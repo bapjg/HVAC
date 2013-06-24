@@ -7,7 +7,7 @@ all: Thermometer.class Thermometers.class TemperatureGradient.class Control.clas
 libInterfaces.so: Interfaces.o
 	gcc -shared -o libInterfaces.so Interfaces.o
 
-Interfaces.o: Interfaces.c  Relay.h Relays.h ADC.h LCD.h Buttons.h
+Interfaces.o: Interfaces.c
 	gcc -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o Interfaces.o
 
 %.h:                    		%.class
