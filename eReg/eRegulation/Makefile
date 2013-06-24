@@ -39,6 +39,7 @@ complete:
 	make
 
 ex:
+	git pull
 	sudo java -cp .. -Djava.library.path=./ eRegulation.Control
 
 help:
