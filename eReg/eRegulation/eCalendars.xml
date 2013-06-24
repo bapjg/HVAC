@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eCalendar>
+	<Circuits type="Collection">
+		<Circuit type="Object" name="Hot_Water">
+			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5, 6, 7"
+				timeStart="17:00" timeEnd="17:30" tempObjective="500"
+				stopOnObjective="1">
+			</Calendar>
+		</Circuit>
+
+		<Circuit type="Object" name="Radiator">
+			<Calendar type="Object" name="EveryDay" days="1"
+				timeStart="17:00" timeEnd="17:30" tempObjective="500"
+				stopOnObjective="0">
+			</Calendar>
+		</Circuit>
+		<Circuit type="Object" name="Floor">
+			<Calendar type="Object" name="WeekDays" days="1"
+				timeStart="06:00" timeEnd="07:30" tempObjective="190"
+				stopOnObjective="0">
+			</Calendar>
+		</Circuit>
+	</Circuits>
+	<Exceptions type="Collection">
+		<Exception type="Object">
+			<Away>
+				<Return_Date>27/02/2013</Return_Date>
+				<Return_Time>22:00</Return_Time>
+			</Away>
+		</Exception>
+		<Exception>
+			<KeepWarm>
+				<CircuitName>Hot_Water</CircuitName>
+				<Return_Time>From Date/Time -> To Date/Time TempObjective Reoccuring
+					?</Return_Time>
+			</KeepWarm>
+		</Exception>
+	</Exceptions>
+	<Otherstuff>
+		<TemperatureAntiGel>
+			4
+		</TemperatureAntiGel>
+	</Otherstuff>
+</eCalendar>
