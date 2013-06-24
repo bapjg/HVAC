@@ -201,6 +201,9 @@ public class Control
 			
 			boiler.requestHeat(globalHeatRequired);
 			
+			System.out.println("temp outside " + Global.thermoOutside.reading);
+			System.out.println("summer temp  " + Global.summerTemp);
+			
 			if (Global.thermoOutside.reading > Global.summerTemp)
 			{
 				if (Global.summerPumpTime > Global.getTimeNowSinceMidnight())
