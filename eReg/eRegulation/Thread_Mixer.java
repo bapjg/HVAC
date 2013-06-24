@@ -2,9 +2,9 @@ package eRegulation;
 
 public class Thread_Mixer implements Runnable
 {
-	public Mixer		mixer;
-	public Circuit_Mixer	circuitMixer;
-	public Boolean 		stopNow;
+	public Mixer				mixer;
+	public Circuit_Mixer		circuitMixer;
+	public Boolean 				stopNow;
 	
 	public Thread_Mixer(Mixer mixer, Circuit_Mixer circuitMixer)
 	{

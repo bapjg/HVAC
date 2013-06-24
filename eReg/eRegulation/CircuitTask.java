@@ -57,7 +57,6 @@ public class CircuitTask
 	
 		this.tempObjective					= tempObjective;
 		this.stopOnObjective				= stopOnObjective;
-	
 		
 		this.temporary 						= temporary;
 	}

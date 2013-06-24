@@ -200,7 +200,21 @@ public class Control
 			// We now have the global energy requirements
 			
 			boiler.requestHeat(globalHeatRequired);
-		
+			
+			if (Global.thermoOutside.reading > Global.summerTemp)
+			{
+				if (Global.summerPumpTime > Global.getTimeNowSinceMidnight())
+				{
+					if (!Global.summerWorkDone)
+					{
+						Global.summerWorkDone					= true;
+						System.out.println("starting summer work");
+						
+						Thread 			thread_summer 			= new Thread(new Thread_Summer(), "Summer");
+						thread_summer.start();
+					}
+				}
+			}
 		}
 		//
 		// End of Main Code

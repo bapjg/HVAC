@@ -65,6 +65,7 @@ public class Global extends DefaultHandler
 	public static Integer				summerTemp;
 	public static Integer				summerPumpDuration;	
 	public static Long					summerPumpTime;	
+	public static Boolean				summerWorkDone;
 
 	public static LCD					display;	
 	public static ADC					adcSomething;	
@@ -173,6 +174,7 @@ public class Global extends DefaultHandler
 					Global.summerTemp					= Integer.parseInt(attributes.getValue("summerTemp"));
 					Global.summerPumpDuration			= Integer.parseInt(attributes.getValue("summerPumpDuration"));
 					Global.summerPumpTime				= Global.parseTime(attributes.getValue("summerPumpTime"));	
+					Global.summerWorkDone				= false;	
 				}
 			}
 			else
