@@ -46,7 +46,7 @@ public class Circuits
 
 		for (Circuit_Abstract circuit : circuitList) 
 		{
-			if (!circuit.activeTask.equals(null))
+			if (circuit.activeTask != null)
 			{
 				count++;
 			}
