@@ -29,7 +29,7 @@ so:
 	rm -f *.so
 	rm -f *.o
 	gcc -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o Interfaces.o
-
+	gcc -shared -o libInterfaces.so Interfaces.o
 
 complete:
 	rm -f *.so
