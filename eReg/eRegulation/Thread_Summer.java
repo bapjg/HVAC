@@ -18,6 +18,6 @@ public class Thread_Summer implements Runnable
 		Global.waitSeconds(Global.summerPumpDuration);
 		Global.pumpRadiator.off();
 		
-		System.out.println("Thread Summer ending");
+		System.out.println("Thread Summer ended");
 	}
 }
