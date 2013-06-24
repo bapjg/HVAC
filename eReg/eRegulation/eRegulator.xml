@@ -84,7 +84,7 @@
 	</Relays>
 
 	<Params type="Object" summerTemp="110" summerPumpDuration="300"
-		summerPumpTime="00:40">
+		summerPumpTime="01:00">
 
 	</Params>
 
