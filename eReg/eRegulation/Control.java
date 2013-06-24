@@ -208,9 +208,9 @@ public class Control
 			{
 				System.out.println("now testing time ");
 				System.out.println("pump time " + Global.summerPumpTime);
-				System.out.println("now  temp  " + Global.getTimeNowSinceMidnight());
+				System.out.println("now  time " + Global.getTimeNowSinceMidnight());
 				
-				if (Global.summerPumpTime > Global.getTimeNowSinceMidnight())
+				if (Global.getTimeNowSinceMidnight() > Global.summerPumpTime)
 				{
 					System.out.println("now testing work done ");
 					System.out.println("summerworkdone " + Global.summerWorkDone);
