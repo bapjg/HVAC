@@ -138,7 +138,7 @@ alias tempmixc='sudo   cat /sys/bus/w1/devices/28-0000048eda69/w1_slave'
 alias tempmixh='sudo   cat /sys/bus/w1/devices/28-0000048e062c/w1_slave'
 alias tempmixo='sudo   cat /sys/bus/w1/devices/28-0000048e9244/w1_slave'
 
-alias go='cd /home/pi/HVAC/eReg/eRegulation/;make ex'
+alias go='cd /home/pi/HVAC/eReg/eRegulation/;git stash save; git stash drop;make ex'
 
 echo mounting //NAS/DropZone to /mnt/DZ
 echo ==================================
@@ -146,5 +146,4 @@ sudo mount -t cifs -o username=ADavis,password=llenkcarb,domain=workgroup //NAS/
 sudo cat /mnt/DZ/test
 
 cd /home/pi/HVAC/eReg/eRegulation
-echo ============================
 echo ============================
