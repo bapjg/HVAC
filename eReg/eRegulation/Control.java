@@ -206,8 +206,14 @@ public class Control
 			
 			if (Global.thermoOutside.reading > Global.summerTemp)
 			{
+				System.out.println("now testing time ");
+				System.out.println("pump time " + Global.summerPumpTime);
+				System.out.println("now  temp  " + Global.getTimeNowSinceMidnight());
+				
 				if (Global.summerPumpTime > Global.getTimeNowSinceMidnight())
 				{
+					System.out.println("now testing work done ");
+					System.out.println("summerworkdone " + Global.summerWorkDone);
 					if (!Global.summerWorkDone)
 					{
 						Global.summerWorkDone					= true;
