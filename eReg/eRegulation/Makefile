@@ -1,6 +1,6 @@
 PACKAGE = eRegulation
-EXECUTE = Burner_Control
-PROJECT = /home/pi/Eclipse/eRegulation/src
+EXECUTE = Control
+PROJECT = /home/pi/HVAC/eReg/eRegulation
 
 all: Thermometer.class Thermometers.class TemperatureGradient.class Control.class Relay.class Relays.class ADC.class Circuit_Abstract.class Circuit_HotWater.class Circuit_Mixer.class Circuit_Gradient.class TemperatureGradient.class Circuits.class  CircuitTask.class Boiler.class Burner.class Calendars.class LogIt.class Mixer.class Thread_Thermometers.class Thread_Mixer.class PID.class
 
@@ -42,6 +42,7 @@ ex:
 	sudo java -cp .. -Djava.library.path=./ eRegulation.Control
 
 help:
+	echo ex........... just execute as copiled in IDE
 	echo so........... interface code in C only
 	echo jni.......... interface code in Java only
 	echo complete..... everything
