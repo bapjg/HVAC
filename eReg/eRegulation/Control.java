@@ -201,23 +201,13 @@ public class Control
 			
 			boiler.requestHeat(globalHeatRequired);
 			
-			System.out.println("temp outside " + Global.thermoOutside.reading);
-			System.out.println("summer temp  " + Global.summerTemp);
-			
 			if (Global.thermoOutside.reading > Global.summerTemp)
 			{
-				System.out.println("now testing time ");
-				System.out.println("pump time " + Global.summerPumpTime);
-				System.out.println("now  time " + Global.getTimeNowSinceMidnight());
-				
 				if (Global.getTimeNowSinceMidnight() > Global.summerPumpTime)
 				{
-					System.out.println("now testing work done ");
-					System.out.println("summerworkdone " + Global.summerWorkDone);
 					if (!Global.summerWorkDone)
 					{
 						Global.summerWorkDone					= true;
-						System.out.println("starting summer work");
 						
 						Thread 			thread_summer 			= new Thread(new Thread_Summer(), "Summer");
 						thread_summer.start();

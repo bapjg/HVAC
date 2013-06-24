@@ -8,7 +8,7 @@ public class Thread_Summer implements Runnable
 	}
 	public void run()
 	{
-		System.out.println("Thread Summer starting");
+		LogIt.info("Thread_Summer", "Run", "Starting");		
 		
 		Global.pumpFloor.on();
 		Global.waitSeconds(Global.summerPumpDuration);
@@ -18,6 +18,6 @@ public class Thread_Summer implements Runnable
 		Global.waitSeconds(Global.summerPumpDuration);
 		Global.pumpRadiator.off();
 		
-		System.out.println("Thread Summer ended");
+		LogIt.info("Thread_Summer", "Run", "Stopping");		
 	}
 }
