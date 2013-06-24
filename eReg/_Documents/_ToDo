@@ -1,0 +1,72 @@
+Mixer
+=====
+	Measure dT/dt at Boiler and Mixer_Hot.
+	Keep in mind dT/dt at Mixer_Hot depends on valve openning (especially if Boiler is Hot)
+	Look at OverShoot while running
+	Thread_Mixer.stopNow continuation variable implemented. Use it in mixer.sequencer()
+	Put in Global
+
+Thread_Mixer
+============
+	Introduce the notion of wait having occured in one of the method calls
+	Should there not be another thread
+	Re-acrchitect Circuit.sequencer() ???
+	Introduce a ThreadVariable .stop
+	Big dT deterministic approach (like now)
+	Small dT delta approach.
+	
+	Try swing = K x deltaTemp
+		
+EnergyRequirements
+==================
+	Use null instead of -1
+	
+singleCircuitActive
+===================
+	Boolean Circuits.singleCircuitActive() implemnted but reports 3 activeCircuits instead of 2 Wtare+Floor
+	Use it inCircuit.sequencer().
+	
+Hot Water
+=========
+	Find out dT(HotWater)/dT(Boiler) to optimise
+	Use SingleCircuit
+	Create button to activate
+	
+Statistics
+==========
+	Create Headings at startup
+
+Thermometers
+============
+	Create thermal contact
+	Calibrate Trip (heat and see at what temp the pump trips
+	
+Linux
+=====
+	fstab
+	
+
+===========================================================================================
+ToTest Items
+============
+
+DaysOfWeek
+==========
+	Wrong Friday was treated as Saturday
+
+===========================================================================================
+Done Items
+==========
+	
+Radiator/Mixer
+==============
+	Use TemperatureGradient	
+
+Thermometers
+============
+	Calibrate : Ok to 1 degree
+			
+
+Circuit
+=======
+	Introduce subClasses

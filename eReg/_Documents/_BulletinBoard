@@ -1,0 +1,52 @@
+Relays
+======
+sbw                -w 20:1		Relay on
+sudo bw_tool -a 9c -w 20:1		Relay on
+
+Get address
+===========
+sudo bw_tool -S
+sudo bw_tool -a xx -w f0:9c		Apply address
+
+Display Hello
+=============
+sudo bw_tool -I -D /dev/i2c-1 -a 94 -t hello
+
+Git discard
+===========
+git stash save --keep-index
+git stash drop
+
+DropZone
+========
+sudo mount -t cifs -o username=ADavis,password=l,domain=workgroup //AD_Office/DropZone /mnt/DZ
+sudo cp (source) /mnt/DZ (destination)
+
+Aliases
+=======
+alias ll		='		ls -l'
+alias down		='sudo 	shutdown -h now'
+alias reboot	='sudo 	shutdown -r now'
+alias sjava		='sudo 	java -cp .. -Djava.library.path="." '
+alias ereg		='		cd /home/pi/Eclipse/eRegulation/src/eRegulation/'
+alias sbw		='sudo 	bw_tool'
+alias sbws		='sudo 	bw_tool -S'
+alias sbwa		='sudo 	bw_tool -w f0:9c -a'
+
+alias burneron	='sudo  bw_tool -a 9c -w 20:1'
+alias burneroff	='sudo  bw_tool -a 9c -w 20:0'
+alias hwon		='sudo  bw_tool -a 9c -w 23:1'
+alias hwoff		='sudo  bw_tool -a 9c -w 23:0'
+alias flooron	='sudo  bw_tool -a 9c -w 25:0'
+alias flooroff	='sudo  bw_tool -a 9c -w 25:0'
+alias mixerup	='sudo  bw_tool -a 9c -w 22:0; sudo   bw_tool -a 9c -w 21:1'
+alias mixerdown	='sudo  bw_tool -a 9c -w 21:0; sudo   bw_tool -a 9c -w 22:1'
+alias mixeroff	='sudo  bw_tool -a 9c -w 22:0; sudo   bw_tool -a 9c -w 21:0'
+
+alias tempboiler='sudo cat /sys/bus/w1/devices/28-0000048F011C/w1_slave'
+alias temphw	='sudo cat /sys/bus/w1/devices/28-0000048E7489/w1_slave'
+alias tempmixc	='sudo cat /sys/bus/w1/devices/28-0000048EDA69/w1_slave'
+alias tempmixh	='sudo cat /sys/bus/w1/devices/28-0000048E062C/w1_slave'
+alias tempmixo	='sudo cat /sys/bus/w1/devices/28-0000048E9244/w1_slave'
+
+alias go		='cd /home/pi/Eclipse/eRegulation/src/eRegulation/;make ex'
