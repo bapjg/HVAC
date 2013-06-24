@@ -39,7 +39,6 @@ complete:
 	make
 
 ex:
-	make
 	sudo java -cp .. -Djava.library.path=./ eRegulation.Control
 
 help:

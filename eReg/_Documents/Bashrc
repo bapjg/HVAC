@@ -147,3 +147,4 @@ sudo cat /mnt/DZ/test
 
 cd /home/pi/HVAC/eReg/eRegulation
 echo ============================
+echo ============================
