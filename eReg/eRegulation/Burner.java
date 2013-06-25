@@ -48,7 +48,7 @@ public class Burner
 	}
 	public void updateFuelFlow()
 	{
-		if ((burnerFault.readAverage() > 3) && 	(burnerFault.readAverage() < 4))					// more than 3V means fuel is flowing
+		if ((burnerFault.readAverage() > 2) && 	(burnerFault.readAverage() < 4))					// more than 3V means fuel is flowing
 		{
 			fuelConsumed++;
 		}
