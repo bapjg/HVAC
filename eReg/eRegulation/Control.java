@@ -150,6 +150,38 @@ public class Control
 		//
 		//============================================================
 		
+		
+		
+		System.out.println("Starting test");
+		burner.powerOn();
+		
+		int i;
+		Float voltage;
+		
+		for (i = 0; i < 100; i++)
+		{
+			voltage = burner.burnerFault.read();
+			System.out.println("Iteration : " + i + " voltage : " + voltage);
+			Global.waitSeconds(1);
+		}
+		
+		
+		burner.powerOff();
+		
+		
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		//=============================================================
 		//
 		// Main Code
