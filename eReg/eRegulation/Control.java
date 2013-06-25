@@ -1,12 +1,7 @@
 package eRegulation;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.xml.sax.SAXException;
 
 public class Control
@@ -58,6 +53,7 @@ public class Control
 			xmlCalendars 							= "eCalendars.xml";			
 		}
 
+		@SuppressWarnings("unused")
 		Global 			global 						= new Global(xmlParams);
 		
 		Global.stopNow								= false;
@@ -80,6 +76,7 @@ public class Control
 		// Read Calendar file
 		//
 		Global.display.writeAtPosition(2, 0, " Calendar");
+		@SuppressWarnings("unused")
 		Calendars 		calendars 					= new Calendars(xmlCalendars);
 		Global.display.writeAtPosition(2, 18, "Ok");
 		//
