@@ -14,32 +14,18 @@ public class Thread_Summer implements Runnable
 		
 		Global.pumpFloor.on();
 		
-		for (i = 0; i < Global.summerPumpDuration; i++)
+		for (i = 0; (i < Global.summerPumpDuration) && (!Global.stopNow); i++)
 		{
-			Global.waitSeconds(Global.summerPumpDuration);
-			
-			if (Global.stopNow)
-			{
-				Global.pumpFloor.off();
-				LogIt.info("Thread_Summer", "Run", "Stopping");	
-				return;
-			}
+			Global.waitSeconds(1);
 		}
 		
 		Global.pumpFloor.off();
 
 		Global.pumpRadiator.on();
 		
-		for (i = 0; i < Global.summerPumpDuration; i++)
+		for (i = 0; (i < Global.summerPumpDuration) && (!Global.stopNow); i++)
 		{
-			Global.waitSeconds(Global.summerPumpDuration);
-			
-			if (Global.stopNow)
-			{
-				Global.pumpRadiator.off();
-				LogIt.info("Thread_Summer", "Run", "Stopping");	
-				return;
-			}
+			Global.waitSeconds(1);
 		}
 		
 		Global.pumpRadiator.off();
