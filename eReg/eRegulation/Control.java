@@ -170,7 +170,7 @@ public class Control
 		int i;
 		Float voltage;
 		
-		for (i = 0; i < 50; i++)
+		for (i = 0; i < 30; i++)
 		{
 			burner.sequencer();
 			voltage = burner.burnerVoltages.read();
@@ -183,8 +183,19 @@ public class Control
 		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
 		
 		
-			
+		Global.waitSeconds(5);	
 		
+		for (i = 0; i < 20; i++)
+		{
+			burner.sequencer();
+			voltage = burner.burnerVoltages.read();
+			System.out.println("Iteration : " + i + " voltage : " + voltage);
+			Global.waitSeconds(1);
+		}
+		
+		
+		burner.powerOff();
+		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
 		
 		
 		

@@ -91,7 +91,7 @@ public class Burner
 				// This is the place to write to disk
 				//
 				//
-				
+				LogIt.saveFuelConsumption(fuelFlowTimeCumulated);
 			}
 			else
 			{

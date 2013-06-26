@@ -159,4 +159,18 @@ public class LogIt
 		String nowFormatted = dateFormat.format(now);
 		return nowFormatted;
 	}
+    public static void saveFuelConsumption(Long fuelConsumption)
+    {
+    	try 
+        {
+            PrintWriter fuelConcumptionFile = new PrintWriter(new BufferedWriter(new FileWriter("fuelConcumption.txt", true)));
+            fuelConcumptionFile.println(fuelConsumption);
+            fuelConcumptionFile.close();
+        } 
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
 }
