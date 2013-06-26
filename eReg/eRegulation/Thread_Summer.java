@@ -20,7 +20,9 @@ public class Thread_Summer implements Runnable
 			
 			if (Global.stopNow)
 			{
-				break;
+				Global.pumpFloor.off();
+				LogIt.info("Thread_Summer", "Run", "Stopping");	
+				return;
 			}
 		}
 		
@@ -34,7 +36,9 @@ public class Thread_Summer implements Runnable
 			
 			if (Global.stopNow)
 			{
-				break;
+				Global.pumpRadiator.off();
+				LogIt.info("Thread_Summer", "Run", "Stopping");	
+				return;
 			}
 		}
 		
