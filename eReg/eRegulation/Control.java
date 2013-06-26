@@ -277,6 +277,5 @@ public class Control
 		
 		boiler.requestIdle();
 		Global.relays.offAll();
-		System.out.println("Main stopped");
 	}
  }
