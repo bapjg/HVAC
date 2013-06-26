@@ -8,7 +8,6 @@ public class Test_ADC
 		ADC			adc			= new ADC();
 		
 		System.out.println("Starting test");
-
 		
 		int i;
 		Float voltage;
