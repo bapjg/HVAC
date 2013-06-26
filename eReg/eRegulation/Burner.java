@@ -27,7 +27,7 @@ public class Burner
 	{
 		burnerPower.off();
 		
-		Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get an average
+		Global.waitMilliSeconds(100);								// Need to wait a bit for relays to work and ADC to get an average
 		
 		if (checkFuelFlow())		// This updates Fuel Consumption
 		{
