@@ -26,7 +26,7 @@ public class ADC
 	{
 		Global.semaphore.lock();
 		//float voltage = Read();
-		float voltage = ReadAverage();
+		//float voltage = ReadAverage();
 		Global.semaphore.unlock();
 		voltage 					= voltage * 5 /1023;  // 1023 = 5V
 		return voltage;
