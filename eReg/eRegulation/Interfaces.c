@@ -489,7 +489,7 @@ void LCD_Clear()
 	UI_Open(5);
 
 	char buf[5];
-	buf[0] 				= 0x94;									// Address of UI Board
+	buf[0] 				= i2c_port;									// Address of UI Board
 	buf[1] 				= 0x10;									// Command Clear Screen
 	buf[2] 				= 0xaa;									// Any data(required for command to take effect
 	i2c_txrx(buf, 3, 0, 5);
@@ -503,7 +503,7 @@ void LCD_Write(char message[])
 	int l;
 	l 					= strlen(message);
 	char buf[l+2];
-	buf[0] 				= 0x94;									// Address of UI Board
+	buf[0] 				= i2c_port;									// Address of UI Board
 	buf[1] 				= 0x00;									// Command Write Data(Data follows)
 	strcpy(buf+2, message);
 	i2c_txrx(buf, l + 2, 0, 6);
@@ -519,7 +519,7 @@ void LCD_Position(int line, int col)
 	UI_Open(7);
 
 	char buf[5];
-	buf[0] 				= 0x94;									// Address of LCD
+	buf[0] 				= i2c_port;									// Address of LCD
 	buf[1] 				= 0x11;									// Command Position Cursor
 	buf[2] 				= line*32 + col;						// Data : Position(3MSB=line, 5LSB=Col)
 	
