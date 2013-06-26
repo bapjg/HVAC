@@ -184,7 +184,9 @@ public class Control
 		
 		
 		Global.waitSeconds(5);	
-		
+
+		burner.powerOn();
+
 		for (i = 0; i < 20; i++)
 		{
 			burner.sequencer();
