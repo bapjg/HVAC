@@ -162,51 +162,50 @@ public class Control
 		//
 		//============================================================
 		
-		
-		
-		System.out.println("Starting test");
-		burner.powerOn();
-		
-		int i;
-		Float voltage;
-		
-		for (i = 0; i < 30; i++)
-		{
-			burner.sequencer();
-			voltage = burner.burnerVoltages.read();
-			System.out.println("Iteration : " + i + " voltage : " + voltage);
-			Global.waitSeconds(1);
-		}
-		
-		
-		burner.powerOff();
-		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
-		
-		
-		Global.waitSeconds(5);	
 
-		burner.powerOn();
+		//=============================================================
+		//
+		// Section for debugging
+		//
 
-		for (i = 0; i < 20; i++)
-		{
-			burner.sequencer();
-			voltage = burner.burnerVoltages.read();
-			System.out.println("Iteration : " + i + " voltage : " + voltage);
-			Global.waitSeconds(1);
-		}
 		
+//		System.out.println("Starting test");
+//		burner.powerOn();
+//		
+//		int i;
+//		Float voltage;
+//		
+//		for (i = 0; i < 30; i++)
+//		{
+//			burner.sequencer();
+//			voltage = burner.burnerVoltages.read();
+//			System.out.println("Iteration : " + i + " voltage : " + voltage);
+//			Global.waitSeconds(1);
+//		}
+//		
+//		
+//		burner.powerOff();
+//		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
+//		
+//		
+//		Global.waitSeconds(5);	
+//
+//		burner.powerOn();
+//
+//		for (i = 0; i < 20; i++)
+//		{
+//			burner.sequencer();
+//			voltage = burner.burnerVoltages.read();
+//			System.out.println("Iteration : " + i + " voltage : " + voltage);
+//			Global.waitSeconds(1);
+//		}
+//		
+//		
+//		burner.powerOff();
+//		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
 		
-		burner.powerOff();
-		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		//
+		//============================================================
 		
 		
 		//=============================================================
