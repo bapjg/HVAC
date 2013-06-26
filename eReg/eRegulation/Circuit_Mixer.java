@@ -58,7 +58,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				{
 					System.out.println("temperatureGradient is null");
 				}
-				Integer temp									= temperatureGradient.getTempToTarget();
+				Integer temp								= temperatureGradient.getTempToTarget();
 				this.heatRequired.tempMinimum			= 500;
 				this.heatRequired.tempMaximum			= 800;
 				// Nothing to do

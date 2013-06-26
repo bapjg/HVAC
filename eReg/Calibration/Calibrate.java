@@ -3,17 +3,7 @@ package Calibration;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import eRegulation.Boiler;
-import eRegulation.Burner;
-import eRegulation.Buttons;
-import eRegulation.Circuit_Gradient;
-import eRegulation.Circuit_HotWater;
-import eRegulation.Circuit_Mixer;
-import eRegulation.Global;
-import eRegulation.LCD;
-import eRegulation.LogIt;
-import eRegulation.Thread_Thermometers;
+import eRegulation.*;
 
 public class Calibrate
 {

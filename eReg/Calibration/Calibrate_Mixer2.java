@@ -1,21 +1,8 @@
 package Calibration;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import eRegulation.Boiler;
-import eRegulation.Burner;
-import eRegulation.Buttons;
-import eRegulation.Control;
-import eRegulation.Global;
-import eRegulation.LCD;
-import eRegulation.LogIt;
-import eRegulation.Thread_Thermometers;
+import eRegulation.*;
 
 public class Calibrate_Mixer2
 {

@@ -1,15 +1,8 @@
 package Calibration;
 
-import java.io.IOException;
 import eRegulation.*;
-
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 public class Calibrate_Test_10nF_Capacitor
 {
@@ -28,6 +21,7 @@ public class Calibrate_Test_10nF_Capacitor
 		//
 		// Instantiate this class (required for JNI)
 		//
+		@SuppressWarnings("unused")
 		Calibrate_Test_10nF_Capacitor Me = new Calibrate_Test_10nF_Capacitor();
 		//
 		//============================================================
@@ -42,6 +36,7 @@ public class Calibrate_Test_10nF_Capacitor
 		}
 
 		LCD 			display 					= new LCD();
+		@SuppressWarnings("unused")
 		Buttons 		buttons 					= new Buttons();
 
 		display.clear();
@@ -50,6 +45,7 @@ public class Calibrate_Test_10nF_Capacitor
 		Global.stopNow								= false;
 
 		String xmlParams 							= "";
+		@SuppressWarnings("unused")
 		String xmlCalendars 						= "";
 
 		//display.writeAtPosition(1, 0, "Reading params");
@@ -68,11 +64,11 @@ public class Calibrate_Test_10nF_Capacitor
 	
 		try
 		{
+			@SuppressWarnings("unused")
 			Global global 								= new Global(xmlParams);
 		} 
 		catch (Exception e2) 
 		{
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		
@@ -142,9 +138,10 @@ public class Calibrate_Test_10nF_Capacitor
 		
 		@SuppressWarnings("unused")
         Burner 			burner 						= new Burner();
+		@SuppressWarnings("unused")
 		Boiler 			boiler						= new Boiler();
+
 		int				i;
-		int				j;
 		
 		display.clear();
 		
