@@ -32,6 +32,9 @@ static uint16_t delay 		= 2;
 
 static int 		spi_fd;
 static int 		i2c_fd;
+static int 		i2c_port	= 0x00;								//Development
+//static int 		i2c_port	= 0x94;								//Production
+
 static char 	*device 	= " ";
 static int 		addr 		= 0x9C;
 
@@ -434,19 +437,18 @@ int ADC_Initialise(int Channels, int Samples, int Bits_To_Shift)
 	UI_Open(2);
 	
 	char buf[5];
-//	buf[0] 				= 0x94;									// Address of UI Board + 0 for Write
-	buf[0] 				= 0x00;									// Address of UI Board + 0 for Write
+	buf[0] 				= i2c_port;								// Address of UI Board + 0 for Write
 	buf[1] 				= 0x80;									// Command : Set Number of channels to monitor
 	buf[2] 				= Channels;								// Any data(required for command to take effect
 	i2c_txrx(buf, 3, 0, 2);
 
-	buf[0] 				= 0x00;									// Address of UI Board + 0 for Write
+	buf[0] 				= i2c_port;								// Address of UI Board + 0 for Write
 	buf[1] 				= 0x81;									// Command : Set Sample size(2 bytes)
 	buf[2] 				= Samples;								// Number of samples over 2 bytes
 	buf[3] 				= Samples >> 8;							// so do some bit shifting
 	i2c_txrx(buf, 4, 0, 2);
 
-	buf[0] 				= 0x00;									// Address of UI Board + 0 for Write
+	buf[0] 				= i2c_port;								// Address of UI Board + 0 for Write
 	buf[1] 				= 0x82;									// Command : Set Number of bit to shift when polling for result
 	buf[2] 				= Bits_To_Shift;						// Number of bits to shift
 	i2c_txrx(buf, 3, 0, 2);
@@ -459,8 +461,7 @@ int ADC_Read()
 	UI_Open(3);
 
 	char buf[5];
-//	buf[0] 				= 0x94 | 1;								// Address of UI Board + 1 for Read
-	buf[0] 				= 0x00 | 1;								// Address of UI Board + 1 for Read
+	buf[0] 				= i2c_port | 1;							// Address of UI Board + 1 for Read
 	buf[1] 				= 0x61;									// Command Read Analog input
 	buf[2] 				= 0x00;									// Any data(required for command to take effect
 	i2c_txrx(buf, 2, 2, 3);
@@ -474,7 +475,7 @@ int ADC_ReadAverage()
 	UI_Open(4);
 
 	char buf[5];
-	buf[0] 				= 0x94 | 1;								// Address of UI Board + 1 for Read
+	buf[0] 				= i2c_port | 1;							// Address of UI Board + 1 for Read
 	buf[1] 				= 0x69;									// Command Read bit shifted sum of Analog input
 	buf[2] 				= 0x00;									// Any data(required for command to take effect
 	i2c_txrx(buf, 2, 2, 4);
