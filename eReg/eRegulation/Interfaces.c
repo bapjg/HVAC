@@ -424,7 +424,7 @@ int Buttons_Read()
 	UI_Open(1);
 
 	char buf[5];
-	buf[0] 				= 0x94 | 1;								// Address of UI Board + 1 for Read
+	buf[0] 				= i2c_port | 1;							// Address of UI Board + 1 for Read
 	buf[1] 				= 0x31;									// Command Read Buttons
 	buf[2] 				= 0x00;									// Any data(required for command to take effect
 	i2c_txrx(buf, 2, 1, 1);
@@ -533,6 +533,10 @@ JNIEXPORT void JNICALL Java_eRegulation_ADC_Initialise(JNIEnv *env, jobject obj,
 JNIEXPORT jint JNICALL Java_eRegulation_ADC_Read(JNIEnv *env, jobject obj)
 {
 	return ADC_Read();
+}
+JNIEXPORT jint JNICALL Java_eRegulation_ADC_ReadAverage(JNIEnv *env, jobject obj)
+{
+	return ADC_ReadAverage();
 }
 JNIEXPORT jint JNICALL Java_eRegulation_Buttons_Read(JNIEnv *env, jobject obj)
 {
