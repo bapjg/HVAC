@@ -5,7 +5,9 @@ public class Test_ADC
 
 	public static void main(String[] args)
 	{
-		ADC			adc			= new ADC();
+		Control 		Me 							= new Control();
+		System.loadLibrary("Interfaces");
+		ADC				adc							= new ADC();
 		
 		System.out.println("Starting test");
 		
