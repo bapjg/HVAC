@@ -397,7 +397,7 @@ static void i2c_txrx(char *buf, int tlen, int rlen, int caller)
 //		if (read(i2c_fd, buf+tlen, rlen) != rlen)
 		if (resultCode != rlen)
 		{
-			printf("write failed rc = %d \n", resultCode);
+			printf("read failed rc = %d \n", resultCode);
 			print_from_whom(caller);
 			pabort("can't read i2c");
 		}
@@ -434,18 +434,19 @@ int ADC_Initialise(int Channels, int Samples, int Bits_To_Shift)
 	UI_Open(2);
 	
 	char buf[5];
-	buf[0] 				= 0x94;									// Address of UI Board + 0 for Write
+//	buf[0] 				= 0x94;									// Address of UI Board + 0 for Write
+	buf[0] 				= 0x00;									// Address of UI Board + 0 for Write
 	buf[1] 				= 0x80;									// Command : Set Number of channels to monitor
 	buf[2] 				= Channels;								// Any data(required for command to take effect
 	i2c_txrx(buf, 3, 0, 2);
 
-	buf[0] 				= 0x94;									// Address of UI Board + 0 for Write
+	buf[0] 				= 0x00;									// Address of UI Board + 0 for Write
 	buf[1] 				= 0x81;									// Command : Set Sample size(2 bytes)
 	buf[2] 				= Samples;								// Number of samples over 2 bytes
 	buf[3] 				= Samples >> 8;							// so do some bit shifting
 	i2c_txrx(buf, 4, 0, 2);
 
-	buf[0] 				= 0x94;									// Address of UI Board + 0 for Write
+	buf[0] 				= 0x00;									// Address of UI Board + 0 for Write
 	buf[1] 				= 0x82;									// Command : Set Number of bit to shift when polling for result
 	buf[2] 				= Bits_To_Shift;						// Number of bits to shift
 	i2c_txrx(buf, 3, 0, 2);
