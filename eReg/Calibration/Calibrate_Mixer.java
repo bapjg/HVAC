@@ -5,10 +5,6 @@ import java.util.Date;
 
 import eRegulation.*;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
 public class Calibrate_Mixer
 {
 	public static void main(String[] args)
@@ -26,6 +22,7 @@ public class Calibrate_Mixer
 		//
 		// Instantiate this class (required for JNI)
 		//
+		@SuppressWarnings("unused")
 		Calibrate_Mixer Me = new Calibrate_Mixer();
 		//
 		//============================================================
@@ -40,6 +37,7 @@ public class Calibrate_Mixer
 		}
 
 		LCD 			display 					= new LCD();
+		@SuppressWarnings("unused")
 		Buttons 		buttons 					= new Buttons();
 
 		display.clear();
@@ -48,6 +46,7 @@ public class Calibrate_Mixer
 		Global.stopNow								= false;
 
 		String xmlParams 							= "";
+		@SuppressWarnings("unused")
 		String xmlCalendars 						= "";
 
 		//display.writeAtPosition(1, 0, "Reading params");
@@ -66,11 +65,11 @@ public class Calibrate_Mixer
 	
 		try
 		{
+			@SuppressWarnings("unused")
 			Global global 								= new Global(xmlParams);
 		} 
 		catch (Exception e2) 
 		{
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		
@@ -139,11 +138,10 @@ public class Calibrate_Mixer
 
 		LogIt.tempInfo("Mixer positionned, Pumps on ");
 		
-		@SuppressWarnings("unused")
         Burner 			burner 						= new Burner();
+		@SuppressWarnings("unused")
 		Boiler 			boiler						= new Boiler();
 		int				i;
-		int				j;
 		
 		display.clear();
 		

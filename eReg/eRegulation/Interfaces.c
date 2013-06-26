@@ -464,7 +464,7 @@ int ADC_Read()
 	i2c_txrx(buf, 2, 2, 3);
 	close(i2c_fd);
 
-	return buf[2] |(buf[3] << 8); 								// Return with bytes reordered
+	return buf[2] | (buf[3] << 8); 								// Return with bytes reordered
 }
 //----------------------------------------------------------
 int ADC_ReadAverage()
@@ -478,7 +478,7 @@ int ADC_ReadAverage()
 	i2c_txrx(buf, 2, 2, 4);
 	close(i2c_fd);
 
-	return buf[2] |(buf[3] << 8); 								// Return with bytes reordered
+	return buf[2] | (buf[3] << 8); 								// Return with bytes reordered
 }
 //----------------------------------------------------------
 void LCD_Clear()

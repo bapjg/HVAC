@@ -12,7 +12,7 @@ public class ADC
 		int ADC_Samples				= 64;		// Number of samples in a read (Default value) (64 = 0x40 ie need to remove bits 0x3F)
 		int ADC_Bits_To_Shift		= 6;		// Shifting 6 bits is dividing by 64
 		
-		//Initialise(ADC_Channels, ADC_Samples, ADC_Bits_To_Shift);
+		Initialise(ADC_Channels, ADC_Samples, ADC_Bits_To_Shift);
 	}
 	public float read()
 	{
@@ -25,8 +25,8 @@ public class ADC
 	public float readAverage()
 	{
 		Global.semaphore.lock();
-		float voltage = Read();
-		//float voltage = ReadAverage();
+		//float voltage = Read();
+		float voltage = ReadAverage();
 		Global.semaphore.unlock();
 		voltage 					= voltage * 5 /1023;  // 1023 = 5V
 		return voltage;

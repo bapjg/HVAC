@@ -1,7 +1,6 @@
-package eRegulation;
+package Calibration;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,7 +8,16 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-public class Calibrate_Thermometers
+import eRegulation.Boiler;
+import eRegulation.Burner;
+import eRegulation.Buttons;
+import eRegulation.Control;
+import eRegulation.Global;
+import eRegulation.LCD;
+import eRegulation.LogIt;
+import eRegulation.Thread_Thermometers;
+
+public class Calibrate_Mixer2
 {
 	public static void main(String[] args)
 	{
@@ -54,7 +62,6 @@ public class Calibrate_Thermometers
 			xmlCalendars 							= "eCalendars.xml";			
 		}
 
-	
 		try
 		{
 			Global global 								= new Global(xmlParams);
@@ -64,9 +71,12 @@ public class Calibrate_Thermometers
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
+
+		
+		
 		
 		display.writeAtPosition(1, 0, " Params");
-	
+
 		display.writeAtPosition(1, 18, "Ok");
 
 		
@@ -112,52 +122,63 @@ public class Calibrate_Thermometers
 
 		LogIt.tempInfo("Relays off ");
 		Global.relays.offAll();
-		Global.pumpFloor.on();
-		Global.pumpWater.on();
 		
 		Global.mixerDown.off();
 		Global.mixerUp.off();
 		
-		Global.mixerDown.on();
-		secondsToWait(90);
-		Global.mixerDown.off();
 		LogIt.tempInfo("Mixer Down ");
+		LogIt.tempInfo("Mixer Flying, Pump on ");
+		Global.pumpFloor.on();
 		
-		Global.mixerUp.on();
-		secondsToWait(45);
-		Global.mixerUp.off();
-		LogIt.tempInfo("Mixer 50% ");
-
-		LogIt.tempInfo("Mixer positionned, Pumps on ");
+		int				i = 0;
+		
 		
 		@SuppressWarnings("unused")
         Burner 			burner 						= new Burner();
 		Boiler 			boiler						= new Boiler();
-		int				i;
+//		int				i;
 		int				j;
+		
+
 		
 		display.clear();
 		
-		LogIt.tempInfo("Starting now ");
+		LogIt.tempInfo("Starting burner with Boiler temp at "+ Global.thermoBoiler.reading);
 		
-		while (!Global.stopNow)
+		burner.powerOn();	
+		secondsToWait(2);
+		
+		while (Global.thermoBoiler.reading < 450)
 		{
-			secondsToWait(30);												// cycle every 30s
+			secondsToWait(5);
 			LogIt.tempData();
-			displayData(display);
-			
-			buttons.read();
-			
-			if (buttons.button0)
-			{
-				buttons.read();
-				Global.stopNow 						= true;					//Exit the loop;
-			}
+			displayData(display);				
 		}
 
+		burner.powerOff();
+		LogIt.tempInfo("Stopping burner");
+
+
+		for (i = 10; i > 0; i--)			
+		{
+			LogIt.tempInfo("Mixer to " + i + "0%");
+			Global.mixerDown.on();
+			secondsToWait(10);
+			Global.mixerDown.off();
+			LogIt.tempInfo("Mixer at " + i + "0%");
+
+		
+			for (j = 0; j < 60; j++)			// 5 mins
+			{
+				secondsToWait(5);
+				LogIt.tempData();
+				displayData(display);				
+			}
+		}
 		LogIt.tempInfo("Test Finished");
 	
 		Global.relays.offAll();
+		Global.stopNow 										= true;					//Close other threads;
 	}
     public static String tempToString(Integer temp)
     {
@@ -195,4 +216,5 @@ public class Calibrate_Thermometers
 		display.writeAtPosition(3, 11, "LivR ");
 		display.writeAtPosition(3, 16, tempToString(Global.thermoLivingRoom.reading));
     }
+
 }

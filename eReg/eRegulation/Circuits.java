@@ -1,8 +1,6 @@
 package eRegulation;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
 
 public class Circuits
 {

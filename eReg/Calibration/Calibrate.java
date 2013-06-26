@@ -1,22 +1,39 @@
-package eRegulation;
+package Calibration;
 
-import java.io.IOException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.xml.parsers.ParserConfigurationException;
+import eRegulation.Boiler;
+import eRegulation.Burner;
+import eRegulation.Buttons;
+import eRegulation.Circuit_Gradient;
+import eRegulation.Circuit_HotWater;
+import eRegulation.Circuit_Mixer;
+import eRegulation.Global;
+import eRegulation.LCD;
+import eRegulation.LogIt;
+import eRegulation.Thread_Thermometers;
 
-import org.xml.sax.SAXException;
-
-public class Calibrate_Mixer2
+public class Calibrate
 {
 	public static void main(String[] args)
 	{
 		//============================================================
 		//
+		// This is to test the 10 nF capacitor used on mixer relay
+		// Put the mixer into half way position
+		// Then simply move it up and down repeatedly
+		//
+		//============================================================
+
+		
+		//============================================================
+		//
 		// Instantiate this class (required for JNI)
 		//
-		Control Me = new Control();
+		@SuppressWarnings("unused")
+		Calibrate Me = new Calibrate();
 		//
 		//============================================================
 
@@ -30,6 +47,7 @@ public class Calibrate_Mixer2
 		}
 
 		LCD 			display 					= new LCD();
+		@SuppressWarnings("unused")
 		Buttons 		buttons 					= new Buttons();
 
 		display.clear();
@@ -38,6 +56,7 @@ public class Calibrate_Mixer2
 		Global.stopNow								= false;
 
 		String xmlParams 							= "";
+		@SuppressWarnings("unused")
 		String xmlCalendars 						= "";
 
 		//display.writeAtPosition(1, 0, "Reading params");
@@ -53,23 +72,20 @@ public class Calibrate_Mixer2
 			xmlCalendars 							= "eCalendars.xml";			
 		}
 
+	
 		try
 		{
+			@SuppressWarnings("unused")
 			Global global 								= new Global(xmlParams);
 		} 
 		catch (Exception e2) 
 		{
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-
-		
-		
 		
 		display.writeAtPosition(1, 0, " Params");
-
+		
 		display.writeAtPosition(1, 18, "Ok");
-
 		
 		Global.thermoBoiler 						= Global.thermometers.fetchThermometer("Boiler");
 		Global.thermoBoilerIn						= Global.thermometers.fetchThermometer("Boiler_In");
@@ -91,7 +107,13 @@ public class Calibrate_Mixer2
 		Global.pumpRadiator 						= Global.relays.fetchRelay("Pump_Radiator");
 		Global.mixerUp		 						= Global.relays.fetchRelay("Mixer_Up");
 		Global.mixerDown	 						= Global.relays.fetchRelay("Mixer_Down");
-		
+
+		Global.circuitFloor							= (Circuit_Mixer) Global.circuits.fetchcircuit("Floor");
+		Global.circuitGradient						= (Circuit_Gradient) Global.circuits.fetchcircuit("Radiator");
+		Global.circuitHotWater						= (Circuit_HotWater) Global.circuits.fetchcircuit("Hot_Water");
+
+		Global.mixer								= Global.circuitFloor.mixer;
+
 		//============================================================
 		//
 		// Start thread to continuously read the thermomoeters
@@ -99,77 +121,62 @@ public class Calibrate_Mixer2
 		display.writeAtPosition(3, 0, " Thermometers");
 		Thread thread_thermometers 					= new Thread(new Thread_Thermometers(), "Thermometers");
 		thread_thermometers.start();
-		try
-		{
-			Thread.sleep(10000);						// Must wait 10 secs for all thermometers to be read and have values
-		}
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+		
+		Global.waitSeconds(10);							// Must wait 10 secs for all thermometers to be read and have values
+		
 		//
 		//============================================================
 		display.writeAtPosition(3, 18, "Ok");
 
-		LogIt.tempInfo("Relays off ");
+		LogIt.tempInfo("Relays off and pump on");
 		Global.relays.offAll();
-		
+		Global.pumpFloor.on();
 		Global.mixerDown.off();
 		Global.mixerUp.off();
 		
+		LogIt.tempInfo("Mixer going down and wait 90s - do this manually to save time");
+		Global.mixerDown.on();
+		Global.waitSeconds(30);
+		Global.mixerDown.off();
 		LogIt.tempInfo("Mixer Down ");
-		LogIt.tempInfo("Mixer Flying, Pump on ");
-		Global.pumpFloor.on();
 		
-		int				i = 0;
-		
+		LogIt.tempInfo("Mixer going up half way");
+		Global.mixerUp.on();
+		Global.waitSeconds(45);
+		Global.mixerUp.off();
+		LogIt.tempInfo("Mixer 50% ");
+
+		LogIt.tempInfo("Mixer positionned, Pumps on ");
 		
 		@SuppressWarnings("unused")
         Burner 			burner 						= new Burner();
+		@SuppressWarnings("unused")
 		Boiler 			boiler						= new Boiler();
-//		int				i;
-		int				j;
-		
-
+		int				i;
 		
 		display.clear();
 		
-		LogIt.tempInfo("Starting burner with Boiler temp at "+ Global.thermoBoiler.reading);
-		
-		burner.powerOn();	
-		secondsToWait(2);
-		
-		while (Global.thermoBoiler.reading < 450)
+		for (i = 0; i < 50; i++)
 		{
-			secondsToWait(5);
-			LogIt.tempData();
-			displayData(display);				
-		}
-
-		burner.powerOff();
-		LogIt.tempInfo("Stopping burner");
-
-
-		for (i = 10; i > 0; i--)			
-		{
-			LogIt.tempInfo("Mixer to " + i + "0%");
-			Global.mixerDown.on();
-			secondsToWait(10);
-			Global.mixerDown.off();
-			LogIt.tempInfo("Mixer at " + i + "0%");
-
-		
-			for (j = 0; j < 60; j++)			// 5 mins
+			if (i % 2 == 0)
 			{
-				secondsToWait(5);
-				LogIt.tempData();
-				displayData(display);				
+				LogIt.tempInfo("Mixer Up, sequence " + i);
+				Global.mixerUp.on();
 			}
+			else
+			{
+				LogIt.tempInfo("Mixer Down, sequence " + i);
+				Global.mixerDown.on();
+			}
+			Global.waitSeconds(1);
+			Global.mixerUp.off();
+			Global.mixerDown.off();
+			Global.waitSeconds(3);
 		}
+		
 		LogIt.tempInfo("Test Finished");
-	
 		Global.relays.offAll();
-		Global.stopNow 										= true;					//Close other threads;
+		Global.stopNow								= true;
 	}
     public static String tempToString(Integer temp)
     {
@@ -178,34 +185,30 @@ public class Calibrate_Mixer2
     	Integer Decimals = temp - Degrees * 10;
     	return Degrees.toString() + "." + Decimals.toString();
     }
-    public static void secondsToWait(Integer seconds)
-    {
-		try
-        {
-            Thread.sleep(seconds * 1000);
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-    }
-    public static void displayData(LCD display)
+    public static void displayData()
     {
 		Date date 												= new Date();
 		SimpleDateFormat 	dateFormat 							= new SimpleDateFormat("dd.MM HH:mm:ss");
-		display.writeAtPosition(0, 0, dateFormat.format(date));
+		Global.display.writeAtPosition(0, 0, dateFormat.format(date));
 
-		display.writeAtPosition(0, 16, tempToString(Global.thermoOutside.reading));
-		display.writeAtPosition(1, 0,  "Blr  MixH  MixO MixC");
-		display.writeAtPosition(2, 0,  tempToString(Global.thermoBoiler.reading));
-		display.writeAtPosition(2, 5,  tempToString(Global.thermoFloorHot.reading));
-		display.writeAtPosition(2, 11, tempToString(Global.thermoFloorOut.reading));
-		display.writeAtPosition(2, 16, tempToString(Global.thermoFloorCold.reading));
-		display.writeAtPosition(3, 0,  "H2O  ");
-		display.writeAtPosition(3, 5,  tempToString(Global.thermoHotWater.reading));
+		Global.display.writeAtPosition(0, 16, tempToString(Global.thermoOutside.reading));
+		Global.display.writeAtPosition(1, 0,  "Blr  MixH  MixO MixC");
+		Global.display.writeAtPosition(2, 0,  tempToString(Global.thermoBoiler.reading));
+		Global.display.writeAtPosition(2, 5,  tempToString(Global.thermoFloorHot.reading));
+		Global.display.writeAtPosition(2, 11, tempToString(Global.thermoFloorOut.reading));
+		Global.display.writeAtPosition(2, 16, tempToString(Global.thermoFloorCold.reading));
+		Global.display.writeAtPosition(3, 0,  "H2O  ");
+		Global.display.writeAtPosition(3, 5,  tempToString(Global.thermoHotWater.reading));
 
-		display.writeAtPosition(3, 11, "LivR ");
-		display.writeAtPosition(3, 16, tempToString(Global.thermoLivingRoom.reading));
+		Global.display.writeAtPosition(3, 11, "LivR ");
+		Global.display.writeAtPosition(3, 16, tempToString(Global.thermoLivingRoom.reading));
     }
-
+    public static void waitForBoilerTemp(Integer target, LCD display)
+    {
+		while (Global.thermoBoiler.reading < target)
+		{
+			Global.waitSeconds(10);
+			displayData();				
+		}
+    }
 }

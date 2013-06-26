@@ -63,6 +63,7 @@ public class Buttons
 	}
 	public void cancel()
 	{
+		@SuppressWarnings("unused")
 		Integer result = Read();
 	}
 
