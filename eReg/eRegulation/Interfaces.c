@@ -459,7 +459,8 @@ int ADC_Read()
 	UI_Open(3);
 
 	char buf[5];
-	buf[0] 				= 0x94 | 1;								// Address of UI Board + 1 for Read
+//	buf[0] 				= 0x94 | 1;								// Address of UI Board + 1 for Read
+	buf[0] 				= 0x00 | 1;								// Address of UI Board + 1 for Read
 	buf[1] 				= 0x61;									// Command Read Analog input
 	buf[2] 				= 0x00;									// Any data(required for command to take effect
 	i2c_txrx(buf, 2, 2, 3);
