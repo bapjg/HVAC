@@ -21,11 +21,13 @@ public class Burner
 	public void powerOn()
 	{
 		burnerPower.on();
-		// Start counting fuel flow
+		// Fuel flow will be detected in sequencer
 	}
 	public void powerOff()
 	{
 		burnerPower.off();
+		
+		Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get an average
 		
 		if (checkFuelFlow())		// This updates Fuel Consumption
 		{
