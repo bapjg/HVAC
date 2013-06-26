@@ -3,17 +3,20 @@ package eRegulation;
 public class Burner
 {
 
-	public ADC	   			burnerFault;
-	public Relay	   		burnerPower;
-	public Integer			fuelConsumed;
-	public Integer			fuelFlow;
+	public 	ADC	   			burnerVoltages;							//circa 2.5V = fuel flowing and 4.5V = fault
+	public 	Relay	   		burnerPower;
+	public 	Long			fuelFlowTimeCumulated;
+	private Long			fuelFlowTimeLastStart;
+	private	Boolean			fuelIsFlowing;
 	
 	public Burner()
 	{
 		burnerPower				= Global.burnerPower;
-		burnerFault 			= new ADC();						// ADC measure fuel flow and burner fault
+		burnerVoltages 			= new ADC();						// ADC measure fuel flow and burner fault
 
 		burnerPower.off();
+		fuelFlowTimeCumulated	= 0L;
+		fuelIsFlowing			= false;
 	}
 	public void powerOn()
 	{
@@ -23,6 +26,14 @@ public class Burner
 	public void powerOff()
 	{
 		burnerPower.off();
+		
+		if (checkFuelFlow())		// This updates Fuel Consumption
+		{
+			System.out.println("Burner.powerOff and fuel is still flowing");
+		}
+		
+		
+		
 		// Stop counting Fuel flow
 	}
 	public void sequencer()
@@ -30,27 +41,63 @@ public class Burner
 		if (checkFault())
 		{
 			powerOff();
+			System.out.println("A Burner Fault has been detected by the burner Sequencer");
 		}
 		// Increment fuel flow
+		checkFuelFlow();
+		// Must also check max temp;
 	}
 	public Boolean checkFault()
 	{
-		if (burnerFault.readAverage() > 4)													// more than 4V means Burner has tripped
+		if (burnerVoltages.isFault())
 		{
 			LogIt.error("Burner", "checkFault", "Over 4 volts indicates trip");
-			return false;
-			//return true;
+			return true;
 		}
 		else
 		{
 			return false;
 		}
 	}
-	public void updateFuelFlow()
+	public Boolean checkFuelFlow()
 	{
-		if ((burnerFault.readAverage() > 2) && 	(burnerFault.readAverage() < 4))					// more than 3V means fuel is flowing
+		Boolean fuelFlowDetected = burnerVoltages.isFuelFlowing();
+		
+		if (fuelFlowDetected)
 		{
-			fuelConsumed++;
+			if (fuelIsFlowing)
+			{
+				// This means that fuel flow start has been previously detected
+			}
+			else
+			{
+				// Fuel flow has just been detected
+				fuelFlowTimeLastStart	= Global.now();
+				
+			}
+			fuelIsFlowing				= true;
+			return true;
+		}
+		else
+		{
+			if (fuelIsFlowing)
+			{
+				// This means that fuel flow start has been previously detected
+				// Fuel flow has been turned off
+				fuelFlowTimeCumulated	= fuelFlowTimeCumulated + Global.now() - fuelFlowTimeLastStart;
+				//
+				// This is the place to write to disk
+				//
+				//
+				
+			}
+			else
+			{
+				// Fuel flow was not on and has been detected as still being not on
+				// Nothing to do
+			}
+			fuelIsFlowing				= false;
+			return false;
 		}
 	}
 }

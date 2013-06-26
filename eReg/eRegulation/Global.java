@@ -239,4 +239,14 @@ public class Global extends DefaultHandler
             e.printStackTrace();
         }
  	}
+	public static Boolean isSummer()
+	{
+		// Determine from outside temperature whether summer or not
+		return true;
+ 	}
+	public static Long now()
+	{
+		// Determine from outside temperature whether summer or not
+		return System.currentTimeMillis();
+ 	}
 }
