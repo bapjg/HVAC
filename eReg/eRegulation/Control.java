@@ -8,7 +8,7 @@ public class Control
 {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException
 	{
-		//============================================================
+    	//============================================================
 		//
 		// Instantiate this class (required for JNI)
 		//
@@ -17,6 +17,8 @@ public class Control
 		//
 		//============================================================
 
+
+		
 		//============================================================
 		//
 		// For debugging on a Windows machine without the necessary hardware
@@ -33,6 +35,7 @@ public class Control
 		//============================================================
 		
 
+		
 		//============================================================
 		//
 		// Initialising : Note that "Initialising" message on LCD is handled
@@ -60,6 +63,8 @@ public class Control
 
 		//
 		//============================================================
+
+		
 		
 		//============================================================
 		//
@@ -70,6 +75,8 @@ public class Control
 		// display.writeAtPosition(1, 18, "Ok");
 		//
 		//============================================================
+
+		
 		
 		//============================================================
 		//
@@ -81,6 +88,8 @@ public class Control
 		Global.display.writeAtPosition(2, 18, "Ok");
 		//
 		//============================================================
+		
+
 		
 		//============================================================
 		//
@@ -115,6 +124,7 @@ public class Control
 		Global.mixer.pidControler					= new PID(5,3);					// PID Controler is updated every 10 secondes by Thread_Thermometers
 		//
 		//============================================================
+
 		
 		
 		//============================================================
@@ -130,6 +140,7 @@ public class Control
 		//============================================================
 
 		
+		
 		//============================================================
 		//
 		// Start thread to handle UserInterface
@@ -139,6 +150,7 @@ public class Control
 		//
 		//============================================================
 
+		
 		
 		//============================================================
 		//
@@ -152,21 +164,21 @@ public class Control
 		
 		
 		
-//		System.out.println("Starting test");
-//		burner.powerOn();
-//		
-//		int i;
-//		Float voltage;
-//		
-//		for (i = 0; i < 100; i++)
-//		{
-//			voltage = burner.burnerFault.read();
-//			System.out.println("Iteration : " + i + " voltage : " + voltage);
-//			Global.waitSeconds(1);
-//		}
-//		
-//		
-//		burner.powerOff();
+		System.out.println("Starting test");
+		burner.powerOn();
+		
+		int i;
+		Float voltage;
+		
+		for (i = 0; i < 100; i++)
+		{
+			voltage = burner.burnerFault.read();
+			System.out.println("Iteration : " + i + " voltage : " + voltage);
+			Global.waitSeconds(1);
+		}
+		
+		
+		burner.powerOff();
 		
 		
 			

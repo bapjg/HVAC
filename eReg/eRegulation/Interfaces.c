@@ -32,8 +32,8 @@ static uint16_t delay 		= 2;
 
 static int 		spi_fd;
 static int 		i2c_fd;
-static int 		i2c_port	= 0x00;								//Development
-//static int 		i2c_port	= 0x94;								//Production
+//static int 		i2c_port	= 0x00;								//Development
+static int 		i2c_port	= 0x94;								//Production
 
 static char 	*device 	= " ";
 static int 		addr 		= 0x9C;
