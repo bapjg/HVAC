@@ -1,5 +1,10 @@
 package eRegulation;
 
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Burner
 {
 
@@ -11,12 +16,31 @@ public class Burner
 	
 	public Burner()
 	{
-		burnerPower				= Global.burnerPower;
-		burnerVoltages 			= new ADC();						// ADC measure fuel flow and burner fault
+		burnerPower									= Global.burnerPower;
+		burnerVoltages 								= new ADC();						// ADC measure fuel flow and burner fault
 
 		burnerPower.off();
-		fuelFlowTimeCumulated	= 0L;
-		fuelIsFlowing			= false;
+		fuelFlowTimeCumulated						= 0L;
+		fuelIsFlowing								= false;
+		
+		// Now recover last saved fuel consumption
+//		try
+//		{
+//			InputStream  	file 					= new FileInputStream("FuelConsumed.txt");
+//			DataInputStream	input  					= new DataInputStream (file);
+//		    try
+//		    {
+//		    	fuelFlowTimeCumulated				= input.readLong();
+//		    }
+//		    finally
+//		    {
+//		    	input.close();
+//		    }
+//		}  
+//		catch(IOException ex)
+//		{
+//			System.out.println("I/O error");
+//		}	
 	}
 	public void powerOn()
 	{

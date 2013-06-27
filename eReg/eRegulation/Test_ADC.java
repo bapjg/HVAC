@@ -1,27 +1,59 @@
 package eRegulation;
 
+import java.io.*;
+import java.util.*;
+import java.util.logging.*;
+
 public class Test_ADC
 {
 
 	public static void main(String[] args)
 	{
 		Control 		Me 							= new Control();
-		System.loadLibrary("Interfaces");
-		ADC				adc							= new ADC();
 		
-		System.out.println("Starting test");
-		
-		int i;
-		Float voltage;
-		
-		for (i = 0; i < 20; i++)
-		{
-			voltage = adc.read();
-			System.out.println("Iteration : " + i + " voltage  : " + voltage);
-			voltage = adc.readAverage();
-			System.out.println("Iteration : " + i + " volt Avg : " + voltage);
+		Long			fuelConsumed				= 45927L;
 
-			Global.waitSeconds(1);
-		}
+		try
+		{
+			InputStream  	file 					= new FileInputStream("FuelConsumed.txt");
+			DataInputStream	input  					= new DataInputStream (file);
+		    try
+		    {
+		    	fuelConsumed 						= input.readLong();
+		    }
+		    finally
+		    {
+		    	input.close();
+		    }
+		}  
+		catch(IOException ex)
+		{
+			System.out.println("I/O error");
+		}	
+
+		
+		fuelConsumed++;
+		
+		
+		
+		try
+		{
+			OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
+		    DataOutputStream 	output 				= new DataOutputStream(file);
+		    try
+		    {
+		    	output.writeLong(fuelConsumed);
+		    }
+		    finally
+		    {
+		        output.close();
+		    }
+		}  
+		catch(IOException ex)
+		{
+			System.out.println("I/O error");
+		}	
+		
+		System.out.println("Done");
 	}
 }

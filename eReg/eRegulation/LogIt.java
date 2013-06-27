@@ -161,16 +161,23 @@ public class LogIt
 	}
     public static void saveFuelConsumption(Long fuelConsumption)
     {
-    	try 
-        {
-            PrintWriter fuelConcumptionFile = new PrintWriter(new BufferedWriter(new FileWriter("fuelConcumption.txt", true)));
-            fuelConcumptionFile.println(fuelConsumption);
-            fuelConcumptionFile.close();
-        } 
-        catch (IOException e) 
-        {
-            e.printStackTrace();
-        }
-    }
 
+		try
+		{
+			OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
+		    DataOutputStream 	output 				= new DataOutputStream(file);
+		    try
+		    {
+		    	output.writeLong(fuelConsumption);
+		    }
+		    finally
+		    {
+		        output.close();
+		    }
+		}  
+		catch(IOException ex)
+		{
+			System.out.println("I/O error");
+		}	
+    }
 }
