@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.*;
 
-public class Test_ADC
+public class Test_FuelFlowToDisk
 {
 
 	public static void main(String[] args)

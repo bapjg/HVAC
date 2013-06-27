@@ -57,10 +57,6 @@ public class Burner
 		{
 			System.out.println("Burner.powerOff and fuel is still flowing");
 		}
-		
-		
-		
-		// Stop counting Fuel flow
 	}
 	public void sequencer()
 	{
