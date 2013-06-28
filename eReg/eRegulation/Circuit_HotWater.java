@@ -38,20 +38,31 @@ public class Circuit_HotWater extends Circuit_Abstract
 			switch (state)
 			{
 			case STATE_Off:
+				
 				//Nothing to do
 				break;
+				
 			case STATE_Started:
+				
 				LogIt.info("Circuit", "sequencerWater", "Started");	
 				Global.pumpWater.on();
 				state								= STATE_Running;		
 				break;
+				
 			case STATE_Running:
+				
 				// Nothing to do
 				this.heatRequired.tempMinimum		= activeTask.tempObjective + 100;
 				this.heatRequired.tempMaximum		= tempMax;
+				
+				if (Global.thermoHotWater.reading > activeTask.tempObjective)
+				{
+					state = STATE_Stopping;
+				}
+				
 				break;
+				
 			case STATE_Stopping:
-				LogIt.info("Circuit", "sequencerWater", "Stopping");	
 				
 				// If active task.temporary = true
 				// need to delete the object to avoid
@@ -65,10 +76,15 @@ public class Circuit_HotWater extends Circuit_Abstract
 					state							= STATE_Off;
 					activeTask						= null;
 				}
+				
 				break;
+				
 			case STATE_Error:
+				
 				break;
+				
 			default:
+				
 				LogIt.error("Circuit", "sequencerWater", "unknown state detected : " + state);	
 			}
 		}
