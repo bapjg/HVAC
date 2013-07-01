@@ -37,9 +37,11 @@ public class ADC
 	}
 	public Boolean isFault()
 	{
+		// If last read/readaverage was more than 1/2 second 
+		// then we should force a new read should force a read
 		if (Global.now() - timeLastRead > 500L)
 		{
-			// Assume that 1/2 second should force a read
+			
 			lastVoltage				= readAverage();
 			timeLastRead			= Global.now();
 		}
