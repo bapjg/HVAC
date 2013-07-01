@@ -161,7 +161,6 @@ public class LogIt
 	}
     public static void saveFuelConsumption(Long fuelConsumption)
     {
-
 		try
 		{
 			OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
