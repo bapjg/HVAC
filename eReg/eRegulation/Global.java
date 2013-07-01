@@ -23,55 +23,55 @@ public class Global extends DefaultHandler
 	// by changing C code to open ic2/spi channel once (and then keeping it open
 	// Current code does open, read/write, close
 	//
-	public static ReentrantLock 		semaphore = new ReentrantLock();
+	public static 	ReentrantLock 					semaphore = new ReentrantLock();
 	//
 	//===================================================================
 	
-	public static 	Boolean						stopNow;
+	public static 	Boolean							stopNow;
 	
-	public static 	Thermometers 				thermometers;
+	public static 	Thermometers 					thermometers;
 	
-	public static 	Thermometer 				thermoBoiler;
-	public static 	Thermometer 				thermoBoilerIn;
+	public static 	Thermometer 					thermoBoiler;
+	public static 	Thermometer 					thermoBoilerIn;
 	
-	public static 	Thermometer 				thermoFloorOut;
-	public static 	Thermometer 				thermoFloorCold;
-	public static 	Thermometer 				thermoFloorHot;
+	public static 	Thermometer 					thermoFloorOut;
+	public static 	Thermometer 					thermoFloorCold;
+	public static 	Thermometer 					thermoFloorHot;
 	
-	public static 	Thermometer 				thermoRadiatorOut;
-	public static 	Thermometer 				thermoRadiatorIn;
+	public static 	Thermometer 					thermoRadiatorOut;
+	public static 	Thermometer 					thermoRadiatorIn;
 	
-	public static 	Thermometer 				thermoOutside;
-	public static 	Thermometer 				thermoLivingRoom;
-	public static 	Thermometer 				thermoHotWater;
+	public static 	Thermometer 					thermoOutside;
+	public static 	Thermometer 					thermoLivingRoom;
+	public static 	Thermometer 					thermoHotWater;
 
-	public static 	Integer						tempHotWaterPrevious;
+	public static 	Integer							tempHotWaterPrevious;
 	
-	public static 	Relays	 					relays;
-	public static 	Relay						burnerPower;
-	public static 	Relay						pumpWater;
-	public static 	Relay						pumpFloor;
-	public static 	Relay						pumpRadiator;
-	public static 	Relay						mixerUp;
-	public static 	Relay						mixerDown;
+	public static 	Relays	 						relays;
+	public static 	Relay							burnerPower;
+	public static 	Relay							pumpWater;
+	public static 	Relay							pumpFloor;
+	public static 	Relay							pumpRadiator;
+	public static 	Relay							mixerUp;
+	public static 	Relay							mixerDown;
 	
-	public static 	Circuits	 				circuits;
-	public static 	Circuit_HotWater			circuitHotWater;
-	public static 	Circuit_Gradient			circuitGradient;
-	public static 	Circuit_Mixer				circuitFloor;
+	public static 	Circuits	 					circuits;
+	public static 	Circuit_HotWater				circuitHotWater;
+	public static 	Circuit_Gradient				circuitGradient;
+	public static 	Circuit_Mixer					circuitFloor;
 
-	public static 	Mixer						mixer;
+	public static 	Mixer							mixer;
 
-	public static 	Integer						summerTemp;
-	public static 	Integer						summerPumpDuration;	
-	public static 	Long						summerPumpTime;	
-	public static 	Boolean						summerWorkDone;
+	public static 	Integer							summerTemp;
+	public static 	Integer							summerPumpDuration;	
+	public static 	Long							summerPumpTime;	
+	public static 	Boolean							summerWorkDone;
 
-	public static 	LCD							display;	
-	public static 	ADC							adcSomething;	
-	public static 	Buttons						buttons;	
+	public static 	LCD								display;	
+	public static 	ADC								adcSomething;	
+	public static 	Buttons							buttons;	
 	
-	private 		Circuit_Abstract 			circuit;		
+	private 		Circuit_Abstract 				circuit;		
 
 
 	public Global(String xmlParameters) throws IOException, SAXException, ParserConfigurationException
