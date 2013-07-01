@@ -57,15 +57,7 @@ public class Calendars extends DefaultHandler
 					String tempObjective 			= attributes.getValue("tempObjective");
 					String stopOnObjective 			= attributes.getValue("stopOnObjective");
 
-					Calendar calendar 				= Calendar.getInstance();
-					Integer day 					= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
-					
-					// Make day = 1 Monday ... day = 7 Sunday
-					day--;																	// Sunday = 0, Monday = 1, Tues = 2 ... Sat = 6
-					if (day == 0)
-					{
-						day							= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
-					}
+					Integer day 					= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 
 					if (days.contains(day.toString()))
 					{
