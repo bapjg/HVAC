@@ -7,6 +7,7 @@ public class CircuitTask
 	public Integer 			tempObjective;
 	public Boolean 			stopOnObjective;
 	public Boolean			temporary;
+	public String			days;
 
 	public Integer			state;
 	
@@ -22,6 +23,7 @@ public class CircuitTask
 		String 			timeEnd,  
 		String 			tempObjective, 
 		String			stopOnObjective,
+		String			days,
 		Boolean			temporary
 		)
 	{
@@ -30,6 +32,7 @@ public class CircuitTask
 		this.timeEnd						= Global.parseTime(timeEnd);
 
 		this.tempObjective					= Integer.parseInt(tempObjective);
+		this.days							= days;
 		
 		if (stopOnObjective.equalsIgnoreCase("1"))
 		{
@@ -48,6 +51,7 @@ public class CircuitTask
 		Long 			timeEnd,  
 		Integer			tempObjective, 
 		Boolean			stopOnObjective,
+		String			days,
 		Boolean			temporary
 		)
 	{
@@ -58,6 +62,7 @@ public class CircuitTask
 		this.tempObjective					= tempObjective;
 		this.stopOnObjective				= stopOnObjective;
 		
+		this.days							= days;
 		this.temporary 						= temporary;
 	}
 }

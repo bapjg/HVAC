@@ -69,7 +69,7 @@ public class Calendars extends DefaultHandler
 
 					if (days.contains(day.toString()))
 					{
-						this.circuit.addCircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, false);
+						this.circuit.addCircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, false);
 						LogIt.info("Calendar Entry", this.circuit.name, "Time start/end " + timeStart + "/" + timeEnd);
 					}
 				}

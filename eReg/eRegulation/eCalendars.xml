@@ -6,10 +6,6 @@
 				timeStart="17:30" timeEnd="18:00" tempObjective="400"
 				stopOnObjective="1">
 			</Calendar>
-			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5, 6, 7"
-				timeStart="07:30" timeEnd="08:00" tempObjective="400"
-				stopOnObjective="1">
-			</Calendar>
 		</Circuit>
 
 		<Circuit type="Object" name="Radiator">

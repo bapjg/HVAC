@@ -47,10 +47,11 @@ abstract class Circuit_Abstract
 		String 			timeEnd,  
 		String 			tempObjective, 
 		String			stopOnObjective,
+		String			days,
 		Boolean			temporary
 		)
 	{
-		CircuitTask circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, temporary);
+		CircuitTask circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
 		circuitTaskList.add(circuitTaskItem);
 	}
 	public void addCircuitTask
@@ -59,10 +60,11 @@ abstract class Circuit_Abstract
 		Long 			timeEnd,  
 		Integer			tempObjective, 
 		Boolean			stopOnObjective,
+		String			days,
 		Boolean			temporary
 		)
 	{
-		CircuitTask circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, temporary);
+		CircuitTask circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
 		circuitTaskList.add(circuitTaskItem);
 	}
 	public void start()

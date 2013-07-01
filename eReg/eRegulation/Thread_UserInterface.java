@@ -40,7 +40,7 @@ public class Thread_UserInterface implements Runnable
     			
 				Long	now						= Global.getTimeNowSinceMidnight();
 
-				Global.circuitHotWater.addCircuitTask(now, now + 30 * 60 * 1000, 500, true, true);
+				Global.circuitHotWater.addCircuitTask(now, now + 30 * 60 * 1000, 500, true, "1, 2, 3, 4, 5, 6, 7", true);
    			
     			Set <Thread> threadSet = Thread.getAllStackTraces().keySet();
     			
