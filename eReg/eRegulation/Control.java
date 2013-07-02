@@ -88,9 +88,8 @@ public class Control
 		Global.display.writeAtPosition(2, 18, "Ok");
 		//
 		//============================================================
-		
 
-		
+
 		//============================================================
 		//
 		// Initialise Global (This ought to be in constructor) xxxx
@@ -125,6 +124,18 @@ public class Control
 		//
 		//============================================================
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		//============================================================
@@ -169,21 +180,26 @@ public class Control
 		//
 
 		
-//		System.out.println("Starting test");
-//		burner.powerOn();
-//		
-//		int i;
-//		Float voltage;
-//		
-//		for (i = 0; i < 30; i++)
-//		{
-//			burner.sequencer();
-//			voltage = burner.burnerVoltages.read();
-//			System.out.println("Iteration : " + i + " voltage : " + voltage);
-//			Global.waitSeconds(1);
-//		}
-//		
-//		
+		System.out.println("Starting test");
+		// burner.powerOn();
+		
+		int i;
+		ADC adc = new ADC();
+		
+		Long timeStart = Global.now();
+		
+		for (i = 0; i < 100; i++)
+		{
+			//burner.sequencer();
+			adc.read();
+		}
+
+		Long timeEnd = Global.now();
+		
+		System.out.println("100 ADC reads : " + (timeEnd - timeStart));
+		Global.stopNow = true;
+
+		
 //		burner.powerOff();
 //		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
 //		
@@ -202,7 +218,7 @@ public class Control
 //		
 //		
 //		burner.powerOff();
-//		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
+		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
 		
 		//
 		//============================================================
