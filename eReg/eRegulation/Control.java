@@ -191,12 +191,12 @@ public class Control
 		for (i = 0; i < 100; i++)
 		{
 			//burner.sequencer();
-			adc.readAverage();
+			Global.burnerPower.off();
 		}
 
 		Long timeEnd = Global.now();
 		
-		System.out.println("100 ADC reads : " + (timeEnd - timeStart));
+		System.out.println("100 relay throws : " + (timeEnd - timeStart));
 		Global.stopNow = true;
 
 		
