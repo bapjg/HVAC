@@ -22,6 +22,7 @@ abstract class Circuit_Abstract
 	public final int 				STATE_Running 			= 2;
 	public final int 				STATE_Stopping	 		= 3;
 	public final int 				STATE_Optimising 		= 4;
+	public final int 				STATE_Completed 		= 5;
 	public final int 				STATE_Error	 			= -1;
 
 	public Mixer					mixer					= null;
@@ -145,6 +146,10 @@ abstract class Circuit_Abstract
 						// We have an error
 						circuitTask.state							= circuitTask.STATE_Error;
 					}
+				}
+				else
+				{
+					circuitTask.state								= circuitTask.STATE_NotToday;
 				}
 			}
 		}

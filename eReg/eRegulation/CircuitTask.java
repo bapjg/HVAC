@@ -15,6 +15,7 @@ public class CircuitTask
 	public final int 		STATE_Started 			= 1;
 	public final int 		STATE_Completed			= 2;
 	public final int 		STATE_Error	 			= -1;
+	public final int 		STATE_NotToday 			= -2;
 
 	
 	public CircuitTask
