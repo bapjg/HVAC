@@ -3,7 +3,7 @@
 	<Circuits type="Collection">
 		<Circuit type="Object" name="Hot_Water">
 			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5, 6, 7"
-				timeStart="23:00" timeEnd="23:30" tempObjective="350"
+				timeStart="23:00" timeEnd="23:55" tempObjective="350"
 				stopOnObjective="1">
 			</Calendar>
 		</Circuit>
