@@ -253,6 +253,18 @@ public class Global extends DefaultHandler
             e.printStackTrace();
         }
  	}
+	public static void waitMilliSeconds(Long milliSeconds)
+	{
+		// Sleeps a supplied number of milliseconds
+		try
+        {
+            Thread.sleep(milliSeconds);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+ 	}
 	public static Boolean isSummer()
 	{
 		// Determine from outside temperature whether summer or not
