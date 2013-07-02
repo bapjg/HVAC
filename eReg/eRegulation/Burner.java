@@ -12,10 +12,13 @@ public class Burner
 	private Long			fuelFlowTimeLastStart;
 	private	Boolean			fuelIsFlowing;
 	
+	private FuelFlow		fuelflow;
+	
 	public Burner()
 	{
 		burnerPower									= Global.burnerPower;
 		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
+		fuelflow									= new FuelFlow();
 
 		burnerPower.off();
 		fuelFlowTimeCumulated						= 0L;
@@ -61,6 +64,8 @@ public class Burner
 	}
 	public void sequencer()
 	{
+		fuelflow.update();
+		
 		if (checkFault())
 		{
 			powerOff();

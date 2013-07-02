@@ -1,8 +1,5 @@
 package eRegulation;
 
-import java.util.concurrent.locks.ReentrantLock;
-
-
 public class Relay
 {
 	private native void 	On(int Relay_Bank, int Relay_Number);
@@ -22,59 +19,17 @@ public class Relay
 		this.name 		    		= name;
 		this.friendlyName   		= friendlyName;
 		this.relayNumber			= Integer.parseInt(address);
-
 	}
 	public void on()
 	{
-//		Long now 				= System.currentTimeMillis();
 		Global.semaphore.lock();
-//		if (timeActioned != 0L)
-//		{
-//			if (now - timeActioned < 10L)
-//			{
-//				try
-//		        {
-//					System.out.println("Relay : Thread collision (on )  " + name + "/" + Thread.currentThread().getName());
-//					Thread.sleep(10L - now + timeActioned);
-//		        }
-//		        catch (InterruptedException e)
-//		        {
-//			        e.printStackTrace();
-//		        }
-//			}
-//			else
-//			{
-//				System.out.println("Relay : Thread Ok        (on ) "  + name + "/" + Thread.currentThread().getName());
-//			}
-//		}
-//		timeActioned = now;
 		On(relayBank, relayNumber);
 		Global.semaphore.unlock();
 	}
 	public void off()
 	{
-//		Long now 				= System.currentTimeMillis();
+		// Call takes approx 12 ms (100 call to off = 1225ms)
 		Global.semaphore.lock();		
-//		if (timeActioned != 0L)
-//		{
-//			if (now - timeActioned < 10L)
-//			{
-//				try
-//		        {
-//					System.out.println("Relay : Thread collision (off) "  + name + "/" + Thread.currentThread().getName());
-//					Thread.sleep(10L - now + timeActioned);
-//		        }
-//		        catch (InterruptedException e)
-//		        {
-//			        e.printStackTrace();
-//		        }
-//			}
-//			else
-//			{
-//				System.out.println("Relay : Thread Ok        (off) "  + name + "/" + Thread.currentThread().getName());
-//			}
-//		}
-//		timeActioned = now;
 		Off(relayBank, relayNumber);
 		Global.semaphore.unlock();
 	}
@@ -82,7 +37,6 @@ public class Relay
 	{
 		Global.semaphore.lock();
 		Long now 				= System.currentTimeMillis();
-//		timeActioned = now;
 		On(relayBank, relayNumber);
 		Global.semaphore.unlock();
 	}
@@ -90,7 +44,6 @@ public class Relay
 	{
 		Global.semaphore.lock();
 		Long now 				= System.currentTimeMillis();
-//		timeActioned = now;
 		Off(relayBank, relayNumber);
 		Global.semaphore.unlock();
 	}

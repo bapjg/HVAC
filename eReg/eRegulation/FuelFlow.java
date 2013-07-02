@@ -12,9 +12,8 @@ public class FuelFlow
 {
 	public Boolean		fuelFlowing;
 	public Long			timeLastStart;
-	public Long			consumptionAccounted;
-	public Long			consumptionUnAccounted;
-
+	public Long			consumption;
+	
 	// consumption represents the number of milliseconds of fuel flow
 	// fuelFlowing is the programs view of whether fuel is flowing or not
 	// whether fuel is flowing or not can only be determined by reading the ADC
@@ -34,13 +33,13 @@ public class FuelFlow
 			DataInputStream	input  					= new DataInputStream (file);
 		    try
 		    {
-		    	consumptionAccounted				= input.readLong();
-		    	consumptionUnAccounted				= 0L;
-		    	timeLastStart						= -1L;
+		    	consumption							= input.readLong();
 		    }
 		    finally
 		    {
+		    	timeLastStart						= -1L;
 		    	input.close();
+		    	System.out.println("Fuel input" + consumption);
 		    }
 		}  
 		catch(IOException ex)
@@ -50,26 +49,24 @@ public class FuelFlow
 	}
 	public void saveFuelFlow()
     {
-		if (consumptionUnAccounted > 0)
+		try
 		{
-			try
-			{
-				OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
-			    DataOutputStream 	output 				= new DataOutputStream(file);
-			    try
-			    {
-			    	output.writeLong(consumptionAccounted + consumptionUnAccounted);
-			    	consumptionUnAccounted				= 0L;
-			    }
-			    finally
-			    {
-			        output.close();
-			    }
-			}  
-			catch(IOException ex)
-			{
-				System.out.println("I/O error when writing FuelConsumed.txt");
-			}
+			OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
+		    DataOutputStream 	output 				= new DataOutputStream(file);
+		    try
+		    {
+		    	output.writeLong(consumption);
+		    }
+		    finally
+		    {
+		    	timeLastStart						= -1L;		// Is this right
+		        output.close();
+		    	System.out.println("Fuel close" + consumption);
+		    }
+		}  
+		catch(IOException ex)
+		{
+			System.out.println("I/O error when writing FuelConsumed.txt");
 		}
     }
 	public void update()
@@ -88,31 +85,25 @@ public class FuelFlow
 		
 		if (timeLastStart == -1L)
 		{
-			
-			
-			// If we detect fuelflowing then
-			// 	set lastSTart
-			//	set Unaccounted = 0
-			// else
-			//	do nothing
+			// last call here had no fuel flowing
+			if (Global.burnerVoltages.isFuelFlowing())			// Fuel has just started to flow
+			{
+				timeLastStart 						= Global.now();
+			}
 		}
 		else
 		{
-			// If we detect fuelflowing then
-			//	do nothing
-			// else
-			// 	
-			//	increment Unaccounted
-
-			
+			// last call here had fuel flowing
+			if (Global.burnerVoltages.isFuelFlowing())
+			{
+				// Nothing to do until it stops
+			}
+			else												// Fuel has just stopped flowing
+			{
+				consumption							= consumption + Global.now() - timeLastStart;;	
+				timeLastStart						= -1L;
+			}
 		}
-		if (fuelFlowing)
-		{
-			consumptionUnAccounted = timeLastStart - Global.now();
-		}
-		else
-		{
-			timeLastStart = 0L;
-		}
+    	System.out.println("Fuel update" + consumption);
 	}
 }

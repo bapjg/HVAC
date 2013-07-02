@@ -180,24 +180,24 @@ public class Control
 		//
 
 		
-		System.out.println("Starting test");
-		// burner.powerOn();
-		
-		int i;
-		ADC adc = new ADC();
-		
-		Long timeStart = Global.now();
-		
-		for (i = 0; i < 100; i++)
-		{
-			//burner.sequencer();
-			Global.burnerPower.off();
-		}
-
-		Long timeEnd = Global.now();
-		
-		System.out.println("100 relay throws : " + (timeEnd - timeStart));
-		Global.stopNow = true;
+//		System.out.println("Starting test");
+//		// burner.powerOn();
+//		
+//		int i;
+//		ADC adc = new ADC();
+//		
+//		Long timeStart = Global.now();
+//		
+//		for (i = 0; i < 100; i++)
+//		{
+//			//burner.sequencer();
+//			Global.burnerPower.off();
+//		}
+//
+//		Long timeEnd = Global.now();
+//		
+//		System.out.println("100 relay throws : " + (timeEnd - timeStart));
+//		Global.stopNow = true;
 
 		
 //		burner.powerOff();
@@ -229,7 +229,7 @@ public class Control
 		// Main Code
 		//
 		
-		HeatRequired 	globalHeatRequired			= new HeatRequired();
+		HeatRequired 	globalHeatRequired						= new HeatRequired();
 		
 		while (!Global.stopNow)
 		{
