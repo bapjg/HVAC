@@ -9,8 +9,9 @@ public class Burner
 	{
 		burnerPower									= Global.burnerPower;
 		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
+		System.out.println("new FuelFlow before");
 		fuelflow									= new FuelFlow();
-
+		System.out.println("new FuelFlow after");
 		burnerPower.off();
 	}
 	public void powerOn()
