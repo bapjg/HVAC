@@ -208,7 +208,7 @@ public class Global extends DefaultHandler
 		Long now							= Calendar.getInstance().getTimeInMillis() - Global.getTimeMidnight();		
 		return now;
 	}
-	public static Integer getDayOfWeek()
+	public static String getDayOfWeek()
 	{
 		Calendar calendar 					= Calendar.getInstance();
 		Integer day 						= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
@@ -220,7 +220,7 @@ public class Global extends DefaultHandler
 			day								= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 		}
 		
-		return day;
+		return day.toString();
 	}
 	public static Long parseTime(String characters)
 	{

@@ -115,9 +115,9 @@ abstract class Circuit_Abstract
 		{
 			for (CircuitTask circuitTask : circuitTaskList) 
 			{
-				Integer day 									= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+				String day 									= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 
-				if (circuitTask.days.contains(day.toString()))
+				if (circuitTask.days.contains(day))
 				{
 					//	LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100);
 					
