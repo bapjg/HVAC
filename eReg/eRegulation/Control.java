@@ -274,19 +274,19 @@ public class Control
 			
 			boiler.requestHeat(globalHeatRequired);
 			
-			if (Global.thermoOutside.reading > Global.summerTemp)
-			{
-				if (Global.getTimeNowSinceMidnight() > Global.summerPumpTime)
-				{
-					if (!Global.summerWorkDone)
-					{
-						Global.summerWorkDone					= true;
-						
-						Thread 			thread_summer 			= new Thread(new Thread_Summer(), "Summer");
-						thread_summer.start();
-					}
-				}
-			}
+//			if (Global.thermoOutside.reading > Global.summerTemp)
+//			{
+//				if (Global.getTimeNowSinceMidnight() > Global.summerPumpTime)
+//				{
+//					if (!Global.summerWorkDone)
+//					{
+//						Global.summerWorkDone					= true;
+//						
+//						Thread 			thread_summer 			= new Thread(new Thread_Summer(), "Summer");
+//						thread_summer.start();
+//					}
+//				}
+//			}
 		}
 		//
 		// End of Main Code
