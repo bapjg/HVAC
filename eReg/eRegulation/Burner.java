@@ -45,7 +45,7 @@ public class Burner
 	{
 		burnerPower.on();
 		System.out.println("Fuel Consumed Burner On     : " + fuelFlowTimeCumulated);
-		// Fuel flow will be detected in sequencer
+		// Fuel flow will be detected in sequencer, as there is an approx 10s delay before fuel starts flowing
 	}
 	public void powerOff()
 	{
