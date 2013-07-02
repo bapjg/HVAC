@@ -35,10 +35,11 @@ public class Thread_Thermometers implements Runnable
 
 			LogIt.tempData();
 			
-			Long timeElapsed					= Global.now() - timeStart;
+			Long timeEnd						= Global.now();
+			Long timeElapsed					= timeEnd - timeStart;
 			Long timeIncrement 					= 10000L - timeElapsed;
 			
-			if (timeIncrement <= 0)
+			if (timeIncrement <= 0L)
 			{
 				LogIt.error("Thread_Thermometers", "run", "Temp reads over 10 seconds");
 				timeIncrement					= 1000L;

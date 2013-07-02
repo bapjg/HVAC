@@ -22,27 +22,29 @@ public class Burner
 		fuelIsFlowing								= false;
 		
 		// Now recover last saved fuel consumption
-//		try
-//		{
-//			InputStream  	file 					= new FileInputStream("FuelConsumed.txt");
-//			DataInputStream	input  					= new DataInputStream (file);
-//		    try
-//		    {
-//		    	fuelFlowTimeCumulated				= input.readLong();
-//		    }
-//		    finally
-//		    {
-//		    	input.close();
-//		    }
-//		}  
-//		catch(IOException ex)
-//		{
-//			System.out.println("I/O error");
-//		}	
+		try
+		{
+			InputStream  	file 					= new FileInputStream("FuelConsumed.txt");
+			DataInputStream	input  					= new DataInputStream (file);
+		    try
+		    {
+		    	fuelFlowTimeCumulated				= input.readLong();
+		    }
+		    finally
+		    {
+		    	input.close();
+		    }
+		}  
+		catch(IOException ex)
+		{
+			System.out.println("I/O error");
+		}
+		System.out.println("Fuel Consumed Instanciation : " + fuelFlowTimeCumulated);
 	}
 	public void powerOn()
 	{
 		burnerPower.on();
+		System.out.println("Fuel Consumed Burner On     : " + fuelFlowTimeCumulated);
 		// Fuel flow will be detected in sequencer
 	}
 	public void powerOff()
@@ -55,6 +57,7 @@ public class Burner
 		{
 			System.out.println("Burner.powerOff and fuel is still flowing");
 		}
+		System.out.println("Fuel Consumed Burner Off    : " + fuelFlowTimeCumulated);
 	}
 	public void sequencer()
 	{
