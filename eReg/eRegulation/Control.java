@@ -191,7 +191,7 @@ public class Control
 		for (i = 0; i < 100; i++)
 		{
 			//burner.sequencer();
-			adc.read();
+			adc.readAverage();
 		}
 
 		Long timeEnd = Global.now();

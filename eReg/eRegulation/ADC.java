@@ -23,6 +23,8 @@ public class ADC
 	}
 	public float read()
 	{
+		//Test showed that this call takes less than 1ms/call
+		// Actual data : 74 ms for 100 calls
 		Global.semaphore.lock();
 		float voltage = Read();
 		Global.semaphore.unlock();
@@ -30,6 +32,8 @@ public class ADC
 	}
 	public float readAverage()
 	{
+		//Test showed that this call takes less than 1ms/call
+		// Actual data : 74 ms for 100 calls
 		Global.semaphore.lock();
 		float voltage = ReadAverage();
 		Global.semaphore.unlock();
