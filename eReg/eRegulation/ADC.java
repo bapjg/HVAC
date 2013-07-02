@@ -35,7 +35,8 @@ public class ADC
 		//Test showed that this call takes less than 1ms/call
 		// Actual data : 74 ms for 100 calls
 		Global.semaphore.lock();
-		float voltage = ReadAverage();
+		//float voltage = ReadAverage();
+		float voltage = 508;
 		Global.semaphore.unlock();
 		return 						 voltage * 5 /1023;  // 1023 = 5V
 	}
