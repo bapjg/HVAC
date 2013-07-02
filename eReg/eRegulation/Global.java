@@ -68,7 +68,7 @@ public class Global extends DefaultHandler
 	public static 	Boolean							summerWorkDone;
 
 	public static 	LCD								display;	
-	public static 	ADC								adcSomething;	
+	public static 	ADC								burnerVoltages;	
 	public static 	Buttons							buttons;	
 	
 	private 		Circuit_Abstract 				circuit;		

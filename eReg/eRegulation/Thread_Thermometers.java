@@ -10,33 +10,33 @@ public class Thread_Thermometers implements Runnable
 		while (!Global.stopNow)
 		{
 			
-			long timeStart 						= System.currentTimeMillis();
+			Long timeStart 						= Global.now();
 			
 			Global.thermoBoiler.read();
-			waitAWhile();
+			Global.waitMilliSeconds(5);
 			Global.thermoBoilerIn.read();
-			waitAWhile();
+			Global.waitMilliSeconds(5);
 			Global.thermoFloorOut.read();
 			Global.circuitFloor.mixer.pidControler.add(Global.thermoFloorOut.reading);
-			waitAWhile();
+			Global.waitMilliSeconds(5);
 			Global.thermoFloorCold.read();
-			waitAWhile();
+			Global.waitMilliSeconds(5);
 			Global.thermoFloorHot.read();
-			waitAWhile();
+			Global.waitMilliSeconds(5);
 			Global.thermoRadiatorOut.read();
-			waitAWhile();
+			Global.waitMilliSeconds(5);
 			Global.thermoRadiatorIn.read();
-			waitAWhile();
+			Global.waitMilliSeconds(5);
 			Global.thermoOutside.read();
-			waitAWhile();
+			Global.waitMilliSeconds(5);
 			Global.thermoLivingRoom.read();
-			waitAWhile();
+			Global.waitMilliSeconds(5);
 			Global.thermoHotWater.read();
 
 			LogIt.tempData();
 			
-			long timeEnd 						= System.currentTimeMillis();
-			long timeIncrement 					= 10000 - timeEnd + timeStart;
+			Long timeElapsed					= Global.now() - timeStart;
+			Integer timeIncrement 				= 10000 - timeElapsed.intValue();
 			
 			if (timeIncrement <= 0)
 			{
@@ -44,30 +44,9 @@ public class Thread_Thermometers implements Runnable
 				timeIncrement					= 1000;
 			}
 
-
-			try
-            {
-                Thread.sleep(timeIncrement);
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-
+			Global.waitMilliSeconds(timeIncrement);
 		}
 		
 		LogIt.info("Thread_Thermometers", "Run", "Stopping");			
-	}
-	public void waitAWhile()
-	{
-		try
-        {
-            Thread.sleep(5);
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-		
 	}
 }

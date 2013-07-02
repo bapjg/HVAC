@@ -7,8 +7,6 @@ import java.io.InputStream;
 
 public class Burner
 {
-
-	public 	ADC	   			burnerVoltages;							//circa 2.5V = fuel flowing and 4.5V = fault
 	public 	Relay	   		burnerPower;
 	public 	Long			fuelFlowTimeCumulated;
 	private Long			fuelFlowTimeLastStart;
@@ -17,7 +15,7 @@ public class Burner
 	public Burner()
 	{
 		burnerPower									= Global.burnerPower;
-		burnerVoltages 								= new ADC();						// ADC measure fuel flow and burner fault
+		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
 
 		burnerPower.off();
 		fuelFlowTimeCumulated						= 0L;
@@ -71,7 +69,7 @@ public class Burner
 	}
 	public Boolean checkFault()
 	{
-		if (burnerVoltages.isFault())
+		if (Global.burnerVoltages.isFault())
 		{
 			LogIt.error("Burner", "checkFault", "Over 4 volts indicates trip");
 			return true;
@@ -83,7 +81,7 @@ public class Burner
 	}
 	public Boolean checkFuelFlow()
 	{
-		Boolean fuelFlowDetected = burnerVoltages.isFuelFlowing();
+		Boolean fuelFlowDetected = Global.burnerVoltages.isFuelFlowing();
 		
 		if (fuelFlowDetected)
 		{

@@ -3,19 +3,19 @@
 	<Circuits type="Collection">
 		<Circuit type="Object" name="Hot_Water">
 			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5, 6, 7"
-				timeStart="17:30" timeEnd="18:00" tempObjective="400"
+				timeStart="17:30" timeEnd="18:00" tempObjective="350"
 				stopOnObjective="1">
 			</Calendar>
 		</Circuit>
 
 		<Circuit type="Object" name="Radiator">
-			<Calendar type="Object" name="EveryDay" days="1"
+			<Calendar type="Object" name="EveryDay" days="0"
 				timeStart="17:00" timeEnd="17:30" tempObjective="500"
 				stopOnObjective="0">
 			</Calendar>
 		</Circuit>
 		<Circuit type="Object" name="Floor">
-			<Calendar type="Object" name="WeekDays" days="1"
+			<Calendar type="Object" name="WeekDays" days="0"
 				timeStart="06:00" timeEnd="07:30" tempObjective="190"
 				stopOnObjective="0">
 			</Calendar>

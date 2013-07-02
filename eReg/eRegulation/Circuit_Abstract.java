@@ -115,31 +115,36 @@ abstract class Circuit_Abstract
 		{
 			for (CircuitTask circuitTask : circuitTaskList) 
 			{
-				//	LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100);
-				
-				// Three possibilities : Task is yet to run, task currently running, finished running
-				if (Global.getTimeNowSinceMidnight() < circuitTask.timeStart)
+				Integer day 									= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+
+				if (circuitTask.days.contains(day.toString()))
 				{
-					circuitTask.state							= circuitTask.STATE_WaitingToStart;
-					// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "waiting to start");
-				}
-				else if ((circuitTask.timeStart < Global.getTimeNowSinceMidnight()) && ( Global.getTimeNowSinceMidnight() < circuitTask.timeEnd))
-				{
-					circuitTask.state							= circuitTask.STATE_Started;	// Indication in the Task that it has been started (just informative)
-					state										= STATE_Started;				// State of the circuit is started. The sequencer will actually get things moving
-					activeTask									= circuitTask;
-					// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "activating");
-				}
-				else if (Global.getTimeNowSinceMidnight() > circuitTask.timeEnd)
-				{
-					circuitTask.state							= circuitTask.STATE_Completed;
-					// activeTask will be set to null in the sequencer
-					// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "completed");
-				}
-				else
-				{
-					// We have an error
-					circuitTask.state							= circuitTask.STATE_Error;
+					//	LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100);
+					
+					// Three possibilities : Task is yet to run, task currently running, finished running
+					if (Global.getTimeNowSinceMidnight() < circuitTask.timeStart)
+					{
+						circuitTask.state							= circuitTask.STATE_WaitingToStart;
+						// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "waiting to start");
+					}
+					else if ((circuitTask.timeStart < Global.getTimeNowSinceMidnight()) && ( Global.getTimeNowSinceMidnight() < circuitTask.timeEnd))
+					{
+						circuitTask.state							= circuitTask.STATE_Started;	// Indication in the Task that it has been started (just informative)
+						state										= STATE_Started;				// State of the circuit is started. The sequencer will actually get things moving
+						activeTask									= circuitTask;
+						// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "activating");
+					}
+					else if (Global.getTimeNowSinceMidnight() > circuitTask.timeEnd)
+					{
+						circuitTask.state							= circuitTask.STATE_Completed;
+						// activeTask will be set to null in the sequencer
+						// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "completed");
+					}
+					else
+					{
+						// We have an error
+						circuitTask.state							= circuitTask.STATE_Error;
+					}
 				}
 			}
 		}

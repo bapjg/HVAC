@@ -57,13 +57,8 @@ public class Calendars extends DefaultHandler
 					String tempObjective 			= attributes.getValue("tempObjective");
 					String stopOnObjective 			= attributes.getValue("stopOnObjective");
 
-					Integer day 					= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
-
-					if (days.contains(day.toString()))
-					{
-						this.circuit.addCircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, false);
-						LogIt.info("Calendar Entry", this.circuit.name, "Time start/end " + timeStart + "/" + timeEnd);
-					}
+					this.circuit.addCircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, false);
+					LogIt.info("Calendar Entry", this.circuit.name, "Time start/end " + timeStart + "/" + timeEnd + " Days " + days);
 				}
 			}
 			else
