@@ -3,9 +3,6 @@ package eRegulation;
 public class Burner
 {
 	public 	Relay	   		burnerPower;
-	public 	Long			fuelFlowTimeCumulated;
-
-	
 	private FuelFlow		fuelflow;
 	
 	public Burner()

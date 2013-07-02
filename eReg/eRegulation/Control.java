@@ -218,7 +218,6 @@ public class Control
 //		
 //		
 //		burner.powerOff();
-		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
 		
 		//
 		//============================================================

@@ -58,18 +58,6 @@ public class Circuits
 			return false;
 		}
 	}
-//	public Circuit fetchCircuit(int index)
-//	{
-//		Circuit element 				= null;
-//		int i;
-//		Iterator <Circuit> itr			= circuitList.iterator();
-//		
-//		for (i = 0; i <= index; i++)
-//		{
-//			element 					= itr.next();
-//		}
-//		return (Circuit) element;
-//	}
 	public Circuit_Abstract fetchcircuit(String name)
 	{
 		for (Circuit_Abstract circuit : Global.circuits.circuitList) 
