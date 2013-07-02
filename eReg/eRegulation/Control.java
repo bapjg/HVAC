@@ -168,9 +168,9 @@ public class Control
 		// To be transferred elsewhere
 		//
 		System.out.println("Control burner befoire");
-		@SuppressWarnings("unused")
-        Burner 			burner 						= new Burner();
-		System.out.println("Control burner after");
+		//@SuppressWarnings("unused")
+        //Burner 			burner 						= new Burner();
+		System.out.println("Control burner before boiler");
 		Boiler 			boiler						= new Boiler();
 		System.out.println("Control burner after boiler");
 		//
