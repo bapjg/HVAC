@@ -36,6 +36,7 @@ public class FuelFlow
 		    {
 		    	consumptionAccounted				= input.readLong();
 		    	consumptionUnAccounted				= 0L;
+		    	timeLastStart						= -1L;
 		    }
 		    finally
 		    {
@@ -49,24 +50,27 @@ public class FuelFlow
 	}
 	public void saveFuelFlow()
     {
-		try
+		if (consumptionUnAccounted > 0)
 		{
-			OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
-		    DataOutputStream 	output 				= new DataOutputStream(file);
-		    try
-		    {
-		    	output.writeLong(consumptionAccounted + consumptionUnAccounted);
-		    	consumptionUnAccounted				= 0L;
-		    }
-		    finally
-		    {
-		        output.close();
-		    }
-		}  
-		catch(IOException ex)
-		{
-			System.out.println("I/O error when writing FuelConsumed.txt");
-		}	
+			try
+			{
+				OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
+			    DataOutputStream 	output 				= new DataOutputStream(file);
+			    try
+			    {
+			    	output.writeLong(consumptionAccounted + consumptionUnAccounted);
+			    	consumptionUnAccounted				= 0L;
+			    }
+			    finally
+			    {
+			        output.close();
+			    }
+			}  
+			catch(IOException ex)
+			{
+				System.out.println("I/O error when writing FuelConsumed.txt");
+			}
+		}
     }
 	public void update()
 	{
@@ -75,6 +79,33 @@ public class FuelFlow
 		// If was wasn't flowing and now is, burner has been started and the 
 		// 10 second ventilation period has elapsed
 		
+		// In fact isFuelFlowing is a result of
+		//   ADC.Read		: present
+		//	time Last Start : past
+		
+		
+		// We also need a convertion milliseconds of FuelFlow to litres of fuel
+		
+		if (timeLastStart == -1L)
+		{
+			
+			
+			// If we detect fuelflowing then
+			// 	set lastSTart
+			//	set Unaccounted = 0
+			// else
+			//	do nothing
+		}
+		else
+		{
+			// If we detect fuelflowing then
+			//	do nothing
+			// else
+			// 	
+			//	increment Unaccounted
+
+			
+		}
 		if (fuelFlowing)
 		{
 			consumptionUnAccounted = timeLastStart - Global.now();
