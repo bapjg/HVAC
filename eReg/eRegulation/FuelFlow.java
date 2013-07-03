@@ -38,7 +38,6 @@ public class FuelFlow
 		    {
 		    	timeLastStart						= -1L;
 		    	input.close();
-		    	System.out.println("Fuel input" + consumption);
 		    }
 		}  
 		catch(IOException ex)
@@ -48,7 +47,6 @@ public class FuelFlow
 	}
 	public void saveFuelFlow()
     {
-		System.out.println("FuelFlow/====save called");
 		try
 		{
 			OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
@@ -61,7 +59,6 @@ public class FuelFlow
 		    {
 		    	timeLastStart						= -1L;		// Is this right
 		        output.close();
-		    	System.out.println("Fuel close" + consumption);
 		    }
 		}  
 		catch(IOException ex)
@@ -80,10 +77,8 @@ public class FuelFlow
 		
 		// We also need a convertion milliseconds of FuelFlow to litres of fuel
 		
-		System.out.println("FuelFlow/update called");
 		if (timeLastStart == -1L)
 		{
-			System.out.println("FuelFlow/update called branch timeLS = -1");
 			// last call here had no fuel flowing
 			if (Global.burnerVoltages.isFuelFlowing())			// Fuel has just started to flow
 			{
@@ -92,17 +87,14 @@ public class FuelFlow
 		}
 		else
 		{
-			System.out.println("FuelFlow/update called branch timeLS <> -1");
 			// last call here had fuel flowing
 			if (Global.burnerVoltages.isFuelFlowing())
 			{
-				System.out.println("FuelFlow/update called fuel flowing");
 				// Nothing has changed, fuel is still flowing
 				// Nothing to do until it stops
 			}
 			else												// Fuel has just stopped flowing
 			{
-				System.out.println("=========FuelFlow/update called fuel not flowing");
 				consumption							= consumption + Global.now() - timeLastStart;;	
 				timeLastStart						= -1L;
 				saveFuelFlow();
