@@ -49,7 +49,7 @@ public class Burner
 		burnerPower.off();
 		fuelflow.update();
 		
-		Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
+		Global.waitMilliSeconds(100);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
 		fuelflow.update();											// This should detect fuelflow off and perhaps force save
 		
 		if (fuelflow.isFuelFlowing())

@@ -275,4 +275,14 @@ public class Global extends DefaultHandler
 		// Determine from outside temperature whether summer or not
 		return System.currentTimeMillis();
  	}
+	public static void burnerPanic(String reason)
+	{
+		// Need to determine what to bo in burner Panic situations
+		// It seems reasonable to do the following :
+		// Ensure that burnerRelay is off
+		// Evacutae heat (over temperature by any means) hot water is usefull even in summer
+		
+		System.out.println("Global/purnerPanic called : will stop all" + reason);
+		Global.burnerPower.off();
+	}
 }
