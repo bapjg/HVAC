@@ -19,23 +19,30 @@ public class Burner
 		burnerPower.on();
 		
 		Integer i;
-		System.out.println("Powered burner");
+		System.out.println("===================Powered burner");
 		
-		for (i = 0; ((i < 30) && (fuelflow.timeLastStart > -1L)); i++)
+//		for (i = 0; ((i < 30) && (fuelflow.timeLastStart > -1L)); i++)
+//		{
+//			// Fuel is not yet flowing
+//			System.out.println("Waiting for fuel flow, iteration : " + i);
+//			fuelflow.update();
+//			Global.waitSeconds(1);
+//		}
+		for (i = 0; i < 30; i++)
 		{
-			// Fuel is not yet flowing
-			System.out.println("Waiting for fuel flow, iteration : " + i);
-			fuelflow.update();
-			Global.waitSeconds(1);
+			if (fuelflow.isFuelFlowing())
+			{
+				System.out.println("fuel flow detected ");
+				return;
+			}
+			else
+			{
+				System.out.println("Waiting for fuel flow, iteration : " + i);
+				fuelflow.update();
+				Global.waitSeconds(1);
+			}
 		}
-		if (fuelflow.isFuelFlowing())
-		{
-			// All is well
-		}
-		else
-		{
-			System.out.println("Burner/powerOn no fuel flow detected : burner has tripped");
-		}
+		System.out.println("Burner/powerOn no fuel flow detected : burner has tripped");
 	}
 	public void powerOff()
 	{
