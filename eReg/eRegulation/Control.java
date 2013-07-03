@@ -155,11 +155,17 @@ public class Control
 		//
 
 		
-//		System.out.println("Starting test");
-//		// burner.powerOn();
-//		
-//		int i;
-//		ADC adc = new ADC();
+		System.out.println("Starting test");
+		System.out.println("burner on");
+		boiler.burner.powerOn();
+		
+		int i;
+		FuelFlow ff = boiler.burner.fuelflow;
+		System.out.println("burner off");
+		boiler.burner.powerOff();
+
+		Global.stopNow = true;
+		
 //		
 //		Long timeStart = Global.now();
 //		

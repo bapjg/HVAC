@@ -3,7 +3,7 @@ package eRegulation;
 public class Burner
 {
 	public 	Relay	   		burnerPower;
-	private FuelFlow		fuelflow;
+	public  FuelFlow		fuelflow;
 	
 	public Burner()
 	{
