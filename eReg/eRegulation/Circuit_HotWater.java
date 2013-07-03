@@ -23,7 +23,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 			if (Global.getTimeNowSinceMidnight() > activeTask.timeEnd)
 			{
 				state								= CIRCUIT_STATE_Stopping;
-				activeTask.state					= activeTask.TASK_STATE_Completed;
+				activeTask.state					= CircuitTask.TASK_STATE_Completed;
 			}
 			//
 			//===========================================================
@@ -38,37 +38,63 @@ public class Circuit_HotWater extends Circuit_Abstract
 			case CIRCUIT_STATE_Started:
 				
 				LogIt.info("Circuit", "sequencerWater", "Started");	
+				
+				// Switching pump on can cause heat being pumped the wrong way
+				// Leave as is on the basis that 1) short lived and 2) easier than doing it later 
+				// while avoiding repeated pump action
+				
 				Global.pumpWater.on();
 				state								= CIRCUIT_STATE_Running;		
 				break;
 				
 			case CIRCUIT_STATE_Running:
 				
-				// Nothing to do
+				// Setup real energy requirements (preset to sero at beginning
+				// This can be adjusted later with a better algorithm based on ernery statistics
+				
 				this.heatRequired.tempMinimum		= activeTask.tempObjective + 100;
 				this.heatRequired.tempMaximum		= tempMax;
 				
 				if (Global.thermoHotWater.reading > activeTask.tempObjective)
 				{
-					state = CIRCUIT_STATE_Stopping;
+					state 							= CIRCUIT_STATE_Optimising;
 				}
 				
 				break;
 				
+			case CIRCUIT_STATE_Optimising:
+				
+				if(Global.circuits.isSingleActiveCircuit())
+				{
+					// Keep going until all heat is taken out of boiler
+					if (Global.thermoBoiler.reading < Global.thermoHotWater.reading + 20)
+					{
+						// set taskstate as running free as if other heat requirement
+						// then this task can be abandoned at no energy cost
+						activeTask.state			= CircuitTask.TASK_STATE_RunningFree;
+						// Continue as there is still more heat
+					}
+					else
+					{
+						state						= CIRCUIT_STATE_Stopping;
+					}
+				}
+				else
+				{
+					state							= CIRCUIT_STATE_Stopping;
+				}
+				// Now fall through to CIRCUIT_STATE_Stopping given that heatRequired is correctly set up
+
 			case CIRCUIT_STATE_Stopping:
 				
 				// If active task.temporary = true
 				// need to delete the object to avoid
 				// memory leaks
-				System.out.println("Single activetasks " + Global.circuits.isSingleActiveCircuit());
-
-				if (Global.thermoBoiler.reading < Global.thermoHotWater.reading + 20)
-				{
-					//No more heat can be taken out of the system
-					Global.pumpWater.off();
-					state							= CIRCUIT_STATE_Off;
-					activeTask						= null;
-				}
+					
+				Global.pumpWater.off();
+				state								= CIRCUIT_STATE_Off;
+				activeTask.state					= CircuitTask.TASK_STATE_Completed;
+				activeTask							= null;
 				
 				break;
 				

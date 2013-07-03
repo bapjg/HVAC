@@ -40,6 +40,10 @@ public class Thread_UserInterface implements Runnable
     			
 				Long	now						= Global.getTimeNowSinceMidnight();
 
+				
+				// Need to change this
+				// Add temporary cirecuit would be better. In this way the tasklist would not be altered
+				// and no need to delete the item at end (just set to null)
 				Global.circuitHotWater.addCircuitTask(now, now + 30 * 60 * 1000, 500, true, "1, 2, 3, 4, 5, 6, 7", true);
    			
     			Set <Thread> threadSet = Thread.getAllStackTraces().keySet();

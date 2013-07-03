@@ -111,7 +111,7 @@ abstract class Circuit_Abstract
 //			LogIt.info("Circuit","scheduleTasks", "activeTask <> null in : " + name);
 			if (Global.getTimeNowSinceMidnight() > activeTask.timeEnd)
 			{
-				activeTask.state								= activeTask.TASK_STATE_Completed;
+				activeTask.state								= CircuitTask.TASK_STATE_Completed;
 				// 
 				// If this a temporary task, should be deleted
 				//

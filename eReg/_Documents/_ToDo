@@ -25,6 +25,7 @@ singleCircuitActive
 ===================
 	Boolean Circuits.singleCircuitActive() implemnted but reports 3 activeCircuits instead of 2 Wtare+Floor
 	Use it inCircuit.sequencer().
+	Enable abandon of RunningFree task if necessary ????
 	
 Hot Water
 =========
@@ -41,10 +42,6 @@ Thermometers
 	Create thermal contact
 	Calibrate Trip (heat and see at what temp the pump trips
 	
-Linux
-=====
-	fstab
-	
 
 ===========================================================================================
 ToTest Items
@@ -58,15 +55,3 @@ DaysOfWeek
 Done Items
 ==========
 	
-Radiator/Mixer
-==============
-	Use TemperatureGradient	
-
-Thermometers
-============
-	Calibrate : Ok to 1 degree
-			
-
-Circuit
-=======
-	Introduce subClasses

@@ -11,12 +11,12 @@ public class CircuitTask
 
 	public Integer			state;
 	
-	public final int 		TASK_STATE_WaitingToStart		= 0;
-	public final int 		TASK_STATE_Started 				= 1;
-	public final int 		TASK_STATE_RunningFree 			= 1;
-	public final int 		TASK_STATE_Completed			= 2;
-	public final int 		TASK_STATE_Error	 			= -1;
-	public final int 		TASK_STATE_NotToday 			= -2;
+	public static final int TASK_STATE_WaitingToStart		= 0;
+	public static final int TASK_STATE_Started 				= 1;
+	public static final int TASK_STATE_RunningFree 			= 2;
+	public static final int TASK_STATE_Completed			= 3;
+	public static final int TASK_STATE_Error	 			= -1;
+	public static final int TASK_STATE_NotToday 			= -2;
 
 	
 	public CircuitTask
