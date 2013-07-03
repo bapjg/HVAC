@@ -105,6 +105,7 @@ public class FuelFlow
 	}
 	public Boolean isFuelFlowing()
 	{
+		update();
 		if (timeLastStart == -1L)
 		{
 			return false;
