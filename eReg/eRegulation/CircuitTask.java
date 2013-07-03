@@ -11,11 +11,12 @@ public class CircuitTask
 
 	public Integer			state;
 	
-	public final int 		STATE_WaitingToStart	= 0;
-	public final int 		STATE_Started 			= 1;
-	public final int 		STATE_Completed			= 2;
-	public final int 		STATE_Error	 			= -1;
-	public final int 		STATE_NotToday 			= -2;
+	public final int 		TASK_STATE_WaitingToStart		= 0;
+	public final int 		TASK_STATE_Started 				= 1;
+	public final int 		TASK_STATE_RunningFree 			= 1;
+	public final int 		TASK_STATE_Completed			= 2;
+	public final int 		TASK_STATE_Error	 			= -1;
+	public final int 		TASK_STATE_NotToday 			= -2;
 
 	
 	public CircuitTask
@@ -28,23 +29,23 @@ public class CircuitTask
 		Boolean			temporary
 		)
 	{
-		this.state							= STATE_WaitingToStart;
-		this.timeStart						= Global.parseTime(timeStart);
-		this.timeEnd						= Global.parseTime(timeEnd);
+		this.state											= TASK_STATE_WaitingToStart;
+		this.timeStart										= Global.parseTime(timeStart);
+		this.timeEnd										= Global.parseTime(timeEnd);
 
-		this.tempObjective					= Integer.parseInt(tempObjective);
-		this.days							= days;
+		this.tempObjective									= Integer.parseInt(tempObjective);
+		this.days											= days;
 		
 		if (stopOnObjective.equalsIgnoreCase("1"))
 		{
-			this.stopOnObjective			= true;
+			this.stopOnObjective							= true;
 		}
 		else
 		{
-			this.stopOnObjective			= false;			
+			this.stopOnObjective							= false;			
 		}
 		
-		this.temporary 						= temporary;
+		this.temporary 										= temporary;
 	}
 	public CircuitTask
 		(
@@ -56,14 +57,14 @@ public class CircuitTask
 		Boolean			temporary
 		)
 	{
-		this.state							= STATE_WaitingToStart;
-		this.timeStart						= timeStart;
-		this.timeEnd						= timeEnd;
+		this.state											= TASK_STATE_WaitingToStart;
+		this.timeStart										= timeStart;
+		this.timeEnd										= timeEnd;
 	
-		this.tempObjective					= tempObjective;
-		this.stopOnObjective				= stopOnObjective;
+		this.tempObjective									= tempObjective;
+		this.stopOnObjective								= stopOnObjective;
 		
-		this.days							= days;
-		this.temporary 						= temporary;
+		this.days											= days;
+		this.temporary 										= temporary;
 	}
 }

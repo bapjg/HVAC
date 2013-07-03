@@ -17,20 +17,44 @@ public class Burner
 	public void powerOn()
 	{
 		burnerPower.on();
-		// Fuel flow will be detected in sequencer, as there is an approx 10s delay before fuel starts flowing
+		
+		Integer i;
+		
+		for (i = 0; (i < 30) && (fuelflow.timeLastStart > -1L); i++)
+		{
+			// Fuel is not yet flowing
+			System.out.println("Witing for fuel flow, iteration : " + i);
+			fuelflow.update();
+			Global.waitSeconds(1);
+		}
+		if (fuelflow.isFuelFlowing())
+		{
+			// All is well
+		}
+		else
+		{
+			System.out.println("Burner/powerOn no fuel flow detected : burner has tripped");
+		}
 	}
 	public void powerOff()
 	{
 		burnerPower.off();
 		fuelflow.update();
 		
-		Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get an average
-		fuelflow.update();											// This should force save
+		Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
+		fuelflow.update();											// This should detect fuelflow off and perhaps force save
 		
-//		if (checkFuelFlow())		// This updates Fuel Consumption
-//		{
-//			System.out.println("Burner.powerOff and fuel is still flowing");
-//		}
+		if (fuelflow.isFuelFlowing())
+		{
+			System.out.println("Burner/powerOff and fuel flow still detected : burner has tripped");
+			// What should we do here
+			// This would be a big big problem
+			// Perhaps close all relays
+		}
+		else
+		{
+			// All is well
+		}
 	}
 	public void sequencer()
 	{

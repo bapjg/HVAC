@@ -63,20 +63,7 @@ public class Control
 
 		//
 		//============================================================
-
-		
-		
-		//============================================================
-		//
-		// Read Param file
-		//
-		// display.writeAtPosition(1, 0, " Params");
-		// Read_XML_Params 	params					= new Read_XML_Params(xmlParams);
-		// display.writeAtPosition(1, 18, "Ok");
-		//
-		//============================================================
-
-		
+	
 		
 		//============================================================
 		//
@@ -123,24 +110,11 @@ public class Control
 		Global.mixer.pidControler					= new PID(5,3);					// PID Controler is updated every 10 secondes by Thread_Thermometers
 		//
 		//============================================================
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		//============================================================
 		//
-		// Start thread to continuously read the thermomoeters
+		// Start thread to continuously read the thermometers
 		//
 		Global.display.writeAtPosition(3, 0, " Thermometers");
 		Thread 			thread_thermometers 		= new Thread(new Thread_Thermometers(), "Thermometers");
@@ -149,7 +123,6 @@ public class Control
 		Global.waitSeconds(10);														// Must wait 10 secs for all thermometers to be read and have values
 		//
 		//============================================================
-
 		
 		
 		//============================================================
@@ -160,7 +133,6 @@ public class Control
 		thread_userInterface.start();
 		//
 		//============================================================
-
 		
 		
 		//============================================================

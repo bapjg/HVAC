@@ -10,7 +10,6 @@ import java.io.OutputStream;
 
 public class FuelFlow
 {
-	public Boolean		fuelFlowing;
 	public Long			timeLastStart;
 	public Long			consumption;
 	
@@ -73,14 +72,11 @@ public class FuelFlow
 	public void update()
 	{
 		// We basically need to detected state changes
-		// Fuel was flowing and now isn't, the burner must have stopped (trip or otherwise)
-		// If was wasn't flowing and now is, burner has been started and the 
-		// 10 second ventilation period has elapsed
+		// if timeLastStart = -1 means that on last ADC.Read, fuel was not flowing
+		// if timeLastStart > -1 means that on last ADC.Read, fuel was flowing
 		
-		// In fact isFuelFlowing is a result of
-		//   ADC.Read		: present
-		//	time Last Start : past
-		
+		// Note that on powerup, there is an approximate 10s ventilation time
+		// before fuel starts flowing
 		
 		// We also need a convertion milliseconds of FuelFlow to litres of fuel
 		
@@ -97,6 +93,7 @@ public class FuelFlow
 			// last call here had fuel flowing
 			if (Global.burnerVoltages.isFuelFlowing())
 			{
+				// Nothing has changed, fuel is still flowing
 				// Nothing to do until it stops
 			}
 			else												// Fuel has just stopped flowing
@@ -106,5 +103,16 @@ public class FuelFlow
 			}
 		}
     	System.out.println("Fuel update" + consumption);
+	}
+	public Boolean isFuelFlowing()
+	{
+		if (timeLastStart == -1L)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 }

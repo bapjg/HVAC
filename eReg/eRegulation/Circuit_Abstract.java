@@ -17,30 +17,30 @@ abstract class Circuit_Abstract
 
 	public Integer					state;
 	
-	public final int 				STATE_Off 				= 0;
-	public final int 				STATE_Started 			= 1;
-	public final int 				STATE_Running 			= 2;
-	public final int 				STATE_Stopping	 		= 3;
-	public final int 				STATE_Optimising 		= 4;
-	public final int 				STATE_Completed 		= 5;
-	public final int 				STATE_Error	 			= -1;
+	public final int 				CIRCUIT_STATE_Off 				= 0;
+	public final int 				CIRCUIT_STATE_Started 			= 1;
+	public final int 				CIRCUIT_STATE_Running 			= 2;
+	public final int 				CIRCUIT_STATE_Stopping	 		= 3;
+	public final int 				CIRCUIT_STATE_Optimising 		= 4;
+	public final int 				CIRCUIT_STATE_Error	 			= -1;
 
-	public Mixer					mixer					= null;
-	public TemperatureGradient 		temperatureGradient		= null;				//This will be overridden
+
+	public Mixer					mixer						= null;
+	public TemperatureGradient 		temperatureGradient			= null;				//This will be overridden
 	
-	public CircuitTask				activeTask				= null;
-	public ArrayList<CircuitTask> 	circuitTaskList 		= new ArrayList<CircuitTask>();
-	public HeatRequired				heatRequired			= new HeatRequired();
+	public CircuitTask				activeTask					= null;
+	public ArrayList<CircuitTask> 	circuitTaskList 			= new ArrayList<CircuitTask>();
+	public HeatRequired				heatRequired				= new HeatRequired();
 
 	public Circuit_Abstract(String name, String friendlyName, String circuitType, String tempMax, String rampUp, String rampDown)
 	{	
-		this.name											= name;
-		this.friendlyName									= friendlyName;
-		this.circuitType									= circuitType;
-		this.tempMax										= Integer.parseInt(tempMax);
-		this.rampUp											= Integer.parseInt(rampUp);
-		this.rampDown										= Integer.parseInt(rampDown);
-		this.state											= STATE_Off;
+		this.name												= name;
+		this.friendlyName										= friendlyName;
+		this.circuitType										= circuitType;
+		this.tempMax											= Integer.parseInt(tempMax);
+		this.rampUp												= Integer.parseInt(rampUp);
+		this.rampDown											= Integer.parseInt(rampDown);
+		this.state												= CIRCUIT_STATE_Off;
 	}
 	public void addCircuitTask
 		(
@@ -52,7 +52,7 @@ abstract class Circuit_Abstract
 		Boolean			temporary
 		)
 	{
-		CircuitTask circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
+		CircuitTask circuitTaskItem 							= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
 		circuitTaskList.add(circuitTaskItem);
 	}
 	public void addCircuitTask
@@ -65,7 +65,7 @@ abstract class Circuit_Abstract
 		Boolean			temporary
 		)
 	{
-		CircuitTask circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
+		CircuitTask circuitTaskItem 							= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
 		circuitTaskList.add(circuitTaskItem);
 	}
 	public void start()
@@ -92,6 +92,14 @@ abstract class Circuit_Abstract
 	/*
 	 *  This sets up "circuitTask" to be the task selected to run based on date/time
 	 *  If the circuit has no task programmed, "circuitTask" is null (not true, but should it be true)
+	 *  
+	 *  Circuit_Abstract has several implmentations (HW/Radiator/Mixer
+	 *  
+	 *  Circuit_Abstract has a list of tasks (circuitTask)
+	 *  
+	 *  
+	 *  
+	 *  
 	 */
 	{
 		if (activeTask != null)
@@ -101,7 +109,7 @@ abstract class Circuit_Abstract
 //			LogIt.info("Circuit","scheduleTasks", "activeTask <> null in : " + name);
 			if (Global.getTimeNowSinceMidnight() > activeTask.timeEnd)
 			{
-				activeTask.state							= activeTask.STATE_Completed;
+				activeTask.state								= activeTask.TASK_STATE_Completed;
 				// 
 				// If this a temporary task, should be deleted
 				//
@@ -116,40 +124,49 @@ abstract class Circuit_Abstract
 		{
 			for (CircuitTask circuitTask : circuitTaskList) 
 			{
-				String day 									= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+				String day 										= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 
 				if (circuitTask.days.contains(day))
 				{
 					//	LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100);
 					
 					// Three possibilities : Task is yet to run, task currently running, finished running
-					if (Global.getTimeNowSinceMidnight() < circuitTask.timeStart)
+					if (circuitTask.state != circuitTask.TASK_STATE_Completed)
 					{
-						circuitTask.state							= circuitTask.STATE_WaitingToStart;
-						// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "waiting to start");
-					}
-					else if ((circuitTask.timeStart < Global.getTimeNowSinceMidnight()) && ( Global.getTimeNowSinceMidnight() < circuitTask.timeEnd))
-					{
-						circuitTask.state							= circuitTask.STATE_Started;	// Indication in the Task that it has been started (just informative)
-						state										= STATE_Started;				// State of the circuit is started. The sequencer will actually get things moving
-						activeTask									= circuitTask;
-						// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "activating");
-					}
-					else if (Global.getTimeNowSinceMidnight() > circuitTask.timeEnd)
-					{
-						circuitTask.state							= circuitTask.STATE_Completed;
-						// activeTask will be set to null in the sequencer
-						// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "completed");
-					}
-					else
-					{
-						// We have an error
-						circuitTask.state							= circuitTask.STATE_Error;
+						if (Global.getTimeNowSinceMidnight() < circuitTask.timeStart)
+						{
+							circuitTask.state						= circuitTask.TASK_STATE_WaitingToStart;
+							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "waiting to start");
+						}
+						else if ((circuitTask.timeStart < Global.getTimeNowSinceMidnight()) && ( Global.getTimeNowSinceMidnight() < circuitTask.timeEnd))
+						{
+							circuitTask.state						= circuitTask.TASK_STATE_Started;	// Indication in the Task that it has been started (just informative)
+							
+							// All this is very fudgy/strange/needs to be sorted out
+							
+							state									= CIRCUIT_STATE_Started;				// State of the circuit is started. The sequencer will actually get things moving
+							activeTask								= circuitTask;
+							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "activating");
+						}
+						else if (Global.getTimeNowSinceMidnight() > circuitTask.timeEnd)
+						{
+							//circuitTask.state						= circuitTask.STATE_Completed;
+							circuitTask.state						= circuitTask.TASK_STATE_Completed;
+							// activeTask will be set to null in the sequencer
+							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "completed");
+						}
+						else
+						{
+							// We have an error
+							//circuitTask.state						= circuitTask.STATE_Error;
+							circuitTask.state						= circuitTask.TASK_STATE_Error;
+						}
 					}
 				}
 				else
 				{
-					circuitTask.state								= circuitTask.STATE_NotToday;
+					//circuitTask.state								= circuitTask.STATE_NotToday;
+					circuitTask.state								= circuitTask.TASK_STATE_NotToday;
 				}
 			}
 		}
