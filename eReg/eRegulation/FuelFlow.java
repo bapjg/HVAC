@@ -79,6 +79,7 @@ public class FuelFlow
 		
 		// We also need a convertion milliseconds of FuelFlow to litres of fuel
 		
+		System.out.println("FuelFlow/update called");
 		if (timeLastStart == -1L)
 		{
 			// last call here had no fuel flowing

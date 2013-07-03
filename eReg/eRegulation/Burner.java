@@ -9,9 +9,7 @@ public class Burner
 	{
 		burnerPower									= Global.burnerPower;
 		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
-		System.out.println("new FuelFlow before");
 		fuelflow									= new FuelFlow();
-		System.out.println("new FuelFlow after");
 		burnerPower.off();
 	}
 	public void powerOn()
@@ -37,7 +35,6 @@ public class Burner
 			}
 			else
 			{
-				System.out.println("Waiting for fuel flow, iteration : " + i);
 				fuelflow.update();
 				Global.waitSeconds(1);
 			}
