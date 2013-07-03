@@ -28,14 +28,14 @@ public class Burner
 //		}
 		for (i = 0; i < 30; i++)
 		{
+			fuelflow.update();
 			if (fuelflow.isFuelFlowing())
 			{
-				System.out.println("fuel flow detected ");
+				System.out.println("Burner/powerOn : fuel flow detected ");
 				return;
 			}
 			else
 			{
-				fuelflow.update();
 				Global.waitSeconds(1);
 			}
 		}

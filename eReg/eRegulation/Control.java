@@ -155,8 +155,8 @@ public class Control
 		//
 
 		
-		System.out.println("Starting test");
-		System.out.println("burner on");
+		System.out.println("Control Starting test");
+		System.out.println("Control burner on");
 		boiler.burner.powerOn();
 		
 		int i;
