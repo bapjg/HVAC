@@ -38,22 +38,29 @@ public class Burner
 	{
 		System.out.println("Burner/powerOff called, will call relay burnerPoweroff/update etc");
 		burnerPower.off();
-		fuelflow.update();
+
+		Integer i;
+		// System.out.println("===================Powered burner");
 		
-		Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
-		fuelflow.update();											// This should detect fuelflow off and perhaps force save
-		
-		if (fuelflow.isFuelFlowing())
+		for (i = 0; i < 30; i++)
 		{
-			System.out.println("Burner/powerOff and fuel flow still detected : burner has tripped");
-			// What should we do here
-			// This would be a big big problem
-			// Perhaps close all relays
+			fuelflow.update();
+			
+			if (fuelflow.isFuelFlowing())
+			{
+				Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
+				System.out.println("Burner/powerOff interation : " + i);
+				// What should we do here
+				// This would be a big big problem
+				// Perhaps close all relays
+			}
+			else
+			{
+				// All is well
+				return;
+			}
 		}
-		else
-		{
-			// All is well
-		}
+		System.out.println("Burner/powerOff and fuel flow still detected : burner has tripped");
 	}
 	public void sequencer()
 	{
