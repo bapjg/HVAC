@@ -100,7 +100,7 @@ public class FuelFlow
 				saveFuelFlow();
 			}
 		}
-    	System.out.println("FuelFlow/update : exit with consumption : " + consumption);
+    	System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + (Global.now() - timeLastStart) );
 	}
 	public Boolean isFuelFlowing()
 	{
