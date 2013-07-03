@@ -17,21 +17,14 @@ public class Burner
 		burnerPower.on();
 		
 		Integer i;
-		System.out.println("===================Powered burner");
+		// System.out.println("===================Powered burner");
 		
-//		for (i = 0; ((i < 30) && (fuelflow.timeLastStart > -1L)); i++)
-//		{
-//			// Fuel is not yet flowing
-//			System.out.println("Waiting for fuel flow, iteration : " + i);
-//			fuelflow.update();
-//			Global.waitSeconds(1);
-//		}
 		for (i = 0; i < 30; i++)
 		{
 			fuelflow.update();
 			if (fuelflow.isFuelFlowing())
 			{
-				System.out.println("Burner/powerOn : fuel flow detected ");
+				// System.out.println("Burner/powerOn : fuel flow detected ");
 				return;
 			}
 			else
@@ -47,7 +40,7 @@ public class Burner
 		burnerPower.off();
 		fuelflow.update();
 		
-		Global.waitMilliSeconds(100);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
+		Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
 		fuelflow.update();											// This should detect fuelflow off and perhaps force save
 		
 		if (fuelflow.isFuelFlowing())
