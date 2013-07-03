@@ -155,21 +155,21 @@ public class Control
 		//
 
 		
-		System.out.println("Control Starting test");
-		System.out.println("Control burner on");
-		boiler.burner.powerOn();
-		
-		int i;
-		FuelFlow ff = boiler.burner.fuelflow;
-		System.out.println("burner off");
-		boiler.burner.powerOff();
-		
-		for (i =0; i < 15; i++)
-		{
-			System.out.println("iteration : " + Global.burnerVoltages.readAverage());
-		}
-
-		Global.stopNow = true;
+//		System.out.println("Control Starting test");
+//		System.out.println("Control burner on");
+//		boiler.burner.powerOn();
+//		
+//		int i;
+//		FuelFlow ff = boiler.burner.fuelflow;
+//		System.out.println("burner off");
+//		boiler.burner.powerOff();
+//		
+//		for (i =0; i < 15; i++)
+//		{
+//			System.out.println("iteration : " + Global.burnerVoltages.readAverage());
+//		}
+//
+//		Global.stopNow = true;
 		
 //		
 //		Long timeStart = Global.now();
