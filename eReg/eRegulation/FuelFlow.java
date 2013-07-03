@@ -100,7 +100,7 @@ public class FuelFlow
 				saveFuelFlow();
 			}
 		}
-    	System.out.println("Fuel update" + consumption);
+    	System.out.println("FuelFlow/update : exit with consumption : " + consumption);
 	}
 	public Boolean isFuelFlowing()
 	{
