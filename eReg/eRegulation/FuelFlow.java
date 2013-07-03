@@ -26,7 +26,6 @@ public class FuelFlow
 	
 	public  FuelFlow()
 	{
-		System.out.println("Constructor FF");
 		try
 		{
 			InputStream  	file 					= new FileInputStream("FuelConsumed.txt");
