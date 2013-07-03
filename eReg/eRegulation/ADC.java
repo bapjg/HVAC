@@ -6,9 +6,6 @@ public class ADC
 	private native int 		Read();
 	private native int 		ReadAverage();
 	
-	private Float			lastVoltage;		// last recorded voltage
-	private Long			timeLastRead;		// time of last reading;
-	
 	public  ADC()
 	{
 		int ADC_Channels			= 2;		// Analog input is second channel. Need to monitor 2 channels
@@ -18,8 +15,6 @@ public class ADC
 		Global.semaphore.lock();
 		Initialise(ADC_Channels, ADC_Samples, ADC_Bits_To_Shift);
 		Global.semaphore.unlock();
-		
-		timeLastRead				= 0L;
 	}
 	public float read()
 	{
@@ -43,13 +38,9 @@ public class ADC
 	{
 		// If last read/readaverage was more than 1/2 second 
 		// then we should force a new read should force a read
-		if (Global.now() - timeLastRead > 500L)
-		{
-			
-			lastVoltage				= readAverage();
-			timeLastRead			= Global.now();
-		}
-		if (lastVoltage > 4.0)
+		float reading = readAverage();
+		
+		if (reading > 4.0)
 		{
 			return true;
 		}
@@ -60,13 +51,9 @@ public class ADC
 	}
 	public Boolean isFuelFlowing()
 	{
-		if (Global.now() - timeLastRead > 500L)
-		{
-			// Assume that 1/2 second should force a read
-			lastVoltage				= readAverage();
-			timeLastRead			= Global.now();
-		}
-		if ((lastVoltage > 2.0) && (lastVoltage < 3.0))
+		float reading = readAverage();
+
+		if ((reading > 2.0) && (reading < 3.0))
 		{
 			return true;
 		}
