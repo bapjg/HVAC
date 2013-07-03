@@ -163,6 +163,11 @@ public class Control
 		FuelFlow ff = boiler.burner.fuelflow;
 		System.out.println("burner off");
 		boiler.burner.powerOff();
+		
+		for (i =0; i < 15; i++)
+		{
+			System.out.println("iteration : " + Global.burnerVoltages.readAverage());
+		}
 
 		Global.stopNow = true;
 		
