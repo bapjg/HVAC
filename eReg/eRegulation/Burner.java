@@ -43,6 +43,7 @@ public class Burner
 	}
 	public void powerOff()
 	{
+		System.out.println("Burner/powerOff called, will call relay burnerPoweroff/update etc");
 		burnerPower.off();
 		fuelflow.update();
 		
