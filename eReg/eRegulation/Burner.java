@@ -45,14 +45,9 @@ public class Burner
 		for (i = 0; i < 30; i++)
 		{
 			fuelflow.update();
-			
 			if (fuelflow.isFuelFlowing())
 			{
 				Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
-				System.out.println("Burner/powerOff interation : " + i);
-				// What should we do here
-				// This would be a big big problem
-				// Perhaps close all relays
 			}
 			else
 			{
@@ -60,7 +55,7 @@ public class Burner
 				return;
 			}
 		}
-		System.out.println("Burner/powerOff and fuel flow still detected : burner has tripped");
+		System.out.println("Burner/powerOff and fuel flow still detected after 300 ms: burner has tripped");
 	}
 	public void sequencer()
 	{
