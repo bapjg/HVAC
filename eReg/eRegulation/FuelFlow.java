@@ -95,11 +95,13 @@ public class FuelFlow
 			// last call here had fuel flowing
 			if (Global.burnerVoltages.isFuelFlowing())
 			{
+				System.out.println("FuelFlow/update called fuel flowing");
 				// Nothing has changed, fuel is still flowing
 				// Nothing to do until it stops
 			}
 			else												// Fuel has just stopped flowing
 			{
+				System.out.println("FuelFlow/update called fuel not flowing");
 				consumption							= consumption + Global.now() - timeLastStart;;	
 				timeLastStart						= -1L;
 			}
