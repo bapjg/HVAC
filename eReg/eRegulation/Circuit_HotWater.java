@@ -2,13 +2,6 @@ package eRegulation;
 
 public class Circuit_HotWater extends Circuit_Abstract
 {
-//	public final int 				CIRCUIT_STATE_Off 				= 0;
-//	public final int 				CIRCUIT_STATE_Started 			= 1;
-//	public final int 				CIRCUIT_STATE_Running 			= 2;
-//	public final int 				CIRCUIT_STATE_Stopping	 		= 3;
-//	public final int 				CIRCUIT_STATE_Optimising 		= 4;
-//	public final int 				CIRCUIT_STATE_Error	 			= -1;
-
 	public Circuit_HotWater(String name, String friendlyName, String circuitType, String tempMax, String rampUp, String rampDown)
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
@@ -16,8 +9,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 	@Override
 	public void sequencer()
 	{
-		this.heatRequired.tempMinimum			= -1;
-		this.heatRequired.tempMaximum			= -1;
+		this.heatRequired.tempMinimum				= -1;
+		this.heatRequired.tempMaximum				= -1;
 		if (activeTask == null)
 		{
 			//Nothing to do
@@ -29,8 +22,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 			//
 			if (Global.getTimeNowSinceMidnight() > activeTask.timeEnd)
 			{
-				state						= CIRCUIT_STATE_Stopping;
-				activeTask.state			= activeTask.TASK_STATE_Completed;
+				state								= CIRCUIT_STATE_Stopping;
+				activeTask.state					= activeTask.TASK_STATE_Completed;
 			}
 			//
 			//===========================================================
