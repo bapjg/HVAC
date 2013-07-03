@@ -1,7 +1,6 @@
 package eRegulation;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 abstract class Circuit_Abstract
 {
@@ -17,12 +16,12 @@ abstract class Circuit_Abstract
 
 	public Integer					state;
 	
-	public final int 				CIRCUIT_STATE_Off 			= 0;
-	public final int 				CIRCUIT_STATE_Started 		= 1;
-	public final int 				CIRCUIT_STATE_Running 		= 2;
-	public final int 				CIRCUIT_STATE_Stopping	 	= 3;
-	public final int 				CIRCUIT_STATE_Optimising 	= 4;
-	public final int 				CIRCUIT_STATE_Error	 		= -1;
+	public static final int			CIRCUIT_STATE_Off 			= 0;
+	public static final int			CIRCUIT_STATE_Started 		= 1;
+	public static final int			CIRCUIT_STATE_Running 		= 2;
+	public static final int			CIRCUIT_STATE_Stopping	 	= 3;
+	public static final int			CIRCUIT_STATE_Optimising 	= 4;
+	public static final int			CIRCUIT_STATE_Error	 		= -1;
 
 
 	public Mixer					mixer						= null;
@@ -32,6 +31,9 @@ abstract class Circuit_Abstract
 	public ArrayList<CircuitTask> 	circuitTaskList 			= new ArrayList<CircuitTask>();
 	public HeatRequired				heatRequired				= new HeatRequired();
 
+	public Circuit_Abstract()
+	{	
+	}
 	public Circuit_Abstract(String name, String friendlyName, String circuitType, String tempMax, String rampUp, String rampDown)
 	{	
 		this.name												= name;
