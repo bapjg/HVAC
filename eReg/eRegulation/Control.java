@@ -155,24 +155,24 @@ public class Control
 		//
 
 		
-		System.out.println("Control Starting test");
-		System.out.println("Control burner on");
-		boiler.burner.powerOn();
-		
-		Global.waitSeconds(20);
-		
-		int i;
-		FuelFlow ff = boiler.burner.fuelflow;
-		System.out.println("burner off");
-		boiler.burner.powerOff();
-		
-		for (i =0; i < 15; i++)
-		{
-			System.out.println("iteration : " + Global.burnerVoltages.readAverage());
-		}
-
-		Global.stopNow = true;
-		
+//		System.out.println("Control Starting test");
+//		System.out.println("Control burner on");
+//		boiler.burner.powerOn();
+//		
+//		Global.waitSeconds(20);
+//		
+//		int i;
+//		FuelFlow ff = boiler.burner.fuelflow;
+//		System.out.println("burner off");
+//		boiler.burner.powerOff();
+//		
+//		for (i =0; i < 15; i++)
+//		{
+//			System.out.println("iteration : " + Global.burnerVoltages.readAverage());
+//		}
+//
+//		Global.stopNow = true;
+//		
 //		
 //		Long timeStart = Global.now();
 //		
@@ -228,17 +228,12 @@ public class Control
 			globalHeatRequired.tempMaximum 						= -1;
 			globalHeatRequired.tempMinimum 						= -1;
 
-//			LogIt.info("Main", "General Loop", "Number of circuits is : "+ Global.circuits.circuitList.size());
 
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{
-//				LogIt.info("Control","mainLoop", "Looking at circuit : " + circuit.name);
 				circuit.scheduleTasks();
-//				LogIt.info("Control","mainLoop", "scheduler called state is  "  + circuit.name + "/" + circuit.state);
 
-//				LogIt.info("Control","mainLoop", "will call sequencer state is  "  + circuit.name + "/" + circuit.state);
 				circuit.sequencer();
-//				LogIt.info("Control","mainLoop", "have called sequencer state is  "  + circuit.name + "/" + circuit.state);
 
 		
 				if (circuit.heatRequired.tempMinimum > globalHeatRequired.tempMinimum)
@@ -254,24 +249,23 @@ public class Control
 				
 			LogIt.tempData();
 			
-			//LogIt.info("Control", "EnergyRequirements", "now are min/max " + globalEnergyRequirements.tempMinimum + "/" + globalEnergyRequirements.tempMaximum);
-			// We now have the global energy requirements
-			
 			boiler.requestHeat(globalHeatRequired);
 			
-//			if (Global.thermoOutside.reading > Global.summerTemp)
-//			{
-//				if (Global.getTimeNowSinceMidnight() > Global.summerPumpTime)
-//				{
-//					if (!Global.summerWorkDone)
-//					{
-//						Global.summerWorkDone					= true;
-//						
-//						Thread 			thread_summer 			= new Thread(new Thread_Summer(), "Summer");
-//						thread_summer.start();
-//					}
-//				}
-//			}
+			// We sould only do this if no circuit active otherwise we will be heating the house in mid summer
+			
+			if (Global.thermoOutside.reading > Global.summerTemp)
+			{
+				if (Global.getTimeNowSinceMidnight() > Global.summerPumpTime)
+				{
+					if (!Global.summerWorkDone)
+					{
+						Global.summerWorkDone					= true;
+						
+						Thread 			thread_summer 			= new Thread(new Thread_Summer(), "Summer");
+						thread_summer.start();
+					}
+				}
+			}
 		}
 		//
 		// End of Main Code
