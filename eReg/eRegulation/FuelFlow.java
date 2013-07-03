@@ -48,6 +48,7 @@ public class FuelFlow
 	}
 	public void saveFuelFlow()
     {
+		System.out.println("FuelFlow/====save called");
 		try
 		{
 			OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
@@ -101,7 +102,7 @@ public class FuelFlow
 			}
 			else												// Fuel has just stopped flowing
 			{
-				System.out.println("FuelFlow/update called fuel not flowing");
+				System.out.println("=========FuelFlow/update called fuel not flowing");
 				consumption							= consumption + Global.now() - timeLastStart;;	
 				timeLastStart						= -1L;
 				saveFuelFlow();
