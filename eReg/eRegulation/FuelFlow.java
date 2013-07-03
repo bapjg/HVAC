@@ -104,6 +104,7 @@ public class FuelFlow
 				System.out.println("FuelFlow/update called fuel not flowing");
 				consumption							= consumption + Global.now() - timeLastStart;;	
 				timeLastStart						= -1L;
+				saveFuelFlow();
 			}
 		}
     	System.out.println("Fuel update" + consumption);
