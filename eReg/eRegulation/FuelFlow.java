@@ -82,6 +82,7 @@ public class FuelFlow
 		System.out.println("FuelFlow/update called");
 		if (timeLastStart == -1L)
 		{
+			System.out.println("FuelFlow/update called branch timeLS = -1");
 			// last call here had no fuel flowing
 			if (Global.burnerVoltages.isFuelFlowing())			// Fuel has just started to flow
 			{
@@ -90,6 +91,7 @@ public class FuelFlow
 		}
 		else
 		{
+			System.out.println("FuelFlow/update called branch timeLS <> -1");
 			// last call here had fuel flowing
 			if (Global.burnerVoltages.isFuelFlowing())
 			{
