@@ -100,7 +100,8 @@ public class FuelFlow
 				saveFuelFlow();
 			}
 		}
-    	System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + (Global.now() - timeLastStart) );
+		Long unaccounted = Global.now() - timeLastStart;
+    	System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + unaccounted);
 	}
 	public Boolean isFuelFlowing()
 	{
