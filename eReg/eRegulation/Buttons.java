@@ -63,8 +63,9 @@ public class Buttons
 	}
 	public void cancel()
 	{
+		Global.semaphore.lock();
 		@SuppressWarnings("unused")
 		Integer result = Read();
+		Global.semaphore.unlock();
 	}
-
 }
