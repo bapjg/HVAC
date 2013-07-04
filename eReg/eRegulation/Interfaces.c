@@ -385,7 +385,7 @@ static void i2c_txrx(char *buf, int tlen, int rlen, int caller)
 				// Just try again
 				if (ioctl(i2c_fd, I2C_SLAVE, buf[0] >> 1) < 0)
 				{
-					printf("i2c write failed to recover from set i2c addr error \n")
+					printf("i2c write failed to recover from set i2c addr error \n");
 					print_from_whom(caller);
 					pabort("can't set i2c_adr addr");
 				}
