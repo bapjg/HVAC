@@ -103,9 +103,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if [ -f /usr/bin/numlockx ];
+if [ -x /usr/bin/numlockx ];
 then
-    /usr/bin/numlockx on
+#   /usr/bin/numlockx on
 fi
 
 PATH=$PATH:/home/pi/Macros
