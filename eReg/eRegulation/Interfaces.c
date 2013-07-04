@@ -74,25 +74,25 @@ static void spi_open()
 	int ret;
 
 	spi_fd 					= open(device, O_RDWR);
-	if(spi_fd < 0)			 pabort("can't open device \n");
+	if (spi_fd < 0)			 pabort("can't open device \n");
 
 	ret 					= ioctl(spi_fd, SPI_IOC_WR_MODE, &spi_mode);
-	if(ret == -1)			pabort("can't set spi mode \n");
+	if (ret == -1)			pabort("can't set spi mode \n");
 
 	ret 					= ioctl(spi_fd, SPI_IOC_RD_MODE, &spi_mode);
-	if(ret == -1)			pabort("can't get spi mode \n");
+	if (ret == -1)			pabort("can't get spi mode \n");
 
 	ret 					= ioctl(spi_fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
-	if(ret == -1)			pabort("can't set bits per word \n");
+	if (ret == -1)			pabort("can't set bits per word \n");
 
-	ret 					 = ioctl(spi_fd, SPI_IOC_RD_BITS_PER_WORD, &bits);
-	if(ret == -1)			pabort("can't get bits per word \n");
+	ret 					= ioctl(spi_fd, SPI_IOC_RD_BITS_PER_WORD, &bits);
+	if (ret == -1)			pabort("can't get bits per word \n");
 
-	ret 					 = ioctl(spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
-	if(ret == -1)			pabort("can't set max speed hz \n");
+	ret 					= ioctl(spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
+	if (ret == -1)			pabort("can't set max speed hz \n");
 
-	ret 					 = ioctl(spi_fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
-	if(ret == -1)			pabort("can't get max speed hz \n");
+	ret 					= ioctl(spi_fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
+	if (ret == -1)			pabort("can't get max speed hz \n");
 }
 static void spi_txrx(char *buf, int tlen, int rlen)
 {
@@ -108,7 +108,7 @@ static void spi_txrx(char *buf, int tlen, int rlen)
 		.bits_per_word 			= bits,
 	};
 
-	if(rlen > tlen) tr.len 	= rlen;
+	if (rlen > tlen) tr.len 	= rlen;
 	else			 tr.len 	= tlen;
 	 
 	tr.tx_buf 					=(unsigned long) buf;
@@ -116,7 +116,7 @@ static void spi_txrx(char *buf, int tlen, int rlen)
 	
 	ret 						= ioctl(spi_fd, SPI_IOC_MESSAGE(1), &tr);
 	
-	if(ret < 1)
+	if (ret < 1)
 	{
 		printf("can't send spi message, retrying \n");
 		
@@ -128,14 +128,14 @@ static void spi_txrx(char *buf, int tlen, int rlen)
 		tr.speed_hz				= speed;
 		tr.bits_per_word		= bits;		
 
-		if(rlen > tlen) tr.len = rlen;
+		if (rlen > tlen) tr.len = rlen;
 		else			 tr.len = tlen;
 		
 		tr.tx_buf 				=(unsigned long) buf;
 		tr.rx_buf 				=(unsigned long) buf;
 	
 		ret 					= ioctl(spi_fd, SPI_IOC_MESSAGE(1), &tr);
-		if(ret < 1) 			pabort("Couldn't recover from the error \n");
+		if (ret < 1) 			pabort("Couldn't recover from the error \n");
 		else 					printf("Recovered \n");
 	}
 }
@@ -183,7 +183,7 @@ static void scanAndSet()
 	
 	char * found;
 	found 						= strstr(buf, "spi_big");
-	if(found == NULL)
+	if (found == NULL)
 	{
 		// The Relay board has lost its address
 		// Scan all addresses to find where it is
@@ -195,7 +195,7 @@ static void scanAndSet()
 			spi_txrx(buf, 0x2, 0x20);
 			
 			found = strstr(buf, "spi_big");
-			if(found != NULL)
+			if (found != NULL)
 			{
 				// We now have to set the address
 				buf[0] 			= add;							// No Or means do action
@@ -207,7 +207,7 @@ static void scanAndSet()
 		}
 		// Relay has no address at all. There's no point continuing
 		// As nothing (pump/burner/valve) can be actioned
-		printf("scanAndSet found no ralays - will now abord \n");
+		printf("scanAndSet found no ralays - will now abort \n");
 		pabort("Aborting by scanAndSet \n");
 	}
 }
@@ -217,7 +217,7 @@ void Relay_Open(int Relay_Bank)
 	// Routine to open relay bank (channel 0 or 1)
 	int ret;
 
-	if(Relay_Bank == 0)
+	if (Relay_Bank == 0)
 	{
 		device 	 			= "/dev/spidev0.0";
 		addr				= 0x9C;
@@ -338,37 +338,37 @@ void print_from_whom(int caller)
 	{
 		case 1:
 		{
-			printf("From ButtonsRead ");
+			printf("From ButtonsRead \n");
 			break;
 		}
 		case 2:
 		{
-			printf("From ADC_Initialise ");
+			printf("From ADC_Initialise \n");
 			break;
 		}
 		case 3:
 		{
-			printf("From ADC_Read ");
+			printf("From ADC_Read \n");
 			break;
 		}
 		case 4:
 		{
-			printf("From ADC_ReadAverage ");
+			printf("From ADC_ReadAverage \n");
 			break;
 		}
 		case 5:
 		{
-			printf("From LCD_Clear ");
+			printf("From LCD_Clear \n");
 			break;
 		}
 		case 6:
 		{
-			printf("From LCD_Write ");
+			printf("From LCD_Write \n");
 			break;
 		}
 		case 7:
 		{
-			printf("From LCD_Position ");
+			printf("From LCD_Position \n");
 			break;
 		}
 	}
@@ -382,15 +382,28 @@ static void i2c_txrx(char *buf, int tlen, int rlen, int caller)
 	{
 			if (ioctl(i2c_fd, I2C_SLAVE, buf[0] >> 1) < 0)
 			{
-				print_from_whom(caller);
-				pabort("can't set i2c_adr addr");
+				// Just try again
+				if (ioctl(i2c_fd, I2C_SLAVE, buf[0] >> 1) < 0)
+				{
+					printf("i2c write failed to recover from set i2c addr error \n")
+					print_from_whom(caller);
+					pabort("can't set i2c_adr addr");
+				}
+				printf("i2c write successfully recovered from i2c addr error \n")
 			}
 			i2c_adr = buf[0];
 	}
 	if (write(i2c_fd, buf+1, tlen-1) != (tlen-1))
 	{
+		// Just try again
+		if (write(i2c_fd, buf+1, tlen-1) != (tlen-1))
+		{
+			printf("i2c write failed to recover from write error \n")
+			print_from_whom(caller);
+			pabort("can't write i2c");
+		}
 		print_from_whom(caller);
-		pabort("can't write i2c");
+		printf("i2c write successfully recovered from write error \n")
 	}
 
 	if (rlen)
