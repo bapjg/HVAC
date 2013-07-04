@@ -102,6 +102,8 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+echo this is 1
+
 
 if [ -x /usr/bin/numlockx ];
 then
