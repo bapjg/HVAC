@@ -389,7 +389,7 @@ static void i2c_txrx(char *buf, int tlen, int rlen, int caller)
 					print_from_whom(caller);
 					pabort("can't set i2c_adr addr");
 				}
-				printf("i2c write successfully recovered from i2c addr error \n")
+				printf("i2c write successfully recovered from i2c addr error \n");
 			}
 			i2c_adr = buf[0];
 	}
@@ -398,12 +398,12 @@ static void i2c_txrx(char *buf, int tlen, int rlen, int caller)
 		// Just try again
 		if (write(i2c_fd, buf+1, tlen-1) != (tlen-1))
 		{
-			printf("i2c write failed to recover from write error \n")
+			printf("i2c write failed to recover from write error \n");
 			print_from_whom(caller);
 			pabort("can't write i2c");
 		}
 		print_from_whom(caller);
-		printf("i2c write successfully recovered from write error \n")
+		printf("i2c write successfully recovered from write error \n");
 	}
 
 	if (rlen)
