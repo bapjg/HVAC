@@ -2,7 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-echo this is 3
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -17,8 +16,6 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
-
-echo this is 2
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -73,8 +70,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-echo this is 1
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -86,6 +81,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
+echo this is 1
+
 
 # some more ls aliases
 #alias ll='ls -l'
@@ -107,6 +104,8 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+echo this is 1
+
 
 if [ -x /usr/bin/numlockx ];
 then
