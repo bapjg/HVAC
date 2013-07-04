@@ -105,6 +105,7 @@ fi
 
 if [ -x /usr/bin/numlockx ];
 then
+	echo numlockx not called
 #   /usr/bin/numlockx on
 fi
 
