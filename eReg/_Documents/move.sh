@@ -1,1 +1,3 @@
-cp -f Bashrc /home/pi/.bashrc 
+cp -f Bashrc /home/pi/.bashrc
+
+
