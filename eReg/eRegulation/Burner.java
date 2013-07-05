@@ -27,6 +27,12 @@ public class Burner
 				// System.out.println("Burner/powerOn : fuel flow detected ");
 				return;
 			}
+			else if (checkFault())
+			{
+				// When burner starts fuel flow is detected
+				// a message has already been displayed
+				// Don't know what to do here
+			}
 			else
 			{
 				Global.waitSeconds(1);
