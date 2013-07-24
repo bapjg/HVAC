@@ -1,4 +1,5 @@
 package eRegulation;
+
 public class Message_Readings extends Message_Abstract
 {
 	Long		dateTime;
