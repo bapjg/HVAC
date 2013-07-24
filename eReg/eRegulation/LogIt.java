@@ -1,5 +1,10 @@
 package eRegulation;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.*;
 import java.text.*;
 import java.io.*;
@@ -93,29 +98,62 @@ public class LogIt
     }
 	public static void tempData()
     {
-    	try 
-        {
-            PrintWriter temperatureFile = new PrintWriter(new BufferedWriter(new FileWriter("Temperatures.csv", true)));
-            temperatureFile.println
-            	(
-            		'"' + dateTimeStamp() 					+ '"' 	+ ';' +
-            		'"' + timeStamp() 						+ '"' 	+ ';' + 
-            		'"' + Global.getTimeNowSinceMidnight() 	+ '"' 	+ ';' + 
-            		Global.thermoBoiler.reading 					+ ';' + 
-            		Global.thermoOutside.reading 					+ ';' + 
-            		Global.thermoHotWater.reading 					+ ';' + 
-            		Global.thermoFloorOut.reading 					+ ';' + 
-            		Global.thermoFloorCold.reading 					+ ';' + 
-            		Global.thermoFloorHot.reading					+ ';' + 
-            		Global.thermoLivingRoom.reading					+ ';' +
-            		Global.mixer.positionTracked
-            	);
-            temperatureFile.close();
-        } 
-        catch (IOException e) 
-        {
-            e.printStackTrace();
-        }
+		try 
+		{
+			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
+			URLConnection 				servletConnection 		= serverURL.openConnection();
+			servletConnection.setDoOutput(true);
+			servletConnection.setUseCaches(false);
+			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
+			
+			Message_Readings 			messageSend 			= new Message_Readings();
+			messageSend.dateTime 								= 1L;
+			messageSend.tempHotWater 							= Global.thermoBoiler.reading;
+			messageSend.tempBoiler 								= Global.thermoBoiler.reading;
+			messageSend.tempBoilerIn 							= Global.thermoBoilerIn.reading;
+			messageSend.tempFloorOut 							= Global.thermoFloorOut.reading;
+			messageSend.tempFloorCold 							= Global.thermoFloorCold.reading;
+			messageSend.tempFloorHot 							= Global.thermoFloorHot.reading;
+			messageSend.tempRadiatorOut 						= Global.thermoRadiatorOut.reading;
+			messageSend.tempRadiatorIn 							= Global.thermoRadiatorIn.reading;
+			messageSend.tempOutside 							= Global.thermoOutside.reading;
+			messageSend.tempLivingRoom 							= Global.thermoLivingRoom.reading;
+			//messageSend.fuelConsumed 							= Global.burner.fuelConsumed;
+			messageSend.fuelConsumed 							= 0L;
+			
+			ObjectOutputStream 			outputToServlet;
+			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
+			outputToServlet.writeObject(messageSend);
+			outputToServlet.flush();
+			outputToServlet.close();
+			
+			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
+			Message_Abstract 			messageReceive 			= null;
+			
+			try
+			{
+				messageReceive 									= (Message_Abstract) response.readObject();
+			}
+	    	catch (ClassNotFoundException e) 
+	    	{
+				e.printStackTrace();
+			}
+			
+			if (messageReceive instanceof Message_Ack)
+			{
+				System.out.println("The data  is : Ack");
+			}
+			else
+			{
+				System.out.println("The data  is : Not ack");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+		System.out.println("Done");
     }
     public static void tempInfo(String message)
     {
@@ -159,24 +197,4 @@ public class LogIt
 		String nowFormatted = dateFormat.format(now);
 		return nowFormatted;
 	}
-    public static void saveFuelConsumption(Long fuelConsumption)
-    {
-		try
-		{
-			OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
-		    DataOutputStream 	output 				= new DataOutputStream(file);
-		    try
-		    {
-		    	output.writeLong(fuelConsumption);
-		    }
-		    finally
-		    {
-		        output.close();
-		    }
-		}  
-		catch(IOException ex)
-		{
-			System.out.println("I/O error");
-		}	
-    }
 }
