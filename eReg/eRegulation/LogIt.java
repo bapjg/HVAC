@@ -136,7 +136,7 @@ public class LogIt
 			}
 	    	catch (ClassNotFoundException e) 
 	    	{
-				e.printStackTrace();
+	    		System.out.println("Error 1 received");
 			}
 			
 			if (messageReceive instanceof Message_Ack)
@@ -150,10 +150,8 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+    		System.out.println("Error 2 received");
 		}
-		
-		System.out.println("Done");
     }
     public static void tempInfo(String message)
     {
