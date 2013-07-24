@@ -107,7 +107,7 @@ public class LogIt
 			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 			
 			Message_Readings 			messageSend 			= new Message_Readings();
-			messageSend.dateTime 								= 1L;
+			messageSend.dateTime 								= System.currentTimeMillis();
 			messageSend.tempHotWater 							= Global.thermoBoiler.reading;
 			messageSend.tempBoiler 								= Global.thermoBoiler.reading;
 			messageSend.tempBoilerIn 							= Global.thermoBoilerIn.reading;
@@ -123,6 +123,14 @@ public class LogIt
 			
 			ObjectOutputStream 			outputToServlet;
 			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
+			if (messageSend == null)
+			{
+				System.out.println("Sending null");
+			}
+			else
+			{
+				System.out.println("Sending something");
+			}
 			outputToServlet.writeObject(messageSend);
 			outputToServlet.flush();
 			outputToServlet.close();
