@@ -6,6 +6,6 @@ public class Message_Return  extends Message_Abstract
 	
 	public Message_Return()
 	{
-		super(TYPE_Return);
+//		super(TYPE_Return);
 	}
 }

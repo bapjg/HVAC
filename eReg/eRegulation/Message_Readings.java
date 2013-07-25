@@ -17,6 +17,6 @@ public class Message_Readings extends Message_Abstract
 	
 	public Message_Readings()
 	{
-		super(TYPE_Readings);
+//		super(TYPE_Readings);
 	}
 }
