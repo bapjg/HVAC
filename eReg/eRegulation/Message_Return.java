@@ -2,10 +2,10 @@ package eRegulation;
 
 public class Message_Return  extends Message_Abstract
 {
-	String		data;
+	public String		data;
 	
 	public Message_Return()
 	{
-		
+		super(TYPE_Return);
 	}
 }
