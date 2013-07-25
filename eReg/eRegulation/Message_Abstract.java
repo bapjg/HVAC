@@ -11,6 +11,8 @@ public abstract class Message_Abstract implements java.io.Serializable
 //	
 //	public Integer					messageType					= 0;
 	
+	private static final long serialVersionUID = 354054054054L;
+	
 	public Message_Abstract()
 	{
 	}	public Message_Abstract(int messageType)
