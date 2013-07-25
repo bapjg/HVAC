@@ -100,6 +100,9 @@ public class FuelFlow
 				saveFuelFlow();
 			}
 		}
+		
+		LogIt.fuelData(consumption);
+		
 		if (timeLastStart == -1L)
 		{
 			// System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + 0);
