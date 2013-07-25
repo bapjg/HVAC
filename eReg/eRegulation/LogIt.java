@@ -123,14 +123,6 @@ public class LogIt
 			
 			ObjectOutputStream 			outputToServlet;
 			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
-			if (messageSend == null)
-			{
-				System.out.println("Sending null");
-			}
-			else
-			{
-				System.out.println("Sending something");
-			}
 			outputToServlet.writeObject(messageSend);
 			outputToServlet.flush();
 			outputToServlet.close();
