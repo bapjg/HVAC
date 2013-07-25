@@ -153,8 +153,10 @@ public class LogIt
     		System.out.println("Error 2 received");
 		}
     }
-	public static void fuelData(Long fuelConsumption)
+	public static void fuelData(Long fuelConsumed)
     {
+		System.out.println("Logit Fuel consumed : " + fuelConsumed);
+		
 		try 
 		{
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
@@ -165,7 +167,7 @@ public class LogIt
 			
 			Message_Fuel	 			messageSend 			= new Message_Fuel();
 			messageSend.dateTime 								= System.currentTimeMillis();
-			messageSend.fuelConsumed 							= fuelConsumption;
+			messageSend.fuelConsumed 							= fuelConsumed;
 			
 			ObjectOutputStream 			outputToServlet;
 			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
