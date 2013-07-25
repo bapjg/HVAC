@@ -109,7 +109,7 @@ public class LogIt
 			Message_Readings 			messageSend 			= new Message_Readings();
 			messageSend.dateTime 								= System.currentTimeMillis();
 			messageSend.tempHotWater 							= Global.thermoBoiler.reading;
-			messageSend.tempBoiler 								= Global.thermoBoiler.reading;
+			messageSend.tempBoiler 								= Global.thermoHotWater.reading;
 			messageSend.tempBoilerIn 							= Global.thermoBoilerIn.reading;
 			messageSend.tempFloorOut 							= Global.thermoFloorOut.reading;
 			messageSend.tempFloorCold 							= Global.thermoFloorCold.reading;
@@ -131,22 +131,16 @@ public class LogIt
 			{
 				System.out.println("Sending something");
 			}
-			System.out.println("before write");
 			outputToServlet.writeObject(messageSend);
-			System.out.println("before flush");
 			outputToServlet.flush();
-			System.out.println("before close");
 			outputToServlet.close();
-			System.out.println("after close");
 			
 			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
 			Message_Abstract 			messageReceive 			= null;
 			
 			try
 			{
-				System.out.println("before read");
 				messageReceive 									= (Message_Abstract) response.readObject();
-				System.out.println("after read");
 			}
 	    	catch (ClassNotFoundException e) 
 	    	{
@@ -155,11 +149,11 @@ public class LogIt
 			
 			if (messageReceive instanceof Message_Ack)
 			{
-				System.out.println("The data  is : Ack");
+				// System.out.println("The data  is : Ack");
 			}
 			else
 			{
-				System.out.println("The data  is : Not ack");
+				// System.out.println("The data  is : Not ack");
 			}
 		} 
 		catch (Exception e) 
