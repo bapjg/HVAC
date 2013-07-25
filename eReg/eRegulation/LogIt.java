@@ -131,16 +131,22 @@ public class LogIt
 			{
 				System.out.println("Sending something");
 			}
+			System.out.println("before write");
 			outputToServlet.writeObject(messageSend);
+			System.out.println("before flush");
 			outputToServlet.flush();
+			System.out.println("before close");
 			outputToServlet.close();
+			System.out.println("after close");
 			
 			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
 			Message_Abstract 			messageReceive 			= null;
 			
 			try
 			{
+				System.out.println("before read");
 				messageReceive 									= (Message_Abstract) response.readObject();
+				System.out.println("after read");
 			}
 	    	catch (ClassNotFoundException e) 
 	    	{
