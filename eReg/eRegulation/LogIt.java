@@ -139,11 +139,11 @@ public class LogIt
 			
 			if (messageReceive instanceof Message_Ack)
 			{
-				System.out.println("The data  is : Ack");
+				System.out.println("Temp data  is : Ack");
 			}
 			else
 			{
-				System.out.println("The data  is : Not ack");
+				System.out.println("Temp data  is : Not ack");
 			}
 		} 
 		catch (Exception e) 
@@ -182,16 +182,16 @@ public class LogIt
 			}
 	    	catch (ClassNotFoundException e) 
 	    	{
-	    		System.out.println("Error 1 received");
+	    		System.out.println("Fuel Error 1 received");
 			}
 			
 			if (messageReceive instanceof Message_Ack)
 			{
-				System.out.println("The data  is : Ack");
+				System.out.println("Fuel data  is : Ack");
 			}
 			else
 			{
-				System.out.println("The data  is : Not ack");
+				System.out.println("Fuel data  is : Not ack");
 			}
 		} 
 		catch (Exception e) 
