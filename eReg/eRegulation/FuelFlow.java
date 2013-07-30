@@ -100,16 +100,17 @@ public class FuelFlow
 			{
 				// Nothing has changed, fuel is still flowing
 				// Nothing to do until it stops
+				LogIt.fuelData(consumption + Global.now() - timeLastStart);
 			}
 			else												// Fuel has just stopped flowing
 			{
-				consumption							= consumption + Global.now() - timeLastStart;;	
+				// There is a case for just logging consumption at end point rather than evry few seconds
+				consumption							= consumption + Global.now() - timeLastStart;
 				timeLastStart						= -1L;
 				saveFuelFlow();
+				LogIt.fuelData(consumption);
 			}
 		}
-		
-		LogIt.fuelData(consumption);
 		
 		if (timeLastStart == -1L)
 		{
