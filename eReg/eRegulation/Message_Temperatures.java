@@ -17,6 +17,5 @@ public class Message_Temperatures extends Message_Abstract
 	
 	public Message_Temperatures()
 	{
-//		super(TYPE_Readings);
 	}
 }

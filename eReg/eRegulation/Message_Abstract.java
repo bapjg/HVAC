@@ -6,8 +6,5 @@ public abstract class Message_Abstract implements java.io.Serializable
 	
 	public Message_Abstract()
 	{
-	}	public Message_Abstract(int messageType)
-	{
-//		this.messageType										= messageType;
-	}
+	}	
 }

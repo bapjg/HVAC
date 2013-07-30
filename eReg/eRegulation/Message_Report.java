@@ -11,7 +11,5 @@ public class Message_Report extends Message_Abstract
 	
 	public Message_Report()
 	{
-//		super(TYPE_Readings);
-		// Do we need constructor
 	}
 }

@@ -9,6 +9,5 @@ public class Message_Action extends Message_Abstract
 	
 	public Message_Action()
 	{
-//		super(TYPE_Readings);
 	}
 }

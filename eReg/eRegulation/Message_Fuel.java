@@ -8,6 +8,5 @@ public class Message_Fuel extends Message_Abstract
 	
 	public Message_Fuel()
 	{
-//		super(TYPE_Readings);
 	}
 }
