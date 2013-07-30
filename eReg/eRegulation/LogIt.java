@@ -139,16 +139,16 @@ public class LogIt
 			
 			if (messageReceive instanceof Message_Ack)
 			{
-				// System.out.println("The data  is : Ack");
+				System.out.println("The data  is : Ack");
 			}
 			else
 			{
-				// System.out.println("The data  is : Not ack");
+				System.out.println("The data  is : Not ack");
 			}
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Error 2 received");
+    		System.out.println("Error temp received");
 		}
     }
 	public static void fuelData(Long fuelConsumed)
@@ -187,16 +187,16 @@ public class LogIt
 			
 			if (messageReceive instanceof Message_Ack)
 			{
-				// System.out.println("The data  is : Ack");
+				System.out.println("The data  is : Ack");
 			}
 			else
 			{
-				// System.out.println("The data  is : Not ack");
+				System.out.println("The data  is : Not ack");
 			}
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Error 2 received");
+    		System.out.println("Error fuel received");
 		}
     }
 	public static void tempInfo(String message)
