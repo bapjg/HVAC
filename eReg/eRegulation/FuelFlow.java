@@ -3,6 +3,7 @@ package eRegulation;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,6 +41,13 @@ public class FuelFlow
 		    	input.close();
 		    }
 		}  
+		catch(FileNotFoundException ex)
+		{
+			System.out.println("File FuelConsumed.txt not found : creating it");
+    
+			consumption								= 0L;
+			saveFuelFlow();
+		}
 		catch(IOException ex)
 		{
 			System.out.println("I/O error when reading FuelConsumed.txt");
