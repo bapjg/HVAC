@@ -9,7 +9,6 @@ public class Thread_Thermometers implements Runnable
 
 		while (!Global.stopNow)
 		{
-			
 			Long timeStart 						= Global.now();
 			
 			Global.thermoBoiler.read();
@@ -47,7 +46,6 @@ public class Thread_Thermometers implements Runnable
 
 			Global.waitMilliSeconds(timeIncrement);
 		}
-		
 		LogIt.info("Thread_Thermometers", "Run", "Stopping");			
 	}
 }

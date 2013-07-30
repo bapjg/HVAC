@@ -98,6 +98,7 @@ public class LogIt
     }
 	public static void tempData()
     {
+    	System.out.println(dateTimeStamp() + " : Info   : " + "LogIt" + "/" + "tempData" + "Sending temp -  message");
 		try 
 		{
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
