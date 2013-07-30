@@ -302,6 +302,7 @@ public class LogIt
 			
 			try
 			{
+				System.out.println("messageReceive");
 				messageReceive 									= (Message_Abstract) response.readObject();
 			}
 	    	catch (ClassNotFoundException e) 
@@ -309,6 +310,7 @@ public class LogIt
 	    		System.out.println("Action Error 1 received");
 			}
 			
+			System.out.println("instanceof");
 			if (messageReceive instanceof Message_Ack)
 			{
 				//System.out.println("Fuel data  is : Ack");
