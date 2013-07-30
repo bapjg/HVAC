@@ -47,6 +47,53 @@ public class LogIt
 	            e.printStackTrace();
             }
 		}
+		try 
+		{
+			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
+			URLConnection 				servletConnection 		= serverURL.openConnection();
+			servletConnection.setDoOutput(true);
+			servletConnection.setUseCaches(false);
+			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
+			
+			Message_Report	 			messageSend 			= new Message_Report();
+			messageSend.dateTime 								= System.currentTimeMillis();
+			messageSend.reportType 								= "Info";
+			messageSend.className 								= className;
+			messageSend.methodName 								= methodName;
+			messageSend.reportText 								= message;
+
+			
+			ObjectOutputStream 			outputToServlet;
+			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
+			outputToServlet.writeObject(messageSend);
+			outputToServlet.flush();
+			outputToServlet.close();
+			
+			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
+			Message_Abstract 			messageReceive 			= null;
+			
+			try
+			{
+				messageReceive 									= (Message_Abstract) response.readObject();
+			}
+	    	catch (ClassNotFoundException e) 
+	    	{
+	    		System.out.println("Error 1 received");
+			}
+			
+			if (messageReceive instanceof Message_Ack)
+			{
+				//System.out.println("Temp data  is : Ack");
+			}
+			else
+			{
+				System.out.println("Logit.info  is : Nack");
+			}
+		} 
+		catch (Exception e) 
+		{
+    		System.out.println("Error temp received");
+		}
 	}
 	public static void  error(String className, String methodName, String message)
 	{
@@ -68,35 +115,55 @@ public class LogIt
 	            e.printStackTrace();
             }
 		}
+		try 
+		{
+			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
+			URLConnection 				servletConnection 		= serverURL.openConnection();
+			servletConnection.setDoOutput(true);
+			servletConnection.setUseCaches(false);
+			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
+			
+			Message_Report	 			messageSend 			= new Message_Report();
+			messageSend.dateTime 								= System.currentTimeMillis();
+			messageSend.reportType 								= "Error";
+			messageSend.className 								= className;
+			messageSend.methodName 								= methodName;
+			messageSend.reportText 								= message;
+
+			
+			ObjectOutputStream 			outputToServlet;
+			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
+			outputToServlet.writeObject(messageSend);
+			outputToServlet.flush();
+			outputToServlet.close();
+			
+			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
+			Message_Abstract 			messageReceive 			= null;
+			
+			try
+			{
+				messageReceive 									= (Message_Abstract) response.readObject();
+			}
+	    	catch (ClassNotFoundException e) 
+	    	{
+	    		System.out.println("Error 1 received");
+			}
+			
+			if (messageReceive instanceof Message_Ack)
+			{
+				//System.out.println("Temp data  is : Ack");
+			}
+			else
+			{
+				System.out.println("Logit.info  is : Nack");
+			}
+		} 
+		catch (Exception e) 
+		{
+    		System.out.println("Error temp received");
+		}
 	}
-    public static void tempHeadings()
-    {
-    	try 
-        {
-            PrintWriter temperatureFile = new PrintWriter(new BufferedWriter(new FileWriter("Temperatures.csv", true)));
-            temperatureFile.println
-            	(
-        			"\"dateTime\";" 		+
-        			"\"time\";" 			+
-        			"\"seconds\";" 			+
-        			"\"Boiler\";" 			+
-        			"\"Outside\";" 			+
-        			"\"HotWater\";" 		+
-        			"\"MixerOut\";" 		+
-        			"\"MixerCold\";" 		+
-        			"\"MixerHot\";" 		+
-        			"\"LivingRoom\";" 		+
-        			"\"MixerPosition\";"	+
-        			"\"Comments\""
-            	);
-            temperatureFile.close();
-        } 
-        catch (IOException e) 
-        {
-            e.printStackTrace();
-        }
-    }
-	public static void tempData()
+ 	public static void tempData()
     {
 		try 
 		{
@@ -106,7 +173,7 @@ public class LogIt
 			servletConnection.setUseCaches(false);
 			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 			
-			Message_Temperatures 			messageSend 			= new Message_Temperatures();
+			Message_Temperatures 			messageSend 		= new Message_Temperatures();
 			messageSend.dateTime 								= System.currentTimeMillis();
 			messageSend.tempHotWater 							= Global.thermoBoiler.reading;
 			messageSend.tempBoiler 								= Global.thermoHotWater.reading;
@@ -143,7 +210,7 @@ public class LogIt
 			}
 			else
 			{
-				System.out.println("Temp data  is : Not ack");
+				System.out.println("Temp data  is : Nack");
 			}
 		} 
 		catch (Exception e) 
@@ -189,7 +256,7 @@ public class LogIt
 			}
 			else
 			{
-				System.out.println("Fuel data  is : Not ack");
+				System.out.println("Fuel data  is : Nack");
 			}
 		} 
 		catch (Exception e) 
