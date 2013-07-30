@@ -2,7 +2,8 @@ package eRegulation;
 
 public class Message_Return  extends Message_Abstract
 {
-	public String		data;
+	private static final 	long 		serialVersionUID = 3L;
+	public 					String		data;
 	
 	public Message_Return()
 	{
