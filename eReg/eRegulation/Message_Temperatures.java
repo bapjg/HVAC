@@ -1,6 +1,6 @@
 package eRegulation;
 
-public class Message_Readings extends Message_Abstract
+public class Message_Temperatures extends Message_Abstract
 {
 	public Long		dateTime;
 	public Integer 	tempHotWater;
@@ -13,9 +13,8 @@ public class Message_Readings extends Message_Abstract
 	public Integer 	tempRadiatorIn;
 	public Integer 	tempOutside;
 	public Integer 	tempLivingRoom;
-	public Long		fuelConsumed;
 	
-	public Message_Readings()
+	public Message_Temperatures()
 	{
 //		super(TYPE_Readings);
 	}
