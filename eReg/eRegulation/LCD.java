@@ -14,34 +14,34 @@ public class LCD
 
 	public void clear()
 	{
-		Global.semaphore.lock();
+		Global.interfaceSemaphore.lock();
 		Clear();
-		Global.semaphore.unlock();
+		Global.interfaceSemaphore.unlock();
 	}
 
 	public void write(String sText)
 	{
-		Global.semaphore.lock();
+		Global.interfaceSemaphore.lock();
 		displayText = sText;
 		Write(displayText);
-		Global.semaphore.unlock();
+		Global.interfaceSemaphore.unlock();
 	}
 	public void writeAtPosition(int iLine, int iColumn, String sText)
 	{
-		Global.semaphore.lock();
+		Global.interfaceSemaphore.lock();
 		Position(iLine, iColumn);
 		Global.waitMilliSeconds(50);
 		displayText = sText;
 		Write(displayText);
-		Global.semaphore.unlock();
+		Global.interfaceSemaphore.unlock();
 	}
 
 	public void position(int iLine, int iColumn)
 	{
-		Global.semaphore.lock();
+		Global.interfaceSemaphore.lock();
 		Position(iLine, iColumn);
 		// I've found that screen gets screwed up
 		//global.wait(1);
-		Global.semaphore.unlock();
+		Global.interfaceSemaphore.unlock();
 	}
 }

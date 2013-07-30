@@ -165,6 +165,7 @@ public class LogIt
 	}
  	public static void tempData()
     {
+		Global.httpSemaphore.lock();
 		try 
 		{
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
@@ -217,9 +218,11 @@ public class LogIt
 		{
     		System.out.println("Error temp received");
 		}
+		Global.httpSemaphore.unlock();
     }
 	public static void fuelData(Long fuelConsumed)
     {
+		Global.httpSemaphore.lock();
 		try 
 		{
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
@@ -263,9 +266,11 @@ public class LogIt
 		{
     		System.out.println("Error fuel received");
 		}
+		Global.httpSemaphore.unlock();
     }
 	public static void action(String device, String action)
     {
+		Global.httpSemaphore.lock();
 		try 
 		{
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
@@ -310,6 +315,7 @@ public class LogIt
 		{
     		System.out.println("Error Action received");
 		}
+		Global.httpSemaphore.lock();
     }
 	public static void tempInfo(String message)
     {

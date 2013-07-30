@@ -23,7 +23,8 @@ public class Global extends DefaultHandler
 	// by changing C code to open ic2/spi channel once (and then keeping it open
 	// Current code does open, read/write, close
 	//
-	public static 	ReentrantLock 					semaphore = new ReentrantLock();
+	public static 	ReentrantLock 					interfaceSemaphore 	= new ReentrantLock();
+	public static 	ReentrantLock 					httpSemaphore 		= new ReentrantLock();
 	//
 	//===================================================================
 	

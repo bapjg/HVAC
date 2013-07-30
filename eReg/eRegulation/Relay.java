@@ -22,36 +22,36 @@ public class Relay
 	}
 	public void on()
 	{
-		Global.semaphore.lock();
+		Global.interfaceSemaphore.lock();
 		On(relayBank, relayNumber);
-		Global.semaphore.unlock();
+		Global.interfaceSemaphore.unlock();
 	}
 	public void off()
 	{
 		// Call takes approx 12 ms (100 call to off = 1225ms)
-		Global.semaphore.lock();		
+		Global.interfaceSemaphore.lock();		
 		Off(relayBank, relayNumber);
-		Global.semaphore.unlock();
+		Global.interfaceSemaphore.unlock();
 	}
 	public void onM()
 	{
-		Global.semaphore.lock();
+		Global.interfaceSemaphore.lock();
 		Long now 				= System.currentTimeMillis();
 		On(relayBank, relayNumber);
-		Global.semaphore.unlock();
+		Global.interfaceSemaphore.unlock();
 	}
 	public void offM()
 	{
-		Global.semaphore.lock();
+		Global.interfaceSemaphore.lock();
 		Long now 				= System.currentTimeMillis();
 		Off(relayBank, relayNumber);
-		Global.semaphore.unlock();
+		Global.interfaceSemaphore.unlock();
 	}
 	public Boolean isOn()
 	{
-		Global.semaphore.lock();
+		Global.interfaceSemaphore.lock();
 		Boolean result			= IsOn(relayBank, relayNumber);
-		Global.semaphore.unlock();
+		Global.interfaceSemaphore.unlock();
 		return result;
 	}
 }
