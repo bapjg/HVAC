@@ -273,36 +273,28 @@ public class LogIt
 		Global.httpSemaphore.lock();
 		try 
 		{
-			System.out.println("URL");
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
-			System.out.println("URLConnection");
 			URLConnection 				servletConnection 		= serverURL.openConnection();
 			servletConnection.setDoOutput(true);
 			servletConnection.setUseCaches(false);
 			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 			
-			System.out.println("Message Action");
 			Message_Action	 			messageSend 			= new Message_Action();
 			messageSend.dateTime 								= System.currentTimeMillis();
 			messageSend.device 									= device;
 			messageSend.action 									= action;
 			
-			System.out.println("ObjectOutputStream");
 			ObjectOutputStream 			outputToServlet;
-			System.out.println("outputToServlet");
 			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
-			System.out.println("writeObject");
 			outputToServlet.writeObject(messageSend);
 			outputToServlet.flush();
 			outputToServlet.close();
 			
-			System.out.println("response");
 			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
 			Message_Abstract 			messageReceive 			= null;
 			
 			try
 			{
-				System.out.println("messageReceive");
 				messageReceive 									= (Message_Abstract) response.readObject();
 			}
 	    	catch (ClassNotFoundException e) 
@@ -310,7 +302,6 @@ public class LogIt
 	    		System.out.println("Action Error 1 received");
 			}
 			
-			System.out.println("instanceof");
 			if (messageReceive instanceof Message_Ack)
 			{
 				//System.out.println("Fuel data  is : Ack");
