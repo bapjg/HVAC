@@ -315,7 +315,7 @@ public class LogIt
 		{
     		System.out.println("Error Action received");
 		}
-		Global.httpSemaphore.lock();
+		Global.httpSemaphore.unlock();
     }
 	public static void tempInfo(String message)
     {
