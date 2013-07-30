@@ -264,6 +264,53 @@ public class LogIt
     		System.out.println("Error fuel received");
 		}
     }
+	public static void action(String device, String action)
+    {
+		try 
+		{
+			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
+			URLConnection 				servletConnection 		= serverURL.openConnection();
+			servletConnection.setDoOutput(true);
+			servletConnection.setUseCaches(false);
+			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
+			
+			Message_Action	 			messageSend 			= new Message_Action();
+			messageSend.dateTime 								= System.currentTimeMillis();
+			messageSend.device 									= device;
+			messageSend.action 									= action;
+			
+			ObjectOutputStream 			outputToServlet;
+			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
+			outputToServlet.writeObject(messageSend);
+			outputToServlet.flush();
+			outputToServlet.close();
+			
+			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
+			Message_Abstract 			messageReceive 			= null;
+			
+			try
+			{
+				messageReceive 									= (Message_Abstract) response.readObject();
+			}
+	    	catch (ClassNotFoundException e) 
+	    	{
+	    		System.out.println("Action Error 1 received");
+			}
+			
+			if (messageReceive instanceof Message_Ack)
+			{
+				//System.out.println("Fuel data  is : Ack");
+			}
+			else
+			{
+				System.out.println("Action data  is : Nack");
+			}
+		} 
+		catch (Exception e) 
+		{
+    		System.out.println("Error Action received");
+		}
+    }
 	public static void tempInfo(String message)
     {
     	System.out.println(dateTimeStamp() + " : Info   : " + "LogIt" + "/" + "tempInfo" + " - " + message);

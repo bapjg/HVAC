@@ -29,6 +29,7 @@ public class Thread_Mixer implements Runnable
 //        {
 //	        e.printStackTrace();
 //        }
+		LogIt.action("PumpFloor", "On");
 		Global.pumpFloor.on();
 		
 		LogIt.info("Thread_Mixer", "Run", "Floor Initialised (10%)");		
@@ -107,6 +108,6 @@ public class Thread_Mixer implements Runnable
 //				e.printStackTrace();
 //			}
 		}
-		LogIt.info("===========================Thread_Mixer", "Run", "Floor Thread ending");	
+		LogIt.info("Thread_Mixer", "Run", "Floor Thread ending");	
 	}
 }

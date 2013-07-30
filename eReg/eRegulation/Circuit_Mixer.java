@@ -69,6 +69,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				// Need to figure out how to stop a thread
 				// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 				//
+				LogIt.action("PumpFloor", "Off");
 				Global.pumpFloor.off();
 				state										= CIRCUIT_STATE_Off;
 				activeTask									= null;

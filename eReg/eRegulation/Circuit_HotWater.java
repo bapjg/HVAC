@@ -43,6 +43,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				// Leave as is on the basis that 1) short lived and 2) easier than doing it later 
 				// while avoiding repeated pump action
 				
+				LogIt.action("PumpWater", "On");
 				Global.pumpWater.on();
 				state								= CIRCUIT_STATE_Running;		
 				break;
@@ -91,6 +92,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				// need to delete the object to avoid
 				// memory leaks
 					
+				LogIt.action("PumpWater", "Off");
 				Global.pumpWater.off();
 				state								= CIRCUIT_STATE_Off;
 				activeTask.state					= CircuitTask.TASK_STATE_Completed;

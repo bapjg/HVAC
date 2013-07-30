@@ -14,6 +14,7 @@ public class Burner
 	}
 	public void powerOn()
 	{
+		LogIt.action("Burner", "On");
 		burnerPower.on();
 		
 		Integer i;
@@ -42,7 +43,7 @@ public class Burner
 	}
 	public void powerOff()
 	{
-		// System.out.println("Burner/powerOff called, will call relay burnerPoweroff/update etc");
+		LogIt.action("Burner", "Off");
 		burnerPower.off();
 
 		Integer i;

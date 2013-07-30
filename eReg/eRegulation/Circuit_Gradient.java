@@ -42,6 +42,7 @@ public class Circuit_Gradient extends Circuit_Abstract
 				break;
 			case CIRCUIT_STATE_Started:
 				LogIt.info("Circuit", "sequencerRadiator", "Started");	
+				LogIt.action("PumpRadiator", "On");
 				Global.pumpRadiator.on();
 				state										= CIRCUIT_STATE_Running;		
 				break;
@@ -58,6 +59,7 @@ public class Circuit_Gradient extends Circuit_Abstract
 				break;
 			case CIRCUIT_STATE_Stopping:
 				LogIt.info("Circuit", "sequencerRadiator", "Stopping");	
+				LogIt.action("PumpRadiator", "Off");
 				Global.pumpRadiator.off();
 				state										= CIRCUIT_STATE_Off;
 				activeTask									= null;
