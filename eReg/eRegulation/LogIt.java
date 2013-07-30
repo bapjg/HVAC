@@ -139,7 +139,7 @@ public class LogIt
 			
 			if (messageReceive instanceof Message_Ack)
 			{
-				System.out.println("Temp data  is : Ack");
+				//System.out.println("Temp data  is : Ack");
 			}
 			else
 			{
@@ -153,7 +153,7 @@ public class LogIt
     }
 	public static void fuelData(Long fuelConsumed)
     {
-		System.out.println("Logit Fuel consumed : " + fuelConsumed);
+		//System.out.println("Logit Fuel consumed : " + fuelConsumed);
 		
 		try 
 		{
@@ -187,7 +187,7 @@ public class LogIt
 			
 			if (messageReceive instanceof Message_Ack)
 			{
-				System.out.println("Fuel data  is : Ack");
+				//System.out.println("Fuel data  is : Ack");
 			}
 			else
 			{
