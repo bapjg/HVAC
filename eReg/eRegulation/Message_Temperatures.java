@@ -2,7 +2,7 @@ package eRegulation;
 
 public class Message_Temperatures extends Message_Abstract
 {
-	private static final 	long 		serialVersionUID = 3L;
+	private static final 	long 		serialVersionUID = 8L;
 	public 					Long		dateTime;
 	public  				Integer 	tempHotWater;
 	public 					Integer 	tempBoiler;
