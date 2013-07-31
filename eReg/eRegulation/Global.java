@@ -24,6 +24,9 @@ public class Global extends DefaultHandler
 	// Current code does open, read/write, close
 	//
 	public static 	ReentrantLock 					interfaceSemaphore 	= new ReentrantLock();
+	//
+	// This ensures that http requests are made ThreadSafe
+	//
 	public static 	ReentrantLock 					httpSemaphore 		= new ReentrantLock();
 	//
 	//===================================================================
