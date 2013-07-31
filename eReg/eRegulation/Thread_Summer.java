@@ -1,5 +1,5 @@
 package eRegulation;
-henry
+
 public class Thread_Summer implements Runnable
 {
 	public Thread_Summer()
