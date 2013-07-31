@@ -22,7 +22,6 @@ public class Relay
 	}
 	public void on()
 	{
-		// Thread Safety
 		Global.interfaceSemaphore.lock();
 		On(relayBank, relayNumber);
 		Global.interfaceSemaphore.unlock();
