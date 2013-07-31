@@ -28,7 +28,6 @@ public class Thread_Summer implements Runnable
 		
 		for (i = 0; (i < Global.summerPumpDuration) && (!Global.stopNow); i++)
 		{
-			System.out.println("Radiator i = " + i + " stopNow = " + Global.stopNow);
 			Global.waitSeconds(1);
 		}
 		
