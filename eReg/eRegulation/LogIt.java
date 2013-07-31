@@ -47,6 +47,7 @@ public class LogIt
 	            e.printStackTrace();
             }
 		}
+		Global.httpSemaphore.lock();
 		try 
 		{
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
@@ -94,6 +95,7 @@ public class LogIt
 		{
     		System.out.println("Error temp received");
 		}
+		Global.httpSemaphore.unlock();
 	}
 	public static void  error(String className, String methodName, String message)
 	{
