@@ -11,21 +11,11 @@ import java.io.*;
 
 public class LogIt
 {
-	public static String 	logFileName 			= "";
-	public static Boolean 	logFile 				= false;
-	public static Boolean 	logDisplay 				= true;
+	public static Boolean 				logDisplay 				= true;
 	
 	public LogIt()
 	{
-		logFileName = "";
-		logFile=false;
-		logDisplay=true;
-	}
-	public LogIt(String fileName)
-	{
-		logFileName = fileName;
-		logFile=true;
-		logDisplay=false;
+		logDisplay												= true;
 	}
 	public static void  info(String className, String methodName, String message)
 	{
@@ -75,7 +65,8 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Error temp received");
+    		System.out.println("Info : httpSend Error");
+			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
 		}
 		if (logDisplay)
 		{
@@ -131,7 +122,8 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Error temp received");
+    		System.out.println("Error : httpSend Error");
+			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
 		}
 		if (logDisplay)
 		{
@@ -192,7 +184,7 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Error temp received");
+    		System.out.println("TempData : httpSend Error");
 		}
 		Global.httpSemaphore.unlock();
     }
@@ -240,7 +232,7 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Error fuel received");
+    		System.out.println("FuelData : httpSend Error");
 		}
 		Global.httpSemaphore.unlock();
     }
@@ -289,7 +281,7 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Error Action received");
+    		System.out.println("Action : httpSend Error");
 		}
 		Global.httpSemaphore.unlock();
     }
