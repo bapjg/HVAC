@@ -81,8 +81,8 @@ public class Mixer
 			// tempSpan 								= tempVeryHot - Global.thermoFloorIn.reading;
         //}
 		
-		LogIt.info("-------====---------Mixer","getSwingProportion", "Floor tempDelta : " + temperature    + " - " + tempMixerInCold + " = " + tempDelta);
-		LogIt.info("-------====---------Mixer","getSwingProportion", "Floor tempSpan  : " + tempMixerInHot + " - " + tempMixerInCold + " = " + tempSpan);
+		LogIt.info("Mixer","getSwingProportion", "Floor tempDelta : " + temperature    + " - " + tempMixerInCold + " = " + tempDelta);
+		LogIt.info("Mixer","getSwingProportion", "Floor tempSpan  : " + tempMixerInHot + " - " + tempMixerInCold + " = " + tempSpan);
 		
 		if (tempSpan < 0 )
 		{
@@ -100,7 +100,7 @@ public class Mixer
 			return  1F;
         }
 
-		LogIt.info("-------====---------Mixer","getSwingProportion", "Floor getSwingProportion " + (Float) tempDelta.floatValue()/tempSpan.floatValue());
+		LogIt.info("Mixer","getSwingProportion", "Floor getSwingProportion " + (Float) tempDelta.floatValue()/tempSpan.floatValue());
 		
 		return (Float) tempDelta.floatValue()/tempSpan.floatValue();
 	}
@@ -113,21 +113,21 @@ public class Mixer
 		{
 			// Things need to stablise This means that cold is warmer than hot
 			// Just wait untill the pump does its work
-			LogIt.tempInfo("targetTemp : " + targetTemp + "swingProportion : " + swingProportion +  "positionTracked : " + 0);
+			// LogIt.tempInfo("targetTemp : " + targetTemp + "swingProportion : " + swingProportion +  "positionTracked : " + 0);
 			return;
 		}
 		if (swingProportion >= 1F)
 		{
-			LogIt.info("-------====---------Mixer","positionAtTemp", "Floor swingProportion >= 1 " + swingProportion);
+			// LogIt.info("-------====---------Mixer","positionAtTemp", "Floor swingProportion >= 1 " + swingProportion);
 			if (positionTracked != swingTime * 1000 )			//No need to spend a swingTime to get it where it already is
 			{
 				positionFull();
 			}
-			LogIt.tempInfo("targetTemp : " + targetTemp + "swingProportion : " + swingProportion +  "positionTracked : " + 0);
+			// LogIt.tempInfo("targetTemp : " + targetTemp + "swingProportion : " + swingProportion +  "positionTracked : " + 0);
 			return;
 		}
 
-		LogIt.tempInfo("targetTemp : " + targetTemp + "swingProportion : " + swingProportion +  "positionTracked : " + 0);
+		// LogIt.tempInfo("targetTemp : " + targetTemp + "swingProportion : " + swingProportion +  "positionTracked : " + 0);
 
 		
 		swingProportion								= 1000.0F * swingProportion * swingTime.floatValue();	// Value is in milliseconds
@@ -140,7 +140,7 @@ public class Mixer
 		{
 			// Avoid doing to many little movements. 
 			// Should tempDontMove not be a time or proportion ??? xxxxx
-			LogIt.info("-------====---------Mixer","positionAtTemp", "Floor Small movement not actionned ");
+			LogIt.info("Mixer","positionAtTemp", "Floor Small movement not actionned ");
 			return;
 		}
 		if (positionFuture > positionTracked)
@@ -199,7 +199,7 @@ public class Mixer
 		Double swingTimeRequired						= - Math.floor(pidControler.getGain(gainP, gainD, gainI));
 		Integer swingTimePerformed						= 0;
 
-		LogIt.tempInfo("PID Called - swingTimeRequired given by PID : " + swingTimeRequired + " current positionTracked : " + positionTracked);
+		// LogIt.tempInfo("PID Called - swingTimeRequired given by PID : " + swingTimeRequired + " current positionTracked : " + positionTracked);
 
 		
 		if (Math.abs(swingTimeRequired) < 500)														// Moving hotter
@@ -216,13 +216,13 @@ public class Mixer
 		 			swingTimeRequired 					= 90000F - positionTracked.doubleValue();		//No point waiting over maximum add an extra second to be sure of end point
 		 		}
 				
-				LogIt.tempInfo("Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
-				LogIt.tempInfo("Calling Up/On");
+				// LogIt.tempInfo("Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
+				// LogIt.tempInfo("Calling Up/On");
 		 		Global.mixerUp.on();
 		 		swingTimePerformed   					= waitAWhile(swingTimeRequired);
-				LogIt.tempInfo("Calling Up/Off");
+		 	// LogIt.tempInfo("Calling Up/Off");
 		 		Global.mixerUp.off();
-				LogIt.tempInfo("Called  Up/Off nothing else");
+		 	// LogIt.tempInfo("Called  Up/Off nothing else");
 	 		}
 		}
 		else																			// Moving colder
@@ -233,7 +233,7 @@ public class Mixer
 		 		{
 		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000f;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
-				LogIt.tempInfo("Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
+				// LogIt.tempInfo("Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
 				Global.mixerDown.on();
 				swingTimePerformed   					= - waitAWhile(Math.abs(swingTimeRequired));
 				Global.mixerDown.off();
@@ -248,7 +248,7 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
- 		LogIt.tempInfo("Moving ended positionTracked : " + positionTracked );
+		// LogIt.tempInfo("Moving ended positionTracked : " + positionTracked );
 	}
 //
 //	============================================================
@@ -305,9 +305,9 @@ public class Mixer
 			// against circuit pump tripping
 			
 			//Just log the fact and pump up the mixer to get hot water flowing
-			LogIt.tempInfo("Moving Hot due to target over inputHot positionAbsolute : 0.80 positionTracked : " + positionTracked );
+			// LogIt.tempInfo("Moving Hot due to target over inputHot positionAbsolute : 0.80 positionTracked : " + positionTracked );
 	 		positionAbsolute(0.80F);
-			LogIt.tempInfo("Moving Hot due to target over inputHot ended positionAbsolute : 0.80 positionTracked : " + positionTracked );
+	 	// LogIt.tempInfo("Moving Hot due to target over inputHot ended positionAbsolute : 0.80 positionTracked : " + positionTracked );
 		}
 		else if (tempMixerOutTarget < tempMixerInCold)
 		{
@@ -326,31 +326,31 @@ public class Mixer
 	 		positionMovement							= swingTimeRequired.intValue();							// Value is in milliseconds
 	 		positionMovementReal						= 0;
 			
-			LogIt.tempInfo("tempMixerOutTarget : " + tempMixerOutTarget + " swingProportion: " + swingProportion + " positionTracked : " + positionTracked );
+	 	// LogIt.tempInfo("tempMixerOutTarget : " + tempMixerOutTarget + " swingProportion: " + swingProportion + " positionTracked : " + positionTracked );
 
 			if (Math.abs(positionMovement) < 2000)					// A 2 percent adjustment is not worth while
 			{
 				// Avoid doing to many little movements. 
 				// Should tempDontMove not be a time or proportion ??? xxxxx
-				LogIt.info("-------====---------Mixer","positionAtTemp", "Floor Small movement not actionned ");
-				LogIt.tempInfo("Not Moving" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+				LogIt.info("Mixer","positionAtTemp", "Floor Small movement not actionned ");
+				// LogIt.tempInfo("Not Moving" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
 				return;
 			}
 			if (positionMovement > 0)
 			{
-				LogIt.tempInfo("Moving Hotter" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+				// LogIt.tempInfo("Moving Hotter" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
 		 		Global.mixerUp.on();
 				positionMovementReal   					= waitAWhile(Math.abs(positionMovement));
 		 		Global.mixerUp.off();
-				LogIt.tempInfo("Moving Hotter ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+		 	// LogIt.tempInfo("Moving Hotter ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
 			}
 			else
 			{
-				LogIt.tempInfo("Moving Colder" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+				// LogIt.tempInfo("Moving Colder" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
 				Global.mixerDown.on();
 				positionMovementReal   					= - waitAWhile(Math.abs(positionMovement));
 				Global.mixerDown.off();
-				LogIt.tempInfo("Moving Colder ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+				// LogIt.tempInfo("Moving Colder ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
 			}
 			positionTracked								= positionTracked + positionMovementReal;
 			if (positionTracked > 90000)
@@ -361,7 +361,7 @@ public class Mixer
 			{
 				positionTracked = 0;
 			}
-			LogIt.tempInfo("tempMixerOutTarget : " + tempMixerOutTarget + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+			// LogIt.tempInfo("tempMixerOutTarget : " + tempMixerOutTarget + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
 		}
 	}
 	public void positionZero()
