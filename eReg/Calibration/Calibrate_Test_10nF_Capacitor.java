@@ -116,25 +116,25 @@ public class Calibrate_Test_10nF_Capacitor
 		//============================================================
 		display.writeAtPosition(3, 18, "Ok");
 
-		LogIt.tempInfo("Relays off and pump on");
+		//LogIt.tempInfo("Relays off and pump on");
 		Global.relays.offAll();
 		Global.pumpFloor.on();
 		Global.mixerDown.off();
 		Global.mixerUp.off();
 		
-		LogIt.tempInfo("Mixer going down and wait 90s - do this manually to save time");
+		//LogIt.tempInfo("Mixer going down and wait 90s - do this manually to save time");
 		Global.mixerDown.on();
 		Global.waitSeconds(30);
 		Global.mixerDown.off();
-		LogIt.tempInfo("Mixer Down ");
+		//LogIt.tempInfo("Mixer Down ");
 		
-		LogIt.tempInfo("Mixer going up half way");
+		//LogIt.tempInfo("Mixer going up half way");
 		Global.mixerUp.on();
 		Global.waitSeconds(45);
 		Global.mixerUp.off();
-		LogIt.tempInfo("Mixer 50% ");
+		//LogIt.tempInfo("Mixer 50% ");
 
-		LogIt.tempInfo("Mixer positionned, Pumps on ");
+		//LogIt.tempInfo("Mixer positionned, Pumps on ");
 		
 		@SuppressWarnings("unused")
         Burner 			burner 						= new Burner();
@@ -149,12 +149,12 @@ public class Calibrate_Test_10nF_Capacitor
 		{
 			if (i % 2 == 0)
 			{
-				LogIt.tempInfo("Mixer Up, sequence " + i);
+				//LogIt.tempInfo("Mixer Up, sequence " + i);
 				Global.mixerUp.on();
 			}
 			else
 			{
-				LogIt.tempInfo("Mixer Down, sequence " + i);
+				//LogIt.tempInfo("Mixer Down, sequence " + i);
 				Global.mixerDown.on();
 			}
 			Global.waitSeconds(1);
@@ -163,7 +163,7 @@ public class Calibrate_Test_10nF_Capacitor
 			Global.waitSeconds(3);
 		}
 		
-		LogIt.tempInfo("Test Finished");
+		//LogIt.tempInfo("Test Finished");
 		Global.relays.offAll();
 		Global.stopNow								= true;
 	}

@@ -118,25 +118,25 @@ public class Calibrate_Mixer
 		//============================================================
 		display.writeAtPosition(3, 18, "Ok");
 
-		LogIt.tempInfo("Relays off and pump on");
+		//LogIt.tempInfo("Relays off and pump on");
 		Global.relays.offAll();
 		Global.pumpFloor.on();
 		Global.mixerDown.off();
 		Global.mixerUp.off();
 		
-		LogIt.tempInfo("Mixer going down and wait 90s");
+		//LogIt.tempInfo("Mixer going down and wait 90s");
 		Global.mixerDown.on();
 		secondsToWait(30);
 		Global.mixerDown.off();
-		LogIt.tempInfo("Mixer Down ");
+		//LogIt.tempInfo("Mixer Down ");
 		
-		LogIt.tempInfo("Mixer going up and wait 10s");
+		//LogIt.tempInfo("Mixer going up and wait 10s");
 		Global.mixerUp.on();
 		secondsToWait(10);
 		Global.mixerUp.off();
-		LogIt.tempInfo("Mixer 10% ");
+		//LogIt.tempInfo("Mixer 10% ");
 
-		LogIt.tempInfo("Mixer positionned, Pumps on ");
+		//LogIt.tempInfo("Mixer positionned, Pumps on ");
 		
         Burner 			burner 						= new Burner();
 		@SuppressWarnings("unused")
@@ -145,26 +145,26 @@ public class Calibrate_Mixer
 		
 		display.clear();
 		
-		LogIt.tempInfo("Starting burner with Boiler temp at "+ Global.thermoBoiler.reading);
+		//LogIt.tempInfo("Starting burner with Boiler temp at "+ Global.thermoBoiler.reading);
 		
 		burner.powerOn();	
 		waitForBoilerTemp(450, display);
 		burner.powerOff();
 
-		LogIt.tempInfo("Burner stopped");
+		//LogIt.tempInfo("Burner stopped");
 
-		LogIt.tempInfo("Mixer to 80%");
+		//LogIt.tempInfo("Mixer to 80%");
 		Global.mixerUp.on();
 		secondsToWait(80);
 		Global.mixerUp.off();
-		LogIt.tempInfo("Mixer at 80%");
+		//LogIt.tempInfo("Mixer at 80%");
 
 		for (i = 0; i <12; i++)			
 		{
 			secondsToWait(10);
 			displayData();				
 		}
-		LogIt.tempInfo("Test Finished");
+		//LogIt.tempInfo("Test Finished");
 		Global.relays.offAll();
 		Global.stopNow								= true;
 	}

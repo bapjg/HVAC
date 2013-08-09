@@ -105,14 +105,14 @@ public class Calibrate_Mixer1
 		//============================================================
 		display.writeAtPosition(3, 18, "Ok");
 
-		LogIt.tempInfo("Relays off ");
+		//LogIt.tempInfo("Relays off ");
 		Global.relays.offAll();
 		
 		Global.mixerDown.off();
 		Global.mixerUp.on();
 		
-		LogIt.tempInfo("Mixer Down ");
-		LogIt.tempInfo("Mixer Flying, Pump on ");
+		//LogIt.tempInfo("Mixer Down ");
+		//LogIt.tempInfo("Mixer Flying, Pump on ");
 		Global.pumpFloor.on();
 		
 		int				i = 0;
@@ -123,16 +123,16 @@ public class Calibrate_Mixer1
 			
 			for (i = 1; i < 11; i++)			
 			{
-				LogIt.tempInfo("Mixer to " + i + "0%");
+				//LogIt.tempInfo("Mixer to " + i + "0%");
 				Global.mixerUp.on();
 				secondsToWait(10);
 				Global.mixerUp.off();
-				LogIt.tempInfo("Mixer at " + i + "0%");
+				//LogIt.tempInfo("Mixer at " + i + "0%");
 	
 				secondsToWait(1);
 			}
 	
-			LogIt.tempInfo("Test Finished");
+			//LogIt.tempInfo("Test Finished");
 			
 			Global.relays.offAll();
 			Global.stopNow 										= true;					//Close other threads;
@@ -150,7 +150,7 @@ public class Calibrate_Mixer1
 		
 		display.clear();
 		
-		LogIt.tempInfo("Starting burner with Boiler temp at "+ Global.thermoBoiler.reading);
+		//LogIt.tempInfo("Starting burner with Boiler temp at "+ Global.thermoBoiler.reading);
 		
 		burner.powerOn();	
 		secondsToWait(2);
@@ -163,16 +163,16 @@ public class Calibrate_Mixer1
 		}
 
 		burner.powerOff();
-		LogIt.tempInfo("Stopping burner");
+		//LogIt.tempInfo("Stopping burner");
 
 
 		for (i = 10; i > 0; i--)			
 		{
-			LogIt.tempInfo("Mixer to " + i + "0%");
+			//LogIt.tempInfo("Mixer to " + i + "0%");
 			Global.mixerDown.on();
 			secondsToWait(10);
 			Global.mixerDown.off();
-			LogIt.tempInfo("Mixer at " + i + "0%");
+			//LogIt.tempInfo("Mixer at " + i + "0%");
 
 		
 			for (j = 0; j < 60; j++)			// 5 mins
@@ -182,7 +182,7 @@ public class Calibrate_Mixer1
 				displayData(display);				
 			}
 		}
-		LogIt.tempInfo("Test Finished");
+		//LogIt.tempInfo("Test Finished");
 	
 		Global.relays.offAll();
 		Global.stopNow 										= true;					//Close other threads;

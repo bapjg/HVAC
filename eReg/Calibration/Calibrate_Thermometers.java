@@ -121,7 +121,7 @@ public class Calibrate_Thermometers
 		//============================================================
 		display.writeAtPosition(3, 18, "Ok");
 
-		LogIt.tempInfo("Relays off ");
+		//LogIt.tempInfo("Relays off ");
 		Global.relays.offAll();
 		Global.pumpFloor.on();
 		Global.pumpWater.on();
@@ -132,14 +132,14 @@ public class Calibrate_Thermometers
 		Global.mixerDown.on();
 		secondsToWait(90);
 		Global.mixerDown.off();
-		LogIt.tempInfo("Mixer Down ");
+		//LogIt.tempInfo("Mixer Down ");
 		
 		Global.mixerUp.on();
 		secondsToWait(45);
 		Global.mixerUp.off();
-		LogIt.tempInfo("Mixer 50% ");
+		//LogIt.tempInfo("Mixer 50% ");
 
-		LogIt.tempInfo("Mixer positionned, Pumps on ");
+		//LogIt.tempInfo("Mixer positionned, Pumps on ");
 		
 		@SuppressWarnings("unused")
         Burner 			burner 						= new Burner();
@@ -149,7 +149,7 @@ public class Calibrate_Thermometers
 		
 		display.clear();
 		
-		LogIt.tempInfo("Starting now ");
+		//LogIt.tempInfo("Starting now ");
 		
 		while (!Global.stopNow)
 		{
@@ -166,7 +166,7 @@ public class Calibrate_Thermometers
 			}
 		}
 
-		LogIt.tempInfo("Test Finished");
+		//LogIt.tempInfo("Test Finished");
 	
 		Global.relays.offAll();
 	}
