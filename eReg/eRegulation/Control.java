@@ -17,6 +17,13 @@ public class Control
 		//
 		//============================================================
 
+    	//============================================================
+		//
+		// Set the current thread name
+		//
+		Thread.currentThread().setName("Thread_Main");
+		//
+		//============================================================
 
 		
 		//============================================================
@@ -117,7 +124,7 @@ public class Control
 		// Start thread to continuously read the thermometers
 		//
 		Global.display.writeAtPosition(3, 0, " Thermometers");
-		Thread 			thread_thermometers 		= new Thread(new Thread_Thermometers(), "Thermometers");
+		Thread 			thread_thermometers 		= new Thread(new Thread_Thermometers(), "Thread_Thermometers");
 		thread_thermometers.start();
 		Global.display.writeAtPosition(3, 18, "Ok");
 		Global.waitSeconds(10);														// Must wait 10 secs for all thermometers to be read and have values
@@ -129,7 +136,7 @@ public class Control
 		//
 		// Start thread to handle UserInterface
 		//
-		Thread 			thread_userInterface 		= new Thread(new Thread_UserInterface(), "UserInteface");
+		Thread 			thread_userInterface 		= new Thread(new Thread_UserInterface(), "Thread_UserInteface");
 		thread_userInterface.start();
 		//
 		//============================================================
