@@ -34,7 +34,7 @@ public class Thread_UserInterface implements Runnable
             }
             if (buttons.button1)
             {
-                   // Start HotWater
+                // Start HotWater
             	
     			buttons.read(); // In case of button bounce
     			
@@ -45,8 +45,16 @@ public class Thread_UserInterface implements Runnable
 				// Add temporary cirecuit would be better. In this way the tasklist would not be altered
 				// and no need to delete the item at end (just set to null)
 				Global.circuitHotWater.addCircuitTask(now, now + 30 * 60 * 1000, 500, true, "1, 2, 3, 4, 5, 6, 7", true);
-   			
-    			Set <Thread> threadSet = Thread.getAllStackTraces().keySet();
+            }
+            if (buttons.button2)
+            {
+                // Get task list
+            	
+    			buttons.read(); // In case of button bounce
+    			
+    			// This is to list active threads
+				
+				Set <Thread> threadSet = Thread.getAllStackTraces().keySet();
     			
     			Iterator<Thread> i = threadSet.iterator();
     			while(i.hasNext()) 
