@@ -55,6 +55,7 @@ public class Thread_UserInterface implements Runnable
     			// This is to list active threads
 				
 				Set <Thread> threadSet = Thread.getAllStackTraces().keySet();
+				System.out.println("---------------------------");
     			
     			Iterator<Thread> i = threadSet.iterator();
     			while(i.hasNext()) 
@@ -62,7 +63,8 @@ public class Thread_UserInterface implements Runnable
     				Thread j =  i.next();
     				System.out.println(j.getName());
     			}
-            }
+				System.out.println("---------------------------");
+           }
  		}
  		LogIt.info("Thread_UserInterface", "Run", "Stopping");             
 	}
