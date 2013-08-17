@@ -30,7 +30,6 @@ public class Thread_UserInterface implements Runnable
                    
             if (buttons.button0)
             {
-System.out.println("setting stopNow = true");
                    Global.stopNow                                     	= true;           //Exit the loop;
             }
             if (buttons.button1)
@@ -76,7 +75,6 @@ System.out.println("setting stopNow = true");
 				System.out.println("---------------------------");
            }
  		}
-System.out.println("Calling Logit.Info with stop message");
  		LogIt.info("Thread_UserInterface", "Run", "Stopping");             
 	}
 	public void showTemperatures()
