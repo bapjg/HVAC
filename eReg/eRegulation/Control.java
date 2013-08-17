@@ -276,7 +276,7 @@ public class Control
 		//
 		//=============================================================
 
- 		LogIt.info("Thread_Main", "Run", "Stopping"); 
+ 		LogIt.info("Thread_Main", "main", "Stopping"); 
  		
 		boiler.requestIdle();
 		Global.relays.offAll();
