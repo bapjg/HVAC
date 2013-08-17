@@ -61,7 +61,16 @@ public class Thread_UserInterface implements Runnable
     			while(i.hasNext()) 
     			{
     				Thread j =  i.next();
-    				System.out.println(j.getName());
+    				String threadName = j.getName();
+    				if (threadName.substring(0,7) == "Thread_")
+    				{
+       					System.out.println(threadName);
+    				}
+    				else
+    				{
+    					System.out.println("--" + threadName);
+    				}
+    				
     			}
 				System.out.println("---------------------------");
            }
