@@ -62,6 +62,7 @@ public class Thread_UserInterface implements Runnable
     			{
     				Thread j =  i.next();
     				String threadName = j.getName();
+    				System.out.println(threadName.substring(0,7));
     				if (threadName.substring(0,7) == "Thread_")
     				{
        					System.out.println(threadName);
