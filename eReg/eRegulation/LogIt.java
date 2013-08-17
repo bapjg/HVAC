@@ -129,7 +129,7 @@ public class LogIt
 		{
 			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
 		}
-		Global.httpSemaphore.lock();
+		Global.httpSemaphore.unlock();
 	}
  	public static void tempData()
     {
