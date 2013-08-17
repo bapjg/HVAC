@@ -30,7 +30,8 @@ public class Thread_UserInterface implements Runnable
                    
             if (buttons.button0)
             {
-                   Global.stopNow                                     = true;                                 //Exit the loop;
+System.out.println("setting stopNow = true");
+                   Global.stopNow                                     	= true;           //Exit the loop;
             }
             if (buttons.button1)
             {
@@ -38,7 +39,7 @@ public class Thread_UserInterface implements Runnable
             	
     			buttons.read(); // In case of button bounce
     			
-				Long	now						= Global.getTimeNowSinceMidnight();
+				Long	now												= Global.getTimeNowSinceMidnight();
 
 				
 				// Need to change this
@@ -60,8 +61,8 @@ public class Thread_UserInterface implements Runnable
     			Iterator<Thread> i = threadSet.iterator();
     			while(i.hasNext()) 
     			{
-    				Thread j =  i.next();
-    				String threadName = j.getName();
+    				Thread j 											= i.next();
+    				String threadName 									= j.getName();
     				if (threadName.substring(0,7).equals("Thread_"))
     				{
        					System.out.println(threadName);
@@ -75,12 +76,13 @@ public class Thread_UserInterface implements Runnable
 				System.out.println("---------------------------");
            }
  		}
+System.out.println("Calling Logit.Info with stop message");
  		LogIt.info("Thread_UserInterface", "Run", "Stopping");             
 	}
 	public void showTemperatures()
 	{
-		Date date                                               = new Date();
-		SimpleDateFormat    dateFormat                          = new SimpleDateFormat("dd.MM HH:mm:ss");
+		Date date                                               		= new Date();
+		SimpleDateFormat    dateFormat                          		= new SimpleDateFormat("dd.MM HH:mm:ss");
 		
 		Global.display.writeAtPosition(0, 0, dateFormat.format(date));
 
@@ -95,7 +97,6 @@ public class Thread_UserInterface implements Runnable
 
 		Global.display.writeAtPosition(3, 11, "LivR ");
 		Global.display.writeAtPosition(3, 16, Global.thermoLivingRoom.toDisplay());
-
 	}
 }
  
