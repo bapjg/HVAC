@@ -24,7 +24,6 @@ public class Control
 		Thread.currentThread().setName("Thread_Main");
 		//
 		//============================================================
-
 		
 		//============================================================
 		//
@@ -40,8 +39,6 @@ public class Control
 		}
 		//
 		//============================================================
-		
-
 		
 		//============================================================
 		//
@@ -268,7 +265,7 @@ public class Control
 					{
 						Global.summerWorkDone					= true;
 						
-						Thread 			thread_summer 			= new Thread(new Thread_Summer(), "Summer");
+						Thread 			thread_summer 			= new Thread(new Thread_Summer(), "Thread_Summer");
 						thread_summer.start();
 					}
 				}
