@@ -409,9 +409,9 @@ public class Mixer
 	public void allOff()
 	{
 		waitAWhile(0.1F);
-		Global.mixerDown.offM();
+		Global.mixerDown.off();
 		waitAWhile(0.1F);
-		Global.mixerUp.offM();
+		Global.mixerUp.off();
 		waitAWhile(0.1F);
 	}
 	public Integer waitAWhile(float timeToWait)

@@ -74,7 +74,21 @@ public class Thread_UserInterface implements Runnable
     			}
 				System.out.println("---------------------------");
            }
- 		}
+           if (buttons.button3)
+           {
+                // Start HotWater
+            	
+    			buttons.read(); // In case of button bounce
+    			Global.pumpWater.on();
+           }
+           if (buttons.button4)
+           {
+                // Start HotWater
+            	
+    			buttons.read(); // In case of button bounce
+    			Global.pumpWater.off();
+           }
+		}
  		LogIt.info("Thread_UserInterface", "Run", "Stopping");             
 	}
 	public void showTemperatures()

@@ -33,20 +33,6 @@ public class Relay
 		Off(relayBank, relayNumber);
 		Global.interfaceSemaphore.unlock();
 	}
-	public void onM()
-	{
-		Global.interfaceSemaphore.lock();
-		Long now 				= System.currentTimeMillis();
-		On(relayBank, relayNumber);
-		Global.interfaceSemaphore.unlock();
-	}
-	public void offM()
-	{
-		Global.interfaceSemaphore.lock();
-		Long now 				= System.currentTimeMillis();
-		Off(relayBank, relayNumber);
-		Global.interfaceSemaphore.unlock();
-	}
 	public Boolean isOn()
 	{
 		Global.interfaceSemaphore.lock();
