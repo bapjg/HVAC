@@ -17,7 +17,8 @@ public class LogIt
 	{
 		logDisplay												= true;
 	}
-	public static void  info(String className, String methodName, String message)
+
+	public static void  logMessage(String messageType, String className, String methodName, String message)
 	{
 		Global.httpSemaphore.lock();
 		try 
@@ -30,7 +31,7 @@ public class LogIt
 			
 			Message_Report	 			messageSend 			= new Message_Report();
 			messageSend.dateTime 								= System.currentTimeMillis();
-			messageSend.reportType 								= "Info";
+			messageSend.reportType 								= messageType;
 			messageSend.className 								= className;
 			messageSend.methodName 								= methodName;
 			messageSend.reportText 								= message;
@@ -72,6 +73,12 @@ public class LogIt
 		{
 			Global.httpSemaphore.unlock();			
 		}
+	}
+	
+	public static void  info(String className, String methodName, String message)
+	{
+		logMessage("Info", className, methodName, message);
+
 		if (logDisplay)
 		{
 			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
@@ -79,65 +86,32 @@ public class LogIt
 	}
 	public static void  error(String className, String methodName, String message)
 	{
-		Global.httpSemaphore.lock();
-		try 
-		{
-			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
-			URLConnection 				servletConnection 		= serverURL.openConnection();
-			servletConnection.setDoOutput(true);
-			servletConnection.setUseCaches(false);
-			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-			
-			Message_Report	 			messageSend 			= new Message_Report();
-			messageSend.dateTime 								= System.currentTimeMillis();
-			messageSend.reportType 								= "Error";
-			messageSend.className 								= className;
-			messageSend.methodName 								= methodName;
-			messageSend.reportText 								= message;
+		logMessage("Error", className, methodName, message);
 
-			
-			ObjectOutputStream 			outputToServlet;
-			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
-			outputToServlet.writeObject(messageSend);
-			outputToServlet.flush();
-			outputToServlet.close();
-			
-			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
-			Message_Abstract 			messageReceive 			= null;
-			
-			try
-			{
-				messageReceive 									= (Message_Abstract) response.readObject();
-			}
-	    	catch (ClassNotFoundException e) 
-	    	{
-	    		System.out.println("Error 1 received");
-			}
-			
-			if (messageReceive instanceof Message_Ack)
-			{
-				//System.out.println("Temp data  is : Ack");
-			}
-			else
-			{
-				System.out.println("Logit.info  is : Nack");
-			}
-		} 
-		catch (Exception e) 
-		{
-    		System.out.println("Error : httpSend Error" + e);
-			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
-		}
-		finally
-		{
-			Global.httpSemaphore.unlock();			
-		}
 		if (logDisplay)
 		{
 			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
 		}
 	}
- 	public static void tempData()
+	public static void  info(String className, String methodName, String message, Boolean display)
+	{
+		logMessage("Info", className, methodName, message);
+
+		if (display)
+		{
+			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
+		}
+	}
+	public static void  error(String className, String methodName, String message, Boolean display)
+	{
+		logMessage("Error", className, methodName, message);
+
+		if (display)
+		{
+			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
+		}
+	}
+	public static void tempData()
     {
 		Global.httpSemaphore.lock();
 		try 
