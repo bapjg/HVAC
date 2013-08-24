@@ -74,18 +74,15 @@
 		</Relay>
 		<Relay type="Object" name="Pump_Water" address="3" friendlyName="Pompe ECS">
 		</Relay>
-		<Relay type="Object" name="Pump_Radiator" address="4"
-			friendlyName="Pompe Plancher">
+		<Relay type="Object" name="Pump_Radiator" address="4" friendlyName="Pompe Plancher">
 		</Relay>
-		<Relay type="Object" name="Pump_Floor" address="5"
-			friendlyName="Pompe Radiateurs">
+		<Relay type="Object" name="Pump_Floor" address="5" friendlyName="Pompe Radiateurs">
 		</Relay>
 
 	</Relays>
 
 	<Params type="Object" summerTemp="110" summerPumpDuration="300"
 		summerPumpTime="01:00">
-
 	</Params>
 
 </eRegulator>
