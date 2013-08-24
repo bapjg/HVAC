@@ -68,11 +68,14 @@ public class LogIt
     		System.out.println("Info : httpSend Error");
 			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
 		}
+		finally
+		{
+			Global.httpSemaphore.unlock();			
+		}
 		if (logDisplay)
 		{
 			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
 		}
-		Global.httpSemaphore.unlock();
 	}
 	public static void  error(String className, String methodName, String message)
 	{
