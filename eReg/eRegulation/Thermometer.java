@@ -64,11 +64,11 @@ public class Thermometer
 			}
 			catch (Exception err)
 			{
-				LogIt.error("Thermometer", "read", "Error message was : " + err.getMessage() + ", continueing iteration");
+				LogIt.error("Thermometer", "read", "Error message was : " + err.getMessage() + ", continuing iteration", false);
 				Global.waitMilliSeconds(5);
 			}		
     	}
-		LogIt.error("Thermometer", "read", "5 reads in arow returned CRC error on: " + name);
+		LogIt.error("Thermometer", "read", "5 reads in arow returned CRC error on: " + name, false);
 		return reading; //Last known good reading;
 	}
     public String toDisplay()

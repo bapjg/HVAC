@@ -5,7 +5,7 @@ public class Thread_Thermometers implements Runnable
 
 	public void run()
 	{
-		LogIt.info("Thread_Thermometers", "Run", "Starting");		
+		LogIt.info("Thread_Thermometers", "Run", "Starting", true);		
 
 		while (!Global.stopNow)
 		{
@@ -40,12 +40,12 @@ public class Thread_Thermometers implements Runnable
 			
 			if (timeIncrement <= 0L)
 			{
-				LogIt.error("Thread_Thermometers", "Run", "Temp reads over 10 seconds");
+				LogIt.error("Thread_Thermometers", "Run", "Temp reads over 10 seconds", false);
 				timeIncrement					= 1000L;
 			}
 
 			Global.waitMilliSeconds(timeIncrement);
 		}
-		LogIt.info("Thread_Thermometers", "Run", "Stopping");			
+		LogIt.info("Thread_Thermometers", "Run", "Stopping", true);			
 	}
 }
