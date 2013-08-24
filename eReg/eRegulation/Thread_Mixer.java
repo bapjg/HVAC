@@ -15,7 +15,7 @@ public class Thread_Mixer implements Runnable
 	{
 		this.stopNow = false;
 		
-		LogIt.info("Thread_Mixer", "Run", "Floor Starting");		
+		LogIt.info("Thread_Mixer", "Run", "Floor Starting", true);		
 
 		mixer.positionAbsolute(0.10F);
 		
@@ -98,16 +98,7 @@ public class Thread_Mixer implements Runnable
 			this.mixer.pidSimple(targetTemp);
 
 			Global.waitSeconds(20);
-
-//			try
-//			{
-//				Thread.sleep(1000 * 20);
-//			}
-//			catch (InterruptedException e)
-//			{
-//				e.printStackTrace();
-//			}
 		}
-		LogIt.info("Thread_Mixer", "Run", "Floor Thread ending");	
+		LogIt.info("Thread_Mixer", "Run", "Floor Thread ending", true);	
 	}
 }

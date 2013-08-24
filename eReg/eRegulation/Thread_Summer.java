@@ -10,7 +10,7 @@ public class Thread_Summer implements Runnable
 	{
 		Integer i;
 		
-		LogIt.info("Thread_Summer", "Run", "Starting");		
+		LogIt.info("Thread_Summer", "Run", "Starting", true);		
 		
 		LogIt.action("PumpFloor", "On");
 		Global.pumpFloor.on();
@@ -34,6 +34,6 @@ public class Thread_Summer implements Runnable
 		LogIt.action("PumpRadiator", "Off");
 		Global.pumpRadiator.off();
 		
-		LogIt.info("Thread_Summer", "Run", "Stopping");		
+		LogIt.info("Thread_Summer", "Run", "Stopping", true);		
 	}
 }

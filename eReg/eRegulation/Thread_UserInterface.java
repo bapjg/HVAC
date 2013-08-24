@@ -10,7 +10,7 @@ public class Thread_UserInterface implements Runnable
 {
 	public void run()
     {
-		LogIt.info("Thread_UserInterface", "Run", "Starting");            
+		LogIt.info("Thread_UserInterface", "Run", "Starting", true);            
  
 		Global.display.clear();
 		Buttons             buttons                                 = Global.buttons;   
@@ -89,7 +89,7 @@ public class Thread_UserInterface implements Runnable
     			Global.pumpWater.off();
            }
 		}
- 		LogIt.info("Thread_UserInterface", "Run", "Stopping");             
+ 		LogIt.info("Thread_UserInterface", "Run", "Stopping", true);             
 	}
 	public void showTemperatures()
 	{
