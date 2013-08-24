@@ -65,7 +65,7 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Info : httpSend Error");
+    		System.out.println("Info : httpSend Error" + e);
 			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
 		}
 		finally
@@ -125,7 +125,7 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Error : httpSend Error");
+    		System.out.println("Error : httpSend Error" + e);
 			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
 		}
 		finally
@@ -190,7 +190,7 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("TempData : httpSend Error");
+    		System.out.println("TempData : httpSend Error" + e);
 		}
 		finally
 		{
@@ -241,7 +241,7 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("FuelData : httpSend Error");
+    		System.out.println("FuelData : httpSend Error" + e);
 		}
 		finally
 		{
@@ -293,7 +293,7 @@ public class LogIt
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Action : httpSend Error");
+    		System.out.println("Action : httpSend Error" + e);
 		}
 		finally
 		{
