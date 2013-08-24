@@ -125,11 +125,14 @@ public class LogIt
     		System.out.println("Error : httpSend Error");
 			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
 		}
+		finally
+		{
+			Global.httpSemaphore.unlock();			
+		}
 		if (logDisplay)
 		{
 			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
 		}
-		Global.httpSemaphore.unlock();
 	}
  	public static void tempData()
     {
@@ -186,7 +189,10 @@ public class LogIt
 		{
     		System.out.println("TempData : httpSend Error");
 		}
-		Global.httpSemaphore.unlock();
+		finally
+		{
+			Global.httpSemaphore.unlock();			
+		}
     }
 	public static void fuelData(Long fuelConsumed)
     {
@@ -234,7 +240,10 @@ public class LogIt
 		{
     		System.out.println("FuelData : httpSend Error");
 		}
-		Global.httpSemaphore.unlock();
+		finally
+		{
+			Global.httpSemaphore.unlock();			
+		}
     }
 	public static void action(String device, String action)
     {
@@ -283,36 +292,11 @@ public class LogIt
 		{
     		System.out.println("Action : httpSend Error");
 		}
-		Global.httpSemaphore.unlock();
+		finally
+		{
+			Global.httpSemaphore.unlock();			
+		}
     }
-//	public static void tempInfo(String message)
-//    {
-//    	System.out.println(dateTimeStamp() + " : Info   : " + "LogIt" + "/" + "tempInfo" + " - " + message);
-//    	try 
-//        {
-//            PrintWriter temperatureFile = new PrintWriter(new BufferedWriter(new FileWriter("Temperatures.csv", true)));
-//            temperatureFile.println
-//        	(
-//        		'"' + dateTimeStamp() 					+ '"' 	+ ';' +
-//        		'"' + timeStamp() 						+ '"' 	+ ';' + 
-//        		'"' + Global.getTimeNowSinceMidnight() 	+ '"' 	+ ';' + 
-//        		Global.thermoBoiler.reading 					+ ';' + 
-//        		Global.thermoOutside.reading 					+ ';' + 
-//        		Global.thermoHotWater.reading 					+ ';' + 
-//        		Global.thermoFloorOut.reading 					+ ';' + 
-//        		Global.thermoFloorCold.reading 					+ ';' + 
-//        		Global.thermoFloorHot.reading					+ ';' + 
-//        		Global.thermoLivingRoom.reading					+ ';' +
-//            	Global.mixer.positionTracked					+ ';' +	
-//            	message
-//        	);
-//            temperatureFile.close();
-//        } 
-//        catch (IOException e) 
-//        {
-//            e.printStackTrace();
-//        }
-//    } 
     public static String  dateTimeStamp()
 	{
 		Date now = new Date();
