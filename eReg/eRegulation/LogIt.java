@@ -122,10 +122,10 @@ public class LogIt
 			servletConnection.setUseCaches(false);
 			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 			
-			Message_Temperatures 			messageSend 		= new Message_Temperatures();
+			Message_Temperatures 		messageSend 			= new Message_Temperatures();
 			messageSend.dateTime 								= System.currentTimeMillis();
-			messageSend.tempHotWater 							= Global.thermoBoiler.reading;
-			messageSend.tempBoiler 								= Global.thermoHotWater.reading;
+			messageSend.tempHotWater 							= Global.thermoHotWater.reading; 
+			messageSend.tempBoiler 								= Global.thermoBoiler.reading;
 			messageSend.tempBoilerIn 							= Global.thermoBoilerIn.reading;
 			messageSend.tempFloorOut 							= Global.thermoFloorOut.reading;
 			messageSend.tempFloorCold 							= Global.thermoFloorCold.reading;

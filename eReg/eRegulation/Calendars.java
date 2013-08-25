@@ -81,6 +81,7 @@ public class Calendars extends DefaultHandler
 		
 		
 		// This part for file calendar
+		// If there's a network problem need to go for file based version
 		
 //		try 
 //		{
