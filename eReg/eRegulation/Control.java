@@ -157,8 +157,8 @@ public class Control
 		//
 		// Section for debugging
 		//
-
-		
+//
+//		
 //		System.out.println("Control Starting test");
 //		System.out.println("Control burner on");
 //		boiler.burner.powerOn();
@@ -190,8 +190,8 @@ public class Control
 //		
 //		System.out.println("100 relay throws : " + (timeEnd - timeStart));
 //		Global.stopNow = true;
-
-		
+//
+//		
 //		burner.powerOff();
 //		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
 //		
@@ -210,7 +210,7 @@ public class Control
 //		
 //		
 //		burner.powerOff();
-		
+//		
 		//
 		//============================================================
 		
@@ -250,8 +250,11 @@ public class Control
 					globalHeatRequired.tempMaximum				= circuit.heatRequired.tempMaximum;
 				}
 			}
-				
-			LogIt.tempData();
+			
+			//------------------------------------
+			// This is done in Thread_Thermometers
+			//LogIt.tempData();
+			//------------------------------------
 			
 			boiler.requestHeat(globalHeatRequired);
 			

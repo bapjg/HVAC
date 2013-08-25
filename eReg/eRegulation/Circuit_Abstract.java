@@ -152,7 +152,6 @@ abstract class Circuit_Abstract
 						}
 						else if (Global.getTimeNowSinceMidnight() > circuitTask.timeEnd)
 						{
-							//circuitTask.state						= circuitTask.STATE_Completed;
 							circuitTask.state						= circuitTask.TASK_STATE_Completed;
 							// activeTask will be set to null in the sequencer
 							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "completed");
@@ -160,14 +159,12 @@ abstract class Circuit_Abstract
 						else
 						{
 							// We have an error
-							//circuitTask.state						= circuitTask.STATE_Error;
 							circuitTask.state						= circuitTask.TASK_STATE_Error;
 						}
 					}
 				}
 				else
 				{
-					//circuitTask.state								= circuitTask.STATE_NotToday;
 					circuitTask.state								= circuitTask.TASK_STATE_NotToday;
 				}
 			}

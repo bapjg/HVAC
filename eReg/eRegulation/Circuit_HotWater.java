@@ -65,7 +65,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				
 			case CIRCUIT_STATE_Optimising:
 				
-				if(Global.circuits.isSingleActiveCircuit())
+				if (Global.circuits.isSingleActiveCircuit())
 				{
 					// Keep going until all heat is taken out of boiler
 					if (Global.thermoBoiler.reading < Global.thermoHotWater.reading + 20)
@@ -102,6 +102,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 				
 			case CIRCUIT_STATE_Error:
 				
+				LogIt.error("Circuit", "sequencerWater", "uCIRCUIT_STATE_Error detected : " + state);	
+
 				break;
 				
 			default:
