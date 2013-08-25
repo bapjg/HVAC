@@ -16,6 +16,7 @@ import java.net.URLConnection;
 public class Calendars extends DefaultHandler
 {
 	private Circuit_Abstract	circuit;
+	private String throwAway;
 	
 	public Calendars(String xmlCalendarFile) throws IOException, SAXException, ParserConfigurationException
     {
