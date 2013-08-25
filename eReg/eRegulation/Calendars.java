@@ -4,12 +4,12 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.*;
-import java.util.Calendar;
 
 import java.net.URL;
 import java.net.URLConnection;
@@ -17,8 +17,10 @@ public class Calendars extends DefaultHandler
 {
 	private Circuit_Abstract	circuit;
 	
-	public Calendars(String xmlCalendars) throws IOException, SAXException, ParserConfigurationException
+	public Calendars(String xmlCalendarFile) throws IOException, SAXException, ParserConfigurationException
     {
+		Message_Calendar_Report 					xmlCalendarString				= null;
+
 		try 
 		{
 			URL 									serverURL 						= new URL("http://192.168.5.20:8080/hvac/Calendar");
@@ -49,9 +51,9 @@ public class Calendars extends DefaultHandler
 			
 			if (messageReceive instanceof Message_Calendar_Report)
 			{
-				Message_Calendar_Report 			messageReport					= (Message_Calendar_Report) messageReceive;
-				System.out.println("dateTime  : " + messageReport.dateTime);
-				System.out.println("calendars : " + messageReport.calendars);
+				xmlCalendarString													= (Message_Calendar_Report) messageReceive;
+				System.out.println("dateTime  : " + xmlCalendarString.dateTime);
+				System.out.println("calendars : " + xmlCalendarString.calendars);
 			}
 			else
 			{
@@ -64,20 +66,27 @@ public class Calendars extends DefaultHandler
 		}
 		System.out.println("Hi");
 		
+		try 
+		{
+			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
+			SAXParser 			saxParser 			= saxFactory.newSAXParser();
+			
+			saxParser.parse(new InputSource(new StringReader(xmlCalendarString.calendars)), this);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 		
 		
 		
-		
-		
-		
-		
-		
+		// This part for file calendar
 		
 		try 
 		{
 			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
 			SAXParser 			saxParser 			= saxFactory.newSAXParser();
 			
-			saxParser.parse(xmlCalendars, this);
+			saxParser.parse(xmlCalendarFile, this);
 		} 
 		catch (Exception e) 
 		{
