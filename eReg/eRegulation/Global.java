@@ -77,6 +77,7 @@ public class Global extends DefaultHandler
 	
 	private 		Circuit_Abstract 				circuit;		
 
+	public static 	String							calendarsDateTime;	
 
 	public Global(String xmlParameters) throws IOException, SAXException, ParserConfigurationException
 	{

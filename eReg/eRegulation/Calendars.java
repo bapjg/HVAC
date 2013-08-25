@@ -71,6 +71,7 @@ public class Calendars extends DefaultHandler
 			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
 			SAXParser 			saxParser 			= saxFactory.newSAXParser();
 			
+			Global.calendarsDateTime				= xmlCalendarString.dateTime;
 			saxParser.parse(new InputSource(new StringReader(xmlCalendarString.calendars)), this);
 		} 
 		catch (Exception e) 
@@ -81,17 +82,17 @@ public class Calendars extends DefaultHandler
 		
 		// This part for file calendar
 		
-		try 
-		{
-			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
-			SAXParser 			saxParser 			= saxFactory.newSAXParser();
-			
-			saxParser.parse(xmlCalendarFile, this);
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		} 		
+//		try 
+//		{
+//			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
+//			SAXParser 			saxParser 			= saxFactory.newSAXParser();
+//			
+//			saxParser.parse(xmlCalendarFile, this);
+//		} 
+//		catch (Exception e) 
+//		{
+//			e.printStackTrace();
+//		} 		
 	}
 	public void startElement(String uri, String localName, String tagName, Attributes attributes) throws SAXException 
     {
