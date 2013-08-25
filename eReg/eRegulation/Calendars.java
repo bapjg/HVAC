@@ -11,12 +11,67 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.util.Calendar;
 
+import java.net.URL;
+import java.net.URLConnection;
 public class Calendars extends DefaultHandler
 {
 	private Circuit_Abstract	circuit;
 	
 	public Calendars(String xmlCalendars) throws IOException, SAXException, ParserConfigurationException
     {
+		try 
+		{
+			URL 									serverURL 						= new URL("http://192.168.5.20:8080/hvac/Calendar");
+			URLConnection 							servletConnection 				= serverURL.openConnection();
+			servletConnection.setDoOutput(true);
+			servletConnection.setUseCaches(false);
+			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
+			
+			Message_Calendar_Request_Data 			messageSend 					= new Message_Calendar_Request_Data();
+			
+			ObjectOutputStream 						outputToServlet;
+			outputToServlet 														= new ObjectOutputStream(servletConnection.getOutputStream());
+			outputToServlet.writeObject(messageSend);
+			outputToServlet.flush();
+			outputToServlet.close();
+			
+			ObjectInputStream 						response 						= new ObjectInputStream(servletConnection.getInputStream());
+			Message_Abstract 						messageReceive 					= null;
+			
+			try
+			{
+				messageReceive 														= (Message_Abstract) response.readObject();
+			}
+	    	catch (ClassNotFoundException e) 
+	    	{
+				e.printStackTrace();
+			}
+			
+			if (messageReceive instanceof Message_Calendar_Report)
+			{
+				Message_Calendar_Report 			messageReport					= (Message_Calendar_Report) messageReceive;
+				System.out.println("dateTime  : " + messageReport.dateTime);
+				System.out.println("calendars : " + messageReport.calendars);
+			}
+			else
+			{
+				System.out.println("instanceof The data  is : Not Message_Calendar_Report");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		System.out.println("Hi");
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		try 
 		{
 			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
@@ -35,10 +90,10 @@ public class Calendars extends DefaultHandler
 		{
 			if (attributes.getValue("type").equalsIgnoreCase("Collection")) 
 			{
-				if (tagName.equalsIgnoreCase("Thermometers"))
-				{
-					Global.thermometers 			= new Thermometers(); 
-				}
+//				if (tagName.equalsIgnoreCase("Thermometers"))
+//				{
+//					Global.thermometers 			= new Thermometers(); 
+//				}
 			}
 			else if (attributes.getValue("type").equalsIgnoreCase("Object"))
 			{
@@ -47,7 +102,6 @@ public class Calendars extends DefaultHandler
 					String name 					= attributes.getValue("name");
 
 					this.circuit					= Global.circuits.fetchcircuit(name);
-					//LogIt.info("Calendars", "startElement", "Managing Calendar for " + name);
 				}
 				if (tagName.equalsIgnoreCase("Calendar"))
 				{

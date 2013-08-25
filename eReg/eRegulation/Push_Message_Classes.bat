@@ -1,3 +1,5 @@
+REM     This is in                                D: \HVAC_Repository\git\HVAC\eReg\eRegulation
+
 D:
 CD      \HVAC_Repository\git\HVAC\eReg\eRegulation
 COPY    Message_*.class                           D:\HVAC_Project\HVAC_Server\bin\eRegulation
@@ -8,3 +10,5 @@ COPY    Calendar.class                            \\NAS\Users_AD\2_Projects\HVAC
 COPY    Monitor.class                             \\NAS\Users_AD\2_Projects\HVAC_Server\hw\WEB-INF\classes
 
 PAUSE
+
+CD		\HVAC_Repository\git\HVAC\eReg\eRegulation
