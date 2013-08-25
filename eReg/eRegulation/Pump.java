@@ -3,24 +3,25 @@ package eRegulation;
 public class Pump
 {
 	public String 			name;
-	public String 			friendlyName;
 	public int 				relayBank;
 	public int 				relayNumber;
+	public Relay			relay;
 	
-	public Pump(String name, String address, String friendlyName)
+	public Pump(String name, String address)
 	{
-		relayBank = 0;
-		
+		this.relayBank 				= 0;
 		this.name 		    		= name;
-		this.friendlyName   		= friendlyName;
 		this.relayNumber			= Integer.parseInt(address);
+		this.relay					= Global.relays.fetchRelay(name);
 	}
 	public void on()
 	{
-		// On(relayBank, relayNumber);
+		LogIt.action(this.name, "On");
+		relay.on();
 	}
 	public void off()
 	{
-		// Off(relayBank, relayNumber);
+		LogIt.action(this.name, "Off");
+		relay.off();
 	}
 }
