@@ -52,8 +52,8 @@ public class Calendars extends DefaultHandler
 			if (messageReceive instanceof Message_Calendar_Report)
 			{
 				xmlCalendarString													= (Message_Calendar_Report) messageReceive;
-				System.out.println("dateTime  : " + xmlCalendarString.dateTime);
-				System.out.println("calendars : " + xmlCalendarString.calendars);
+//				System.out.println("dateTime  : " + xmlCalendarString.dateTime);
+//				System.out.println("calendars : " + xmlCalendarString.calendars);
 			}
 			else
 			{
