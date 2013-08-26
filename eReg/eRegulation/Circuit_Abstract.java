@@ -27,7 +27,9 @@ abstract class Circuit_Abstract
 	public Mixer					mixer						= null;
 	public TemperatureGradient 		temperatureGradient			= null;				//This will be overridden
 	
-	public CircuitTask				activeTask					= null;
+	public CircuitTask				taskActive					= null;
+	public CircuitTask				taskNext					= null;
+	
 	public ArrayList<CircuitTask> 	circuitTaskList 			= new ArrayList<CircuitTask>();
 	public HeatRequired				heatRequired				= new HeatRequired();
 
@@ -104,14 +106,14 @@ abstract class Circuit_Abstract
 	 *  
 	 */
 	{
-		if (activeTask != null)
+		if (taskActive != null)
 		{
 			//There is an active task. No need to schedule anything until it has finished
 			//Unless it is not running (ie we stopped the program mid-schedule
 //			LogIt.info("Circuit","scheduleTasks", "activeTask <> null in : " + name);
-			if (Global.getTimeNowSinceMidnight() > activeTask.timeEnd)
+			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
 			{
-				activeTask.state								= CircuitTask.TASK_STATE_Completed;
+				taskActive.state								= CircuitTask.TASK_STATE_Completed;
 				// 
 				// If this a temporary task, should be deleted
 				//
@@ -147,7 +149,7 @@ abstract class Circuit_Abstract
 							// All this is very fudgy/strange/needs to be sorted out
 							
 							state									= CIRCUIT_STATE_Started;				// State of the circuit is started. The sequencer will actually get things moving
-							activeTask								= circuitTask;
+							taskActive								= circuitTask;
 							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "activating");
 						}
 						else if (Global.getTimeNowSinceMidnight() > circuitTask.timeEnd)

@@ -18,7 +18,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 	{
 		this.heatRequired.tempMinimum			= -1;
 		this.heatRequired.tempMaximum			= -1;
-		if (activeTask == null)
+		if (taskActive == null)
 		{
 			//Nothing to do
 		}
@@ -27,10 +27,10 @@ public class Circuit_Mixer extends Circuit_Abstract
 			//===========================================================
 			// Here we detect that a task has just finished its time slot
 			//
-			if (Global.getTimeNowSinceMidnight() > activeTask.timeEnd)
+			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
 			{
 				state										= CIRCUIT_STATE_Stopping;
-				activeTask.state							= activeTask.TASK_STATE_Completed;
+				taskActive.state							= taskActive.TASK_STATE_Completed;
 			}
 			//
 			//===========================================================
@@ -72,7 +72,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				LogIt.action("PumpFloor", "Off");
 				Global.pumpFloor.off();
 				state										= CIRCUIT_STATE_Off;
-				activeTask									= null;
+				taskActive									= null;
 				break;
 			case CIRCUIT_STATE_Error:
 				break;
