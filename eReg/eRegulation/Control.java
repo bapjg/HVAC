@@ -11,19 +11,11 @@ public class Control
     	//============================================================
 		//
 		// Instantiate this class (required for JNI)
+    	// and Set the current thread name
 		//
     	
 		@SuppressWarnings("unused")
 		Control 		Me 							= new Control();
-		
-		//
-		//============================================================
-
-    	//============================================================
-		//
-		// Set the current thread name
-		//
-		
 		Thread.currentThread().setName("Thread_Main");
 		
 		//
@@ -98,15 +90,16 @@ public class Control
 		Global.pumpWater 							= Global.relays.fetchRelay("Pump_Water");
 		Global.pumpFloor	 						= Global.relays.fetchRelay("Pump_Floor");
 		Global.pumpRadiator 						= Global.relays.fetchRelay("Pump_Radiator");
+
 		Global.mixerUp		 						= Global.relays.fetchRelay("Mixer_Up");
 		Global.mixerDown	 						= Global.relays.fetchRelay("Mixer_Down");
 
-		Global.circuitFloor							= (Circuit_Mixer) Global.circuits.fetchcircuit("Floor");
-		Global.circuitGradient						= (Circuit_Gradient) Global.circuits.fetchcircuit("Radiator");
-		Global.circuitHotWater						= (Circuit_HotWater) Global.circuits.fetchcircuit("Hot_Water");
+		Global.circuitFloor							= (Circuit_Mixer) 		Global.circuits.fetchcircuit("Floor");
+		Global.circuitGradient						= (Circuit_Gradient) 	Global.circuits.fetchcircuit("Radiator");
+		Global.circuitHotWater						= (Circuit_HotWater) 	Global.circuits.fetchcircuit("Hot_Water");
 
 		Global.mixer								= Global.circuitFloor.mixer;
-		Global.mixer.pidControler					= new PID(5,3);					// PID Controler is updated every 10 secondes by Thread_Thermometers
+		Global.mixer.pidControler					= new PID(5,3);					// PID Controler is updated every 10 seconds by Thread_Thermometers
 		
 		//
 		//============================================================
@@ -226,7 +219,6 @@ public class Control
 		{
 			Global.waitSeconds(5);
 		
-//			LogIt.info("Main", "General Loop", "Before Burner sequencer");
 			boiler.sequencer();
 			
 			globalHeatRequired.tempMaximum 						= -1;
@@ -258,7 +250,7 @@ public class Control
 			
 			boiler.requestHeat(globalHeatRequired);
 			
-			// We sould only do this if no circuit active otherwise we will be heating the house in mid summer
+			// We should only do this if no circuit active otherwise we will be heating the house in mid summer
 			
 			if (Global.thermoOutside.reading > Global.summerTemp)
 			{

@@ -56,7 +56,7 @@ abstract class Circuit_Abstract
 		Boolean			temporary
 		)
 	{
-		CircuitTask circuitTaskItem 							= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
+		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
 		circuitTaskList.add(circuitTaskItem);
 	}
 	public void addCircuitTask
@@ -69,7 +69,7 @@ abstract class Circuit_Abstract
 		Boolean			temporary
 		)
 	{
-		CircuitTask circuitTaskItem 							= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
+		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
 		circuitTaskList.add(circuitTaskItem);
 	}
 	public void start()
@@ -106,6 +106,40 @@ abstract class Circuit_Abstract
 	 *  
 	 */
 	{
+		//--------------
+		// New
+		// Get next circuit task to be performed today
+		//     ----
+		//
+		
+		if (this.taskNext == null) // Is this a good idea. If its not null, could it be re-arranged
+		{
+			String dayxxx 										= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+			CircuitTask 		circuitTaskNext					= null;
+			Long				circuitTaskTimeMin				= 999999999L;
+			
+			for (CircuitTask circuitTask : circuitTaskList) 
+			{
+				if (circuitTask.days.contains(dayxxx))
+				{
+					if ((circuitTask.state != 0 /* circuitTask.TASK_STATE_Scheduled */) & (true))
+					{
+						if (circuitTask.timeStart < circuitTaskTimeMin)
+						{
+							this.taskNext						= circuitTask;
+							circuitTaskTimeMin					= circuitTask.timeStart;
+							// this.taskNext.estTimeStart		= circuitTask.timeStart;              	To be readjusted later
+							// this.taskNext.estTimeEnd			= circuitTask.timeEnd;					To be readjusted later
+						}
+					}
+				}
+			}
+		}
+		
+		// New
+		//--------------
+
+
 		if (taskActive != null)
 		{
 			//There is an active task. No need to schedule anything until it has finished
