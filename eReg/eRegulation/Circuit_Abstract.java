@@ -121,7 +121,7 @@ abstract class Circuit_Abstract
 			
 			for (CircuitTask circuitTask : circuitTaskList) 
 			{
-				if (circuitTask.days.contains(dayxxx))
+				if (circuitTask.days.contains(day))
 				{
 					if ((circuitTask.state != 0 /* circuitTask.TASK_STATE_Scheduled */) & (true))
 					{
