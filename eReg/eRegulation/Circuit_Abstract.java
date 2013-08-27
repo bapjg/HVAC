@@ -111,10 +111,11 @@ abstract class Circuit_Abstract
 		// Get next circuit task to be performed today
 		//     ----
 		//
-		
+
+		String day 												= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+
 		if (this.taskNext == null) // Is this a good idea. If its not null, could it be re-arranged
 		{
-			String dayxxx 										= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 			CircuitTask 		circuitTaskNext					= null;
 			Long				circuitTaskTimeMin				= 999999999L;
 			
@@ -162,7 +163,6 @@ abstract class Circuit_Abstract
 		{
 			for (CircuitTask circuitTask : circuitTaskList) 
 			{
-				String day 										= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 
 				if (circuitTask.days.contains(day))
 				{
