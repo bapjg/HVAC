@@ -130,7 +130,9 @@ abstract class Circuit_Abstract
 							this.taskNext						= circuitTask;
 							circuitTaskTimeMin					= circuitTask.timeStart;
 							// this.taskNext.estTimeStart		= circuitTask.timeStart;              	To be readjusted later
+							// this.taskNext.setEstTimeStart() 							//             	To be readjusted later
 							// this.taskNext.estTimeEnd			= circuitTask.timeEnd;					To be readjusted later
+							// this.taskNext.setEstTimeEnd() 							//             	To be readjusted later
 						}
 					}
 				}
