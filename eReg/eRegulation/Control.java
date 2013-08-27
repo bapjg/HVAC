@@ -12,8 +12,10 @@ public class Control
 		//
 		// Instantiate this class (required for JNI)
 		//
+    	
 		@SuppressWarnings("unused")
 		Control 		Me 							= new Control();
+		
 		//
 		//============================================================
 
@@ -21,7 +23,9 @@ public class Control
 		//
 		// Set the current thread name
 		//
+		
 		Thread.currentThread().setName("Thread_Main");
+		
 		//
 		//============================================================
 		
@@ -29,6 +33,7 @@ public class Control
 		//
 		// For debugging on a Windows machine without the necessary hardware
 		//
+		
 		if (System.getProperty("os.name").equalsIgnoreCase("windows 7"))
 		{
 			System.out.println("libraries not loaded");
@@ -37,6 +42,7 @@ public class Control
 		{
 			System.loadLibrary("Interfaces");
 		}
+		
 		//
 		//============================================================
 		
@@ -45,23 +51,9 @@ public class Control
 		// Initialising : Note that "Initialising" message on LCD is handled
 		// in the Global constructor when the LCD display has been created
 		//
-		
-		String 			xmlParams 					= "";
-		String 			xmlCalendars 				= "";
-
-		if (args.length > 0)
-		{
-			xmlParams 								= args[0] + "_eRegulator.xml";			
-			xmlCalendars 							= args[0] + "_eCalendars.xml";			
-		}
-		else
-		{
-			xmlParams 								= "eRegulator.xml";			
-			xmlCalendars 							= "eCalendars.xml";			
-		}
 
 		@SuppressWarnings("unused")
-		Global 			global 						= new Global(xmlParams);
+		Global 			global 						= new Global();
 		
 		Global.stopNow								= false;
 
@@ -73,10 +65,12 @@ public class Control
 		//
 		// Read Calendar file
 		//
+		
 		Global.display.writeAtPosition(2, 0, " Calendar");
 		@SuppressWarnings("unused")
-		Calendars 		calendars 					= new Calendars(xmlCalendars);
+		Calendars 		calendars 					= new Calendars();
 		Global.display.writeAtPosition(2, 18, "Ok");
+		
 		//
 		//============================================================
 
@@ -85,6 +79,7 @@ public class Control
 		//
 		// Initialise Global (This ought to be in constructor) xxxx
 		//
+		
 		Global.thermoBoiler 						= Global.thermometers.fetchThermometer("Boiler");
 		Global.thermoBoilerIn						= Global.thermometers.fetchThermometer("Boiler_In");
 		
@@ -112,6 +107,7 @@ public class Control
 
 		Global.mixer								= Global.circuitFloor.mixer;
 		Global.mixer.pidControler					= new PID(5,3);					// PID Controler is updated every 10 secondes by Thread_Thermometers
+		
 		//
 		//============================================================
 		
@@ -120,11 +116,13 @@ public class Control
 		//
 		// Start thread to continuously read the thermometers
 		//
+		
 		Global.display.writeAtPosition(3, 0, " Thermometers");
 		Thread 			thread_thermometers 		= new Thread(new Thread_Thermometers(), "Thread_Thermometers");
 		thread_thermometers.start();
 		Global.display.writeAtPosition(3, 18, "Ok");
 		Global.waitSeconds(10);														// Must wait 10 secs for all thermometers to be read and have values
+		
 		//
 		//============================================================
 		
@@ -133,8 +131,10 @@ public class Control
 		//
 		// Start thread to handle UserInterface
 		//
+		
 		Thread 			thread_userInterface 		= new Thread(new Thread_UserInterface(), "Thread_UserInteface");
 		thread_userInterface.start();
+		
 		//
 		//============================================================
 		
@@ -274,6 +274,7 @@ public class Control
 				}
 			}
 		}
+		
 		//
 		// End of Main Code
 		//

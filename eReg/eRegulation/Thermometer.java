@@ -18,11 +18,10 @@ public class Thermometer
 	{
 		this.name 		    			= name;
 		this.thermoFile 			    = address;
-		this.friendlyName  				 = friendlyName;
+		this.friendlyName  				= friendlyName;
 		
-		String  thermoRadical 		    = "/sys/bus/w1/devices/";
-		//String thermoRadical 		    = "C:/sys/";
-		String thermoFile 				= thermoRadical + this.thermoFile.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
+		String  	thermoRadical 		= "/sys/bus/w1/devices/";
+		String 		thermoFile 			= thermoRadical + this.thermoFile.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
 		
 		this.filePath 					= thermoFile;
 	}
@@ -68,7 +67,7 @@ public class Thermometer
 				Global.waitMilliSeconds(5);
 			}		
     	}
-		LogIt.error("Thermometer", "read", "5 reads in arow returned CRC error on: " + name, false);
+		LogIt.error("Thermometer", "read", "5 reads in a row returned CRC error on: " + name, false);
 		return reading; //Last known good reading;
 	}
     public String toDisplay()

@@ -79,7 +79,7 @@ public class Global extends DefaultHandler
 
 	public static 	String							calendarsDateTime;	
 
-	public Global(String xmlParameters) throws IOException, SAXException, ParserConfigurationException
+	public Global() throws IOException, SAXException, ParserConfigurationException
 	{
 		Global.display 								= new LCD();
 		Global.buttons 								= new Buttons();	
@@ -93,7 +93,7 @@ public class Global extends DefaultHandler
 			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
 			SAXParser 			saxParser 			= saxFactory.newSAXParser();
 			
-			saxParser.parse(xmlParameters, this);
+			saxParser.parse("eRegulator.xml", this);
 		} 
 		catch (Exception e) 
 		{

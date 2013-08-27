@@ -17,7 +17,7 @@ public class Calendars extends DefaultHandler
 {
 	private Circuit_Abstract	circuit;
 	
-	public Calendars(String xmlCalendarFile) throws IOException, SAXException, ParserConfigurationException
+	public Calendars() throws IOException, SAXException, ParserConfigurationException
     {
 		Message_Calendar_Report 					xmlCalendarString				= null;
 
@@ -88,7 +88,7 @@ public class Calendars extends DefaultHandler
 //			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
 //			SAXParser 			saxParser 			= saxFactory.newSAXParser();
 //			
-//			saxParser.parse(xmlCalendarFile, this);
+//			saxParser.parse("eCalendars.xml", this);
 //		} 
 //		catch (Exception e) 
 //		{
