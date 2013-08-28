@@ -13,6 +13,7 @@ import java.io.*;
 
 import java.net.URL;
 import java.net.URLConnection;
+
 public class Calendars extends DefaultHandler
 {
 	private Circuit_Abstract	circuit;
@@ -27,6 +28,9 @@ public class Calendars extends DefaultHandler
 			URLConnection 							servletConnection 				= serverURL.openConnection();
 			servletConnection.setDoOutput(true);
 			servletConnection.setUseCaches(false);
+			System.out.println("Connect Timeout is : " + servletConnection.getConnectTimeout());
+			System.out.println("Read    Timeout is : " + servletConnection.getReadTimeout());
+			
 			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 			
 			Message_Calendar_Request_Data 			messageSend 					= new Message_Calendar_Request_Data();
@@ -64,7 +68,6 @@ public class Calendars extends DefaultHandler
 		{
 			e.printStackTrace();
 		}
-		System.out.println("Hi");
 		
 		try 
 		{
