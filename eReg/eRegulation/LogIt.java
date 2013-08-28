@@ -46,6 +46,8 @@ public class LogIt
 			URLConnection 				servletConnection 		= serverURL.openConnection();
 			servletConnection.setDoOutput(true);
 			servletConnection.setUseCaches(false);
+			servletConnection.setConnectTimeout(1000);
+			servletConnection.setReadTimeout(1000);
 			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 			
 			Message_Report	 			messageSend 			= new Message_Report();
@@ -157,6 +159,8 @@ public class LogIt
 			URLConnection 				servletConnection 		= serverURL.openConnection();
 			servletConnection.setDoOutput(true);
 			servletConnection.setUseCaches(false);
+			servletConnection.setConnectTimeout(1000);
+			servletConnection.setReadTimeout(1000);
 			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 			
 			Message_Temperatures 		messageSend 			= new Message_Temperatures();
@@ -236,6 +240,8 @@ public class LogIt
 			URLConnection 				servletConnection 		= serverURL.openConnection();
 			servletConnection.setDoOutput(true);
 			servletConnection.setUseCaches(false);
+			servletConnection.setConnectTimeout(1000);
+			servletConnection.setReadTimeout(1000);
 			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 			
 			Message_Fuel	 			messageSend 			= new Message_Fuel();
@@ -306,6 +312,8 @@ public class LogIt
 			URLConnection 				servletConnection 		= serverURL.openConnection();
 			servletConnection.setDoOutput(true);
 			servletConnection.setUseCaches(false);
+			servletConnection.setConnectTimeout(1000);
+			servletConnection.setReadTimeout(1000);
 			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 			
 			Message_Action	 			messageSend 			= new Message_Action();
