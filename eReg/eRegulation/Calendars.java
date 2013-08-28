@@ -28,8 +28,8 @@ public class Calendars extends DefaultHandler
 			URLConnection 							servletConnection 				= serverURL.openConnection();
 			servletConnection.setDoOutput(true);
 			servletConnection.setUseCaches(false);
-			System.out.println("Connect Timeout is : " + servletConnection.getConnectTimeout());
-			System.out.println("Read    Timeout is : " + servletConnection.getReadTimeout());
+			servletConnection.setConnectTimeout(1000);
+			servletConnection.setReadTimeout(1000);
 			
 			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 			
