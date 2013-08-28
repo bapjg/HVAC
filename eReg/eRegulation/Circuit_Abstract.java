@@ -114,25 +114,24 @@ abstract class Circuit_Abstract
 
 		String day 												= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 
-		if (this.taskNext == null) // Is this a good idea. If its not null, could it be re-arranged
+		if (this.taskNext == null) // Is this a good idea. If its not null, could it be re-arranged Also need to handle midnight (put next day's fist action
 		{
-			CircuitTask 		circuitTaskNext					= null;
-			Long				circuitTaskTimeMin				= 999999999L;
-			
 			for (CircuitTask circuitTask : circuitTaskList) 
 			{
 				if (circuitTask.days.contains(day))
 				{
-					if ((circuitTask.state != 0 /* circuitTask.TASK_STATE_Scheduled */) & (true))
+					if ((circuitTask.state != 0 /* circuitTask.TASK_STATE_Scheduled or Running*/) & (true))
 					{
-						if (circuitTask.timeStart < circuitTaskTimeMin)
+						if (this.taskNext == null)
 						{
 							this.taskNext						= circuitTask;
-							circuitTaskTimeMin					= circuitTask.timeStart;
-							// this.taskNext.estTimeStart		= circuitTask.timeStart;              	To be readjusted later
-							// this.taskNext.setEstTimeStart() 							//             	To be readjusted later
-							// this.taskNext.estTimeEnd			= circuitTask.timeEnd;					To be readjusted later
-							// this.taskNext.setEstTimeEnd() 							//             	To be readjusted later
+						}
+						else
+						{
+							if (circuitTask.timeStart < this.taskNext.timeStart)
+							{
+								this.taskNext						= circuitTask;
+							}
 						}
 					}
 				}

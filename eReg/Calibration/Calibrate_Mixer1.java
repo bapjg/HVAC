@@ -38,21 +38,11 @@ public class Calibrate_Mixer1
 
 		//display.writeAtPosition(1, 0, "Reading params");
 
-		if (args.length > 0)
-		{
-			xmlParams 								= args[0] + "_eRegulator.xml";			
-			xmlCalendars 							= args[0] + "_eCalendars.xml";			
-		}
-		else
-		{
-			xmlParams 								= "eRegulator.xml";			
-			xmlCalendars 							= "eCalendars.xml";			
-		}
 
 	
 		try 
 		{
-			Global global 								= new Global(xmlParams);
+			Global global 								= new Global();
 		} 
 		catch (Exception e2) 
 		{
