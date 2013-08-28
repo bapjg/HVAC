@@ -6,8 +6,7 @@ public class TemperatureGradient
 	public Integer 	tempLow;
 	public Integer 	outsideHigh;
 	public Integer 	tempHigh;
-	public Integer 	rampUp;
-	public Integer 	rampDown;
+
 
 	// Coefficients in the form tempOut = a x tempOutside + b
 
