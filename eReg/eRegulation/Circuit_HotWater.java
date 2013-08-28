@@ -102,7 +102,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				
 			case CIRCUIT_STATE_Error:
 				
-				LogIt.error("Circuit", "sequencerWater", "uCIRCUIT_STATE_Error detected : " + state);	
+				LogIt.error("Circuit", "sequencerWater", "CIRCUIT_STATE_Error detected : " + state);	
 
 				break;
 				
