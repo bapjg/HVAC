@@ -83,17 +83,17 @@ public class Calendars extends DefaultHandler
 		// This part for file calendar
 		// If there's a network problem need to go for file based version
 		
-//		try 
-//		{
-//			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
-//			SAXParser 			saxParser 			= saxFactory.newSAXParser();
-//			
-//			saxParser.parse("eCalendars.xml", this);
-//		} 
-//		catch (Exception e) 
-//		{
-//			e.printStackTrace();
-//		} 		
+		try 
+		{
+			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
+			SAXParser 			saxParser 			= saxFactory.newSAXParser();
+			
+			saxParser.parse("eCalendars.xml", this);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 		
 	}
 	public void startElement(String uri, String localName, String tagName, Attributes attributes) throws SAXException 
     {
