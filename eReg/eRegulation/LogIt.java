@@ -52,7 +52,7 @@ public class LogIt
 			}
 	    	catch (ClassNotFoundException e) 
 	    	{
-	    		System.out.println("Error 1 received");
+	    		System.out.println("Logit." + messageType + " is : ClassNotFoundException " + e);
 			}
 			
 			if (messageReceive instanceof Message_Ack)
@@ -61,13 +61,13 @@ public class LogIt
 			}
 			else
 			{
-				System.out.println("Logit.info  is : Nack");
+				System.out.println("Logit.info is : Nack");
 			}
 		} 
 		catch (Exception e) 
 		{
-    		System.out.println("Info : httpSend Error" + e);
-			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
+    		System.out.println("Logit." + messageType + "  : httpSend Error" + e);
+			System.out.println(dateTimeStamp() + " : " + messageType  + " : " + className + "/" + methodName + " - " + message);
 		}
 		finally
 		{
