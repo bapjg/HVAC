@@ -31,13 +31,13 @@ public class LogIt
 		}
 		catch (InterruptedException e1)
 		{
-			System.out.println("LogIt.logMessage.tryLock failed");
+			System.out.println(dateTimeStamp() + " LogIt.logMessage.tryLock failed");
 			return;
 		}
 		
 		if (!lockResult)
 		{
-			System.out.println("LogIt.logMessage.tryLock timedout, owned by " + owner);
+			System.out.println(dateTimeStamp() + " LogIt.logMessage.tryLock timedout, owned by " + owner);
 			return;
 		}
 		
@@ -74,7 +74,7 @@ public class LogIt
 			}
 	    	catch (ClassNotFoundException e) 
 	    	{
-	    		System.out.println("Logit." + messageType + " is : ClassNotFoundException " + e);
+	    		System.out.println(dateTimeStamp() + " Logit." + messageType + " is : ClassNotFoundException " + e);
 			}
 			
 			if (messageReceive instanceof Message_Ack)
@@ -83,16 +83,16 @@ public class LogIt
 			}
 			else
 			{
-				System.out.println("Logit." + messageType + "  is : Nack");
+				System.out.println(dateTimeStamp() + " Logit." + messageType + "  is : Nack");
 			}
 		} 
 		catch (SocketTimeoutException ste)
 		{
-    		System.out.println("Logit." + messageType + " Timeout occured : " + ste);
+    		System.out.println(dateTimeStamp() + " Logit." + messageType + " Timeout occured : " + ste);
 		}
 		catch (Exception e) 
 		{
-    		System.out.println("Logit." + messageType + "  : httpSend Error" + e);
+    		System.out.println(dateTimeStamp() + " Logit." + messageType + "  : httpSend Error" + e);
 			System.out.println(dateTimeStamp() + " : " + messageType  + " : " + className + "/" + methodName + " - " + message);
 		}
 		finally
@@ -148,13 +148,13 @@ public class LogIt
 		}
 		catch (InterruptedException e1)
 		{
-			System.out.println("LogIt.logMessage.tryLock failed");
+			System.out.println(dateTimeStamp() + " LogIt.tempData.tryLock failed");
 			return;
 		}
 		
 		if (!lockResult)
 		{
-			System.out.println("LogIt.logMessage.tryLock timedout, owned by " + owner);
+			System.out.println(dateTimeStamp() + " LogIt.tempData.tryLock timedout, owned by " + owner);
 			return;
 		}
 
@@ -196,7 +196,7 @@ public class LogIt
 			}
 	    	catch (ClassNotFoundException e) 
 	    	{
-	    		System.out.println("Error 1 received");
+	    		System.out.println(dateTimeStamp() + " Error 1 received");
 			}
 			
 			if (messageReceive instanceof Message_Ack)
@@ -205,16 +205,16 @@ public class LogIt
 			}
 			else
 			{
-				System.out.println("Temp data  is : Nack");
+				System.out.println(dateTimeStamp() + " Temp data  is : Nack");
 			}
 		} 
 		catch (SocketTimeoutException ste)
 		{
-    		System.out.println("TempData : Timeout occured : " + ste);
+    		System.out.println(dateTimeStamp() + " TempData : Timeout occured : " + ste);
 		}
 		catch (Exception e) 
 		{
-    		System.out.println("TempData : httpSend Error" + e);
+    		System.out.println(dateTimeStamp() + " TempData : httpSend Error" + e);
 		}
 		finally
 		{
@@ -233,13 +233,13 @@ public class LogIt
 		}
 		catch (InterruptedException e1)
 		{
-			System.out.println("LogIt.logMessage.tryLock failed");
+			System.out.println(dateTimeStamp() + " LogIt.fuelData.tryLock failed");
 			return;
 		}
 		
 		if (!lockResult)
 		{
-			System.out.println("LogIt.logMessage.tryLock timedout, owned by " + owner);
+			System.out.println(dateTimeStamp() + " LogIt.fuelData.tryLock timedout, owned by " + owner);
 			return;
 		}
 
@@ -272,7 +272,7 @@ public class LogIt
 			}
 	    	catch (ClassNotFoundException e) 
 	    	{
-	    		System.out.println("Fuel Error 1 received");
+	    		System.out.println(dateTimeStamp() + " Fuel Error 1 received");
 			}
 			
 			if (messageReceive instanceof Message_Ack)
@@ -281,16 +281,16 @@ public class LogIt
 			}
 			else
 			{
-				System.out.println("Fuel data  is : Nack");
+				System.out.println(dateTimeStamp() + " Fuel data  is : Nack");
 			}
 		} 
 		catch (SocketTimeoutException ste)
 		{
-    		System.out.println("FuelData : Timeout occured : " + ste);
+    		System.out.println(dateTimeStamp() + " FuelData : Timeout occured : " + ste);
 		}
 		catch (Exception e) 
 		{
-    		System.out.println("FuelData : httpSend Error" + e);
+    		System.out.println(dateTimeStamp() + " FuelData : httpSend Error" + e);
 		}
 		finally
 		{
@@ -309,13 +309,13 @@ public class LogIt
 		}
 		catch (InterruptedException e1)
 		{
-			System.out.println("LogIt.logMessage.tryLock failed");
+			System.out.println(dateTimeStamp() + " LogIt.action.tryLock failed");
 			return;
 		}
 		
 		if (!lockResult)
 		{
-			System.out.println("LogIt.logMessage.tryLock timedout, owned by " + owner);
+			System.out.println(dateTimeStamp() + " LogIt.action.tryLock timedout, owned by " + owner);
 			return;
 		}
 
@@ -349,7 +349,7 @@ public class LogIt
 			}
 	    	catch (ClassNotFoundException e) 
 	    	{
-	    		System.out.println("Action Error 1 received");
+	    		System.out.println(dateTimeStamp() + " Action Error 1 received");
 			}
 			
 			if (messageReceive instanceof Message_Ack)
@@ -358,16 +358,16 @@ public class LogIt
 			}
 			else
 			{
-				System.out.println("Action data  is : Nack");
+				System.out.println(dateTimeStamp() + " Action data  is : Nack");
 			}
 		}
 		catch (SocketTimeoutException ste)
 		{
-    		System.out.println("Action : Timeout occured : " + ste);
+    		System.out.println(dateTimeStamp() + " Action : Timeout occured : " + ste);
 		}
 		catch (Exception e) 
 		{
-    		System.out.println("Action : httpSend Error" + e);
+    		System.out.println(dateTimeStamp() + " Action : httpSend Error" + e);
 		}
 		finally
 		{
