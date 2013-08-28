@@ -8,6 +8,7 @@ import java.net.URLConnection;
 import java.util.*;
 import java.text.*;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
 
 public class LogIt
 {
@@ -20,7 +21,23 @@ public class LogIt
 
 	public static void  logMessage(String messageType, String className, String methodName, String message)
 	{
-		Global.httpSemaphore.lock();
+		Boolean 						lockResult;
+		try
+		{
+			lockResult = Global.httpSemaphore.tryLock(2, TimeUnit.SECONDS);
+		}
+		catch (InterruptedException e1)
+		{
+			System.out.println("LogIt.logMessage.tryLock failed");
+			return;
+		}
+		
+		if (!lockResult)
+		{
+			System.out.println("LogIt.logMessage.tryLock timedout");
+			return;
+		}
+		
 		try 
 		{
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
@@ -113,7 +130,23 @@ public class LogIt
 	}
 	public static void tempData()
     {
-		Global.httpSemaphore.lock();
+		Boolean 						lockResult;
+		try
+		{
+			lockResult = Global.httpSemaphore.tryLock(2, TimeUnit.SECONDS);
+		}
+		catch (InterruptedException e1)
+		{
+			System.out.println("LogIt.logMessage.tryLock failed");
+			return;
+		}
+		
+		if (!lockResult)
+		{
+			System.out.println("LogIt.logMessage.tryLock timedout");
+			return;
+		}
+
 		try 
 		{
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
@@ -173,7 +206,24 @@ public class LogIt
     }
 	public static void fuelData(Long fuelConsumed)
     {
-		Global.httpSemaphore.lock();
+		//Global.httpSemaphore.lock();
+		Boolean 						lockResult;
+		try
+		{
+			lockResult = Global.httpSemaphore.tryLock(2, TimeUnit.SECONDS);
+		}
+		catch (InterruptedException e1)
+		{
+			System.out.println("LogIt.logMessage.tryLock failed");
+			return;
+		}
+		
+		if (!lockResult)
+		{
+			System.out.println("LogIt.logMessage.tryLock timedout");
+			return;
+		}
+
 		try 
 		{
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
@@ -224,7 +274,24 @@ public class LogIt
     }
 	public static void action(String device, String action)
     {
-		Global.httpSemaphore.lock();
+		//Global.httpSemaphore.lock();
+		Boolean 						lockResult;
+		try
+		{
+			lockResult = Global.httpSemaphore.tryLock(2, TimeUnit.SECONDS);
+		}
+		catch (InterruptedException e1)
+		{
+			System.out.println("LogIt.logMessage.tryLock failed");
+			return;
+		}
+		
+		if (!lockResult)
+		{
+			System.out.println("LogIt.logMessage.tryLock timedout");
+			return;
+		}
+
 		try 
 		{
 			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
