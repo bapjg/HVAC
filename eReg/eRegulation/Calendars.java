@@ -72,7 +72,7 @@ public class Calendars extends DefaultHandler
 			SAXParser 			saxParser 			= saxFactory.newSAXParser();
 			
 			Global.calendarsDateTime				= xmlCalendarString.dateTime;
-			saxParser.parse(new InputSource(new StringReader(xmlCalendarString.calendars)), this);
+//			saxParser.parse(new InputSource(new StringReader(xmlCalendarString.calendars)), this);
 		} 
 		catch (Exception e) 
 		{
