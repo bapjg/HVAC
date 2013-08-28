@@ -74,9 +74,9 @@ public class Global extends DefaultHandler
 	public static 	ADC								burnerVoltages;	
 	public static 	Buttons							buttons;	
 	
-	private 		Circuit_Abstract 				circuit;		
+	private 		Circuit_Abstract 				circuit;			// Used during XMLparsing		
 
-	public static 	String							calendarsDateTime;	
+	public static 	String							calendarsDateTime;	// Used to dateTime the Calendar version in use
 
 	public Global() throws IOException, SAXException, ParserConfigurationException
 	{
@@ -286,7 +286,7 @@ public class Global extends DefaultHandler
 		// Ensure that burnerRelay is off
 		// Evacutae heat (over temperature by any means) hot water is usefull even in summer
 		
-		System.out.println("Global/purnerPanic called : will stop all" + reason);
+		System.out.println("Global/burnerPanic called : will stop all" + reason);
 		Global.burnerPower.off();
 	}
 }

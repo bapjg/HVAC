@@ -3,6 +3,7 @@ package eRegulation;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.*;
@@ -82,9 +83,13 @@ public class LogIt
 			}
 			else
 			{
-				System.out.println("Logit.info is : Nack");
+				System.out.println("Logit." + messageType + "  is : Nack");
 			}
 		} 
+		catch (SocketTimeoutException ste)
+		{
+    		System.out.println("Logit." + messageType + " Timeout occured : " + ste);
+		}
 		catch (Exception e) 
 		{
     		System.out.println("Logit." + messageType + "  : httpSend Error" + e);
@@ -203,6 +208,10 @@ public class LogIt
 				System.out.println("Temp data  is : Nack");
 			}
 		} 
+		catch (SocketTimeoutException ste)
+		{
+    		System.out.println("TempData : Timeout occured : " + ste);
+		}
 		catch (Exception e) 
 		{
     		System.out.println("TempData : httpSend Error" + e);
@@ -275,6 +284,10 @@ public class LogIt
 				System.out.println("Fuel data  is : Nack");
 			}
 		} 
+		catch (SocketTimeoutException ste)
+		{
+    		System.out.println("FuelData : Timeout occured : " + ste);
+		}
 		catch (Exception e) 
 		{
     		System.out.println("FuelData : httpSend Error" + e);
@@ -347,7 +360,11 @@ public class LogIt
 			{
 				System.out.println("Action data  is : Nack");
 			}
-		} 
+		}
+		catch (SocketTimeoutException ste)
+		{
+    		System.out.println("Action : Timeout occured : " + ste);
+		}
 		catch (Exception e) 
 		{
     		System.out.println("Action : httpSend Error" + e);
