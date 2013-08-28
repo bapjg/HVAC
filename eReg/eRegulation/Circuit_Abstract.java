@@ -92,29 +92,11 @@ abstract class Circuit_Abstract
 		LogIt.error("Circuit","sequencer", "Overloaded method not called");
 		// This method is over ridden in subclasses
 	}
-	public void scheduleTasks()
-	/*
-	 *  This sets up "circuitTask" to be the task selected to run based on date/time
-	 *  If the circuit has no task programmed, "circuitTask" is null (not true, but should it be true)
-	 *  
-	 *  Circuit_Abstract has several implmentations (HW/Radiator/Mixer
-	 *  
-	 *  Circuit_Abstract has a list of tasks (circuitTask)
-	 *  
-	 *  
-	 *  
-	 *  
-	 */
+	public void scheduleTaskNext()
 	{
-		//--------------
-		// New
-		// Get next circuit task to be performed today
-		//     ----
-		//
-
 		String day 												= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 
-		if (this.taskNext == null) // Is this a good idea. If its not null, could it be re-arranged Also need to handle midnight (put next day's fist action
+		if (this.taskNext == null) // Is this a good idea. If its not null, could it be re-arranged 
 		{
 			for (CircuitTask circuitTask : circuitTaskList) 
 			{
@@ -130,18 +112,74 @@ abstract class Circuit_Abstract
 						{
 							if (circuitTask.timeStart < this.taskNext.timeStart)
 							{
-								this.taskNext						= circuitTask;
+								this.taskNext					= circuitTask;
 							}
 						}
 					}
 				}
 			}
 		}
+		if (this.taskNext == null) // If it still is null, then we cn do the same over again
+		{
+			// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+			// Must Convert to int, add 1 modulo 7
+			// Convert back to string
+			String tomorrow 									= Global.getDayOfWeek() + 1; // Rubbish as string
+			// Do the same as above, but get the first activity after midnight
+		}
+	}
+	public void scheduleTasks()
+	/*
+	 *  This sets up "circuitTask" to be the task selected to run based on date/time
+	 *  If the circuit has no task programmed, "circuitTask" is null (not true, but should it be true)
+	 *  
+	 *  Circuit_Abstract has several implmentations (HW/Radiator/Mixer
+	 *  
+	 *  Circuit_Abstract has a list of tasks (circuitTask)
+	 *  
+	 *  
+	 *  
+	 *  
+	 */
+	{
+		// First calculate time to start next task based on thermal performance.
+		// This will be circuit dependant
+		// Hence timeToStart = timeStart - thrermalrampup
+		/*
+		 if (now > timeStart - thrermalrampup)
+		 {
+		 	if (this.taskActive != null)
+		 	{
+		 	// mAY NEED TO STOP THE TASK OR DO SOMETHING
+		 	}
+		 	
+		 	this.taskActive = this.taskNext;
+		 	this.taskNext = null;
+		 }
+		 
+		 Set the task state to rampup
+		 HW = Wait to get boiler temp > HW temp before pumpon
+		      Determine the max/min boiler temp required
+		 Floor = Start the mixer and set floor temp at 40°
+		      Determine the max/min boiler temp required
+		 Radiator = Dont know what to do
+		      Determine the max/min boiler temp required
+		 
+		 
+		 End of task can be due to
+		      New task with rampup requirements stepping in
+		      targetTemp reached (HW)
+		      timeEnd reached
+		      
+	     At task end allow for optimising
+	     		eg HW carrying on
+		 * 
+		 * 
+		 */
 		
-		// New
-		//--------------
-
-
+		String day 												= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+		
+		
 		if (taskActive != null)
 		{
 			//There is an active task. No need to schedule anything until it has finished
