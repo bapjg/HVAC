@@ -23,6 +23,12 @@ abstract class Circuit_Abstract
 	public static final int			CIRCUIT_STATE_Optimising 	= 4;
 	public static final int			CIRCUIT_STATE_Error	 		= -1;
 
+	public static final int			CIRCUIT_STATE_Suspended		= -1;
+	public static final int			CIRCUIT_STATE_RampUp 		= -1;
+
+	
+	
+	
 
 	public Mixer					mixer						= null;
 	public TemperatureGradient 		temperatureGradient			= null;				//This will be overridden
@@ -119,7 +125,7 @@ abstract class Circuit_Abstract
 				}
 			}
 		}
-		if (this.taskNext == null) // If it still is null, then we cn do the same over again
+		if (this.taskNext == null) // If it still is null, then we can do the same over again on next DAY
 		{
 			// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 			// Must Convert to int, add 1 modulo 7

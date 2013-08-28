@@ -18,15 +18,18 @@ public class CircuitTask
 	public static final int TASK_STATE_Error	 			= -1;
 	public static final int TASK_STATE_NotToday 			= -2;
 
+	public static final int TASK_STATE_RampUp   			= -2;
+	public static final int TASK_STATE_RampDown   			= -2;
+
 	
 	public CircuitTask
 		(
-		String 			timeStart, 
-		String 			timeEnd,  
-		String 			tempObjective, 
-		String			stopOnObjective,
-		String			days,
-		Boolean			temporary
+			String 			timeStart, 
+			String 			timeEnd,  
+			String 			tempObjective, 
+			String			stopOnObjective,
+			String			days,
+			Boolean			temporary
 		)
 	{
 		this.state											= TASK_STATE_WaitingToStart;
@@ -47,14 +50,14 @@ public class CircuitTask
 		
 		this.temporary 										= temporary;
 	}
-	public CircuitTask
+	public CircuitTask // This is terrible
 		(
-		Long 			timeStart, 
-		Long 			timeEnd,  
-		Integer			tempObjective, 
-		Boolean			stopOnObjective,
-		String			days,
-		Boolean			temporary
+			Long 			timeStart, 
+			Long 			timeEnd,  
+			Integer			tempObjective, 
+			Boolean			stopOnObjective,
+			String			days,
+			Boolean			temporary
 		)
 	{
 		this.state											= TASK_STATE_WaitingToStart;
