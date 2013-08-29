@@ -109,7 +109,7 @@ public class Calendars extends DefaultHandler
 		    }
 			catch(IOException ex)
 			{
-				System.out.println("I/O error on writeObject");
+				System.out.println("I/O error on writeObject : " + ex);
 			}	
 		    finally
 		    {
@@ -118,7 +118,7 @@ public class Calendars extends DefaultHandler
 		}  
 		catch(IOException ex)
 		{
-			System.out.println("I/O error on open");
+			System.out.println("I/O error on open : " + ex);
 		}	
 
 	}
