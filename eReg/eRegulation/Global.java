@@ -10,6 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.*;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Global extends DefaultHandler
@@ -288,5 +289,25 @@ public class Global extends DefaultHandler
 		
 		System.out.println("Global/burnerPanic called : will stop all" + reason);
 		Global.burnerPower.off();
+	}
+	public static void semaphoreLock(ReentrantLock semaphore)
+	{
+		Boolean 						lockResult;
+		try
+		{
+			lockResult = semaphore.tryLock(2, TimeUnit.SECONDS);
+		}
+		catch (InterruptedException e1)
+		{
+			System.out.println(LogIt.dateTimeStamp() + " TryLock failed");
+			return;
+		}
+		
+		if (!lockResult)
+		{
+			System.out.println(LogIt.dateTimeStamp() + " TryLock timed out ");
+			return;
+		}
+
 	}
 }

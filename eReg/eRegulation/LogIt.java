@@ -138,7 +138,7 @@ public class LogIt
 			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
 		}
 	}
-	public static void tempData()
+	public static void tempData_OLD()
     {
 		Boolean 						lockResult;
 		try
@@ -221,6 +221,54 @@ public class LogIt
 			Global.httpSemaphore.unlock();			
 			owner = "";
 		}
+    }
+	public static void tempData()
+    {
+		Boolean 						lockResult;
+		try
+		{
+			lockResult = Global.httpSemaphore.tryLock(2, TimeUnit.SECONDS);
+			owner = Thread.currentThread().getName();
+		}
+		catch (InterruptedException e1)
+		{
+			System.out.println(dateTimeStamp() + " LogIt.tempData.tryLock failed");
+			return;
+		}
+		
+		if (!lockResult)
+		{
+			System.out.println(dateTimeStamp() + " LogIt.tempData.tryLock timedout, owned by " + owner);
+			return;
+		}
+
+		LogIt_HTTP	<Message_Temperatures>	httpRequest				= new LogIt_HTTP <Message_Temperatures> ("Monitor");
+		
+		Message_Temperatures 				messageSend 			= new Message_Temperatures();
+		messageSend.dateTime 										= System.currentTimeMillis();
+		messageSend.tempHotWater 									= Global.thermoHotWater.reading; 
+		messageSend.tempBoiler 										= Global.thermoBoiler.reading;
+		messageSend.tempBoilerIn 									= Global.thermoBoilerIn.reading;
+		messageSend.tempFloorOut 									= Global.thermoFloorOut.reading;
+		messageSend.tempFloorCold 									= Global.thermoFloorCold.reading;
+		messageSend.tempFloorHot 									= Global.thermoFloorHot.reading;
+		messageSend.tempRadiatorOut 								= Global.thermoRadiatorOut.reading;
+		messageSend.tempRadiatorIn 									= Global.thermoRadiatorIn.reading;
+		messageSend.tempOutside 									= Global.thermoOutside.reading;
+		messageSend.tempLivingRoom 									= Global.thermoLivingRoom.reading;
+			
+		Message_Abstract 					messageReceive 			= httpRequest.sendData(messageSend);
+
+		if (messageReceive instanceof Message_Ack)
+		{
+		}
+		else
+		{
+			System.out.println(dateTimeStamp() + " Temp data  is : Nack");
+		}
+
+		Global.httpSemaphore.unlock();			
+		owner = "";
     }
 	public static void fuelData(Long fuelConsumed)
     {
