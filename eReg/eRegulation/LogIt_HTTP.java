@@ -47,7 +47,7 @@ public class LogIt_HTTP <SendType>
 	{
 		Message_Abstract				messageReceive		= null;
 
-		System.out.println(""--F");
+		System.out.println("--F");
 		System.out.println(messageSend.dateTime);
 		System.out.println(messageSend.tempHotWater);
 		System.out.println(messageSend.tempBoiler);
@@ -59,7 +59,7 @@ public class LogIt_HTTP <SendType>
 		System.out.println(messageSend.tempRadiatorIn);
 		System.out.println(messageSend.tempOutside);
 		System.out.println(messageSend.tempLivingRoom);
-		System.out.println(""--L");		
+		System.out.println("--L");		
 		try
 		{
 			ObjectOutputStream 			outputToServlet;
