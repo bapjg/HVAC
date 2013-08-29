@@ -124,14 +124,12 @@ public class LogIt
 		}
 
 		HTTP_Request <Message_Fuel>				httpRequest			= new HTTP_Request <Message_Fuel> ("Monitor");
-
 			
 		Message_Fuel	 						messageSend 		= new Message_Fuel();
 		messageSend.dateTime 										= System.currentTimeMillis();
 		messageSend.fuelConsumed 									= fuelConsumed;
 			
 		Message_Abstract 						messageReceive	 	= httpRequest.sendData(messageSend);
-
 			
 		if (!(messageReceive instanceof Message_Ack))
 		{
@@ -157,7 +155,6 @@ public class LogIt
 		messageSend.action 											= action;
 			
 		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
-
 			
 		if (!(messageReceive instanceof Message_Ack))
 		{
