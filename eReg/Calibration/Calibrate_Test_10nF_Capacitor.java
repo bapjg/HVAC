@@ -1,6 +1,7 @@
 package Calibration;
 
 import eRegulation.*;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -80,9 +81,9 @@ public class Calibrate_Test_10nF_Capacitor
 		Global.thermoHotWater						= Global.thermometers.fetchThermometer("Hot_Water");
 
 		Global.burnerPower	 						= Global.relays.fetchRelay("Burner");
-		Global.pumpWater 							= Global.relays.fetchRelay("Pump_Water");
-		Global.pumpFloor	 						= Global.relays.fetchRelay("Pump_Floor");
-		Global.pumpRadiator 						= Global.relays.fetchRelay("Pump_Radiator");
+		Global.pumpWater 							= Global.pumps.fetchPump("Pump_Water");
+		Global.pumpFloor	 						= Global.pumps.fetchPump("Pump_Floor");
+		Global.pumpRadiator 						= Global.pumps.fetchPump("Pump_Radiator");
 		Global.mixerUp		 						= Global.relays.fetchRelay("Mixer_Up");
 		Global.mixerDown	 						= Global.relays.fetchRelay("Mixer_Down");
 

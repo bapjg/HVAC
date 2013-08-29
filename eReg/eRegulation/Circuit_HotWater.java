@@ -140,19 +140,11 @@ public class Circuit_HotWater extends Circuit_Abstract
 				
 				if (boilerHotEnough)
 				{
-					if (!Global.pumpWater.isOn())
-					{
-						LogIt.action("PumpWater", "On");
-						Global.pumpWater.on();
-					}
+					Global.pumpWater.on();
 				}
 				else
 				{
-					if (Global.pumpWater.isOn())
-					{
-						LogIt.action("PumpWater", "Off");
-						Global.pumpWater.off();
-					}
+					Global.pumpWater.off();
 				}
 				
 				if (tempObjectiveAttained)
@@ -198,30 +190,18 @@ public class Circuit_HotWater extends Circuit_Abstract
 					}
 					if (boilerHotEnough)
 					{
-						if (!Global.pumpWater.isOn())
-						{
-							LogIt.action("PumpWater", "On");
-							Global.pumpWater.on();
-						}
+						Global.pumpWater.on();
 					}
 					else
 					{
-						if (Global.pumpWater.isOn())
-						{
-							LogIt.action("PumpWater", "Off");
-							Global.pumpWater.off();
-						}
+						Global.pumpWater.off();
 					}
 				}
 			}
 			
 			if (nowStop)
 			{
-				if (Global.pumpWater.isOn())
-				{
-					LogIt.action("PumpWater", "Off");
-					Global.pumpWater.off();
-				}
+				Global.pumpWater.off();
 				this.taskActive				= null;
 			}
 		}

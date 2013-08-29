@@ -83,11 +83,11 @@
 
 	<Pumps type="Collection">
 
-		<Pump type="Object" name="Pump_Water" address="3" friendlyName="Pompe ECS">
+		<Pump type="Object" name="Pump_Water">
 		</Pump>
-		<Pump type="Object" name="Pump_Radiator" address="4" friendlyName="Pompe Plancher">
+		<Pump type="Object" name="Pump_Radiator">
 		</Pump>
-		<Pump type="Object" name="Pump_Floor" address="5" friendlyName="Pompe Radiateurs">
+		<Pump type="Object" name="Pump_Floor">
 		</Pump>
 
 	</Pumps>

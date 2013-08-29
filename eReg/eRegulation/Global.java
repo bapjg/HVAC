@@ -53,9 +53,9 @@ public class Global extends DefaultHandler
 	
 	public static 	Relays	 						relays;
 	public static 	Relay							burnerPower;
-	public static 	Relay							pumpWater;
-	public static 	Relay							pumpFloor;
-	public static 	Relay							pumpRadiator;
+//	public static 	Relay							pumpWater;
+//	public static 	Relay							pumpFloor;
+//	public static 	Relay							pumpRadiator;
 	public static 	Relay							mixerUp;
 	public static 	Relay							mixerDown;
 	
@@ -63,6 +63,11 @@ public class Global extends DefaultHandler
 	public static 	Circuit_HotWater				circuitHotWater;
 	public static 	Circuit_Gradient				circuitGradient;
 	public static 	Circuit_Mixer					circuitFloor;
+	
+	public static	Pumps							pumps;
+	public static 	Pump							pumpWater;
+	public static 	Pump							pumpFloor;
+	public static 	Pump							pumpRadiator;
 
 	public static 	Mixer							mixer;
 
@@ -121,6 +126,10 @@ public class Global extends DefaultHandler
 				{
 					Global.circuits 					= new Circuits(); 
 				}
+				else if (tagName.equalsIgnoreCase("Pumps"))
+				{
+					Global.pumps 					= new Pumps(); 
+				}
 			}
 			else if (attributes.getValue("type").equalsIgnoreCase("Object"))
 			{
@@ -143,7 +152,6 @@ public class Global extends DefaultHandler
 
 					Global.circuits.add(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
 					this.circuit 						= Global.circuits.fetchcircuit(name);
-					// LogIt.info("Global", "startElement", "Adding circuit : " + name);
 				}	
 				else if (tagName.equalsIgnoreCase("tempGradient"))
 				{
@@ -173,6 +181,12 @@ public class Global extends DefaultHandler
 					String gainI						= attributes.getValue("gainI");
 
 					this.circuit.mixer					= new Mixer(name, swingTime, lagTime, gainP, timeD, timeI, gainI);
+				}
+				else if (tagName.equalsIgnoreCase("Pump"))
+				{
+					String name 						= attributes.getValue("name");
+
+					Global.pumps.addFromXML(name);
 				}
 				else if (tagName.equalsIgnoreCase("Params"))
 				{
