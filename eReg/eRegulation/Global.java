@@ -27,7 +27,7 @@ public class Global extends DefaultHandler
 	//
 	// This ensures that http requests are made ThreadSafe
 	//
-	public static 	ReentrantLock 					httpSemaphore 		= new ReentrantLock();
+	public static 	Semaphore 						httpSemaphore 		= new Semaphore("http", true);
 	//
 	//===================================================================
 	

@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 public class LogIt
 {
 	public static Boolean 				logDisplay 				= true;
-	public static String 				owner	 				= "";
 	
 	public LogIt()
 	{
@@ -23,21 +22,9 @@ public class LogIt
 
 	public static void  logMessage(String messageType, String className, String methodName, String message)
 	{
-		Boolean 						lockResult;
-		try
+		if (!Global.httpSemaphore.semaphoreLock("LogIt.logMessage"))
 		{
-			lockResult = Global.httpSemaphore.tryLock(2, TimeUnit.SECONDS);
-			owner = Thread.currentThread().getName();
-		}
-		catch (InterruptedException e1)
-		{
-			System.out.println(dateTimeStamp() + " LogIt.logMessage.tryLock failed");
-			return;
-		}
-		
-		if (!lockResult)
-		{
-			System.out.println(dateTimeStamp() + " LogIt.logMessage.tryLock timedout, owned by " + owner);
+			System.out.println(dateTimeStamp() + " LogIt.logMessage Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
 		
@@ -97,8 +84,7 @@ public class LogIt
 		}
 		finally
 		{
-			Global.httpSemaphore.unlock();			
-			owner = "";
+			Global.httpSemaphore.semaphoreUnLock();			
 		}
 	}
 	
@@ -140,21 +126,9 @@ public class LogIt
 	}
 	public static void tempData_OLD()
     {
-		Boolean 						lockResult;
-		try
+		if (!Global.httpSemaphore.semaphoreLock("LogIt.tempData_OLD"))
 		{
-			lockResult = Global.httpSemaphore.tryLock(2, TimeUnit.SECONDS);
-			owner = Thread.currentThread().getName();
-		}
-		catch (InterruptedException e1)
-		{
-			System.out.println(dateTimeStamp() + " LogIt.tempData.tryLock failed");
-			return;
-		}
-		
-		if (!lockResult)
-		{
-			System.out.println(dateTimeStamp() + " LogIt.tempData.tryLock timedout, owned by " + owner);
+			System.out.println(dateTimeStamp() + " LogIt.tempData_OLD Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
 
@@ -218,27 +192,14 @@ public class LogIt
 		}
 		finally
 		{
-			Global.httpSemaphore.unlock();			
-			owner = "";
+			Global.httpSemaphore.semaphoreUnLock();			
 		}
     }
 	public static void tempData()
     {
-		Boolean 						lockResult;
-		try
+		if (!Global.httpSemaphore.semaphoreLock("LogIt.tempData"))
 		{
-			lockResult = Global.httpSemaphore.tryLock(2, TimeUnit.SECONDS);
-			owner = Thread.currentThread().getName();
-		}
-		catch (InterruptedException e1)
-		{
-			System.out.println(dateTimeStamp() + " LogIt.tempData.tryLock failed");
-			return;
-		}
-		
-		if (!lockResult)
-		{
-			System.out.println(dateTimeStamp() + " LogIt.tempData.tryLock timedout, owned by " + owner);
+			System.out.println(dateTimeStamp() + " LogIt.tempData Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
 
@@ -267,27 +228,13 @@ public class LogIt
 			System.out.println(dateTimeStamp() + " Temp data  is : Nack");
 		}
 
-		Global.httpSemaphore.unlock();			
-		owner = "";
+		Global.httpSemaphore.semaphoreUnLock();			
     }
 	public static void fuelData(Long fuelConsumed)
     {
-		//Global.httpSemaphore.lock();
-		Boolean 						lockResult;
-		try
+		if (!Global.httpSemaphore.semaphoreLock("LogIt.fuelData"))
 		{
-			lockResult = Global.httpSemaphore.tryLock(2, TimeUnit.SECONDS);
-			owner = Thread.currentThread().getName();
-		}
-		catch (InterruptedException e1)
-		{
-			System.out.println(dateTimeStamp() + " LogIt.fuelData.tryLock failed");
-			return;
-		}
-		
-		if (!lockResult)
-		{
-			System.out.println(dateTimeStamp() + " LogIt.fuelData.tryLock timedout, owned by " + owner);
+			System.out.println(dateTimeStamp() + " LogIt.fuelData Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
 
@@ -342,28 +289,15 @@ public class LogIt
 		}
 		finally
 		{
-			Global.httpSemaphore.unlock();			
-			owner = "";
+			Global.httpSemaphore.semaphoreUnLock();			
 		}
     }
 	public static void action(String device, String action)
     {
 		//Global.httpSemaphore.lock();
-		Boolean 						lockResult;
-		try
+		if (!Global.httpSemaphore.semaphoreLock("LogIt.action"))
 		{
-			lockResult = Global.httpSemaphore.tryLock(2, TimeUnit.SECONDS);
-			owner = Thread.currentThread().getName();
-		}
-		catch (InterruptedException e1)
-		{
-			System.out.println(dateTimeStamp() + " LogIt.action.tryLock failed");
-			return;
-		}
-		
-		if (!lockResult)
-		{
-			System.out.println(dateTimeStamp() + " LogIt.action.tryLock timedout, owned by " + owner);
+			System.out.println(dateTimeStamp() + " LogIt.action Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
 
@@ -419,8 +353,7 @@ public class LogIt
 		}
 		finally
 		{
-			Global.httpSemaphore.unlock();
-			owner = "";
+			Global.httpSemaphore.semaphoreUnLock();			
 		}
     }
     public static String  dateTimeStamp()
