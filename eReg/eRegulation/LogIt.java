@@ -257,9 +257,7 @@ public class LogIt
 		messageSend.tempOutside 									= Global.thermoOutside.reading;
 		messageSend.tempLivingRoom 									= Global.thermoLivingRoom.reading;
 			
-		System.out.println("--Start");
 		Message_Abstract 					messageReceive 			= httpRequest.sendData(messageSend);
-		System.out.println("--Stop");
 		
 		if (messageReceive instanceof Message_Ack)
 		{
