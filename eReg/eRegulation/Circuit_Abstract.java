@@ -108,8 +108,10 @@ abstract class Circuit_Abstract
 			{
 				if (circuitTask.days.contains(day))
 				{
-					if ((circuitTask.state != 0 /* circuitTask.TASK_STATE_Scheduled or Running*/) & (true))
+					if (circuitTask.timeStart > Global.getTimeNowSinceMidnight())
 					{
+						// This task has yet to be performed
+						// Should we not check that it is either running or already scheduled
 						if (this.taskNext == null)
 						{
 							this.taskNext						= circuitTask;
@@ -132,6 +134,48 @@ abstract class Circuit_Abstract
 			// Convert back to string
 			String tomorrow 									= Global.getDayOfWeek() + 1; // Rubbish as string
 			// Do the same as above, but get the first activity after midnight
+		}
+	}
+	public void scheduleTaskActive()
+	{
+		if (this.taskActive != null)
+		{
+			//There is an active task. See if time is up
+			// Note that this could also be done in circuit sequencer
+			//    stop on object / stop on time
+			// Also need to handle case of Optimising
+			
+			if (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd)
+			{
+				// Note that task may be optimising, so we should wait longer
+				// TODO
+				// TOODO
+				//
+				// I thinh that removing taskActive should be done in sequencer
+				// ==============================================================
+				//
+				this.taskActive.state							= CircuitTask.TASK_STATE_Completed;
+				this.taskActive									= null;				// 
+			}
+//			if (this.taskActive.stopOnObjective && objectiveAttained)
+//			{
+//				this.taskActive.state							= CircuitTask.TASK_STATE_Completed;
+//				this.taskActive									= null;				// 
+//			}
+		}
+		if (this.taskNext != null)
+		{
+			//There is a waiting task.
+			if (Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - 0L) //include rampup time
+			{
+				if (this.taskActive != null)
+				{
+					this.taskActive.state						= CircuitTask.TASK_STATE_Completed;
+				}
+				this.taskActive									= this.taskNext;
+				this.taskNext									= null;
+				this.taskActive.state							= CircuitTask.TASK_STATE_Started;
+			}
 		}
 	}
 	public void scheduleTasks()

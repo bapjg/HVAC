@@ -33,7 +33,6 @@ public class Circuits implements java.io.Serializable
 			Circuit_Mixer circuitItem = new Circuit_Mixer(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
 			circuitList.add(circuitItem);
 		}
-//		<T>circuitItem = new Circuit<T>(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
 	}
 	public Boolean isSingleActiveCircuit()
 	{
