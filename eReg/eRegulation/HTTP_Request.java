@@ -8,12 +8,12 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public class LogIt_HTTP <SendType>
+public class HTTP_Request <SendType>
 {
 	public URL						serverURL;
 	public URLConnection			servletConnection;
 	
-	public LogIt_HTTP(String servlet)
+	public HTTP_Request(String servlet)
 	{
 		serverURL							= null;
 		servletConnection					= null;

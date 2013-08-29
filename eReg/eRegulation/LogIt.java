@@ -13,11 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 public class LogIt
 {
-	public static Boolean 				logDisplay 				= true;
+	public static Boolean 						logDisplay 			= true;
 	
 	public LogIt()
 	{
-		logDisplay												= true;
+		logDisplay													= true;
 	}
 
 	public static void  logMessage(String messageType, String className, String methodName, String message)
@@ -28,16 +28,16 @@ public class LogIt
 			return;
 		}
 
-		LogIt_HTTP	<Message_Report>		httpRequest				= new LogIt_HTTP <Message_Report> ("Monitor");
+		HTTP_Request	<Message_Report>		httpRequest			= new HTTP_Request <Message_Report> ("Monitor");
 		
-		Message_Report	 					messageSend 			= new Message_Report();
+		Message_Report	 						messageSend 		= new Message_Report();
 		messageSend.dateTime 										= System.currentTimeMillis();
 		messageSend.reportType 										= messageType;
 		messageSend.className 										= className;
 		messageSend.methodName 										= methodName;
 		messageSend.reportText 										= message;
 			
-		Message_Abstract 					messageReceive 			= httpRequest.sendData(messageSend);
+		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Message_Ack))
 		{
@@ -91,9 +91,9 @@ public class LogIt
 			return;
 		}
 
-		LogIt_HTTP	<Message_Temperatures>	httpRequest				= new LogIt_HTTP <Message_Temperatures> ("Monitor");
+		HTTP_Request <Message_Temperatures>		httpRequest			= new HTTP_Request <Message_Temperatures> ("Monitor");
 		
-		Message_Temperatures 				messageSend 			= new Message_Temperatures();
+		Message_Temperatures 					messageSend 		= new Message_Temperatures();
 		messageSend.dateTime 										= System.currentTimeMillis();
 		messageSend.tempHotWater 									= Global.thermoHotWater.reading; 
 		messageSend.tempBoiler 										= Global.thermoBoiler.reading;
@@ -106,7 +106,7 @@ public class LogIt
 		messageSend.tempOutside 									= Global.thermoOutside.reading;
 		messageSend.tempLivingRoom 									= Global.thermoLivingRoom.reading;
 			
-		Message_Abstract 					messageReceive 			= httpRequest.sendData(messageSend);
+		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 		
 		if (!(messageReceive instanceof Message_Ack))
 		{
@@ -123,14 +123,14 @@ public class LogIt
 			return;
 		}
 
-		LogIt_HTTP	<Message_Fuel>	httpRequest					= new LogIt_HTTP <Message_Fuel> ("Monitor");
+		HTTP_Request <Message_Fuel>				httpRequest			= new HTTP_Request <Message_Fuel> ("Monitor");
 
 			
-		Message_Fuel	 			messageSend 				= new Message_Fuel();
-		messageSend.dateTime 									= System.currentTimeMillis();
-		messageSend.fuelConsumed 								= fuelConsumed;
+		Message_Fuel	 						messageSend 		= new Message_Fuel();
+		messageSend.dateTime 										= System.currentTimeMillis();
+		messageSend.fuelConsumed 									= fuelConsumed;
 			
-		Message_Abstract 					messageReceive 			= httpRequest.sendData(messageSend);
+		Message_Abstract 						messageReceive	 	= httpRequest.sendData(messageSend);
 
 			
 		if (!(messageReceive instanceof Message_Ack))
@@ -149,14 +149,14 @@ public class LogIt
 			return;
 		}
 
-		LogIt_HTTP	<Message_Action>	httpRequest				= new LogIt_HTTP <Message_Action> ("Monitor");
+		HTTP_Request <Message_Action>			httpRequest			= new HTTP_Request <Message_Action> ("Monitor");
 
-		Message_Action	 				messageSend 			= new Message_Action();
-		messageSend.dateTime 									= System.currentTimeMillis();
-		messageSend.device 										= device;
-		messageSend.action 										= action;
+		Message_Action	 						messageSend 		= new Message_Action();
+		messageSend.dateTime 										= System.currentTimeMillis();
+		messageSend.device 											= device;
+		messageSend.action 											= action;
 			
-		Message_Abstract 				messageReceive 			= httpRequest.sendData(messageSend);
+		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 
 			
 		if (!(messageReceive instanceof Message_Ack))
