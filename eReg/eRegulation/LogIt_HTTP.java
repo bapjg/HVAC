@@ -48,27 +48,33 @@ public class LogIt_HTTP <SendType>
 		
 		try 
 		{
-			ObjectOutputStream 			outputToServlet;
-			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
-			outputToServlet.writeObject(messageSend);
-			outputToServlet.flush();
-			outputToServlet.close();
-			
-			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
-			
 			try
 			{
+				ObjectOutputStream 			outputToServlet;
+				outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
+				outputToServlet.writeObject(messageSend);
+				outputToServlet.flush();
+				outputToServlet.close();
+			}
+			catch (SocketTimeoutException eTimeOut)
+			{
+	    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP TimeOut on write : " + eTimeOut);
+			}
+
+			try
+			{
+				ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
 				messageReceive 									= (Message_Abstract) response.readObject();
 			}
 	    	catch (ClassNotFoundException eClassNotFound) 
 	    	{
 	    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP ClassNotFound : " + eClassNotFound);
 			}
+			catch (SocketTimeoutException eTimeOut)
+			{
+	    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP TimeOut on read  : " + eTimeOut);
+			}
 		} 
-		catch (SocketTimeoutException eTimeOut)
-		{
-    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP TimeOut : " + eTimeOut);
-		}
 		catch (Exception eOther) 
 		{
     		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Other :" + eOther);
