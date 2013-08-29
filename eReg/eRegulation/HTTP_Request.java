@@ -44,7 +44,6 @@ public class HTTP_Request <SendType>
 	}
 	public Message_Abstract sendData(SendType messageSend)
 	{
-		int xx = 32;
 		Message_Abstract				messageReceive		= null;
 
 		try
