@@ -44,6 +44,8 @@ public class LogIt_HTTP <SendType>
 	}
 	public Message_Abstract sendData(SendType messageSend)
 	{
+		System.out.println(messageSend);
+		
 		Message_Abstract				messageReceive			= null;
 		
 		try 
