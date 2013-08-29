@@ -42,8 +42,7 @@ public class LogIt_HTTP <SendType>
 		servletConnection.setReadTimeout(1000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 	}
-//	public Message_Abstract sendData(SendType messageSend)
-	public Message_Abstract sendData(Message_Temperatures messageSend)
+	public Message_Abstract sendData(SendType messageSend)
 	{
 		Message_Abstract				messageReceive		= null;
 
