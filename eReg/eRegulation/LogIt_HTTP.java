@@ -42,9 +42,11 @@ public class LogIt_HTTP <SendType>
 		servletConnection.setReadTimeout(1000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 	}
-	public Message_Abstract sendData(Message_Abstract messageSend)
+	public Message_Abstract sendData(SendType messageSend)
 	{
-		System.out.println(messageSend);
+		Messgae_Temperatures			xx						= (Messgae_Temperatures) messageSend;
+		
+		System.out.println(xx);
 		
 		Message_Abstract				messageReceive			= null;
 		
@@ -54,7 +56,8 @@ public class LogIt_HTTP <SendType>
 			{
 				ObjectOutputStream 			outputToServlet;
 				outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
-				outputToServlet.writeObject(messageSend);
+outputToServlet.writeObject(xx);
+//				outputToServlet.writeObject(messageSend);
 				outputToServlet.flush();
 				outputToServlet.close();
 			}
