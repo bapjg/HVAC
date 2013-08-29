@@ -60,7 +60,10 @@ public class LogIt_HTTP <SendType>
 			{
 	    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP TimeOut on write : " + eTimeOut);
 			}
-
+			catch (Exception eSend) 
+			{
+	    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Send :" + eSend);
+			}
 			try
 			{
 				ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
