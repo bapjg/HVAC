@@ -39,7 +39,7 @@ public class Thread_Thermometers implements Runnable
 			
 			if (timeIncrement <= 0L)
 			{
-				LogIt.error("Thread_Thermometers", "Run", "Temp reads over 10 seconds", false);
+				// LogIt.error("Thread_Thermometers", "Run", "Temp reads over 10 seconds", false);
 				timeIncrement					= 1000L;
 			}
 
