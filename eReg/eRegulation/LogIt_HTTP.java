@@ -15,8 +15,8 @@ public class LogIt_HTTP <SendType>
 	
 	public LogIt_HTTP(String servlet)
 	{
-		URL 			serverURL			= null;
-		URLConnection 	servletConnection	= null;
+		serverURL							= null;
+		servletConnection					= null;
 		
 		try
 		{
@@ -47,19 +47,6 @@ public class LogIt_HTTP <SendType>
 	{
 		Message_Abstract				messageReceive		= null;
 
-		System.out.println("--F");
-		System.out.println(messageSend.dateTime);
-		System.out.println(messageSend.tempHotWater);
-		System.out.println(messageSend.tempBoiler);
-		System.out.println(messageSend.tempBoilerIn);
-		System.out.println(messageSend.tempFloorOut);
-		System.out.println(messageSend.tempFloorCold);
-		System.out.println(messageSend.tempFloorHot);
-		System.out.println(messageSend.tempRadiatorOut);
-		System.out.println(messageSend.tempRadiatorIn);
-		System.out.println(messageSend.tempOutside);
-		System.out.println(messageSend.tempLivingRoom);
-		System.out.println("--L");		
 		try
 		{
 			System.out.println("1");
