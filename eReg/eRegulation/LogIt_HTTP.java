@@ -62,11 +62,17 @@ public class LogIt_HTTP <SendType>
 		System.out.println("--L");		
 		try
 		{
+			System.out.println("1");
 			ObjectOutputStream 			outputToServlet;
+			System.out.println("2");
 			outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
+			System.out.println("3");
 			outputToServlet.writeObject(messageSend);
+			System.out.println("4");
 			outputToServlet.flush();
+			System.out.println("5");
 			outputToServlet.close();
+			System.out.println("6");
 		}
 		catch (SocketTimeoutException eTimeOut)
 		{
@@ -93,6 +99,7 @@ public class LogIt_HTTP <SendType>
 		catch (Exception eReceive) 
 		{
     		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Other : " + eReceive);
+    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Other : " + eReceive.getMessage());
 		}
 			
 		return messageReceive;			
