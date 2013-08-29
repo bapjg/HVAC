@@ -47,6 +47,8 @@ public class LogIt_HTTP <SendType>
 	{
 		Message_Abstract				messageReceive		= null;
 		System.out.println("Boiler temp is " + messageSend.tempBoiler);
+		System.out.println("Boiler temp is " + messageSend.tempBoiler);
+		
 		try
 		{
 			ObjectOutputStream 			outputToServlet;
