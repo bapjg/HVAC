@@ -42,10 +42,11 @@ public class LogIt_HTTP <SendType>
 		servletConnection.setReadTimeout(1000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 	}
-	public Message_Abstract sendData(SendType messageSend)
+//	public Message_Abstract sendData(SendType messageSend)
+	public Message_Abstract sendData(Message_Temperatures messageSend)
 	{
-		Message_Abstract				messageReceive			= null;
-		
+		Message_Abstract				messageReceive		= null;
+		System.out.println("Boiler temp is " + messageSend.tempBoiler);
 		try
 		{
 			ObjectOutputStream 			outputToServlet;
