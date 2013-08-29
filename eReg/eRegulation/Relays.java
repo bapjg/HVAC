@@ -16,18 +16,6 @@ public class Relays
 		Relay relayItem 				= new Relay(name, address, friendlyName);
 		relayList.add(relayItem);
 	}
-//	public Relay fetchRelay(int index)
-//	{
-//		Relay element 					= null;
-//		int i;
-//		Iterator<Relay> itr = relayList.iterator();
-//		
-//		for (i = 0; i <= index; i++)
-//		{
-//			element 					= (Relay) itr.next();
-//		}
-//		return element;
-//	}
 	public Relay fetchRelay(String name)
 	{
 		for (Relay element : relayList) 
@@ -39,21 +27,6 @@ public class Relays
 		}
 		return null;
 	}
-//	public Relay fetchRelay(String name)
-//	{
-//		Relay element = null;
-//		Iterator<Relay> itr 			= relayList.iterator();
-//
-//		while (itr.hasNext())
-//		{
-//			element 					= (Relay) itr.next();
-//			if (element.name.equalsIgnoreCase(name))
-//			{
-//				return element;
-//			}
-//		}
-//		return element;
-//	}
 	public void offAll()
 	{
 		Global.interfaceSemaphore.semaphoreLock("Relays.offAll");

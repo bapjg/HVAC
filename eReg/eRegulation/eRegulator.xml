@@ -81,6 +81,17 @@
 
 	</Relays>
 
+	<Pumps type="Collection">
+
+		<Pump type="Object" name="Pump_Water" address="3" friendlyName="Pompe ECS">
+		</Pump>
+		<Pump type="Object" name="Pump_Radiator" address="4" friendlyName="Pompe Plancher">
+		</Pump>
+		<Pump type="Object" name="Pump_Floor" address="5" friendlyName="Pompe Radiateurs">
+		</Pump>
+
+	</Pumps>
+
 	<Params type="Object" summerTemp="110" summerPumpDuration="300"
 		summerPumpTime="01:00">
 	</Params>
