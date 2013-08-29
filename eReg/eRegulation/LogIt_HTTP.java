@@ -44,7 +44,7 @@ public class LogIt_HTTP <SendType>
 	}
 	public Message_Abstract sendData(SendType messageSend)
 	{
-		Messgae_Temperatures			xx						= (Messgae_Temperatures) messageSend;
+		Message_Temperatures			xx						= (Message_Temperatures) messageSend;
 		
 		System.out.println(xx);
 		
