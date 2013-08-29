@@ -15,7 +15,7 @@ public class Semaphore
 		this.name												= name;
 		this.owner												= "";
 	}
-	public Boolean semaphoreLock()
+	public Boolean semaphoreLock(String caller)
 	{
 		Boolean 							lockResult;
 		try
@@ -25,13 +25,13 @@ public class Semaphore
 		}
 		catch (InterruptedException e1)
 		{
-			System.out.println(Global.now() + " Lock on semaphore " + this.name + " failed");
+			System.out.println(Global.now() + " Lock on semaphore " + this.name + " failed, called by " + caller);
 			return false;
 		}
 		
 		if (!lockResult)
 		{
-			System.out.println(Global.now() + " Lock on semaphore " + this.name + " timed out, owned by " + this.owner);
+			System.out.println(Global.now() + " Lock on semaphore " + this.name + " timed out, called by " + caller + " owned by " + this.owner);
 			return false;
 		}
 		else
