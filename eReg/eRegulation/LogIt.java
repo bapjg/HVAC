@@ -27,65 +27,24 @@ public class LogIt
 			System.out.println(dateTimeStamp() + " LogIt.logMessage Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
-		
-		try 
-		{
-			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
-			URLConnection 				servletConnection 		= serverURL.openConnection();
-			servletConnection.setDoOutput(true);
-			servletConnection.setUseCaches(false);
-			servletConnection.setConnectTimeout(1000);
-			servletConnection.setReadTimeout(1000);
-			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-			
-			Message_Report	 			messageSend 			= new Message_Report();
-			messageSend.dateTime 								= System.currentTimeMillis();
-			messageSend.reportType 								= messageType;
-			messageSend.className 								= className;
-			messageSend.methodName 								= methodName;
-			messageSend.reportText 								= message;
 
+		LogIt_HTTP	<Message_Report>		httpRequest				= new LogIt_HTTP <Message_Report> ("Monitor");
+		
+		Message_Report	 					messageSend 			= new Message_Report();
+		messageSend.dateTime 										= System.currentTimeMillis();
+		messageSend.reportType 										= messageType;
+		messageSend.className 										= className;
+		messageSend.methodName 										= methodName;
+		messageSend.reportText 										= message;
 			
-			ObjectOutputStream 			outputToServlet;
-			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
-			outputToServlet.writeObject(messageSend);
-			outputToServlet.flush();
-			outputToServlet.close();
+		Message_Abstract 					messageReceive 			= httpRequest.sendData(messageSend);
 			
-			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
-			Message_Abstract 			messageReceive 			= null;
-			
-			try
-			{
-				messageReceive 									= (Message_Abstract) response.readObject();
-			}
-	    	catch (ClassNotFoundException e) 
-	    	{
-	    		System.out.println(dateTimeStamp() + " Logit." + messageType + " is : ClassNotFoundException " + e);
-			}
-			
-			if (messageReceive instanceof Message_Ack)
-			{
-				//System.out.println("Temp data  is : Ack");
-			}
-			else
-			{
-				System.out.println(dateTimeStamp() + " Logit." + messageType + "  is : Nack");
-			}
-		} 
-		catch (SocketTimeoutException ste)
+		if (!(messageReceive instanceof Message_Ack))
 		{
-    		System.out.println(dateTimeStamp() + " Logit." + messageType + " Timeout occured : " + ste);
+			System.out.println(dateTimeStamp() + " Logit.logMessage" + messageType + "  is : Nack");
 		}
-		catch (Exception e) 
-		{
-    		System.out.println(dateTimeStamp() + " Logit." + messageType + "  : httpSend Error" + e);
-			System.out.println(dateTimeStamp() + " : " + messageType  + " : " + className + "/" + methodName + " - " + message);
-		}
-		finally
-		{
-			Global.httpSemaphore.semaphoreUnLock();			
-		}
+
+		Global.httpSemaphore.semaphoreUnLock();			
 	}
 	
 	public static void  info(String className, String methodName, String message)
@@ -220,10 +179,7 @@ public class LogIt
 			
 		Message_Abstract 					messageReceive 			= httpRequest.sendData(messageSend);
 		
-		if (messageReceive instanceof Message_Ack)
-		{
-		}
-		else
+		if (!(messageReceive instanceof Message_Ack))
 		{
 			System.out.println(dateTimeStamp() + " Temp data  is : Nack");
 		}
@@ -238,123 +194,48 @@ public class LogIt
 			return;
 		}
 
-		try 
+		LogIt_HTTP	<Message_Fuel>	httpRequest					= new LogIt_HTTP <Message_Fuel> ("Monitor");
+
+			
+		Message_Fuel	 			messageSend 				= new Message_Fuel();
+		messageSend.dateTime 									= System.currentTimeMillis();
+		messageSend.fuelConsumed 								= fuelConsumed;
+			
+		Message_Abstract 					messageReceive 			= httpRequest.sendData(messageSend);
+
+			
+		if (!(messageReceive instanceof Message_Ack))
 		{
-			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
-			URLConnection 				servletConnection 		= serverURL.openConnection();
-			servletConnection.setDoOutput(true);
-			servletConnection.setUseCaches(false);
-			servletConnection.setConnectTimeout(1000);
-			servletConnection.setReadTimeout(1000);
-			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-			
-			Message_Fuel	 			messageSend 			= new Message_Fuel();
-			messageSend.dateTime 								= System.currentTimeMillis();
-			messageSend.fuelConsumed 							= fuelConsumed;
-			
-			ObjectOutputStream 			outputToServlet;
-			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
-			outputToServlet.writeObject(messageSend);
-			outputToServlet.flush();
-			outputToServlet.close();
-			
-			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
-			Message_Abstract 			messageReceive 			= null;
-			
-			try
-			{
-				messageReceive 									= (Message_Abstract) response.readObject();
-			}
-	    	catch (ClassNotFoundException e) 
-	    	{
-	    		System.out.println(dateTimeStamp() + " Fuel Error 1 received");
-			}
-			
-			if (messageReceive instanceof Message_Ack)
-			{
-				//System.out.println("Fuel data  is : Ack");
-			}
-			else
-			{
-				System.out.println(dateTimeStamp() + " Fuel data  is : Nack");
-			}
-		} 
-		catch (SocketTimeoutException ste)
-		{
-    		System.out.println(dateTimeStamp() + " FuelData : Timeout occured : " + ste);
+			System.out.println(dateTimeStamp() + " Fuel data  is : Nack");
 		}
-		catch (Exception e) 
-		{
-    		System.out.println(dateTimeStamp() + " FuelData : httpSend Error" + e);
-		}
-		finally
-		{
-			Global.httpSemaphore.semaphoreUnLock();			
-		}
+
+		Global.httpSemaphore.semaphoreUnLock();			
+
     }
 	public static void action(String device, String action)
     {
-		//Global.httpSemaphore.lock();
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.action"))
 		{
 			System.out.println(dateTimeStamp() + " LogIt.action Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
 
-		try 
+		LogIt_HTTP	<Message_Action>	httpRequest				= new LogIt_HTTP <Message_Action> ("Monitor");
+
+		Message_Action	 				messageSend 			= new Message_Action();
+		messageSend.dateTime 									= System.currentTimeMillis();
+		messageSend.device 										= device;
+		messageSend.action 										= action;
+			
+		Message_Abstract 				messageReceive 			= httpRequest.sendData(messageSend);
+
+			
+		if (!(messageReceive instanceof Message_Ack))
 		{
-			URL 						serverURL 				= new URL("http://192.168.5.20:8080/hvac/Monitor");
-			URLConnection 				servletConnection 		= serverURL.openConnection();
-			servletConnection.setDoOutput(true);
-			servletConnection.setUseCaches(false);
-			servletConnection.setConnectTimeout(1000);
-			servletConnection.setReadTimeout(1000);
-			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-			
-			Message_Action	 			messageSend 			= new Message_Action();
-			messageSend.dateTime 								= System.currentTimeMillis();
-			messageSend.device 									= device;
-			messageSend.action 									= action;
-			
-			ObjectOutputStream 			outputToServlet;
-			outputToServlet 									= new ObjectOutputStream(servletConnection.getOutputStream());
-			outputToServlet.writeObject(messageSend);
-			outputToServlet.flush();
-			outputToServlet.close();
-			
-			ObjectInputStream 			response 				= new ObjectInputStream(servletConnection.getInputStream());
-			Message_Abstract 			messageReceive 			= null;
-			
-			try
-			{
-				messageReceive 									= (Message_Abstract) response.readObject();
-			}
-	    	catch (ClassNotFoundException e) 
-	    	{
-	    		System.out.println(dateTimeStamp() + " Action Error 1 received");
-			}
-			
-			if (messageReceive instanceof Message_Ack)
-			{
-				//System.out.println("Fuel data  is : Ack");
-			}
-			else
-			{
-				System.out.println(dateTimeStamp() + " Action data  is : Nack");
-			}
+			System.out.println(dateTimeStamp() + " Action data  is : Nack");
 		}
-		catch (SocketTimeoutException ste)
-		{
-    		System.out.println(dateTimeStamp() + " Action : Timeout occured : " + ste);
-		}
-		catch (Exception e) 
-		{
-    		System.out.println(dateTimeStamp() + " Action : httpSend Error" + e);
-		}
-		finally
-		{
-			Global.httpSemaphore.semaphoreUnLock();			
-		}
+
+		Global.httpSemaphore.semaphoreUnLock();			
     }
     public static String  dateTimeStamp()
 	{
