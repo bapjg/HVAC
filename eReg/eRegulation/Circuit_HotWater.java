@@ -11,7 +11,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 	{
 		this.heatRequired.tempMinimum				= -1;
 		this.heatRequired.tempMaximum				= -1;
-		if (taskActive == null)
+		if (this.taskActive == null)
 		{
 			//Nothing to do
 		}
@@ -20,15 +20,15 @@ public class Circuit_HotWater extends Circuit_Abstract
 			//===========================================================
 			// Here we detect that a task has just finished its time slot
 			//
-			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
+			if (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd)
 			{
-				state								= CIRCUIT_STATE_Stopping;
-				taskActive.state					= CircuitTask.TASK_STATE_Completed;
+				this.state							= CIRCUIT_STATE_Stopping;
+				this.taskActive.state				= CircuitTask.TASK_STATE_Completed;
 			}
 			//
 			//===========================================================
 
-			switch (state)
+			switch (this.state)
 			{
 			case CIRCUIT_STATE_Off:
 				
@@ -109,6 +109,120 @@ public class Circuit_HotWater extends Circuit_Abstract
 			default:
 				
 				LogIt.error("Circuit", "sequencerWater", "unknown state detected : " + state);	
+			}
+		}
+	}
+	public void sequencer_NEW()
+	{
+		// Note that this wont pass midnight
+		// Whould need to stop automatically at 23:55
+		
+		
+		
+		this.heatRequired.tempMinimum				= -1;
+		this.heatRequired.tempMaximum				= -1;
+		
+		if (this.taskActive != null)
+		{
+			Boolean		tempObjectiveAttained		= (Global.thermoHotWater.reading > taskActive.tempObjective);
+			Boolean		timeUp						= (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd);
+			Boolean		boilerHotEnough				= (Global.thermoBoiler.reading > Global.thermoHotWater.reading);
+			
+			Boolean		nowStop						= false;
+			
+			if (this.taskActive.stopOnObjective)
+			{
+				if (!tempObjectiveAttained)
+				{
+					this.heatRequired.tempMinimum	= this.taskActive.tempObjective + 100;
+					this.heatRequired.tempMaximum	= this.tempMax;
+				}
+				
+				if (boilerHotEnough)
+				{
+					if (!Global.pumpWater.isOn())
+					{
+						LogIt.action("PumpWater", "On");
+						Global.pumpWater.on();
+					}
+				}
+				else
+				{
+					if (Global.pumpWater.isOn())
+					{
+						LogIt.action("PumpWater", "Off");
+						Global.pumpWater.off();
+					}
+				}
+				
+				if (tempObjectiveAttained)
+				{
+					if (Global.circuits.isSingleActiveCircuit() && boilerHotEnough)
+					{
+						// Water is up to temp
+						// We have a single circuit and the boiler still has extra heat
+						// so keep pumping
+						nowStop						= false;
+					}
+					else
+					{
+						// Either the boiler isn't hot enough or there are other circuits active
+						// so we should stop now
+						nowStop						= true;
+					}
+				}
+			}
+			else
+			{
+				if (timeUp)
+				{
+					if (Global.circuits.isSingleActiveCircuit() && boilerHotEnough)
+					{
+						// We have a single circuit and the boiler still has extra heat
+						// so keep pumping
+						nowStop						= false;
+					}
+					else
+					{
+						// Either the boiler isn't hot enough or there are other circuits active
+						// so we should stop now
+						nowStop						= true;
+					}
+				}
+				else
+				{
+					if (!tempObjectiveAttained)
+					{
+						this.heatRequired.tempMinimum	= this.taskActive.tempObjective + 100;
+						this.heatRequired.tempMaximum	= this.tempMax;
+					}
+					if (boilerHotEnough)
+					{
+						if (!Global.pumpWater.isOn())
+						{
+							LogIt.action("PumpWater", "On");
+							Global.pumpWater.on();
+						}
+					}
+					else
+					{
+						if (Global.pumpWater.isOn())
+						{
+							LogIt.action("PumpWater", "Off");
+							Global.pumpWater.off();
+						}
+					}
+				}
+			}
+			
+			if (nowStop)
+			{
+				if (Global.pumpWater.isOn())
+				{
+					LogIt.action("PumpWater", "Off");
+					Global.pumpWater.off();
+				}
+				this.taskActive				= null;
 			}
 		}
 	}	

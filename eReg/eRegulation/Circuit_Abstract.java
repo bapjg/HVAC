@@ -138,34 +138,33 @@ abstract class Circuit_Abstract
 	}
 	public void scheduleTaskActive()
 	{
-		if (this.taskActive != null)
-		{
-			//There is an active task. See if time is up
-			// Note that this could also be done in circuit sequencer
-			//    stop on object / stop on time
-			// Also need to handle case of Optimising
-			
-			if (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd)
-			{
-				// Note that task may be optimising, so we should wait longer
-				// TODO
-				// TOODO
-				//
-				// I thinh that removing taskActive should be done in sequencer
-				// ==============================================================
-				//
-				this.taskActive.state							= CircuitTask.TASK_STATE_Completed;
-				this.taskActive									= null;				// 
-			}
+//		if (this.taskActive != null)
+//		{
+//			// Time up is handled circuit sequencer
+//			//    either : stop on objective / stop on time
+//			// Also handles case of Optimising
+//			
+//			if (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd)
+//			{
+//				// Note that task may be optimising, so we should wait longer
+//				// TODO
+//				// TOODO
+//				//
+//				// I thinh that removing taskActive should be done in sequencer
+//				// ==============================================================
+//				//
+//				this.taskActive.state							= CircuitTask.TASK_STATE_Completed;
+//				this.taskActive									= null;				// 
+//			}
 //			if (this.taskActive.stopOnObjective && objectiveAttained)
 //			{
 //				this.taskActive.state							= CircuitTask.TASK_STATE_Completed;
 //				this.taskActive									= null;				// 
 //			}
-		}
+//		}
 		if (this.taskNext != null)
 		{
-			//There is a waiting task.
+			//There is a waiting task. Replace active task if it exists
 			if (Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - 0L) //include rampup time
 			{
 				if (this.taskActive != null)
