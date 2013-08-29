@@ -18,10 +18,10 @@ public class Buttons
 
 	public int read()
 	{
-		Global.interfaceSemaphore.lock();
+		Global.interfaceSemaphore.semaphoreLock("Buttons.read");
 		Integer result = Read();
 		Integer result1 = result;
-		Global.interfaceSemaphore.unlock();
+		Global.interfaceSemaphore.semaphoreUnLock();
 		
 		button0 = false;
 		button1 = false;
@@ -63,9 +63,10 @@ public class Buttons
 	}
 	public void cancel()
 	{
-		Global.interfaceSemaphore.lock();
+		Global.interfaceSemaphore.semaphoreLock("Buttons.cancel");
 		@SuppressWarnings("unused")
 		Integer result = Read();
-		Global.interfaceSemaphore.unlock();
+		Global.interfaceSemaphore.semaphoreUnLock();
+
 	}
 }

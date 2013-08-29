@@ -56,14 +56,14 @@ public class Relays
 //	}
 	public void offAll()
 	{
-		Global.interfaceSemaphore.lock();
+		Global.interfaceSemaphore.semaphoreLock("Relays.offAll");
 		OffAll(0);		// Bank 0 : Burner
-		Global.interfaceSemaphore.unlock();
+		Global.interfaceSemaphore.semaphoreUnLock();
 	}
 	public void scanAndSet()
 	{
-		Global.interfaceSemaphore.lock();
+		Global.interfaceSemaphore.semaphoreLock("Relays.scanAndSet");
 		ScanAndSet(0);		// Bank 0 : Burner
-		Global.interfaceSemaphore.unlock();
+		Global.interfaceSemaphore.semaphoreUnLock();
 	}
 }
