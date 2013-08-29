@@ -2,8 +2,10 @@ package eRegulation;
 
 import java.util.ArrayList;
 
-public class Circuits
+public class Circuits implements java.io.Serializable
 {
+	private static final 	long 		serialVersionUID = 999999L;
+	
 	public ArrayList<Circuit_Abstract> circuitList = new ArrayList<Circuit_Abstract>();
 	
 	public void add

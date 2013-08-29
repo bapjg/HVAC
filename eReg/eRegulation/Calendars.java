@@ -96,7 +96,27 @@ public class Calendars extends DefaultHandler
 		catch (Exception e) 
 		{
 			e.printStackTrace();
-		} 		
+		}
+		
+		// Write serialised object to file
+		try
+		{
+			OutputStream 		file 				= new FileOutputStream("eCalendars_obj.txt");
+			ObjectOutputStream 	output 				= new ObjectOutputStream(file);
+		    try
+		    {
+		    	output.writeObject(Global.circuits);
+		    }
+		    finally
+		    {
+		        output.close();
+		    }
+		}  
+		catch(IOException ex)
+		{
+			System.out.println("I/O error");
+		}	
+
 	}
 	public void startElement(String uri, String localName, String tagName, Attributes attributes) throws SAXException 
     {
