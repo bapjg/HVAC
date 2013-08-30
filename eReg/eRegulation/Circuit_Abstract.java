@@ -137,7 +137,8 @@ abstract class Circuit_Abstract
 		{
 			//There is a waiting task. Replace active task if it exists
 			
-			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - this.taskNext.circuit.getRampUpTime()) // or - getRampUpTime()
+//			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - this.taskNext.circuit.getRampUpTime()) // or - getRampUpTime()
+			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - getRampUpTime()) // or - getRampUpTime()
 			&&  (Global.getTimeNowSinceMidnight() < this.taskNext.timeEnd))
 			{
 				if (this.taskActive != null)
