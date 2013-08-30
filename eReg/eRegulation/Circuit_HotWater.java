@@ -6,8 +6,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
 	}
-	@Override
-	public void sequencer()
+		public void sequencer_OLD()
 	{
 		this.heatRequired.tempMinimum				= -1;
 		this.heatRequired.tempMaximum				= -1;
@@ -110,7 +109,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 			}
 		}
 	}
-	public void sequencer_NEW()
+	@Override
+	public void sequencer()
 	{
 		// Note that this wont pass midnight
 		// Whould need to stop automatically at 23:55
