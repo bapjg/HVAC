@@ -46,8 +46,7 @@ public class Thread_UserInterface implements Runnable
 
 				if (Global.circuitHotWater.taskActive != null)
 				{
-					Global.circuitHotWater.taskActive					= new CircuitTask(	Global.circuitHotWater, // Circuit reference
-																							now, 					// Time Start
+					Global.circuitHotWater.taskActive					= new CircuitTask(	now, 					// Time Start
 																							now + 30 * 60 * 1000, 	// TimeEnd
 																							350,					// TempObjective
 																							true,					// StopOnObjective
