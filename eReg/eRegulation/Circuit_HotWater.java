@@ -123,6 +123,11 @@ public class Circuit_HotWater extends Circuit_Abstract
 			Boolean		tempObjectiveAttained		= (Global.thermoHotWater.reading > taskActive.tempObjective);
 			Boolean		timeUp						= (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd);
 			Boolean		boilerHotEnough				= (Global.thermoBoiler.reading > Global.thermoHotWater.reading);
+
+System.out.println("=============================================");
+System.out.println("tempObjectiveAttained : " + tempObjectiveAttained);
+System.out.println("timeUp :                " + timeUp);
+System.out.println("boilerHotEnough :       " + boilerHotEnough);
 			
 			if (this.taskActive.stopOnObjective)
 			{
@@ -130,6 +135,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				{
 					if (Global.circuits.isSingleActiveCircuit() && boilerHotEnough)
 					{
+System.out.println("stopOnObjective : running free");
 						// Water is up to temp
 						// We have a single circuit and the boiler still has extra heat
 						// so keep pumping
@@ -138,22 +144,27 @@ public class Circuit_HotWater extends Circuit_Abstract
 					{
 						// Either the boiler isn't hot enough or there are other circuits active
 						// so we should stop now
+System.out.println("stopOnObjective : it's the end");
+System.out.println("=============================================");
 						Global.pumpWater.off();
 						this.taskActive				= null;
 					}
 				}
 				else
 				{
+System.out.println("StopOnObject We need heat");
 					this.heatRequired.tempMinimum	= this.taskActive.tempObjective + 100;
 					this.heatRequired.tempMaximum	= this.tempMax;
 				}
 				
 				if (boilerHotEnough)
 				{
+System.out.println("StopOnObject Boiler hot enough : pump on");
 					Global.pumpWater.on();
 				}
 				else
 				{
+System.out.println("StopOnObject Boiler not hot enough : pump off");
 					Global.pumpWater.off();
 				}
 			}
@@ -163,6 +174,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				{
 					if (Global.circuits.isSingleActiveCircuit() && boilerHotEnough)
 					{
+System.out.println("TimeEnd timeUp : running free");
 						// We have a single circuit and the boiler still has extra heat
 						// so keep pumping
 					}
@@ -170,6 +182,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 					{
 						// Either the boiler isn't hot enough or there are other circuits active
 						// so we should stop now
+System.out.println("TimeEnd timeUp : it's the end");
+System.out.println("=============================================");
 						Global.pumpWater.off();
 						this.taskActive				= null;
 					}
@@ -178,15 +192,19 @@ public class Circuit_HotWater extends Circuit_Abstract
 				{
 					if (!tempObjectiveAttained)
 					{
+System.out.println("TimeEnd time not Up : need heat");
+
 						this.heatRequired.tempMinimum	= this.taskActive.tempObjective + 100;
 						this.heatRequired.tempMaximum	= this.tempMax;
 					}
 					if (boilerHotEnough)
 					{
+System.out.println("TimeEnd time not Up : pump on");
 						Global.pumpWater.on();
 					}
 					else
 					{
+System.out.println("TimeEnd time not Up : pump off");
 						Global.pumpWater.off();
 					}
 				}
