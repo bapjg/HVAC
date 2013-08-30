@@ -149,7 +149,7 @@ public class Calendars extends DefaultHandler
 					String tempObjective 			= attributes.getValue("tempObjective");
 					String stopOnObjective 			= attributes.getValue("stopOnObjective");
 
-					this.circuit.addCircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, false);
+					this.circuit.addCircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
 					LogIt.info("Calendar Entry", this.circuit.name, "Time start/end " + timeStart + "/" + timeEnd + " Days " + days);
 				}
 			}

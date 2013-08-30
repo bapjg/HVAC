@@ -2,9 +2,9 @@ package eRegulation;
 
 public class Circuit_HotWater extends Circuit_Abstract
 {
-	public Circuit_HotWater(String name, String friendlyName, String circuitType, String tempMax, String rampUp, String rampDown)
+	public Circuit_HotWater(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
 	{	
-		super(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
+		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 	}
 	public void sequencer_OLD()
 	{
@@ -109,6 +109,67 @@ public class Circuit_HotWater extends Circuit_Abstract
 			}
 		}
 	}
+
+	public Long getRampUpTime()
+	{
+		System.out.println("Calculateing rampUpTime for HW");
+		Integer hwTempTarget						= this.taskNext.tempObjective;
+		Integer hwTempCurrent 						= Global.thermoHotWater.reading;
+		Integer hwTempDifference 					= hwTempTarget - hwTempCurrent;
+		
+		// Boiler went from 300 -> 700 (Delta = 400) including over shoot of 70
+		// HW     went from 300 -> 460 (Delta = 160)
+		// And it took 40 mins ie 10 mins = 4 degrees
+		//    or                  600 s   = 4 degrees
+		//    or                  150 s   = 1 degree
+		//    or                   15 s   = 0.1 degree
+		
+		Integer  boilerTempDifference 				= hwTempDifference * 400 / 160;
+		Integer  boilerTempCutoff					= boilerTempDifference - 70; 			//expect a 7 degree overshoot		
+		
+		// Need to put cutoff in the boiler temp somewhere
+		
+		Long	rampUpTime							= hwTempDifference * 15L * 1000L; 		//15000 ms per decidegree 
+				
+		System.out.println("Calculated rampUpTime for HW " + rampUpTime/1000 + " secs");
+		return rampUpTime;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public Long calculatePerformance()
+	{
+		Integer hwTempTarget						= this.taskNext.tempObjective;
+		Integer hwTempCurrent 						= Global.thermoHotWater.reading;
+		Integer hwTempDifference 					= hwTempTarget - hwTempCurrent;
+		
+		// Boiler went from 300 -> 700 (Delta = 400) including over shoot of 70
+		// HW     went from 300 -> 460 (Delta = 160)
+		// And it took 40 mins ie 10 mins = 4 degrees
+		//    or                  600 s   = 4 degrees
+		//    or                  150 s   = 1 degree
+		//    or                   15 s   = 0.1 degree
+		
+		Integer  boilerTempDifference 				= hwTempDifference * 400 / 160;
+		Integer  boilerTempCutoff					= boilerTempDifference - 70; 			//expect a 7 degree overshoot		
+		
+		// Need to put cutoff in the boiler temp somewhere
+		
+		Long	rampUpTime							= hwTempDifference * 15L * 1000L; 		//15000 ms per decidegree 
+				
+		return rampUpTime;
+	}
 	@Override
 	public void sequencer()
 	{
@@ -124,21 +185,21 @@ public class Circuit_HotWater extends Circuit_Abstract
 			Boolean		timeUp						= (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd);
 			Boolean		boilerHotEnough				= (Global.thermoBoiler.reading > Global.thermoHotWater.reading);
 
-System.out.println("=============================================");
-System.out.println("boilerTemp              " + Global.thermoBoiler.reading);
-System.out.println("waterTemp               " + Global.thermoHotWater.reading);
-
-System.out.println("tempObjectiveAttained : " + tempObjectiveAttained);
-System.out.println("timeUp :                " + timeUp);
-System.out.println("boilerHotEnough :       " + boilerHotEnough);
+			System.out.println("=============================================");
+			System.out.println("boilerTemp              " + Global.thermoBoiler.reading);
+			System.out.println("waterTemp               " + Global.thermoHotWater.reading);
+			
+			System.out.println("tempObjectiveAttained : " + tempObjectiveAttained);
+			System.out.println("timeUp :                " + timeUp);
+			System.out.println("boilerHotEnough :       " + boilerHotEnough);
 			
 			if (this.taskActive.stopOnObjective)
 			{
 				if (tempObjectiveAttained)
 				{
-					if (Global.circuits.isSingleActiveCircuit() && boilerHotEnough)
+					if (Global.circuits.isSingleActiveCircuit() && boilerHotEnough && !timeUp)
 					{
-System.out.println("stopOnObjective : running free");
+						System.out.println("stopOnObjective : running free");
 						// Water is up to temp
 						// We have a single circuit and the boiler still has extra heat
 						// so keep pumping
@@ -147,27 +208,27 @@ System.out.println("stopOnObjective : running free");
 					{
 						// Either the boiler isn't hot enough or there are other circuits active
 						// so we should stop now
-System.out.println("stopOnObjective : it's the end");
-System.out.println("=============================================");
+						System.out.println("stopOnObjective : it's the end");
+						System.out.println("=============================================");
 						Global.pumpWater.off();
 						this.taskActive				= null;
 					}
 				}
 				else
 				{
-System.out.println("StopOnObject We need heat");
+					System.out.println("StopOnObject We need heat");
 					this.heatRequired.tempMinimum	= this.taskActive.tempObjective + 100;
 					this.heatRequired.tempMaximum	= this.tempMax;
 				}
 				
 				if (boilerHotEnough)
 				{
-System.out.println("StopOnObject Boiler hot enough : pump on");
+					System.out.println("StopOnObject Boiler hot enough : pump on");
 					Global.pumpWater.on();
 				}
 				else
 				{
-System.out.println("StopOnObject Boiler not hot enough : pump off");
+					System.out.println("StopOnObject Boiler not hot enough : pump off");
 					Global.pumpWater.off();
 				}
 			}
@@ -177,7 +238,7 @@ System.out.println("StopOnObject Boiler not hot enough : pump off");
 				{
 					if (Global.circuits.isSingleActiveCircuit() && boilerHotEnough)
 					{
-System.out.println("TimeEnd timeUp : running free");
+						System.out.println("TimeEnd timeUp : running free");
 						// We have a single circuit and the boiler still has extra heat
 						// so keep pumping
 					}
@@ -185,8 +246,8 @@ System.out.println("TimeEnd timeUp : running free");
 					{
 						// Either the boiler isn't hot enough or there are other circuits active
 						// so we should stop now
-System.out.println("TimeEnd timeUp : it's the end");
-System.out.println("=============================================");
+						System.out.println("TimeEnd timeUp : it's the end");
+						System.out.println("=============================================");
 						Global.pumpWater.off();
 						this.taskActive				= null;
 					}
@@ -195,19 +256,19 @@ System.out.println("=============================================");
 				{
 					if (!tempObjectiveAttained)
 					{
-System.out.println("TimeEnd time not Up : need heat");
+						System.out.println("TimeEnd time not Up : need heat");
 
 						this.heatRequired.tempMinimum	= this.taskActive.tempObjective + 100;
 						this.heatRequired.tempMaximum	= this.tempMax;
 					}
 					if (boilerHotEnough)
 					{
-System.out.println("TimeEnd time not Up : pump on");
+						System.out.println("TimeEnd time not Up : pump on");
 						Global.pumpWater.on();
 					}
 					else
 					{
-System.out.println("TimeEnd time not Up : pump off");
+						System.out.println("TimeEnd time not Up : pump off");
 						Global.pumpWater.off();
 					}
 				}

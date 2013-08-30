@@ -14,23 +14,22 @@ public class Circuits implements java.io.Serializable
 		String 			friendlyName,  
 		String 			circuitType, 
 		String			tempMax, 
-		String			rampUp, 
-		String			rampDown
+		String			rampUpTime
 		)
 	{
 		if (circuitType.equalsIgnoreCase("hotWater"))
 		{
-			Circuit_HotWater circuitItem = new Circuit_HotWater(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
+			Circuit_HotWater circuitItem = new Circuit_HotWater(name, friendlyName, circuitType, tempMax, rampUpTime);
 			circuitList.add(circuitItem);
 		}
 		else if (circuitType.equalsIgnoreCase("tempGradient"))
 		{
-			Circuit_Gradient circuitItem = new Circuit_Gradient(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
+			Circuit_Gradient circuitItem = new Circuit_Gradient(name, friendlyName, circuitType, tempMax, rampUpTime);
 			circuitList.add(circuitItem);
 		}
 		else if (circuitType.equalsIgnoreCase("Mixer"))
 		{
-			Circuit_Mixer circuitItem = new Circuit_Mixer(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
+			Circuit_Mixer circuitItem = new Circuit_Mixer(name, friendlyName, circuitType, tempMax, rampUpTime);
 			circuitList.add(circuitItem);
 		}
 	}

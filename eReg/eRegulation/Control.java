@@ -227,10 +227,9 @@ public class Control
 
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{
-				circuit.scheduleTasks();
-
+				circuit.scheduleTaskNext();
+				circuit.scheduleTaskActive();
 				circuit.sequencer();
-
 		
 				if (circuit.heatRequired.tempMinimum > globalHeatRequired.tempMinimum)
 				{

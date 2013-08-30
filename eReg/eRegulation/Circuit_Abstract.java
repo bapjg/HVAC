@@ -9,8 +9,7 @@ abstract class Circuit_Abstract
 	public String 					circuitType;
 	public Integer 					tempMax;
 
-	public Integer 					rampUp;
-	public Integer 					rampDown;
+	public Long 					rampUpTime					= 0L;
 	public Integer					tempToTrack;						// Used to recalculate ax+b;
 	public Thermometer				thermoToMonitor;					//Used with above
 
@@ -36,20 +35,19 @@ abstract class Circuit_Abstract
 	public CircuitTask				taskActive					= null;
 	public CircuitTask				taskNext					= null;
 	
-	public ArrayList<CircuitTask> 	circuitTaskList 			= new ArrayList<CircuitTask>();
+	public ArrayList <CircuitTask> 	circuitTaskList 			= new ArrayList <CircuitTask>();
 	public HeatRequired				heatRequired				= new HeatRequired();
 
 	public Circuit_Abstract()
 	{	
 	}
-	public Circuit_Abstract(String name, String friendlyName, String circuitType, String tempMax, String rampUp, String rampDown)
+	public Circuit_Abstract(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
 	{	
 		this.name												= name;
 		this.friendlyName										= friendlyName;
 		this.circuitType										= circuitType;
 		this.tempMax											= Integer.parseInt(tempMax);
-		this.rampUp												= Integer.parseInt(rampUp);
-		this.rampDown											= Integer.parseInt(rampDown);
+		this.rampUpTime											= Long.parseLong(rampUpTime);
 		this.state												= CIRCUIT_STATE_Off;
 	}
 	public void addCircuitTask
@@ -58,11 +56,10 @@ abstract class Circuit_Abstract
 		String 			timeEnd,  
 		String 			tempObjective, 
 		String			stopOnObjective,
-		String			days,
-		Boolean			temporary
+		String			days
 		)
 	{
-		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
+		CircuitTask 	circuitTaskItem 						= new CircuitTask(this, timeStart, timeEnd, tempObjective, stopOnObjective, days);
 		circuitTaskList.add(circuitTaskItem);
 	}
 //	public void addCircuitTask
@@ -78,25 +75,19 @@ abstract class Circuit_Abstract
 //		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
 //		circuitTaskList.add(circuitTaskItem);
 //	}
-	public void start()
+	public Long getRampUpTime()
 	{
-		LogIt.error("Circuit","start", "Overloaded method not called");
-		// This method is over ridden in subclasses
+		System.out.println("Overriden method called in Abstract");
+		return 10000L;
 	}
-	public void stop()
+	public Long calculatePerformance()
 	{
-		LogIt.error("Circuit","stop", "Overloaded method not called");
-		// This method is over ridden in subclasses
-	}
-	public void runFree()
-	{
-		LogIt.error("Circuit","runFree", "Overloaded method not called");
-		// This method is over ridden in subclasses
+		System.out.println("Overriden method called in Abstract");
+		return 0L;
 	}
 	public void sequencer()
 	{
-		LogIt.error("Circuit","sequencer", "Overloaded method not called");
-		// This method is over ridden in subclasses
+		// Task overridden in sub classes
 	}
 	public void scheduleTaskNext()
 	{
@@ -138,34 +129,15 @@ abstract class Circuit_Abstract
 	}
 	public void scheduleTaskActive()
 	{
-//		if (this.taskActive != null)
-//		{
-//			// Time up is handled circuit sequencer
-//			//    either : stop on objective / stop on time
-//			// Also handles case of Optimising
-//			
-//			if (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd)
-//			{
-//				// Note that task may be optimising, so we should wait longer
-//				// TODO
-//				// TOODO
-//				//
-//				// I thinh that removing taskActive should be done in sequencer
-//				// ==============================================================
-//				//
-//				this.taskActive.state							= CircuitTask.TASK_STATE_Completed;
-//				this.taskActive									= null;				// 
-//			}
-//			if (this.taskActive.stopOnObjective && objectiveAttained)
-//			{
-//				this.taskActive.state							= CircuitTask.TASK_STATE_Completed;
-//				this.taskActive									= null;				// 
-//			}
-//		}
+		// Time up is handled circuit sequencer
+		//    either : stop on objective / stop on time
+		// Also handles case of Optimising
+
 		if (this.taskNext != null)
 		{
 			//There is a waiting task. Replace active task if it exists
-			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - 0L) //include rampup time
+			
+			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - this.taskNext.circuit.getRampUpTime()) // or - getRampUpTime()
 			&&  (Global.getTimeNowSinceMidnight() < this.taskNext.timeEnd))
 			{
 				if (this.taskActive != null)
@@ -178,121 +150,121 @@ abstract class Circuit_Abstract
 			}
 		}
 	}
-	public void scheduleTasks()
-	/*
-	 *  This sets up "circuitTask" to be the task selected to run based on date/time
-	 *  If the circuit has no task programmed, "circuitTask" is null (not true, but should it be true)
-	 *  
-	 *  Circuit_Abstract has several implmentations (HW/Radiator/Mixer
-	 *  
-	 *  Circuit_Abstract has a list of tasks (circuitTask)
-	 *  
-	 *  
-	 *  
-	 *  
-	 */
-	{
-		// First calculate time to start next task based on thermal performance.
-		// This will be circuit dependant
-		// Hence timeToStart = timeStart - thrermalrampup
-		/*
-		 if (now > timeStart - thrermalrampup)
-		 {
-		 	if (this.taskActive != null)
-		 	{
-		 	// mAY NEED TO STOP THE TASK OR DO SOMETHING
-		 	}
-		 	
-		 	this.taskActive = this.taskNext;
-		 	this.taskNext = null;
-		 }
-		 
-		 Set the task state to rampup
-		 HW = Wait to get boiler temp > HW temp before pumpon
-		      Determine the max/min boiler temp required
-		 Floor = Start the mixer and set floor temp at 40°
-		      Determine the max/min boiler temp required
-		 Radiator = Dont know what to do
-		      Determine the max/min boiler temp required
-		 
-		 
-		 End of task can be due to
-		      New task with rampup requirements stepping in
-		      targetTemp reached (HW)
-		      timeEnd reached
-		      
-	     At task end allow for optimising
-	     		eg HW carrying on
-		 * 
-		 * 
-		 */
-		
-		String day 												= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
-		
-		
-		if (taskActive != null)
-		{
-			//There is an active task. No need to schedule anything until it has finished
-			//Unless it is not running (ie we stopped the program mid-schedule
-//			LogIt.info("Circuit","scheduleTasks", "activeTask <> null in : " + name);
-			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
-			{
-				taskActive.state								= CircuitTask.TASK_STATE_Completed;
-				// 
-				// If this a temporary task, should be deleted
-				//
-				// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "completed");
-			}
-			else
-			{
-				// Just carry on
-			}
-		}
-		else
-		{
-			for (CircuitTask circuitTask : circuitTaskList) 
-			{
-
-				if (circuitTask.days.contains(day))
-				{
-					//	LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100);
-					
-					// Three possibilities : Task is yet to run, task currently running, finished running
-					if (circuitTask.state != circuitTask.TASK_STATE_Completed)
-					{
-						if (Global.getTimeNowSinceMidnight() < circuitTask.timeStart)
-						{
-							circuitTask.state						= circuitTask.TASK_STATE_WaitingToStart;
-							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "waiting to start");
-						}
-						else if ((circuitTask.timeStart < Global.getTimeNowSinceMidnight()) && ( Global.getTimeNowSinceMidnight() < circuitTask.timeEnd))
-						{
-							circuitTask.state						= circuitTask.TASK_STATE_Started;	// Indication in the Task that it has been started (just informative)
-							
-							// All this is very fudgy/strange/needs to be sorted out
-							
-							state									= CIRCUIT_STATE_Started;				// State of the circuit is started. The sequencer will actually get things moving
-							taskActive								= circuitTask;
-							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "activating");
-						}
-						else if (Global.getTimeNowSinceMidnight() > circuitTask.timeEnd)
-						{
-							circuitTask.state						= circuitTask.TASK_STATE_Completed;
-							// activeTask will be set to null in the sequencer
-							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "completed");
-						}
-						else
-						{
-							// We have an error
-							circuitTask.state						= circuitTask.TASK_STATE_Error;
-						}
-					}
-				}
-				else
-				{
-					circuitTask.state								= circuitTask.TASK_STATE_NotToday;
-				}
-			}
-		}
-	}
+//	public void scheduleTasks()
+//	/*
+//	 *  This sets up "circuitTask" to be the task selected to run based on date/time
+//	 *  If the circuit has no task programmed, "circuitTask" is null (not true, but should it be true)
+//	 *  
+//	 *  Circuit_Abstract has several implmentations (HW/Radiator/Mixer
+//	 *  
+//	 *  Circuit_Abstract has a list of tasks (circuitTask)
+//	 *  
+//	 *  
+//	 *  
+//	 *  
+//	 */
+//	{
+//		// First calculate time to start next task based on thermal performance.
+//		// This will be circuit dependant
+//		// Hence timeToStart = timeStart - thrermalrampup
+//		/*
+//		 if (now > timeStart - thrermalrampup)
+//		 {
+//		 	if (this.taskActive != null)
+//		 	{
+//		 	// mAY NEED TO STOP THE TASK OR DO SOMETHING
+//		 	}
+//		 	
+//		 	this.taskActive = this.taskNext;
+//		 	this.taskNext = null;
+//		 }
+//		 
+//		 Set the task state to rampup
+//		 HW = Wait to get boiler temp > HW temp before pumpon
+//		      Determine the max/min boiler temp required
+//		 Floor = Start the mixer and set floor temp at 40°
+//		      Determine the max/min boiler temp required
+//		 Radiator = Dont know what to do
+//		      Determine the max/min boiler temp required
+//		 
+//		 
+//		 End of task can be due to
+//		      New task with rampup requirements stepping in
+//		      targetTemp reached (HW)
+//		      timeEnd reached
+//		      
+//	     At task end allow for optimising
+//	     		eg HW carrying on
+//		 * 
+//		 * 
+//		 */
+//		
+//		String day 												= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+//		
+//		
+//		if (taskActive != null)
+//		{
+//			//There is an active task. No need to schedule anything until it has finished
+//			//Unless it is not running (ie we stopped the program mid-schedule
+////			LogIt.info("Circuit","scheduleTasks", "activeTask <> null in : " + name);
+//			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
+//			{
+//				taskActive.state								= CircuitTask.TASK_STATE_Completed;
+//				// 
+//				// If this a temporary task, should be deleted
+//				//
+//				// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "completed");
+//			}
+//			else
+//			{
+//				// Just carry on
+//			}
+//		}
+//		else
+//		{
+//			for (CircuitTask circuitTask : circuitTaskList) 
+//			{
+//
+//				if (circuitTask.days.contains(day))
+//				{
+//					//	LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100);
+//					
+//					// Three possibilities : Task is yet to run, task currently running, finished running
+//					if (circuitTask.state != circuitTask.TASK_STATE_Completed)
+//					{
+//						if (Global.getTimeNowSinceMidnight() < circuitTask.timeStart)
+//						{
+//							circuitTask.state						= circuitTask.TASK_STATE_WaitingToStart;
+//							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "waiting to start");
+//						}
+//						else if ((circuitTask.timeStart < Global.getTimeNowSinceMidnight()) && ( Global.getTimeNowSinceMidnight() < circuitTask.timeEnd))
+//						{
+//							circuitTask.state						= circuitTask.TASK_STATE_Started;	// Indication in the Task that it has been started (just informative)
+//							
+//							// All this is very fudgy/strange/needs to be sorted out
+//							
+//							state									= CIRCUIT_STATE_Started;				// State of the circuit is started. The sequencer will actually get things moving
+//							taskActive								= circuitTask;
+//							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "activating");
+//						}
+//						else if (Global.getTimeNowSinceMidnight() > circuitTask.timeEnd)
+//						{
+//							circuitTask.state						= circuitTask.TASK_STATE_Completed;
+//							// activeTask will be set to null in the sequencer
+//							// LogIt.info("Circuit","scheduleTasks", "checking circuitTask for : " + name + "starting at time " + circuitTask.timeStart/3600/100 + "completed");
+//						}
+//						else
+//						{
+//							// We have an error
+//							circuitTask.state						= circuitTask.TASK_STATE_Error;
+//						}
+//					}
+//				}
+//				else
+//				{
+//					circuitTask.state								= circuitTask.TASK_STATE_NotToday;
+//				}
+//			}
+//		}
+//	}
 }

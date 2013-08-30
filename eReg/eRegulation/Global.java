@@ -147,10 +147,9 @@ public class Global extends DefaultHandler
 					String friendlyName					= attributes.getValue("friendlyName");
 					String circuitType					= attributes.getValue("circuitType");
 					String tempMax 						= attributes.getValue("tempMax");
-					String rampUp 						= attributes.getValue("rampUp");
-					String rampDown 					= attributes.getValue("rampDown");
+					String rampUpTime					= attributes.getValue("rampUpTime");
 
-					Global.circuits.add(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
+					Global.circuits.add(name, friendlyName, circuitType, tempMax, rampUpTime);
 					this.circuit 						= Global.circuits.fetchcircuit(name);
 				}	
 				else if (tagName.equalsIgnoreCase("tempGradient"))

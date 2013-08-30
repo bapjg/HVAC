@@ -9,9 +9,18 @@ public class Circuit_Mixer extends Circuit_Abstract
 //	public final int 				CIRCUIT_STATE_Optimising 		= 4;
 //	public final int 				CIRCUIT_STATE_Error	 			= -1;
 
-	public Circuit_Mixer(String name, String friendlyName, String circuitType, String tempMax, String rampUp, String rampDown)
+	public Circuit_Mixer(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
 	{	
-		super(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
+		super(name, friendlyName, circuitType, tempMax, rampUpTime);
+	}
+	public Long getRampUpTime()
+	{
+		return 10000L;
+	}
+	@Override
+	public Long calculatePerformance()
+	{
+		return 10000L;
 	}
 	@Override
 	public void sequencer()
