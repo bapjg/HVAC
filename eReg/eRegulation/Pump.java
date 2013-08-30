@@ -10,6 +10,7 @@ public class Pump
 	{
 		this.name 		    		= name;
 		this.relay					= Global.relays.fetchRelay(name);
+		this.isOn					= false;
 	}
 	public void on()
 	{
