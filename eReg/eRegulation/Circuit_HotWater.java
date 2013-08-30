@@ -6,7 +6,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUp, rampDown);
 	}
-		public void sequencer_OLD()
+	public void sequencer_OLD()
 	{
 		this.heatRequired.tempMinimum				= -1;
 		this.heatRequired.tempMaximum				= -1;
@@ -125,6 +125,9 @@ public class Circuit_HotWater extends Circuit_Abstract
 			Boolean		boilerHotEnough				= (Global.thermoBoiler.reading > Global.thermoHotWater.reading);
 
 System.out.println("=============================================");
+System.out.println("boilerTemp              " + Global.thermoBoiler.reading);
+System.out.println("waterTemp               " + Global.thermoHotWater.reading);
+
 System.out.println("tempObjectiveAttained : " + tempObjectiveAttained);
 System.out.println("timeUp :                " + timeUp);
 System.out.println("boilerHotEnough :       " + boilerHotEnough);
