@@ -15,7 +15,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 	}
 	public Long getRampUpTime()
 	{
-		return 10000L;
+		return 0L;
 	}
 	@Override
 	public Long calculatePerformance()

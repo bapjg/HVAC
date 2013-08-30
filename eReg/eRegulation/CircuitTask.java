@@ -2,7 +2,6 @@ package eRegulation;
 
 public class CircuitTask
 {
-	public Circuit_Abstract		circuit;
 	public Long					timeStart;
 	public Long					timeEnd;
 	public Integer 				tempObjective;
@@ -24,7 +23,6 @@ public class CircuitTask
 	
 	public CircuitTask
 		(
-			Circuit_Abstract	circuit,
 			String 				timeStart, 
 			String 				timeEnd,  
 			String 				tempObjective, 
@@ -32,7 +30,6 @@ public class CircuitTask
 			String				days
 		)
 	{
-		this.circuit											= circuit;
 		this.state												= TASK_STATE_WaitingToStart;
 		this.timeStart											= Global.parseTime(timeStart);
 		this.timeEnd											= Global.parseTime(timeEnd);
@@ -51,7 +48,6 @@ public class CircuitTask
 	}
 	public CircuitTask
 		(
-			Circuit_Abstract	circuit,
 			Long 				timeStart, 
 			Long 				timeEnd,  
 			Integer				tempObjective, 
@@ -59,7 +55,6 @@ public class CircuitTask
 			String				days
 		)
 	{
-		this.circuit											= circuit;
 		this.state												= TASK_STATE_WaitingToStart;
 		this.timeStart											= timeStart;
 		this.timeEnd											= timeEnd;

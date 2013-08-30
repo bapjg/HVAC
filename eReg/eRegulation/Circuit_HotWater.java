@@ -176,6 +176,23 @@ public class Circuit_HotWater extends Circuit_Abstract
 		Long	rampUpTime							= hwTempDifference * 15L * 1000L; 		//15000 ms per decidegree 
 				
 		return rampUpTime;
+		
+		// To go from 300 -> 460 (delta 160)
+		// We need boiler to go to 300 + 2xdelta = 620
+		// Boiler will go up to 620 + 70 (overshoot)
+		
+		// Single circuit
+		
+		// boilerMin = hwTempTarget
+		// boilerMax = hwTempCurrent + hwTempDifference x 2 (2 multiplier can be modified)
+		//   boilerMax will improve by 70 overshoot
+		// hwTarget = hwTempCurrent + hwDifference x 0.5  (0.5 multiplier can be modified)
+
+	
+	
+	
+	
+	
 	}
 	@Override
 	public void sequencer()

@@ -59,7 +59,7 @@ abstract class Circuit_Abstract
 		String			days
 		)
 	{
-		CircuitTask 	circuitTaskItem 						= new CircuitTask(this, timeStart, timeEnd, tempObjective, stopOnObjective, days);
+		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
 		circuitTaskList.add(circuitTaskItem);
 	}
 //	public void addCircuitTask
@@ -137,8 +137,7 @@ abstract class Circuit_Abstract
 		{
 			//There is a waiting task. Replace active task if it exists
 			
-//			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - this.taskNext.circuit.getRampUpTime()) // or - getRampUpTime()
-			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - getRampUpTime()) // or - getRampUpTime()
+			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - getRampUpTime())
 			&&  (Global.getTimeNowSinceMidnight() < this.taskNext.timeEnd))
 			{
 				if (this.taskActive != null)
