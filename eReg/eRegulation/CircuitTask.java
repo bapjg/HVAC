@@ -6,7 +6,6 @@ public class CircuitTask
 	public Long				timeEnd;
 	public Integer 			tempObjective;
 	public Boolean 			stopOnObjective;
-	public Boolean			temporary;
 	public String			days;
 
 	public Integer			state;
@@ -28,8 +27,7 @@ public class CircuitTask
 			String 			timeEnd,  
 			String 			tempObjective, 
 			String			stopOnObjective,
-			String			days,
-			Boolean			temporary
+			String			days
 		)
 	{
 		this.state											= TASK_STATE_WaitingToStart;
@@ -47,17 +45,14 @@ public class CircuitTask
 		{
 			this.stopOnObjective							= false;			
 		}
-		
-		this.temporary 										= temporary;
 	}
-	public CircuitTask // This is terrible
+	public CircuitTask
 		(
 			Long 			timeStart, 
 			Long 			timeEnd,  
 			Integer			tempObjective, 
 			Boolean			stopOnObjective,
-			String			days,
-			Boolean			temporary
+			String			days
 		)
 	{
 		this.state											= TASK_STATE_WaitingToStart;
@@ -66,8 +61,6 @@ public class CircuitTask
 	
 		this.tempObjective									= tempObjective;
 		this.stopOnObjective								= stopOnObjective;
-		
 		this.days											= days;
-		this.temporary 										= temporary;
 	}
 }

@@ -43,7 +43,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 				// Leave as is on the basis that 1) short lived and 2) easier than doing it later 
 				// while avoiding repeated pump action
 				
-				LogIt.action("PumpWater", "On");
 				Global.pumpWater.on();
 				state								= CIRCUIT_STATE_Running;		
 				break;
@@ -92,7 +91,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 				// need to delete the object to avoid
 				// memory leaks
 					
-				LogIt.action("PumpWater", "Off");
 				Global.pumpWater.off();
 				state								= CIRCUIT_STATE_Off;
 				taskActive.state					= CircuitTask.TASK_STATE_Completed;
@@ -117,8 +115,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 		// Note that this wont pass midnight
 		// Whould need to stop automatically at 23:55
 		
-		
-		
 		this.heatRequired.tempMinimum				= -1;
 		this.heatRequired.tempMaximum				= -1;
 		
@@ -128,11 +124,25 @@ public class Circuit_HotWater extends Circuit_Abstract
 			Boolean		timeUp						= (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd);
 			Boolean		boilerHotEnough				= (Global.thermoBoiler.reading > Global.thermoHotWater.reading);
 			
-			Boolean		nowStop						= false;
-			
 			if (this.taskActive.stopOnObjective)
 			{
-				if (!tempObjectiveAttained)
+				if (tempObjectiveAttained)
+				{
+					if (Global.circuits.isSingleActiveCircuit() && boilerHotEnough)
+					{
+						// Water is up to temp
+						// We have a single circuit and the boiler still has extra heat
+						// so keep pumping
+					}
+					else
+					{
+						// Either the boiler isn't hot enough or there are other circuits active
+						// so we should stop now
+						Global.pumpWater.off();
+						this.taskActive				= null;
+					}
+				}
+				else
 				{
 					this.heatRequired.tempMinimum	= this.taskActive.tempObjective + 100;
 					this.heatRequired.tempMaximum	= this.tempMax;
@@ -146,23 +156,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 				{
 					Global.pumpWater.off();
 				}
-				
-				if (tempObjectiveAttained)
-				{
-					if (Global.circuits.isSingleActiveCircuit() && boilerHotEnough)
-					{
-						// Water is up to temp
-						// We have a single circuit and the boiler still has extra heat
-						// so keep pumping
-						nowStop						= false;
-					}
-					else
-					{
-						// Either the boiler isn't hot enough or there are other circuits active
-						// so we should stop now
-						nowStop						= true;
-					}
-				}
 			}
 			else
 			{
@@ -172,13 +165,13 @@ public class Circuit_HotWater extends Circuit_Abstract
 					{
 						// We have a single circuit and the boiler still has extra heat
 						// so keep pumping
-						nowStop						= false;
 					}
 					else
 					{
 						// Either the boiler isn't hot enough or there are other circuits active
 						// so we should stop now
-						nowStop						= true;
+						Global.pumpWater.off();
+						this.taskActive				= null;
 					}
 				}
 				else
@@ -197,12 +190,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 						Global.pumpWater.off();
 					}
 				}
-			}
-			
-			if (nowStop)
-			{
-				Global.pumpWater.off();
-				this.taskActive				= null;
 			}
 		}
 	}	

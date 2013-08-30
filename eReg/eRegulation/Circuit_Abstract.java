@@ -62,22 +62,22 @@ abstract class Circuit_Abstract
 		Boolean			temporary
 		)
 	{
-		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
+		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
 		circuitTaskList.add(circuitTaskItem);
 	}
-	public void addCircuitTask
-		(
-		Long 			timeStart, 
-		Long 			timeEnd,  
-		Integer			tempObjective, 
-		Boolean			stopOnObjective,
-		String			days,
-		Boolean			temporary
-		)
-	{
-		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days, temporary);
-		circuitTaskList.add(circuitTaskItem);
-	}
+//	public void addCircuitTask
+//		(
+//		Long 			timeStart, 
+//		Long 			timeEnd,  
+//		Integer			tempObjective, 
+//		Boolean			stopOnObjective,
+//		String			days,
+//		Boolean			temporary
+//		)
+//	{
+//		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
+//		circuitTaskList.add(circuitTaskItem);
+//	}
 	public void start()
 	{
 		LogIt.error("Circuit","start", "Overloaded method not called");
@@ -165,7 +165,8 @@ abstract class Circuit_Abstract
 		if (this.taskNext != null)
 		{
 			//There is a waiting task. Replace active task if it exists
-			if (Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - 0L) //include rampup time
+			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - 0L) //include rampup time
+			&&  (Global.getTimeNowSinceMidnight() < this.taskNext.timeEnd))
 			{
 				if (this.taskActive != null)
 				{

@@ -40,11 +40,18 @@ public class Thread_UserInterface implements Runnable
     			
 				Long	now												= Global.getTimeNowSinceMidnight();
 
-				
 				// Need to change this
-				// Add temporary cirecuit would be better. In this way the tasklist would not be altered
-				// and no need to delete the item at end (just set to null)
-				Global.circuitHotWater.addCircuitTask(now, now + 30 * 60 * 1000, 500, true, "1, 2, 3, 4, 5, 6, 7", true);
+				// Just create a taskItem. No need to put it on taskList as it wont be repeated
+				// Once performed, sequencer will set taskActive to null which will delete the object
+
+				if (Global.circuitHotWater.taskActive != null)
+				{
+					Global.circuitHotWater.taskActive					= new CircuitTask(	now, 					// Time Start
+																							now + 30 * 60 * 1000, 	// TimeEnd
+																							350,					// TempObjective
+																							true,					// StopOnObjective
+																							"1, 2, 3, 4, 5, 6, 7");	// Days
+				}
             }
             if (buttons.button2)
             {
