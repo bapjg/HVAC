@@ -112,7 +112,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 
 	public Long getRampUpTime()
 	{
-		System.out.println("Calculateing rampUpTime for HW");
+		//System.out.println("Calculateing rampUpTime for HW");
 		Integer hwTempTarget						= this.taskNext.tempObjective;
 		Integer hwTempCurrent 						= Global.thermoHotWater.reading;
 		Integer hwTempDifference 					= hwTempTarget - hwTempCurrent;
