@@ -37,6 +37,8 @@ abstract class Circuit_Abstract
 	
 	public ArrayList <CircuitTask> 	circuitTaskList 			= new ArrayList <CircuitTask>();
 	public HeatRequired				heatRequired				= new HeatRequired();
+	
+	public Boolean					willBeSingleCircuit			= false;
 
 	public Circuit_Abstract()
 	{	
@@ -147,6 +149,28 @@ abstract class Circuit_Abstract
 				this.taskActive									= this.taskNext;
 				this.taskNext									= null;
 				this.taskActive.state							= CircuitTask.TASK_STATE_Started;
+			}
+			
+			for (Circuit_Abstract circuit : Global.circuits.circuitList)
+			{
+				this.willBeSingleCircuit 						= true;
+				
+				if (!this.name.equalsIgnoreCase(circuit.name))
+				{
+					if (circuit.taskActive != null)
+					{
+						this.willBeSingleCircuit				= false;
+						return;
+					}
+					if (circuit.taskNext != null)
+					{
+						if (circuit.taskNext.timeStart - circuit.getRampUpTime() < this.taskActive.timeEnd)
+						{
+							this.willBeSingleCircuit			= false;
+							return;
+						}
+					}
+				}
 			}
 		}
 	}

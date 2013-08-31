@@ -35,12 +35,12 @@ public class Thread_Thermometers implements Runnable
 			
 			Long timeEnd						= Global.now();
 			Long timeElapsed					= timeEnd - timeStart;
-			Long timeIncrement 					= 10000L - timeElapsed;
+			Long timeIncrement 					= 15000L - timeElapsed;
 			
 			if (timeIncrement <= 0L)
 			{
-				// LogIt.error("Thread_Thermometers", "Run", "Temp reads over 10 seconds", false);
-				timeIncrement					= 1000L;
+				LogIt.error("Thread_Thermometers", "Run", "Temp reads over 15 seconds", false);
+				timeIncrement					= 1500L;
 			}
 
 			Global.waitMilliSeconds(timeIncrement);
