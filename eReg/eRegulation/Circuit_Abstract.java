@@ -64,19 +64,6 @@ abstract class Circuit_Abstract
 		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
 		circuitTaskList.add(circuitTaskItem);
 	}
-//	public void addCircuitTask
-//		(
-//		Long 			timeStart, 
-//		Long 			timeEnd,  
-//		Integer			tempObjective, 
-//		Boolean			stopOnObjective,
-//		String			days,
-//		Boolean			temporary
-//		)
-//	{
-//		CircuitTask 	circuitTaskItem 						= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
-//		circuitTaskList.add(circuitTaskItem);
-//	}
 	public Long getRampUpTime()
 	{
 		System.out.println("Overriden method called in Abstract");
@@ -142,6 +129,13 @@ abstract class Circuit_Abstract
 			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - getRampUpTime())
 			&&  (Global.getTimeNowSinceMidnight() < this.taskNext.timeEnd))
 			{
+				System.out.println("============A task has been scheduled");
+				System.out.println("Scheduled to start at : " + this.taskNext.timeStart);
+				System.out.println("Rampup                : " + getRampUpTime());
+				System.out.println("Decision              : " + (this.taskNext.timeStart -  getRampUpTime()));
+				System.out.println("Now                   : " + Global.getTimeNowSinceMidnight());
+				
+				
 				if (this.taskActive != null)
 				{
 					this.taskActive.state						= CircuitTask.TASK_STATE_Completed;

@@ -117,7 +117,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 		Integer hwTempCurrent 						= Global.thermoHotWater.reading;
 		Integer hwTempDifference 					= hwTempTarget - hwTempCurrent;
 		
-		System.out.println("hwTempDifference : " + hwTempDifference);
+		//System.out.println("hwTempDifference : " + hwTempDifference);
 		
 		// Boiler went from 300 -> 700 (Delta = 400) including over shoot of 70
 		// HW     went from 300 -> 460 (Delta = 160)
@@ -133,7 +133,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 		
 		Long	rampUpTime							= hwTempDifference * 15L * 1000L; 		//15000 ms per decidegree 
 				
-		System.out.println("Calculated rampUpTime for HW " + rampUpTime/1000 + " secs");
+		//System.out.println("Calculated rampUpTime for HW " + rampUpTime/1000 + " secs");
 		if (rampUpTime > 0)
 		{
 			return rampUpTime;
