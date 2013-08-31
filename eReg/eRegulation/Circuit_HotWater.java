@@ -117,6 +117,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 		Integer hwTempCurrent 						= Global.thermoHotWater.reading;
 		Integer hwTempDifference 					= hwTempTarget - hwTempCurrent;
 		
+		System.out.println("hwTempDifference : " + hwTempDifference);
+		
 		// Boiler went from 300 -> 700 (Delta = 400) including over shoot of 70
 		// HW     went from 300 -> 460 (Delta = 160)
 		// And it took 40 mins ie 10 mins = 4 degrees
