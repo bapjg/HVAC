@@ -234,6 +234,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 					{
 						// Either the boiler isn't hot enough or there are other circuits active
 						// so we should stop now
+						this.heatRequired.tempMinimum	= -1;
+						this.heatRequired.tempMaximum	= -1;
 						System.out.println("stopOnObjective : it's the end");
 						System.out.println("=============================================");
 						Global.pumpWater.off();
@@ -272,6 +274,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 					{
 						// Either the boiler isn't hot enough or there are other circuits active
 						// so we should stop now
+						this.heatRequired.tempMinimum	= -1;
+						this.heatRequired.tempMaximum	= -1;
 						System.out.println("TimeEnd timeUp : it's the end");
 						System.out.println("=============================================");
 						Global.pumpWater.off();
