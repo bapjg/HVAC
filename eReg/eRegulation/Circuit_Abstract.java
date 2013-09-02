@@ -74,6 +74,14 @@ abstract class Circuit_Abstract
 		System.out.println("Overriden method called in Abstract");
 		return 0L;
 	}
+	public void start()
+	{
+		System.out.println("Overriden method called in Abstract");
+	}
+	public void stop()
+	{
+		System.out.println("Overriden method called in Abstract");
+	}
 	public void sequencer()
 	{
 		// Task overridden in sub classes
