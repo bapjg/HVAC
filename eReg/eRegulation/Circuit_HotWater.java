@@ -207,8 +207,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 		// so we should stop now
 		this.heatRequired.tempMinimum	= -1;
 		this.heatRequired.tempMaximum	= -1;
-		System.out.println("stopOnObjective : it's the end");
-		System.out.println("=============================================");
+		System.out.println("Circuit_HotWater/stop called : heatRequired set to zero, pumpwater off, active task = null");
 		Global.pumpWater.off();
 		this.taskActive				= null;
 	}
@@ -250,24 +249,26 @@ public class Circuit_HotWater extends Circuit_Abstract
 					{
 						// Either the boiler isn't hot enough or there are other circuits active
 						// so we should stop now
+						System.out.println("stopOnObjective : it's the end");
+						System.out.println("=============================================");
 						stop();
 					}
 				}
 				else
 				{
-					System.out.println("StopOnObject We need heat");
+					System.out.println("stopOnObjective We need heat");
 					this.heatRequired.tempMinimum	= this.taskActive.tempObjective + 100;
 					this.heatRequired.tempMaximum	= this.tempMax;
 				}
 				
 				if (boilerHotEnough)
 				{
-					System.out.println("StopOnObject Boiler hot enough : pump on");
+					System.out.println("stopOnObjective Boiler hot enough : pump on");
 					Global.pumpWater.on();
 				}
 				else
 				{
-					System.out.println("StopOnObject Boiler not hot enough : pump off");
+					System.out.println("stopOnObjective Boiler not hot enough : pump off");
 					Global.pumpWater.off();
 				}
 			}
@@ -285,12 +286,9 @@ public class Circuit_HotWater extends Circuit_Abstract
 					{
 						// Either the boiler isn't hot enough or there are other circuits active
 						// so we should stop now
-						this.heatRequired.tempMinimum	= -1;
-						this.heatRequired.tempMaximum	= -1;
 						System.out.println("TimeEnd timeUp : it's the end");
 						System.out.println("=============================================");
-						Global.pumpWater.off();
-						this.taskActive				= null;
+						stop();
 					}
 				}
 				else
@@ -310,7 +308,9 @@ public class Circuit_HotWater extends Circuit_Abstract
 					else
 					{
 						System.out.println("TimeEnd time not Up : pump off");
-						Global.pumpWater.off();
+						// Not sure that this is correct
+						// boiler aint hot enough but time isnt necessarily up
+						stop();
 					}
 				}
 			}
