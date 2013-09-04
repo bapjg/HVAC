@@ -261,7 +261,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 					this.heatRequired.tempMaximum	= this.tempMax;
 				}
 				
-				if (boilerHotEnough)
+				if ((boilerHotEnough) && (this.taskActive != null)) // We might just have stopped due to temp misread
 				{
 					System.out.println("stopOnObjective Boiler hot enough : pump on");
 					Global.pumpWater.on();
