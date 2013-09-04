@@ -31,7 +31,6 @@ Hot Water
 =========
 	Find out dT(HotWater)/dT(Boiler) to optimise
 	Use SingleCircuit
-	Create button to activate
 	
 Statistics
 ==========
@@ -47,9 +46,6 @@ Thermometers
 ToTest Items
 ============
 
-DaysOfWeek
-==========
-	Wrong Friday was treated as Saturday
 
 ===========================================================================================
 Done Items
