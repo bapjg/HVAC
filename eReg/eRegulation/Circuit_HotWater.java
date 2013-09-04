@@ -297,7 +297,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 					{
 						System.out.println("TimeEnd time not Up : need heat");
 
-						this.heatRequired.tempMinimum	= this.taskActive.tempObjective + 100;
+						this.heatRequired.tempMinimum	= this.taskActive.tempObjective;
 						this.heatRequired.tempMaximum	= this.tempMax;
 					}
 					if (boilerHotEnough)
