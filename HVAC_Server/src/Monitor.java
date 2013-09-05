@@ -22,14 +22,14 @@ public class Monitor extends HttpServlet
     public Monitor()
     {
         super();
-    	dbName = "jdbc:mysql://localhost/hvac_database";
+    	dbName 										= "jdbc:mysql://localhost/hvac_database";
     }
 
     public void init() throws ServletException
     {
         try
         {
-            InitialContext ctx = new InitialContext();
+            InitialContext 				ctx 		= new InitialContext();
             dbPool = (DataSource)ctx.lookup("java:comp/env/jdbc/hvac");
             if(dbPool == null)
 			{
@@ -45,22 +45,22 @@ public class Monitor extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+        PrintWriter 					out 		= response.getWriter();
         out.println("<html>");
         out.println("<head>");
         out.println("<title>Hello World!</title>");
         out.println("</head>");
         out.println("<body>");
         dbOpen();
-        Statement dbStatement = null;
+        Statement 						dbStatement = null;
         String dbField = "Z";
         try
         {
-            dbStatement = dbConnection.createStatement();
-            String dbSQL = "SELECT * FROM Test";
-            ResultSet dbResult = dbStatement.executeQuery(dbSQL);
+            dbStatement 							= dbConnection.createStatement();
+            String 						dbSQL 		= "SELECT * FROM Test";
+            ResultSet 					dbResult 	= dbStatement.executeQuery(dbSQL);
             dbResult.next();
-            dbField = dbResult.getString(2);
+            dbField 								= dbResult.getString(2);
         }
         catch(SQLException e)
         {
@@ -73,11 +73,11 @@ public class Monitor extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        Object message_in = null;
+        Object 							message_in 	= null;
         Message_Abstract message_out = null;
         try
         {
-            ObjectInputStream input = new ObjectInputStream(request.getInputStream());
+            ObjectInputStream 			input 		= new ObjectInputStream(request.getInputStream());
             message_in = input.readObject();
         }
         catch(ClassNotFoundException eCNF)
@@ -87,58 +87,58 @@ public class Monitor extends HttpServlet
         catch(IOException eIO)
         {
             System.out.println((new StringBuilder("An IO Exception occured : ")).append(eIO).toString());
-            message_out = new Message_Nack();
+            message_out 							= new Message_Nack();
         }
         if (message_in.getClass() == Message_Temperatures.class)
         {
-            Message_Temperatures readings = (Message_Temperatures)message_in;
+            Message_Temperatures 		readings 	= (Message_Temperatures)message_in;
             if(processTemperatures(readings).booleanValue())
 			{
-                message_out = new Message_Ack();
+                message_out 						= new Message_Ack();
  			}
             else
  			{
-               message_out = new Message_Nack();
+               message_out 							= new Message_Nack();
  			}
             response.reset();
             response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream output = new ObjectOutputStream(response.getOutputStream());
+            ObjectOutputStream 			output 		= new ObjectOutputStream(response.getOutputStream());
             output.writeObject(message_out);
             output.flush();
             output.close();
         } 
 		else if (message_in.getClass() == Message_Fuel.class)
         {
-            Message_Fuel readings = (Message_Fuel)message_in;
+            Message_Fuel 		readings 			= (Message_Fuel)message_in;
             if(processFuel(readings).booleanValue())
  			{
-                message_out = new Message_Ack();
+                message_out 						= new Message_Ack();
  			}
             else
  			{
-               message_out = new Message_Nack();
+               message_out 							= new Message_Nack();
  			}
             response.reset();
             response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream output = new ObjectOutputStream(response.getOutputStream());
+            ObjectOutputStream 			output 		= new ObjectOutputStream(response.getOutputStream());
             output.writeObject(message_out);
             output.flush();
             output.close();
         } 
 		else if (message_in.getClass() == Message_Report.class)
         {
-            Message_Report readings = (Message_Report)message_in;
+            Message_Report 			readings 		= (Message_Report)message_in;
             if(processReport(readings).booleanValue())
 			{
-                message_out = new Message_Ack();
+                message_out 						= new Message_Ack();
  			}
             else
  			{
-               message_out = new Message_Nack();
+               message_out 							= new Message_Nack();
  			}
             response.reset();
             response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream output = new ObjectOutputStream(response.getOutputStream());
+            ObjectOutputStream 		output 			= new ObjectOutputStream(response.getOutputStream());
             output.writeObject(message_out);
             output.flush();
             output.close();
@@ -148,15 +148,15 @@ public class Monitor extends HttpServlet
             Message_Action readings = (Message_Action)message_in;
             if(processAction(readings).booleanValue())
 			{
-                message_out = new Message_Ack();
+                message_out 						= new Message_Ack();
  			}
             else
  			{
-               message_out = new Message_Nack();
+               message_out 							= new Message_Nack();
  			}
             response.reset();
             response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream output = new ObjectOutputStream(response.getOutputStream());
+            ObjectOutputStream 		output 			= new ObjectOutputStream(response.getOutputStream());
             output.writeObject(message_out);
             output.flush();
             output.close();
@@ -172,8 +172,8 @@ public class Monitor extends HttpServlet
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            dbName = "jdbc:mysql://localhost/hvac_database";
-            dbConnection = DriverManager.getConnection(dbName, "root", "llenkcarb");
+            dbName 								= "jdbc:mysql://localhost/hvac_database";
+            dbConnection 						= DriverManager.getConnection(dbName, "root", "llenkcarb");
         }
         catch(ClassNotFoundException e)
         {
@@ -191,12 +191,12 @@ public class Monitor extends HttpServlet
         Boolean returnAck = Boolean.valueOf(false);
         try
         {
-            dbStatement = dbConnection.createStatement(1004, 1008);
-            ResultSet dbResultSet = dbStatement.executeQuery("SELECT * FROM temperatures");
+            dbStatement 						= dbConnection.createStatement(1004, 1008);
+            ResultSet 				dbResultSet = dbStatement.executeQuery("SELECT * FROM temperatures");
             dbResultSet.moveToInsertRow();
-            Long dateTime = readings.dateTime;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
-            GregorianCalendar calendar = new GregorianCalendar();
+            Long dateTime 						= readings.dateTime;
+            SimpleDateFormat 		sdf 		= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
+            GregorianCalendar 		calendar 	= new GregorianCalendar();
             calendar.setTimeInMillis(dateTime.longValue());
             dbResultSet.updateString("dateTime", sdf.format(dateTime));
             dbResultSet.updateInt("tempHotWater", readings.tempHotWater.intValue());
@@ -228,12 +228,12 @@ public class Monitor extends HttpServlet
         Boolean returnAck = Boolean.valueOf(false);
         try
         {
-            dbStatement = dbConnection.createStatement(1004, 1008);
-            ResultSet dbResultSet = dbStatement.executeQuery("SELECT * FROM fuel");
+            dbStatement 						= dbConnection.createStatement(1004, 1008);
+            ResultSet 				dbResultSet = dbStatement.executeQuery("SELECT * FROM fuel");
             dbResultSet.moveToInsertRow();
-            Long dateTime = readings.dateTime;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
-            GregorianCalendar calendar = new GregorianCalendar();
+            Long dateTime 						= readings.dateTime;
+            SimpleDateFormat 		sdf 		= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
+            GregorianCalendar 		calendar 	= new GregorianCalendar();
             calendar.setTimeInMillis(dateTime.longValue());
             dbResultSet.updateString("dateTime", sdf.format(dateTime));
             dbResultSet.updateLong("fuelConsumed", readings.fuelConsumed.longValue());
@@ -256,12 +256,12 @@ public class Monitor extends HttpServlet
         Boolean returnAck = Boolean.valueOf(false);
         try
         {
-            dbStatement = dbConnection.createStatement(1004, 1008);
-            ResultSet dbResultSet = dbStatement.executeQuery("SELECT * FROM reports");
+            dbStatement 						= dbConnection.createStatement(1004, 1008);
+            ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT * FROM reports");
             dbResultSet.moveToInsertRow();
-            Long dateTime = readings.dateTime;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
-            GregorianCalendar calendar = new GregorianCalendar();
+            Long 				dateTime 		= readings.dateTime;
+            SimpleDateFormat 	sdf 			= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
+            GregorianCalendar 	calendar 		= new GregorianCalendar();
             calendar.setTimeInMillis(dateTime.longValue());
             dbResultSet.updateString("dateTime", sdf.format(dateTime));
             dbResultSet.updateString("reportType", readings.reportType);
@@ -287,12 +287,12 @@ public class Monitor extends HttpServlet
         Boolean returnAck = Boolean.valueOf(false);
         try
         {
-            dbStatement = dbConnection.createStatement(1004, 1008);
-            ResultSet dbResultSet = dbStatement.executeQuery("SELECT * FROM actions");
+            dbStatement 						= dbConnection.createStatement(1004, 1008);
+            ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT * FROM actions");
             dbResultSet.moveToInsertRow();
-            Long dateTime = readings.dateTime;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
-            GregorianCalendar calendar = new GregorianCalendar();
+            Long 				dateTime 		= readings.dateTime;
+            SimpleDateFormat 	sdf 			= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
+            GregorianCalendar 	calendar 		= new GregorianCalendar();
             calendar.setTimeInMillis(dateTime.longValue());
             dbResultSet.updateString("dateTime", sdf.format(dateTime));
             dbResultSet.updateString("device", readings.device);

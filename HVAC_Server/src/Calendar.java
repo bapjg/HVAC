@@ -10,23 +10,23 @@ import javax.sql.DataSource;
 public class Calendar extends HttpServlet
 {
 
-    public Connection dbConnection;
-    public Statement dbStatement;
-    public String dbName;
-    private DataSource dbPool;
+    public 		Connection 			dbConnection;
+    public 		Statement 			dbStatement;
+    public 		String 				dbName;
+    private 	DataSource 			dbPool;
 	
     public Calendar()
     {
         super();
-    	dbName = "jdbc:mysql://localhost/hvac_database";
+    	dbName 									= "jdbc:mysql://localhost/hvac_database";
     }
 
     public void init() throws ServletException
     {
         try
         {
-            InitialContext ctx = new InitialContext();
-            dbPool = (DataSource)ctx.lookup("java:comp/env/jdbc/hvac");
+            InitialContext 		ctx 			= new InitialContext();
+            dbPool 								= (DataSource)ctx.lookup("java:comp/env/jdbc/hvac");
             if(dbPool == null)
 			{
 				throw new ServletException("Unknown DataSource 'jdbc/hvac'");
@@ -40,12 +40,12 @@ public class Calendar extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        ObjectInputStream input = new ObjectInputStream(request.getInputStream());
-        Object message_in = null;
-        Message_Abstract message_out = null;
+        ObjectInputStream 		input 			= new ObjectInputStream(request.getInputStream());
+        Object 					message_in 		= null;
+        Message_Abstract message_out 			= null;
         try
         {
-            message_in = input.readObject();
+            message_in 							= input.readObject();
         }
         catch(ClassNotFoundException e)
         {
@@ -57,20 +57,20 @@ public class Calendar extends HttpServlet
 		}
         if(message_in.getClass() == Message_Calendar_Request_Index.class)
         {
-            message_out = processCalendarRequestIndex();
+            message_out 						= processCalendarRequestIndex();
             response.reset();
             response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream output = new ObjectOutputStream(response.getOutputStream());
+            ObjectOutputStream 		output 		= new ObjectOutputStream(response.getOutputStream());
             output.writeObject(message_out);
             output.flush();
             output.close();
         } 
 		else if(message_in.getClass() == Message_Calendar_Request_Data.class)
         {
-            message_out = processCalendarRequestData();
+            message_out 						= processCalendarRequestData();
             response.reset();
             response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream output = new ObjectOutputStream(response.getOutputStream());
+            ObjectOutputStream 		output 		= new ObjectOutputStream(response.getOutputStream());
             output.writeObject(message_out);
             output.flush();
             output.close();
@@ -86,8 +86,8 @@ public class Calendar extends HttpServlet
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            dbName = "jdbc:mysql://localhost/hvac_database";
-            dbConnection = DriverManager.getConnection(dbName, "root", "llenkcarb");
+            dbName 								= "jdbc:mysql://localhost/hvac_database";
+            dbConnection 						= DriverManager.getConnection(dbName, "root", "llenkcarb");
         }
         catch(ClassNotFoundException e)
         {
@@ -103,14 +103,14 @@ public class Calendar extends HttpServlet
     {
         dbOpen();
         Message_Calendar_Report returnBuffer = new Message_Calendar_Report();
-        returnBuffer.dateTime = "";
-        returnBuffer.calendars = "";
+        returnBuffer.dateTime 					= "";
+        returnBuffer.calendars 					= "";
         try
         {
-            dbStatement = dbConnection.createStatement(1004, 1008);
-            ResultSet dbResultSet = dbStatement.executeQuery("SELECT MAX(dateTime) AS dateTime FROM calendars");
+            dbStatement 						= dbConnection.createStatement(1004, 1008);
+            ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT MAX(dateTime) AS dateTime FROM calendars");
             dbResultSet.next();
-            returnBuffer.dateTime = dbResultSet.getString("dateTime");
+            returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
             dbStatement.close();
             dbConnection.close();
         }
@@ -124,16 +124,16 @@ public class Calendar extends HttpServlet
     public Message_Calendar_Report processCalendarRequestData()
     {
         dbOpen();
-        Message_Calendar_Report returnBuffer = new Message_Calendar_Report();
-        returnBuffer.dateTime = "";
-        returnBuffer.calendars = "";
+        Message_Calendar_Report returnBuffer 	= new Message_Calendar_Report();
+        returnBuffer.dateTime 					= "";
+        returnBuffer.calendars 					= "";
         try
         {
-            dbStatement = dbConnection.createStatement(1004, 1008);
-            ResultSet dbResultSet = dbStatement.executeQuery("SELECT dateTime, calendars FROM calendars ORDER BY dateTime DESC LIMIT 1");
+            dbStatement 						= dbConnection.createStatement(1004, 1008);
+            ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT dateTime, calendars FROM calendars ORDER BY dateTime DESC LIMIT 1");
             dbResultSet.next();
-            returnBuffer.dateTime = dbResultSet.getString("dateTime");
-            returnBuffer.calendars = dbResultSet.getString("calendars");
+            returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
+            returnBuffer.calendars 				= dbResultSet.getString("calendars");
             dbStatement.close();
             dbConnection.close();
         }
