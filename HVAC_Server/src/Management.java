@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 
 
 
-public class Management_Control extends HttpServlet
+public class Management extends HttpServlet
 {
 
     public 		Connection 			dbConnection;
@@ -22,7 +22,7 @@ public class Management_Control extends HttpServlet
     public 		String 				dbName;
     private 	DataSource 			dbPool;
 	
-    public Management_Control()
+    public Management()
     {
         super();
     	dbName 									= "jdbc:mysql://localhost/hvac_database";
@@ -101,27 +101,31 @@ public class Management_Control extends HttpServlet
     public Message_Calendar_Report processCalendarRequestIndex()
     {
         dbOpen();
-        Message_Calendar_Report returnBuffer = new Message_Calendar_Report();
+        
+        Message_Calendar_Report returnBuffer 	= new Message_Calendar_Report();
         returnBuffer.dateTime 					= "";
         returnBuffer.calendars 					= "";
-        try
-        {
-            dbStatement 						= dbConnection.createStatement(1004, 1008);
-            ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT MAX(dateTime) AS dateTime FROM calendars");
-            dbResultSet.next();
-            returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
-            dbStatement.close();
-            dbConnection.close();
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
+//        try
+//        {
+//            dbStatement 						= dbConnection.createStatement(1004, 1008);
+//            ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT MAX(dateTime) AS dateTime FROM calendars");
+//            dbResultSet.next();
+//            returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
+//            dbStatement.close();
+//            dbConnection.close();
+//        }
+//        catch(SQLException eSQL)
+//        {
+//            eSQL.printStackTrace();
+//        }
+        returnBuffer.dateTime 					= "2013_01_01 00:01:02";
+        returnBuffer.calendars 					= "Hello World";
         return returnBuffer;
     }
     public Message_Calendar_Report processCalendarRequestData()
     {
         dbOpen();
+        
         Message_Calendar_Report returnBuffer 	= new Message_Calendar_Report();
         returnBuffer.dateTime 					= "";
         returnBuffer.calendars 					= "";
