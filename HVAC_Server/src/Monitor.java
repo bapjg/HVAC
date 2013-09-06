@@ -77,6 +77,11 @@ public class Monitor extends HttpServlet
             message_out 							= new Message_Nack();
         }
         
+        if (message_in == null)
+        {
+        	System.out.println ("null message received");
+        }
+        
         if (message_in.getClass() == Message_Temperatures.class)
         {
             Message_Temperatures 		readings 	= (Message_Temperatures) message_in;
