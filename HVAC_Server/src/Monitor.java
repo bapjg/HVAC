@@ -282,18 +282,60 @@ public class Monitor extends HttpServlet
     }
     public void init() throws ServletException
     {
+        Connection 						conn 		= null;
+        Statement 						stmt 		= null;
         try
         {
             InitialContext 				ctx 		= new InitialContext();
-            dbPool 									= (DataSource)ctx.lookup("java:comp/env/jdbc/hvac");
+            dbPool 									= (DataSource) ctx.lookup("java:comp/env/jdbc/hvac");
             if(dbPool == null)
 			{
                 throw new ServletException("Unknown DataSource 'jdbc/hvac'");
 			}
+            conn 									= dbPool.getConnection();
+            stmt 									= conn.createStatement();
+            stmt.execute("SELECT * FROM reports");
+            
+            ResultSet 					resSet 		= stmt.executeQuery("SELECT * FROM reports");
+            stmt.close();
+            stmt = null;
+
+            conn.close();
+            conn = null;
         }
         catch(NamingException ex)
         {
             ex.printStackTrace();
+        }
+		catch (SQLException eSQL)
+		{
+			// TODO Auto-generated catch block
+			eSQL.printStackTrace();
+		}
+        finally 
+        {
+            if (stmt != null) 
+            {
+                try 
+                {
+                    stmt.close();
+                } 
+                catch (SQLException sqlex) 
+                {
+                }
+                stmt = null;
+            }
+            if (conn != null) 
+            {
+                try 
+                {
+                    conn.close();
+                } 
+                catch (SQLException sqlex) 
+                {
+                }
+                conn = null;
+            }
         }
     }
     public void dbOpen()
