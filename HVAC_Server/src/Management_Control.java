@@ -1,6 +1,10 @@
 import eRegulation.*;
+
 import java.io.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -20,7 +24,6 @@ public class Management_Control extends HttpServlet
         super();
     	dbName 									= "jdbc:mysql://localhost/hvac_database";
     }
-
     public void init() throws ServletException
     {
         try
@@ -37,50 +40,44 @@ public class Management_Control extends HttpServlet
             ex.printStackTrace();
         }
     }
-
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        ObjectInputStream 		input 			= new ObjectInputStream(request.getInputStream());
-        Object 					message_in 		= null;
-        Message_Abstract message_out 			= null;
+        Object 							message_in 	= null;
+        Message_Abstract 				message_out = null;
+        
         try
         {
-            message_in 							= input.readObject();
+            ObjectInputStream 			input 		= new ObjectInputStream(request.getInputStream());
+            message_in 								= input.readObject();
         }
-        catch(ClassNotFoundException e)
+        catch(ClassNotFoundException eCNF)
         {
-            e.printStackTrace();
+            eCNF.printStackTrace();
+            message_out 							= new Message_Nack();
         }
-        if (message_in == null)
-		{
-            System.out.println("null null null");
-		}
+        catch(IOException eIO)
+        {
+            System.out.println((new StringBuilder("An IO Exception occured : ")).append(eIO).toString());
+            message_out 							= new Message_Nack();
+        }
+
         if(message_in.getClass() == Message_Calendar_Request_Index.class)
         {
             message_out 						= processCalendarRequestIndex();
-            response.reset();
-            response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream 		output 		= new ObjectOutputStream(response.getOutputStream());
-            output.writeObject(message_out);
-            output.flush();
-            output.close();
         } 
 		else if(message_in.getClass() == Message_Calendar_Request_Data.class)
         {
             message_out 						= processCalendarRequestData();
-            response.reset();
-            response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream 		output 		= new ObjectOutputStream(response.getOutputStream());
-            output.writeObject(message_out);
-            output.flush();
-            output.close();
         } 
 		else
         {
             System.out.println("Unsupported message class received from client");
+            message_out								= new Message_Nack();
         }
-    }
+        
+        reply(response, message_out);
 
+    }
     public void dbOpen()
     {
         try
@@ -98,7 +95,6 @@ public class Management_Control extends HttpServlet
             e.printStackTrace();
         }
     }
-
     public Message_Calendar_Report processCalendarRequestIndex()
     {
         dbOpen();
@@ -120,7 +116,6 @@ public class Management_Control extends HttpServlet
         }
         return returnBuffer;
     }
-
     public Message_Calendar_Report processCalendarRequestData()
     {
         dbOpen();
@@ -143,4 +138,27 @@ public class Management_Control extends HttpServlet
         }
         return returnBuffer;
     }
+    public void reply(HttpServletResponse response, Message_Abstract message_out) throws IOException 
+    {
+        response.reset();
+        response.setHeader("Content-Type", "application/x-java-serialized-object");
+        ObjectOutputStream 		output				= null;;
+		
+		output 										= new ObjectOutputStream(response.getOutputStream());
+		output.writeObject(message_out);
+        output.flush();
+        output.close();
+    }
+    public String dateTime2String(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);
+    	
+    	return dateTimeString;
+    }
+
 }

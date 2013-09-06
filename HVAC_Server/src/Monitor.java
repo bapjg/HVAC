@@ -69,6 +69,7 @@ public class Monitor extends HttpServlet
         catch(ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
+            message_out 							= new Message_Nack();
         }
         catch(IOException eIO)
         {
@@ -78,95 +79,43 @@ public class Monitor extends HttpServlet
         
         if (message_in.getClass() == Message_Temperatures.class)
         {
-            Message_Temperatures 		readings 	= (Message_Temperatures)message_in;
-            
-            if(processTemperatures(readings))
-			{
-                message_out 						= new Message_Ack();
- 			}
-            else
- 			{
-               message_out 							= new Message_Nack();
- 			}
-            
-            response.reset();
-            response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream 			output 		= new ObjectOutputStream(response.getOutputStream());
-            output.writeObject(message_out);
-            output.flush();
-            output.close();
-        } 
+            Message_Temperatures 		readings 	= (Message_Temperatures) message_in;
+            message_out								= processTemperatures(readings);
+         } 
 		else if (message_in.getClass() == Message_Fuel.class)
         {
-            Message_Fuel 			readings 		= (Message_Fuel)message_in;
-            
-            if(processFuel(readings))
- 			{
-                message_out 						= new Message_Ack();
- 			}
-            else
- 			{
-               message_out 							= new Message_Nack();
- 			}
-            
-            response.reset();
-            response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream 		output 			= new ObjectOutputStream(response.getOutputStream());
-            output.writeObject(message_out);
-            output.flush();
-            output.close();
+            Message_Fuel 				readings 	= (Message_Fuel) message_in;
+            message_out								= processFuel(readings);
         } 
 		else if (message_in.getClass() == Message_Report.class)
         {
-            Message_Report 			readings 		= (Message_Report)message_in;
-            
-            if(processReport(readings))
-			{
-                message_out 						= new Message_Ack();
- 			}
-            else
- 			{
-               message_out 							= new Message_Nack();
- 			}
-            
-            response.reset();
-            response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream 		output 			= new ObjectOutputStream(response.getOutputStream());
-            output.writeObject(message_out);
-            output.flush();
-            output.close();
+            Message_Report 				readings 	= (Message_Report) message_in;
+            message_out								= processReport(readings);
         } 
 		else if (message_in.getClass() == Message_Action.class)
         {
-            Message_Action 			readings 		= (Message_Action) message_in;
-            
+            Message_Action 				readings 	= (Message_Action) message_in;
             message_out								= processAction(readings);
-            reply(response, message_out);
         } 
 		else
         {
             System.out.println("Unsupported message class received from client");
             message_out								= new Message_Nack();
-            reply(response, message_out);
         }
+        
+        reply(response, message_out);
     }
-    public Boolean processTemperatures(Message_Temperatures readings)
+    public Message_Abstract processTemperatures(Message_Temperatures readings)
     {
         dbOpen();
-        Boolean 					returnAck 		= false;
         
         try
         {
-            dbStatement 							= dbConnection.createStatement(1004, 1008);
+            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures");
             dbResultSet.moveToInsertRow();
             
-            Long dateTime 							= readings.dateTime;
-            SimpleDateFormat 		sdf 			= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
-            GregorianCalendar 		calendar 		= new GregorianCalendar();
-            calendar.setTimeInMillis(dateTime.longValue());
-            
-            dbResultSet.updateString("dateTime", sdf.format(dateTime));
+            dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
             dbResultSet.updateInt("tempHotWater", readings.tempHotWater.intValue());
             dbResultSet.updateInt("tempBoiler", readings.tempBoiler.intValue());
             dbResultSet.updateInt("tempBoilerIn", readings.tempBoilerIn.intValue());
@@ -179,34 +128,28 @@ public class Monitor extends HttpServlet
             dbResultSet.updateInt("tempLivingRoom", readings.tempLivingRoom.intValue());
             dbResultSet.insertRow();
             
-            returnAck 								= true;
             dbStatement.close();
             dbConnection.close();
         }
-        catch(SQLException e)
+        catch(SQLException eSQL)
         {
-            e.printStackTrace();
-            returnAck 								= false;
+        	eSQL.printStackTrace();
+            return new Message_Nack();
         }
-        return returnAck;
+        return new Message_Ack();
     }
-    public Boolean processFuel(Message_Fuel readings)
+    public Message_Abstract processFuel(Message_Fuel readings)
     {
         dbOpen();
         Boolean 					returnAck 		= false;
 
         try
         {
-            dbStatement 							= dbConnection.createStatement(1004, 1008);
+            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM fuel");
             dbResultSet.moveToInsertRow();
-            
-            Long dateTime 							= readings.dateTime;
-            SimpleDateFormat 		sdf 			= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
-            GregorianCalendar 		calendar 		= new GregorianCalendar();
-            calendar.setTimeInMillis(dateTime.longValue());
 
-            dbResultSet.updateString("dateTime", sdf.format(dateTime));
+            dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
             dbResultSet.updateLong("fuelConsumed", readings.fuelConsumed.longValue());
             dbResultSet.insertRow();
             returnAck	 							= true;
@@ -217,27 +160,22 @@ public class Monitor extends HttpServlet
         catch(SQLException e)
         {
             e.printStackTrace();
-            returnAck 								= false;
+            return new Message_Nack();
         }
-        return returnAck;
+        return new Message_Ack();
     }
-    public Boolean processReport(Message_Report readings)
+    public Message_Abstract processReport(Message_Report readings)
     {
         dbOpen();
         Boolean 				returnAck 			= false;
         
         try
         {
-            dbStatement 							= dbConnection.createStatement(1004, 1008);
+            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM reports");
             dbResultSet.moveToInsertRow();
             
-            Long 				dateTime 			= readings.dateTime;
-            SimpleDateFormat 	sdf 				= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
-            GregorianCalendar 	calendar 			= new GregorianCalendar();
-            calendar.setTimeInMillis(dateTime.longValue());
-            
-            dbResultSet.updateString("dateTime", sdf.format(dateTime));
+            dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
             dbResultSet.updateString("reportType", readings.reportType);
             dbResultSet.updateString("className", readings.className);
             dbResultSet.updateString("methodName", readings.methodName);
@@ -251,9 +189,9 @@ public class Monitor extends HttpServlet
         catch(SQLException e)
         {
             e.printStackTrace();
-            returnAck = Boolean.valueOf(false);
+            return new Message_Nack();
         }
-        return returnAck;
+        return new Message_Ack();
     }
     public Message_Abstract processAction(Message_Action readings)
     {
@@ -261,7 +199,7 @@ public class Monitor extends HttpServlet
 
         try
         {
-            dbStatement 							= dbConnection.createStatement();
+            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM actions");
             dbResultSet.moveToInsertRow();
             
@@ -292,26 +230,26 @@ public class Monitor extends HttpServlet
 			{
                 throw new ServletException("Unknown DataSource 'jdbc/hvac'");
 			}
-            conn 									= dbPool.getConnection();
-            stmt 									= conn.createStatement();
-            stmt.execute("SELECT * FROM reports");
-            
-            ResultSet 					resSet 		= stmt.executeQuery("SELECT * FROM reports");
-            stmt.close();
-            stmt = null;
-
-            conn.close();
+//            conn 									= dbPool.getConnection();
+//            stmt 									= conn.createStatement();
+//            stmt.execute("SELECT * FROM reports");
+//            
+//            ResultSet 					resSet 		= stmt.executeQuery("SELECT * FROM reports");
+//            stmt.close();
+//            stmt = null;
+//
+//            conn.close();
             conn = null;
         }
         catch(NamingException ex)
         {
             ex.printStackTrace();
         }
-		catch (SQLException eSQL)
-		{
-			// TODO Auto-generated catch block
-			eSQL.printStackTrace();
-		}
+//		catch (SQLException eSQL)
+//		{
+//			// TODO Auto-generated catch block
+//			eSQL.printStackTrace();
+//		}
         finally 
         {
             if (stmt != null) 
