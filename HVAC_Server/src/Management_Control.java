@@ -1,5 +1,6 @@
-import eRegulation.*;
 
+
+import eRegulation.*;
 import java.io.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,8 @@ import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
+
+
 
 public class Management_Control extends HttpServlet
 {
@@ -57,17 +60,17 @@ public class Management_Control extends HttpServlet
         }
         catch(IOException eIO)
         {
-            System.out.println((new StringBuilder("An IO Exception occured : ")).append(eIO).toString());
+            System.out.println("An IO Exception occured : " + eIO);
             message_out 							= new Message_Nack();
         }
 
-        if(message_in.getClass() == Message_Calendar_Request_Index.class)
+        if (message_in.getClass() == Message_Calendar_Request_Index.class)
         {
-            message_out 						= processCalendarRequestIndex();
+            message_out 							= processCalendarRequestIndex();
         } 
-		else if(message_in.getClass() == Message_Calendar_Request_Data.class)
+		else if (message_in.getClass() == Message_Calendar_Request_Data.class)
         {
-            message_out 						= processCalendarRequestData();
+            message_out 							= processCalendarRequestData();
         } 
 		else
         {
