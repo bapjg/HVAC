@@ -7,7 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
 
-public class Calendar extends HttpServlet
+public class Management_Control extends HttpServlet
 {
 
     public 		Connection 			dbConnection;
@@ -15,7 +15,7 @@ public class Calendar extends HttpServlet
     public 		String 				dbName;
     private 	DataSource 			dbPool;
 	
-    public Calendar()
+    public Management_Control()
     {
         super();
     	dbName 									= "jdbc:mysql://localhost/hvac_database";
