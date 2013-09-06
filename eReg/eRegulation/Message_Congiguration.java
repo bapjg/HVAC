@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Message_Congiguration  extends Message_Abstract
 {
 	@SuppressWarnings("unused")
-	private static final long 				serialVersionUID 	= 99003L;
+	private static final long 				serialVersionUID 	= 5L;
 	
 	public ArrayList<Message_Circuit> 		circuitList 		= new ArrayList <Message_Circuit> ();
 	public ArrayList<Message_Relay> 		relayList 			= new ArrayList <Message_Relay> ();
