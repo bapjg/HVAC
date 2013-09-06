@@ -24,23 +24,7 @@ public class Monitor extends HttpServlet
         super();
     	dbName 										= "jdbc:mysql://localhost/hvac_database";
     }
-    public void init() throws ServletException
-    {
-        try
-        {
-            InitialContext 				ctx 		= new InitialContext();
-            dbPool 									= (DataSource)ctx.lookup("java:comp/env/jdbc/hvac");
-            if(dbPool == null)
-			{
-                throw new ServletException("Unknown DataSource 'jdbc/hvac'");
-			}
-        }
-        catch(NamingException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         response.setContentType("text/html");
         PrintWriter 					out 		= response.getWriter();
@@ -114,7 +98,7 @@ public class Monitor extends HttpServlet
         } 
 		else if (message_in.getClass() == Message_Fuel.class)
         {
-            Message_Fuel 		readings 			= (Message_Fuel)message_in;
+            Message_Fuel 			readings 		= (Message_Fuel)message_in;
             
             if(processFuel(readings))
  			{
@@ -127,7 +111,7 @@ public class Monitor extends HttpServlet
             
             response.reset();
             response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream 			output 		= new ObjectOutputStream(response.getOutputStream());
+            ObjectOutputStream 		output 			= new ObjectOutputStream(response.getOutputStream());
             output.writeObject(message_out);
             output.flush();
             output.close();
@@ -154,45 +138,16 @@ public class Monitor extends HttpServlet
         } 
 		else if (message_in.getClass() == Message_Action.class)
         {
-            Message_Action readings = (Message_Action)message_in;
+            Message_Action 			readings 		= (Message_Action) message_in;
             
-            if(processAction(readings))
-			{
-                message_out 						= new Message_Ack();
- 			}
-            else
- 			{
-               message_out 							= new Message_Nack();
- 			}
-            
-            response.reset();
-            response.setHeader("Content-Type", "application/x-java-serialized-object");
-            ObjectOutputStream 		output 			= new ObjectOutputStream(response.getOutputStream());
-            output.writeObject(message_out);
-            output.flush();
-            output.close();
+            message_out								= processAction(readings);
+            reply(response, message_out);
         } 
 		else
         {
             System.out.println("Unsupported message class received from client");
-        }
-    }
-
-    public void dbOpen()
-    {
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            dbName 									= "jdbc:mysql://localhost/hvac_database";
-            dbConnection 							= DriverManager.getConnection(dbName, "root", "llenkcarb");
-        }
-        catch(ClassNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
+            message_out								= new Message_Nack();
+            reply(response, message_out);
         }
     }
     public Boolean processTemperatures(Message_Temperatures readings)
@@ -205,10 +160,12 @@ public class Monitor extends HttpServlet
             dbStatement 							= dbConnection.createStatement(1004, 1008);
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures");
             dbResultSet.moveToInsertRow();
+            
             Long dateTime 							= readings.dateTime;
             SimpleDateFormat 		sdf 			= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
             GregorianCalendar 		calendar 		= new GregorianCalendar();
             calendar.setTimeInMillis(dateTime.longValue());
+            
             dbResultSet.updateString("dateTime", sdf.format(dateTime));
             dbResultSet.updateInt("tempHotWater", readings.tempHotWater.intValue());
             dbResultSet.updateInt("tempBoiler", readings.tempBoiler.intValue());
@@ -243,14 +200,17 @@ public class Monitor extends HttpServlet
             dbStatement 							= dbConnection.createStatement(1004, 1008);
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM fuel");
             dbResultSet.moveToInsertRow();
+            
             Long dateTime 							= readings.dateTime;
             SimpleDateFormat 		sdf 			= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
             GregorianCalendar 		calendar 		= new GregorianCalendar();
             calendar.setTimeInMillis(dateTime.longValue());
+
             dbResultSet.updateString("dateTime", sdf.format(dateTime));
             dbResultSet.updateLong("fuelConsumed", readings.fuelConsumed.longValue());
             dbResultSet.insertRow();
             returnAck	 							= true;
+            
             dbStatement.close();
             dbConnection.close();
         }
@@ -271,10 +231,12 @@ public class Monitor extends HttpServlet
             dbStatement 							= dbConnection.createStatement(1004, 1008);
             ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM reports");
             dbResultSet.moveToInsertRow();
+            
             Long 				dateTime 			= readings.dateTime;
             SimpleDateFormat 	sdf 				= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
             GregorianCalendar 	calendar 			= new GregorianCalendar();
             calendar.setTimeInMillis(dateTime.longValue());
+            
             dbResultSet.updateString("dateTime", sdf.format(dateTime));
             dbResultSet.updateString("reportType", readings.reportType);
             dbResultSet.updateString("className", readings.className);
@@ -282,6 +244,7 @@ public class Monitor extends HttpServlet
             dbResultSet.updateString("reportText", readings.reportText);
             dbResultSet.insertRow();
             returnAck 								= true;
+            
             dbStatement.close();
             dbConnection.close();
         }
@@ -292,25 +255,20 @@ public class Monitor extends HttpServlet
         }
         return returnAck;
     }
-    public Boolean processAction(Message_Action readings)
+    public Message_Abstract processAction(Message_Action readings)
     {
-        dbOpen();
-        Boolean 					returnAck 		= false;
+    	dbOpen();
 
         try
         {
-            dbStatement 							= dbConnection.createStatement(1004, 1008);
+            dbStatement 							= dbConnection.createStatement();
             ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM actions");
             dbResultSet.moveToInsertRow();
-            Long 				dateTime 			= readings.dateTime;
-            SimpleDateFormat 	sdf 				= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
-            GregorianCalendar 	calendar 			= new GregorianCalendar();
-            calendar.setTimeInMillis(dateTime.longValue());
-            dbResultSet.updateString("dateTime", sdf.format(dateTime));
+            
+            dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
             dbResultSet.updateString("device", readings.device);
             dbResultSet.updateString("action", readings.action);
             dbResultSet.insertRow();
-            returnAck 								= true;
 
             dbStatement.close();
             dbConnection.close();
@@ -318,8 +276,63 @@ public class Monitor extends HttpServlet
         catch(SQLException e)
         {
             e.printStackTrace();
-            returnAck = Boolean.valueOf(false);
+            return new Message_Nack();
         }
-        return returnAck;
+        return new Message_Ack();
+    }
+    public void init() throws ServletException
+    {
+        try
+        {
+            InitialContext 				ctx 		= new InitialContext();
+            dbPool 									= (DataSource)ctx.lookup("java:comp/env/jdbc/hvac");
+            if(dbPool == null)
+			{
+                throw new ServletException("Unknown DataSource 'jdbc/hvac'");
+			}
+        }
+        catch(NamingException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    public void dbOpen()
+    {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            dbName 									= "jdbc:mysql://localhost/hvac_database";
+            dbConnection 							= DriverManager.getConnection(dbName, "root", "llenkcarb");
+        }
+        catch(ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    public void reply(HttpServletResponse response, Message_Abstract message_out) throws IOException 
+    {
+        response.reset();
+        response.setHeader("Content-Type", "application/x-java-serialized-object");
+        ObjectOutputStream 		output				= null;;
+		
+		output 										= new ObjectOutputStream(response.getOutputStream());
+		output.writeObject(message_out);
+        output.flush();
+        output.close();
+    }
+    public String dateTime2String(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);
+    	
+    	return dateTimeString;
     }
 }
