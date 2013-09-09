@@ -24,7 +24,7 @@ public class Calendars extends DefaultHandler
 
 		try 
 		{
-			URL 									serverURL 						= new URL("http://192.168.5.20:8080/hvac/Calendar");
+			URL 									serverURL 						= new URL("http://192.168.5.20:8080/hvac/Management");
 			URLConnection 							servletConnection 				= serverURL.openConnection();
 			servletConnection.setDoOutput(true);
 			servletConnection.setUseCaches(false);
