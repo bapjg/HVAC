@@ -28,7 +28,7 @@ public class Calendars extends DefaultHandler
 		
 		Message_Abstract		 							messageReceive					= httpRequest.sendData(messageSend);
 
-		if (!(messageReceive instanceof Message_Calendar_Report))
+		if (messageReceive instanceof Message_Calendar_Report)
 		{
 			xmlCalendarString																= (Message_Calendar_Report) messageReceive;
 		}		
