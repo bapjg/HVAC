@@ -39,7 +39,7 @@ public class LogIt
 			
 		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Message_Ack))
+		if (!(messageReceive instanceof Message_Nack))
 		{
 			System.out.println(dateTimeStamp() + " Logit.logMessage" + messageType + "  is : Nack");
 		}

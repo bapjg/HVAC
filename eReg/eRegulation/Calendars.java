@@ -20,54 +20,69 @@ public class Calendars extends DefaultHandler
 	
 	public Calendars() throws IOException, SAXException, ParserConfigurationException
     {
-		Message_Calendar_Report 					xmlCalendarString				= null;
+		Message_Calendar_Report 							xmlCalendarString				= null;
+		
+		HTTP_Request	<Message_Calendar_Request_Data>		httpRequest						= new HTTP_Request <Message_Calendar_Request_Data> ("Management");
 
-		try 
+		Message_Calendar_Request_Data 						messageSend 					= new Message_Calendar_Request_Data();
+		
+		Message_Abstract		 							messageReceive					= httpRequest.sendData(messageSend);
+
+		if (!(messageReceive instanceof Message_Calendar_Report))
 		{
-			URL 									serverURL 						= new URL("http://192.168.5.20:8080/hvac/Management");
-			URLConnection 							servletConnection 				= serverURL.openConnection();
-			servletConnection.setDoOutput(true);
-			servletConnection.setUseCaches(false);
-			servletConnection.setConnectTimeout(1000);
-			servletConnection.setReadTimeout(1000);
-			
-			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-			
-			Message_Calendar_Request_Data 			messageSend 					= new Message_Calendar_Request_Data();
-			
-			ObjectOutputStream 						outputToServlet;
-			outputToServlet 														= new ObjectOutputStream(servletConnection.getOutputStream());
-			outputToServlet.writeObject(messageSend);
-			outputToServlet.flush();
-			outputToServlet.close();
-			
-			ObjectInputStream 						response 						= new ObjectInputStream(servletConnection.getInputStream());
-			Message_Abstract 						messageReceive 					= null;
-			
-			try
-			{
-				messageReceive 														= (Message_Abstract) response.readObject();
-			}
-	    	catch (ClassNotFoundException e) 
-	    	{
-				e.printStackTrace();
-			}
-			
-			if (messageReceive instanceof Message_Calendar_Report)
-			{
-				xmlCalendarString													= (Message_Calendar_Report) messageReceive;
-//				System.out.println("dateTime  : " + xmlCalendarString.dateTime);
-//				System.out.println("calendars : " + xmlCalendarString.calendars);
-			}
-			else
-			{
-				System.out.println("instanceof The data  is : Not Message_Calendar_Report");
-			}
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+			xmlCalendarString																= (Message_Calendar_Report) messageReceive;
+		}		
+		
+		
+		
+		
+		
+//		try 
+//		{
+//			URL 									serverURL 						= new URL("http://192.168.5.20:8080/hvac/Management");
+//			URLConnection 							servletConnection 				= serverURL.openConnection();
+//			servletConnection.setDoOutput(true);
+//			servletConnection.setUseCaches(false);
+//			servletConnection.setConnectTimeout(1000);
+//			servletConnection.setReadTimeout(1000);
+//			
+//			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
+//			
+//			Message_Calendar_Request_Data 			messageSend 					= new Message_Calendar_Request_Data();
+//			
+//			ObjectOutputStream 						outputToServlet;
+//			outputToServlet 														= new ObjectOutputStream(servletConnection.getOutputStream());
+//			outputToServlet.writeObject(messageSend);
+//			outputToServlet.flush();
+//			outputToServlet.close();
+//			
+//			ObjectInputStream 						response 						= new ObjectInputStream(servletConnection.getInputStream());
+//			Message_Abstract 						messageReceive 					= null;
+//			
+//			try
+//			{
+//				messageReceive 														= (Message_Abstract) response.readObject();
+//			}
+//	    	catch (ClassNotFoundException e) 
+//	    	{
+//				e.printStackTrace();
+//			}
+//			
+//			if (messageReceive instanceof Message_Calendar_Report)
+//			{
+//				xmlCalendarString													= (Message_Calendar_Report) messageReceive;
+////				System.out.println("dateTime  : " + xmlCalendarString.dateTime);
+////				System.out.println("calendars : " + xmlCalendarString.calendars);
+//			}
+//			else
+//			{
+//				System.out.println("instanceof The data  is : Not Message_Calendar_Report");
+//			}
+//		} 
+//		catch (Exception e) 
+//		{
+//			e.printStackTrace();
+//		}
 		
 		try 
 		{
@@ -128,10 +143,6 @@ public class Calendars extends DefaultHandler
 		{
 			if (attributes.getValue("type").equalsIgnoreCase("Collection")) 
 			{
-//				if (tagName.equalsIgnoreCase("Thermometers"))
-//				{
-//					Global.thermometers 			= new Thermometers(); 
-//				}
 			}
 			else if (attributes.getValue("type").equalsIgnoreCase("Object"))
 			{
