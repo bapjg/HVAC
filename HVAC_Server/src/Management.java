@@ -63,6 +63,8 @@ public class Management extends HttpServlet
             System.out.println("An IO Exception occured : " + eIO);
             message_out 							= new Message_Nack();
         }
+        
+        System.out.println("Received class : " + message_in.getClass().getSimpleName());
 
         if (message_in.getClass() == Message_Calendar_Request_Index.class)
         {
