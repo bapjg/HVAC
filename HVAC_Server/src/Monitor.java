@@ -66,12 +66,12 @@ public class Monitor extends HttpServlet
             ObjectInputStream 			input 		= new ObjectInputStream(request.getInputStream());
             message_in 								= input.readObject();
         }
-        catch(ClassNotFoundException eCNF)
+        catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
             message_out 							= new Message_Nack();
         }
-        catch(IOException eIO)
+        catch (IOException eIO)
         {
             System.out.println((new StringBuilder("An IO Exception occured : ")).append(eIO).toString());
             message_out 							= new Message_Nack();

@@ -50,20 +50,28 @@ public class Management extends HttpServlet
         
         try
         {
+            System.out.println("Step 1");
             ObjectInputStream 			input 		= new ObjectInputStream(request.getInputStream());
+            System.out.println("Step 2");
             message_in 								= input.readObject();
+            System.out.println("Step 3");
         }
-        catch(ClassNotFoundException eCNF)
+        catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
             message_out 							= new Message_Nack();
         }
-        catch(IOException eIO)
+        catch (IOException eIO)
         {
             System.out.println("An IO Exception occured : " + eIO);
             message_out 							= new Message_Nack();
         }
-        
+        catch (Exception e)
+        {
+            System.out.println("An Exception occured : " + e);
+            message_out 							= new Message_Nack();
+        }
+         
         System.out.println("Received class : " + message_in.getClass().getSimpleName());
 
         if (message_in.getClass() == Message_Calendar_Request_Index.class)
