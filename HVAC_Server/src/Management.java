@@ -71,24 +71,34 @@ public class Management extends HttpServlet
             System.out.println("An Exception occured : " + e);
             message_out 							= new Message_Nack();
         }
-         
-        System.out.println("Received class : " + message_in.getClass().getSimpleName());
-
-        if (message_in.getClass() == Message_Calendar_Request_Index.class)
-        {
-            message_out 							= processCalendarRequestIndex();
-        } 
-		else if (message_in.getClass() == Message_Calendar_Request_Data.class)
-        {
-            message_out 							= processCalendarRequestData();
-        } 
-		else
-        {
-            System.out.println("Unsupported message class received from client");
-            message_out								= new Message_Nack();
-        }
         
-        reply(response, message_out);
+        Message_Calendar_Report returnBuffer 	= new Message_Calendar_Report();
+        returnBuffer.dateTime 					= "2013_01_01 00:01:02";
+        returnBuffer.calendars 					= "Hello World";
+
+        reply(response, returnBuffer);
+        
+        
+        
+        
+        
+//        System.out.println("Received class : " + message_in.getClass().getSimpleName());
+//
+//        if (message_in.getClass() == Message_Calendar_Request_Index.class)
+//        {
+//            message_out 							= processCalendarRequestIndex();
+//        } 
+//		else if (message_in.getClass() == Message_Calendar_Request_Data.class)
+//        {
+//            message_out 							= processCalendarRequestData();
+//        } 
+//		else
+//        {
+//            System.out.println("Unsupported message class received from client");
+//            message_out								= new Message_Nack();
+//        }
+//        
+//        reply(response, message_out);
 
     }
     public void dbOpen()
