@@ -56,7 +56,7 @@ public class Management extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         Object 							message_in 	= null;
-        Management_Abstract 			message_out = null;
+        Mgmt_Msg_Abstract 				message_out = null;
         
         try
         {
@@ -69,17 +69,17 @@ public class Management extends HttpServlet
         catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
-            message_out 							= new Management_Nack();
+            message_out 							= new Mgmt_Msg_Nack();
         }
         catch (IOException eIO)
         {
             System.out.println("An IO Exception occured : " + eIO);
-            message_out 							= new Management_Nack();
+            message_out 							= new Mgmt_Msg_Nack();
         }
         catch (Exception e)
         {
             System.out.println("An Exception occured : " + e);
-            message_out 							= new Management_Nack();
+            message_out 							= new Mgmt_Msg_Nack();
         }
         
         Mgmt_Msg_Calendar_Report returnBuffer 	= new Mgmt_Msg_Calendar_Report();
