@@ -69,46 +69,34 @@ public class Management extends HttpServlet
         catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
-            message_out 							= new Mgmt_Msg_Nack();
+            message_out 							= new Mgmt_Msg_Sce_Nack();
         }
         catch (IOException eIO)
         {
             System.out.println("An IO Exception occured : " + eIO);
-            message_out 							= new Mgmt_Msg_Nack();
+            message_out 							= new Mgmt_Msg_Sce_Nack();
         }
         catch (Exception e)
         {
             System.out.println("An Exception occured : " + e);
-            message_out 							= new Mgmt_Msg_Nack();
+            message_out 							= new Mgmt_Msg_Sce_Nack();
         }
         
-        Mgmt_Msg_Calendar_Report returnBuffer 	= new Mgmt_Msg_Calendar_Report();
-        returnBuffer.dateTime 					= "2013_01_01 00:01:02";
-        returnBuffer.calendars 					= "Hello World";
-
-        reply(response, returnBuffer);
+        if (message_in.getClass() == Mgmt_Msg_Req_Temperatures.class)
+        {
+            message_out 							= processTemperaturesReq();
+        } 
+		else if (message_in.getClass() == Mgmt_Msg_Calendar_Request_Data.class)
+        {
+            message_out 							= processCalendarRequestData();
+        } 
+		else
+        {
+            System.out.println("Unsupported message class received from client");
+            message_out								= new Mgmt_Msg_Sce_Nack();
+        }
         
-        
-        
-        
-        
-//        System.out.println("Received class : " + message_in.getClass().getSimpleName());
-//
-//        if (message_in.getClass() == Message_Calendar_Request_Index.class)
-//        {
-//            message_out 							= processCalendarRequestIndex();
-//        } 
-//		else if (message_in.getClass() == Message_Calendar_Request_Data.class)
-//        {
-//            message_out 							= processCalendarRequestData();
-//        } 
-//		else
-//        {
-//            System.out.println("Unsupported message class received from client");
-//            message_out								= new Message_Nack();
-//        }
-//        
-//        reply(response, message_out);
+        reply(response, message_out);
 
     }
     public void dbOpen()
@@ -127,6 +115,60 @@ public class Management extends HttpServlet
         {
             e.printStackTrace();
         }
+    }
+    public Mgmt_Msg_Rsp_Temperatures processTemperaturesReq()
+    {
+        dbOpen();
+        
+        Mgmt_Msg_Rsp_Temperatures returnBuffer  = new Mgmt_Msg_Rsp_Temperatures();
+
+        try
+        {
+            dbStatement 						= dbConnection.createStatement(1004, 1008);
+            
+            String				dbSQL			= "";
+            dbSQL								+= "SELECT     dateTime,        ";	
+            dbSQL								+= "           tempBoiler,      ";	
+            dbSQL								+= "           tempHotWater,    ";	
+            dbSQL								+= "           tempBoilerIn,    ";
+            dbSQL								+= "           tempFloorOut,    ";
+            dbSQL								+= "           tempFloorCold,   ";
+            dbSQL								+= "           tempFloorHot,    ";
+            dbSQL								+= "           tempRadiatorOut, ";
+            dbSQL								+= "           tempRadiatorIn,  ";
+            dbSQL								+= "           tempOutside,     ";
+            dbSQL								+= "           tempLivingRoom	";            dbSQL								+= "FROM       temperatures  ";	
+            dbSQL								+= "ORDER BY   dateTime DESC    ";	
+            dbSQL								+= "LIMIT      1                ";	
+            
+            ResultSet 			dbResultSet 	= dbStatement.executeQuery(dbSQL);
+            dbResultSet.next();
+            returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
+            returnBuffer.tempBoiler 			= dbResultSet.getInt("tempBoiler");
+            returnBuffer.tempHotWater 			= dbResultSet.getInt("tempHotWater");
+            returnBuffer.tempBoilerIn 			= dbResultSet.getInt("tempBoilerIn");
+            returnBuffer.tempFloorOut 			= dbResultSet.getInt("tempFloorOut");
+            returnBuffer.tempFloorCold 			= dbResultSet.getInt("tempFloorCold");
+            returnBuffer.tempFloorHot 			= dbResultSet.getInt("tempFloorHot");
+            returnBuffer.tempRadiatorOut 		= dbResultSet.getInt("tempRadiatorOut");
+            returnBuffer.tempRadiatorIn 		= dbResultSet.getInt("tempRadiatorIn");
+            returnBuffer.tempOutside 			= dbResultSet.getInt("tempOutside");
+            returnBuffer.tempLivingRoom 		= dbResultSet.getInt("tempLivingRoom");
+            
+            System.out.println("processTemperaturesReq responding");
+            System.out.println("dateTime     :" + returnBuffer.dateTime);
+            System.out.println("tempBoiler   :" + returnBuffer.tempBoiler);
+            System.out.println("tempHotWater :" + returnBuffer.tempHotWater);
+                        
+            dbStatement.close();
+            dbConnection.close();
+        }
+        catch(SQLException eSQL)
+        {
+            eSQL.printStackTrace();
+        }
+
+        return returnBuffer;
     }
     public Mgmt_Msg_Calendar_Report processCalendarRequestIndex()
     {

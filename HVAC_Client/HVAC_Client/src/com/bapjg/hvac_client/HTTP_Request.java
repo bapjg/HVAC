@@ -35,7 +35,19 @@ public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_A
     protected void onPostExecute(Mgmt_Msg_Abstract result) 
 	{             
 		System.out.println("step 4");
-		System.out.println("This step is " + result.getClass().getSimpleName());
+		if (result.getClass() == Mgmt_Msg_Calendar_Report.class)
+		{
+			Mgmt_Msg_Calendar_Report msg_received = (Mgmt_Msg_Calendar_Report) result;
+			System.out.println("step dateTime : " + msg_received.dateTime);
+			System.out.println("step calendars: " + msg_received.calendars);
+		}
+		else if (result.getClass() == Mgmt_Msg_Rsp_Temperatures.class)
+		{
+			Mgmt_Msg_Rsp_Temperatures msg_received = (Mgmt_Msg_Rsp_Temperatures) result;
+			System.out.println("step dateTime     : " + msg_received.dateTime);
+			System.out.println("step tempBoiler   : " + msg_received.tempBoiler);
+			System.out.println("step tempHotWater : " + msg_received.tempHotWater);
+		}
     }
 
 	public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
