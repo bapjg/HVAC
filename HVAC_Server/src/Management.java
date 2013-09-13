@@ -1,16 +1,26 @@
 
 
-import eRegulation.*;
-import java.io.*;
-import java.sql.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+
+import com.bapjg.hvac_client.*;
+
 
 
 
@@ -46,7 +56,7 @@ public class Management extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         Object 							message_in 	= null;
-        Message_Abstract 				message_out = null;
+        Management_Abstract 			message_out = null;
         
         try
         {
@@ -59,20 +69,20 @@ public class Management extends HttpServlet
         catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
-            message_out 							= new Message_Nack();
+            message_out 							= new Management_Nack();
         }
         catch (IOException eIO)
         {
             System.out.println("An IO Exception occured : " + eIO);
-            message_out 							= new Message_Nack();
+            message_out 							= new Management_Nack();
         }
         catch (Exception e)
         {
             System.out.println("An Exception occured : " + e);
-            message_out 							= new Message_Nack();
+            message_out 							= new Management_Nack();
         }
         
-        Message_Calendar_Report returnBuffer 	= new Message_Calendar_Report();
+        Mgmt_Msg_Calendar_Report returnBuffer 	= new Mgmt_Msg_Calendar_Report();
         returnBuffer.dateTime 					= "2013_01_01 00:01:02";
         returnBuffer.calendars 					= "Hello World";
 
@@ -118,11 +128,11 @@ public class Management extends HttpServlet
             e.printStackTrace();
         }
     }
-    public Message_Calendar_Report processCalendarRequestIndex()
+    public Mgmt_Msg_Calendar_Report processCalendarRequestIndex()
     {
         dbOpen();
         
-        Message_Calendar_Report returnBuffer 	= new Message_Calendar_Report();
+        Mgmt_Msg_Calendar_Report returnBuffer 	= new Mgmt_Msg_Calendar_Report();
         returnBuffer.dateTime 					= "";
         returnBuffer.calendars 					= "";
 //        try
@@ -142,11 +152,11 @@ public class Management extends HttpServlet
         returnBuffer.calendars 					= "Hello World";
         return returnBuffer;
     }
-    public Message_Calendar_Report processCalendarRequestData()
+    public Mgmt_Msg_Calendar_Report processCalendarRequestData()
     {
         dbOpen();
         
-        Message_Calendar_Report returnBuffer 	= new Message_Calendar_Report();
+        Mgmt_Msg_Calendar_Report returnBuffer 	= new Mgmt_Msg_Calendar_Report();
         returnBuffer.dateTime 					= "";
         returnBuffer.calendars 					= "";
         try
@@ -165,7 +175,7 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public void reply(HttpServletResponse response, Message_Abstract message_out) throws IOException 
+    public void reply(HttpServletResponse response, Mgmt_Msg_Abstract message_out) throws IOException 
     {
         response.reset();
         response.setHeader("Content-Type", "application/x-java-serialized-object");

@@ -12,7 +12,7 @@ import java.net.URLConnection;
 import android.os.AsyncTask;
 
 
-public class HTTP_Request extends AsyncTask <Management_Abstract, Void, Management_Abstract> 
+public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 {
 	public URL						serverURL;
 	public URLConnection			servletConnection;
@@ -22,7 +22,7 @@ public class HTTP_Request extends AsyncTask <Management_Abstract, Void, Manageme
 	}
 	
 	@Override
-	protected Management_Abstract doInBackground(Management_Abstract... messageOut) 
+	protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
 	{
 		return sendData(messageOut[0]);
 	}	
@@ -32,13 +32,13 @@ public class HTTP_Request extends AsyncTask <Management_Abstract, Void, Manageme
 //         setProgressPercent(progress[0]);
     }
 	@Override
-    protected void onPostExecute(Management_Abstract result) 
+    protected void onPostExecute(Mgmt_Msg_Abstract result) 
 	{             
 		System.out.println("step 4");
 		System.out.println("This step is " + result.getClass().getSimpleName());
     }
 
-	public Management_Abstract sendData(Management_Abstract messageSend)
+	public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
 	{
 		serverURL							= null;
 		servletConnection					= null;
@@ -67,7 +67,7 @@ public class HTTP_Request extends AsyncTask <Management_Abstract, Void, Manageme
 		servletConnection.setReadTimeout(1000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 		
-		Management_Abstract				messageReceive		= null;
+		Mgmt_Msg_Abstract				messageReceive		= null;
 
 		try
 		{
@@ -90,7 +90,7 @@ public class HTTP_Request extends AsyncTask <Management_Abstract, Void, Manageme
 		try
 		{
 			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 									= (Management_Abstract) response.readObject();
+			messageReceive 									= (Mgmt_Msg_Abstract) response.readObject();
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{
