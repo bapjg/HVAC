@@ -11,6 +11,14 @@ import java.net.URLConnection;
 
 import android.os.AsyncTask;
 
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+
 
 public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 {
@@ -44,9 +52,16 @@ public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_A
 		else if (result.getClass() == Mgmt_Msg_Rsp_Temperatures.class)
 		{
 			Mgmt_Msg_Rsp_Temperatures msg_received = (Mgmt_Msg_Rsp_Temperatures) result;
+
+//			TextView right1 						= (TextView) findViewByID(R.id.right1);
+//			right1.setText(msg_received.dateTime);
+			
+			
 			System.out.println("step dateTime     : " + msg_received.dateTime);
 			System.out.println("step tempBoiler   : " + msg_received.tempBoiler);
 			System.out.println("step tempHotWater : " + msg_received.tempHotWater);
+			
+			
 		}
     }
 

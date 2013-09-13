@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="55dp"
         android:layout_toRightOf="@+id/buttonTemperatures"
+        android:text="Date Time"
         android:width="300dp"
     />           
     <TextView
@@ -50,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/left1"
+        android:text="Boiler"
         android:width="300dp"
     />           
     <TextView
@@ -57,6 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/left2"
+         android:text="Hot Water"
         android:width="300dp"
     />           
     <TextView
@@ -64,6 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/left3"
+        android:text="Outside"
         android:width="300dp"
     />           
     
