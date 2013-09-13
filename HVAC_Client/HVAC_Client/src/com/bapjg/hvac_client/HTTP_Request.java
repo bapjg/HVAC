@@ -4,15 +4,15 @@ package com.bapjg.hvac_client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
 import android.os.AsyncTask;
+import eRegulation.Message_Abstract;
 
-public class HTTP_Request extends AsyncTask <Message_Abstract, Void, Message_Abstract> 
+public class HTTP_Request extends AsyncTask <Management_Abstract, Void, Management_Abstract> 
 {
 	public URL						serverURL;
 	public URLConnection			servletConnection;
@@ -22,7 +22,7 @@ public class HTTP_Request extends AsyncTask <Message_Abstract, Void, Message_Abs
 	}
 	
 	@Override
-	protected Message_Abstract doInBackground(Message_Abstract... messageOut) 
+	protected Management_Abstract doInBackground(Management_Abstract... messageOut) 
 	{
 		return sendData(messageOut[0]);
 	}	
@@ -32,13 +32,13 @@ public class HTTP_Request extends AsyncTask <Message_Abstract, Void, Message_Abs
 //         setProgressPercent(progress[0]);
     }
 	@Override
-    protected void onPostExecute(Message_Abstract result) 
+    protected void onPostExecute(Management_Abstract result) 
 	{             
 		System.out.println("step 4");
 		System.out.println("This step is " + result.getClass().getSimpleName());
     }
 
-	public Message_Abstract sendData(Message_Abstract messageSend)
+	public Management_Abstract sendData(Management_Abstract messageSend)
 	{
 		serverURL							= null;
 		servletConnection					= null;
@@ -67,7 +67,7 @@ public class HTTP_Request extends AsyncTask <Message_Abstract, Void, Message_Abs
 		servletConnection.setReadTimeout(1000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 		
-		Message_Abstract				messageReceive		= null;
+		Management_Abstract				messageReceive		= null;
 
 		try
 		{
@@ -90,7 +90,7 @@ public class HTTP_Request extends AsyncTask <Message_Abstract, Void, Message_Abs
 		try
 		{
 			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 									= (Message_Abstract) response.readObject();
+			messageReceive 									= (Management_Abstract) response.readObject();
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{
@@ -108,7 +108,7 @@ public class HTTP_Request extends AsyncTask <Message_Abstract, Void, Message_Abs
 			
 		return messageReceive;			
 	}
-
+}
 
 
 

@@ -21,7 +21,7 @@ public class MainActivity extends Activity
 		System.out.println("step 1");
 		HTTP_Request							httpRequest			= new HTTP_Request();
 		
-		Message_Calendar_Request_Data			messageSend 		= new Message_Calendar_Request_Data();
+		Management_Calendar_Request_Data		messageSend 		= new Management_Calendar_Request_Data();
 
 		httpRequest.execute(messageSend);
 		
