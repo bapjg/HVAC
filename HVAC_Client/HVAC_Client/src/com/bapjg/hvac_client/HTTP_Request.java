@@ -10,7 +10,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import android.os.AsyncTask;
-import eRegulation.Message_Abstract;
+
 
 public class HTTP_Request extends AsyncTask <Management_Abstract, Void, Management_Abstract> 
 {
