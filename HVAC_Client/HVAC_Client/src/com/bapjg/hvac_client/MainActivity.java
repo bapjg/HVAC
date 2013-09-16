@@ -1,6 +1,15 @@
 package com.bapjg.hvac_client;
 
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URLConnection;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -19,45 +28,12 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main);
 
 		System.out.println("step 1");
-		HTTP_Request							httpRequest			= new HTTP_Request();
-		
-		//Mgmt_Msg_Calendar_Request_Data			messageSend 		= new Mgmt_Msg_Calendar_Request_Data();
-
-		//httpRequest.execute(messageSend);
+		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		
 		Mgmt_Msg_Req_Temperatures				messageSend2 		= new Mgmt_Msg_Req_Temperatures();
 
 		httpRequest.execute(messageSend2);
-		
-		
-//		if (messageReceive instanceof Message_Calendar_Report)
-//		{
-//			Message_Calendar_Report				messageCalendar		= (Message_Calendar_Report) messageReceive;
-//			System.out.println("step 5");
-//			TextView							left1				= null;
-//			TextView							left2				= null;
-//			left1 													= (TextView) findViewById( R.id.left1 );
-//			left1.setText(messageCalendar.dateTime);
-//			left2 													= (TextView) findViewById( R.id.left2 );
-//			left2.setText(messageCalendar.calendars);
-//			System.out.println("step 6");
-//			View relativeLayout =  findViewById(R.id.info);
-//		    //LinearLayout layout = (LinearLayout) findViewById(R.id.info);
-//			System.out.println("step 7");
-//
-//		    TextView valueTV = new TextView(this);
-//		    valueTV.setText("hallo hallo");
-//		    valueTV.setId(5);
-//		    valueTV.setLayoutParams(new LayoutParams(
-//		            LayoutParams.FILL_PARENT,
-//		            LayoutParams.WRAP_CONTENT));
-//
-//			((RelativeLayout) relativeLayout).addView(valueTV);
-//		}
-//		else
-//		{
-//			System.out.println("step Not 5");
-//		}
+		System.out.println("step 2");
 	}
 
 	@Override
@@ -67,5 +43,122 @@ public class MainActivity extends Activity
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
+	{
+		public URL						serverURL;
+		public URLConnection			servletConnection;
 
+		public HTTP_Req_Temp()
+		{
+		}
+		
+		@Override
+		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
+		{
+			return sendData(messageOut[0]);
+		}	
+		@Override
+		protected void onProgressUpdate(Void... progress) 
+		{
+	    }
+		@Override
+	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
+		{             
+			System.out.println("step 4");
+			if (result.getClass() == Mgmt_Msg_Rsp_Temperatures.class)
+			{
+				Mgmt_Msg_Rsp_Temperatures msg_received = (Mgmt_Msg_Rsp_Temperatures) result;
+
+				TextView right1 						= (TextView) findViewById(R.id.right1);
+				right1.setText(msg_received.dateTime);
+				
+				TextView right2 						= (TextView) findViewById(R.id.right2);
+				right2.setText(displayTemperature(msg_received.tempBoiler));
+
+				TextView right3 						= (TextView) findViewById(R.id.right3);
+				right3.setText(displayTemperature(msg_received.tempHotWater));
+
+				TextView right4 						= (TextView) findViewById(R.id.right4);
+				right4.setText(displayTemperature(msg_received.tempOutside));
+			}
+	    }
+		public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
+		{
+			serverURL							= null;
+			servletConnection					= null;
+			
+			try
+			{
+				serverURL = new URL("http://192.168.5.20:8080/hvac/Management");
+			}
+			catch (MalformedURLException eMUE)
+			{
+				eMUE.printStackTrace();
+			}
+
+			try
+			{
+				servletConnection = serverURL.openConnection();
+			}
+			catch (IOException eIO)
+			{
+				eIO.printStackTrace();
+			}
+			
+			servletConnection.setDoOutput(true);
+			servletConnection.setUseCaches(false);
+			servletConnection.setConnectTimeout(1000);
+			servletConnection.setReadTimeout(1000);
+			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
+			
+			Mgmt_Msg_Abstract				messageReceive		= null;
+
+			try
+			{
+				ObjectOutputStream 			outputToServlet;
+				outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
+				outputToServlet.writeObject(messageSend);
+				outputToServlet.flush();
+				outputToServlet.close();
+	    		System.out.println(" HTTP_Request Sent ");
+			}
+			catch (SocketTimeoutException eTimeOut)
+			{
+	    		System.out.println(" HTTP_Request TimeOut on write : " + eTimeOut);
+			}
+			catch (Exception eSend) 
+			{
+	    		System.out.println(" HTTP_Request Send : " + eSend);
+			}
+
+			try
+			{
+				ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
+				messageReceive 									= (Mgmt_Msg_Abstract) response.readObject();
+			}
+	    	catch (ClassNotFoundException eClassNotFound) 
+	    	{
+	    		System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
+			}
+			catch (SocketTimeoutException eTimeOut)
+			{
+	    		System.out.println(" HTTP_Request TimeOut on read  : " + eTimeOut);
+			}
+			catch (Exception e) 
+			{
+	    		System.out.println(" HTTP_Request Other 1 : " + e);
+	    		System.out.println(" HTTP_Request Other 2 : " + e.getMessage());
+			}
+				
+			return messageReceive;			
+		}
+	}
+	private String displayTemperature(Integer temperature)
+	{
+		int degrees = temperature/10;
+		int decimal = temperature - degrees*10;
+		return degrees + "." + decimal;
+	}
+	
+	
 }
