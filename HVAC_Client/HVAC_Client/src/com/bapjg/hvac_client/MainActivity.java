@@ -69,17 +69,20 @@ public class MainActivity extends Activity
 			{
 				Mgmt_Msg_Rsp_Temperatures msg_received = (Mgmt_Msg_Rsp_Temperatures) result;
 
-				TextView right1 						= (TextView) findViewById(R.id.right1);
-				right1.setText(msg_received.dateTime);
+				TextView field	 						= (TextView) findViewById(R.id.Date);
+				field.setText(displayDate(msg_received.dateTime));
+
+				field	 								= (TextView) findViewById(R.id.Time);
+				field.setText(displayTime(msg_received.dateTime));
 				
-				TextView right2 						= (TextView) findViewById(R.id.right2);
-				right2.setText(displayTemperature(msg_received.tempBoiler));
+				field	 								= (TextView) findViewById(R.id.Boiler);
+				field.setText(displayTemperature(msg_received.tempBoiler));
 
-				TextView right3 						= (TextView) findViewById(R.id.right3);
-				right3.setText(displayTemperature(msg_received.tempHotWater));
+				field	 								= (TextView) findViewById(R.id.HotWater);
+				field.setText(displayTemperature(msg_received.tempHotWater));
 
-				TextView right4 						= (TextView) findViewById(R.id.right4);
-				right4.setText(displayTemperature(msg_received.tempOutside));
+				field	 								= (TextView) findViewById(R.id.Outside);
+				field.setText(displayTemperature(msg_received.tempOutside));
 			}
 	    }
 		public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
@@ -158,6 +161,14 @@ public class MainActivity extends Activity
 		int degrees = temperature/10;
 		int decimal = temperature - degrees*10;
 		return degrees + "." + decimal;
+	}
+	private String displayDate(String dateTime)
+	{
+		return dateTime.substring(8,10) + "/" + dateTime.substring(5,7);
+	}
+	private String displayTime(String dateTime)
+	{
+		return dateTime.substring(11,13) + ":" + dateTime.substring(14,16);
 	}
 	
 	
