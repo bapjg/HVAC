@@ -39,7 +39,7 @@ public class Thermometer_Stabliser
 			}
 		}
  	}
-	private Integer average()
+	public Integer average()
 	{
 		Integer i;
 		Integer sum						= 0;
