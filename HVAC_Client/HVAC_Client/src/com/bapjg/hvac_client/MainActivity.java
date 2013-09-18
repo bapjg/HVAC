@@ -27,13 +27,8 @@ public class MainActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		System.out.println("step 1");
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-		
-		Mgmt_Msg_Req_Temperatures				messageSend2 		= new Mgmt_Msg_Req_Temperatures();
-
-		httpRequest.execute(messageSend2);
-		System.out.println("step 2");
+		httpRequest.execute(new Mgmt_Msg_Req_Temperatures());
 	}
 
 	@Override
@@ -43,6 +38,13 @@ public class MainActivity extends Activity
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	public void temperaturesClick(View v)
+	{
+		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
+		httpRequest.execute(new Mgmt_Msg_Req_Temperatures());
+	}
+	
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 	{
 		public URL						serverURL;
@@ -83,6 +85,28 @@ public class MainActivity extends Activity
 
 				field	 								= (TextView) findViewById(R.id.Outside);
 				field.setText(displayTemperature(msg_received.tempOutside));
+
+				field	 								= (TextView) findViewById(R.id.BoilerIn);
+				field.setText(displayTemperature(msg_received.tempBoilerIn));
+
+				field	 								= (TextView) findViewById(R.id.FloorOut);
+				field.setText(displayTemperature(msg_received.tempFloorOut));
+
+				field	 								= (TextView) findViewById(R.id.FloorHot);
+				field.setText(displayTemperature(msg_received.tempFloorHot));
+
+				field	 								= (TextView) findViewById(R.id.FloorCold);
+				field.setText(displayTemperature(msg_received.tempFloorCold));
+
+				field	 								= (TextView) findViewById(R.id.RadiatorOut);
+				field.setText(displayTemperature(msg_received.tempRadiatorOut));
+
+				field	 								= (TextView) findViewById(R.id.RadiatorIn);
+				field.setText(displayTemperature(msg_received.tempRadiatorIn));
+
+				field	 								= (TextView) findViewById(R.id.LivingRoom);
+				field.setText(displayTemperature(msg_received.tempLivingRoom));
+				
 			}
 	    }
 		public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
@@ -168,8 +192,6 @@ public class MainActivity extends Activity
 	}
 	private String displayTime(String dateTime)
 	{
-		return dateTime.substring(11,13) + ":" + dateTime.substring(14,16);
+		return dateTime.substring(11,13) + ":" + dateTime.substring(14,16) + ":" + dateTime.substring(17,19);
 	}
-	
-	
 }
