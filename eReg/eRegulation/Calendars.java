@@ -20,22 +20,33 @@ public class Calendars extends DefaultHandler
 	
 	public Calendars() throws IOException, SAXException, ParserConfigurationException
     {
-		Message_Calendar_Report 							xmlCalendarString				= null;
-		
-		HTTP_Request	<Message_Calendar_Request_Data>		httpRequest						= new HTTP_Request <Message_Calendar_Request_Data> ("Management");
+		//=====================================================================
+		//
+		// This must be adapted to receive the serialised object
+		//
+				
+//		Message_Calendar_Report 							xmlCalendarString				= null;
+//		
+//		HTTP_Request	<Message_Calendar_Request_Data>		httpRequest						= new HTTP_Request <Message_Calendar_Request_Data> ("Management");
+//
+//		Message_Calendar_Request_Data 						messageSend 					= new Message_Calendar_Request_Data();
+//		
+//		Message_Abstract		 							messageReceive					= httpRequest.sendData(messageSend);
+//
+//		if (messageReceive instanceof Message_Calendar_Report)
+//		{
+//			xmlCalendarString																= (Message_Calendar_Report) messageReceive;
+//		}		
+		//
+		//=====================================================================
 
-		Message_Calendar_Request_Data 						messageSend 					= new Message_Calendar_Request_Data();
-		
-		Message_Abstract		 							messageReceive					= httpRequest.sendData(messageSend);
-
-		if (messageReceive instanceof Message_Calendar_Report)
-		{
-			xmlCalendarString																= (Message_Calendar_Report) messageReceive;
-		}		
 		
 		
 		
-		
+		//=====================================================================
+		//
+		// This part is the first attempt
+		// Get an xml version of the calendar from the server
 		
 //		try 
 //		{
@@ -83,19 +94,29 @@ public class Calendars extends DefaultHandler
 //		{
 //			e.printStackTrace();
 //		}
+		//
+		//=====================================================================
+
 		
-		try 
-		{
-			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
-			SAXParser 			saxParser 			= saxFactory.newSAXParser();
-			
-			Global.calendarsDateTime				= xmlCalendarString.dateTime;
-//			saxParser.parse(new InputSource(new StringReader(xmlCalendarString.calendars)), this);
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		} 		
+		//=====================================================================
+		//
+		// This must be adapted to receive the serialised object
+		//
+
+//		try 
+//		{
+//			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
+//			SAXParser 			saxParser 			= saxFactory.newSAXParser();
+//			
+//			Global.calendarsDateTime				= xmlCalendarString.dateTime;
+////			saxParser.parse(new InputSource(new StringReader(xmlCalendarString.calendars)), this);
+//		} 
+//		catch (Exception e) 
+//		{
+//			e.printStackTrace();
+//		} 	
+		//
+		//=====================================================================
 		
 		
 		// This part for file calendar
