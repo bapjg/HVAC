@@ -15,7 +15,7 @@ public class Thermometer
 	public String 					filePath;
  	public Integer 					reading;
 //	Go for a depth of 5 readings and a tolerance of 2 degrees
-	public Thermometer_Stabliser 	readings		= new Thermometer_Stabliser(5, 20); 
+	public Thermometer_Stabliser 	readings					= new Thermometer_Stabliser(5, 20); 
 	
 	
 	public Thermometer(String name, String address, String friendlyName)
@@ -60,7 +60,7 @@ public class Thermometer
 					System.out.println("tempReading : " + tempReading);
 					this.reading								= this.readings.add((tempReading + 50)/100);
 					System.out.println("this.reading : " + this.reading);
-					System.out.println("average : " + this.reading.average());
+					System.out.println("average : " + this.readings.average());
 					return this.reading;
 				}
 				else
