@@ -59,6 +59,7 @@ public class Thermometer
 
 					System.out.println("tempReading : " + tempReading);
 					this.reading								= this.readings.add((tempReading + 50)/100);
+					System.out.println("this.reading : ");
 					System.out.println("this.reading : " + this.reading);
 					System.out.println("average : " + this.readings.average());
 					return this.reading;
