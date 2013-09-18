@@ -1,6 +1,5 @@
 package eRegulation;
 
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -56,11 +55,7 @@ public class Thermometer
 					Integer 		tempPosition 				= ThermoFile_InputLine2.indexOf("t=");
 					Integer 		tempReading 				= Integer.parseInt(ThermoFile_InputLine2.substring(tempPosition + 2));
 
-					System.out.println("xxxtempReading : " + tempReading);
 					this.reading								= this.readings.add((tempReading + 50)/100);
-					System.out.println("this.reading : ");
-					System.out.println("this.reading : " + this.reading);
-					System.out.println("average : " + this.readings.average());
 					return this.reading;
 				}
 				else
