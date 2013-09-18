@@ -23,6 +23,7 @@ public class Thermometer
 		this.name 		    									= name;
 		this.thermoFile 			    						= address;
 		this.friendlyName  										= friendlyName;
+		this.reading											= 0;
 		
 		String  					thermoRadical 				= "/sys/bus/w1/devices/";
 		String 						thermoFile 					= thermoRadical + this.thermoFile.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'

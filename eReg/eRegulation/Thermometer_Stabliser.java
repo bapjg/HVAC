@@ -49,5 +49,4 @@ public class Thermometer_Stabliser
 		}
 		return sum / readings.length;
 	}
-
 }
