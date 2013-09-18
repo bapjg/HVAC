@@ -21,6 +21,7 @@ public class Thermometer_Stabliser
 		
 		if (readings.length == 0)
 		{
+			System.out.println("In add == 0");
 			readings[index] 			= newReading;
 			index++;
 			System.out.println("Return add read 0");
@@ -28,6 +29,7 @@ public class Thermometer_Stabliser
 		}
 		else
 		{
+			System.out.println("In add else");
 			Integer avgReading			= average();
 			
 			if (Math.abs(avgReading - newReading) > tolerance)
