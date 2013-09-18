@@ -63,6 +63,7 @@ public class Thermometer_Stabliser
 		{
 			sum							= sum + readings[i];
 		}
+		System.out.println("sum/count : " + sum + " / " + count);
 		return sum / count;
 	}
 }
