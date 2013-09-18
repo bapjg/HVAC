@@ -23,6 +23,7 @@ public class Thermometer_Stabliser
 		{
 			readings[index] 			= newReading;
 			index++;
+			System.out.println("Return add read 0");
 			return newReading;
 		}
 		else
@@ -31,12 +32,15 @@ public class Thermometer_Stabliser
 			
 			if (Math.abs(avgReading - newReading) > tolerance)
 			{
+				System.out.println("Return add average");
 				return avgReading;
 			}
 			else
 			{
 				readings[index] 		= newReading;
 				index					= index + 1 % depth;
+				System.out.println("Return add index : " + index);
+				System.out.println("Return add result : " + newReading);
 				return newReading;
 			}
 		}
