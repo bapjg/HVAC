@@ -17,6 +17,8 @@ public class Thermometer_Stabliser
 	}
 	public Integer add(Integer newReading)
 	{
+		System.out.println("In add");
+		
 		if (readings.length == 0)
 		{
 			readings[index] 			= newReading;
