@@ -57,7 +57,9 @@ public class Thermometer
 					Integer 		tempPosition 				= ThermoFile_InputLine2.indexOf("t=");
 					Integer 		tempReading 				= Integer.parseInt(ThermoFile_InputLine2.substring(tempPosition + 2));
 
+					System.out.println("tempReading : " + tempReading);
 					this.reading								= this.readings.add((tempReading + 50)/100);
+					System.out.println("this.reading : " + this.reading);
 					return this.reading;
 				}
 				else
