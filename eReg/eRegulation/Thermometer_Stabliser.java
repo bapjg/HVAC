@@ -24,7 +24,7 @@ public class Thermometer_Stabliser
 		
 		if (count == 0)
 		{
-			System.out.println("In add == 0");
+			System.out.println("In add == 0 : reading is " + newReading);
 			readings[index] 			= newReading;
 			index++;
 			count++;
@@ -59,7 +59,7 @@ public class Thermometer_Stabliser
 	{
 		Integer i;
 		Integer sum						= 0;
-		for (i = 0; i < count - 1; i++)
+		for (i = 0; i < count; i++)
 		{
 			sum							= sum + readings[i];
 		}
