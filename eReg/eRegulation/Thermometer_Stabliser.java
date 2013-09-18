@@ -20,25 +20,20 @@ public class Thermometer_Stabliser
 	}
 	public Integer add(Integer newReading)
 	{
-		System.out.println("============In add");
-		
 		if (count == 0)
 		{
-			System.out.println("In add == 0 : reading is " + newReading);
 			readings[index] 			= newReading;
 			index++;
 			count++;
-			System.out.println("Return add read 0");
 			return newReading;
 		}
 		else
 		{
-			System.out.println("In add else");
 			Integer avgReading			= average();
 			
 			if (Math.abs(avgReading - newReading) > tolerance)
 			{
-				System.out.println("Return add average : " + avgReading);
+				System.out.println("========Returning add average, Ecart : " + (avgReading - newReading));
 				return avgReading;
 			}
 			else
@@ -49,8 +44,6 @@ public class Thermometer_Stabliser
 				{
 					count++;
 				}
-				System.out.println("Return add index : " + index);
-				System.out.println("Return add result : " + newReading);
 				return newReading;
 			}
 		}
@@ -63,7 +56,6 @@ public class Thermometer_Stabliser
 		{
 			sum							= sum + readings[i];
 		}
-		System.out.println("sum/count : " + sum + " / " + count);
 		return sum / count;
 	}
 }
