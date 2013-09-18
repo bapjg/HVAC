@@ -14,6 +14,7 @@ public class Thermometer_Stabliser
 		this.depth 		  	  			= readingDepth;
 		this.index 		   			 	= 0;
 		this.tolerance					= tolerance;
+		this.readings					= new Integer[readingDepth];
 	}
 	public Integer add(Integer newReading)
 	{
