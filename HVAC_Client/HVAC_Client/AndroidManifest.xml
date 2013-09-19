@@ -6,13 +6,11 @@
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="17" 
-    />
-    
-	<uses-permission 
-	    android:name="android.permission.INTERNET">
-	</uses-permission>
-	
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -26,6 +24,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.bapjg.hvac_client.ConfigurationActivity"
+            android:label="@string/title_activity_configuration" >
         </activity>
     </application>
 

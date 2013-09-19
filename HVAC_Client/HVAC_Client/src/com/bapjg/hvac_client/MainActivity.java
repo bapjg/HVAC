@@ -12,6 +12,7 @@ import java.net.URLConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -43,6 +44,14 @@ public class MainActivity extends Activity
 	{
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
+	}
+	public void configurationClick(View v)
+	{
+	//	HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
+	//	httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
+		Intent i = new Intent(getBaseContext(), ConfigurationActivity.class);                      
+	//	i.putExtra("PersonID", personID);
+		startActivity(i);
 	}
 	
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 

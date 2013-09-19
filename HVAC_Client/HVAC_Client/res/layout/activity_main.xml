@@ -19,14 +19,15 @@
 
         <Button
             android:id="@+id/Button03"
-            android:onClick="temperaturesClick"
             android:text="Temperatures"
+            android:onClick="temperaturesClick"
             style="@style/AD_Button"		
         />
 
         <Button
             android:id="@+id/Button02"
-            android:text="Parameters"
+            android:text="Configuration"
+            android:onClick="configurationClick"
             style="@style/AD_Button" 
 		/>
 
