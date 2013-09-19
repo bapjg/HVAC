@@ -2,13 +2,13 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-public class Mgmt_Msg_Calendars extends Mgmt_Msg_Abstract
+public class Mgmt_Msg_Calendar extends Mgmt_Msg_Abstract
 {
 //	private static final long 				serialVersionUID 			= 1099L;
 	 
 	public ArrayList<Mgmt_Msg_Cal_Circuit> 			circuitList 				= new ArrayList<Mgmt_Msg_Cal_Circuit>();
 	
-	public Mgmt_Msg_Calendars ()
+	public Mgmt_Msg_Calendar ()
 	{
 	}
 
