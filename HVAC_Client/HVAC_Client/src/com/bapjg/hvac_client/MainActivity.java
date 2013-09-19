@@ -166,15 +166,18 @@ public class MainActivity extends Activity
 	    	catch (ClassNotFoundException eClassNotFound) 
 	    	{
 	    		System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
+	    		messageReceive									= new Mgmt_Msg_Sce_Nack();
 			}
 			catch (SocketTimeoutException eTimeOut)
 			{
 	    		System.out.println(" HTTP_Request TimeOut on read  : " + eTimeOut);
+	    		messageReceive									= new Mgmt_Msg_Sce_Nack();
 			}
 			catch (Exception e) 
 			{
 	    		System.out.println(" HTTP_Request Other 1 : " + e);
 	    		System.out.println(" HTTP_Request Other 2 : " + e.getMessage());
+	    		messageReceive									= new Mgmt_Msg_Sce_Nack();
 			}
 				
 			return messageReceive;			

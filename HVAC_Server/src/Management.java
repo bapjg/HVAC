@@ -116,11 +116,11 @@ public class Management extends HttpServlet
             e.printStackTrace();
         }
     }
-    public Mgmt_Msg_Rsp_Temperatures processTemperaturesReq()
+    public Mgmt_Msg_Temperatures processTemperaturesReq()
     {
         dbOpen();
         
-        Mgmt_Msg_Rsp_Temperatures returnBuffer  = new Mgmt_Msg_Rsp_Temperatures();
+        Mgmt_Msg_Temperatures returnBuffer  = new Mgmt_Msg_Temperatures();
 
         try
         {
