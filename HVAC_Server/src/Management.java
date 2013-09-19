@@ -60,11 +60,11 @@ public class Management extends HttpServlet
         
         try
         {
-            System.out.println("Step 1");
+//            System.out.println("Step 1");
             ObjectInputStream 			input 		= new ObjectInputStream(request.getInputStream());
-            System.out.println("Step 2");
+//            System.out.println("Step 2");
             message_in 								= input.readObject();
-            System.out.println("Step 3");
+//            System.out.println("Step 3");
         }
         catch (ClassNotFoundException eCNF)
         {
@@ -155,11 +155,6 @@ public class Management extends HttpServlet
             returnBuffer.tempOutside 			= dbResultSet.getInt("tempOutside");
             returnBuffer.tempLivingRoom 		= dbResultSet.getInt("tempLivingRoom");
             
-            System.out.println("processTemperaturesReq responding");
-            System.out.println("dateTime     :" + returnBuffer.dateTime);
-            System.out.println("tempBoiler   :" + returnBuffer.tempBoiler);
-            System.out.println("tempHotWater :" + returnBuffer.tempHotWater);
-                        
             dbStatement.close();
             dbConnection.close();
         }

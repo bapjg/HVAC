@@ -65,7 +65,6 @@ public class Monitor extends HttpServlet
         {
             ObjectInputStream 			input 		= new ObjectInputStream(request.getInputStream());
             message_in 								= input.readObject();
-            System.err.println("Try completed");
         }
         catch (ClassNotFoundException eCNF)
         {
@@ -79,8 +78,13 @@ public class Monitor extends HttpServlet
         	System.out.println("An IO Exception occured : " + eIO);
             message_out 							= new Message_Nack();
         }
+        catch (Exception e)
+        {
+        	System.err.println("Caught another exception");
+        	System.out.println("An Exception occured : " + e);
+            message_out 							= new Message_Nack();
+        }
 
-    	System.err.println("Test getClass");
     	if (message_in == null)
         {
             System.out.println("Null received from client");
@@ -267,7 +271,7 @@ public class Monitor extends HttpServlet
                 {
                     stmt.close();
                 } 
-                catch (SQLException sqlex) 
+                catch (SQLException eSQL) 
                 {
                 }
                 stmt = null;
