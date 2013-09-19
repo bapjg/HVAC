@@ -49,9 +49,9 @@ public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_A
 			System.out.println("step dateTime : " + msg_received.dateTime);
 			System.out.println("step calendars: " + msg_received.calendars);
 		}
-		else if (result.getClass() == Mgmt_Msg_Rsp_Temperatures.class)
+		else if (result.getClass() == Mgmt_Msg_Temperatures.class)
 		{
-			Mgmt_Msg_Rsp_Temperatures msg_received = (Mgmt_Msg_Rsp_Temperatures) result;
+			Mgmt_Msg_Temperatures msg_received = (Mgmt_Msg_Temperatures) result;
 
 //			TextView right1 						= (TextView) findViewByID(R.id.right1);
 //			right1.setText(msg_received.dateTime);

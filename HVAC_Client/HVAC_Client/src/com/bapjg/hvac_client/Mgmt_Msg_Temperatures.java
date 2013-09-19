@@ -1,6 +1,6 @@
 package com.bapjg.hvac_client;
 
-public class Mgmt_Msg_Rsp_Temperatures   extends Mgmt_Msg_Abstract
+public class Mgmt_Msg_Temperatures   extends Mgmt_Msg_Abstract
 {
 	private static final long 		serialVersionUID 			= 1091L;
 	
@@ -16,7 +16,7 @@ public class Mgmt_Msg_Rsp_Temperatures   extends Mgmt_Msg_Abstract
 	public  Integer					tempOutside;
 	public  Integer					tempLivingRoom;
 	
-	public Mgmt_Msg_Rsp_Temperatures()
+	public Mgmt_Msg_Temperatures()
 	{
 	}
 

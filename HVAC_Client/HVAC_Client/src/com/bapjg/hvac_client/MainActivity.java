@@ -28,7 +28,7 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main);
 
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-		httpRequest.execute(new Mgmt_Msg_Req_Temperatures());
+		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class MainActivity extends Activity
 	public void temperaturesClick(View v)
 	{
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-		httpRequest.execute(new Mgmt_Msg_Req_Temperatures());
+		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 	}
 	
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
@@ -67,9 +67,9 @@ public class MainActivity extends Activity
 	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
 		{             
 			System.out.println("step 4");
-			if (result.getClass() == Mgmt_Msg_Rsp_Temperatures.class)
+			if (result.getClass() == Mgmt_Msg_Temperatures.class)
 			{
-				Mgmt_Msg_Rsp_Temperatures msg_received = (Mgmt_Msg_Rsp_Temperatures) result;
+				Mgmt_Msg_Temperatures msg_received = (Mgmt_Msg_Temperatures) result;
 
 				TextView field	 						= (TextView) findViewById(R.id.Date);
 				field.setText(displayDate(msg_received.dateTime));
