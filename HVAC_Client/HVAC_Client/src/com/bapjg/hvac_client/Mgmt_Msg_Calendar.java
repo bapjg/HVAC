@@ -6,6 +6,7 @@ public class Mgmt_Msg_Calendar extends Mgmt_Msg_Abstract
 {
 //	private static final long 				serialVersionUID 			= 1099L;
 	 
+	public String									dateTime;
 	public ArrayList<Mgmt_Msg_Cal_Circuit> 			circuitList 				= new ArrayList<Mgmt_Msg_Cal_Circuit>();
 	
 	public Mgmt_Msg_Calendar ()
