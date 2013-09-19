@@ -65,18 +65,28 @@ public class Monitor extends HttpServlet
         {
             ObjectInputStream 			input 		= new ObjectInputStream(request.getInputStream());
             message_in 								= input.readObject();
+            System.err.println("Try completed");
         }
         catch (ClassNotFoundException eCNF)
         {
-            eCNF.printStackTrace();
+        	System.err.println("Caught CNF");
+        	eCNF.printStackTrace();
             message_out 							= new Message_Nack();
         }
         catch (IOException eIO)
         {
-            System.out.println((new StringBuilder("An IO Exception occured : ")).append(eIO).toString());
+        	System.err.println("Caught IO");
+        	System.out.println("An IO Exception occured : " + eIO);
             message_out 							= new Message_Nack();
         }
-        if (message_in.getClass() == Message_Temperatures.class)
+
+    	System.err.println("Test getClass");
+    	if (message_in == null)
+        {
+            System.out.println("Null received from client");
+            message_out								= new Message_Nack();
+        } 
+    	else if (message_in.getClass() == Message_Temperatures.class)
         {
             Message_Temperatures 		readings 	= (Message_Temperatures) message_in;
             message_out								= processTemperatures(readings);

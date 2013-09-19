@@ -19,7 +19,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivity extends Activity 
+public class Activity_Main extends Activity 
 {
 
 	@Override
@@ -30,6 +30,9 @@ public class MainActivity extends Activity
 
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
+		
+		Global									global				= new Global();
+		global.henry												= "Hen3ry";
 	}
 
 	@Override
@@ -49,7 +52,7 @@ public class MainActivity extends Activity
 	{
 	//	HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 	//	httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
-		Intent i = new Intent(getBaseContext(), ConfigurationActivity.class);                      
+		Intent i = new Intent(getBaseContext(), Activity_Configuration.class);                      
 	//	i.putExtra("PersonID", personID);
 		startActivity(i);
 	}

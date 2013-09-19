@@ -69,31 +69,31 @@ public class Management extends HttpServlet
         catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
-            message_out 							= new Mgmt_Msg_Sce_Nack();
+            message_out 							= new Mgmt_Msg_Nack();
         }
         catch (IOException eIO)
         {
             System.out.println("An IO Exception occured : " + eIO);
-            message_out 							= new Mgmt_Msg_Sce_Nack();
+            message_out 							= new Mgmt_Msg_Nack();
         }
         catch (Exception e)
         {
             System.out.println("An Exception occured : " + e);
-            message_out 							= new Mgmt_Msg_Sce_Nack();
+            message_out 							= new Mgmt_Msg_Nack();
         }
         
         if (message_in.getClass() == Mgmt_Msg_Temperatures_Req.class)
         {
             message_out 							= processTemperaturesReq();
         } 
-		else if (message_in.getClass() == Mgmt_Msg_Calendar_Request_Data.class)
+		else if (message_in.getClass() == Mgmt_Msg_Calendar_Req.class)
         {
             message_out 							= processCalendarRequestData();
         } 
 		else
         {
             System.out.println("Unsupported message class received from client");
-            message_out								= new Mgmt_Msg_Sce_Nack();
+            message_out								= new Mgmt_Msg_Nack();
         }
         
         reply(response, message_out);
@@ -170,13 +170,13 @@ public class Management extends HttpServlet
 
         return returnBuffer;
     }
-    public Mgmt_Msg_Calendar_Report processCalendarRequestIndex()
+    public Mgmt_Msg_Calendar processCalendarRequestIndex()
     {
         dbOpen();
         
-        Mgmt_Msg_Calendar_Report returnBuffer 	= new Mgmt_Msg_Calendar_Report();
+        Mgmt_Msg_Calendar 		returnBuffer 	= new Mgmt_Msg_Calendar();
         returnBuffer.dateTime 					= "";
-        returnBuffer.calendars 					= "";
+//        returnBuffer.calendars 					= "";
 //        try
 //        {
 //            dbStatement 						= dbConnection.createStatement(1004, 1008);
@@ -191,23 +191,22 @@ public class Management extends HttpServlet
 //            eSQL.printStackTrace();
 //        }
         returnBuffer.dateTime 					= "2013_01_01 00:01:02";
-        returnBuffer.calendars 					= "Hello World";
+
         return returnBuffer;
     }
-    public Mgmt_Msg_Calendar_Report processCalendarRequestData()
+    public Mgmt_Msg_Calendar processCalendarRequestData()
     {
         dbOpen();
         
-        Mgmt_Msg_Calendar_Report returnBuffer 	= new Mgmt_Msg_Calendar_Report();
+        Mgmt_Msg_Calendar		 returnBuffer 	= new Mgmt_Msg_Calendar();
         returnBuffer.dateTime 					= "";
-        returnBuffer.calendars 					= "";
+
         try
         {
             dbStatement 						= dbConnection.createStatement(1004, 1008);
             ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT dateTime, calendars FROM calendars ORDER BY dateTime DESC LIMIT 1");
             dbResultSet.next();
             returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
-            returnBuffer.calendars 				= dbResultSet.getString("calendars");
             dbStatement.close();
             dbConnection.close();
         }
