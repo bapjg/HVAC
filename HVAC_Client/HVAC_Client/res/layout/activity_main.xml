@@ -1,66 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:baselineAligned="false"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="horizontal"
+	android:baselineAligned="false"
+	android:background= "@color/background"
 >
 
     <LinearLayout
-        android:layout_width="131sp"
-        android:layout_height="match_parent"
-        android:layout_marginRight="20dp"
-        android:layout_weight="0.10"
-        android:orientation="vertical"
-        android:paddingRight="0dp" 
-        android:background= "@color/background"
+		android:layout_width="131sp"
+		android:layout_height="match_parent"
+		android:layout_marginRight="20dp"
+		android:layout_weight="0.10"
+		android:orientation="vertical"
+		android:paddingRight="0dp" 
     >
 
         <Button
             android:id="@+id/Button03"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:onClick="temperaturesClick"
             android:text="Temperatures"
-            android:textColor="@color/textNormal"
-            android:textStyle="bold"
-            android:width="200sp" />
+            style="@style/AD_Button"		
+        />
 
         <Button
             android:id="@+id/Button02"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="Parameters"
-            android:textColor="@color/textNormal"
-            android:textStyle="bold"
-            android:width="200sp" />
+            style="@style/AD_Button" 
+		/>
 
         <Button
             android:id="@+id/Button01"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="Calendars"
-            android:textColor="@color/textNormal"
-            android:textStyle="bold"
-            android:width="200sp" />
+            style="@style/AD_Button"
+		/>
 
         <Button
             android:id="@+id/buttonTemperatures"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="Something Else"
-            android:textColor="@color/textNormal"
-            android:textStyle="bold"
-            android:width="200sp" />
+            style="@style/AD_Button"
+		/>
 
     </LinearLayout>
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-    	android:layout_weight="1"
-    >
+		<TableLayout
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+		>
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -68,45 +56,34 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Date"
-                android:width="200sp" 
-                />
+				android:text="Date"
+                style="@style/AD_Text"
+            />
 
             <TextView
                 android:id="@+id/Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
                 android:text="Date"
-                android:gravity="right"
-                android:width="100sp"             />
+ 				style="@style/AD_Data"
+			/>
 
-             </TableRow>
+		</TableRow>
 
         <TableRow
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+        >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Time"
-                android:textSize="20sp"
-                android:width="200sp"
+
+                style="@style/AD_Text"
              />
 
             <TextView
                 android:id="@+id/Time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Time"
-                android:textSize="20sp"
-                android:gravity="right"
-                android:width="100sp" 
+                style="@style/AD_Data"
             />
 
 
@@ -115,74 +92,55 @@
         <TableRow
             android:id="@+id/tableRow3333"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+        >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text=""
-                android:textSize="20sp"
-                android:width="200sp" 
+                style="@style/AD_Text"
             />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text=""
-                android:textSize="20sp"
-                android:gravity="right"
-                android:width="100sp" 
-            />
+  				style="@style/AD_Data"
+           />
 
         </TableRow>
 
         <TableRow
             android:id="@+id/tableRow3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
+            android:layout_height="wrap_content"
+        >
+            
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Boiler"
-                android:textSize="20sp"
-                android:width="200sp" 
+                style="@style/AD_Text"
             />
 
             <TextView
                 android:id="@+id/Boiler"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Boiler"
-                android:textSize="20sp"
-                android:gravity="right"
-                android:width="100sp" 
-            />
+  				style="@style/AD_Data"
+           />
 
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
+            android:layout_height="wrap_content"
+        >
             
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Hot Water"
-                android:textSize="20sp"
-                android:width="200sp" 
+                style="@style/AD_Text"
             />
 
             <TextView
                 android:id="@+id/HotWater"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Hot Water"
-                android:textSize="20sp"
-                android:gravity="right"
-                android:width="100sp"
+ 				style="@style/AD_Data"
             />
         </TableRow>
 
@@ -190,262 +148,211 @@
         <TableRow
             android:id="@+id/TableRow5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+        >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Outside"
-                android:textSize="20sp"
-                android:width="200sp" 
+                 style="@style/AD_Text"
             />
 
             <TextView
                 android:id="@+id/Outside"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Outside"
-                android:textSize="20sp"
-                android:gravity="right"
-                android:width="100sp"
+  				style="@style/AD_Data"
             />
+			
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow01"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
+            android:layout_height="wrap_content"
+        >
+            
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:width="200sp" 
+                style="@style/AD_Text"
             />
 
             <TextView
                 android:id="@+id/TextView01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:gravity="right"
-                android:width="100sp" 
+ 				style="@style/AD_Data"
             />
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow03"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+        >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Living Room"
-                android:textSize="20sp"
-                android:width="200sp" />
+				style="@style/AD_Text"
+			/>
 
             <TextView
                 android:id="@+id/LivingRoom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
                 android:text="Next"
-                android:textSize="20sp"
-                android:width="100sp" />
+ 				style="@style/AD_Data"
+               />
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow02"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+        >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:width="200sp" />
+				style="@style/AD_Text"
+			/>
 
             <TextView
                 android:id="@+id/TextView02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:textSize="20sp"
-                android:width="100sp" />
+				style="@style/AD_Data"
+			/>
 
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow04"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+        >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Floor Out"
-                android:textSize="20sp"
-                android:width="200sp" />
+				style="@style/AD_Text"
+			/>
 
             <TextView
                 android:id="@+id/FloorOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
                 android:text="Next"
-                android:textSize="20sp"
-                android:width="100sp" />
+				style="@style/AD_Data"
+			/>
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow05"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+		>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Floor Hot"
-                android:textSize="20sp"
-                android:width="200sp" />
+				style="@style/AD_Text"
+			 />
 
             <TextView
                 android:id="@+id/FloorHot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
                 android:text="Next"
-                android:textSize="20sp"
-                android:width="100sp" />
+				style="@style/AD_Data"
+			/>
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow06"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+		>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Floor Cold"
-                android:textSize="20sp"
-                android:width="200sp" />
+				style="@style/AD_Text"
+			/>
 
             <TextView
                 android:id="@+id/FloorCold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
                 android:text="Next"
-                android:textSize="20sp"
-                android:width="100sp" />
+				style="@style/AD_Data"
+			/>
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow07"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+        >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:width="200sp" />
+				style="@style/AD_Text"
+			/>
 
             <TextView
                 android:id="@+id/TextView07"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:textSize="20sp"
-                android:width="100sp" />
+				style="@style/AD_Data"
+			/>
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow08"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+		>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Radiator Out"
-                android:textSize="20sp"
-                android:width="200sp" />
+				style="@style/AD_Text"
+			/>
 
             <TextView
                 android:id="@+id/RadiatorOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
                 android:text="Next"
-                android:textSize="20sp"
-                android:width="100sp" />
+				style="@style/AD_Data"
+			/>
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow09"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+		>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Radiator In"
-                android:textSize="20sp"
-                android:width="200sp" />
+				style="@style/AD_Text"
+			/>
 
             <TextView
                 android:id="@+id/RadiatorIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="Radiator In"
-                android:textSize="20sp"
-                android:width="100sp" />
+                 android:text="Radiator In"
+				style="@style/AD_Data"
+			/>
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow10"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+		>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:width="200sp" />
+				style="@style/AD_Text"
+			/>
 
             <TextView
                 android:id="@+id/TextView03"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:textSize="20sp"
-                android:width="100sp" />
+				style="@style/AD_Data"
+			/>
         </TableRow>
 
         <TableRow
             android:id="@+id/TableRow11"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+		>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Boiler In"
-                android:textSize="20sp"
-                android:width="200sp" />
+				style="@style/AD_Text"
+			/>
 
             <TextView
                 android:id="@+id/BoilerIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
                 android:text="Boiler"
-                android:textSize="20sp"
-                android:width="100sp" />
+				style="@style/AD_Data"
+			/>
         </TableRow>
         
     </TableLayout>

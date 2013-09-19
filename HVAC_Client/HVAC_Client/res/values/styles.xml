@@ -17,4 +17,71 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-</resources>
+
+    <style name="AD_Text" parent="@android:style/TextAppearance.Medium"> 
+			<item name="android:textSize">
+				25sp
+			</item> 
+			<item name="android:width">
+			    200sp
+			</item> 
+			<item name="android:textColor">
+				#FFFFFF
+			</item> 
+			<item name="android:layout_width">
+				wrap_content
+			</item> 
+			<item name="android:layout_height">
+				wrap_content
+			</item> 
+	</style>
+	
+    <style name="AD_Data" parent="@android:style/TextAppearance.Medium"> 
+			<item name="android:textSize">
+				25sp
+			</item> 
+			<item name="android:textColor">
+				#FFFF00
+			</item> 
+			<item name="android:width">
+			    150sp
+			</item> 
+			<item name="android:gravity">
+			    right
+			</item> 
+			<item name="android:layout_width">
+				wrap_content
+			</item> 
+			<item name="android:layout_height">
+				wrap_content
+			</item> 
+	</style>
+    <style name="AD_Button" parent="@android:style/TextAppearance.Medium"> 
+			<item name="android:textSize">
+				25sp
+			</item> 
+			<item name="android:textColor">
+				#FFFF00
+			</item> 
+			<item name="android:width">
+			    200sp
+			</item> 
+			<item name="android:textStyle">
+				bold
+			</item> 
+			<item name="android:layout_width">
+				match_parent
+			</item> 
+			<item name="android:layout_height">
+				wrap_content
+			</item> 
+	</style>
+    
+    
+
+
+
+
+
+
+ </resources>
