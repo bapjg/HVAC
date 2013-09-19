@@ -79,6 +79,9 @@ public final class R {
         public static final int hello_world=0x7f060002;
     }
     public static final class style {
+        public static final int AD_Button=0x7f070004;
+        public static final int AD_Data=0x7f070003;
+        public static final int AD_Text=0x7f070002;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -97,6 +100,18 @@ public final class R {
         Base application theme for API 14+. This theme completely replaces
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
+        
+        
+        Added by AD from internet
+        
+        <style name="CustomText" parent="@android:style/TextAppearance.Medium"> 
+			<item name="android:textSize">40sp
+			</item> 
+			<item name="android:textColor">#008
+			</item> 
+		</style>
+
+		referenced by " @style/CustomText"
     
  API 14 theme customizations can go here. 
          */
