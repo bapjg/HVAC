@@ -82,7 +82,7 @@ public class Management extends HttpServlet
             message_out 							= new Mgmt_Msg_Sce_Nack();
         }
         
-        if (message_in.getClass() == Mgmt_Msg_Req_Temperatures.class)
+        if (message_in.getClass() == Mgmt_Msg_Temperatures_Req.class)
         {
             message_out 							= processTemperaturesReq();
         } 
