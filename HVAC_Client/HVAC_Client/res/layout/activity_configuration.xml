@@ -20,23 +20,35 @@
         <Button
             android:text="Thermometers"
             style="@style/AD_Button"		
+            android:onClick="thermometersClick"
         />
 
         <Button
             android:text="Relays"
             style="@style/AD_Button" 
-		/>
+            android:onClick="relaysClick"
+        />
 
         <Button
 
             android:text="Circuits"
             style="@style/AD_Button"
-		/>
+            android:onClick="circuitsClick"
+        />
+
 
         <Button
-            android:text="Othere"
+            android:text="Burner"
             style="@style/AD_Button"
-		/>
+            android:onClick="burnerClick"
+        />
+
+		<Button
+            android:text="Other"
+            style="@style/AD_Button"
+            android:onClick="otherClick"
+        />
+        
 
     </LinearLayout>
 
@@ -54,7 +66,6 @@
 				android:text="Date"
                 style="@style/AD_Text"
             />
-
             <TextView
             	android:id="@+id/Data"
                 android:text="Data"
@@ -71,7 +82,6 @@
                 android:text="Time"
                 style="@style/AD_Text"
              />
-
             <TextView
                 android:text="Time"
                 style="@style/AD_Data"
@@ -88,7 +98,6 @@
                 android:text=""
                 style="@style/AD_Text"
             />
-
             <TextView
                 android:text=""
   				style="@style/AD_Data"
@@ -104,7 +113,6 @@
                 android:text="Boiler"
                 style="@style/AD_Text"
             />
-
             <TextView
                 android:text="Boiler"
   				style="@style/AD_Data"
@@ -120,7 +128,6 @@
                 android:text="Hot Water"
                 style="@style/AD_Text"
             />
-
             <TextView
                 android:text="Hot Water"
  				style="@style/AD_Data"
@@ -136,7 +143,6 @@
                 android:text="Outside"
                  style="@style/AD_Text"
             />
-
             <TextView
                 android:text="Outside"
   				style="@style/AD_Data"
@@ -151,7 +157,6 @@
             <TextView
                 style="@style/AD_Text"
             />
-
             <TextView
  				style="@style/AD_Data"
             />
@@ -165,7 +170,6 @@
                 android:text="Living Room"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                  android:text="Next"
  				style="@style/AD_Data"
@@ -179,7 +183,6 @@
             <TextView
 				style="@style/AD_Text"
 			/>
-
             <TextView
  				style="@style/AD_Data"
 			/>
@@ -194,7 +197,6 @@
                 android:text="Floor Out"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:text="Next"
 				style="@style/AD_Data"
@@ -209,7 +211,6 @@
                 android:text="Floor Hot"
 				style="@style/AD_Text"
 			 />
-
             <TextView
                  android:text="Next"
 				style="@style/AD_Data"
@@ -224,7 +225,6 @@
                 android:text="Floor Cold"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:text="Next"
 				style="@style/AD_Data"
@@ -238,7 +238,6 @@
             <TextView
 				style="@style/AD_Text"
 			/>
-
             <TextView
  				style="@style/AD_Data"
 			/>
@@ -252,7 +251,6 @@
                 android:text="Radiator Out"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:text="Next"
 				style="@style/AD_Data"
@@ -267,7 +265,6 @@
                 android:text="Radiator In"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                  android:text="Radiator In"
 				style="@style/AD_Data"
@@ -281,7 +278,6 @@
             <TextView
 				style="@style/AD_Text"
 			/>
-
             <TextView
 				style="@style/AD_Data"
 			/>
@@ -295,7 +291,6 @@
                 android:text="Boiler In"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:text="Boiler"
 				style="@style/AD_Data"

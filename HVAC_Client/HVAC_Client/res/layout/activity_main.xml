@@ -18,27 +18,23 @@
     >
 
         <Button
-            android:id="@+id/Button03"
-            android:text="Temperatures"
+             android:text="Temperatures"
             android:onClick="temperaturesClick"
             style="@style/AD_Button"		
         />
 
         <Button
-            android:id="@+id/Button02"
             android:text="Configuration"
             android:onClick="configurationClick"
             style="@style/AD_Button" 
 		/>
 
         <Button
-            android:id="@+id/Button01"
             android:text="Calendars"
             style="@style/AD_Button"
 		/>
 
         <Button
-            android:id="@+id/buttonTemperatures"
             android:text="Something Else"
             style="@style/AD_Button"
 		/>
@@ -51,16 +47,14 @@
 			android:layout_weight="1"
 		>
 
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+         <TableRow
+            style="@style/AD_Row"
+        >
 
             <TextView
 				android:text="Date"
                 style="@style/AD_Text"
             />
-
             <TextView
                 android:id="@+id/Date"
                 android:text="Date"
@@ -70,9 +64,7 @@
 		</TableRow>
 
         <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+            style="@style/AD_Row"
         >
 
             <TextView
@@ -80,7 +72,6 @@
 
                 style="@style/AD_Text"
              />
-
             <TextView
                 android:id="@+id/Time"
                 android:text="Time"
@@ -91,16 +82,13 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow3333"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
+            style="@style/AD_Row"
         >
 
             <TextView
                 android:text=""
                 style="@style/AD_Text"
             />
-
             <TextView
                 android:text=""
   				style="@style/AD_Data"
@@ -109,16 +97,13 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/tableRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AD_Row"
         >
             
             <TextView
                 android:text="Boiler"
                 style="@style/AD_Text"
             />
-
             <TextView
                 android:id="@+id/Boiler"
                 android:text="Boiler"
@@ -128,16 +113,13 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/TableRow4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AD_Row"
         >
             
             <TextView
                 android:text="Hot Water"
                 style="@style/AD_Text"
             />
-
             <TextView
                 android:id="@+id/HotWater"
                 android:text="Hot Water"
@@ -147,16 +129,13 @@
 
         
         <TableRow
-            android:id="@+id/TableRow5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AD_Row"
         >
 
             <TextView
                 android:text="Outside"
                  style="@style/AD_Text"
             />
-
             <TextView
                 android:id="@+id/Outside"
                 android:text="Outside"
@@ -166,15 +145,12 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/TableRow01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AD_Row"
         >
             
             <TextView
                 style="@style/AD_Text"
             />
-
             <TextView
                 android:id="@+id/TextView01"
  				style="@style/AD_Data"
@@ -182,16 +158,13 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/TableRow03"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AD_Row"
         >
 
             <TextView
                 android:text="Living Room"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:id="@+id/LivingRoom"
                 android:text="Next"
@@ -200,15 +173,12 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/TableRow02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AD_Row"
         >
 
             <TextView
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:id="@+id/TextView02"
 				style="@style/AD_Data"
@@ -217,16 +187,13 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/TableRow04"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AD_Row"
         >
 
             <TextView
                 android:text="Floor Out"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:id="@+id/FloorOut"
                 android:text="Next"
@@ -234,17 +201,14 @@
 			/>
         </TableRow>
 
-        <TableRow
-            android:id="@+id/TableRow05"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-		>
+         <TableRow
+            style="@style/AD_Row"
+        >
 
             <TextView
                 android:text="Floor Hot"
 				style="@style/AD_Text"
 			 />
-
             <TextView
                 android:id="@+id/FloorHot"
                 android:text="Next"
@@ -252,17 +216,14 @@
 			/>
         </TableRow>
 
-        <TableRow
-            android:id="@+id/TableRow06"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-		>
+         <TableRow
+            style="@style/AD_Row"
+        >
 
             <TextView
                 android:text="Floor Cold"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:id="@+id/FloorCold"
                 android:text="Next"
@@ -271,15 +232,12 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/TableRow07"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/AD_Row"
         >
 
             <TextView
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:id="@+id/TextView07"
 				style="@style/AD_Data"
@@ -287,16 +245,13 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/TableRow08"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-		>
+            style="@style/AD_Row"
+        >
 
             <TextView
                 android:text="Radiator Out"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:id="@+id/RadiatorOut"
                 android:text="Next"
@@ -305,16 +260,13 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/TableRow09"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-		>
+            style="@style/AD_Row"
+        >
 
             <TextView
                 android:text="Radiator In"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:id="@+id/RadiatorIn"
                  android:text="Radiator In"
@@ -323,15 +275,12 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/TableRow10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-		>
+            style="@style/AD_Row"
+        >
 
             <TextView
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:id="@+id/TextView03"
 				style="@style/AD_Data"
@@ -339,16 +288,13 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/TableRow11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-		>
+            style="@style/AD_Row"
+        >
 
             <TextView
                 android:text="Boiler In"
 				style="@style/AD_Text"
 			/>
-
             <TextView
                 android:id="@+id/BoilerIn"
                 android:text="Boiler"
