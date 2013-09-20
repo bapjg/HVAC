@@ -33,7 +33,7 @@ public class Thermometer_Stabliser
 			
 			if (Math.abs(avgReading - newReading) > tolerance)
 			{
-				System.out.println("========Returning add average, Ecart : " + (avgReading - newReading));
+				System.out.println("========Returning add average, Ecart : " + (avgReading - newReading) + " avg : " + avgReading + " rdg : " +  newReading+ " tol : " +  tolerance);
 				return avgReading;
 			}
 			else
