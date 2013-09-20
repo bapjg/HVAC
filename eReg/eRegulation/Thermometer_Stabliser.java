@@ -28,7 +28,7 @@ public class Thermometer_Stabliser
 		}
 		else
 		{
-			smoothreading				= smoothreading + (newReading - newReading)/2;
+			smoothreading				= smoothreading + (newReading - smoothreading)/2;
 		}
 		return smoothreading;
 		
