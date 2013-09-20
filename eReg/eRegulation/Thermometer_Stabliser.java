@@ -9,6 +9,7 @@ public class Thermometer_Stabliser
 	public Integer			depth;
 	public Integer			tolerance;
 	public Integer			count;
+	public Integer			smoothreading;
 
 	public Thermometer_Stabliser(Integer readingDepth, Integer tolerance)
 	{
@@ -17,36 +18,48 @@ public class Thermometer_Stabliser
 		this.count						= 0;
 		this.tolerance					= tolerance;
 		this.readings					= new Integer[readingDepth];
+		this.smoothreading				= -99;
 	}
 	public Integer add(Integer newReading)
 	{
-		if (count == 0)
+		if (smoothreading == -99)
 		{
-			readings[index] 			= newReading;
-			index++;
-			count++;
-			return newReading;
+			smoothreading				= newReading;
 		}
 		else
 		{
-			Integer avgReading			= average();
-			
-			if (Math.abs(avgReading - newReading) > tolerance)
-			{
-				System.out.println("========Returning add average, Ecart : " + (avgReading - newReading) + " avg : " + avgReading + " rdg : " +  newReading+ " tol : " +  tolerance);
-				return avgReading;
-			}
-			else
-			{
-				readings[index] 		= newReading;
-				index					= index + 1 % depth;
-				if (count < depth)
-				{
-					count++;
-				}
-				return newReading;
-			}
+			smoothreading				= smoothreading + (newReading - newReading)/2;
 		}
+		return smoothreading;
+		
+		
+//		if (count == 0)
+//		{
+//			readings[index] 			= newReading;
+//			index++;
+//			count++;
+//			return newReading;
+//		}
+//		else
+//		{
+//			Integer avgReading			= average();
+//			
+//			if (Math.abs(avgReading - newReading) > tolerance)
+//			{
+//				System.out.println("========Returning add average, Ecart : " + (avgReading - newReading) + " avg : " + avgReading + " rdg : " +  newReading+ " tol : " +  tolerance);
+//				return avgReading;
+//			}
+//			else
+//			{
+//				readings[index] 		= newReading;
+//				index					= index + 1 % depth;
+//				if (count < depth)
+//				{
+//					count++;
+//				}
+//				return newReading;
+//			}
+//		}
  	}
 	public Integer average()
 	{
