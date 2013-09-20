@@ -22,7 +22,7 @@ public class Thermometer
 		this.name 		    									= name;
 		this.thermoFile 			    						= address;
 		this.friendlyName  										= friendlyName;
-		this.readings											= new Thermometer_Stabliser(5, 20); 
+		this.readings											= new Thermometer_Stabliser(10, 200); // Depth 10 entries// Tolerence = 20 degrees
 		String  					thermoRadical 				= "/sys/bus/w1/devices/";
 		String 						thermoFile 					= thermoRadical + this.thermoFile.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
 		
