@@ -11,13 +11,16 @@ import java.net.URLConnection;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
+import android.app.*;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Activity_Main extends Activity 
 {
@@ -120,78 +123,84 @@ public class Activity_Main extends Activity
 				field.setText(displayTemperature(msg_received.tempLivingRoom));
 				
 			}
+			else
+			{
+				Context 				context 				= getApplicationContext();
+				CharSequence 			text 					= "A Nack has been returned";
+				int 					duration 				= Toast.LENGTH_SHORT;
+
+				Toast 					toast 					= Toast.makeText(context, text, duration);
+				toast.show();
+				
+				Toast.makeText(getApplicationContext(), "What a shame", Toast.LENGTH_LONG).show();
+				
+				
+//				AlertDialog alertDialog 						= new AlertDialog.Builder(this).create();
+// 
+//				alertDialog.setTitle("Alert Dialog");
+//				alertDialog.setMessage("We have a problem");
+//				alertDialog.setButton("OK", new DialogInterface.OnClickListener() 
+//				{
+//                public void onClick(DialogInterface dialog, int which) 
+//                	{
+//
+//                	Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
+//                	}
+//				});
+// 
+//				alertDialog.show();
+			}
 	    }
 		public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
 		{
-			serverURL							= null;
-			servletConnection					= null;
+			serverURL											= null;
+			servletConnection									= null;
+			Mgmt_Msg_Abstract				messageReceive		= null;
 			
 			try
 			{
 				serverURL = new URL("http://192.168.5.20:8080/hvac/Management");
-			}
-			catch (MalformedURLException eMUE)
-			{
-				eMUE.printStackTrace();
-			}
-
-			try
-			{
 				servletConnection = serverURL.openConnection();
-			}
-			catch (IOException eIO)
-			{
-				eIO.printStackTrace();
-			}
-			
-			servletConnection.setDoOutput(true);
-			servletConnection.setUseCaches(false);
-			servletConnection.setConnectTimeout(1000);
-			servletConnection.setReadTimeout(1000);
-			servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-			
-			Mgmt_Msg_Abstract				messageReceive		= null;
-
-			try
-			{
+				servletConnection.setDoOutput(true);
+				servletConnection.setUseCaches(false);
+				servletConnection.setConnectTimeout(1000);
+				servletConnection.setReadTimeout(1000);
+				servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 				ObjectOutputStream 			outputToServlet;
 				outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
 				outputToServlet.writeObject(messageSend);
 				outputToServlet.flush();
 				outputToServlet.close();
 	    		System.out.println(" HTTP_Request Sent ");
-			}
-			catch (SocketTimeoutException eTimeOut)
-			{
-	    		System.out.println(" HTTP_Request TimeOut on write : " + eTimeOut);
-			}
-			catch (Exception eSend) 
-			{
-	    		System.out.println(" HTTP_Request Send : " + eSend);
-			}
-
-			try
-			{
 				ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
 				messageReceive 									= (Mgmt_Msg_Abstract) response.readObject();
 			}
-	    	catch (ClassNotFoundException eClassNotFound) 
+			catch (MalformedURLException eMUE) // thrown by new URL
+			{
+				eMUE.printStackTrace();
+				return new Mgmt_Msg_Nack();	
+			}
+			catch (SocketTimeoutException eTimeOut) // thrown on connection or read timeout
+			{
+	    		// Consider retries
+				System.out.println(" HTTP_Request TimeOut on read or write : " + eTimeOut);
+				return new Mgmt_Msg_Nack();	
+			}
+	    	catch (ClassNotFoundException eClassNotFound) // thrown if read returns unexpected class
 	    	{
 	    		System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
-	    		messageReceive									= new Mgmt_Msg_Nack();
+	    		return new Mgmt_Msg_Nack();
 			}
-			catch (SocketTimeoutException eTimeOut)
+			catch (IOException eIO) //thrown by various
 			{
-	    		System.out.println(" HTTP_Request TimeOut on read  : " + eTimeOut);
-	    		messageReceive									= new Mgmt_Msg_Nack();
+				eIO.printStackTrace();
+				return new Mgmt_Msg_Nack();	
 			}
 			catch (Exception e) 
 			{
-	    		System.out.println(" HTTP_Request Other 1 : " + e);
-	    		System.out.println(" HTTP_Request Other 2 : " + e.getMessage());
-	    		messageReceive									= new Mgmt_Msg_Nack();
+	    		System.out.println(" HTTP_Request Send or read : " + e);
+				return new Mgmt_Msg_Nack();	
 			}
-				
 			return messageReceive;			
 		}
 	}

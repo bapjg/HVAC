@@ -26,4 +26,5 @@ COPY    Mgmt_Msg_*.class                            \\NAS\Users_AD\2_Projects\HV
 
 PAUSE
 
+D:
 CD      \HVAC_Repository\HVAC\eReg\eRegulation

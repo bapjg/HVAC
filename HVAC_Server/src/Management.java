@@ -82,13 +82,17 @@ public class Management extends HttpServlet
             message_out 							= new Mgmt_Msg_Nack();
         }
         
-        if (message_in.getClass() == Mgmt_Msg_Temperatures_Req.class)
+        if (message_in == null)
+        {
+            message_out 							= new Mgmt_Msg_Nack();
+        } 
+        else if (message_in.getClass() == Mgmt_Msg_Temperatures_Req.class)
         {
             message_out 							= processTemperaturesReq();
         } 
 		else if (message_in.getClass() == Mgmt_Msg_Calendar_Req.class)
         {
-            message_out 							= processCalendarRequestData();
+            message_out 							= processCalendarRequest();
         } 
 		else
         {
@@ -170,7 +174,7 @@ public class Management extends HttpServlet
         dbOpen();
         
         Mgmt_Msg_Calendar 		returnBuffer 	= new Mgmt_Msg_Calendar();
-        returnBuffer.dateTime 					= "";
+
 //        returnBuffer.calendars 					= "";
 //        try
 //        {
@@ -189,7 +193,7 @@ public class Management extends HttpServlet
 
         return returnBuffer;
     }
-    public Mgmt_Msg_Calendar processCalendarRequestData()
+    public Mgmt_Msg_Calendar processCalendarRequest()
     {
         dbOpen();
         

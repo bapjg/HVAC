@@ -44,8 +44,11 @@ public class Thread_UserInterface implements Runnable
 				// Just create a taskItem. No need to put it on taskList as it wont be repeated
 				// Once performed, sequencer will set taskActive to null which will delete the object
 
+				System.out.println("HW requested");
+				
 				if (Global.circuitHotWater.taskActive != null)
 				{
+					System.out.println("Setting up HW circuit task");
 					Global.circuitHotWater.taskActive					= new CircuitTask(	now, 					// Time Start
 																							now + 30 * 60 * 1000, 	// TimeEnd
 																							350,					// TempObjective
