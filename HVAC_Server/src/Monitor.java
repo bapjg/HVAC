@@ -125,7 +125,7 @@ public class Monitor extends HttpServlet
         try
         {
             dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures");
+            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
@@ -159,7 +159,7 @@ public class Monitor extends HttpServlet
         try
         {
             dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM fuel");
+            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM fuel LIMIT 1");
             dbResultSet.moveToInsertRow();
 
             dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
@@ -185,7 +185,7 @@ public class Monitor extends HttpServlet
         try
         {
             dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM reports");
+            ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM reports LIMIT 1");
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
@@ -213,7 +213,7 @@ public class Monitor extends HttpServlet
         try
         {
             dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM actions");
+            ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM actions LIMIT 1");
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
