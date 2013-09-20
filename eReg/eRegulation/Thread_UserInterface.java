@@ -46,7 +46,7 @@ public class Thread_UserInterface implements Runnable
 
 				System.out.println("HW requested");
 				
-				if (Global.circuitHotWater.taskActive != null)
+				if (Global.circuitHotWater.taskActive == null)
 				{
 					System.out.println("Setting up HW circuit task");
 					Global.circuitHotWater.taskActive					= new CircuitTask(	now, 					// Time Start
