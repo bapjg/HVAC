@@ -10,7 +10,7 @@
 	<fragment 
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent" 
-	    android:name="com.bapjg.hvac_client.List_Fragment"
+	    android:name="com.bapjg.hvac_client.Fragment_List"
 	    android:id="@+id/list_fragment"
 	>
 	    

@@ -2,7 +2,11 @@ package com.bapjg.hvac_client;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
 public class Activity_Configuration extends Activity 
@@ -17,6 +21,16 @@ public class Activity_Configuration extends Activity
 		System.out.println(Global.henry);
 		// TextView field	 						= (TextView) findViewById(R.id.Data);
 		// field.setText(Global.henry);
+	}
+	protected View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle savedInstanceState) 
+	{
+		View view = inflator.inflate(R.layout.fragment_list, container, false);
+		setContentView(R.layout.activity_configuration);
+		
+		System.out.println(Global.henry);
+		// TextView field	 						= (TextView) findViewById(R.id.Data);
+		// field.setText(Global.henry);
+		return view;
 	}
 
 	@Override

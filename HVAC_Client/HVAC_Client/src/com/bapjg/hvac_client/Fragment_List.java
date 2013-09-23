@@ -3,10 +3,10 @@ package com.bapjg.hvac_client;
 import android.app.Fragment;
 import android.os.Bundle;
 
-public class List_Fragment extends Fragment
+public class Fragment_List extends Fragment
 {
 
-	public List_Fragment() 
+	public Fragment_List() 
 	{
 	}
 

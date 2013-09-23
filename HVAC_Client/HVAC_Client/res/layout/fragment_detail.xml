@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:name="com.bapjg.hvac_client.List_Fragment"
-    android:id="@+id/list_fragment"
+    android:name="com.bapjg.hvac_client.Fragment_Detail"
+    android:id="@+id/fragment_detail"
 >
     
 
