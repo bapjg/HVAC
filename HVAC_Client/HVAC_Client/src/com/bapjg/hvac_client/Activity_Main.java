@@ -121,7 +121,7 @@ public class Activity_Main extends Activity
 
 				field	 								= (TextView) findViewById(R.id.LivingRoom);
 				field.setText(displayTemperature(msg_received.tempLivingRoom));
-				
+				((TextView) findViewById(R.id.LivingRoom)).setText("abcd");
 			}
 			else
 			{
