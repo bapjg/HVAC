@@ -16,6 +16,8 @@
 		android:orientation="vertical"
 		android:paddingRight="0dp" 
     >
+    
+        
 
         <Button
             android:text="Thermometers"
