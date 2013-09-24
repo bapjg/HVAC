@@ -1,34 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="horizontal"
-	android:baselineAligned="false"
-	android:background= "@color/background"
+	xmlns:android					= "http://schemas.android.com/apk/res/android"
+	xmlns:tools						= "http://schemas.android.com/tools"
+	android:layout_width			= "match_parent"
+	android:layout_height			= "match_parent"
+	android:orientation				= "horizontal"
+	android:baselineAligned			= "false"
+	android:background				= "@color/background"
 >
 	<fragment 
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent" 
-	    android:name="com.bapjg.hvac_client.Fragment_List"
-	    android:id="@+id/list_fragment"
+	    android:layout_width		= "match_parent"
+	    android:layout_height		= "match_parent" 
+	    android:name				= "com.bapjg.hvac_client.Fragment_List"
+	    android:id					= "@+id/fragment_list"
 	>
-	    
-	
 	</fragment>
-
+<!-- 
+	
 	<fragment 
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent" 
-	    android:name="com.bapjg.hvac_client.Detail_Fragment"
-	    android:id="@+id/detail_fragment"
+	    android:layout_width		= "match_parent"
+	    android:layout_height		= "match_parent" 
+	    android:name				= "com.bapjg.hvac_client.Fragment_List"
+	    android:id					= "@+id/fragment_detail"
 	>
-    
-
 	</fragment>
-	
-    
-    
+ -->    
 </LinearLayout>    
 <!-- 
 <LinearLayout 
@@ -62,7 +58,6 @@
         />
 
         <Button
-
             android:text="Circuits"
             style="@style/AD_Button"
             android:onClick="circuitsClick"
@@ -133,7 +128,7 @@
             <TextView
                 android:text=""
   				style="@style/AD_Data"
-           />
+            />
 
         </TableRow>
 

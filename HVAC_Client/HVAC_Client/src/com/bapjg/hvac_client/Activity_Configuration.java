@@ -1,15 +1,15 @@
 package com.bapjg.hvac_client;
 
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
-public class Activity_Configuration extends Activity 
+public class Activity_Configuration extends FragmentActivity 
 {
 
 	@Override

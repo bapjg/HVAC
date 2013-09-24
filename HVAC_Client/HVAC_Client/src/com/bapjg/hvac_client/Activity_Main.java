@@ -11,10 +11,11 @@ import java.net.URLConnection;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.*;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -22,7 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Activity_Main extends Activity 
+public class Activity_Main extends FragmentActivity 
 {
 
 	@Override
@@ -53,11 +54,12 @@ public class Activity_Main extends Activity
 	}
 	public void configurationClick(View v)
 	{
-	//	HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-	//	httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
-		Intent i = new Intent(getBaseContext(), Activity_Configuration.class);                      
+	//	Intent i = new Intent(getBaseContext(), Activity_Configuration.class);                      
 	//	i.putExtra("PersonID", personID);
-		startActivity(i);
+	//	startActivity(i);
+		System.out.println("before sCV");
+		setContentView(R.layout.activity_configuration);
+		System.out.println("after sCV");
 	}
 	
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
