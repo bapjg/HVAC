@@ -86,42 +86,20 @@ public class Activity_Main extends Activity
 			{
 				Mgmt_Msg_Temperatures msg_received = (Mgmt_Msg_Temperatures) result;
 
-				TextView field	 						= (TextView) findViewById(R.id.Date);
-				field.setText(displayDate(msg_received.dateTime));
 
-				field	 								= (TextView) findViewById(R.id.Time);
-				field.setText(displayTime(msg_received.dateTime));
-				
-				field	 								= (TextView) findViewById(R.id.Boiler);
-				field.setText(displayTemperature(msg_received.tempBoiler));
+				((TextView) findViewById(R.id.Date)).setText(displayDate(msg_received.dateTime));
+				((TextView) findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));
 
-				field	 								= (TextView) findViewById(R.id.HotWater);
-				field.setText(displayTemperature(msg_received.tempHotWater));
-
-				field	 								= (TextView) findViewById(R.id.Outside);
-				field.setText(displayTemperature(msg_received.tempOutside));
-
-				field	 								= (TextView) findViewById(R.id.BoilerIn);
-				field.setText(displayTemperature(msg_received.tempBoilerIn));
-
-				field	 								= (TextView) findViewById(R.id.FloorOut);
-				field.setText(displayTemperature(msg_received.tempFloorOut));
-
-				field	 								= (TextView) findViewById(R.id.FloorHot);
-				field.setText(displayTemperature(msg_received.tempFloorHot));
-
-				field	 								= (TextView) findViewById(R.id.FloorCold);
-				field.setText(displayTemperature(msg_received.tempFloorCold));
-
-				field	 								= (TextView) findViewById(R.id.RadiatorOut);
-				field.setText(displayTemperature(msg_received.tempRadiatorOut));
-
-				field	 								= (TextView) findViewById(R.id.RadiatorIn);
-				field.setText(displayTemperature(msg_received.tempRadiatorIn));
-
-				field	 								= (TextView) findViewById(R.id.LivingRoom);
-				field.setText(displayTemperature(msg_received.tempLivingRoom));
-				((TextView) findViewById(R.id.LivingRoom)).setText("abcd");
+				((TextView) findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
+				((TextView) findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
+				((TextView) findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
+				((TextView) findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
+				((TextView) findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
+				((TextView) findViewById(R.id.FloorHot)).setText(displayTemperature(msg_received.tempFloorHot));
+				((TextView) findViewById(R.id.FloorCold)).setText(displayTemperature(msg_received.tempFloorCold));
+				((TextView) findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
+				((TextView) findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
+				((TextView) findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
 			}
 			else
 			{
