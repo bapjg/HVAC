@@ -7,7 +7,7 @@ public class HeatRequired
 	
 	public HeatRequired()
 	{
-		this.tempMinimum = -1;
-		this.tempMaximum = -1;
+		this.tempMinimum = -1000;
+		this.tempMaximum = -1000;
 	}
 }

@@ -61,8 +61,8 @@ public class Boiler
 	public void requestIdle()
 	{
 		burner.powerOff();
-		tempMax 									= -1;
-		tempMin 									= -1;
+		tempMax 									= -1000;
+		tempMin 									= -1000;
 		state 										= STATE_Off;
 	}
 	public Boolean checkFault()

@@ -25,10 +25,6 @@ abstract class Circuit_Abstract
 	public static final int			CIRCUIT_STATE_Suspended		= -1;
 	public static final int			CIRCUIT_STATE_RampUp 		= -1;
 
-	
-	
-	
-
 	public Mixer					mixer						= null;
 	public TemperatureGradient 		temperatureGradient			= null;				//This will be overridden
 	

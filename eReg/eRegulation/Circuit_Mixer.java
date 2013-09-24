@@ -25,8 +25,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 	@Override
 	public void sequencer()
 	{
-		this.heatRequired.tempMinimum			= -1;
-		this.heatRequired.tempMaximum			= -1;
+		this.heatRequired.tempMinimum			= -1000;
+		this.heatRequired.tempMaximum			= -1000;
 		if (taskActive == null)
 		{
 			//Nothing to do

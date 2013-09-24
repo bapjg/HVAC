@@ -217,8 +217,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 		// Note that this wont pass midnight
 		// Whould need to stop automatically at 23:55
 		
-		this.heatRequired.tempMinimum				= -1;
-		this.heatRequired.tempMaximum				= -1;
+		this.heatRequired.tempMinimum				= -1000;
+		this.heatRequired.tempMaximum				= -1000;
 		
 		if (this.taskActive != null)
 		{
