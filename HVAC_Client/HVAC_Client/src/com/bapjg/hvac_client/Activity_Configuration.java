@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
+import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.Menu;
 import android.view.View;
@@ -17,51 +19,33 @@ import android.widget.Toast;
 
 public class Activity_Configuration extends FragmentActivity 
 {
-
+	private CustomListAdapter 		adapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
-		        super.onCreate(savedInstanceState);
-		        setContentView(R.layout.activity_main);
-		 
-		        ArrayList image_details = getListData();
-		        ListView lv1 = (ListView) findViewById(R.id.List_View);
-		        
-		        CustomListAdapter adapter	= new CustomListAdapter(this, R.id.List_View, image_details);
-		        lv1.setAdapter(new CustomListAdapter(this, R.id.List_View, image_details));
-
-//		        lv1.setOnItemClickListener
-//		        (new OnItemClickListener() 
-//		        {
-//		 
-//		            @Override
-//		            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-//		                Object o = lv1.getItemAtPosition(position);
-//		                NewsItem newsData = (NewsItem) o;
-//		                Toast.makeText(Activity_Configuration.this, "Selected :" + " " + newsData, Toast.LENGTH_LONG).show();
-//		            }
-//		 
-//		        }
-//		        );		
-		
-		
-		
-		
-		
-//		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.activity_configuration);
-		
-//		TextView field	 											= (TextView) findViewById(R.id.Data);
-//		field.setText(Global.configuration.thermometerList.get(0).thermoID);
-//
-//		field	 													= (TextView) findViewById(R.id.Datum);
-//		field.setText(Global.configuration.thermometerList.get(1).thermoID);
-
-		//ArrayAdapter adapter										= new ArrayAdapter <Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer>(this, R.id.List_View, Global.configuration.thermometerList);
-		//ListView list = (ListView) findViewById(R.id.List_View);
-		//list.setAdapter(adapter);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_configuration);
+ 
+        ArrayList 					data		 					= getListData();
+        AdapterView 				view							= (AdapterView) findViewById(R.id.List_View);
+        
+        CustomListAdapter 			adapter							= new CustomListAdapter(this, R.id.List_View, data);
+        
+        view.setAdapter(adapter);
+        
+        
+        view.setOnItemClickListener(new AdapterView.OnItemClickListener()
+		{	@Override	public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) 
+			{
+				onClick(arg0, view, position, arg3);
+			}
+	    });		
 	}
-	
+	public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
+	{
+		Toast.makeText(Activity_Configuration.this, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();		
+	}
     private ArrayList getListData() 
     {
         ArrayList results = new ArrayList();

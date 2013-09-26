@@ -35,6 +35,7 @@ public final class R {
         public static final int FloorHot=0x7f09000a;
         public static final int FloorOut=0x7f090009;
         public static final int HotWater=0x7f090004;
+        public static final int List_View=0x7f090000;
         public static final int LivingRoom=0x7f090007;
         public static final int Outside=0x7f090005;
         public static final int RadiatorIn=0x7f09000e;
@@ -44,14 +45,17 @@ public final class R {
         public static final int TextView03=0x7f09000f;
         public static final int TextView07=0x7f09000c;
         public static final int Time=0x7f090002;
-        public static final int action_settings=0x7f090011;
-        public static final int fragment_list=0x7f090000;
+        public static final int action_settings=0x7f090014;
+        public static final int date=0x7f090013;
+        public static final int reporter=0x7f090012;
+        public static final int title=0x7f090011;
     }
     public static final class layout {
         public static final int activity_configuration=0x7f030000;
         public static final int activity_main=0x7f030001;
         public static final int fragment_detail=0x7f030002;
         public static final int fragment_list=0x7f030003;
+        public static final int list_row_layout=0x7f030004;
     }
     public static final class menu {
         public static final int configuration=0x7f080000;

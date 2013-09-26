@@ -11,59 +11,41 @@ public class CustomListAdapter extends ArrayAdapter
 {
 	 
     private ArrayList						listData;
-    private LayoutInflater 					layoutInflater;
-//    private Activity 						myActivity;
+    private LayoutInflater 					myInflater;
     private Context 						myContext;
  
     public CustomListAdapter(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
         
-        System.out.println("CustomListAdapter construtor called");
-
-        // this.myActivity					= activity;
         this.listData 					= listData;
         this.myContext 					= context;
-        
-        System.out.println("CustomListAdapter listData setup");
-        
-        layoutInflater 					= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //LayoutInflater layoutInflater 	= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        System.out.println("CustomListAdapter layoutInflater setup");
-   }
- 
+        this.myInflater					= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
     @Override
     public int getCount() 
     {
-        System.out.println("getCount called");
-
         return listData.size();
     }
- 
     @Override
     public NewsItem getItem(int position) 
     {
-        System.out.println("getItem called");
-
         return (NewsItem) listData.get(position);
     }
- 
     @Override
     public long getItemId(int position) 
     {
-        System.out.println("getItemId called");
-
         return position;
     }
- 
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) 
     {
-        System.out.println("getView called");
-        
     	ViewHolder holder;
+    	
         if (convertView == null) 
         {
-            convertView 				= layoutInflater.inflate(R.layout.list_row_layout, null);
+            
+        	convertView 				= myInflater.inflate(R.layout.list_row_layout, null);
             holder 						= new ViewHolder();
             holder.headlineView 		= (TextView) convertView.findViewById(R.id.title);
             holder.reporterNameView 	= (TextView) convertView.findViewById(R.id.reporter);
@@ -81,11 +63,16 @@ public class CustomListAdapter extends ArrayAdapter
  
         return convertView;
     }
- 
     static class ViewHolder 
     {
         TextView headlineView;
         TextView reporterNameView;
         TextView reportedDateView;
+    }
+    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
+    {
+        // Object 		o 								= view.getItemAtPosition(position);
+        // NewsItem 	newsData 						= (NewsItem) o;
+		Toast.makeText(myContext, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();
     }
 }

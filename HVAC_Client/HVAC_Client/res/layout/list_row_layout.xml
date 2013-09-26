@@ -8,31 +8,14 @@
  
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textStyle="bold"
-        android:typeface="sans" />
+        style			= "@style/AD_Text" />
  
     <TextView
         android:id="@+id/reporter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_marginTop="5dip"
-        android:text=""
-        android:textColor="#343434"
-        android:textSize="12sp" />
+        style			= "@style/AD_Text" />
  
     <TextView
         android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/reporter"
-        android:layout_alignBottom="@+id/reporter"
-        android:layout_alignParentRight="true"
-        android:text=""
-        android:textColor="#343434"
-        android:textSize="12sp" />
+        style			= "@style/AD_Text" />
  
 </RelativeLayout>

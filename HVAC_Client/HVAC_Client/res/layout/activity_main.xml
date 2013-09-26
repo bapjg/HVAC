@@ -16,7 +16,7 @@
 		android:paddingRight			= "0dp" 
     >
         <Button
-             android:text				= "Temperatures"
+            android:text				= "Temperatures"
             android:onClick				= "temperaturesClick"
             style						= "@style/AD_Button"		
         />
