@@ -36,7 +36,19 @@ public class Activity_Main extends FragmentActivity
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 		
 		Global									global				= new Global();
-		global.henry												= "Hen3ry";
+		Global.configuration										= new Mgmt_Msg_Configuration();
+		
+		Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer thermo			= Global.configuration.new Mgmt_Msg_Thermometer();
+		thermo.name													= "boiler";
+		thermo.friendlyName											= "Chaudière";
+		thermo.thermoID												= "28-xxxxyyyy";
+		Global.configuration.thermometerList.add(thermo);
+		
+		Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer thermo2			= Global.configuration.new Mgmt_Msg_Thermometer();
+		thermo2.name												= "floor";
+		thermo2.friendlyName										= "Plancher";
+		thermo2.thermoID											= "28-zzzzaaaa";
+		Global.configuration.thermometerList.add(thermo2);
 	}
 
 	@Override
@@ -54,12 +66,12 @@ public class Activity_Main extends FragmentActivity
 	}
 	public void configurationClick(View v)
 	{
-	//	Intent i = new Intent(getBaseContext(), Activity_Configuration.class);                      
+	Intent i 														= new Intent(getBaseContext(), Activity_Configuration.class);                      
 	//	i.putExtra("PersonID", personID);
-	//	startActivity(i);
-		System.out.println("before sCV");
-		setContentView(R.layout.activity_configuration);
-		System.out.println("after sCV");
+		startActivity(i);
+	//	System.out.println("before sCV");
+	//	setContentView(R.layout.activity_configuration);
+	//	System.out.println("after sCV");
 	}
 	
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 

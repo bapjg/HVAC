@@ -1,330 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version		= "1.0" encoding		= "utf-8"?>
 <LinearLayout 
-	xmlns:android					= "http://schemas.android.com/apk/res/android"
-	xmlns:tools						= "http://schemas.android.com/tools"
-	android:layout_width			= "match_parent"
-	android:layout_height			= "match_parent"
-	android:orientation				= "horizontal"
-	android:baselineAligned			= "false"
-	android:background				= "@color/background"
->
-	<fragment 
-	    android:layout_width		= "match_parent"
-	    android:layout_height		= "match_parent" 
-	    android:name				= "com.bapjg.hvac_client.Fragment_List"
-	    android:id					= "@+id/fragment_list"
-	>
-	</fragment>
-<!-- 
-	
-	<fragment 
-	    android:layout_width		= "match_parent"
-	    android:layout_height		= "match_parent" 
-	    android:name				= "com.bapjg.hvac_client.Fragment_List"
-	    android:id					= "@+id/fragment_detail"
-	>
-	</fragment>
- -->    
-</LinearLayout>    
-<!-- 
-<LinearLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="horizontal"
-	android:baselineAligned="false"
-	android:background= "@color/background"
+	xmlns:android						=  "http://schemas.android.com/apk/res/android"
+	android:layout_width				=  "match_parent"
+	android:layout_height				= "match_parent"
+	android:orientation					= "horizontal"
+	android:baselineAligned				= "false"
+	android:background					=  "@color/background"
 >
 
     <LinearLayout
-		android:layout_width="131sp"
-		android:layout_height="match_parent"
-		android:layout_marginRight="20dp"
-		android:layout_weight="0.10"
-		android:orientation="vertical"
-		android:paddingRight="0dp" 
+		android:layout_width			= "131sp"
+		android:layout_height			= "match_parent"
+		android:layout_marginRight		= "20dp"
+		android:layout_weight			= "0.20"
+		android:orientation				= "vertical"
+		android:paddingRight			= "0dp" 
     >
- 
+
         <Button
-            android:text="Thermometers"
-            style="@style/AD_Button"		
+            style="@style/AD_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:onClick="thermometersClick"
-        />
+            android:text="Thermometers" />
 
         <Button
-            android:text="Relays"
-            style="@style/AD_Button" 
+            style="@style/AD_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:onClick="relaysClick"
-        />
+            android:text="Relays" />
 
         <Button
-            android:text="Circuits"
             style="@style/AD_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:onClick="circuitsClick"
-        />
-
+            android:text="Circuits" />
 
         <Button
-            android:text="Burner"
             style="@style/AD_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:onClick="burnerClick"
-        />
+            android:text="Burner" />
 
 		<Button
-            android:text="Other"
-            style="@style/AD_Button"
-            android:onClick="otherClick"
-        />
-        
+		    style="@style/AD_Button"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:onClick="otherClick"
+		    android:text="Other" />
 
-    </LinearLayout>
-
-		<TableLayout
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_weight="1"
+     </LinearLayout>
+		<ListView
+			android:id						= "@+id/List_View"    
+			android:layout_width			= "150sp"
+			android:layout_height			= "match_parent"
+			android:layout_weight			= "1"
 		>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-				android:text="Date"
-                style="@style/AD_Text"
-            />
-            <TextView
-            	android:id="@+id/Data"
-                android:text="Data"
- 				style="@style/AD_Data"
-			/>
-
-		</TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-                android:text="Time"
-                style="@style/AD_Text"
-             />
-            <TextView
-                android:text="Time"
-                style="@style/AD_Data"
-            />
-
-
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-                android:text=""
-                style="@style/AD_Text"
-            />
-            <TextView
-                android:text=""
-  				style="@style/AD_Data"
-            />
-
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-            
-            <TextView
-                android:text="Boiler"
-                style="@style/AD_Text"
-            />
-            <TextView
-                android:text="Boiler"
-  				style="@style/AD_Data"
-           />
-
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-            
-            <TextView
-                android:text="Hot Water"
-                style="@style/AD_Text"
-            />
-            <TextView
-                android:text="Hot Water"
- 				style="@style/AD_Data"
-            />
-        </TableRow>
-
-        
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-                android:text="Outside"
-                 style="@style/AD_Text"
-            />
-            <TextView
-                android:text="Outside"
-  				style="@style/AD_Data"
-            />
 			
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-            
-            <TextView
-                style="@style/AD_Text"
-            />
-            <TextView
- 				style="@style/AD_Data"
-            />
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-                android:text="Living Room"
-				style="@style/AD_Text"
-			/>
-            <TextView
-                 android:text="Next"
- 				style="@style/AD_Data"
-               />
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-				style="@style/AD_Text"
-			/>
-            <TextView
- 				style="@style/AD_Data"
-			/>
-
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-                android:text="Floor Out"
-				style="@style/AD_Text"
-			/>
-            <TextView
-                android:text="Next"
-				style="@style/AD_Data"
-			/>
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-                android:text="Floor Hot"
-				style="@style/AD_Text"
-			 />
-            <TextView
-                 android:text="Next"
-				style="@style/AD_Data"
-			/>
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-                android:text="Floor Cold"
-				style="@style/AD_Text"
-			/>
-            <TextView
-                android:text="Next"
-				style="@style/AD_Data"
-			/>
-        </TableRow>
-
-         <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-				style="@style/AD_Text"
-			/>
-            <TextView
- 				style="@style/AD_Data"
-			/>
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-                android:text="Radiator Out"
-				style="@style/AD_Text"
-			/>
-            <TextView
-                android:text="Next"
-				style="@style/AD_Data"
-			/>
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-                android:text="Radiator In"
-				style="@style/AD_Text"
-			/>
-            <TextView
-                 android:text="Radiator In"
-				style="@style/AD_Data"
-			/>
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-				style="@style/AD_Text"
-			/>
-            <TextView
-				style="@style/AD_Data"
-			/>
-        </TableRow>
-
-        <TableRow
-            style="@style/AD_Row"
-        >
-
-            <TextView
-                android:text="Boiler In"
-				style="@style/AD_Text"
-			/>
-            <TextView
-                android:text="Boiler"
-				style="@style/AD_Data"
-			/>
-        </TableRow>
-        
-    </TableLayout>
-
+    	</ListView>
 </LinearLayout>
- -->

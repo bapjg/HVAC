@@ -20,7 +20,7 @@ public class Fragment_List extends Fragment
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.activity_configuration);
 		
-		System.out.println(Global.henry);
+		//System.out.println(Global.henry);
 		// TextView field	 						= (TextView) findViewById(R.id.Data);
 		// field.setText(Global.henry);
 	}
