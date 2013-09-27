@@ -7,14 +7,14 @@ import android.content.Context;
 import android.view.*;
 import android.widget.*;
 
-public class CustomListAdapter extends ArrayAdapter
+public class Adapter_Thermometers extends ArrayAdapter
 {
 	 
     private ArrayList						listData;
     private LayoutInflater 					myInflater;
     private Context 						myContext;
  
-    public CustomListAdapter(Context context, int resource, ArrayList listData) 
+    public Adapter_Thermometers(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
         
@@ -25,12 +25,12 @@ public class CustomListAdapter extends ArrayAdapter
     @Override
     public int getCount() 
     {
-        return listData.size();
+        return listData.size() + 1;
     }
     @Override
-    public NewsItem getItem(int position) 
+    public Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer getItem(int position) 
     {
-        return (NewsItem) listData.get(position);
+        return (Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer) listData.get(position - 1);
     }
     @Override
     public long getItemId(int position) 
@@ -45,29 +45,36 @@ public class CustomListAdapter extends ArrayAdapter
         if (convertView == null) 
         {
             
-        	convertView 				= myInflater.inflate(R.layout.list_row_layout, null);
+        	convertView 				= myInflater.inflate(R.layout.row_thermometer, null);
             holder 						= new ViewHolder();
-            holder.headlineView 		= (TextView) convertView.findViewById(R.id.title);
-            holder.reporterNameView 	= (TextView) convertView.findViewById(R.id.reporter);
-            holder.reportedDateView 	= (TextView) convertView.findViewById(R.id.date);
+            holder.name 		= (TextView) convertView.findViewById(R.id.name);
+            holder.friendlyName 	= (TextView) convertView.findViewById(R.id.friendlyName);
+            holder.thermoID 	= (TextView) convertView.findViewById(R.id.thermoID);
             convertView.setTag(holder);
         } 
         else 
         {
             holder = (ViewHolder) convertView.getTag();
         }
- 
-        holder.headlineView.setText(((NewsItem) listData.get(position)).getHeadline());
-        holder.reporterNameView.setText("By, " + ((NewsItem) listData.get(position)).getReporterName());
-        holder.reportedDateView.setText(((NewsItem) listData.get(position)).getDate());
- 
+        if (position == 0)
+        {
+            holder.name.setText("name");
+            holder.friendlyName.setText("friendlyName");
+            holder.thermoID.setText("thermoID");
+        }
+        else
+        {
+	        holder.name.setText(((Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer) listData.get(position - 1)).name);
+	        holder.friendlyName.setText(((Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer) listData.get(position - 1)).friendlyName);
+	        holder.thermoID.setText(((Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer) listData.get(position - 1)).thermoID);
+        }
         return convertView;
     }
     static class ViewHolder 
     {
-        TextView headlineView;
-        TextView reporterNameView;
-        TextView reportedDateView;
+    	TextView 						name;
+    	TextView 						friendlyName;
+    	TextView 						thermoID;
     }
     public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
     {

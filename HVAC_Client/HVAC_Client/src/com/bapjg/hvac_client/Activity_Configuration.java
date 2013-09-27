@@ -11,15 +11,17 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Activity_Configuration extends FragmentActivity 
 {
-	private CustomListAdapter 		adapter;
+	private Adapter_Thermometers 		adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -27,10 +29,11 @@ public class Activity_Configuration extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
  
-        ArrayList 					data		 					= getListData();
+        Mgmt_Msg_Configuration		message_in						= getMessage_In();
+        ArrayList 					data		 					= message_in.thermometerList;
         AdapterView 				view							= (AdapterView) findViewById(R.id.List_View);
         
-        CustomListAdapter 			adapter							= new CustomListAdapter(this, R.id.List_View, data);
+        Adapter_Thermometers 		adapter							= new Adapter_Thermometers(this, R.id.List_View, data);
         
         view.setAdapter(adapter);
         
@@ -44,48 +47,40 @@ public class Activity_Configuration extends FragmentActivity
 	}
 	public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
 	{
-		Toast.makeText(Activity_Configuration.this, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();		
+		Toast.makeText(Activity_Configuration.this, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();
+        AbsListView 				layout_list							= (AbsListView) findViewById(R.id.List_View);
+        LinearLayout.LayoutParams	params_list							= (LinearLayout.LayoutParams) layout_list.getLayoutParams();
+        params_list.height												= 0;
+        layout_list.setLayoutParams(params_list);
+        
+        LinearLayout 				layout_item							= (LinearLayout) findViewById(R.id.Item_View);
+        LinearLayout.LayoutParams	params_item							= (LinearLayout.LayoutParams) layout_item.getLayoutParams();
+        params_item.height												= 100;
+        layout_item.setLayoutParams(params_item);
 	}
-    private ArrayList getListData() 
+    private Mgmt_Msg_Configuration getMessage_In() 
     {
-        ArrayList results = new ArrayList();
-        NewsItem newsData = new NewsItem();
-        newsData.setHeadline("Dance of Democracy");
-        newsData.setReporterName("Pankaj Gupta");
-        newsData.setDate("May 26, 2013, 13:35");
-        results.add(newsData);
+    	Mgmt_Msg_Configuration message_in = new Mgmt_Msg_Configuration();
+    	
+    	Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer thermometer = message_in.new Mgmt_Msg_Thermometer();
+    	thermometer.name = "tempBoiler";
+    	thermometer.friendlyName ="Chaudiere";
+    	thermometer.thermoID = "028-0000xxxx";
+    	message_in.thermometerList.add(thermometer);
  
-        newsData = new NewsItem();
-        newsData.setHeadline("Major Naxal attacks in the past");
-        newsData.setReporterName("Pankaj Gupta");
-        newsData.setDate("May 26, 2013, 13:35");
-        results.add(newsData);
+        thermometer = message_in.new Mgmt_Msg_Thermometer();
+        thermometer.name = "tempHotWater";
+        thermometer.friendlyName ="Eau Chaude Sanitaire";
+        thermometer.thermoID = "028-0000yyyy";
+        message_in.thermometerList.add(thermometer);
  
-        newsData = new NewsItem();
-        newsData.setHeadline("BCCI suspends Gurunath pending inquiry ");
-        newsData.setReporterName("Rajiv Chandan");
-        newsData.setDate("May 26, 2013, 13:35");
-        results.add(newsData);
+        thermometer = message_in.new Mgmt_Msg_Thermometer();
+        thermometer.name = "tempRadiator";
+        thermometer.friendlyName ="Radiateur";
+        thermometer.thermoID = "028-0000zzzz";
+        message_in.thermometerList.add(thermometer);
  
-        newsData = new NewsItem();
-        newsData.setHeadline("Life convict can`t claim freedom after 14 yrs: SC");
-        newsData.setReporterName("Pankaj Gupta");
-        newsData.setDate("May 26, 2013, 13:35");
-        results.add(newsData);
- 
-        newsData = new NewsItem();
-        newsData.setHeadline("Indian Army refuses to share info on soldiers mutilated at LoC");
-        newsData.setReporterName("Pankaj Gupta");
-        newsData.setDate("May 26, 2013, 13:35");
-        results.add(newsData);
- 
-        newsData = new NewsItem();
-        newsData.setHeadline("French soldier stabbed; link to Woolwich attack being probed");
-        newsData.setReporterName("Sudeep Nanda");
-        newsData.setDate("May 26, 2013, 13:35");
-        results.add(newsData);
- 
-        return results;
+        return message_in;
     }	
 	
 	
