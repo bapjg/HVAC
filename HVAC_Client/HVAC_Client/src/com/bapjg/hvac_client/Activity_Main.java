@@ -131,8 +131,9 @@ public class Activity_Main extends Activity
 	
 	public void temperaturesClick(View v)
 	{
-		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
+		System.out.println("I dont think we should be here in temperaturesClick");
+//		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
+//		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 	}
 	public void configurationClick(View v)
 	{
@@ -148,11 +149,6 @@ public class Activity_Main extends Activity
 	{
 		public URL						serverURL;
 		public URLConnection			servletConnection;
-
-		public HTTP_Req_Temp()
-		{
-		}
-		
 		@Override
 		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
 		{

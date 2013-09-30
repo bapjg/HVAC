@@ -7,7 +7,29 @@
 	android:baselineAligned				= "false"
 	android:background					=  "@color/background"
 >
-	<!--  
+	<LinearLayout 
+		android:layout_width			= "131sp"
+		android:layout_height			= "match_parent"
+		android:layout_marginRight		= "20dp"
+		android:layout_weight			= "0.10"
+		android:orientation				= "vertical"
+		android:baselineAligned			= "false"
+		android:background				= "@color/background"
+		android:text					= "roomForButtons"
+	>
+	</LinearLayout>
+	<LinearLayout 
+		android:id						= "@+id/fragment_container"
+		android:layout_width			= "match_parent"
+		android:layout_height			= "match_parent"
+		android:layout_weight			= "1"
+		android:orientation				= "vertical"
+		android:baselineAligned			= "false"
+		android:background				= "@color/background"
+		android:text					= "roomForButtons"
+	>
+	</LinearLayout>
+		<!--  
     <LinearLayout
 		android:layout_width			= "131sp"
 		android:layout_height			= "match_parent"
@@ -35,7 +57,7 @@
             style						= "@style/AD_Button"
 		/>
     </LinearLayout>
-    -->
+
 	<TableLayout
 		android:layout_width			= "wrap_content"
 		android:layout_height			= "match_parent"
@@ -286,5 +308,6 @@
         </TableRow>
         
     </TableLayout>
+    -->
 
 </LinearLayout>

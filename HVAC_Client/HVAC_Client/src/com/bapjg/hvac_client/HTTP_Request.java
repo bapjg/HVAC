@@ -131,7 +131,7 @@ public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_A
     		System.out.println(" HTTP_Request Other 1 : " + e);
     		System.out.println(" HTTP_Request Other 2 : " + e.getMessage());
 		}
-			
+
 		return messageReceive;			
 	}
 }
