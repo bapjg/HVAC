@@ -2,9 +2,6 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-import com.bapjg.hvac_client.Mgmt_Msg_Configuration.Data;
-import com.bapjg.hvac_client.Mgmt_Msg_Configuration.Data.Thermometer;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -39,7 +36,14 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
         if (position > 0)
         {
         	System.out.println("position : " + position);
-        	//Need to setup an update screen
+	        Activity activity											= (Activity) Activity_Main.actContext;
+	        ViewGroup 					viewGroup						= (ViewGroup) activity.findViewById(R.id.Detail_View);
+        	
+	        LayoutInflater 				inflater 						= (LayoutInflater) Activity_Main.actContext.getSystemService(Activity_Main.actContext.LAYOUT_INFLATER_SERVICE);
+        	
+        	View 						newView 						= inflater.inflate(R.layout.detail_thermometer, viewGroup, true);
+
+            //Need to setup an update screen
         }
         else
         {

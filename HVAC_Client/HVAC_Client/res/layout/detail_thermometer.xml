@@ -14,15 +14,15 @@
 	>
         <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Name"    	    									style	= "@style/AD_Text"  />
-            <EditView       android:text	= "xxxx"			android:id	= "@+id/Name"			style	= "@style/AD_Data"	/>
+            <TextView       android:text	= "xxxx"			android:id	= "@+id/Name"			style	= "@style/AD_Data"	/>
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Friendly Name"	   									style	= "@style/AD_Text"  />
-            <EditView       android:text	= "xxxx"			android:id	= "@+id/FriendlyName"	style	= "@style/AD_Data"	/>
+            <TextView       android:text	= "xxxx"			android:id	= "@+id/FriendlyName"	style	= "@style/AD_Data"	/>
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Thermo ID"  		      								style	= "@style/AD_Text"  />
-            <EditView       android:text	= "xxxx"			android:id	= "@+id/ThermoID"		style	= "@style/AD_Data"	/>
+            <TextView       android:text	= "xxxx"			android:id	= "@+id/ThermoID"		style	= "@style/AD_Data"	/>
 		</TableRow>
     </TableLayout>
 </LinearLayout>
