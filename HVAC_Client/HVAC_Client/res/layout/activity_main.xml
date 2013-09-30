@@ -1,6 +1,7 @@
 <?xml version			= "1.0" encoding			= "utf-8"?>
 <LinearLayout 
 	xmlns:android						= "http://schemas.android.com/apk/res/android"
+	android:id							= "@+id/activity_container"
 	android:layout_width				= "match_parent"
 	android:layout_height				= "match_parent"
 	android:orientation					= "horizontal"
@@ -8,6 +9,7 @@
 	android:background					=  "@color/background"
 >
 	<LinearLayout 
+		android:id						= "@+id/button_container"
 		android:layout_width			= "131sp"
 		android:layout_height			= "match_parent"
 		android:layout_marginRight		= "20dp"
@@ -15,11 +17,14 @@
 		android:orientation				= "vertical"
 		android:baselineAligned			= "false"
 		android:background				= "@color/background"
-		android:text					= "roomForButtons"
 	>
-	</LinearLayout>
+        <Button
+            android:text				= "roomForButtons"
+            style						= "@style/AD_Button"		
+        />
+		</LinearLayout>
 	<LinearLayout 
-		android:id						= "@+id/fragment_container"
+		android:id						= "@+id/panel_container"
 		android:layout_width			= "match_parent"
 		android:layout_height			= "match_parent"
 		android:layout_weight			= "1"
