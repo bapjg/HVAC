@@ -16,7 +16,21 @@ public class Mgmt_Msg_Temperatures   extends Mgmt_Msg_Abstract
 	public  Integer					tempOutside;
 	public  Integer					tempLivingRoom;
 	
-	public Mgmt_Msg_Temperatures()
+	public class Data
+	{
+		public  String				dateTime;
+		public  Integer				tempBoiler;
+		public  Integer				tempHotWater;
+		public  Integer				tempBoilerIn;
+		public  Integer				tempFloorOut;
+		public  Integer				tempFloorCold;
+		public  Integer				tempFloorHot;
+		public  Integer				tempRadiatorOut;
+		public  Integer				tempRadiatorIn;
+		public  Integer				tempOutside;
+		public  Integer				tempLivingRoom;
+	}
+	public class Request
 	{
 	}
 
