@@ -11,6 +11,7 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int Yellow=0x7f040002;
         public static final int background=0x7f040000;
         public static final int textNormal=0x7f040001;
     }
@@ -43,18 +44,19 @@ public final class R {
         public static final int RadiatorOut=0x7f09000e;
         public static final int Time=0x7f090006;
         public static final int activity_container=0x7f090002;
+        public static final int buttonThermometers=0x7f090012;
         public static final int button_container=0x7f090003;
-        public static final int friendlyName=0x7f090013;
-        public static final int menuitem_about=0x7f090019;
-        public static final int menuitem_add=0x7f090016;
-        public static final int menuitem_feedback=0x7f090018;
-        public static final int menuitem_quit=0x7f09001a;
-        public static final int menuitem_search=0x7f090015;
-        public static final int menuitem_share=0x7f090017;
-        public static final int name=0x7f090012;
+        public static final int friendlyName=0x7f090014;
+        public static final int menuitem_about=0x7f09001a;
+        public static final int menuitem_add=0x7f090017;
+        public static final int menuitem_feedback=0x7f090019;
+        public static final int menuitem_quit=0x7f09001b;
+        public static final int menuitem_search=0x7f090016;
+        public static final int menuitem_share=0x7f090018;
+        public static final int name=0x7f090013;
         public static final int panel_container=0x7f090004;
         public static final int textView1=0x7f090011;
-        public static final int thermoID=0x7f090014;
+        public static final int thermoID=0x7f090015;
     }
     public static final class layout {
         public static final int activity_configuration=0x7f030000;

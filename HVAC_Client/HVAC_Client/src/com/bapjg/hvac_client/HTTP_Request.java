@@ -71,7 +71,8 @@ public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_A
 		
 		try
 		{
-			serverURL = new URL("http://192.168.5.20:8080/hvac/Management");
+			//serverURL = new URL("http://192.168.5.20:8080/hvac/Management");
+			serverURL = new URL("http://home.bapjg.com:8080/hvac/Management");
 		}
 		catch (MalformedURLException eMUE)
 		{

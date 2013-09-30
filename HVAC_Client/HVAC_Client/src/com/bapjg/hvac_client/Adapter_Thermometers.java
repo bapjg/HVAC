@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.*;
 import android.widget.*;
 
@@ -43,7 +45,6 @@ public class Adapter_Thermometers extends ArrayAdapter
     	
         if (convertView == null) 
         {
-            
         	convertView 				= myInflater.inflate(R.layout.row_thermometer, null);
             holder 						= new ViewHolder();
             holder.name 				= (TextView) convertView.findViewById(R.id.name);
@@ -57,9 +58,15 @@ public class Adapter_Thermometers extends ArrayAdapter
         }
         if (position == 0)
         {
-            holder.name.setText("name");
-            holder.friendlyName.setText("friendlyName");
-            holder.thermoID.setText("thermoID");
+           	holder.name.setText("Name");
+            holder.name.setTextColor(Color.YELLOW);
+            holder.name.setTypeface(null, Typeface.BOLD);
+            holder.friendlyName.setText("Friendly Name");
+            holder.friendlyName.setTextColor(Color.YELLOW);
+            holder.friendlyName.setTypeface(null, Typeface.BOLD);
+            holder.thermoID.setText("Thermo ID");
+            holder.thermoID.setTextColor(Color.YELLOW);
+            holder.thermoID.setTypeface(null, Typeface.BOLD);
         }
         else
         {

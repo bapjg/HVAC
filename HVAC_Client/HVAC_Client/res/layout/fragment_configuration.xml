@@ -14,11 +14,13 @@
 		android:orientation				= "vertical"
 		android:paddingRight			= "0dp" >
 		<Button
+            android:id					= "@+id/buttonThermometers"
             style						= "@style/AD_Button"
             android:layout_width		= "wrap_content"
             android:layout_height		= "wrap_content"
-            android:onClick				= "thermometersClick"
+
             android:text				= "Thermometers" />
+            <!-- android:onClick				= "thermometersClick" -->
         <Button
             style						= "@style/AD_Button"
             android:layout_width		= "wrap_content"
@@ -53,20 +55,22 @@
 		android:paddingRight			= "0dp" >
      	<TextView 
 		    style						= "@style/AD_Text"
+
 		    android:text				= "Thermometers"
 		    android:gravity				= "left" />
 		<ListView
 		    android:id					= "@+id/List_View"
 		    android:layout_width		= "match_parent"
-		    android:layout_height		= "match_parent" />
+		    android:layout_height		= "500dp" />
 		<LinearLayout
 		    android:id					= "@+id/Item_View"
 		    android:layout_width		= "match_parent"
 			android:orientation			= "vertical"
-		    android:layout_height		= "10dp" >
+		    android:layout_height		= "500dp" >
 	     	<TextView 
 			    style					= "@style/AD_Text"
 			    android:text			= "Something"
+			    android:layout_height	= "100dp"
 			    android:gravity			= "left" />
 		</LinearLayout>
 	</LinearLayout>

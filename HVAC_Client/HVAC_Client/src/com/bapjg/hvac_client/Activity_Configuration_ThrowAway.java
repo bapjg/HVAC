@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Activity_Configuration extends FragmentActivity 
+public class Activity_Configuration_ThrowAway extends FragmentActivity 
 {
 	private Adapter_Thermometers 		adapter;
 	
@@ -47,7 +47,7 @@ public class Activity_Configuration extends FragmentActivity
 	}
 	public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
 	{
-		Toast.makeText(Activity_Configuration.this, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();
+		Toast.makeText(Activity_Configuration_ThrowAway.this, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();
         AbsListView 				layout_list							= (AbsListView) findViewById(R.id.List_View);
         LinearLayout.LayoutParams	params_list							= (LinearLayout.LayoutParams) layout_list.getLayoutParams();
         params_list.height												= 0;
@@ -58,32 +58,13 @@ public class Activity_Configuration extends FragmentActivity
         params_item.height												= 100;
         layout_item.setLayoutParams(params_item);
 	}
-    private Mgmt_Msg_Configuration.Data getMessage_In() 
+    public         Mgmt_Msg_Configuration.Data		getMessage_In()
     {
-    	Mgmt_Msg_Configuration 						message 			= new Mgmt_Msg_Configuration();
-    	Mgmt_Msg_Configuration.Data 				message_in 			= message.new Data();
+    	Mgmt_Msg_Configuration x = new Mgmt_Msg_Configuration();
     	
-    	Mgmt_Msg_Configuration.Data.Thermometer 	thermometer 		= message_in.new Thermometer();
-    	thermometer.name = "tempBoiler";
-    	thermometer.friendlyName ="Chaudiere";
-    	thermometer.thermoID = "028-0000xxxx";
-    	message_in.thermometerList.add(thermometer);
- 
-    	thermometer 													= message_in.new Thermometer();
-        thermometer.name = "tempHotWater";
-        thermometer.friendlyName ="Eau Chaude Sanitaire";
-        thermometer.thermoID = "028-0000yyyy";
-        message_in.thermometerList.add(thermometer);
- 
-    	thermometer 													= message_in.new Thermometer();
-    	thermometer.name = "tempRadiator";
-        thermometer.friendlyName ="Radiateur";
-        thermometer.thermoID = "028-0000zzzz";
-        message_in.thermometerList.add(thermometer);
- 
-        return message_in;
-    }	
-	
+    	return x.new Data();
+    }
+
 	
 	
 	

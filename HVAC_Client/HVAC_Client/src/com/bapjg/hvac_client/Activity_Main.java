@@ -118,28 +118,17 @@ public class Activity_Main extends Activity
 		return false;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void temperaturesClick(View v)
 	{
-		System.out.println("I dont think we should be here in temperaturesClick");
-//		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-//		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
+		// This is to update the temperature readings - but it is all wrong
+		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
+		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 	}
 	public void configurationClick(View v)
 	{
-	Intent i 														= new Intent(getBaseContext(), Activity_Configuration.class);                      
+//	Intent i 														= new Intent(getBaseContext(), Activity_Configuration.class);                      
 	//	i.putExtra("PersonID", personID);
-		startActivity(i);
+//		startActivity(i);
 	//	System.out.println("before sCV");
 	//	setContentView(R.layout.activity_configuration);
 	//	System.out.println("after sCV");
@@ -191,22 +180,6 @@ public class Activity_Main extends Activity
 				toast.show();
 				
 				Toast.makeText(getApplicationContext(), "What a shame", Toast.LENGTH_LONG).show();
-				
-				
-//				AlertDialog alertDialog 						= new AlertDialog.Builder(this).create();
-// 
-//				alertDialog.setTitle("Alert Dialog");
-//				alertDialog.setMessage("We have a problem");
-//				alertDialog.setButton("OK", new DialogInterface.OnClickListener() 
-//				{
-//                public void onClick(DialogInterface dialog, int which) 
-//                	{
-//
-//                	Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-//                	}
-//				});
-// 
-//				alertDialog.show();
 			}
 	    }
 		public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
@@ -217,7 +190,8 @@ public class Activity_Main extends Activity
 			
 			try
 			{
-				serverURL = new URL("http://192.168.5.20:8080/hvac/Management");
+//				serverURL = new URL("http://192.168.5.20:8080/hvac/Management");
+				serverURL = new URL("http://home.bapjg.com:8080/hvac/Management");
 				servletConnection = serverURL.openConnection();
 				servletConnection.setDoOutput(true);
 				servletConnection.setUseCaches(false);
