@@ -26,12 +26,14 @@ import android.widget.Toast;
 public class Activity_Main extends FragmentActivity 
 {
 	public static 	Context 					appContext;
+	public static 	Context 					actContext;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
         appContext 													= getApplicationContext();
+        actContext													= this;
         
         setContentView(R.layout.activity_main);
 
@@ -41,17 +43,6 @@ public class Activity_Main extends FragmentActivity
 		Global									global				= new Global();
 		Global.configuration										= new Mgmt_Msg_Configuration();
 		
-		Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer thermo			= Global.configuration.new Mgmt_Msg_Thermometer();
-		thermo.name													= "boiler";
-		thermo.friendlyName											= "Chaudière";
-		thermo.thermoID												= "28-xxxxyyyy";
-		Global.configuration.thermometerList.add(thermo);
-		
-		Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer thermo2			= Global.configuration.new Mgmt_Msg_Thermometer();
-		thermo2.name												= "floor";
-		thermo2.friendlyName										= "Plancher";
-		thermo2.thermoID											= "28-zzzzaaaa";
-		Global.configuration.thermometerList.add(thermo2);
 	}
 
 	@Override

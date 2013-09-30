@@ -4,36 +4,36 @@ import java.util.ArrayList;
 
 public class Mgmt_Msg_Calendar extends Mgmt_Msg_Abstract
 {
-//	private static final long 				serialVersionUID 			= 1099L;
-	 
-	public String									dateTime;
-	public ArrayList<Mgmt_Msg_Calendar_Circuit> 			circuitList 				= new ArrayList<Mgmt_Msg_Calendar_Circuit>();
-	
-	public Mgmt_Msg_Calendar ()
+	public class Data extends Mgmt_Msg_Abstract
 	{
-	}
-
-	// Inner classes
-	
-	public class Mgmt_Msg_Calendar_Circuit
-	{
-		public String								circuitName;
-		public ArrayList<Mgmt_Msg_Calendar_Task> 		circuitList 				= new ArrayList<Mgmt_Msg_Calendar_Task>();
+		public String										dateTime;
+		public ArrayList <Circuit> 							circuitList 				= new ArrayList <Circuit>();
 		
-		public Mgmt_Msg_Calendar_Circuit ()
+		public class Circuit
 		{
-		}
-		public class Mgmt_Msg_Calendar_Task
-		{
-			public String								days;
-			public Long									timeStart;
-			public Long  								timeEnd;
-			public Integer								tempObjective;
-			public Boolean								stopOnObjective;
+			public String									circuitName;
+			public ArrayList <Task> 						taskList 					= new ArrayList <Task>();
 			
-			public Mgmt_Msg_Calendar_Task ()
+			public class Task
 			{
+				public String								days;
+				public Long									timeStart;
+				public Long  								timeEnd;
+				public Integer								tempObjective;
+				public Boolean								stopOnObjective;
 			}
 		}
+	}
+	public class Request
+	{
+	}
+	public class Update extends Data
+	{
+	}
+	public class Ack  extends Mgmt_Msg_Abstract
+	{
+	}
+	public class Nack extends Mgmt_Msg_Abstract
+	{
 	}
 }

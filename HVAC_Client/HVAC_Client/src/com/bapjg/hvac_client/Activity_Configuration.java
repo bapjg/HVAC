@@ -29,11 +29,11 @@ public class Activity_Configuration extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
  
-        Mgmt_Msg_Configuration		message_in						= getMessage_In();
-        ArrayList 					data		 					= message_in.thermometerList;
-        AdapterView 				view							= (AdapterView) findViewById(R.id.List_View);
+        Mgmt_Msg_Configuration.Data		message_in					= getMessage_In();
+        ArrayList 						data		 				= message_in.thermometerList;
+        AdapterView 					view						= (AdapterView) findViewById(R.id.List_View);
         
-        Adapter_Thermometers 		adapter							= new Adapter_Thermometers(this, R.id.List_View, data);
+        Adapter_Thermometers 			adapter						= new Adapter_Thermometers(this, R.id.List_View, data);
         
         view.setAdapter(adapter);
         
@@ -58,24 +58,25 @@ public class Activity_Configuration extends FragmentActivity
         params_item.height												= 100;
         layout_item.setLayoutParams(params_item);
 	}
-    private Mgmt_Msg_Configuration getMessage_In() 
+    private Mgmt_Msg_Configuration.Data getMessage_In() 
     {
-    	Mgmt_Msg_Configuration message_in = new Mgmt_Msg_Configuration();
+    	Mgmt_Msg_Configuration 						message 			= new Mgmt_Msg_Configuration();
+    	Mgmt_Msg_Configuration.Data 				message_in 			= message.new Data();
     	
-    	Mgmt_Msg_Configuration.Mgmt_Msg_Thermometer thermometer = message_in.new Mgmt_Msg_Thermometer();
+    	Mgmt_Msg_Configuration.Data.Thermometer 	thermometer 		= message_in.new Thermometer();
     	thermometer.name = "tempBoiler";
     	thermometer.friendlyName ="Chaudiere";
     	thermometer.thermoID = "028-0000xxxx";
     	message_in.thermometerList.add(thermometer);
  
-        thermometer = message_in.new Mgmt_Msg_Thermometer();
+    	thermometer 													= message_in.new Thermometer();
         thermometer.name = "tempHotWater";
         thermometer.friendlyName ="Eau Chaude Sanitaire";
         thermometer.thermoID = "028-0000yyyy";
         message_in.thermometerList.add(thermometer);
  
-        thermometer = message_in.new Mgmt_Msg_Thermometer();
-        thermometer.name = "tempRadiator";
+    	thermometer 													= message_in.new Thermometer();
+    	thermometer.name = "tempRadiator";
         thermometer.friendlyName ="Radiateur";
         thermometer.thermoID = "028-0000zzzz";
         message_in.thermometerList.add(thermometer);
