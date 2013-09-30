@@ -25,12 +25,15 @@ import android.widget.Toast;
 
 public class Activity_Main extends FragmentActivity 
 {
-
+	public static 	Context 					appContext;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+        appContext 													= getApplicationContext();
+        
+        setContentView(R.layout.activity_main);
 
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());

@@ -46,17 +46,23 @@ public final class R {
         public static final int TextView03=0x7f090010;
         public static final int TextView07=0x7f09000d;
         public static final int Time=0x7f090003;
-        public static final int action_settings=0x7f090015;
-        public static final int friendlyName=0x7f090013;
-        public static final int name=0x7f090012;
-        public static final int thermoID=0x7f090014;
+        public static final int action_settings=0x7f090016;
+        public static final int friendlyName=0x7f090014;
+        public static final int name=0x7f090013;
+        public static final int textView1=0x7f090012;
+        public static final int thermoID=0x7f090015;
     }
     public static final class layout {
         public static final int activity_configuration=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int fragment_detail=0x7f030002;
-        public static final int fragment_list=0x7f030003;
-        public static final int row_thermometer=0x7f030004;
+        public static final int activity_main_old=0x7f030002;
+        public static final int fragment_actions=0x7f030003;
+        public static final int fragment_calendars=0x7f030004;
+        public static final int fragment_configuration=0x7f030005;
+        public static final int fragment_detail=0x7f030006;
+        public static final int fragment_list=0x7f030007;
+        public static final int fragment_temperatures=0x7f030008;
+        public static final int row_thermometer=0x7f030009;
     }
     public static final class menu {
         public static final int configuration=0x7f080000;
