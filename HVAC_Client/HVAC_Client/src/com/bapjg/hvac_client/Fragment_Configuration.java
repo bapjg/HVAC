@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 public class Fragment_Configuration extends Fragment 
 {
-	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -31,5 +30,5 @@ public class Fragment_Configuration extends Fragment
         LinearLayout.LayoutParams	params_item							= (LinearLayout.LayoutParams) layout_item.getLayoutParams();
         params_item.height												= 100;
         layout_item.setLayoutParams(params_item);
-	}}
-
+	}
+}

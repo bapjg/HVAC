@@ -11,38 +11,78 @@ import java.net.URLConnection;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
+
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.MenuInflater;
+
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Activity_Main extends FragmentActivity 
+public class Activity_Main extends Activity 
 {
 	public static 	Context 					appContext;
 	public static 	Context 					actContext;
+
+	private 		Adapter_Thermometers 		adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-        appContext 													= getApplicationContext();
-        actContext													= this;
-        
         setContentView(R.layout.activity_main);
+        
+        appContext 													= getApplicationContext();
+        actContext													= (Context) this;
+
+        ActionBar 				actionbar 				= getActionBar();
+        actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        
+        ActionBar.Tab 			tabTemperatures 		= actionbar.newTab().setText("Temperatures");
+        ActionBar.Tab 			tabConfiguration 		= actionbar.newTab().setText("Configuration");
+        ActionBar.Tab 			tabCalendars		 	= actionbar.newTab().setText("Calendars");
+        ActionBar.Tab 			tabActions				= actionbar.newTab().setText("Actions");
+        
+        Fragment_Temperatures	fragmentTemperatures 	= new Fragment_Temperatures();
+        Fragment_Configuration	fragmentConfiguration 	= new Fragment_Configuration();
+        Fragment_Calendars		fragmentCalendars 		= new Fragment_Calendars();
+        Fragment_Actions		fragmentActions 		= new Fragment_Actions();
+
+        tabTemperatures.setTabListener(new Listener_Tabs(fragmentTemperatures));
+        tabConfiguration.setTabListener(new Listener_Tabs(fragmentConfiguration));
+        tabCalendars.setTabListener(new Listener_Tabs(fragmentCalendars));
+        tabActions.setTabListener(new Listener_Tabs(fragmentActions));
+        
+        actionbar.addTab(tabTemperatures);
+        actionbar.addTab(tabConfiguration);
+        actionbar.addTab(tabCalendars);
+        actionbar.addTab(tabActions);
+
+    	Global									global				= new Global();
+		Global.configuration										= new Mgmt_Msg_Configuration();
+        
+        
+        
+
 
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 		
-		Global									global				= new Global();
-		Global.configuration										= new Mgmt_Msg_Configuration();
-		
+
 	}
 
 	@Override
@@ -52,6 +92,42 @@ public class Activity_Main extends FragmentActivity
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
+		switch(item.getItemId()) 
+		{
+			case R.id.menuitem_search:
+				Toast.makeText(appContext, "search", Toast.LENGTH_SHORT).show();
+				return true;
+			case R.id.menuitem_add:
+				Toast.makeText(appContext, "add", Toast.LENGTH_SHORT).show();
+				return true;
+			case R.id.menuitem_share:
+				Toast.makeText(appContext, "share", Toast.LENGTH_SHORT).show();
+				return true;
+			case R.id.menuitem_feedback:
+				Toast.makeText(appContext, "feedback", Toast.LENGTH_SHORT).show();
+				return true;
+			case R.id.menuitem_about:
+				Toast.makeText(appContext, "about", Toast.LENGTH_SHORT).show();
+				return true;
+			case R.id.menuitem_quit:
+				Toast.makeText(appContext, "quit", Toast.LENGTH_SHORT).show();
+				return true;
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public void temperaturesClick(View v)
 	{

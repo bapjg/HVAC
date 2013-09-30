@@ -106,13 +106,4 @@ public class Activity_Configuration extends FragmentActivity
 		// field.setText(Global.henry);
 		return view;
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) 
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.configuration, menu);
-		return true;
-	}
-
 }

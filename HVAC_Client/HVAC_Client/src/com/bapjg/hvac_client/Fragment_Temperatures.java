@@ -22,12 +22,10 @@ import android.widget.Toast;
 
 public class Fragment_Temperatures extends Fragment 
 {
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	// Inflate the layout for this fragment
-
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 

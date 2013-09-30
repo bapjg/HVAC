@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Mgmt_Msg_Configuration extends Mgmt_Msg_Abstract
 {
-	public class Data
+	public class Data extends Mgmt_Msg_Abstract
 	{
 		public ArrayList <Relay> 				relayList 					= new ArrayList <Relay>();
 		public ArrayList <Thermometer> 			thermometerList 			= new ArrayList <Thermometer>();
@@ -45,16 +45,16 @@ public class Mgmt_Msg_Configuration extends Mgmt_Msg_Abstract
 			public String 						summerPumpTime;
 		}
 	}
-	public class Request
+	public class Request extends Mgmt_Msg_Abstract
 	{
 	}
 	public class Update extends Data
 	{
 	}
-	public class Ack
+	public class Ack extends Mgmt_Msg_Abstract
 	{
 	}
-	public class Nack
+	public class Nack extends Mgmt_Msg_Abstract
 	{
 	}
 }
