@@ -25,6 +25,7 @@ public class Listener_Tabs implements ActionBar.TabListener
 	public void onTabSelected(Tab tab, FragmentTransaction ft) 
 	{
 		ft.replace(R.id.panel_container, fragment);
+		ft.replace(R.id.button_container, fragment);
 	}
 
 	@Override
