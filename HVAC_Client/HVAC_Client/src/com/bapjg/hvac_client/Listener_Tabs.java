@@ -8,11 +8,18 @@ import android.widget.Toast;
 
 public class Listener_Tabs implements ActionBar.TabListener
 {
-	public Fragment fragment;
+	public Fragment choices;
+	public Fragment information;
 	
-	public Listener_Tabs(Fragment fragment) 
+	public Listener_Tabs(Fragment choices, Fragment information) 
 	{
-		this.fragment = fragment;
+		this.choices = choices;
+		this.information = information;
+	}
+	public Listener_Tabs(Fragment information) 
+	{
+		this.choices = null;
+		this.information = information;
 	}
 	
 	@Override
@@ -24,13 +31,20 @@ public class Listener_Tabs implements ActionBar.TabListener
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) 
 	{
-		ft.replace(R.id.panel_container, fragment);
-		//ft.replace(R.id.button_container, fragment);
+		if (choices != null)
+		{
+			ft.replace(R.id.button_container, choices);
+		}
+		ft.replace(R.id.panel_container, information);
 	}
 
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) 
 	{
-		ft.remove(fragment);
+		if (choices != null)
+		{
+			ft.remove(choices);
+		}
+		ft.remove(information);
 	}
 }

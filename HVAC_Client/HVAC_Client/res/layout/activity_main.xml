@@ -10,7 +10,7 @@
 >
 	<LinearLayout 
 		android:id						= "@+id/button_container"
-		android:layout_width			= "131sp"
+		android:layout_width			= "220sp"
 		android:layout_height			= "match_parent"
 		android:layout_marginRight		= "20dp"
 		android:layout_weight			= "0.10"

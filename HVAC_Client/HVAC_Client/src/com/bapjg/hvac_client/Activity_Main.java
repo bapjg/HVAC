@@ -4,10 +4,16 @@ import com.bapjg.hvac_client.Mgmt_Msg_Configuration.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
+import java.util.Enumeration;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -43,7 +49,7 @@ public class Activity_Main extends Activity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); // Contains activity_container which contains button_container (left) and panel_container(right)
         
         global											= new Global();
         global.appContext 								= getApplicationContext();
@@ -62,11 +68,14 @@ public class Activity_Main extends Activity
         Fragment_Configuration	fragmentConfiguration 	= new Fragment_Configuration();
         Fragment_Calendars		fragmentCalendars 		= new Fragment_Calendars();
         Fragment_Actions		fragmentActions 		= new Fragment_Actions();
+        
+        Fragment_Buttons_Configuration		fragmentButtons			= new Fragment_Buttons_Configuration();
 
+        // Note that first argument is for the buttons/tabs the second for information page
         tabTemperatures.setTabListener(new Listener_Tabs(fragmentTemperatures));
-        tabConfiguration.setTabListener(new Listener_Tabs(fragmentConfiguration));
+        tabConfiguration.setTabListener(new Listener_Tabs(fragmentButtons, fragmentConfiguration));
         tabCalendars.setTabListener(new Listener_Tabs(fragmentCalendars));
-        tabActions.setTabListener(new Listener_Tabs(fragmentActions));
+        tabActions.setTabListener(new Listener_Tabs(fragmentButtons, fragmentActions));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabConfiguration);
@@ -207,8 +216,8 @@ public class Activity_Main extends Activity
 			
 			try
 			{
-//				serverURL = new URL("http://192.168.5.20:8080/hvac/Management");
-				serverURL = new URL("http://home.bapjg.com:8080/hvac/Management");
+				serverURL = new URL("http://192.168.5.20:8080/hvac/Management");
+				//serverURL = new URL("http://home.bapjg.com:8080/hvac/Management");
 				servletConnection = serverURL.openConnection();
 				servletConnection.setDoOutput(true);
 				servletConnection.setUseCaches(false);
@@ -220,13 +229,13 @@ public class Activity_Main extends Activity
 				outputToServlet.writeObject(messageSend);
 				outputToServlet.flush();
 				outputToServlet.close();
-	    		System.out.println(" HTTP_Request Sent ");
+
 				ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
 				messageReceive 									= (Mgmt_Msg_Abstract) response.readObject();
 			}
 			catch (MalformedURLException eMUE) // thrown by new URL
 			{
-				eMUE.printStackTrace();
+				System.out.println(" HTTP_Request MalformedURLException : " + eMUE);
 				return new Mgmt_Msg_Nack();	
 			}
 			catch (SocketTimeoutException eTimeOut) // thrown on connection or read timeout
@@ -242,7 +251,7 @@ public class Activity_Main extends Activity
 			}
 			catch (IOException eIO) //thrown by various
 			{
-				eIO.printStackTrace();
+	    		System.out.println(" HTTP_Request eIO : " + eIO);
 				return new Mgmt_Msg_Nack();	
 			}
 			catch (Exception e) 

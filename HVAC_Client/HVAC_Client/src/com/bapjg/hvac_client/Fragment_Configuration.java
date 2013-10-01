@@ -28,9 +28,9 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
     {
         // Inflate the layout for this fragment
         View myView =  inflater.inflate(R.layout.fragment_configuration, container, false);
-        myView.findViewById(R.id.buttonThermometers).setOnClickListener((OnClickListener) this);
-        ViewGroup myViewGroup = (ViewGroup) myView;
-        setButtonOnClick(myViewGroup);
+        //myView.findViewById(R.id.buttonThermometers).setOnClickListener((OnClickListener) this);
+        //ViewGroup myViewGroup = (ViewGroup) myView;
+        //setButtonOnClick(myViewGroup);
         return myView;
     }
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
@@ -107,29 +107,4 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
         }
         return;
     }
-//    private Mgmt_Msg_Configuration.Data getMessage_In() 
-//    {
-//    	Mgmt_Msg_Configuration 						message 			= new Mgmt_Msg_Configuration();
-//    	Mgmt_Msg_Configuration.Data 				message_in 			= message.new Data();
-//    	
-//    	Mgmt_Msg_Configuration.Data.Thermometer 	thermometer 		= message_in.new Thermometer();
-//    	thermometer.name = "tempBoiler";
-//    	thermometer.friendlyName ="Chaudiere";
-//    	thermometer.thermoID = "028-0000xxxx";
-//    	message_in.thermometerList.add(thermometer);
-// 
-//    	thermometer 													= message_in.new Thermometer();
-//        thermometer.name = "tempHotWater";
-//        thermometer.friendlyName ="Eau Chaude Sanitaire";
-//        thermometer.thermoID = "028-0000yyyy";
-//        message_in.thermometerList.add(thermometer);
-// 
-//    	thermometer 													= message_in.new Thermometer();
-//    	thermometer.name = "tempRadiator";
-//        thermometer.friendlyName ="Radiateur";
-//        thermometer.thermoID = "028-0000zzzz";
-//        message_in.thermometerList.add(thermometer);
-// 
-//        return message_in;
-//    }	
 }

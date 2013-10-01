@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Fragment_List extends Fragment
+public class Fragment_List_NotUsed extends Fragment
 {
 
-	public Fragment_List() 
+	public Fragment_List_NotUsed() 
 	{
 	}
 
