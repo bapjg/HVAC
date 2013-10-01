@@ -29,9 +29,9 @@ public class Adapter_Thermometers extends ArrayAdapter
         return listData.size() + 1;
     }
     @Override
-    public Mgmt_Msg_Configuration.Data.Thermometer getItem(int position) 
+    public Mgmt_Msg_Configuration.Thermometer getItem(int position) 
     {
-        return (Mgmt_Msg_Configuration.Data.Thermometer) listData.get(position - 1);
+        return (Mgmt_Msg_Configuration.Thermometer) listData.get(position - 1);
     }
     @Override
     public long getItemId(int position) 
@@ -70,9 +70,9 @@ public class Adapter_Thermometers extends ArrayAdapter
         }
         else
         {
-	        holder.name.setText(((Mgmt_Msg_Configuration.Data.Thermometer) listData.get(position - 1)).name);
-	        holder.friendlyName.setText(((Mgmt_Msg_Configuration.Data.Thermometer) listData.get(position - 1)).friendlyName);
-	        holder.thermoID.setText(((Mgmt_Msg_Configuration.Data.Thermometer) listData.get(position - 1)).thermoID);
+	        holder.name.setText(((Mgmt_Msg_Configuration.Thermometer) listData.get(position - 1)).name);
+	        holder.friendlyName.setText(((Mgmt_Msg_Configuration.Thermometer) listData.get(position - 1)).friendlyName);
+	        holder.thermoID.setText(((Mgmt_Msg_Configuration.Thermometer) listData.get(position - 1)).thermoID);
         }
         return convertView;
     }

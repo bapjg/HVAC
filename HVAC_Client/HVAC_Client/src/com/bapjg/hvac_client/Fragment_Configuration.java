@@ -2,6 +2,8 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
+import com.bapjg.hvac_client.Mgmt_Msg_Configuration;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -36,10 +38,10 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
         if (position > 0)
         {
         	System.out.println("position : " + position);
-	        Activity activity											= (Activity) Activity_Main.actContext;
+	        Activity activity											= (Activity) Global.actContext;
 	        ViewGroup 					viewGroup						= (ViewGroup) activity.findViewById(R.id.Detail_View);
         	
-	        LayoutInflater 				inflater 						= (LayoutInflater) Activity_Main.actContext.getSystemService(Activity_Main.actContext.LAYOUT_INFLATER_SERVICE);
+	        LayoutInflater 				inflater 						= (LayoutInflater) Global.actContext.getSystemService(Global.actContext.LAYOUT_INFLATER_SERVICE);
         	
         	View 						newView 						= inflater.inflate(R.layout.detail_thermometer, viewGroup, true);
 
@@ -77,12 +79,12 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
     	
     	if (myId == R.id.buttonThermometers)
     	{
-	    	Mgmt_Msg_Configuration.Data		message_in					= getMessage_In();
-	        ArrayList 						data		 				= message_in.thermometerList;
-	        Activity activity											= (Activity) Activity_Main.actContext;
-	        AdapterView 					view						= (AdapterView) activity.findViewById(R.id.List_View);
+	    	Mgmt_Msg_Configuration			message_in					= Global.configuration;
+	        ArrayList  						data		 				= Global.configuration.thermometerList;
+	        Activity activity											= (Activity) Global.actContext;
+	        AdapterView <Adapter_Thermometers> view						= (AdapterView) activity.findViewById(R.id.List_View);
 	        
-	        Adapter_Thermometers 			adapter						= new Adapter_Thermometers(Activity_Main.actContext, R.id.List_View, data);
+	        Adapter_Thermometers 			adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
 	        
 	        view.setAdapter(adapter);
 	        view.setOnItemClickListener((OnItemClickListener) this);	
@@ -105,29 +107,29 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
         }
         return;
     }
-    private Mgmt_Msg_Configuration.Data getMessage_In() 
-    {
-    	Mgmt_Msg_Configuration 						message 			= new Mgmt_Msg_Configuration();
-    	Mgmt_Msg_Configuration.Data 				message_in 			= message.new Data();
-    	
-    	Mgmt_Msg_Configuration.Data.Thermometer 	thermometer 		= message_in.new Thermometer();
-    	thermometer.name = "tempBoiler";
-    	thermometer.friendlyName ="Chaudiere";
-    	thermometer.thermoID = "028-0000xxxx";
-    	message_in.thermometerList.add(thermometer);
- 
-    	thermometer 													= message_in.new Thermometer();
-        thermometer.name = "tempHotWater";
-        thermometer.friendlyName ="Eau Chaude Sanitaire";
-        thermometer.thermoID = "028-0000yyyy";
-        message_in.thermometerList.add(thermometer);
- 
-    	thermometer 													= message_in.new Thermometer();
-    	thermometer.name = "tempRadiator";
-        thermometer.friendlyName ="Radiateur";
-        thermometer.thermoID = "028-0000zzzz";
-        message_in.thermometerList.add(thermometer);
- 
-        return message_in;
-    }	
+//    private Mgmt_Msg_Configuration.Data getMessage_In() 
+//    {
+//    	Mgmt_Msg_Configuration 						message 			= new Mgmt_Msg_Configuration();
+//    	Mgmt_Msg_Configuration.Data 				message_in 			= message.new Data();
+//    	
+//    	Mgmt_Msg_Configuration.Data.Thermometer 	thermometer 		= message_in.new Thermometer();
+//    	thermometer.name = "tempBoiler";
+//    	thermometer.friendlyName ="Chaudiere";
+//    	thermometer.thermoID = "028-0000xxxx";
+//    	message_in.thermometerList.add(thermometer);
+// 
+//    	thermometer 													= message_in.new Thermometer();
+//        thermometer.name = "tempHotWater";
+//        thermometer.friendlyName ="Eau Chaude Sanitaire";
+//        thermometer.thermoID = "028-0000yyyy";
+//        message_in.thermometerList.add(thermometer);
+// 
+//    	thermometer 													= message_in.new Thermometer();
+//    	thermometer.name = "tempRadiator";
+//        thermometer.friendlyName ="Radiateur";
+//        thermometer.thermoID = "028-0000zzzz";
+//        message_in.thermometerList.add(thermometer);
+// 
+//        return message_in;
+//    }	
 }

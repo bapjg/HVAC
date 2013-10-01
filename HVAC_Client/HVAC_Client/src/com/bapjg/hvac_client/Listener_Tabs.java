@@ -18,14 +18,14 @@ public class Listener_Tabs implements ActionBar.TabListener
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) 
 	{
-		Toast.makeText(Activity_Main.appContext, "Reselected!", Toast.LENGTH_LONG).show();
+		Toast.makeText(Global.appContext, "Reselected!", Toast.LENGTH_LONG).show();
 	}
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) 
 	{
 		ft.replace(R.id.panel_container, fragment);
-		ft.replace(R.id.button_container, fragment);
+		//ft.replace(R.id.button_container, fragment);
 	}
 
 	@Override

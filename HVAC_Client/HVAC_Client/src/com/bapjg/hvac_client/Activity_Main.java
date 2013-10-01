@@ -1,6 +1,6 @@
 package com.bapjg.hvac_client;
 
-
+import com.bapjg.hvac_client.Mgmt_Msg_Configuration.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -35,8 +35,7 @@ import android.widget.Toast;
 
 public class Activity_Main extends Activity 
 {
-	public static 	Context 					appContext;
-	public static 	Context 					actContext;
+	public static	Global						global;
 
 	private 		Adapter_Thermometers 		adapter;
 	
@@ -46,8 +45,10 @@ public class Activity_Main extends Activity
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        appContext 													= getApplicationContext();
-        actContext													= (Context) this;
+        global											= new Global();
+        global.appContext 								= getApplicationContext();
+        global.actContext								= (Context) this;
+        global.activity									= (Activity) this;
 
         ActionBar 				actionbar 				= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -72,17 +73,33 @@ public class Activity_Main extends Activity
         actionbar.addTab(tabCalendars);
         actionbar.addTab(tabActions);
 
-    	Global									global				= new Global();
-		Global.configuration										= new Mgmt_Msg_Configuration();
+        // Simulate Configuration message from server
         
         
-        
-
+        Global.configuration											= new Mgmt_Msg_Configuration();
+ 		
+ 		Mgmt_Msg_Configuration						config				= Global.configuration;
+ 
+    	Mgmt_Msg_Configuration.Thermometer 			thermometer 		= config.new Thermometer();
+    	thermometer.name = "tempBoiler";
+    	thermometer.friendlyName ="Chaudiere";
+    	thermometer.thermoID = "028-0000xxxx";
+    	config.thermometerList.add(thermometer);
+ 
+    	thermometer 													= config.new Thermometer();
+        thermometer.name = "tempHotWater";
+        thermometer.friendlyName ="Eau Chaude Sanitaire";
+        thermometer.thermoID = "028-0000yyyy";
+        config.thermometerList.add(thermometer);
+ 
+    	thermometer 													= config.new Thermometer();
+    	thermometer.name = "tempRadiator";
+        thermometer.friendlyName ="Radiateur";
+        thermometer.thermoID = "028-0000zzzz";
+        config.thermometerList.add(thermometer);
 
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
-		
-
 	}
 
 	@Override
@@ -97,22 +114,22 @@ public class Activity_Main extends Activity
 		switch(item.getItemId()) 
 		{
 			case R.id.menuitem_search:
-				Toast.makeText(appContext, "search", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Global.appContext, "search", Toast.LENGTH_SHORT).show();
 				return true;
 			case R.id.menuitem_add:
-				Toast.makeText(appContext, "add", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Global.appContext, "add", Toast.LENGTH_SHORT).show();
 				return true;
 			case R.id.menuitem_share:
-				Toast.makeText(appContext, "share", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Global.appContext, "share", Toast.LENGTH_SHORT).show();
 				return true;
 			case R.id.menuitem_feedback:
-				Toast.makeText(appContext, "feedback", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Global.appContext, "feedback", Toast.LENGTH_SHORT).show();
 				return true;
 			case R.id.menuitem_about:
-				Toast.makeText(appContext, "about", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Global.appContext, "about", Toast.LENGTH_SHORT).show();
 				return true;
 			case R.id.menuitem_quit:
-				Toast.makeText(appContext, "quit", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Global.appContext, "quit", Toast.LENGTH_SHORT).show();
 				return true;
 		}
 		return false;
