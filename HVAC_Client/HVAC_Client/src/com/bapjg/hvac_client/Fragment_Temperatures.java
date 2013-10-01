@@ -109,12 +109,12 @@ public class Fragment_Temperatures extends Fragment
 			
 			try
 			{
-				serverURL = new URL("http://192.168.5.20:8080/hvac/Management");
+				serverURL = new URL("http://home.bapjg.com:8080/hvac/Management");
 				servletConnection = serverURL.openConnection();
 				servletConnection.setDoOutput(true);
 				servletConnection.setUseCaches(false);
-				servletConnection.setConnectTimeout(1000);
-				servletConnection.setReadTimeout(1000);
+				servletConnection.setConnectTimeout(3000);
+				servletConnection.setReadTimeout(3000);
 				servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 				ObjectOutputStream 			outputToServlet;
 				outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());

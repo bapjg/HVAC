@@ -98,7 +98,7 @@ public class Activity_Main extends Activity
         thermometer.thermoID = "028-0000zzzz";
         config.thermometerList.add(thermometer);
 
-		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
+		HTTP_Req_Temp							httpRequest				= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 	}
 
@@ -212,8 +212,8 @@ public class Activity_Main extends Activity
 				servletConnection = serverURL.openConnection();
 				servletConnection.setDoOutput(true);
 				servletConnection.setUseCaches(false);
-				servletConnection.setConnectTimeout(1000);
-				servletConnection.setReadTimeout(1000);
+				servletConnection.setConnectTimeout(3000);
+				servletConnection.setReadTimeout(3000);
 				servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 				ObjectOutputStream 			outputToServlet;
 				outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
