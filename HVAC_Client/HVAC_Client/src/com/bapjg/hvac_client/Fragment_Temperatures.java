@@ -59,6 +59,10 @@ public class Fragment_Temperatures extends Fragment
 				Mgmt_Msg_Temperatures msg_received 	= (Mgmt_Msg_Temperatures) result;
 				Activity a							= getActivity();
 
+				// Need to change this to avoid null pointer exception
+				// Probably due to (Activity) a not being current any more (clicking too fast)
+				
+				
 				((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.dateTime));
 				((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));
 
