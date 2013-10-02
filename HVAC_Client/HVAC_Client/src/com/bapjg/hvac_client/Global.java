@@ -8,6 +8,7 @@ public class Global
 	public static 	Context 					appContext;
 	public static 	Context 					actContext;
 	public static 	Activity 					activity;
+	public static	String						serverURL;
 	public static 	Mgmt_Msg_Configuration 		configuration;
 	public static 	Mgmt_Msg_Calendar 			calendar;
 	
