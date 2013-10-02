@@ -24,26 +24,33 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.MenuInflater;
+import android.view.ViewParent;
 
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 
 public class Activity_Main extends Activity 
 {
 	public static	Global						global;
 
 	private 		Adapter_Thermometers 		adapter;
+	private			TabHost 					tabHost;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -69,13 +76,13 @@ public class Activity_Main extends Activity
         Fragment_Calendars		fragmentCalendars 		= new Fragment_Calendars();
         Fragment_Actions		fragmentActions 		= new Fragment_Actions();
         
-        Fragment_Buttons_Configuration		fragmentButtons			= new Fragment_Buttons_Configuration();
+        Choices_Configuration	choicesConfiguration	= new Choices_Configuration();
 
         // Note that first argument is for the buttons/tabs the second for information page
         tabTemperatures.setTabListener(new Listener_Tabs(fragmentTemperatures));
-        tabConfiguration.setTabListener(new Listener_Tabs(fragmentButtons, fragmentConfiguration));
+        tabConfiguration.setTabListener(new Listener_Tabs(choicesConfiguration, fragmentConfiguration));
         tabCalendars.setTabListener(new Listener_Tabs(fragmentCalendars));
-        tabActions.setTabListener(new Listener_Tabs(fragmentButtons, fragmentActions));
+        tabActions.setTabListener(new Listener_Tabs(choicesConfiguration, fragmentActions));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabConfiguration);
@@ -109,6 +116,29 @@ public class Activity_Main extends Activity
 
 		HTTP_Req_Temp							httpRequest				= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
+		
+		
+		// Now setup the Tabs
+		
+		//tabHost = (TabHost) findViewById(R.id.tabHost);
+//		tabHost 														= getTabHost();
+//		tabHost.setup();
+//		
+//		TabSpec 								spec1 					= tabHost.newTabSpec("Temperatures");
+//		Intent 									intent 					= new Intent().setClass(this, Tab_Temperatures.class);
+//		spec1.setContent(intent);
+//		spec1.setIndicator("Temperatures");
+//		tabHost.addTab(spec1);
+//
+//		for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
+//	    {
+//	        TextView 							tv 						= (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
+//	        tv.setTextColor(Color.parseColor("#FFFF00"));
+//	        // tv.setBackgroundColor(Color.parseColor("#000000"));
+//	    }
+//
+//		tabHost.setCurrentTab(0);
+		
 	}
 
 	@Override
@@ -152,12 +182,24 @@ public class Activity_Main extends Activity
 	}
 	public void configurationClick(View v)
 	{
-//	Intent i 														= new Intent(getBaseContext(), Activity_Configuration.class);                      
-	//	i.putExtra("PersonID", personID);
-//		startActivity(i);
-	//	System.out.println("before sCV");
-	//	setContentView(R.layout.activity_configuration);
-	//	System.out.println("after sCV");
+		
+		ViewGroup vg = (ViewGroup) v.getParent();
+		for (int i = 0; i < vg.getChildCount(); i++)
+		{
+			View child = ((ViewGroup) vg).getChildAt(i);
+			child.setBackgroundColor(Color.BLACK);
+		}
+		if (v.getId() == R.id.buttonThermometers)
+		{
+			System.out.println("Is : " + v.toString());
+			ViewGroup target = (ViewGroup) findViewById(R.id.panel_container);
+			LayoutInflater li = LayoutInflater.from(Global.actContext);
+			li.inflate(R.layout.fragment_configuration, target, false);
+		}
+		else
+		{
+			System.out.println("Isnt : " + v.toString());
+		}
 	}
 	
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
@@ -167,6 +209,20 @@ public class Activity_Main extends Activity
 		@Override
 		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
 		{
+			try {
+				if (!InetAddress.getByName("192.168.5.20").isReachable(2000))
+				{
+					Global.serverURL										= "http://192.168.5.20:8080/hvac/Management";
+				}
+				else
+				{
+					Global.serverURL										= "http://home.bapjg.com:8080/hvac/Management";
+				}
+			} catch (UnknownHostException e) {
+				Global.serverURL											= "http://home.bapjg.com:8080/hvac/Management";
+			} catch (IOException e) {
+				Global.serverURL											= "http://home.bapjg.com:8080/hvac/Management";
+			}
 			return sendData(messageOut[0]);
 		}	
 		@Override
@@ -216,7 +272,7 @@ public class Activity_Main extends Activity
 			
 			try
 			{
-				serverURL = new URL("http://192.168.5.20:8080/hvac/Management");
+				serverURL = new URL(Global.serverURL);
 				//serverURL = new URL("http://home.bapjg.com:8080/hvac/Management");
 				servletConnection = serverURL.openConnection();
 				servletConnection.setDoOutput(true);
