@@ -9,7 +9,6 @@ public class Mgmt_Msg_Configuration extends Mgmt_Msg_Abstract
 	public ArrayList <Circuit> 				circuitList 				= new ArrayList <Circuit>();
 	public ArrayList <Pump> 				pumpList 					= new ArrayList <Pump>();
 	public Params 							params;
-	private int								nothingToSay;
 	
 	public class Relay
 	{
