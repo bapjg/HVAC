@@ -51,15 +51,21 @@ public final class R {
         public static final int buttonThermometers=0x7f090009;
         public static final int button_container=0x7f090003;
         public static final int friendlyName=0x7f090018;
-        public static final int menuitem_about=0x7f09001e;
-        public static final int menuitem_add=0x7f09001b;
-        public static final int menuitem_feedback=0x7f09001d;
-        public static final int menuitem_quit=0x7f09001f;
-        public static final int menuitem_search=0x7f09001a;
-        public static final int menuitem_share=0x7f09001c;
+        public static final int menuitem_about=0x7f090024;
+        public static final int menuitem_add=0x7f090021;
+        public static final int menuitem_feedback=0x7f090023;
+        public static final int menuitem_quit=0x7f090025;
+        public static final int menuitem_search=0x7f090020;
+        public static final int menuitem_share=0x7f090022;
         public static final int name=0x7f090017;
         public static final int panel_container=0x7f090004;
+        public static final int tab1=0x7f09001b;
+        public static final int tab2=0x7f09001c;
+        public static final int tab3=0x7f09001e;
+        public static final int tabHost=0x7f09001a;
         public static final int textView1=0x7f090008;
+        public static final int textView2=0x7f09001d;
+        public static final int textView3=0x7f09001f;
         public static final int thermoID=0x7f090019;
     }
     public static final class layout {
@@ -74,6 +80,8 @@ public final class R {
         public static final int fragment_temperatures=0x7f030008;
         public static final int row_thermometer=0x7f030009;
         public static final int tab_configuration=0x7f03000a;
+        public static final int tab_test=0x7f03000b;
+        public static final int tab_test_vertical=0x7f03000c;
     }
     public static final class menu {
         public static final int main=0x7f080000;
