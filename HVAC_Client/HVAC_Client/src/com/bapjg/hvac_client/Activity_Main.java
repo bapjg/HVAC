@@ -13,6 +13,7 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import android.os.AsyncTask;
@@ -39,10 +40,12 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.MenuInflater;
 import android.view.ViewParent;
 
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TabHost;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost.TabSpec;
 
 public class Activity_Main extends Activity 
@@ -190,6 +193,24 @@ public class Activity_Main extends Activity
 		}
 		if (v.getId() == R.id.buttonThermometers)
 		{
+	    	Mgmt_Msg_Configuration			message_in					= Global.configuration;
+	        ArrayList  						data		 				= Global.configuration.thermometerList;
+	        Activity 						activity					= (Activity) Global.actContext;
+	        AdapterView <Adapter_Thermometers> view						= (AdapterView) activity.findViewById(R.id.List_View);
+	        
+	        Adapter_Thermometers 			adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
+	        
+	        view.setAdapter(adapter);
+	        
+	        // The error is here
+	        //
+	        view.setOnItemClickListener((OnItemClickListener) this);	
+	        //
+			//
+			
+			
+			
+			
 			System.out.println("Is : " + v.toString());
 			ViewGroup target = (ViewGroup) findViewById(R.id.panel_container);
 			LayoutInflater li = LayoutInflater.from(Global.actContext);
