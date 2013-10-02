@@ -11,6 +11,7 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int Black=0x7f040003;
         public static final int Yellow=0x7f040002;
         public static final int background=0x7f040000;
         public static final int textNormal=0x7f040001;
@@ -36,20 +37,20 @@ public final class R {
         public static final int FloorCold=0x7f090013;
         public static final int FloorHot=0x7f090012;
         public static final int FloorOut=0x7f090011;
-        public static final int FriendlyName=0x7f090006;
+        public static final int FriendlyName=0x7f090007;
         public static final int HotWater=0x7f09000e;
         public static final int Item_View=0x7f090001;
         public static final int List_View=0x7f090000;
         public static final int LivingRoom=0x7f090010;
-        public static final int Name=0x7f090005;
+        public static final int Name=0x7f090006;
         public static final int Outside=0x7f09000f;
         public static final int RadiatorIn=0x7f090015;
         public static final int RadiatorOut=0x7f090014;
-        public static final int ThermoID=0x7f090007;
+        public static final int ThermoID=0x7f090008;
         public static final int Time=0x7f09000c;
         public static final int activity_container=0x7f090002;
-        public static final int buttonThermometers=0x7f090009;
-        public static final int button_container=0x7f090003;
+        public static final int buttonThermometers=0x7f090005;
+        public static final int choices_container=0x7f090003;
         public static final int friendlyName=0x7f090018;
         public static final int menuitem_about=0x7f090024;
         public static final int menuitem_add=0x7f090021;
@@ -63,7 +64,7 @@ public final class R {
         public static final int tab2=0x7f09001c;
         public static final int tab3=0x7f09001e;
         public static final int tabHost=0x7f09001a;
-        public static final int textView1=0x7f090008;
+        public static final int textView1=0x7f090009;
         public static final int textView2=0x7f09001d;
         public static final int textView3=0x7f09001f;
         public static final int thermoID=0x7f090019;
@@ -71,18 +72,20 @@ public final class R {
     public static final class layout {
         public static final int activity_configuration_unused=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int detail_thermometer=0x7f030002;
-        public static final int fragment_actions=0x7f030003;
-        public static final int fragment_buttons_configuration=0x7f030004;
-        public static final int fragment_calendars=0x7f030005;
-        public static final int fragment_configuration=0x7f030006;
-        public static final int fragment_list=0x7f030007;
-        public static final int fragment_temperatures=0x7f030008;
-        public static final int row_thermometer=0x7f030009;
-        public static final int tab_actions=0x7f03000a;
-        public static final int tab_configuration=0x7f03000b;
-        public static final int tab_test=0x7f03000c;
-        public static final int tab_test_vertical=0x7f03000d;
+        public static final int activity_main_with_tabs=0x7f030002;
+        public static final int choices_configuration=0x7f030003;
+        public static final int detail_thermometer=0x7f030004;
+        public static final int fragment_actions=0x7f030005;
+        public static final int fragment_buttons_configuration=0x7f030006;
+        public static final int fragment_calendars=0x7f030007;
+        public static final int fragment_configuration=0x7f030008;
+        public static final int fragment_list=0x7f030009;
+        public static final int fragment_temperatures=0x7f03000a;
+        public static final int row_thermometer=0x7f03000b;
+        public static final int tab_actions=0x7f03000c;
+        public static final int tab_configuration=0x7f03000d;
+        public static final int tab_test=0x7f03000e;
+        public static final int tab_test_vertical=0x7f03000f;
     }
     public static final class menu {
         public static final int main=0x7f080000;

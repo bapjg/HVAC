@@ -6,19 +6,19 @@
 	android:layout_height				= "match_parent"
 	android:orientation					= "horizontal"
 	android:baselineAligned				= "false"
-	android:background					=  "@color/background"
+	android:background					= "@color/background"
+	android:textColor					= "@color/Yellow"
 >
 	<LinearLayout 
-		android:id						= "@+id/button_container"
-		android:layout_width			= "220sp"
+		android:id						= "@+id/choices_container"
+		android:layout_width			= "250dp"
 		android:layout_height			= "match_parent"
-		android:layout_marginRight		= "20dp"
-		android:layout_weight			= "0.10"
+		android:layout_weight			= "0.2"
 		android:orientation				= "vertical"
 		android:baselineAligned			= "false"
 		android:background				= "@color/background"
-	>
-	</LinearLayout>
+		android:text					= "roomForButtons"
+	/>
 	<LinearLayout 
 		android:id						= "@+id/panel_container"
 		android:layout_width			= "match_parent"
@@ -28,6 +28,5 @@
 		android:baselineAligned			= "false"
 		android:background				= "@color/background"
 		android:text					= "roomForButtons"
-	>
-	</LinearLayout>
+	/>
 </LinearLayout>
