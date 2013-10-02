@@ -1,12 +1,11 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
 <LinearLayout 
-	xmlns:android						=  "http://schemas.android.com/apk/res/android"
-	android:layout_width				=  "match_parent"
+	xmlns:android						= "http://schemas.android.com/apk/res/android"
+	android:layout_width				= "match_parent"
 	android:layout_height				= "match_parent"
 	android:orientation					= "horizontal"
 	android:baselineAligned				= "false"
-	android:background					=  "@color/background">
- 
+	android:background					= "@color/background">
    	<LinearLayout
 		android:id						= "@+id/Detail_View"
 		android:layout_width			= "131sp"
