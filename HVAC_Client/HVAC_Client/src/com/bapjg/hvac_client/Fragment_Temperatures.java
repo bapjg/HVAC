@@ -113,7 +113,7 @@ public class Fragment_Temperatures extends Fragment
 			
 			try
 			{
-				serverURL = new URL("http://home.bapjg.com:8080/hvac/Management");
+				serverURL = new URL(Global.serverURL);
 				servletConnection = serverURL.openConnection();
 				servletConnection.setDoOutput(true);
 				servletConnection.setUseCaches(false);
