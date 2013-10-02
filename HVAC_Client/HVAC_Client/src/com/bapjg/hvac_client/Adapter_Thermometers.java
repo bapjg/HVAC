@@ -22,6 +22,7 @@ public class Adapter_Thermometers extends ArrayAdapter
         this.listData 					= listData;
         this.myContext 					= context;
         this.myInflater					= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        System.out.println("Adapter constructer called");
     }
     @Override
     public int getCount() 
