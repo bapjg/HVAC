@@ -182,7 +182,6 @@ public class Activity_Main extends Activity
 	}
 	public void configurationClick(View v)
 	{
-		
 		ViewGroup vg = (ViewGroup) v.getParent();
 		for (int i = 0; i < vg.getChildCount(); i++)
 		{
@@ -201,7 +200,6 @@ public class Activity_Main extends Activity
 			System.out.println("Isnt : " + v.toString());
 		}
 	}
-	
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 	{
 		public URL						serverURL;
