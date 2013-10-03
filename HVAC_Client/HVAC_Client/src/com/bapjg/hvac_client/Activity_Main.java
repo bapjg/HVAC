@@ -188,12 +188,14 @@ public class Activity_Main extends Activity
 		ViewGroup vg = (ViewGroup) v.getParent();
 		for (int i = 0; i < vg.getChildCount(); i++)
 		{
-			View child = ((ViewGroup) vg).getChildAt(i);
-			child.setBackgroundColor(Color.BLACK);
+			TextView child = (TextView) vg.getChildAt(i);
+			child.setTextColor(Color.WHITE);
 		}
 		if (v.getId() == R.id.buttonThermometers)
 		{
-	    	Mgmt_Msg_Configuration			message_in					= Global.configuration;
+			((TextView) v).setTextColor(Color.YELLOW);
+			
+			Mgmt_Msg_Configuration			message_in					= Global.configuration;
 	        ArrayList  						data		 				= Global.configuration.thermometerList;
 	        Activity 						activity					= (Activity) Global.actContext;
 	        AdapterView <Adapter_Thermometers> view						= (AdapterView) activity.findViewById(R.id.List_View);
@@ -202,16 +204,9 @@ public class Activity_Main extends Activity
 	        
 	        view.setAdapter(adapter);
 	        
-	        // The error is here
-	        //
-	        view.setOnItemClickListener((OnItemClickListener) this);	
-	        //
-			//
-			
-			
-			
-			
-			System.out.println("Is : " + v.toString());
+
+	        view.setOnItemClickListener((OnItemClickListener) new Fragment_Configuration());	
+
 			ViewGroup target = (ViewGroup) findViewById(R.id.panel_container);
 			LayoutInflater li = LayoutInflater.from(Global.actContext);
 			li.inflate(R.layout.fragment_configuration, target, false);
@@ -228,20 +223,32 @@ public class Activity_Main extends Activity
 		@Override
 		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
 		{
-			try {
-				if (!InetAddress.getByName("192.168.5.20").isReachable(2000))
-				{
-					Global.serverURL										= "http://192.168.5.20:8080/hvac/Management";
-				}
-				else
-				{
-					Global.serverURL										= "http://home.bapjg.com:8080/hvac/Management";
-				}
-			} catch (UnknownHostException e) {
-				Global.serverURL											= "http://home.bapjg.com:8080/hvac/Management";
-			} catch (IOException e) {
-				Global.serverURL											= "http://home.bapjg.com:8080/hvac/Management";
+			Process p1;
+			boolean reachable = false;
+			try 
+			{
+				p1 = java.lang.Runtime.getRuntime().exec("ping -c 192.168.5.20");
+				int returnVal = p1.waitFor();
+				reachable = (returnVal==0);
+			} 
+			catch (IOException e1) 
+			{
+
 			}
+			catch (InterruptedException e1) 
+			{
+
+			}
+			
+			if (reachable)
+			{
+				Global.serverURL										= "http://192.168.5.20:8080/hvac/Management";
+			}
+			else
+			{
+				Global.serverURL										= "http://home.bapjg.com:8080/hvac/Management";
+			}
+
 			return sendData(messageOut[0]);
 		}	
 		@Override
