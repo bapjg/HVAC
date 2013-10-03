@@ -7,7 +7,7 @@
 	android:baselineAligned				= "false"
 	android:background					= "@color/background"
 	android:clickable 					= "true"
-	>
+>
 		<Button
             android:id					= "@+id/buttonThermometers"
             style						= "@style/AD_Button"

@@ -15,12 +15,12 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Tab_Temperatures extends Activity
+public class Tab_Temperatures_ThrowAway extends Activity
 {
 	public Activity activity;
 	public Context context;
 	
-	public Tab_Temperatures() 
+	public Tab_Temperatures_ThrowAway() 
 	{
 	}
 	protected void onCreate(Bundle savedInstanceState) 

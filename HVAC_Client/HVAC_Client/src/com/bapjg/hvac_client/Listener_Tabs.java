@@ -13,27 +13,22 @@ public class Listener_Tabs implements ActionBar.TabListener
 {
 	public Fragment choices;
 	public Fragment information;
-	public String	tabName;
 	
 	public Listener_Tabs(Fragment choices, Fragment information) 
 	{
 		this.choices 		= choices;
 		this.information 	= information;
-		this.tabName 		= "";
 	}
 	public Listener_Tabs(Fragment information) 
 	{
 		this.choices 		= null;
 		this.information 	= information;
-		this.tabName 		= "";
 	}
 	public Listener_Tabs(String tabName) 
 	{
 		this.choices 		= null;
 		this.information 	= null;
-		this.tabName 		= tabName;
 	}
-	
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) 
 	{
@@ -49,7 +44,6 @@ public class Listener_Tabs implements ActionBar.TabListener
 		}
 		ft.replace(R.id.panel_container, information);
 	}
-
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) 
 	{

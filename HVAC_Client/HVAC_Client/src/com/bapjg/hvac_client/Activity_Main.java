@@ -1,6 +1,5 @@
 package com.bapjg.hvac_client;
 
-import com.bapjg.hvac_client.Mgmt_Msg_Configuration.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -80,12 +79,13 @@ public class Activity_Main extends Activity
         Fragment_Actions		fragmentActions 		= new Fragment_Actions();
         
         Choices_Configuration	choicesConfiguration	= new Choices_Configuration();
+        Choices_Temperatures	choicesTemperatures		= new Choices_Temperatures();
 
         // Note that first argument is for the buttons/tabs the second for information page
-        tabTemperatures.setTabListener(new Listener_Tabs(fragmentTemperatures));
-        tabConfiguration.setTabListener(new Listener_Tabs(choicesConfiguration, fragmentConfiguration));
-        tabCalendars.setTabListener(new Listener_Tabs(fragmentCalendars));
-        tabActions.setTabListener(new Listener_Tabs(choicesConfiguration, fragmentActions));
+        tabTemperatures.setTabListener	(new Listener_Tabs(choicesTemperatures, fragmentTemperatures));
+        tabConfiguration.setTabListener	(new Listener_Tabs(choicesConfiguration, fragmentConfiguration));
+        tabCalendars.setTabListener		(new Listener_Tabs(fragmentCalendars));
+        tabActions.setTabListener		(new Listener_Tabs(choicesConfiguration, fragmentActions));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabConfiguration);
@@ -119,31 +119,7 @@ public class Activity_Main extends Activity
 
 		HTTP_Req_Temp							httpRequest				= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
-		
-		
-		// Now setup the Tabs
-		
-		//tabHost = (TabHost) findViewById(R.id.tabHost);
-//		tabHost 														= getTabHost();
-//		tabHost.setup();
-//		
-//		TabSpec 								spec1 					= tabHost.newTabSpec("Temperatures");
-//		Intent 									intent 					= new Intent().setClass(this, Tab_Temperatures.class);
-//		spec1.setContent(intent);
-//		spec1.setIndicator("Temperatures");
-//		tabHost.addTab(spec1);
-//
-//		for(int i=0;i<tabHost.getTabWidget().getChildCount();i++)
-//	    {
-//	        TextView 							tv 						= (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
-//	        tv.setTextColor(Color.parseColor("#FFFF00"));
-//	        // tv.setBackgroundColor(Color.parseColor("#000000"));
-//	    }
-//
-//		tabHost.setCurrentTab(0);
-		
 	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
 	{
@@ -227,17 +203,16 @@ public class Activity_Main extends Activity
 			boolean reachable = false;
 			try 
 			{
+				//This needs to be done better
 				p1 = java.lang.Runtime.getRuntime().exec("ping -c 192.168.5.20");
 				int returnVal = p1.waitFor();
 				reachable = (returnVal==0);
 			} 
 			catch (IOException e1) 
 			{
-
 			}
 			catch (InterruptedException e1) 
 			{
-
 			}
 			
 			if (reachable)
@@ -263,7 +238,6 @@ public class Activity_Main extends Activity
 			{
 				Mgmt_Msg_Temperatures msg_received = (Mgmt_Msg_Temperatures) result;
 
-
 				((TextView) findViewById(R.id.Date)).setText(displayDate(msg_received.dateTime));
 				((TextView) findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));
 
@@ -280,14 +254,7 @@ public class Activity_Main extends Activity
 			}
 			else
 			{
-				Context 				context 				= getApplicationContext();
-				CharSequence 			text 					= "A Nack has been returned";
-				int 					duration 				= Toast.LENGTH_SHORT;
-
-				Toast 					toast 					= Toast.makeText(context, text, duration);
-				toast.show();
-				
-				Toast.makeText(getApplicationContext(), "What a shame", Toast.LENGTH_LONG).show();
+				Toast.makeText(Global.appContext, "A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
 			}
 	    }
 		public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
@@ -300,7 +267,7 @@ public class Activity_Main extends Activity
 			{
 				serverURL = new URL(Global.serverURL);
 				//serverURL = new URL("http://home.bapjg.com:8080/hvac/Management");
-				servletConnection = serverURL.openConnection();
+				servletConnection 								= serverURL.openConnection();
 				servletConnection.setDoOutput(true);
 				servletConnection.setUseCaches(false);
 				servletConnection.setConnectTimeout(3000);
