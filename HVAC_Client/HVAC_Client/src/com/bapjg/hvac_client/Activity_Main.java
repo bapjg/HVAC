@@ -1,12 +1,5 @@
 package com.bapjg.hvac_client;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 import android.os.AsyncTask;
@@ -50,7 +43,8 @@ public class Activity_Main extends Activity
         global.appContext 								= getApplicationContext();
         global.actContext								= (Context) this;
         global.activity									= (Activity) this;
-
+        global.serverURL								= "http://192.168.5.20:8080/hvac/Management";
+        
         ActionBar 				actionbar 				= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         
@@ -59,32 +53,25 @@ public class Activity_Main extends Activity
         ActionBar.Tab 			tabCalendars		 	= actionbar.newTab().setText("Calendars");
         ActionBar.Tab 			tabActions				= actionbar.newTab().setText("Actions");
         
-        Fragment_Temperatures	fragmentTemperatures 	= new Fragment_Temperatures();
+        global.fragmentTemperatures 					= new Fragment_Temperatures();
         global.fragmentConfiguration 					= new Fragment_Configuration();
-        Fragment_Calendars		fragmentCalendars 		= new Fragment_Calendars();
-        Fragment_Actions		fragmentActions 		= new Fragment_Actions();
+        global.fragmentCalendars 						= new Fragment_Calendars();
+        global.fragmentActions 							= new Fragment_Actions();
         
-        Choices_Temperatures	choicesTemperatures		= new Choices_Temperatures();
-        Choices_Configuration	choicesConfiguration	= new Choices_Configuration(global.fragmentConfiguration);
+        Choices_Fragment		choicesTemperatures		= new Choices_Fragment(global.fragmentTemperatures, R.layout.choices_temperatures);
+        Choices_Fragment		choicesConfiguration	= new Choices_Fragment(global.fragmentConfiguration, R.layout.choices_configuration);
+        Choices_Fragment		choicesActions			= new Choices_Fragment(global.fragmentActions, R.layout.choices_actions);
+        Choices_Fragment		choicesCalendars		= new Choices_Fragment(global.fragmentCalendars, R.layout.choices_calendars);
 
-        
-        
-        //View a											= getLayout(R.layout.activity_main);
-        
-        //(OnClickListener) choicesConfiguration.setOnClickListener			= (OnClickListener) fragmentConfiguration;
-        
-        
-        
-        
         
         
 
         // Note that first argument is for the buttons/tabs the second for information page
         //                                                 buttons layout     ,  Information layou
-        tabTemperatures.setTabListener	(new Listener_Tabs(choicesTemperatures, fragmentTemperatures));
+        tabTemperatures.setTabListener	(new Listener_Tabs(choicesTemperatures, global.fragmentTemperatures));
         tabConfiguration.setTabListener	(new Listener_Tabs(choicesConfiguration, global.fragmentConfiguration));
-        tabCalendars.setTabListener		(new Listener_Tabs(fragmentCalendars));
-        tabActions.setTabListener		(new Listener_Tabs(choicesConfiguration, fragmentActions));
+        tabCalendars.setTabListener		(new Listener_Tabs(choicesCalendars, global.fragmentCalendars));
+        tabActions.setTabListener		(new Listener_Tabs(choicesActions, global.fragmentActions));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabConfiguration);
@@ -160,38 +147,16 @@ public class Activity_Main extends Activity
 	}
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 	{
-		public URL						serverURL;
-		public URLConnection			servletConnection;
+		public HTTP_Request				http;
+		public HTTP_Req_Temp()
+		{
+			http													= new HTTP_Request();
+		}
 		@Override
 		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
 		{
-			Process p1;
-			boolean reachable = false;
-			try 
-			{
-				//This needs to be done better
-				p1 = java.lang.Runtime.getRuntime().exec("ping -c 192.168.5.20");
-				int returnVal = p1.waitFor();
-				reachable = (returnVal==0);
-			} 
-			catch (IOException e1) 
-			{
-			}
-			catch (InterruptedException e1) 
-			{
-			}
-			
-			if (reachable)
-			{
-				Global.serverURL										= "http://192.168.5.20:8080/hvac/Management";
-			}
-			else
-			{
-				Global.serverURL										= "http://home.bapjg.com:8080/hvac/Management";
-			}
-
-			return sendData(messageOut[0]);
-		}	
+			return http.sendData(messageOut[0]);			
+		}
 		@Override
 		protected void onProgressUpdate(Void... progress) 
 		{
@@ -223,59 +188,6 @@ public class Activity_Main extends Activity
 				Toast.makeText(Global.appContext, "A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
 			}
 	    }
-		public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
-		{
-			serverURL											= null;
-			servletConnection									= null;
-			Mgmt_Msg_Abstract				messageReceive		= null;
-			
-			try
-			{
-				serverURL = new URL(Global.serverURL);
-				//serverURL = new URL("http://home.bapjg.com:8080/hvac/Management");
-				servletConnection 								= serverURL.openConnection();
-				servletConnection.setDoOutput(true);
-				servletConnection.setUseCaches(false);
-				servletConnection.setConnectTimeout(3000);
-				servletConnection.setReadTimeout(3000);
-				servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-				ObjectOutputStream 			outputToServlet;
-				outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
-				outputToServlet.writeObject(messageSend);
-				outputToServlet.flush();
-				outputToServlet.close();
-
-				ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
-				messageReceive 									= (Mgmt_Msg_Abstract) response.readObject();
-			}
-			catch (MalformedURLException eMUE) // thrown by new URL
-			{
-				System.out.println(" HTTP_Request MalformedURLException : " + eMUE);
-				return new Mgmt_Msg_Nack();	
-			}
-			catch (SocketTimeoutException eTimeOut) // thrown on connection or read timeout
-			{
-	    		// Consider retries
-				System.out.println(" HTTP_Request TimeOut on read or write : " + eTimeOut);
-				return new Mgmt_Msg_Nack();	
-			}
-	    	catch (ClassNotFoundException eClassNotFound) // thrown if read returns unexpected class
-	    	{
-	    		System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
-	    		return new Mgmt_Msg_Nack();
-			}
-			catch (IOException eIO) //thrown by various
-			{
-	    		System.out.println(" HTTP_Request eIO : " + eIO);
-				return new Mgmt_Msg_Nack();	
-			}
-			catch (Exception e) 
-			{
-	    		System.out.println(" HTTP_Request Send or read : " + e);
-				return new Mgmt_Msg_Nack();	
-			}
-			return messageReceive;			
-		}
 	}
 	private String displayTemperature(Integer temperature)
 	{

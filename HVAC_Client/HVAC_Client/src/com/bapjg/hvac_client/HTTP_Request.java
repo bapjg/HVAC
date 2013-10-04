@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 
 
-public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
+public class HTTP_Request
 {
 	public URL						serverURL;
 	public URLConnection			servletConnection;
@@ -29,38 +29,10 @@ public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_A
 	{
 	}
 	
-	@Override
-	protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
-	{
-		return sendData(messageOut[0]);
-	}	
-	@Override
-	protected void onProgressUpdate(Void... progress) 
-	{
-//         setProgressPercent(progress[0]);
-    }
-	@Override
-    protected void onPostExecute(Mgmt_Msg_Abstract result) 
-	{             
-		System.out.println("step 4");
-		if (result.getClass() == Mgmt_Msg_Calendar.Data.class)
-		{
-			Mgmt_Msg_Calendar.Data 		msg_received = (Mgmt_Msg_Calendar.Data) result;
-			System.out.println("step dateTime : " + msg_received.dateTime);
-		}
-		else if (result.getClass() == Mgmt_Msg_Temperatures.class)
-		{
-			Mgmt_Msg_Temperatures msg_received = (Mgmt_Msg_Temperatures) result;
-
-			System.out.println("step dateTime     : " + msg_received.dateTime);
-			System.out.println("step tempBoiler   : " + msg_received.tempBoiler);
-			System.out.println("step tempHotWater : " + msg_received.tempHotWater);
-		}
-    }
 	public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
 	{
-		serverURL							= null;
-		servletConnection					= null;
+		servletConnection									= null;
+		Mgmt_Msg_Abstract				messageReceive		= null;
 		
 		try
 		{
@@ -82,11 +54,9 @@ public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_A
 		
 		servletConnection.setDoOutput(true);
 		servletConnection.setUseCaches(false);
-		servletConnection.setConnectTimeout(1000);
-		servletConnection.setReadTimeout(1000);
+		servletConnection.setConnectTimeout(3000);
+		servletConnection.setReadTimeout(3000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-		
-		Mgmt_Msg_Abstract				messageReceive		= null;
 
 		try
 		{
@@ -114,15 +84,19 @@ public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_A
     	catch (ClassNotFoundException eClassNotFound) 
     	{
     		System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
+    		return new Mgmt_Msg_Nack();
 		}
 		catch (SocketTimeoutException eTimeOut)
 		{
-    		System.out.println(" HTTP_Request TimeOut on read  : " + eTimeOut);
+			System.out.println("eTimeOut");
+			// Consider retries
+			System.out.println(" HTTP_Request TimeOut on read or write : " + eTimeOut);
+			return new Mgmt_Msg_Nack();	
 		}
 		catch (Exception e) 
 		{
-    		System.out.println(" HTTP_Request Other 1 : " + e);
-    		System.out.println(" HTTP_Request Other 2 : " + e.getMessage());
+    		System.out.println(" HTTP_Request Send or read : " + e);
+			return new Mgmt_Msg_Nack();	
 		}
 		return messageReceive;			
 	}

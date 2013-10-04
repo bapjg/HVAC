@@ -68,15 +68,17 @@ public final class R {
         public static final int activity_main=0x7f030000;
         public static final int activity_main_with_tabs=0x7f030001;
         public static final int activity_temperatures=0x7f030002;
-        public static final int choices_configuration=0x7f030003;
-        public static final int choices_temperatures=0x7f030004;
-        public static final int detail_thermometer=0x7f030005;
-        public static final int fragment_actions=0x7f030006;
-        public static final int fragment_calendars=0x7f030007;
-        public static final int fragment_configuration=0x7f030008;
-        public static final int fragment_list=0x7f030009;
-        public static final int fragment_temperatures=0x7f03000a;
-        public static final int row_thermometer=0x7f03000b;
+        public static final int choices_actions=0x7f030003;
+        public static final int choices_calendars=0x7f030004;
+        public static final int choices_configuration=0x7f030005;
+        public static final int choices_temperatures=0x7f030006;
+        public static final int detail_thermometer=0x7f030007;
+        public static final int fragment_actions=0x7f030008;
+        public static final int fragment_calendars=0x7f030009;
+        public static final int fragment_configuration=0x7f03000a;
+        public static final int fragment_list=0x7f03000b;
+        public static final int fragment_temperatures=0x7f03000c;
+        public static final int row_thermometer=0x7f03000d;
     }
     public static final class menu {
         public static final int main=0x7f080000;

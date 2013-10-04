@@ -12,15 +12,18 @@ import java.net.URLConnection;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Fragment_Temperatures extends Fragment 
+public class Fragment_Temperatures extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
@@ -33,17 +36,17 @@ public class Fragment_Temperatures extends Fragment
     }
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 	{
-		public URL						serverURL;
-		public URLConnection			servletConnection;
+		public HTTP_Request				http;
 
 		public HTTP_Req_Temp()
 		{
+			http													= new HTTP_Request();
 		}
 		
 		@Override
 		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
 		{
-			return sendData(messageOut[0]);
+			return http.sendData(messageOut[0]);
 		}	
 		@Override
 		protected void onProgressUpdate(Void... progress) 
@@ -61,7 +64,6 @@ public class Fragment_Temperatures extends Fragment
 
 				// Need to change this to avoid null pointer exception
 				// Probably due to (Activity) a not being current any more (clicking too fast)
-				
 				
 				((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.dateTime));
 				((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));
@@ -87,76 +89,8 @@ public class Fragment_Temperatures extends Fragment
 				toast.show();
 				
 				Toast.makeText(getActivity(), "What a shame", Toast.LENGTH_LONG).show();
-				
-				
-//				AlertDialog alertDialog 						= new AlertDialog.Builder(this).create();
-// 
-//				alertDialog.setTitle("Alert Dialog");
-//				alertDialog.setMessage("We have a problem");
-//				alertDialog.setButton("OK", new DialogInterface.OnClickListener() 
-//				{
-//                public void onClick(DialogInterface dialog, int which) 
-//                	{
-//
-//                	Toast.makeText(getApplicationContext(), "You clicked on OK", Toast.LENGTH_SHORT).show();
-//                	}
-//				});
-// 
-//				alertDialog.show();
 			}
 	    }
-		public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
-		{
-			serverURL											= null;
-			servletConnection									= null;
-			Mgmt_Msg_Abstract				messageReceive		= null;
-			
-			try
-			{
-				serverURL = new URL(Global.serverURL);
-				servletConnection = serverURL.openConnection();
-				servletConnection.setDoOutput(true);
-				servletConnection.setUseCaches(false);
-				servletConnection.setConnectTimeout(3000);
-				servletConnection.setReadTimeout(3000);
-				servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-				ObjectOutputStream 			outputToServlet;
-				outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
-				outputToServlet.writeObject(messageSend);
-				outputToServlet.flush();
-				outputToServlet.close();
-	    		System.out.println(" HTTP_Request Sent ");
-				ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
-				messageReceive 									= (Mgmt_Msg_Abstract) response.readObject();
-			}
-			catch (MalformedURLException eMUE) // thrown by new URL
-			{
-				eMUE.printStackTrace();
-				return new Mgmt_Msg_Nack();	
-			}
-			catch (SocketTimeoutException eTimeOut) // thrown on connection or read timeout
-			{
-	    		// Consider retries
-				System.out.println(" HTTP_Request TimeOut on read or write : " + eTimeOut);
-				return new Mgmt_Msg_Nack();	
-			}
-	    	catch (ClassNotFoundException eClassNotFound) // thrown if read returns unexpected class
-	    	{
-	    		System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
-	    		return new Mgmt_Msg_Nack();
-			}
-			catch (IOException eIO) //thrown by various
-			{
-				eIO.printStackTrace();
-				return new Mgmt_Msg_Nack();	
-			}
-			catch (Exception e) 
-			{
-	    		System.out.println(" HTTP_Request Send or read : " + e);
-				return new Mgmt_Msg_Nack();	
-			}
-			return messageReceive;			
-		}
 	}
 	private String displayTemperature(Integer temperature)
 	{
@@ -171,6 +105,33 @@ public class Fragment_Temperatures extends Fragment
 	private String displayTime(String dateTime)
 	{
 		return dateTime.substring(11,13) + ":" + dateTime.substring(14,16) + ":" + dateTime.substring(17,19);
+	}
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
+	{
+	}
+	@Override
+	public void onClick(View myView) 
+	{
+    	System.out.println("We have arrived in onClick again");
+    	
+    	Button 								myButton 					= (Button) myView;
+    	String								myCaption					= myButton.getText().toString();
+    	
+		// Set all textColours to white
+		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();
+		for (int i = 0; i < viewParent.getChildCount(); i++)
+		{
+			Button							buttonChild 				= (Button) viewParent.getChildAt(i);
+			buttonChild.setTextColor(Color.WHITE);
+		}
+		
+		((Button) myView).setTextColor(Color.YELLOW);
+    	
+    	if (myCaption.equalsIgnoreCase("Thermometers"))
+    	{
+    		// buttonThermometersClick(myView);	
+    	}
 	}    
 }
 
