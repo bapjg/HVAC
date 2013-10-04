@@ -28,7 +28,25 @@ public class HTTP_Request
 	public HTTP_Request()
 	{
 	}
-	
+	public boolean ping()
+	{
+		Mgmt_Msg_Abstract				messageReceive;
+		Mgmt_Msg_Abstract.Ping			messageSend			= new Mgmt_Msg_Abstract().new Ping();
+		Global.serverURL									= "http://192.168.5.20:8080/hvac/Management";
+		messageReceive										= sendData(messageSend);
+		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
+		{
+			return true;
+		}
+
+		Global.serverURL									= "http://home.bapjg.com:8080/hvac/Management";
+		messageReceive										= sendData(messageSend);
+		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
+		{
+			return true;
+		}
+		return false;
+	}
 	public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
 	{
 		servletConnection									= null;
