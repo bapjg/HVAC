@@ -6,6 +6,7 @@ import com.bapjg.hvac_client.Mgmt_Msg_Configuration;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,9 +41,7 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
         	System.out.println("position : " + position);
 	        Activity activity											= (Activity) Global.actContext;
 	        ViewGroup 					viewGroup						= (ViewGroup) activity.findViewById(R.id.Detail_View);
-        	
-	        LayoutInflater 				inflater 						= (LayoutInflater) Global.actContext.getSystemService(Global.actContext.LAYOUT_INFLATER_SERVICE);
-        	
+ 	        LayoutInflater 				inflater 						= (LayoutInflater) Global.actContext.getSystemService(Global.actContext.LAYOUT_INFLATER_SERVICE);
         	View 						newView 						= inflater.inflate(R.layout.detail_thermometer, viewGroup, true);
 
             //Need to setup an update screen
@@ -74,37 +73,36 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
    	}
     public void onClick(View myView)
     {
-    	Button 								myButton 					= (Button) myView;
-    	Integer								myId						= myButton.getId();
+    	System.out.println("We have arrived in onClick again");
     	
-    	if (myId == R.id.buttonThermometers)
+    	Button 								myButton 					= (Button) myView;
+    	String								myCaption					= myButton.getText().toString();
+    	
+		// Set all textColours to white
+		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();
+		for (int i = 0; i < viewParent.getChildCount(); i++)
+		{
+			Button							buttonChild 				= (Button) viewParent.getChildAt(i);
+			buttonChild.setTextColor(Color.WHITE);
+		}
+		
+		((Button) myView).setTextColor(Color.YELLOW);
+    	
+    	if (myCaption.equalsIgnoreCase("Thermometers"))
     	{
-	    	Mgmt_Msg_Configuration			message_in					= Global.configuration;
-	        ArrayList  						data		 				= Global.configuration.thermometerList;
-	        Activity activity											= (Activity) Global.actContext;
-	        AdapterView <Adapter_Thermometers> view						= (AdapterView) activity.findViewById(R.id.List_View);
-	        
-	        Adapter_Thermometers 			adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
-	        
-	        view.setAdapter(adapter);
-	        view.setOnItemClickListener((OnItemClickListener) this);	
+    		buttonThermometersClick(myView);	
     	}
     }
-    private void setButtonOnClick(ViewGroup v) 
+    public void buttonThermometersClick(View myView)
     {
-        View a;
-        for(int i = 0; i < v.getChildCount(); i++) 
-        {
-            a = v.getChildAt(i);
-            if (a instanceof ViewGroup)
-        	{
-            	setButtonOnClick((ViewGroup) a);
-        	}
-            else if (a instanceof Button) 
-            {
-                a.setOnClickListener((OnClickListener) this);
-            }
-        }
-        return;
+		// This sets up the code to display the information and get clicks in order to display an update screen
+        ArrayList  						data		 				= Global.configuration.thermometerList;
+        Activity 						activity					= (Activity) Global.actContext;
+        AdapterView <Adapter_Thermometers> view						= (AdapterView) activity.findViewById(R.id.List_View);
+        
+        Adapter_Thermometers 			adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
+        
+        view.setAdapter(adapter);
+        view.setOnItemClickListener((OnItemClickListener) this);	
     }
 }

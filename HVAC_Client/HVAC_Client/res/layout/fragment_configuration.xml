@@ -14,10 +14,6 @@
 		android:layout_weight			= "1"
 		android:orientation				= "vertical"
 		android:paddingRight			= "0dp" >
-     	<TextView 
-		    style						= "@style/AD_Text"
-		    android:text				= "Thermometers"
-		    android:gravity				= "left" />
 		<ListView
 		    android:id					= "@+id/List_View"
 		    android:layout_width		= "match_parent"

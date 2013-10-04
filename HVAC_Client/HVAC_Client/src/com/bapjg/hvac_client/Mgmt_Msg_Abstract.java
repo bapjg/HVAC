@@ -10,5 +10,8 @@ public abstract class Mgmt_Msg_Abstract implements java.io.Serializable
 	public class Nack extends Mgmt_Msg_Abstract
 	{
 	}
+	public class Ping extends Mgmt_Msg_Abstract
+	{
+	}
 
 }

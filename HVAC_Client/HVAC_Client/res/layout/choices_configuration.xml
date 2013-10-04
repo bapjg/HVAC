@@ -13,35 +13,30 @@
             style						= "@style/AD_Button"
             android:layout_width		= "wrap_content"
             android:layout_height		= "wrap_content"
-            android:onClick				= "configurationClick"
             android:text				= "Thermometers" 
         />
         <Button
             style						= "@style/AD_Button"
             android:layout_width		= "wrap_content"
             android:layout_height		= "wrap_content"
-            android:onClick				= "configurationClick"
             android:text				= "Relays" 
         />
         <Button
             style="@style/AD_Button"
             android:layout_width		= "wrap_content"
             android:layout_height		= "wrap_content"
-            android:onClick				= "configurationClick"
             android:text				= "Circuits"
         />
 		<Button
             style						= "@style/AD_Button"
             android:layout_width		= "wrap_content"
             android:layout_height		= "wrap_content"
-            android:onClick				= "configurationClick"
             android:text				= "Burner" 
         />
 		<Button
 		    style						= "@style/AD_Button"
 		    android:layout_width		= "wrap_content"
 		    android:layout_height		= "wrap_content"
-            android:onClick				= "configurationClick"
 		    android:text				= "Other" 
 		/>
 </LinearLayout>

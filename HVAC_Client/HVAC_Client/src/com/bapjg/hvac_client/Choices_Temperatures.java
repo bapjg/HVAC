@@ -12,7 +12,9 @@ public class Choices_Temperatures extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.choices_temperatures, container, false);
+    	View result = inflater.inflate(R.layout.choices_temperatures, container, false);
+    	    	
+        return result;
     }
 }
 

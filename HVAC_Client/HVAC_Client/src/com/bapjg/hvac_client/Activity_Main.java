@@ -3,49 +3,35 @@ package com.bapjg.hvac_client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.Inet4Address;
-import java.net.InetAddress;
 import java.net.MalformedURLException;
-import java.net.NetworkInterface;
-import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
+
 import android.graphics.Color;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.view.MenuInflater;
-import android.view.ViewParent;
+
 
 import android.widget.AdapterView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TabHost;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TabHost.TabSpec;
 
 public class Activity_Main extends Activity 
 {
@@ -58,7 +44,7 @@ public class Activity_Main extends Activity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); // Contains activity_container which contains button_container (left) and panel_container(right)
+        setContentView(R.layout.activity_main); // Contains activity_container which contains choices_container (left) and panel_container(right)
         
         global											= new Global();
         global.appContext 								= getApplicationContext();
@@ -74,16 +60,29 @@ public class Activity_Main extends Activity
         ActionBar.Tab 			tabActions				= actionbar.newTab().setText("Actions");
         
         Fragment_Temperatures	fragmentTemperatures 	= new Fragment_Temperatures();
-        Fragment_Configuration	fragmentConfiguration 	= new Fragment_Configuration();
+        global.fragmentConfiguration 					= new Fragment_Configuration();
         Fragment_Calendars		fragmentCalendars 		= new Fragment_Calendars();
         Fragment_Actions		fragmentActions 		= new Fragment_Actions();
         
-        Choices_Configuration	choicesConfiguration	= new Choices_Configuration();
         Choices_Temperatures	choicesTemperatures		= new Choices_Temperatures();
+        Choices_Configuration	choicesConfiguration	= new Choices_Configuration(global.fragmentConfiguration);
+
+        
+        
+        //View a											= getLayout(R.layout.activity_main);
+        
+        //(OnClickListener) choicesConfiguration.setOnClickListener			= (OnClickListener) fragmentConfiguration;
+        
+        
+        
+        
+        
+        
 
         // Note that first argument is for the buttons/tabs the second for information page
+        //                                                 buttons layout     ,  Information layou
         tabTemperatures.setTabListener	(new Listener_Tabs(choicesTemperatures, fragmentTemperatures));
-        tabConfiguration.setTabListener	(new Listener_Tabs(choicesConfiguration, fragmentConfiguration));
+        tabConfiguration.setTabListener	(new Listener_Tabs(choicesConfiguration, global.fragmentConfiguration));
         tabCalendars.setTabListener		(new Listener_Tabs(fragmentCalendars));
         tabActions.setTabListener		(new Listener_Tabs(choicesConfiguration, fragmentActions));
         
@@ -117,8 +116,8 @@ public class Activity_Main extends Activity
         thermometer.thermoID = "028-0000zzzz";
         config.thermometerList.add(thermometer);
 
-		HTTP_Req_Temp							httpRequest				= new HTTP_Req_Temp();
-		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
+	//	HTTP_Req_Temp							httpRequest				= new HTTP_Req_Temp();
+	//	httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -158,39 +157,6 @@ public class Activity_Main extends Activity
 		// This is to update the temperature readings - but it is all wrong
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
-	}
-	public void configurationClick(View v)
-	{
-		ViewGroup vg = (ViewGroup) v.getParent();
-		for (int i = 0; i < vg.getChildCount(); i++)
-		{
-			TextView child = (TextView) vg.getChildAt(i);
-			child.setTextColor(Color.WHITE);
-		}
-		if (v.getId() == R.id.buttonThermometers)
-		{
-			((TextView) v).setTextColor(Color.YELLOW);
-			
-			Mgmt_Msg_Configuration			message_in					= Global.configuration;
-	        ArrayList  						data		 				= Global.configuration.thermometerList;
-	        Activity 						activity					= (Activity) Global.actContext;
-	        AdapterView <Adapter_Thermometers> view						= (AdapterView) activity.findViewById(R.id.List_View);
-	        
-	        Adapter_Thermometers 			adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
-	        
-	        view.setAdapter(adapter);
-	        
-
-	        view.setOnItemClickListener((OnItemClickListener) new Fragment_Configuration());	
-
-			ViewGroup target = (ViewGroup) findViewById(R.id.panel_container);
-			LayoutInflater li = LayoutInflater.from(Global.actContext);
-			li.inflate(R.layout.fragment_configuration, target, false);
-		}
-		else
-		{
-			System.out.println("Isnt : " + v.toString());
-		}
 	}
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 	{

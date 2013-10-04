@@ -11,6 +11,7 @@ public class Global
 	public static	String						serverURL;
 	public static 	Mgmt_Msg_Configuration 		configuration;
 	public static 	Mgmt_Msg_Calendar 			calendar;
+	public static	Fragment_Configuration		fragmentConfiguration;
 	
 	public Global() 
 	{

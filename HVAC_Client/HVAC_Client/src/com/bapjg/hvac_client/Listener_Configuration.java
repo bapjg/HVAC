@@ -13,6 +13,6 @@ public class Listener_Configuration implements View.OnClickListener
 	public void onClick(View myView) 
 	{
 		System.out.println("On click listener active");
-		
+		Toast.makeText(Global.appContext, "A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
 	}
 }

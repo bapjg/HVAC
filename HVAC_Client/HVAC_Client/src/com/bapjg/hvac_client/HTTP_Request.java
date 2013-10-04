@@ -52,18 +52,11 @@ public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_A
 		{
 			Mgmt_Msg_Temperatures msg_received = (Mgmt_Msg_Temperatures) result;
 
-//			TextView right1 						= (TextView) findViewByID(R.id.right1);
-//			right1.setText(msg_received.dateTime);
-			
-			
 			System.out.println("step dateTime     : " + msg_received.dateTime);
 			System.out.println("step tempBoiler   : " + msg_received.tempBoiler);
 			System.out.println("step tempHotWater : " + msg_received.tempHotWater);
-			
-			
 		}
     }
-
 	public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
 	{
 		serverURL							= null;
@@ -131,19 +124,6 @@ public class HTTP_Request extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_A
     		System.out.println(" HTTP_Request Other 1 : " + e);
     		System.out.println(" HTTP_Request Other 2 : " + e.getMessage());
 		}
-
 		return messageReceive;			
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
