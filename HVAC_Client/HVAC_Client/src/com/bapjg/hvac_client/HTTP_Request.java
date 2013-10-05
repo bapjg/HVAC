@@ -31,17 +31,17 @@ public class HTTP_Request
 	public boolean ping()
 	{
 		Mgmt_Msg_Abstract				messageReceive;
-		Mgmt_Msg_Abstract.Ping			messageSend			= new Mgmt_Msg_Abstract().new Ping();
+		Mgmt_Msg_Ping					messageSend			= new Mgmt_Msg_Ping();
 		Global.serverURL									= "http://192.168.5.20:8080/hvac/Management";
 		messageReceive										= sendData(messageSend);
-		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
+		if (messageReceive instanceof Mgmt_Msg_Ping.Ack)
 		{
 			return true;
 		}
 
 		Global.serverURL									= "http://home.bapjg.com:8080/hvac/Management";
 		messageReceive										= sendData(messageSend);
-		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
+		if (messageReceive instanceof Mgmt_Msg_Ping.Ack)
 		{
 			return true;
 		}

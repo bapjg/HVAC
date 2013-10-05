@@ -33,5 +33,4 @@ public class Mgmt_Msg_Temperatures   extends Mgmt_Msg_Abstract
 	public class Request
 	{
 	}
-
 }

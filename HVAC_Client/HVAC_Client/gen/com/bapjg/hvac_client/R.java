@@ -79,6 +79,7 @@ public final class R {
         public static final int fragment_list=0x7f03000b;
         public static final int fragment_temperatures=0x7f03000c;
         public static final int row_thermometer=0x7f03000d;
+        public static final int update_thermometer=0x7f03000e;
     }
     public static final class menu {
         public static final int main=0x7f080000;
