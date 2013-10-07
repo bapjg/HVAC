@@ -3,9 +3,11 @@ package com.bapjg.hvac_client;
 import java.util.ArrayList;
 
 import com.bapjg.hvac_client.Mgmt_Msg_Configuration;
+import com.bapjg.hvac_client.Mgmt_Msg_Configuration.Thermometer;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -43,7 +46,22 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
 	        ViewGroup 					viewGroup						= (ViewGroup) activity.findViewById(R.id.Detail_View);
  	        LayoutInflater 				inflater 						= (LayoutInflater) Global.actContext.getSystemService(Global.actContext.LAYOUT_INFLATER_SERVICE);
         	View 						newView 						= inflater.inflate(R.layout.detail_thermometer, viewGroup, true);
+        	
+        	FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
+        	Detail_Thermometers dt = new Detail_Thermometers();
+        	
+        	ft.replace(R.id.panel_container, dt);
+        	ft.commit();
+        	
+        	Mgmt_Msg_Configuration conf = Global.configuration;
 
+        	
+        	Mgmt_Msg_Configuration.Thermometer me = (Mgmt_Msg_Configuration.Thermometer) Global.configuration.thermometerList.get(position -1);
+
+        	((TextView) activity.findViewById(R.id.name)).setText(me.name);
+			((TextView) activity.findViewById(R.id.friendlyName)).setText(me.friendlyName);
+			((TextView) activity.findViewById(R.id.thermoID)).setText(me.thermoID);
+        	
             //Need to setup an update screen
         }
         else
@@ -73,9 +91,7 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
    	}
     public void onClick(View myView)
     {
-    	System.out.println("We have arrived in onClick again");
-    	
-    	Button 								myButton 					= (Button) myView;
+     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
     	
 		// Set all textColours to white
@@ -104,5 +120,14 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
         
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	
+    }
+    static public class Detail_Thermometers extends Fragment 
+    {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+        {
+            View myView =  inflater.inflate(R.layout.detail_thermometer, container, false);
+            return myView;
+        }
+         	
     }
 }

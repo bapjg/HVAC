@@ -1,5 +1,3 @@
-
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -20,9 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.bapjg.hvac_client.*;
-
-
-
+import com.bapjg.hvac_client.Mgmt_Msg_Calendar.Data;
 
 public class Management extends HttpServlet
 {
@@ -86,11 +82,11 @@ public class Management extends HttpServlet
         {
             message_out 							= new Mgmt_Msg_Nack();
         } 
-        else if (message_in.getClass() == Mgmt_Msg_Temperatures_Req.class)
+        else if (message_in.getClass() == Mgmt_Msg_Temperatures.Request.class)
         {
             message_out 							= processTemperaturesReq();
         } 
-		else if (message_in.getClass() == Mgmt_Msg_Calendar_Req.class)
+		else if (message_in.getClass() == Mgmt_Msg_Calendar.Request.class)
         {
             message_out 							= processCalendarRequest();
         } 
@@ -169,11 +165,12 @@ public class Management extends HttpServlet
 
         return returnBuffer;
     }
-    public Mgmt_Msg_Calendar processCalendarRequestIndex()
+    public Mgmt_Msg_Calendar.Data processCalendarRequestIndex()
     {
         dbOpen();
         
-        Mgmt_Msg_Calendar 		returnBuffer 	= new Mgmt_Msg_Calendar();
+        Mgmt_Msg_Calendar			reply			= new Mgmt_Msg_Calendar();
+        Mgmt_Msg_Calendar.Data 		returnBuffer 	= reply.new Data();
 
 //        returnBuffer.calendars 					= "";
 //        try
@@ -198,14 +195,14 @@ public class Management extends HttpServlet
         dbOpen();
         
         Mgmt_Msg_Calendar		 returnBuffer 	= new Mgmt_Msg_Calendar();
-        returnBuffer.dateTime 					= "";
+        //returnBuffer.dateTime 					= "";
 
         try
         {
             dbStatement 						= dbConnection.createStatement(1004, 1008);
             ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT dateTime, calendars FROM calendars ORDER BY dateTime DESC LIMIT 1");
             dbResultSet.next();
-            returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
+            //returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
             dbStatement.close();
             dbConnection.close();
         }
