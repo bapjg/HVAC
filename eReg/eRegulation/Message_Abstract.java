@@ -6,5 +6,17 @@ public abstract class Message_Abstract implements java.io.Serializable
 	
 	public Message_Abstract()
 	{
-	}	
+	}
+	@SuppressWarnings("serial")
+	public class Ack extends Message_Abstract
+	{
+	}
+	@SuppressWarnings("serial")
+	public class Nack extends Message_Abstract
+	{
+	}
+	@SuppressWarnings("serial")
+	public class Ping extends Message_Abstract
+	{
+	}
 }

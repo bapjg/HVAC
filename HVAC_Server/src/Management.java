@@ -66,22 +66,22 @@ public class Management extends HttpServlet
         catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
-            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
+            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
         }
         catch (IOException eIO)
         {
             System.out.println("An IO Exception occured : " + eIO);
-            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
+            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
         }
         catch (Exception e)
         {
             System.out.println("An Exception occured : " + e);
-            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
+            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
         }
         
         if (message_in == null)
         {
-            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
+            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
         } 
         else if (message_in.getClass() == Mgmt_Msg_Temperatures.Request.class)
         {
