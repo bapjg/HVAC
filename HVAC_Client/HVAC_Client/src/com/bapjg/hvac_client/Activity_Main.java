@@ -58,10 +58,10 @@ public class Activity_Main extends Activity
         global.fragmentCalendars 						= new Fragment_Calendars();
         global.fragmentActions 							= new Fragment_Actions();
         
-        Choices_Fragment		choicesTemperatures		= new Choices_Fragment(global.fragmentTemperatures, R.layout.choices_temperatures);
-        Choices_Fragment		choicesConfiguration	= new Choices_Fragment(global.fragmentConfiguration, R.layout.choices_configuration);
-        Choices_Fragment		choicesActions			= new Choices_Fragment(global.fragmentActions, R.layout.choices_actions);
-        Choices_Fragment		choicesCalendars		= new Choices_Fragment(global.fragmentCalendars, R.layout.choices_calendars);
+        Choices_Fragment		choicesTemperatures		= new Choices_Fragment(global.fragmentTemperatures, R.layout.menu_temperatures);
+        Choices_Fragment		choicesConfiguration	= new Choices_Fragment(global.fragmentConfiguration, R.layout.menu_configuration);
+        Choices_Fragment		choicesActions			= new Choices_Fragment(global.fragmentActions, R.layout.menu_actions);
+        Choices_Fragment		choicesCalendars		= new Choices_Fragment(global.fragmentCalendars, R.layout.menu_calendars);
 
         
         

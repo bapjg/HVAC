@@ -10,7 +10,7 @@
 	android:textColor					= "@color/Yellow"
 >
 	<LinearLayout 
-		android:id						= "@+id/choices_container"
+		android:id						= "@+id/menu_container"
 		android:layout_width			= "250dp"
 		android:layout_height			= "match_parent"
 		android:layout_weight			= "0.2"

@@ -40,7 +40,7 @@ public class Listener_Tabs implements ActionBar.TabListener
 	{
 		if (this.choices != null)
 		{
-			ft.replace(R.id.choices_container, choices);
+			ft.replace(R.id.menu_container, choices);
 		}
 		ft.replace(R.id.panel_container, information);
 	}
