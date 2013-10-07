@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Fragment_Configuration extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
+public class Panel_Configuration extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
 {
 	private Adapter_Thermometers 		adapter;
 

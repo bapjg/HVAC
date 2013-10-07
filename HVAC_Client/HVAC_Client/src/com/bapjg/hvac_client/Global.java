@@ -11,10 +11,10 @@ public class Global
 	public static	String						serverURL;
 	public static 	Mgmt_Msg_Configuration 		configuration;
 	public static 	Mgmt_Msg_Calendar 			calendar;
-	public static	Fragment_Configuration		fragmentConfiguration;
-	public static	Fragment_Temperatures		fragmentTemperatures;
-	public static	Fragment_Calendars			fragmentCalendars;
-	public static	Fragment_Actions			fragmentActions;	
+	public static	Panel_Configuration		fragmentConfiguration;
+	public static	Panel_Temperatures		fragmentTemperatures;
+	public static	Panel_Calendars			fragmentCalendars;
+	public static	Panel_Actions			fragmentActions;	
 
 	public Global() 
 	{

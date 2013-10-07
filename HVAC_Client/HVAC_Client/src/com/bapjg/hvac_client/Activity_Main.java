@@ -53,15 +53,15 @@ public class Activity_Main extends Activity
         ActionBar.Tab 			tabCalendars		 	= actionbar.newTab().setText("Calendars");
         ActionBar.Tab 			tabActions				= actionbar.newTab().setText("Actions");
         
-        global.fragmentTemperatures 					= new Fragment_Temperatures();
-        global.fragmentConfiguration 					= new Fragment_Configuration();
-        global.fragmentCalendars 						= new Fragment_Calendars();
-        global.fragmentActions 							= new Fragment_Actions();
+        global.fragmentTemperatures 					= new Panel_Temperatures();
+        global.fragmentConfiguration 					= new Panel_Configuration();
+        global.fragmentCalendars 						= new Panel_Calendars();
+        global.fragmentActions 							= new Panel_Actions();
         
-        Choices_Fragment		choicesTemperatures		= new Choices_Fragment(global.fragmentTemperatures, R.layout.menu_1_temperatures);
-        Choices_Fragment		choicesConfiguration	= new Choices_Fragment(global.fragmentConfiguration, R.layout.menu_2_configuration);
-        Choices_Fragment		choicesActions			= new Choices_Fragment(global.fragmentActions, R.layout.menu_4_actions);
-        Choices_Fragment		choicesCalendars		= new Choices_Fragment(global.fragmentCalendars, R.layout.menu_3_calendars);
+        Menu_Fragment		choicesTemperatures		= new Menu_Fragment(global.fragmentTemperatures, R.layout.menu_1_temperatures);
+        Menu_Fragment		choicesConfiguration	= new Menu_Fragment(global.fragmentConfiguration, R.layout.menu_2_configuration);
+        Menu_Fragment		choicesActions			= new Menu_Fragment(global.fragmentActions, R.layout.menu_4_actions);
+        Menu_Fragment		choicesCalendars		= new Menu_Fragment(global.fragmentCalendars, R.layout.menu_3_calendars);
 
         
         

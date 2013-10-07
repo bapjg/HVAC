@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Fragment_Temperatures extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
+public class Panel_Temperatures extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 

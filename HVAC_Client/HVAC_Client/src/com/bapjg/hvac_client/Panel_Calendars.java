@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 
 
-public class Fragment_Calendars extends Fragment  implements View.OnClickListener, AdapterView.OnItemClickListener
+public class Panel_Calendars extends Fragment  implements View.OnClickListener, AdapterView.OnItemClickListener
 {
 	
     @Override
