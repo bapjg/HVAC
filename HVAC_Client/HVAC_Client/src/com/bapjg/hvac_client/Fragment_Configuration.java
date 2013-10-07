@@ -31,7 +31,7 @@ public class Fragment_Configuration extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        View myView =  inflater.inflate(R.layout.fragment_configuration, container, false);
+        View myView =  inflater.inflate(R.layout.panel_2_configuration, container, false);
         //myView.findViewById(R.id.buttonThermometers).setOnClickListener((OnClickListener) this);
         //ViewGroup myViewGroup = (ViewGroup) myView;
         //setButtonOnClick(myViewGroup);

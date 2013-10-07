@@ -32,7 +32,7 @@ public class Fragment_Temperatures extends Fragment implements View.OnClickListe
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 
-        return inflater.inflate(R.layout.fragment_temperatures, container, false);
+        return inflater.inflate(R.layout.panel_1_temperatures, container, false);
     }
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 	{

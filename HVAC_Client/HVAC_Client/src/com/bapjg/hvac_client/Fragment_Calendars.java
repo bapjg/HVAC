@@ -17,7 +17,7 @@ public class Fragment_Calendars extends Fragment  implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calendars, container, false);
+        return inflater.inflate(R.layout.panel_3_calendars, container, false);
     }
 	public void onClick(View myView) 
 	{
