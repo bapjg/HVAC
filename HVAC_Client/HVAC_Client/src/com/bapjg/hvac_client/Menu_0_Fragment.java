@@ -11,18 +11,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-public class Menu_Fragment extends Fragment // implements View.OnClickListener
+public class Menu_0_Fragment extends Fragment // implements View.OnClickListener
 {
 	private Fragment			 						fragment;
 	private int											layout;
 	
-	public Menu_Fragment()
+	public Menu_0_Fragment()
 	{
 		super();
 		this.fragment									= null;
 		this.layout										= -1;
 	}
-	public Menu_Fragment(Fragment fragment, int layout)
+	public Menu_0_Fragment(Fragment fragment, int layout)
 	{
 		super();
 		this.fragment									= fragment;
