@@ -2,6 +2,8 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
+import com.bapjg.hvac_client.Mgmt_Msg_Temperatures.Request;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -147,7 +149,7 @@ public class Activity_Main extends Activity
 	{
 		// This is to update the temperature readings - but it is all wrong
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
+		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
 	}
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 	{
@@ -169,9 +171,11 @@ public class Activity_Main extends Activity
 	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
 		{             
 			System.out.println("step 4");
-			if (result.getClass() == Mgmt_Msg_Temperatures.class)
+			System.out.println("step 4.1" + (result.getClass().toString()));
+//			if (result.getClass() == Mgmt_Msg_Temperatures.class)
+			if (result.getClass() == Mgmt_Msg_Temperatures.Data.class)
 			{
-				Mgmt_Msg_Temperatures msg_received = (Mgmt_Msg_Temperatures) result;
+				Mgmt_Msg_Temperatures.Data msg_received = (Mgmt_Msg_Temperatures.Data) result;
 
 				((TextView) findViewById(R.id.Date)).setText(displayDate(msg_received.dateTime));
 				((TextView) findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));

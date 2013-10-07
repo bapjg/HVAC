@@ -9,6 +9,8 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import com.bapjg.hvac_client.Mgmt_Msg_Temperatures.Data;
+
 import android.os.AsyncTask;
 
 import android.app.Activity;
@@ -31,17 +33,20 @@ public class HTTP_Request
 	public boolean ping()
 	{
 		Mgmt_Msg_Abstract				messageReceive;
-		Mgmt_Msg_Ping					messageSend			= new Mgmt_Msg_Ping();
+		Mgmt_Msg_Abstract				message;
+		
+		
+		Mgmt_Msg_Abstract.Ping			messageSend			= (new Mgmt_Msg_Abstract()).new Ping();
 		Global.serverURL									= "http://192.168.5.20:8080/hvac/Management";
 		messageReceive										= sendData(messageSend);
-		if (messageReceive instanceof Mgmt_Msg_Ping.Ack)
+		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
 			return true;
 		}
 
 		Global.serverURL									= "http://home.bapjg.com:8080/hvac/Management";
 		messageReceive										= sendData(messageSend);
-		if (messageReceive instanceof Mgmt_Msg_Ping.Ack)
+		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
 			return true;
 		}
@@ -102,19 +107,19 @@ public class HTTP_Request
     	catch (ClassNotFoundException eClassNotFound) 
     	{
     		System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
-    		return new Mgmt_Msg_Nack();
+    		return new Mgmt_Msg_Abstract().new Nack();
 		}
 		catch (SocketTimeoutException eTimeOut)
 		{
 			System.out.println("eTimeOut");
 			// Consider retries
 			System.out.println(" HTTP_Request TimeOut on read or write : " + eTimeOut);
-			return new Mgmt_Msg_Nack();	
+			return new Mgmt_Msg_Abstract().new Nack();	
 		}
 		catch (Exception e) 
 		{
     		System.out.println(" HTTP_Request Send or read : " + e);
-			return new Mgmt_Msg_Nack();	
+    		return new Mgmt_Msg_Abstract().new Nack();	
 		}
 		return messageReceive;			
 	}

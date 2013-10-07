@@ -16,7 +16,7 @@ public class Mgmt_Msg_Temperatures   extends Mgmt_Msg_Abstract
 	public  Integer					tempOutside;
 	public  Integer					tempLivingRoom;
 	
-	public class Data
+	public class Data   extends Mgmt_Msg_Abstract
 	{
 		public  String				dateTime;
 		public  Integer				tempBoiler;
@@ -30,7 +30,7 @@ public class Mgmt_Msg_Temperatures   extends Mgmt_Msg_Abstract
 		public  Integer				tempOutside;
 		public  Integer				tempLivingRoom;
 	}
-	public class Request
+	public class Request   extends Mgmt_Msg_Abstract
 	{
 	}
 }

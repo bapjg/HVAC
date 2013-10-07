@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import com.bapjg.hvac_client.*;
+import com.bapjg.hvac_client.Mgmt_Msg_Abstract.Ping;
 import com.bapjg.hvac_client.Mgmt_Msg_Calendar.Data;
 
 public class Management extends HttpServlet
@@ -65,22 +66,22 @@ public class Management extends HttpServlet
         catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
-            message_out 							= new Mgmt_Msg_Nack();
+            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
         }
         catch (IOException eIO)
         {
             System.out.println("An IO Exception occured : " + eIO);
-            message_out 							= new Mgmt_Msg_Nack();
+            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
         }
         catch (Exception e)
         {
             System.out.println("An Exception occured : " + e);
-            message_out 							= new Mgmt_Msg_Nack();
+            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
         }
         
         if (message_in == null)
         {
-            message_out 							= new Mgmt_Msg_Nack();
+            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
         } 
         else if (message_in.getClass() == Mgmt_Msg_Temperatures.Request.class)
         {
@@ -93,7 +94,7 @@ public class Management extends HttpServlet
 		else
         {
             System.out.println("Unsupported message class received from client");
-            message_out								= new Mgmt_Msg_Nack();
+            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
         }
         
         reply(response, message_out);
@@ -116,44 +117,45 @@ public class Management extends HttpServlet
             e.printStackTrace();
         }
     }
-    public Mgmt_Msg_Temperatures processTemperaturesReq()
+    public Mgmt_Msg_Temperatures.Data processTemperaturesReq()
     {
         dbOpen();
         
-        Mgmt_Msg_Temperatures returnBuffer  = new Mgmt_Msg_Temperatures();
+        Mgmt_Msg_Temperatures.Data 	returnBuffer  	= new Mgmt_Msg_Temperatures().new Data();
 
         try
         {
-            dbStatement 						= dbConnection.createStatement(1004, 1008);
+            dbStatement 							= dbConnection.createStatement(1004, 1008);
             
-            String				dbSQL			= "";
-            dbSQL								+= "SELECT     dateTime,        ";	
-            dbSQL								+= "           tempBoiler,      ";	
-            dbSQL								+= "           tempHotWater,    ";	
-            dbSQL								+= "           tempBoilerIn,    ";
-            dbSQL								+= "           tempFloorOut,    ";
-            dbSQL								+= "           tempFloorCold,   ";
-            dbSQL								+= "           tempFloorHot,    ";
-            dbSQL								+= "           tempRadiatorOut, ";
-            dbSQL								+= "           tempRadiatorIn,  ";
-            dbSQL								+= "           tempOutside,     ";
-            dbSQL								+= "           tempLivingRoom	";            dbSQL								+= "FROM       temperatures  ";	
-            dbSQL								+= "ORDER BY   dateTime DESC    ";	
-            dbSQL								+= "LIMIT      1                ";	
+            String				dbSQL				= "";
+            dbSQL									+= "SELECT     dateTime,        ";	
+            dbSQL									+= "           tempBoiler,      ";	
+            dbSQL									+= "           tempHotWater,    ";	
+            dbSQL									+= "           tempBoilerIn,    ";
+            dbSQL									+= "           tempFloorOut,    ";
+            dbSQL									+= "           tempFloorCold,   ";
+            dbSQL									+= "           tempFloorHot,    ";
+            dbSQL									+= "           tempRadiatorOut, ";
+            dbSQL									+= "           tempRadiatorIn,  ";
+            dbSQL									+= "           tempOutside,     ";
+            dbSQL									+= "           tempLivingRoom	";
+            dbSQL									+= "FROM       temperatures     ";	
+            dbSQL									+= "ORDER BY   dateTime DESC    ";	
+            dbSQL									+= "LIMIT      1                ";	
             
-            ResultSet 			dbResultSet 	= dbStatement.executeQuery(dbSQL);
+            ResultSet 			dbResultSet 		= dbStatement.executeQuery(dbSQL);
             dbResultSet.next();
-            returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
-            returnBuffer.tempBoiler 			= dbResultSet.getInt("tempBoiler");
-            returnBuffer.tempHotWater 			= dbResultSet.getInt("tempHotWater");
-            returnBuffer.tempBoilerIn 			= dbResultSet.getInt("tempBoilerIn");
-            returnBuffer.tempFloorOut 			= dbResultSet.getInt("tempFloorOut");
-            returnBuffer.tempFloorCold 			= dbResultSet.getInt("tempFloorCold");
-            returnBuffer.tempFloorHot 			= dbResultSet.getInt("tempFloorHot");
-            returnBuffer.tempRadiatorOut 		= dbResultSet.getInt("tempRadiatorOut");
-            returnBuffer.tempRadiatorIn 		= dbResultSet.getInt("tempRadiatorIn");
-            returnBuffer.tempOutside 			= dbResultSet.getInt("tempOutside");
-            returnBuffer.tempLivingRoom 		= dbResultSet.getInt("tempLivingRoom");
+            returnBuffer.dateTime 					= dbResultSet.getString("dateTime");
+            returnBuffer.tempBoiler 				= dbResultSet.getInt("tempBoiler");
+            returnBuffer.tempHotWater 				= dbResultSet.getInt("tempHotWater");
+            returnBuffer.tempBoilerIn 				= dbResultSet.getInt("tempBoilerIn");
+            returnBuffer.tempFloorOut 				= dbResultSet.getInt("tempFloorOut");
+            returnBuffer.tempFloorCold 				= dbResultSet.getInt("tempFloorCold");
+            returnBuffer.tempFloorHot 				= dbResultSet.getInt("tempFloorHot");
+            returnBuffer.tempRadiatorOut 			= dbResultSet.getInt("tempRadiatorOut");
+            returnBuffer.tempRadiatorIn 			= dbResultSet.getInt("tempRadiatorIn");
+            returnBuffer.tempOutside 				= dbResultSet.getInt("tempOutside");
+            returnBuffer.tempLivingRoom 			= dbResultSet.getInt("tempLivingRoom");
             
             dbStatement.close();
             dbConnection.close();
@@ -169,8 +171,7 @@ public class Management extends HttpServlet
     {
         dbOpen();
         
-        Mgmt_Msg_Calendar			reply			= new Mgmt_Msg_Calendar();
-        Mgmt_Msg_Calendar.Data 		returnBuffer 	= reply.new Data();
+        Mgmt_Msg_Calendar.Data 		returnBuffer 	= new Mgmt_Msg_Calendar().new Data();
 
 //        returnBuffer.calendars 					= "";
 //        try
@@ -190,12 +191,12 @@ public class Management extends HttpServlet
 
         return returnBuffer;
     }
-    public Mgmt_Msg_Calendar processCalendarRequest()
+    public Mgmt_Msg_Calendar.Data processCalendarRequest()
     {
         dbOpen();
         
-        Mgmt_Msg_Calendar		 returnBuffer 	= new Mgmt_Msg_Calendar();
-        //returnBuffer.dateTime 					= "";
+        Mgmt_Msg_Calendar.Data 	returnBuffer 	= new Mgmt_Msg_Calendar().new Data();
+
 
         try
         {

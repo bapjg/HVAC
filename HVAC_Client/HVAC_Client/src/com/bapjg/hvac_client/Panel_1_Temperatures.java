@@ -30,8 +30,10 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
     {
     	// Inflate the layout for this fragment
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-		httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
+		//httpRequest.execute(new Mgmt_Msg_Temperatures.Request());
 
+		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+		
         return inflater.inflate(R.layout.panel_1_temperatures, container, false);
     }
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
@@ -56,10 +58,11 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
 		{             
 			System.out.println("step 4");
+			System.out.println("step 4.1" + (result.getClass().toString()));
 			
-			if (result.getClass() == Mgmt_Msg_Temperatures.class)
+			if (result.getClass() == Mgmt_Msg_Temperatures.Data.class)
 			{
-				Mgmt_Msg_Temperatures msg_received 	= (Mgmt_Msg_Temperatures) result;
+				Mgmt_Msg_Temperatures.Data msg_received 	= (Mgmt_Msg_Temperatures.Data) result;
 				Activity a							= getActivity();
 
 				// Need to change this to avoid null pointer exception
