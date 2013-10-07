@@ -16,14 +16,17 @@ public class Menu_0_Fragment extends Fragment // implements View.OnClickListener
 	private Fragment			 						fragment;
 	private int											layout;
 	
-	public Menu_0_Fragment()
-	{
-		super();
-		this.fragment									= null;
-		this.layout										= -1;
-	}
+//	public Menu_0_Fragment()
+//	{
+//		super();
+//		this.fragment									= null;
+//		this.layout										= -1;
+//	}
 	public Menu_0_Fragment(Fragment fragment, int layout)
 	{
+		// fragment : object which maintains the panel fragment			eg : panelTemperatures = new Panel_1_Temperatures();
+		// layout   : id of the layout file								eg : R.layout.menu_1_temperatures
+		
 		super();
 		this.fragment									= fragment;
 		this.layout										= layout;

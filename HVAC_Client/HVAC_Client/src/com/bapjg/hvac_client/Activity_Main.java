@@ -53,25 +53,29 @@ public class Activity_Main extends Activity
         ActionBar.Tab 			tabCalendars		 	= actionbar.newTab().setText("Calendars");
         ActionBar.Tab 			tabActions				= actionbar.newTab().setText("Actions");
         
-        global.fragmentTemperatures 					= new Panel_1_Temperatures();
-        global.fragmentConfiguration 					= new Panel_2_Configuration();
-        global.fragmentCalendars 						= new Panel_3_Calendars();
-        global.fragmentActions 							= new Panel_4_Actions();
+        global.panelTemperatures 						= new Panel_1_Temperatures();
+        global.panelConfiguration 						= new Panel_2_Configuration();
+        global.panelCalendars 							= new Panel_3_Calendars();
+        global.panelActions 							= new Panel_4_Actions();
         
-        Menu_0_Fragment		choicesTemperatures		= new Menu_0_Fragment(global.fragmentTemperatures, R.layout.menu_1_temperatures);
-        Menu_0_Fragment		choicesConfiguration	= new Menu_0_Fragment(global.fragmentConfiguration, R.layout.menu_2_configuration);
-        Menu_0_Fragment		choicesActions			= new Menu_0_Fragment(global.fragmentActions, R.layout.menu_4_actions);
-        Menu_0_Fragment		choicesCalendars		= new Menu_0_Fragment(global.fragmentCalendars, R.layout.menu_3_calendars);
+        // Setup the Menu Fragments
+        // Menu_0_Fragment constructor takes 2 arguments :
+        //	PanelFragment
+        //	Layout.id
+        Menu_0_Fragment		menuTemperatures			= new Menu_0_Fragment(global.panelTemperatures, 	R.layout.menu_1_temperatures);
+        Menu_0_Fragment		menuConfiguration			= new Menu_0_Fragment(global.panelConfiguration, 	R.layout.menu_2_configuration);
+        Menu_0_Fragment		menuActions					= new Menu_0_Fragment(global.panelActions, 			R.layout.menu_4_actions);
+        Menu_0_Fragment		menuCalendars				= new Menu_0_Fragment(global.panelCalendars, 		R.layout.menu_3_calendars);
 
         
         
 
-        // Note that first argument is for the buttons/tabs the second for information page
-        //                                                 buttons layout     ,  Information layou
-        tabTemperatures.setTabListener	(new Listener_Tabs(choicesTemperatures, global.fragmentTemperatures));
-        tabConfiguration.setTabListener	(new Listener_Tabs(choicesConfiguration, global.fragmentConfiguration));
-        tabCalendars.setTabListener		(new Listener_Tabs(choicesCalendars, global.fragmentCalendars));
-        tabActions.setTabListener		(new Listener_Tabs(choicesActions, global.fragmentActions));
+        // Setup the listener to change the 2 pages to be displayed on each "tab" click
+        //                                                 menu layout     ,  panel layout
+        tabTemperatures.setTabListener	(new Listener_Tabs(menuTemperatures, global.panelTemperatures));
+        tabConfiguration.setTabListener	(new Listener_Tabs(menuConfiguration, global.panelConfiguration));
+        tabCalendars.setTabListener		(new Listener_Tabs(menuCalendars, global.panelCalendars));
+        tabActions.setTabListener		(new Listener_Tabs(menuActions, global.panelActions));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabConfiguration);

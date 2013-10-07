@@ -11,46 +11,42 @@ import android.view.Menu;
 
 public class Listener_Tabs implements ActionBar.TabListener
 {
-	public Fragment choices;
-	public Fragment information;
+	public Fragment 	menu;
+	public Fragment 	panel;
 	
-	public Listener_Tabs(Fragment choices, Fragment information) 
+	public Listener_Tabs(Fragment choices, Fragment panel) 
 	{
-		this.choices 		= choices;
-		this.information 	= information;
+		this.menu 		= choices;
+		this.panel 		= panel;
 	}
-	public Listener_Tabs(Fragment information) 
-	{
-		this.choices 		= null;
-		this.information 	= information;
-	}
-	public Listener_Tabs(String tabName) 
-	{
-		this.choices 		= null;
-		this.information 	= null;
-	}
+//	public Listener_Tabs(Fragment information) 
+//	{
+//		this.menu 		= null;
+//		this.panel 		= panel;
+//	}
+//	public Listener_Tabs(String tabName) 
+//	{
+//		this.menu 		= null;
+//		this.panel 		= null;
+//	}
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) 
 	{
-		Toast.makeText(Global.appContext, "Reselected!", Toast.LENGTH_LONG).show();
+	//	Toast.makeText(Global.appContext, "Reselected!", Toast.LENGTH_LONG).show();
 	}
 
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) 
 	{
-		if (this.choices != null)
-		{
-			ft.replace(R.id.menu_container, choices);
-		}
-		ft.replace(R.id.panel_container, information);
+		// params for ft.replace : Destination in layout, Fragment_Object to be placed within
+		ft.replace(R.id.menu_container, menu);					
+		ft.replace(R.id.panel_container, panel);
 	}
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) 
 	{
-		if (choices != null)
-		{
-			ft.remove(choices);
-		}
-		ft.remove(information);
+		// params for ft.replace : Fragment_Object to be removed
+		ft.remove(menu);
+		ft.remove(panel);
 	}
 }
