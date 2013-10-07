@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 
 
+@SuppressWarnings("serial")
 public class Message_Congiguration  extends Message_Abstract
 {
-	@SuppressWarnings("unused")
-	private static final long 				serialVersionUID 	= 5L;
-	
 	public ArrayList<Message_Circuit> 		circuitList 		= new ArrayList <Message_Circuit> ();
 	public ArrayList<Message_Relay> 		relayList 			= new ArrayList <Message_Relay> ();
 	public ArrayList<Message_Thermometer> 	thermometerList 	= new ArrayList <Message_Thermometer> ();

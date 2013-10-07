@@ -123,9 +123,9 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request <Message_Fuel>				httpRequest			= new HTTP_Request <Message_Fuel> ("Monitor");
+		HTTP_Request <Message_Fuel.Update>		httpRequest			= new HTTP_Request <Message_Fuel.Update> ("Monitor");
 			
-		Message_Fuel	 						messageSend 		= new Message_Fuel();
+		Message_Fuel.Update	 					messageSend 		= (new Message_Fuel()).new Update();
 		messageSend.dateTime 										= System.currentTimeMillis();
 		messageSend.fuelConsumed 									= fuelConsumed;
 			

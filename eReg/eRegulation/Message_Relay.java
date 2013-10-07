@@ -1,9 +1,8 @@
 package eRegulation;
 
+@SuppressWarnings("serial")
 public class Message_Relay  extends Message_Abstract
 {
-	private static final long 		serialVersionUID 			= 12L;
-	
 	public String 					name;
 	public String 					friendlyName;
 	public int 						relayBank;

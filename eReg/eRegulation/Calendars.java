@@ -25,7 +25,7 @@ public class Calendars extends DefaultHandler
 		// This must be adapted to receive the serialised object
 		//
 				
-//		Mntr_Msg_Calendars 							xmlCalendarString				= null;
+//		Message_Calendars 							xmlCalendarString				= null;
 //		
 //		HTTP_Request	<Message_Calendar_Request_Data>		httpRequest						= new HTTP_Request <Message_Calendar_Request_Data> ("Management");
 //
@@ -33,9 +33,9 @@ public class Calendars extends DefaultHandler
 //		
 //		Message_Abstract		 							messageReceive					= httpRequest.sendData(messageSend);
 //
-//		if (messageReceive instanceof Mntr_Msg_Calendars)
+//		if (messageReceive instanceof Message_Calendars)
 //		{
-//			xmlCalendarString																= (Mntr_Msg_Calendars) messageReceive;
+//			xmlCalendarString																= (Message_Calendars) messageReceive;
 //		}		
 		//
 		//=====================================================================
@@ -79,15 +79,15 @@ public class Calendars extends DefaultHandler
 //				e.printStackTrace();
 //			}
 //			
-//			if (messageReceive instanceof Mntr_Msg_Calendars)
+//			if (messageReceive instanceof Message_Calendars)
 //			{
-//				xmlCalendarString													= (Mntr_Msg_Calendars) messageReceive;
+//				xmlCalendarString													= (Message_Calendars) messageReceive;
 ////				System.out.println("dateTime  : " + xmlCalendarString.dateTime);
 ////				System.out.println("calendars : " + xmlCalendarString.calendars);
 //			}
 //			else
 //			{
-//				System.out.println("instanceof The data  is : Not Mntr_Msg_Calendars");
+//				System.out.println("instanceof The data  is : Not Message_Calendars");
 //			}
 //		} 
 //		catch (Exception e) 
