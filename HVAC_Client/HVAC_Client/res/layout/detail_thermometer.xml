@@ -13,16 +13,39 @@
 		android:layout_weight			= "1"
 	>
         <TableRow																					style	= "@style/AD_Row"   >
-            <TextView		android:text	= "Name"    	    									style	= "@style/AD_Text"  />
-            <TextView       android:text	= "xxxx"			android:id	= "@+id/Name"			style	= "@style/AD_Data"	/>
+
+            <TextView
+                style="@style/AD_Text"
+                android:text="Name"
+                android:width="300dp" />
+
+            <EditText
+                android:id="@+id/name"
+                style="@style/AD_Data"
+                android:gravity="left"
+                android:text="xxxx"
+                android:width="400sp" />
+
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
-            <TextView		android:text	= "Friendly Name"	   									style	= "@style/AD_Text"  />
-            <TextView       android:text	= "xxxx"			android:id	= "@+id/FriendlyName"	style	= "@style/AD_Data"	/>
+            <TextView		android:text	= "Friendly Name"	   	android:width="300dp"								style	= "@style/AD_Text"  />
+            <EditText       android:text	= "xxxx"			android:id	= "@+id/friendlyName"	style	= "@style/AD_Data"	android:gravity="left" android:width="400sp"/>
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
-            <TextView		android:text	= "Thermo ID"  		      								style	= "@style/AD_Text"  />
-            <TextView       android:text	= "xxxx"			android:id	= "@+id/ThermoID"		style	= "@style/AD_Data"	/>
+            <TextView		android:text	= "Thermo ID"  		  android:width="300dp"    								style	= "@style/AD_Text"  />
+            <EditText       android:text	= "xxxx"			android:id	= "@+id/thermoID"		style	= "@style/AD_Data"	android:gravity="left" android:width="400sp"/>
 		</TableRow>
     </TableLayout>
+    <Button
+        android:id="@+id/Ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok" />
+    <Button
+        android:id="@+id/Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
+    
+
 </LinearLayout>

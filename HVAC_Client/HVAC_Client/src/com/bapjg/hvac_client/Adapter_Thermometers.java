@@ -83,10 +83,10 @@ public class Adapter_Thermometers extends ArrayAdapter
     	TextView 						friendlyName;
     	TextView 						thermoID;
     }
-    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
-    {
-        // Object 		o 								= view.getItemAtPosition(position);
-        // NewsItem 	newsData 						= (NewsItem) o;
-		Toast.makeText(myContext, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();
-    }
+//    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
+//    {
+//        // Object 		o 								= view.getItemAtPosition(position);
+//        // NewsItem 	newsData 						= (NewsItem) o;
+//		Toast.makeText(myContext, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();
+//    }
 }

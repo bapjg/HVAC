@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import com.bapjg.hvac_client.Mgmt_Msg_Configuration;
 import com.bapjg.hvac_client.Mgmt_Msg_Configuration.Thermometer;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -21,6 +24,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.EditText;
 
 
 public class Panel_2_Configuration extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
@@ -46,23 +50,12 @@ public class Panel_2_Configuration extends Fragment implements View.OnClickListe
 	        ViewGroup 					viewGroup						= (ViewGroup) activity.findViewById(R.id.Detail_View);
  	        LayoutInflater 				inflater 						= (LayoutInflater) Global.actContext.getSystemService(Global.actContext.LAYOUT_INFLATER_SERVICE);
         	View 						newView 						= inflater.inflate(R.layout.detail_thermometer, viewGroup, true);
-        	
-        	FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-        	Detail_Thermometers dt = new Detail_Thermometers();
-        	
+
+        	FragmentTransaction 		ft 								= getActivity().getFragmentManager().beginTransaction();
+        	Detail_Thermometers 		dt 								= new Detail_Thermometers();
+        	dt.me														= Global.configuration.thermometerList.get(position -1);
         	ft.replace(R.id.panel_container, dt);
         	ft.commit();
-        	
-        	Mgmt_Msg_Configuration conf = Global.configuration;
-
-        	
-        	Mgmt_Msg_Configuration.Thermometer me = (Mgmt_Msg_Configuration.Thermometer) Global.configuration.thermometerList.get(position -1);
-
-        	((TextView) activity.findViewById(R.id.name)).setText(me.name);
-			((TextView) activity.findViewById(R.id.friendlyName)).setText(me.friendlyName);
-			((TextView) activity.findViewById(R.id.thermoID)).setText(me.thermoID);
-        	
-            //Need to setup an update screen
         }
         else
         {
@@ -71,22 +64,22 @@ public class Panel_2_Configuration extends Fragment implements View.OnClickListe
         	
         	// This sets height of the listview 0, and item view 100
 	    	// Cant remember why - the if clause is just to not execute the code until I remember why
-        	if (position == 0)
-        	{
-        		
-        	}
-        	else
-        	{
-		    	AbsListView 				layout_list						= (AbsListView) view.findViewById(R.id.List_View);
-		        LinearLayout.LayoutParams	params_list						= (LinearLayout.LayoutParams) layout_list.getLayoutParams();
-		        params_list.height											= 0;
-		        layout_list.setLayoutParams(params_list);
-		        
-		        LinearLayout 				layout_item						= (LinearLayout) view.findViewById(R.id.Item_View);
-		        LinearLayout.LayoutParams	params_item						= (LinearLayout.LayoutParams) layout_item.getLayoutParams();
-		        params_item.height											= 100;
-		        layout_item.setLayoutParams(params_item);
-        	}
+//        	if (position == 0)
+//        	{
+//        		
+//        	}
+//        	else
+//        	{
+//		    	AbsListView 				layout_list						= (AbsListView) view.findViewById(R.id.List_View);
+//		        LinearLayout.LayoutParams	params_list						= (LinearLayout.LayoutParams) layout_list.getLayoutParams();
+//		        params_list.height											= 0;
+//		        layout_list.setLayoutParams(params_list);
+//		        
+//		        LinearLayout 				layout_item						= (LinearLayout) view.findViewById(R.id.Item_View);
+//		        LinearLayout.LayoutParams	params_item						= (LinearLayout.LayoutParams) layout_item.getLayoutParams();
+//		        params_item.height											= 100;
+//		        layout_item.setLayoutParams(params_item);
+//        	}
        }
    	}
     public void onClick(View myView)
@@ -120,14 +113,5 @@ public class Panel_2_Configuration extends Fragment implements View.OnClickListe
         
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	
-    }
-    static public class Detail_Thermometers extends Fragment 
-    {
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-        {
-            View myView =  inflater.inflate(R.layout.detail_thermometer, container, false);
-            return myView;
-        }
-         	
     }
 }
