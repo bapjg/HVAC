@@ -151,7 +151,7 @@ public class Monitor extends HttpServlet
         }
         return new Message_Ack();
     }
-    public Message_Abstract processFuel(Message_Fuel readings)
+    public Message_Abstract processFuel(Message_Fuel.Data readings)
     {
         dbOpen();
         Boolean 					returnAck 		= false;
@@ -162,8 +162,8 @@ public class Monitor extends HttpServlet
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM fuel LIMIT 1");
             dbResultSet.moveToInsertRow();
 
-            dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
-            dbResultSet.updateLong("fuelConsumed", readings.fuelConsumed.longValue());
+            dbResultSet.updateString	("dateTime", 		dateTime2String(readings.dateTime));
+            dbResultSet.updateLong		("fuelConsumed", 	readings.fuelConsumed.longValue());
             dbResultSet.insertRow();
             returnAck	 							= true;
             
