@@ -74,7 +74,7 @@ public final class R {
         public static final int menu_2_configuration=0x7f030006;
         public static final int menu_3_calendars=0x7f030007;
         public static final int menu_4_actions=0x7f030008;
-        public static final int panel_10_temperatures_temperatures=0x7f030009;
+        public static final int panel_10_temperatures_readings=0x7f030009;
         public static final int panel_1_temperatures=0x7f03000a;
         public static final int panel_2_configuration=0x7f03000b;
         public static final int panel_3_calendars=0x7f03000c;

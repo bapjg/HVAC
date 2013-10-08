@@ -13,39 +13,29 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 public class Menu_0_Fragment extends Fragment // implements View.OnClickListener
 {
-	private Fragment			 						fragment;
-	private int											layout;
+	private Fragment			panelFragment;
+	private int					menuLayout;
 	
-//	public Menu_0_Fragment()
-//	{
-//		super();
-//		this.fragment									= null;
-//		this.layout										= -1;
-//	}
-	public Menu_0_Fragment(Fragment fragment, int layout)
+	public Menu_0_Fragment(Fragment panelFragment, int menuLayout)
 	{
 		// fragment : object which maintains the panel fragment			eg : panelTemperatures = new Panel_1_Temperatures();
 		// layout   : id of the layout file								eg : R.layout.menu_1_temperatures
 		
 		super();
-		this.fragment									= fragment;
-		this.layout										= layout;
+		this.panelFragment								= panelFragment;
+		this.menuLayout									= menuLayout;
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	//View result = inflater.inflate(R.layout.choices_configuration, container, false);
-    	View result = inflater.inflate(this.layout, container, false);
-    	// The choice list of buttons has been inflated
-    	// They are all buttons, so set the OnClickListener to the fragment of RHS
-		if (this.fragment != null)
+    	// Inflate the menuLayout into container (menu_container)
+    	View result = inflater.inflate(this.menuLayout, container, false);
+    	// The menuLayout contains only buttons. Set the OnClickListener to the panelFragment 
+		for (int i = 0; i < ((ViewGroup) result).getChildCount(); i++)
 		{
-			for (int i = 0; i < ((ViewGroup) result).getChildCount(); i++)
-			{
-				Button							buttonChild 				= (Button) ((ViewGroup) result).getChildAt(i);
-				buttonChild.setOnClickListener((OnClickListener) this.fragment);
-			}
-		}    	
+			Button				buttonChild 			= (Button) ((ViewGroup) result).getChildAt(i);
+			buttonChild.setOnClickListener((OnClickListener) this.panelFragment);
+		}
     	return result;
     }
 }
