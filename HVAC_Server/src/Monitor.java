@@ -70,42 +70,42 @@ public class Monitor extends HttpServlet
         {
         	System.err.println("Caught CNF");
         	eCNF.printStackTrace();
-            message_out 							= new Message_Nack();
+            message_out 							= new Message_Abstract().new Nack();
         }
         catch (IOException eIO)
         {
         	System.err.println("Caught IO");
         	System.out.println("An IO Exception occured : " + eIO);
-            message_out 							= new Message_Nack();
+        	message_out 							= new Message_Abstract().new Nack();
         }
         catch (Exception e)
         {
         	System.err.println("Caught another exception");
         	System.out.println("An Exception occured : " + e);
-            message_out 							= new Message_Nack();
+        	message_out 							= new Message_Abstract().new Nack();
         }
 
     	if (message_in == null)
         {
             System.out.println("Null received from client");
-            message_out								= new Message_Nack();
+            message_out 							= new Message_Abstract().new Nack();
         } 
-    	else if (message_in.getClass() == Message_Temperatures.class)
+    	else if (message_in instanceof Message_Temperatures)
         {
-            Message_Temperatures 		readings 	= (Message_Temperatures) message_in;
+    		Message_Temperatures 		readings 	= (Message_Temperatures) message_in;
             message_out								= processTemperatures(readings);
          } 
-		else if (message_in.getClass() == Message_Fuel.class)
+		else if (message_in instanceof Message_Fuel.Update)
         {
-            Message_Fuel 				readings 	= (Message_Fuel) message_in;
+            Message_Fuel.Update			readings 	= (Message_Fuel.Update) message_in;
             message_out								= processFuel(readings);
         } 
-		else if (message_in.getClass() == Message_Report.class)
+		else if (message_in instanceof Message_Report)
         {
             Message_Report 				readings 	= (Message_Report) message_in;
             message_out								= processReport(readings);
         } 
-		else if (message_in.getClass() == Message_Action.class)
+		else if (message_in instanceof Message_Action)
         {
             Message_Action 				readings 	= (Message_Action) message_in;
             message_out								= processAction(readings);
@@ -113,7 +113,7 @@ public class Monitor extends HttpServlet
 		else
         {
             System.out.println("Unsupported message class received from client");
-            message_out								= new Message_Nack();
+            message_out 							= new Message_Abstract().new Nack();
         }
         
         reply(response, message_out);
@@ -147,9 +147,9 @@ public class Monitor extends HttpServlet
         catch(SQLException eSQL)
         {
         	eSQL.printStackTrace();
-            return new Message_Nack();
+            return new Message_Abstract().new Nack();
         }
-        return new Message_Ack();
+        return new Message_Abstract().new Ack();
     }
     public Message_Abstract processFuel(Message_Fuel.Data readings)
     {
@@ -173,9 +173,9 @@ public class Monitor extends HttpServlet
         catch(SQLException e)
         {
             e.printStackTrace();
-            return new Message_Nack();
+            return new Message_Abstract().new Nack();
         }
-        return new Message_Ack();
+        return new Message_Abstract().new Ack();
     }
     public Message_Abstract processReport(Message_Report readings)
     {
@@ -202,9 +202,9 @@ public class Monitor extends HttpServlet
         catch(SQLException e)
         {
             e.printStackTrace();
-            return new Message_Nack();
+            return new Message_Abstract().new Nack();
         }
-        return new Message_Ack();
+        return new Message_Abstract().new Ack();
     }
     public Message_Abstract processAction(Message_Action readings)
     {
@@ -227,9 +227,9 @@ public class Monitor extends HttpServlet
         catch(SQLException e)
         {
             e.printStackTrace();
-            return new Message_Nack();
+            return new Message_Abstract().new Nack();
         }
-        return new Message_Ack();
+        return new Message_Abstract().new Ack();
     }
     public void init() throws ServletException
     {
