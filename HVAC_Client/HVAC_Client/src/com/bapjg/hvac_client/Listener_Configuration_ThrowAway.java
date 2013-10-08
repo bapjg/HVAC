@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
-public class Listener_Configuration implements View.OnClickListener
+public class Listener_Configuration_ThrowAway implements View.OnClickListener
 {
 	@Override
 	public void onClick(View myView) 
