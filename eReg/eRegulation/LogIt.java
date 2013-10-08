@@ -39,7 +39,7 @@ public class LogIt
 			
 		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Message_Ack))
+		if (!(messageReceive instanceof Message_Abstract.Ack))
 		{
 			System.out.println(dateTimeStamp() + " Logit.logMessage" + messageType + "  is : Nack");
 		}
@@ -108,7 +108,7 @@ public class LogIt
 			
 		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 		
-		if (!(messageReceive instanceof Message_Ack))
+		if (!(messageReceive instanceof Message_Abstract.Ack))
 		{
 			System.out.println(dateTimeStamp() + " Temp data  is : Nack");
 		}
@@ -131,7 +131,7 @@ public class LogIt
 			
 		Message_Abstract 						messageReceive	 	= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Message_Ack))
+		if (!(messageReceive instanceof Message_Abstract.Ack))
 		{
 			System.out.println(dateTimeStamp() + " Fuel data  is : Nack");
 		}
@@ -156,7 +156,7 @@ public class LogIt
 			
 		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Message_Ack))
+		if (!(messageReceive instanceof Message_Abstract.Ack))
 		{
 			System.out.println(dateTimeStamp() + " Action data  is : Nack");
 		}
