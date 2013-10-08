@@ -36,6 +36,7 @@ public class Menu_0_Fragment extends Fragment // implements View.OnClickListener
 			Button				buttonChild 			= (Button) ((ViewGroup) result).getChildAt(i);
 			buttonChild.setOnClickListener((OnClickListener) this.panelFragment);
 		}
+		((OnClickListener) this.panelFragment).onClick((Button) ((ViewGroup) result).getChildAt(0));
     	return result;
     }
 }
