@@ -30,7 +30,6 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
     {
     	// Inflate the layout for this fragment
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-		//httpRequest.execute(new Mgmt_Msg_Temperatures.Request());
 
 		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
 		
@@ -48,7 +47,15 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 		@Override
 		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
 		{
-			return http.sendData(messageOut[0]);
+			if (Global.serverURL == "")
+			{
+				System.out.println("In HTTP_Req_Temp/doInBackground and no connection has yet been established");
+				return new Mgmt_Msg_Abstract().new NoConnection();
+			}
+			else
+			{
+				return http.sendData(messageOut[0]);
+			}
 		}	
 		@Override
 		protected void onProgressUpdate(Void... progress) 
@@ -60,7 +67,7 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 			System.out.println("step 4");
 			System.out.println("step 4.1" + (result.getClass().toString()));
 			
-			if (result.getClass() == Mgmt_Msg_Temperatures.Data.class)
+			if (result instanceof Mgmt_Msg_Temperatures.Data)
 			{
 				Mgmt_Msg_Temperatures.Data msg_received 	= (Mgmt_Msg_Temperatures.Data) result;
 				Activity a							= getActivity();
@@ -81,6 +88,10 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 				((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
 				((TextView) a.findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
 				((TextView) a.findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
+			}
+			else if (result instanceof Mgmt_Msg_Temperatures.NoConnection)
+			{
+				System.out.println("In HTTP_Req_Temp/onPostExecute and no connection has yet been established");
 			}
 			else
 			{

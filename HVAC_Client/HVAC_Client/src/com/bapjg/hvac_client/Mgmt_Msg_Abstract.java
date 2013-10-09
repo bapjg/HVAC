@@ -15,4 +15,8 @@ public class Mgmt_Msg_Abstract implements java.io.Serializable
 	public class Ping extends Mgmt_Msg_Abstract
 	{
 	}
+	public class NoConnection extends Mgmt_Msg_Abstract
+	{
+	}
+
 }

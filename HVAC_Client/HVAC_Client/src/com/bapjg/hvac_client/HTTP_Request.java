@@ -64,15 +64,21 @@ public class HTTP_Request
 	}
 	public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
 	{
+System.out.println("Mgmt_Msg_Abstract/sendData Started");
 		servletConnection									= null;
 		Mgmt_Msg_Abstract				messageReceive		= null;
-		
+		if (Global.serverURL.equalsIgnoreCase(""))
+		{
+System.out.println("Mgmt_Msg_Abstract/sendData empty serverURL detected, must wait");
+			return new Mgmt_Msg_Abstract().new NoConnection();
+		}
 		try
 		{
 			serverURL = new URL(Global.serverURL);
 		}
 		catch (MalformedURLException eMUE)
 		{
+System.out.println("Mgmt_Msg_Abstract/sendData MalformedURLException : " + eMUE);
 			eMUE.printStackTrace();
 		}
 
@@ -116,7 +122,7 @@ public class HTTP_Request
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{
-    		System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
+System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
     		return new Mgmt_Msg_Abstract().new Nack();
 		}
 		catch (SocketTimeoutException eTimeOut)

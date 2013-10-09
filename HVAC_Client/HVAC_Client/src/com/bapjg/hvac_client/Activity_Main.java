@@ -45,8 +45,7 @@ public class Activity_Main extends Activity
         global.appContext 								= getApplicationContext();
         global.actContext								= (Context)  this;
         global.activity									= (Activity) this;
-        global.serverURL								= "http://192.168.5.20:8080/hvac/Management";
-        
+        global.serverURL								= "";
         ActionBar 				actionbar 				= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         
@@ -68,7 +67,7 @@ public class Activity_Main extends Activity
         Menu_0_Fragment		menuConfiguration			= new Menu_0_Fragment(global.panelConfiguration, 	R.layout.menu_2_configuration);
         Menu_0_Fragment		menuActions					= new Menu_0_Fragment(global.panelActions, 			R.layout.menu_4_actions);
         Menu_0_Fragment		menuCalendars				= new Menu_0_Fragment(global.panelCalendars, 		R.layout.menu_3_calendars);
-
+ 
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu layout     ,  panel layout
         tabTemperatures.setTabListener	(new Listener_Tabs(menuTemperatures, 	global.panelTemperatures));
@@ -83,7 +82,7 @@ public class Activity_Main extends Activity
 
         // Simulate Configuration message from server
         
-        
+
         Global.configuration											= new Mgmt_Msg_Configuration();
  		
  		Mgmt_Msg_Configuration						config				= Global.configuration;
@@ -105,7 +104,7 @@ public class Activity_Main extends Activity
         thermometer.friendlyName ="Radiateur";
         thermometer.thermoID = "028-0000zzzz";
         config.thermometerList.add(thermometer);
-        
+       
         HTTP_Req_Ping							httpRequest				= new HTTP_Req_Ping();
 		httpRequest.execute(new Mgmt_Msg_Abstract().new Ping());
 
