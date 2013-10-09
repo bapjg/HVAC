@@ -36,8 +36,7 @@ public class HTTP_Request
 		System.out.println("Ping Started");
 		Mgmt_Msg_Abstract				messageReceive;
 		Mgmt_Msg_Abstract.Ping			messageSend			= (new Mgmt_Msg_Abstract()).new Ping();
-		Global.serverURL									= "http://192.168.5.20:8080/hvac/Management";
-		messageReceive										= sendData(messageSend);
+		messageReceive										= sendIt(messageSend, "http://192.168.5.20:8080/hvac/Management");
 		System.out.println("Ping sent/replied local");
 
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
@@ -49,8 +48,7 @@ public class HTTP_Request
 		Toast.makeText(Global.appContext, "A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
 		System.out.println("Ping sent remote");
 
-		Global.serverURL									= "http://home.bapjg.com:8080/hvac/Management";
-		messageReceive										= sendData(messageSend);
+		messageReceive										= sendIt(messageSend, "http://home.bapjg.com:8080/hvac/Management");
 		System.out.println("Ping sent/replied remote");
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
@@ -75,6 +73,78 @@ System.out.println("Mgmt_Msg_Abstract/sendData empty serverURL detected, must wa
 		try
 		{
 			serverURL = new URL(Global.serverURL);
+		}
+		catch (MalformedURLException eMUE)
+		{
+System.out.println("Mgmt_Msg_Abstract/sendData MalformedURLException : " + eMUE);
+			eMUE.printStackTrace();
+		}
+
+		try
+		{
+			servletConnection = serverURL.openConnection();
+		}
+		catch (IOException eIO)
+		{
+			eIO.printStackTrace();
+		}
+		
+		servletConnection.setDoOutput(true);
+		servletConnection.setUseCaches(false);
+		servletConnection.setConnectTimeout(3000);
+		servletConnection.setReadTimeout(3000);
+		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
+
+		try
+		{
+			ObjectOutputStream 			outputToServlet;
+			outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
+			outputToServlet.writeObject(messageSend);
+			outputToServlet.flush();
+			outputToServlet.close();
+    		System.out.println(" HTTP_Request Sent ");
+		}
+		catch (SocketTimeoutException eTimeOut)
+		{
+    		System.out.println(" HTTP_Request TimeOut on write : " + eTimeOut);
+		}
+		catch (Exception eSend) 
+		{
+    		System.out.println(" HTTP_Request Send : " + eSend);
+		}
+
+		try
+		{
+			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
+			messageReceive 									= (Mgmt_Msg_Abstract) response.readObject();
+		}
+    	catch (ClassNotFoundException eClassNotFound) 
+    	{
+System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
+    		return new Mgmt_Msg_Abstract().new Nack();
+		}
+		catch (SocketTimeoutException eTimeOut)
+		{
+			System.out.println("eTimeOut");
+			// Consider retries
+			System.out.println(" HTTP_Request TimeOut on read or write : " + eTimeOut);
+			return new Mgmt_Msg_Abstract().new Nack();	
+		}
+		catch (Exception e) 
+		{
+    		System.out.println(" HTTP_Request Send or read : " + e);
+    		return new Mgmt_Msg_Abstract().new Nack();	
+		}
+		return messageReceive;			
+	}
+	public Mgmt_Msg_Abstract sendIt(Mgmt_Msg_Abstract messageSend, String URL)
+	{
+System.out.println("Mgmt_Msg_Abstract/sendData Started");
+		servletConnection									= null;
+		Mgmt_Msg_Abstract				messageReceive		= null;
+		try
+		{
+			serverURL = new URL(URL);
 		}
 		catch (MalformedURLException eMUE)
 		{

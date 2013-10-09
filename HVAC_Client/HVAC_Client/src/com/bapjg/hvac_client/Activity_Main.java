@@ -81,8 +81,6 @@ public class Activity_Main extends Activity
         actionbar.addTab(tabActions);
 
         // Simulate Configuration message from server
-        
-
         Global.configuration											= new Mgmt_Msg_Configuration();
  		
  		Mgmt_Msg_Configuration						config				= Global.configuration;
@@ -104,7 +102,7 @@ public class Activity_Main extends Activity
         thermometer.friendlyName ="Radiateur";
         thermometer.thermoID = "028-0000zzzz";
         config.thermometerList.add(thermometer);
-       
+System.out.println("ping start");       
         HTTP_Req_Ping							httpRequest				= new HTTP_Req_Ping();
 		httpRequest.execute(new Mgmt_Msg_Abstract().new Ping());
 
@@ -158,6 +156,7 @@ public class Activity_Main extends Activity
 		@Override
 		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
 		{
+System.out.println("ping doInbackgroud senddata"); 
 			return http.sendData(messageOut[0]);			
 		}
 		@Override
