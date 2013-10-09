@@ -7,45 +7,69 @@
 	android:baselineAligned				= "false"
 	android:background					= "@color/background"
 >
-	<TableLayout
-		android:layout_width			= "wrap_content"
-		android:layout_height			= "match_parent"
-		android:layout_weight			= "1"
-	>
-        <TableRow																					style	= "@style/AD_Row"   >
 
-            <TextView
-                style="@style/AD_Text"
-                android:text="Name"
-                android:width="300dp" />
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="50sp"
+	    android:background="@color/background"
+	    android:baselineAligned="false"
+	    android:gravity="right"
+	    android:orientation="horizontal" >
+	    
+	    <Button
+	        android:id="@+id/Cancel"
+	        style="@style/AD_Button"
+	        android:layout_width="120dp"
+	        android:layout_height="wrap_content"
+	        android:text="Cancel" />
 
-            <EditText
-                android:id="@+id/name"
-                style="@style/AD_Data"
-                android:gravity="left"
-                android:text="xxxx"
-                android:width="400sp" />
-
-		</TableRow>
-        <TableRow																					style	= "@style/AD_Row"   >
-            <TextView		android:text	= "Friendly Name"	   	android:width="300dp"								style	= "@style/AD_Text"  />
-            <EditText       android:text	= "xxxx"			android:id	= "@+id/friendlyName"	style	= "@style/AD_Data"	android:gravity="left" android:width="400sp"/>
-		</TableRow>
-        <TableRow																					style	= "@style/AD_Row"   >
-            <TextView		android:text	= "Thermo ID"  		  android:width="300dp"    								style	= "@style/AD_Text"  />
-            <EditText       android:text	= "xxxx"			android:id	= "@+id/thermoID"		style	= "@style/AD_Data"	android:gravity="left" android:width="400sp"/>
-		</TableRow>
-    </TableLayout>
-    <Button
-        android:id="@+id/Ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ok" />
-    <Button
-        android:id="@+id/Cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel" />
+	    <Button
+	        android:id="@+id/Ok"
+	        android:layout_width="120dp"
+	        android:layout_height="wrap_content"
+			style						= "@style/AD_Button"
+	       
+	        android:text="Ok" />
+	</LinearLayout>    
+ 	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="@color/background"
+	    android:baselineAligned="false"
+	    android:gravity="right"
+	    android:orientation="vertical" >
+	
     
+    
+	    <TableLayout
+			android:layout_width			= "wrap_content"
+			android:layout_height			= "match_parent"
+			android:layout_weight			= "1"
+		>
+	        <TableRow																					style	= "@style/AD_Row"   >
+	
+	            <TextView
+	                style="@style/AD_Text"
+	                android:text="Name"
+	                android:width="300dp" />
+	
+	            <EditText
+	                android:id="@+id/name"
+	                style="@style/AD_Data"
+	                android:gravity="left"
+	                android:text="xxxx"
+	                android:width="400sp" />
+	
+			</TableRow>
+	        <TableRow																					style	= "@style/AD_Row"   >
+	            <TextView		android:text	= "Friendly Name"	   	android:width="300dp"								style	= "@style/AD_Text"  />
+	            <EditText       android:text	= "xxxx"			android:id	= "@+id/friendlyName"	style	= "@style/AD_Data"	android:gravity="left" android:width="400sp"/>
+			</TableRow>
+	        <TableRow																					style	= "@style/AD_Row"   >
+	            <TextView		android:text	= "Thermo ID"  		  android:width="300dp"    								style	= "@style/AD_Text"  />
+	            <EditText       android:text	= "xxxx"			android:id	= "@+id/thermoID"		style	= "@style/AD_Data"	android:gravity="left" android:width="400sp"/>
+			</TableRow>
+		    </TableLayout>
+	 </LinearLayout>   
 
 </LinearLayout>

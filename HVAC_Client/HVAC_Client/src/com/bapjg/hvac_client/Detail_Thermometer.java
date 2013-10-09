@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Button;
 
 
-public class Detail_Thermometers extends Fragment implements View.OnClickListener
+public class Detail_Thermometer extends Fragment implements View.OnClickListener
 {
 	public Mgmt_Msg_Configuration.Thermometer me;
 	

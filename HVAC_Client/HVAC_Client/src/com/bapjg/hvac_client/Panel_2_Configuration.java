@@ -52,7 +52,7 @@ public class Panel_2_Configuration extends Fragment implements View.OnClickListe
         	View 						newView 						= inflater.inflate(R.layout.detail_thermometer, viewGroup, true);
 
         	FragmentTransaction 		ft 								= getActivity().getFragmentManager().beginTransaction();
-        	Detail_Thermometers 		dt 								= new Detail_Thermometers();
+        	Detail_Thermometer 		dt 								= new Detail_Thermometer();
         	dt.me														= Global.configuration.thermometerList.get(position -1);
         	ft.replace(R.id.panel_container, dt);
         	ft.commit();
@@ -105,11 +105,11 @@ public class Panel_2_Configuration extends Fragment implements View.OnClickListe
     public void buttonThermometersClick(View myView)
     {
 		// This sets up the code to display the panel and get clicks in order to display an update screen
-        ArrayList  						data		 				= Global.configuration.thermometerList;
-        Activity 						activity					= (Activity) Global.actContext;
-        AdapterView <Adapter_Thermometers> view						= (AdapterView) activity.findViewById(R.id.List_View);
+        ArrayList  							data		 				= Global.configuration.thermometerList;
+        Activity 							activity					= (Activity) Global.actContext;
+        AdapterView <Adapter_Thermometers> 	view						= (AdapterView) activity.findViewById(R.id.List_View);
         
-        Adapter_Thermometers 			adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
+        Adapter_Thermometers 				adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
         
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	

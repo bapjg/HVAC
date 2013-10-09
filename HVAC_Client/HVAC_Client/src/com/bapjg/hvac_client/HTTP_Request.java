@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 
@@ -30,27 +31,36 @@ public class HTTP_Request
 	public HTTP_Request()
 	{
 	}
-	public boolean ping()
+	public Mgmt_Msg_Abstract ping()
 	{
+		System.out.println("Ping Started");
 		Mgmt_Msg_Abstract				messageReceive;
-		Mgmt_Msg_Abstract				message;
-		
-		
 		Mgmt_Msg_Abstract.Ping			messageSend			= (new Mgmt_Msg_Abstract()).new Ping();
 		Global.serverURL									= "http://192.168.5.20:8080/hvac/Management";
 		messageReceive										= sendData(messageSend);
+		System.out.println("Ping sent/replied local");
+
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
-			return true;
+			System.out.println("Ping Ack local");
+			Toast.makeText(Global.appContext, "A Ack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
+			return new Mgmt_Msg_Abstract().new Nack();	
 		}
+		Toast.makeText(Global.appContext, "A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
+		System.out.println("Ping sent remote");
 
 		Global.serverURL									= "http://home.bapjg.com:8080/hvac/Management";
 		messageReceive										= sendData(messageSend);
+		System.out.println("Ping sent/replied remote");
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
-			return true;
+			System.out.println("Ping Ack remote");
+			Toast.makeText(Global.appContext, "A Ack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
+			return new Mgmt_Msg_Abstract().new Nack();	
 		}
-		return false;
+		System.out.println("Ping Nack giveup");
+		Toast.makeText(Global.appContext, "A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
+		return new Mgmt_Msg_Abstract().new Ack();	
 	}
 	public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
 	{

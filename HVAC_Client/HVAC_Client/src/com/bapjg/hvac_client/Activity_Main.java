@@ -43,7 +43,7 @@ public class Activity_Main extends Activity
         
         global											= new Global();
         global.appContext 								= getApplicationContext();
-        global.actContext								= (Context) this;
+        global.actContext								= (Context)  this;
         global.activity									= (Activity) this;
         global.serverURL								= "http://192.168.5.20:8080/hvac/Management";
         
@@ -69,15 +69,12 @@ public class Activity_Main extends Activity
         Menu_0_Fragment		menuActions					= new Menu_0_Fragment(global.panelActions, 			R.layout.menu_4_actions);
         Menu_0_Fragment		menuCalendars				= new Menu_0_Fragment(global.panelCalendars, 		R.layout.menu_3_calendars);
 
-        
-        
-
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu layout     ,  panel layout
-        tabTemperatures.setTabListener	(new Listener_Tabs(menuTemperatures, global.panelTemperatures));
-        tabConfiguration.setTabListener	(new Listener_Tabs(menuConfiguration, global.panelConfiguration));
-        tabCalendars.setTabListener		(new Listener_Tabs(menuCalendars, global.panelCalendars));
-        tabActions.setTabListener		(new Listener_Tabs(menuActions, global.panelActions));
+        tabTemperatures.setTabListener	(new Listener_Tabs(menuTemperatures, 	global.panelTemperatures));
+        tabConfiguration.setTabListener	(new Listener_Tabs(menuConfiguration, 	global.panelConfiguration));
+        tabCalendars.setTabListener		(new Listener_Tabs(menuCalendars, 		global.panelCalendars));
+        tabActions.setTabListener		(new Listener_Tabs(menuActions, 		global.panelActions));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabConfiguration);
@@ -108,9 +105,10 @@ public class Activity_Main extends Activity
         thermometer.friendlyName ="Radiateur";
         thermometer.thermoID = "028-0000zzzz";
         config.thermometerList.add(thermometer);
+        
+        HTTP_Req_Ping							httpRequest				= new HTTP_Req_Ping();
+		httpRequest.execute(new Mgmt_Msg_Abstract().new Ping());
 
-	//	HTTP_Req_Temp							httpRequest				= new HTTP_Req_Temp();
-	//	httpRequest.execute(new Mgmt_Msg_Temperatures_Req());
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -151,6 +149,28 @@ public class Activity_Main extends Activity
 		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
 	}
+	private class HTTP_Req_Ping extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
+	{
+		public HTTP_Request				http;
+		//public HTTP_Req_Temp()
+		{
+			http													= new HTTP_Request();
+		}
+		@Override
+		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
+		{
+			return http.sendData(messageOut[0]);			
+		}
+		@Override
+		protected void onProgressUpdate(Void... progress) 
+		{
+	    }
+		@Override
+	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
+		{             
+			Toast.makeText(Global.appContext, "Ping replied from : " + Global.serverURL + " result : " + result, Toast.LENGTH_LONG).show();
+	    }
+	}
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 	{
 		public HTTP_Request				http;
@@ -170,10 +190,7 @@ public class Activity_Main extends Activity
 		@Override
 	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
 		{             
-			System.out.println("step 4");
-			System.out.println("step 4.1" + (result.getClass().toString()));
-//			if (result.getClass() == Mgmt_Msg_Temperatures.class)
-			if (result.getClass() == Mgmt_Msg_Temperatures.Data.class)
+			if (result instanceof Mgmt_Msg_Temperatures.Data)
 			{
 				Mgmt_Msg_Temperatures.Data msg_received = (Mgmt_Msg_Temperatures.Data) result;
 
