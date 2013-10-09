@@ -123,7 +123,7 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request <Message_Fuel.Update>		httpRequest			= new HTTP_Request <Message_Fuel.Update> ("Monitor");
+		HTTP_Request							httpRequest			= new HTTP_Request <Message_Fuel.Update> ("Monitor");
 			
 		Message_Fuel.Update	 					messageSend 		= (new Message_Fuel()).new Update();
 		messageSend.dateTime 										= System.currentTimeMillis();
