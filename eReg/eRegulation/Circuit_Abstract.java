@@ -174,10 +174,6 @@ abstract class Circuit_Abstract
 						}
 						if (circuit.taskNext != null)
 						{
-							System.out.println(this.name + " next task is not null");
-							System.out.println(this.name + " values for if 1 : " + circuit.taskNext.timeStart);
-							System.out.println(this.name + " values for if 2 : " + circuit.getRampUpTime());
-							System.out.println(this.name + " values for if 3 : " + this.taskActive.timeEnd);
 							if (circuit.taskNext.timeStart - circuit.getRampUpTime() < this.taskActive.timeEnd)
 							{
 								this.willBeSingleCircuit			= false;
