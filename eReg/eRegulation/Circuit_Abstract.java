@@ -122,17 +122,19 @@ abstract class Circuit_Abstract
 	}
 	public void scheduleTaskActive()
 	{
+		// Purpose is to place taskNext as activeTask at the right time
+		// Additionally we need to know if the newly scheduled taskActive will will be alone
+		
 		// Time up is handled circuit sequencer
 		//    either : stop on objective / stop on time
 		// Also handles case of Optimising
 
-System.out.println("Scheduling active task for " + this.name);
 		if (this.taskNext != null)
 		{
 			System.out.println("Scheduling active task for " + this.name + " and nextTask is not null");
 			//There is a waiting task. Replace active task if it exists
 			
-			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - getRampUpTime())
+			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - getRampUpTime())			//Which get rampuptime ??? this or next
 			&&  (Global.getTimeNowSinceMidnight() < this.taskNext.timeEnd))
 			{
 				System.out.println("============A task has been scheduled");
@@ -151,15 +153,22 @@ System.out.println("Scheduling active task for " + this.name);
 				this.taskActive.state							= CircuitTask.TASK_STATE_Started;
 			}
 			
+			
+			// Now see if other tasks are scheduled to run at the same time
+			
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{
 				this.willBeSingleCircuit 						= true;
 				
-				if (!this.name.equalsIgnoreCase(circuit.name))
+				if ( ! this.name.equalsIgnoreCase(circuit.name))					// We are looking for other tasks than the current
 				{
+					System.out.println(this.name + " current circuit");
+					System.out.println(circuit.name + " investigated circuit");
+					
+					
 					if (circuit.taskActive != null)
 					{
-						this.willBeSingleCircuit				= false;
+						this.willBeSingleCircuit				= false;			// A task is currently active, so we will not be alone
 						return;
 					}
 					if (circuit.taskNext != null)
@@ -170,9 +179,7 @@ System.out.println("Scheduling active task for " + this.name);
 						System.out.println(this.name + " values for if 3 : " + this.taskActive.timeEnd);
 						if (circuit.taskNext.timeStart - circuit.getRampUpTime() < this.taskActive.timeEnd)
 						{
-							System.out.println(this.name + " if started");
 							this.willBeSingleCircuit			= false;
-							System.out.println(this.name + " Singlecircuit done");
 							return;
 						}
 					}
