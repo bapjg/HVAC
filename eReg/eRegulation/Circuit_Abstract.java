@@ -164,9 +164,12 @@ System.out.println("Scheduling active task for " + this.name);
 					}
 					if (circuit.taskNext != null)
 					{
+						System.out.println(this.name + " next task is not null");
 						if (circuit.taskNext.timeStart - circuit.getRampUpTime() < this.taskActive.timeEnd)
 						{
+							System.out.println(this.name + " if started");
 							this.willBeSingleCircuit			= false;
+							System.out.println(this.name + " Singlecircuit done");
 							return;
 						}
 					}
