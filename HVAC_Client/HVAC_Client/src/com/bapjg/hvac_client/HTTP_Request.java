@@ -31,6 +31,9 @@ public class HTTP_Request
 	public HTTP_Request()
 	{
 	}
+	//===========================================================================================================================
+	//
+	//
 	public Mgmt_Msg_Abstract ping()
 	{
 		System.out.println("Ping Started");
@@ -60,6 +63,13 @@ public class HTTP_Request
 		Toast.makeText(Global.appContext, "A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
 		return new Mgmt_Msg_Abstract().new Ack();	
 	}
+	//
+	//
+	//===========================================================================================================================
+
+	//===========================================================================================================================
+	//
+	//
 	public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
 	{
 System.out.println("Mgmt_Msg_Abstract/sendData Started");
@@ -137,6 +147,13 @@ System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
 		}
 		return messageReceive;			
 	}
+	//
+	//
+	//===========================================================================================================================
+
+	//===========================================================================================================================
+	//
+	//
 	public Mgmt_Msg_Abstract sendIt(Mgmt_Msg_Abstract messageSend, String URL)
 	{
 System.out.println("Mgmt_Msg_Abstract/sendData Started");
@@ -209,4 +226,7 @@ System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
 		}
 		return messageReceive;			
 	}
+	//
+	//
+	//===========================================================================================================================
 }

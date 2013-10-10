@@ -114,6 +114,9 @@ System.out.println("ping start");
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	//===========================================================================================================================
+	//
+	//
 	public boolean onOptionsItemSelected(MenuItem item) 
 	{
 		switch(item.getItemId()) 
@@ -139,17 +142,37 @@ System.out.println("ping start");
 		}
 		return false;
 	}
-	
+	//
+	//
+	//===========================================================================================================================
+
+	//===========================================================================================================================
+	//
+	//
 	public void temperaturesClick(View v)
 	{
-		// This is to update the temperature readings - but it is all wrong
-		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+		if (Global.serverURL.equalsIgnoreCase(""))
+		{
+			Toast.makeText(Global.appContext, "Server connexion not yet established", Toast.LENGTH_LONG).show();
+
+		}
+		else
+		{
+			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
+			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+		}
 	}
+	//
+	//
+	//===========================================================================================================================
+
+	//===========================================================================================================================
+	//
+	//
 	private class HTTP_Req_Ping extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 	{
 		public HTTP_Request				http;
-		//public HTTP_Req_Temp()
+		public HTTP_Req_Ping()
 		{
 			http													= new HTTP_Request();
 		}
@@ -169,6 +192,13 @@ System.out.println("ping doInbackgroud senddata");
 			Toast.makeText(Global.appContext, "Ping replied from : " + Global.serverURL + " result : " + result, Toast.LENGTH_LONG).show();
 	    }
 	}
+	//
+	//
+	//===========================================================================================================================
+
+	//===========================================================================================================================
+	//
+	//
 	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 	{
 		public HTTP_Request				http;
@@ -212,6 +242,9 @@ System.out.println("ping doInbackgroud senddata");
 			}
 	    }
 	}
+	//
+	//
+	//===========================================================================================================================
 	private String displayTemperature(Integer temperature)
 	{
 		int degrees = temperature/10;
