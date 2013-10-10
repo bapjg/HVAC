@@ -27,6 +27,7 @@ public class Thermometer
 		String 						thermoFile 					= thermoRadical + this.thermoFile.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
 		
 		this.filePath 											= thermoFile;
+		this.reading 											= 150;				// Set to any reasonable value
 	}
     public Integer read()
 	{

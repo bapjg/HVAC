@@ -117,6 +117,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 		Integer hwTempTarget						= this.taskNext.tempObjective;
 		Integer hwTempCurrent 						= Global.thermoHotWater.reading;
 		Integer hwTempDifference 					= hwTempTarget - hwTempCurrent;
+		System.out.println("Initial values calculated "+ this.name);
 		
 		//System.out.println("hwTempDifference : " + hwTempDifference);
 		
@@ -135,6 +136,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 		Long	rampUpTime							= hwTempDifference * 15L * 1000L; 		//15000 ms per decidegree 
 				
 		// System.out.println("Calculated rampUpTime for HW " + rampUpTime/1000 + " secs");
+		System.out.println("retruning "+ rampUpTime);
+
 		if (rampUpTime > 0)
 		{
 			return rampUpTime;
