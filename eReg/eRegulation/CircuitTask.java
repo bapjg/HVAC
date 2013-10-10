@@ -58,7 +58,6 @@ public class CircuitTask
 		this.state												= TASK_STATE_WaitingToStart;
 		this.timeStart											= timeStart;
 		this.timeEnd											= timeEnd;
-	
 		this.tempObjective										= tempObjective;
 		this.stopOnObjective									= stopOnObjective;
 		this.days												= days;
