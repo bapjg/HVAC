@@ -33,7 +33,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		}
 		else
 		{
-			System.out.println("Floor We are here");
+			System.out.println("Floor We are here and the state is : " + state);
 
 			//===========================================================
 			// Here we detect that a task has just finished its time slot
