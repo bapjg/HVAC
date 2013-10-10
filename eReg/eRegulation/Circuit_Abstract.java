@@ -84,14 +84,18 @@ abstract class Circuit_Abstract
 	}
 	public void scheduleTaskNext()
 	{
+		System.out.println("Scheduling next task for " + this.name);
 		String day 												= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 
 		if (this.taskNext == null) // Is this a good idea. If its not null, could it be re-arranged 
 		{
+			System.out.println("Scheduling next task for " + this.name + " and nextTask is not null");
+			
 			for (CircuitTask circuitTask : circuitTaskList) 
 			{
 				if (circuitTask.days.contains(day))
 				{
+					System.out.println("Scheduling next task for " + this.name + " a task has been found");
 					if (circuitTask.timeStart > Global.getTimeNowSinceMidnight())
 					{
 						// This task has yet to be performed

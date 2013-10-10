@@ -83,13 +83,17 @@ public class Management extends HttpServlet
         {
             message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
         } 
-        else if (message_in.getClass() == Mgmt_Msg_Temperatures.Request.class)
+        else if (message_in instanceof Mgmt_Msg_Temperatures.Request)
         {
             message_out 							= processTemperaturesReq();
         } 
-		else if (message_in.getClass() == Mgmt_Msg_Calendar.Request.class)
+		else if (message_in instanceof Mgmt_Msg_Calendar.Request)
         {
             message_out 							= processCalendarRequest();
+        } 
+		else if (message_in instanceof Mgmt_Msg_Abstract.Ping)
+        {
+            message_out 							= (new Mgmt_Msg_Abstract()).new Ack();
         } 
 		else
         {
