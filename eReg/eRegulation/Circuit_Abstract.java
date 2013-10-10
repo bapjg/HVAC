@@ -143,7 +143,6 @@ abstract class Circuit_Abstract
 				System.out.println("Decision              : " + (this.taskNext.timeStart -  getRampUpTime()));
 				System.out.println("Now                   : " + Global.getTimeNowSinceMidnight());
 				
-				
 				if (this.taskActive != null)
 				{
 					this.taskActive.state						= CircuitTask.TASK_STATE_Completed;
@@ -153,7 +152,7 @@ abstract class Circuit_Abstract
 				this.taskActive.state							= CircuitTask.TASK_STATE_Started;
 			}
 			
-			// At this stage taskActive may (or may not) have been set to taskNext
+			// At this stage taskActive may (or may not) have been scheduled to taskNext
 			// Now see if other tasks are scheduled to run at the same time
 			
 			if (this.taskActive != null)
