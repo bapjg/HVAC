@@ -22,7 +22,7 @@
 		
 		<Circuit type="Object" name="Floor">
 			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5, 6, 7"
-				timeStart="23:43" timeEnd="23:55" tempObjective="200"
+				timeStart="23:48" timeEnd="23:59" tempObjective="200"
 				stopOnObjective="0">
 			</Calendar>
 		</Circuit>
