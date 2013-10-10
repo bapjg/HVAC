@@ -72,11 +72,12 @@ abstract class Circuit_Abstract
 	}
 	public void start()
 	{
-		System.out.println("Overriden method called in Abstract");
+		System.out.println(this.name + "Start called");
+		this.state												= CIRCUIT_STATE_Started;
 	}
 	public void stop()
 	{
-		System.out.println("Overriden method called in Abstract");
+		System.out.println(this.name + "Stop called");
 	}
 	public void sequencer()
 	{
@@ -152,6 +153,7 @@ abstract class Circuit_Abstract
 				this.taskActive									= this.taskNext;
 				this.taskNext									= null;
 				this.taskActive.state							= CircuitTask.TASK_STATE_Started;
+				this.start();
 			}
 			
 			// At this stage taskActive may (or may not) have been scheduled to taskNext
