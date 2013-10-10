@@ -114,7 +114,7 @@ public class Control
 		Thread 			thread_thermometers 		= new Thread(new Thread_Thermometers(), "Thread_Thermometers");
 		thread_thermometers.start();
 		Global.display.writeAtPosition(3, 18, "Ok");
-		Global.waitSeconds(10);														// Must wait 10 secs for all thermometers to be read and have values + allow for retires
+		//Global.waitSeconds(10);														// Must wait 10 secs for all thermometers to be read and have values + allow for retires
 		
 		//
 		//============================================================
@@ -157,49 +157,7 @@ public class Control
 //		boiler.burner.powerOn();
 //		
 //		Global.waitSeconds(20);
-//		
-//		int i;
-//		FuelFlow ff = boiler.burner.fuelflow;
-//		System.out.println("burner off");
-//		boiler.burner.powerOff();
-//		
-//		for (i =0; i < 15; i++)
-//		{
-//			System.out.println("iteration : " + Global.burnerVoltages.readAverage());
-//		}
-//
-//		Global.stopNow = true;
-//		
-//		
-//		Long timeStart = Global.now();
-//		
-//		for (i = 0; i < 100; i++)
-//		{
-//			//burner.sequencer();
-//			Global.burnerPower.off();
-//		}
-//
-//		Long timeEnd = Global.now();
-//		
-//		System.out.println("100 relay throws : " + (timeEnd - timeStart));
-//		Global.stopNow = true;
-//
-//		
-//		burner.powerOff();
-//		System.out.println("Fuel Consumed : " + burner.fuelFlowTimeCumulated);
-//		
-//		
-//		Global.waitSeconds(5);	
-//
-//		burner.powerOn();
-//
-//		for (i = 0; i < 20; i++)
-//		{
-//			burner.sequencer();
-//			voltage = burner.burnerVoltages.read();
-//			System.out.println("Iteration : " + i + " voltage : " + voltage);
-//			Global.waitSeconds(1);
-//		}
+
 //		
 //		
 //		burner.powerOff();
