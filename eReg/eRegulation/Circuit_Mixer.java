@@ -2,12 +2,12 @@ package eRegulation;
 
 public class Circuit_Mixer extends Circuit_Abstract
 {
-//	public final int 				CIRCUIT_STATE_Off 				= 0;
-//	public final int 				CIRCUIT_STATE_Started 			= 1;
-//	public final int 				CIRCUIT_STATE_Running 			= 2;
-//	public final int 				CIRCUIT_STATE_Stopping	 		= 3;
-//	public final int 				CIRCUIT_STATE_Optimising 		= 4;
-//	public final int 				CIRCUIT_STATE_Error	 			= -1;
+	public final int 				CIRCUIT_STATE_Off 				= 0;
+	public final int 				CIRCUIT_STATE_Started 			= 1;
+	public final int 				CIRCUIT_STATE_Running 			= 2;
+	public final int 				CIRCUIT_STATE_Stopping	 		= 3;
+	public final int 				CIRCUIT_STATE_Optimising 		= 4;
+	public final int 				CIRCUIT_STATE_Error	 			= -1;
 
 	public Circuit_Mixer(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
 	{	
