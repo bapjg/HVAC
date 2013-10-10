@@ -133,8 +133,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 		
 		Long	rampUpTime							= hwTempDifference * 15L * 1000L; 		//15000 ms per decidegree 
 				
-		System.out.println("Calculated rampUpTime for HW " + rampUpTime/1000 + " secs");
-
 		if (rampUpTime > 0)
 		{
 			return rampUpTime;
