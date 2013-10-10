@@ -8,6 +8,8 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import com.bapjg.hvac_client.Mgmt_Msg_Temperatures.Request;
+
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -128,7 +130,6 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 	public void onClick(View myView) 
 	{
     	System.out.println("We have arrived in onClick again");
-    	
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
     	
@@ -145,6 +146,16 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
     	if (myCaption.equalsIgnoreCase("Thermometers"))
     	{
     		// buttonThermometersClick(myView);	
+    		if (Global.serverURL.equalsIgnoreCase(""))
+    		{
+    			Toast.makeText(Global.appContext, "Server connexion not yet established", Toast.LENGTH_LONG).show();
+    		}
+    		else
+    		{
+//    			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
+//    			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+    			Toast.makeText(Global.appContext, "Getting Data", Toast.LENGTH_LONG).show();
+    		}
     	}
 	}    
 }

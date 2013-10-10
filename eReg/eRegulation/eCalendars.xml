@@ -20,8 +20,8 @@
 			</Calendar>
 		</Circuit>
 		<Circuit type="Object" name="Floor">
-			<Calendar type="Object" name="WeekDays" days="0"
-				timeStart="06:00" timeEnd="07:30" tempObjective="190"
+			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5, 6, 7"
+				timeStart="13:35" timeEnd="21:00" tempObjective="200"
 				stopOnObjective="0">
 			</Calendar>
 		</Circuit>

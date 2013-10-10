@@ -45,10 +45,8 @@ public class HTTP_Request
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
 			System.out.println("Ping Ack local");
-			Toast.makeText(Global.appContext, "A Ack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
-			return new Mgmt_Msg_Abstract().new Nack();	
+			return new Mgmt_Msg_Abstract().new Ack();	
 		}
-		Toast.makeText(Global.appContext, "A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
 		System.out.println("Ping sent remote");
 
 		messageReceive										= sendIt(messageSend, "http://home.bapjg.com:8080/hvac/Management");
@@ -56,11 +54,9 @@ public class HTTP_Request
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
 			System.out.println("Ping Ack remote");
-			Toast.makeText(Global.appContext, "A Ack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
 			return new Mgmt_Msg_Abstract().new Nack();	
 		}
 		System.out.println("Ping Nack giveup");
-		Toast.makeText(Global.appContext, "A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
 		return new Mgmt_Msg_Abstract().new Ack();	
 	}
 	//

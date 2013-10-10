@@ -104,7 +104,8 @@ public class Activity_Main extends Activity
         config.thermometerList.add(thermometer);
 System.out.println("ping start");       
         HTTP_Req_Ping							httpRequest				= new HTTP_Req_Ping();
-		httpRequest.execute(new Mgmt_Msg_Abstract().new Ping());
+//		httpRequest.execute(new Mgmt_Msg_Abstract().new Ping());
+		httpRequest.execute();
 
 	}
 	@Override
@@ -149,19 +150,18 @@ System.out.println("ping start");
 	//===========================================================================================================================
 	//
 	//
-	public void temperaturesClick(View v)
-	{
-		if (Global.serverURL.equalsIgnoreCase(""))
-		{
-			Toast.makeText(Global.appContext, "Server connexion not yet established", Toast.LENGTH_LONG).show();
-
-		}
-		else
-		{
-			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
-			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
-		}
-	}
+//	public void temperaturesClick(View v)
+//	{
+//		if (Global.serverURL.equalsIgnoreCase(""))
+//		{
+//			Toast.makeText(Global.appContext, "Server connexion not yet established", Toast.LENGTH_LONG).show();
+//		}
+//		else
+//		{
+//			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
+//			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+//		}
+//	}
 	//
 	//
 	//===========================================================================================================================
@@ -169,7 +169,7 @@ System.out.println("ping start");
 	//===========================================================================================================================
 	//
 	//
-	private class HTTP_Req_Ping extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
+	private class HTTP_Req_Ping extends AsyncTask <Void, Void, Mgmt_Msg_Abstract> 
 	{
 		public HTTP_Request				http;
 		public HTTP_Req_Ping()
@@ -177,10 +177,9 @@ System.out.println("ping start");
 			http													= new HTTP_Request();
 		}
 		@Override
-		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
+		protected Mgmt_Msg_Abstract doInBackground(Void... params) 
 		{
-System.out.println("ping doInbackgroud senddata"); 
-			return http.sendData(messageOut[0]);			
+			return http.ping();
 		}
 		@Override
 		protected void onProgressUpdate(Void... progress) 
@@ -189,7 +188,14 @@ System.out.println("ping doInbackgroud senddata");
 		@Override
 	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
 		{             
-			Toast.makeText(Global.appContext, "Ping replied from : " + Global.serverURL + " result : " + result, Toast.LENGTH_LONG).show();
+			if (result instanceof Mgmt_Msg_Abstract.Ack)
+			{
+				Toast.makeText(Global.appContext, "Connected to server : " + Global.serverURL + " result : " + result, Toast.LENGTH_LONG).show();
+			}
+			else
+			{
+				Toast.makeText(Global.appContext, "Not Connected, no server replied", Toast.LENGTH_LONG).show();
+			}
 	    }
 	}
 	//
