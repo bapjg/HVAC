@@ -6,6 +6,20 @@ public class Thread_Thermometers implements Runnable
 	{
 		LogIt.info("Thread_Thermometers", "Run", "Starting", true);		
 
+		// Set readings to any value to avoid rampup times falling on unitialised variabbles
+		
+		Global.thermoBoiler.reading = 160;
+		Global.thermoBoilerIn.reading = 160;
+		Global.thermoFloorOut.reading = 160;
+		Global.thermoFloorCold.reading = 160;
+		Global.thermoFloorHot.reading = 160;
+		Global.thermoRadiatorOut.reading = 160;
+		Global.thermoRadiatorIn.reading = 160;
+		Global.thermoOutside.reading = 160;
+		Global.thermoLivingRoom.reading = 160;
+		Global.thermoHotWater.reading = 160;
+
+
 		while (!Global.stopNow)
 		{
 			Long timeStart 						= Global.now();
