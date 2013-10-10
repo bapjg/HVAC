@@ -99,12 +99,14 @@ abstract class Circuit_Abstract
 						if (this.taskNext == null)
 						{
 							this.taskNext						= circuitTask;
+							System.out.println("Circuit : " + this.name + " put on next to run list");
 						}
 						else
 						{
 							if (circuitTask.timeStart < this.taskNext.timeStart)
 							{
 								this.taskNext					= circuitTask;
+								System.out.println("Circuit : " + this.name + " put on next to run list");
 							}
 						}
 					}
