@@ -114,7 +114,7 @@ public class Control
 		Thread 			thread_thermometers 		= new Thread(new Thread_Thermometers(), "Thread_Thermometers");
 		thread_thermometers.start();
 		Global.display.writeAtPosition(3, 18, "Ok");
-		Global.waitSeconds(20);														// Must wait 10 secs for all thermometers to be read and have values + allow for retires
+		Global.waitSeconds(10);														// Must wait 10 secs for all thermometers to be read and have values + allow for retires
 		
 		//
 		//============================================================
