@@ -92,7 +92,8 @@ public class LogIt
 				Float 	kP,
 				Float 	kD,
 				Float 	kI,
-				Float 	result
+				Float 	result,
+				Integer tempOut
 		)
     {
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.pidData"))
@@ -113,6 +114,7 @@ public class LogIt
 		messageSend.kD		 										= kD; 
 		messageSend.kI		 										= kI; 
 		messageSend.result		 									= result; 
+		messageSend.tempOut		 									= tempOut;
 			
 		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 		

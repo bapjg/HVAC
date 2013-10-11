@@ -17,6 +17,7 @@ public class Message_PID extends Message_Abstract
 		public Float					kD;
 		public Float					kI;
 		public Float					result;	
+		public Integer					tempOut;	
 	}
 	public class Request extends Message_Abstract
 	{
