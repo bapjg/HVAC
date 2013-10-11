@@ -4,7 +4,7 @@ public class Thread_Mixer implements Runnable
 {
 	public Mixer				mixer;
 	public Circuit_Mixer		circuitMixer;
-	public Boolean 				stopNow;
+//	public Boolean 				stopNow;
 	
 	public Thread_Mixer(Mixer mixer, Circuit_Mixer circuitMixer)
 	{
@@ -13,28 +13,20 @@ public class Thread_Mixer implements Runnable
 	}
 	public void run()
 	{
-		this.stopNow = false;
+//		this.stopNow = false;
 		
 		LogIt.info("Thread_Mixer", "Run", "Floor Starting", true);		
 
 		mixer.positionAbsolute(0.10F);
 		
 		Global.waitSeconds(60);
-//		try
-//        {
-//			LogIt.info("===========================Thread_Mixer", "Run", "Floor waiting for 1min to let temps settle down");		
-//	        Thread.sleep(1000 * 60);
-//        }
-//        catch (InterruptedException e)
-//        {
-//	        e.printStackTrace();
-//        }
 		LogIt.action("PumpFloor", "On");
 		Global.pumpFloor.on();
 		
 		LogIt.info("Thread_Mixer", "Run", "Floor Initialised (10%)");		
 		
-		while ((!Global.stopNow) && (!this.stopNow))
+//		while ((!Global.stopNow) && (!this.stopNow))
+		while (!Global.stopNow)
 		{
 			// Note that Mixer calls go to sleep when positionning the mixer.
 			
@@ -47,7 +39,7 @@ public class Thread_Mixer implements Runnable
 			
 			
 			Integer targetTemp						= circuitMixer.temperatureGradient.getTempToTarget();
-			LogIt.tempData();		
+			//LogIt.tempData();		not needed as done in Thread thermometers
 			
 			this.mixer.pidSimple(targetTemp);
 

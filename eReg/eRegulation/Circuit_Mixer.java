@@ -63,7 +63,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				//Mixer Type has temperature gradient
 				if (temperatureGradient == null)
 				{
-					System.out.println("temperatureGradient is null");
+					LogIt.error("Circuit_Mixer", "sequencer", "temperatureGradient is null");
 				}
 				Integer temp								= temperatureGradient.getTempToTarget();
 				this.heatRequired.tempMinimum				= 500;

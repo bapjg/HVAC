@@ -30,7 +30,8 @@ public class Burner
 			}
 			else if (checkFault())
 			{
-				// When burner starts fuel flow is detected
+				LogIt.error("Burner", "powerOn", "checkFault has revealed a problem");
+			// When burner starts fuel flow is detected
 				// a message has already been displayed
 				// Don't know what to do here
 			}
@@ -60,7 +61,7 @@ public class Burner
 				return;														// All is well
 			}
 		}
-		LogIt.action("Burner", "powerOff and fuel flow still detected after 300 ms: burner has tripped");
+		LogIt.error("Burner", "powerOff", "fuel flow still detected after 300 ms: burner has tripped");
 		System.out.println("Burner/powerOff and fuel flow still detected after 300 ms: burner has tripped");
 	}
 	public void sequencer()
@@ -69,6 +70,7 @@ public class Burner
 		
 		if (checkFault())
 		{
+			LogIt.error("Burner", "sequencer", "checkFault has detected a problem");
 			powerOff();
 			System.out.println("A Burner Fault has been detected by the burner Sequencer");
 		}

@@ -48,6 +48,7 @@ public class Control
 		Global 			global 						= new Global();
 		
 		Global.stopNow								= false;
+		LogIt.info("Control", "main", "Starting/BootSequence");
 
 		//
 		//============================================================
@@ -178,7 +179,6 @@ public class Control
 			
 			globalHeatRequired.tempMaximum 						= -1;
 			globalHeatRequired.tempMinimum 						= -1;
-
 
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{

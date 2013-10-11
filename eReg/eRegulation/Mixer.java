@@ -5,7 +5,7 @@ package eRegulation;
 // For small mixer valve openings (ie swing proportion close to zero (ie cold)
 // the circuit pump works a lot in closed loop
 // Hence, time required for BoilerOut (or MixerHot) to increase upto Boiler Temp
-// is much longer than with much larger valve opennings
+// is much longer than with much larger valve openings
 
 public class Mixer
 {
@@ -161,7 +161,7 @@ public class Mixer
 //
 	public void pidSimple(Integer targetTemp)
 	{
-		// Keep in simple :
+		// Keep it simple :
 		//
 		// Full span is approx 60 degrees - 20 degrees = 40 degrees
 		// Full span takes approx                      = 100 seconds 
@@ -216,13 +216,13 @@ public class Mixer
 		 			swingTimeRequired 					= 90000F - positionTracked.doubleValue();		//No point waiting over maximum add an extra second to be sure of end point
 		 		}
 				
-				// LogIt.tempInfo("Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
-				// LogIt.tempInfo("Calling Up/On");
+				LogIt.action("Mixer/PID", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
+				LogIt.action("Mixer/PID", "Calling Up/On");
 		 		Global.mixerUp.on();
 		 		swingTimePerformed   					= waitAWhile(swingTimeRequired);
-		 	// LogIt.tempInfo("Calling Up/Off");
+		 		LogIt.action("Mixer/PID", "Calling Up/Off");
 		 		Global.mixerUp.off();
-		 	// LogIt.tempInfo("Called  Up/Off nothing else");
+		 		LogIt.action("Mixer/PID", "Called  Up/Off nothing else");
 	 		}
 		}
 		else																			// Moving colder
@@ -233,7 +233,7 @@ public class Mixer
 		 		{
 		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000f;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
-				// LogIt.tempInfo("Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
+				LogIt.action("Mixer/PID", "Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
 				Global.mixerDown.on();
 				swingTimePerformed   					= - waitAWhile(Math.abs(swingTimeRequired));
 				Global.mixerDown.off();
@@ -248,7 +248,7 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
-		// LogIt.tempInfo("Moving ended positionTracked : " + positionTracked );
+		LogIt.action("Mixer/PID", "Moving ended positionTracked : " + positionTracked );
 	}
 //
 //	============================================================

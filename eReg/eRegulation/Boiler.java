@@ -25,6 +25,7 @@ public class Boiler
 	
 	public Integer	   		tempMax;
 	public Integer	   		tempMin;
+	public Integer			tempNeverExceed;
 	public Integer			state;
 	
 	public final int 		STATE_Off 				= 0;
@@ -43,12 +44,14 @@ public class Boiler
 
 		tempMax 									= -1;
 		tempMin 									= -1;
+		tempNeverExceed								= 85;
 		state										= STATE_Off;
 	}
 	public void requestHeat(HeatRequired eR)
 	{
 		tempMax 									= eR.tempMaximum;
 		tempMin 									= eR.tempMinimum;
+		LogIt.info("Boiler", "requestHeat", "tempMin/tempMax are " + tempMin + "/" + tempMax);
 		
 		// Only change the state if it is STATE_Off
 		// There could be an error (STATE_Error)
@@ -67,8 +70,9 @@ public class Boiler
 	}
 	public Boolean checkFault()
 	{
-		if (Global.thermoBoiler.reading > 990)				// tempNeverExceed
+		if (Global.thermoBoiler.reading > tempNeverExceed)
 		{
+			LogIt.error("Boiler", "checkFault", "tempNeverExceed has been reached");
 			return true;
 		}
 		else
