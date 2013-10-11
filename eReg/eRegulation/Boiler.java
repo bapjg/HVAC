@@ -44,7 +44,7 @@ public class Boiler
 
 		tempMax 									= -1;
 		tempMin 									= -1;
-		tempNeverExceed								= 85;
+		tempNeverExceed								= 850;
 		state										= STATE_Off;
 	}
 	public void requestHeat(HeatRequired eR)
