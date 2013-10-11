@@ -83,6 +83,46 @@ public class LogIt
 			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
 		}
 	}
+	public static void pidData
+		(
+				Integer target, 
+				Float 	proportional,
+				Float 	differential,
+				Float 	integral,
+				Float 	kP,
+				Float 	kD,
+				Float 	kI,
+				Float 	result
+		)
+    {
+		if (!Global.httpSemaphore.semaphoreLock("LogIt.pidData"))
+		{
+			System.out.println(dateTimeStamp() + " LogIt.pidData Lock timedout, owned by " + Global.httpSemaphore.owner);
+			return;
+		}
+
+		HTTP_Request 							httpRequest			= new HTTP_Request <Message_PID.Update> ("Monitor");
+		
+		Message_PID.Data 						messageSend 		= (new Message_PID()).new Update();
+		messageSend.dateTime 										= System.currentTimeMillis();
+		messageSend.target		 									= target; 
+		messageSend.proportional		 							= proportional; 
+		messageSend.differential		 							= differential; 
+		messageSend.integral		 								= integral; 
+		messageSend.kP		 										= kP; 
+		messageSend.kD		 										= kD; 
+		messageSend.kI		 										= kI; 
+		messageSend.result		 									= result; 
+			
+		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		
+		if (!(messageReceive instanceof Message_Abstract.Ack))
+		{
+			System.out.println(dateTimeStamp() + " pid data  is : Nack");
+		}
+
+		Global.httpSemaphore.semaphoreUnLock();			
+    }
 	public static void tempData()
     {
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.tempData"))

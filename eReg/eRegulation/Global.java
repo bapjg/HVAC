@@ -226,21 +226,22 @@ public class Global extends DefaultHandler
 		Long now							= Calendar.getInstance().getTimeInMillis() - Global.getTimeMidnight();		
 		return now;
 	}
-	public static String getDayOfWeek()
+	public static String getDayOfWeek(Integer extraDays)
 	{
 		Calendar calendar 					= Calendar.getInstance();
 		Integer day 						= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
 	
 		// Make day = 1 Monday ... day = 7 Sunday
+		day									= day + extraDays;
+		day									= day % 7;
 		day--;																		// Sunday = 0, Monday = 1, Tues = 2 ... Sat = 6
 		if (day == 0)
 		{
 			day								= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 		}
-		
 		return day.toString();
 	}
-	public static Long parseTime(String characters)
+		public static Long parseTime(String characters)
 	{
 		// Returns a supplied time in string form "hh:mm" 
 		// In milliseconds since last midnight

@@ -23,6 +23,7 @@ public class CircuitTask
 	public static final int 	TASK_STATE_RampUp   			= -3;
 	public static final int 	TASK_STATE_RampDown   			= -4;
 
+	public String				lastRun;
 	
 	public CircuitTask
 		(

@@ -96,7 +96,7 @@ abstract class Circuit_Abstract
 	}
 	public void scheduleTaskNext()
 	{
-		String day 												= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+		String day 												= Global.getDayOfWeek(0);				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 
 		if (this.taskNext == null)
 		{
@@ -133,7 +133,7 @@ abstract class Circuit_Abstract
 			// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 			// Must Convert to int, add 1 modulo 7
 			// Convert back to string
-			String tomorrow 									= Global.getDayOfWeek() + 1; // Rubbish as string
+			String tomorrow 									= Global.getDayOfWeek(1);
 			// Do the same as above, but get the first activity after midnight
 		}
 	}

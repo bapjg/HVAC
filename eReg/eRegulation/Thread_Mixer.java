@@ -36,52 +36,6 @@ public class Thread_Mixer implements Runnable
 		
 		while ((!Global.stopNow) && (!this.stopNow))
 		{
-			
-			/* 			
-				states can be 
-					- rampUp	
-					- rampStabalising
-					- rampStablised
-				
-				if (tempTarget - tempLivingRoom > 20)
-				{
-					state = STATE_RampUp
-				}
-				else if (abs(tempTarget - tempLivingRoom) > 10)
-				{
-					state = STATE_rampStabalising
-				}
-				else if (abs(tempTarget - tempLivingRoom) < 10)
-				{
-					state = STATE_rampStabale
-				}
-				else 
-				{
-					state = STATE_rampError
-				}
-				
-				Initially rampUp	
-				When tempLivingRoom within 2 degrees of desired state := rampStabiling
-				When tempLivingRoom within 1 degree  of desired state := rampStabile
-				
-				switch (state)
-				{
-				case rampUp:
-					mixer.positionAtTemp(maxTemp);
-					break;
-				case rampStabalising:
-					mixer.positionAtTemp(gradient);
-					break;
-				case tampStabale:
-					Need statistics on Out/In/Ciruit temps
-					mixer.positionAtTemp(gradient + correction);
-					break;
-				case STATE_rampError:
-					LogIt.error("Thread_Mixer", "Main Loop", "STATE_rampError detected");
-				default:
-					LogIt.error("Thread_Mixer", "Main Loop", "Unknown state detected : " + state);
-				}	
-			*/			
 			// Note that Mixer calls go to sleep when positionning the mixer.
 			
 			// Notes

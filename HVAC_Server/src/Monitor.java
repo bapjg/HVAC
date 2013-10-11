@@ -110,6 +110,11 @@ public class Monitor extends HttpServlet
             Message_Action 				readings 	= (Message_Action) message_in;
             message_out								= processAction(readings);
         } 
+		else if (message_in instanceof Message_PID.Update)
+        {
+            Message_PID.Update			readings 	= (Message_PID.Update) message_in;
+            message_out								= processPID(readings);
+        } 
 		else
         {
             System.out.println("Unsupported message class received from client");
@@ -151,10 +156,9 @@ public class Monitor extends HttpServlet
         }
         return new Message_Abstract().new Ack();
     }
-    public Message_Abstract processFuel(Message_Fuel.Data readings)
+    public Message_Abstract processPID(Message_PID.Update readings)
     {
         dbOpen();
-        Boolean 					returnAck 		= false;
 
         try
         {
@@ -163,9 +167,39 @@ public class Monitor extends HttpServlet
             dbResultSet.moveToInsertRow();
 
             dbResultSet.updateString	("dateTime", 		dateTime2String(readings.dateTime));
+            dbResultSet.updateInt		("target", 			readings.target);
+            dbResultSet.updateFloat		("proportional", 	readings.proportional);
+            dbResultSet.updateFloat		("differential", 	readings.differential);
+            dbResultSet.updateFloat		("integral", 		readings.integral);
+            dbResultSet.updateFloat		("kP", 				readings.kP);
+            dbResultSet.updateFloat		("kD", 				readings.kD);
+            dbResultSet.updateFloat		("kI", 				readings.kI);
+            dbResultSet.updateFloat		("result", 			readings.result);
+            dbResultSet.insertRow();
+            
+            dbStatement.close();
+            dbConnection.close();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+            return new Message_Abstract().new Nack();
+        }
+        return new Message_Abstract().new Ack();
+    }
+    public Message_Abstract processFuel(Message_Fuel.Update readings)
+    {
+        dbOpen();
+
+        try
+        {
+            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM pid LIMIT 1");
+            dbResultSet.moveToInsertRow();
+
+            dbResultSet.updateString	("dateTime", 		dateTime2String(readings.dateTime));
             dbResultSet.updateLong		("fuelConsumed", 	readings.fuelConsumed.longValue());
             dbResultSet.insertRow();
-            returnAck	 							= true;
             
             dbStatement.close();
             dbConnection.close();

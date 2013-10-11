@@ -88,14 +88,17 @@ public class PID
     	Integer		index 				= (items.length + enqueueIndex - 1) % items.length;
     	Integer 	currentError 		= items[index] - target;
     	Float 		proportional 		= currentError.floatValue();
-    	
+		Float 		differential 		= 0F;
+		Float 		integral 			= 0F;
+		Float 		result 				= 0F;
+		
     	// Differential component will be average of last 2 readings to avoid pbs with misreadings
     	// Rather than calc de/dt (which can have transients due to square wave targets
     	// we go for dnewNumber/dt which is smoother. All times are saved in ms.
     	// The integration function gives a value in seconds
     	// The differential work is done here and so is multiplied by 1000 to go from ms -> s
  
-		Float differential = 0F;
+
 		
     	if (count == 0)
     	{
@@ -118,15 +121,12 @@ public class PID
     		differential				= (deltas[index] + deltas[(deltas.length + index - 1) % deltas.length].floatValue()) / deltaTimeStamps;
     	}
 
-		Float integral 					= integrals[index].floatValue();
+		integral 						= integrals[index].floatValue();
+		result 							=kP * proportional + kD * differential * 1000F + kI * integral;
+		
+		LogIt.pidData(target, proportional, differential, integral, kP, kD, kI, result);
 
-System.out.println("target is         : " + target);
-System.out.println("currentError      : " + proportional + " kP : " + kP  +        " = " + kP * proportional);
-
-System.out.println("differential x 1k : " + differential + " kD : " + kD * 1000F + " = " + kD * differential * 1000F);
-System.out.println("integral          : " + integral +     " kI : " + kI +         " = " + kI * integral);
-
-    	return kP * proportional + kD * differential * 1000F + kI * integral;
+    	return result;
     }
      @Override
     public String toString() 
