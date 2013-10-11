@@ -36,8 +36,7 @@ public class PID
     	//           inegration decidegrees * seconds
     	//           differential decidegrees per second
     	
-    	items[enqueueIndex] = newNumber;
-    	
+    	items[enqueueIndex] 			= newNumber;
     	timeStamps[enqueueIndex] 		= Calendar.getInstance().getTimeInMillis();
     	
     	if (count == 0)
@@ -97,8 +96,6 @@ public class PID
     	// we go for dnewNumber/dt which is smoother. All times are saved in ms.
     	// The integration function gives a value in seconds
     	// The differential work is done here and so is multiplied by 1000 to go from ms -> s
- 
-
 		
     	if (count == 0)
     	{
@@ -116,7 +113,6 @@ public class PID
     	}
     	else 
     	{
-
     		Long 	deltaTimeStamps 	= timeStamps[index] - timeStamps[(timeStamps.length + index - 2) % timeStamps.length];
     		differential				= (deltas[index] + deltas[(deltas.length + index - 1) % deltas.length].floatValue()) / deltaTimeStamps;
     	}
@@ -128,7 +124,7 @@ public class PID
 
     	return result;
     }
-     @Override
+    @Override
     public String toString() 
     {
         return Arrays.toString(items);

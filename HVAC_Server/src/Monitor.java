@@ -133,17 +133,19 @@ public class Monitor extends HttpServlet
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
             dbResultSet.moveToInsertRow();
             
-            dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
-            dbResultSet.updateInt("tempHotWater", readings.tempHotWater.intValue());
-            dbResultSet.updateInt("tempBoiler", readings.tempBoiler.intValue());
-            dbResultSet.updateInt("tempBoilerIn", readings.tempBoilerIn.intValue());
-            dbResultSet.updateInt("tempFloorOut", readings.tempFloorOut.intValue());
-            dbResultSet.updateInt("tempFloorCold", readings.tempFloorCold.intValue());
-            dbResultSet.updateInt("tempFloorHot", readings.tempFloorHot.intValue());
-            dbResultSet.updateInt("tempRadiatorOut", readings.tempRadiatorOut.intValue());
-            dbResultSet.updateInt("tempRadiatorIn", readings.tempRadiatorIn.intValue());
-            dbResultSet.updateInt("tempOutside", readings.tempOutside.intValue());
-            dbResultSet.updateInt("tempLivingRoom", readings.tempLivingRoom.intValue());
+            dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
+            dbResultSet.updateString	("date", 			dateTime2Date(readings.dateTime));
+            dbResultSet.updateString	("time", 			dateTime2Time(readings.dateTime));
+            dbResultSet.updateInt		("tempHotWater", 	readings.tempHotWater.intValue());
+            dbResultSet.updateInt		("tempBoiler", 		readings.tempBoiler.intValue());
+            dbResultSet.updateInt		("tempBoilerIn", 	readings.tempBoilerIn.intValue());
+            dbResultSet.updateInt		("tempFloorOut", 	readings.tempFloorOut.intValue());
+            dbResultSet.updateInt		("tempFloorCold", 	readings.tempFloorCold.intValue());
+            dbResultSet.updateInt		("tempFloorHot", 	readings.tempFloorHot.intValue());
+            dbResultSet.updateInt		("tempRadiatorOut", readings.tempRadiatorOut.intValue());
+            dbResultSet.updateInt		("tempRadiatorIn", 	readings.tempRadiatorIn.intValue());
+            dbResultSet.updateInt		("tempOutside", 	readings.tempOutside.intValue());
+            dbResultSet.updateInt		("tempLivingRoom", 	readings.tempLivingRoom.intValue());
             dbResultSet.insertRow();
             
             dbStatement.close();
@@ -166,7 +168,9 @@ public class Monitor extends HttpServlet
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM pid LIMIT 1");
             dbResultSet.moveToInsertRow();
 
-            dbResultSet.updateString	("dateTime", 		dateTime2String(readings.dateTime));
+            dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
+            dbResultSet.updateString	("date", 			dateTime2Date(readings.dateTime));
+            dbResultSet.updateString	("time", 			dateTime2Time(readings.dateTime));
             dbResultSet.updateInt		("target", 			readings.target);
             dbResultSet.updateFloat		("proportional", 	readings.proportional);
             dbResultSet.updateFloat		("differential", 	readings.differential);
@@ -176,6 +180,7 @@ public class Monitor extends HttpServlet
             dbResultSet.updateFloat		("kI", 				readings.kI);
             dbResultSet.updateFloat		("result", 			readings.result);
             dbResultSet.updateInt		("tempOut", 		readings.tempOut);
+            dbResultSet.updateInt		("tempBoiler", 		readings.tempBoiler);
             dbResultSet.insertRow();
             
             dbStatement.close();
@@ -198,7 +203,9 @@ public class Monitor extends HttpServlet
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM fuel LIMIT 1");
             dbResultSet.moveToInsertRow();
 
-            dbResultSet.updateString	("dateTime", 		dateTime2String(readings.dateTime));
+            dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
+            dbResultSet.updateString	("date", 			dateTime2Date(readings.dateTime));
+            dbResultSet.updateString	("time", 			dateTime2Time(readings.dateTime));
             dbResultSet.updateLong		("fuelConsumed", 	readings.fuelConsumed.longValue());
             dbResultSet.insertRow();
             
@@ -223,11 +230,13 @@ public class Monitor extends HttpServlet
             ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM reports LIMIT 1");
             dbResultSet.moveToInsertRow();
             
-            dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
-            dbResultSet.updateString("reportType", readings.reportType);
-            dbResultSet.updateString("className", readings.className);
-            dbResultSet.updateString("methodName", readings.methodName);
-            dbResultSet.updateString("reportText", readings.reportText);
+            dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
+            dbResultSet.updateString	("date", 			dateTime2Date(readings.dateTime));
+            dbResultSet.updateString	("time", 			dateTime2Time(readings.dateTime));
+           dbResultSet.updateString		("reportType", 		readings.reportType);
+            dbResultSet.updateString	("className", 		readings.className);
+            dbResultSet.updateString	("methodName",		 readings.methodName);
+            dbResultSet.updateString	("reportText", 		readings.reportText);
             dbResultSet.insertRow();
             returnAck 								= true;
             
@@ -251,9 +260,11 @@ public class Monitor extends HttpServlet
             ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM actions LIMIT 1");
             dbResultSet.moveToInsertRow();
             
-            dbResultSet.updateString("dateTime", dateTime2String(readings.dateTime));
-            dbResultSet.updateString("device", readings.device);
-            dbResultSet.updateString("action", readings.action);
+            dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
+            dbResultSet.updateString	("date", 			dateTime2Date(readings.dateTime));
+            dbResultSet.updateString	("time", 			dateTime2Time(readings.dateTime));
+            dbResultSet.updateString	("device", 			readings.device);
+            dbResultSet.updateString	("action", 			readings.action);
             dbResultSet.insertRow();
 
             dbStatement.close();
@@ -357,6 +368,28 @@ public class Monitor extends HttpServlet
     	String					dateTimeString		= "";
  
         SimpleDateFormat 		sdf 				= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);
+    	
+    	return dateTimeString;
+    }
+    public String dateTime2Date(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("yyyy_MM_dd");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);
+    	
+    	return dateTimeString;
+    }
+    public String dateTime2Time(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm:ss.SSS");
         GregorianCalendar 		calendar 			= new GregorianCalendar();
         calendar.setTimeInMillis(dateTime);
         dateTimeString								= sdf.format(dateTime);

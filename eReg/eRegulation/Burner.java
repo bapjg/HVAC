@@ -43,11 +43,10 @@ public class Burner
 	}
 	public void powerOff()
 	{
-		LogIt.action("Burner", "Off");
+		LogIt.action("Burner", "powerOff");
 		burnerPower.off();
 
 		Integer i;
-		// System.out.println("===================Powered burner");
 		
 		for (i = 0; i < 30; i++)
 		{
@@ -58,10 +57,10 @@ public class Burner
 			}
 			else
 			{
-				// All is well
-				return;
+				return;														// All is well
 			}
 		}
+		LogIt.action("Burner", "powerOff and fuel flow still detected after 300 ms: burner has tripped");
 		System.out.println("Burner/powerOff and fuel flow still detected after 300 ms: burner has tripped");
 	}
 	public void sequencer()

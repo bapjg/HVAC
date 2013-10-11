@@ -199,18 +199,14 @@ public class Control
 				}
 			}
 			
-			//------------------------------------
-			// This is done in Thread_Thermometers
-			//LogIt.tempData();
-			//------------------------------------
-			
 			boiler.requestHeat(globalHeatRequired);
 			
 			// We should only do this if no circuit active otherwise we will be heating the house in mid summer
 			
 			if (Global.thermoOutside.reading > Global.summerTemp)
 			{
-				if ((Global.getTimeNowSinceMidnight() > Global.summerPumpTime) && (Global.getTimeNowSinceMidnight() < Global.summerPumpTime + 30 * 60 * 1000L)) // 30 mins
+				if ((Global.getTimeNowSinceMidnight() > Global.summerPumpTime) 
+				&& (Global.getTimeNowSinceMidnight() < Global.summerPumpTime + 30 * 60 * 1000L)) // 30 mins
 				{
 					if (!Global.summerWorkDone)
 					{
