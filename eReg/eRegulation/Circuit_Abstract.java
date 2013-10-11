@@ -16,14 +16,14 @@ abstract class Circuit_Abstract
 	public Integer					state;
 	
 	public static final int			CIRCUIT_STATE_Off 			= 0;
-	public static final int			CIRCUIT_STATE_Started 		= 1;
+	public static final int			CIRCUIT_STATE_Starting 		= 1;
 	public static final int			CIRCUIT_STATE_Running 		= 2;
 	public static final int			CIRCUIT_STATE_Stopping	 	= 3;
 	public static final int			CIRCUIT_STATE_Optimising 	= 4;
 	public static final int			CIRCUIT_STATE_Error	 		= -1;
 
-	public static final int			CIRCUIT_STATE_Suspended		= -1;
-	public static final int			CIRCUIT_STATE_RampUp 		= -1;
+	public static final int			CIRCUIT_STATE_Suspended		= 5;
+	public static final int			CIRCUIT_STATE_Resuming 		= 6;
 
 	public Mixer					mixer						= null;
 	public TemperatureGradient 		temperatureGradient			= null;				//This will be overridden
@@ -36,9 +36,9 @@ abstract class Circuit_Abstract
 	
 	public Boolean					willBeSingleCircuit			= false;
 
-	public Circuit_Abstract()
-	{	
-	}
+//	public Circuit_Abstract()
+//	{	
+//	}
 	public Circuit_Abstract(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
 	{	
 		this.name												= name;
@@ -62,22 +62,31 @@ abstract class Circuit_Abstract
 	}
 	public Long getRampUpTime()
 	{
-		System.out.println("Overriden method called in Abstract");
-		return 10000L;
+		return 10000L; // Overriddent method
 	}
 	public Long calculatePerformance()
 	{
-		System.out.println("Overriden method called in Abstract");
-		return 0L;
+		return 0L; // Overriddent method
 	}
 	public void start()
 	{
 		System.out.println(this.name + "Start called");
-		this.state												= CIRCUIT_STATE_Started;
+		this.state												= CIRCUIT_STATE_Starting;
 	}
 	public void stop()
 	{
 		System.out.println(this.name + "Stop called");
+		this.state												= CIRCUIT_STATE_Stopping;
+	}
+	public void suspend()
+	{
+		System.out.println(this.name + "Suspend called");
+		this.state												= CIRCUIT_STATE_Suspended;
+	}
+	public void resume()
+	{
+		System.out.println(this.name + "Resume called");
+		this.state												= CIRCUIT_STATE_Resuming;
 	}
 	public void sequencer()
 	{
@@ -87,17 +96,16 @@ abstract class Circuit_Abstract
 	{
 		String day 												= Global.getDayOfWeek();  				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 
-		if (this.taskNext == null) // Is this a good idea. If its not null, could it be re-arranged 
+		if (this.taskNext == null)
 		{
-			for (CircuitTask circuitTask : circuitTaskList) 
+			for (CircuitTask circuitTask : circuitTaskList) 											// Go through all tasks
 			{
-				if (circuitTask.days.contains(day))
+				if (circuitTask.days.contains(day))														// This one is for today
 				{
-					if (circuitTask.timeStart > Global.getTimeNowSinceMidnight())
+					if (circuitTask.timeStart > Global.getTimeNowSinceMidnight())						// This task has yet to be performed
 					{
-						// This task has yet to be performed
-						// Should we not check that it is either running or already scheduled
-						if (this.taskNext == null)
+						// No allowance is made for rampuptime : not really needed as this is setup long before at around midnight
+						if (this.taskNext == null)		// Is this usefull ??????												
 						{
 							this.taskNext						= circuitTask;
 							System.out.println("Circuit : " + this.name + " put on next to run list");
@@ -113,6 +121,10 @@ abstract class Circuit_Abstract
 					}
 				}
 			}
+		}
+		else
+		{
+			// The taskNext is not null, but with a modified calendar could want to rearrange things
 		}
 		if (this.taskNext == null) // If it still is null, then we can do the same over again on next DAY
 		{
@@ -137,8 +149,8 @@ abstract class Circuit_Abstract
 			System.out.println("Scheduling active task for " + this.name + " and nextTask is not null");
 			//There is a waiting task. Replace active task if it exists
 			
-			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - getRampUpTime())			//Which get rampuptime ??? this or next
-			&&  (Global.getTimeNowSinceMidnight() < this.taskNext.timeEnd))
+			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - this.getRampUpTime())			// TimeNow is after starttime - rampup
+			&&  (Global.getTimeNowSinceMidnight() < this.taskNext.timeEnd))									// TimeNow is still before stoptime
 			{
 				System.out.println("============A task has been scheduled");
 				System.out.println("Scheduled to start at : " + this.taskNext.timeStart);
@@ -157,31 +169,28 @@ abstract class Circuit_Abstract
 			}
 			
 			// At this stage taskActive may (or may not) have been scheduled to taskNext
-			// Now see if other tasks are scheduled to run at the same time
+			// Now see if other tasks are planned to run at the same time
 			
-			if (this.taskActive != null)
+			if (this.taskActive != null)												// This is to determine whether task will be alone
 			{
+				this.willBeSingleCircuit 							= true;
+				
 				for (Circuit_Abstract circuit : Global.circuits.circuitList)
 				{
-					this.willBeSingleCircuit 						= true;
-					
 					if ( ! this.name.equalsIgnoreCase(circuit.name))					// We are looking for other tasks than the current
 					{
 						System.out.println(this.name + " current circuit");
 						System.out.println(circuit.name + " investigated circuit");
 						
-						
 						if (circuit.taskActive != null)
 						{
 							this.willBeSingleCircuit				= false;			// A task is currently active, so we will not be alone
-							return;
 						}
 						if (circuit.taskNext != null)
 						{
 							if (circuit.taskNext.timeStart - circuit.getRampUpTime() < this.taskActive.timeEnd)
 							{
-								this.willBeSingleCircuit			= false;
-								return;
+								this.willBeSingleCircuit			= false;			// A task will be active before we finish
 							}
 						}
 					}

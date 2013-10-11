@@ -21,7 +21,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 			//
 			if (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd)
 			{
-				this.state							= CIRCUIT_STATE_Stopping;
+				this.stop();
 				this.taskActive.state				= CircuitTask.TASK_STATE_Completed;
 			}
 			//
@@ -34,7 +34,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				//Nothing to do
 				break;
 				
-			case CIRCUIT_STATE_Started:
+			case CIRCUIT_STATE_Starting:
 				
 				LogIt.info("Circuit", "sequencerWater", "Started");	
 				
@@ -142,19 +142,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 			return 0L;
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public Long calculatePerformance()
 	{
@@ -188,12 +175,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 		// boilerMax = hwTempCurrent + hwTempDifference x 2 (2 multiplier can be modified)
 		//   boilerMax will improve by 70 overshoot
 		// hwTarget = hwTempCurrent + hwDifference x 0.5  (0.5 multiplier can be modified)
-
-
-	
-	
-	
-	
 	}
 	@Override
 	public void start()
@@ -204,11 +185,14 @@ public class Circuit_HotWater extends Circuit_Abstract
 	{
 		// Either the boiler isn't hot enough or there are other circuits active
 		// so we should stop now
+		
+		// We should call super().stop()
+		
 		this.heatRequired.tempMinimum	= -1;
 		this.heatRequired.tempMaximum	= -1;
 		System.out.println("Circuit_HotWater/stop called : heatRequired set to zero, pumpwater off, active task = null");
 		Global.pumpWater.off();
-		this.taskActive				= null;
+		this.taskActive					= null;
 	}
 	@Override
 	public void sequencer()

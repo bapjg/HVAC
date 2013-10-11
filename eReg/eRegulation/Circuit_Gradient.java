@@ -2,13 +2,6 @@ package eRegulation;
 
 public class Circuit_Gradient extends Circuit_Abstract
 {
-//	public final int 				CIRCUIT_STATE_Off 				= 0;
-//	public final int 				CIRCUIT_STATE_Started 			= 1;
-//	public final int 				CIRCUIT_STATE_Running 			= 2;
-//	public final int 				CIRCUIT_STATE_Stopping	 		= 3;
-//	public final int 				CIRCUIT_STATE_Optimising 		= 4;
-//	public final int 				CIRCUIT_STATE_Error	 			= -1;
-
 
 	public Circuit_Gradient(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
 	{	
@@ -26,8 +19,8 @@ public class Circuit_Gradient extends Circuit_Abstract
 	@Override
 	public void sequencer()
 	{
-		this.heatRequired.tempMinimum			= -1000;
-		this.heatRequired.tempMaximum			= -1000;
+		this.heatRequired.tempMinimum						= -1000;
+		this.heatRequired.tempMaximum						= -1000;
 		if (taskActive == null)
 		{
 			//Nothing to do
@@ -49,7 +42,7 @@ public class Circuit_Gradient extends Circuit_Abstract
 			case CIRCUIT_STATE_Off:
 				//Nothing to do
 				break;
-			case CIRCUIT_STATE_Started:
+			case CIRCUIT_STATE_Starting:
 				LogIt.info("Circuit", "sequencerRadiator", "Started");	
 				LogIt.action("PumpRadiator", "On");
 				Global.pumpRadiator.on();
@@ -62,7 +55,7 @@ public class Circuit_Gradient extends Circuit_Abstract
 				//Will also depend on loi d'eau
 
 				//Radiator Type has temperature gradient
-				Integer temp			= temperatureGradient.getTempToTarget();
+				Integer temp							= temperatureGradient.getTempToTarget();
 				this.heatRequired.tempMinimum			= temp - 75;
 				this.heatRequired.tempMaximum			= temp + 75;
 				break;
@@ -70,15 +63,14 @@ public class Circuit_Gradient extends Circuit_Abstract
 				LogIt.info("Circuit", "sequencerRadiator", "Stopping");	
 				LogIt.action("PumpRadiator", "Off");
 				Global.pumpRadiator.off();
-				state										= CIRCUIT_STATE_Off;
-				taskActive									= null;
+				state									= CIRCUIT_STATE_Off;
+				taskActive								= null;
 				break;
 			case CIRCUIT_STATE_Error:
 				break;
 			default:
 				LogIt.error("Circuit", "sequencerRadiator", "unknown state detected : " + state);	
 			}
-			// This is a comment for git
 		}
 	}
 }
