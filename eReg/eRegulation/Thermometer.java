@@ -14,7 +14,7 @@ public class Thermometer
 	public String 					filePath;
  	public Integer 					reading;
 //	Go for a depth of 5 readings and a tolerance of 2 degrees
-	public Thermometer_Stabliser 	readings; 
+//	public Thermometer_Stabliser 	readings; 
 	
 	
 	public Thermometer(String name, String address, String friendlyName)
@@ -22,7 +22,7 @@ public class Thermometer
 		this.name 		    									= name;
 		this.thermoFile 			    						= address;
 		this.friendlyName  										= friendlyName;
-		this.readings											= new Thermometer_Stabliser(10, 200); // Depth 10 entries// Tolerence = 20 degrees
+//		this.readings											= new Thermometer_Stabliser(10, 200); // Depth 10 entries// Tolerence = 20 degrees
 		String  					thermoRadical 				= "/sys/bus/w1/devices/";
 		String 						thermoFile 					= thermoRadical + this.thermoFile.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
 		
@@ -56,7 +56,8 @@ public class Thermometer
 					Integer 		tempPosition 				= ThermoFile_InputLine2.indexOf("t=");
 					Integer 		tempReading 				= Integer.parseInt(ThermoFile_InputLine2.substring(tempPosition + 2));
 
-					this.reading								= this.readings.add((tempReading + 50)/100);
+					this.reading								= (tempReading + 50)/100;
+//					this.reading								= this.readings.add((tempReading + 50)/100);
 					return this.reading;
 				}
 				else
