@@ -124,7 +124,7 @@ public class PID
 		integral 						= integrals[index].floatValue();
 		result 							=kP * proportional + kD * differential * 1000F + kI * integral;
 		
-		LogIt.pidData(target, proportional, differential, integral, kP, kD, kI, result, items[index]);
+		LogIt.pidData(target, proportional, differential, integral, kP, kD, kI, result, items[index], Global.thermoBoiler.reading);
 
     	return result;
     }
