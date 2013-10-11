@@ -8,8 +8,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 	}
 	public void sequencer_OLD()
 	{
-		this.heatRequired.tempMinimum				= -1;
-		this.heatRequired.tempMaximum				= -1;
 		if (this.taskActive == null)
 		{
 			//Nothing to do
@@ -177,24 +175,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 		// hwTarget = hwTempCurrent + hwDifference x 0.5  (0.5 multiplier can be modified)
 	}
 	@Override
-	public void start()
-	{
-	}
-	@Override
-	public void stop()
-	{
-		// Either the boiler isn't hot enough or there are other circuits active
-		// so we should stop now
-		
-		// We should call super().stop()
-		
-		this.heatRequired.tempMinimum	= -1;
-		this.heatRequired.tempMaximum	= -1;
-		System.out.println("Circuit_HotWater/stop called : heatRequired set to zero, pumpwater off, active task = null");
-		Global.pumpWater.off();
-		this.taskActive					= null;
-	}
-	@Override
 	public void sequencer()
 	{
 		// Note that this wont pass midnight
@@ -209,13 +189,13 @@ public class Circuit_HotWater extends Circuit_Abstract
 			Boolean		timeUp						= (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd);
 			Boolean		boilerHotEnough				= (Global.thermoBoiler.reading > Global.thermoHotWater.reading);
 
-			System.out.println("=============================================");
-			System.out.println("boilerTemp              " + Global.thermoBoiler.reading);
-			System.out.println("waterTemp               " + Global.thermoHotWater.reading);
-			
-			System.out.println("tempObjectiveAttained : " + tempObjectiveAttained);
-			System.out.println("timeUp :                " + timeUp);
-			System.out.println("boilerHotEnough :       " + boilerHotEnough);
+//			System.out.println("=============================================");
+//			System.out.println("boilerTemp              " + Global.thermoBoiler.reading);
+//			System.out.println("waterTemp               " + Global.thermoHotWater.reading);
+//			
+//			System.out.println("tempObjectiveAttained : " + tempObjectiveAttained);
+//			System.out.println("timeUp :                " + timeUp);
+//			System.out.println("boilerHotEnough :       " + boilerHotEnough);
 			
 			if (this.taskActive.stopOnObjective)
 			{
@@ -235,6 +215,9 @@ public class Circuit_HotWater extends Circuit_Abstract
 						System.out.println("stopOnObjective : it's the end");
 						System.out.println("=============================================");
 						stop();
+						Global.pumpWater.off();
+						this.taskActive					= null;
+
 					}
 				}
 				else
@@ -272,6 +255,9 @@ public class Circuit_HotWater extends Circuit_Abstract
 						System.out.println("TimeEnd timeUp : it's the end");
 						System.out.println("=============================================");
 						stop();
+						Global.pumpWater.off();
+						this.taskActive					= null;
+
 					}
 				}
 				else
@@ -294,6 +280,9 @@ public class Circuit_HotWater extends Circuit_Abstract
 						// Not sure that this is correct
 						// boiler aint hot enough but time isnt necessarily up
 						stop();
+						Global.pumpWater.off();
+						this.taskActive					= null;
+
 					}
 				}
 			}

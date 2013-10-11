@@ -185,15 +185,17 @@ public class Control
 				circuit.scheduleTaskNext();
 				circuit.scheduleTaskActive();
 				circuit.sequencer();
-		
-				if (circuit.heatRequired.tempMinimum > globalHeatRequired.tempMinimum)
+				if (circuit.heatRequired != null)
 				{
-					globalHeatRequired.tempMinimum				= circuit.heatRequired.tempMinimum;
-				}
-				
-				if (circuit.heatRequired.tempMaximum > globalHeatRequired.tempMaximum)
-				{
-					globalHeatRequired.tempMaximum				= circuit.heatRequired.tempMaximum;
+					if (circuit.heatRequired.tempMinimum > globalHeatRequired.tempMinimum)
+					{
+						globalHeatRequired.tempMinimum				= circuit.heatRequired.tempMinimum;
+					}
+					
+					if (circuit.heatRequired.tempMaximum > globalHeatRequired.tempMaximum)
+					{
+						globalHeatRequired.tempMaximum				= circuit.heatRequired.tempMaximum;
+					}
 				}
 			}
 			

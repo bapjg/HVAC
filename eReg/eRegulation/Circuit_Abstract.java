@@ -32,7 +32,7 @@ abstract class Circuit_Abstract
 	public CircuitTask				taskNext					= null;
 	
 	public ArrayList <CircuitTask> 	circuitTaskList 			= new ArrayList <CircuitTask>();
-	public HeatRequired				heatRequired				= new HeatRequired();
+	public HeatRequired				heatRequired				= null;
 	
 	public Boolean					willBeSingleCircuit			= false;
 
@@ -47,6 +47,7 @@ abstract class Circuit_Abstract
 		this.tempMax											= Integer.parseInt(tempMax);
 		this.rampUpTime											= Long.parseLong(rampUpTime);
 		this.state												= CIRCUIT_STATE_Off;
+		this.heatRequired										= null;
 	}
 	public void addCircuitTask
 		(
@@ -72,11 +73,13 @@ abstract class Circuit_Abstract
 	{
 		System.out.println(this.name + "Start called");
 		this.state												= CIRCUIT_STATE_Starting;
+		this.heatRequired										= new HeatRequired();
 	}
 	public void stop()
 	{
 		System.out.println(this.name + "Stop called");
 		this.state												= CIRCUIT_STATE_Stopping;
+		this.heatRequired										= null;
 	}
 	public void suspend()
 	{

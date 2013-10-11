@@ -25,8 +25,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 	@Override
 	public void sequencer()
 	{
-		this.heatRequired.tempMinimum			= -1000;
-		this.heatRequired.tempMaximum			= -1000;
 		if (taskActive == null)
 		{
 			//Nothing to do
@@ -70,9 +68,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 					System.out.println("temperatureGradient is null");
 				}
 				Integer temp								= temperatureGradient.getTempToTarget();
-				this.heatRequired.tempMinimum			= 500;
-				this.heatRequired.tempMaximum			= 800;
-				// Nothing to do
+				this.heatRequired.tempMinimum				= 500;
+				this.heatRequired.tempMaximum				= 800;
 				break;
 			case CIRCUIT_STATE_Stopping:
 				LogIt.info("Circuit", "sequencerFloor", "Stopping");
