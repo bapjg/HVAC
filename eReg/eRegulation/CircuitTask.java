@@ -33,7 +33,6 @@ public class CircuitTask
 		this.state												= TASK_STATE_WaitingToStart;
 		this.timeStart											= Global.parseTime(timeStart);
 		this.timeEnd											= Global.parseTime(timeEnd);
-
 		this.tempObjective										= Integer.parseInt(tempObjective);
 		this.days												= days;
 		
@@ -46,7 +45,7 @@ public class CircuitTask
 			this.stopOnObjective								= false;			
 		}
 	}
-	public CircuitTask
+	public CircuitTask												// Used to create dynamically (ie not on calendars) an immediatetask
 		(
 			Long 				timeStart, 
 			Long 				timeEnd,  

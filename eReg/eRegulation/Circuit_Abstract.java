@@ -88,9 +88,8 @@ abstract class Circuit_Abstract
 		System.out.println(this.name + "Resume called");
 		this.state												= CIRCUIT_STATE_Resuming;
 	}
-	public void sequencer()
+	public void sequencer()										// Task overridden in sub classes
 	{
-		// Task overridden in sub classes
 	}
 	public void scheduleTaskNext()
 	{
