@@ -104,10 +104,14 @@ abstract class Circuit_Abstract
 			{
 				if (circuitTask.days.contains(day))														// This one is for today
 				{
-					if (circuitTask.timeStart > Global.getTimeNowSinceMidnight())						// This task has yet to be performed
+					if ((circuitTask.timeStart > Global.getTimeNowSinceMidnight())						// This task has yet to be performed (timeStart > now
+					|| (circuitTask.timeEnd > Global.getTimeNowSinceMidnight()))						// Or time End > now
+						// Also need to handle the case of restarting the Regulator in the middle of a program
 					{
 						// No allowance is made for rampuptime : not really needed as this is setup long before at around midnight
-						if (this.taskNext == null)		// Is this usefull ??????												
+						// We started the loop with taskNext = null
+						// Item 1 might have been put on the list, so we need to take the first one.
+						if (this.taskNext == null)		// 												
 						{
 							this.taskNext						= circuitTask;
 							System.out.println("Circuit : " + this.name + " put on next to run list");
