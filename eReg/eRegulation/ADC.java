@@ -38,10 +38,10 @@ public class ADC
 	public Boolean isFault()
 	{
 		float reading = readAverage();
-		LogIt.info("ADC", "isFault", "reading > 4.0 : " + reading);
 		
 		if (reading > 4.0)
 		{
+			LogIt.info("ADC", "isFault", "reading over 4.0 : " + reading);
 			return true;
 		}
 		else
@@ -52,10 +52,10 @@ public class ADC
 	public Boolean isFuelFlowing()
 	{
 		float reading = readAverage();
-		LogIt.info("ADC", "isFault", "reading > 4.0 : " + reading);
 
 		if ((reading > 2.0) && (reading < 3.0))
 		{
+			LogIt.info("ADC", "isFuelFlowing", "reading between 2.0 and 3.0 : " + reading);
 			return true;
 		}
 		else
