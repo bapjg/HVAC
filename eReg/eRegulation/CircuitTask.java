@@ -4,6 +4,8 @@ public class CircuitTask
 {
 	public Long					timeStart;
 	public Long					timeEnd;
+	public String				timeStartDisplay;
+	public String				timeEndDisplay;
 	public Integer 				tempObjective;
 	public Boolean 				stopOnObjective;
 	public String				days;
@@ -11,14 +13,15 @@ public class CircuitTask
 	public Integer				state;
 	
 	public static final int 	TASK_STATE_WaitingToStart		= 0;
-	public static final int 	TASK_STATE_Started 				= 1;
-	public static final int 	TASK_STATE_RunningFree 			= 2;
-	public static final int 	TASK_STATE_Completed			= 3;
+	public static final int 	TASK_STATE_WillBeNext			= 1;
+	public static final int 	TASK_STATE_Started 				= 2;
+	public static final int 	TASK_STATE_RunningFree 			= 3;
+	public static final int 	TASK_STATE_Completed			= 4;
 	public static final int 	TASK_STATE_Error	 			= -1;
 	public static final int 	TASK_STATE_NotToday 			= -2;
 
-	public static final int 	TASK_STATE_RampUp   			= -2;
-	public static final int 	TASK_STATE_RampDown   			= -2;
+	public static final int 	TASK_STATE_RampUp   			= -3;
+	public static final int 	TASK_STATE_RampDown   			= -4;
 
 	
 	public CircuitTask
@@ -32,7 +35,9 @@ public class CircuitTask
 	{
 		this.state												= TASK_STATE_WaitingToStart;
 		this.timeStart											= Global.parseTime(timeStart);
+		this.timeStartDisplay									= timeStart;
 		this.timeEnd											= Global.parseTime(timeEnd);
+		this.timeEndDisplay										= timeEnd;
 		this.tempObjective										= Integer.parseInt(tempObjective);
 		this.days												= days;
 		
@@ -56,7 +61,9 @@ public class CircuitTask
 	{
 		this.state												= TASK_STATE_WaitingToStart;
 		this.timeStart											= timeStart;
+		this.timeStartDisplay									= "Now";
 		this.timeEnd											= timeEnd;
+		this.timeEndDisplay										= "A While";
 		this.tempObjective										= tempObjective;
 		this.stopOnObjective									= stopOnObjective;
 		this.days												= days;

@@ -137,9 +137,6 @@ public class Control
 		// To be transferred elsewhere
 		//
 
-		//@SuppressWarnings("unused")
-        //Burner 			burner 						= new Burner();
-
 		Boiler 			boiler						= new Boiler();
 
 		//
