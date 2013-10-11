@@ -25,7 +25,7 @@ public class Boiler
 	
 	public Integer	   		tempMax;
 	public Integer	   		tempMin;
-	public Integer			tempNeverExceed;
+	public Integer			tempNeverExceed			= 850;
 	public Integer			state;
 	
 	public final int 		STATE_Off 				= 0;
@@ -72,7 +72,7 @@ public class Boiler
 	{
 		if (Global.thermoBoiler.reading > tempNeverExceed)
 		{
-			LogIt.error("Boiler", "checkFault", "tempNeverExceed has been reached");
+			LogIt.error("Boiler", "checkFault", "tempNeverExceed has been reached temp/NeverExceed" + Global.thermoBoiler.reading + "/3" + tempNeverExceed);
 			return true;
 		}
 		else
