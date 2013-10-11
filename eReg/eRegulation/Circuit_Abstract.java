@@ -102,7 +102,7 @@ abstract class Circuit_Abstract
 		{
 			for (CircuitTask circuitTask : circuitTaskList) 											// Go through all tasks
 			{
-				if (circuitTask.days.contains(day))														// This one is for today
+				if ((circuitTask.days.contains(day)) && (circuitTask.state == circuitTask.TASK_STATE_WaitingToStart))														// This one is for today
 				{
 					if ((circuitTask.timeStart > Global.getTimeNowSinceMidnight())						// This task has yet to be performed (timeStart > now
 					|| (circuitTask.timeEnd > Global.getTimeNowSinceMidnight()))						// Or time End > now
@@ -176,6 +176,12 @@ abstract class Circuit_Abstract
 			// At this stage taskActive may (or may not) have been scheduled to taskNext
 			// Now see if other tasks are planned to run at the same time
 			
+			if ((this.taskActive != null) &&  (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd))	// Task has finished its time
+			{
+				// We should call circuit.stop()
+				this.taskActive.state							= CircuitTask.TASK_STATE_WaitingToStart;	// Should be Completed ....
+			}
+				
 			if (this.taskActive != null)												// This is to determine whether task will be alone
 			{
 				this.willBeSingleCircuit 							= true;
