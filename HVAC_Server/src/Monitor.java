@@ -163,7 +163,7 @@ public class Monitor extends HttpServlet
         try
         {
             dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM fuel LIMIT 1");
+            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM pid LIMIT 1");
             dbResultSet.moveToInsertRow();
 
             dbResultSet.updateString	("dateTime", 		dateTime2String(readings.dateTime));
@@ -194,7 +194,7 @@ public class Monitor extends HttpServlet
         try
         {
             dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM pid LIMIT 1");
+            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM fuel LIMIT 1");
             dbResultSet.moveToInsertRow();
 
             dbResultSet.updateString	("dateTime", 		dateTime2String(readings.dateTime));

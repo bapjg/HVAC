@@ -71,24 +71,24 @@ abstract class Circuit_Abstract
 	}
 	public void start()
 	{
-		System.out.println(this.name + "Start called");
+		System.out.println(this.name + " Start called");
 		this.state												= CIRCUIT_STATE_Starting;
 		this.heatRequired										= new HeatRequired();
 	}
 	public void stop()
 	{
-		System.out.println(this.name + "Stop called");
+		System.out.println(this.name + " Stop called");
 		this.state												= CIRCUIT_STATE_Stopping;
 		this.heatRequired										= null;
 	}
 	public void suspend()
 	{
-		System.out.println(this.name + "Suspend called");
+		System.out.println(this.name + " Suspend called");
 		this.state												= CIRCUIT_STATE_Suspended;
 	}
 	public void resume()
 	{
-		System.out.println(this.name + "Resume called");
+		System.out.println(this.name + " Resume called");
 		this.state												= CIRCUIT_STATE_Resuming;
 	}
 	public void sequencer()										// Task overridden in sub classes
@@ -148,7 +148,6 @@ abstract class Circuit_Abstract
 
 		if (this.taskNext != null)
 		{
-			System.out.println("Scheduling active task for " + this.name + " and nextTask is not null");
 			//There is a waiting task. Replace active task if it exists
 			
 			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - this.getRampUpTime())			// TimeNow is after starttime - rampup
@@ -181,9 +180,6 @@ abstract class Circuit_Abstract
 				{
 					if ( ! this.name.equalsIgnoreCase(circuit.name))					// We are looking for other tasks than the current
 					{
-						System.out.println(this.name + " current circuit");
-						System.out.println(circuit.name + " investigated circuit");
-						
 						if (circuit.taskActive != null)
 						{
 							this.willBeSingleCircuit				= false;			// A task is currently active, so we will not be alone
