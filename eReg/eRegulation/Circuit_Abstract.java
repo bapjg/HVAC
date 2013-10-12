@@ -71,24 +71,24 @@ abstract class Circuit_Abstract
 	}
 	public void start()
 	{
-		System.out.println(this.name + " Start called");
+		LogIt.action(this.name, "Start called");
 		this.state												= CIRCUIT_STATE_Starting;
 		this.heatRequired										= new HeatRequired();
 	}
 	public void stop()
 	{
-		System.out.println(this.name + " Stop called");
+		LogIt.action(this.name, "Stop called");
 		this.state												= CIRCUIT_STATE_Stopping;
 		this.heatRequired										= null;
 	}
 	public void suspend()
 	{
-		System.out.println(this.name + " Suspend called");
+		LogIt.action(this.name, "Suspend called");
 		this.state												= CIRCUIT_STATE_Suspended;
 	}
 	public void resume()
 	{
-		System.out.println(this.name + " Resume called");
+		LogIt.action(this.name, "Resume called");
 		this.state												= CIRCUIT_STATE_Resuming;
 	}
 	public void sequencer()										// Task overridden in sub classes
@@ -104,24 +104,27 @@ abstract class Circuit_Abstract
 			{
 				if ((circuitTask.days.contains(day)) && (circuitTask.state == circuitTask.TASK_STATE_WaitingToStart))														// This one is for today
 				{
+					LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Looking at task on " + this.name + " starting at " + circuitTask.timeStartDisplay);
+					
 					if ((circuitTask.timeStart > Global.getTimeNowSinceMidnight())						// This task has yet to be performed (timeStart > now
 					|| (circuitTask.timeEnd > Global.getTimeNowSinceMidnight()))						// Or time End > now
 						// Also need to handle the case of restarting the Regulator in the middle of a program
 					{
+						LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Found a task on " + this.name + " starting at " + circuitTask.timeStartDisplay);
 						// No allowance is made for rampuptime : not really needed as this is setup long before at around midnight
 						// We started the loop with taskNext = null
 						// Item 1 might have been put on the list, so we need to take the first one.
 						if (this.taskNext == null)		// 												
 						{
 							this.taskNext						= circuitTask;
-							System.out.println("Circuit : " + this.name + " put on next to run list");
+							LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Circuit " + this.name + " starting at " + circuitTask.timeStartDisplay + " put on the next to run list");
 						}
 						else
 						{
 							if (circuitTask.timeStart < this.taskNext.timeStart)
 							{
 								this.taskNext					= circuitTask;
-								System.out.println("Circuit : " + this.name + " put on next to run list");
+								LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Found a task on " + this.name + " starting at " + circuitTask.timeStartDisplay + " replaced current on the next to run list");
 							}
 						}
 					}
