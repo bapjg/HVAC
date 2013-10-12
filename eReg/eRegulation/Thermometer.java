@@ -106,7 +106,7 @@ public class Thermometer
     	{
     		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
     		{
-    			System.out.println("Success");
+    			System.out.println("Success"); //uSEFULL
     		}
     		if (count == 0)
     		{
