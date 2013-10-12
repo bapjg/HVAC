@@ -33,7 +33,9 @@ public class Thermometer
 	}
     public Integer read()
 	{
-		// File contains Line 1 : Hex Data CRC YES (or CRC NO if failed)
+    	// This is for Dallas DS18B20
+    	//             ==============
+    	// File contains Line 1 : Hex Data CRC YES (or CRC NO if failed)
 		//               Line 2 : Hex Data t=nnnnn (where n is in millidegrees celcius)
 		// We will do 5 retries in the event of failure. -99999 returned if all bad
 		
@@ -76,13 +78,13 @@ public class Thermometer
 		LogIt.error("Thermometer", "read", "5 reads in a row returned CRC error on: " + name, false);
 		return this.reading; //Last known good reading;
 	}
-//    public String toDisplay()
-//    {
-//    	// Converts temperature in decidegrees into displayable format
-//    	Integer Degrees 										= this.reading/10;
-//    	Integer Decimals 										= this.reading - Degrees * 10;
-//    	return Degrees.toString() + "." + Decimals.toString();
-//    }
+    public String toDisplay()
+    {
+    	// Converts temperature in decidegrees into displayable format
+    	Integer Degrees 										= this.reading/10;
+    	Integer Decimals 										= this.reading - Degrees * 10;
+    	return Degrees.toString() + "." + Decimals.toString();
+    }
     public class Reading_Stabliser
     {
     	public Integer[] 		readings;
