@@ -68,7 +68,7 @@ public class Boiler
 		tempMin 									= -1000;
 		state 										= STATE_Off;
 	}
-	public Boolean checkFault()
+	public Boolean checkOverHeat()
 	{
 		if (Global.thermoBoiler.reading > tempNeverExceed)
 		{
@@ -84,7 +84,7 @@ public class Boiler
 	{
 		//LogIt.info("Boiler", "sequencer", "state is : " + state);
 		
-		if (checkFault())
+		if (checkOverHeat())
 		{
 			state									 = STATE_Error;
 			burner.powerOff();
@@ -110,7 +110,7 @@ public class Boiler
 			// Should we not close down all relays
 			break;
 		case STATE_OnHeating:
-			//LogIt.info("Boiler", "sequencer",  "STATE_OnHeating : temp boiler/max " + Global.tempBoiler + "/" + tempMax);
+			LogIt.info("Boiler", "sequencer",  "STATE_OnHeating : temp boiler/max " + Global.thermoBoiler.reading + "/" + tempMax);
 			if (Global.thermoBoiler.reading > tempMax)
 			{
 				burner.powerOff();
@@ -119,7 +119,7 @@ public class Boiler
 			}
 			break;
 		case STATE_OnCooling:
-			//LogIt.info("Boiler", "sequencer", "STATE_OnCooling : temp boiler/min " + Global.tempBoiler + "/" + tempMin);
+			LogIt.info("Boiler", "sequencer", "STATE_OnCooling : temp boiler/min " + Global.thermoBoiler.reading + "/" + tempMin);
 			if (Global.thermoBoiler.reading < tempMin)
 			{
 				burner.powerOn();

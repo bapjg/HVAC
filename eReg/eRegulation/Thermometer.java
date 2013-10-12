@@ -14,7 +14,6 @@ public class Thermometer
  	public Integer 					reading;
 	public Reading_Stabliser 		readings; 
 	
-	
 	public Thermometer(String name, String address, String friendlyName)
 	{
 		this.name 		    									= name;
@@ -65,7 +64,6 @@ public class Thermometer
 				}
 				else
 				{
-					// try again or return -999999
 					Global.waitMilliSeconds(5);
 				}
 			}
@@ -78,13 +76,13 @@ public class Thermometer
 		LogIt.error("Thermometer", "read", "5 reads in a row returned CRC error on: " + name, false);
 		return this.reading; //Last known good reading;
 	}
-    public String toDisplay()
-    {
-    	// Converts temperature in decidegrees into displayable format
-    	Integer Degrees 										= this.reading/10;
-    	Integer Decimals 										= this.reading - Degrees * 10;
-    	return Degrees.toString() + "." + Decimals.toString();
-    }
+//    public String toDisplay()
+//    {
+//    	// Converts temperature in decidegrees into displayable format
+//    	Integer Degrees 										= this.reading/10;
+//    	Integer Decimals 										= this.reading - Degrees * 10;
+//    	return Degrees.toString() + "." + Decimals.toString();
+//    }
     public class Reading_Stabliser
     {
     	public Integer[] 		readings;
