@@ -56,15 +56,6 @@ public class LogIt
 			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
 		}
 	}
-	public static void  error(String className, String methodName, String message)
-	{
-		logMessage("Error", className, methodName, message);
-
-		if (logDisplay)
-		{
-			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
-		}
-	}
 	public static void  info(String className, String methodName, String message, Boolean display)
 	{
 		logMessage("Info", className, methodName, message);
@@ -72,6 +63,15 @@ public class LogIt
 		if (display)
 		{
 			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
+		}
+	}
+	public static void  error(String className, String methodName, String message)
+	{
+		logMessage("Error", className, methodName, message);
+
+		if (logDisplay)
+		{
+			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
 		}
 	}
 	public static void  error(String className, String methodName, String message, Boolean display)

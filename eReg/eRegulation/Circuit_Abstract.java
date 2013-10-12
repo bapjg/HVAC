@@ -98,33 +98,36 @@ abstract class Circuit_Abstract
 	{
 		String day 												= Global.getDayOfWeek(0);				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 
+		LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Looking for tasks on " + this.name, true);
 		if (this.taskNext == null)
 		{
+			LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Looking for tasks on " + this.name + " and Next is null", true);
 			for (CircuitTask circuitTask : circuitTaskList) 											// Go through all tasks
 			{
+				LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Looking at task on " + this.name + " starting at " + circuitTask.timeStartDisplay + " state is " + circuitTask.state, true);
 				if ((circuitTask.days.contains(day)) && (circuitTask.state == circuitTask.TASK_STATE_WaitingToStart))														// This one is for today
 				{
-					LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Looking at task on " + this.name + " starting at " + circuitTask.timeStartDisplay);
+					LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Looking at task on " + this.name + " starting at " + circuitTask.timeStartDisplay, true);
 					
 					if ((circuitTask.timeStart > Global.getTimeNowSinceMidnight())						// This task has yet to be performed (timeStart > now
 					|| (circuitTask.timeEnd > Global.getTimeNowSinceMidnight()))						// Or time End > now
 						// Also need to handle the case of restarting the Regulator in the middle of a program
 					{
-						LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Found a task on " + this.name + " starting at " + circuitTask.timeStartDisplay);
+						LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Found a task on " + this.name + " starting at " + circuitTask.timeStartDisplay, true);
 						// No allowance is made for rampuptime : not really needed as this is setup long before at around midnight
 						// We started the loop with taskNext = null
 						// Item 1 might have been put on the list, so we need to take the first one.
 						if (this.taskNext == null)		// 												
 						{
 							this.taskNext						= circuitTask;
-							LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Circuit " + this.name + " starting at " + circuitTask.timeStartDisplay + " put on the next to run list");
+							LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Circuit " + this.name + " starting at " + circuitTask.timeStartDisplay + " put on the next to run list", true);
 						}
 						else
 						{
 							if (circuitTask.timeStart < this.taskNext.timeStart)
 							{
 								this.taskNext					= circuitTask;
-								LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Found a task on " + this.name + " starting at " + circuitTask.timeStartDisplay + " replaced current on the next to run list");
+								LogIt.info("Circuit_Abstract", "scheduleTaskNext", "Found a task on " + this.name + " starting at " + circuitTask.timeStartDisplay + " replaced current on the next to run list", true);
 							}
 						}
 					}
