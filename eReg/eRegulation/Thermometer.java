@@ -51,7 +51,7 @@ public class Thermometer
 				ThermoFile_InputStream.close();
 				ThermoFile_InputBuffer.close();
 
-				if (this.name.equalsIgnoreCase("tempBoiler")) {
+				if (this.name.equalsIgnoreCase("Boiler")) {
 					System.out.println(ThermoFile_InputLine1);
 					System.out.println(ThermoFile_InputLine2); }
 				
