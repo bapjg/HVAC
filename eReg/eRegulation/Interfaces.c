@@ -10,7 +10,6 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 #include <linux/i2c-dev.h>
-#include <OneWire.h>
 
 //================================================================
 //
