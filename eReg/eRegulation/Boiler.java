@@ -72,7 +72,7 @@ public class Boiler
 	{
 		if (Global.thermoBoiler.reading > tempNeverExceed)
 		{
-			LogIt.error("Boiler", "checkFault", "tempNeverExceed has been reached temp/NeverExceed" + Global.thermoBoiler.reading + "/3" + tempNeverExceed);
+			LogIt.error("Boiler", "checkFault", "tempNeverExceed has been reached temp/NeverExceed " + Global.thermoBoiler.reading + "/" + tempNeverExceed);
 			return true;
 		}
 		else
