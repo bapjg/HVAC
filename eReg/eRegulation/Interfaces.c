@@ -111,7 +111,7 @@ static void spi_txrx(char *buf, int tlen, int rlen)
 	if (rlen > tlen) tr.len 	= rlen;
 	else			 tr.len 	= tlen;
 	 
-	tr.tx_buf1 					=(unsigned long) buf;
+	tr.tx_buf 					=(unsigned long) buf;
 	tr.rx_buf 					=(unsigned long) buf;
 	
 	ret 						= ioctl(spi_fd, SPI_IOC_MESSAGE(1), &tr);
