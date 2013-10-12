@@ -51,7 +51,7 @@ public class Boiler
 	{
 		tempMax 									= eR.tempMaximum;
 		tempMin 									= eR.tempMinimum;
-		LogIt.info("Boiler", "requestHeat", "tempMin/tempMax are " + tempMin + "/" + tempMax);
+		//LogIt.info("Boiler", "requestHeat", "tempMin/tempMax are " + tempMin + "/" + tempMax);
 		
 		// Only change the state if it is STATE_Off
 		// There could be an error (STATE_Error)

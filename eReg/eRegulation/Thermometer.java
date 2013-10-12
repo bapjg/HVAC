@@ -7,27 +7,22 @@ import java.io.InputStreamReader;
 
 public class Thermometer
 {
-	public String 					thermoFile;
-	public String 					thermoRadical;
 	public String 					name;
 	public String 					friendlyName;
-	public String 					filePath;
+	public String 					address;
+	public String 					thermoFile;
  	public Integer 					reading;
-//	Go for a depth of 5 readings and a tolerance of 2 degrees
-	public Thermometer_Stabliser 	readings; 
+	public Reading_Stabliser 		readings; 
 	
 	
 	public Thermometer(String name, String address, String friendlyName)
 	{
 		this.name 		    									= name;
-		this.thermoFile 			    						= address;
 		this.friendlyName  										= friendlyName;
-		this.readings											= new Thermometer_Stabliser(10, 100); // Depth 10 entries// Tolerence = 10 degrees
-		String  					thermoRadical 				= "/sys/bus/w1/devices/";
-		String 						thermoFile 					= thermoRadical + this.thermoFile.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
+		this.address  											= address;
+		this.thermoFile 										= "/sys/bus/w1/devices/" + address.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
+		this.readings											= new Reading_Stabliser(10, 100); // Depth 10 entries// Tolerence = 10 degrees
 		
-		this.filePath 											= thermoFile;
-		this.reading 											= 150;				// Set to any reasonable value
 		if (name.equalsIgnoreCase("Boiler"))
 		{
 			int i;
@@ -48,7 +43,7 @@ public class Thermometer
 		{
 	    	try
 			{
-				FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(filePath);
+				FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile);
 				DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
 				BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
 
@@ -89,5 +84,63 @@ public class Thermometer
     	Integer Degrees 										= this.reading/10;
     	Integer Decimals 										= this.reading - Degrees * 10;
     	return Degrees.toString() + "." + Decimals.toString();
+    }
+    public class Reading_Stabliser
+    {
+    	public Integer[] 		readings;
+    	public Integer			index;
+    	public Integer			depth;
+    	public Integer			tolerance;
+    	public Integer			count;
+    	public Integer			smoothreading;
+
+    	public Reading_Stabliser(Integer readingDepth, Integer tolerance)
+    	{
+    		this.depth 		  	  			= readingDepth;
+    		this.index 		   			 	= 0;									// index is for next entry.
+    		this.count						= 0;
+    		this.tolerance					= tolerance;
+    		this.readings					= new Integer[readingDepth];
+    	}
+    	public Integer add(Integer newReading)
+    	{
+    		if (count == 0)
+    		{
+    			readings[index] 			= newReading;
+    			index++;
+    			count++;
+    			return newReading;
+    		}
+    		else
+    		{
+    			Integer avgReading			= average();
+    			
+    			if (Math.abs(avgReading - newReading) > tolerance)
+    			{
+    				System.out.println("========Returning add average, Ecart : " + (avgReading - newReading) + " avg : " + avgReading + " rdg : " +  newReading+ " tol : " +  tolerance);
+    				return avgReading;
+    			}
+    			else
+    			{
+    				readings[index] 		= newReading;
+    				index					= index + 1 % depth;
+    				if (count < depth)
+    				{
+    					count++;
+    				}
+    				return newReading;
+    			}
+    		}
+     	}
+    	public Integer average()
+    	{
+    		Integer i;
+    		Integer sum						= 0;
+    		for (i = 0; i < count; i++)
+    		{
+    			sum							= sum + readings[i];
+    		}
+    		return sum / count;
+    	}
     }
 }
