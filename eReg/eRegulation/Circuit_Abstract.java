@@ -107,6 +107,7 @@ abstract class Circuit_Abstract
 				LogIt.info("Circuit_Abstract", "scheduleTaskNext", "3. Looking at task on " + this.name + " starting at " + circuitTask.timeStartDisplay + " state is " + circuitTask.state);
 				LogIt.info("Circuit_Abstract", "scheduleTaskNext", "3. Looking at task on " + this.name + " contains day " + (circuitTask.days.contains(day)));
 				LogIt.info("Circuit_Abstract", "scheduleTaskNext", "3. Looking at task on " + this.name + " state waitin " + (circuitTask.state == circuitTask.TASK_STATE_WaitingToStart));
+				LogIt.info("Circuit_Abstract", "scheduleTaskNext", "day is " + day);
 
 				if ((circuitTask.days.contains(day)) && (circuitTask.state == circuitTask.TASK_STATE_WaitingToStart))														// This one is for today
 				{
