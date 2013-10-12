@@ -51,6 +51,10 @@ public class Thermometer
 				ThermoFile_InputStream.close();
 				ThermoFile_InputBuffer.close();
 
+				if (this.name.equalsIgnoreCase("tempBoiler")) {
+					System.out.println(ThermoFile_InputLine1);
+					System.out.println(ThermoFile_InputLine2); }
+				
 				if (ThermoFile_InputLine1.contains("YES")) //CRC is Ok
 				{
 					Integer 		tempPosition 				= ThermoFile_InputLine2.indexOf("t=");

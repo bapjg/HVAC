@@ -103,7 +103,7 @@ public class Boiler
 		{
 		case STATE_Error:
 			// do nothing
-			// Should we not close down all relays
+			// Dont close other relays because we must evacuate the heat
 			break;
 		case STATE_Off:
 			// do nothing
