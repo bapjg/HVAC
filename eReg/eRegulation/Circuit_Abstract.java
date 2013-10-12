@@ -239,7 +239,7 @@ abstract class Circuit_Abstract
 //		 Set the task state to rampup
 //		 HW = Wait to get boiler temp > HW temp before pumpon
 //		      Determine the max/min boiler temp required
-//		 Floor = Start the mixer and set floor temp at 40°
+//		 Floor = Start the mixer and set floor temp at 40 degrees
 //		      Determine the max/min boiler temp required
 //		 Radiator = Dont know what to do
 //		      Determine the max/min boiler temp required
