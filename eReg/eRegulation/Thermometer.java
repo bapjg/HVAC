@@ -22,14 +22,12 @@ public class Thermometer
 		this.thermoFile 										= "/sys/bus/w1/devices/" + address.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
 		this.readings											= new Reading_Stabliser(10, 100); // Depth 10 entries// Tolerence = 10 degrees
 		
-		if (name.equalsIgnoreCase("Boiler"))
-		{
 			int i;
 			for (i = 0; i < 10; i++)
 			{
 				System.out.println("Boiler reading " + i + " is : " + read());
 			}
-		}
+
 	}
     public Integer read()
 	{
