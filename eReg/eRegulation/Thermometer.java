@@ -25,7 +25,7 @@ public class Thermometer
 			int i;
 			for (i = 0; i < 10; i++)
 			{
-				System.out.println("Boiler reading " + i + " is : " + read());
+				// System.out.println("Boiler reading " + i + " is : " + read());
 			}
 
 	}
