@@ -14,7 +14,7 @@ public class Thermometer
 	public String 					filePath;
  	public Integer 					reading;
 //	Go for a depth of 5 readings and a tolerance of 2 degrees
-//	public Thermometer_Stabliser 	readings; 
+	public Thermometer_Stabliser 	readings; 
 	
 	
 	public Thermometer(String name, String address, String friendlyName)
@@ -22,12 +22,20 @@ public class Thermometer
 		this.name 		    									= name;
 		this.thermoFile 			    						= address;
 		this.friendlyName  										= friendlyName;
-//		this.readings											= new Thermometer_Stabliser(10, 200); // Depth 10 entries// Tolerence = 20 degrees
+		this.readings											= new Thermometer_Stabliser(10, 100); // Depth 10 entries// Tolerence = 10 degrees
 		String  					thermoRadical 				= "/sys/bus/w1/devices/";
 		String 						thermoFile 					= thermoRadical + this.thermoFile.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
 		
 		this.filePath 											= thermoFile;
 		this.reading 											= 150;				// Set to any reasonable value
+		if (name.equalsIgnoreCase("Boiler"))
+		{
+			int i;
+			for (i = 0; i < 10; i++)
+			{
+				System.out.println("Boiler reading " + i + " is : " + read());
+			}
+		}
 	}
     public Integer read()
 	{
@@ -51,17 +59,13 @@ public class Thermometer
 				ThermoFile_InputStream.close();
 				ThermoFile_InputBuffer.close();
 
-				if (this.name.equalsIgnoreCase("Boiler")) {
-					System.out.println(ThermoFile_InputLine1);
-					System.out.println(ThermoFile_InputLine2); }
-				
 				if (ThermoFile_InputLine1.contains("YES")) //CRC is Ok
 				{
 					Integer 		tempPosition 				= ThermoFile_InputLine2.indexOf("t=");
 					Integer 		tempReading 				= Integer.parseInt(ThermoFile_InputLine2.substring(tempPosition + 2));
 
-					this.reading								= (tempReading + 50)/100;
-//					this.reading								= this.readings.add((tempReading + 50)/100);
+					//this.reading								= (tempReading + 50)/100;
+					this.reading								= this.readings.add((tempReading + 50)/100);
 					return this.reading;
 				}
 				else
@@ -77,7 +81,7 @@ public class Thermometer
 			}		
     	}
 		LogIt.error("Thermometer", "read", "5 reads in a row returned CRC error on: " + name, false);
-		return reading; //Last known good reading;
+		return this.reading; //Last known good reading;
 	}
     public String toDisplay()
     {
