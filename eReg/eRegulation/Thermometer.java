@@ -93,18 +93,21 @@ public class Thermometer
     	public Integer			depth;
     	public Integer			tolerance;
     	public Integer			count;
-    	public Integer			smoothreading;
 
-    	public Reading_Stabliser(Integer readingDepth, Integer tolerance)
+    	public Reading_Stabliser(Integer depth, Integer tolerance)
     	{
-    		this.depth 		  	  			= readingDepth;
+    		this.depth 		  	  			= depth;
     		this.index 		   			 	= 0;									// index is for next entry.
     		this.count						= 0;
     		this.tolerance					= tolerance;
-    		this.readings					= new Integer[readingDepth];
+    		this.readings					= new Integer[depth];
     	}
     	public Integer add(Integer newReading)
     	{
+    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
+    		{
+    			System.out.println("Success");
+    		}
     		if (count == 0)
     		{
     			readings[index] 			= newReading;
