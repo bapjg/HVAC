@@ -53,9 +53,6 @@ public class Global extends DefaultHandler
 	
 	public static 	Relays	 						relays;
 	public static 	Relay							burnerPower;
-//	public static 	Relay							pumpWater;
-//	public static 	Relay							pumpFloor;
-//	public static 	Relay							pumpRadiator;
 	public static 	Relay							mixerUp;
 	public static 	Relay							mixerDown;
 	
