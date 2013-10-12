@@ -84,14 +84,14 @@ public class Boiler
 	{
 		//LogIt.info("Boiler", "sequencer", "state is : " + state);
 		
-		if (checkOverHeat())
+		if (checkOverHeat())		// This is just a temperature check
 		{
-			state									 = STATE_Error;
+			state									 = STATE_Off;
 			burner.powerOff();
-			LogIt.error("Boiler", "sequencer", "boiler overheat");
+			LogIt.error("Boiler", "sequencer", "boiler overheat, state set to off");
 			return;
 		}
-		if (burner.checkFault())
+		if (burner.checkFault())	//This reads ADC
 		{
 			state									 = STATE_Error;
 			burner.powerOff();
