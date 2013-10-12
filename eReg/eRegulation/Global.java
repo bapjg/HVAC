@@ -231,12 +231,9 @@ public class Global extends DefaultHandler
 		Calendar calendar 					= Calendar.getInstance();
 		Integer day 						= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
 	
-		System.out.println("day Sunday 1 " + day);
-		// Make day = 1 Monday ... day = 7 Sunday
-		day									= day + extraDays;
-		System.out.println("day Sunday 1 + extra " + day);
+		day									= day + extraDays;						// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
 		day--;																		// Sunday = 0, Monday = 1, Tues = 2 ... Sat = 6
-		day									= day % 7;
+		day									= day % 7;								// Modulo to take extra days into account
 		if (day == 0)
 		{
 			day								= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
