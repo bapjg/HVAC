@@ -104,16 +104,16 @@ public class Thermometer
     	}
     	public Integer add(Integer newReading)
     	{
-    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
-    		{
-    			System.out.println("Success"); //uSEFULL
-    		}
     		if (count == 0)
     		{
     			readings[index] 			= newReading;
     			index++;
     			count++;
-    			return newReading;
+	    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
+	    		{
+	    			System.out.println("Returning reading " + newReading); //uSEFULL
+	    		}
+	    		return newReading;
     		}
     		else
     		{
@@ -122,6 +122,10 @@ public class Thermometer
     			if (Math.abs(avgReading - newReading) > tolerance)
     			{
     				System.out.println("========Returning add average, Ecart : " + (avgReading - newReading) + " avg : " + avgReading + " rdg : " +  newReading+ " tol : " +  tolerance);
+       	    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
+    	    		{
+    	    			System.out.println("Returning average " + avgReading); //uSEFULL
+    	    		}
     				return avgReading;
     			}
     			else
@@ -132,6 +136,10 @@ public class Thermometer
     				{
     					count++;
     				}
+    	    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
+    	    		{
+    	    			System.out.println("Returning reading " + newReading); //uSEFULL
+    	    		}
     				return newReading;
     			}
     		}
