@@ -61,7 +61,7 @@ public class Thermometer
 					//this.reading								= (tempReading + 50)/100;
 					this.reading								= this.readings.add((tempReading + 50)/100);
 					if (this.name.equalsIgnoreCase("Boiler"))
-						System.out.println("Thermometer/read : tempReading/reading" + tempReading + "/" + this.reading);
+						System.out.println("Thermometer/read : tempReading/reading " + ((tempReading + 50)/100) + "/" + this.reading);
 					return this.reading;
 				}
 				else
