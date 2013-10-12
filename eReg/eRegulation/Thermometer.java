@@ -121,6 +121,12 @@ public class Thermometer
     			
     			if (Math.abs(avgReading - newReading) > tolerance)
     			{
+    				readings[index] 		= newReading;				//	Add it to the chain, otherwise we cannot change the average
+    				index					= index + 1 % depth;
+    				if (count < depth)
+    				{
+    					count++;
+    				}
     				System.out.println("========Returning add average, Ecart : " + (avgReading - newReading) + " avg : " + avgReading + " rdg : " +  newReading+ " tol : " +  tolerance);
        	    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
     	    		{
