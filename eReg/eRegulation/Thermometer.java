@@ -35,6 +35,7 @@ public class Thermometer
     	// File contains Line 1 : Hex Data CRC YES (or CRC NO if failed)
 		//               Line 2 : Hex Data t=nnnnn (where n is in millidegrees celcius)
 		// We will do 5 retries in the event of failure. -99999 returned if all bad
+		System.out.println("===============Thermometer/read : Entered for " + this.name);
 		
     	int i;
 		for (i = 0; i < 5; i++)
