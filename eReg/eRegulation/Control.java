@@ -148,6 +148,7 @@ public class Control
 		//
 		// Section for debugging
 		//
+		Global.waitSeconds(100);
 
 		boiler.burner.powerOn();
 		
