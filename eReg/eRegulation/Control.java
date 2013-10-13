@@ -148,6 +148,15 @@ public class Control
 		//
 		// Section for debugging
 		//
+
+		boiler.burner.powerOn();
+		
+		while (!Global.stopNow)
+		{
+			Integer thisReading = Global.thermoBoiler.reading;
+			System.out.println("And the reading is " +thisReading);
+		}
+		boiler.burner.powerOff();
 //
 //		
 //		System.out.println("Control Starting test");

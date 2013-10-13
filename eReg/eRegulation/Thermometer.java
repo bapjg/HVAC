@@ -12,7 +12,7 @@ public class Thermometer
 	public String 					address;
 	public String 					thermoFile;
  	public Integer 					reading;
-	public Reading_Stabliser 		readings; 
+	public Reading_Stabiliser 		readings; 
 	
 	public Thermometer(String name, String address, String friendlyName)
 	{
@@ -20,14 +20,13 @@ public class Thermometer
 		this.friendlyName  										= friendlyName;
 		this.address  											= address;
 		this.thermoFile 										= "/sys/bus/w1/devices/" + address.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
-		this.readings											= new Reading_Stabliser(10, 100); // Depth 10 entries// Tolerence = 10 degrees
+		this.readings											= new Reading_Stabiliser(10, 100); // Depth 10 entries// Tolerence = 10 degrees
 		
 		int i;
 		for (i = 0; i < 10; i++)
 		{
 			this.reading										= read();
 		}
-
 	}
     public Integer read()
 	{
@@ -86,7 +85,7 @@ public class Thermometer
     	Integer Decimals 										= this.reading - Degrees * 10;
     	return Degrees.toString() + "." + Decimals.toString();
     }
-    public class Reading_Stabliser
+    public class Reading_Stabiliser
     {
     	public Integer[] 		readings;
     	public Integer			index;
@@ -94,7 +93,7 @@ public class Thermometer
     	public Integer			tolerance;
     	public Integer			count;
 
-    	public Reading_Stabliser(Integer depth, Integer tolerance)
+    	public Reading_Stabiliser(Integer depth, Integer tolerance)
     	{
     		this.depth 		  	  			= depth;
     		this.index 		   			 	= 0;									// index is for next entry.
