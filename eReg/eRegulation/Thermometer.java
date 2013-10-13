@@ -124,7 +124,7 @@ public class Thermometer
     			count++;
 	    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
 	    		{
-	    			System.out.println("Returning reading " + newReading); //uSEFULL
+	    			System.out.println("10 Reading_Stabiliser/add Returning reading " + newReading); //uSEFULL
 	    		}
 	    		return newReading;
     		}
@@ -140,10 +140,10 @@ public class Thermometer
     				{
     					count++;
     				}
-    				System.out.println("========Returning add average, Ecart : " + (avgReading - newReading) + " avg : " + avgReading + " rdg : " +  newReading+ " tol : " +  tolerance);
+    				System.out.println("11 Reading_Stabiliser/add ======== Returning add average, Ecart : " + (avgReading - newReading) + " avg : " + avgReading + " rdg : " +  newReading+ " tol : " +  tolerance);
        	    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
     	    		{
-    	    			System.out.println("Returning average " + avgReading); //uSEFULL
+    	    			System.out.println("12 Reading_Stabiliser/add ======== Returning average " + avgReading); //uSEFULL
     	    		}
     				return avgReading;
     			}
@@ -157,7 +157,7 @@ public class Thermometer
     				}
     	    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
     	    		{
-    	    			System.out.println("Returning reading " + newReading); //uSEFULL
+    	    			System.out.println("13 Reading_Stabiliser/add ======== Returning reading " + newReading); //uSEFULL
     	    		}
     				return newReading;
     			}
