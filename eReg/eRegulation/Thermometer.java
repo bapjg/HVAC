@@ -35,7 +35,11 @@ public class Thermometer
     	// File contains Line 1 : Hex Data CRC YES (or CRC NO if failed)
 		//               Line 2 : Hex Data t=nnnnn (where n is in millidegrees celcius)
 		// We will do 5 retries in the event of failure. -99999 returned if all bad
-		System.out.println("===============Thermometer/read : Entered for " + this.name);
+		if (this.name.equalsIgnoreCase("Boiler"))
+		{
+			System.out.println("1. ===============Thermometer/read : Entered for " + this.name);
+		}
+		
 		
     	int i;
 		for (i = 0; i < 5; i++)
@@ -48,6 +52,11 @@ public class Thermometer
 
 				String 				ThermoFile_InputLine1 		= ThermoFile_InputBuffer.readLine();
 				String 				ThermoFile_InputLine2 		= ThermoFile_InputBuffer.readLine();
+				if (this.name.equalsIgnoreCase("Boiler"))
+				{
+					System.out.println("2. ===============Thermometer/read : Line1 " + ThermoFile_InputLine1);
+					System.out.println("3. ===============Thermometer/read : Line2 " + ThermoFile_InputLine2);
+				}
 
 				ThermoFile_InputData.close();
 				ThermoFile_InputStream.close();
@@ -62,7 +71,9 @@ public class Thermometer
 					this.reading								= this.readings.add((tempReading + 50)/100);
 
 					if (this.name.equalsIgnoreCase("Boiler"))
-						System.out.println("===============Thermometer/read : tempReading/reading " + ((tempReading + 50)/100) + "/" + this.reading);
+					{
+						System.out.println("4. ===============Thermometer/read : tempReading/reading " + ((tempReading + 50)/100) + "/" + this.reading);
+					}
 					return this.reading;
 				}
 				else
