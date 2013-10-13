@@ -20,15 +20,14 @@ public class Thermometer_Stabiliser
 	}
 	public Integer add(Integer newReading)
 	{
-		if (count == 0)
+   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("10 Reading_Stabiliser/add WE ARE IN reading/count : " + newReading + "/" + count); }
+
+   		if (count == 0)
 		{
 			readings[index] 			= newReading;
 			index++;
 			count++;
-    		if (this.name.equalsIgnoreCase("Boiler"))
-    		{
-    			System.out.println("10 Reading_Stabiliser/add Returning reading " + newReading); //uSEFULL
-    		}
+    		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("10 Reading_Stabiliser/add Returning reading " + newReading); }
     		return newReading;
 		}
 		else
@@ -43,11 +42,7 @@ public class Thermometer_Stabiliser
 				{
 					count++;
 				}
-				System.out.println("11 Reading_Stabiliser/add ======== Returning add average, Ecart : " + (avgReading - newReading) + " avg : " + avgReading + " rdg : " +  newReading+ " tol : " +  tolerance);
-   	    		if (this.name.equalsIgnoreCase("Boiler"))
-	    		{
-	    			System.out.println("12 Reading_Stabiliser/add ======== Returning average " + avgReading); //uSEFULL
-	    		}
+   	    		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("12 Reading_Stabiliser/add ======== Returning average " + avgReading);}
 				return avgReading;
 			}
 			else
@@ -58,10 +53,7 @@ public class Thermometer_Stabiliser
 				{
 					count++;
 				}
-	    		if (this.name.equalsIgnoreCase("Boiler"))
-	    		{
-	    			System.out.println("13 Reading_Stabiliser/add ======== Returning reading " + newReading); //uSEFULL
-	    		}
+	    		if (this.name.equalsIgnoreCase("Boiler")) { System.out.println("13 Reading_Stabiliser/add ======== Returning reading " + newReading); }
 				return newReading;
 			}
 		}
