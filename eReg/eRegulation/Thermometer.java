@@ -61,9 +61,10 @@ public class Thermometer
 					System.out.println("3. ===============Thermometer/read : Line2 " + ThermoFile_InputLine2);
 				}
 
+				ThermoFile_InputBuffer.close();
 				ThermoFile_InputData.close();
 				ThermoFile_InputStream.close();
-				ThermoFile_InputBuffer.close();
+
 
 				if (ThermoFile_InputLine1.contains("YES")) //CRC is Ok
 				{
