@@ -155,20 +155,10 @@ public class Control
 		{
 			Integer thisReading = Global.thermoBoiler.reading;
 			System.out.println("And the reading is " +thisReading);
+			Global.waitSeconds(10);
 		}
 		boiler.burner.powerOff();
-//
-//		
-//		System.out.println("Control Starting test");
-//		System.out.println("Control burner on");
-//		boiler.burner.powerOn();
-//		
-//		Global.waitSeconds(20);
 
-//		
-//		
-//		burner.powerOff();
-//		
 		//
 		//============================================================
 		
