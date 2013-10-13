@@ -12,10 +12,10 @@ public class Thread_Thermometers implements Runnable
 		{
 			Long timeStart 						= Global.now();
 			
-			LogIt.error("Thread_Thermometers", "Run", "Reading all temperature", true);
+			LogIt.info("1. Thread_Thermometers", "Run", "Reading all temperature", true);
 			
 			Global.thermoBoiler.read();
-			System.out.println("Thread_Thermometer/run : reading " + Global.thermoBoiler.reading);
+			System.out.println("2. Thread_Thermometer/run : reading " + Global.thermoBoiler.reading);
 
 			Global.waitMilliSeconds(5);
 			Global.thermoBoilerIn.read();
