@@ -38,6 +38,7 @@ public class Thermometer_Stabiliser
 			
 			if (Math.abs(avgReading - newReading) > tolerance)
 			{
+		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add Within Tolerance "); }
 				readings[index] 		= newReading;				//	Add it to the chain, otherwise we cannot change the average
 				index					= index + 1 % depth;
 				if (count < depth)
@@ -49,6 +50,7 @@ public class Thermometer_Stabiliser
 			}
 			else
 			{
+		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 -- Reading_Stabiliser/add Outside Tolerance "); }
 				readings[index] 		= newReading;
 				index					= index + 1 % depth;
 				if (count < depth)
