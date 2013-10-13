@@ -32,7 +32,9 @@ public class Thermometer_Stabiliser
 		}
 		else
 		{
+	   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("10 Reading_Stabiliser/add calling average"); }
 			Integer avgReading			= average();
+	   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("10 Reading_Stabiliser/add called average : " +avgReading); }
 			
 			if (Math.abs(avgReading - newReading) > tolerance)
 			{
