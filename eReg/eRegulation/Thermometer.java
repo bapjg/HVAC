@@ -12,7 +12,7 @@ public class Thermometer
 	public String 					address;
 	public String 					thermoFile;
  	public Integer 					reading;
-	public Reading_Stabiliser 		readings; 
+	public Thermometer_Stabiliser 	readings; 
 	
 	public Thermometer(String name, String address, String friendlyName)
 	{
@@ -20,7 +20,7 @@ public class Thermometer
 		this.friendlyName  										= friendlyName;
 		this.address  											= address;
 		this.thermoFile 										= "/sys/bus/w1/devices/" + address.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
-		this.readings											= new Reading_Stabiliser(10, 100); // Depth 10 entries// Tolerence = 10 degrees
+		this.readings											= new Thermometer_Stabiliser(name, 10, 100); // Depth 10 entries// Tolerence = 10 degrees
 		
 		int i;
 		for (i = 0; i < 10; i++)
@@ -80,18 +80,12 @@ public class Thermometer
 					this.reading								= this.readings.add((tempReading + 50)/100);
 					if (thisIsBoiler) {	System.out.println("6. <<<<<<<<<<<<<<< Thermometer/read : OutoffAdd"); }
 
-					if (thisIsBoiler)
-					{
-						System.out.println("4. ===============Thermometer/read : tempReading/reading " + ((tempReading + 50)/100) + "/" + this.reading);
-					}
+					if (thisIsBoiler) {	System.out.println("4. ===============Thermometer/read : tempReading/reading " + ((tempReading + 50)/100) + "/" + this.reading); }
 					return this.reading;
 				}
 				else
 				{
-					if (thisIsBoiler)
-					{
-						System.out.println("6. ===============Thermometer/read : NO");
-					}
+					if (thisIsBoiler) {	System.out.println("6. ===============Thermometer/read : NO");}
 
 					Global.waitMilliSeconds(5);
 				}
@@ -112,79 +106,5 @@ public class Thermometer
     	Integer Decimals 										= this.reading - Degrees * 10;
     	return Degrees.toString() + "." + Decimals.toString();
     }
-    public class Reading_Stabiliser
-    {
-    	public Integer[] 		readings;
-    	public Integer			index;
-    	public Integer			depth;
-    	public Integer			tolerance;
-    	public Integer			count;
 
-    	public Reading_Stabiliser(Integer depth, Integer tolerance)
-    	{
-    		this.depth 		  	  			= depth;
-    		this.index 		   			 	= 0;									// index is for next entry.
-    		this.count						= 0;
-    		this.tolerance					= tolerance;
-    		this.readings					= new Integer[depth];
-    	}
-    	public Integer add(Integer newReading)
-    	{
-    		if (count == 0)
-    		{
-    			readings[index] 			= newReading;
-    			index++;
-    			count++;
-	    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
-	    		{
-	    			System.out.println("10 Reading_Stabiliser/add Returning reading " + newReading); //uSEFULL
-	    		}
-	    		return newReading;
-    		}
-    		else
-    		{
-    			Integer avgReading			= average();
-    			
-    			if (Math.abs(avgReading - newReading) > tolerance)
-    			{
-    				readings[index] 		= newReading;				//	Add it to the chain, otherwise we cannot change the average
-    				index					= index + 1 % depth;
-    				if (count < depth)
-    				{
-    					count++;
-    				}
-    				System.out.println("11 Reading_Stabiliser/add ======== Returning add average, Ecart : " + (avgReading - newReading) + " avg : " + avgReading + " rdg : " +  newReading+ " tol : " +  tolerance);
-       	    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
-    	    		{
-    	    			System.out.println("12 Reading_Stabiliser/add ======== Returning average " + avgReading); //uSEFULL
-    	    		}
-    				return avgReading;
-    			}
-    			else
-    			{
-    				readings[index] 		= newReading;
-    				index					= index + 1 % depth;
-    				if (count < depth)
-    				{
-    					count++;
-    				}
-    	    		if (Thermometer.this.name.equalsIgnoreCase("Boiler"))
-    	    		{
-    	    			System.out.println("13 Reading_Stabiliser/add ======== Returning reading " + newReading); //uSEFULL
-    	    		}
-    				return newReading;
-    			}
-    		}
-     	}
-    	public Integer average()
-    	{
-    		Integer i;
-    		Integer sum						= 0;
-    		for (i = 0; i < count; i++)
-    		{
-    			sum							= sum + readings[i];
-    		}
-    		return sum / count;
-    	}
-    }
 }
