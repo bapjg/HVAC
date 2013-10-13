@@ -10,32 +10,35 @@ public class Thread_Thermometers implements Runnable
 		
 		while (!Global.stopNow)
 		{
+			Integer result = 0;
 			Long timeStart 						= Global.now();
 			
 			LogIt.info("1. Thread_Thermometers", "Run", "Reading all temperature", true);
 			
-			Global.thermoBoiler.read();
+			result = Global.thermoBoiler.read();
 			System.out.println("2. Thread_Thermometer/run : reading " + Global.thermoBoiler.reading);
 
 			Global.waitMilliSeconds(5);
-			Global.thermoBoilerIn.read();
+			result = Global.thermoBoilerIn.read();
 			Global.waitMilliSeconds(5);
-			Global.thermoFloorOut.read();
-			Global.circuitFloor.mixer.pidControler.add(Global.thermoFloorOut.reading);
+			result = Global.thermoFloorOut.read();
+			result = Global.thermoFloorOut.reading;
+			
+			Global.circuitFloor.mixer.pidControler.add(result);
 			Global.waitMilliSeconds(5);
-			Global.thermoFloorCold.read();
+			result = Global.thermoFloorCold.read();
 			Global.waitMilliSeconds(5);
-			Global.thermoFloorHot.read();
+			result = Global.thermoFloorHot.read();
 			Global.waitMilliSeconds(5);
-			Global.thermoRadiatorOut.read();
+			result = Global.thermoRadiatorOut.read();
 			Global.waitMilliSeconds(5);
-			Global.thermoRadiatorIn.read();
+			result = Global.thermoRadiatorIn.read();
 			Global.waitMilliSeconds(5);
-			Global.thermoOutside.read();
+			result = Global.thermoOutside.read();
 			Global.waitMilliSeconds(5);
-			Global.thermoLivingRoom.read();
+			result = Global.thermoLivingRoom.read();
 			Global.waitMilliSeconds(5);
-			Global.thermoHotWater.read();
+			result = Global.thermoHotWater.read();
 
 			LogIt.tempData();
 			
