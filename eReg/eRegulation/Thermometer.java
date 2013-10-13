@@ -35,9 +35,12 @@ public class Thermometer
     	// File contains Line 1 : Hex Data CRC YES (or CRC NO if failed)
 		//               Line 2 : Hex Data t=nnnnn (where n is in millidegrees celcius)
 		// We will do 5 retries in the event of failure. -99999 returned if all bad
-		if (this.name.equalsIgnoreCase("Boiler"))
+		
+    	Boolean thisIsBoiler = false;
+    	if (this.name.equalsIgnoreCase("Boiler"))
 		{
-			System.out.println("1. ===============Thermometer/read : Entered for " + this.name);
+    		thisIsBoiler = true;
+    		System.out.println("1. ===============Thermometer/read : Entered for " + this.name);
 		}
 		
 		
@@ -52,7 +55,7 @@ public class Thermometer
 
 				String 				ThermoFile_InputLine1 		= ThermoFile_InputBuffer.readLine();
 				String 				ThermoFile_InputLine2 		= ThermoFile_InputBuffer.readLine();
-				if (this.name.equalsIgnoreCase("Boiler"))
+				if (thisIsBoiler)
 				{
 					System.out.println("2. ===============Thermometer/read : Line1 " + ThermoFile_InputLine1);
 					System.out.println("3. ===============Thermometer/read : Line2 " + ThermoFile_InputLine2);
@@ -64,7 +67,7 @@ public class Thermometer
 
 				if (ThermoFile_InputLine1.contains("YES")) //CRC is Ok
 				{
-					if (this.name.equalsIgnoreCase("Boiler"))
+					if (thisIsBoiler)
 					{
 						System.out.println("5. ===============Thermometer/read : YES");
 					}
@@ -72,9 +75,12 @@ public class Thermometer
 					Integer 		tempReading 				= Integer.parseInt(ThermoFile_InputLine2.substring(tempPosition + 2));
 
 					//this.reading								= (tempReading + 50)/100;
-					this.reading								= this.readings.add((tempReading + 50)/100);
+					if (thisIsBoiler) {	System.out.println("6. >>>>>>>>>>>>>>> Thermometer/read : IntoAdd"); }
 
-					if (this.name.equalsIgnoreCase("Boiler"))
+					this.reading								= this.readings.add((tempReading + 50)/100);
+					if (thisIsBoiler) {	System.out.println("6. <<<<<<<<<<<<<<< Thermometer/read : OutoffAdd"); }
+
+					if (thisIsBoiler)
 					{
 						System.out.println("4. ===============Thermometer/read : tempReading/reading " + ((tempReading + 50)/100) + "/" + this.reading);
 					}
@@ -82,7 +88,7 @@ public class Thermometer
 				}
 				else
 				{
-					if (this.name.equalsIgnoreCase("Boiler"))
+					if (thisIsBoiler)
 					{
 						System.out.println("6. ===============Thermometer/read : NO");
 					}
