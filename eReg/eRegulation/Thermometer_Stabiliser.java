@@ -38,7 +38,7 @@ public class Thermometer_Stabiliser
 			
 			if (Math.abs(avgReading - newReading) > tolerance)
 			{
-		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add Within Tolerance "); }
+		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 -- Reading_Stabiliser/add Outside Tolerance "); }
 				readings[index] 		= newReading;				//	Add it to the chain, otherwise we cannot change the average
 				index					= index + 1 % depth;
 				if (count < depth)
@@ -50,13 +50,18 @@ public class Thermometer_Stabiliser
 			}
 			else
 			{
-		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 -- Reading_Stabiliser/add Outside Tolerance "); }
+		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add Within Tolerance "); }
 				readings[index] 		= newReading;
+		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add reading(index) added    index is " + index); }
 				index					= index + 1 % depth;
+		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add reading(index) adjusted index is " + index); }
 				if (count < depth)
 				{
+			   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add count < depth " + count); }
 					count++;
+			   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add count  is now " + count); }
 				}
+		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add Within Tolerance "); }
 	    		if (this.name.equalsIgnoreCase("Boiler")) { System.out.println("13 Reading_Stabiliser/add ======== Returning reading " + newReading); }
 				return newReading;
 			}
