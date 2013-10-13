@@ -61,7 +61,6 @@ public class Thermometer_Stabiliser
 					count++;
 			   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add count  is now " + count); }
 				}
-		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add Within Tolerance "); }
 	    		if (this.name.equalsIgnoreCase("Boiler")) { System.out.println("13 Reading_Stabiliser/add ======== Returning reading " + newReading); }
 				return newReading;
 			}
