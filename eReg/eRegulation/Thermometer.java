@@ -64,7 +64,10 @@ public class Thermometer
 
 				if (ThermoFile_InputLine1.contains("YES")) //CRC is Ok
 				{
-					System.out.println("5. ===============Thermometer/read : YES");
+					if (this.name.equalsIgnoreCase("Boiler"))
+					{
+						System.out.println("5. ===============Thermometer/read : YES");
+					}
 					Integer 		tempPosition 				= ThermoFile_InputLine2.indexOf("t=");
 					Integer 		tempReading 				= Integer.parseInt(ThermoFile_InputLine2.substring(tempPosition + 2));
 
@@ -79,7 +82,11 @@ public class Thermometer
 				}
 				else
 				{
-					System.out.println("6. ===============Thermometer/read : NO");
+					if (this.name.equalsIgnoreCase("Boiler"))
+					{
+						System.out.println("6. ===============Thermometer/read : NO");
+					}
+
 					Global.waitMilliSeconds(5);
 				}
 			}
