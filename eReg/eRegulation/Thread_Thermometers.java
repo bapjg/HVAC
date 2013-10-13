@@ -8,6 +8,12 @@ public class Thread_Thermometers implements Runnable
 
 		// Set readings to any value to avoid rampup times falling on unitialised variabbles
 		
+		int i;
+		for (i = 0; i < 10; i++)
+		{
+			Integer reading = Global.thermoBoiler.read();
+		}
+		
 		while (!Global.stopNow)
 		{
 			Integer result = 0;
