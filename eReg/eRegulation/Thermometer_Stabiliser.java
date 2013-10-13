@@ -2,12 +2,12 @@ package eRegulation;
 
 public class Thermometer_Stabiliser
 {
-	public String	 		name;
-	public Integer[] 		readings;
-	public Integer			index;
-	public Integer			depth;
-	public Integer			tolerance;
-	public Integer			count;
+	private String	 		name;
+	private Integer[] 		readings;
+	private Integer			index;
+	private Integer			depth;
+	private Integer			tolerance;
+	private Integer			count;
 
 	public Thermometer_Stabiliser(String name, Integer depth, Integer tolerance)
 	{
@@ -51,9 +51,9 @@ public class Thermometer_Stabiliser
 			else
 			{
 		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add Within Tolerance "); }
-				readings[index] 		= newReading;
+				this.readings[index] 	= newReading;
 		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add reading(index) added    index is " + index); }
-				index					= index + 1 % depth;
+		   		this.index				= index + 1 % depth;
 		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add reading(index) adjusted index is " + index); }
 				if (count < depth)
 				{
