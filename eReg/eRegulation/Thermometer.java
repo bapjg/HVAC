@@ -132,25 +132,17 @@ public class Thermometer
    		    Integer result									= 0;
     		if (count == 0)
     		{
-    			System.out.println("Position 97.0 index is : " + readingIndex);
     			readings[readingIndex].reading 				= 33; // newReading;
-       			System.out.println("Position 97.1");
     			readings[readingIndex].mean 				= newReading;
-       			System.out.println("Position 97.2");
     			readings[readingIndex].standardDeviation	= 0D;
-       			System.out.println("Position 97.3");
-       			System.out.println("Position 98");
     			readingIndex++;
     			count++;
     			result 										= newReading;
     		}
     		else
     		{
-    			System.out.println("Position 45");
     			Integer avgReading							= average();
-    			System.out.println("Position 46");
     			Double varianceReading						= averageSquared()  - avgReading;
-    			System.out.println("Position 47");
     			
     			if (Math.abs(avgReading - newReading) < tolerance)
     			{
