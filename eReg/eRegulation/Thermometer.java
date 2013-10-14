@@ -13,6 +13,7 @@ public class Thermometer
 	public String 					address;
 	public String 					thermoFile;
  	public Integer 					reading;
+ 	public Integer 					readingTrue;
 	public Reading_Stabiliser 		readings; 
 	
 	public Thermometer(String name, String address, String friendlyName)
@@ -49,7 +50,6 @@ public class Thermometer
     		thisIsSpecial = true;
  		}
 		
-		
     	int i;
 		for (i = 0; i < 5; i++)
 		{
@@ -74,6 +74,7 @@ public class Thermometer
 
 					//this.reading								= (tempReading + 50)/100;
 //																		if (thisIsBoiler) {	System.out.println("6. >>>>>>>>>>>>>>> Thermometer/read : IntoAdd"); }
+					this.readingTrue							= (tempReading + 50)/100;
 					this.reading								= this.readings.add((tempReading + 50)/100);
 //																		if (thisIsBoiler) {	System.out.println("6. <<<<<<<<<<<<<<< Thermometer/read : OutoffAdd"); }
 //																		if (thisIsBoiler) {	System.out.println("4. =============== Thermometer/read : reading/acceptedReading " + ((tempReading + 50)/100) + "/" + this.reading); }

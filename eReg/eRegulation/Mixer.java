@@ -63,10 +63,10 @@ public class Mixer
 		Integer tempMixerInHot						= Global.thermoFloorHot.reading;
 		Integer tempMixerInVeryHot					= Global.thermoBoiler.reading;
 		
-//		LogIt.info("-------====---------Mixer","getSwingProportion", "Floor tempMixerInCold    : " + tempMixerInCold);
-//		LogIt.info("-------====---------Mixer","getSwingProportion", "Floor tempMixerInHot     : " + tempMixerInHot);
-//		LogIt.info("-------====---------Mixer","getSwingProportion", "Floor tempMixerInVeryHot : " + tempMixerInVeryHot);
-//		LogIt.info("-------====---------Mixer","getSwingProportion", "Floor target temperature : " + temperature);
+//		LogIt.info("Mixer","getSwingProportion", "Floor tempMixerInCold    : " + tempMixerInCold);
+//		LogIt.info("Mixer","getSwingProportion", "Floor tempMixerInHot     : " + tempMixerInHot);
+//		LogIt.info("Mixer","getSwingProportion", "Floor tempMixerInVeryHot : " + tempMixerInVeryHot);
+//		LogIt.info("Mixer","getSwingProportion", "Floor target temperature : " + temperature);
 		
 		LogIt.tempData();
 		
@@ -94,7 +94,7 @@ public class Mixer
 
 		if (tempDelta > tempSpan )
 		{
-			LogIt.info("-------====---------Mixer","getSwingProportion", "Floor tempDelta > tempSpan " + tempSpan);
+			LogIt.info("Mixer","getSwingProportion", "Floor tempDelta > tempSpan " + tempSpan);
 	        // Temp out is colder than tempCold : we cannot tell where we are
 			// Wait for water to flow to get things changing
 			return  1F;
@@ -118,7 +118,7 @@ public class Mixer
 		}
 		if (swingProportion >= 1F)
 		{
-			// LogIt.info("-------====---------Mixer","positionAtTemp", "Floor swingProportion >= 1 " + swingProportion);
+			// LogIt.info("Mixer","positionAtTemp", "Floor swingProportion >= 1 " + swingProportion);
 			if (positionTracked != swingTime * 1000 )			//No need to spend a swingTime to get it where it already is
 			{
 				positionFull();

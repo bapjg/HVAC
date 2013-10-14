@@ -139,16 +139,16 @@ public class LogIt
 		
 		Message_Temperatures 					messageSend 		= new Message_Temperatures();
 		messageSend.dateTime 										= System.currentTimeMillis();
-		messageSend.tempHotWater 									= Global.thermoHotWater.reading; 
-		messageSend.tempBoiler 										= Global.thermoBoiler.reading;
-		messageSend.tempBoilerIn 									= Global.thermoBoilerIn.reading;
-		messageSend.tempFloorOut 									= Global.thermoFloorOut.reading;
-		messageSend.tempFloorCold 									= Global.thermoFloorCold.reading;
-		messageSend.tempFloorHot 									= Global.thermoFloorHot.reading;
-		messageSend.tempRadiatorOut 								= Global.thermoRadiatorOut.reading;
-		messageSend.tempRadiatorIn 									= Global.thermoRadiatorIn.reading;
-		messageSend.tempOutside 									= Global.thermoOutside.reading;
-		messageSend.tempLivingRoom 									= Global.thermoLivingRoom.reading;
+		messageSend.tempHotWater 									= Global.thermoHotWater.readingTrue; 
+		messageSend.tempBoiler 										= Global.thermoBoiler.readingTrue;
+		messageSend.tempBoilerIn 									= Global.thermoBoilerIn.readingTrue;
+		messageSend.tempFloorOut 									= Global.thermoFloorOut.readingTrue;
+		messageSend.tempFloorCold 									= Global.thermoFloorCold.readingTrue;
+		messageSend.tempFloorHot 									= Global.thermoFloorHot.readingTrue;
+		messageSend.tempRadiatorOut 								= Global.thermoRadiatorOut.readingTrue;
+		messageSend.tempRadiatorIn 									= Global.thermoRadiatorIn.readingTrue;
+		messageSend.tempOutside 									= Global.thermoOutside.readingTrue;
+		messageSend.tempLivingRoom 									= Global.thermoLivingRoom.readingTrue;
 			
 		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 		
