@@ -20,7 +20,15 @@ public class Thermometer
 		this.friendlyName  										= friendlyName;
 		this.address  											= address;
 		this.thermoFile 										= "/sys/bus/w1/devices/" + address.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
-		this.readings											= new Reading_Stabiliser(name, 10, 100); // Depth 10 entries// Tolerence = 10 degrees
+		if (this.name.equalsIgnoreCase("Floor_Out"))
+		{
+			System.out.println();
+			this.readings										= new Reading_Stabiliser(name, 3, 200); // Depth 10 entries// Tolerence = 20 degrees
+		}
+		else
+		{
+			this.readings										= new Reading_Stabiliser(name, 10, 100); // Depth 10 entries// Tolerence = 10 degrees
+		}
 		int i;
 		for (i = 0; i < 5; i++)
 		{
@@ -96,7 +104,8 @@ public class Thermometer
     public class Reading_Stabiliser
     {
     	private String	 		name;
-    	private Integer[] 		readings;
+//    	private Integer[] 		readings;
+    	private Reading[] 		readings;
     	private Integer			readingIndex;
     	private Integer			depth;
     	private Integer			tolerance;
@@ -104,37 +113,42 @@ public class Thermometer
 
     	public Reading_Stabiliser(String name, Integer depth, Integer tolerance)
     	{
-    		this.name 		  	  			= name;
-    		this.depth 		  	  			= depth;
-    		this.readingIndex 		   		= 0;									// index is for next entry.
-    		this.count						= 0;
-    		this.tolerance					= tolerance;
-    		this.readings					= new Integer[depth];
+    		this.name 		  	  							= name;
+    		this.depth 				  	  					= depth;
+    		this.readingIndex 				   				= 0;									// index is for next entry.
+    		this.count										= 0;
+    		this.tolerance									= tolerance;
+  //  		this.readings									= new Integer[depth];
+    		this.readings									= new Reading[depth];
     	}
     	public Integer add(Integer newReading)
     	{
-       		Integer result					= 0;
+       		Integer result									= 0;
     		if (count == 0)
     		{
-    			readings[readingIndex] 		= newReading;
+    			readings[readingIndex].reading 				= newReading;
     			readingIndex++;
     			count++;
-    			result 						= newReading;
+    			result 										= newReading;
     		}
     		else
     		{
-    			Integer avgReading			= average();
+    			Integer avgReading							= average();
+    			Integer varianceReading						= averageSquared() - avgReading;
     			
     			if (Math.abs(avgReading - newReading) < tolerance)
     			{
-    				result 					= newReading;				// Within tolerance, return the reading
+    				result 									= newReading;				// Within tolerance, return the reading
     			}
     			else
     			{
-    				result 					= avgReading;				// Outside tolerance, return the reading
+    				result 									= avgReading;				// Outside tolerance, return the reading
     			}
-    			readings[readingIndex] 		= newReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
-    			readingIndex				= (readingIndex + 1) % depth;
+    			readings[readingIndex].reading 				= newReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
+    			readings[readingIndex].average 				= avgReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
+       			readings[readingIndex].standardDeviation	= Math.sqrt(varianceReading);
+       			
+    			readingIndex								= (readingIndex + 1) % depth;
     			if (count < depth)
     			{
     				count++;
@@ -145,12 +159,32 @@ public class Thermometer
     	public Integer average()
     	{
     		Integer i;
-    		Integer sum						= 0;
+    		Integer sum										= 0;
     		for (i = 0; i < count; i++)
     		{
-    			sum							= sum + readings[i];
+    			sum											= sum + readings[i].reading;
     		}
     		return sum / count;
+    	}
+    	public Integer averageSquared()
+    	{
+    		Integer i;
+    		Integer sumSquared								= 0;
+    		for (i = 0; i < count; i++)
+    		{
+    			sumSquared									= sumSquared + readings[i].reading * readings[i].reading;
+    		}
+    		return sumSquared / count;
+    	}
+    	public class Reading
+    	{
+    		public 	Integer reading;
+    		public 	Integer average;
+    		public 	Double standardDeviation;
+    		public 	Integer status;
+    		public  Reading()
+    		{
+    		}
     	}
     }
 }
