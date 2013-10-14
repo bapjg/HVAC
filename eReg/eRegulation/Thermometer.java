@@ -128,7 +128,7 @@ public class Thermometer
     		if (count == 0)
     		{
        			System.out.println("Position 97.0 " + readingIndex);
-    			readings[readingIndex].reading 				= 33; //newReading;
+    			readings[readingIndex].reading 				= 33; // newReading;
        			System.out.println("Position 97.1");
     			readings[readingIndex].mean 				= newReading;
        			System.out.println("Position 97.2");
@@ -197,9 +197,6 @@ public class Thermometer
     		public 	Integer 	mean;
     		public 	Double 		standardDeviation;
     		public 	Integer 	status;
-    		public  Reading()
-    		{
-    		}
     	}
     }
 }
