@@ -2,6 +2,7 @@ package eRegulation;
 
 public class Circuit_Mixer extends Circuit_Abstract
 {
+	// Should delete below as superClass contains these
 	public final int 				CIRCUIT_STATE_Off 				= 0;
 	public final int 				CIRCUIT_STATE_Started 			= 1;
 	public final int 				CIRCUIT_STATE_Running 			= 2;
@@ -48,10 +49,11 @@ public class Circuit_Mixer extends Circuit_Abstract
 				break;
 			case CIRCUIT_STATE_Started:
 				LogIt.info("Circuit", "sequencerFloor", "Thread Started");	
+				
+				// mixer is Global.mixer
 				Thread thread_mixer 						= new Thread(new Thread_Mixer(mixer, this), "Mixer");
 				thread_mixer.start();
 				// Need to ensure that pump and mixer dont go on at the same time
-				
 				Global.waitSeconds(1);
 				state										= CIRCUIT_STATE_Running;		
 				break;
@@ -65,17 +67,22 @@ public class Circuit_Mixer extends Circuit_Abstract
 				{
 					LogIt.error("Circuit_Mixer", "sequencer", "temperatureGradient is null");
 				}
-				Integer temp								= temperatureGradient.getTempToTarget();
-				this.heatRequired.tempMinimum				= 500;
-				this.heatRequired.tempMaximum				= 800;
+				else
+				{
+					Integer temp							= temperatureGradient.getTempToTarget();
+					this.heatRequired.tempMinimum			= 500;
+					this.heatRequired.tempMaximum			= 800;
+				}
 				break;
 			case CIRCUIT_STATE_Stopping:
 				LogIt.info("Circuit", "sequencerFloor", "Stopping");
 				//
-				// Need to figure out how to stop a thread
+				// Need to figure out how to stop a thread 
 				// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 				//
 				LogIt.action("PumpFloor", "Off");
+				//this.stop();
+				this.heatRequired							= null;
 				Global.pumpFloor.off();
 				state										= CIRCUIT_STATE_Off;
 				taskActive									= null;

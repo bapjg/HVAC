@@ -4,12 +4,12 @@ public class Thread_Mixer implements Runnable
 {
 	public Mixer				mixer;
 	public Circuit_Mixer		circuitMixer;
-//	public Boolean 				stopNow;
+//	public Boolean 				stopRequested;
 	
 	public Thread_Mixer(Mixer mixer, Circuit_Mixer circuitMixer)
 	{
-		this.mixer 				= mixer;
-		this.circuitMixer 		= circuitMixer;
+		this.mixer 				= mixer;		// object Global.mixer
+		this.circuitMixer 		= circuitMixer; // object Circuit_Mixer
 	}
 	public void run()
 	{
@@ -25,7 +25,7 @@ public class Thread_Mixer implements Runnable
 		
 		LogIt.info("Thread_Mixer", "Run", "Floor Initialised (10%)");		
 		
-//		while ((!Global.stopNow) && (!this.stopNow))
+//		while ((!Global.stopNow) && (!this.stopRequested))
 		while (!Global.stopNow)
 		{
 			// Note that Mixer calls go to sleep when positionning the mixer.
@@ -45,6 +45,7 @@ public class Thread_Mixer implements Runnable
 
 			Global.waitSeconds(20);
 		}
+		// Optimise if singlecircuit
 		LogIt.info("Thread_Mixer", "Run", "Floor Thread ending", true);	
 	}
 }
