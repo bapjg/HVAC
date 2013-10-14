@@ -40,7 +40,7 @@ public class Thermometer_Stabiliser
 			{
 		   														if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 -- Reading_Stabiliser/add Outside Tolerance "); }
 				readings[readingIndex] 		= newReading;				//	Add it to the chain, otherwise we cannot change the average
-				readingIndex					= readingIndex + 1 % depth;
+				readingIndex					= (readingIndex + 1) % depth;
 				if (count < depth)
 				{
 					count++;
@@ -53,7 +53,7 @@ public class Thermometer_Stabiliser
 		   														if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add Within Tolerance & index is " + this.readingIndex); }
 				this.readings[readingIndex] 	= newReading;
 		   														if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add reading(index) added    index is " + readingIndex); }
-		   		this.readingIndex				= this.readingIndex + 1 % depth;
+		   		this.readingIndex				= (this.readingIndex + 1) % depth;
 		   														if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add reading(index) adjusted index is " + readingIndex); }
 				if (count < depth)
 				{
