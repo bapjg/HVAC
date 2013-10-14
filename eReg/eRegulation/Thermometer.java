@@ -23,7 +23,6 @@ public class Thermometer
 		this.thermoFile 										= "/sys/bus/w1/devices/" + address.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
 		if (this.name.equalsIgnoreCase("Floor_Out"))
 		{
-			System.out.println("== Creating readingStabiliser for name : " + name +" depth = 3  and tolerance = 200 ");
 			this.readings										= new Reading_Stabiliser(name, 3, 200); // Depth 10 entries// Tolerence = 20 degrees
 		}
 		else
@@ -44,12 +43,11 @@ public class Thermometer
 		//               Line 2 : Hex Data t=nnnnn (where n is in millidegrees celcius)
 		// We will do 5 retries in the event of failure. -99999 returned if all bad
 		
-    	Boolean thisIsBoiler = false;
+    	Boolean thisIsSpecial = false;
     	if (this.name.equalsIgnoreCase("Boiler"))
 		{
-    		thisIsBoiler = true;
-    		System.out.println("1. ===============Thermometer/read : Entered for " + this.name);
-		}
+    		thisIsSpecial = true;
+ 		}
 		
 		
     	int i;
