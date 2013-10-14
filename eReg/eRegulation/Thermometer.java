@@ -131,7 +131,8 @@ public class Thermometer
     			readings[readingIndex].reading 				= newReading;
     			readings[readingIndex].mean 				= newReading;
     			readings[readingIndex].standardDeviation	= 0D;
-   			readingIndex++;
+       			System.out.println("Position 98");
+    			readingIndex++;
     			count++;
     			result 										= newReading;
     		}
@@ -192,7 +193,7 @@ public class Thermometer
     		public 	Integer 	reading;
     		public 	Integer 	mean;
     		public 	Double 		standardDeviation;
-    		public 	Integer 		status;
+    		public 	Integer 	status;
     		public  Reading()
     		{
     		}
