@@ -144,9 +144,13 @@ public class Thermometer
     			{
     				result 									= avgReading;				// Outside tolerance, return the reading
     			}
+    			System.out.println("Position 1");
     			readings[readingIndex].reading 				= newReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
+    			System.out.println("Position 2");
     			readings[readingIndex].average 				= avgReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
+    			System.out.println("Position 3");
        			readings[readingIndex].standardDeviation	= Math.sqrt(varianceReading);
+    			System.out.println("Position 4");
        			
     			readingIndex								= (readingIndex + 1) % depth;
     			if (count < depth)
