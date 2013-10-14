@@ -133,8 +133,11 @@ public class Thermometer
     		}
     		else
     		{
+    			System.out.println("Position 45");
     			Integer avgReading							= average();
+    			System.out.println("Position 46");
     			Integer varianceReading						= averageSquared() - avgReading;
+    			System.out.println("Position 47");
     			
     			if (Math.abs(avgReading - newReading) < tolerance)
     			{
