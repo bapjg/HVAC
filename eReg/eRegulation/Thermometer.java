@@ -123,7 +123,8 @@ public class Thermometer
     	}
     	public Integer add(Integer newReading)
     	{
-       		Integer result									= 0;
+   			System.out.println("Position 96");
+   		        		Integer result									= 0;
     		if (count == 0)
     		{
     			readings[readingIndex].reading 				= newReading;
