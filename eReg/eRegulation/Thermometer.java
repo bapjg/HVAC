@@ -75,10 +75,10 @@ public class Thermometer
 					Integer 		tempReading 				= Integer.parseInt(ThermoFile_InputLine2.substring(tempPosition + 2));
 
 					//this.reading								= (tempReading + 50)/100;
-																		if (thisIsBoiler) {	System.out.println("6. >>>>>>>>>>>>>>> Thermometer/read : IntoAdd"); }
+//																		if (thisIsBoiler) {	System.out.println("6. >>>>>>>>>>>>>>> Thermometer/read : IntoAdd"); }
 					this.reading								= this.readings.add((tempReading + 50)/100);
-																		if (thisIsBoiler) {	System.out.println("6. <<<<<<<<<<<<<<< Thermometer/read : OutoffAdd"); }
-																		if (thisIsBoiler) {	System.out.println("4. =============== Thermometer/read : reading/acceptedReading " + ((tempReading + 50)/100) + "/" + this.reading); }
+//																		if (thisIsBoiler) {	System.out.println("6. <<<<<<<<<<<<<<< Thermometer/read : OutoffAdd"); }
+//																		if (thisIsBoiler) {	System.out.println("4. =============== Thermometer/read : reading/acceptedReading " + ((tempReading + 50)/100) + "/" + this.reading); }
 					return this.reading;
 				}
 				else
@@ -133,7 +133,6 @@ public class Thermometer
     	}
     	public Integer add(Integer newReading)
     	{
-   			System.out.println("Position 96");
    		    Integer result									= 0;
     		if (count == 0)
     		{
