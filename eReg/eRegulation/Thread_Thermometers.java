@@ -7,6 +7,8 @@ public class Thread_Thermometers implements Runnable
 		LogIt.info("Thread_Thermometers", "Run", "Starting", true);		
 
 		// Set readings to any value to avoid rampup times falling on unitialised variabbles
+		// See if this works
+		Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 		
 		while (!Global.stopNow)
 		{
