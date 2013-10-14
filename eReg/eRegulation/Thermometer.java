@@ -22,7 +22,7 @@ public class Thermometer
 		this.thermoFile 										= "/sys/bus/w1/devices/" + address.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
 		if (this.name.equalsIgnoreCase("Floor_Out"))
 		{
-			System.out.println();
+			System.out.println("== Creating readingStabiliser for name : " + name +" depth = 3  and tolerance = 200 ");
 			this.readings										= new Reading_Stabiliser(name, 3, 200); // Depth 10 entries// Tolerence = 20 degrees
 		}
 		else
