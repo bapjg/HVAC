@@ -128,7 +128,7 @@ public class Thermometer
     		if (count == 0)
     		{
        			System.out.println("Position 97.0");
-    			readings[readingIndex].reading 				= newReading;
+    			readings[readingIndex].reading 				= 33; //newReading;
        			System.out.println("Position 97.1");
     			readings[readingIndex].mean 				= newReading;
        			System.out.println("Position 97.2");
