@@ -124,15 +124,27 @@ alias sbw='sudo bw_tool'
 alias sbws='sudo bw_tool -S'
 alias sbwa='sudo bw_tool -w f0:9c -a'
 
-alias burneron='sudo  bw_tool -a 9c -w 20:1'
-alias burneroff='sudo bw_tool -a 9c -w 20:0'
-alias hwon='sudo      bw_tool -a 9c -w 23:1'
-alias hwoff='sudo     bw_tool -a 9c -w 23:0'
-alias flooron='sudo   bw_tool -a 9c -w 25:1'
-alias flooroff='sudo  bw_tool -a 9c -w 25:0'
-alias mixerup='sudo   bw_tool -a 9c -w 22:0; sudo   bw_tool -a 9c -w 21:1'
-alias mixerdown='sudo bw_tool -a 9c -w 21:0; sudo   bw_tool -a 9c -w 22:1'
-alias mixeroff='sudo  bw_tool -a 9c -w 22:0; sudo   bw_tool -a 9c -w 21:0'
+
+# Relays are
+#  - Burner        20
+#  - MixerUp       21
+#  - MixerDown     22
+#  - Hot Water     23
+#  - Radiator      24
+#  - Floor         25
+
+alias burneron='sudo  	bw_tool -a 9c -w 20:1'
+alias burneroff='sudo 	bw_tool -a 9c -w 20:0'
+alias mixerup='sudo   	bw_tool -a 9c -w 22:0; sudo   bw_tool -a 9c -w 21:1'
+alias mixerdown='sudo 	bw_tool -a 9c -w 21:0; sudo   bw_tool -a 9c -w 22:1'
+alias mixeroff='sudo  	bw_tool -a 9c -w 22:0; sudo   bw_tool -a 9c -w 21:0'
+alias hwon='sudo      	bw_tool -a 9c -w 23:1'
+alias hwoff='sudo     	bw_tool -a 9c -w 23:0'
+alias radiatoron='sudo  bw_tool -a 9c -w 24:1'
+alias radiatoroff='sudo bw_tool -a 9c -w 24:0'
+alias flooron='sudo   	bw_tool -a 9c -w 25:1'
+alias flooroff='sudo  	bw_tool -a 9c -w 25:0'
+
 
 alias tempboiler='sudo cat /sys/bus/w1/devices/28-0000048f011c/w1_slave'
 alias temphw='sudo     cat /sys/bus/w1/devices/28-0000048e7489/w1_slave'
