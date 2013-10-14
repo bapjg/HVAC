@@ -124,9 +124,10 @@ public class Thermometer
     	public Integer add(Integer newReading)
     	{
    			System.out.println("Position 96");
-   		        		Integer result									= 0;
+   		    Integer result									= 0;
     		if (count == 0)
     		{
+       			System.out.println("Position 97");
     			readings[readingIndex].reading 				= newReading;
     			readingIndex++;
     			count++;
