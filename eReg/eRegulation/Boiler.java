@@ -25,14 +25,16 @@ public class Boiler
 	
 	public Integer	   		tempMax;
 	public Integer	   		tempMin;
-	public Integer			tempNeverExceed			= 850;
+	public Integer			tempNeverExceed						= 850;
+	public Integer			tempOvershoot						= 150;
 	public Integer			state;
 	
-	public final int 		STATE_Off 				= 0;
-	public final int 		STATE_OnHeating 		= 1;
-	public final int 		STATE_OnCooling 		= 2;
-	public final int 		STATE_OnPowerUp 		= 3;
-	public final int 		STATE_Error	 			= -1;
+	public final int 		STATE_Off 							= 0;
+	public final int 		STATE_On_Heating 					= 1;
+	public final int 		STATE_On_Cooling 					= 2;
+	public final int 		STATE_On_CoolingAfterOverheat 		= 3;
+	public final int 		STATE_On_PowerUp 					= 4;
+	public final int 		STATE_Error	 						= -1;
 	
 
 	public Boiler()
@@ -45,6 +47,7 @@ public class Boiler
 		tempMax 									= -1;
 		tempMin 									= -1;
 		tempNeverExceed								= 850;
+		tempOvershoot								= 150;
 		state										= STATE_Off;
 	}
 	public void requestHeat(HeatRequired eR)
@@ -58,7 +61,7 @@ public class Boiler
 		// The sequencer will do the rest
 		if (state == STATE_Off)
 		{
-			state									= STATE_OnPowerUp;
+			state									= STATE_On_PowerUp;
 		}
 	}
 	public void requestIdle()
@@ -72,7 +75,6 @@ public class Boiler
 	{
 		if (Global.thermoBoiler.reading > tempNeverExceed)
 		{
-			LogIt.error("Boiler", "checkFault", "tempNeverExceed has been reached temp/NeverExceed " + Global.thermoBoiler.reading + "/" + tempNeverExceed);
 			return true;
 		}
 		else
@@ -86,9 +88,12 @@ public class Boiler
 		
 		if (checkOverHeat())		// This is just a temperature check
 		{
-			state									 = STATE_Off;
 			burner.powerOff();
-			LogIt.error("Boiler", "sequencer", "boiler overheat, state set to off");
+			if (state != STATE_On_CoolingAfterOverheat)
+			{
+				LogIt.error("Boiler", "sequencer", "boiler overheat, state set to STATE_OnCoolingAfterOverheat");
+			}
+			state									 = STATE_On_CoolingAfterOverheat;
 			return;
 		}
 		if (burner.checkFault())	//This reads ADC
@@ -109,27 +114,36 @@ public class Boiler
 			// do nothing
 			// Should we not close down all relays
 			break;
-		case STATE_OnHeating:
+		case STATE_On_Heating:
 			if (Global.thermoBoiler.reading > tempMax)
 			{
 				burner.powerOff();
-				state								 = STATE_OnCooling;
+				state								 = STATE_On_Cooling;
 				return;
 			}
 			break;
-		case STATE_OnCooling:
+		case STATE_On_CoolingAfterOverheat:
+			burner.powerOff();													//Ensure burner is powered off (normally, already done
+			if (!checkOverHeat())
+			{
+				LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature, state set to STATE_OnCooling");
+				state								 = STATE_On_Cooling; 		//Normal operating temp has returned
+				return;
+			}
+			break;
+		case STATE_On_Cooling:
 			if (Global.thermoBoiler.reading < tempMin)
 			{
 				burner.powerOn();
-				state 								= STATE_OnHeating;
+				state 								= STATE_On_Heating;
 				return;
 			}
 			break;
-		case STATE_OnPowerUp:
+		case STATE_On_PowerUp:
 			if (Global.thermoBoiler.reading < tempMax)
 			{
 				burner.powerOn();
-				state 								= STATE_OnHeating;
+				state 								= STATE_On_Heating;
 				return;
 			}
 			break;

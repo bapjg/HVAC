@@ -158,11 +158,7 @@ abstract class Circuit_Abstract
 			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeStart - this.getRampUpTime())			// TimeNow is after starttime - rampup
 			&&  (Global.getTimeNowSinceMidnight() < this.taskNext.timeEnd))									// TimeNow is still before stoptime
 			{
-				System.out.println("============A task has been scheduled");
-				System.out.println("Scheduled to start at : " + this.taskNext.timeStart);
-				System.out.println("Rampup                : " + getRampUpTime());
-				System.out.println("Decision              : " + (this.taskNext.timeStart -  getRampUpTime()));
-				System.out.println("Now                   : " + Global.getTimeNowSinceMidnight());
+				LogIt.action(this.name, "Put on taskActive entry to starting at " + this.taskNext.timeStartDisplay);
 				
 				if (this.taskActive != null)
 				{
