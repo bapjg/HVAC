@@ -20,7 +20,7 @@ public class Thermometer_Stabiliser
 	}
 	public Integer add(Integer newReading)
 	{
-   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("10 Reading_Stabiliser/add WE ARE IN reading/count : " + newReading + "/" + count); }
+   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("10 Reading_Stabiliser/add WE ARE IN reading/count/index : " + newReading + "/" + count + "/" + readingIndex); }
 
    		if (count == 0)
 		{
