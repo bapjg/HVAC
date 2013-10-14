@@ -12,7 +12,7 @@ public class Thermometer
 	public String 					address;
 	public String 					thermoFile;
  	public Integer 					reading;
-	public Thermometer_Stabiliser 	readings; 
+	public Reading_Stabiliser 		readings; 
 	
 	public Thermometer(String name, String address, String friendlyName)
 	{
@@ -20,7 +20,7 @@ public class Thermometer
 		this.friendlyName  										= friendlyName;
 		this.address  											= address;
 		this.thermoFile 										= "/sys/bus/w1/devices/" + address.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
-		this.readings											= new Thermometer_Stabiliser(name, 10, 100); // Depth 10 entries// Tolerence = 10 degrees
+		this.readings											= new Reading_Stabiliser(name, 10, 100); // Depth 10 entries// Tolerence = 10 degrees
 	}
     public Integer read()
 	{
@@ -49,11 +49,6 @@ public class Thermometer
 
 				String 				ThermoFile_InputLine1 		= ThermoFile_InputBuffer.readLine();
 				String 				ThermoFile_InputLine2 		= ThermoFile_InputBuffer.readLine();
-				if (thisIsBoiler)
-				{
-					System.out.println("2. ===============Thermometer/read : Line1 " + ThermoFile_InputLine1);
-					System.out.println("3. ===============Thermometer/read : Line2 " + ThermoFile_InputLine2);
-				}
 
 				ThermoFile_InputBuffer.close();
 				ThermoFile_InputData.close();
@@ -62,26 +57,18 @@ public class Thermometer
 
 				if (ThermoFile_InputLine1.contains("YES")) //CRC is Ok
 				{
-					if (thisIsBoiler)
-					{
-						System.out.println("5. ===============Thermometer/read : YES");
-					}
 					Integer 		tempPosition 				= ThermoFile_InputLine2.indexOf("t=");
 					Integer 		tempReading 				= Integer.parseInt(ThermoFile_InputLine2.substring(tempPosition + 2));
 
 					//this.reading								= (tempReading + 50)/100;
-					if (thisIsBoiler) {	System.out.println("6. >>>>>>>>>>>>>>> Thermometer/read : IntoAdd"); }
-
+																		if (thisIsBoiler) {	System.out.println("6. >>>>>>>>>>>>>>> Thermometer/read : IntoAdd"); }
 					this.reading								= this.readings.add((tempReading + 50)/100);
-					if (thisIsBoiler) {	System.out.println("6. <<<<<<<<<<<<<<< Thermometer/read : OutoffAdd"); }
-
-					if (thisIsBoiler) {	System.out.println("4. ===============Thermometer/read : tempReading/reading " + ((tempReading + 50)/100) + "/" + this.reading); }
+																		if (thisIsBoiler) {	System.out.println("6. <<<<<<<<<<<<<<< Thermometer/read : OutoffAdd"); }
+																		if (thisIsBoiler) {	System.out.println("4. =============== Thermometer/read : reading/acceptedReading " + ((tempReading + 50)/100) + "/" + this.reading); }
 					return this.reading;
 				}
 				else
 				{
-					if (thisIsBoiler) {	System.out.println("6. ===============Thermometer/read : NO");}
-
 					Global.waitMilliSeconds(5);
 				}
 			}
@@ -101,5 +88,64 @@ public class Thermometer
     	Integer Decimals 										= this.reading - Degrees * 10;
     	return Degrees.toString() + "." + Decimals.toString();
     }
+    public class Reading_Stabiliser
+    {
+    	private String	 		name;
+    	private Integer[] 		readings;
+    	private Integer			readingIndex;
+    	private Integer			depth;
+    	private Integer			tolerance;
+    	private Integer			count;
 
+    	public Reading_Stabiliser(String name, Integer depth, Integer tolerance)
+    	{
+    		this.name 		  	  			= name;
+    		this.depth 		  	  			= depth;
+    		this.readingIndex 		   		= 0;									// index is for next entry.
+    		this.count						= 0;
+    		this.tolerance					= tolerance;
+    		this.readings					= new Integer[depth];
+    	}
+    	public Integer add(Integer newReading)
+    	{
+       		Integer result					= 0;
+    		if (count == 0)
+    		{
+    			readings[readingIndex] 		= newReading;
+    			readingIndex++;
+    			count++;
+    			result 						= newReading;
+    		}
+    		else
+    		{
+    			Integer avgReading			= average();
+    			
+    			if (Math.abs(avgReading - newReading) < tolerance)
+    			{
+    				result 					= newReading;				// Within tolerance, return the reading
+    			}
+    			else
+    			{
+    				result 					= avgReading;				// Outside tolerance, return the reading
+    			}
+    			readings[readingIndex] 		= newReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
+    			readingIndex				= (readingIndex + 1) % depth;
+    			if (count < depth)
+    			{
+    				count++;
+    			}
+    		}
+    		return result;
+     	}
+    	public Integer average()
+    	{
+    		Integer i;
+    		Integer sum						= 0;
+    		for (i = 0; i < count; i++)
+    		{
+    			sum							= sum + readings[i];
+    		}
+    		return sum / count;
+    	}
+    }
 }
