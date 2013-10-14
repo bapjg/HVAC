@@ -127,10 +127,13 @@ public class Thermometer
    		    Integer result									= 0;
     		if (count == 0)
     		{
-       			System.out.println("Position 97");
+       			System.out.println("Position 97.0");
     			readings[readingIndex].reading 				= newReading;
+       			System.out.println("Position 97.1");
     			readings[readingIndex].mean 				= newReading;
+       			System.out.println("Position 97.2");
     			readings[readingIndex].standardDeviation	= 0D;
+       			System.out.println("Position 97.3");
        			System.out.println("Position 98");
     			readingIndex++;
     			count++;
