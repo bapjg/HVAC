@@ -141,7 +141,7 @@ public class Thermometer
     			System.out.println("Position 45");
     			Integer avgReading							= average();
     			System.out.println("Position 46");
-    			Integer varianceReading						= averageSquared() - avgReading;
+    			Double varianceReading						= averageSquared()  - avgReading;
     			System.out.println("Position 47");
     			
     			if (Math.abs(avgReading - newReading) < tolerance)
@@ -178,10 +178,10 @@ public class Thermometer
     		}
     		return sum / count;
     	}
-    	public Integer averageSquared()
+    	public Double averageSquared()
     	{
     		Integer i;
-    		Integer sumSquared								= 0;
+    		Double sumSquared								= 0D;
     		for (i = 0; i < count; i++)
     		{
     			sumSquared									= sumSquared + readings[i].reading * readings[i].reading;
