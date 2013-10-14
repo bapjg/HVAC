@@ -152,7 +152,7 @@ public class Thermometer
     			{
     				result 									= avgReading;				// Outside tolerance, return the reading
     			}
-    			System.out.println("Position 1" + readingIndex);
+    			System.out.println("Position 1 - " + readingIndex);
     			readings[readingIndex].reading 				= newReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
     			System.out.println("Position 2");
     			readings[readingIndex].mean 				= avgReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
