@@ -110,7 +110,6 @@ public class Boiler
 			// Should we not close down all relays
 			break;
 		case STATE_OnHeating:
-			LogIt.info("Boiler", "sequencer",  "STATE_OnHeating : temp boiler/max " + Global.thermoBoiler.reading + "/" + tempMax);
 			if (Global.thermoBoiler.reading > tempMax)
 			{
 				burner.powerOff();
@@ -119,7 +118,6 @@ public class Boiler
 			}
 			break;
 		case STATE_OnCooling:
-			LogIt.info("Boiler", "sequencer", "STATE_OnCooling : temp boiler/min " + Global.thermoBoiler.reading + "/" + tempMin);
 			if (Global.thermoBoiler.reading < tempMin)
 			{
 				burner.powerOn();
@@ -128,7 +126,6 @@ public class Boiler
 			}
 			break;
 		case STATE_OnPowerUp:
-			//LogIt.info("Boiler", "sequencer", "STATE_OnPowerUp : temp boiler/min " + Global.tempBoiler + "/" + tempMin);
 			if (Global.thermoBoiler.reading < tempMax)
 			{
 				burner.powerOn();

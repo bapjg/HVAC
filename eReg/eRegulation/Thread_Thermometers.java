@@ -12,29 +12,34 @@ public class Thread_Thermometers implements Runnable
 		{
 			Long timeStart 						= Global.now();
 			
-			LogIt.info("Thread_Thermometers", "Run", "Reading all temperature", true);
-			
 			Global.thermoBoiler.read();
-			System.out.println("Thread_Thermometer/run : reading " + Global.thermoBoiler.reading);
-
 			Global.waitMilliSeconds(5);
+			
 			Global.thermoBoilerIn.read();
 			Global.waitMilliSeconds(5);
+			
 			Global.thermoFloorOut.read();
 			Global.circuitFloor.mixer.pidControler.add(Global.thermoFloorOut.read());
 			Global.waitMilliSeconds(5);
+			
 			Global.thermoFloorCold.read();
 			Global.waitMilliSeconds(5);
+			
 			Global.thermoFloorHot.read();
 			Global.waitMilliSeconds(5);
+			
 			Global.thermoRadiatorOut.read();
 			Global.waitMilliSeconds(5);
+			
 			Global.thermoRadiatorIn.read();
 			Global.waitMilliSeconds(5);
+			
 			Global.thermoOutside.read();
 			Global.waitMilliSeconds(5);
+			
 			Global.thermoLivingRoom.read();
 			Global.waitMilliSeconds(5);
+			
 			Global.thermoHotWater.read();
 
 			LogIt.tempData();
@@ -45,7 +50,7 @@ public class Thread_Thermometers implements Runnable
 			
 			if (timeIncrement <= 0L)
 			{
-				LogIt.error("Thread_Thermometers", "Run", "Temp reads over 15 seconds", false);
+//				LogIt.error("Thread_Thermometers", "Run", "Temp reads over 15 seconds", false);
 				timeIncrement					= 1500L;
 			}
 
