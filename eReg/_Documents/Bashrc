@@ -125,13 +125,13 @@ alias sbws='sudo bw_tool -S'
 alias sbwa='sudo bw_tool -w f0:9c -a'
 
 
-# Relays are
-#  - Burner        20
-#  - MixerUp       21
-#  - MixerDown     22
-#  - Hot Water     23
-#  - Radiator      24
-#  - Floor         25
+echo Relays are
+echo  - Burner        20
+echo  - MixerUp       21
+echo  - MixerDown     22
+echo  - Hot Water     23
+echo  - Radiator      24
+echo  - Floor         25
 
 alias burneron='sudo  	bw_tool -a 9c -w 20:1'
 alias burneroff='sudo 	bw_tool -a 9c -w 20:0'
