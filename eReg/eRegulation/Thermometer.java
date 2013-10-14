@@ -194,6 +194,13 @@ public class Thermometer
     		public 	Integer 	mean;
     		public 	Double 		standardDeviation;
     		public 	Integer 	status;
+        	public Reading()
+        	{
+        		reading = 0;
+        		mean = 0;
+        		standardDeviation = 0D;
+        		status = 0;
+         	}
     	}
     }
 }
