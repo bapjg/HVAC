@@ -129,7 +129,9 @@ public class Thermometer
     		{
        			System.out.println("Position 97");
     			readings[readingIndex].reading 				= newReading;
-    			readingIndex++;
+    			readings[readingIndex].mean 				= newReading;
+    			readings[readingIndex].standardDeviation	= 0D;
+   			readingIndex++;
     			count++;
     			result 										= newReading;
     		}
@@ -152,7 +154,7 @@ public class Thermometer
     			System.out.println("Position 1");
     			readings[readingIndex].reading 				= newReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
     			System.out.println("Position 2");
-    			readings[readingIndex].average 				= avgReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
+    			readings[readingIndex].mean 				= avgReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
     			System.out.println("Position 3");
        			readings[readingIndex].standardDeviation	= Math.sqrt(varianceReading);
     			System.out.println("Position 4");
@@ -187,10 +189,10 @@ public class Thermometer
     	}
     	public class Reading
     	{
-    		public 	Integer reading;
-    		public 	Integer average;
-    		public 	Double standardDeviation;
-    		public 	Integer status;
+    		public 	Integer 	reading;
+    		public 	Integer 	mean;
+    		public 	Double 		standardDeviation;
+    		public 	Integer 		status;
     		public  Reading()
     		{
     		}
