@@ -32,13 +32,13 @@ public class Thermometer_Stabiliser
 		}
 		else
 		{
-	   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("10 Reading_Stabiliser/add calling average"); }
+	   															if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("10 Reading_Stabiliser/add calling average"); }
 			Integer avgReading			= average();
-	   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("10 Reading_Stabiliser/add called average : " +avgReading); }
+	   															if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("10 Reading_Stabiliser/add called average : " +avgReading); }
 			
 			if (Math.abs(avgReading - newReading) > tolerance)
 			{
-		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 -- Reading_Stabiliser/add Outside Tolerance "); }
+		   														if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 -- Reading_Stabiliser/add Outside Tolerance "); }
 				readings[readingIndex] 		= newReading;				//	Add it to the chain, otherwise we cannot change the average
 				readingIndex					= readingIndex + 1 % depth;
 				if (count < depth)
@@ -50,18 +50,18 @@ public class Thermometer_Stabiliser
 			}
 			else
 			{
-		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add Within Tolerance "); }
+		   														if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add Within Tolerance & index is " + this.readingIndex); }
 				this.readings[readingIndex] 	= newReading;
-		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add reading(index) added    index is " + readingIndex); }
-		   		this.readingIndex				= readingIndex + 1 % depth;
-		   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add reading(index) adjusted index is " + readingIndex); }
+		   														if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add reading(index) added    index is " + readingIndex); }
+		   		this.readingIndex				= this.readingIndex + 1 % depth;
+		   														if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add reading(index) adjusted index is " + readingIndex); }
 				if (count < depth)
 				{
-			   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add count < depth " + count); }
+			   													if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add count < depth " + count); }
 					count++;
-			   		if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add count  is now " + count); }
+			   													if (this.name.equalsIgnoreCase("Boiler")) {	System.out.println("11 ++ Reading_Stabiliser/add count  is now " + count); }
 				}
-	    		if (this.name.equalsIgnoreCase("Boiler")) { System.out.println("13 Reading_Stabiliser/add ======== Returning reading " + newReading); }
+	    														if (this.name.equalsIgnoreCase("Boiler")) { System.out.println("13 Reading_Stabiliser/add ======== Returning reading " + newReading); }
 				return newReading;
 			}
 		}
