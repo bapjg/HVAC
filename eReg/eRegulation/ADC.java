@@ -35,7 +35,7 @@ public class ADC
 		Global.interfaceSemaphore.semaphoreUnLock();
 		return 						 voltage * 5 /1023;  // 1023 = 5V
 	}
-	public Boolean isFault()
+	public Boolean isFault()					// Connected to burner to detect trip
 	{
 		float reading = readAverage();
 		
@@ -48,7 +48,7 @@ public class ADC
 			return false;
 		}
 	}
-	public Boolean isFuelFlowing()
+	public Boolean isFuelFlowing()				// Connected to FuelFlow 230V line
 	{
 		float reading = readAverage();
 
