@@ -46,7 +46,7 @@ public class Boiler
 
 		tempMax 									= -1;
 		tempMin 									= -1;
-		tempNeverExceed								= 850;
+		tempNeverExceed								= 950;
 		tempOvershoot								= 150;
 		state										= STATE_Off;
 	}
