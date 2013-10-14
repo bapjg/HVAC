@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Thermometer
 {
@@ -97,19 +98,20 @@ public class Thermometer
     public String toDisplay()
     {
     	// Converts temperature in decidegrees into displayable format
-    	Integer Degrees 										= this.reading/10;
-    	Integer Decimals 										= this.reading - Degrees * 10;
+    	Integer Degrees 									= this.reading/10;
+    	Integer Decimals 									= this.reading - Degrees * 10;
     	return Degrees.toString() + "." + Decimals.toString();
     }
     public class Reading_Stabiliser
     {
-    	private String	 		name;
-//    	private Integer[] 		readings;
-    	private Reading[] 		readings;
-    	private Integer			readingIndex;
-    	private Integer			depth;
-    	private Integer			tolerance;
-    	private Integer			count;
+    	private String	 					name;
+    	private Integer[] 					readings;
+    	private Integer[] 					averages;
+    	private Double[] 					standardDeviations;
+    	private Integer						readingIndex;
+    	private Integer						depth;
+    	private Integer						tolerance;
+    	private Integer						count;
 
     	public Reading_Stabiliser(String name, Integer depth, Integer tolerance)
     	{
@@ -118,12 +120,15 @@ public class Thermometer
     		this.readingIndex 				   				= 0;									// index is for next entry.
     		this.count										= 0;
     		this.tolerance									= tolerance;
-  //  		this.readings									= new Integer[depth];
-    		this.readings									= new Reading[depth];
+    		this.readings									= new Integer[depth];
+    		this.averages									= new Integer[depth];
+    		this.standardDeviations							= new Double[depth];
     		int i;
     		for (i = 0; i < depth; i++)
     		{
-    			readings[readingIndex]						= new Reading();
+    			readings[readingIndex]						= 0;
+    			averages[readingIndex]						= 0;
+    			standardDeviations[readingIndex]			= 0D;
     		}
     	}
     	public Integer add(Integer newReading)
@@ -132,17 +137,17 @@ public class Thermometer
    		    Integer result									= 0;
     		if (count == 0)
     		{
-    			readings[readingIndex].reading 				= 33; // newReading;
-    			readings[readingIndex].mean 				= newReading;
-    			readings[readingIndex].standardDeviation	= 0D;
+    			readings[readingIndex] 						= newReading;
+    			averages[readingIndex] 						= newReading;
+    			standardDeviations[readingIndex]			= 0D;
     			readingIndex++;
     			count++;
     			result 										= newReading;
     		}
     		else
     		{
-    			Integer avgReading							= average();
-    			Double varianceReading						= averageSquared()  - avgReading;
+    			Integer 	avgReading						= average();
+    			Double 		standardDeviation				= Math.sqrt(averageSquared()  - avgReading * avgReading);
     			
     			if (Math.abs(avgReading - newReading) < tolerance)
     			{
@@ -152,13 +157,9 @@ public class Thermometer
     			{
     				result 									= avgReading;				// Outside tolerance, return the reading
     			}
-    			System.out.println("Position 1 - " + readingIndex);
-    			readings[readingIndex].reading 				= newReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
-    			System.out.println("Position 2");
-    			readings[readingIndex].mean 				= avgReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
-    			System.out.println("Position 3");
-       			readings[readingIndex].standardDeviation	= Math.sqrt(varianceReading);
-    			System.out.println("Position 4");
+    			readings[readingIndex] 						= newReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
+    			averages[readingIndex]						= avgReading;				// Add reading to the chain, even if out of tolerance, otherwise we cannot change the average
+    			standardDeviations[readingIndex]			= standardDeviation;
        			
     			readingIndex								= (readingIndex + 1) % depth;
     			if (count < depth)
@@ -174,7 +175,7 @@ public class Thermometer
     		Integer sum										= 0;
     		for (i = 0; i < count; i++)
     		{
-    			sum											= sum + readings[i].reading;
+    			sum											= sum + readings[i];
     		}
     		return sum / count;
     	}
@@ -184,23 +185,9 @@ public class Thermometer
     		Double sumSquared								= 0D;
     		for (i = 0; i < count; i++)
     		{
-    			sumSquared									= sumSquared + readings[i].reading * readings[i].reading;
+    			sumSquared									= sumSquared + readings[i] * readings[i];
     		}
     		return sumSquared / count;
     	}
-    	public class Reading
-    	{
-    		public 	Integer 	reading;
-    		public 	Integer 	mean;
-    		public 	Double 		standardDeviation;
-    		public 	Integer 	status;
-        	public Reading()
-        	{
-        		reading = 0;
-        		mean = 0;
-        		standardDeviation = 0D;
-        		status = 0;
-         	}
-    	}
-    }
+     }
 }
