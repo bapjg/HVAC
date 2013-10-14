@@ -21,6 +21,11 @@ public class Thermometer
 		this.address  											= address;
 		this.thermoFile 										= "/sys/bus/w1/devices/" + address.toLowerCase().replace(" ", "") + "/w1_slave"; // remove spaces from address like '28-0000 49ec xxxx'
 		this.readings											= new Reading_Stabiliser(name, 10, 100); // Depth 10 entries// Tolerence = 10 degrees
+		int i;
+		for (i = 0; i < 5; i++)
+		{
+			read();
+		}
 	}
     public Integer read()
 	{
