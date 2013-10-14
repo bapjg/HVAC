@@ -21,7 +21,6 @@ public class Thread_UserInterface implements Runnable
 		
 		while (!Global.stopNow)
 		{
-                   
 			showTemperatures();
  
 			Global.waitSeconds(10);
