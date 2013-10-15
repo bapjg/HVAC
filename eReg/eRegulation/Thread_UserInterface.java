@@ -108,7 +108,8 @@ public class Thread_UserInterface implements Runnable
 		Global.display.writeAtPosition(0, 0, dateFormat.format(date));
 
 		Global.display.writeAtPosition(0, 16, Global.thermoOutside.toDisplay());
-		Global.display.writeAtPosition(1, 0,  "Blr  MixH  MixO MixC");
+//		Global.display.writeAtPosition(1, 0,  "Blr  MixH  MixO MixC");
+		Global.display.writeAtPosition(1, 0,  "Tru  MixH  MixO MixC");
 		Global.display.writeAtPosition(2, 4,  " ");								
 		Global.display.writeAtPosition(2, 0,  Global.thermoBoiler.toDisplay() + " "); // add an extra char to Blank out possible remenicence of previous info
 		Global.display.writeAtPosition(2, 5,  Global.thermoFloorHot.toDisplay());

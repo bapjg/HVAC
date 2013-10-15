@@ -208,7 +208,7 @@ abstract class Circuit_Abstract
 					// We can swap this task in
 					if (taskFound == null)
 					{
-						System.out.println("3. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
+//						System.out.println("3. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 						taskFound								= circuitTask;
 					}
 					else if (circuitTask.timeStart > taskFound.timeStart)

@@ -41,8 +41,18 @@ public class Circuit_HotWater extends Circuit_Abstract
 				
 				// This needs to be reapraised while running and if only circuit we can optimise based on statistics
 				
-				this.heatRequired.tempMinimum						= this.taskActive.tempObjective + 100;
-				this.heatRequired.tempMaximum						= this.tempMax;
+				if (	(this.taskActive.stopOnObjective)
+				&&		(Global.thermoBoiler.reading > this.taskActive.tempObjective))
+				{
+					this.heatRequired.tempMinimum						= 0;
+					this.heatRequired.tempMaximum						= 0;
+					stop();
+				}
+				else
+				{
+					this.heatRequired.tempMinimum						= this.taskActive.tempObjective + 100;
+					this.heatRequired.tempMaximum						= this.tempMax;
+				}
 				break;
 			case CIRCUIT_STATE_Stop_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
