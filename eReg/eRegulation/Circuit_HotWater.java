@@ -111,34 +111,35 @@ public class Circuit_HotWater extends Circuit_Abstract
 	public Long getRampUpTime()
 	{
 		// System.out.println("Calculating rampUpTime for HW");
-		Integer hwTempTarget						= this.taskNext.tempObjective;
-		Integer hwTempCurrent 						= Global.thermoHotWater.reading;
-		Integer hwTempDifference 					= hwTempTarget - hwTempCurrent;
-		
-		//System.out.println("hwTempDifference : " + hwTempDifference);
-		
-		// Boiler went from 300 -> 700 (Delta = 400) including over shoot of 70
-		// HW     went from 300 -> 460 (Delta = 160)
-		// And it took 40 mins ie 10 mins = 4 degrees
-		//    or                  600 s   = 4 degrees
-		//    or                  150 s   = 1 degree
-		//    or                   15 s   = 0.1 degree
-		
-		Integer  boilerTempDifference 				= hwTempDifference * 400 / 160;
-		Integer  boilerTempCutoff					= boilerTempDifference - 70; 			//expect a 7 degree overshoot		
-		
-		// Need to put cutoff in the boiler temp somewhere
-		
-		Long	rampUpTime							= hwTempDifference * 15L * 1000L; 		//15000 ms per decidegree 
-				
-		if (rampUpTime > 0)
-		{
-			return rampUpTime;
-		}
-		else
-		{
-			return 0L;
-		}
+//		Integer hwTempTarget						= this.taskNext.tempObjective;
+//		Integer hwTempCurrent 						= Global.thermoHotWater.reading;
+//		Integer hwTempDifference 					= hwTempTarget - hwTempCurrent;
+//		
+//		//System.out.println("hwTempDifference : " + hwTempDifference);
+//		
+//		// Boiler went from 300 -> 700 (Delta = 400) including over shoot of 70
+//		// HW     went from 300 -> 460 (Delta = 160)
+//		// And it took 40 mins ie 10 mins = 4 degrees
+//		//    or                  600 s   = 4 degrees
+//		//    or                  150 s   = 1 degree
+//		//    or                   15 s   = 0.1 degree
+//		
+//		Integer  boilerTempDifference 				= hwTempDifference * 400 / 160;
+//		Integer  boilerTempCutoff					= boilerTempDifference - 70; 			//expect a 7 degree overshoot		
+//		
+//		// Need to put cutoff in the boiler temp somewhere
+//		
+//		Long	rampUpTime							= hwTempDifference * 15L * 1000L; 		//15000 ms per decidegree 
+//				
+//		if (rampUpTime > 0)
+//		{
+//			return rampUpTime;
+//		}
+//		else
+//		{
+//			return 0L;
+//		}
+		return 0L;
 	}
 	@Override
 	public Long calculatePerformance()
