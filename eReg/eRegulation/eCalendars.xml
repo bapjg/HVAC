@@ -30,7 +30,7 @@
 				stopOnObjective="0">
 			</Calendar>
 			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5, 6, 7"
-				timeStart="00:01" timeEnd="23:55" tempObjective="200"
+				timeStart="00:01" timeEnd="00:42" tempObjective="200"
 				stopOnObjective="0">
 			</Calendar>
 		</Circuit>

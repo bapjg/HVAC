@@ -88,14 +88,14 @@ abstract class Circuit_Abstract
 	}
 	public void optimise()
 	{
-		LogIt.action(this.name, "optimising");
+		LogIt.action(this.name, "Optimising");
 		this.state													= CIRCUIT_STATE_Optimising;
 		this.heatRequired											= null;
 		this.taskActive.state										= this.taskActive.TASK_STATE_Optimising;
 	}
 	public void shutDown()
 	{
-		LogIt.action(this.name, "closing down completely");
+		LogIt.action(this.name, "Closing down completely");
 		this.state													= CIRCUIT_STATE_Off;
 		this.heatRequired											= null;
 		this.taskActive.active										= false; // What happens if the task has been switched to a new one
@@ -170,9 +170,12 @@ abstract class Circuit_Abstract
 		
 		if (taskActive != null)
 		{
-			if (now > taskActive.timeEnd)
+			if (	(now > taskActive.timeEnd) 
+			&& 		(this.state != CIRCUIT_STATE_Stop_Requested) 
+			&&		(this.state != CIRCUIT_STATE_Stopping)   
+			&&		(this.state != CIRCUIT_STATE_Optimising)   )
 			{
-				// Time is up for this task
+				// Time is up for this task and it hasn't yet been asked to stop
 				this.stop();
 			}
 		}
