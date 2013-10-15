@@ -6,9 +6,9 @@ public class Circuit_HotWater extends Circuit_Abstract
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 	}
-	public void sequencer_OLD()
+	public void sequencer_NEW()
 	{
-		if (this.taskActive == null)
+		if (taskActive == null)
 		{
 			//Nothing to do
 		}
@@ -17,97 +17,64 @@ public class Circuit_HotWater extends Circuit_Abstract
 			//===========================================================
 			// Here we detect that a task has just finished its time slot
 			//
-//			if (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd)
+//			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
 //			{
-//				this.stop();
-//				this.taskActive.state				= CircuitTask.TASK_STATE_Completed;
+//				state										= CIRCUIT_STATE_Stopping;
+//				taskActive.state							= taskActive.TASK_STATE_Completed;
 //			}
 			//
 			//===========================================================
-
-			switch (this.state)
+			switch (state)
 			{
 			case CIRCUIT_STATE_Off:
-				
 				//Nothing to do
 				break;
-				
+			case CIRCUIT_STATE_Start_Requested:
+				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
+				state												= CIRCUIT_STATE_Starting;
+				//Now fall through
 			case CIRCUIT_STATE_Starting:
-				
-				LogIt.info("Circuit", "sequencerWater", "Started");	
-				
-				// Switching pump on can cause heat being pumped the wrong way
-				// Leave as is on the basis that 1) short lived and 2) easier than doing it later 
-				// while avoiding repeated pump action
-				
-				Global.pumpWater.on();
-				state								= CIRCUIT_STATE_Running;		
+				this.heatRequired.tempMinimum						= this.taskActive.tempObjective + 100;
+				this.heatRequired.tempMaximum						= this.tempMax;
+				state												= CIRCUIT_STATE_AwaitingHeat;
 				break;
-				
-			case CIRCUIT_STATE_Running:
-				
-				// Setup real energy requirements (preset to sero at beginning
-				// This can be adjusted later with a better algorithm based on ernery statistics
-				
-				this.heatRequired.tempMinimum		= taskActive.tempObjective + 100;
-				this.heatRequired.tempMaximum		= tempMax;
-				
-				if (Global.thermoHotWater.reading > taskActive.tempObjective)
+			case CIRCUIT_STATE_AwaitingHeat:
+				if (Global.thermoBoiler.reading > Global.thermoHotWater.reading)
 				{
-					state 							= CIRCUIT_STATE_Optimising;
+					LogIt.action("PumpHotWater", "On");
+					Global.pumpWater.on();
+					state											= CIRCUIT_STATE_Running;
 				}
-				
 				break;
-				
-			case CIRCUIT_STATE_Optimising:
-				
-				if (Global.circuits.isSingleActiveCircuit())
+			case CIRCUIT_STATE_Running:
+				this.heatRequired.tempMinimum						= this.taskActive.tempObjective + 100;
+				this.heatRequired.tempMaximum						= this.tempMax;
+				break;
+			case CIRCUIT_STATE_Stop_Requested:
+				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
+				state												= CIRCUIT_STATE_Stopping;
+				//Now fall through
+			case CIRCUIT_STATE_Stopping:
+				if 	(	(Global.circuits.isSingleActiveCircuit())
+				&& 		(Global.thermoBoiler.reading > Global.thermoFloorOut.reading) )
 				{
-					// Keep going until all heat is taken out of boiler
-					if (Global.thermoBoiler.reading < Global.thermoHotWater.reading + 20)
-					{
-						// set taskstate as running free as if other heat requirement
-						// then this task can be abandoned at no energy cost
-						taskActive.state			= CircuitTask.TASK_STATE_Optimising;
-						// Continue as there is still more heat
-					}
-					else
-					{
-						state						= CIRCUIT_STATE_Stopping;
-					}
+					// We are alone, so as long as there is heat to get out of the system
+					// carry on
 				}
 				else
 				{
-					state							= CIRCUIT_STATE_Stopping;
+					LogIt.action("PumpHotWater", "Off");
+					Global.pumpWater.off();
+					this.shutDown();					// shutDown sets state to off. Threadmixer looks at this as signal to stop
 				}
-				// Now fall through to CIRCUIT_STATE_Stopping given that heatRequired is correctly set up
-
-			case CIRCUIT_STATE_Stopping:
-				
-				// If active task.temporary = true
-				// need to delete the object to avoid
-				// memory leaks
-					
-				Global.pumpWater.off();
-				state								= CIRCUIT_STATE_Off;
-				taskActive.state					= CircuitTask.TASK_STATE_Completed;
-				taskActive							= null;
-				
 				break;
-				
 			case CIRCUIT_STATE_Error:
-				
-				LogIt.error("Circuit", "sequencerWater", "CIRCUIT_STATE_Error detected : " + state);	
-
 				break;
-				
 			default:
-				
-				LogIt.error("Circuit", "sequencerWater", "unknown state detected : " + state);	
+				LogIt.error("Circuit_" + this.name, "sequencer", "unknown state detected : " + state);	
 			}
 		}
 	}
-
 	public Long getRampUpTime()
 	{
 		// System.out.println("Calculating rampUpTime for HW");

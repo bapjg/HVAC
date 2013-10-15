@@ -31,13 +31,13 @@ public class Circuit_Gradient extends Circuit_Abstract
 				//Nothing to do
 				break;
 			case CIRCUIT_STATE_Start_Requested:
-				LogIt.info("Circuit_Gradient", "sequencer", "Start Requested");
+				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
 				state												= CIRCUIT_STATE_Starting;
 				//Now fall through
 			case CIRCUIT_STATE_Starting:
 				if (temperatureGradient == null)
 				{
-					LogIt.error("Circuit_Gradient", "sequencer", "temperatureGradient is null");
+					LogIt.error("Circuit_" + this.name, "sequencer", "temperatureGradient is null");
 					state										= CIRCUIT_STATE_Error;
 				}
 				else
@@ -62,13 +62,15 @@ public class Circuit_Gradient extends Circuit_Abstract
 				this.heatRequired.tempMaximum			= temp + 75;
 				break;
 			case CIRCUIT_STATE_Stop_Requested:
-				LogIt.info("Circuit_Gradient", "sequencer", "Stop Requested");
+				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
 				state												= CIRCUIT_STATE_Stopping;
 				//Now fall through
 			case CIRCUIT_STATE_Stopping:
-				if (Global.circuits.isSingleActiveCircuit())
+				if 	(	(Global.circuits.isSingleActiveCircuit())
+				&& 		(Global.thermoBoiler.reading > 400) ) //Might as well get as much heat out of it as possible
 				{
-					this.optimise();
+					// We are alone, so as long as there is heat to get out of the system
+					// carry on
 				}
 				else
 				{
@@ -80,7 +82,7 @@ public class Circuit_Gradient extends Circuit_Abstract
 			case CIRCUIT_STATE_Error:
 				break;
 			default:
-				LogIt.error("Circuit", "sequencerRadiator", "unknown state detected : " + state);	
+				LogIt.error("Circuit_" + this.name, "sequencer", "unknown state detected : " + state);	
 			}
 		}
 	}

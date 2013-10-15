@@ -86,13 +86,13 @@ abstract class Circuit_Abstract
 		this.heatRequired											= null;
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 	}
-	public void optimise()
-	{
-		LogIt.action(this.name, "Optimising");
-		this.state													= CIRCUIT_STATE_Optimising;
-		this.heatRequired											= null;
-		this.taskActive.state										= this.taskActive.TASK_STATE_Optimising;
-	}
+//	public void optimise()
+//	{
+//		LogIt.action(this.name, "Optimising");
+//		this.state													= CIRCUIT_STATE_Optimising;
+//		this.heatRequired											= null;
+//		this.taskActive.state										= this.taskActive.TASK_STATE_Optimising;
+//	}
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");

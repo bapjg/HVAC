@@ -32,29 +32,19 @@ public class Circuit_Mixer extends Circuit_Abstract
 		}
 		else
 		{
-			//===========================================================
-			// Here we detect that a task has just finished its time slot
-			//
-//			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
-//			{
-//				state										= CIRCUIT_STATE_Stopping;
-//				taskActive.state							= taskActive.TASK_STATE_Completed;
-//			}
-			//
-			//===========================================================
 			switch (state)
 			{
 			case CIRCUIT_STATE_Off:
 				//Nothing to do
 				break;
 			case CIRCUIT_STATE_Start_Requested:
-				LogIt.info("Circuit_Mixer", "sequencer", "Start Requested");
+				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
 				state												= CIRCUIT_STATE_Starting;
 				//Now fall through
 			case CIRCUIT_STATE_Starting:
 				if (temperatureGradient == null)
 				{
-					LogIt.error("Circuit_Mixer", "sequencer", "temperatureGradient is null");
+					LogIt.error("Circuit_" + this.name, "sequencer", "temperatureGradient is null");
 					state										= CIRCUIT_STATE_Error;
 				}
 				else
@@ -64,7 +54,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 					this.heatRequired.tempMaximum					= 800;
 					state											= CIRCUIT_STATE_AwaitingHeat;
 
-					LogIt.info("Circuit", "sequencerFloor", "Thread Started");	
+					LogIt.info("Circuit_" + this.name, "sequencer", "Thread Started");
 					Global.waitSeconds(1);
 					Thread thread_mixer 							= new Thread(new Thread_Mixer(mixer, this), "Mixer");
 					thread_mixer.start();
@@ -84,7 +74,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				this.heatRequired.tempMaximum						= 800;
 				break;
 			case CIRCUIT_STATE_Stop_Requested:
-				LogIt.info("Circuit", "sequencer", "Stop Requested");
+				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
 				state												= CIRCUIT_STATE_Stopping;
 				//Now fall through
 			case CIRCUIT_STATE_Stopping:
@@ -106,7 +96,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			case CIRCUIT_STATE_Error:
 				break;
 			default:
-				LogIt.error("Circuit", "sequencerFloor", "unknown state detected : " + state);	
+				LogIt.error("Circuit_" + this.name, "sequencer", "unknown state detected : " + state);	
 			}
 		}
 	}
