@@ -6,7 +6,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 	}
-	public void sequencer_NEW()
+	@Override
+	public void sequencer()
 	{
 		if (taskActive == null)
 		{
@@ -14,16 +15,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 		}
 		else
 		{
-			//===========================================================
-			// Here we detect that a task has just finished its time slot
-			//
-//			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
-//			{
-//				state										= CIRCUIT_STATE_Stopping;
-//				taskActive.state							= taskActive.TASK_STATE_Completed;
-//			}
-			//
-			//===========================================================
 			switch (state)
 			{
 			case CIRCUIT_STATE_Off:
@@ -47,6 +38,9 @@ public class Circuit_HotWater extends Circuit_Abstract
 				}
 				break;
 			case CIRCUIT_STATE_Running:
+				
+				// This needs to be reapraised while running and if only circuit we can optimise based on statistics
+				
 				this.heatRequired.tempMinimum						= this.taskActive.tempObjective + 100;
 				this.heatRequired.tempMaximum						= this.tempMax;
 				break;
@@ -142,8 +136,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 		//   boilerMax will improve by 70 overshoot
 		// hwTarget = hwTempCurrent + hwDifference x 0.5  (0.5 multiplier can be modified)
 	}
-	@Override
-	public void sequencer()
+	public void sequencer_Revised()
 	{
 		// Note that this wont pass midnight
 		// Whould need to stop automatically at 23:55
