@@ -217,7 +217,7 @@ abstract class Circuit_Abstract
 		}
 		if (taskFound != null)
 		{
-			this.taskActive = taskFound;
+			taskActivate(taskFound);
 		}
 	}
 	public void scheduleTaskNext()
