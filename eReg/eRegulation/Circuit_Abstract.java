@@ -186,24 +186,26 @@ abstract class Circuit_Abstract
 				// - It can be yet to run
 				
 				if (		(circuitTask.timeStart - this.getRampUpTime() > now)							// This task has yet to be performed (timeStart > now
-				|| 			(circuitTask.timeEnd > now)        )											// Or time End > now
+				&& 			(circuitTask.timeEnd > now)        )											// Or time End > now
 				{
 					System.out.println("1. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 					// This task has yet to run : both start and end are in the future
 					// Nothing todo
 				}
 				else if (	(circuitTask.timeStart - this.getRampUpTime() < now)							// This task has yet to be performed (timeStart > now
-				|| 			(circuitTask.timeEnd > now)        )											// Or time End > now
+				&& 			(circuitTask.timeEnd > now)        )											// Or time End > now
 				{
-					System.out.println("1. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
+					System.out.println("2. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
 					if (taskFound == null)
 					{
+						System.out.println("3. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 						taskFound								= circuitTask;
 					}
 					else if (circuitTask.timeStart > taskFound.timeStart)
 					{
+						System.out.println("4. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 						// taskFound contains a task which should start
 						// circuitTask should start later
 						// This can happen either by error (overlapping calendars)
