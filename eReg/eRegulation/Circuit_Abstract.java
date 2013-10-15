@@ -125,12 +125,13 @@ abstract class Circuit_Abstract
 		{
 			if (aTask.active)
 			{
-				LogIt.error("Circuit_Abstract", "taskActivate", "A task if active when it shouldn't be");
+				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
 				aTask.active									= false;
 			}
 		}
 		thisTask.active											= true;
 		this.taskActive											= thisTask;
+		this.start();
 	}
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
@@ -139,7 +140,7 @@ abstract class Circuit_Abstract
 		{
 			if (aTask.active)
 			{
-				LogIt.error("Circuit_Abstract", "taskDeactivate", "A task if active when it shouldn't be");
+				LogIt.error("Circuit_Abstract", "taskDeactivate", "A task is active when it shouldn't be");
 				aTask.active									= false;
 			}
 		}

@@ -81,10 +81,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				break;
 			case CIRCUIT_STATE_Stopping:
 				LogIt.info("Circuit", "sequencerFloor", "Stopping");
-				//
-				// Need to figure out how to stop a thread 
-				// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-				//
+
 				if 	(	(Global.circuits.isSingleActiveCircuit())
 				&& 		(Global.thermoBoiler.reading > Global.thermoFloorOut.reading) )
 				{
