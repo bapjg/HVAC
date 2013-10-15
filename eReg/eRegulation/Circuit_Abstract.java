@@ -185,7 +185,7 @@ abstract class Circuit_Abstract
 			if (	(circuitTask.days.contains(day)) 
 			&& 		(! circuitTask.active)	          )
 			{
-				System.out.println("0. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
+//				System.out.println("0. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 				// This circuitTask must run today and is not active
 				// - It can already have run and finished
 				// - It can already have run and not finished but been pre-emted
@@ -196,14 +196,14 @@ abstract class Circuit_Abstract
 				if (		(circuitTask.timeStart - this.getRampUpTime() > now)							// This task has yet to be performed (timeStart > now
 				&& 			(circuitTask.timeEnd > now)        )											// Or time End > now
 				{
-					System.out.println("1. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
+//					System.out.println("1. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 					// This task has yet to run : both start and end are in the future
 					// Nothing todo
 				}
 				else if (	(circuitTask.timeStart - this.getRampUpTime() < now)							// This task has yet to be performed (timeStart > now
 				&& 			(circuitTask.timeEnd > now)        )											// Or time End > now
 				{
-					System.out.println("2. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
+//					System.out.println("2. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
 					if (taskFound == null)
@@ -213,7 +213,7 @@ abstract class Circuit_Abstract
 					}
 					else if (circuitTask.timeStart > taskFound.timeStart)
 					{
-						System.out.println("4. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
+//						System.out.println("4. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 						// taskFound contains a task which should start
 						// circuitTask should start later
 						// This can happen either by error (overlapping calendars)

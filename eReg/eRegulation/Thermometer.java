@@ -97,9 +97,9 @@ public class Thermometer
     public String toDisplay()
     {
     	// Converts temperature in decidegrees into displayable format
-    	Integer Degrees 									= this.reading/10;
-    	Integer Decimals 									= this.reading - Degrees * 10;
-    	return Degrees.toString() + "." + Decimals.toString();
+    	Integer degrees 									= this.reading/10;
+    	Integer decimals 									= this.reading - degrees * 10;
+    	return degrees.toString() + "." + decimals.toString();
     }
     public class Reading_Stabiliser
     {

@@ -88,7 +88,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				state												= CIRCUIT_STATE_Stopping;
 				//Now fall through
 			case CIRCUIT_STATE_Stopping:
-				LogIt.info("Circuit", "sequencerFloor", "Stopping Stopping zzzzzzzzzz");
+//				LogIt.info("Circuit", "sequencerFloor", "Stopping Stopping zzzzzzzzzz");
 
 				if 	(	(Global.circuits.isSingleActiveCircuit())
 				&& 		(Global.thermoBoiler.reading > Global.thermoFloorOut.reading) )
