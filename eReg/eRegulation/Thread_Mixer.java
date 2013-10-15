@@ -25,8 +25,7 @@ public class Thread_Mixer implements Runnable
 		
 		LogIt.info("Thread_Mixer", "Run", "Floor Initialised (10%)");		
 		
-//		while ((!Global.stopNow) && (!this.stopRequested))
-		while (!Global.stopNow)
+		while ((!Global.stopNow) && (circuitMixer.state != circuitMixer.CIRCUIT_STATE_Off))
 		{
 			// Note that Mixer calls go to sleep when positionning the mixer.
 			

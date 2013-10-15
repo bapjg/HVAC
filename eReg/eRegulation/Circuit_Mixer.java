@@ -47,32 +47,37 @@ public class Circuit_Mixer extends Circuit_Abstract
 			case CIRCUIT_STATE_Off:
 				//Nothing to do
 				break;
-			case CIRCUIT_STATE_Started:
-				LogIt.info("Circuit", "sequencerFloor", "Thread Started");	
-				
-				// mixer is Global.mixer
-				Thread thread_mixer 						= new Thread(new Thread_Mixer(mixer, this), "Mixer");
-				thread_mixer.start();
-				// Need to ensure that pump and mixer dont go on at the same time
-				Global.waitSeconds(1);
-				state										= CIRCUIT_STATE_Running;		
-				break;
-			case CIRCUIT_STATE_Running:
-				//The temps will depend on circuit type (h/w, radiator etc.
-				//Will also depend on outside temp
-				//Will also depend on loi d'eau
-
-				//Mixer Type has temperature gradient
+			case CIRCUIT_STATE_Starting:
 				if (temperatureGradient == null)
 				{
 					LogIt.error("Circuit_Mixer", "sequencer", "temperatureGradient is null");
+					state										= CIRCUIT_STATE_Error;
 				}
 				else
 				{
 					Integer temp							= temperatureGradient.getTempToTarget();
 					this.heatRequired.tempMinimum			= 500;
 					this.heatRequired.tempMaximum			= 800;
+					state									= CIRCUIT_STATE_AwaitingHeat;
+
+					LogIt.info("Circuit", "sequencerFloor", "Thread Started");	
+					Global.waitSeconds(1);
+					Thread thread_mixer 						= new Thread(new Thread_Mixer(mixer, this), "Mixer");
+					thread_mixer.start();
 				}
+				break;
+			case CIRCUIT_STATE_AwaitingHeat:
+				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
+				{
+					LogIt.action("PumpFloor", "On");
+					Global.pumpFloor.on();
+					state										= CIRCUIT_STATE_Running;
+				}
+				break;
+			case CIRCUIT_STATE_Running:
+				Integer temp							= temperatureGradient.getTempToTarget();
+				this.heatRequired.tempMinimum			= 500;
+				this.heatRequired.tempMaximum			= 800;
 				break;
 			case CIRCUIT_STATE_Stopping:
 				LogIt.info("Circuit", "sequencerFloor", "Stopping");
@@ -80,12 +85,18 @@ public class Circuit_Mixer extends Circuit_Abstract
 				// Need to figure out how to stop a thread 
 				// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 				//
-				LogIt.action("PumpFloor", "Off");
-				//this.stop();
-				this.heatRequired							= null;
-				Global.pumpFloor.off();
-				state										= CIRCUIT_STATE_Off;
-				taskActive									= null;
+				if 	(	(Global.circuits.isSingleActiveCircuit())
+				&& 		(Global.thermoBoiler.reading > Global.thermoFloorOut.reading) )
+				{
+					// We are alone, so as long as there is heat to get out of the system
+					// carry on
+				}
+				else
+				{
+					LogIt.action("PumpFloor", "Off");
+					Global.pumpFloor.off();
+					this.shutDown();					// shutDown sets state to off. Threadmixer looks at this as signal to stop
+				}
 				break;
 			case CIRCUIT_STATE_Error:
 				break;

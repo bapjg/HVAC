@@ -10,6 +10,7 @@ public class CircuitTask
 	public Boolean 				stopOnObjective;
 	public String				days;
 
+	public Boolean				active;
 	public Integer				state;
 	
 	public static final int 	TASK_STATE_WaitingToStart		= 0;
@@ -35,6 +36,7 @@ public class CircuitTask
 		)
 	{
 		this.state												= TASK_STATE_WaitingToStart;
+		this.active												= false;
 		this.timeStart											= Global.parseTime(timeStart);
 		this.timeStartDisplay									= timeStart;
 		this.timeEnd											= Global.parseTime(timeEnd);

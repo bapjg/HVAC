@@ -33,19 +33,23 @@ public class Circuit_Gradient extends Circuit_Abstract
 			case CIRCUIT_STATE_Starting:
 				if (temperatureGradient == null)
 				{
-					LogIt.error("Circuit_Mixer", "sequencer", "temperatureGradient is null");
+					LogIt.error("Circuit_Gradient", "sequencer", "temperatureGradient is null");
+					state										= CIRCUIT_STATE_Error;
 				}
 				else
 				{
 					Integer temp							= temperatureGradient.getTempToTarget();
 					this.heatRequired.tempMinimum			= temp - 75;
 					this.heatRequired.tempMaximum			= temp + 75;
-					if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
-					{
-						LogIt.action("PumpRadiator", "On");
-						Global.pumpRadiator.on();
-						state										= CIRCUIT_STATE_Running;
-					}
+					state									= CIRCUIT_STATE_AwaitingHeat;
+				}
+				break;
+			case CIRCUIT_STATE_AwaitingHeat:
+				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
+				{
+					LogIt.action("PumpRadiator", "On");
+					Global.pumpRadiator.on();
+					state										= CIRCUIT_STATE_Running;
 				}
 				break;
 			case CIRCUIT_STATE_Running:
@@ -60,6 +64,7 @@ public class Circuit_Gradient extends Circuit_Abstract
 				}
 				else
 				{
+					LogIt.action("PumpRadiator", "Off");
 					Global.pumpRadiator.off();
 					this.shutDown();
 				}

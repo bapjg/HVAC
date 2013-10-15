@@ -24,6 +24,7 @@ abstract class Circuit_Abstract
 
 	public static final int			CIRCUIT_STATE_Suspended		= 5;
 	public static final int			CIRCUIT_STATE_Resuming 		= 6;
+	public static final int			CIRCUIT_STATE_AwaitingHeat	= 7;
 
 	public Mixer					mixer						= null;
 	public TemperatureGradient 		temperatureGradient			= null;				//This will be overridden
@@ -63,7 +64,7 @@ abstract class Circuit_Abstract
 	}
 	public Long getRampUpTime()
 	{
-		return 10000L; // Overriddent method
+		return 0L; // Overriddent method
 	}
 	public Long calculatePerformance()
 	{
@@ -80,10 +81,7 @@ abstract class Circuit_Abstract
 		LogIt.action(this.name, "Stop called");
 		this.state												= CIRCUIT_STATE_Stopping;
 		this.heatRequired										= null;
-		
-		// Need to sort this out
-		//this.taskActive.state									= this.taskActive.TASK_STATE_Completed;
-		//this.taskActive											= null; ??????????????
+		// Depending on the situation, the circuit will either optimise or stopdown completely
 	}
 	public void optimise()
 	{
@@ -94,11 +92,11 @@ abstract class Circuit_Abstract
 	}
 	public void shutDown()
 	{
-		LogIt.action(this.name, "closing down");
+		LogIt.action(this.name, "closing down completely");
 		this.state												= CIRCUIT_STATE_Off;
 		this.heatRequired										= null;
-		this.taskActive.state									= this.taskActive.TASK_STATE_Completed; // What happens if the task has been switched to a new one
-		this.taskActive											= null;
+		this.taskActive.active									= false; // What happens if the task has been switched to a new one
+		taskDeactivate(this.taskActive);
 	}
 	public void interupt()
 	{
@@ -120,6 +118,86 @@ abstract class Circuit_Abstract
 	}
 	public void sequencer()										// Task overridden in sub classes
 	{
+	}
+	public void taskActivate(CircuitTask thisTask)
+	{
+		for (CircuitTask aTask : this.circuitTaskList)			// Check to ensure there are no active tasks
+		{
+			if (aTask.active)
+			{
+				LogIt.error("Circuit_Abstract", "taskActivate", "A task if active when it shouldn't be");
+				aTask.active									= false;
+			}
+		}
+		thisTask.active											= true;
+		this.taskActive											= thisTask;
+	}
+	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
+	{
+		thisTask.active											= false;
+		for (CircuitTask aTask : this.circuitTaskList)
+		{
+			if (aTask.active)
+			{
+				LogIt.error("Circuit_Abstract", "taskDeactivate", "A task if active when it shouldn't be");
+				aTask.active									= false;
+			}
+		}
+		this.taskActive											= null;
+	}
+	public void scheduleTask()
+	{
+		String 					day 							= Global.getDayOfWeek(0);				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+		Long 					now								= Global.getTimeNowSinceMidnight();
+		CircuitTask				taskFound						= null;
+		
+		if (taskActive != null)
+		{
+			if (taskActive.timeEnd > now)
+			{
+				// Time is up for this task
+				this.stop();
+			}
+		}
+		
+		for (CircuitTask circuitTask : circuitTaskList) 												// Go through all tasks
+		{	
+			if (	(circuitTask.days.contains(day)) 
+			&& 		(! circuitTask.active)	          )
+			{
+				// This circuitTask must run today and is not active
+				// - It can already have run and finished
+				// - It can already have run and not finished but been pre-emted
+				// - It can be in the state "should have started, and not yet finished" but we have just booted the RaspPi
+				// - It can be running (Not possible in this branch of code)
+				// - It can be yet to run
+				
+				if (		(circuitTask.timeStart - this.getRampUpTime() > now)							// This task has yet to be performed (timeStart > now
+				|| 			(circuitTask.timeEnd > now)        )											// Or time End > now
+				{
+					// This task has yet to run : both start and end are in the future
+					// Nothing todo
+				}
+				else if (	(circuitTask.timeStart - this.getRampUpTime() < now)							// This task has yet to be performed (timeStart > now
+				|| 			(circuitTask.timeEnd > now)        )											// Or time End > now
+				{
+					// This task should be run : start is past and end is the future
+					// We can swap this task in
+					if (taskFound == null)
+					{
+						taskFound								= circuitTask;
+					}
+					else if (circuitTask.timeStart > taskFound.timeStart)
+					{
+						// taskFound contains a task which should start
+						// circuitTask should start later
+						// This can happen either by error (overlapping calendars)
+						// or due to rampUp : infact circuitTask should run later but we will start now to ramp up
+						taskFound								= circuitTask;
+					}
+				}
+			}
+		}
 	}
 	public void scheduleTaskNext()
 	{

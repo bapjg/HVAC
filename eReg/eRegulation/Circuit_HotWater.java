@@ -17,11 +17,11 @@ public class Circuit_HotWater extends Circuit_Abstract
 			//===========================================================
 			// Here we detect that a task has just finished its time slot
 			//
-			if (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd)
-			{
-				this.stop();
-				this.taskActive.state				= CircuitTask.TASK_STATE_Completed;
-			}
+//			if (Global.getTimeNowSinceMidnight() > this.taskActive.timeEnd)
+//			{
+//				this.stop();
+//				this.taskActive.state				= CircuitTask.TASK_STATE_Completed;
+//			}
 			//
 			//===========================================================
 
