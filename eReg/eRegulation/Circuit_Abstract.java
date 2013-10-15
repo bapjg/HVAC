@@ -170,7 +170,7 @@ abstract class Circuit_Abstract
 		
 		if (taskActive != null)
 		{
-			if (taskActive.timeEnd > now)
+			if (now > taskActive.timeEnd)
 			{
 				// Time is up for this task
 				this.stop();
@@ -182,6 +182,7 @@ abstract class Circuit_Abstract
 			if (	(circuitTask.days.contains(day)) 
 			&& 		(! circuitTask.active)	          )
 			{
+				System.out.println("0. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 				// This circuitTask must run today and is not active
 				// - It can already have run and finished
 				// - It can already have run and not finished but been pre-emted
