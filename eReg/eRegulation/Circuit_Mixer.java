@@ -3,12 +3,12 @@ package eRegulation;
 public class Circuit_Mixer extends Circuit_Abstract
 {
 	// Should delete below as superClass contains these
-	public final int 				CIRCUIT_STATE_Off 				= 0;
-	public final int 				CIRCUIT_STATE_Started 			= 1;
-	public final int 				CIRCUIT_STATE_Running 			= 2;
-	public final int 				CIRCUIT_STATE_Stopping	 		= 3;
-	public final int 				CIRCUIT_STATE_Optimising 		= 4;
-	public final int 				CIRCUIT_STATE_Error	 			= -1;
+//	public final int 				CIRCUIT_STATE_Off 				= 0;
+//	public final int 				CIRCUIT_STATE_Started 			= 1;
+//	public final int 				CIRCUIT_STATE_Running 			= 2;
+//	public final int 				CIRCUIT_STATE_Stopping	 		= 3;
+//	public final int 				CIRCUIT_STATE_Optimising 		= 4;
+//	public final int 				CIRCUIT_STATE_Error	 			= -1;
 
 	public Circuit_Mixer(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
 	{	
@@ -47,6 +47,10 @@ public class Circuit_Mixer extends Circuit_Abstract
 			case CIRCUIT_STATE_Off:
 				//Nothing to do
 				break;
+			case CIRCUIT_STATE_Start_Requested:
+				LogIt.info("Circuit_Mixer", "sequencer", "Start Requested");
+				state												= CIRCUIT_STATE_Starting;
+				//Now fall through
 			case CIRCUIT_STATE_Starting:
 				if (temperatureGradient == null)
 				{
@@ -79,8 +83,12 @@ public class Circuit_Mixer extends Circuit_Abstract
 				this.heatRequired.tempMinimum						= 500;
 				this.heatRequired.tempMaximum						= 800;
 				break;
+			case CIRCUIT_STATE_Stop_Requested:
+				LogIt.info("Circuit", "sequencer", "Stop Requested");
+				state												= CIRCUIT_STATE_Stopping;
+				//Now fall through
 			case CIRCUIT_STATE_Stopping:
-				LogIt.info("Circuit", "sequencerFloor", "Stopping");
+				LogIt.info("Circuit", "sequencerFloor", "Stopping Stopping zzzzzzzzzz");
 
 				if 	(	(Global.circuits.isSingleActiveCircuit())
 				&& 		(Global.thermoBoiler.reading > Global.thermoFloorOut.reading) )

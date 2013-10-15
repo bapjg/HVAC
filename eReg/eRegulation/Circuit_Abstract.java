@@ -26,6 +26,9 @@ abstract class Circuit_Abstract
 	public static final int			CIRCUIT_STATE_Resuming 			= 6;
 	public static final int			CIRCUIT_STATE_AwaitingHeat		= 7;
 
+	public static final int			CIRCUIT_STATE_Start_Requested	= 10;
+	public static final int			CIRCUIT_STATE_Stop_Requested	= 11;
+
 	public Mixer					mixer							= null;
 	public TemperatureGradient 		temperatureGradient				= null;				//This will be overridden
 	
@@ -73,13 +76,13 @@ abstract class Circuit_Abstract
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
-		this.state													= CIRCUIT_STATE_Starting;
+		this.state													= CIRCUIT_STATE_Start_Requested;
 		this.heatRequired											= new HeatRequired();
 	}
 	public void stop()
 	{
 		LogIt.action(this.name, "Stop called");
-		this.state													= CIRCUIT_STATE_Stopping;
+		this.state													= CIRCUIT_STATE_Stop_Requested;
 		this.heatRequired											= null;
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 	}

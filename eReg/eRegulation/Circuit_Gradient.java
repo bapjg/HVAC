@@ -30,6 +30,10 @@ public class Circuit_Gradient extends Circuit_Abstract
 			case CIRCUIT_STATE_Off:
 				//Nothing to do
 				break;
+			case CIRCUIT_STATE_Start_Requested:
+				LogIt.info("Circuit_Gradient", "sequencer", "Start Requested");
+				state												= CIRCUIT_STATE_Starting;
+				//Now fall through
 			case CIRCUIT_STATE_Starting:
 				if (temperatureGradient == null)
 				{
@@ -57,6 +61,10 @@ public class Circuit_Gradient extends Circuit_Abstract
 				this.heatRequired.tempMinimum			= temp - 75;
 				this.heatRequired.tempMaximum			= temp + 75;
 				break;
+			case CIRCUIT_STATE_Stop_Requested:
+				LogIt.info("Circuit_Gradient", "sequencer", "Stop Requested");
+				state												= CIRCUIT_STATE_Stopping;
+				//Now fall through
 			case CIRCUIT_STATE_Stopping:
 				if (Global.circuits.isSingleActiveCircuit())
 				{
