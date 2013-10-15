@@ -147,6 +147,19 @@ abstract class Circuit_Abstract
 	}
 	public void scheduleTask()
 	{
+		/* ============= Must adjust these comments
+		 * 	Objective : Determine which task should run next : this.taskNext
+		 * 
+		 *  Loop through each circuitTask and see if :
+		 *   - It is for todyy
+		 *   - It has yet to run
+		 *   - If there are several which have yet to run, take the earliest 
+		 *   
+		 *  3 runtime situations can occur
+		 *   - We have passed midnight, a new schedule must be implemented
+		 *   - A new, unplanned, task may have been added (through user decision)
+		 *   - Normal running, the nextTask has been scheduled to run, and the next one must be found
+		 */
 		String 					day 							= Global.getDayOfWeek(0);				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 		Long 					now								= Global.getTimeNowSinceMidnight();
 		CircuitTask				taskFound						= null;
