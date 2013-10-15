@@ -188,12 +188,14 @@ abstract class Circuit_Abstract
 				if (		(circuitTask.timeStart - this.getRampUpTime() > now)							// This task has yet to be performed (timeStart > now
 				|| 			(circuitTask.timeEnd > now)        )											// Or time End > now
 				{
+					System.out.println("1. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 					// This task has yet to run : both start and end are in the future
 					// Nothing todo
 				}
 				else if (	(circuitTask.timeStart - this.getRampUpTime() < now)							// This task has yet to be performed (timeStart > now
 				|| 			(circuitTask.timeEnd > now)        )											// Or time End > now
 				{
+					System.out.println("1. " + this.name + " circuitTask.timeStart " + circuitTask.timeStartDisplay);
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
 					if (taskFound == null)
@@ -210,6 +212,10 @@ abstract class Circuit_Abstract
 					}
 				}
 			}
+		}
+		if (taskFound != null)
+		{
+			this.taskActive = taskFound;
 		}
 	}
 	public void scheduleTaskNext()
