@@ -68,7 +68,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 					{
 						// set taskstate as running free as if other heat requirement
 						// then this task can be abandoned at no energy cost
-						taskActive.state			= CircuitTask.TASK_STATE_RunningFree;
+						taskActive.state			= CircuitTask.TASK_STATE_Optimising;
 						// Continue as there is still more heat
 					}
 					else

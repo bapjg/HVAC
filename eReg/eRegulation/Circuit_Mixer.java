@@ -35,11 +35,11 @@ public class Circuit_Mixer extends Circuit_Abstract
 			//===========================================================
 			// Here we detect that a task has just finished its time slot
 			//
-			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
-			{
-				state										= CIRCUIT_STATE_Stopping;
-				taskActive.state							= taskActive.TASK_STATE_Completed;
-			}
+//			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
+//			{
+//				state										= CIRCUIT_STATE_Stopping;
+//				taskActive.state							= taskActive.TASK_STATE_Completed;
+//			}
 			//
 			//===========================================================
 			switch (state)

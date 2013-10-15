@@ -54,6 +54,10 @@ public class Boiler
 	{
 		tempMax 									= eR.tempMaximum;
 		tempMin 									= eR.tempMinimum;
+		if (tempMax > tempNeverExceed - tempOvershoot)
+		{
+			tempMax 								= tempNeverExceed - tempOvershoot;
+		}
 		//LogIt.info("Boiler", "requestHeat", "tempMin/tempMax are " + tempMin + "/" + tempMax);
 		
 		// Only change the state if it is STATE_Off

@@ -25,44 +25,44 @@ public class Circuit_Gradient extends Circuit_Abstract
 		}
 		else
 		{
-			//===========================================================
-			// Here we detect that a task has just finished its time slot
-			//
-			if (Global.getTimeNowSinceMidnight() > taskActive.timeEnd)
-			{
-				state										= CIRCUIT_STATE_Stopping;
-				taskActive.state							= taskActive.TASK_STATE_Completed;
-			}
-			//
-			//===========================================================
 			switch (state)
 			{
 			case CIRCUIT_STATE_Off:
 				//Nothing to do
 				break;
 			case CIRCUIT_STATE_Starting:
-				LogIt.info("Circuit", "sequencerRadiator", "Started");	
-				LogIt.action("PumpRadiator", "On");
-				Global.pumpRadiator.on();
-				state										= CIRCUIT_STATE_Running;		
+				if (temperatureGradient == null)
+				{
+					LogIt.error("Circuit_Mixer", "sequencer", "temperatureGradient is null");
+				}
+				else
+				{
+					Integer temp							= temperatureGradient.getTempToTarget();
+					this.heatRequired.tempMinimum			= temp - 75;
+					this.heatRequired.tempMaximum			= temp + 75;
+					if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
+					{
+						LogIt.action("PumpRadiator", "On");
+						Global.pumpRadiator.on();
+						state										= CIRCUIT_STATE_Running;
+					}
+				}
 				break;
 			case CIRCUIT_STATE_Running:
-				// Nothing to do
-				//The temps will depend on circuit type (h/w, radiator etc.
-				//Will also depend on outside temp
-				//Will also depend on loi d'eau
-
-				//Radiator Type has temperature gradient
 				Integer temp							= temperatureGradient.getTempToTarget();
 				this.heatRequired.tempMinimum			= temp - 75;
 				this.heatRequired.tempMaximum			= temp + 75;
 				break;
 			case CIRCUIT_STATE_Stopping:
-				LogIt.info("Circuit", "sequencerRadiator", "Stopping");	
-				LogIt.action("PumpRadiator", "Off");
-				Global.pumpRadiator.off();
-				state									= CIRCUIT_STATE_Off;
-				taskActive								= null;
+				if (Global.circuits.isSingleActiveCircuit())
+				{
+					this.optimise();
+				}
+				else
+				{
+					Global.pumpRadiator.off();
+					this.shutDown();
+				}
 				break;
 			case CIRCUIT_STATE_Error:
 				break;

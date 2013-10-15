@@ -15,7 +15,7 @@ public class CircuitTask
 	public static final int 	TASK_STATE_WaitingToStart		= 0;
 	public static final int 	TASK_STATE_WillBeNext			= 1;
 	public static final int 	TASK_STATE_Started 				= 2;
-	public static final int 	TASK_STATE_RunningFree 			= 3;
+	public static final int 	TASK_STATE_Optimising 			= 3;
 	public static final int 	TASK_STATE_Completed			= 4;
 	public static final int 	TASK_STATE_Error	 			= -1;
 	public static final int 	TASK_STATE_NotToday 			= -2;

@@ -80,6 +80,33 @@ abstract class Circuit_Abstract
 		LogIt.action(this.name, "Stop called");
 		this.state												= CIRCUIT_STATE_Stopping;
 		this.heatRequired										= null;
+		
+		// Need to sort this out
+		//this.taskActive.state									= this.taskActive.TASK_STATE_Completed;
+		//this.taskActive											= null; ??????????????
+	}
+	public void optimise()
+	{
+		LogIt.action(this.name, "optimising");
+		this.state												= CIRCUIT_STATE_Optimising;
+		this.heatRequired										= null;
+		this.taskActive.state									= this.taskActive.TASK_STATE_Optimising;
+	}
+	public void shutDown()
+	{
+		LogIt.action(this.name, "closing down");
+		this.state												= CIRCUIT_STATE_Off;
+		this.heatRequired										= null;
+		this.taskActive.state									= this.taskActive.TASK_STATE_Completed; // What happens if the task has been switched to a new one
+		this.taskActive											= null;
+	}
+	public void interupt()
+	{
+//		LogIt.action(this.name, "closing down");
+//		this.state												= CIRCUIT_STATE_Off;
+//		this.heatRequired										= null;
+//		this.taskActive.state									= this.taskActive.TASK_STATE_Completed; // What happens if the task has been switched to a new one
+//		this.taskActive											= null;
 	}
 	public void suspend()
 	{
@@ -147,10 +174,17 @@ abstract class Circuit_Abstract
 		// Purpose is to place taskNext as activeTask at the right time
 		// Additionally we need to know if the newly scheduled taskActive will will be alone
 		
-		// Time up is handled circuit sequencer
-		//    either : stop on objective / stop on time
-		// Also handles case of Optimising
+		// Timeup just signals to circuit sequencer that its time is up
+		// Depending whether the circuit is alone or not
+		// it will really stop sooner or later
 
+		if (this.taskActive != null)
+		{
+			if ((Global.getTimeNowSinceMidnight() > this.taskNext.timeEnd))
+			{
+				this.stop();
+			}
+		}
 		if (this.taskNext != null)
 		{
 			//There is a waiting task. Replace active task if it exists
