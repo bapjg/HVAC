@@ -55,14 +55,14 @@ public class Circuit_Mixer extends Circuit_Abstract
 				}
 				else
 				{
-					Integer temp							= temperatureGradient.getTempToTarget();
-					this.heatRequired.tempMinimum			= 500;
-					this.heatRequired.tempMaximum			= 800;
-					state									= CIRCUIT_STATE_AwaitingHeat;
+					Integer temp									= temperatureGradient.getTempToTarget();
+					this.heatRequired.tempMinimum					= 500;
+					this.heatRequired.tempMaximum					= 800;
+					state											= CIRCUIT_STATE_AwaitingHeat;
 
 					LogIt.info("Circuit", "sequencerFloor", "Thread Started");	
 					Global.waitSeconds(1);
-					Thread thread_mixer 						= new Thread(new Thread_Mixer(mixer, this), "Mixer");
+					Thread thread_mixer 							= new Thread(new Thread_Mixer(mixer, this), "Mixer");
 					thread_mixer.start();
 				}
 				break;
@@ -71,13 +71,13 @@ public class Circuit_Mixer extends Circuit_Abstract
 				{
 					LogIt.action("PumpFloor", "On");
 					Global.pumpFloor.on();
-					state										= CIRCUIT_STATE_Running;
+					state											= CIRCUIT_STATE_Running;
 				}
 				break;
 			case CIRCUIT_STATE_Running:
-				Integer temp							= temperatureGradient.getTempToTarget();
-				this.heatRequired.tempMinimum			= 500;
-				this.heatRequired.tempMaximum			= 800;
+				Integer temp										= temperatureGradient.getTempToTarget();
+				this.heatRequired.tempMinimum						= 500;
+				this.heatRequired.tempMaximum						= 800;
 				break;
 			case CIRCUIT_STATE_Stopping:
 				LogIt.info("Circuit", "sequencerFloor", "Stopping");
