@@ -12,6 +12,7 @@ public class CircuitTask
 
 	public Boolean				active;
 	public Integer				state;
+	public Long					dateLastRun;
 	
 	public static final int 	TASK_STATE_WaitingToStart		= 0;
 	public static final int 	TASK_STATE_WillBeNext			= 1;
@@ -24,8 +25,6 @@ public class CircuitTask
 	public static final int 	TASK_STATE_RampUp   			= -3;
 	public static final int 	TASK_STATE_RampDown   			= -4;
 
-	public String				lastRun;
-	
 	public CircuitTask
 		(
 			String 				timeStart, 
@@ -43,6 +42,7 @@ public class CircuitTask
 		this.timeEndDisplay										= timeEnd;
 		this.tempObjective										= Integer.parseInt(tempObjective);
 		this.days												= days;
+		this.dateLastRun										= Global.getTimeMidnight();
 		
 		if (stopOnObjective.equalsIgnoreCase("1"))
 		{
@@ -70,5 +70,6 @@ public class CircuitTask
 		this.tempObjective										= tempObjective;
 		this.stopOnObjective									= stopOnObjective;
 		this.days												= days;
+		this.dateLastRun										= Global.getTimeMidnight();
 	}
 }

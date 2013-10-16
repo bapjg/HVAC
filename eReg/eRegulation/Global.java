@@ -58,7 +58,7 @@ public class Global extends DefaultHandler
 	
 	public static 	Circuits	 					circuits;
 	public static 	Circuit_HotWater				circuitHotWater;
-	public static 	Circuit_Gradient				circuitGradient;
+	public static 	Circuit_Radiator				circuitGradient;
 	public static 	Circuit_Mixer					circuitFloor;
 	
 	public static	Pumps							pumps;
@@ -222,6 +222,10 @@ public class Global extends DefaultHandler
 		// Returns the number of milliseconds since last midnight
 		Long now							= Calendar.getInstance().getTimeInMillis() - Global.getTimeMidnight();		
 		return now;
+	}
+	public static String getDayOfWeek()
+	{
+		return getDayOfWeek(0);
 	}
 	public static String getDayOfWeek(Integer extraDays)
 	{

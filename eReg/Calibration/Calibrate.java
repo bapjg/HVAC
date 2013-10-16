@@ -88,7 +88,7 @@ public class Calibrate
 		Global.mixerDown	 						= Global.relays.fetchRelay("Mixer_Down");
 
 		Global.circuitFloor							= (Circuit_Mixer) Global.circuits.fetchcircuit("Floor");
-		Global.circuitGradient						= (Circuit_Gradient) Global.circuits.fetchcircuit("Radiator");
+		Global.circuitGradient						= (Circuit_Radiator) Global.circuits.fetchcircuit("Radiator");
 		Global.circuitHotWater						= (Circuit_HotWater) Global.circuits.fetchcircuit("Hot_Water");
 
 		Global.mixer								= Global.circuitFloor.mixer;

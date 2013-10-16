@@ -1,9 +1,9 @@
 package eRegulation;
 
-public class Circuit_Gradient extends Circuit_Abstract
+public class Circuit_Radiator extends Circuit_Abstract
 {
 
-	public Circuit_Gradient(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
+	public Circuit_Radiator(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 	}

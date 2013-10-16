@@ -24,7 +24,7 @@ public class Circuits implements java.io.Serializable
 		}
 		else if (circuitType.equalsIgnoreCase("tempGradient"))
 		{
-			Circuit_Gradient circuitItem = new Circuit_Gradient(name, friendlyName, circuitType, tempMax, rampUpTime);
+			Circuit_Radiator circuitItem = new Circuit_Radiator(name, friendlyName, circuitType, tempMax, rampUpTime);
 			circuitList.add(circuitItem);
 		}
 		else if (circuitType.equalsIgnoreCase("Mixer"))
