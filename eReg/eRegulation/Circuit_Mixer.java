@@ -81,7 +81,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 //				LogIt.info("Circuit", "sequencerFloor", "Stopping Stopping zzzzzzzzzz");
 
 				if 	(	(Global.circuits.isSingleActiveCircuit())
-				&& 		(Global.thermoBoiler.reading > Global.thermoFloorOut.reading) )
+				&& 		(Global.thermoBoiler.reading > taskActive.tempObjective)   )
 				{
 					// We are alone, so as long as there is heat to get out of the system
 					// carry on
