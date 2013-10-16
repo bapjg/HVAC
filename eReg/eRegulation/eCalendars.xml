@@ -15,13 +15,13 @@
 				timeStart="06:30" timeEnd="07:30" tempObjective="500" stopOnObjective="0">
 			</Calendar>
 		    <Calendar type="Object" name="EveryDay" days="0"
-				timeStart="21:00" timeEnd="22:00" tempObjective="500" stopOnObjective="0">
+				timeStart="12:00" timeEnd="13:00" tempObjective="500" stopOnObjective="0">
 			</Calendar>
 		</Circuit>
 		
 		<Circuit type="Object" name="Floor">
 			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5, 6, 7"
-				timeStart="06:00" timeEnd="06:45" tempObjective="200" stopOnObjective="0">
+				timeStart="11:30" timeEnd="13:00" tempObjective="200" stopOnObjective="0">
 			</Calendar>
 			<Calendar type="Object" name="WeekDays" days="0"
 				timeStart="17:00" timeEnd="21:30" tempObjective="200" stopOnObjective="0">
