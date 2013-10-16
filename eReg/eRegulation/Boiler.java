@@ -26,7 +26,7 @@ public class Boiler
 	public Integer	   		tempMax;
 	public Integer	   		tempMin;
 	public Integer			tempNeverExceed						= 950;
-	public Integer			tempOvershoot						= 120;
+	public Integer			tempOvershoot						= 180;
 	public Integer			state;
 	
 	public final int 		STATE_Off 							= 0;
