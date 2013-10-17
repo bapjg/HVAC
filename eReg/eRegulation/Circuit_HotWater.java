@@ -42,6 +42,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				// This needs to be reapraised while running and if only circuit we can optimise based on statistics
 				
 				if (	(this.taskActive.stopOnObjective)
+//				&&		(Global.thermoHotWater.reading > this.taskActive.tempObjective))
 				&&		(Global.thermoBoiler.reading > this.taskActive.tempObjective))
 				{
 					this.heatRequired.tempMinimum						= 0;
