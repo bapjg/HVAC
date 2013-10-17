@@ -33,7 +33,7 @@ abstract class Circuit_Abstract
 	public TemperatureGradient 		temperatureGradient				= null;				//This will be overridden
 	
 	public CircuitTask				taskActive						= null;
-	public CircuitTask				taskNext						= null;
+//	public CircuitTask				taskNext						= null;
 	
 	public ArrayList <CircuitTask> 	circuitTaskList 				= new ArrayList <CircuitTask>();
 	public HeatRequired				heatRequired					= null;
