@@ -206,7 +206,7 @@ abstract class Circuit_Abstract
 				&& 			(circuitTask.timeEnd > now)       												// and time End is future
 				&&			(circuitTask.dateLastRun != today)						)						// and the last run wasn't today					
 				{
-System.out.println("Task is candidate to start. dateLastRun = " + circuitTask.dateLastRun);
+System.out.println("Task is candidate to start. dateLastRun = " + circuitTask.dateLastRun + " today = " + today);
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
 					if (taskFound == null)
