@@ -204,7 +204,7 @@ public class Global extends DefaultHandler
 	public void characters(char ch[], int start, int length) throws SAXException
 	{
 	}
-	public static Long getTimeMidnight()
+	public static Long getTimeAtMidnight()
 	{
 		// Returns the system time last midnight
 		Calendar now		 				= Calendar.getInstance();
@@ -220,7 +220,7 @@ public class Global extends DefaultHandler
 	public static Long getTimeNowSinceMidnight()
 	{
 		// Returns the number of milliseconds since last midnight
-		Long now							= Calendar.getInstance().getTimeInMillis() - Global.getTimeMidnight();		
+		Long now							= Calendar.getInstance().getTimeInMillis() - Global.getTimeAtMidnight();		
 		return now;
 	}
 	public static String getDayOfWeek()
@@ -253,7 +253,7 @@ public class Global extends DefaultHandler
 		calendar.set(Calendar.SECOND, 		0);
 		calendar.set(Calendar.MILLISECOND, 	0);
 		
-		return calendar.getTimeInMillis() - Global.getTimeMidnight();
+		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
 	}
 	public static void waitSeconds(Integer seconds)
 	{

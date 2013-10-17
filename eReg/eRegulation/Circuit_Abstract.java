@@ -135,7 +135,7 @@ abstract class Circuit_Abstract
 		thisTask.active												= true;
 		this.taskActive												= thisTask;
 		this.start();
-		this.taskActive.dateLastRun									= Global.getTimeMidnight();
+		this.taskActive.dateLastRun									= Global.getTimeAtMidnight();
 	}
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
@@ -148,7 +148,7 @@ abstract class Circuit_Abstract
 				aTask.active										= false;
 			}
 		}
-		this.taskActive.dateLastRun									= Global.getTimeMidnight();
+		this.taskActive.dateLastRun									= Global.getTimeAtMidnight();
 		this.taskActive												= null;
 	}
 	public void scheduleTask()
@@ -169,6 +169,7 @@ abstract class Circuit_Abstract
 		 */
 		String 					day 								= Global.getDayOfWeek(0);				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 		Long 					now									= Global.getTimeNowSinceMidnight();
+		Long 					today								= Global.getTimeAtMidnight();
 		CircuitTask				taskFound							= null;
 		
 		if (taskActive != null)
@@ -195,16 +196,17 @@ abstract class Circuit_Abstract
 				// - It can be running (Not possible in this branch of code)
 				// - It can be yet to run
 				
-				if (		(circuitTask.timeStart - this.getRampUpTime() > now)							// This task has yet to be performed (timeStart > now
-				&& 			(circuitTask.timeEnd > now)        )											// Or time End > now
+				if (		(circuitTask.timeStart - this.getRampUpTime() > now)							// This task has yet to be performed (timeStart future
+				&& 			(circuitTask.timeEnd > now)        )											// Or time End future
 				{
 					// This task has yet to run : both start and end are in the future
 					// Nothing todo
 				}
 				else if (	(circuitTask.timeStart - this.getRampUpTime() < now)							// This task has yet to be performed (timeStart is past
-				&& 			(circuitTask.timeEnd > now)       												// and time End is furture
-				&&			(circuitTask.dateLastRun != Global.getTimeMidnight())	)						// and the last run wasn't today					
+				&& 			(circuitTask.timeEnd > now)       												// and time End is future
+				&&			(circuitTask.dateLastRun != today)						)						// and the last run wasn't today					
 				{
+System.out.println("Task is candidate to start. dateLastRun = " + circuitTask.dateLastRun);
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
 					if (taskFound == null)
