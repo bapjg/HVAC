@@ -51,7 +51,6 @@ public class Monitor extends HttpServlet
         {
             e.printStackTrace();
         }
-        
         out.println((new StringBuilder("<h1>Hello World : ")).append(dbField).append("!</h1>").toString());
         out.println("</body>");
         out.println("</html>");
@@ -68,19 +67,19 @@ public class Monitor extends HttpServlet
         }
         catch (ClassNotFoundException eCNF)
         {
-        	System.err.println("Caught CNF");
+        	System.out.println("Caught CNF");
         	eCNF.printStackTrace();
             message_out 							= new Message_Abstract().new Nack();
         }
         catch (IOException eIO)
         {
-        	System.err.println("Caught IO");
+        	System.out.println("Caught IO");
         	System.out.println("An IO Exception occured : " + eIO);
         	message_out 							= new Message_Abstract().new Nack();
         }
         catch (Exception e)
         {
-        	System.err.println("Caught another exception");
+        	System.out.println("Caught another exception");
         	System.out.println("An Exception occured : " + e);
         	message_out 							= new Message_Abstract().new Nack();
         }
@@ -233,7 +232,7 @@ public class Monitor extends HttpServlet
             dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
             dbResultSet.updateString	("date", 			dateTime2Date(readings.dateTime));
             dbResultSet.updateString	("time", 			dateTime2Time(readings.dateTime));
-           dbResultSet.updateString		("reportType", 		readings.reportType);
+            dbResultSet.updateString	("reportType", 		readings.reportType);
             dbResultSet.updateString	("className", 		readings.className);
             dbResultSet.updateString	("methodName",		 readings.methodName);
             dbResultSet.updateString	("reportText", 		readings.reportText);
