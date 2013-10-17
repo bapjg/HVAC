@@ -66,13 +66,11 @@ abstract class Circuit_Abstract
 		circuitTaskList.add(circuitTaskItem);
 	}
 	public Long getRampUpTime()
-	{
-		return 0L; // Overriddent method
-	}
+	{  /* OverRiden in Circuit_XXX classes */	return 0L; 	}
 	public Long calculatePerformance()
-	{
-		return 0L; // Overriddent method
-	}
+	{  /* OverRiden in Circuit_XXX classes */	return 0L; 	}
+	public void sequencer()										// Task overridden in child classes
+	{ /* OverRiden in Circuit_XXX classes */	}
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
@@ -81,6 +79,9 @@ abstract class Circuit_Abstract
 	}
 	public void stop()
 	{
+		// Called on one of the following conditions
+		//   1. Time is up : 					Detected/Called by Circuit_Abstract.scheduleTask
+		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
 		LogIt.action(this.name, "Stop called");
 		this.state													= CIRCUIT_STATE_Stop_Requested;
 		this.heatRequired											= null;
@@ -118,9 +119,6 @@ abstract class Circuit_Abstract
 	{
 		LogIt.action(this.name, "Resume called");
 		this.state													= CIRCUIT_STATE_Resuming;
-	}
-	public void sequencer()										// Task overridden in sub classes
-	{
 	}
 	public void taskActivate(CircuitTask thisTask)
 	{
