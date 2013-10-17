@@ -124,6 +124,7 @@ abstract class Circuit_Abstract
 	}
 	public void taskActivate(CircuitTask thisTask)
 	{
+		System.out.println(this.name + " Task activated ");
 		for (CircuitTask aTask : this.circuitTaskList)			// Check to ensure there are no active tasks
 		{
 			if (aTask.active)
@@ -139,6 +140,7 @@ abstract class Circuit_Abstract
 	}
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
+		System.out.println(this.name + " Task Deactivated ");
 		thisTask.active												= false;
 		for (CircuitTask aTask : this.circuitTaskList)
 		{
@@ -186,7 +188,6 @@ abstract class Circuit_Abstract
 		
 		for (CircuitTask circuitTask : circuitTaskList) 												// Go through all tasks
 		{	
-System.out.println("1. Task is candidate to start. dateLastRun = " + circuitTask.dateLastRun + " today = " + today + " they are not equal = " + (!circuitTask.dateLastRun.equals(today)));
 			if (	(circuitTask.days.contains(day)) 
 			&& 		(! circuitTask.active)	          )
 			{
@@ -207,7 +208,6 @@ System.out.println("1. Task is candidate to start. dateLastRun = " + circuitTask
 				&& 			(circuitTask.timeEnd > now)       												// and time End is future
 				&&			(!circuitTask.dateLastRun.equals(today))						)						// and the last run wasn't today					
 				{
-System.out.println("2. Task is candidate to start. dateLastRun = " + circuitTask.dateLastRun + " today = " + today + " they are not equal = " + (!circuitTask.dateLastRun.equals(today)));
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
 					if (taskFound == null)
