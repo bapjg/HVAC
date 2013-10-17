@@ -204,9 +204,9 @@ abstract class Circuit_Abstract
 				}
 				else if (	(circuitTask.timeStart - this.getRampUpTime() < now)							// This task has yet to be performed (timeStart is past
 				&& 			(circuitTask.timeEnd > now)       												// and time End is future
-				&&			(circuitTask.dateLastRun != today)						)						// and the last run wasn't today					
+				&&			(!circuitTask.dateLastRun.equals(today))						)						// and the last run wasn't today					
 				{
-System.out.println("Task is candidate to start. dateLastRun = " + circuitTask.dateLastRun + " today = " + today + " they are not equal = " + (circuitTask.dateLastRun != today));
+System.out.println("Task is candidate to start. dateLastRun = " + circuitTask.dateLastRun + " today = " + today + " they are not equal = " + (!circuitTask.dateLastRun.equals(today)));
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
 					if (taskFound == null)
