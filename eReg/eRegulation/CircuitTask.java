@@ -42,7 +42,7 @@ public class CircuitTask
 		this.timeEndDisplay										= timeEnd;
 		this.tempObjective										= Integer.parseInt(tempObjective);
 		this.days												= days;
-		this.dateLastRun										= Global.getTimeAtMidnight();
+		this.dateLastRun										= 0L;
 		
 		if (stopOnObjective.equalsIgnoreCase("1"))
 		{
@@ -70,6 +70,6 @@ public class CircuitTask
 		this.tempObjective										= tempObjective;
 		this.stopOnObjective									= stopOnObjective;
 		this.days												= days;
-		this.dateLastRun										= Global.getTimeAtMidnight();
+		this.dateLastRun										= 0L;
 	}
 }
