@@ -186,6 +186,7 @@ abstract class Circuit_Abstract
 		
 		for (CircuitTask circuitTask : circuitTaskList) 												// Go through all tasks
 		{	
+System.out.println("1. Task is candidate to start. dateLastRun = " + circuitTask.dateLastRun + " today = " + today + " they are not equal = " + (!circuitTask.dateLastRun.equals(today)));
 			if (	(circuitTask.days.contains(day)) 
 			&& 		(! circuitTask.active)	          )
 			{
@@ -206,7 +207,7 @@ abstract class Circuit_Abstract
 				&& 			(circuitTask.timeEnd > now)       												// and time End is future
 				&&			(!circuitTask.dateLastRun.equals(today))						)						// and the last run wasn't today					
 				{
-System.out.println("Task is candidate to start. dateLastRun = " + circuitTask.dateLastRun + " today = " + today + " they are not equal = " + (!circuitTask.dateLastRun.equals(today)));
+System.out.println("2. Task is candidate to start. dateLastRun = " + circuitTask.dateLastRun + " today = " + today + " they are not equal = " + (!circuitTask.dateLastRun.equals(today)));
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
 					if (taskFound == null)
