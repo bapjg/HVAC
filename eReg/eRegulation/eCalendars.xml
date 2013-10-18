@@ -6,7 +6,7 @@
 				timeStart="06:00" timeEnd="06:30" tempObjective="350" stopOnObjective="1">
 			</Calendar>
 			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5, 6, 7"
-				timeStart="19:20" timeEnd="19:45" tempObjective="450" stopOnObjective="1">
+				timeStart="19:20" timeEnd="19:45" tempObjective="350" stopOnObjective="1">
 			</Calendar>
 		</Circuit>
 
