@@ -105,7 +105,7 @@ public class Panel_2_Configuration extends Fragment implements View.OnClickListe
     public void buttonThermometersClick(View myView)
     {
 		// This sets up the code to display the panel and get clicks in order to display an update screen
-        ArrayList  							data		 				= Global.configuration.thermometerList;
+        ArrayList  	<Mgmt_Msg_Configuration.Thermometer>	data		= Global.configuration.thermometerList;
         Activity 							activity					= (Activity) Global.actContext;
         AdapterView <Adapter_Thermometers> 	view						= (AdapterView) activity.findViewById(R.id.List_View);
         

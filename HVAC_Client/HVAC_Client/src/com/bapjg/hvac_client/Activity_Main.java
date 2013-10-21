@@ -144,6 +144,7 @@ public class Activity_Main extends Activity
 		{             
 			if (result instanceof Mgmt_Msg_Abstract.Ack)
 			{
+				System.out.println("11 Reply to Ping with Ack");
 				Toast.makeText(Global.appContext, "Connected to server : " + Global.serverURL, Toast.LENGTH_SHORT).show();
 		        HTTP_Req_Configuration			httpRequest			= new HTTP_Req_Configuration();
 				httpRequest.execute();
@@ -176,12 +177,14 @@ public class Activity_Main extends Activity
 		@Override
 		protected void onProgressUpdate(Void... progress) {}
 		@Override
-	    protected void onPostExecute(Mgmt_Msg_Abstract result) //NOT USED //NOT USED
+	    protected void onPostExecute(Mgmt_Msg_Abstract result)
 		{             
+			System.out.println("1. hello here");
 			if (result instanceof Mgmt_Msg_Configuration.Data)
 			{
 				Mgmt_Msg_Configuration.Data msg_received = (Mgmt_Msg_Configuration.Data) result;
 				Global.configuration					 = msg_received;
+				System.out.println("2. hello here");
 			}
 			else
 			{

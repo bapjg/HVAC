@@ -51,7 +51,6 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 		{
 			if (Global.serverURL == "")
 			{
-				System.out.println("In HTTP_Req_Temp/doInBackground and no connection has yet been established");
 				return new Mgmt_Msg_Abstract().new NoConnection();
 			}
 			else
@@ -64,9 +63,6 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 		@Override
 	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
 		{             
-			System.out.println("step 4");
-			System.out.println("step 4.1" + (result.getClass().toString()));
-			
 			if (result instanceof Mgmt_Msg_Temperatures.Data)
 			{
 				Mgmt_Msg_Temperatures.Data msg_received 	= (Mgmt_Msg_Temperatures.Data) result;
@@ -75,7 +71,6 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 				// Need to change this to avoid null pointer exception
 				// Probably due to (Activity) a not being current any more (clicking too fast)
 				
-				System.out.println("aaaaaaaaaaa " + msg_received.date + " bbb " + msg_received.time);
 				((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.date));
 				((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.time));
 				
@@ -92,18 +87,11 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 			}
 			else if (result instanceof Mgmt_Msg_Temperatures.NoConnection)
 			{
-				System.out.println("In HTTP_Req_Temp/onPostExecute and no connection has yet been established");
+				Toast.makeText(getActivity(), "No Connection established here", Toast.LENGTH_SHORT).show();
 			}
 			else
 			{
-				Context 				context 				= getActivity();
-				CharSequence 			text 					= "A Nack has been returned";
-				int 					duration 				= Toast.LENGTH_SHORT;
-
-				Toast 					toast 					= Toast.makeText(context, text, duration);
-				toast.show();
-				
-				Toast.makeText(getActivity(), "What a shame", Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), "A Nack has been returned", Toast.LENGTH_SHORT).show();
 			}
 	    }
 	}
@@ -147,15 +135,14 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
     		// buttonThermometersClick(myView);	
     		if (Global.serverURL.equalsIgnoreCase(""))
     		{
-    			System.out.println("1");
-    			Toast.makeText(Global.appContext, "Server connexion not yet established", Toast.LENGTH_LONG).show();
+    			System.out.println("1 Server connection not established");
+    			Toast.makeText(Global.appContext, "45 Server connexion not yet established", Toast.LENGTH_LONG).show();
     		}
     		else
     		{
-    			System.out.println("2");
+    			System.out.println("2 connection established");
     			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
     			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
-//    			Toast.makeText(Global.appContext, "Getting Data", Toast.LENGTH_LONG).show();
     		}
     	}
 	}    
