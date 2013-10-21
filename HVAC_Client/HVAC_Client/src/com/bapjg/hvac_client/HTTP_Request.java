@@ -114,11 +114,11 @@ System.out.println("Mgmt_Msg_Abstract/sendData MalformedURLException : " + eMUE)
 		}
 		catch (SocketTimeoutException eTimeOut)
 		{
-    		System.out.println(" HTTP_Request TimeOut on write : " + eTimeOut);
+    		System.out.println("Mgmt_Msg_Abstract/sendData TimeOut on write : " + eTimeOut);
 		}
 		catch (Exception eSend) 
 		{
-    		System.out.println(" HTTP_Request Send : " + eSend);
+    		System.out.println("Mgmt_Msg_Abstract/sendData Send : " + eSend);
 		}
 
 		try
@@ -128,14 +128,14 @@ System.out.println("Mgmt_Msg_Abstract/sendData MalformedURLException : " + eMUE)
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{
-System.out.println(" HTTP_Request ClassNotFound : " + eClassNotFound);
+System.out.println("Mgmt_Msg_Abstract/sendData ClassNotFound : " + eClassNotFound);
     		return new Mgmt_Msg_Abstract().new Nack();
 		}
 		catch (SocketTimeoutException eTimeOut)
 		{
-			System.out.println("eTimeOut");
+			System.out.println("Mgmt_Msg_Abstract/sendData other");
 			// Consider retries
-			System.out.println(" HTTP_Request TimeOut on read or write : " + eTimeOut);
+			System.out.println("Mgmt_Msg_Abstract/sendData TimeOut on read or write : " + eTimeOut);
 			return new Mgmt_Msg_Abstract().new Nack();	
 		}
 		catch (Exception e) 
