@@ -56,7 +56,7 @@ public class HTTP_Request
 		{
 			System.out.println("Ping Ack remote");
 			Global.serverURL								= "http://home.bapjg.com:8080/hvac/Management";
-			return new Mgmt_Msg_Abstract().new Nack();	
+			return new Mgmt_Msg_Abstract().new Ack();	
 		}
 		System.out.println("Ping Nack giveup");
 		return new Mgmt_Msg_Abstract().new Nack();	
@@ -99,8 +99,8 @@ System.out.println("Mgmt_Msg_Abstract/sendData MalformedURLException : " + eMUE)
 		
 		servletConnection.setDoOutput(true);
 		servletConnection.setUseCaches(false);
-		servletConnection.setConnectTimeout(3000);
-		servletConnection.setReadTimeout(3000);
+		servletConnection.setConnectTimeout(5000);
+		servletConnection.setReadTimeout(5000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 
 		try
@@ -178,8 +178,8 @@ System.out.println("Mgmt_Msg_Abstract/sendData MalformedURLException : " + eMUE)
 		
 		servletConnection.setDoOutput(true);
 		servletConnection.setUseCaches(false);
-		servletConnection.setConnectTimeout(3000);
-		servletConnection.setReadTimeout(3000);
+		servletConnection.setConnectTimeout(5000);
+		servletConnection.setReadTimeout(5000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 
 		try
