@@ -19,22 +19,11 @@ public class Listener_Tabs implements ActionBar.TabListener
 		this.menu 		= choices;
 		this.panel 		= panel;
 	}
-//	public Listener_Tabs(Fragment information) 
-//	{
-//		this.menu 		= null;
-//		this.panel 		= panel;
-//	}
-//	public Listener_Tabs(String tabName) 
-//	{
-//		this.menu 		= null;
-//		this.panel 		= null;
-//	}
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) 
 	{
 	//	Toast.makeText(Global.appContext, "Reselected!", Toast.LENGTH_LONG).show();
 	}
-
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) 
 	{

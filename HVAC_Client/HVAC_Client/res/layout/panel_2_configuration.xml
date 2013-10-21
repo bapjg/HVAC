@@ -20,13 +20,11 @@
 	        android:layout_width="50dp"
 	        android:layout_height="wrap_content"
 	        android:text="-" />
-
 	    <Button
 	        android:id="@+id/Plus"
 	        android:layout_width="50dp"
 	        android:layout_height="wrap_content"
 			style						= "@style/AD_Button"
-	       
 	        android:text="+" />
 	</LinearLayout>    
     <LinearLayout

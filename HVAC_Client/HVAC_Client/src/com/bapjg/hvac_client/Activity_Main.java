@@ -54,19 +54,20 @@ public class Activity_Main extends Activity
         ActionBar.Tab 			tabCalendars		 	= actionbar.newTab().setText("Calendars");
         ActionBar.Tab 			tabActions				= actionbar.newTab().setText("Actions");
         
+        // Global contains Objects Panel_1_xxx etc.
         global.panelTemperatures 						= new Panel_1_Temperatures();
         global.panelConfiguration 						= new Panel_2_Configuration();
         global.panelCalendars 							= new Panel_3_Calendars();
         global.panelActions 							= new Panel_4_Actions();
         
         // Setup the Menu Fragments
-        // Menu_0_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
+        // Menu_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
         // The onCreate method, calls the onClick argument of the first item in the list	
         //	
-        Menu_0_Fragment		menuTemperatures			= new Menu_0_Fragment(global.panelTemperatures, 	R.layout.menu_1_temperatures);
-        Menu_0_Fragment		menuConfiguration			= new Menu_0_Fragment(global.panelConfiguration, 	R.layout.menu_2_configuration);
-        Menu_0_Fragment		menuActions					= new Menu_0_Fragment(global.panelActions, 			R.layout.menu_4_actions);
-        Menu_0_Fragment		menuCalendars				= new Menu_0_Fragment(global.panelCalendars, 		R.layout.menu_3_calendars);
+        Menu_Fragment		menuTemperatures			= new Menu_Fragment(global.panelTemperatures, 	R.layout.menu_1_temperatures);
+        Menu_Fragment		menuConfiguration			= new Menu_Fragment(global.panelConfiguration, 	R.layout.menu_2_configuration);
+        Menu_Fragment		menuActions					= new Menu_Fragment(global.panelActions, 		R.layout.menu_4_actions);
+        Menu_Fragment		menuCalendars				= new Menu_Fragment(global.panelCalendars, 		R.layout.menu_3_calendars);
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu fragment   ,  	panel object
