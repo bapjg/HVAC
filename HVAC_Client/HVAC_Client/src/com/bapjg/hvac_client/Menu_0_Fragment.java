@@ -28,16 +28,15 @@ public class Menu_0_Fragment extends Fragment // implements View.OnClickListener
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	// Inflate the menuLayout into container (menu_container)
-    	View result = inflater.inflate(this.menuLayout, container, false);
-    	// The menuLayout contains only buttons. Set the OnClickListener to the panelFragment 
-		for (int i = 0; i < ((ViewGroup) result).getChildCount(); i++)
+    	View result = inflater.inflate(this.menuLayout, container, false);							// Inflate the menuLayout into container (menu_container)
+    	
+		for (int i = 0; i < ((ViewGroup) result).getChildCount(); i++)								// The menuLayout contains only buttons. Set the OnClickListener to the panelFragment 
 		{
 			Button				buttonChild 			= (Button) ((ViewGroup) result).getChildAt(i);
 			buttonChild.setOnClickListener((OnClickListener) this.panelFragment);
 		}
-		((OnClickListener) this.panelFragment).onClick((Button) ((ViewGroup) result).getChildAt(0)); // ie Panel_1_Temperatures.onClick
-    	return result;
+		((OnClickListener) this.panelFragment).onClick((Button) ((ViewGroup) result).getChildAt(0)); // call the onClick of the first child ie Panel_1_Temperatures.onClick
+    	return result;																				 // and pass the firstChild as eventInitiator argument
     }
 }
 

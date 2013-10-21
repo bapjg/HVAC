@@ -36,9 +36,6 @@ public class Panel_2_Configuration extends Fragment implements View.OnClickListe
     {
         // Inflate the layout for this fragment
         View myView =  inflater.inflate(R.layout.panel_2_configuration, container, false);
-        //myView.findViewById(R.id.buttonThermometers).setOnClickListener((OnClickListener) this);
-        //ViewGroup myViewGroup = (ViewGroup) myView;
-        //setButtonOnClick(myViewGroup);
         return myView;
     }
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
@@ -52,8 +49,8 @@ public class Panel_2_Configuration extends Fragment implements View.OnClickListe
         	View 						newView 						= inflater.inflate(R.layout.detail_thermometer, viewGroup, true);
 
         	FragmentTransaction 		ft 								= getActivity().getFragmentManager().beginTransaction();
-        	Detail_Thermometer 		dt 								= new Detail_Thermometer();
-        	dt.me														= Global.configuration.thermometerList.get(position -1);
+        	Detail_Thermometer 			dt 								= new Detail_Thermometer();
+        	dt.me														= Global.configuration.thermometerList.get(position -1);	//position 0 contains titles
         	ft.replace(R.id.panel_container, dt);
         	ft.commit();
         }

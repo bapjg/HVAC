@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 import com.bapjg.hvac_client.Mgmt_Msg_Temperatures.Request;
 
@@ -24,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class Panel_1_Temperatures extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
 {
@@ -87,7 +89,7 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 			}
 			else if (result instanceof Mgmt_Msg_Temperatures.NoConnection)
 			{
-				Toast.makeText(getActivity(), "No Connection established here", Toast.LENGTH_SHORT).show();
+				// Toast.makeText(getActivity(), "No Connection established yet", Toast.LENGTH_SHORT).show();
 			}
 			else
 			{
@@ -132,19 +134,37 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
     	
     	if (myCaption.equalsIgnoreCase("Temperatures"))
     	{
-    		// buttonThermometersClick(myView);	
+    		buttonTemperaturesClick(myView);	
+    	}
+	}
+    public void buttonTemperaturesClick(View myView)
+    {
+		if (!Global.initialisationCompleted)
+		{
     		if (Global.serverURL.equalsIgnoreCase(""))
     		{
-    			System.out.println("1 Server connection not established");
-    			Toast.makeText(Global.appContext, "45 Server connexion not yet established", Toast.LENGTH_LONG).show();
+    			System.out.println("P1_Temperatures : Server connection not established");
+    			Toast.makeText(Global.appContext, "P1_Temperatures : Server connexion not yet established", Toast.LENGTH_LONG).show();
     		}
     		else
     		{
-    			System.out.println("2 connection established");
+    			System.out.println("P1_Temperatures : connection established");
     			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
     			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
     		}
-    	}
-	}    
+		}
+
+		// This sets up the code to display the panel and get clicks in order to display an update screen
+// All this comes from Thermometers
+//        ArrayList  	<Mgmt_Msg_Configuration.Thermometer>	data		= Global.configuration.thermometerList;
+//        Activity 							activity					= (Activity) Global.actContext;
+//        AdapterView <Adapter_Thermometers> 	view						= (AdapterView) activity.findViewById(R.id.List_View);
+//        
+//        Adapter_Thermometers 				adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
+//        
+//        view.setAdapter(adapter);
+//        view.setOnItemClickListener((OnItemClickListener) this);	
+    }
+
 }
 

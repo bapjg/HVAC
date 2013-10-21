@@ -60,16 +60,16 @@ public class Activity_Main extends Activity
         global.panelActions 							= new Panel_4_Actions();
         
         // Setup the Menu Fragments
-        // Menu_0_Fragment constructor takes 2 arguments :
-        //	PanelFragment
-        //	Layout.id
+        // Menu_0_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
+        // The onCreate method, calls the onClick argument of the first item in the list	
+        //	
         Menu_0_Fragment		menuTemperatures			= new Menu_0_Fragment(global.panelTemperatures, 	R.layout.menu_1_temperatures);
         Menu_0_Fragment		menuConfiguration			= new Menu_0_Fragment(global.panelConfiguration, 	R.layout.menu_2_configuration);
         Menu_0_Fragment		menuActions					= new Menu_0_Fragment(global.panelActions, 			R.layout.menu_4_actions);
         Menu_0_Fragment		menuCalendars				= new Menu_0_Fragment(global.panelCalendars, 		R.layout.menu_3_calendars);
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
-        //                                                 menu layout     ,  panel layout
+        //                                                 menu fragment   ,  	panel object
         tabTemperatures.setTabListener	(new Listener_Tabs(menuTemperatures, 	global.panelTemperatures));
         tabConfiguration.setTabListener	(new Listener_Tabs(menuConfiguration, 	global.panelConfiguration));
         tabCalendars.setTabListener		(new Listener_Tabs(menuCalendars, 		global.panelCalendars));
@@ -82,6 +82,7 @@ public class Activity_Main extends Activity
 
         HTTP_Req_Ping								httpRequest			= new HTTP_Req_Ping();
 		httpRequest.execute();
+		Global.initialisationCompleted					= true;
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -144,14 +145,14 @@ public class Activity_Main extends Activity
 		{             
 			if (result instanceof Mgmt_Msg_Abstract.Ack)
 			{
-				System.out.println("11 Reply to Ping with Ack");
-				Toast.makeText(Global.appContext, "Connected to server : " + Global.serverURL, Toast.LENGTH_SHORT).show();
+				System.out.println("Activity_Main : Reply to Ping with Ack");
+				Toast.makeText(Global.appContext, "Activity_Main : Connected to server : " + Global.serverURL, Toast.LENGTH_SHORT).show();
 		        HTTP_Req_Configuration			httpRequest			= new HTTP_Req_Configuration();
 				httpRequest.execute();
 			}
 			else
 			{
-				Toast.makeText(Global.appContext, "Not Connected, no server replied", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Global.appContext, "Activity_Main : Not Connected, no server replied", Toast.LENGTH_SHORT).show();
 			}
 	    }
 	}
@@ -179,16 +180,16 @@ public class Activity_Main extends Activity
 		@Override
 	    protected void onPostExecute(Mgmt_Msg_Abstract result)
 		{             
-			System.out.println("1. hello here");
+			System.out.println("Activity_Main : hello here");
 			if (result instanceof Mgmt_Msg_Configuration.Data)
 			{
-				Mgmt_Msg_Configuration.Data msg_received = (Mgmt_Msg_Configuration.Data) result;
-				Global.configuration					 = msg_received;
-				System.out.println("2. hello here");
+				Mgmt_Msg_Configuration.Data msg_received 			= (Mgmt_Msg_Configuration.Data) result;
+				Global.configuration					 			= msg_received;
+				System.out.println("Activity_Main : hello here");
 			}
 			else
 			{
-				Toast.makeText(Global.appContext, "A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
+				Toast.makeText(Global.appContext, "Activity_Main : A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
 			}
 	    }
 	}

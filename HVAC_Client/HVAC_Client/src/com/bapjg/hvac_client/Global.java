@@ -18,9 +18,12 @@ public class Global
 	public static	Panel_2_Configuration		panelConfiguration;
 	public static	Panel_3_Calendars			panelCalendars;
 	public static	Panel_4_Actions				panelActions;	
+	
+	public static	Boolean						initialisationCompleted;
 
 	public Global() 
 	{
+		initialisationCompleted					= false;
 	}
 
 }
