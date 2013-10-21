@@ -45,6 +45,7 @@ public class HTTP_Request
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
 			System.out.println("Ping Ack local");
+			Global.serverURL								= "http://192.168.5.20:8080/hvac/Management";
 			return new Mgmt_Msg_Abstract().new Ack();	
 		}
 		System.out.println("Ping sent remote");
@@ -54,6 +55,7 @@ public class HTTP_Request
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
 			System.out.println("Ping Ack remote");
+			Global.serverURL								= "http://home.bapjg.com:8080/hvac/Management";
 			return new Mgmt_Msg_Abstract().new Nack();	
 		}
 		System.out.println("Ping Nack giveup");

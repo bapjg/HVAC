@@ -20,6 +20,7 @@ import javax.sql.DataSource;
 import com.bapjg.hvac_client.*;
 import com.bapjg.hvac_client.Mgmt_Msg_Abstract.Ping;
 import com.bapjg.hvac_client.Mgmt_Msg_Calendar.Data;
+import com.bapjg.hvac_client.Mgmt_Msg_Configuration.Thermometer;
 
 public class Management extends HttpServlet
 {
@@ -57,11 +58,8 @@ public class Management extends HttpServlet
         
         try
         {
-//            System.out.println("Step 1");
             ObjectInputStream 			input 		= new ObjectInputStream(request.getInputStream());
-//            System.out.println("Step 2");
             message_in 								= input.readObject();
-//            System.out.println("Step 3");
         }
         catch (ClassNotFoundException eCNF)
         {
@@ -86,6 +84,10 @@ public class Management extends HttpServlet
         else if (message_in instanceof Mgmt_Msg_Temperatures.Request)
         {
             message_out 							= processTemperaturesReq();
+        } 
+		else if (message_in instanceof Mgmt_Msg_Configuration.Request)
+        {
+            message_out 							= processConfigurationRequest();
         } 
 		else if (message_in instanceof Mgmt_Msg_Calendar.Request)
         {
@@ -133,6 +135,8 @@ public class Management extends HttpServlet
             
             String				dbSQL				= "";
             dbSQL									+= "SELECT     dateTime,        ";	
+            dbSQL									+= "           date,            ";	
+            dbSQL									+= "           time,            ";	
             dbSQL									+= "           tempBoiler,      ";	
             dbSQL									+= "           tempHotWater,    ";	
             dbSQL									+= "           tempBoilerIn,    ";
@@ -149,7 +153,9 @@ public class Management extends HttpServlet
             
             ResultSet 			dbResultSet 		= dbStatement.executeQuery(dbSQL);
             dbResultSet.next();
-            returnBuffer.dateTime 					= dbResultSet.getString("dateTime");
+            returnBuffer.dateTime 					= dbResultSet.getLong("dateTime");
+            returnBuffer.date 						= dbResultSet.getString("date");
+            returnBuffer.time 						= dbResultSet.getString("time");
             returnBuffer.tempBoiler 				= dbResultSet.getInt("tempBoiler");
             returnBuffer.tempHotWater 				= dbResultSet.getInt("tempHotWater");
             returnBuffer.tempBoilerIn 				= dbResultSet.getInt("tempBoilerIn");
@@ -217,6 +223,47 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
+    public Mgmt_Msg_Configuration.Data processConfigurationRequest()
+    {
+        dbOpen();
+        
+        Mgmt_Msg_Configuration.Data 					returnBuffer 		= new Mgmt_Msg_Configuration().new Data();
+
+
+        try
+        {
+//            dbStatement 						= dbConnection.createStatement(1004, 1008);
+//            ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT dateTime, calendars FROM calendars ORDER BY dateTime DESC LIMIT 1");
+//            dbResultSet.next();
+//            //returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
+//            dbStatement.close();
+//            dbConnection.close();
+
+        	Mgmt_Msg_Configuration.Thermometer 			thermometer 		= returnBuffer.new Thermometer();
+        	thermometer.name 												= "tempBoiler";
+        	thermometer.friendlyName 										= "Chaudiere";
+        	thermometer.thermoID 											= "028-0000xxxx";
+        	returnBuffer.thermometerList.add(thermometer);
+     
+        	thermometer 													= returnBuffer.new Thermometer();
+            thermometer.name 												= "tempHotWater";
+            thermometer.friendlyName 										= "Eau Chaude Sanitaire";
+            thermometer.thermoID 											= "028-0000yyyy";
+            returnBuffer.thermometerList.add(thermometer);
+     
+        	thermometer 													= returnBuffer.new Thermometer();
+        	thermometer.name 												= "tempRadiator";
+            thermometer.friendlyName 										= "Radiateur";
+            thermometer.thermoID 											= "028-0000abcd";
+            returnBuffer.thermometerList.add(thermometer);
+        }
+        catch(Exception e)
+//        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return returnBuffer;
+    }
     public void reply(HttpServletResponse response, Mgmt_Msg_Abstract message_out) throws IOException 
     {
         response.reset();
@@ -239,5 +286,4 @@ public class Management extends HttpServlet
     	
     	return dateTimeString;
     }
-
 }

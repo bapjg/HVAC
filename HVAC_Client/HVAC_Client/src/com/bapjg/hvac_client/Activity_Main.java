@@ -80,33 +80,8 @@ public class Activity_Main extends Activity
         actionbar.addTab(tabCalendars);
         actionbar.addTab(tabActions);
 
-        // Simulate Configuration message from server
-        Global.configuration											= new Mgmt_Msg_Configuration();
- 		
- 		Mgmt_Msg_Configuration						config				= Global.configuration;
- 
-    	Mgmt_Msg_Configuration.Thermometer 			thermometer 		= config.new Thermometer();
-    	thermometer.name = "tempBoiler";
-    	thermometer.friendlyName ="Chaudiere";
-    	thermometer.thermoID = "028-0000xxxx";
-    	config.thermometerList.add(thermometer);
- 
-    	thermometer 													= config.new Thermometer();
-        thermometer.name = "tempHotWater";
-        thermometer.friendlyName ="Eau Chaude Sanitaire";
-        thermometer.thermoID = "028-0000yyyy";
-        config.thermometerList.add(thermometer);
- 
-    	thermometer 													= config.new Thermometer();
-    	thermometer.name = "tempRadiator";
-        thermometer.friendlyName ="Radiateur";
-        thermometer.thermoID = "028-0000zzzz";
-        config.thermometerList.add(thermometer);
-System.out.println("ping start");       
-        HTTP_Req_Ping							httpRequest				= new HTTP_Req_Ping();
-//		httpRequest.execute(new Mgmt_Msg_Abstract().new Ping());
+        HTTP_Req_Ping								httpRequest			= new HTTP_Req_Ping();
 		httpRequest.execute();
-
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -150,25 +125,6 @@ System.out.println("ping start");
 	//===========================================================================================================================
 	//
 	//
-//	public void temperaturesClick(View v)
-//	{
-//		if (Global.serverURL.equalsIgnoreCase(""))
-//		{
-//			Toast.makeText(Global.appContext, "Server connexion not yet established", Toast.LENGTH_LONG).show();
-//		}
-//		else
-//		{
-//			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
-//			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
-//		}
-//	}
-	//
-	//
-	//===========================================================================================================================
-
-	//===========================================================================================================================
-	//
-	//
 	private class HTTP_Req_Ping extends AsyncTask <Void, Void, Mgmt_Msg_Abstract> 
 	{
 		public HTTP_Request				http;
@@ -182,19 +138,19 @@ System.out.println("ping start");
 			return http.ping();
 		}
 		@Override
-		protected void onProgressUpdate(Void... progress) 
-		{
-	    }
+		protected void onProgressUpdate(Void... progress) {}
 		@Override
 	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
 		{             
 			if (result instanceof Mgmt_Msg_Abstract.Ack)
 			{
-				Toast.makeText(Global.appContext, "Connected to server : " + Global.serverURL + " result : " + result, Toast.LENGTH_LONG).show();
+				Toast.makeText(Global.appContext, "Connected to server : " + Global.serverURL, Toast.LENGTH_SHORT).show();
+		        HTTP_Req_Configuration			httpRequest			= new HTTP_Req_Configuration();
+				httpRequest.execute();
 			}
 			else
 			{
-				Toast.makeText(Global.appContext, "Not Connected, no server replied", Toast.LENGTH_LONG).show();
+				Toast.makeText(Global.appContext, "Not Connected, no server replied", Toast.LENGTH_SHORT).show();
 			}
 	    }
 	}
@@ -205,42 +161,27 @@ System.out.println("ping start");
 	//===========================================================================================================================
 	//
 	//
-	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
+	private class HTTP_Req_Configuration extends AsyncTask <Void, Void, Mgmt_Msg_Abstract> 
 	{
 		public HTTP_Request				http;
-		public HTTP_Req_Temp()
+		public HTTP_Req_Configuration()
 		{
 			http													= new HTTP_Request();
 		}
 		@Override
-		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
+		protected Mgmt_Msg_Abstract doInBackground(Void... messageOut) 
 		{
-			return http.sendData(messageOut[0]);			
+			return http.sendData(new Mgmt_Msg_Configuration().new Request());			
 		}
 		@Override
-		protected void onProgressUpdate(Void... progress) 
-		{
-	    }
+		protected void onProgressUpdate(Void... progress) {}
 		@Override
-	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
+	    protected void onPostExecute(Mgmt_Msg_Abstract result) //NOT USED //NOT USED
 		{             
-			if (result instanceof Mgmt_Msg_Temperatures.Data)
+			if (result instanceof Mgmt_Msg_Configuration.Data)
 			{
-				Mgmt_Msg_Temperatures.Data msg_received = (Mgmt_Msg_Temperatures.Data) result;
-
-				((TextView) findViewById(R.id.Date)).setText(displayDate(msg_received.dateTime));
-				((TextView) findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));
-
-				((TextView) findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
-				((TextView) findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
-				((TextView) findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
-				((TextView) findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
-				((TextView) findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
-				((TextView) findViewById(R.id.FloorHot)).setText(displayTemperature(msg_received.tempFloorHot));
-				((TextView) findViewById(R.id.FloorCold)).setText(displayTemperature(msg_received.tempFloorCold));
-				((TextView) findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
-				((TextView) findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
-				((TextView) findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
+				Mgmt_Msg_Configuration.Data msg_received = (Mgmt_Msg_Configuration.Data) result;
+				Global.configuration					 = msg_received;
 			}
 			else
 			{
@@ -251,18 +192,4 @@ System.out.println("ping start");
 	//
 	//
 	//===========================================================================================================================
-	private String displayTemperature(Integer temperature)
-	{
-		int degrees = temperature/10;
-		int decimal = temperature - degrees*10;
-		return degrees + "." + decimal;
-	}
-	private String displayDate(String dateTime)
-	{
-		return dateTime.substring(8,10) + "/" + dateTime.substring(5,7);
-	}
-	private String displayTime(String dateTime)
-	{
-		return dateTime.substring(11,13) + ":" + dateTime.substring(14,16) + ":" + dateTime.substring(17,19);
-	}
 }

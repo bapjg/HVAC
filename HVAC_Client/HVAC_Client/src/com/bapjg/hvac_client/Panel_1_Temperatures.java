@@ -60,9 +60,7 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 			}
 		}	
 		@Override
-		protected void onProgressUpdate(Void... progress) 
-		{
-	    }
+		protected void onProgressUpdate(Void... progress)  { }
 		@Override
 	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
 		{             
@@ -77,9 +75,10 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 				// Need to change this to avoid null pointer exception
 				// Probably due to (Activity) a not being current any more (clicking too fast)
 				
-				((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.dateTime));
-				((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));
-
+				System.out.println("aaaaaaaaaaa " + msg_received.date + " bbb " + msg_received.time);
+				((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.date));
+				((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.time));
+				
 				((TextView) a.findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
 				((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
 				((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
@@ -114,13 +113,13 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 		int decimal = temperature - degrees*10;
 		return degrees + "." + decimal;
 	}
-	private String displayDate(String dateTime)
+	private String displayDate(String date)
 	{
-		return dateTime.substring(8,10) + "/" + dateTime.substring(5,7);
+		return date.substring(8,10) + "/" + date.substring(5,7);
 	}
-	private String displayTime(String dateTime)
+	private String displayTime(String time)
 	{
-		return dateTime.substring(11,13) + ":" + dateTime.substring(14,16) + ":" + dateTime.substring(17,19);
+		return time.substring(0,8);
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
@@ -143,18 +142,20 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 		
 		((Button) myView).setTextColor(Color.YELLOW);
     	
-    	if (myCaption.equalsIgnoreCase("Thermometers"))
+    	if (myCaption.equalsIgnoreCase("Temperatures"))
     	{
     		// buttonThermometersClick(myView);	
     		if (Global.serverURL.equalsIgnoreCase(""))
     		{
+    			System.out.println("1");
     			Toast.makeText(Global.appContext, "Server connexion not yet established", Toast.LENGTH_LONG).show();
     		}
     		else
     		{
-//    			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
-//    			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
-    			Toast.makeText(Global.appContext, "Getting Data", Toast.LENGTH_LONG).show();
+    			System.out.println("2");
+    			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
+    			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+//    			Toast.makeText(Global.appContext, "Getting Data", Toast.LENGTH_LONG).show();
     		}
     	}
 	}    

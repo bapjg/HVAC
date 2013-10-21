@@ -4,7 +4,9 @@ public class Mgmt_Msg_Temperatures   extends Mgmt_Msg_Abstract
 {
 	public class Data   extends Mgmt_Msg_Abstract
 	{
-		public  String				dateTime;
+		public  Long				dateTime;
+		public  String				date;
+		public  String				time;
 		public  Integer				tempBoiler;
 		public  Integer				tempHotWater;
 		public  Integer				tempBoilerIn;

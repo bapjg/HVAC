@@ -10,39 +10,42 @@ public class Mgmt_Msg_Configuration extends Mgmt_Msg_Abstract
 	public ArrayList <Pump> 				pumpList 					= new ArrayList <Pump>();
 	public Params 							params;
 	
-	public class Relay
+	public class Relay implements java.io.Serializable
 	{
 		public String 						name;
 		public String 						friendlyName;
 		public int 							relayBank;
 		public int 							relayNumber;
 	}
-	public class Thermometer
+	public class Thermometer implements java.io.Serializable
 	{
 		public String 						name;
 		public String 						friendlyName;
 		public String 						thermoID;
 	}
-	public class Pump
+	public class Pump implements java.io.Serializable
 	{
 		public String 						name;
 		public String 						friendlyName;
 		public Relay						relay;
 	}
-	public class Circuit
+	public class Circuit implements java.io.Serializable
 	{
 		public String 						name;
 		public String 						friendlyName;
 		public String 						circuitType;
 		public Integer 						tempMax;
 	}
-	public class Params
+	public class Params implements java.io.Serializable
 	{
 		public Integer						summerTemp;
 		public Integer 						summerPumpDuration;
 		public String 						summerPumpTime;
 	}
 	public class Request extends Mgmt_Msg_Abstract
+	{
+	}
+	public class Data extends Mgmt_Msg_Configuration
 	{
 	}
 	public class Update extends Mgmt_Msg_Configuration
