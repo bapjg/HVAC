@@ -71,11 +71,10 @@ public class Thermometer_New
 		}
 		catch (Exception err)
 		{
-			LogIt.error("Thermometer", "read", "Error message was : " + err.getMessage() + ", continuing iteration", false);
-			Global.waitMilliSeconds(5);
+//			LogIt.error("Thermometer", "read", "Error message was : " + err.getMessage() + ", continuing iteration", false);
+			System.out.println("Thermometer read Error message was : " + err.getMessage());
 		}		
 
-		LogIt.error("Thermometer", "read", "5 reads in a row returned CRC error on: " + name, false);
 		return this.reading; //Last known good reading;
 	}
     public String toDisplay()
