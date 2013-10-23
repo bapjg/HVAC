@@ -11,7 +11,7 @@ public class Test
 	{
 		Control 		Me 							= new Control();
 		
-		Thermometer_New thermo						= new Thermometer_New("28.72D1 8504 0000", "Test", "Test friend");
+		Thermometer_New thermo						= new Thermometer_New("Test", "28.72D1 8504 0000", "Test friend");
 		thermo.read();
 		
 		
