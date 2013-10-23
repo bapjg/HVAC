@@ -68,7 +68,8 @@ public class Thermometer_New
   				System.out.println("simu 2");
    				DataOutputStream 	ThermoFile_OutputData 	= new DataOutputStream(ThermoFile_OutputStream);
   				System.out.println("simu 3");
-  				ThermoFile_OutputData.write(1);
+//  				ThermoFile_OutputData.write(1);
+  				ThermoFile_OutputData.writeUTF("a");
   				System.out.println("simu 4");
   				ThermoFile_OutputData.close();
   				ThermoFile_OutputStream.close();
