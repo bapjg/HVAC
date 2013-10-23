@@ -18,7 +18,8 @@ public class Test
 		for (i = 9; i < 13; i++)
 		{
 			Long now									= Global.getTimeNowSinceMidnight();
-			thermo.read(i.toString());
+			String iString								= i.toString();
+			thermo.read(iString);
 			Long later									= Global.getTimeNowSinceMidnight();
 			System.out.println("time required : " + (later - now));
 		
