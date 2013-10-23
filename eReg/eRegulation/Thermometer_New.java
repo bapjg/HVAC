@@ -62,6 +62,8 @@ public class Thermometer_New
 		{
   			if (all)
   			{
+  				try
+  				{
   				System.out.println("simu 1");
   				FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/1wire/simultaneous/temperature");
 //  				FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/xx.txt");
@@ -76,6 +78,11 @@ public class Thermometer_New
   				System.out.println("simu 4");
   				ThermoFile_OutputData.close();
   				ThermoFile_OutputStream.close();
+  				}
+  				catch (Exception e)
+  				{
+  				System.out.println("Simu write Error message was : " + e.getMessage());
+  				}		
 			}
     		FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature" + resolution);
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
