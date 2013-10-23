@@ -1,8 +1,11 @@
 package eRegulation;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -41,7 +44,7 @@ public class Thermometer_New
 //			read();
 //		}
 	}
-    public Integer read(String resolution)
+    public Integer read(String resolution, Boolean all)
 	{
      	/*
      	 *  Read times are :
@@ -50,12 +53,21 @@ public class Thermometer_New
      	 *  	Not in cache  : 10 bit - 400 ms
      	 *  	Not in cache  : 11 bit - 500 ms
      	 *  	Not in cache  : 12 bit - 900 ms
+     	 *  
+     	 *  	A change of resolution (either up or down) seems to be uncached
      	 */
     	
     	
     	try
 		{
-  			FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature" + resolution);
+  			if (all)
+  			{
+  	    		FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/1wire/simultaneous/temperature");
+  				DataOutputStream 	ThermoFile_OutputData 	= new DataOutputStream(ThermoFile_OutputStream);
+  				ThermoFile_OutputData.write(1);
+  				
+			}
+    		FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature" + resolution);
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
 			BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
 
