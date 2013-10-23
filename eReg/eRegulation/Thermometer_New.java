@@ -41,7 +41,7 @@ public class Thermometer_New
 //			read();
 //		}
 	}
-    public Integer read()
+    public Integer read(String resolution)
 	{
      	/*
      	 *  Read times are :
@@ -49,13 +49,13 @@ public class Thermometer_New
      	 *  	Not in cache  : 9 bit  - 300 ms
      	 *  	Not in cache  : 10 bit - 400 ms
      	 *  	Not in cache  : 11 bit - 500 ms
-     	 *  	Not in cache  : 12 bit - 300 ms
+     	 *  	Not in cache  : 12 bit - 900 ms
      	 */
     	
     	
     	try
 		{
-  			FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature12");
+  			FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature" + resolution);
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
 			BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
 
