@@ -63,8 +63,8 @@ public class Thermometer_New
 			Float	 		tempFloat	 					= Float.parseFloat(tempString);
 	    	System.out.println("7. reading");
 
-			System.out.println("tempString" + tempString);
-			System.out.println("tempFloat" + tempFloat);
+			System.out.println("tempString : " + tempString);
+			System.out.println("tempFloat  : " + tempFloat);
 			//			this.readingTrue								= (tempReading + 50)/100;
 //			this.reading									= this.readings.add((tempReading + 50)/100);
 //			return this.reading;
