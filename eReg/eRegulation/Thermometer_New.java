@@ -48,14 +48,14 @@ public class Thermometer_New
      	 *  	When in cache : 10 ms
      	 *  	Not in cache  : 9 bit  - 300 ms
      	 *  	Not in cache  : 10 bit - 400 ms
-     	 *  	Not in cache  : 11 bit - 300 ms
+     	 *  	Not in cache  : 11 bit - 500 ms
      	 *  	Not in cache  : 12 bit - 300 ms
      	 */
     	
     	
     	try
 		{
-  			FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature11");
+  			FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature12");
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
 			BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
 
