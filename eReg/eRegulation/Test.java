@@ -13,12 +13,16 @@ public class Test
 		
 		Thermometer_New thermo						= new Thermometer_New("Test", "28.72D1 8504 0000", "Test friend");
 
-		Long now									= Global.getTimeNowSinceMidnight();
-		thermo.read();
-		Long later									= Global.getTimeNowSinceMidnight();
-		System.out.println("time required : " + (later - now));
+
+		int i;
+		for (i = 0; i < 10; i++)
+		{
+			Long now									= Global.getTimeNowSinceMidnight();
+			thermo.read();
+			Long later									= Global.getTimeNowSinceMidnight();
+			System.out.println("time required : " + (later - now));
 		
-		
+		}
 		System.out.println("Done");
 	}
 }
