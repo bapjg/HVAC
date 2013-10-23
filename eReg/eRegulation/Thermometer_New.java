@@ -60,11 +60,11 @@ public class Thermometer_New
 
 			String	 		tempString	 					= ThermoFile_InputLine.replace(" ", "");
 	    	System.out.println("6. reading");
-			Integer 		tempReading 					= Integer.parseInt(tempString);
+			Float	 		tempFloat	 					= Float.parseFloat(tempString);
 	    	System.out.println("7. reading");
 
 			System.out.println("tempString" + tempString);
-			System.out.println("tempReading" + tempReading);
+			System.out.println("tempFloat" + tempFloat);
 			//			this.readingTrue								= (tempReading + 50)/100;
 //			this.reading									= this.readings.add((tempReading + 50)/100);
 //			return this.reading;
