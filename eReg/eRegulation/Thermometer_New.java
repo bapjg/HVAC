@@ -67,6 +67,8 @@ public class Thermometer_New
   				DataOutputStream 	ThermoFile_OutputData 	= new DataOutputStream(ThermoFile_OutputStream);
   				ThermoFile_OutputData.write(1);
   				System.out.println("simu end");
+  				ThermoFile_OutputData.close();
+  				ThermoFile_OutputStream.close();
 			}
     		FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature" + resolution);
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
