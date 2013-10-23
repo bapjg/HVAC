@@ -21,7 +21,6 @@ public class Test
 			temp										= thermo.read();
 			Long later									= Global.getTimeNowSinceMidnight();
 			System.out.println(i.toString() + " temp : " + temp + ", time required Norm : " + (later - now));
-		
 		}
 
 		for (i = 0; i < 10; i++)
@@ -30,7 +29,6 @@ public class Test
 			temp										= thermo.readUnCached();
 			Long later									= Global.getTimeNowSinceMidnight();
 			System.out.println(i.toString() + " temp : " + temp + ", time required UnCa : " + (later - now));
-		
 		}
 System.out.println("Done");
 	}
