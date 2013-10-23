@@ -63,14 +63,16 @@ public class Thermometer_New
   			if (all)
   			{
   				System.out.println("simu 1");
-//  				FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/1wire/simultaneous/temperature");
-  				FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/xx.txt");
+  				FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/1wire/simultaneous/temperature");
+//  				FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/xx.txt");
   				System.out.println("simu 2");
    				DataOutputStream 	ThermoFile_OutputData 	= new DataOutputStream(ThermoFile_OutputStream);
   				System.out.println("simu 3");
   				ThermoFile_OutputData.writeUTF("a");
-  				ThermoFile_OutputData.writeByte(1);
-  				ThermoFile_OutputData.writeUTF("b");
+  				System.out.println("simu 3a");
+ 				ThermoFile_OutputData.writeByte(1);
+  				System.out.println("simu 3b");
+ 				ThermoFile_OutputData.writeUTF("b");
   				System.out.println("simu 4");
   				ThermoFile_OutputData.close();
   				ThermoFile_OutputStream.close();
