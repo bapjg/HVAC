@@ -87,6 +87,10 @@ public class Thermometer_New
      	 *  	A change of resolution (either up or down) seems to be uncached
      	 */
     	
+		String	 		tempString;
+		float	 		tempFloat;
+		Integer			tempInt;
+ 
     	
     	try
 		{
@@ -101,11 +105,13 @@ public class Thermometer_New
 			ThermoFile_InputStream.close();
 
 
-			String	 		tempString	 					= ThermoFile_InputLine.replace(" ", "");
-			Float	 		tempFloat	 					= Float.parseFloat(tempString);
-
-			System.out.println("tempString : " + tempString);
+			tempString	 									= ThermoFile_InputLine.replace(" ", "");
+			tempFloat	 									= Float.parseFloat(tempString);
+			tempInt										= Math.round(tempFloat * 10); // Round to half deci-degree
+			
 			System.out.println("tempFloat  : " + tempFloat);
+			System.out.println("tempInt  : " + tempInt);
+			
 			//			this.readingTrue								= (tempReading + 50)/100;
 //			this.reading									= this.readings.add((tempReading + 50)/100);
 //			return this.reading;
