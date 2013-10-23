@@ -72,8 +72,8 @@ public class Thermometer_New
   				System.out.println("simu 3");
 //  				ThermoFile_OutputData.writeUTF("a");
   				System.out.println("simu 3a");
-  				byte x = 1;
- 				ThermoFile_OutputData.writeByte(x);
+  				byte[] x = {1};
+ 				ThermoFile_OutputData.write(x);
   				System.out.println("simu 3b");
 // 				ThermoFile_OutputData.writeUTF("b");
   				System.out.println("simu 4");
