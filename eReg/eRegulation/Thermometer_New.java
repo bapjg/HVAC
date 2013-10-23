@@ -46,7 +46,7 @@ public class Thermometer_New
      	/*
      	 *  Read times are :
      	 *  	When in cache : 10 ms
-     	 *  	Not in cache  : 9 bit  - 290 ms
+     	 *  	Not in cache  : 9 bit  - 300 ms
      	 *  	Not in cache  : 10 bit - 300 ms
      	 *  	Not in cache  : 11 bit - 300 ms
      	 *  	Not in cache  : 12 bit - 300 ms
@@ -55,7 +55,7 @@ public class Thermometer_New
     	
     	try
 		{
-  			FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature9");
+  			FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature10");
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
 			BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
 
