@@ -43,14 +43,17 @@ public class Thermometer_New
 	}
     public Integer read()
 	{
-    	System.out.println("reading");
+    	System.out.println("1. reading");
     	try
 		{
+        	System.out.println("2. reading");
 			FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature9");
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
 			BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
+	    	System.out.println("3. reading");
 
 			String 				ThermoFile_InputLine 		= ThermoFile_InputBuffer.readLine();
+	    	System.out.println("4. reading");
 
 			ThermoFile_InputBuffer.close();
 			ThermoFile_InputData.close();
