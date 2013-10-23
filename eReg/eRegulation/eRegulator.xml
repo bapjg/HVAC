@@ -2,36 +2,16 @@
 <eRegulator>
 	<Thermometers type="Collection">
 
-		<Thermometer type="Object" name="Boiler" address="28-0000 048F 011C"
-			friendlyName="Chaudiere">
-		</Thermometer>
-		<Thermometer type="Object" name="Boiler_In" address="28-0000 048E 9F62"
-			friendlyName="Chaudiere_Retour">
-		</Thermometer>
-		<Thermometer type="Object" name="Floor_Out" address="28-0000 048E 9244"
-			friendlyName="V3V_Depart">
-		</Thermometer>
-		<Thermometer type="Object" name="Floor_Cold" address="28-0000 048E DA69"
-			friendlyName="V3V_Retour">
-		</Thermometer>
-		<Thermometer type="Object" name="Floor_Hot" address="28-0000 048E 062C"
-			friendlyName="V3V_Chaud">
-		</Thermometer>
-		<Thermometer type="Object" name="Radiator_Out" address="28-0000 048E 94A1"
-			friendlyName="Radiateur_Depart">
-		</Thermometer>
-		<Thermometer type="Object" name="Radiator_In" address="28-0000 048E EF76"
-			friendlyName="Radiateur_Retour">
-		</Thermometer>
-		<Thermometer type="Object" name="Outside" address="28-0000 048E DB41"
-			friendlyName="Exterieur">
-		</Thermometer>
-		<Thermometer type="Object" name="Living_Room" address="28-0000 048E DB90"
-			friendlyName="Sonde_Salon">
-		</Thermometer>
-		<Thermometer type="Object" name="Hot_Water" address="28-0000 048E 7489"
-			friendlyName="ECS">
-		</Thermometer>
+		<Thermometer type="Object" name="Boiler" 		address="28-0000 048F 011C" friendlyName="Chaudiere">			</Thermometer>
+		<Thermometer type="Object" name="Boiler_In" 	address="28-0000 048E 9F62"	friendlyName="Chaudiere_Retour">	</Thermometer>
+		<Thermometer type="Object" name="Floor_Out" 	address="28-0000 048E 9244"	friendlyName="V3V_Depart">			</Thermometer>
+		<Thermometer type="Object" name="Floor_Cold" 	address="28-0000 048E DA69"	friendlyName="V3V_Retour">			</Thermometer>
+		<Thermometer type="Object" name="Floor_Hot" 	address="28-0000 048E 062C"	friendlyName="V3V_Chaud">			</Thermometer>
+		<Thermometer type="Object" name="Radiator_Out" 	address="28-0000 048E 94A1"	friendlyName="Radiateur_Depart">	</Thermometer>
+		<Thermometer type="Object" name="Radiator_In" 	address="28-0000 048E EF76"	friendlyName="Radiateur_Retour">	</Thermometer>
+		<Thermometer type="Object" name="Outside" 		address="28-0000 048E DB41"	friendlyName="Exterieur">			</Thermometer>
+		<Thermometer type="Object" name="Living_Room" 	address="28-0000 048E DB90"	friendlyName="Sonde_Salon">			</Thermometer>
+		<Thermometer type="Object" name="Hot_Water" 	address="28-0000 048E 7489"	friendlyName="ECS">					</Thermometer>
 
 	</Thermometers>
 
@@ -58,29 +38,20 @@
 
 	<Relays type="Collection">
 
-		<Relay type="Object" name="Burner" address="0" friendlyName="Bruleur">
-		</Relay>
-		<Relay type="Object" name="Mixer_Up" address="1" friendlyName="V3V Chaud">
-		</Relay>
-		<Relay type="Object" name="Mixer_Down" address="2" friendlyName="V3V Froid">
-		</Relay>
-		<Relay type="Object" name="Pump_Water" address="3" friendlyName="Pompe ECS">
-		</Relay>
-		<Relay type="Object" name="Pump_Radiator" address="4" friendlyName="Pompe Plancher">
-		</Relay>
-		<Relay type="Object" name="Pump_Floor" address="5" friendlyName="Pompe Radiateurs">
-		</Relay>
+		<Relay type="Object" name="Burner" address="0" friendlyName="Bruleur"> 					</Relay>
+		<Relay type="Object" name="Mixer_Up" address="1" friendlyName="V3V Chaud">				</Relay>
+		<Relay type="Object" name="Mixer_Down" address="2" friendlyName="V3V Froid">			</Relay>
+		<Relay type="Object" name="Pump_Water" address="3" friendlyName="Pompe ECS">			</Relay>
+		<Relay type="Object" name="Pump_Radiator" address="4" friendlyName="Pompe Plancher">	</Relay>
+		<Relay type="Object" name="Pump_Floor" address="5" friendlyName="Pompe Radiateurs">		</Relay>
 
 	</Relays>
 
 	<Pumps type="Collection">
 
-		<Pump type="Object" name="Pump_Water">
-		</Pump>
-		<Pump type="Object" name="Pump_Radiator">
-		</Pump>
-		<Pump type="Object" name="Pump_Floor">
-		</Pump>
+		<Pump type="Object" name="Pump_Water">			</Pump>
+		<Pump type="Object" name="Pump_Radiator">		</Pump>
+		<Pump type="Object" name="Pump_Floor">			</Pump>
 
 	</Pumps>
 
