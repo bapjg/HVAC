@@ -11,48 +11,11 @@ public class Test
 	{
 		Control 		Me 							= new Control();
 		
-		Long			fuelConsumed				= 45927L;
-
-		try
-		{
-			InputStream  	file 					= new FileInputStream("FuelConsumed.txt");
-			DataInputStream	input  					= new DataInputStream (file);
-		    try
-		    {
-		    	fuelConsumed 						= input.readLong();
-		    }
-		    finally
-		    {
-		    	input.close();
-		    }
-		}  
-		catch(IOException ex)
-		{
-			System.out.println("I/O error");
-		}	
-
-		
-		fuelConsumed++;
+		Thermometer_New thermo						= new Thermometer_New("28.72D1 8504 0000", "Test", "Test friend");
 		
 		
 		
-		try
-		{
-			OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
-		    DataOutputStream 	output 				= new DataOutputStream(file);
-		    try
-		    {
-		    	output.writeLong(fuelConsumed);
-		    }
-		    finally
-		    {
-		        output.close();
-		    }
-		}  
-		catch(IOException ex)
-		{
-			System.out.println("I/O error");
-		}	
+		
 		
 		System.out.println("Done");
 	}

@@ -1,5 +1,18 @@
 package eRegulation;
 
+/*
+	Experiment 23/10/2013
+	=====================
+	Burner tripped at 110 degrees
+	Burner de-tripped at 97 degrees
+	Overshoot went to 120 degrees
+		Probably limited by latent heat ofboiling
+		I noted a lot of vapour in the circuit (floor, which tripped later)
+ */
+
+
+
+
 public class Burner
 {
 	public 	Relay	   		burnerPower;
