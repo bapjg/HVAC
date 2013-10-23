@@ -50,18 +50,14 @@ public class Thermometer_New
 			BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
 
 			String 				ThermoFile_InputLine 		= ThermoFile_InputBuffer.readLine();
-	    	System.out.println("4. reading");
 
 			ThermoFile_InputBuffer.close();
 			ThermoFile_InputData.close();
 			ThermoFile_InputStream.close();
 
-	    	System.out.println("5. reading");
 
 			String	 		tempString	 					= ThermoFile_InputLine.replace(" ", "");
-	    	System.out.println("6. reading");
 			Float	 		tempFloat	 					= Float.parseFloat(tempString);
-	    	System.out.println("7. reading");
 
 			System.out.println("tempString : " + tempString);
 			System.out.println("tempFloat  : " + tempFloat);
