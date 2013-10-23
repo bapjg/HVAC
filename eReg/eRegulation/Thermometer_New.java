@@ -44,7 +44,37 @@ public class Thermometer_New
 //			read();
 //		}
 	}
-    public Integer read(String resolution, Boolean all)
+    public void readAll()
+	{
+			try
+			{
+			System.out.println("simu 1");
+			FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/1wire/simultaneous/temperature");
+//			FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/xx.txt");
+			System.out.println("simu 2");
+			DataOutputStream 	ThermoFile_OutputData 	= new DataOutputStream(ThermoFile_OutputStream);
+			System.out.println("simu 3");
+//			ThermoFile_OutputData.writeUTF("a");
+			System.out.println("simu 3a");
+			byte[] x = {1};
+//			ThermoFile_OutputData.write(x);
+			ThermoFile_OutputStream.write(x);
+			System.out.println("simu 3b");
+//			ThermoFile_OutputData.writeUTF("b");
+			System.out.println("simu 4");
+			ThermoFile_OutputData.close();
+			ThermoFile_OutputStream.close();
+			}
+			catch (Exception e)
+			{
+			System.out.println("Simu write Error message was : " + e.getMessage());
+			}		
+	}
+    public Integer read()
+	{
+    	return read(10);
+	}
+    public Integer read(Integer resolution)
 	{
      	/*
      	 *  Read times are :
@@ -60,33 +90,7 @@ public class Thermometer_New
     	
     	try
 		{
-  			if (all)
-  			{
-  				try
-  				{
-  				System.out.println("simu 1");
-  				FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/1wire/simultaneous/temperature");
-//  				FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/xx.txt");
-  				System.out.println("simu 2");
-   				DataOutputStream 	ThermoFile_OutputData 	= new DataOutputStream(ThermoFile_OutputStream);
-  				System.out.println("simu 3");
-//  				ThermoFile_OutputData.writeUTF("a");
-  				System.out.println("simu 3a");
-  				byte[] x = {1};
-// 				ThermoFile_OutputData.write(x);
-  				ThermoFile_OutputStream.write(x);
-  				System.out.println("simu 3b");
-// 				ThermoFile_OutputData.writeUTF("b");
-  				System.out.println("simu 4");
-  				ThermoFile_OutputData.close();
-  				ThermoFile_OutputStream.close();
-  				}
-  				catch (Exception e)
-  				{
-  				System.out.println("Simu write Error message was : " + e.getMessage());
-  				}		
-			}
-    		FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature" + resolution);
+    		FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature" + resolution.toString());
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
 			BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
 

@@ -13,14 +13,14 @@ public class Test
 		
 		Thermometer_New thermo						= new Thermometer_New("Test", "28.72D1 8504 0000", "Test friend");
 
-		thermo.read("9", true);
+		thermo.read();
 
 		Integer i;
 		for (i = 12; i > 8; i--)
 		{
 			Long now									= Global.getTimeNowSinceMidnight();
 			String iString								= i.toString();
-			thermo.read(iString, false);
+			thermo.read();
 			Long later									= Global.getTimeNowSinceMidnight();
 			System.out.println(iString + "/time required : " + (later - now));
 		
