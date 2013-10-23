@@ -81,7 +81,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 //				LogIt.info("Circuit", "sequencerFloor", "Stopping Stopping zzzzzzzzzz");
 
 				if 	(	(Global.circuits.isSingleActiveCircuit())
-				&& 		(Global.thermoBoiler.reading > taskActive.tempObjective + 30)   )	// Continue while more than 3 degrees
+//				&& 		(Global.thermoBoiler.reading > taskActive.tempObjective + 30)   )		// Care, we can be above objective while pumpting heat out !!!
+				&& 		(Global.thermoBoiler.reading > Global.thermoFloorCold.reading + 30)   )	// Solution : Continue while more than 3 degrees than return temp
 				{
 					// We are alone, so as long as there is heat to get out of the system
 					// carry on
