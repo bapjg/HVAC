@@ -15,9 +15,10 @@ public class Thermometer_New
 	public String 					friendlyName;
 	public String 					address;
 	public String 					thermoFile;
+	public String 					thermoFile_UnCached;
  	public Integer 					reading;
  	public Integer 					readingTrue;
-	public Reading_Stabiliser 		readings; 
+	public Reading_Stabiliser 		readings;
 	
 	public Thermometer_New(String name, String address, String friendlyName)
 	{
@@ -28,7 +29,8 @@ public class Thermometer_New
 		String prefix											= "/mnt/1wire/";
 		String suffix											= "/";
 
-		this.thermoFile 										= prefix + address.toUpperCase().replace(" ", "").replace("-", ".") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		this.thermoFile 										= prefix               + address.toUpperCase().replace(" ", "").replace("-", ".") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "").replace("-", ".") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 //		if (this.name.equalsIgnoreCase("Floor_Out"))
 //		{
 //			this.readings										= new Reading_Stabiliser(name, 3, 200); // Depth 10 entries// Tolerence = 20 degrees
@@ -48,33 +50,23 @@ public class Thermometer_New
 	{
 			try
 			{
-			System.out.println("simu 1");
-			FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/1wire/simultaneous/temperature");
-//			FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/xx.txt");
-			System.out.println("simu 2");
-			DataOutputStream 	ThermoFile_OutputData 	= new DataOutputStream(ThermoFile_OutputStream);
-			System.out.println("simu 3");
-//			ThermoFile_OutputData.writeUTF("a");
-			System.out.println("simu 3a");
-			byte[] x = {1};
-//			ThermoFile_OutputData.write(x);
-			ThermoFile_OutputStream.write(x);
-			System.out.println("simu 3b");
-//			ThermoFile_OutputData.writeUTF("b");
-			System.out.println("simu 4");
-			ThermoFile_OutputData.close();
-			ThermoFile_OutputStream.close();
+				FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/1wire/simultaneous/temperature");
+				DataOutputStream 	ThermoFile_OutputData 	= new DataOutputStream(ThermoFile_OutputStream);
+				byte[] x = {1};
+				ThermoFile_OutputStream.write(x);
+				ThermoFile_OutputData.close();
+				ThermoFile_OutputStream.close();
 			}
 			catch (Exception e)
 			{
-			System.out.println("Simu write Error message was : " + e.getMessage());
+				System.out.println("Simu write Error message was : " + e.getMessage());
 			}		
 	}
     public Integer read()
 	{
-    	return read(10);
+    	return read(10, false);
 	}
-    public Integer read(Integer resolution)
+    public Integer read(Integer resolution, Boolean unCached)
 	{
      	/*
      	 *  Read times are :
@@ -89,15 +81,20 @@ public class Thermometer_New
     	
 		String	 		tempString;
 		float	 		tempFloat;
-		Integer			tempInt;
- 
     	
     	try
 		{
-    		FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature" + resolution.toString());
+    		FileInputStream 	ThermoFile_InputStream 		= null;
+    		if (unCached)
+    		{
+        		ThermoFile_InputStream 						= new FileInputStream(thermoFile_UnCached + "temperature" + resolution.toString());
+    		}
+    		else
+    		{
+        		ThermoFile_InputStream 						= new FileInputStream(thermoFile + "temperature" + resolution.toString());
+    		}
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
 			BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
-
 			String 				ThermoFile_InputLine 		= ThermoFile_InputBuffer.readLine();
 
 			ThermoFile_InputBuffer.close();
@@ -107,21 +104,17 @@ public class Thermometer_New
 
 			tempString	 									= ThermoFile_InputLine.replace(" ", "");
 			tempFloat	 									= Float.parseFloat(tempString);
-			tempInt										= Math.round(tempFloat * 10); // Round to half deci-degree
+			this.reading									= Math.round(tempFloat * 10); // Round to half deci-degree
 			
-			System.out.println("tempFloat  : " + tempFloat);
-			System.out.println("tempInt  : " + tempInt);
-			
-			//			this.readingTrue								= (tempReading + 50)/100;
 //			this.reading									= this.readings.add((tempReading + 50)/100);
-//			return this.reading;
 		}
 		catch (Exception err)
 		{
 //			LogIt.error("Thermometer", "read", "Error message was : " + err.getMessage() + ", continuing iteration", false);
 			System.out.println("Thermometer read Error message was : " + err.getMessage());
-		}		
+			this.reading									= -2730; // Absolute zero
 
+		}		
 		return this.reading; //Last known good reading;
 	}
     public String toDisplay()
