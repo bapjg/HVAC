@@ -21,7 +21,7 @@ public class Test
 			String iString								= i.toString();
 			thermo.read(iString);
 			Long later									= Global.getTimeNowSinceMidnight();
-			System.out.println("time required : " + (later - now));
+			System.out.println(iString + "/time required : " + (later - now));
 		
 		}
 		System.out.println("Done");
