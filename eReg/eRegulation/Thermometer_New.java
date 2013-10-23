@@ -14,7 +14,7 @@ public class Thermometer_New
 	public String 					name;
 	public String 					friendlyName;
 	public String 					address;
-	public String 					thermoFile;
+	public String 					thermoFile_Normal;
 	public String 					thermoFile_UnCached;
  	public Integer 					reading;
  	public Integer 					readingTrue;
@@ -29,7 +29,7 @@ public class Thermometer_New
 		String prefix											= "/mnt/1wire/";
 		String suffix											= "/";
 
-		this.thermoFile 										= prefix               + address.toUpperCase().replace(" ", "").replace("-", ".") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "").replace("-", ".") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "").replace("-", ".") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 //		if (this.name.equalsIgnoreCase("Floor_Out"))
 //		{
@@ -64,8 +64,12 @@ public class Thermometer_New
 	}
     public Integer read()
 	{
-    	return read(10, false);
+    	return read(12, false);
 	}
+    public Integer readUnCached()
+ 	{
+     	return read(12, true);
+ 	}
     public Integer read(Integer resolution, Boolean unCached)
 	{
      	/*
@@ -91,7 +95,7 @@ public class Thermometer_New
     		}
     		else
     		{
-        		ThermoFile_InputStream 						= new FileInputStream(thermoFile + "temperature" + resolution.toString());
+        		ThermoFile_InputStream 						= new FileInputStream(thermoFile_Normal   + "temperature" + resolution.toString());
     		}
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
 			BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
