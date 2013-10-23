@@ -43,6 +43,7 @@ public class Thermometer_New
 	}
     public Integer read()
 	{
+    	System.out.println("reading");
     	try
 		{
 			FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature9");
