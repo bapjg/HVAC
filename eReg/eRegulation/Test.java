@@ -15,7 +15,7 @@ public class Test
 
 
 		Integer i;
-		for (i = 9; i < 13; i++)
+		for (i = 12; i > 8; i--)
 		{
 			Long now									= Global.getTimeNowSinceMidnight();
 			String iString								= i.toString();
