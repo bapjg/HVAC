@@ -43,7 +43,17 @@ public class Thermometer_New
 	}
     public Integer read()
 	{
-     	try
+     	/*
+     	 *  Read times are :
+     	 *  	When in cache : 10 ms
+     	 *  	Not in cache  : 9 bit  - 290 ms
+     	 *  	Not in cache  : 10 bit - 300 ms
+     	 *  	Not in cache  : 11 bit - 300 ms
+     	 *  	Not in cache  : 12 bit - 300 ms
+     	 */
+    	
+    	
+    	try
 		{
   			FileInputStream 	ThermoFile_InputStream 		= new FileInputStream(thermoFile + "temperature9");
 			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
