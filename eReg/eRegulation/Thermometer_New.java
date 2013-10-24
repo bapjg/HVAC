@@ -29,8 +29,9 @@ public class Thermometer_New
 		String prefix											= "/mnt/1wire/";
 		String suffix											= "/";
 
-		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "").replace("-", ".") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
-		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "").replace("-", ".") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+//		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "").replace("-", ".") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 //		if (this.name.equalsIgnoreCase("Floor_Out"))
 //		{
 //			this.readings										= new Reading_Stabiliser(name, 3, 200); // Depth 10 entries// Tolerence = 20 degrees
