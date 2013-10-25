@@ -125,7 +125,6 @@ alias sbws='sudo bw_tool -S'
 alias sbwaSPI='sudo bw_tool -w f0:9c -a'
 alias sbwaI2C='sudo bw_tool -I -D /dev/i2c-1 -w f0:94 -a'
 
-
 echo Relays are
 echo  - Burner        20
 echo  - MixerUp       21
