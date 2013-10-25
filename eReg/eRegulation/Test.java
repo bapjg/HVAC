@@ -11,9 +11,9 @@ public class Test
 	{
 		Control 		Me 							= new Control();
 		
-		Thermometer_New thermo1						= new Thermometer_New("Test1", "28.72D1 8504 0000", "Test friend");
-		Thermometer_New thermo2						= new Thermometer_New("Test2", "28.9ED0 8504 0000", "Test friend");
-		Thermometer_New thermo3						= new Thermometer_New("Test3", "28.B491 8504 0000", "Test friend");
+		Thermometer thermo1							= new Thermometer("Test1", "28.72D1 8504 0000", "Test friend");
+		Thermometer thermo2							= new Thermometer("Test2", "28.9ED0 8504 0000", "Test friend");
+		Thermometer thermo3							= new Thermometer("Test3", "28.B491 8504 0000", "Test friend");
 
 		Integer i;
 		Integer temp1, temp2, temp3;

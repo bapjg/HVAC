@@ -122,7 +122,8 @@ alias devices='cd /sys/bus/w1/devices/'
 alias ereg='cd /home/pi/Eclipse/eRegulation/eRegulation/'
 alias sbw='sudo bw_tool'
 alias sbws='sudo bw_tool -S'
-alias sbwa='sudo bw_tool -w f0:9c -a'
+alias sbwaSPI='sudo bw_tool -w f0:9c -a'
+alias sbwaI2C='sudo bw_tool -I -D /dev/i2c-1 -w f0:94 -a'
 
 
 echo Relays are
@@ -146,11 +147,11 @@ alias flooron='sudo   	bw_tool -a 9c -w 25:1'
 alias flooroff='sudo  	bw_tool -a 9c -w 25:0'
 
 
-alias tempboiler='sudo cat /sys/bus/w1/devices/28-0000048f011c/w1_slave'
-alias temphw='sudo     cat /sys/bus/w1/devices/28-0000048e7489/w1_slave'
-alias tempmixc='sudo   cat /sys/bus/w1/devices/28-0000048eda69/w1_slave'
-alias tempmixh='sudo   cat /sys/bus/w1/devices/28-0000048e062c/w1_slave'
-alias tempmixo='sudo   cat /sys/bus/w1/devices/28-0000048e9244/w1_slave'
+alias tempboiler='echo boiler;sudo cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo'
+alias temphw='echo hotwater;sudo     cat /mnt/1wire/uncached/28.89748e040000/temperature10;echo'
+alias tempmixc='echo mixer_cold;sudo   cat /mnt/1wire/uncached/28.69da8e040000/temperature10;echo'
+alias tempmixh='echo mixer_hot;sudo   cat /mnt/1wire/uncached/28.2c068e040000/temperature10;echo'
+alias tempmixo='echo mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
 
 alias go='cd /home/pi/HVAC/eReg/eRegulation/;git stash save; git stash drop;make ex'
 
