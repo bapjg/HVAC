@@ -17,7 +17,7 @@ public class Thermometer
 	public String 					thermoFile_Normal;
 	public String 					thermoFile_UnCached;
  	public Integer 					reading;
- 	public Integer 					readingTrue;
+// 	public Integer 					readingTrue;
 	public Reading_Stabiliser 		readings;
 	
 	public Thermometer(String name, String address, String friendlyName)
@@ -125,8 +125,8 @@ public class Thermometer
     public String toDisplay()
     {
     	// Converts temperature in decidegrees into displayable format							// Either keep true or throw it out from display
-    	Integer degrees 									= this.readingTrue/10;
-    	Integer decimals 									= this.readingTrue - degrees * 10;
+    	Integer degrees 									= this.reading/10;
+    	Integer decimals 									= this.reading - degrees * 10;
     	return degrees.toString() + "." + decimals.toString();
     }
     public class Reading_Stabiliser
