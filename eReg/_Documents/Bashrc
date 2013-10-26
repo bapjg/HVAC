@@ -133,7 +133,7 @@ echo  - Hot Water     23
 echo  - Radiator      24
 echo  - Floor         25
 
-alias update='/home/pi/HVAC/eReg/_Domuments/update.sh'
+alias update='/home/pi/HVAC/eReg/_Documents/update.sh'
 
 alias burneron='sudo  	bw_tool -a 9c -w 20:1'
 alias burneroff='sudo 	bw_tool -a 9c -w 20:0'
