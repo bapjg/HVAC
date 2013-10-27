@@ -15,6 +15,8 @@ public class Test
 		Thermometer thermo2							= new Thermometer("Test2", "28.9ED0 8504 0000", "Test friend");
 		Thermometer thermo3							= new Thermometer("Test3", "28.B491 8504 0000", "Test friend");
 
+		thermo1.readAll();
+		
 		Integer i;
 		Integer temp1, temp2, temp3;
 		for (i = 0; i < 10; i++)
