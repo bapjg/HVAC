@@ -11,14 +11,13 @@ public class Test
 	{
 		Control 		Me 							= new Control();
 		
-		Thermometer thermo1							= new Thermometer("Test1", "28.72D1 8504 0000", "Test friend");
-		Thermometer thermo2							= new Thermometer("Test2", "28.9ED0 8504 0000", "Test friend");
-		Thermometer thermo3							= new Thermometer("Test3", "28.B491 8504 0000", "Test friend");
+		Thermometer thermo1							= new Thermometer("Test1", "28.1C01 8F04 0000", "Test friend");
+		Thermometer thermo2							= new Thermometer("Test2", "28.629F 8E04 0000", "Test friend");
+		Thermometer thermo3							= new Thermometer("Test3", "28.4492 8E04 0000", "Test friend");
 
 		thermo1.readAll();
-		
-		
-		
+
+		Global.waitSeconds(3);
 		
 		Integer i;
 		Integer temp1, temp2, temp3;
