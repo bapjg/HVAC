@@ -21,29 +21,29 @@ public class Test
 		
 		Integer i;
 		Integer temp1, temp2, temp3;
-		for (i = 0; i < 10; i++)
-		{
-			Long now									= Global.getTimeNowSinceMidnight();
-			temp1										= thermo1.read();
-			temp2										= thermo2.read();
-			temp3										= thermo3.read();
-			Long later									= Global.getTimeNowSinceMidnight();
-			System.out.println(i.toString() + " temp : " + temp1 + ", time required Norm : " + (later - now));
-			System.out.println(i.toString() + " temp : " + temp2 + ", time required Norm : " + (later - now));
-			System.out.println(i.toString() + " temp : " + temp3 + ", time required Norm : " + (later - now));
-		}
+//		for (i = 0; i < 10; i++)
+//		{
+//			Long now									= Global.getTimeNowSinceMidnight();
+//			temp1										= thermo1.read();
+//			temp2										= thermo2.read();
+//			temp3										= thermo3.read();
+//			Long later									= Global.getTimeNowSinceMidnight();
+//			System.out.println(i.toString() + " temp : " + temp1 + ", time required Norm : " + (later - now));
+//			System.out.println(i.toString() + " temp : " + temp2 + ", time required Norm : " + (later - now));
+//			System.out.println(i.toString() + " temp : " + temp3 + ", time required Norm : " + (later - now));
+//		}
 
-		for (i = 0; i < 10; i++)
-		{
-			Long now									= Global.getTimeNowSinceMidnight();
-			temp1										= thermo1.readUnCached();
-			temp2										= thermo2.readUnCached();
-			temp3										= thermo3.readUnCached();
-			Long later									= Global.getTimeNowSinceMidnight();
-			System.out.println(i.toString() + " temp : " + temp1 + ", time required UnCa : " + (later - now));
-			System.out.println(i.toString() + " temp : " + temp2 + ", time required UnCa : " + (later - now));
-			System.out.println(i.toString() + " temp : " + temp3 + ", time required UnCa : " + (later - now));
-		}
+//		for (i = 0; i < 10; i++)
+//		{
+//			Long now									= Global.getTimeNowSinceMidnight();
+//			temp1										= thermo1.readUnCached();
+//			temp2										= thermo2.readUnCached();
+//			temp3										= thermo3.readUnCached();
+//			Long later									= Global.getTimeNowSinceMidnight();
+//			System.out.println(i.toString() + " temp : " + temp1 + ", time required UnCa : " + (later - now));
+//			System.out.println(i.toString() + " temp : " + temp2 + ", time required UnCa : " + (later - now));
+//			System.out.println(i.toString() + " temp : " + temp3 + ", time required UnCa : " + (later - now));
+//		}
 System.out.println("Done");
 	}
 }

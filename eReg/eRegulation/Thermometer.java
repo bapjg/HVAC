@@ -117,7 +117,7 @@ public class Thermometer
 		{
 //			LogIt.error("Thermometer", "read", "Error message was : " + err.getMessage() + ", continuing iteration", false);
 			System.out.println("Thermometer read Error message was : " + err.getMessage());
-			this.reading									= -2730; // Absolute zero
+			this.reading									= -273; // Absolute zero
 
 		}		
 		return this.reading; //Last known good reading;
