@@ -133,7 +133,7 @@ echo  - Hot Water     23
 echo  - Radiator      24
 echo  - Floor         25
 
-alias update='/home/pi/HVAC/eReg/_Domuments/update.sh'
+alias update='/home/pi/HVAC/eReg/_Documents/update.sh'
 
 alias burneron='sudo  	bw_tool -a 9c -w 20:1'
 alias burneroff='sudo 	bw_tool -a 9c -w 20:0'
@@ -153,13 +153,13 @@ alias temphw='echo hotwater;sudo     cat /mnt/1wire/uncached/28.89748e040000/tem
 alias tempmixc='echo mixer_cold;sudo   cat /mnt/1wire/uncached/28.69da8e040000/temperature10;echo'
 alias tempmixh='echo mixer_hot;sudo   cat /mnt/1wire/uncached/28.2c068e040000/temperature10;echo'
 alias tempmixo='echo mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
+alias tempall='echo boiler;sudo cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo;echo hotwater;sudo cat /mnt/1wire/uncached/28.89748e040000/temperature10;echo;echo mixer_hot;sudo   cat /mnt/1wire/uncached/28.2c068e040000/temperature10;echo'
 
 alias go='cd /home/pi/HVAC/eReg/eRegulation/;git stash save; git stash drop;make ex'
 
-echo mounting //NAS/DropZone to /mnt/DZ
-echo ==================================
-sudo mount -t cifs -o username=ADavis,password=llenkcarb,domain=workgroup //NAS/DropZone /mnt/DZ
+echo testing mount to //NAS/DropZone at /mnt/DZ
+echo ==========================================
 sudo cat /mnt/DZ/test
+echo ==========================================
 
 cd /home/pi/HVAC/eReg/eRegulation
-echo ============================
