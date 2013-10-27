@@ -17,6 +17,9 @@ public class Test
 
 		thermo1.readAll();
 		
+		
+		
+		
 		Integer i;
 		Integer temp1, temp2, temp3;
 		for (i = 0; i < 10; i++)
