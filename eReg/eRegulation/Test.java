@@ -103,7 +103,7 @@ public class Test
             for (int channum=0; channum < raf.length; channum++) 
             {
 //                raf[channum] 							= new RandomAccessFile("/sys/class/gpio/gpio" + GpioChannels[channum] + "/value", "r");
-                raf[channum] 							= new RandomAccessFile("/sys/class/gpio/gpio" + GpioChannels[channum] + "/value", "w");
+                raf[channum] 							= new RandomAccessFile("/sys/class/gpio/gpio" + GpioChannels[channum] + "/value", "rw");
                 raf[channum].seek(0);
                 raf[channum].write(1);
             
