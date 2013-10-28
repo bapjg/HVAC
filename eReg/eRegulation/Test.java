@@ -123,7 +123,7 @@ public class Test
                     {
                         // Compress 0 values so we don't see too many 
                         //   unimportant lines
-                    	System.out.print( "inBytes : " + inBytes);
+                    	System.out.print( "inBytes : " + inLine);
                         if (inLine.startsWith("0")) 
                         {
                             if (zeroCounter < 1000) 
