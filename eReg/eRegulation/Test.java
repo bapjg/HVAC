@@ -83,7 +83,7 @@ public class Test
                 FileWriter directionFile 				= new FileWriter("/sys/class/gpio/gpio" + gpioChannel + "/direction");
             
                 // Set port for input
-                directionFile.write(GPIO_IN);
+                directionFile.write("out");
                 directionFile.flush();
             }   
 			
