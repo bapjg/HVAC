@@ -87,7 +87,7 @@ public class Test
                 directionFile.flush();
             }   
 			
-	/*** Read data from each GPIO port ***/
+            /*** Read data from each GPIO port ***/
             RandomAccessFile[] raf 						= new RandomAccessFile[GpioChannels.length];
             
             int sleepPeriod 							= 10;
@@ -99,22 +99,16 @@ public class Test
             int zeroCounter 							= 0;
             
             // Get current timestamp with Calendar()
-            Calendar cal;
-            DateFormat dateFormat 						= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");
-            String dateStr;
-            
             // Open RandomAccessFile handle to each GPIO port
             for (int channum=0; channum < raf.length; channum++) 
             {
-                raf[channum] = new RandomAccessFile("/sys/class/gpio/gpio" + GpioChannels[channum] + "/value", "r");
+                raf[channum] 							= new RandomAccessFile("/sys/class/gpio/gpio" + GpioChannels[channum] + "/value", "r");
             }
 
 	        // Loop forever
             while (true) 
             {
                 // Get current timestamp for latest event
-                cal = Calendar.getInstance();
-                dateStr = dateFormat.format(cal.getTime());
         
                 // Use RandomAccessFile handle to read in GPIO port value
                 for (int channum=0; channum < raf.length; channum++) 
@@ -122,13 +116,14 @@ public class Test
                    // Reset file seek pointer to read latest value of GPIO port
                     raf[channum].seek(0);
                     raf[channum].read(inBytes);
-                    inLine = new String(inBytes);
+                    inLine 								= new String(inBytes);
                     
                     // Check if any value was read
                     if (inLine != null) 
                     {
                         // Compress 0 values so we don't see too many 
                         //   unimportant lines
+                    	System.out.print( "inBytes : " + inBytes);
                         if (inLine.startsWith("0")) 
                         {
                             if (zeroCounter < 1000) 
@@ -137,14 +132,14 @@ public class Test
                             } 
                             else
                             {
-                                System.out.print(dateStr + ": " + inLine);
+                                System.out.print( "Some thing : " + inLine);
                                 zeroCounter = 0;
                             }
                         } 
                         else 
                         {
                             // Else, specially mark value non-zero value
-                            System.out.print("***" + dateStr + ": " + inLine);
+                            System.out.print( "Some thing else : " + inLine);
                             zeroCounter = 0;
                         }
                     }
@@ -153,8 +148,9 @@ public class Test
         
                 }
             }
-
-        } catch (Exception exception) {
+        } 
+        catch (Exception exception) 
+        {
             exception.printStackTrace();
         }
     }
