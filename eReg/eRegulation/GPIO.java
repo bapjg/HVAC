@@ -41,7 +41,7 @@ public class GPIO
 	{
         try
         {
-        	FileWriter directionFile 				= new FileWriter("/sys/class/gpio/gpio" + this.pin + "/direction");
+        	FileWriter directionFile 				= new FileWriter(prefix + "gpio" + this.pin + "/direction");
         	directionFile.write("in");
         	directionFile.flush();
         	directionFile.close();
@@ -55,7 +55,7 @@ public class GPIO
 	{
         try
         {
-        	FileWriter directionFile 				= new FileWriter("/sys/class/gpio/gpio" + this.pin + "/direction");
+        	FileWriter directionFile 				= new FileWriter(prefix + "gpio" + this.pin + "/direction");
         	directionFile.write("out");
         	directionFile.flush();
         	directionFile.close();
