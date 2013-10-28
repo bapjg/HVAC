@@ -122,6 +122,7 @@ public class Test
                 		System.out.println("Can 1");
                 		bw.flush();
                         bw.close();
+                		System.out.println("Can nought");
                 } else {
                 		System.out.println("Cant write");
 //                        Process p = Runtime.getRuntime().exec("su");
