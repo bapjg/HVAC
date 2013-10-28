@@ -118,8 +118,7 @@ public class Test
                 	System.out.println("Can write");
                 		BufferedWriter bw 				= new BufferedWriter(new FileWriter("/sys/class/gpio/gpio" + GpioChannels[channum] + "/value"));
                 		System.out.println("Can bw");
-                		bw.write("1");
-                		bw.write("\n");
+                		bw.write("0");
                 		System.out.println("Can 1");
                 		bw.flush();
                         bw.close();
