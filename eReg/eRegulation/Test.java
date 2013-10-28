@@ -105,13 +105,39 @@ public class Test
 //                raf[channum] 							= new RandomAccessFile("/sys/class/gpio/gpio" + GpioChannels[channum] + "/value", "r");
                 raf[channum] 							= new RandomAccessFile("/sys/class/gpio/gpio" + GpioChannels[channum] + "/value", "rw");
                 raf[channum].seek(0);
-                byte oneByte 							= 1;
-                raf[channum].write(oneByte);
+//                byte[] bytes 							= new byte[2];
+//                bytes[0]								= "1";
+//                bytes[1]								= "\n";
+//                
+//                raf[channum].write(bytes);
+                raf[channum].close();
+                
+                File mpuFile 							= new File("/sys/class/gpio/gpio" + GpioChannels[channum] + "/value");
+                if(mpuFile.canWrite()) 
+                {
+                	System.out.println("Can write");
+                		BufferedWriter bw 				= new BufferedWriter(new FileWriter("/sys/class/gpio/gpio" + GpioChannels[channum] + "/value"));
+                        bw.write("1");
+                        bw.close();
+                } else {
+                		System.out.println("Cant write");
+//                        Process p = Runtime.getRuntime().exec("su");
+//                        
+//                        DataOutputStream dos = new DataOutputStream(p.getOutputStream());
+//                        dos.writeBytes("echo " + obj.getValue() + " > " + obj.getFile() + "\n");
+//                        dos.writeBytes("exit");
+//                        dos.flush();
+//                        dos.close();
+//                        
+//                        if(p.waitFor() != 0)
+//                                Log.i(TAG, "Could not write to " + obj.getFile());
+                }
+
             
             
             
             }
-
+            
 
             
 	        // Loop forever
