@@ -60,6 +60,7 @@ public class Test
 		pin25.setLow();
 		pin25.setInput();
 		System.out.println("isHigh : " + pin25.isHigh());
+		pin25.finalize();
 		pin25 = null;
 		System.out.println("end of Test : =============== ");
 		
