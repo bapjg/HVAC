@@ -53,7 +53,22 @@ public class Test
 		
 		String[] GpioChannels							= { "25" };
 		String GPIO_IN 									= "in";
-        try 
+
+		GPIO pin25										= new GPIO(25);
+		pin25.setOutput();
+		pin25.setHigh();
+		pin25.setLow();
+		pin25.setInput();
+		System.out.println("isHigh : " + pin25.isHigh());
+		pin25 = null;
+		System.out.println("end of Test : =============== ");
+		
+		
+		
+		
+		
+		
+		try 
         {
             
             /*** Init GPIO port(s) for input ***/
