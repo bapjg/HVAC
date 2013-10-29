@@ -77,7 +77,7 @@ public class Boiler
 	}
 	public Boolean checkOverHeat()
 	{
-		if (Global.thermoBoiler.reading > (tempNeverExceed - tempOvershoot))
+		if (Global.thermoBoiler.readUnCached() > (tempNeverExceed - tempOvershoot))
 		{
 			return true;
 		}
@@ -89,6 +89,10 @@ public class Boiler
 	public void sequencer()
 	{
 		//LogIt.info("Boiler", "sequencer", "state is : " + state);
+		
+		// Take unCached temperature. The value is then cached
+		
+		Integer	tempNow =  Global.thermoBoiler.readUnCached();
 		
 		if (checkOverHeat())		// This is just a temperature check
 		{

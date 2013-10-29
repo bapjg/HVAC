@@ -106,7 +106,6 @@ public class Thermometer
 			ThermoFile_InputData.close();
 			ThermoFile_InputStream.close();
 
-
 			tempString	 									= ThermoFile_InputLine.replace(" ", "");
 			tempFloat	 									= Float.parseFloat(tempString);
 			this.reading									= Math.round(tempFloat * 10); // Round to half deci-degree
