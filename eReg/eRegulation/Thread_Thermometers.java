@@ -14,14 +14,14 @@ public class Thread_Thermometers implements Runnable
 		{
 			Long timeStart 						= Global.now();
 			
-			Global.thermoBoiler.read();
+			Global.thermoBoiler.readUnCached();
 			Global.waitMilliSeconds(5);
 			
 			Global.thermoBoilerIn.read();
 			Global.waitMilliSeconds(5);
 			
-			Global.thermoFloorOut.read();
-			Global.circuitFloor.mixer.pidControler.add(Global.thermoFloorOut.readUnCached());
+			Global.thermoFloorOut.readUnCached();
+			Global.circuitFloor.mixer.pidControler.add(Global.thermoFloorOut.reading);
 			Global.waitMilliSeconds(5);
 			
 			Global.thermoFloorCold.read();

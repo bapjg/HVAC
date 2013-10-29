@@ -33,7 +33,7 @@ public class PID
     	// Units are temp in decimal degrees (1/10 degree)
     	//           time in milliseconds
     	//           inegration decidegrees * seconds
-    	//           differential decidegrees per second
+    	//           differential decidegrees per second (this is not handled here, but is handles in getGain()
     	
     	items[enqueueIndex] 			= newNumber;
     	timeStamps[enqueueIndex] 		= Calendar.getInstance().getTimeInMillis();
@@ -41,18 +41,12 @@ public class PID
     	if (count == 0)
     	{
     		deltas[enqueueIndex] = 0;
-    	}
-    	else
-    	{
-    		deltas[enqueueIndex] 		= newNumber - items[(items.length + enqueueIndex - 1) % items.length];			// This is dT
-    	}
-
-    	if (count == 0)
-    	{
     		integrals[enqueueIndex] = 0L;
     	}
     	else
     	{
+    		deltas[enqueueIndex] 		= newNumber - items[(items.length + enqueueIndex - 1) % items.length];							// This is dT
+    		
     		Long deltaTimeStamps 		= timeStamps[enqueueIndex] - timeStamps[(timeStamps.length + enqueueIndex - 1) % timeStamps.length];
     		Long integratedTime  		= newNumber.longValue() * deltaTimeStamps/1000L;
     		

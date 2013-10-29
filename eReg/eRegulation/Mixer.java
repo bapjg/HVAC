@@ -159,7 +159,7 @@ public class Mixer
 //	============================================================
 //
 //
-	public void pidSimple(Integer targetTemp)
+	public void sequencer(Integer targetTemp)
 	{
 		// Keep it simple :
 		//
@@ -199,6 +199,19 @@ public class Mixer
 		Double swingTimeRequired						= - Math.floor(pidControler.getGain(gainP, gainD, gainI));
 		Integer swingTimePerformed						= 0;
 
+		if (Global.thermoFloorOut.readUnCached() > 450)
+		{
+			// We need to do trip avoidance
+			System.out.println("Mixer/sequencer : Avoiding trip situation. Calculated swingTimeRequired : " + swingTimeRequired + "Forced/override to -20 seconds");
+			swingTimeRequired							= (double) 20000;
+		}
+		if (Global.thermoFloorOut.read() > 500)
+		{
+			// We need to do trip avoidance
+			System.out.println("Mixer/sequencer : Have definately tripped. Calculated swingTimeRequired : " + swingTimeRequired + "Cant do nought");
+		}
+		
+		
 		// LogIt.tempInfo("PID Called - swingTimeRequired given by PID : " + swingTimeRequired + " current positionTracked : " + positionTracked);
 
 		

@@ -40,7 +40,7 @@ public class Thread_Mixer implements Runnable
 			Integer targetTemp						= circuitMixer.temperatureGradient.getTempToTarget();
 			//LogIt.tempData();		not needed as done in Thread thermometers
 			
-			this.mixer.pidSimple(targetTemp);
+			this.mixer.sequencer(targetTemp);
 
 			Global.waitSeconds(20);
 		}
