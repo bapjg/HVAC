@@ -21,7 +21,7 @@ public class Thread_Thermometers implements Runnable
 			Global.waitMilliSeconds(5);
 			
 			Global.thermoFloorOut.read();
-			Global.circuitFloor.mixer.pidControler.add(Global.thermoFloorOut.read());
+			Global.circuitFloor.mixer.pidControler.add(Global.thermoFloorOut.readUnCached());
 			Global.waitMilliSeconds(5);
 			
 			Global.thermoFloorCold.read();
