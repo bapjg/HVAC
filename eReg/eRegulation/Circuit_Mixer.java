@@ -51,7 +51,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				{
 					Integer temp									= temperatureGradient.getTempToTarget();
 					this.heatRequired.tempMinimum					= 500;
-					this.heatRequired.tempMaximum					= 800;
+					this.heatRequired.tempMaximum					= 750;
 					state											= CIRCUIT_STATE_AwaitingHeat;
 
 					LogIt.info("Circuit_" + this.name, "sequencer", "Thread Started");
