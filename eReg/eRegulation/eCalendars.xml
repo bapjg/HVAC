@@ -23,10 +23,10 @@
 			<Calendar type="Object" name="WeekDays" days="4"
 				timeStart="16:00" timeEnd="19:00" tempObjective="200" stopOnObjective="0">
 			</Calendar>
-			<Calendar type="Object" name="WeekDays" days="5"
+			<Calendar type="Object" name="WeekDays" days="0"
 				timeStart="12:00" timeEnd="19:00" tempObjective="200" stopOnObjective="0">
 			</Calendar>
-						<Calendar type="Object" name="WeekDays" days="6, 7"
+						<Calendar type="Object" name="WeekDays" days="5, 6, 7"
 				timeStart="08:00" timeEnd="19:00" tempObjective="200" stopOnObjective="0">
 			</Calendar>
 		</Circuit>
