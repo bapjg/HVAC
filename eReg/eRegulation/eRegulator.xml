@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eRegulator>
 	<Thermometers type="Collection">
-		<Thermometer type="Object" name="Boiler" 		address="28.1C01 8F04 0000" 	friendlyName="Chaudiere">			</Thermometer>
+		<Thermometer type="Object" name="Boiler" 		address="28.1C01 8F04 0000" friendlyName="Chaudiere">			</Thermometer>
 		<Thermometer type="Object" name="Boiler_In" 	address="28.629F 8E04 0000"	friendlyName="Chaudiere_Retour">	</Thermometer>
 		<Thermometer type="Object" name="Floor_Out" 	address="28.4492 8E04 0000"	friendlyName="V3V_Depart">			</Thermometer>
 		<Thermometer type="Object" name="Floor_Cold" 	address="28.69DA 8E04 0000"	friendlyName="V3V_Retour">			</Thermometer>
