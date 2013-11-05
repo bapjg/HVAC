@@ -74,11 +74,14 @@ public final class R {
         public static final int menu_3_calendars=0x7f030004;
         public static final int menu_4_actions=0x7f030005;
         public static final int panel_0_subcontainer=0x7f030006;
-        public static final int panel_1_temperatures=0x7f030007;
-        public static final int panel_2_configuration=0x7f030008;
-        public static final int panel_3_calendars=0x7f030009;
-        public static final int panel_4_actions=0x7f03000a;
-        public static final int row_thermometer=0x7f03000b;
+        public static final int panel_10_temperatures_readings=0x7f030007;
+        public static final int panel_1_temperatures=0x7f030008;
+        public static final int panel_2_configuration=0x7f030009;
+        public static final int panel_3_calendars=0x7f03000a;
+        public static final int panel_41_actions=0x7f03000b;
+        public static final int panel_42_actions=0x7f03000c;
+        public static final int panel_43_actions=0x7f03000d;
+        public static final int row_thermometer=0x7f03000e;
     }
     public static final class menu {
         public static final int main=0x7f080000;

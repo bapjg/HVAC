@@ -17,7 +17,7 @@ public class Global
 	public static	Panel_1_Temperatures		panelTemperatures;
 	public static	Panel_2_Configuration		panelConfiguration;
 	public static	Panel_3_Calendars			panelCalendars;
-	public static	Panel_4_Actions				panelActions;	
+	public static	Panel_41_Action				panelActions;	
 	
 	public static	Boolean						initialisationCompleted;
 

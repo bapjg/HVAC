@@ -12,25 +12,25 @@
             style						= "@style/AD_Button"
             android:layout_width		= "wrap_content"
             android:layout_height		= "wrap_content"
-            android:text				= "Something1" 
+            android:text				= "Action1" 
         />
         <Button
             style						= "@style/AD_Button"
             android:layout_width		= "wrap_content"
             android:layout_height		= "wrap_content"
-            android:text				= "Something2" 
+            android:text				= "Action2" 
         />
         <Button
             style						= "@style/AD_Button"
             android:layout_width		= "wrap_content"
             android:layout_height		= "wrap_content"
-            android:text				= "Something3"
+            android:text				= "Action3"
         />
 		<Button
             style						= "@style/AD_Button"
             android:layout_width		= "wrap_content"
             android:layout_height		= "wrap_content"
-            android:text				= "Something4" 
+            android:text				= "Action4" 
         />
 		<Button
 		    style						= "@style/AD_Button"

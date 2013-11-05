@@ -58,7 +58,7 @@ public class Activity_Main extends Activity
         global.panelTemperatures 						= new Panel_1_Temperatures();
         global.panelConfiguration 						= new Panel_2_Configuration();
         global.panelCalendars 							= new Panel_3_Calendars();
-        global.panelActions 							= new Panel_4_Actions();
+        global.panelActions 							= new Panel_41_Action();
         
         // Setup the Menu Fragments
         // Menu_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
@@ -66,7 +66,7 @@ public class Activity_Main extends Activity
         //	
         Menu_1_Temperatures	menuTemperatures			= new Menu_1_Temperatures(global.panelTemperatures, 	R.layout.menu_1_temperatures);
         Menu_Fragment		menuConfiguration			= new Menu_Fragment(global.panelConfiguration, 	R.layout.menu_2_configuration);
-        Menu_Fragment		menuActions					= new Menu_Fragment(global.panelActions, 		R.layout.menu_4_actions);
+        Menu_4_Actions		menuActions					= new Menu_4_Actions(global.panelActions, 		R.layout.menu_4_actions);
         Menu_Fragment		menuCalendars				= new Menu_Fragment(global.panelCalendars, 		R.layout.menu_3_calendars);
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
@@ -146,14 +146,13 @@ public class Activity_Main extends Activity
 		{             
 			if (result instanceof Mgmt_Msg_Abstract.Ack)
 			{
-				System.out.println("Activity_Main : Reply to Ping with Ack");
-				Toast.makeText(Global.appContext, "Activity_Main : Connected to server : " + Global.serverURL, Toast.LENGTH_SHORT).show();
+				Toast.makeText(Global.appContext, "Connected to server : " + Global.serverURL.replace("http://", "").replace("/hvac/Management", "").replace(":8080", ""), Toast.LENGTH_LONG).show();
 		        HTTP_Req_Configuration			httpRequest			= new HTTP_Req_Configuration();
 				httpRequest.execute();
 			}
 			else
 			{
-				Toast.makeText(Global.appContext, "Activity_Main : Not Connected, no server replied", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Global.appContext, "Not Connected, no server replied", Toast.LENGTH_LONG).show();
 			}
 	    }
 	}
@@ -181,12 +180,10 @@ public class Activity_Main extends Activity
 		@Override
 	    protected void onPostExecute(Mgmt_Msg_Abstract result)
 		{             
-			System.out.println("Activity_Main : hello here");
 			if (result instanceof Mgmt_Msg_Configuration.Data)
 			{
 				Mgmt_Msg_Configuration.Data msg_received 			= (Mgmt_Msg_Configuration.Data) result;
 				Global.configuration					 			= msg_received;
-				System.out.println("Activity_Main : hello here");
 			}
 			else
 			{
