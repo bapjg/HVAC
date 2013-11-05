@@ -36,9 +36,8 @@ public class Menu_1_Temperatures extends Menu_0_Fragment implements View.OnClick
     	if (myCaption.equalsIgnoreCase("Temperatures"))
     	{
     		System.out.println("Temperatures Click again");
-    		//this.panelFragment.update();	
+    		Global.panelTemperatures.update();
+    		System.out.println("Temperatures Called update");
     	}
-
 	}
-
 }

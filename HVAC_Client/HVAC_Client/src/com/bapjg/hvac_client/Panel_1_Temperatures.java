@@ -166,6 +166,8 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
     public void update()
     {
     	System.out.println("update called");
+		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
+		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
     }
 }
 

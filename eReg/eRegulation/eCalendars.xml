@@ -11,7 +11,9 @@
 		</Circuit>
 		<Circuit type="Object" name="Floor">
 			<Calendar type="Object" name="WeekDays" days="0" 					timeStart="16:00" 	timeEnd="19:00" tempObjective="200" stopOnObjective="0"/>
-			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5"		timeStart="16:00" 	timeEnd="21:00" tempObjective="200" stopOnObjective="0"/>
+			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5"		timeStart="06:00" 	timeEnd="07:30" tempObjective="200" stopOnObjective="0"/>
+			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5"		timeStart="06:00" 	timeEnd="07:30" tempObjective="200" stopOnObjective="0"/>
+			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5"		timeStart="11:00" 	timeEnd="13:00" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="6, 7"					timeStart="08:00" 	timeEnd="19:00" tempObjective="200" stopOnObjective="0"/>
 		</Circuit>
 	</Circuits>
