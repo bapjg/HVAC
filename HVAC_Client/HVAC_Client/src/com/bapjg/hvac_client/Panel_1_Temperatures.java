@@ -112,9 +112,7 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 		return time.substring(0,8);
 	}
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
-	{
-	}
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {}
 	@Override
 	public void onClick(View myView) 
 	{
@@ -165,6 +163,9 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 //        view.setAdapter(adapter);
 //        view.setOnItemClickListener((OnItemClickListener) this);	
     }
-
+    public void update()
+    {
+    	System.out.println("update called");
+    }
 }
 

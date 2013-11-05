@@ -1,7 +1,6 @@
 package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.Color;
@@ -13,13 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-public class Menu_Fragment_New extends Fragment // implements View.OnClickListener
+public class Menu_Fragment_Old extends Fragment // implements View.OnClickListener
 {
 	private Fragment			panelFragment;
 	private int					menuLayout;
-	public ArrayList			items;
 	
-	public Menu_Fragment_New(Fragment panelFragment, int menuLayout)
+	public Menu_Fragment_Old(Fragment panelFragment, int menuLayout)
 	{
 		// fragment : object which maintains the panel fragment			eg : panelTemperatures = new Panel_1_Temperatures();
 		// layout   : id of the layout file								eg : R.layout.menu_1_temperatures

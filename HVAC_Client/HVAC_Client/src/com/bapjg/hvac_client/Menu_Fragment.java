@@ -1,5 +1,6 @@
 package com.bapjg.hvac_client;
 
+import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ public class Menu_Fragment extends Fragment // implements View.OnClickListener
 {
 	private Fragment			panelFragment;
 	private int					menuLayout;
+	public ArrayList			items;
 	
 	public Menu_Fragment(Fragment panelFragment, int menuLayout)
 	{

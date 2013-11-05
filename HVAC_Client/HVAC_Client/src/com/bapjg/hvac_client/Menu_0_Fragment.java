@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-public class Menu_0_Fragment extends Fragment // implements View.OnClickListener
+public class Menu_0_Fragment extends Fragment 
 {
-	private Fragment			panelFragment;
+	public  Fragment			panelFragment;
 	private int					menuLayout;
 	
 	public Menu_0_Fragment(Fragment panelFragment, int menuLayout)
@@ -34,7 +34,7 @@ public class Menu_0_Fragment extends Fragment // implements View.OnClickListener
 		for (int i = 0; i < ((ViewGroup) result).getChildCount(); i++)
 		{
 			Button				buttonChild 			= (Button) ((ViewGroup) result).getChildAt(i);
-			buttonChild.setOnClickListener((OnClickListener) this.panelFragment);
+			buttonChild.setOnClickListener((OnClickListener) this);
 		}
 		((OnClickListener) this.panelFragment).onClick((Button) ((ViewGroup) result).getChildAt(0));
     	return result;

@@ -64,7 +64,7 @@ public class Activity_Main extends Activity
         // Menu_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
         // The onCreate method, calls the onClick argument of the first item in the list	
         //	
-        Menu_Fragment		menuTemperatures			= new Menu_Fragment(global.panelTemperatures, 	R.layout.menu_1_temperatures);
+        Menu_1_Temperatures	menuTemperatures			= new Menu_1_Temperatures(global.panelTemperatures, 	R.layout.menu_1_temperatures);
         Menu_Fragment		menuConfiguration			= new Menu_Fragment(global.panelConfiguration, 	R.layout.menu_2_configuration);
         Menu_Fragment		menuActions					= new Menu_Fragment(global.panelActions, 		R.layout.menu_4_actions);
         Menu_Fragment		menuCalendars				= new Menu_Fragment(global.panelCalendars, 		R.layout.menu_3_calendars);
