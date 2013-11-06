@@ -203,7 +203,7 @@ public class Mixer
 		{
 			// We need to do trip avoidance
 			System.out.println("Mixer/sequencer : Avoiding trip situation. Calculated swingTimeRequired : " + swingTimeRequired + "Forced/override to -20 seconds");
-			swingTimeRequired							= (double) 20000;
+			swingTimeRequired							= (double) -20000;
 		}
 		if (Global.thermoFloorOut.read() > 500)
 		{
