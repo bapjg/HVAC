@@ -4,7 +4,6 @@ public class Thread_Mixer implements Runnable
 {
 	public Mixer				mixer;
 	public Circuit_Mixer		circuitMixer;
-//	public Boolean 				stopRequested;
 	
 	public Thread_Mixer(Mixer mixer, Circuit_Mixer circuitMixer)
 	{
@@ -13,8 +12,6 @@ public class Thread_Mixer implements Runnable
 	}
 	public void run()
 	{
-//		this.stopNow = false;
-		
 		LogIt.info("Thread_Mixer", "Run", "Floor Starting", true);		
 
 		mixer.positionAbsolute(0.10F);
@@ -36,10 +33,15 @@ public class Thread_Mixer implements Runnable
 			// MixCold > 25 degrees indicates trip, could try sitching on radiators to induce water flow, but would need to put Mix to Hot for the duration
 			// perhaps not that feasible
 			
-			
-			Integer targetTemp						= circuitMixer.temperatureGradient.getTempToTarget();
-			//LogIt.tempData();		not needed as done in Thread thermometers
-			
+			Integer targetTemp;
+			if (circuitMixer.state == circuitMixer.CIRCUIT_STATE_RampingUp) // This is to accelerate rampup
+			{
+				targetTemp						= 420;						// Trip avoidance kicks in at 450
+			}
+			else
+			{
+				targetTemp						= circuitMixer.temperatureGradient.getTempToTarget();
+			}
 			this.mixer.sequencer(targetTemp);
 
 			Global.waitSeconds(20);

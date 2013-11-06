@@ -202,13 +202,13 @@ public class Mixer
 		if (Global.thermoFloorOut.readUnCached() > 450)
 		{
 			// We need to do trip avoidance
-			System.out.println("Mixer/sequencer : Avoiding trip situation. Calculated swingTimeRequired : " + swingTimeRequired + "Forced/override to -20 seconds");
+			System.out.println("Mixer/sequencer : Avoiding trip situation. Calculated swingTimeRequired : " + swingTimeRequired + " Forced/override to -20 seconds");
 			swingTimeRequired							= (double) -20000;
 		}
 		if (Global.thermoFloorOut.read() > 500)
 		{
 			// We need to do trip avoidance
-			System.out.println("Mixer/sequencer : Have definately tripped. Calculated swingTimeRequired : " + swingTimeRequired + "Cant do nought");
+			System.out.println("Mixer/sequencer : Have definately tripped. Calculated swingTimeRequired : " + swingTimeRequired + " Cant do nought");
 		}
 		
 		

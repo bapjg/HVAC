@@ -17,9 +17,10 @@ abstract class Circuit_Abstract
 	
 	public static final int			CIRCUIT_STATE_Off 				= 0;
 	public static final int			CIRCUIT_STATE_Starting 			= 1;
-	public static final int			CIRCUIT_STATE_Running 			= 2;
-	public static final int			CIRCUIT_STATE_Stopping	 		= 3;
-	public static final int			CIRCUIT_STATE_Optimising 		= 4;
+	public static final int			CIRCUIT_STATE_RampingUp			= 2;
+	public static final int			CIRCUIT_STATE_Running 			= 3;
+	public static final int			CIRCUIT_STATE_Stopping	 		= 4;
+	public static final int			CIRCUIT_STATE_Optimising 		= 5;
 	public static final int			CIRCUIT_STATE_Error	 			= -1;
 
 	public static final int			CIRCUIT_STATE_Suspended			= 5;
@@ -65,12 +66,9 @@ abstract class Circuit_Abstract
 		CircuitTask 	circuitTaskItem 							= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
 		circuitTaskList.add(circuitTaskItem);
 	}
-	public Long getRampUpTime()
-	{  /* OverRiden in Circuit_XXX classes */	return 0L; 	}
-	public Long calculatePerformance()
-	{  /* OverRiden in Circuit_XXX classes */	return 0L; 	}
-	public void sequencer()										// Task overridden in child classes
-	{ /* OverRiden in Circuit_XXX classes */	}
+	public Long getRampUpTime() 			{  /* OverRiden in Circuit_XXX classes */	return 0L; 	}
+	public Long calculatePerformance()		{  /* OverRiden in Circuit_XXX classes */	return 0L; 	}
+	public void sequencer()					{ /* OverRiden in Circuit_XXX classes */	}
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");

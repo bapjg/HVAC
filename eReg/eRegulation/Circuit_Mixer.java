@@ -26,6 +26,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 	@Override
 	public void sequencer()
 	{
+		Integer temp;							// Probably not usefull;
 		if (taskActive == null)
 		{
 			//Nothing to do
@@ -49,7 +50,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				}
 				else
 				{
-					Integer temp									= temperatureGradient.getTempToTarget();
+					temp											= temperatureGradient.getTempToTarget();
 					this.heatRequired.tempMinimum					= 500;
 					this.heatRequired.tempMaximum					= 750;
 					state											= CIRCUIT_STATE_AwaitingHeat;
@@ -65,11 +66,20 @@ public class Circuit_Mixer extends Circuit_Abstract
 				{
 					LogIt.action("PumpFloor", "On");
 					Global.pumpFloor.on();
-					state											= CIRCUIT_STATE_Running;
+					state											= CIRCUIT_STATE_RampingUp;
 				}
 				break;
+			case CIRCUIT_STATE_RampingUp:
+				if (Global.thermoLivingRoom.reading > (200 - 20))
+				{
+					state											= CIRCUIT_STATE_Running;
+				}
+				temp												= 420;
+				this.heatRequired.tempMinimum						= 500;
+				this.heatRequired.tempMaximum						= 800;
+				break;
 			case CIRCUIT_STATE_Running:
-				Integer temp										= temperatureGradient.getTempToTarget();
+				temp												= temperatureGradient.getTempToTarget();
 				this.heatRequired.tempMinimum						= 500;
 				this.heatRequired.tempMaximum						= 800;
 				break;
@@ -78,8 +88,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 				state												= CIRCUIT_STATE_Stopping;
 				//Now fall through
 			case CIRCUIT_STATE_Stopping:
-//				LogIt.info("Circuit", "sequencerFloor", "Stopping Stopping zzzzzzzzzz");
-
 				if 	(	(Global.circuits.isSingleActiveCircuit())
 //				&& 		(Global.thermoBoiler.reading > taskActive.tempObjective + 30)   )		// Care, we can be above objective while pumpting heat out !!!
 				&& 		(Global.thermoBoiler.reading > Global.thermoFloorCold.reading + 30)   )	// Solution : Continue while more than 3 degrees than return temp
