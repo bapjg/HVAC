@@ -108,7 +108,7 @@ public class PID
     	}
 
 		integral 						= integrals[indexCurrent].floatValue();							// in decidegree x seconds
-		result 							= - kP * proportional + kD * differential + kI * integral;
+		result 							= - kP * proportional - kD * differential - kI * integral;
 		
 		LogIt.pidData(target, proportional, differential, integral, kP, kD, kI, result, items[indexCurrent], Global.thermoBoiler.reading);
 

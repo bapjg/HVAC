@@ -254,7 +254,7 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
-		LogIt.action("Mixer/PID", "Moving ended positionTracked : " + positionTracked );
+		LogIt.action("Mixer/sequencer", "Moving ended positionTracked : " + positionTracked );
 	}
 //
 //	============================================================
