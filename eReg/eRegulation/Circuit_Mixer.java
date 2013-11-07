@@ -74,7 +74,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				{
 					state											= CIRCUIT_STATE_Running;
 				}
-				temp												= 420;
+				temp												= 400;
 				this.heatRequired.tempMinimum						= 500;
 				this.heatRequired.tempMaximum						= 800;
 				break;
