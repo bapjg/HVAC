@@ -99,7 +99,7 @@ public class Boiler
 			burner.powerOff();
 			if (state != STATE_On_CoolingAfterOverheat)
 			{
-				LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + " , state set to STATE_OnCoolingAfterOverheat");
+				LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + " , state set to STATE_OnCoolingAfterOverheat", false);
 			}
 			state									 = STATE_On_CoolingAfterOverheat;
 			return;
@@ -134,7 +134,7 @@ public class Boiler
 			burner.powerOff();													//Ensure burner is powered off (normally, already done
 			if (!checkOverHeat())
 			{
-				LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling");
+				LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling", false);
 				state								 = STATE_On_Cooling; 		//Normal operating temp has returned
 				return;
 			}

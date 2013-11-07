@@ -6,22 +6,22 @@ import java.util.Calendar;
 
 public class PID 
 {
-    private Integer 	enqueueIndex;// Separate index to ensure enqueue happens at the end
-    private Integer[] 	items;
-    private Integer[] 	deltas;
-    private Long[] 		integrals;
+    private Integer 	enqueueIndex;	// Separate index to ensure enqueue happens at the end
+    private Integer[] 	items;			// Proportional component, stored unit = decidegrees (we store values, not differences to avoid pbs with 
+    private Integer[] 	deltas;			// Differential component, stored unit = decidegrees  sudden target changes with sudden target changes)
+    private Long[] 		integrals;		// Integral component,     stored unit = decidegree from target x seconds
     private Integer 	count;
     public 	Integer 	target;
-    private Long[] 		timeStamps;
+    private Long[] 		timeStamps;		//                         stored unit = milliseconds
     
-    public PID(Integer target, Integer size) 
+    public PID(Integer size) 
     {
         enqueueIndex 					= 0;
         items 							= new Integer[size];
         deltas 							= new Integer[size];
         integrals 						= new Long[size];
         timeStamps 						= new Long[size];
-        this.target 					= target;
+        this.target 					= 0;
         count							= 0;
     }
     public void setTarget(Integer target)
@@ -35,6 +35,7 @@ public class PID
     	//           inegration decidegrees * seconds
     	//           differential decidegrees per second (this is not handled here, but is handles in getGain()
     	
+    	Integer previousIndex			= 0;
     	items[enqueueIndex] 			= newNumber;
     	timeStamps[enqueueIndex] 		= Calendar.getInstance().getTimeInMillis();
     	
@@ -45,12 +46,16 @@ public class PID
     	}
     	else
     	{
-    		deltas[enqueueIndex] 		= newNumber - items[(items.length + enqueueIndex - 1) % items.length];							// This is dT
+    		// previous index is enqueueIndex -1 modulo length. We add queue length to avoid negative values 
+    		previousIndex				= (enqueueIndex - 1 + timeStamps.length) % timeStamps.length;
     		
-    		Long deltaTimeStamps 		= timeStamps[enqueueIndex] - timeStamps[(timeStamps.length + enqueueIndex - 1) % timeStamps.length];
-    		Long integratedTime  		= newNumber.longValue() * deltaTimeStamps/1000L;
+    		// Calculate dTemp. Note that it is independant of the target (rate of change)
+    		deltas[enqueueIndex] 		= newNumber - items[previousIndex];							
     		
-    		integrals[enqueueIndex] 	= integratedTime + integrals[(integrals.length + enqueueIndex - 1) % integrals.length];			// This is items x dT
+    		Long deltaTimeStamps 		= timeStamps[enqueueIndex] - timeStamps[previousIndex];
+    		Long decidegreeSeconds		= (newNumber.longValue() - target.longValue()) * deltaTimeStamps/1000L;		// decidegreeSeconds = offTarget x seconds
+    		
+    		integrals[enqueueIndex] 	= decidegreeSeconds + integrals[previousIndex];			// This is items x.dT
     	}
 
         enqueueIndex = (enqueueIndex + 1) % items.length;
@@ -77,43 +82,35 @@ public class PID
     	// Note that Java modulo defines that result carries same sign as numurator
     	// So to get the index of index-1 (or -2) we add the modulo base to ensure a positive outcome
     	
-    	Integer		index 				= (items.length + enqueueIndex - 1) % items.length;
-    	Integer 	currentError 		= items[index] - target;
-    	Float 		proportional 		= currentError.floatValue();
-		Float 		differential 		= 0F;
-		Float 		integral 			= 0F;
-		Float 		result 				= 0F;
+    	Integer		indexCurrent		= (enqueueIndex - 1 + items.length) % items.length;
+    	Integer		indexPrevious		= (enqueueIndex - 2 + items.length) % items.length;
+    	Integer 	currentError 		= items[indexCurrent] - target;
+    	Float 		proportional 		= currentError.floatValue();		// unit = decigrees offtarget
+		Float 		differential 		= 0F;								// unit = decigrees/second 
+		Float 		integral 			= 0F;								// unit = decigrees offtarget x seconds
+		Float 		result 				= 0F;								// retruns number of milliseconds to move 3way valve
+																			// Made negative as is a negative feedback system
 		
-    	// Differential component will be average of last 2 readings to avoid pbs with misreadings
     	// Rather than calc de/dt (which can have transients due to square wave targets
     	// we go for dnewNumber/dt which is smoother. All times are saved in ms.
     	// The integration function gives a value in seconds
     	// The differential work is done here and so is multiplied by 1000 to go from ms -> s
 		
-    	if (count == 0)
+    	if (count <= 1)
     	{
     		differential 				= 0F;
     	}
-    	else if (count == 1)
-    	{
-    		differential 				= 0F;
-    	}
-    	else if (count == 2)
+    	else
     	{
     		//Units of differential are decidegrees/millisecond
-    		Long 	deltaTimeStamps 	= timeStamps[index] - timeStamps[(timeStamps.length + index - 1) % timeStamps.length];
-    		differential				= deltas[index].floatValue() / deltaTimeStamps;
-    	}
-    	else 
-    	{
-    		Long 	deltaTimeStamps 	= timeStamps[index] - timeStamps[(timeStamps.length + index - 2) % timeStamps.length];
-    		differential				= (deltas[index] + deltas[(deltas.length + index - 1) % deltas.length].floatValue()) / deltaTimeStamps;
+    		Long 	deltaTimeStamps 	= timeStamps[indexCurrent] - timeStamps[indexPrevious];
+    		differential				= 1000F * deltas[indexCurrent].floatValue() / deltaTimeStamps;	// in decidegrees per second
     	}
 
-		integral 						= integrals[index].floatValue();
-		result 							=kP * proportional + kD * differential * 1000F + kI * integral;
+		integral 						= integrals[indexCurrent].floatValue();							// in decidegree x seconds
+		result 							= - kP * proportional + kD * differential + kI * integral;
 		
-		LogIt.pidData(target, proportional, differential, integral, kP, kD, kI, result, items[index], Global.thermoBoiler.reading);
+		LogIt.pidData(target, proportional, differential, integral, kP, kD, kI, result, items[indexCurrent], Global.thermoBoiler.reading);
 
     	return result;
     }

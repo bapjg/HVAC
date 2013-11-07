@@ -14,7 +14,8 @@ public class Test_Pid
 		Long now = Calendar.getInstance().getTimeInMillis();
 		
 		
-		PID pid	= new PID(5,3);
+		PID pid	= new PID(3);
+		pid.target = 5;
 		pid.add(3);
 		
 		try

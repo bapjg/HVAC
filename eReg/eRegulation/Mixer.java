@@ -46,7 +46,7 @@ public class Mixer
 		this.name 									= name;
 		this.swingTime								= Integer.parseInt(swingTime);
 		this.lagTime								= Integer.parseInt(lagTime);
-		this.pidControler							= new PID(5,3);
+		this.pidControler							= new PID(10);
 		this.gainP									= Float.parseFloat(gainP);
 		this.timeD									= Float.parseFloat(timeD);
 		this.gainD									= this.gainP * this.timeD;
@@ -191,62 +191,55 @@ public class Mixer
 		// Changed Kd = 0.02
 		
 		
-		pidControler.target								= targetTemp;
+		pidControler.target								= targetTemp;		// targetTemp is either gradient or some maxTemp for rampup
 		
 		// kP at 62F was too sluggish. Pushed it up to 100
 		// gainI										= 0F;			// If dtI <> then = gainP/dtI;
 		
-		Double swingTimeRequired						= - Math.floor(pidControler.getGain(gainP, gainD, gainI));
+		Double swingTimeRequired						= Math.floor(pidControler.getGain(gainP, gainD, gainI));
 		Integer swingTimePerformed						= 0;
 
 		if (Global.thermoFloorOut.readUnCached() > 450)
 		{
 			// We need to do trip avoidance
-			System.out.println("Mixer/sequencer : Avoiding trip situation. Calculated swingTimeRequired : " + swingTimeRequired + " Forced/override to -20 seconds");
+			LogIt.action("Mixer/sequencer", "Avoiding trip situation. Calculated swingTimeRequired : " + swingTimeRequired + " Forced/override to -20000 milliseconds");
 			swingTimeRequired							= (double) -20000;
 		}
 		if (Global.thermoFloorOut.read() > 500)
 		{
 			// We need to do trip avoidance
-			System.out.println("Mixer/sequencer : Have definately tripped. Calculated swingTimeRequired : " + swingTimeRequired + " Cant do nought");
+			LogIt.action("Mixer/sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
 		}
 		
-		
-		// LogIt.tempInfo("PID Called - swingTimeRequired given by PID : " + swingTimeRequired + " current positionTracked : " + positionTracked);
-
-		
-		if (Math.abs(swingTimeRequired) < 500)														// Moving hotter
+		if (Math.abs(swingTimeRequired) < 500)												// Less than half a second
 		{
 			// Do nothing to avoid contact bounce and relay problems
 			swingTimePerformed							= 0;
 		}
 		else if (swingTimeRequired > 0)														// Moving hotter
 		{
-	 		if (positionTracked != 90000)												// No point going over max
+	 		if (positionTracked < 90000)													// No point going over max
 	 		{
 				if (positionTracked + swingTimeRequired > 90000)
 		 		{
 		 			swingTimeRequired 					= 90000F - positionTracked.doubleValue();		//No point waiting over maximum add an extra second to be sure of end point
 		 		}
 				
-				LogIt.action("Mixer/PID", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
-				LogIt.action("Mixer/PID", "Calling Up/On");
+				LogIt.action("Mixer/sequencer", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
 		 		Global.mixerUp.on();
 		 		swingTimePerformed   					= waitAWhile(swingTimeRequired);
-		 		LogIt.action("Mixer/PID", "Calling Up/Off");
 		 		Global.mixerUp.off();
-		 		LogIt.action("Mixer/PID", "Called  Up/Off nothing else");
 	 		}
 		}
 		else																			// Moving colder
 		{
-			if (positionTracked != 0)													// No point going under min
+			if (positionTracked > 0)													// No point going under min
 	 		{
 				if (positionTracked + swingTimeRequired < 0)
 		 		{
 		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000f;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
-				LogIt.action("Mixer/PID", "Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
+				LogIt.action("Mixer/sequencer", "Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
 				Global.mixerDown.on();
 				swingTimePerformed   					= - waitAWhile(Math.abs(swingTimeRequired));
 				Global.mixerDown.off();

@@ -100,7 +100,7 @@ public class Control
 		Global.circuitHotWater						= (Circuit_HotWater) 	Global.circuits.fetchcircuit("Hot_Water");
 
 		Global.mixer								= Global.circuitFloor.mixer;
-		Global.mixer.pidControler					= new PID(5,3);					// PID Controler is updated every 10 seconds by Thread_Thermometers
+		Global.mixer.pidControler					= new PID(10);					// PID Controler is updated every 10 seconds by Thread_Thermometers
 		
 		//
 		//============================================================
