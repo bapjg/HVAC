@@ -17,7 +17,6 @@ public class Thread_Mixer implements Runnable
 		mixer.positionAbsolute(0.10F);
 		
 		Global.waitSeconds(60);
-		LogIt.action("PumpFloor", "On");
 		Global.pumpFloor.on();
 		
 		LogIt.info("Thread_Mixer", "Run", "Floor Initialised (10%)");		
@@ -47,7 +46,6 @@ public class Thread_Mixer implements Runnable
 			Global.waitSeconds(20);
 		}
 		// Optimise if singlecircuit
-		LogIt.action("PumpFloor", "Off");
 		Global.pumpFloor.off();
 		LogIt.info("Thread_Mixer", "Run", "Floor Thread ending", true);	
 	}

@@ -64,7 +64,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 			case CIRCUIT_STATE_AwaitingHeat:
 				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
 				{
-					LogIt.action("PumpFloor", "On");
 					Global.pumpFloor.on();
 					state											= CIRCUIT_STATE_RampingUp;
 				}
@@ -97,7 +96,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 				}
 				else
 				{
-					LogIt.action("PumpFloor", "Off");
 					Global.pumpFloor.off();
 					this.shutDown();					// shutDown sets state to off. Threadmixer looks at this as signal to stop
 				}
