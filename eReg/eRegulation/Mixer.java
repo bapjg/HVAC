@@ -24,12 +24,12 @@ public class Mixer
 	public Float			timeI					= 0F;
 	
 	public PID				pidControler;
-	
-//	public Integer			state					= 0;
-	
-//	public final int 		STATE_Stopped 			= 0;
-//	public final int 		STATE_Moving	 		= 1;
-//	public final int 		STATE_AwaitingTemp 		= 2;
+	public Integer			state					= 0;
+	public static final int	MIXER_STATE_Off 		= 0;
+	public static final int	MIXER_STATE_Moving_Up	= 1;
+	public static final int	MIXER_STATE_Moving_Down	= -1;
+	public Long				timeToStop;
+
        
  	
 	public Mixer
@@ -52,6 +52,7 @@ public class Mixer
 		this.gainD									= this.gainP * this.timeD;
 		this.timeI									= Float.parseFloat(timeI);
 		this.gainI									= Float.parseFloat(gainI);
+		this.state									= MIXER_STATE_Off;
 	}
 	public Float getSwingProportion(Integer temperature)
 	{
