@@ -112,7 +112,7 @@ fi
 PATH=$PATH:/home/pi/Macros
 alias ll='ls -l'
 alias down='sudo shutdown -h now;exit'
-alias reboot='sudo shutdown -r now'
+alias reboot='sudo shutdown -r now;exit'
 alias sjava='sudo java -cp .. -Djava.library.path="." '
 
 #sudo modprobe w1-gpio
