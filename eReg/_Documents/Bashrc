@@ -150,7 +150,7 @@ alias flooroff='sudo  	bw_tool -a 9c -w 25:0'
 
 
 alias tempboiler='echo boiler;sudo cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo'
-alias temphw='echo hotwater;sudo     cat /mnt/1wire/uncached/28.89748e040000/temperature10;echo'
+alias temphw='echo hotwater;sudo     cat /mnt/1wire/uncached/28.901e58400000/temperature10;echo'
 alias tempmixc='echo mixer_cold;sudo   cat /mnt/1wire/uncached/28.69da8e040000/temperature10;echo'
 alias tempmixh='echo mixer_hot;sudo   cat /mnt/1wire/uncached/28.2c068e040000/temperature10;echo'
 alias tempmixo='echo mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'

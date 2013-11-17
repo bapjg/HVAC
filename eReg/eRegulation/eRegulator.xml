@@ -10,7 +10,7 @@
 		<Thermometer type="Object" name="Radiator_In" 	address="28.76EF 8E04 0000"	friendlyName="Radiateur_Retour">	</Thermometer>
 		<Thermometer type="Object" name="Outside" 		address="28.41DB 8E04 0000"	friendlyName="Exterieur">			</Thermometer>
 		<Thermometer type="Object" name="Living_Room" 	address="28.90DB 8E04 0000"	friendlyName="Sonde_Salon">			</Thermometer>
-		<Thermometer type="Object" name="Hot_Water" 	address="28.8974 8E04 0000"	friendlyName="ECS">					</Thermometer>
+		<Thermometer type="Object" name="Hot_Water" 	address="28.901E 5840 0000"	friendlyName="ECS">					</Thermometer>
 	</Thermometers>
 
 	<Circuits type="Collection">
