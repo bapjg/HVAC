@@ -156,6 +156,10 @@ alias tempmixh='echo mixer_hot;sudo   cat /mnt/1wire/uncached/28.2c068e040000/te
 alias tempmixo='echo mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
 alias tempall='echo -ne "boiler   ";sudo cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo;echo -ne "hotwater ";sudo cat /mnt/1wire/uncached/28.89748e040000/temperature10;echo;echo -ne mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
 
+alias thw='cat /sys/bus/w1/devices/28-00000485e109/w1_slave'
+alias tboiler='cat /sys/bus/w1/devices/28-0000048f011c/w1_slave'
+alias tmixo='cat /sys/bus/w1/devices/28-0000048e9244/w1_slave'
+
 alias go='cd /home/pi/HVAC/eReg/eRegulation/;git stash save; git stash drop;make ex'
 
 echo testing mount to //NAS/DropZone at /mnt/DZ
