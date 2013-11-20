@@ -149,12 +149,19 @@ alias flooron='sudo   	bw_tool -a 9c -w 25:1'
 alias flooroff='sudo  	bw_tool -a 9c -w 25:0'
 
 
-alias tempboiler='echo boiler;sudo cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo'
-alias temphw='echo hotwater;sudo     cat /mnt/1wire/uncached/28.901e58400000/temperature10;echo'
-alias tempmixc='echo mixer_cold;sudo   cat /mnt/1wire/uncached/28.69da8e040000/temperature10;echo'
-alias tempmixh='echo mixer_hot;sudo   cat /mnt/1wire/uncached/28.2c068e040000/temperature10;echo'
-alias tempmixo='echo mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
-alias tempall='echo -ne "boiler   ";sudo cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo;echo -ne "hotwater ";sudo cat /mnt/1wire/uncached/28.89748e040000/temperature10;echo;echo -ne mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
+alias tempboiler='echo boiler;          sudo   cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo'
+alias temphw='echo hotwater;            sudo   cat /mnt/1wire/uncached/28.09e185040000/temperature10;echo'
+alias tempmixc='echo mixer_cold;        sudo   cat /mnt/1wire/uncached/28.69da8e040000/temperature10;echo'
+alias tempmixh='echo mixer_hot;         sudo   cat /mnt/1wire/uncached/28.2c068e040000/temperature10;echo'
+alias tempmixo='echo mixer_out;         sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
+alias tempboilerin='echo boiler_in;     sudo   cat /mnt/1wire/uncached/28.629F8E040000/temperature10;echo'
+alias tempradiatorh='echo radiator_out; sudo   cat /mnt/1wire/uncached/28.A1948E040000/temperature10;echo'
+alias tempradiatorc='echo radiator_in;  sudo   cat /mnt/1wire/uncached/28.76EF8E040000/temperature10;echo'
+alias templivingroom='echo living_room; sudo   cat /mnt/1wire/uncached/28.76EF8E040000/temperature10;echo'
+alias tempoutside='echo outside;        sudo   cat /mnt/1wire/uncached/28.76EF8E040000/temperature10;echo'
+
+
+alias tempall='echo -ne "boiler   ";    sudo   cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo;echo -ne "hotwater ";sudo cat /mnt/1wire/uncached/28.89748e040000/temperature10;echo;echo -ne mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
 
 alias thw='cat /sys/bus/w1/devices/28-00000485e109/w1_slave'
 alias tboiler='cat /sys/bus/w1/devices/28-0000048f011c/w1_slave'
