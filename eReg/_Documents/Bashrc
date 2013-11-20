@@ -158,7 +158,7 @@ alias tempboilerin='echo boiler_in;     sudo   cat /mnt/1wire/uncached/28.629F8E
 alias tempradiatorh='echo radiator_out; sudo   cat /mnt/1wire/uncached/28.A1948E040000/temperature10;echo'
 alias tempradiatorc='echo radiator_in;  sudo   cat /mnt/1wire/uncached/28.76EF8E040000/temperature10;echo'
 alias templivingroom='echo living_room; sudo   cat /mnt/1wire/uncached/28.90DB8E040000/temperature10;echo'
-alias tempoutside='echo outside;        sudo   cat /mnt/1wire/uncached/28.76EF8E040000/temperature10;echo'
+alias tempoutside='echo outside;        sudo   cat /mnt/1wire/uncached/28.41DB8E040000/temperature10;echo'
 
 
 alias tempall='echo -ne "boiler   ";    sudo   cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo;echo -ne "hotwater ";sudo cat /mnt/1wire/uncached/28.89748e040000/temperature10;echo;echo -ne mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
