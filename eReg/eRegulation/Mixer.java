@@ -221,7 +221,7 @@ public class Mixer
 		{
 	 		if (swingTimeRequired > 25000)													// Limit swings to 25% (25s)
 	 		{
-	 			swingTimeRequired						= 30000D;
+	 			swingTimeRequired						= 25000D;
 	 		}
 			
 			if (positionTracked < 90000)													// No point going over max
