@@ -164,7 +164,7 @@ public class Monitor extends HttpServlet
         try
         {
             dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM pid LIMIT 1");
+            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
             dbResultSet.moveToInsertRow();
 
             dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
@@ -178,7 +178,7 @@ public class Monitor extends HttpServlet
             dbResultSet.updateFloat		("kD", 				readings.kD);
             dbResultSet.updateFloat		("kI", 				readings.kI);
             dbResultSet.updateFloat		("result", 			readings.result);
-            dbResultSet.updateInt		("tempOut", 		readings.tempOut);
+            dbResultSet.updateInt		("tempFloorOut",	readings.tempOut);
             dbResultSet.updateInt		("tempBoiler", 		readings.tempBoiler);
             dbResultSet.insertRow();
             
@@ -226,7 +226,7 @@ public class Monitor extends HttpServlet
         try
         {
             dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM reports LIMIT 1");
+            ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
@@ -256,7 +256,7 @@ public class Monitor extends HttpServlet
         try
         {
             dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM actions LIMIT 1");
+            ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
