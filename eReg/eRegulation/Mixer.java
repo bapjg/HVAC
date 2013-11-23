@@ -219,9 +219,9 @@ public class Mixer
 		}
 		else if (swingTimeRequired > 0)														// Moving hotter
 		{
-	 		if (swingTimeRequired > 25000)													// Limit swings to 25% (25s)
+	 		if (swingTimeRequired > 20000)													// Limit swings to 25% (25s)
 	 		{
-	 			swingTimeRequired						= 25000D;
+	 			swingTimeRequired						= 20000D;
 	 		}
 			
 			if (positionTracked < 90000)													// No point going over max
