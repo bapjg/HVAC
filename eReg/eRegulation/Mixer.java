@@ -197,7 +197,7 @@ public class Mixer
 		// kP at 62F was too sluggish. Pushed it up to 100
 		// gainI										= 0F;			// If dtI <> then = gainP/dtI;
 		
-		Double swingTimeRequired						= Math.floor(pidControler.getGain(gainP, gainD, gainI));
+		Double swingTimeRequired						= Math.floor(pidControler.getGain(gainP, gainD, gainI)); // returns a swingTime in milliseconds
 		Integer swingTimePerformed						= 0;
 
 		if (Global.thermoFloorOut.readUnCached() > 450)

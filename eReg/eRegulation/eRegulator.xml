@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eRegulator>
 	<Thermometers type="Collection">
-		<Thermometer type="Object" name="Boiler" 		address="28.1C01 8F04 0000" friendlyName="Chaudiere">			</Thermometer>
+		<Thermometer type="Object" name="Boiler" 		address="28.3F9A 8504 0000" friendlyName="Chaudiere">			</Thermometer>
 		<Thermometer type="Object" name="Boiler_In" 	address="28.629F 8E04 0000"	friendlyName="Chaudiere_Retour">	</Thermometer>
 		<Thermometer type="Object" name="Floor_Out" 	address="28.4492 8E04 0000"	friendlyName="V3V_Depart">			</Thermometer>
 		<Thermometer type="Object" name="Floor_Cold" 	address="28.69DA 8E04 0000"	friendlyName="V3V_Retour">			</Thermometer>
@@ -16,7 +16,7 @@
 	<Circuits type="Collection">
 
 		<Circuit type="Object" name="Floor" tempMax="500" circuitType="Mixer" friendlyName="Plancher Chauffant" rampUpTime="0" summerActivity="0">
-			<Mixer type="Object" name="Mixer" swingTime="103" lagTime="20" gainP="60" timeD="40" gainI="0" timeI="0">
+			<Mixer type="Object" name="Mixer" swingTime="103" lagTime="20" gainP="1000" timeD="0" gainI="0" timeI="0">
 			</Mixer>
 			<TempGradient type="Object" name="Mixer" outsideLow="-150" tempLow="450" outsideHigh="150" tempHigh="350">
 			</TempGradient>
