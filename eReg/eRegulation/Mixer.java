@@ -198,6 +198,18 @@ public class Mixer
 		// gainI										= 0F;			// If dtI <> then = gainP/dtI;
 		
 		Double swingTimeRequired						= Math.floor(pidControler.getGain(gainP, gainD, gainI)); // returns a swingTime in milliseconds
+		
+		if (swingTimeRequired > 20000)
+		{
+			// Recalculate swingTime taking into consideration extra length of time
+			Double swingTimeRequired2						= Math.floor(pidControler.getGain(gainP, gainD + 20000, gainI)); // returns a swingTime in milliseconds
+			if (swingTimeRequired2 < 20000)
+			{
+				// Recalculate swingTime taking into consideration extra length of time
+				swingTimeRequired							=  swingTimeRequired2;						
+			}
+		}
+		
 		Integer swingTimePerformed						= 0;
 
 		if (Global.thermoFloorOut.readUnCached() > 450)
