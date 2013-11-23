@@ -167,7 +167,7 @@ alias thw='cat /sys/bus/w1/devices/28-00000485e109/w1_slave'
 alias tboiler='cat /sys/bus/w1/devices/28-0000048f011c/w1_slave'
 alias tmixo='cat /sys/bus/w1/devices/28-0000048e9244/w1_slave'
 
-alias go='cd /home/pi/HVAC/eReg/eRegulation/;git stash save; git stash drop;make ex'
+alias go='cd /home/pi/HVAC/eReg/eRegulation/;git stash save; git stash drop;make ex;update'
 
 echo testing mount to //NAS/DropZone at /mnt/DZ
 echo ==========================================
