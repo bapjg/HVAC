@@ -71,6 +71,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			case CIRCUIT_STATE_RampingUp:
 				if (Global.thermoLivingRoom.reading > (200 - 20))
 				{
+					LogIt.display("Circuit_Mixer", "sequencer", "RampUpFinished as livingroom temp is " + Global.thermoLivingRoom.reading);
 					state											= CIRCUIT_STATE_Running;
 				}
 				temp												= 400;

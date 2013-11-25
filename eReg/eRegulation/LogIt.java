@@ -49,7 +49,7 @@ public class LogIt
 	
 	public static void  display(String className, String methodName, String message)
 	{
-		System.out.println(dateTimeStamp() + " : Display : " + className + "/" + methodName + " - " + message);
+		System.out.println(dateTimeStamp() + " : Display: " + className + "/" + methodName + " - " + message);
 
 	}
 	public static void  info(String className, String methodName, String message)
