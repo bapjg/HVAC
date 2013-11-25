@@ -174,7 +174,7 @@ public class Mixer
 		// Simply measure the difference between wanted temperature and mixerOut
 		// Multiply by a coefficient (250ms/decimal degree to start with) and see how it goes
 		//
-		
+		LogIt.display("Mixer", "sequencer", "targetTemp is : " + targetTemp);
 		allOff();
 		
 		
