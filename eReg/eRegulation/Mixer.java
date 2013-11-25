@@ -82,8 +82,8 @@ public class Mixer
 			// tempSpan 								= tempVeryHot - Global.thermoFloorIn.reading;
         //}
 		
-		LogIt.info("Mixer","getSwingProportion", "Floor tempDelta : " + temperature    + " - " + tempMixerInCold + " = " + tempDelta);
-		LogIt.info("Mixer","getSwingProportion", "Floor tempSpan  : " + tempMixerInHot + " - " + tempMixerInCold + " = " + tempSpan);
+//		LogIt.info("Mixer","getSwingProportion", "Floor tempDelta : " + temperature    + " - " + tempMixerInCold + " = " + tempDelta);
+//		LogIt.info("Mixer","getSwingProportion", "Floor tempSpan  : " + tempMixerInHot + " - " + tempMixerInCold + " = " + tempSpan);
 		
 		if (tempSpan < 0 )
 		{
@@ -253,7 +253,7 @@ public class Mixer
 		 		{
 		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000F;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
-				LogIt.display("Mixer", "sequencer", "Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
+				LogIt.display("Mixer", "sequencer", "Moving Colder swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
 				Global.mixerDown.on();
 				swingTimePerformed   					= - waitAWhile(swingTimeRequired);
 				Global.mixerDown.off();
