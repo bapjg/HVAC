@@ -27,6 +27,7 @@ public class Thread_Mixer implements Runnable
 		
 		Global.waitSeconds(60);
 		Global.pumpFloor.on();
+		Integer i								= 0; // Used for loop waiting 20 s
 		
 		
 		while ((!Global.stopNow) && (circuitMixer.state != circuitMixer.CIRCUIT_STATE_Off))
@@ -51,7 +52,18 @@ public class Thread_Mixer implements Runnable
 			}
 			this.mixer.sequencer(targetTemp);
 
-			Global.waitSeconds(20);
+			for (i = 0; i < 4; i++)
+			{
+				if (Global.thermoFloorOut.readUnCached() < 450)
+				{
+					Global.waitSeconds(5);									// 4 loops of 5s
+				}
+				else
+				{
+					System.out.println(LogIt.dateTimeStamp() + "Thread_Mixer/mainLoop : Interrupting the 20s wait");
+					break;
+				}
+			}
 		}
 		// Optimise if singlecircuit
 		Global.pumpFloor.off();

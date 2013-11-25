@@ -201,12 +201,13 @@ public class Mixer
 		
 		if (swingTimeRequired > 20000)
 		{
-			// Recalculate swingTime taking into consideration extra length of time
+			// Recalculate swingTime taking into consideration extra length of time in mixerUp situation
 			Double swingTimeRequired2						= Math.floor(pidControler.getGain(gainP, gainD + 20000, gainI)); // returns a swingTime in milliseconds
 			if (swingTimeRequired2 < 20000)
 			{
 				// Recalculate swingTime taking into consideration extra length of time
-				swingTimeRequired							=  swingTimeRequired2;						
+				swingTimeRequired							=  swingTimeRequired2;	
+				System.out.println(LogIt.dateTimeStamp() + "Mixer/sequencer : Using recalculated pid value");
 			}
 		}
 		
@@ -215,13 +216,13 @@ public class Mixer
 		if (Global.thermoFloorOut.readUnCached() > 450)
 		{
 			// We need to do trip avoidance
-			LogIt.action("Mixer/sequencer", "Avoiding trip situation. Calculated swingTimeRequired : " + swingTimeRequired + " Forced/override to -20000 milliseconds");
-			swingTimeRequired							= (double) -20000;
+			System.out.println(LogIt.dateTimeStamp() + "Mixer/sequencer : Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
+			//swingTimeRequired							= (double) -20000;
 		}
 		if (Global.thermoFloorOut.read() > 500)
 		{
 			// We need to do trip avoidance
-			LogIt.action("Mixer/sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
+			System.out.println(LogIt.dateTimeStamp() + "Mixer/sequencer : Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
 		}
 		
 		if (Math.abs(swingTimeRequired) < 500)												// Less than half a second
@@ -231,11 +232,6 @@ public class Mixer
 		}
 		else if (swingTimeRequired > 0)														// Moving hotter
 		{
-	 		if (swingTimeRequired > 20000)													// Limit swings to 25% (25s)
-	 		{
-	 			swingTimeRequired						= 20000D;
-	 		}
-			
 			if (positionTracked < 90000)													// No point going over max
 	 		{
 				if (positionTracked + swingTimeRequired > 90000)
@@ -243,7 +239,7 @@ public class Mixer
 		 			swingTimeRequired 					= 90000F - positionTracked.doubleValue();		//No point waiting over maximum add an extra second to be sure of end point
 		 		}
 				
-				LogIt.action("Mixer/sequencer", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
+				LogIt.action(LogIt.dateTimeStamp() + "Mixer/sequencer", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
 		 		Global.mixerUp.on();
 		 		swingTimePerformed   					= waitAWhile(swingTimeRequired);
 		 		Global.mixerUp.off();
@@ -255,11 +251,11 @@ public class Mixer
 	 		{
 				if (positionTracked + swingTimeRequired < 0)
 		 		{
-		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000f;		//No point waiting under minimum add an extra second to be sure of end point
+		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000F;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
-				LogIt.action("Mixer/sequencer", "Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
+				System.out.println("Mixer/sequencer : Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
 				Global.mixerDown.on();
-				swingTimePerformed   					= - waitAWhile(Math.abs(swingTimeRequired));
+				swingTimePerformed   					= - waitAWhile(swingTimeRequired);
 				Global.mixerDown.off();
 	 		}
 		}
@@ -272,12 +268,12 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
-		LogIt.action("Mixer/sequencer", "Moving ended positionTracked : " + positionTracked );
+		System.out.println(LogIt.dateTimeStamp() + "Mixer/sequencer : Moving ended positionTracked : " + positionTracked );
 	}
 //
 //	============================================================
 
-
+	// No longer used
 	public void adjustTemperature(Integer tempMixerOutTarget)
 	{
 		// Using similar traiangles, Formula is
@@ -319,7 +315,7 @@ public class Mixer
 		{
 			// We will probably have to let things settle down
 			// LogIt
-			return;
+			return;		// Things go wrong after trip situation
 		}
 		
 		if (tempMixerOutTarget > tempMixerInHot)
@@ -390,20 +386,12 @@ public class Mixer
 	}
 	public void positionZero()
 	{
-		/*
-			Routine to send mixer to "Cold" position
-			Parameters :
-			Input   : none
-			Returns : none
-			Static  : positionTracked - Set to zero
-		*/
 		allOff();
 		Global.mixerDown.on();
 		waitAWhile(1000 * swingTime);
 		Global.mixerDown.off();
 		waitAWhile(400);
 		positionTracked									= 0;
-//		LogIt.mixerData("positionZero / Floor positionTracked " + positionTracked);
 	}
 	public void positionFull()
 	{
@@ -418,7 +406,6 @@ public class Mixer
 		Global.mixerUp.on();
 		waitAWhile(1000 * swingTime);
 		positionTracked									= swingTime * 1000;
-//		LogIt.mixerData("positionFull / Floor positionTracked " + positionTracked);
 	}
 	public void positionAbsolute(float proportion)
 	{
@@ -428,7 +415,6 @@ public class Mixer
 	    Integer positionDiff   						= waitAWhile(timeToWait.intValue());
 		Global.mixerUp.off();
  		positionTracked								= positionDiff;		
-//		LogIt.mixerData("positionAbsolute / Floor positionTracked " + positionTracked);
 	}
 	public void allOff()
 	{
@@ -438,30 +424,67 @@ public class Mixer
 		Global.mixerUp.off();
 		waitAWhile(0.1F);
 	}
-	public Integer waitAWhile(float timeToWait)
-	{
-		/*
-			Routine to wait a number of seconds
-			Parameters :
-			Input   : Integer timeToWait - Number of seconds to wait
-			Returns : Integer            - Number of milliseconds waited
-		*/
-		Long timeStart 								= 0L;
-		Long timeEnd 								= 0L;
-		Long timeWaited								= 0L;
-		try
-        {
-	        timeStart 								= System.currentTimeMillis();
-			Thread.sleep((long) timeToWait);
-			timeEnd	 								= System.currentTimeMillis();
-        }
-        catch (InterruptedException e)
-        {
-	        e.printStackTrace();
-        }
-		timeWaited									= timeEnd - timeStart;
-		return timeWaited.intValue();
-	}
+//	public Integer waitAWhile(float timeToWait)
+//	{
+//		/*
+//			Routine to wait a number of seconds
+//			Parameters :
+//			Input   : Integer timeToWait - Number of seconds to wait
+//			Returns : Integer            - Number of milliseconds waited
+//		*/
+//		Long timeStart 								= System.currentTimeMillis();
+//		Long timeEnd 								= 0L;
+//		Long timeWaited								= 0L;
+//		Long waitTime								= 0L;
+//		
+//		if (timeToWait < 0F)					// Going Down
+//		{
+//			try
+//	        {
+//				Thread.sleep((long) Math.abs(timeToWait));
+//				timeEnd	 							= System.currentTimeMillis();
+//	        }
+//	        catch (InterruptedException e)
+//	        {
+//		        e.printStackTrace();
+//	        }
+//		}
+//		else									// Going Up
+//		{
+//			waitTime								= (long) timeToWait;
+//			while (waitTime > 0)
+//			{
+//				try
+//		        {
+//					if (waitTime > 5)
+//					{
+//						if (wait5secs())
+//						{
+//							// Have an overtemp situation
+//							waitTime				= 0L;		// Wait no longer
+//						}
+//						else
+//						{
+//							waitTime				= (long) timeToWait - (System.currentTimeMillis() - timeStart);
+//						}
+//						timeEnd	 					= System.currentTimeMillis();
+//					}
+//					else
+//					{
+//						Thread.sleep((long) timeToWait);
+//					}
+//					Thread.sleep((long) timeToWait);
+//					timeEnd	 						= System.currentTimeMillis();
+//		        }
+//		        catch (InterruptedException e)
+//		        {
+//			        e.printStackTrace();
+//		        }
+//			}
+//		}
+//		timeWaited									= timeEnd - timeStart;
+//		return timeWaited.intValue();
+//	}
 	public Integer waitAWhile(double timeToWait)
 	{
 		/*
@@ -470,20 +493,74 @@ public class Mixer
 			Input   : Integer timeToWait - Number of seconds to wait
 			Returns : Integer            - Number of milliseconds waited
 		*/
-		Long timeStart 								= 0L;
+		Long timeStart 								= System.currentTimeMillis();
 		Long timeEnd 								= 0L;
 		Long timeWaited								= 0L;
+		Long waitTime								= 0L;
+		
+		if (timeToWait < 0F)					// Going Down
+		{
+			try
+	        {
+				Thread.sleep((long) Math.abs(timeToWait));
+				timeEnd	 							= System.currentTimeMillis();
+	        }
+	        catch (InterruptedException e)
+	        {
+		        e.printStackTrace();
+	        }
+		}
+		else									// Going Up
+		{
+			waitTime								= (long) timeToWait;
+			while (waitTime > 0)
+			{
+				try
+		        {
+					if (waitTime > 5)
+					{
+						if (wait5secs())
+						{
+							// Have an overtemp situation
+							waitTime				= 0L;		// Wait no longer
+						}
+						else
+						{
+							waitTime				= (long) timeToWait - (System.currentTimeMillis() - timeStart);
+						}
+					}
+					else
+					{
+						Thread.sleep(waitTime);
+					}
+					timeEnd	 						= System.currentTimeMillis();
+		        }
+		        catch (InterruptedException e)
+		        {
+			        e.printStackTrace();
+		        }
+			}
+		}
+		timeWaited									= timeEnd - timeStart;
+		return timeWaited.intValue();
+	}
+	public Boolean wait5secs()
+	{
 		try
         {
-	        timeStart 								= System.currentTimeMillis();
-			Thread.sleep((long) timeToWait);
-			timeEnd	 								= System.currentTimeMillis();
+			Thread.sleep(5000);
         }
         catch (InterruptedException e)
         {
 	        e.printStackTrace();
         }
-		timeWaited									= timeEnd - timeStart;
-		return timeWaited.intValue();
+		if (Global.thermoFloorOut.readUnCached() > 450)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

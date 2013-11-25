@@ -255,34 +255,38 @@ public class Global extends DefaultHandler
 		
 		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
 	}
-	public static void waitSeconds(Integer seconds)
+	public static Boolean waitSeconds(Integer seconds)
 	{
 		// Sleeps a supplied number of seconds
-		waitMilliSeconds(seconds * 1000);
+		return waitMilliSeconds(seconds * 1000);
  	}
-	public static void waitMilliSeconds(Integer milliSeconds)
+	public static Boolean waitMilliSeconds(Integer milliSeconds)
 	{
 		// Sleeps a supplied number of milliseconds
+		Boolean interrupted 				= false;
 		try
         {
             Thread.sleep(milliSeconds);
         }
         catch (InterruptedException e)
         {
-            e.printStackTrace();
+        	interrupted 					= true;
         }
+		return interrupted;
  	}
-	public static void waitMilliSeconds(Long milliSeconds)
+	public static Boolean waitMilliSeconds(Long milliSeconds)
 	{
 		// Sleeps a supplied number of milliseconds
+		Boolean interrupted 				= false;
 		try
         {
             Thread.sleep(milliSeconds);
         }
         catch (InterruptedException e)
         {
-            e.printStackTrace();
+        	interrupted 					= true;
         }
+		return interrupted;
  	}
 	public static Boolean isSummer()
 	{
