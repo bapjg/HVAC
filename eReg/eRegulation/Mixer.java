@@ -207,7 +207,7 @@ public class Mixer
 			{
 				// Recalculate swingTime taking into consideration extra length of time
 				swingTimeRequired							=  swingTimeRequired2;	
-				System.out.println(LogIt.dateTimeStamp() + "Mixer/sequencer : Using recalculated pid value");
+				LogIt.display("Mixer", "sequencer", "Using recalculated pid value");
 			}
 		}
 		
@@ -216,13 +216,13 @@ public class Mixer
 		if (Global.thermoFloorOut.readUnCached() > 450)
 		{
 			// We need to do trip avoidance
-			System.out.println(LogIt.dateTimeStamp() + "Mixer/sequencer : Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
+			LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
 			//swingTimeRequired							= (double) -20000;
 		}
 		if (Global.thermoFloorOut.read() > 500)
 		{
 			// We need to do trip avoidance
-			System.out.println(LogIt.dateTimeStamp() + "Mixer/sequencer : Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
+			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
 		}
 		
 		if (Math.abs(swingTimeRequired) < 500)												// Less than half a second
@@ -239,7 +239,7 @@ public class Mixer
 		 			swingTimeRequired 					= 90000F - positionTracked.doubleValue();		//No point waiting over maximum add an extra second to be sure of end point
 		 		}
 				
-				LogIt.action(LogIt.dateTimeStamp() + "Mixer/sequencer", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
+				LogIt.display("Mixer", "sequencer", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
 		 		Global.mixerUp.on();
 		 		swingTimePerformed   					= waitAWhile(swingTimeRequired);
 		 		Global.mixerUp.off();
@@ -253,7 +253,7 @@ public class Mixer
 		 		{
 		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000F;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
-				System.out.println("Mixer/sequencer : Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
+				LogIt.display("Mixer", "sequencer", "Moving Colder swingTimeRequired : " + swingTimeRequired + "positionTracked : " + positionTracked);
 				Global.mixerDown.on();
 				swingTimePerformed   					= - waitAWhile(swingTimeRequired);
 				Global.mixerDown.off();
@@ -268,7 +268,7 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
-		System.out.println(LogIt.dateTimeStamp() + "Mixer/sequencer : Moving ended positionTracked : " + positionTracked );
+		LogIt.display("Mixer", "sequencer", "Moving ended positionTracked : " + positionTracked );
 	}
 //
 //	============================================================
