@@ -97,7 +97,7 @@ public class Thermometer
 		}
 		catch (Exception err)
 		{
-			System.out.println("Thermometer read Error on " + this.name + "message was : " + err.getMessage());
+			System.out.println("Thermometer read Error on " + this.name + " message was : " + err.getMessage());
 			this.reading									= -273; // Absolute zero
 
 		}		
