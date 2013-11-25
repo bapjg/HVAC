@@ -30,21 +30,6 @@ public class Thermometer
 
 		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
-//		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "").replace("-", ".") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
-//		if (this.name.equalsIgnoreCase("Floor_Out"))
-//		{
-//			this.readings										= new Reading_Stabiliser(name, 3, 200); // Depth 10 entries// Tolerence = 20 degrees
-//		}
-//		else
-//		{
-//			this.readings										= new Reading_Stabiliser(name, 10, 100); // Depth 10 entries// Tolerence = 10 degrees
-//		}
-//
-//		int i;
-//		for (i = 0; i < 5; i++)
-//		{
-//			read();
-//		}
 	}
     public void readAll()
 	{
@@ -112,7 +97,7 @@ public class Thermometer
 		}
 		catch (Exception err)
 		{
-			System.out.println("Thermometer read Error message was : " + err.getMessage());
+			System.out.println("Thermometer read Error on " + this.name + "message was : " + err.getMessage());
 			this.reading									= -273; // Absolute zero
 
 		}		

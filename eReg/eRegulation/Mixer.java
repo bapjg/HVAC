@@ -232,11 +232,11 @@ public class Mixer
 		}
 		else if (swingTimeRequired > 0)														// Moving hotter
 		{
-			if (positionTracked < 90000)													// No point going over max
+			if (positionTracked < this.swingTime * 1000)													// No point going over max
 	 		{
-				if (positionTracked + swingTimeRequired > 90000)
+				if (positionTracked + swingTimeRequired > this.swingTime * 1000)
 		 		{
-		 			swingTimeRequired 					= 90000F - positionTracked.doubleValue();		//No point waiting over maximum add an extra second to be sure of end point
+		 			swingTimeRequired 					= (float) (this.swingTime * 1000) - positionTracked.doubleValue();		//No point waiting over maximum add an extra second to be sure of end point
 		 		}
 				
 				LogIt.display("Mixer", "sequencer", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
@@ -260,9 +260,9 @@ public class Mixer
 	 		}
 		}
 		positionTracked									= positionTracked + swingTimePerformed;
-		if (positionTracked > 90000)
+		if (positionTracked > this.swingTime * 1000)
 		{
-			positionTracked			 					= 90000;
+			positionTracked			 					= this.swingTime * 1000;
 		}
 		else if (positionTracked < 0)
 		{
@@ -373,9 +373,9 @@ public class Mixer
 				// LogIt.tempInfo("Moving Colder ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
 			}
 			positionTracked								= positionTracked + positionMovementReal;
-			if (positionTracked > 90000)
+			if (positionTracked > this.swingTime * 1000)
 			{
-				positionTracked = 90000;
+				positionTracked = this.swingTime * 1000;
 			}
 			else if (positionTracked < 0)
 			{
