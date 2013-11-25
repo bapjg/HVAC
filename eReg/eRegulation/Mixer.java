@@ -239,7 +239,7 @@ public class Mixer
 		 			swingTimeRequired 					= (float) (this.swingTime * 1000) - positionTracked.doubleValue();		//No point waiting over maximum add an extra second to be sure of end point
 		 		}
 				
-				LogIt.display("Mixer", "sequencer", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
+				//LogIt.display("Mixer", "sequencer", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
 		 		Global.mixerUp.on();
 		 		swingTimePerformed   					= waitAWhile(swingTimeRequired);
 		 		Global.mixerUp.off();
@@ -253,7 +253,7 @@ public class Mixer
 		 		{
 		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000F;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
-				LogIt.display("Mixer", "sequencer", "Moving Colder swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
+				//LogIt.display("Mixer", "sequencer", "Moving Colder swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
 				Global.mixerDown.on();
 				swingTimePerformed   					= - waitAWhile(swingTimeRequired);
 				Global.mixerDown.off();
@@ -268,7 +268,7 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
-		LogIt.display("Mixer", "sequencer", "Moving ended positionTracked : " + positionTracked );
+		//LogIt.display("Mixer", "sequencer", "Moving ended positionTracked : " + positionTracked );
 	}
 //
 //	============================================================
@@ -362,7 +362,7 @@ public class Mixer
 		 		Global.mixerUp.on();
 				positionMovementReal   					= waitAWhile(Math.abs(positionMovement));
 		 		Global.mixerUp.off();
-		 	// LogIt.tempInfo("Moving Hotter ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+		 		// LogIt.tempInfo("Moving Hotter ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
 			}
 			else
 			{
