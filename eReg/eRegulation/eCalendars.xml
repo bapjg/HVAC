@@ -14,7 +14,7 @@
 			<Calendar type="Object" name="WeekDays" days="0            "		timeStart="01:15" 	timeEnd="01:45" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5"		timeStart="05:30" 	timeEnd="06:45" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5"		timeStart="11:00" 	timeEnd="13:00" tempObjective="200" stopOnObjective="0"/>
-			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5"		timeStart="16:00" 	timeEnd="21:30" tempObjective="200" stopOnObjective="0"/>
+			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5"		timeStart="15:00" 	timeEnd="21:30" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="            5"		timeStart="13:30" 	timeEnd="21:30" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekEnds" days="6, 7"					timeStart="07:30" 	timeEnd="21:30" tempObjective="200" stopOnObjective="0"/>
 		</Circuit>

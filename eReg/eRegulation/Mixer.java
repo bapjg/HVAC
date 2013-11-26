@@ -216,6 +216,10 @@ public class Mixer
 		if (Global.thermoFloorOut.readUnCached() > 450)
 		{
 			// We need to do trip avoidance
+			if (swingTimeRequired < 0)
+			{
+				swingTimeRequired						= swingTimeRequired * 2D;
+			}
 			LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
 			//swingTimeRequired							= (double) -20000;
 		}
