@@ -326,6 +326,5 @@ public class Global extends DefaultHandler
 			System.out.println(LogIt.dateTimeStamp() + " TryLock timed out ");
 			return;
 		}
-
 	}
 }

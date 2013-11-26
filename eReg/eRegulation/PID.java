@@ -77,6 +77,12 @@ public class PID
     }
     public Float getGain(Float kP, Float kD, Float kI) 
     {
+    	// Parameters are
+    	//    kP = number of milliseconds swingTime per decidegree
+    	//    kD = number of milliseconds swingTime per decidegree/second change in temperature = number of seconds over which to calculate x kP
+    	//    kI = number of milliseconds swingTime per decidegree x seconds cumulated off target error
+    	
+    	
     	// enqueueIndex is the place for the next item to be added.
     	// hence most recently added item is enqueueIndex-1
     	// Note that Java modulo defines that result carries same sign as numurator
