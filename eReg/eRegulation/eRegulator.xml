@@ -16,7 +16,7 @@
 	<Circuits type="Collection">
 
 		<Circuit type="Object" name="Floor" tempMax="500" circuitType="Mixer" friendlyName="Plancher Chauffant" rampUpTime="0" summerActivity="0">
-			<Mixer type="Object" name="Mixer" swingTime="103" lagTime="20" gainP="20" timeD="10" gainI="0" timeI="0"
+			<Mixer type="Object" name="Mixer" swingTime="103" lagTime="20" gainP="20" timeD="30" gainI="0" timeI="0"
 			       textinfo="timeD 40s to account for 20s wait + upto 20s swing. gainP 100 is 100ms per decidegree">
 			</Mixer>
 			<TempGradient type="Object" name="Mixer" outsideLow="-150" tempLow="450" outsideHigh="150" tempHigh="350">
