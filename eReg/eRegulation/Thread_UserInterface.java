@@ -102,6 +102,9 @@ public class Thread_UserInterface implements Runnable
 	}
 	public void showTemperatures()
 	{
+		Integer x = 0;
+		x++;
+		
 		Date date                                               		= new Date();
 		SimpleDateFormat    dateFormat                          		= new SimpleDateFormat("dd.MM HH:mm:ss");
 		
