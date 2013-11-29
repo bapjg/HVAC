@@ -28,6 +28,7 @@ public class Boiler
 	public Integer			tempNeverExceed						= 950;
 	public Integer			tempOvershoot						= 180;
 	public Integer			state;
+	public PID				pidControler;
 	
 	public final int 		STATE_Off 							= 0;
 	public final int 		STATE_On_Heating 					= 1;
@@ -41,6 +42,7 @@ public class Boiler
 	{
 		thermometers 								= new Thermometers();
 		thermoBoiler 								= thermometers.fetchThermometer("Boiler");
+		pidControler								= new PID(10);
 		
 		burner										= new Burner();
 

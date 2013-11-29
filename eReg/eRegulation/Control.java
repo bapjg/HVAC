@@ -139,6 +139,7 @@ public class Control
 		//
 
 		Boiler 			boiler						= new Boiler();
+		Global.boiler								= boiler;
 
 		//
 		//============================================================

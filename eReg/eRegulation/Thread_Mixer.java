@@ -58,7 +58,7 @@ public class Thread_Mixer implements Runnable
 				Global.waitSeconds(5);									// 4 loops of 5s
 				System.out.println(LogIt.dateTimeStamp() + "Thread_Mixer/mainLoop : 20s wait Loop : " + i);
 
-				if (Global.thermoFloorOut.readUnCached() > 450)
+				if (Global.thermoFloorOut.readUnCached() > 490)
 				{
 					System.out.println(LogIt.dateTimeStamp() + "Thread_Mixer/mainLoop : Interrupting the 20s wait");
 					break;

@@ -72,6 +72,8 @@ public class Global extends DefaultHandler
 	public static 	Integer							summerPumpDuration;	
 	public static 	Long							summerPumpTime;	
 	public static 	Boolean							summerWorkDone;
+	
+	public static	Boiler							boiler;
 
 	public static 	LCD								display;	
 	public static 	ADC								burnerVoltages;	
