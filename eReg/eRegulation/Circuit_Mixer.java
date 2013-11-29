@@ -44,8 +44,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 				else
 				{
 					temp											= temperatureGradient.getTempToTarget();
-					this.heatRequired.tempMinimum					= 500;
-					this.heatRequired.tempMaximum					= 750;
+					this.heatRequired.tempMinimum					= 550;
+					this.heatRequired.tempMaximum					= 800;
 					state											= CIRCUIT_STATE_AwaitingHeat;
 
 					LogIt.info("Circuit_" + this.name, "sequencer", "Thread Started");
@@ -67,8 +67,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 					LogIt.display("Circuit_Mixer", "sequencer", "RampUpFinished as livingroom temp is " + Global.thermoLivingRoom.reading);
 					state											= CIRCUIT_STATE_Running;
 				}
-				temp												= 400;
-				this.heatRequired.tempMinimum						= 500;
+				temp												= 420;
+				this.heatRequired.tempMinimum						= 550;
 				this.heatRequired.tempMaximum						= 800;
 				break;
 			case CIRCUIT_STATE_Running:
