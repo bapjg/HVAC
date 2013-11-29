@@ -85,6 +85,9 @@ public class Global extends DefaultHandler
 
 	public Global() throws IOException, SAXException, ParserConfigurationException
 	{
+		Integer x = 0;
+		x++;
+
 		Global.display 								= new LCD();
 		Global.buttons 								= new Buttons();	
 
