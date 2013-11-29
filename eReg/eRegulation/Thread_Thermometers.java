@@ -25,10 +25,10 @@ public class Thread_Thermometers implements Runnable
 			if (i == 0)
 			{
 				Global.thermoBoiler.readUnCached();
-				System.out.println("before");
-				Integer x = Global.thermoBoiler.reading;
-				System.out.println("after");
-				Global.boiler.pidControler.add(Global.thermoBoiler.reading);
+				if (Global.thermoBoiler.reading != null)		//This can happen early as burner.pidControler is initialised faily late
+				{
+					Global.boiler.pidControler.add(Global.thermoBoiler.reading);
+				}
 				Global.waitMilliSeconds(5);
 				
 				Global.thermoBoilerIn.read();
