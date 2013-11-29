@@ -2,9 +2,10 @@
 <eCalendar>
 	<Circuits type="Collection">
 		<Circuit type="Object" name="Hot_Water">
-			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5, 6, 7" 	timeStart="06:45" 	timeEnd="07:15" tempObjective="350" stopOnObjective="1"/>
+			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5,     " 	timeStart="06:45" 	timeEnd="07:15" tempObjective="350" stopOnObjective="1"/>
 			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5, 6, 7"	timeStart="21:30" 	timeEnd="22:30" tempObjective="350" stopOnObjective="1"/>
-		</Circuit>
+			<Calendar type="Object" name="EveryDay" days="               6, 7"	timeStart="07:30" 	timeEnd="08:30" tempObjective="350" stopOnObjective="1"/>
+					</Circuit>
 		<Circuit type="Object" name="Radiator">
 			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5"		timeStart="06:30" 	timeEnd="07:45" tempObjective="500" stopOnObjective="0"/>
 			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5"		timeStart="18:30" 	timeEnd="22:15" tempObjective="500" stopOnObjective="0"/>
@@ -13,7 +14,7 @@
 		<Circuit type="Object" name="Floor">
 			<Calendar type="Object" name="WeekDays" days="0            "		timeStart="01:15" 	timeEnd="01:45" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="0            "		timeStart="05:00" 	timeEnd="06:45" tempObjective="200" stopOnObjective="0"/>
-			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5"		timeStart="08:00" 	timeEnd="22:00" tempObjective="200" stopOnObjective="0"/>
+			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5"		timeStart="08:00" 	timeEnd="23:55" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="0            "		timeStart="15:00" 	timeEnd="22:30" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="            0"		timeStart="13:30" 	timeEnd="21:30" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekEnds" days="6, 7"					timeStart="07:30" 	timeEnd="21:30" tempObjective="200" stopOnObjective="0"/>
