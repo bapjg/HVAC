@@ -67,7 +67,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 					LogIt.display("Circuit_Mixer", "sequencer", "RampUpFinished as livingroom temp is " + Global.thermoLivingRoom.reading);
 					state											= CIRCUIT_STATE_Running;
 				}
-				temp												= 420;
+				temp												= 430;
 				this.heatRequired.tempMinimum						= 550;
 				this.heatRequired.tempMaximum						= 800;
 				break;
