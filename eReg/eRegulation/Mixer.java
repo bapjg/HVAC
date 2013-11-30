@@ -275,6 +275,9 @@ public class Mixer
 	 		}
 		}
 		positionTracked									= positionTracked + swingTimePerformed;
+		
+		System.out.println("Swing : " + swingTimePerformed +" positionTracked : " +positionTracked);
+		
 		if (positionTracked > this.swingTime * 1000)
 		{
 			positionTracked			 					= this.swingTime * 1000;
