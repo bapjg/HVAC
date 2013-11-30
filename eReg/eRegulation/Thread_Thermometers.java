@@ -10,6 +10,9 @@ public class Thread_Thermometers implements Runnable
 		// See if this works
 //		Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 		
+		Global.thermoFloorHot.pidControler		= new PID(5);
+		Global.thermoFloorCold.pidControler		= new PID(5);
+		
 		Integer i = 0;
 		
 		while (!Global.stopNow)

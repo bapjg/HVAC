@@ -18,6 +18,7 @@ public class Thermometer
 	public String 					thermoFile_UnCached;
  	public Integer 					reading;
 // 	public Integer 					readingTrue;
+ 	public PID						pidControler;
 	
 	public Thermometer(String name, String address, String friendlyName)
 	{
