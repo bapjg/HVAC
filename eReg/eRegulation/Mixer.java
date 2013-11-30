@@ -202,7 +202,7 @@ public class Mixer
 		
 		pidTempSpan.add(tempMixerHot - tempMixerCold);
 		
-		LogIt.display("Mixer", "sequencer", "TempSpan : " + (tempMixerHot - tempMixerCold) + ", position calc/real : " + positionTracked + "/"+ (tempMixerOut/(tempMixerHot - tempMixerCold)));
+		LogIt.display("Mixer", "sequencer", "TempSpan : " + (tempMixerHot - tempMixerCold) + ", position real/calc : " + positionTracked + "/"+ (tempMixerOut * 1000/(tempMixerHot - tempMixerCold)));
 		LogIt.display("Mixer", "sequencer", "TempSpan dTdt: " + pidTempSpan.dTdt());
 		
 		// kP at 62F was too sluggish. Pushed it up to 100
