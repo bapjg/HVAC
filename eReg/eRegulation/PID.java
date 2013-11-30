@@ -75,6 +75,24 @@ public class PID
     	}
     	return sum/count;
     }
+    public Float dTdt() 
+    {
+		Float 		differential 		= 0F;								// unit = decigrees/second 
+    	Integer		indexCurrent		= (enqueueIndex - 1 + items.length) % items.length;
+    	Integer		indexPrevious		= (enqueueIndex - 2 + items.length) % items.length;
+    	if (count <= 1)
+    	{
+    		differential 				= 0F;
+    	}
+    	else
+    	{
+    		//Units of differential are decidegrees/millisecond
+    		Long 	deltaTimeStamps 	= timeStamps[indexCurrent] - timeStamps[indexPrevious];
+    		differential				= 1000F * deltas[indexCurrent].floatValue() / deltaTimeStamps;	// in decidegrees per second
+    	}
+
+    	return differential;
+    }
     public Float getGain(Float kP, Float kD, Float kI) 
     {
     	// Parameters are

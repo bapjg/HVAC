@@ -24,6 +24,7 @@ public class Mixer
 	public Float			timeI					= 0F;
 	
 	public PID				pidControler;
+	public PID				pidTempSpan;
 	public Integer			state					= 0;
 	public static final int	MIXER_STATE_Off 		= 0;
 	public static final int	MIXER_STATE_Moving_Up	= 1;
@@ -47,6 +48,7 @@ public class Mixer
 		this.swingTime								= Integer.parseInt(swingTime);
 		this.lagTime								= Integer.parseInt(lagTime);
 		this.pidControler							= new PID(10);
+		this.pidTempSpan							= new PID(5);
 		this.gainP									= Float.parseFloat(gainP);
 		this.timeD									= Float.parseFloat(timeD);
 		this.gainD									= this.gainP * this.timeD;
@@ -193,6 +195,15 @@ public class Mixer
 		
 		
 		pidControler.target								= targetTemp;		// targetTemp is either gradient or some maxTemp for rampup
+
+		Integer tempMixerOut							= Global.thermoFloorOut.readUnCached();
+		Integer tempMixerHot							= Global.thermoFloorHot.readUnCached();
+		Integer tempMixerCold							= Global.thermoFloorCold.readUnCached();
+		
+		pidTempSpan.add(tempMixerHot - tempMixerCold);
+		
+		LogIt.display("Mixer", "sequencer", "TempSpan : " + (tempMixerHot - tempMixerCold) + ", position calc/real : " + positionTracked + "/"+ (tempMixerOut/(tempMixerHot - tempMixerCold)));
+		LogIt.display("Mixer", "sequencer", "TempSpan dTdt: " + pidTempSpan.dTdt());
 		
 		// kP at 62F was too sluggish. Pushed it up to 100
 		// gainI										= 0F;			// If dtI <> then = gainP/dtI;

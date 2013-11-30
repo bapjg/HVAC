@@ -10,9 +10,6 @@ public class Thread_Thermometers implements Runnable
 		// See if this works
 //		Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 		
-		Global.thermoFloorHot.pidControler		= new PID(5);
-		Global.thermoFloorCold.pidControler		= new PID(5);
-		
 		Integer i = 0;
 		
 		while (!Global.stopNow)
@@ -20,7 +17,7 @@ public class Thread_Thermometers implements Runnable
 			Global.thermoFloorOut.readUnCached();
 			Global.circuitFloor.mixer.pidControler.add(Global.thermoFloorOut.reading);
 			Global.waitMilliSeconds(5);
-			if (Global.thermoFloorOut.reading > 450)
+			if (Global.thermoFloorOut.reading > 480)
 			{
 				LogIt.display("Thread_Thermometer", "mainLoop", "FloorOut is over temperature : " + Global.thermoFloorOut.reading);
 			}
@@ -33,13 +30,10 @@ public class Thread_Thermometers implements Runnable
 				Global.thermoBoilerIn.read();
 				Global.waitMilliSeconds(5);
 				
-				
 				Global.thermoFloorCold.readUnCached();
-				Global.thermoFloorCold.pidControler.add(Global.thermoFloorCold.reading);
 				Global.waitMilliSeconds(5);
 				
 				Global.thermoFloorHot.readUnCached();
-				Global.thermoFloorHot.pidControler.add(Global.thermoFloorHot.reading);
 				Global.waitMilliSeconds(5);
 				
 				Global.thermoRadiatorOut.read();
