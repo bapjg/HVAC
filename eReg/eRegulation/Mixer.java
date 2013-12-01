@@ -205,6 +205,7 @@ public class Mixer
 		
 		pidTempSpan.add(tempMixerHot - tempMixerCold);
 		
+		LogIt.display("Mixer", "sequencer", "tempMixerHot/tempMixerOut/tempMixerCold : " + tempMixerHot + "/" +tempMixerOut+ "/" + tempMixerCold);
 		LogIt.display("Mixer", "sequencer", "tempSpanActive/tempSpanComplete : " + tempSpanActive  + "/" +  tempSpanComplete + ", position real/calc : " + positionTracked + "/" + (tempSpanActive * this.swingTime * 1000/tempSpanComplete));
 		LogIt.display("Mixer", "sequencer", "TempSpan dTdt: " + pidTempSpan.dTdt());
 		
