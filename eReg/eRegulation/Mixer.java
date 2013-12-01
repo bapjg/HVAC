@@ -200,9 +200,12 @@ public class Mixer
 		Integer tempMixerHot							= Global.thermoFloorHot.readUnCached();
 		Integer tempMixerCold							= Global.thermoFloorCold.readUnCached();
 		
+		Integer tempSpanComplete						= tempMixerHot - tempMixerCold;
+		Integer tempSpanActive							= tempMixerOut - tempMixerCold;
+		
 		pidTempSpan.add(tempMixerHot - tempMixerCold);
 		
-		LogIt.display("Mixer", "sequencer", "TempSpan : " + (tempMixerHot - tempMixerCold) + ", position real/calc : " + positionTracked + "/"+ ((tempMixerOut - tempMixerCold) * this.swingTime * 1000/(tempMixerHot - tempMixerCold)));
+		LogIt.display("Mixer", "sequencer", "tempSpanActive/tempSpanComplete : " + tempSpanActive  + "/" +  tempSpanComplete + ", position real/calc : " + positionTracked + "/" + (tempSpanActive * this.swingTime * 1000/tempSpanComplete));
 		LogIt.display("Mixer", "sequencer", "TempSpan dTdt: " + pidTempSpan.dTdt());
 		
 		// kP at 62F was too sluggish. Pushed it up to 100
