@@ -204,37 +204,40 @@ public class Mixer
 		
 		pidTempSpan.add(tempSpanComplete);
 		
-		Float tempSpanComplet_dTdt						= pidTempSpan.dTdt();
-		Integer tempSpanCompleteIn20s					= tempSpanComplete + (Integer) Math.round(tempSpanComplet_dTdt * 20F);
-		Integer tempAtPositionIn20s						= tempSpanCompleteIn20s * positionTracked / this.swingTime / 1000;
-		Integer tempErrorAtPositionIn20s				= tempAtPositionIn20s - tempFloorOut;
+		Float tempSpanComplet_dTdt						= pidTempSpan.dTdt();														// decidegrees per second
+		Integer tempSpanCompleteIn20s					= tempSpanComplete + (Integer) Math.round(tempSpanComplet_dTdt * 20F);		// decidegrees
+		Integer tempAtPositionIn20s						= tempSpanCompleteIn20s * positionTracked / this.swingTime / 1000;			// decidegrees
+		Integer tempErrorAtPositionIn20s				= targetTemp - tempAtPositionIn20s;											// decidegrees assume unchanged outbound temp
+																																	// positive means under temp means swing up
 		
-		Float tempSpanCompleteIn20sPerSecondSwing		= ((float) tempSpanCompleteIn20s) / ((float) this.swingTime); //decidegrees per second
+		Float tempSpanCompleteIn20sPerSecondSwing		= ((float) tempSpanCompleteIn20s) / ((float) this.swingTime); 				// decidegrees per second
 		
-		Double correction								= ((double) tempErrorAtPositionIn20s) / ((double) tempSpanCompleteIn20sPerSecondSwing) * 1000D;
+		Double correction								= ((double) tempErrorAtPositionIn20s) / ((double) tempSpanCompleteIn20sPerSecondSwing) * 1000D;	// milliseconds
 
 		LogIt.display("Mixer", "sequencer", "tempBoilerOut/tempFloorOut/tempFloorIn : " + tempBoilerOut + "/" + tempFloorOut + "/" + tempFloorIn);
 		LogIt.display("Mixer", "sequencer", "tempSpanActive/tempSpanComplete : " + tempSpanActive  + "/" +  tempSpanComplete + ", position real/calc : " + positionTracked + "/" + (tempSpanActive * this.swingTime * 1000/tempSpanComplete));
-		LogIt.display("Mixer", "sequencer", "TempSpan dTdt: " + pidTempSpan.dTdt());
+		LogIt.display("Mixer", "sequencer", "TempSpan dTdt: " + tempSpanComplet_dTdt);
 		
-		Double swingTimeRequired						= Math.floor(pidControler.getGain(gainP, gainD, gainI)); // returns a swingTime in milliseconds
+		Double swingTimeRequired						= Math.floor(pidControler.getGain(gainP, gainD, gainI)); 					// returns a swingTime in milliseconds
+		
 		LogIt.display("Mixer", "sequencer", "swingTimeRequired/correction : " + swingTimeRequired + "/" + correction);
+		LogIt.display("Mixer", "sequencer", "==============================");
 		
-		if (swingTimeRequired > 20000)
-		{
-			// Recalculate swingTime taking into consideration extra length of time in mixerUp situation
-			Double swingTimeRequired2						= Math.floor(pidControler.getGain(gainP, gainD + 20000, gainI)); // returns a swingTime in milliseconds
-			if (swingTimeRequired2 < 20000)
-			{
-				// Recalculate swingTime taking into consideration extra length of time
-				swingTimeRequired							=  swingTimeRequired2;	
-				LogIt.display("Mixer", "sequencer", "Using recalculated pid value");
-			}
-		}
+//		if (swingTimeRequired > 20000)
+//		{
+//			// Recalculate swingTime taking into consideration extra length of time in mixerUp situation
+//			Double swingTimeRequired2						= Math.floor(pidControler.getGain(gainP, gainD + 20000, gainI)); // returns a swingTime in milliseconds
+//			if (swingTimeRequired2 < 20000)
+//			{
+//				// Recalculate swingTime taking into consideration extra length of time
+//				swingTimeRequired							=  swingTimeRequired2;	
+//				LogIt.display("Mixer", "sequencer", "Using recalculated pid value");
+//			}
+//		}
 		
 		Integer swingTimePerformed						= 0;
 
-		if (Global.thermoFloorOut.readUnCached() > 450)
+		if (tempFloorOut > 450)
 		{
 			// We need to do trip avoidance
 			if (swingTimeRequired < 0)
@@ -242,9 +245,8 @@ public class Mixer
 				swingTimeRequired						= swingTimeRequired * 2D;
 			}
 			LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
-			//swingTimeRequired							= (double) -20000;
 		}
-		if (Global.thermoFloorOut.read() > 500)
+		if (tempFloorOut > 500)
 		{
 			// We need to do trip avoidance
 			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
