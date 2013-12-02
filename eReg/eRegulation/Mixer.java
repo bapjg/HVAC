@@ -203,14 +203,13 @@ public class Mixer
 		Integer tempFloorIn								= Global.thermoFloorIn.readUnCached();
 
 		Integer tempBoilerOut							= Global.thermoBoilerOut.readUnCached();
-		Integer tempBoilerIn							= Global.thermoBoilerIn.readUnCached();
 		
-		Integer tempSpanComplete						= tempBoilerOut - tempBoilerIn;
-		Integer tempSpanActive							= tempFloorOut - tempBoilerIn;
+		Integer tempSpanComplete						= tempBoilerOut - tempFloorIn;
+		Integer tempSpanActive							= tempFloorOut  - tempFloorIn;
 		
-		pidTempSpan.add(tempBoilerOut - tempBoilerIn);
+		pidTempSpan.add(tempSpanComplete);
 		
-		LogIt.display("Mixer", "sequencer", "tempMixerHot/tempMixerOut/tempMixerCold : " + tempBoilerOut + "/" + tempFloorOut + "/" + tempBoilerIn);
+		LogIt.display("Mixer", "sequencer", "tempMixerHot/tempMixerOut/tempMixerCold : " + tempBoilerOut + "/" + tempFloorOut + "/" + tempFloorIn);
 		LogIt.display("Mixer", "sequencer", "tempSpanActive/tempSpanComplete : " + tempSpanActive  + "/" +  tempSpanComplete + ", position real/calc : " + positionTracked + "/" + (tempSpanActive * this.swingTime * 1000/tempSpanComplete));
 		LogIt.display("Mixer", "sequencer", "TempSpan dTdt: " + pidTempSpan.dTdt());
 		
