@@ -244,7 +244,7 @@ public class Mixer
 			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
 		}
 		
-		if (Math.abs(swingTimeRequired) < 200)												// Less than half a second
+		if (Math.abs(swingTimeRequired) < 500)												// Less than half a second
 		{
 			// Do nothing to avoid contact bounce and relay problems
 			swingTimePerformed							= 0;
