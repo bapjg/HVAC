@@ -74,6 +74,7 @@ public class Control
 		//
 		
 		Global.thermoBoiler 						= Global.thermometers.fetchThermometer("Boiler");
+		Global.thermoBoilerOld						= Global.thermometers.fetchThermometer("Boiler_Old");
 		Global.thermoBoilerIn						= Global.thermometers.fetchThermometer("Boiler_In");
 		
 		Global.thermoFloorOut						= Global.thermometers.fetchThermometer("Floor_Out");
