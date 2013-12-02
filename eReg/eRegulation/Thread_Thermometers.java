@@ -26,21 +26,21 @@ public class Thread_Thermometers implements Runnable
 			{
 				Global.thermoBoiler.readUnCached();
 				Global.waitMilliSeconds(5);
-				
+				Global.thermoBoilerOut.read();
+				Global.waitMilliSeconds(5);
 				Global.thermoBoilerIn.read();
 				Global.waitMilliSeconds(5);
 				
-				Global.thermoFloorCold.readUnCached();
-				Global.waitMilliSeconds(5);
-				
-				Global.thermoFloorHot.readUnCached();
+//				Global.thermoFloorOut.readUnCached();
+//				Global.waitMilliSeconds(5);
+				Global.thermoFloorIn.read();
 				Global.waitMilliSeconds(5);
 				
 				Global.thermoRadiatorOut.read();
 				Global.waitMilliSeconds(5);
-				
 				Global.thermoRadiatorIn.read();
 				Global.waitMilliSeconds(5);
+				
 				
 				Global.thermoOutside.read();
 				Global.waitMilliSeconds(5);

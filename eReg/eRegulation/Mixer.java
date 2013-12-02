@@ -62,9 +62,12 @@ public class Mixer
 		// required to achieve a target temperature
 		// tempDelta = difference between requested temp and cold input to the mixer
 		// tempSpan  = difference between hot temp and cold input to the mixer
-		Integer tempMixerInCold						= Global.thermoFloorCold.reading;
-		Integer tempMixerInHot						= Global.thermoFloorHot.reading;
-		Integer tempMixerInVeryHot					= Global.thermoBoiler.reading;
+		Integer tempBoiler							= Global.thermoBoiler.reading;
+		Integer tempBoilerOut						= Global.thermoBoilerOut.reading;
+		Integer tempBoilerIn						= Global.thermoBoilerIn.reading;
+		
+		Integer tempMixerOut						= Global.thermoFloorOut.reading;
+		Integer tempMixerIn							= Global.thermoFloorIn.reading;
 		
 //		LogIt.info("Mixer","getSwingProportion", "Floor tempMixerInCold    : " + tempMixerInCold);
 //		LogIt.info("Mixer","getSwingProportion", "Floor tempMixerInHot     : " + tempMixerInHot);
@@ -73,8 +76,8 @@ public class Mixer
 		
 		LogIt.tempData();
 		
-		Integer tempDelta 							= temperature    - tempMixerInCold;
-		Integer tempSpan 							= tempMixerInHot - tempMixerInCold;
+		Integer tempDelta 							= temperature    - tempMixerIn;
+		Integer tempSpan 							= tempMixerOut - tempMixerIn;
 		//if (tempSpan < 30 )
 		//{
 	        // Temp difference is less than 3 degrees : there's no knowing where it is
@@ -196,16 +199,18 @@ public class Mixer
 		
 		pidControler.target								= targetTemp;		// targetTemp is either gradient or some maxTemp for rampup
 
-		Integer tempMixerOut							= Global.thermoFloorOut.readUnCached();
-		Integer tempMixerHot							= Global.thermoFloorHot.readUnCached();
-		Integer tempMixerCold							= Global.thermoFloorCold.readUnCached();
+		Integer tempFloorOut							= Global.thermoFloorOut.readUnCached();
+		Integer tempFloorIn								= Global.thermoFloorIn.readUnCached();
+
+		Integer tempBoilerOut							= Global.thermoBoilerOut.readUnCached();
+		Integer tempBoilerIn							= Global.thermoBoilerIn.readUnCached();
 		
-		Integer tempSpanComplete						= tempMixerHot - tempMixerCold;
-		Integer tempSpanActive							= tempMixerOut - tempMixerCold;
+		Integer tempSpanComplete						= tempBoilerOut - tempBoilerIn;
+		Integer tempSpanActive							= tempFloorOut - tempBoilerIn;
 		
-		pidTempSpan.add(tempMixerHot - tempMixerCold);
+		pidTempSpan.add(tempBoilerOut - tempBoilerIn);
 		
-		LogIt.display("Mixer", "sequencer", "tempMixerHot/tempMixerOut/tempMixerCold : " + tempMixerHot + "/" +tempMixerOut+ "/" + tempMixerCold);
+		LogIt.display("Mixer", "sequencer", "tempMixerHot/tempMixerOut/tempMixerCold : " + tempBoilerOut + "/" + tempFloorOut + "/" + tempBoilerIn);
 		LogIt.display("Mixer", "sequencer", "tempSpanActive/tempSpanComplete : " + tempSpanActive  + "/" +  tempSpanComplete + ", position real/calc : " + positionTracked + "/" + (tempSpanActive * this.swingTime * 1000/tempSpanComplete));
 		LogIt.display("Mixer", "sequencer", "TempSpan dTdt: " + pidTempSpan.dTdt());
 		
@@ -293,116 +298,116 @@ public class Mixer
 //	============================================================
 
 	// No longer used
-	public void adjustTemperature(Integer tempMixerOutTarget)
-	{
-		// Using similar traiangles, Formula is
-		//
-		// (mixerTempHot - mixerTempCold)       (mixerTempTarget - mixerTempOut)
-		// ------------------------------   =   -------------------------------- 
-		//           fullSwingTime                    requiredSwingTime
-		//
-		// or
-		//
-		//                                      (mixerTempTarget - mixerTempOut)
-		//       requiredSwingTime          =   -------------------------------- x  fullSwingTime
-		//                                       (mixerTempHot - mixerTempCold) 
-		//
-		// or
-		//
-		//                                      tempSpanRequired
-		//       requiredSwingTime          =   ---------------- x  fullSwingTime
-		//                                        tempSpanFull 
-		//
-		//
-		
-		allOff();
-		
-		Integer tempMixerInCold							= Global.thermoFloorCold.reading;
-		Integer tempMixerInHot							= Global.thermoFloorHot.reading;
-		Integer tempMixerInVeryHot						= Global.thermoBoiler.reading;
-		Integer tempMixerOut							= Global.thermoFloorOut.reading;
-
-		Integer tempSpanRequired						= tempMixerOutTarget   - tempMixerOut;
-		Integer tempSpanFull							= tempMixerInHot       - tempMixerInCold;
-		
-		Float   swingProportion							= 0F;
-		Float   swingTimeRequired						= 0F;
- 		Integer positionMovement						= 0;
- 		Integer positionMovementReal					= 0;
-		
-		if (tempSpanFull < 0)
-		{
-			// We will probably have to let things settle down
-			// LogIt
-			return;		// Things go wrong after trip situation
-		}
-		
-		if (tempMixerOutTarget > tempMixerInHot)
-		{
-			// This can happen if the circuit has been off for a long time
-			// Could look at boiler temp and see if boiler is running to ensure 
-			// against circuit pump tripping
-			
-			//Just log the fact and pump up the mixer to get hot water flowing
-			// LogIt.tempInfo("Moving Hot due to target over inputHot positionAbsolute : 0.80 positionTracked : " + positionTracked );
-	 		positionAbsolute(0.80F);
-	 	// LogIt.tempInfo("Moving Hot due to target over inputHot ended positionAbsolute : 0.80 positionTracked : " + positionTracked );
-		}
-		else if (tempMixerOutTarget < tempMixerInCold)
-		{
-			System.out.println("tempMixerOutTarget < tempMixerInCold");
-			// This can happen if the circuit has tripped 
-			// The whole thing warms up and no temp is representative of anything
-			// ToDo
-			//  - Set the mixer to cold for 1 min
-			//  - Set the mixer to 10% for 1 min
-		}
-		else
-		{
-			swingProportion								= tempSpanRequired.floatValue()/tempSpanFull.floatValue();
-			
-			swingTimeRequired							= 1000.0F * swingProportion * swingTime.floatValue();	// Value is in milliseconds
-	 		positionMovement							= swingTimeRequired.intValue();							// Value is in milliseconds
-	 		positionMovementReal						= 0;
-			
-	 	// LogIt.tempInfo("tempMixerOutTarget : " + tempMixerOutTarget + " swingProportion: " + swingProportion + " positionTracked : " + positionTracked );
-
-			if (Math.abs(positionMovement) < 2000)					// A 2 percent adjustment is not worth while
-			{
-				// Avoid doing to many little movements. 
-				// Should tempDontMove not be a time or proportion ??? xxxxx
-				LogIt.info("Mixer","positionAtTemp", "Floor Small movement not actionned ");
-				// LogIt.tempInfo("Not Moving" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
-				return;
-			}
-			if (positionMovement > 0)
-			{
-				// LogIt.tempInfo("Moving Hotter" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
-		 		Global.mixerUp.on();
-				positionMovementReal   					= waitAWhile(Math.abs(positionMovement));
-		 		Global.mixerUp.off();
-		 		// LogIt.tempInfo("Moving Hotter ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
-			}
-			else
-			{
-				// LogIt.tempInfo("Moving Colder" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
-				Global.mixerDown.on();
-				positionMovementReal   					= - waitAWhile(Math.abs(positionMovement));
-				Global.mixerDown.off();
-				// LogIt.tempInfo("Moving Colder ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
-			}
-			positionTracked								= positionTracked + positionMovementReal;
-			if (positionTracked > this.swingTime * 1000)
-			{
-				positionTracked = this.swingTime * 1000;
-			}
-			else if (positionTracked < 0)
-			{
-				positionTracked = 0;
-			}
-			// LogIt.tempInfo("tempMixerOutTarget : " + tempMixerOutTarget + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
-		}
-	}
+//	public void adjustTemperature(Integer tempMixerOutTarget)
+//	{
+//		// Using similar traiangles, Formula is
+//		//
+//		// (mixerTempHot - mixerTempCold)       (mixerTempTarget - mixerTempOut)
+//		// ------------------------------   =   -------------------------------- 
+//		//           fullSwingTime                    requiredSwingTime
+//		//
+//		// or
+//		//
+//		//                                      (mixerTempTarget - mixerTempOut)
+//		//       requiredSwingTime          =   -------------------------------- x  fullSwingTime
+//		//                                       (mixerTempHot - mixerTempCold) 
+//		//
+//		// or
+//		//
+//		//                                      tempSpanRequired
+//		//       requiredSwingTime          =   ---------------- x  fullSwingTime
+//		//                                        tempSpanFull 
+//		//
+//		//
+//		
+//		allOff();
+//		
+//		Integer tempMixerInCold							= Global.thermoFloorCold.reading;
+//		Integer tempMixerInHot							= Global.thermoFloorHot.reading;
+//		Integer tempMixerInVeryHot						= Global.thermoBoiler.reading;
+//		Integer tempMixerOut							= Global.thermoFloorOut.reading;
+//
+//		Integer tempSpanRequired						= tempMixerOutTarget   - tempMixerOut;
+//		Integer tempSpanFull							= tempMixerInHot       - tempMixerInCold;
+//		
+//		Float   swingProportion							= 0F;
+//		Float   swingTimeRequired						= 0F;
+// 		Integer positionMovement						= 0;
+// 		Integer positionMovementReal					= 0;
+//		
+//		if (tempSpanFull < 0)
+//		{
+//			// We will probably have to let things settle down
+//			// LogIt
+//			return;		// Things go wrong after trip situation
+//		}
+//		
+//		if (tempMixerOutTarget > tempMixerInHot)
+//		{
+//			// This can happen if the circuit has been off for a long time
+//			// Could look at boiler temp and see if boiler is running to ensure 
+//			// against circuit pump tripping
+//			
+//			//Just log the fact and pump up the mixer to get hot water flowing
+//			// LogIt.tempInfo("Moving Hot due to target over inputHot positionAbsolute : 0.80 positionTracked : " + positionTracked );
+//	 		positionAbsolute(0.80F);
+//	 	// LogIt.tempInfo("Moving Hot due to target over inputHot ended positionAbsolute : 0.80 positionTracked : " + positionTracked );
+//		}
+//		else if (tempMixerOutTarget < tempMixerInCold)
+//		{
+//			System.out.println("tempMixerOutTarget < tempMixerInCold");
+//			// This can happen if the circuit has tripped 
+//			// The whole thing warms up and no temp is representative of anything
+//			// ToDo
+//			//  - Set the mixer to cold for 1 min
+//			//  - Set the mixer to 10% for 1 min
+//		}
+//		else
+//		{
+//			swingProportion								= tempSpanRequired.floatValue()/tempSpanFull.floatValue();
+//			
+//			swingTimeRequired							= 1000.0F * swingProportion * swingTime.floatValue();	// Value is in milliseconds
+//	 		positionMovement							= swingTimeRequired.intValue();							// Value is in milliseconds
+//	 		positionMovementReal						= 0;
+//			
+//	 	// LogIt.tempInfo("tempMixerOutTarget : " + tempMixerOutTarget + " swingProportion: " + swingProportion + " positionTracked : " + positionTracked );
+//
+//			if (Math.abs(positionMovement) < 2000)					// A 2 percent adjustment is not worth while
+//			{
+//				// Avoid doing to many little movements. 
+//				// Should tempDontMove not be a time or proportion ??? xxxxx
+//				LogIt.info("Mixer","positionAtTemp", "Floor Small movement not actionned ");
+//				// LogIt.tempInfo("Not Moving" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+//				return;
+//			}
+//			if (positionMovement > 0)
+//			{
+//				// LogIt.tempInfo("Moving Hotter" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+//		 		Global.mixerUp.on();
+//				positionMovementReal   					= waitAWhile(Math.abs(positionMovement));
+//		 		Global.mixerUp.off();
+//		 		// LogIt.tempInfo("Moving Hotter ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+//			}
+//			else
+//			{
+//				// LogIt.tempInfo("Moving Colder" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+//				Global.mixerDown.on();
+//				positionMovementReal   					= - waitAWhile(Math.abs(positionMovement));
+//				Global.mixerDown.off();
+//				// LogIt.tempInfo("Moving Colder ended" + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+//			}
+//			positionTracked								= positionTracked + positionMovementReal;
+//			if (positionTracked > this.swingTime * 1000)
+//			{
+//				positionTracked = this.swingTime * 1000;
+//			}
+//			else if (positionTracked < 0)
+//			{
+//				positionTracked = 0;
+//			}
+//			// LogIt.tempInfo("tempMixerOutTarget : " + tempMixerOutTarget + " swingProportion : " + swingProportion + " positionTracked : " + positionTracked );
+//		}
+//	}
 	public void positionZero()
 	{
 		allOff();
