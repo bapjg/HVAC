@@ -138,9 +138,9 @@ public class Monitor extends HttpServlet
             dbResultSet.updateInt		("tempHotWater", 	readings.tempHotWater.intValue());
             dbResultSet.updateInt		("tempBoiler", 		readings.tempBoiler.intValue());
             dbResultSet.updateInt		("tempBoilerIn", 	readings.tempBoilerIn.intValue());
+            dbResultSet.updateInt		("tempBoilerOut", 	readings.tempBoilerOut.intValue());
             dbResultSet.updateInt		("tempFloorOut", 	readings.tempFloorOut.intValue());
-            dbResultSet.updateInt		("tempFloorCold", 	readings.tempFloorCold.intValue());
-            dbResultSet.updateInt		("tempFloorHot", 	readings.tempFloorHot.intValue());
+            dbResultSet.updateInt		("tempFloorIn", 	readings.tempFloorIn.intValue());
             dbResultSet.updateInt		("tempRadiatorOut", readings.tempRadiatorOut.intValue());
             dbResultSet.updateInt		("tempRadiatorIn", 	readings.tempRadiatorIn.intValue());
             dbResultSet.updateInt		("tempOutside", 	readings.tempOutside.intValue());
