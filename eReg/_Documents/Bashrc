@@ -148,6 +148,7 @@ alias radiatoroff='sudo bw_tool -a 9c -w 24:0'
 alias flooron='sudo   	bw_tool -a 9c -w 25:1'
 alias flooroff='sudo  	bw_tool -a 9c -w 25:0'
 
+
 alias tempboiler='echo     -ne boiler;      sudo   cat /mnt/1wire/uncached/28.3F9A85040000/temperature10;echo'
 alias temphw='echo         -ne hotwater;    sudo   cat /mnt/1wire/uncached/28.09e185040000/temperature10;echo'
 alias tempmixc='echo       -ne mixer_cold;  sudo   cat /mnt/1wire/uncached/28.69da8e040000/temperature10;echo'
