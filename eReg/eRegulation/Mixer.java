@@ -69,11 +69,6 @@ public class Mixer
 		Integer tempMixerOut						= Global.thermoFloorOut.reading;
 		Integer tempMixerIn							= Global.thermoFloorIn.reading;
 		
-//		LogIt.info("Mixer","getSwingProportion", "Floor tempMixerInCold    : " + tempMixerInCold);
-//		LogIt.info("Mixer","getSwingProportion", "Floor tempMixerInHot     : " + tempMixerInHot);
-//		LogIt.info("Mixer","getSwingProportion", "Floor tempMixerInVeryHot : " + tempMixerInVeryHot);
-//		LogIt.info("Mixer","getSwingProportion", "Floor target temperature : " + temperature);
-		
 		LogIt.tempData();
 		
 		Integer tempDelta 							= temperature    - tempMixerIn;
@@ -197,7 +192,7 @@ public class Mixer
 		// Changed Kd = 0.02
 		
 		
-		pidControler.target								= targetTemp;		// targetTemp is either gradient or some maxTemp for rampup
+		pidControler.target								= targetTemp;		// targetTemp is either tempGradient or some maxTemp for rampup
 
 		Integer tempFloorOut							= Global.thermoFloorOut.readUnCached();
 		Integer tempFloorIn								= Global.thermoFloorIn.readUnCached();
@@ -209,14 +204,21 @@ public class Mixer
 		
 		pidTempSpan.add(tempSpanComplete);
 		
-		LogIt.display("Mixer", "sequencer", "tempMixerHot/tempMixerOut/tempMixerCold : " + tempBoilerOut + "/" + tempFloorOut + "/" + tempFloorIn);
+		Float tempSpanComplet_dTdt						= pidTempSpan.dTdt();
+		Integer tempSpanCompleteIn20s					= tempSpanComplete + (Integer) Math.round(tempSpanComplet_dTdt * 20F);
+		Integer tempAtPositionIn20s						= tempSpanCompleteIn20s * positionTracked / this.swingTime / 1000;
+		Integer tempErrorAtPositionIn20s				= tempAtPositionIn20s - tempFloorOut;
+		
+		Float tempSpanCompleteIn20sPerSecondSwing		= ((float) tempSpanCompleteIn20s) / ((float) this.swingTime); //decidegrees per second
+		
+		Double correction								= ((double) tempErrorAtPositionIn20s) / ((double) tempSpanCompleteIn20sPerSecondSwing) * 1000D;
+
+		LogIt.display("Mixer", "sequencer", "tempBoilerOut/tempFloorOut/tempFloorIn : " + tempBoilerOut + "/" + tempFloorOut + "/" + tempFloorIn);
 		LogIt.display("Mixer", "sequencer", "tempSpanActive/tempSpanComplete : " + tempSpanActive  + "/" +  tempSpanComplete + ", position real/calc : " + positionTracked + "/" + (tempSpanActive * this.swingTime * 1000/tempSpanComplete));
 		LogIt.display("Mixer", "sequencer", "TempSpan dTdt: " + pidTempSpan.dTdt());
 		
-		// kP at 62F was too sluggish. Pushed it up to 100
-		// gainI										= 0F;			// If dtI <> then = gainP/dtI;
-		
 		Double swingTimeRequired						= Math.floor(pidControler.getGain(gainP, gainD, gainI)); // returns a swingTime in milliseconds
+		LogIt.display("Mixer", "sequencer", "swingTimeRequired/correction : " + swingTimeRequired + "/" + correction);
 		
 		if (swingTimeRequired > 20000)
 		{
