@@ -160,7 +160,7 @@ alias templivingroom='echo living_room; sudo   cat /mnt/1wire/uncached/28.90DB8E
 alias tempoutside='echo outside;        sudo   cat /mnt/1wire/uncached/28.41DB8E040000/temperature10;echo'
 
 
-alias tempall='echo -ne "boiler   ";    sudo   cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo;echo -ne "hotwater ";sudo cat /mnt/1wire/uncached/28.89748e040000/temperature10;echo;echo -ne mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
+alias tempall='echo -ne "boiler   ";    sudo   cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo;echo -ne "hotwater ";sudo cat /mnt/1wire/uncached/28.09e185040000/temperature10;echo;echo -ne mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
 
 alias thw='cat /sys/bus/w1/devices/28-00000485e109/w1_slave'
 alias tboiler='cat /sys/bus/w1/devices/28-0000048f011c/w1_slave'
