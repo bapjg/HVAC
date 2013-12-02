@@ -38,6 +38,7 @@ public class Global extends DefaultHandler
 	public static 	Thermometer 					thermoBoiler;
 	public static 	Thermometer 					thermoBoilerOld;
 	public static 	Thermometer 					thermoBoilerIn;
+	public static 	Thermometer 					thermoBoilerOut;
 	
 	public static 	Thermometer 					thermoFloorOut;
 	public static 	Thermometer 					thermoFloorCold;
