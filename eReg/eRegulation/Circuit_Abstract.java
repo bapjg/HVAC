@@ -120,7 +120,7 @@ abstract class Circuit_Abstract
 	}
 	public void taskActivate(CircuitTask thisTask)
 	{
-		System.out.println(this.name + " Task activated ");
+		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated ");
 		for (CircuitTask aTask : this.circuitTaskList)			// Check to ensure there are no active tasks
 		{
 			if (aTask.active)
@@ -136,7 +136,7 @@ abstract class Circuit_Abstract
 	}
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
-		System.out.println(this.name + " Task Deactivated ");
+		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated ");
 		thisTask.active												= false;
 		for (CircuitTask aTask : this.circuitTaskList)
 		{
