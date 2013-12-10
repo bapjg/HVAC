@@ -38,6 +38,7 @@ public class Thread_UserInterface implements Runnable
             	
             	userControl												= new UserControl("Hot Water");
             	userControl.line1Text									= "Temperature";
+            	userControl.line1Value									= 35;
             	userControl.display();
             	
     			buttons.read(); // In case of button bounce
@@ -152,6 +153,8 @@ public class Thread_UserInterface implements Runnable
 			if (line1Text != null)
 			{
 				Global.display.writeAtPosition(1, 2, line1Text);
+				Global.display.writeAtPosition(1, 19, line1Value.toString());
+				Global.waitSeconds(5);
 			}
 			if (line2Text != null)
 			{
