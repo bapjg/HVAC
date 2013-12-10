@@ -370,6 +370,16 @@ void print_from_whom(int caller)
 			printf("From LCD_Position \n");
 			break;
 		}
+		case 8:
+		{
+			printf("From LCD_BlickOn \n");
+			break;
+		}
+		case 9:
+		{
+			printf("From LCD_BlickOff \n");
+			break;
+		}
 	}
 }
 //----------------------------------------------------------//----------------------------------------------------------
@@ -535,6 +545,40 @@ void LCD_Position(int line, int col)
 	buf[1] 				= 0x11;									// Command Position Cursor
 	buf[2] 				= line*32 + col;						// Data : Position(3MSB=line, 5LSB=Col)
 	
+	i2c_txrx(buf, 3, 0, 7);
+	close(i2c_fd);
+}
+//----------------------------------------------------------
+void LCD_BlinkOn()
+{
+	//   Position is coded as
+	//	 Top		3 bits : Line
+	//	 Bottom     8 bits : Column
+
+	UI_Open(8);
+
+	char buf[5];
+	buf[0] 				= i2c_port;								// Address of LCD
+	buf[1] 				= 0x01;									// Command Position Cursor
+	buf[2] 				= 0x0D;									// Data : Blick On
+
+	i2c_txrx(buf, 3, 0, 7);
+	close(i2c_fd);
+}
+//----------------------------------------------------------
+void LCD_BlinkOff()
+{
+	//   Position is coded as
+	//	 Top		3 bits : Line
+	//	 Bottom     8 bits : Column
+
+	UI_Open(9);
+
+	char buf[5];
+	buf[0] 				= i2c_port;								// Address of LCD
+	buf[1] 				= 0x01;									// Command Position Cursor
+	buf[2] 				= 0x0C;									// Data : Blick Off
+
 	i2c_txrx(buf, 3, 0, 7);
 	close(i2c_fd);
 }
