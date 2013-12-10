@@ -13,7 +13,8 @@ public class Thread_UserInterface implements Runnable
 		LogIt.info("Thread_UserInterface", "Run", "Starting", true);            
  
 		Global.display.clear();
-		Buttons             buttons                                 = Global.buttons;   
+		Buttons             buttons                                 = Global.buttons;
+		UserControl			userControl;
         
 		buttons.cancel();			// Removes all old button pushes from the buffer
 		Global.waitSeconds(1);
@@ -29,11 +30,15 @@ public class Thread_UserInterface implements Runnable
                    
             if (buttons.button0)
             {
-                   Global.stopNow                                     	= true;           //Exit the loop;
+                  Global.stopNow                                     	= true;           //Exit the loop;
             }
             if (buttons.button1)
             {
                 // Start HotWater
+            	
+            	userControl												= new UserControl("Hot Water");
+            	userControl.line1Text									= "Temperature";
+            	userControl.display();
             	
     			buttons.read(); // In case of button bounce
     			
@@ -122,6 +127,41 @@ public class Thread_UserInterface implements Runnable
 
 		Global.display.writeAtPosition(3, 11, "LivR ");
 		Global.display.writeAtPosition(3, 16, Global.thermoLivingRoom.toDisplay());
+	}
+	private class UserControl
+	{
+		String 	title;
+		String 	line1Text;
+		Integer line1Value;
+		String 	line2Text;
+		Integer line2Value;
+		String 	line3Text;
+		Integer line3Value;
+		Integer lineActive;
+		
+		public UserControl (String title)
+		{
+			this.title													= title;
+			Global.display.clear();
+			Global.display.writeAtPosition(0, 0, title);
+		}
+		public void display()
+		{
+			Global.display.writeAtPosition(0, 0, title);
+			
+			if (line1Text != null)
+			{
+				Global.display.writeAtPosition(1, 2, line1Text);
+			}
+			if (line2Text != null)
+			{
+				Global.display.writeAtPosition(1, 2, line2Text);
+			}
+			if (line3Text != null)
+			{
+				Global.display.writeAtPosition(1, 2, line3Text);
+			}
+		}
 	}
 }
  

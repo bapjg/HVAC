@@ -19,7 +19,7 @@ public class Message_PID extends Message_Abstract
 		public Float					result;	
 		public Integer					tempOut;	
 		public Integer					tempBoiler;	
-}
+	}
 	public class Request extends Message_Abstract
 	{
 	}
