@@ -36,13 +36,13 @@ public class Thread_UserInterface implements Runnable
             {
                 // Start HotWater
             	
+    			buttons.read(); // In case of button bounce
+    			
             	userControl												= new UserControl("Hot Water");
             	userControl.line1Text									= "Temperature";
             	userControl.line1Value									= 35;
             	userControl.display();
             	
-    			buttons.read(); // In case of button bounce
-    			
 				Long	now												= Global.getTimeNowSinceMidnight();
 
 				// Need to change this
@@ -148,6 +148,7 @@ public class Thread_UserInterface implements Runnable
 		}
 		public void display()
 		{
+			Buttons             buttons                                 = Global.buttons;
 			Global.display.writeAtPosition(0, 0, title);
 			
 			if (line1Text != null)
@@ -163,6 +164,14 @@ public class Thread_UserInterface implements Runnable
 			if (line3Text != null)
 			{
 				Global.display.writeAtPosition(1, 2, line3Text);
+			}
+			
+			buttons.read();
+			
+			while (!buttons.button0)
+			{
+				Global.waitSeconds(1);
+				buttons.read();
 			}
 		}
 	}
