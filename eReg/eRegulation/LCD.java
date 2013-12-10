@@ -5,8 +5,8 @@ public class LCD
 	private native void Clear();
 	private native void Write(String displayText);
 	private native void Position(int iLine, int iColumn);
-	private native void BlickOn();
-	private native void BlickOff();
+	private native void BlinkOn();
+	private native void BlinkOff();
 
 	private String displayText;
 	
@@ -60,13 +60,13 @@ public class LCD
 	public void blinkOn()
 	{
 		Global.interfaceSemaphore.semaphoreLock("LDC.blinkOn");
-		BlickOn();
+		BlinkOn();
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
 	public void blinkOff()
 	{
 		Global.interfaceSemaphore.semaphoreLock("LDC.blinkOff");
-		BlickOff();
+		BlinkOff();
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
 
