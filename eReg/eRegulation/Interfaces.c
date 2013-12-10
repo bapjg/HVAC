@@ -560,7 +560,7 @@ void LCD_BlinkOn()
 	char buf[5];
 	buf[0] 				= i2c_port;								// Address of LCD
 	buf[1] 				= 0x01;									// Command Position Cursor
-	buf[2] 				= 0x0D;									// Data : Blick On
+	buf[2] 				= 0x0d;									// Data : Blick On
 
 	i2c_txrx(buf, 3, 0, 7);
 	close(i2c_fd);
@@ -577,7 +577,7 @@ void LCD_BlinkOff()
 	char buf[5];
 	buf[0] 				= i2c_port;								// Address of LCD
 	buf[1] 				= 0x01;									// Command Position Cursor
-	buf[2] 				= 0x0C;									// Data : Blick Off
+	buf[2] 				= 0x0c;									// Data : Blick Off
 
 	i2c_txrx(buf, 3, 0, 7);
 	close(i2c_fd);
