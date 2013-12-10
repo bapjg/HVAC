@@ -93,6 +93,7 @@ public class Global extends DefaultHandler
 		Global.buttons 								= new Buttons();	
 
 		display.clear();
+		display.blinkOff();
 		display.writeAtPosition(0, 0, "Initialising");
 		display.writeAtPosition(1, 0, " Reading params");
 		
