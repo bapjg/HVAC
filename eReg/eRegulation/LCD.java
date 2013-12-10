@@ -43,9 +43,9 @@ public class LCD
 		Global.waitMilliSeconds(10);
 		blinkOn();
 		Global.waitMilliSeconds(10);
-		displayText = sText;
-		Write(displayText);
-		blinkOff();
+		//displayText = sText;
+		//Write(displayText);
+		//blinkOff();
 		Global.waitMilliSeconds(50);
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
