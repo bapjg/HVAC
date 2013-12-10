@@ -5,6 +5,8 @@ public class LCD
 	private native void Clear();
 	private native void Write(String displayText);
 	private native void Position(int iLine, int iColumn);
+	private native void BlickOn();
+	private native void BlickOff();
 
 	private String displayText;
 	
@@ -18,7 +20,6 @@ public class LCD
 		Clear();
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
-
 	public void write(String sText)
 	{
 		Global.interfaceSemaphore.semaphoreLock("LDC.write");
@@ -44,4 +45,17 @@ public class LCD
 		//global.wait(1);
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
+	public void blickOn()
+	{
+		Global.interfaceSemaphore.semaphoreLock("LDC.blinkOn");
+		BlickOn();
+		Global.interfaceSemaphore.semaphoreUnLock();
+	}
+	public void blickOff()
+	{
+		Global.interfaceSemaphore.semaphoreLock("LDC.blinkOff");
+		BlickOff();
+		Global.interfaceSemaphore.semaphoreUnLock();
+	}
+
 }

@@ -612,7 +612,14 @@ JNIEXPORT void JNICALL Java_eRegulation_LCD_Position(JNIEnv *env, jobject obj, j
 {
 	LCD_Position(Line, Column);
 }
-
+JNIEXPORT void JNICALL Java_eRegulation_LCD_BlinkOn(JNIEnv *env, jobject obj)
+{
+	LCD_BlinkOn();
+}
+JNIEXPORT void JNICALL Java_eRegulation_LCD_BlinkOff(JNIEnv *env, jobject obj)
+{
+	LCD_BlinkOff();
+}
 //
 //================================================================
 
