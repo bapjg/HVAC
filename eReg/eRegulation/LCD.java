@@ -43,10 +43,6 @@ public class LCD
 		Global.waitMilliSeconds(10);
 		blinkOn();
 		Global.waitMilliSeconds(10);
-		
-		
-		// Wait
-		
 		displayText = sText;
 		Write(displayText);
 		blinkOff();
