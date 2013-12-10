@@ -31,6 +31,22 @@ JNIEXPORT void JNICALL Java_eRegulation_LCD_Write
 JNIEXPORT void JNICALL Java_eRegulation_LCD_Position
   (JNIEnv *, jobject, jint, jint);
 
+/*
+ * Class:     eRegulation_LCD
+ * Method:    BlickOn
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_eRegulation_LCD_BlickOn
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     eRegulation_LCD
+ * Method:    BlickOff
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_eRegulation_LCD_BlickOff
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
