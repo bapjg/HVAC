@@ -36,6 +36,14 @@ public class LCD
 		Write(displayText);
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
+	public void blinkAtPosition(int iLine, int iColumn)
+	{
+		Global.interfaceSemaphore.semaphoreLock("LDC.blinkAtPosition");
+		Position(iLine, iColumn);
+		Global.waitMilliSeconds(50);
+		BlinkOn();
+		Global.interfaceSemaphore.semaphoreUnLock();
+	}
 	public void position(int iLine, int iColumn)
 	{
 		Global.interfaceSemaphore.semaphoreLock("LDC.position");

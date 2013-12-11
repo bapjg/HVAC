@@ -155,7 +155,7 @@ public class Thread_UserInterface implements Runnable
 			{
 				Global.display.writeAtPosition(1, 1, line1Text);
 				Global.display.writeAtPosition(1, 18, line1Value.toString());
-				Global.display.blinkOn();
+				Global.display.blinkAtPosition(1, 19);
 				Global.waitSeconds(5);
 			}
 			if (line2Text != null)
