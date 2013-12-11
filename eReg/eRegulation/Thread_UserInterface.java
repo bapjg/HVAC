@@ -145,6 +145,7 @@ public class Thread_UserInterface implements Runnable
 			this.title													= title;
 			Global.display.clear();
 			Global.display.writeAtPosition(0, 0, title);
+			lineActive													= 1;
 		}
 		public void display()
 		{
@@ -154,7 +155,7 @@ public class Thread_UserInterface implements Runnable
 			if (line1Text != null)
 			{
 				Global.display.writeAtPosition(1, 1, line1Text);
-				Global.display.writeAtPosition(1, 18, line1Value.toString());
+				Global.display.writeAtPosition(1, 17, line1Value.toString());
 				Global.display.blinkAtPosition(1, 19);
 				Global.waitSeconds(5);
 			}
@@ -171,6 +172,25 @@ public class Thread_UserInterface implements Runnable
 			
 			while (!buttons.button0)
 			{
+				if (buttons.button3)
+				{
+					if (lineActive == 1)
+					{
+						line1Value										= line1Value - 1;
+						Global.display.writeAtPosition(1, 17, line1Value.toString());
+						Global.display.blinkAtPosition(1, 19);
+					}
+				}
+				if (buttons.button4)
+				{
+					if (lineActive == 1)
+					{
+						line1Value										= line1Value + 1;
+						Global.display.writeAtPosition(1, 17, line1Value.toString());
+						Global.display.blinkAtPosition(1, 19);
+					}
+					
+				}
 				Global.waitSeconds(1);
 				buttons.read();
 			}
