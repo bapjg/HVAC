@@ -198,6 +198,7 @@ public class Thread_UserInterface implements Runnable
 			{
 				LogIt.display("UserControl", "display", "Ok pressed");
 			}
+			Global.display.blinkOff();
 		}
 	}
 }
