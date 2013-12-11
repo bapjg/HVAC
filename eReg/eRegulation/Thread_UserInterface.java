@@ -170,7 +170,7 @@ public class Thread_UserInterface implements Runnable
 			
 			buttons.read();
 			
-			while (!buttons.button0)
+			while ((!buttons.button0) && (!buttons.button5))
 			{
 				if (buttons.button3)
 				{
@@ -193,6 +193,10 @@ public class Thread_UserInterface implements Runnable
 				}
 				Global.waitSeconds(1);
 				buttons.read();
+			}
+			if (buttons.button5)
+			{
+				LogIt.display("UserControl", "display", "Ok pressed");
 			}
 		}
 	}
