@@ -59,6 +59,7 @@ public class Thread_UserInterface implements Runnable
 																							userControl.line1Value * 10,		// TempObjective
 																							true,								// StopOnObjective
 																							"1, 2, 3, 4, 5, 6, 7");				// Days
+					Global.circuitHotWater.start();
 				}
             }
             if (buttons.button2)
