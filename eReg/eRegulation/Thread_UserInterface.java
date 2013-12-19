@@ -54,11 +54,11 @@ public class Thread_UserInterface implements Runnable
 				if (Global.circuitHotWater.taskActive == null)
 				{
 					System.out.println("Setting up HW circuit task");
-					Global.circuitHotWater.taskActive					= new CircuitTask(	now, 					// Time Start
-																							now + 30 * 60 * 1000, 	// TimeEnd
-																							350,					// TempObjective
-																							true,					// StopOnObjective
-																							"1, 2, 3, 4, 5, 6, 7");	// Days
+					Global.circuitHotWater.taskActive					= new CircuitTask(	now, 								// Time Start
+																							now + 30 * 60 * 1000, 				// TimeEnd
+																							userControl.line1Value * 10,		// TempObjective
+																							true,								// StopOnObjective
+																							"1, 2, 3, 4, 5, 6, 7");				// Days
 				}
             }
             if (buttons.button2)
