@@ -38,12 +38,6 @@ public class Thread_UserInterface implements Runnable
             	
     			buttons.read(); // In case of button bounce
     			
-            	userControl												= new UserControl("Hot Water");
-            	userControl.line1Text									= "Temperature";
-            	userControl.line1Value									= 35;
-            	userControl.display();
-            	
-				Long	now												= Global.getTimeNowSinceMidnight();
 
 				// Need to change this
 				// Just create a taskItem. No need to put it on taskList as it wont be repeated
@@ -53,13 +47,23 @@ public class Thread_UserInterface implements Runnable
 				
 				if (Global.circuitHotWater.taskActive == null)
 				{
-					System.out.println("Setting up HW circuit task");
+	            	userControl											= new UserControl("Hot Water");
+	            	userControl.line1Text								= "Temperature";
+	            	userControl.line1Value								= 35;
+	            	userControl.display();
+	            	
+					Long	now											= Global.getTimeNowSinceMidnight();
+					
 					Global.circuitHotWater.taskActive					= new CircuitTask(	now, 								// Time Start
 																							now + 30 * 60 * 1000, 				// TimeEnd
 																							userControl.line1Value * 10,		// TempObjective
 																							true,								// StopOnObjective
 																							"1, 2, 3, 4, 5, 6, 7");				// Days
 					Global.circuitHotWater.start();
+				}
+				else
+				{
+					Global.circuitHotWater.stop();
 				}
             }
             if (buttons.button2)
