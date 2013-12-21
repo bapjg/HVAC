@@ -17,8 +17,9 @@
 	<Circuits type="Collection">
 
 		<Circuit type="Object" name="Floor" tempMax="500" circuitType="Mixer" friendlyName="Plancher Chauffant" rampUpTime="0" summerActivity="0">
-			<Mixer type="Object" name="Mixer" swingTime="103" lagTime="20" gainP="20" timeD="50" gainI="0" timeI="0"
-			       textinfo="timeD 40s to account for 20s wait + upto 20s swing. gainP 100 is 100ms per decidegree or 1s per degree">
+			<Mixer type="Object" name="Mixer" swingTime="92" lagTime="20" gainP="20" timeD="50" gainI="0" timeI="0"
+			       textinfo1="timeD 40s to account for 20s wait + upto 20s swing. gainP 100 is 100ms per decidegree or 1s per degree"
+			       textinfo2="bottom 10s of swingTime are not available (cut out)">
 			</Mixer>
 			<TempGradient type="Object" name="Mixer" outsideLow="-150" tempLow="450" outsideHigh="150" tempHigh="350">
 			</TempGradient>
