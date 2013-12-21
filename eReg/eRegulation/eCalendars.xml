@@ -12,7 +12,8 @@
 			<Calendar type="Object" name="EveryDay" days="            5"		timeStart="06:30" 	timeEnd="07:15" tempObjective="500" stopOnObjective="0"/>
 			<Calendar type="Object" name="EveryDay" days="1, 2, 3, 4, 5"		timeStart="18:30" 	timeEnd="22:15" tempObjective="500" stopOnObjective="0"/>
 			<Calendar type="Object" name="EveryDay" days="6,7"					timeStart="08:00" 	timeEnd="09:00" tempObjective="500" stopOnObjective="0"/>
-		</Circuit>
+			<Calendar type="Object" name="EveryDay" days="6,7"					timeStart="20:00" 	timeEnd="23:00" tempObjective="500" stopOnObjective="0"/>
+					</Circuit>
 		<Circuit type="Object" name="Floor">
 			<Calendar type="Object" name="WeekDays" days="0            "		timeStart="01:15" 	timeEnd="01:45" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="0            "		timeStart="05:00" 	timeEnd="06:45" tempObjective="200" stopOnObjective="0"/>
