@@ -41,7 +41,7 @@ public class LogIt
 			
 		if (!(messageReceive instanceof Message_Abstract.Ack))
 		{
-			System.out.println(dateTimeStamp() + " Logit.logMessage" + messageType + "  is : Nack");
+			// System.out.println(dateTimeStamp() + " Logit.logMessage" + messageType + "  is : Nack");
 		}
 
 		Global.httpSemaphore.semaphoreUnLock();			
@@ -127,7 +127,7 @@ public class LogIt
 		
 		if (!(messageReceive instanceof Message_Abstract.Ack))
 		{
-			System.out.println(dateTimeStamp() + " pid data  is : Nack");
+			// System.out.println(dateTimeStamp() + " pid data  is : Nack");
 		}
 
 		Global.httpSemaphore.semaphoreUnLock();			
@@ -163,7 +163,7 @@ public class LogIt
 		
 		if (!(messageReceive instanceof Message_Abstract.Ack))
 		{
-			System.out.println(dateTimeStamp() + " Temp data  is : Nack");
+			// System.out.println(dateTimeStamp() + " Temp data  is : Nack");
 		}
 
 		Global.httpSemaphore.semaphoreUnLock();			
@@ -186,7 +186,7 @@ public class LogIt
 			
 		if (!(messageReceive instanceof Message_Abstract.Ack))
 		{
-			System.out.println(dateTimeStamp() + " Fuel data  is : Nack");
+			// System.out.println(dateTimeStamp() + " Fuel data  is : Nack");
 		}
 
 		Global.httpSemaphore.semaphoreUnLock();			
@@ -211,7 +211,7 @@ public class LogIt
 			
 		if (!(messageReceive instanceof Message_Abstract.Ack))
 		{
-			System.out.println(dateTimeStamp() + " Action data  is : Nack");
+			// System.out.println(dateTimeStamp() + " Action data  is : Nack");
 		}
 
 		Global.httpSemaphore.semaphoreUnLock();			
