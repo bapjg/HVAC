@@ -48,11 +48,11 @@ public class Thermometer
 	}
     public Integer read()
 	{
-    	return read(10, false);
+    	return read(11, false);
 	}
     public Integer readUnCached()
  	{
-     	return read(10, true);
+     	return read(11, true);
  	}
     public Integer read(Integer resolution, Boolean unCached)
 	{
@@ -91,7 +91,7 @@ public class Thermometer
 
 			tempString	 									= ThermoFile_InputLine.replace(" ", "");
 			tempFloat	 									= Float.parseFloat(tempString);
-			this.reading									= Math.round(tempFloat * 10); // Round to half deci-degree
+			this.reading									= Math.round(tempFloat * 10); // Round to deci-degree
 
 		}
 		catch (Exception err)
