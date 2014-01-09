@@ -48,11 +48,11 @@ public class Thermometer
 	}
     public Integer read()
 	{
-    	return read(11, false);
+    	return read(10, false);
 	}
     public Integer readUnCached()
  	{
-     	return read(11, true);
+     	return read(10, true);
  	}
     public Integer read(Integer resolution, Boolean unCached)
 	{
