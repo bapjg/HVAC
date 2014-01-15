@@ -16,13 +16,13 @@ public class Thread_Mixer implements Runnable
 
 		if (Global.thermoBoiler.reading > 450)
 		{
-			mixer.positionAbsolute(0.25F);
-			LogIt.info("Thread_Mixer", "Run", "Floor Initialised (25%)");		
+			mixer.positionAbsolute(0.30F);
+			LogIt.info("Thread_Mixer", "Run", "Floor Initialised (30%)");		
 		}
 		else
 		{
-			mixer.positionFull();
-			LogIt.info("Thread_Mixer", "Run", "Floor Initialised Full (100%)");		
+			mixer.positionAbsolute(0.90F);
+			LogIt.info("Thread_Mixer", "Run", "Floor Initialised Full (90%)");		
 		}			
 		
 		Global.waitSeconds(1);
