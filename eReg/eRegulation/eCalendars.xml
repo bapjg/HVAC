@@ -13,7 +13,7 @@
 					</Circuit>
 		<Circuit type="Object" name="Floor">
 			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5,"		timeStart="05:00" 	timeEnd="07:30" tempObjective="200" stopOnObjective="0"/>
-			<Calendar type="Object" name="WeekDays" days="		3,    5 "		timeStart="15:00" 	timeEnd="21:00" tempObjective="200" stopOnObjective="0"/>
+			<Calendar type="Object" name="WeekDays" days="		3,    5 "		timeStart="12:30" 	timeEnd="20:30" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekEnds" days="				 6, 7"	timeStart="07:00" 	timeEnd="21:00" tempObjective="200" stopOnObjective="0"/>
 		</Circuit>
 	</Circuits>
