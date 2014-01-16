@@ -14,6 +14,23 @@
 		<Thermometer type="Object" name="Hot_Water" 	address="28.09E1 8504 0000"	friendlyName="ECS">					</Thermometer>
 	</Thermometers>
 
+	<Relays type="Collection">
+		<Relay type="Object" name="Burner" 			address="0" friendlyName="Bruleur"> 			</Relay>
+		<Relay type="Object" name="Mixer_Up" 		address="1" friendlyName="V3V Chaud">			</Relay>
+		<Relay type="Object" name="Mixer_Down" 		address="2" friendlyName="V3V Froid">			</Relay>
+		<Relay type="Object" name="Pump_Water" 		address="3" friendlyName="Pompe ECS">			</Relay>
+		<Relay type="Object" name="Pump_Radiator" 	address="4" friendlyName="Pompe Plancher">		</Relay>
+		<Relay type="Object" name="Pump_Floor" 		address="5" friendlyName="Pompe Radiateurs">	</Relay>
+	</Relays>
+
+	<Pumps type="Collection">
+		<Pump type="Object" name="Pump_Water">			</Pump>
+		<Pump type="Object" name="Pump_Radiator">		</Pump>
+		<Pump type="Object" name="Pump_Floor">			</Pump>
+	</Pumps>
+	
+	
+	
 	<Circuits type="Collection">
 
 		<Circuit type="Object" name="Floor" tempMax="500" circuitType="Mixer" friendlyName="Plancher Chauffant" rampUpTime="0" summerActivity="0">
@@ -37,20 +54,6 @@
 
 	</Circuits>
 
-	<Relays type="Collection">
-		<Relay type="Object" name="Burner" 			address="0" friendlyName="Bruleur"> 			</Relay>
-		<Relay type="Object" name="Mixer_Up" 		address="1" friendlyName="V3V Chaud">			</Relay>
-		<Relay type="Object" name="Mixer_Down" 		address="2" friendlyName="V3V Froid">			</Relay>
-		<Relay type="Object" name="Pump_Water" 		address="3" friendlyName="Pompe ECS">			</Relay>
-		<Relay type="Object" name="Pump_Radiator" 	address="4" friendlyName="Pompe Plancher">		</Relay>
-		<Relay type="Object" name="Pump_Floor" 		address="5" friendlyName="Pompe Radiateurs">	</Relay>
-	</Relays>
-
-	<Pumps type="Collection">
-		<Pump type="Object" name="Pump_Water">			</Pump>
-		<Pump type="Object" name="Pump_Radiator">		</Pump>
-		<Pump type="Object" name="Pump_Floor">			</Pump>
-	</Pumps>
 
 	<Params type="Object" summerTemp="110" summerPumpDuration="300"
 		summerPumpTime="01:00">
