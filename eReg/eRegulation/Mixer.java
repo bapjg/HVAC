@@ -55,8 +55,6 @@ public class Mixer
 		this.timeI									= Float.parseFloat(timeI);
 		this.gainI									= Float.parseFloat(gainI);
 		this.state									= MIXER_STATE_Off;
-		this.positionTracked						= 0;
-		positionAbsolute(0.30F);
 	}
 	public Float getSwingProportion(Integer temperature)
 	{
