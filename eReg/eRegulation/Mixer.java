@@ -241,9 +241,9 @@ public class Mixer
 	public Integer waitAWhile(double timeToWait)
 	{
 		/*
-			Routine to wait a number of seconds
+			Routine to wait a number of milliseconds, but interrupt if over temp
 			Parameters :
-			Input   : Integer timeToWait - Number of seconds to wait
+			Input   : Integer timeToWait - Number of milliseconds to wait
 			Returns : Integer            - Number of milliseconds waited
 		*/
 		Long timeStart 								= System.currentTimeMillis();
