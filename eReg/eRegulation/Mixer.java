@@ -56,44 +56,44 @@ public class Mixer
 		this.gainI									= Float.parseFloat(gainI);
 		this.state									= MIXER_STATE_Off;
 	}
-	public Float getSwingProportion(Integer temperature)
-	{
-		// Returns proportion of swingTime starting from zero
-		// required to achieve a target temperature
-		// tempDelta = difference between requested temp and cold input to the mixer
-		// tempSpan  = difference between hot temp and cold input to the mixer
-		Integer tempBoiler							= Global.thermoBoiler.reading;
-		Integer tempBoilerOut						= Global.thermoBoilerOut.reading;
-		Integer tempBoilerIn						= Global.thermoBoilerIn.reading;
-		
-		Integer tempMixerOut						= Global.thermoFloorOut.reading;
-		Integer tempMixerIn							= Global.thermoFloorIn.reading;
-		
-		LogIt.tempData();
-		
-		Integer tempDelta 							= temperature    - tempMixerIn;
-		Integer tempSpan 							= tempMixerOut - tempMixerIn;
-		
-		if (tempSpan < 0 )
-		{
-			LogIt.info("-------====---------Mixer","getSwingProportion", "Floor tempSpan negative " + tempSpan);
-	        // Temp out is colder than tempCold : we cannot tell where we are
-			// Wait for water to flow to get things changing
-			return  -1F;
-        }
-
-		if (tempDelta > tempSpan )
-		{
-			LogIt.info("Mixer","getSwingProportion", "Floor tempDelta > tempSpan " + tempSpan);
-	        // Temp out is colder than tempCold : we cannot tell where we are
-			// Wait for water to flow to get things changing
-			return  1F;
-        }
-
-		LogIt.info("Mixer","getSwingProportion", "Floor getSwingProportion " + (Float) tempDelta.floatValue()/tempSpan.floatValue());
-		
-		return (Float) tempDelta.floatValue()/tempSpan.floatValue();
-	}
+//	public Float getSwingProportion(Integer temperature)
+//	{
+//		// Returns proportion of swingTime starting from zero
+//		// required to achieve a target temperature
+//		// tempDelta = difference between requested temp and cold input to the mixer
+//		// tempSpan  = difference between hot temp and cold input to the mixer
+//		Integer tempBoiler							= Global.thermoBoiler.reading;
+//		Integer tempBoilerOut						= Global.thermoBoilerOut.reading;
+//		Integer tempBoilerIn						= Global.thermoBoilerIn.reading;
+//		
+//		Integer tempMixerOut						= Global.thermoFloorOut.reading;
+//		Integer tempMixerIn							= Global.thermoFloorIn.reading;
+//		
+//		LogIt.tempData();
+//		
+//		Integer tempDelta 							= temperature    - tempMixerIn;
+//		Integer tempSpan 							= tempMixerOut - tempMixerIn;
+//		
+//		if (tempSpan < 0 )
+//		{
+//			LogIt.info("-------====---------Mixer","getSwingProportion", "Floor tempSpan negative " + tempSpan);
+//	        // Temp out is colder than tempCold : we cannot tell where we are
+//			// Wait for water to flow to get things changing
+//			return  -1F;
+//        }
+//
+//		if (tempDelta > tempSpan )
+//		{
+//			LogIt.info("Mixer","getSwingProportion", "Floor tempDelta > tempSpan " + tempSpan);
+//	        // Temp out is colder than tempCold : we cannot tell where we are
+//			// Wait for water to flow to get things changing
+//			return  1F;
+//        }
+//
+//		LogIt.info("Mixer","getSwingProportion", "Floor getSwingProportion " + (Float) tempDelta.floatValue()/tempSpan.floatValue());
+//		
+//		return (Float) tempDelta.floatValue()/tempSpan.floatValue();
+//	}
 	public void sequencer(Integer targetTemp)
 	{
 		// Keep it simple :
@@ -129,40 +129,8 @@ public class Mixer
 		pidControler.target								= targetTemp;		// targetTemp is either tempGradient or some maxTemp for rampup
 
 		Integer tempFloorOut							= Global.thermoFloorOut.readUnCached();
-		Integer tempFloorIn								= Global.thermoFloorIn.readUnCached();
-
-		Integer tempBoilerOut							= Global.thermoBoilerOut.readUnCached();
-		
-		Integer tempSpanComplete						= tempBoilerOut - tempFloorIn;
-		Integer tempSpanActive							= tempFloorOut  - tempFloorIn;
-		
-		pidTempSpan.add(tempSpanComplete);
-		
-		Float tempSpanComplet_dTdt						= pidTempSpan.dTdt();														// decidegrees per second
-		Integer tempSpanCompleteIn20s					= tempSpanComplete + (Integer) Math.round(tempSpanComplet_dTdt * 20F);		// decidegrees
-		Integer tempAtPositionIn20s						= tempSpanCompleteIn20s * positionTracked / this.swingTime / 1000;			// decidegrees
-		Integer tempErrorAtPositionIn20s				= targetTemp - tempAtPositionIn20s;											// decidegrees assume unchanged outbound temp
-																																	// positive means under temp means swing up
-		
-		Float tempSpanCompleteIn20sPerSecondSwing		= ((float) tempSpanCompleteIn20s) / ((float) this.swingTime); 				// decidegrees per second
-		
-		Double correction								= ((double) tempErrorAtPositionIn20s) / ((double) tempSpanCompleteIn20sPerSecondSwing) * 1000D;	// milliseconds
-
 		
 		Double swingTimeRequired						= Math.floor(pidControler.getGain(gainP, gainD, gainI)); 					// returns a swingTime in milliseconds
-		
-		
-//		if (swingTimeRequired > 20000)
-//		{
-//			// Recalculate swingTime taking into consideration extra length of time in mixerUp situation
-//			Double swingTimeRequired2						= Math.floor(pidControler.getGain(gainP, gainD + 20000, gainI)); // returns a swingTime in milliseconds
-//			if (swingTimeRequired2 < 20000)
-//			{
-//				// Recalculate swingTime taking into consideration extra length of time
-//				swingTimeRequired							=  swingTimeRequired2;	
-//				LogIt.display("Mixer", "sequencer", "Using recalculated pid value");
-//			}
-//		}
 		
 		Integer swingTimePerformed						= 0;
 
@@ -195,7 +163,6 @@ public class Mixer
 		 			swingTimeRequired 					= (float) (this.swingTime * 1000) - positionTracked.doubleValue();		//No point waiting over maximum add an extra second to be sure of end point
 		 		}
 				
-				//LogIt.display("Mixer", "sequencer", "Moving Hotter swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
 		 		Global.mixerUp.on();
 		 		swingTimePerformed   					= waitAWhile(swingTimeRequired);
 		 		Global.mixerUp.off();
@@ -209,7 +176,6 @@ public class Mixer
 		 		{
 		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000F;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
-				//LogIt.display("Mixer", "sequencer", "Moving Colder swingTimeRequired : " + swingTimeRequired + " positionTracked : " + positionTracked);
 				Global.mixerDown.on();
 				swingTimePerformed   					= - waitAWhile(swingTimeRequired);
 				Global.mixerDown.off();
@@ -224,7 +190,6 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
-		//LogIt.display("Mixer", "sequencer", "Moving ended positionTracked : " + positionTracked );
 	}
 	public void positionZero()
 	{
@@ -305,7 +270,7 @@ public class Mixer
 			{
 				try
 		        {
-					if (waitTime > 5)
+					if (waitTime > 5000)
 					{
 						if (wait5secs())
 						{
