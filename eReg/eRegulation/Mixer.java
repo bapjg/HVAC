@@ -194,19 +194,28 @@ public class Mixer
 	}
 	public void positionZero()
 	{
+		LogIt.display("Mixer", "positionZero", "allOff");
 		allOff();
+		LogIt.display("Mixer", "positionZero", "DownOn");
 		Global.mixerDown.on();
+		LogIt.display("Mixer", "positionZero", "Waiting");
 		waitAWhile(1000 * swingTime);
+		LogIt.display("Mixer", "positionZero", "DownOff");
 		Global.mixerDown.off();
-		waitAWhile(400);
+		LogIt.display("Mixer", "positionZero", "Positioned");
 		positionTracked									= 0;
 	}
 	public void positionFull()
 	{
+		LogIt.display("Mixer", "positionFull", "allOff");
 		allOff();
+		LogIt.display("Mixer", "positionFull", "UpOn");
 		Global.mixerUp.on();
+		LogIt.display("Mixer", "positionFull", "Waiting");
 		waitAWhile(1000 * swingTime);
+		LogIt.display("Mixer", "positionFull", "UpOff");
 		Global.mixerUp.off();
+		LogIt.display("Mixer", "positionFull", "Positioned");
 		positionTracked									= swingTime * 1000;
 	}
 	public void positionAbsolute(float proportion)
