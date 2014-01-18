@@ -157,7 +157,7 @@ public class Mixer
 		}
 		else if (swingTimeRequired > 0)														// Moving hotter
 		{
-			if (positionTracked < this.swingTime * 1000)													// No point going over max
+			if (positionTracked <= this.swingTime * 1000)													// No point going over max
 	 		{
 				if (positionTracked + swingTimeRequired > this.swingTime * 1000)
 		 		{
@@ -171,7 +171,7 @@ public class Mixer
 		}
 		else																			// Moving colder
 		{
-			if (positionTracked > 0)													// No point going under min
+			if (positionTracked >= 0)													// No point going under min
 	 		{
 				if (positionTracked + swingTimeRequired < 0)
 		 		{
@@ -271,7 +271,7 @@ public class Mixer
 			{
 				try
 		        {
-					if (waitTime > 5000)
+					if (waitTime > 5000L)
 					{
 						if (wait5secs())
 						{
