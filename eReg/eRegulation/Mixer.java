@@ -131,6 +131,7 @@ public class Mixer
 		Integer tempFloorOut							= Global.thermoFloorOut.readUnCached();
 		
 		Double swingTimeRequired						= Math.floor(pidControler.getGain(gainP, gainD, gainI)); 					// returns a swingTime in milliseconds
+		LogIt.display("Mixer", "sequencer", "swingTimeRequired : " + swingTimeRequired);
 		
 		Integer swingTimePerformed						= 0;
 
