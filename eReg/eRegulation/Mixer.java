@@ -302,6 +302,7 @@ public class Mixer
 					{
 						Thread.sleep(waitTime);
 						LogIt.display("Mixer", "waitAWhile", "waitTime7 : " + waitTime);
+						waitTime					= 0L;
 					}
 					timeEnd	 						= System.currentTimeMillis();
 		        }
