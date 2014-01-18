@@ -130,7 +130,7 @@ public class Mixer
 
 		Integer tempFloorOut							= Global.thermoFloorOut.readUnCached();
 		
-		Double swingTimeRequired						= Math.floor(pidControler.getGain(gainP, gainD, gainI)); 					// returns a swingTime in milliseconds
+		Integer swingTimeRequired						= pidControler.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
 		LogIt.display("Mixer", "sequencer", "swingTimeRequired : " + swingTimeRequired);
 		
 		Integer swingTimePerformed						= 0;
@@ -140,7 +140,7 @@ public class Mixer
 			// We need to do trip avoidance
 			if (swingTimeRequired < 0)
 			{
-				swingTimeRequired						= swingTimeRequired * 2D;
+				swingTimeRequired						= swingTimeRequired * 2;
 			}
 			LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
 		}
@@ -161,7 +161,7 @@ public class Mixer
 	 		{
 				if (positionTracked + swingTimeRequired > this.swingTime * 1000)
 		 		{
-		 			swingTimeRequired 					= (float) (this.swingTime * 1000) - positionTracked.doubleValue();		//No point waiting over maximum add an extra second to be sure of end point
+		 			swingTimeRequired 					= this.swingTime * 1000 - positionTracked;		//No point waiting over maximum add an extra second to be sure of end point
 		 		}
 				
 		 		Global.mixerUp.on();
@@ -179,11 +179,11 @@ public class Mixer
 	 		{
 				if (positionTracked + swingTimeRequired < 0)
 		 		{
-		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000F;		//No point waiting under minimum add an extra second to be sure of end point
+		 			swingTimeRequired 					= positionTracked + 1000;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
 				Global.mixerDown.on();
 				Long timeStart							= Global.now();
-				Global.waitMilliSeconds(-swingTimeRequired.intValue());
+				Global.waitMilliSeconds(Math.abs(swingTimeRequired));
 				Global.mixerDown.off();
 				Long timeEnd							= Global.now();
 				Long positionDiff						= timeStart - timeEnd;

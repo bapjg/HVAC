@@ -93,7 +93,7 @@ public class PID
 
     	return differential;
     }
-    public Float getGain(Float kP, Float kD, Float kI) 
+    public Integer getGain(Float kP, Float kD, Float kI) 
     {
     	// Parameters are
     	//    kP = number of milliseconds swingTime per decidegree
@@ -138,7 +138,7 @@ public class PID
 		LogIt.display("PID", "getGain", "currentError : " + currentError + " kP : " + kP + " proportional : " + proportional + " calc : " + kP * proportional);
 		LogIt.display("PID", "getGain", "currentError : " + currentError + " kD : " + kD + " differential : " + differential + " calc : " + kD * differential);
 		LogIt.display("PID", "getGain", "result : " + result);
-		return result;
+		return result.intValue();
     }
     @Override
     public String toString() 
