@@ -206,6 +206,7 @@ public class Mixer
 		allOff();
 		Global.mixerUp.on();
 		waitAWhile(1000 * swingTime);
+		Global.mixerUp.off();
 		positionTracked									= swingTime * 1000;
 	}
 	public void positionAbsolute(float proportion)
@@ -216,7 +217,7 @@ public class Mixer
 		{
 			positionFull();
 			Global.mixerDown.on();
-			timeToWait									= 1000 * swingTime * proportion;
+			timeToWait									= 1000 * swingTime * (1F - proportion);
 		    positionDiff   								= waitAWhile(timeToWait.intValue());
 			Global.mixerDown.off();
 	 		positionTracked								= 1000 * swingTime - positionDiff;		
