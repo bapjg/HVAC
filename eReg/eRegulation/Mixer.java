@@ -276,26 +276,32 @@ public class Mixer
 		}
 		else									// Going Up
 		{
+			LogIt.display("Mixer", "waitAWhile", "waitTime1 : " + waitTime);
 			waitTime								= (long) timeToWait;
+			LogIt.display("Mixer", "waitAWhile", "waitTime2 : " + waitTime);
 			while (waitTime > 0)
 			{
 				try
 		        {
+					LogIt.display("Mixer", "waitAWhile", "waitTime3 : " + waitTime);
 					if (waitTime > 5000L)
 					{
 						if (wait5secs())
 						{
 							// Have an overtemp situation
 							waitTime				= 0L;		// Wait no longer
+							LogIt.display("Mixer", "waitAWhile", "waitTime4 : " + waitTime);
 						}
 						else
 						{
 							waitTime				= (long) timeToWait - (System.currentTimeMillis() - timeStart);
+							LogIt.display("Mixer", "waitAWhile", "waitTime6 : " + waitTime);
 						}
 					}
 					else
 					{
 						Thread.sleep(waitTime);
+						LogIt.display("Mixer", "waitAWhile", "waitTime7 : " + waitTime);
 					}
 					timeEnd	 						= System.currentTimeMillis();
 		        }
@@ -304,6 +310,7 @@ public class Mixer
 			        e.printStackTrace();
 		        }
 			}
+			LogIt.display("Mixer", "waitAWhile", "waitTime8 : " + waitTime);
 		}
 		timeWaited									= timeEnd - timeStart;
 		return timeWaited.intValue();
