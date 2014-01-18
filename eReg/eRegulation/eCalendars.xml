@@ -15,7 +15,7 @@
 			<Calendar type="Object" name="WeekDays" days="1, 2, 3, 4, 5,"		timeStart="05:00" 	timeEnd="07:30" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="		0,    5 "		timeStart="12:30" 	timeEnd="20:30" tempObjective="200" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="         4,   "		timeStart="16:00" 	timeEnd="21:30" tempObjective="200" stopOnObjective="0"/>
-			<Calendar type="Object" name="WeekEnds" days="				 6, 7"	timeStart="07:00" 	timeEnd="23:55" tempObjective="200" stopOnObjective="0"/>
+			<Calendar type="Object" name="WeekEnds" days="				 6, 7"	timeStart="00:01" 	timeEnd="23:55" tempObjective="200" stopOnObjective="0"/>
 		</Circuit>
 	</Circuits>
 	
