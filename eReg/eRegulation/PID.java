@@ -135,8 +135,10 @@ public class PID
 		result 							= - kP * proportional - kD * differential - kI * integral;
 		
 		LogIt.pidData(target, proportional, differential, integral, kP, kD, kI, result, items[indexCurrent], Global.thermoBoiler.reading);
-
-    	return result;
+		LogIt.display("PID", "getGain", "currentError : " + currentError + " kP : " + kP + " proportional : " + proportional + " calc : " + kP * proportional);
+		LogIt.display("PID", "getGain", "currentError : " + currentError + " kD : " + kD + " differential : " + differential + " calc : " + kD * differential);
+		LogIt.display("PID", "getGain", "result : " + result);
+		return result;
     }
     @Override
     public String toString() 
