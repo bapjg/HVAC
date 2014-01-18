@@ -165,8 +165,12 @@ public class Mixer
 		 		}
 				
 		 		Global.mixerUp.on();
-		 		swingTimePerformed   					= waitAWhile(swingTimeRequired);
-		 		Global.mixerUp.off();
+				Long timeStart							= Global.now();
+				Global.waitMilliSeconds(swingTimeRequired.intValue());
+				Global.mixerUp.off();
+				Long timeEnd							= Global.now();
+				Long positionDiff						= timeStart - timeEnd;
+		 		swingTimePerformed   					= positionDiff.intValue();
 	 		}
 		}
 		else																			// Moving colder
@@ -178,8 +182,12 @@ public class Mixer
 		 			swingTimeRequired 					= positionTracked.doubleValue() + 1000F;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
 				Global.mixerDown.on();
-				swingTimePerformed   					= - waitAWhile(swingTimeRequired);
+				Long timeStart							= Global.now();
+				Global.waitMilliSeconds(-swingTimeRequired.intValue());
 				Global.mixerDown.off();
+				Long timeEnd							= Global.now();
+				Long positionDiff						= timeStart - timeEnd;
+		 		swingTimePerformed   					= - positionDiff.intValue();
 	 		}
 		}
 		positionTracked									= positionTracked + swingTimePerformed;
@@ -194,128 +202,119 @@ public class Mixer
 	}
 	public void positionZero()
 	{
-		LogIt.display("Mixer", "positionZero", "allOff");
 		allOff();
-		LogIt.display("Mixer", "positionZero", "DownOn");
 		Global.mixerDown.on();
-		LogIt.display("Mixer", "positionZero", "Waiting");
-		waitAWhile(1000 * swingTime);
-		LogIt.display("Mixer", "positionZero", "DownOff");
+		Global.waitMilliSeconds(1000 * swingTime);
 		Global.mixerDown.off();
-		LogIt.display("Mixer", "positionZero", "Positioned");
 		positionTracked									= 0;
 	}
 	public void positionFull()
 	{
-		LogIt.display("Mixer", "positionFull", "allOff");
 		allOff();
-		LogIt.display("Mixer", "positionFull", "UpOn");
 		Global.mixerUp.on();
-		LogIt.display("Mixer", "positionFull", "Waiting");
-		waitAWhile(1000 * swingTime);
-		LogIt.display("Mixer", "positionFull", "UpOff");
+		Global.waitMilliSeconds(1000 * swingTime);
 		Global.mixerUp.off();
-		LogIt.display("Mixer", "positionFull", "Positioned");
 		positionTracked									= swingTime * 1000;
 	}
 	public void positionAbsolute(float proportion)
 	{
-		Integer 										positionDiff;
+		Long 											positionDiff;
 		Float 											timeToWait;
+		Long											timeStart;
+		Long											timeEnd;
 		if (proportion > 0.5F)
 		{
 			positionFull();
 			Global.mixerDown.on();
 			timeToWait									= 1000 * swingTime * (1F - proportion);
-		    positionDiff   								= waitAWhile(timeToWait.intValue());
+			timeStart									= Global.now();
+			Global.waitMilliSeconds(timeToWait.intValue());
 			Global.mixerDown.off();
-	 		positionTracked								= 1000 * swingTime - positionDiff;		
+			timeEnd										= Global.now();
+			positionDiff   								= timeStart - timeEnd;
+	 		positionTracked								= 1000 * swingTime - positionDiff.intValue();		
 		}
 		else
 		{
 			positionZero();
 			Global.mixerUp.on();
 			timeToWait									= 1000 * swingTime * proportion;
-		    positionDiff   								= waitAWhile(timeToWait.intValue());
+			timeStart									= Global.now();
+			Global.waitMilliSeconds(timeToWait.intValue());
 			Global.mixerUp.off();
-	 		positionTracked								= positionDiff;		
+			timeEnd										= Global.now();
+			positionDiff   								= timeStart - timeEnd;
+	 		positionTracked								= positionDiff.intValue();		
 		}
 	}
 	public void allOff()
 	{
-		waitAWhile(0.1F);
+		Global.waitMilliSeconds(100);
 		Global.mixerDown.off();
-		waitAWhile(0.1F);
+		Global.waitMilliSeconds(100);
 		Global.mixerUp.off();
-		waitAWhile(0.1F);
+		Global.waitMilliSeconds(100);
 	}
-	public Integer waitAWhile(double timeToWait)
-	{
-		/*
-			Routine to wait a number of milliseconds, but interrupt if over temp
-			Parameters :
-			Input   : Integer timeToWait - Number of milliseconds to wait
-			Returns : Integer            - Number of milliseconds waited
-		*/
-		Long timeStart 								= System.currentTimeMillis();
-		Long timeEnd 								= 0L;
-		Long timeWaited								= 0L;
-		Long waitTime								= 0L;
-		
-		if (timeToWait < 0F)					// Going Down
-		{
-			try
-	        {
-				Thread.sleep((long) Math.abs(timeToWait));
-				timeEnd	 							= System.currentTimeMillis();
-	        }
-	        catch (InterruptedException e)
-	        {
-		        e.printStackTrace();
-	        }
-		}
-		else									// Going Up
-		{
-			LogIt.display("Mixer", "waitAWhile", "waitTime1 : " + waitTime);
-			waitTime								= (long) timeToWait;
-			LogIt.display("Mixer", "waitAWhile", "waitTime2 : " + waitTime);
-			while (waitTime > 0)
-			{
-				try
-		        {
-					LogIt.display("Mixer", "waitAWhile", "waitTime3 : " + waitTime);
-					if (waitTime > 5000L)
-					{
-						if (wait5secs())
-						{
-							// Have an overtemp situation
-							waitTime				= 0L;		// Wait no longer
-							LogIt.display("Mixer", "waitAWhile", "waitTime4 : " + waitTime);
-						}
-						else
-						{
-							waitTime				= (long) timeToWait - (System.currentTimeMillis() - timeStart);
-							LogIt.display("Mixer", "waitAWhile", "waitTime6 : " + waitTime);
-						}
-					}
-					else
-					{
-						Thread.sleep(waitTime);
-						LogIt.display("Mixer", "waitAWhile", "waitTime7 : " + waitTime);
-						waitTime					= 0L;
-					}
-					timeEnd	 						= System.currentTimeMillis();
-		        }
-		        catch (InterruptedException e)
-		        {
-			        e.printStackTrace();
-		        }
-			}
-			LogIt.display("Mixer", "waitAWhile", "waitTime8 : " + waitTime);
-		}
-		timeWaited									= timeEnd - timeStart;
-		return timeWaited.intValue();
-	}
+//	public Integer waitAWhile(double timeToWait)
+//	{
+//		/*
+//			Routine to wait a number of milliseconds, but interrupt if over temp
+//			Parameters :
+//			Input   : Integer timeToWait - Number of milliseconds to wait
+//			Returns : Integer            - Number of milliseconds waited
+//		*/
+//		Long timeStart 								= System.currentTimeMillis();
+//		Long timeEnd 								= 0L;
+//		Long timeWaited								= 0L;
+//		Long waitTime								= 0L;
+//		
+//		if (timeToWait < 0F)					// Going Down
+//		{
+//			try
+//	        {
+//				Thread.sleep((long) Math.abs(timeToWait));
+//				timeEnd	 							= System.currentTimeMillis();
+//	        }
+//	        catch (InterruptedException e)
+//	        {
+//		        e.printStackTrace();
+//	        }
+//		}
+//		else									// Going Up
+//		{
+//			waitTime								= (long) timeToWait;
+//			while (waitTime > 0)
+//			{
+//				try
+//		        {
+//					if (waitTime > 5000L)
+//					{
+//						if (wait5secs())
+//						{
+//							// Have an overtemp situation
+//							waitTime				= 0L;		// Wait no longer
+//						}
+//						else
+//						{
+//							waitTime				= (long) timeToWait - (System.currentTimeMillis() - timeStart);
+//						}
+//					}
+//					else
+//					{
+//						Thread.sleep(waitTime);
+//						waitTime					= 0L;
+//					}
+//					timeEnd	 						= System.currentTimeMillis();
+//		        }
+//		        catch (InterruptedException e)
+//		        {
+//			        e.printStackTrace();
+//		        }
+//			}
+//		}
+//		timeWaited									= timeEnd - timeStart;
+//		return timeWaited.intValue();
+//	}
 	public Boolean wait5secs()
 	{
 		try
