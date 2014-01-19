@@ -218,7 +218,6 @@ public class Thread_UserInterface implements Runnable
 						Global.display.writeAtPosition(1, 17, line1Value.toString());
 						Global.display.blinkAtPosition(1, 19);
 					}
-					
 				}
 				Global.waitMilliSeconds(200);
 				buttons.read();
@@ -251,7 +250,7 @@ public class Thread_UserInterface implements Runnable
 		}
 		public Integer addLine (String text, String value)
 		{
-			this.text[lineCount]										= "xxx"; // text;
+			this.text[lineCount]										= text;
 			this.value[lineCount]										= value;
 			lineCount++;
 			return lineCount - 1;
