@@ -246,6 +246,8 @@ public class Thread_UserInterface implements Runnable
 			this.lineActive												= 0;
 			this.lineCount												= 0;
 			this.page													= 0;
+			text 														= new String[20];
+			value 														= new String[20];
 		}
 		public Integer addLine (String text, String value)
 		{
