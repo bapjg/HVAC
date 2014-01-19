@@ -108,6 +108,30 @@ public class Thread_UserInterface implements Runnable
     			buttons.read(); // In case of button bounce
     			Global.pumpWater.off();
            }
+           if (buttons.button5)
+           {
+                // Start HotWater
+            	
+    			buttons.read(); // In case of button bounce
+    			
+				System.out.println("Menu requested");
+				UserMenu userMenu										= new UserMenu("Menu");
+				userMenu.addLine("Line 1", "");
+				userMenu.addLine("Line 2", "");
+				userMenu.addLine("Line 3", "");
+				userMenu.addLine("Line 4", "");
+				userMenu.addLine("Line 5", "");
+				userMenu.addLine("Line 5", "");
+				Integer result											= userMenu.display();
+				if (result == -1)
+				{
+					LogIt.display("Menu", "menu", "canceled");
+				}
+				else
+				{
+					LogIt.display("Menu", "menu", "ietm selected : " + result);
+				}
+           }
 		}
  		LogIt.info("Thread_UserInterface", "Run", "Stopping", true);             
 	}
@@ -204,6 +228,107 @@ public class Thread_UserInterface implements Runnable
 				LogIt.display("UserControl", "display", "Ok pressed");
 			}
 			Global.display.blinkOff();
+		}
+	}
+	private class UserMenu
+	{
+		String 		title;
+		String[]	text;
+		String[]	value;
+		Integer		lineCount;
+		Integer		lineActive;
+		Integer		page;
+		public UserMenu (String title)
+		{
+			this.title													= title;
+			Global.display.clear();
+			Global.display.writeAtPosition(0, 0, title);
+			this.lineActive												= 0;
+			this.lineCount												= 0;
+			this.page													= 0;
+		}
+		public Integer addLine (String text, String value)
+		{
+			this.text[lineCount]										= text;
+			this.value[lineCount]										= value;
+			lineCount++;
+			return lineCount - 1;
+		}
+		public Integer display()
+		{
+			Buttons             buttons                                 = Global.buttons;
+			Boolean				buttonCancel							= buttons.button0;
+			Boolean				buttonY									= buttons.button1;
+			Boolean				buttonX									= buttons.button2;
+			Boolean				buttonDown								= buttons.button3;
+			Boolean				buttonUp								= buttons.button4;
+			Boolean				buttonOk								= buttons.button5;
+			
+			Integer				i										= 0;
+			show();
+			Global.display.blinkAtPosition(1, 19);
+			
+			buttons.read();
+			
+			while ((!buttonCancel) && (!buttonOk))
+			{
+				if (buttonDown)
+				{
+					if (lineActive < lineCount)
+					{
+						lineActive++;
+					}
+					if (lineActive > page * 3)
+					{
+						page++;
+						show();
+					}
+					showActiveLine();
+				}
+				if (buttonUp)
+				{
+					if (lineActive > 1)
+					{
+						lineActive--;
+						if (lineActive < page * 3)
+						{
+							page--;
+							show();
+						}
+					}
+					showActiveLine();
+				}
+				Global.waitMilliSeconds(200);
+				buttons.read();
+			}
+			
+			Global.display.blinkOff();
+			if (buttonCancel)
+			{
+				i = -1;
+			}
+			return i;
+		}
+		public void show ()
+		{
+			Integer	i;
+			Integer pageLineTop											= page * 3;
+			
+			Global.display.clear();
+			Global.display.writeAtPosition(0, 0, title);
+			
+			for (i = 0; (i < 3); i++)
+			{
+				Global.display.writeAtPosition(i + 1, 1,   text[pageLineTop + i]);
+				Global.display.writeAtPosition(i + 1, 17, value[pageLineTop + i]);
+			}
+		}
+		public void showActiveLine()
+		{
+			Integer topLine = page * 3;
+			Integer lineFromTop = lineActive - topLine;
+			
+			Global.display.blinkAtPosition(lineFromTop + 1, 19);
 		}
 	}
 }
