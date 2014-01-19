@@ -275,7 +275,7 @@ public class Thread_UserInterface implements Runnable
 			while ((!buttonCancel) && (!buttonOk))
 			{
 				LogIt.display("UI", "disp", "readloop");
-				if (buttonDown)
+				if (buttons.button3) // (buttonDown)
 				{
 					LogIt.display("UI", "disp", "down");
 					if (lineActive < lineCount)
