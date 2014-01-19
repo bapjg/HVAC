@@ -157,7 +157,7 @@ public class Mixer
 		}
 		else if (swingTimeRequired > 0)														// Moving hotter
 		{
-			if (positionTracked <= this.swingTime * 1000)													// No point going over max
+			if (positionTracked < this.swingTime * 1000)													// No point going over max
 	 		{
 				if (positionTracked + swingTimeRequired > this.swingTime * 1000)
 		 		{
@@ -175,15 +175,15 @@ public class Mixer
 		}
 		else																			// Moving colder
 		{
-			if (positionTracked >= 0)													// No point going under min
+			if (positionTracked > 0)													// No point going under min
 	 		{
 				if (positionTracked + swingTimeRequired < 0)
 		 		{
 		 			swingTimeRequired 					= - (positionTracked + 2000);		//No point waiting under minimum add extra 2 seconds to be sure of end point
 		 		}
-				if (positionTracked == swingTime * 1000)									// We are at max, last 10% swing gives no change
+				if (positionTracked > swingTime * 900)										// We are over 90%, last 10% swing gives no change
 		 		{
-		 			swingTimeRequired 					= swingTimeRequired - swingTime * 100;	//Bring it down to 10% and then start the motion
+		 			swingTimeRequired 					= swingTimeRequired - (positionTracked - swingTime * 900);	//Bring it down to 10% and then start the motion
 		 		}
 				LogIt.display("Mixer", "sequencer", "Moving Down");
 				Global.mixerDown.on();
