@@ -116,6 +116,7 @@ public class Thread_UserInterface implements Runnable
     			
 				System.out.println("Menu requested");
 				UserMenu userMenu										= new UserMenu("Menu");
+				userMenu.addLine("Line 0", "");
 				userMenu.addLine("Line 1", "");
 				userMenu.addLine("Line 2", "");
 				userMenu.addLine("Line 3", "");
@@ -285,7 +286,7 @@ public class Thread_UserInterface implements Runnable
 					if (lineActive > 1)
 					{
 						lineActive--;
-						if (lineActive < page * 3)
+						if (lineActive < page * 3)		// First line of current page
 						{
 							page--;
 							show();
