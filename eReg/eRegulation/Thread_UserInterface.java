@@ -259,12 +259,6 @@ public class Thread_UserInterface implements Runnable
 		public Integer display()
 		{
 			Buttons             buttons                                 = Global.buttons;
-			Boolean				buttonCancel							= buttons.button0;
-			Boolean				buttonY									= buttons.button1;
-			Boolean				buttonX									= buttons.button2;
-			Boolean				buttonDown								= buttons.button3;
-			Boolean				buttonUp								= buttons.button4;
-			Boolean				buttonOk								= buttons.button5;
 			
 			Integer				i										= 0;
 			show();
@@ -272,10 +266,10 @@ public class Thread_UserInterface implements Runnable
 			
 			buttons.read();
 			
-			while ((!buttonCancel) && (!buttonOk))
+			while ((!buttons.buttonCancel) && (!buttons.buttonOk))
 			{
 				LogIt.display("UI", "disp", "readloop");
-				if (buttons.button3) // (buttonDown)
+				if (buttons.buttonDown)
 				{
 					LogIt.display("UI", "disp", "down");
 					if (lineActive < lineCount)
@@ -289,7 +283,7 @@ public class Thread_UserInterface implements Runnable
 					}
 					showActiveLine();
 				}
-				if (buttonUp)
+				if (buttons.buttonUp)
 				{
 					LogIt.display("UI", "disp", "up");
 					if (lineActive > 1)
@@ -308,11 +302,11 @@ public class Thread_UserInterface implements Runnable
 			}
 			
 			Global.display.blinkOff();
-			if (buttonCancel)
+			if (buttons.buttonCancel)
 			{
-				i = -1;
+				return -1;
 			}
-			return i;
+			return lineActive;
 		}
 		public void show ()
 		{
