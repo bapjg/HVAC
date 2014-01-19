@@ -274,8 +274,10 @@ public class Thread_UserInterface implements Runnable
 			
 			while ((!buttonCancel) && (!buttonOk))
 			{
+				LogIt.display("UI", "disp", "readloop");
 				if (buttonDown)
 				{
+					LogIt.display("UI", "disp", "down");
 					if (lineActive < lineCount)
 					{
 						lineActive++;
@@ -289,6 +291,7 @@ public class Thread_UserInterface implements Runnable
 				}
 				if (buttonUp)
 				{
+					LogIt.display("UI", "disp", "up");
 					if (lineActive > 1)
 					{
 						lineActive--;
@@ -300,7 +303,7 @@ public class Thread_UserInterface implements Runnable
 					}
 					showActiveLine();
 				}
-				Global.waitMilliSeconds(200);
+				Global.waitMilliSeconds(2000);
 				buttons.read();
 			}
 			
