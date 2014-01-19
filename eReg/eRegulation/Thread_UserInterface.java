@@ -315,8 +315,11 @@ public class Thread_UserInterface implements Runnable
 			
 			for (i = 0; (i < 3); i++)
 			{
-				Global.display.writeAtPosition(i + 1, 1,   text[pageLineTop + i]);
-				Global.display.writeAtPosition(i + 1, 17, value[pageLineTop + i]);
+				if (pageLineTop + i <= lineCount)
+				{
+					Global.display.writeAtPosition(i + 1, 1,   text[pageLineTop + i]);
+					Global.display.writeAtPosition(i + 1, 17, value[pageLineTop + i]);
+				}
 			}
 		}
 		public void showActiveLine()
