@@ -227,6 +227,7 @@ public class Mixer
 		if (proportion > 0.5F)
 		{
 			positionFull();
+			LogIt.display("Mixer", "positionAbsolute", "positionnedFull, track : " + positionTracked);
 			Global.mixerDown.on();
 			timeToWait									= 1000 * swingTime * (1F - proportion);
 			timeStart									= Global.now();
@@ -235,10 +236,12 @@ public class Mixer
 			timeEnd										= Global.now();
 			positionDiff   								= timeStart - timeEnd;
 	 		positionTracked								= 1000 * swingTime - positionDiff.intValue();		
+			LogIt.display("Mixer", "positionAbsolute", "positionnedproportion : "+  proportion + ", track : " + positionTracked);
 		}
 		else
 		{
 			positionZero();
+			LogIt.display("Mixer", "positionAbsolute", "positionnedZero, track : " + positionTracked);
 			Global.mixerUp.on();
 			timeToWait									= 1000 * swingTime * proportion;
 			timeStart									= Global.now();
@@ -247,6 +250,7 @@ public class Mixer
 			timeEnd										= Global.now();
 			positionDiff   								= timeStart - timeEnd;
 	 		positionTracked								= positionDiff.intValue();		
+			LogIt.display("Mixer", "positionAbsolute", "positionnedproportion : "+  proportion + ", track : " + positionTracked);
 		}
 	}
 	public void allOff()
