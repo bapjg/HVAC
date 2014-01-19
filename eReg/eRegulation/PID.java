@@ -135,8 +135,19 @@ public class PID
 		result 							= - kP * proportional - kD * differential - kI * integral;
 		
 		LogIt.pidData(target, proportional, differential, integral, kP, kD, kI, result, items[indexCurrent], Global.thermoBoiler.reading);
-		LogIt.display("PID", "getGain", "currentError : " + currentError + " kP : " + kP + " proportional : " + proportional + " calc : " + kP * proportional);
-		LogIt.display("PID", "getGain", "currentError : " + currentError + " kD : " + kD + " differential : " + differential + " calc : " + kD * differential);
+		LogIt.display("PID", "getGain", "currentError : " + currentError + ", kP : " + kP + ", proportional : " + proportional + ", calc : " + kP * proportional);
+		if (differential == 0F)
+		{
+			LogIt.display("PID", "getGain", "static.   "  + " kD : " + kD + ", differential : " + differential + ", calc : " + kD * differential);
+		}
+		else if (differential > 0F)
+		{
+			LogIt.display("PID", "getGain", "climbing. " +  " kD : " + kD + ", differential : " + differential + ", calc : " + kD * differential);
+		}
+		else
+		{
+			LogIt.display("PID", "getGain", "falling.  " +  " kD : " + kD + ", differential : " + differential + ", calc : " + kD * differential);
+		}
 		LogIt.display("PID", "getGain", "result : " + result);
 		return result.intValue();
     }

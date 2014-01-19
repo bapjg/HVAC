@@ -131,7 +131,7 @@ public class Mixer
 		Integer tempFloorOut							= Global.thermoFloorOut.readUnCached();
 		
 		Integer swingTimeRequired						= pidControler.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
-		LogIt.display("Mixer", "sequencer", "swingTimeRequired : " + swingTimeRequired);
+		LogIt.display("Mixer", "sequencer", "swingTimeRequired : " + swingTimeRequired + ", positionTracked : " + positionTracked);
 		
 		Integer swingTimePerformed						= 0;
 
@@ -199,6 +199,7 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
+		LogIt.display("Mixer", "sequencer", "==================== " +"positionTracked : " + positionTracked);
 	}
 	public void positionZero()
 	{
