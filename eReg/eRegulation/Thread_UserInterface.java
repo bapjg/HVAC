@@ -121,7 +121,7 @@ public class Thread_UserInterface implements Runnable
 				userMenu.addLine("Line 3", "");
 				userMenu.addLine("Line 4", "");
 				userMenu.addLine("Line 5", "");
-				userMenu.addLine("Line 5", "");
+				userMenu.addLine("Line 6", "");
 				Integer result											= userMenu.display();
 				if (result == -1)
 				{
@@ -249,7 +249,7 @@ public class Thread_UserInterface implements Runnable
 		}
 		public Integer addLine (String text, String value)
 		{
-			this.text[lineCount]										= text;
+			this.text[lineCount]										= "xxx"; // text;
 			this.value[lineCount]										= value;
 			lineCount++;
 			return lineCount - 1;
