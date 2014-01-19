@@ -163,7 +163,7 @@ public class Mixer
 		 		{
 		 			swingTimeRequired 					= this.swingTime * 1000 - positionTracked;		//No point waiting over maximum add an extra second to be sure of end point
 		 		}
-				
+				LogIt.display("Mixer", "sequencer", "Moving Up");
 		 		Global.mixerUp.on();
 				Long timeStart							= Global.now();
 				Global.waitMilliSeconds(swingTimeRequired.intValue());
@@ -181,6 +181,7 @@ public class Mixer
 		 		{
 		 			swingTimeRequired 					= positionTracked + 1000;		//No point waiting under minimum add an extra second to be sure of end point
 		 		}
+				LogIt.display("Mixer", "sequencer", "Moving Down");
 				Global.mixerDown.on();
 				Long timeStart							= Global.now();
 				Global.waitMilliSeconds(Math.abs(swingTimeRequired));
