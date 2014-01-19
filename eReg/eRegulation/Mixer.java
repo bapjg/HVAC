@@ -161,7 +161,7 @@ public class Mixer
 	 		{
 				if (positionTracked + swingTimeRequired > this.swingTime * 1000)
 		 		{
-		 			swingTimeRequired 					= this.swingTime * 1000 - positionTracked;		//No point waiting over maximum add an extra second to be sure of end point
+		 			swingTimeRequired 					= this.swingTime * 1000 - positionTracked + 2000;	//No point waiting over maximum add extra 2 seconds to be sure of end point
 		 		}
 				LogIt.display("Mixer", "sequencer", "Moving Up");
 		 		Global.mixerUp.on();
@@ -179,7 +179,11 @@ public class Mixer
 	 		{
 				if (positionTracked + swingTimeRequired < 0)
 		 		{
-		 			swingTimeRequired 					= positionTracked + 1000;		//No point waiting under minimum add an extra second to be sure of end point
+		 			swingTimeRequired 					= - (positionTracked + 2000);		//No point waiting under minimum add extra 2 seconds to be sure of end point
+		 		}
+				if (positionTracked == swingTime * 1000)									// We are at max, last 10% swing gives no change
+		 		{
+		 			swingTimeRequired 					= swingTimeRequired - swingTime * 100;	//Bring it down to 10% and then start the motion
 		 		}
 				LogIt.display("Mixer", "sequencer", "Moving Down");
 				Global.mixerDown.on();
