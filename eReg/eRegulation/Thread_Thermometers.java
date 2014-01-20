@@ -6,57 +6,40 @@ public class Thread_Thermometers implements Runnable
 	{
 		LogIt.info("Thread_Thermometers", "Run", "Starting", true);		
 
-		// Set readings to any value to avoid rampup times falling on unitialised variabbles
-		// See if this works
-//		Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
-		
-		Integer i = 0;
-		
 		while (!Global.stopNow)
 		{
 			Global.thermoFloorOut.readUnCached();
 			Global.circuitFloor.mixer.pidControler.add(Global.thermoFloorOut.reading);
 			Global.waitMilliSeconds(5);
-			if (Global.thermoFloorOut.reading > 480)
-			{
-				LogIt.display("Thread_Thermometer", "mainLoop", "FloorOut is over temperature : " + Global.thermoFloorOut.reading);
-			}
 			
-			if (i == 0)
-			{
-				Global.thermoBoiler.readUnCached();
-				Global.waitMilliSeconds(5);
-				Global.thermoBoilerOut.read();
-				Global.waitMilliSeconds(5);
-				Global.thermoBoilerIn.read();
-				Global.waitMilliSeconds(5);
-				
-//				Global.thermoFloorOut.readUnCached();
-//				Global.waitMilliSeconds(5);
-				Global.thermoFloorIn.read();
-				Global.waitMilliSeconds(5);
-				
-				Global.thermoRadiatorOut.read();
-				Global.waitMilliSeconds(5);
-				Global.thermoRadiatorIn.read();
-				Global.waitMilliSeconds(5);
-				
-				
-				Global.thermoOutside.read();
-				Global.waitMilliSeconds(5);
-				
-				Global.thermoLivingRoom.read();
-				Global.waitMilliSeconds(5);
-				
-				Global.thermoHotWater.read();
-
-				LogIt.tempData();
-			}
+			Global.thermoBoiler.readUnCached();
+			Global.waitMilliSeconds(5);
+			Global.thermoBoilerOut.read();
+			Global.waitMilliSeconds(5);
+			Global.thermoBoilerIn.read();
+			Global.waitMilliSeconds(5);
 			
-			i = i++ % 4;
+			Global.thermoFloorIn.read();
+			Global.waitMilliSeconds(5);
+			
+			Global.thermoRadiatorOut.read();
+			Global.waitMilliSeconds(5);
+			Global.thermoRadiatorIn.read();
+			Global.waitMilliSeconds(5);
+			
+			Global.thermoOutside.read();
+			Global.waitMilliSeconds(5);
+			
+			Global.thermoLivingRoom.read();
+			Global.waitMilliSeconds(5);
+			
+			Global.thermoHotWater.read();
 
-			Global.waitMilliSeconds(5000);
+			LogIt.tempData();
+
+			Global.waitSeconds(10);
 		}
+		
 		LogIt.info("Thread_Thermometers", "Run", "Stopping", true);			
 	}
 }

@@ -24,16 +24,13 @@ public class Mixer
 	public Float			timeI					= 0F;
 	
 	public PID				pidControler;
-	public PID				pidTempSpan;
 	public Integer			state					= 0;
 	public static final int	MIXER_STATE_Off 		= 0;
 	public static final int	MIXER_STATE_Moving_Up	= 1;
 	public static final int	MIXER_STATE_Moving_Down	= -1;
 	public Long				timeToStop;
 
-       
- 	
-	public Mixer
+ 	public Mixer
 		(
 			String name, 
 			String swingTime, 
@@ -48,7 +45,6 @@ public class Mixer
 		this.swingTime								= Integer.parseInt(swingTime);
 		this.lagTime								= Integer.parseInt(lagTime);
 		this.pidControler							= new PID(10);
-		this.pidTempSpan							= new PID(5);
 		this.gainP									= Float.parseFloat(gainP);
 		this.timeD									= Float.parseFloat(timeD);
 		this.gainD									= this.gainP * this.timeD;
@@ -56,44 +52,6 @@ public class Mixer
 		this.gainI									= Float.parseFloat(gainI);
 		this.state									= MIXER_STATE_Off;
 	}
-//	public Float getSwingProportion(Integer temperature)
-//	{
-//		// Returns proportion of swingTime starting from zero
-//		// required to achieve a target temperature
-//		// tempDelta = difference between requested temp and cold input to the mixer
-//		// tempSpan  = difference between hot temp and cold input to the mixer
-//		Integer tempBoiler							= Global.thermoBoiler.reading;
-//		Integer tempBoilerOut						= Global.thermoBoilerOut.reading;
-//		Integer tempBoilerIn						= Global.thermoBoilerIn.reading;
-//		
-//		Integer tempMixerOut						= Global.thermoFloorOut.reading;
-//		Integer tempMixerIn							= Global.thermoFloorIn.reading;
-//		
-//		LogIt.tempData();
-//		
-//		Integer tempDelta 							= temperature    - tempMixerIn;
-//		Integer tempSpan 							= tempMixerOut - tempMixerIn;
-//		
-//		if (tempSpan < 0 )
-//		{
-//			LogIt.info("-------====---------Mixer","getSwingProportion", "Floor tempSpan negative " + tempSpan);
-//	        // Temp out is colder than tempCold : we cannot tell where we are
-//			// Wait for water to flow to get things changing
-//			return  -1F;
-//        }
-//
-//		if (tempDelta > tempSpan )
-//		{
-//			LogIt.info("Mixer","getSwingProportion", "Floor tempDelta > tempSpan " + tempSpan);
-//	        // Temp out is colder than tempCold : we cannot tell where we are
-//			// Wait for water to flow to get things changing
-//			return  1F;
-//        }
-//
-//		LogIt.info("Mixer","getSwingProportion", "Floor getSwingProportion " + (Float) tempDelta.floatValue()/tempSpan.floatValue());
-//		
-//		return (Float) tempDelta.floatValue()/tempSpan.floatValue();
-//	}
 	public void sequencer(Integer targetTemp)
 	{
 		// Keep it simple :
@@ -263,66 +221,6 @@ public class Mixer
 		Global.mixerUp.off();
 		Global.waitMilliSeconds(100);
 	}
-//	public Integer waitAWhile(double timeToWait)
-//	{
-//		/*
-//			Routine to wait a number of milliseconds, but interrupt if over temp
-//			Parameters :
-//			Input   : Integer timeToWait - Number of milliseconds to wait
-//			Returns : Integer            - Number of milliseconds waited
-//		*/
-//		Long timeStart 								= System.currentTimeMillis();
-//		Long timeEnd 								= 0L;
-//		Long timeWaited								= 0L;
-//		Long waitTime								= 0L;
-//		
-//		if (timeToWait < 0F)					// Going Down
-//		{
-//			try
-//	        {
-//				Thread.sleep((long) Math.abs(timeToWait));
-//				timeEnd	 							= System.currentTimeMillis();
-//	        }
-//	        catch (InterruptedException e)
-//	        {
-//		        e.printStackTrace();
-//	        }
-//		}
-//		else									// Going Up
-//		{
-//			waitTime								= (long) timeToWait;
-//			while (waitTime > 0)
-//			{
-//				try
-//		        {
-//					if (waitTime > 5000L)
-//					{
-//						if (wait5secs())
-//						{
-//							// Have an overtemp situation
-//							waitTime				= 0L;		// Wait no longer
-//						}
-//						else
-//						{
-//							waitTime				= (long) timeToWait - (System.currentTimeMillis() - timeStart);
-//						}
-//					}
-//					else
-//					{
-//						Thread.sleep(waitTime);
-//						waitTime					= 0L;
-//					}
-//					timeEnd	 						= System.currentTimeMillis();
-//		        }
-//		        catch (InterruptedException e)
-//		        {
-//			        e.printStackTrace();
-//		        }
-//			}
-//		}
-//		timeWaited									= timeEnd - timeStart;
-//		return timeWaited.intValue();
-//	}
 	public Boolean wait5secs()
 	{
 		try
