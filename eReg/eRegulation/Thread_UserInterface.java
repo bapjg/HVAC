@@ -108,28 +108,64 @@ public class Thread_UserInterface implements Runnable
     			buttons.read(); // In case of button bounce
     			Global.pumpWater.off();
            }
-           if (buttons.button5)
+           if (buttons.buttonOk)
            {
-                // Start HotWater
+                // Start Menu
             	
     			buttons.read(); // In case of button bounce
     			
-				UserMenu userMenu										= new UserMenu("Menu");
-				userMenu.addLine("Line 0", "");
-				userMenu.addLine("Line 1", "");
-				userMenu.addLine("Line 2", "");
-				userMenu.addLine("Line 3", "");
-				userMenu.addLine("Line 4", "");
-				userMenu.addLine("Line 5", "");
-				userMenu.addLine("Line 6", "");
-				Integer result											= userMenu.display();
-				if (result == -1)
+				UserMenu menuLevel_0										= new UserMenu("Menu");
+				UserMenu menuLevel_1;
+				
+				Integer result_0;
+				Integer result_1;
+				
+				menuLevel_0.addLine("Circuits", "");
+				menuLevel_0.addLine("Pumps",    "");
+				menuLevel_0.addLine("Mixer",    "");
+				menuLevel_0.addLine("Burner",   "");
+
+				result_0													= menuLevel_0.display();
+				
+				switch (result_0)
 				{
-					LogIt.display("Menu", "menu", "canceled");
-				}
-				else
-				{
-					LogIt.display("Menu", "menu", "ietm selected : " + result);
+				case -1:
+					break;
+				case 0:
+					menuLevel_1												= new UserMenu("Circuits");
+					menuLevel_1.addLine("Hot Water", "");
+					menuLevel_1.addLine("Floor",     "");
+					menuLevel_1.addLine("Radiator",  "");
+
+					result_1												= menuLevel_1.display();
+					
+					break;
+				case 1:
+					menuLevel_1												= new UserMenu("Pumps");
+					menuLevel_1.addLine("Hot Water", "");
+					menuLevel_1.addLine("Floor",     "");
+					menuLevel_1.addLine("Radiator",  "");
+					
+					result_1												= menuLevel_1.display();
+					
+					break;
+				case 2:
+					menuLevel_1												= new UserMenu("Mixer");
+					menuLevel_1.addLine("Up",       "");
+					menuLevel_1.addLine("Down",     "");
+					menuLevel_1.addLine("Off",      "");
+					
+					result_1												= menuLevel_1.display();
+					
+					break;
+				case 3:
+					menuLevel_1												= new UserMenu("Burner");
+					menuLevel_1.addLine("On",       "");
+					menuLevel_1.addLine("Off",      "");
+					
+					result_1												= menuLevel_1.display();
+					
+					break;
 				}
            }
 		}
