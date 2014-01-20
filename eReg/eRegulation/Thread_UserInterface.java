@@ -116,9 +116,11 @@ public class Thread_UserInterface implements Runnable
     			
 				UserMenu menuLevel_0										= new UserMenu("Menu");
 				UserMenu menuLevel_1;
+				UserMenu menuLevel_2;
 				
 				Integer result_0;
 				Integer result_1;
+				Integer result_2;
 				
 				menuLevel_0.addLine("Circuits", "");
 				menuLevel_0.addLine("Pumps",    "");
