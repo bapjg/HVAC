@@ -315,7 +315,7 @@ public class Thread_UserInterface implements Runnable
 			
 			for (i = 0; (i < 3); i++)
 			{
-				if (pageLineTop + i <= lineCount)
+				if (pageLineTop + i < lineCount)
 				{
 					LogIt.display("a", "b", "line " + i);
 					Global.display.writeAtPosition(i + 1, 1,   text[pageLineTop + i]);
