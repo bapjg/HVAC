@@ -114,7 +114,6 @@ public class Thread_UserInterface implements Runnable
             	
     			buttons.read(); // In case of button bounce
     			
-				System.out.println("Menu requested");
 				UserMenu userMenu										= new UserMenu("Menu");
 				userMenu.addLine("Line 0", "");
 				userMenu.addLine("Line 1", "");
@@ -283,7 +282,7 @@ public class Thread_UserInterface implements Runnable
 				}
 				if (buttons.buttonUp)
 				{
-					if (lineActive > 1)
+					if (lineActive > 0)
 					{
 						lineActive--;
 						if (lineActive < page * 3)		// First line of current page
@@ -317,7 +316,6 @@ public class Thread_UserInterface implements Runnable
 			{
 				if (pageLineTop + i < lineCount)
 				{
-					LogIt.display("a", "b", "line " + i);
 					Global.display.writeAtPosition(i + 1, 1,   text[pageLineTop + i]);
 					Global.display.writeAtPosition(i + 1, 17, value[pageLineTop + i]);
 				}
