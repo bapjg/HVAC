@@ -267,16 +267,71 @@ public class Thread_UserInterface implements Runnable
 			Global.display.blinkOff();
 		}
 	}
-	private class MenuItem
+	private class MenuItem <DataType>
 	{
-		String		text;
-		String		value;
-		String		type;
-		public MenuItem (String text, String value,  String type)
+		public static final int			DATA_TYPE_Menu 					= 0;
+		public static final int			DATA_TYPE_String				= 1;
+		public static final int			DATA_TYPE_Integer				= 2;
+		public static final int			DATA_TYPE_Time					= 3;
+		public static final int			DATA_TYPE_Boolean				= 4;
+
+		String							text;
+		DataType						value;
+		int								type;
+		
+		public MenuItem (String text, DataType value,  int type)
 		{
 			this.text													= text;
 			this.value													= value;
 			this.type													= type;
+		}
+		public String getValue()
+		{
+			String response = "";
+			
+			switch (this.type)
+			{
+			case DATA_TYPE_Menu :
+				response = "";
+				break;
+			case DATA_TYPE_String :
+				response = (String) this.value;
+				break;
+			case DATA_TYPE_Integer :
+				response = ((Integer) this.value).toString();
+				break;
+			case DATA_TYPE_Time :
+				response = "";							// Need to work this out
+				break;
+			case DATA_TYPE_Boolean :
+				if ((Boolean) this.value)
+				{
+					response = " On";
+				}
+				else
+				{
+					response = "Off";
+				}
+				break;
+			}
+			return response;
+		}
+		public void incrementValue()
+		{
+			switch (this.type)
+			{
+			case DATA_TYPE_Integer :
+//				this.value =  ((Integer) this.value) + 1;
+				break;
+			case DATA_TYPE_Time :
+										// Need to work this out
+				break;
+			case DATA_TYPE_Boolean :
+//				this.value = !(Boolean) this.value;
+				break;
+			default :
+				break;
+			}
 		}
 	}
 	private class UserMenu

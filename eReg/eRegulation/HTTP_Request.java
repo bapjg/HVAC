@@ -56,11 +56,11 @@ public class HTTP_Request <SendType>
 		}
 		catch (SocketTimeoutException eTimeOut)
 		{
-    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP TimeOut on write : " + eTimeOut);
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP TimeOut on write : " + eTimeOut);
 		}
 		catch (Exception eSend) 
 		{
-    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Send : " + eSend);
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Send : " + eSend);
 		}
 
 		try
@@ -70,16 +70,16 @@ public class HTTP_Request <SendType>
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{
-    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP ClassNotFound : " + eClassNotFound);
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP ClassNotFound : " + eClassNotFound);
 		}
 		catch (SocketTimeoutException eTimeOut)
 		{
-    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP TimeOut on read  : " + eTimeOut);
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP TimeOut on read  : " + eTimeOut);
 		}
 		catch (Exception eReceive) 
 		{
-    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Other : " + eReceive);
-    		System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Other : " + eReceive.getMessage());
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Other : " + eReceive);
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Other : " + eReceive.getMessage());
 		}
 			
 		return messageReceive;			

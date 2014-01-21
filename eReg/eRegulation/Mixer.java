@@ -66,7 +66,6 @@ public class Mixer
 		// Simply measure the difference between wanted temperature and mixerOut
 		// Multiply by a coefficient (250ms/decimal degree to start with) and see how it goes
 		//
-		LogIt.display("Mixer", "sequencer", "targetTemp is : " + targetTemp + " mixerOut : " + Global.thermoFloorOut.reading);
 		allOff();
 		
 		
@@ -89,7 +88,6 @@ public class Mixer
 		Integer tempFloorOut							= Global.thermoFloorOut.readUnCached();
 		
 		Integer swingTimeRequired						= pidControler.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
-		LogIt.display("Mixer", "sequencer", "swingTimeRequired : " + swingTimeRequired + ", positionTracked : " + positionTracked);
 		
 		Integer swingTimePerformed						= 0;
 
@@ -121,7 +119,6 @@ public class Mixer
 		 		{
 		 			swingTimeRequired 					= this.swingTime * 1000 - positionTracked + 2000;	//No point waiting over maximum add extra 2 seconds to be sure of end point
 		 		}
-				LogIt.display("Mixer", "sequencer", "Moving Up");
 		 		Global.mixerUp.on();
 				Long timeStart							= Global.now();
 				Global.waitMilliSeconds(swingTimeRequired.intValue());
@@ -143,7 +140,6 @@ public class Mixer
 		 		{
 		 			swingTimeRequired 					= swingTimeRequired - (positionTracked - swingTime * 900);	//Bring it down to 10% and then start the motion
 		 		}
-				LogIt.display("Mixer", "sequencer", "Moving Down");
 				Global.mixerDown.on();
 				Long timeStart							= Global.now();
 				Global.waitMilliSeconds(Math.abs(swingTimeRequired));
@@ -162,7 +158,6 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
-		LogIt.display("Mixer", "sequencer", "==================== " +"positionTracked : " + positionTracked);
 	}
 	public void positionZero()
 	{
@@ -201,7 +196,6 @@ public class Mixer
 		else
 		{
 			positionZero();
-			LogIt.display("Mixer", "positionAbsolute", "positionnedZero, track : " + positionTracked);
 			Global.mixerUp.on();
 			timeToWait									= 1000 * swingTime * proportion;
 			timeStart									= Global.now();
@@ -210,7 +204,6 @@ public class Mixer
 			timeEnd										= Global.now();
 			positionDiff   								= timeEnd - timeStart;
 	 		positionTracked								= positionDiff.intValue();		
-			LogIt.display("Mixer", "positionAbsolute", "positionnedproportion : "+  proportion + ", track : " + positionTracked);
 		}
 	}
 	public void allOff()
