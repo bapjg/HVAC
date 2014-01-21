@@ -267,6 +267,18 @@ public class Thread_UserInterface implements Runnable
 			Global.display.blinkOff();
 		}
 	}
+	private class MenuItem
+	{
+		String		text;
+		String		value;
+		String		type;
+		public MenuItem (String text, String value,  String type)
+		{
+			this.text													= text;
+			this.value													= value;
+			this.type													= type;
+		}
+	}
 	private class UserMenu
 	{
 		String 		title;
