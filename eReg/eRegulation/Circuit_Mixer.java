@@ -44,7 +44,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				else
 				{
 					temp											= temperatureGradient.getTempToTarget();
-					this.heatRequired.tempMinimum					= 550;
+					this.heatRequired.tempMinimum					= 600;
 					this.heatRequired.tempMaximum					= 800;
 					state											= CIRCUIT_STATE_AwaitingHeat;
 
@@ -68,12 +68,12 @@ public class Circuit_Mixer extends Circuit_Abstract
 					state											= CIRCUIT_STATE_Running;
 				}
 				temp												= 430;
-				this.heatRequired.tempMinimum						= 550;
+				this.heatRequired.tempMinimum						= 600;
 				this.heatRequired.tempMaximum						= 800;
 				break;
 			case CIRCUIT_STATE_Running:
 				temp												= temperatureGradient.getTempToTarget();
-				this.heatRequired.tempMinimum						= 500;
+				this.heatRequired.tempMinimum						= 600;
 				this.heatRequired.tempMaximum						= 800;
 				break;
 			case CIRCUIT_STATE_Stop_Requested:
