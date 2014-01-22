@@ -10,11 +10,12 @@
 			<Calendar type="Object" name="EveryDay" days="12345  "	timeStart="07:00" 	timeEnd="08:00" tempObjective="500" stopOnObjective="0"/>
 			<Calendar type="Object" name="EveryDay" days="     67"	timeStart="08:00" 	timeEnd="09:00" tempObjective="500" stopOnObjective="0"/>
 			<Calendar type="Object" name="EveryDay" days="1234567"	timeStart="21:30" 	timeEnd="22:00" tempObjective="500" stopOnObjective="0"/>
-					</Circuit>
+			<Calendar type="Object" name="Chris" 	days="  34   "	timeStart="18:00" 	timeEnd="21:00" tempObjective="500" stopOnObjective="0"/>
+		</Circuit>
 		<Circuit type="Object" name="Floor">
 			<Calendar type="Object" name="WeekDays" days="12345  "	timeStart="05:00" 	timeEnd="07:30" tempObjective="190" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekDays" days="123 5  "	timeStart="10:30" 	timeEnd="12:30" tempObjective="190" stopOnObjective="0"/>
-			<Calendar type="Object" name="WeekDays" days=" 2     "	timeStart="23:00" 	timeEnd="23:50" tempObjective="190" stopOnObjective="0"/>
+			<Calendar type="Object" name="WeekDays" days="1234   "	timeStart="15:00" 	timeEnd="20:30" tempObjective="190" stopOnObjective="0"/>
 			<Calendar type="Object" name="WeekEnds" days="	   67"	timeStart="06:30" 	timeEnd="21:30" tempObjective="190" stopOnObjective="0"/>
 		</Circuit>
 	</Circuits>
