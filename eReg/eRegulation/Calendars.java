@@ -185,6 +185,7 @@ public class Calendars extends DefaultHandler
 					
 					for (Word word : vocabulary.wordList) 
 					{
+						LogIt.info("Calendar Entry", "Vocab", "word.name " + word.name + " word.days " + word.days);
 						days.replace(word.name, word.days);
 					}
 
