@@ -182,6 +182,11 @@ public class Calendars extends DefaultHandler
 					String timeEnd 					= attributes.getValue("timeEnd");
 					String tempObjective 			= attributes.getValue("tempObjective");
 					String stopOnObjective 			= attributes.getValue("stopOnObjective");
+					
+					for (Word word : vocabulary.wordList) 
+					{
+						days.replace(word.name, word.days);
+					}
 
 					this.circuit.addCircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
 					LogIt.info("Calendar Entry", this.circuit.name, "Time start/end " + timeStart + "/" + timeEnd + " Days " + days);
