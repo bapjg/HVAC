@@ -7,7 +7,7 @@
 		<Word 		type="object"	name="WeekEnd"	type= "days"		days="67">				</Word>				
 		<Word 		type="object"	name="Today"	type= "relative"	days="0">				</Word>	
 		<Word 		type="object"	name="Tomorrow"	type= "relative"	days="1">				</Word>	
-			</Vocabulary>
+	</Vocabulary>
 	<Circuits type="Collection">
 		<Circuit type="Object" name="Hot_Water">
 			<Calendar type="Object" name="EveryDay" days="12345  " 	timeStart="06:15" 	timeEnd="06:45" tempObjective="350" stopOnObjective="1"/>
