@@ -13,10 +13,12 @@ import java.io.*;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 public class Calendars extends DefaultHandler
 {
 	private Circuit_Abstract	circuit;
+	private Vocabulary			vocabulary = new Vocabulary();
 	
 	public Calendars() throws IOException, SAXException, ParserConfigurationException
     {
@@ -173,7 +175,7 @@ public class Calendars extends DefaultHandler
 
 					this.circuit					= Global.circuits.fetchcircuit(name);
 				}
-				if (tagName.equalsIgnoreCase("Calendar"))
+				else if (tagName.equalsIgnoreCase("Calendar"))
 				{
 					String days 					= attributes.getValue("days");
 					String timeStart 				= attributes.getValue("timeStart");
@@ -183,6 +185,13 @@ public class Calendars extends DefaultHandler
 
 					this.circuit.addCircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
 					LogIt.info("Calendar Entry", this.circuit.name, "Time start/end " + timeStart + "/" + timeEnd + " Days " + days);
+				}
+				else if (tagName.equalsIgnoreCase("Word"))
+				{
+					String name 					= attributes.getValue("name");
+					String days 					= attributes.getValue("days");
+					this.vocabulary.add(name, days);
+					LogIt.info("Vocabulary Entry", name, "Days " + days);
 				}
 			}
 			else
@@ -197,4 +206,29 @@ public class Calendars extends DefaultHandler
 	public void characters(char ch[], int start, int length) throws SAXException 
 	{
 	}
+	private class Vocabulary
+	{
+		public ArrayList<Word>	wordList = new ArrayList<Word>();
+		
+		public Vocabulary()
+		{
+		}
+		public void add(String name, String days)
+		{
+			Word word 	= new Word(name, days);
+			wordList.add(word);
+		}
+	}
+	private class Word
+	{
+		public String name;
+		public String days;
+		public Word(String name, String days)
+		{
+			this.name 		    									= name;
+			this.days  												= days;
+		}
+
+	}
+	
 }

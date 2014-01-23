@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eCalendar>
 	<Vocabulary 		type="Collection">
-		<Word1 			type="object"	name="EveryDay"	use="days"		days="1234567"			/>
-		<Word2 			type="object"	name="WeekDay"	use="days"		days="12345"			/>
-		<Word3 			type="object"	name="HalfDay"	use="days"		days="5"				/>
-		<Word4 			type="object"	name="WeekEnd"	use="days"		days="67"				/>			
-		<Word5 			type="object"	name="Today"	use="relative"	days="0"				/>
-		<Word6 			type="object"	name="Tomorrow"	use="relative"	days="1"				/>
+		<Word 			type="object"	name="EveryDay"	use="days"		days="1234567"			/>
+		<Word 			type="object"	name="WeekDay"	use="days"		days="12345"			/>
+		<Word 			type="object"	name="HalfDay"	use="days"		days="5"				/>
+		<Word 			type="object"	name="WeekEnd"	use="days"		days="67"				/>			
+		<Word 			type="object"	name="Today"	use="relative"	days="0"				/>
+		<Word 			type="object"	name="Tomorrow"	use="relative"	days="1"				/>
 	</Vocabulary>
 	<Circuits 			type="Collection">
 		<Circuit 		type="Object" 	name="Hot_Water">
