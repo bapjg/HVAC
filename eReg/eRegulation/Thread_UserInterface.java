@@ -186,14 +186,14 @@ public class Thread_UserInterface implements Runnable
 		Global.display.writeAtPosition(0, 16, Global.thermoOutside.toDisplay());
 		Global.display.writeAtPosition(1, 0,  "Blr  MixH  MixO MixR");
 		Global.display.writeAtPosition(2, 4,  " ");								
-		Global.display.writeAtPosition(2, 0,  Global.thermoBoiler.toDisplay() + " "); // add an extra char to Blank out possible remenicence of previous info
-		Global.display.writeAtPosition(2, 5,  Global.thermoBoilerOut.toDisplay());
-		Global.display.writeAtPosition(2, 11, Global.thermoFloorOut.toDisplay());
+		Global.display.writeAtPosition(2, 0,  Global.thermoBoiler.toDisplay() + "  "); // add 2 extra chars to Blank out possible remenicence of previous info
+		Global.display.writeAtPosition(2, 5,  Global.thermoBoilerOut.toDisplay() + "  ");
+		Global.display.writeAtPosition(2, 11, Global.thermoFloorOut.toDisplay() + "  ");
 		Global.display.writeAtPosition(2, 16, Global.thermoFloorIn.toDisplay());
 		Global.display.writeAtPosition(3, 0,  "H2O  ");
-		Global.display.writeAtPosition(3, 5,  Global.thermoHotWater.toDisplay());
+		Global.display.writeAtPosition(3, 5,  Global.thermoHotWater.toDisplay() + "  ");
 
-		Global.display.writeAtPosition(3, 11, "LivR ");
+		Global.display.writeAtPosition(3, 11, "LivR     ");
 		Global.display.writeAtPosition(3, 16, Global.thermoLivingRoom.toDisplay());
 	}
 	private class UserControl
