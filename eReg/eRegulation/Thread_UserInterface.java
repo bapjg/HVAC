@@ -289,21 +289,12 @@ public class Thread_UserInterface implements Runnable
 		{
 			String response = "";
 			
-			switch (this.type)
+			if (this.value instanceof Integer)
 			{
-			case DATA_TYPE_Menu :
-				response = "";
-				break;
-			case DATA_TYPE_String :
-				response = (String) this.value;
-				break;
-			case DATA_TYPE_Integer :
 				response = ((Integer) this.value).toString();
-				break;
-			case DATA_TYPE_Time :
-				response = "";							// Need to work this out
-				break;
-			case DATA_TYPE_Boolean :
+			}
+			else if (this.value instanceof Boolean)
+			{
 				if ((Boolean) this.value)
 				{
 					response = " On";
@@ -312,25 +303,43 @@ public class Thread_UserInterface implements Runnable
 				{
 					response = "Off";
 				}
-				break;
 			}
+			else if (this.value instanceof String)
+			{
+				response = (String) this.value;
+			}
+//			else if (this.value instanceof Menu)
+//			{
+//				response = "";
+//			}
 			return response;
 		}
 		public void incrementValue()
 		{
-			switch (this.type)
+			if (this.value instanceof Integer)
 			{
-			case DATA_TYPE_Integer :
-//				this.value =  ((Integer) this.value) + 1;
-				break;
-			case DATA_TYPE_Time :
-										// Need to work this out
-				break;
-			case DATA_TYPE_Boolean :
-//				this.value = !(Boolean) this.value;
-				break;
-			default :
-				break;
+
+				Integer x = ((Integer) this.value) + 1;
+				this.value =  (DataType) x;
+			}
+			else if (this.value instanceof Boolean)
+			{
+				Boolean y = !((Boolean) this.value);
+				this.value =  (DataType) y;
+			}
+		}
+		public void decrementValue()
+		{
+			if (this.value instanceof Integer)
+			{
+
+				Integer x = ((Integer) this.value) - 1;
+				this.value =  (DataType) x;
+			}
+			else if (this.value instanceof Boolean)
+			{
+				Boolean y = !((Boolean) this.value);
+				this.value =  (DataType) y;
 			}
 		}
 	}
