@@ -12,19 +12,19 @@
 		<Circuit 		type="Object" 	name="Hot_Water">
 			<Calendar 	type="Object" 	name="EveryDay" days="WeekDay" 	timeStart="06:15" 	timeEnd="06:45" tempObjective="350" stopOnObjective="1"/>
 			<Calendar 	type="Object" 	name="EveryDay" days="EveryDay" timeStart="21:30" 	timeEnd="22:00" tempObjective="350" stopOnObjective="1"/>
-			<Calendar 	type="Object" 	name="EveryDay" days="     67"	timeStart="07:30" 	timeEnd="08:30" tempObjective="350" stopOnObjective="1"/>
+			<Calendar 	type="Object" 	name="EveryDay" days="WeekEnd"	timeStart="07:30" 	timeEnd="08:30" tempObjective="350" stopOnObjective="1"/>
 		</Circuit>
 		<Circuit 		type="Object" 	name="Radiator">
 			<Calendar 	type="Object" 	name="EveryDay" days="WeekDay"	timeStart="07:00" 	timeEnd="08:00" tempObjective="500" stopOnObjective="0"/>
-			<Calendar 	type="Object" 	name="EveryDay" days="     67"	timeStart="08:00" 	timeEnd="09:00" tempObjective="500" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="EveryDay" days="WeekEnd"	timeStart="08:00" 	timeEnd="09:00" tempObjective="500" stopOnObjective="0"/>
 			<Calendar 	type="Object" 	name="EveryDay" days="EveryDay"	timeStart="21:30" 	timeEnd="22:00" tempObjective="500" stopOnObjective="0"/>
 			<Calendar 	type="Object" 	name="Chris" 	days="  34   "	timeStart="18:00" 	timeEnd="21:00" tempObjective="500" stopOnObjective="0"/>
 		</Circuit>
 		<Circuit 		type="Object" 	name="Floor">
 			<Calendar 	type="Object" 	name="WeekDays" days="WeekDay"	timeStart="05:00" 	timeEnd="07:30" tempObjective="190" stopOnObjective="0"/>
 			<Calendar 	type="Object" 	name="WeekDays" days="WeekDay"	timeStart="10:30" 	timeEnd="12:30" tempObjective="190" stopOnObjective="0"/>
-			<Calendar 	type="Object" 	name="WeekDays" days="1234   "	timeStart="15:00" 	timeEnd="20:30" tempObjective="190" stopOnObjective="0"/>
-			<Calendar 	type="Object" 	name="WeekEnds" days="	   67"	timeStart="06:30" 	timeEnd="21:30" tempObjective="190" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekDays" days="HalfDay "	timeStart="15:00" 	timeEnd="20:30" tempObjective="190" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekEnds" days="WeekEnd"	timeStart="06:30" 	timeEnd="21:30" tempObjective="190" stopOnObjective="0"/>
 		</Circuit>
 	</Circuits>
 	
