@@ -196,7 +196,6 @@ public class Calendars extends DefaultHandler
 					String use	 					= attributes.getValue("use");
 					if (use.equalsIgnoreCase("days"))
 					{
-						int x =1;
 						this.vocabulary.add(name, days);
 						LogIt.info("Vocabulary Entry", name, "Days " + days);
 					}
