@@ -98,7 +98,7 @@ public class Mixer
 			{
 				swingTimeRequired						= swingTimeRequired * 2;
 			}
-			LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
+			// LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
 		}
 		if (tempFloorOut > 500)
 		{
