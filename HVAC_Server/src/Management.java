@@ -102,9 +102,7 @@ public class Management extends HttpServlet
             System.out.println("Unsupported message class received from client");
             message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
         }
-        
         reply(response, message_out);
-
     }
     public void dbOpen()
     {
@@ -174,7 +172,7 @@ public class Management extends HttpServlet
         {
             eSQL.printStackTrace();
         }
-
+        int x = 3;
         return returnBuffer;
     }
     public Mgmt_Msg_Calendar.Data processCalendarRequestIndex()
