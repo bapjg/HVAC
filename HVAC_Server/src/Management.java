@@ -50,7 +50,6 @@ public class Management extends HttpServlet
         {
             ex.printStackTrace();
         }
-        int x = 3;
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
