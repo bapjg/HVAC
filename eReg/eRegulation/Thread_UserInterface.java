@@ -318,7 +318,6 @@ public class Thread_UserInterface implements Runnable
 		{
 			if (this.value instanceof Integer)
 			{
-
 				Integer x = ((Integer) this.value) + 1;
 				this.value =  (DataType) x;
 			}
