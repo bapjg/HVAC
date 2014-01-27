@@ -172,7 +172,6 @@ public class Management extends HttpServlet
         {
             eSQL.printStackTrace();
         }
-        int x = 3;
         return returnBuffer;
     }
     public Mgmt_Msg_Calendar.Data processCalendarRequestIndex()
