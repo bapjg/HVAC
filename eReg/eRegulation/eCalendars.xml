@@ -23,7 +23,7 @@
 		<Circuit 		type="Object" 	name="Floor">
 			<Calendar 	type="Object" 	name="WeekDays" days="WeekDay"	timeStart="05:00" 	timeEnd="07:30" tempObjective="190" stopOnObjective="0"/>
 			<Calendar 	type="Object" 	name="WeekDays" days="WeekDay"	timeStart="10:30" 	timeEnd="12:30" tempObjective="190" stopOnObjective="0"/>
-			<Calendar 	type="Object" 	name="WeekDays" days="HalfDay "	timeStart="15:00" 	timeEnd="20:30" tempObjective="190" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekDays" days="WeekDay "	timeStart="15:00" 	timeEnd="21:30" tempObjective="190" stopOnObjective="0"/>
 			<Calendar 	type="Object" 	name="WeekEnds" days="WeekEnd"	timeStart="06:30" 	timeEnd="21:30" tempObjective="190" stopOnObjective="0"/>
 		</Circuit>
 	</Circuits>
