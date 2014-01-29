@@ -10,24 +10,29 @@ package eRegulation;
 public class Mixer
 {
 	public String 			name;
-	public Integer 			swingTime 				= 90;
-	public Integer 			lagTime 				= 30;
+	public Integer 			swingTime 								= 90;
+	public Integer 			lagTime 								= 30;
 
-	public Integer 			tempMax 				= 480;	
-	public Integer 			tempDontMove			= 20;
-	public Integer 			positionTracked			= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
+	public Integer 			tempMax 								= 480;	
+	public Integer 			tempDontMove							= 20;
+	public Integer 			positionTracked							= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
 
-	public Float			gainP					= 0F;
-	public Float			gainD					= 0F;
-	public Float			gainI					= 0F;
-	public Float			timeD					= 0F;
-	public Float			timeI					= 0F;
+	public Float			gainP									= 0F;
+	public Float			gainD									= 0F;
+	public Float			gainI									= 0F;
+	public Float			timeD									= 0F;
+	public Float			timeI									= 0F;
 	
 	public PID				pidControler;
-	public Integer			state					= 0;
-	public static final int	MIXER_STATE_Off 		= 0;
-	public static final int	MIXER_STATE_Moving_Up	= 1;
-	public static final int	MIXER_STATE_Moving_Down	= -1;
+	public Integer			state									= 0;
+	public static final int	MIXER_STATE_Off 						= 0;
+	public static final int	MIXER_STATE_Normal_Operating			= 1;
+	public static final int	MIXER_STATE_Moving_Up					= 2;
+	public static final int	MIXER_STATE_Moving_Down					= 3;
+	public static final int	MIXER_STATE_Moving_Waint				= 4;
+	public static final int	MIXER_STATE_Moving_OverTemp_Recovery	= 5;
+	public static final int	MIXER_STATE_Moving_Idle					= 6;
+
 	public Long				timeToStop;
 
  	public Mixer
