@@ -8,7 +8,7 @@ public class Message_Fuel extends Message_Abstract
 	}
 	public class Data extends Message_Abstract
 	{
-		private static final long 		temporary 			= 1L;
+		private static final long 		serialVersionUID 			= 1L;
 		public Long						dateTime;
 		public Long						fuelConsumed;
 	}
