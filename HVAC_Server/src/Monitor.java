@@ -119,7 +119,6 @@ public class Monitor extends HttpServlet
             System.out.println("Unsupported message class received from client");
             message_out 							= new Message_Abstract().new Nack();
         }
-        int x=1;
         reply(response, message_out);
     }
     public Message_Abstract processTemperatures(Message_Temperatures readings)
