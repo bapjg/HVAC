@@ -175,6 +175,17 @@ public class Calendars extends DefaultHandler
 
 					this.circuit					= Global.circuits.fetchcircuit(name);
 				}
+				else if (tagName.equalsIgnoreCase("Word"))
+				{
+					String name 					= attributes.getValue("name");
+					String days 					= attributes.getValue("days");
+					String use	 					= attributes.getValue("use");
+					if (use.equalsIgnoreCase("days"))
+					{
+						this.vocabulary.add(name, days);
+						LogIt.info("Vocabulary Entry", name, "Days " + days);
+					}
+				}
 				else if (tagName.equalsIgnoreCase("Calendar"))
 				{
 					String days 					= attributes.getValue("days");
@@ -188,17 +199,6 @@ public class Calendars extends DefaultHandler
 					}
 					this.circuit.addCircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
 					LogIt.info("Calendar Entry", this.circuit.name, "Time start/end " + timeStart + "/" + timeEnd + " Days " + days);
-				}
-				else if (tagName.equalsIgnoreCase("Word"))
-				{
-					String name 					= attributes.getValue("name");
-					String days 					= attributes.getValue("days");
-					String use	 					= attributes.getValue("use");
-					if (use.equalsIgnoreCase("days"))
-					{
-						this.vocabulary.add(name, days);
-						LogIt.info("Vocabulary Entry", name, "Days " + days);
-					}
 				}
 			}
 			else
