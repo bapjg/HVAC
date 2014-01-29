@@ -3,7 +3,7 @@ package eRegulation;
 @SuppressWarnings("serial")
 public class Message_Temperatures extends Message_Abstract
 {
-	private static final long 		temporary 			= 1L;
+	private static final long 		serialVersionUID 			= 1L;
 	public Long						dateTime;
 	
 	public Integer 					tempBoiler;
