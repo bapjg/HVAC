@@ -20,5 +20,5 @@ public class Message_Temperatures extends Message_Abstract
 	public Integer 					tempOutside;
 	public Integer 					tempLivingRoom;
 	
-	public Float					pid_dTdt;
+	public Float					pidMixerDifferential;
 }

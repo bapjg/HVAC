@@ -159,6 +159,8 @@ public class LogIt
 		messageSend.tempOutside 									= Global.thermoOutside.reading;
 		messageSend.tempLivingRoom 									= Global.thermoLivingRoom.reading;
 			
+		messageSend.pidMixerDifferential							= Global.mixer.pidControler.dTdt();
+
 		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 		
 		if (!(messageReceive instanceof Message_Abstract.Ack))
