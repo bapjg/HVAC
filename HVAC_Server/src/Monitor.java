@@ -131,19 +131,20 @@ public class Monitor extends HttpServlet
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
             dbResultSet.moveToInsertRow();
             
-            dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
-            dbResultSet.updateString	("date", 			dateTime2Date(readings.dateTime));
-            dbResultSet.updateString	("time", 			dateTime2Time(readings.dateTime));
-            dbResultSet.updateInt		("tempHotWater", 	readings.tempHotWater.intValue());
-            dbResultSet.updateInt		("tempBoiler", 		readings.tempBoiler.intValue());
-            dbResultSet.updateInt		("tempBoilerIn", 	readings.tempBoilerIn.intValue());
-            dbResultSet.updateInt		("tempBoilerOut", 	readings.tempBoilerOut.intValue());
-            dbResultSet.updateInt		("tempFloorOut", 	readings.tempFloorOut.intValue());
-            dbResultSet.updateInt		("tempFloorIn", 	readings.tempFloorIn.intValue());
-            dbResultSet.updateInt		("tempRadiatorOut", readings.tempRadiatorOut.intValue());
-            dbResultSet.updateInt		("tempRadiatorIn", 	readings.tempRadiatorIn.intValue());
-            dbResultSet.updateInt		("tempOutside", 	readings.tempOutside.intValue());
-            dbResultSet.updateInt		("tempLivingRoom", 	readings.tempLivingRoom.intValue());
+            dbResultSet.updateDouble	("dateTime", 				readings.dateTime);
+            dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTime));
+            dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTime));
+            dbResultSet.updateInt		("tempHotWater", 			readings.tempHotWater.intValue());
+            dbResultSet.updateInt		("tempBoiler", 				readings.tempBoiler.intValue());
+            dbResultSet.updateInt		("tempBoilerIn", 			readings.tempBoilerIn.intValue());
+            dbResultSet.updateInt		("tempBoilerOut", 			readings.tempBoilerOut.intValue());
+            dbResultSet.updateInt		("tempFloorOut", 			readings.tempFloorOut.intValue());
+            dbResultSet.updateInt		("tempFloorIn", 			readings.tempFloorIn.intValue());
+            dbResultSet.updateInt		("tempRadiatorOut", 		readings.tempRadiatorOut.intValue());
+            dbResultSet.updateInt		("tempRadiatorIn", 			readings.tempRadiatorIn.intValue());
+            dbResultSet.updateInt		("tempOutside", 			readings.tempOutside.intValue());
+            dbResultSet.updateInt		("tempLivingRoom", 			readings.tempLivingRoom.intValue());
+            dbResultSet.updateFloat		("pidMixerDifferential",	readings.pidMixerDifferential);
             dbResultSet.insertRow();
             
             dbStatement.close();
