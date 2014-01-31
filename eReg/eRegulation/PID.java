@@ -10,19 +10,26 @@ public class PID
     private Integer[] 	items;			// Proportional component, stored unit = decidegrees (we store values, not differences to avoid pbs with 
     private Integer[] 	deltas;			// Differential component, stored unit = decidegrees  sudden target changes with sudden target changes)
     private Long[] 		integrals;		// Integral component,     stored unit = decidegree from target x seconds
-    private Integer 	count;
+    private Integer 	count;			// Count is the number of entries in the PID Table <= pidDepth
     public 	Integer 	target;
     private Long[] 		timeStamps;		//                         stored unit = milliseconds
+
+    private	Integer		pidDepth;		// Depth is the size of the PID table
+    private PID_Entry[]	entries;
     
-    public PID(Integer size) 
+    public PID(Integer pidDepth) 
     {
         enqueueIndex 					= 0;
-        items 							= new Integer[size];
-        deltas 							= new Integer[size];
-        integrals 						= new Long[size];
-        timeStamps 						= new Long[size];
+        items 							= new Integer[pidDepth];
+        deltas 							= new Integer[pidDepth];
+        integrals 						= new Long[pidDepth];
+        timeStamps 						= new Long[pidDepth];
         this.target 					= 0;
         count							= 0;
+        
+        // New code =================================================
+        this.pidDepth					= pidDepth;
+        this.entries					= new PID_Entry[pidDepth];
     }
     public void setTarget(Integer target)
     {
@@ -30,6 +37,19 @@ public class PID
     }
     public void add(Integer newNumber) 
     {
+    	// This is new code
+    	
+    	entries[enqueueIndex].timeStamp	= Calendar.getInstance().getTimeInMillis();
+    	entries[enqueueIndex].item		= newNumber;
+    	
+    	// End of new code This is new code ===============================================================
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	// Units are temp in decimal degrees (1/10 degree)
     	//           time in milliseconds
     	//           inegration decidegrees * seconds
@@ -41,13 +61,13 @@ public class PID
     	
     	if (count == 0)
     	{
-    		deltas[enqueueIndex] = 0;
-    		integrals[enqueueIndex] = 0L;
+    		deltas[enqueueIndex] 		= 0;
+    		integrals[enqueueIndex] 	= 0L;
     	}
     	else
     	{
     		// previous index is enqueueIndex -1 modulo length. We add queue length to avoid negative values 
-    		previousIndex				= (enqueueIndex - 1 + timeStamps.length) % timeStamps.length;
+    		previousIndex				= (enqueueIndex  - 1 + timeStamps.length) % timeStamps.length;
     		
     		// Calculate dTemp. Note that it is independant of the target (rate of change)
     		deltas[enqueueIndex] 		= newNumber - items[previousIndex];							
@@ -141,4 +161,15 @@ public class PID
     {
         return Arrays.toString(items);
     }
+    public class PID_Entry
+    {
+        private Long 		timeStamp;		//                         stored unit = milliseconds
+        private Integer 	item;			// Proportional component, stored unit = decidegrees (we store values, not differences to avoid pbs with 
+        private Integer 	delta;			// Differential component, stored unit = decidegrees  sudden target changes with sudden target changes)
+        private Long 		integral;		// Integral component,     stored unit = decidegree from target x seconds
+       
+        public PID_Entry() 
+        {
+        }
+     }
 }
