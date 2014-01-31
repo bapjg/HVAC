@@ -7,25 +7,17 @@ import java.util.Calendar;
 public class PID 
 {
     private Integer 	enqueueIndex;	// Separate index to ensure enqueue happens at the end
-    private Integer[] 	items;			// Proportional component, stored unit = decidegrees (we store values, not differences to avoid pbs with 
-    private Integer[] 	deltas;			// Differential component, stored unit = decidegrees  sudden target changes with sudden target changes)
-    private Long[] 		integrals;		// Integral component,     stored unit = decidegree from target x seconds
     private Integer 	count;			// Count is the number of entries in the PID Table <= pidDepth
     public 	Integer 	target;
-    private Long[] 		timeStamps;		//                         stored unit = milliseconds
 
     private	Integer		pidDepth;		// Depth is the size of the PID table
     private PID_Entry[]	entries;
     
     public PID(Integer pidDepth) 
     {
-        enqueueIndex 							= 0;
-        items 									= new Integer[pidDepth];
-        deltas 									= new Integer[pidDepth];
-        integrals 								= new Long[pidDepth];
-        timeStamps 								= new Long[pidDepth];
+    	this.enqueueIndex 						= 0;
         this.target 							= 0;
-        count									= 0;
+        this.count								= 0;
         
         // New code =================================================
         this.pidDepth							= pidDepth;
@@ -67,55 +59,11 @@ public class PID
     		entries[enqueueIndex].integral 		= decidegreeSeconds + entries[previousIndex].integral;			// This is items x.dt
     	}
     	
-    	//enqueueIndex 							= (enqueueIndex + 1) % pidDepth;
+    	enqueueIndex 							= (enqueueIndex + 1) % pidDepth;
 
     	if (count < pidDepth)
     	{
-    		// count++;					// Do later
-    	}
-
-    	
-    	// End of new code This is new code ===============================================================
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	// Units are temp in decimal degrees (1/10 degree)
-    	//           time in milliseconds
-    	//           inegration decidegrees * seconds
-    	//           differential decidegrees per second (this is not handled here, but is handles in getGain()
-    	
-    	previousIndex					= 0;
-    	items[enqueueIndex] 			= newNumber;
-    	timeStamps[enqueueIndex] 		= Calendar.getInstance().getTimeInMillis();
-    	
-    	if (count == 0)
-    	{
-    		deltas[enqueueIndex] 		= 0;
-    		integrals[enqueueIndex] 	= 0L;
-    	}
-    	else
-    	{
-    		// previous index is enqueueIndex -1 modulo length. We add queue length to avoid negative values 
-    		previousIndex				= (enqueueIndex  - 1 + timeStamps.length) % timeStamps.length;
-    		
-    		// Calculate dTemp. Note that it is independant of the target (rate of change)
-    		deltas[enqueueIndex] 		= newNumber - items[previousIndex];							
-    		
-    		Long deltaTimeStamps 		= timeStamps[enqueueIndex] - timeStamps[previousIndex];
-    		Long decidegreeSeconds		= (newNumber.longValue() - target.longValue()) * deltaTimeStamps/1000L;		// decidegreeSeconds = offTarget x seconds
-    		
-    		integrals[enqueueIndex] 	= decidegreeSeconds + integrals[previousIndex];			// This is items x.dT
-    	}
-
-        enqueueIndex = (enqueueIndex + 1) % items.length;
-           	
-    	if (count < items.length)
-    	{
-    		count++;
+    		count++;					// Do later
     	}
     }
     public int average() 
@@ -124,25 +72,25 @@ public class PID
     	int sum = 0;
     	for (i = 0; i < count; i++)
     	{
-    		sum = sum + items[i];
+    		sum 								= sum + entries[enqueueIndex].item;
     	}
     	return sum/count;
     }
     public Float dTdt() 
     {
-		Float 		differential 		= 0F;								// unit = decigrees/second 
-		Long 		deltaTimeStamps		= 0L;								// unit = millisconds
-    	Integer		indexCurrent		= (enqueueIndex - 1 + items.length) % items.length;
-    	Integer		indexPrevious		= (enqueueIndex - 2 + items.length) % items.length;
+		Float 		differential 				= 0F;								// unit = decigrees/second 
+		Long 		deltaTimeStamps				= 0L;								// unit = millisconds
+    	Integer		indexCurrent				= (enqueueIndex - 1 + pidDepth) % pidDepth;
+    	Integer		indexPrevious				= (enqueueIndex - 2 + pidDepth) % pidDepth;
     	if (count <= 1)
     	{
-    		differential 				= 0F;
+    		differential 						= 0F;
     	}
     	else
     	{
     		//Units of differential are decidegrees/millisecond
-    		deltaTimeStamps 			= timeStamps[indexCurrent] - timeStamps[indexPrevious];
-    		differential				= 1000F * deltas[indexCurrent].floatValue() / deltaTimeStamps;	// in decidegrees per second
+    		deltaTimeStamps 					= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
+    		differential						= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in decidegrees per second
     	}
 
     	return differential;
@@ -160,13 +108,13 @@ public class PID
     	// Note that Java modulo defines that result carries same sign as numurator
     	// So to get the index of index-1 (or -2) we add the modulo base to ensure a positive outcome
     	
-    	Integer		indexCurrent		= (enqueueIndex - 1 + items.length) % items.length;
-    	Integer		indexPrevious		= (enqueueIndex - 2 + items.length) % items.length;
-    	Integer 	currentError 		= items[indexCurrent] - target;
-    	Float 		proportional 		= currentError.floatValue();		// unit = decigrees offtarget
-		Float 		differential 		= 0F;								// unit = decigrees/second 
-		Float 		integral 			= 0F;								// unit = decigrees offtarget x seconds
-		Float 		result 				= 0F;								// retruns number of milliseconds to move 3way valve
+    	Integer		indexCurrent				= (enqueueIndex - 1 + pidDepth) % pidDepth;
+    	Integer		indexPrevious				= (enqueueIndex - 2 + pidDepth) % pidDepth;
+    	Integer 	currentError 				= entries[indexCurrent].item - target;
+    	Float 		proportional 				= currentError.floatValue();		// unit = decigrees offtarget
+		Float 		differential 				= 0F;								// unit = decigrees/second 
+		Float 		integral 					= 0F;								// unit = decigrees offtarget x seconds
+		Float 		result 						= 0F;								// retruns number of milliseconds to move 3way valve
 																			// Made negative as is a negative feedback system
 		
     	// Rather than calc de/dt (which can have transients due to square wave targets
@@ -176,24 +124,19 @@ public class PID
 		
     	if (count <= 1)
     	{
-    		differential 				= 0F;
+    		differential 						= 0F;
     	}
     	else
     	{
     		//Units of differential are decidegrees/millisecond
-    		Long 	deltaTimeStamps 	= timeStamps[indexCurrent] - timeStamps[indexPrevious];
-    		differential				= 1000F * deltas[indexCurrent].floatValue() / deltaTimeStamps;	// in decidegrees per second
+    		Long 	deltaTimeStamps 			= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
+    		differential						= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in decidegrees per second
     	}
 
-		integral 						= integrals[indexCurrent].floatValue();							// in decidegree x seconds
-		result 							= - kP * proportional - kD * differential - kI * integral;
+		integral 								= entries[indexCurrent].integral.floatValue();							// in decidegree x seconds
+		result 									= - kP * proportional - kD * differential - kI * integral;
 		
 		return result.intValue();
-    }
-    @Override
-    public String toString() 
-    {
-        return Arrays.toString(items);
     }
     public class PID_Entry
     {

@@ -44,7 +44,7 @@ public class Thread_Mixer implements Runnable
 			}
 			this.mixer.sequencer(targetTemp);
 
-			for (i = 0; i < 8; i++)
+			for (i = 0; i < 10; i++)
 			{
 				Global.waitSeconds(5);									// 4 loops of 5s
 
