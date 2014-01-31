@@ -6,7 +6,7 @@
 		<Word 			type="object"	name="HalfDay"		use="days"		days="15     "			/>
 		<Word 			type="object"	name="WeekEnd"		use="days"		days="67     "			/>			
 		<Word 			type="object"	name="Locataire"	use="days"		days="       "			/>			
-		<Word 			type="object"	name="Now"			use="days"		days="5      "			/>			
+		<Word 			type="object"	name="Now"			use="days"		days="6      "			/>			
 		<Word 			type="object"	name="Today"		use="relative"	days="0      "			/>
 		<Word 			type="object"	name="Tomorrow"		use="relative"	days="1      "			/>
 	</Vocabulary>
@@ -23,7 +23,7 @@
 			<Calendar 	type="Object" 	name="Locataire" 	days="Locataire"	timeStart="17:00" 	timeEnd="22:00" tempObjective="500" stopOnObjective="0"/>
 		</Circuit>
 		<Circuit 		type="Object" 	name="Floor">
-			<Calendar 	type="Object" 	name="WeekDay" 		days="Now"			timeStart="22:00" 	timeEnd="23:55" tempObjective="190" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekDay" 		days="Now"			timeStart="00:01" 	timeEnd="23:59" tempObjective="190" stopOnObjective="0"/>
 		    <Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="05:00" 	timeEnd="07:30" tempObjective="190" stopOnObjective="0"/>
 			<Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="10:30" 	timeEnd="12:30" tempObjective="190" stopOnObjective="0"/>
 			<Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay "		timeStart="15:00" 	timeEnd="21:30" tempObjective="190" stopOnObjective="0"/>

@@ -58,13 +58,6 @@ public class PID
     		// previous index is enqueueIndex -1 modulo length. We add queue length to avoid negative values 
     		previousIndex						= (enqueueIndex  - 1 + pidDepth) % pidDepth;
 
-    		LogIt.display("PID","add", "enqueueIndex " + enqueueIndex);
-    		LogIt.display("PID","add", "previousIndex " + previousIndex);
-    		
-    		LogIt.display("PID","add", "timeStampEnq " + entries[enqueueIndex].timeStamp);
-    		LogIt.display("PID","add", "timeStampPre " + entries[previousIndex].timeStamp);
-    		
-
     		// Calculate dTemp. Note that it is independant of the target (rate of change)
     		entries[enqueueIndex].delta 		= newNumber - entries[enqueueIndex].item;							
     		
