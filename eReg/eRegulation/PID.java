@@ -30,6 +30,12 @@ public class PID
         // New code =================================================
         this.pidDepth					= pidDepth;
         this.entries					= new PID_Entry[pidDepth];
+        
+        int i;
+        for (i = 0; i < pidDepth; i++)
+        {
+        	this.entries[i]				= new PID_Entry();
+        }
     }
     public void setTarget(Integer target)
     {
