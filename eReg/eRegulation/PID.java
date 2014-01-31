@@ -19,34 +19,61 @@ public class PID
     
     public PID(Integer pidDepth) 
     {
-        enqueueIndex 					= 0;
-        items 							= new Integer[pidDepth];
-        deltas 							= new Integer[pidDepth];
-        integrals 						= new Long[pidDepth];
-        timeStamps 						= new Long[pidDepth];
-        this.target 					= 0;
-        count							= 0;
+        enqueueIndex 							= 0;
+        items 									= new Integer[pidDepth];
+        deltas 									= new Integer[pidDepth];
+        integrals 								= new Long[pidDepth];
+        timeStamps 								= new Long[pidDepth];
+        this.target 							= 0;
+        count									= 0;
         
         // New code =================================================
-        this.pidDepth					= pidDepth;
-        this.entries					= new PID_Entry[pidDepth];
+        this.pidDepth							= pidDepth;
+        this.entries							= new PID_Entry[pidDepth];
         
         int i;
         for (i = 0; i < pidDepth; i++)
         {
-        	this.entries[i]				= new PID_Entry();
+        	this.entries[i]						= new PID_Entry();
         }
     }
     public void setTarget(Integer target)
     {
-        this.target 					= target;
+        this.target 							= target;
     }
     public void add(Integer newNumber) 
     {
     	// This is new code
+    	Integer previousIndex					= 0;
+    	entries[enqueueIndex].timeStamp			= Calendar.getInstance().getTimeInMillis();
+    	entries[enqueueIndex].item				= newNumber;
+ 
+    	if (count == 0)
+    	{
+    		entries[enqueueIndex].delta			= 0;
+    		entries[enqueueIndex].integral		= 0L;
+    	}
+    	else
+    	{
+    		// previous index is enqueueIndex -1 modulo length. We add queue length to avoid negative values 
+    		previousIndex						= (enqueueIndex  - 1 + pidDepth) % pidDepth;
+    		
+    		// Calculate dTemp. Note that it is independant of the target (rate of change)
+    		entries[enqueueIndex].delta 		= newNumber - entries[enqueueIndex].item;							
+    		
+    		Long deltaTimeStamps 				= entries[enqueueIndex].timeStamp - entries[previousIndex].timeStamp;
+    		Long decidegreeSeconds				= (newNumber.longValue() - target.longValue()) * deltaTimeStamps/1000L;		// decidegreeSeconds = offTarget x seconds
+    		
+    		entries[enqueueIndex].integral 		= decidegreeSeconds + entries[previousIndex].integral;			// This is items x.dt
+    	}
     	
-    	entries[enqueueIndex].timeStamp	= Calendar.getInstance().getTimeInMillis();
-    	entries[enqueueIndex].item		= newNumber;
+    	enqueueIndex 							= (enqueueIndex + 1) % pidDepth;
+
+    	if (count < pidDepth)
+    	{
+    		// count++;					// Do later
+    	}
+
     	
     	// End of new code This is new code ===============================================================
     	
@@ -61,7 +88,7 @@ public class PID
     	//           inegration decidegrees * seconds
     	//           differential decidegrees per second (this is not handled here, but is handles in getGain()
     	
-    	Integer previousIndex			= 0;
+    	previousIndex					= 0;
     	items[enqueueIndex] 			= newNumber;
     	timeStamps[enqueueIndex] 		= Calendar.getInstance().getTimeInMillis();
     	
@@ -104,6 +131,7 @@ public class PID
     public Float dTdt() 
     {
 		Float 		differential 		= 0F;								// unit = decigrees/second 
+		Long 		deltaTimeStamps		= 0L;								// unit = millisconds
     	Integer		indexCurrent		= (enqueueIndex - 1 + items.length) % items.length;
     	Integer		indexPrevious		= (enqueueIndex - 2 + items.length) % items.length;
     	if (count <= 1)
@@ -113,7 +141,7 @@ public class PID
     	else
     	{
     		//Units of differential are decidegrees/millisecond
-    		Long 	deltaTimeStamps 	= timeStamps[indexCurrent] - timeStamps[indexPrevious];
+    		deltaTimeStamps 			= timeStamps[indexCurrent] - timeStamps[indexPrevious];
     		differential				= 1000F * deltas[indexCurrent].floatValue() / deltaTimeStamps;	// in decidegrees per second
     	}
 

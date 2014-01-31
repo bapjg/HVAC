@@ -44,13 +44,13 @@ public class Thread_Mixer implements Runnable
 			}
 			this.mixer.sequencer(targetTemp);
 
-			for (i = 0; i < 6; i++)
+			for (i = 0; i < 8; i++)
 			{
 				Global.waitSeconds(5);									// 4 loops of 5s
 
 				if ((Global.thermoFloorOut.readUnCached() > 490) || (Global.stopNow))
 				{
-					LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the 30s wait");
+					LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the 40s wait");
 					break;
 				}
 			}
