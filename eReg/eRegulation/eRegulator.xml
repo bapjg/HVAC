@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eRegulator>
 	<Thermometers type="Collection">
-		<Thermometer type="Object" name="Boiler" 		address="28.3F9A 8504 0000" friendlyName="Chaudiere"			pid="Yes"   >		</Thermometer>
-		<Thermometer type="Object" name="Boiler_Old"	address="28.1C01 8F04 0000" friendlyName="Chaudiere_Old"					>		</Thermometer>
-		<Thermometer type="Object" name="Floor_In" 		address="28.629F 8E04 0000"	friendlyName="Chaudiere_Retour"					>		</Thermometer>
-		<Thermometer type="Object" name="Floor_Out" 	address="28.4492 8E04 0000"	friendlyName="V3V_Depart"			pid="Yes"	>		</Thermometer>
-		<Thermometer type="Object" name="Boiler_Out" 	address="28.69DA 8E04 0000"	friendlyName="V3V_Chaud"						>		</Thermometer>
-		<Thermometer type="Object" name="Boiler_In" 	address="28.2C06 8E04 0000"	friendlyName="V3V_Retour"						>		</Thermometer>
-		<Thermometer type="Object" name="Radiator_Out" 	address="28.A194 8E04 0000"	friendlyName="Radiateur_Depart"					>		</Thermometer>
-		<Thermometer type="Object" name="Radiator_In" 	address="28.76EF 8E04 0000"	friendlyName="Radiateur_Retour"					>		</Thermometer>
-		<Thermometer type="Object" name="Outside" 		address="28.41DB 8E04 0000"	friendlyName="Exterieur"						>		</Thermometer>
-		<Thermometer type="Object" name="Living_Room" 	address="28.90DB 8E04 0000"	friendlyName="Sonde_Salon"						>		</Thermometer>
-		<Thermometer type="Object" name="Hot_Water" 	address="28.09E1 8504 0000"	friendlyName="ECS"								>		</Thermometer>
+		<Thermometer type="Object" name="Boiler" 		address="28.3F9A 8504 0000" friendlyName="Chaudiere"			pid="Yes">		</Thermometer>
+		<Thermometer type="Object" name="Boiler_Old"	address="28.1C01 8F04 0000" friendlyName="Chaudiere_Old"		pid="No" >		</Thermometer>
+		<Thermometer type="Object" name="Floor_In" 		address="28.629F 8E04 0000"	friendlyName="Chaudiere_Retour"		pid="No" >		</Thermometer>
+		<Thermometer type="Object" name="Floor_Out" 	address="28.4492 8E04 0000"	friendlyName="V3V_Depart"			pid="Yes">		</Thermometer>
+		<Thermometer type="Object" name="Boiler_Out" 	address="28.69DA 8E04 0000"	friendlyName="V3V_Chaud"			pid="No" >		</Thermometer>
+		<Thermometer type="Object" name="Boiler_In" 	address="28.2C06 8E04 0000"	friendlyName="V3V_Retour"			pid="No" >		</Thermometer>
+		<Thermometer type="Object" name="Radiator_Out" 	address="28.A194 8E04 0000"	friendlyName="Radiateur_Depart"		pid="No" >		</Thermometer>
+		<Thermometer type="Object" name="Radiator_In" 	address="28.76EF 8E04 0000"	friendlyName="Radiateur_Retour"		pid="No" >		</Thermometer>
+		<Thermometer type="Object" name="Outside" 		address="28.41DB 8E04 0000"	friendlyName="Exterieur"			pid="No" >		</Thermometer>
+		<Thermometer type="Object" name="Living_Room" 	address="28.90DB 8E04 0000"	friendlyName="Sonde_Salon"			pid="No" >		</Thermometer>
+		<Thermometer type="Object" name="Hot_Water" 	address="28.09E1 8504 0000"	friendlyName="ECS"					pid="No" >		</Thermometer>
 	</Thermometers>
 
 	<Relays type="Collection">
