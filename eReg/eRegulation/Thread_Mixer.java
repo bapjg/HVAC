@@ -59,11 +59,11 @@ public class Thread_Mixer implements Runnable
 				
 				tempNow										= Global.thermoFloorOut.readUnCached();
 				
-				if (Math.abs(tempNow - tempPrevious) > 5)				// Trend is > 2degrees/10s need to react immediately
-				{
-					LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeWait + "s wait after " + (i * 5) +"s, due to high dT/dt : " + (tempNow - tempPrevious));
-					break;
-				}
+//				if (Math.abs(tempNow - tempPrevious) > 5)				// Trend is > 2degrees/10s need to react immediately
+//				{
+//					LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeWait + "s wait after " + (i * 5) +"s, due to high dT/dt : " + (tempNow - tempPrevious));
+//					break;
+//				}
 				if (i >= indexInterupt)									// We have waited for dTdt to settle a bit
 				{
 					temperatureProjected					= tempNow + ((Float) (this.mixer.pidControler.dTdt() * timeWait)).intValue();
