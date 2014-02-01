@@ -45,7 +45,7 @@ public class Thread_Mixer implements Runnable
 			this.mixer.sequencer(targetTemp);
 
 			Integer timeWait								= 50;
-			Integer timeInterupt							= 30;
+			Integer timeInterupt							= 20;
 			
 			Integer indexWait								= timeWait/5;
 			Integer indexInterupt							= timeInterupt/5;
@@ -64,7 +64,7 @@ public class Thread_Mixer implements Runnable
 				{
 					temperatureProjected					= Global.thermoFloorOut.readUnCached() + ((Float) (this.mixer.pidControler.dTdt() * timeWait)).intValue();
 					
-					if (temperatureProjected > targetTemp + 20)
+					if (Math.abs(temperatureProjected - targetTemp) > 20)		// More than 2 degrees difference (either over or under)
 					{
 						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the 50s wait");
 						break;
