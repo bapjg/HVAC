@@ -87,6 +87,13 @@ public class Mixer
 		// These params gave oscilations
 		// Changed Kd = 0.02
 		
+		Integer timeWait								= 50;
+		Integer timeInterupt							= 30;
+		
+		Integer indexWait								= timeWait/5;
+		Integer indexInterupt							= timeInterupt/5;
+		
+		
 		
 		pidControler.target								= targetTemp;		// targetTemp is either tempGradient or some maxTemp for rampup
 

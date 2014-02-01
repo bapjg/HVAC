@@ -44,14 +44,31 @@ public class Thread_Mixer implements Runnable
 			}
 			this.mixer.sequencer(targetTemp);
 
-			for (i = 0; i < 10; i++)
-			{
-				Global.waitSeconds(5);									// 4 loops of 5s
+			Integer timeWait								= 50;
+			Integer timeInterupt							= 30;
+			
+			Integer indexWait								= timeWait/5;
+			Integer indexInterupt							= timeInterupt/5;
+			Integer temperatureProjected					= 0;
 
-				if ((Global.thermoFloorOut.readUnCached() > 490) || (Global.stopNow))
+			for (i = 0; i < indexWait; i++)
+			{
+				Global.waitSeconds(5);									// indexWait loops of 5s
+				
+				if (Global.stopNow)
 				{
-					LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the 40s wait");
 					break;
+				}
+				
+				if (i >= indexInterupt)									// We have waited for dTdt to settle a bit
+				{
+					temperatureProjected					= Global.thermoFloorOut.readUnCached() + ((Float) (this.mixer.pidControler.dTdt() * timeWait)).intValue();
+					
+					if (temperatureProjected > targetTemp + 20)
+					{
+						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the 50s wait");
+						break;
+					}
 				}
 			}
 		}
