@@ -50,19 +50,23 @@ public class Thread_Mixer implements Runnable
 			Integer indexWait								= timeWait/5;
 			Integer indexInterupt							= timeInterupt/5;
 			Integer temperatureProjected					= 0;
+			Integer tempNow;
+			Integer tempPrevious							= Global.thermoFloorOut.readUnCached();
 
-			for (i = 0; i < indexWait; i++)
+			for (i = 0; (i < indexWait) && (! Global.stopNow); i++)
 			{
 				Global.waitSeconds(5);									// indexWait loops of 5s
 				
-				if (Global.stopNow)
+				tempNow										= Global.thermoFloorOut.readUnCached();
+				
+				if (Math.abs(tempNow - tempPrevious) > 5)				// Trend is > 2degrees/10s need to react immediately
 				{
+					LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeWait + "s wait after " + (i * 5) +"s, due to high dT/dt");
 					break;
 				}
-				
 				if (i >= indexInterupt)									// We have waited for dTdt to settle a bit
 				{
-					temperatureProjected					= Global.thermoFloorOut.readUnCached() + ((Float) (this.mixer.pidControler.dTdt() * timeWait)).intValue();
+					temperatureProjected					= tempNow + ((Float) (this.mixer.pidControler.dTdt() * timeWait)).intValue();
 					
 					if (Math.abs(temperatureProjected - targetTemp) > 20)		// More than 2 degrees difference (either over or under)
 					{
@@ -70,6 +74,7 @@ public class Thread_Mixer implements Runnable
 						break;
 					}
 				}
+				tempPrevious								= tempNow;
 			}
 		}
 		// Optimise if singlecircuit
