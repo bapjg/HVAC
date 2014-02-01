@@ -148,7 +148,8 @@ public class Monitor extends HttpServlet
             dbResultSet.updateInt		("positionTracked", 		readings.positionTracked);
             dbResultSet.updateInt		("swingTimeRequired", 		readings.swingTimeRequired);
             dbResultSet.updateDouble	("swingStart", 				readings.swingStart);
-           dbResultSet.insertRow();
+            dbResultSet.updateFloat		("pidBoilerOutDifferential",readings.pidBoilerOutDifferential);
+            dbResultSet.insertRow();
             
             dbStatement.close();
             dbConnection.close();
