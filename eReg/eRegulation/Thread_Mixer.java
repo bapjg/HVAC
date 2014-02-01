@@ -66,7 +66,7 @@ public class Thread_Mixer implements Runnable
 					
 					if (Math.abs(temperatureProjected - targetTemp) > 20)		// More than 2 degrees difference (either over or under)
 					{
-						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the 50s wait");
+						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeWait + "s wait after " + (i * 5) +"s");
 						break;
 					}
 				}
