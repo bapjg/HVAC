@@ -160,6 +160,9 @@ public class LogIt
 		messageSend.tempLivingRoom 									= Global.thermoLivingRoom.reading;
 			
 		messageSend.pidMixerDifferential							= Global.mixer.pidControler.dTdt();
+		messageSend.positionTracked									= Global.mixer.positionTracked;
+		messageSend.swingTimeRequired								= Global.mixer.swingTimeRequired;
+		messageSend.swingStart										= Global.mixer.swingStart;
 
 		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 		

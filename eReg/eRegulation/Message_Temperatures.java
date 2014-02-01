@@ -21,4 +21,7 @@ public class Message_Temperatures extends Message_Abstract
 	public Integer 					tempLivingRoom;
 	
 	public Float					pidMixerDifferential;
+	public Integer					positionTracked;
+	public Integer					swingTimeRequired;
+	public Long						swingStart;
 }
