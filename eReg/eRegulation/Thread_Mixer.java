@@ -45,7 +45,7 @@ public class Thread_Mixer implements Runnable
 			this.mixer.sequencer(targetTemp);
 
 			Integer timeWait								= 50;
-			Integer timeInterupt							= 20;
+			Integer timeInterupt							= 30;
 			
 			Integer indexWait								= timeWait/5;
 			Integer indexInterupt							= timeInterupt/5;
