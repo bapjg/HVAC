@@ -6,7 +6,7 @@
 		<Word 			type="object"	name="HalfDay"		use="days"		days="15     "			/>
 		<Word 			type="object"	name="WeekEnd"		use="days"		days="67     "			/>			
 		<Word 			type="object"	name="Locataire"	use="days"		days="       "			/>			
-		<Word 			type="object"	name="Test"			use="days"		days="       "			/>			
+		<Word 			type="object"	name="Test"			use="days"		days="67     "			/>			
 		<Word 			type="object"	name="Today"		use="relative"	days="0      "			/>
 		<Word 			type="object"	name="Tomorrow"		use="relative"	days="1      "			/>
 	</Vocabulary>
