@@ -17,8 +17,9 @@ public class Thermometer
 	public String 					thermoFile_Normal;
 	public String 					thermoFile_UnCached;
  	public Integer 					reading;
+	public PID						pidControler;
 	
-	public Thermometer(String name, String address, String friendlyName)
+	public Thermometer(String name, String address, String friendlyName, Boolean pid)
 	{
 		this.name 		    									= name;
 		this.friendlyName  										= friendlyName;
@@ -29,6 +30,12 @@ public class Thermometer
 
 		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		
+		if (pid)
+		{
+			pidControler										= new PID(10);
+			LogIt.display("xxx", name, "PID Created");
+		}
 	}
     public void readAll()
 	{

@@ -1,7 +1,6 @@
 package eRegulation;
 
 import java.util.ArrayList;
-//import java.util.Iterator;
 
 public class Thermometers
 {
@@ -10,9 +9,9 @@ public class Thermometers
 	public Thermometers()
 	{
 	}
-	public void add(String name, String address, String friendlyName)
+	public void add(String name, String address, String friendlyName, Boolean pid)
 	{
-		Thermometer thermometerItem 	= new Thermometer(name, address, friendlyName);
+		Thermometer thermometerItem 	= new Thermometer(name, address, friendlyName, pid);
 		thermometerList.add(thermometerItem);
 	}
 	public Thermometer fetchThermometer(String name)

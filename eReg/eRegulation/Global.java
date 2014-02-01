@@ -142,8 +142,16 @@ public class Global extends DefaultHandler
 					String name 						= attributes.getValue("name");
 					String address 						= attributes.getValue("address");
 					String friendlyName					= attributes.getValue("friendlyName");
-
-					Global.thermometers.add(name, address, friendlyName);
+					String pid							= attributes.getValue("pid");
+					
+					if (pid.equalsIgnoreCase("Yes"))
+					{
+						Global.thermometers.add(name, address, friendlyName, true);
+					}
+					else
+					{
+						Global.thermometers.add(name, address, friendlyName, false);
+					}
 				}
 				else if (tagName.equalsIgnoreCase("Circuit"))
 				{
