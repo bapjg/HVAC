@@ -143,7 +143,6 @@ public class Global extends DefaultHandler
 					String address 						= attributes.getValue("address");
 					String friendlyName					= attributes.getValue("friendlyName");
 					String pid							= attributes.getValue("pid");
-					attributes.
 					
 					if (pid.equalsIgnoreCase("Yes"))
 					{
