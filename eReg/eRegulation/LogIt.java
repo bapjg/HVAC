@@ -159,6 +159,9 @@ public class LogIt
 		messageSend.tempOutside 									= Global.thermoOutside.reading;
 		messageSend.tempLivingRoom 									= Global.thermoLivingRoom.reading;
 			
+		messageSend.pidMixerTarget									= Global.thermoFloorOut.pidControler.target;
+		messageSend.tempLivingRoomTarget							= 190;
+		
 		messageSend.pidMixerDifferential							= Global.thermoFloorOut.pidControler.dTdt();
 		messageSend.pidBoilerOutDifferential						= Global.thermoBoilerOut.pidControler.dTdt();
 

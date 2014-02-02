@@ -151,6 +151,8 @@ public class Monitor extends HttpServlet
             dbResultSet.updateInt		("tempLivingRoom", 			readings.tempLivingRoom.intValue());
             dbResultSet.updateFloat		("pidMixerDifferential",	readings.pidMixerDifferential);
             dbResultSet.updateFloat		("pidBoilerOutDifferential",readings.pidBoilerOutDifferential);
+            dbResultSet.updateInt		("pidMixerTarget", 			readings.pidMixerTarget);
+            dbResultSet.updateInt		("tempLivingRoomTarget", 	readings.tempLivingRoomTarget);
             dbResultSet.insertRow();
             
             dbStatement.close();
