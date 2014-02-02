@@ -82,6 +82,9 @@ public class PID
 		Long 		deltaTimeStamps				= 0L;								// unit = millisconds
     	Integer		indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
     	Integer		indexPrevious				= (indexEnqueue - 2 + pidDepth) % pidDepth;
+    	
+    	LogIt.display("PID", "dTdt", "indexCurrent/indexPrevious" + indexCurrent + "/" + indexPrevious);
+    	
     	if (count <= 1)
     	{
     		differential 						= 0F;
