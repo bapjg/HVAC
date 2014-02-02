@@ -34,7 +34,6 @@ public class Thermometer
 		if (pid)
 		{
 			pidControler										= new PID(10);
-			LogIt.display("xxx", name, "PID Created");
 		}
 	}
     public void readAll()

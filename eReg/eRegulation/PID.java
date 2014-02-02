@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 public class PID 
 {
-    private Integer 	enqueueIndex;	// Separate index to ensure enqueue happens at the end
+    private Integer 	indexEnqueue;	// Separate index to ensure enqueue happens at the end
     private Integer 	count;			// Count is the number of entries in the PID Table <= pidDepth
     public 	Integer 	target;
 
@@ -15,11 +15,10 @@ public class PID
     
     public PID(Integer pidDepth) 
     {
-    	this.enqueueIndex 						= 0;
+    	this.indexEnqueue 						= 0;
         this.target 							= 0;
         this.count								= 0;
         
-        // New code =================================================
         this.pidDepth							= pidDepth;
         this.entries							= new PID_Entry[pidDepth];
         
@@ -37,29 +36,30 @@ public class PID
     {
     	// This is new code
     	Integer previousIndex					= 0;
-    	entries[enqueueIndex].timeStamp			= Calendar.getInstance().getTimeInMillis();
-    	entries[enqueueIndex].item				= newNumber;
+    	entries[indexEnqueue].timeStamp			= Calendar.getInstance().getTimeInMillis();
+    	entries[indexEnqueue].item				= newNumber;
  
     	if (count == 0)
     	{
-    		entries[enqueueIndex].delta			= 0;
-    		entries[enqueueIndex].integral		= 0L;
+    		entries[indexEnqueue].delta			= 0;
+    		entries[indexEnqueue].integral		= 0L;
     	}
     	else
     	{
     		// previous index is enqueueIndex -1 modulo length. We add queue length to avoid negative values 
-    		previousIndex						= (enqueueIndex  - 1 + pidDepth) % pidDepth;
+    		previousIndex						= (indexEnqueue  - 1 + pidDepth) % pidDepth;
 
     		// Calculate dTemp. Note that it is independant of the target (rate of change)
-    		entries[enqueueIndex].delta 		= newNumber - entries[enqueueIndex].item;							
+    		entries[indexEnqueue].delta 		= newNumber - entries[indexEnqueue].item;
+    		LogIt.display("PID", "add", "delta is " + entries[indexEnqueue].delta);
     		
-    		Long deltaTimeStamps 				= entries[enqueueIndex].timeStamp - entries[previousIndex].timeStamp;
+    		Long deltaTimeStamps 				= entries[indexEnqueue].timeStamp - entries[previousIndex].timeStamp;
     		Long decidegreeSeconds				= (newNumber.longValue() - target.longValue()) * deltaTimeStamps/1000L;		// decidegreeSeconds = offTarget x seconds
     		
-    		entries[enqueueIndex].integral 		= decidegreeSeconds + entries[previousIndex].integral;			// This is items x.dt
+    		entries[indexEnqueue].integral 		= decidegreeSeconds + entries[previousIndex].integral;			// This is items x.dt
     	}
     	
-    	enqueueIndex 							= (enqueueIndex + 1) % pidDepth;
+    	indexEnqueue 							= (indexEnqueue + 1) % pidDepth;
 
     	if (count < pidDepth)
     	{
@@ -72,7 +72,7 @@ public class PID
     	int sum = 0;
     	for (i = 0; i < count; i++)
     	{
-    		sum 								= sum + entries[enqueueIndex].item;
+    		sum 								= sum + entries[indexEnqueue].item;
     	}
     	return sum/count;
     }
@@ -80,8 +80,8 @@ public class PID
     {
 		Float 		differential 				= 0F;								// unit = decigrees/second 
 		Long 		deltaTimeStamps				= 0L;								// unit = millisconds
-    	Integer		indexCurrent				= (enqueueIndex - 1 + pidDepth) % pidDepth;
-    	Integer		indexPrevious				= (enqueueIndex - 2 + pidDepth) % pidDepth;
+    	Integer		indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer		indexPrevious				= (indexEnqueue - 2 + pidDepth) % pidDepth;
     	if (count <= 1)
     	{
     		differential 						= 0F;
@@ -91,6 +91,7 @@ public class PID
     		//Units of differential are decidegrees/millisecond
     		deltaTimeStamps 					= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
     		differential						= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in decidegrees per second
+    		LogIt.display("PID", "dTdt", "delta is " + entries[indexCurrent].delta);
     	}
 
     	return differential;
@@ -108,8 +109,8 @@ public class PID
     	// Note that Java modulo defines that result carries same sign as numurator
     	// So to get the index of index-1 (or -2) we add the modulo base to ensure a positive outcome
     	
-    	Integer		indexCurrent				= (enqueueIndex - 1 + pidDepth) % pidDepth;
-    	Integer		indexPrevious				= (enqueueIndex - 2 + pidDepth) % pidDepth;
+    	Integer		indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer		indexPrevious				= (indexEnqueue - 2 + pidDepth) % pidDepth;
     	Integer 	currentError 				= entries[indexCurrent].item - target;
     	Float 		proportional 				= currentError.floatValue();		// unit = decigrees offtarget
 		Float 		differential 				= 0F;								// unit = decigrees/second 
