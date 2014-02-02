@@ -174,6 +174,31 @@ public class LogIt
 
 		Global.httpSemaphore.semaphoreUnLock();			
     }
+	public static void mixerData(Long dateTimeStart,Integer positionTrackedStart, Long dateTimeEnd, Integer positionTrackedEnd)
+    {
+		if (!Global.httpSemaphore.semaphoreLock("LogIt.mixerData"))
+		{
+			System.out.println(dateTimeStamp() + " LogIt.mixerData Lock timedout, owned by " + Global.httpSemaphore.owner);
+			return;
+		}
+
+		HTTP_Request <Message_MixerMouvement>	httpRequest			= new HTTP_Request <Message_MixerMouvement> ("Monitor");
+		
+		Message_MixerMouvement 					messageSend 		= new Message_MixerMouvement();
+		messageSend.dateTimeStart 									= dateTimeStart;
+		messageSend.positionTrackedStart 							= positionTrackedStart;
+		messageSend.dateTimeEnd 									= dateTimeEnd;
+		messageSend.positionTrackedEnd								= positionTrackedEnd;
+		
+		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		
+		if (!(messageReceive instanceof Message_Abstract.Ack))
+		{
+			// System.out.println(dateTimeStamp() + " Temp data  is : Nack");
+		}
+
+		Global.httpSemaphore.semaphoreUnLock();			
+    }
 	public static void fuelData(Long fuelConsumed)
     {
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.fuelData"))

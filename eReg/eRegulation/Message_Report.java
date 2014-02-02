@@ -1,6 +1,5 @@
 package eRegulation;
 
-@SuppressWarnings("serial")
 public class Message_Report extends Message_Abstract
 {
 	private static final long 		serialVersionUID 			= 1L;
