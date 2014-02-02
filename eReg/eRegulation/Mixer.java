@@ -17,7 +17,9 @@ public class Mixer
 	public Integer 			tempDontMove							= 20;
 	public Integer 			positionTracked							= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
 	public Integer 			swingTimeRequired						= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
+	
 	public Long				swingStart								= 0L;
+	public Long				swingEnd								= 0L;
 	
 	public Float			gainP									= 0F;
 	public Float			gainD									= 0F;
@@ -92,6 +94,7 @@ public class Mixer
 		Integer tempFloorOut							= Global.thermoFloorOut.readUnCached();
 		
 		swingStart										= 0L;
+		swingEnd										= 0L;
 		swingTimeRequired								= pidControler.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
 		
 		Integer swingTimePerformed						= 0;
@@ -125,14 +128,11 @@ public class Mixer
 		 			swingTimeRequired 					= this.swingTime * 1000 - positionTracked + 2000;	//No point waiting over maximum add extra 2 seconds to be sure of end point
 		 		}
 		 		Global.mixerUp.on();
-				Long timeStart							= Global.now();
-				swingStart								= timeStart;
+				swingStart								= Global.now();
 				Global.waitMilliSeconds(swingTimeRequired.intValue());
 				Global.mixerUp.off();
-				Long timeEnd							= Global.now();
-				Long positionDiff						= timeEnd - timeStart;
-		 		swingTimePerformed   					= positionDiff.intValue();
-				swingStart								= 0L;
+				swingEnd								= Global.now();
+		 		swingTimePerformed   					= ((Long) (swingStart - swingEnd)).intValue();
 			}
 		}
 		else																			// Moving colder
@@ -148,19 +148,16 @@ public class Mixer
 		 			swingTimeRequired 					= swingTimeRequired - (positionTracked - swingTime * 900);	//Bring it down to 10% and then start the motion
 		 		}
 				Global.mixerDown.on();
-				Long timeStart							= Global.now();
-				swingStart								= timeStart;
+				swingStart								= Global.now();
 				Global.waitMilliSeconds(Math.abs(swingTimeRequired));
 				Global.mixerDown.off();
-				Long timeEnd							= Global.now();
-				Long positionDiff						= timeEnd - timeStart;
-		 		swingTimePerformed   					= - positionDiff.intValue();
-				swingStart								= 0L;
+				swingEnd								= Global.now();
+		 		swingTimePerformed   					= - ((Long) (swingStart - swingEnd)).intValue();
 	 		}
 		}
+		Integer positionTrackedOld						= positionTracked;
 		positionTracked									= positionTracked + swingTimePerformed;
 		swingTimeRequired								= 0;
-		swingStart										= 0L;
 		if (positionTracked > this.swingTime * 1000)
 		{
 			positionTracked			 					= this.swingTime * 1000;
@@ -169,6 +166,7 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
+		LogIt.mixerData(swingStart, positionTrackedOld, swingEnd, positionTracked);
 	}
 	public void positionZero()
 	{
