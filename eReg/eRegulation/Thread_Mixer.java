@@ -17,7 +17,7 @@ public class Thread_Mixer implements Runnable
 		Long timeStart							= Global.now();
 		mixer.positionAbsolute(0.30F);
 		LogIt.info("Thread_Mixer", "Run", "Floor Initialised (30%)");		
-		LogIt.mixerData(timeStart, 0, Global.now(), mixer.swingTime * 1000);
+		LogIt.mixerData(timeStart, 0, Global.now(), mixer.swingTime * 300);
 		
 		Global.waitSeconds(1);
 		Global.pumpFloor.on();
