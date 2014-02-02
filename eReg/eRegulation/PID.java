@@ -50,7 +50,7 @@ public class PID
     		previousIndex						= (indexEnqueue  - 1 + pidDepth) % pidDepth;
 
     		// Calculate dTemp. Note that it is independant of the target (rate of change)
-    		entries[indexEnqueue].delta 		= newNumber - entries[indexEnqueue].item;
+    		entries[indexEnqueue].delta 		= newNumber - entries[previousIndex].item;
     		LogIt.display("PID", "add", "delta is " + entries[indexEnqueue].delta);
     		
     		Long deltaTimeStamps 				= entries[indexEnqueue].timeStamp - entries[previousIndex].timeStamp;
