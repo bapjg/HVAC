@@ -187,6 +187,9 @@ public class LogIt
 		messageSend.dateTimeEnd 									= dateTimeEnd;
 		messageSend.positionTrackedEnd								= positionTrackedEnd;
 		
+		System.out.println("Start : " + dateTimeStart);
+		System.out.println("End   : " + dateTimeEnd);
+		
 		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 		
 		if (!(messageReceive instanceof Message_Abstract.Ack))
