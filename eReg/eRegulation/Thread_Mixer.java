@@ -66,7 +66,7 @@ public class Thread_Mixer implements Runnable
 //				}
 				if (i >= indexInterupt)									// We have waited for dTdt to settle a bit
 				{
-					temperatureProjected					= tempNow + ((Float) (this.mixer.pidControler.dTdt() * timeWait)).intValue();
+					temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeWait)).intValue();
 					
 					if (Math.abs(temperatureProjected - targetTemp) > 20)		// More than 2 degrees difference (either over or under)
 					{

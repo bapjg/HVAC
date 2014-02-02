@@ -51,7 +51,6 @@ public class PID
 
     		// Calculate dTemp. Note that it is independant of the target (rate of change)
     		entries[indexEnqueue].delta 		= newNumber - entries[previousIndex].item;
-    		LogIt.display("PID", "add", "delta is " + entries[indexEnqueue].delta);
     		
     		Long deltaTimeStamps 				= entries[indexEnqueue].timeStamp - entries[previousIndex].timeStamp;
     		Long decidegreeSeconds				= (newNumber.longValue() - target.longValue()) * deltaTimeStamps/1000L;		// decidegreeSeconds = offTarget x seconds
@@ -83,8 +82,6 @@ public class PID
     	Integer		indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
     	Integer		indexPrevious				= (indexEnqueue - 2 + pidDepth) % pidDepth;
     	
-    	LogIt.display("PID", "dTdt", "indexCurrent/indexPrevious" + indexCurrent + "/" + indexPrevious);
-    	
     	if (count <= 1)
     	{
     		differential 						= 0F;
@@ -94,7 +91,6 @@ public class PID
     		//Units of differential are decidegrees/millisecond
     		deltaTimeStamps 					= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
     		differential						= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in decidegrees per second
-    		LogIt.display("PID", "dTdt", "delta is " + entries[indexCurrent].delta);
     	}
 
     	return differential;

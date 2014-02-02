@@ -10,16 +10,11 @@ public class Thread_Thermometers implements Runnable
 		{
 			Global.thermoFloorOut.readUnCached();
 			Global.thermoFloorOut.pidControler.add(Global.thermoFloorOut.reading);
-			Global.circuitFloor.mixer.pidControler.add(Global.thermoFloorOut.reading);
-
-			LogIt.display("Global", "run", "floorout " + Global.thermoFloorOut.pidControler.dTdt());
 			
 			Global.thermoBoiler.readUnCached();
-
 			Global.thermoBoilerOut.readUnCached();
 			Global.thermoBoilerOut.pidControler.add(Global.thermoBoilerOut.reading);
-			LogIt.display("Global", "run", "BoilerOut " + Global.thermoBoilerOut.pidControler.dTdt());
-
+			
 			Global.thermoBoilerIn.read();
 			Global.thermoFloorIn.read();
 			Global.thermoRadiatorOut.read();

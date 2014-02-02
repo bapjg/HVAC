@@ -25,7 +25,6 @@ public class Mixer
 	public Float			timeD									= 0F;
 	public Float			timeI									= 0F;
 	
-	public PID				pidControler;
 	public Integer			state									= 0;
 	public static final int	MIXER_STATE_Off 						= 0;
 	public static final int	MIXER_STATE_Normal_Operating			= 1;
@@ -51,7 +50,6 @@ public class Mixer
 		this.name 									= name;
 		this.swingTime								= Integer.parseInt(swingTime);
 		this.lagTime								= Integer.parseInt(lagTime);
-		this.pidControler							= new PID(10);
 		this.gainP									= Float.parseFloat(gainP);
 		this.timeD									= Float.parseFloat(timeD);
 		this.gainD									= this.gainP * this.timeD;
@@ -74,7 +72,7 @@ public class Mixer
 		// Multiply by a coefficient (250ms/decimal degree to start with) and see how it goes
 		//
 		allOff();
-		
+		PID pidControler								= Global.thermoFloorOut.pidControler;
 		
 		// Koeff at 250 ok for low boiler temp circa 30
 		// when over 45, had a lot of overshoot
