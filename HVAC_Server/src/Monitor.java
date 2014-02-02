@@ -194,7 +194,7 @@ public class Monitor extends HttpServlet
             System.out.println("dateTime 2 :" + readings.dateTimeStart);
             System.out.println("date     2 :" + dateTime2Date(readings.dateTimeStart));
             System.out.println("    Time 2 :" + dateTime2Time(readings.dateTimeStart));
-            System.out.println("pos      2 :" + readings.positionTrackedStart);
+            System.out.println("pos      2 :" + readings.positionTrackedEnd);
             
 dbResultSet.insertRow();
  
