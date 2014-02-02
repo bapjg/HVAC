@@ -114,6 +114,11 @@ public class Monitor extends HttpServlet
             Message_PID.Update			readings 	= (Message_PID.Update) message_in;
             message_out								= processPID(readings);
         } 
+		else if (message_in instanceof Message_MixerMouvement)
+        {
+			Message_MixerMouvement 		readings 	= (Message_MixerMouvement) message_in;
+            message_out								= processMixerMouvement(readings);
+         } 
 		else
         {
             System.out.println("Unsupported message class received from client");
@@ -151,6 +156,40 @@ public class Monitor extends HttpServlet
             dbResultSet.updateFloat		("pidBoilerOutDifferential",readings.pidBoilerOutDifferential);
             dbResultSet.insertRow();
             
+            dbStatement.close();
+            dbConnection.close();
+        }
+        catch(SQLException eSQL)
+        {
+        	eSQL.printStackTrace();
+            return new Message_Abstract().new Nack();
+        }
+        return new Message_Abstract().new Ack();
+    }
+    public Message_Abstract processMixerMouvement(Message_MixerMouvement readings)
+    {
+        dbOpen();
+        
+        try
+        {
+            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
+            dbResultSet.moveToInsertRow();
+            
+            dbResultSet.updateDouble	("dateTime", 				readings.dateTimeStart);
+            dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTimeStart));
+            dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTimeStart));
+            dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedStart);
+            dbResultSet.insertRow();
+ 
+            dbResultSet.moveToInsertRow();
+            
+            dbResultSet.updateDouble	("dateTime", 				readings.dateTimeEnd);
+            dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTimeEnd));
+            dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTimeEnd));
+            dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedEnd);
+            dbResultSet.insertRow();
+ 
             dbStatement.close();
             dbConnection.close();
         }
