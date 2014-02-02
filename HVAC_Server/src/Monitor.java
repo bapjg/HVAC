@@ -181,11 +181,11 @@ public class Monitor extends HttpServlet
             dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedStart);
             dbResultSet.insertRow();
  
-//            System.out.println("dateTime 1 :" + readings.dateTimeStart);
-//            System.out.println("date     1 :" + dateTime2Date(readings.dateTimeStart));
-//            System.out.println("    Time 1 :" + dateTime2Time(readings.dateTimeStart));
-//            System.out.println("pos      1 :" + readings.positionTrackedStart);
-//            
+            System.out.println("dateTime 1 :" + readings.dateTimeStart);
+            System.out.println("date     1 :" + dateTime2Date(readings.dateTimeStart));
+            System.out.println("    Time 1 :" + dateTime2Time(readings.dateTimeStart));
+            System.out.println("pos      1 :" + readings.positionTrackedStart);
+            
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateDouble	("dateTime", 				readings.dateTimeEnd);
@@ -193,10 +193,10 @@ public class Monitor extends HttpServlet
             dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTimeEnd));
             dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedEnd);
 
-//            System.out.println("dateTime 2 :" + readings.dateTimeStart);
-//            System.out.println("date     2 :" + dateTime2Date(readings.dateTimeStart));
-//            System.out.println("    Time 2 :" + dateTime2Time(readings.dateTimeStart));
-//            System.out.println("pos      2 :" + readings.positionTrackedEnd);
+            System.out.println("dateTime 2 :" + readings.dateTimeStart);
+            System.out.println("date     2 :" + dateTime2Date(readings.dateTimeStart));
+            System.out.println("    Time 2 :" + dateTime2Time(readings.dateTimeStart));
+            System.out.println("pos      2 :" + readings.positionTrackedEnd);
             
             dbResultSet.insertRow();
  
