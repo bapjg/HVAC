@@ -16,10 +16,7 @@ public class Mixer
 	public Integer 			tempMax 								= 480;	
 	public Integer 			tempDontMove							= 20;
 	public Integer 			positionTracked							= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
-	public Integer 			swingTimeRequired						= 0;
-	
-	public Long				swingStart								= 0L;
-	public Long				swingEnd								= 0L;
+	public Integer			swingTimeRequired						= 0;
 	
 	public Float			gainP									= 0F;
 	public Float			gainD									= 0F;
@@ -78,6 +75,8 @@ public class Mixer
 
 		allOff();
 		PID pidControler								= Global.thermoFloorOut.pidControler;
+		MixerMove_Report report;
+		
 		
 		// Koeff at 250 ok for low boiler temp circa 30
 		// when over 45, had a lot of overshoot
@@ -96,12 +95,8 @@ public class Mixer
 
 		Integer tempFloorOut							= Global.thermoFloorOut.readUnCached();
 		
-		swingStart										= 0L;
-		swingEnd										= 0L;
 		swingTimeRequired								= pidControler.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
 		
-		Integer swingTimePerformed						= 0;
-
 		if (tempFloorOut > 500)
 		{
 			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
@@ -119,71 +114,45 @@ public class Mixer
 			}
 		}
 		
-		if (Math.abs(swingTimeRequired) < 500)												// Less than half a second
+		if (Math.abs(swingTimeRequired) > 500)												// Less than half a second
 		{
-			swingTimePerformed							= 0;								// Do nothing to avoid contact bounce and relay problems
-		}
-		else if (swingTimeRequired > 0)														// Moving hotter
-		{
-			if (positionTracked < this.swingTime * 1000)													// No point going over max
-	 		{
+			if (swingTimeRequired > 0)		// Moving hotter
+			{
 				if (positionTracked + swingTimeRequired > this.swingTime * 1000)
 		 		{
 		 			swingTimeRequired 					= this.swingTime * 1000 - positionTracked + 2000;	//No point waiting over maximum add extra 2 seconds to be sure of end point
 		 		}
-		 		Global.mixerUp.on();
-				swingStart								= Global.now();
-				Global.waitMilliSeconds(swingTimeRequired);
-				Global.mixerUp.off();
-				swingEnd								= Global.now();
-		 		swingTimePerformed   					= ((Long) (swingStart - swingEnd)).intValue();
+				if (positionTracked < swingTime * 300)										// We are under 30%, first 30% swing gives no change
+		 		{
+		 			// Empty swing is (swingTime * 300 - positionTracked)
+					swingTimeRequired 					= swingTimeRequired + (swingTime * 300 - positionTracked);	//Bring it down to 10% and then start the motion
+		 		}
+		 		
+				report									= mixerMoveUp(swingTimeRequired);
 			}
-			else
+			else							// Moving colder
 			{
-				LogIt.display("Mixer", "sequencer", "OverMax...swingTimeRequired : " + swingTimeRequired + ", positionTracked: " + positionTracked);
-			}
-		}
-		else																			// Moving colder
-		{
-			if (positionTracked > 0)													// No point going under min
-	 		{
 				if (positionTracked + swingTimeRequired < 0)
 		 		{
 		 			swingTimeRequired 					= - (positionTracked + 2000);		//No point waiting under minimum add extra 2 seconds to be sure of end point
 		 		}
 				if (positionTracked > swingTime * 900)										// We are over 90%, last 10% swing gives no change
 		 		{
+		 			// Empty swing is (positionTracked - swingTime * 900) Make it negative to make it a down movement
 		 			swingTimeRequired 					= swingTimeRequired - (positionTracked - swingTime * 900);	//Bring it down to 10% and then start the motion
 		 		}
-				Global.mixerDown.on();
-				swingStart								= Global.now();
-				Global.waitMilliSeconds(Math.abs(swingTimeRequired));
-				Global.mixerDown.off();
-				swingEnd								= Global.now();
-		 		swingTimePerformed   					= - ((Long) (swingStart - swingEnd)).intValue();
+				
+				report									= mixerMoveDown(swingTimeRequired);
 			}
-			else
-			{
-				LogIt.display("Mixer", "sequencer", "UnderMin...swingTimeRequired : " + swingTimeRequired + ", positionTracked: " + positionTracked);
-			}
+			
+			LogIt.mixerData(report.timeStart, positionTracked, report.timeEnd, report.positionTracked);
+			
+			positionTracked								= report.positionTracked;
 		}
-		Integer positionTrackedOld						= positionTracked;
-		positionTracked									= positionTracked + swingTimePerformed;
-		LogIt.display("Mixer", "sequencer", "NearEnd...positionTracked : " + positionTracked);
-		if (positionTracked > this.swingTime * 1000)
+		else
 		{
-			positionTracked			 					= this.swingTime * 1000;
+			// Less that 500 ms. Do nought
 		}
-		else if (positionTracked < 0)
-		{
-			positionTracked 							= 0;
-		}
-		if (Math.abs(swingTimeRequired) >= 500)
-		{
-			System.out.println("swingTimeRequired : " + swingTimeRequired);
-			LogIt.mixerData(swingStart, positionTrackedOld, swingEnd, positionTracked);
-		}
-		swingTimeRequired								= 0;
 		LogIt.display("Mixer", "sequencer", "End...positionTracked : " + positionTracked);
 		LogIt.display("Mixer", "sequencer", "================================================================ End");
 	}
@@ -242,50 +211,49 @@ public class Mixer
 		Global.mixerUp.off();
 		Global.waitMilliSeconds(100);
 	}
-	private MixerMovement mixerMove(Integer swingTime)
+	private MixerMove_Report mixerMoveUp(Integer swingTimeRequired)
 	{
-		Long			positionChange					= 0L;
-		MixerMovement	result							= new MixerMovement();
+		Long				positionChange				= 0L;
+		MixerMove_Report	report						= new MixerMove_Report();
 		
-		if (swingTime > 0)
-		{
-		}
-		return result;
-	}
-	private MixerMovement mixerMoveUp(Integer swingTime)
-	{
-		Long			positionChange					= 0L;
-		MixerMovement	result							= new MixerMovement();
-		
-		if (swingTime > 0)
-		{
 		Global.mixerUp.on();
-		result.timeStart								= Global.now();
-		Global.waitMilliSeconds(Math.abs(swingTime));
-		Global.mixerDown.off();
-		result.timeEnd									= Global.now();
-		positionChange									= result.timeEnd - result.timeStart;
-		result.positionChange							= positionChange.intValue();
+		report.timeStart								= Global.now();
+		Global.waitMilliSeconds(Math.abs(swingTimeRequired));
+		Global.mixerUp.off();
+		report.timeEnd									= Global.now();
+		positionChange									= report.timeEnd - report.timeStart;		// Positive number as moved up
+		report.swingTimePerformed						= positionChange.intValue();
+		report.positionTracked							= positionTracked + report.swingTimePerformed;
+		if (report.positionTracked > swingTime * 1000)
+		{
+			report.positionTracked 						= swingTime * 1000;
 		}
-		return result;
+		return report;
 	}
-	private MixerMovement mixerMoveDown(Integer swingTime)
+	private MixerMove_Report mixerMoveDown(Integer swingTimeRequired)
 	{
-		Long			positionChange					= 0L;
-		MixerMovement	result							= new MixerMovement();
+		Long				positionChange				= 0L;
+		MixerMove_Report	report						= new MixerMove_Report();
+		
 		Global.mixerDown.on();
-		result.timeStart								= Global.now();
-		Global.waitMilliSeconds(Math.abs(swingTime));
+		report.timeStart								= Global.now();
+		Global.waitMilliSeconds(Math.abs(swingTimeRequired));
 		Global.mixerDown.off();
-		result.timeEnd									= Global.now();
-		positionChange									= result.timeEnd - result.timeStart;
-		result.positionChange							= positionChange.intValue();
-		return result;
+		report.timeEnd									= Global.now();
+		positionChange									= report.timeStart - report.timeEnd;		// Negative number as moved down
+		report.swingTimePerformed						= positionChange.intValue();
+		report.positionTracked							= positionTracked + report.swingTimePerformed;
+		if (report.positionTracked < 0)
+		{
+			report.positionTracked 						= 0;
+		}
+		return report;
 	}
-	private class MixerMovement
+	private class MixerMove_Report
 	{
-		public	Long	timeStart;
-		public	Long	timeEnd;
-		public	Integer	positionChange;
+		public	Long		timeStart;
+		public	Long		timeEnd;
+		public	Integer		swingTimePerformed;
+		public 	Integer		positionTracked;
 	}
 }
