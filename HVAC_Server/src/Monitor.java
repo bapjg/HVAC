@@ -173,19 +173,26 @@ public class Monitor extends HttpServlet
         {
             dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
+            
+            if (readings.dateTimeStart > 0)
+            {
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateDouble	("dateTime", 				readings.dateTimeStart);
             dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTimeStart));
             dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTimeStart));
             dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedStart);
-            dbResultSet.insertRow();
  
             System.out.println("dateTime 1 :" + readings.dateTimeStart);
             System.out.println("date     1 :" + dateTime2Date(readings.dateTimeStart));
             System.out.println("    Time 1 :" + dateTime2Time(readings.dateTimeStart));
             System.out.println("pos      1 :" + readings.positionTrackedStart);
-            
+
+            dbResultSet.insertRow();
+            }
+
+            if (readings.dateTimeStart > 0)
+            {
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateDouble	("dateTime", 				readings.dateTimeEnd);
@@ -199,7 +206,7 @@ public class Monitor extends HttpServlet
             System.out.println("pos      2 :" + readings.positionTrackedEnd);
             
             dbResultSet.insertRow();
- 
+            }
             dbStatement.close();
             dbConnection.close();
         }
