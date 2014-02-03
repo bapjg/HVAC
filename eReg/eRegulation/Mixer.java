@@ -167,6 +167,7 @@ public class Mixer
 		}
 		if (swingTimeRequired != 0)
 		{
+			System.out.println("swingTimeRequired : " + swingTimeRequired);
 			LogIt.mixerData(swingStart, positionTrackedOld, swingEnd, positionTracked);
 		}
 		swingTimeRequired								= 0;
