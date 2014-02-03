@@ -165,7 +165,7 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
-		if (swingTimeRequired != 0)
+		if (Math.abs(swingTimeRequired) >= 500)
 		{
 			System.out.println("swingTimeRequired : " + swingTimeRequired);
 			LogIt.mixerData(swingStart, positionTrackedOld, swingEnd, positionTracked);
