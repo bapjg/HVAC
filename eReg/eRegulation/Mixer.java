@@ -166,6 +166,7 @@ public class Mixer
 		}
 		Integer positionTrackedOld						= positionTracked;
 		positionTracked									= positionTracked + swingTimePerformed;
+		LogIt.display("Mixer", "sequencer", "NearEnd...positionTracked : " + positionTracked);
 		if (positionTracked > this.swingTime * 1000)
 		{
 			positionTracked			 					= this.swingTime * 1000;
@@ -180,6 +181,7 @@ public class Mixer
 			LogIt.mixerData(swingStart, positionTrackedOld, swingEnd, positionTracked);
 		}
 		swingTimeRequired								= 0;
+		LogIt.display("Mixer", "sequencer", "End...positionTracked : " + positionTracked);
 	}
 	public void positionZero()
 	{
