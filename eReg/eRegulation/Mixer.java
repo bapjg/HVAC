@@ -227,23 +227,50 @@ public class Mixer
 		Global.mixerUp.off();
 		Global.waitMilliSeconds(100);
 	}
-	public Boolean wait5secs()
+	private MixerMovement mixerMove(Integer swingTime)
 	{
-		try
-        {
-			Thread.sleep(5000);
-        }
-        catch (InterruptedException e)
-        {
-	        e.printStackTrace();
-        }
-		if (Global.thermoFloorOut.readUnCached() > 450)
+		Long			positionChange					= 0L;
+		MixerMovement	result							= new MixerMovement();
+		
+		if (swingTime > 0)
 		{
-			return true;
 		}
-		else
+		return result;
+	}
+	private MixerMovement mixerMoveUp(Integer swingTime)
+	{
+		Long			positionChange					= 0L;
+		MixerMovement	result							= new MixerMovement();
+		
+		if (swingTime > 0)
 		{
-			return false;
+		Global.mixerUp.on();
+		result.timeStart								= Global.now();
+		Global.waitMilliSeconds(Math.abs(swingTime));
+		Global.mixerDown.off();
+		result.timeEnd									= Global.now();
+		positionChange									= result.timeEnd - result.timeStart;
+		result.positionChange							= positionChange.intValue();
 		}
+		return result;
+	}
+	private MixerMovement mixerMoveDown(Integer swingTime)
+	{
+		Long			positionChange					= 0L;
+		MixerMovement	result							= new MixerMovement();
+		Global.mixerDown.on();
+		result.timeStart								= Global.now();
+		Global.waitMilliSeconds(Math.abs(swingTime));
+		Global.mixerDown.off();
+		result.timeEnd									= Global.now();
+		positionChange									= result.timeEnd - result.timeStart;
+		result.positionChange							= positionChange.intValue();
+		return result;
+	}
+	private class MixerMovement
+	{
+		public	Long	timeStart;
+		public	Long	timeEnd;
+		public	Integer	positionChange;
 	}
 }
