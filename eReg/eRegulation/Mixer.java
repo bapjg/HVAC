@@ -16,7 +16,7 @@ public class Mixer
 	public Integer 			tempMax 								= 480;	
 	public Integer 			tempDontMove							= 20;
 	public Integer 			positionTracked							= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
-	public Integer 			swingTimeRequired						= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
+	public Integer 			swingTimeRequired						= 0;
 	
 	public Long				swingStart								= 0L;
 	public Long				swingEnd								= 0L;
@@ -99,25 +99,26 @@ public class Mixer
 		
 		Integer swingTimePerformed						= 0;
 
-		if (tempFloorOut > 450)
+		if (tempFloorOut > 500)
+		{
+			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
+		}
+		else if (tempFloorOut > 450)
 		{
 			// We need to do trip avoidance
 			if (swingTimeRequired < 0)
 			{
-				swingTimeRequired						= swingTimeRequired * 2;
+				swingTimeRequired						= swingTimeRequired * 2;		// i.e. double the gain factor kp
 			}
-			// LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
-		}
-		if (tempFloorOut > 500)
-		{
-			// We need to do trip avoidance
-			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
+			else
+			{
+				LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
+			}
 		}
 		
 		if (Math.abs(swingTimeRequired) < 500)												// Less than half a second
 		{
-			// Do nothing to avoid contact bounce and relay problems
-			swingTimePerformed							= 0;
+			swingTimePerformed							= 0;								// Do nothing to avoid contact bounce and relay problems
 		}
 		else if (swingTimeRequired > 0)														// Moving hotter
 		{
@@ -129,10 +130,14 @@ public class Mixer
 		 		}
 		 		Global.mixerUp.on();
 				swingStart								= Global.now();
-				Global.waitMilliSeconds(swingTimeRequired.intValue());
+				Global.waitMilliSeconds(swingTimeRequired);
 				Global.mixerUp.off();
 				swingEnd								= Global.now();
 		 		swingTimePerformed   					= ((Long) (swingStart - swingEnd)).intValue();
+			}
+			else
+			{
+				LogIt.display("Mixer", "sequencer", "OverMax...swingTimeRequired : " + swingTimeRequired + ", positionTracked: " + positionTracked);
 			}
 		}
 		else																			// Moving colder
@@ -153,7 +158,11 @@ public class Mixer
 				Global.mixerDown.off();
 				swingEnd								= Global.now();
 		 		swingTimePerformed   					= - ((Long) (swingStart - swingEnd)).intValue();
-	 		}
+			}
+			else
+			{
+				LogIt.display("Mixer", "sequencer", "UnderMin...swingTimeRequired : " + swingTimeRequired + ", positionTracked: " + positionTracked);
+			}
 		}
 		Integer positionTrackedOld						= positionTracked;
 		positionTracked									= positionTracked + swingTimePerformed;
