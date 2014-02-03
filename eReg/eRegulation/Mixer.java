@@ -157,7 +157,6 @@ public class Mixer
 		}
 		Integer positionTrackedOld						= positionTracked;
 		positionTracked									= positionTracked + swingTimePerformed;
-		swingTimeRequired								= 0;
 		if (positionTracked > this.swingTime * 1000)
 		{
 			positionTracked			 					= this.swingTime * 1000;
@@ -166,7 +165,11 @@ public class Mixer
 		{
 			positionTracked 							= 0;
 		}
-		LogIt.mixerData(swingStart, positionTrackedOld, swingEnd, positionTracked);
+		if (swingTimeRequired != 0)
+		{
+			LogIt.mixerData(swingStart, positionTrackedOld, swingEnd, positionTracked);
+		}
+		swingTimeRequired								= 0;
 	}
 	public void positionZero()
 	{
