@@ -73,6 +73,9 @@ public class Mixer
 		// Simply measure the difference between wanted temperature and mixerOut
 		// Multiply by a coefficient (250ms/decimal degree to start with) and see how it goes
 		//
+		LogIt.display("Mixer", "sequencer", "================================================================ Start");
+		LogIt.display("Mixer", "sequencer", "Start...positionTracked : " + positionTracked);
+
 		allOff();
 		PID pidControler								= Global.thermoFloorOut.pidControler;
 		
@@ -182,6 +185,7 @@ public class Mixer
 		}
 		swingTimeRequired								= 0;
 		LogIt.display("Mixer", "sequencer", "End...positionTracked : " + positionTracked);
+		LogIt.display("Mixer", "sequencer", "================================================================ End");
 	}
 	public void positionZero()
 	{
