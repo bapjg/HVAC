@@ -130,10 +130,10 @@ public class PID
     	{
     		//Units of differential are decidegrees/millisecond
     		Long 	deltaTimeStamps 			= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
-    		differential						= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in decidegrees per second
+    		differential						= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
     	}
 
-		integral 								= entries[indexCurrent].integral.floatValue();							// in decidegree x seconds
+		integral 								= entries[indexCurrent].integral.floatValue();							// in millidegree x seconds
 		result 									= - kP * proportional - kD * differential - kI * integral;
 		
 		return result.intValue();
