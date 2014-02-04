@@ -3,7 +3,7 @@
 	<Vocabulary 		type="Collection">
 		<Word 			type="object"	name="EveryDay"		use="days"		days="1234567"			/>
 		<Word 			type="object"	name="WeekDay"		use="days"		days="12345  "			/>
-		<Word 			type="object"	name="HalfDay"		use="days"		days="15     "			/>
+		<Word 			type="object"	name="HalfDay"		use="days"		days="12     "			/>
 		<Word 			type="object"	name="WeekEnd"		use="days"		days="67     "			/>			
 		<Word 			type="object"	name="Locataire"	use="days"		days="       "			/>			
 		<Word 			type="object"	name="Test"			use="days"		days="TT   TT"			/>			
