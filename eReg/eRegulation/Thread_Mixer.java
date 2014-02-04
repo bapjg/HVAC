@@ -74,9 +74,9 @@ public class Thread_Mixer implements Runnable
 					{
 						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeWait + "s wait after " + (i * 5) +"s");
 						LogIt.display("Thread_Mixer", "mainLoop", "temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp);
-						LogIt.display("Thread_Mixer", "mainLoop", "tempNow : " + tempNow);
-						LogIt.display("Thread_Mixer", "mainLoop", "expectedChange : " + (Global.thermoFloorOut.pidControler.dTdt() * timeWait));
-						LogIt.display("Thread_Mixer", "mainLoop", "expectedChange different : " + ((tempNow - tempPrevious) * timeWait / 5));
+//						LogIt.display("Thread_Mixer", "mainLoop", "tempNow : " + tempNow);
+//						LogIt.display("Thread_Mixer", "mainLoop", "expectedChange : " + (Global.thermoFloorOut.pidControler.dTdt() * timeWait));
+//						LogIt.display("Thread_Mixer", "mainLoop", "expectedChange different : " + ((tempNow - tempPrevious) * timeWait / 5));
 						break;
 					}
 				}
