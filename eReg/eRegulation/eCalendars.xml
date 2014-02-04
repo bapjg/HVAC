@@ -9,6 +9,7 @@
 		<Word 			type="object"	name="Test"			use="days"		days="TT   TT"			/>			
 		<Word 			type="object"	name="Today"		use="relative"	days="0      "			/>
 		<Word 			type="object"	name="Tomorrow"		use="relative"	days="1      "			/>
+	
 	</Vocabulary>
 	<Circuits 			type="Collection">
 		<Circuit 		type="Object" 	name="Hot_Water">
