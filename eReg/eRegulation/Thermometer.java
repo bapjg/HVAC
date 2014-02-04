@@ -19,8 +19,6 @@ public class Thermometer
 	public String 					thermoFile_UnCached;
  	public Integer 					reading;
 	public PID						pidControler;
- 	public Integer 					milliReading;
-
 	
 	public Thermometer(String name, String address, String friendlyName, Boolean pid)
 	{
@@ -116,6 +114,6 @@ public class Thermometer
     {
     	// Converts temperature in millidegrees into displayable format							// Either keep true or throw it out from display
     	DecimalFormat temperatureFormat 					= new DecimalFormat("#.0");
-    	return  temperatureFormat.format(this.milliReading/1000);
+    	return  temperatureFormat.format(this.reading/1000);
     }
 }
