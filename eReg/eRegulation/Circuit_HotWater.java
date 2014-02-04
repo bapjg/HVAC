@@ -61,7 +61,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				//Now fall through
 			case CIRCUIT_STATE_Stopping:
 				if 	(	(Global.circuits.isSingleActiveCircuit())
-				&& 		(Global.thermoBoiler.reading > Global.thermoHotWater.reading + 30) ) 	
+				&& 		(Global.thermoBoiler.reading > Global.thermoHotWater.reading + 3000) ) 	
 				{
 					// Require atleast 3 degrees difference otherwise it takes ages
 					// We are alone, so as long as there is heat to get out of the system
