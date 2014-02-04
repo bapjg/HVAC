@@ -60,7 +60,7 @@ public class Boiler
 		{
 			tempMax 											= tempNeverExceed - tempOvershoot;
 		}
-		LogIt.display("Boiler", "requestHeat", "tempMin/tempMax are " + tempMin + "/" + tempMax);
+		//LogIt.display("Boiler", "requestHeat", "tempMin/tempMax are " + tempMin + "/" + tempMax);
 		
 		// Only change the state if it is STATE_Off
 		// There could be an error (STATE_Error)

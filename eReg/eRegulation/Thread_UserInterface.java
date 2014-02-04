@@ -56,7 +56,7 @@ public class Thread_UserInterface implements Runnable
 					
 					Global.circuitHotWater.taskActive					= new CircuitTask(	now, 								// Time Start
 																							now + 30 * 60 * 1000, 				// TimeEnd
-																							userControl.line1Value * 10,		// TempObjective
+																							userControl.line1Value * 1000,		// TempObjective in millidesrees
 																							true,								// StopOnObjective
 																							"1, 2, 3, 4, 5, 6, 7");				// Days
 					Global.circuitHotWater.start();
