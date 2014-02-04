@@ -115,7 +115,7 @@ public class PID
 		Float 		differential 				= 0F;								// unit = decigrees/second 
 		Float 		integral 					= 0F;								// unit = decigrees offtarget x seconds
 		Float 		result 						= 0F;								// retruns number of milliseconds to move 3way valve
-																			// Made negative as is a negative feedback system
+																				// Made negative as is a negative feedback system
 		
     	// Rather than calc de/dt (which can have transients due to square wave targets
     	// we go for dnewNumber/dt which is smoother. All times are saved in ms.

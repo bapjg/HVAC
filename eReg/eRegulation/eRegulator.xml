@@ -40,17 +40,17 @@
 			       textinfo2="bottom 10s of swingTime are not available (cut out)"
 			       textinforeport="Indicates about 200ms/decidegree, 30s to reach 50% upward change from stop movement time. About 10s from start movement to temp change detect">
 			</Mixer>
-			<TempGradient type="Object" name="Mixer" outsideLow="-150" tempLow="450" outsideHigh="150" tempHigh="350">
+			<TempGradient type="Object" name="Mixer" outsideLow="-15000" tempLow="45000" outsideHigh="15000" tempHigh="35000">
 			</TempGradient>
 		</Circuit>
 
-		<Circuit type="Object" name="Radiator" tempMax="900" circuitType="tempGradient" friendlyName="Radiateurs" rampUpTime="0" summerActivity="0">
+		<Circuit type="Object" name="Radiator" tempMax="90000" circuitType="tempGradient" friendlyName="Radiateurs" rampUpTime="0" summerActivity="0">
 			<TempGradient type="Object" name="Mixer" outsideLow="-150"
-				tempLow="800" outsideHigh="150" tempHigh="350">
+				tempLow="80000" outsideHigh="15000" tempHigh="35000">
 			</TempGradient>
 		</Circuit>
 
-		<Circuit type="Object" name="Hot_Water" tempMax="750" circuitType="hotWater" friendlyName="ECS" outsideLow="99" tempLow="99" outsideHigh="99" tempHigh="99" rampUpTime="0"
+		<Circuit type="Object" name="Hot_Water" tempMax="75000" circuitType="hotWater" friendlyName="ECS" outsideLow="9900" tempLow="9900" outsideHigh="9900" tempHigh="9900" rampUpTime="0"
 			summerActivity="1">
 		</Circuit>
 
