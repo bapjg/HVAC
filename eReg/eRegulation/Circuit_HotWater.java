@@ -25,7 +25,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				state												= CIRCUIT_STATE_Starting;
 				//Now fall through
 			case CIRCUIT_STATE_Starting:
-				this.heatRequired.tempMinimum						= this.taskActive.tempObjective + 100;
+				this.heatRequired.tempMinimum						= this.taskActive.tempObjective + 10000;
 				this.heatRequired.tempMaximum						= this.tempMax;
 				state												= CIRCUIT_STATE_AwaitingHeat;
 				break;
