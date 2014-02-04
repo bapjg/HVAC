@@ -25,8 +25,8 @@ public class Boiler
 	
 	public Integer	   		tempMax;
 	public Integer	   		tempMin;
-	public Integer			tempNeverExceed						= 950;
-	public Integer			tempOvershoot						= 180;
+	public Integer			tempNeverExceed						= 95000;
+	public Integer			tempOvershoot						= 18000;
 	public Integer			state;
 	public PID				pidControler;
 	
