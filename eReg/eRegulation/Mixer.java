@@ -13,7 +13,7 @@ public class Mixer
 	public Integer 			swingTime 								= 90;
 	public Integer 			lagTime 								= 30;
 
-	public Integer 			tempMax 								= 480;	
+	public Integer 			tempMax 								= 48000;	
 	public Integer 			tempDontMove							= 20;
 	public Integer 			positionTracked							= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
 	public Integer			swingTimeRequired						= 0;
@@ -94,11 +94,11 @@ public class Mixer
 		
 		swingTimeRequired								= pidControler.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
 		
-		if (tempFloorOut > 500)
+		if (tempFloorOut > 50000)
 		{
 			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
 		}
-		else if (tempFloorOut > 450)
+		else if (tempFloorOut > 45000)
 		{
 			// We need to do trip avoidance
 			if (swingTimeRequired < 0)
@@ -111,7 +111,7 @@ public class Mixer
 			}
 		}
 		
-		if (Math.abs(swingTimeRequired) > 500)												// Less than half a second
+		if (Math.abs(swingTimeRequired) > 50000)												// Less than half a second
 		{
 			if (swingTimeRequired > 0)		// Moving hotter
 			{
