@@ -53,9 +53,9 @@ public class PID
     		entries[indexEnqueue].delta 		= newNumber - entries[previousIndex].item;
     		
     		Long deltaTimeStamps 				= entries[indexEnqueue].timeStamp - entries[previousIndex].timeStamp;
-    		Long decidegreeSeconds				= (newNumber.longValue() - target.longValue()) * deltaTimeStamps/1000L;		// decidegreeSeconds = offTarget x seconds
+    		Long millidegreeSeconds				= (newNumber.longValue() - target.longValue()) * deltaTimeStamps/1000L;		// decidegreeSeconds = offTarget x seconds
     		
-    		entries[indexEnqueue].integral 		= decidegreeSeconds + entries[previousIndex].integral;			// This is items x.dt
+    		entries[indexEnqueue].integral 		= millidegreeSeconds + entries[previousIndex].integral;			// This is items x.dt
     	}
     	
     	indexEnqueue 							= (indexEnqueue + 1) % pidDepth;
@@ -141,10 +141,10 @@ public class PID
     public class PID_Entry
     {
         private Long 		timeStamp;		//                         stored unit = milliseconds
-        private Integer 	item;			// Proportional component, stored unit = decidegrees (we store values, not differences to avoid pbs with 
-        private Integer 	delta;			// Differential component, stored unit = decidegrees  sudden target changes with sudden target changes)
-        private Long 		integral;		// Integral component,     stored unit = decidegree from target x seconds
-        private Integer 	delta2;			// Second order Differential component, stored unit = decidegrees per ????  sudden target changes with sudden target changes)
+        private Integer 	item;			// Proportional component, stored unit = millidegrees (we store values, not differences to avoid pbs with 
+        private Integer 	delta;			// Differential component, stored unit = millidegrees  sudden target changes with sudden target changes)
+        private Long 		integral;		// Integral component,     stored unit = millidegree from target x seconds
+        private Integer 	delta2;			// Second order Differential component, stored unit = millidegrees per ????  sudden target changes with sudden target changes)
                
         public PID_Entry() 
         {

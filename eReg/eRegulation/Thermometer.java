@@ -100,8 +100,7 @@ public class Thermometer
 
 			tempString	 									= ThermoFile_InputLine.replace(" ", "");
 			tempFloat	 									= Float.parseFloat(tempString);
-			this.reading									= Math.round(tempFloat * 10); // Round to deci-degree
-			this.milliReading								= Math.round(tempFloat * 1000); // Round to milli-degree
+			this.reading									= Math.round(tempFloat * 1000); // Round to milli-degree
 		}
 		catch (Exception err)
 		{
@@ -109,22 +108,14 @@ public class Thermometer
 			{
 				System.out.println("Thermometer read Error on " + this.name + " message was : " + err.getMessage());
 			}
-			this.reading									= -273; // Absolute zero
-			this.milliReading								= -273000; // Round to milli-degree
+			this.reading									= -273000; // Round to milli-degree
 		}		
 		return this.reading; //Last known good reading;
 	}
     public String toDisplay()
     {
     	// Converts temperature in millidegrees into displayable format							// Either keep true or throw it out from display
-//    	Integer degrees 									= this.reading/1000;
-//    	Integer decimals 									= this.reading - degrees * 1000;
-
-    	Integer degrees 									= this.milliReading/1000;
-    	Integer decimals 									= this.milliReading - degrees * 1000;
-    	
     	DecimalFormat temperatureFormat 					= new DecimalFormat("#.0");
-    	//return degrees.toString() + "." + decimals.toString(); //.substring(1,2);
     	return  temperatureFormat.format(this.milliReading/1000);
     }
 }

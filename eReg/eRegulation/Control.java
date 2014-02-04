@@ -10,17 +10,6 @@ public class Control
 {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException
 	{
-    	Integer x =12500;
-    	DecimalFormat numberFormat = new DecimalFormat("#.0");
-    	
-    	System.out.println ("x : " +numberFormat.format(x/1000));
-    		
-    	
-    	
-    	
-    	
-    	
-    	
     	//============================================================
 		//
 		// Instantiate this class (required for JNI)
