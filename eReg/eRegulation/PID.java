@@ -144,7 +144,8 @@ public class PID
         private Integer 	item;			// Proportional component, stored unit = decidegrees (we store values, not differences to avoid pbs with 
         private Integer 	delta;			// Differential component, stored unit = decidegrees  sudden target changes with sudden target changes)
         private Long 		integral;		// Integral component,     stored unit = decidegree from target x seconds
-       
+        private Integer 	delta2;			// Second order Differential component, stored unit = decidegrees per ????  sudden target changes with sudden target changes)
+               
         public PID_Entry() 
         {
         }
