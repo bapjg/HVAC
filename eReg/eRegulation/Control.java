@@ -8,6 +8,15 @@ public class Control
 {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException
 	{
+    	Integer x =12500;
+    	System.out.println ("x : " + x/1000);
+    		
+    	
+    	
+    	
+    	
+    	
+    	
     	//============================================================
 		//
 		// Instantiate this class (required for JNI)
