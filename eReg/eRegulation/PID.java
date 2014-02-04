@@ -77,8 +77,8 @@ public class PID
     }
     public Float dTdt() 
     {
-		Float 		differential 				= 0F;								// unit = decigrees/second 
-		Long 		deltaTimeStamps				= 0L;								// unit = millisconds
+		Float 		differential 				= 0F;								// unit = millidegrees/second 
+		Long 		deltaTimeStamps				= 0L;								// unit = milliseconds
     	Integer		indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
     	Integer		indexPrevious				= (indexEnqueue - 2 + pidDepth) % pidDepth;
     	
@@ -90,7 +90,7 @@ public class PID
     	{
     		//Units of differential are decidegrees/millisecond
     		deltaTimeStamps 					= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
-    		differential						= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in decidegrees per second
+    		differential						= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
     	}
 
     	return differential;
