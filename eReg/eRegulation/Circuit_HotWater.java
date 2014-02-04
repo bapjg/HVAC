@@ -51,7 +51,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				}
 				else
 				{
-					this.heatRequired.tempMinimum						= this.taskActive.tempObjective + 100;
+					this.heatRequired.tempMinimum						= this.taskActive.tempObjective + 10000;
 					this.heatRequired.tempMaximum						= this.tempMax;
 				}
 				break;

@@ -44,8 +44,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 				else
 				{
 					temp											= temperatureGradient.getTempToTarget();
-					this.heatRequired.tempMinimum					= 600;
-					this.heatRequired.tempMaximum					= 800;
+					this.heatRequired.tempMinimum					= 60000;
+					this.heatRequired.tempMaximum					= 80000;
 					state											= CIRCUIT_STATE_AwaitingHeat;
 
 					LogIt.info("Circuit_" + this.name, "sequencer", "Thread Started");
@@ -67,14 +67,14 @@ public class Circuit_Mixer extends Circuit_Abstract
 					LogIt.display("Circuit_Mixer", "sequencer", "RampUpFinished as livingroom temp is " + Global.thermoLivingRoom.reading);
 					state											= CIRCUIT_STATE_Running;
 				}
-				temp												= 430;
-				this.heatRequired.tempMinimum						= 600;
-				this.heatRequired.tempMaximum						= 800;
+				temp												= 43000;
+				this.heatRequired.tempMinimum						= 60000;
+				this.heatRequired.tempMaximum						= 80000;
 				break;
 			case CIRCUIT_STATE_Running:
 				temp												= temperatureGradient.getTempToTarget();
-				this.heatRequired.tempMinimum						= 600;
-				this.heatRequired.tempMaximum						= 800;
+				this.heatRequired.tempMinimum						= 60000;
+				this.heatRequired.tempMaximum						= 80000;
 				break;
 			case CIRCUIT_STATE_Stop_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
@@ -83,7 +83,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			case CIRCUIT_STATE_Stopping:
 				if 	(	(Global.circuits.isSingleActiveCircuit())
 //				&& 		(Global.thermoBoiler.reading > taskActive.tempObjective + 30)   )		// Care, we can be above objective while pumpting heat out !!!
-				&& 		(Global.thermoBoiler.reading > Global.thermoFloorIn.reading + 30)   )	// Solution : Continue while more than 3 degrees than return temp
+				&& 		(Global.thermoBoiler.reading > Global.thermoFloorIn.reading + 3000)   )	// Solution : Continue while more than 3 degrees than return temp
 				{
 					// We are alone, so as long as there is heat to get out of the system
 					// carry on
