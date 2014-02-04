@@ -38,11 +38,12 @@ public class Thread_Mixer implements Runnable
 			Integer targetTemp;
 			if (circuitMixer.state == circuitMixer.CIRCUIT_STATE_RampingUp) // This is to accelerate rampup
 			{
-				targetTemp						= 43000;						// Trip avoidance kicks in at 450
+				targetTemp									= 43000;						// Trip avoidance kicks in at 450
 			}
 			else
 			{
-				targetTemp						= circuitMixer.temperatureGradient.getTempToTarget();
+				targetTemp									= circuitMixer.temperatureGradient.getTempToTarget();
+				System.out.println("target : " + targetTemp);
 			}
 			this.mixer.sequencer(targetTemp);
 
