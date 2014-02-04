@@ -213,7 +213,7 @@ public class Mixer
 		
 		Global.mixerUp.on();
 		report.timeStart								= Global.now();
-		Global.waitMilliSeconds(Math.abs(swingTimeRequired));
+		Global.waitMilliSeconds(swingTimeRequired);
 		Global.mixerUp.off();
 		report.timeEnd									= Global.now();
 		positionChange									= report.timeEnd - report.timeStart;		// Positive number as moved up
@@ -232,7 +232,7 @@ public class Mixer
 		
 		Global.mixerDown.on();
 		report.timeStart								= Global.now();
-		Global.waitMilliSeconds(Math.abs(swingTimeRequired));
+		Global.waitMilliSeconds(-swingTimeRequired);
 		Global.mixerDown.off();
 		report.timeEnd									= Global.now();
 		positionChange									= report.timeStart - report.timeEnd;		// Negative number as moved down
