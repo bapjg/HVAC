@@ -124,7 +124,7 @@ public class PID
 		
     	if (count <= 1)
     	{
-    		differential 						= 0L;
+    		differential 						= 0F;
     	}
     	else
     	{
