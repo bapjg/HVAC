@@ -7,6 +7,7 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Thermometer
@@ -122,6 +123,8 @@ public class Thermometer
     	Integer degrees 									= this.milliReading/1000;
     	Integer decimals 									= this.milliReading - degrees * 1000;
     	
-    	return degrees.toString() + "." + decimals.toString(); //.substring(1,2);
+    	DecimalFormat temperatureFormat 					= new DecimalFormat("#.0");
+    	//return degrees.toString() + "." + decimals.toString(); //.substring(1,2);
+    	return  temperatureFormat.format(this.milliReading/1000);
     }
 }
