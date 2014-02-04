@@ -1,6 +1,8 @@
 package eRegulation;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
@@ -9,7 +11,9 @@ public class Control
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException
 	{
     	Integer x =12500;
-    	System.out.println ("x : " + x/1000);
+    	DecimalFormat numberFormat = new DecimalFormat("#.0");
+    	
+    	System.out.println ("x : " +numberFormat.format(x/1000));
     		
     	
     	

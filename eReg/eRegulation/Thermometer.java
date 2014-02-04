@@ -122,6 +122,6 @@ public class Thermometer
     	Integer degrees 									= this.milliReading/1000;
     	Integer decimals 									= this.milliReading - degrees * 1000;
     	
-    	return degrees.toString() + "." + decimals.toString() //.substring(1,2);
+    	return degrees.toString() + "." + decimals.toString(); //.substring(1,2);
     }
 }
