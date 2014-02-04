@@ -15,7 +15,7 @@
 			<Calendar 	type="Object" 	name="EveryDay" 	days="WeekDay" 		timeStart="06:15" 	timeEnd="06:45" tempObjective="35000" stopOnObjective="1"/>
 			<Calendar 	type="Object" 	name="EveryDay" 	days="EveryDay" 	timeStart="21:30" 	timeEnd="22:00" tempObjective="35000" stopOnObjective="1"/>
 			<Calendar 	type="Object" 	name="EveryDay" 	days="WeekEnd"		timeStart="07:30" 	timeEnd="08:30" tempObjective="35000" stopOnObjective="1"/>
-			<Calendar 	type="Object" 	name="Test" 		days="Test"			timeStart="07:30" 	timeEnd="23:30" tempObjective="35000" stopOnObjective="1"/>
+			<Calendar 	type="Object" 	name="Test" 		days="Test"			timeStart="07:30" 	timeEnd="23:30" tempObjective="40000" stopOnObjective="1"/>
 					</Circuit>
 		<Circuit 		type="Object" 	name="Radiator">
 			<Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="07:00" 	timeEnd="08:00" tempObjective="50000" stopOnObjective="0"/>
