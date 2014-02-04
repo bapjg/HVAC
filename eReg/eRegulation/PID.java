@@ -111,9 +111,9 @@ public class PID
     	Integer		indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
     	Integer		indexPrevious				= (indexEnqueue - 2 + pidDepth) % pidDepth;
     	Integer 	currentError 				= entries[indexCurrent].item - target;
-    	Float 		proportional 				= currentError.floatValue();		// unit = decigrees offtarget
-		Float 		differential 				= 0F;								// unit = decigrees/second 
-		Float 		integral 					= 0F;								// unit = decigrees offtarget x seconds
+    	Float 		proportional 				= currentError.floatValue();		// unit = milligrees offtarget
+		Float 		differential 				= 0F;								// unit = milligrees/second 
+		Float 		integral 					= 0F;								// unit = milligrees offtarget x seconds
 		Float 		result 						= 0F;								// retruns number of milliseconds to move 3way valve
 																				// Made negative as is a negative feedback system
 		
