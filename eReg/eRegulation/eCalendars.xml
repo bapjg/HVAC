@@ -8,13 +8,15 @@
 		<Word 			type="object"	name="Locataire"	use="days"		days="       "			/>			
 		<Word 			type="object"	name="Today"		use="relative"	days="0      "			/>
 		<Word 			type="object"	name="Tomorrow"		use="relative"	days="1      "			/>
-		<Word 			type="object"	name="Test"			use="days"		days="123  TT"			/>			
+		
+		<Word 			type="object"	name="Test"			use="days"		days="TTT  TT"			/>			
 			</Vocabulary>
 	<Circuits 			type="Collection">
 		<Circuit 		type="Object" 	name="Hot_Water">
 			<Calendar 	type="Object" 	name="EveryDay" 	days="WeekDay" 		timeStart="06:15" 	timeEnd="06:45" tempObjective="35000" stopOnObjective="1"/>
 			<Calendar 	type="Object" 	name="EveryDay" 	days="EveryDay" 	timeStart="21:30" 	timeEnd="22:00" tempObjective="35000" stopOnObjective="1"/>
 			<Calendar 	type="Object" 	name="EveryDay" 	days="WeekEnd"		timeStart="07:30" 	timeEnd="08:30" tempObjective="35000" stopOnObjective="1"/>
+			
 			<Calendar 	type="Object" 	name="Test" 		days="Test"			timeStart="07:30" 	timeEnd="23:30" tempObjective="40000" stopOnObjective="1"/>
 					</Circuit>
 		<Circuit 		type="Object" 	name="Radiator">
