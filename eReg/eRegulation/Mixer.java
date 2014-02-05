@@ -111,7 +111,7 @@ public class Mixer
 			}
 		}
 		
-		if (Math.abs(swingTimeRequired) > 50000)												// Less than half a second
+		if (Math.abs(swingTimeRequired) > 500)												// Less than half a second
 		{
 			if (swingTimeRequired > 0)		// Moving hotter
 			{
