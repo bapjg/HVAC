@@ -176,26 +176,78 @@ public class Monitor extends HttpServlet
             
             if (readings.dateTimeStart > 0)
             {
-            dbResultSet.moveToInsertRow();
-            
-            dbResultSet.updateDouble	("dateTime", 				readings.dateTimeStart);
-            dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTimeStart));
-            dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTimeStart));
-            dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedStart);
- 
-            dbResultSet.insertRow();
+	            dbResultSet.moveToInsertRow();
+	            
+	            dbResultSet.updateDouble	("dateTime", 				readings.dateTimeStart);
+	            dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTimeStart));
+	            dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTimeStart));
+	            dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedStart);
+	 
+	            dbResultSet.insertRow();
+	        }
+            else
+            {
+            	System.out.println("processMixerMouvement readings.dateTimeStart = zero, infact : " + readings.dateTimeStart);
             }
 
+            if (readings.dateTimeEnd > 0)
+            {
+	            dbResultSet.moveToInsertRow();
+	            
+	            dbResultSet.updateDouble	("dateTime", 				readings.dateTimeEnd);
+	            dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTimeEnd));
+	            dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTimeEnd));
+	            dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedEnd);
+	
+	            dbResultSet.insertRow();
+            }
+            else
+            {
+            	System.out.println("processMixerMouvement readings.dateTimeEnd = zero, infact : " + readings.dateTimeEnd);
+            }
+            dbStatement.close();
+        }
+        catch(SQLException eSQL)
+        {
+        	eSQL.printStackTrace();
+            return new Message_Abstract().new Nack();
+        }
+        
+        try
+        {
+            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM mixer LIMIT 1");
+            
             if (readings.dateTimeStart > 0)
             {
-            dbResultSet.moveToInsertRow();
-            
-            dbResultSet.updateDouble	("dateTime", 				readings.dateTimeEnd);
-            dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTimeEnd));
-            dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTimeEnd));
-            dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedEnd);
+	            dbResultSet.moveToInsertRow();
+	            
+	            dbResultSet.updateDouble	("dateTime", 				readings.dateTimeStart);
+	            dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTimeStart));
+	            dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTimeStart));
+	            dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedStart);
+	 
+	            dbResultSet.insertRow();
+            }
+            else
+            {
+            	System.out.println("processMixerMouvement readings.dateTimeStart = zero, infact : " + readings.dateTimeStart);
+            }
 
-            dbResultSet.insertRow();
+            if (readings.dateTimeEnd > 0)
+            {
+            	dbResultSet.moveToInsertRow();
+            
+	            dbResultSet.updateDouble	("dateTime", 				readings.dateTimeEnd);
+	            dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTimeEnd));
+	            dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTimeEnd));
+	            dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedEnd);
+
+            	dbResultSet.insertRow();
+            }
+            else
+            {
+            	System.out.println("processMixerMouvement readings.dateTimeEnd = zero, infact : " + readings.dateTimeEnd);
             }
             dbStatement.close();
             dbConnection.close();
