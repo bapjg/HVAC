@@ -170,9 +170,15 @@ alias tmixo='cat   /sys/bus/w1/devices/28-0000048e9244/w1_slave'
 
 alias go='cd /home/pi/HVAC/eReg/eRegulation/;git stash save; git stash drop;update;make ex'
 
-echo testing mount to //NAS/DropZone at /mnt/DZ
-echo ==========================================
+echo ============================================
+echo Adjusting contrast to 4 and brightness to 08
+sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 12:04
+sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
+echo ============================================
+
+echo Testing mount to //NAS/DropZone at /mnt/DZ
+echo ============================================
 sudo cat /mnt/DZ/test
-echo ==========================================
+echo ============================================
 
 cd /home/pi/HVAC/eReg/eRegulation
