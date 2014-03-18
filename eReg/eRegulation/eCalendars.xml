@@ -31,8 +31,8 @@
 			<Calendar 	type="Object" 	name="WeekDay" 		days="Test"			timeStart="00:01" 	timeEnd="23:59" tempObjective="19000" stopOnObjective="0"/>
 			
 		    <Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="05:00" 	timeEnd="07:30" tempObjective="19000" stopOnObjective="0"/>
-			<Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="10:30" 	timeEnd="12:30" tempObjective="19000" stopOnObjective="0"/>
-			<Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay "		timeStart="15:00" 	timeEnd="21:30" tempObjective="19000" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekDay" 		days="TEST   "		timeStart="10:30" 	timeEnd="12:30" tempObjective="19000" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekDay" 		days="TEST   "		timeStart="15:00" 	timeEnd="21:30" tempObjective="19000" stopOnObjective="0"/>
 			
 			<Calendar 	type="Object" 	name="WeekEnd" 		days="WeekEnd"		timeStart="06:30" 	timeEnd="21:30" tempObjective="19000" stopOnObjective="0"/>
 			
