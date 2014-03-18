@@ -53,6 +53,7 @@ abstract class Circuit_Abstract
 		this.rampUpTime												= Long.parseLong(rampUpTime);
 		this.state													= CIRCUIT_STATE_Off;
 		this.heatRequired											= null;
+		System.out.println(name + ", target : " + tempMax);
 	}
 	public void addCircuitTask
 		(

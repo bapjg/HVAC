@@ -36,6 +36,16 @@ public class Thread_Mixer implements Runnable
 			// perhaps not that feasible
 			
 			Integer targetTemp;
+			if (Global.thermoOutside.reading > 17000)
+			{
+				// Outside temp is high : no need to heat
+				
+			}
+			else if (Global.thermoLivingRoom.reading > this.circuitMixer.tempToTrack)
+			{
+				// Inside temp is high : no need to heat
+				
+			}
 			if (circuitMixer.state == circuitMixer.CIRCUIT_STATE_RampingUp) // This is to accelerate rampup
 			{
 				targetTemp									= 43000;						// Trip avoidance kicks in at 450
@@ -71,7 +81,7 @@ public class Thread_Mixer implements Runnable
 				{
 					temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeWait)).intValue();
 					
-					if (Math.abs(temperatureProjected - targetTemp) > 20)		// More than 2 degrees difference (either over or under)
+					if (Math.abs(temperatureProjected - targetTemp) > 2000)		// More than 2 degrees difference (either over or under)
 					{
 						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeWait + "s wait after " + (i * 5) +"s");
 						LogIt.display("Thread_Mixer", "mainLoop", "temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese

@@ -55,14 +55,17 @@ public class Thermometer
 	}
     public Integer read()
 	{
+     	// Returns temperature in millidegrees
     	return read(10, false);
 	}
     public Integer readUnCached()
  	{
-     	return read(10, true);
+     	// Returns temperature in millidegrees
+    	return read(10, true);
  	}
     public Integer read(Integer resolution, Boolean unCached)
 	{
+     	// Returns temperature in millidegrees
      	/*
      	 *  Read times are :
      	 *  	When in cache : 10 ms
