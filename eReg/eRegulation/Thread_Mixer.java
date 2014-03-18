@@ -7,8 +7,8 @@ public class Thread_Mixer implements Runnable
 	
 	public Thread_Mixer(Mixer mixer, Circuit_Mixer circuitMixer)
 	{
-		this.mixer 				= mixer;		// object Global.mixer
-		this.circuitMixer 		= circuitMixer; // object Circuit_Mixer
+		this.mixer 								= mixer;		// object Global.mixer
+		this.circuitMixer 						= circuitMixer; // object Circuit_Mixer
 	}
 	public void run()
 	{
@@ -39,14 +39,16 @@ public class Thread_Mixer implements Runnable
 			if (Global.thermoOutside.reading > 17000)
 			{
 				// Outside temp is high : no need to heat
+				targetTemp									= 10000;		// Dont put at zero to avoid freezing
 				
 			}
-			else if (Global.thermoLivingRoom.reading > this.circuitMixer.tempToTrack)
+			else if (Global.thermoLivingRoom.reading > this.circuitMixer.taskActive.tempObjective - 1000)
 			{
-				// Inside temp is high : no need to heat
+				// Inside temp is high : no need to heat (within 1 degree
+				targetTemp									= 10000;		// Dont put at zero to avoid freezing
 				
 			}
-			if (circuitMixer.state == circuitMixer.CIRCUIT_STATE_RampingUp) // This is to accelerate rampup
+			else if (circuitMixer.state == circuitMixer.CIRCUIT_STATE_RampingUp) // This is to accelerate rampup
 			{
 				targetTemp									= 43000;						// Trip avoidance kicks in at 450
 			}

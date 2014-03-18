@@ -9,7 +9,7 @@ abstract class Circuit_Abstract
 	public String 					circuitType;
 	public Integer 					tempMax;
 
-	public Long 					rampUpTime					= 0L;
+	public Long 					rampUpTime						= 0L;
 	public Integer					tempToTrack;						// Used to recalculate ax+b;
 	public Thermometer				thermoToMonitor;					//Used with above
 
@@ -34,7 +34,6 @@ abstract class Circuit_Abstract
 	public TemperatureGradient 		temperatureGradient				= null;				//This will be overridden
 	
 	public CircuitTask				taskActive						= null;
-//	public CircuitTask				taskNext						= null;
 	
 	public ArrayList <CircuitTask> 	circuitTaskList 				= new ArrayList <CircuitTask>();
 	public HeatRequired				heatRequired					= null;
@@ -53,7 +52,6 @@ abstract class Circuit_Abstract
 		this.rampUpTime												= Long.parseLong(rampUpTime);
 		this.state													= CIRCUIT_STATE_Off;
 		this.heatRequired											= null;
-		System.out.println(name + ", target : " + tempMax);
 	}
 	public void addCircuitTask
 		(
@@ -67,9 +65,9 @@ abstract class Circuit_Abstract
 		CircuitTask 	circuitTaskItem 							= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
 		circuitTaskList.add(circuitTaskItem);
 	}
-	public Long getRampUpTime() 			{  /* OverRiden in Circuit_XXX classes */	return 0L; 	}
-	public Long calculatePerformance()		{  /* OverRiden in Circuit_XXX classes */	return 0L; 	}
-	public void sequencer()					{ /* OverRiden in Circuit_XXX classes */	}
+	public Long getRampUpTime() 			{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
+	public Long calculatePerformance()		{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
+	public void sequencer()					{ /* OverRidden in Circuit_XXX classes */	}
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
