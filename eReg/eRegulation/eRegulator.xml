@@ -41,7 +41,8 @@
 			       textinfo2="bottom 10s of swingTime are not available (cut out)"
 			       textinforeport="Indicates about 200ms/decidegree, 30s to reach 50% upward change from stop movement time. About 10s from start movement to temp change detect">
 			</Mixer>
-			<TempGradient type="Object" name="Mixer" outsideLow="-15000" tempLow="45000" outsideHigh="15000" tempHigh="35000">
+			<TempGradient type="Object" name="Mixer" outsideLow="-15000" tempLow="45000" outsideHigh="15000" tempHigh="30000"
+			       comments="tempHigh reduced from 35000 to 30000">
 			</TempGradient>
 		</Circuit>
 

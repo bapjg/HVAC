@@ -50,3 +50,7 @@ alias tempmixh	='sudo cat /sys/bus/w1/devices/28-0000048E062C/w1_slave'
 alias tempmixo	='sudo cat /sys/bus/w1/devices/28-0000048E9244/w1_slave'
 
 alias go		='cd /home/pi/Eclipse/eRegulation/src/eRegulation/;make ex'
+
+Weather forecast
+http://api.openweathermap.org/data/2.5/forecast?q=chambery,fr&mode=xml contains forecast on 3hr intervals
+
