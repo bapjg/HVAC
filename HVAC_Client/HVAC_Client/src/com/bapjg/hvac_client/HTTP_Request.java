@@ -39,7 +39,7 @@ public class HTTP_Request
 		System.out.println("Ping Started");
 		Mgmt_Msg_Abstract				messageReceive;
 		Mgmt_Msg_Abstract.Ping			messageSend			= (new Mgmt_Msg_Abstract()).new Ping();
-		messageReceive										= sendIt(messageSend, "http://192.168.5.20:8080/hvac/Management");
+		messageReceive										= sendIt(messageSend, "http://192.168.5.20:8888/hvac/Management");
 		System.out.println("Ping sent/replied local");
 
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
@@ -50,12 +50,12 @@ public class HTTP_Request
 		}
 		System.out.println("Ping sent remote");
 
-		messageReceive										= sendIt(messageSend, "http://home.bapjg.com:8080/hvac/Management");
+		messageReceive										= sendIt(messageSend, "http://home.bapjg.com:8888/hvac/Management");
 		System.out.println("Ping sent/replied retruned from remote");
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
 			System.out.println("Ping Ack remote");
-			Global.serverURL								= "http://home.bapjg.com:8080/hvac/Management";
+			Global.serverURL								= "http://home.bapjg.com:8888/hvac/Management";
 			return new Mgmt_Msg_Abstract().new Ack();	
 		}
 		System.out.println("Ping Nack giveup");
