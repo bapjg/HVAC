@@ -76,13 +76,5 @@
             <TextView		android:text	= "Radiator In"	      									style	= "@style/AD_Text"  />
             <TextView       android:text	= "Radiator In"		android:id	= "@+id/RadiatorIn"		style	= "@style/AD_Data"	/>
 		</TableRow>
-        <TableRow																					style	= "@style/AD_Row"   >
-            <TextView		android:text	= ""  		      										style	= "@style/AD_Text"  />
-            <TextView       android:text	= ""													style	= "@style/AD_Data"	/>
-		</TableRow>
-        <TableRow																					style	= "@style/AD_Row"  	>
-            <TextView		android:text	= "Boiler In"	      									style	= "@style/AD_Text"  />
-            <TextView       android:text	= "Boiler In"		android:id	= "@+id/BoilerIn"		style	= "@style/AD_Data"	/>
-		</TableRow>
     </TableLayout>
 </LinearLayout>
