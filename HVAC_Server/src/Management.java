@@ -135,14 +135,14 @@ public class Management extends HttpServlet
             dbSQL									+= "SELECT     dateTime,        ";	
             dbSQL									+= "           date,            ";	
             dbSQL									+= "           time,            ";	
-            dbSQL									+= "           tempBoiler,      ";	
             dbSQL									+= "           tempHotWater,    ";	
+            dbSQL									+= "           tempBoiler,      ";	
             dbSQL									+= "           tempBoilerIn,    ";
+            dbSQL									+= "           tempBoilerOut,   ";
+            dbSQL									+= "           tempFloorIn,     ";
             dbSQL									+= "           tempFloorOut,    ";
-            dbSQL									+= "           tempFloorCold,   ";
-            dbSQL									+= "           tempFloorHot,    ";
-            dbSQL									+= "           tempRadiatorOut, ";
             dbSQL									+= "           tempRadiatorIn,  ";
+            dbSQL									+= "           tempRadiatorOut, ";
             dbSQL									+= "           tempOutside,     ";
             dbSQL									+= "           tempLivingRoom	";
             dbSQL									+= "FROM       temperatures     ";	
@@ -154,14 +154,14 @@ public class Management extends HttpServlet
             returnBuffer.dateTime 					= dbResultSet.getLong("dateTime");
             returnBuffer.date 						= dbResultSet.getString("date");
             returnBuffer.time 						= dbResultSet.getString("time");
-            returnBuffer.tempBoiler 				= dbResultSet.getInt("tempBoiler");
             returnBuffer.tempHotWater 				= dbResultSet.getInt("tempHotWater");
+            returnBuffer.tempBoiler 				= dbResultSet.getInt("tempBoiler");
             returnBuffer.tempBoilerIn 				= dbResultSet.getInt("tempBoilerIn");
+            returnBuffer.tempBoilerOut				= dbResultSet.getInt("tempBoilerOut");
+            returnBuffer.tempFloorIn 				= dbResultSet.getInt("tempFloorIn");
             returnBuffer.tempFloorOut 				= dbResultSet.getInt("tempFloorOut");
-            returnBuffer.tempFloorCold 				= dbResultSet.getInt("tempFloorCold");
-            returnBuffer.tempFloorHot 				= dbResultSet.getInt("tempFloorHot");
-            returnBuffer.tempRadiatorOut 			= dbResultSet.getInt("tempRadiatorOut");
             returnBuffer.tempRadiatorIn 			= dbResultSet.getInt("tempRadiatorIn");
+            returnBuffer.tempRadiatorOut 			= dbResultSet.getInt("tempRadiatorOut");
             returnBuffer.tempOutside 				= dbResultSet.getInt("tempOutside");
             returnBuffer.tempLivingRoom 			= dbResultSet.getInt("tempLivingRoom");
             

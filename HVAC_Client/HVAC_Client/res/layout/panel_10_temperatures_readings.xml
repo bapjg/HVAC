@@ -49,16 +49,20 @@
             <TextView       android:text	= ""													style	= "@style/AD_Data"	/>
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
+            <TextView		android:text	= "Boiler In"	      									style	= "@style/AD_Text"  />
+            <TextView       android:text	= "Boiler In"		android:id	= "@+id/BoilerIn"		style	= "@style/AD_Data"	/>
+		</TableRow>
+        <TableRow																					style	= "@style/AD_Row"   >
+            <TextView		android:text	= "Boiler Out"	      									style	= "@style/AD_Text"  />
+            <TextView       android:text	= "Boiler Out"		android:id	= "@+id/BoilerOut"		style	= "@style/AD_Data"	/>
+		</TableRow>
+        <TableRow																					style	= "@style/AD_Row"   >
+            <TextView		android:text	= "Floor In"	      									style	= "@style/AD_Text"  />
+            <TextView       android:text	= "Floor In"		android:id	= "@+id/FloorIn"		style	= "@style/AD_Data"	/>
+		</TableRow>
+        <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Floor Out"	      									style	= "@style/AD_Text"  />
             <TextView       android:text	= "Floor Out"		android:id	= "@+id/FloorOut"		style	= "@style/AD_Data"	/>
-		</TableRow>
-        <TableRow																					style	= "@style/AD_Row"   >
-            <TextView		android:text	= "Floor Hot"	      									style	= "@style/AD_Text"  />
-            <TextView       android:text	= "Floor Hot"		android:id	= "@+id/FloorHot"		style	= "@style/AD_Data"	/>
-		</TableRow>
-        <TableRow																					style	= "@style/AD_Row"   >
-            <TextView		android:text	= "Floor Cold"	      									style	= "@style/AD_Text"  />
-            <TextView       android:text	= "Floor Cold"		android:id	= "@+id/FloorCold"		style	= "@style/AD_Data"	/>
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= ""  		      										style	= "@style/AD_Text"  />

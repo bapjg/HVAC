@@ -81,8 +81,8 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 				((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
 				((TextView) a.findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
 				((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
-				((TextView) a.findViewById(R.id.FloorHot)).setText(displayTemperature(msg_received.tempFloorHot));
-				((TextView) a.findViewById(R.id.FloorCold)).setText(displayTemperature(msg_received.tempFloorCold));
+				((TextView) a.findViewById(R.id.FloorIn)).setText(displayTemperature(msg_received.tempFloorIn));
+				((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
 				((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
 				((TextView) a.findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
 				((TextView) a.findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
