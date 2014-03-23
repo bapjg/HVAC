@@ -20,10 +20,10 @@
 
     <style name="AD_Text" parent="@android:style/TextAppearance.Medium"> 
 			<item name="android:textSize">
-				25sp
+				15sp
 			</item> 
 			<item name="android:width">
-			    200sp
+			320sp
 			</item> 
 			<item name="android:textColor">
 				#FFFFFF
@@ -38,13 +38,13 @@
 	
     <style name="AD_Data" parent="@android:style/TextAppearance.Medium"> 
 			<item name="android:textSize">
-				25sp
+				15sp
 			</item> 
 			<item name="android:textColor">
 				#FFFF00
 			</item> 
 			<item name="android:width">
-			    150sp
+			80sp
 			</item> 
 			<item name="android:gravity">
 			    right
@@ -58,13 +58,13 @@
 	</style>
     <style name="AD_Button" parent="@android:style/TextAppearance.Medium"> 
 			<item name="android:textSize">
-				25sp
+				8sp
 			</item> 
 			<item name="android:textColor">
 				#FFFFFF
 			</item> 
 			<item name="android:width">
-			    200sp
+			   100sp
 			</item> 
 			<item name="android:layout_width">
 				match_parent

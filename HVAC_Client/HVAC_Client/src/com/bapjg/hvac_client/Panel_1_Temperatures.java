@@ -80,11 +80,11 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 				((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
 				((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
 				((TextView) a.findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
-				((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
+				((TextView) a.findViewById(R.id.BoilerOut)).setText(displayTemperature(msg_received.tempBoilerOut));
 				((TextView) a.findViewById(R.id.FloorIn)).setText(displayTemperature(msg_received.tempFloorIn));
 				((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
-				((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
 				((TextView) a.findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
+				((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
 				((TextView) a.findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
 			}
 			else if (result instanceof Mgmt_Msg_Temperatures.NoConnection)
@@ -99,8 +99,8 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 	}
 	private String displayTemperature(Integer temperature)
 	{
-		int degrees = temperature/10;
-		int decimal = temperature - degrees*10;
+		int degrees = temperature/1000;
+		int decimal = (temperature - degrees*1000) / 100;
 		return degrees + "." + decimal;
 	}
 	private String displayDate(String date)

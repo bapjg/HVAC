@@ -1,13 +1,12 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
-<LinearLayout 
-	xmlns:android						= "http://schemas.android.com/apk/res/android"
-	android:layout_width				= "match_parent"
-	android:layout_height				= "match_parent"
-	android:orientation					= "vertical"
-	android:baselineAligned				= "false"
-	android:background					= "@color/background"
-	android:clickable 					= "true"
->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:baselineAligned="false"
+    android:clickable="true"
+    android:orientation="horizontal" >
+
 		<Button
             android:id					= "@+id/buttonTemperatures"
             style						= "@style/AD_Button"
