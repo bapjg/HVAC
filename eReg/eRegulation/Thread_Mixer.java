@@ -39,23 +39,24 @@ public class Thread_Mixer implements Runnable
 			if (Global.thermoOutside.reading > 17000)
 			{
 				// Outside temp is high : no need to heat
-				targetTemp									= 10000;		// Dont put at zero to avoid freezing
-				
+				targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
+				System.out.println("ThreadMixer/run thermoOutside > 17000 target : " + targetTemp);
 			}
 			else if (Global.thermoLivingRoom.reading > this.circuitMixer.taskActive.tempObjective - 1000)
 			{
 				// Inside temp is high : no need to heat (within 1 degree
-				targetTemp									= 10000;		// Dont put at zero to avoid freezing
-				
+				targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
+				System.out.println("ThreadMixer/run thermoLivingRoom > Objective - 1000 target : " + targetTemp);
 			}
 			else if (circuitMixer.state == circuitMixer.CIRCUIT_STATE_RampingUp) // This is to accelerate rampup
 			{
 				targetTemp									= 43000;						// Trip avoidance kicks in at 450
+				System.out.println("ThreadMixer/run Rampingup target : " + targetTemp);
 			}
 			else
 			{
 				targetTemp									= circuitMixer.temperatureGradient.getTempToTarget();
-				System.out.println("target : " + targetTemp);
+				System.out.println("ThreadMixer/run elsestatement target : " + targetTemp);
 			}
 			this.mixer.sequencer(targetTemp);
 
@@ -74,11 +75,6 @@ public class Thread_Mixer implements Runnable
 				
 				tempNow										= Global.thermoFloorOut.readUnCached();
 				
-//				if (Math.abs(tempNow - tempPrevious) > 5)				// Trend is > 2degrees/10s need to react immediately
-//				{
-//					LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeWait + "s wait after " + (i * 5) +"s, due to high dT/dt : " + (tempNow - tempPrevious));
-//					break;
-//				}
 				if (i >= indexInterupt)									// We have waited for dTdt to settle a bit
 				{
 					temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeWait)).intValue();

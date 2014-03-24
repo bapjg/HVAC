@@ -43,7 +43,7 @@
 			    right
 			</item> 
 			<item name="android:layout_width">
-				100sp			</item> 
+				90sp			</item> 
 			<item name="android:layout_height">
 				wrap_content
 			</item> 

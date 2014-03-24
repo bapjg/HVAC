@@ -18,7 +18,7 @@
                 style="@style/AD_Text"
                 android:text="Date" />
 
-            <TextView       android:text	= "xxx"				android:id	= "@+id/Date"			style	= "@style/AD_Data"	/>
+            <TextView       android:text	= " "				android:id	= "@+id/Date"			style	= "@style/AD_Data"	/>
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Time"     		   									style	= "@style/AD_Text"  />
