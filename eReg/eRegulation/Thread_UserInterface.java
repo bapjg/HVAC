@@ -5,6 +5,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.*;
+
+import eRegulation.Message_Abstract.Nack;
  
 public class Thread_UserInterface implements Runnable
 {
@@ -13,7 +18,7 @@ public class Thread_UserInterface implements Runnable
 		LogIt.info("Thread_UserInterface", "Run", "Starting", true);            
  
 		Global.display.clear();
-		Buttons             buttons                                 = Global.buttons;
+		Buttons             buttons                                 	= Global.buttons;
 		UserControl			userControl;
         
 		buttons.cancel();			// Removes all old button pushes from the buffer
@@ -27,7 +32,7 @@ public class Thread_UserInterface implements Runnable
 			Global.waitSeconds(10);
 			
 			buttons.read();
-                   
+
             if (buttons.button0)
             {
                   Global.stopNow                                     	= true;           //Exit the loop;
