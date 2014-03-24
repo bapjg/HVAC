@@ -22,15 +22,11 @@
 			<item name="android:textSize">
 				15sp
 			</item> 
-			<item name="android:width">
-			320sp
-			</item> 
 			<item name="android:textColor">
 				#FFFFFF
 			</item> 
 			<item name="android:layout_width">
-				wrap_content
-			</item> 
+				250sp			</item> 
 			<item name="android:layout_height">
 				wrap_content
 			</item> 
@@ -43,28 +39,21 @@
 			<item name="android:textColor">
 				#FFFF00
 			</item> 
-			<item name="android:width">
-			80sp
-			</item> 
 			<item name="android:gravity">
 			    right
 			</item> 
 			<item name="android:layout_width">
-				wrap_content
-			</item> 
+				100sp			</item> 
 			<item name="android:layout_height">
 				wrap_content
 			</item> 
 	</style>
     <style name="AD_Button" parent="@android:style/TextAppearance.Medium"> 
 			<item name="android:textSize">
-				8sp
+				15sp
 			</item> 
 			<item name="android:textColor">
 				#FFFFFF
-			</item> 
-			<item name="android:width">
-			   100sp
 			</item> 
 			<item name="android:layout_width">
 				match_parent

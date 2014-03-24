@@ -5,27 +5,28 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:baselineAligned="false"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:textColor="@color/Yellow" >
 
     <LinearLayout
         android:id="@+id/menu_container"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:layout_weight="0.35"
-        android:background="@color/background"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:paddingTop="0dp"
-        android:text="roomForButtons" />
-
-    <LinearLayout
-        android:id="@+id/panel_container"
-        android:layout_width="match_parent"
-        android:layout_height="818dp"
+        android:layout_width="140dp"
+        android:layout_height="match_parent"
         android:background="@color/background"
         android:baselineAligned="false"
         android:orientation="vertical"
-        android:text="roomForButtons" />
+        android:paddingTop="0dp"
+        android:text="roomForButtons" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/panel_container"
+        android:layout_width="353dp"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:text="roomForButtons" >
+    </LinearLayout>
 
 </LinearLayout>

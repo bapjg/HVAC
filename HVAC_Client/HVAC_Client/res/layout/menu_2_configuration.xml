@@ -11,31 +11,31 @@
 		<Button
             android:id					= "@+id/buttonThermometers"
             style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
+            android:layout_width		= "match_parent"
             android:layout_height		= "wrap_content"
             android:text				= "Thermometers" 
         />
         <Button
             style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
+            android:layout_width		= "match_parent"
             android:layout_height		= "wrap_content"
             android:text				= "Relays" 
         />
         <Button
             style="@style/AD_Button"
-            android:layout_width		= "wrap_content"
+            android:layout_width		= "match_parent"
             android:layout_height		= "wrap_content"
             android:text				= "Circuits"
         />
 		<Button
             style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
+            android:layout_width		= "match_parent"
             android:layout_height		= "wrap_content"
             android:text				= "Burner" 
         />
 		<Button
 		    style						= "@style/AD_Button"
-		    android:layout_width		= "wrap_content"
+		    android:layout_width		= "match_parent"
 		    android:layout_height		= "wrap_content"
 		    android:text				= "Other" 
 		/>
