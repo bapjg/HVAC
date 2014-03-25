@@ -137,6 +137,18 @@ public class Control
 		
 		//============================================================
 		//
+		// Start thread to handle UserInterface
+		//
+		
+		Thread 			thread_tcpListen	 		= new Thread(new Thread_TCPListen(), "Thread_TCPListen");
+		thread_userInterface.start();
+		
+		//
+		//============================================================
+		
+		
+		//============================================================
+		//
 		// To be transferred elsewhere
 		//
 
