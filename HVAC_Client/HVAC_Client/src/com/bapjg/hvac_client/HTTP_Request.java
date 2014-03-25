@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
-import eRegulation.Ctrl_Abstract;
+//import eRegulation.Ctrl_Abstract;
 import eRegulation.Ctrl_Temperatures;
 
 public class HTTP_Request
@@ -30,13 +30,13 @@ public class HTTP_Request
 		try
 		{
 			System.out.println("Step 1");
-			Socket clientSocket = new Socket("192.168.5.51", 8889);
+			Socket clientSocket 							= new Socket("192.168.5.51", 8889);
 			System.out.println("Step 2");
-			ObjectInputStream input = new ObjectInputStream(clientSocket.getInputStream());
-			ObjectOutputStream output = new ObjectOutputStream(clientSocket.getOutputStream());
+			ObjectInputStream input 						= new ObjectInputStream(clientSocket.getInputStream());
+			ObjectOutputStream output 						= new ObjectOutputStream(clientSocket.getOutputStream());
 			System.out.println("Step 3");
 		
-			Ctrl_Temperatures.Request send = new Ctrl_Temperatures().new Request();
+			Ctrl_Temperatures.Request send 					= new Ctrl_Temperatures().new Request();
 			System.out.println("Step 4");
 
 			output.writeObject(send);
@@ -45,9 +45,9 @@ public class HTTP_Request
 	        output.flush();
 	        output.close();
 	        
-	        Object data_in				= input.readObject();
-			Ctrl_Temperatures.Response message_in = new Ctrl_Temperatures().new Response();
-			message_in					= (Ctrl_Temperatures.Response) data_in;
+	        Object data_in									= input.readObject();
+			Ctrl_Temperatures.Response message_in 			= new Ctrl_Temperatures().new Response();
+			message_in										= (Ctrl_Temperatures.Response) data_in;
 			
 			System.out.println("Date : " + message_in.date);
 			System.out.println("Time : " + message_in.time);

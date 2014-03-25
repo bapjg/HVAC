@@ -10,5 +10,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="eReg/eRegulation"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/eReg/eRegulation"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
