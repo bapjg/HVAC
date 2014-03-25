@@ -22,8 +22,8 @@ public class Thread_TCPListen <SendType> implements Runnable
     {
 		LogIt.info("Thread_TCPListen", "Run", "Starting", true);            
  
-        Object 							message_in 							= null;
-        Message_Abstract				message_out 						= null;
+		Ctrl_Abstract					message_in 							= null;
+        Ctrl_Abstract					message_out 						= null;
 
 		try
 		{
@@ -37,32 +37,33 @@ public class Thread_TCPListen <SendType> implements Runnable
 					UI_Socket												= UI_Server.accept();
 			        
 			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
-			        message_in 												= input.readObject();
+			        message_in 												= (Ctrl_Abstract) input.readObject();
 			        
 			    	if (message_in == null)
 			        {
 			            System.out.println("Null received from client");
-			            (Ctrl_Abstract.Nack) message_out 						= new Ctrl_Abstract().new Nack();
+			            message_out 										= new Ctrl_Abstract().new Nack();
 			        } 
 			    	else if (message_in instanceof Ctrl_Temperatures.Request)
 			        {
-			    		Ctrl_Temperatures.Response message_out				= new Ctrl_Temperatures().new Response();
-			            message_out.dateTime 								= 3L;
-			            message_out.date 									= "01/01/2001";
-			            message_out.time  									= "15:15:15";
-			            message_out.tempBoiler	 							= 10;
-			            message_out.tempBoilerIn	 						= 10;
-			            message_out.tempBoilerOut	 						= 10;
+			    		Ctrl_Temperatures.Response message_ou				= new Ctrl_Temperatures().new Response();
+			            message_ou.dateTime 								= 3L;
+			            message_ou.date 									= "01/01/2001";
+			            message_ou.time  									= "15:15:15";
+			            message_ou.tempBoiler	 							= 10;
+			            message_ou.tempBoilerIn	 							= 10;
+			            message_ou.tempBoilerOut	 						= 10;
 			    		
-			            message_out.tempFloorIn	 							= 10;
-			            message_out.tempFloorOut	 						= 10;
+			            message_ou.tempFloorIn	 							= 10;
+			            message_ou.tempFloorOut	 							= 10;
 			    		
-			            message_out.tempRadiatorOut	 						= 10;
-			            message_out.tempRadiatorIn	 						= 10;
-
-			            message_out.tempHotWater	 						= 10;
-			            message_out.tempOutside	 							= 10;
-			            message_out.tempLivingRoom	 						= 10;
+			            message_ou.tempRadiatorOut	 						= 10;
+			            message_ou.tempRadiatorIn	 						= 10;
+			            message_ou.tempHotWater	 							= 10;
+			            message_ou.tempOutside	 							= 10;
+			            message_ou.tempLivingRoom	 						= 10;
+			            
+			            message_out											= message_ou;
 			        } 
 			        ObjectOutputStream 		output							= null;;
 					
