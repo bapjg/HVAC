@@ -5,23 +5,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
-
-import com.bapjg.hvac_client.Mgmt_Msg_Temperatures.Data;
-
-import android.os.AsyncTask;
-
-import android.app.Activity;
-import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-
+import eRegulation.Ctrl_Abstract;
+import eRegulation.Ctrl_Temperatures;
 
 public class HTTP_Request
 {
@@ -36,6 +25,39 @@ public class HTTP_Request
 	//
 	public Mgmt_Msg_Abstract ping()
 	{
+		System.out.println("TCPRequest");
+		
+		try
+		{
+			System.out.println("Step 1");
+			Socket clientSocket = new Socket("192.168.5.51", 8889);
+			System.out.println("Step 2");
+			ObjectInputStream input = new ObjectInputStream(clientSocket.getInputStream());
+			ObjectOutputStream output = new ObjectOutputStream(clientSocket.getOutputStream());
+			System.out.println("Step 3");
+		
+			Ctrl_Temperatures.Request send = new Ctrl_Temperatures().new Request();
+			System.out.println("Step 4");
+
+			output.writeObject(send);
+			System.out.println("Step 5");
+
+	        output.flush();
+	        output.close();
+	        
+	        Object data_in				= input.readObject();
+			Ctrl_Temperatures.Response message_in = new Ctrl_Temperatures().new Response();
+			message_in					= (Ctrl_Temperatures.Response) data_in;
+			
+			System.out.println("Date : " + message_in.date);
+			System.out.println("Time : " + message_in.time);
+			System.out.println("tempBoiler : " + message_in.tempBoiler);
+		}
+		catch(Exception e)
+		{
+			System.out.print("Whoops! It didn't work!\n" + e);
+		}
+		
 		System.out.println("Ping Started");
 		Mgmt_Msg_Abstract				messageReceive;
 		Mgmt_Msg_Abstract.Ping			messageSend			= (new Mgmt_Msg_Abstract()).new Ping();

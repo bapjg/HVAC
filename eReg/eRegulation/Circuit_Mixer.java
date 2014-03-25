@@ -77,7 +77,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 				this.heatRequired.tempMaximum						= 80000;
 				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective - 1000)		//Within 1 degree
 				{
-					LogIt.display("Circuit_Mixer", "sequencer", "Temperature reached target/actual : " + this.taskActive.tempObjective + " / " + Global.thermoLivingRoom.reading);
 					this.heatRequired.tempMinimum					= 20000;
 					this.heatRequired.tempMaximum					= 20000;
 				}

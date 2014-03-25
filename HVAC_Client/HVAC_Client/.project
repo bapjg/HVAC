@@ -3,6 +3,7 @@
 	<name>HVAC_Client</name>
 	<comment></comment>
 	<projects>
+		<project>eReg</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

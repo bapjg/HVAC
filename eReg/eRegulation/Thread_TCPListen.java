@@ -41,11 +41,12 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        
 			    	if (message_in == null)
 			        {
-			            System.out.println("Null received from client");
+			            System.out.println("Thread_TCPListen/Run : Null received from client");
 			            message_out 										= new Ctrl_Abstract().new Nack();
 			        } 
 			    	else if (message_in instanceof Ctrl_Temperatures.Request)
 			        {
+			            System.out.println("Thread_TCPListen/Run : Message received from client");
 			    		Ctrl_Temperatures.Response message_ou				= new Ctrl_Temperatures().new Response();
 			            message_ou.dateTime 								= 3L;
 			            message_ou.date 									= "01/01/2001";
@@ -65,12 +66,14 @@ public class Thread_TCPListen <SendType> implements Runnable
 			            
 			            message_out											= message_ou;
 			        } 
-			        ObjectOutputStream 		output							= null;;
+			        ObjectOutputStream 		output							= null;
+		            System.out.println("Thread_TCPListen/Run : Will Respond");
 					
 					output 													= new ObjectOutputStream(UI_Socket.getOutputStream());
 					output.writeObject(message_out);
 			        output.flush();
 			        output.close();
+		            System.out.println("Thread_TCPListen/Run : Responded");
 				}
 		        catch (ClassNotFoundException eCNF)
 		        {
