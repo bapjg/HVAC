@@ -91,9 +91,12 @@ public class Thread_TCPListen <SendType> implements Runnable
 				{
 					// Do nothing we will loop and do another 10s wait unless stopNow activated
 				}
-				catch (IOException e)
+				catch (IOException eIO)
 				{
-					// TODO Auto-generated catch block
+					eIO.printStackTrace();
+				}
+				catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
