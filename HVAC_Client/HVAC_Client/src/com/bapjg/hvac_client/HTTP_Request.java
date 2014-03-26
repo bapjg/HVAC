@@ -31,10 +31,12 @@ public class HTTP_Request
 		{
 			System.out.println("Step 1");
 			Socket clientSocket 							= new Socket("192.168.5.51", 8889);
+//			Socket clientSocket 							= new Socket("home.bapjg.com", 8889);
 			System.out.println("Step 2");
-			ObjectInputStream input 						= new ObjectInputStream(clientSocket.getInputStream());
 			ObjectOutputStream output 						= new ObjectOutputStream(clientSocket.getOutputStream());
 			System.out.println("Step 3");
+			ObjectInputStream input 						= new ObjectInputStream(clientSocket.getInputStream());
+			System.out.println("Step 3.1");
 		
 			Ctrl_Temperatures.Request send 					= new Ctrl_Temperatures().new Request();
 			System.out.println("Step 4");

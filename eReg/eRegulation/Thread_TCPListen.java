@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -41,6 +42,8 @@ public class Thread_TCPListen <SendType> implements Runnable
 					LogIt.info("Thread_TCPListen", "Run", "Socket created", true);            
 			        
 			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
+			        // This previous line results in an EOFException
+			        
 					LogIt.info("Thread_TCPListen", "Run", "input created and now readObject", true);            
 			        message_in 												= (Ctrl_Abstract) input.readObject();
 					LogIt.info("Thread_TCPListen", "Run", "message_in read", true);            
@@ -87,6 +90,11 @@ public class Thread_TCPListen <SendType> implements Runnable
 		        	eCNF.printStackTrace();
 		            // message_out 							= new Message_Abstract().new Nack();
 		        }
+				catch (EOFException eEOF)
+				{
+		        	System.out.println("Caught EOF");
+					// Do nothing we will loop and do another 10s wait unless stopNow activated
+				}
 				catch (SocketTimeoutException eTO)
 				{
 					// Do nothing we will loop and do another 10s wait unless stopNow activated
