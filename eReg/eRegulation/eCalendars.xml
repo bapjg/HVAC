@@ -19,7 +19,7 @@
 			<Calendar 	type="Object" 	name="EveryDay" 	days="WeekEnd"		timeStart="07:30" 	timeEnd="08:30" tempObjective="35000" stopOnObjective="1"/>
 			
 			<Calendar 	type="Object" 	name="Test" 		days="EveryDay"		timeStart="18:00" 	timeEnd="18:30" tempObjective="40000" stopOnObjective="1"/>
-					</Circuit>
+		</Circuit>
 		<Circuit 		type="Object" 	name="Radiator">
 			<Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="07:00" 	timeEnd="08:00" tempObjective="50000" stopOnObjective="0"/>
 			<Calendar 	type="Object" 	name="WeekEnd" 		days="WeekEnd"		timeStart="08:00" 	timeEnd="09:00" tempObjective="50000" stopOnObjective="0"/>
@@ -32,7 +32,7 @@
 			
 		    <Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="05:00" 	timeEnd="07:30" tempObjective="19000" stopOnObjective="0"/>
 			<Calendar 	type="Object" 	name="WeekDay" 		days="TEST   "		timeStart="10:30" 	timeEnd="12:30" tempObjective="19000" stopOnObjective="0"/>
-			<Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="15:00" 	timeEnd="23:30" tempObjective="19000" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekDay" 		days="Test"			timeStart="15:00" 	timeEnd="23:30" tempObjective="19000" stopOnObjective="0"/>
 			
 			<Calendar 	type="Object" 	name="WeekEnd" 		days="WeekEnd"		timeStart="06:30" 	timeEnd="21:30" tempObjective="19000" stopOnObjective="0"/>
 			
