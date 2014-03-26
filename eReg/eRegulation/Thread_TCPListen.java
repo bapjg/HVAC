@@ -27,17 +27,23 @@ public class Thread_TCPListen <SendType> implements Runnable
 
 		try
 		{
+			LogIt.info("Thread_TCPListen", "Run", "Creating Objects", true);            
 			UI_Server														= new ServerSocket(8889);
 			UI_Server.setSoTimeout(10 * 1000);
+			LogIt.info("Thread_TCPListen", "Run", "Server Created", true);            
 		
 			while (!Global.stopNow)
 			{
 				try
 				{
+					LogIt.info("Thread_TCPListen", "Run", "In while", true);            
 					UI_Socket												= UI_Server.accept();
+					LogIt.info("Thread_TCPListen", "Run", "Socket created", true);            
 			        
 			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
+					LogIt.info("Thread_TCPListen", "Run", "input created and now readObject", true);            
 			        message_in 												= (Ctrl_Abstract) input.readObject();
+					LogIt.info("Thread_TCPListen", "Run", "message_in read", true);            
 			        
 			    	if (message_in == null)
 			        {
