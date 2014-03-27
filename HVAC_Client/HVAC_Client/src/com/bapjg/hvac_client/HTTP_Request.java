@@ -10,7 +10,6 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import eRegulation.*;
 
 public class HTTP_Request
 {
@@ -59,6 +58,7 @@ public class HTTP_Request
 		catch(Exception e)
 		{
 			System.out.print("Whoops! It didn't work!\n" + e);
+        	e.printStackTrace();
 		}
 		
 		System.out.println("Ping Started");

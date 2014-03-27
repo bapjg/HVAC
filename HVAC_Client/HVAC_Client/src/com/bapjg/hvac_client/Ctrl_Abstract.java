@@ -1,4 +1,4 @@
-package eRegulation;
+package com.bapjg.hvac_client;
 
 //This class was intended as abstract. But to be able to instanciate/reference inner classes
 //abstract has been removed
