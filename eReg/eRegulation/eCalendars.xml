@@ -10,8 +10,8 @@
 		<Word 			type="object"	name="Tomorrow"		use="relative"	days="1      "			/>
 		
 		<Word 			type="object"	name="HalfDay"		use="days"		days="4      "			/>
-		<Word 			type="object"	name="Test"			use="days"		days="TTT  TT"			/>			
-	</Vocabulary>
+		<Word 			type="object"	name="TestDay"		use="days"		days="TTT  TT"			/>			
+			</Vocabulary>
 	<Circuits 			type="Collection">
 		<Circuit 		type="Object" 	name="Hot_Water">
 			<Calendar 	type="Object" 	name="EveryDay" 	days="WeekDay" 		timeStart="06:15" 	timeEnd="06:45" tempObjective="35000" stopOnObjective="1"/>
@@ -28,11 +28,11 @@
 			<Calendar 	type="Object" 	name="Locataire" 	days="HalfDay"		timeStart="14:00" 	timeEnd="16:30" tempObjective="50000" stopOnObjective="0"/>
 		</Circuit>
 		<Circuit 		type="Object" 	name="Floor">
-			<Calendar 	type="Object" 	name="WeekDay" 		days="Test"			timeStart="00:01" 	timeEnd="23:59" tempObjective="19000" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekDay" 		days="TestDay"		timeStart="00:01" 	timeEnd="23:59" tempObjective="19000" stopOnObjective="0"/>
 			
 		    <Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="05:00" 	timeEnd="07:30" tempObjective="19000" stopOnObjective="0"/>
-			<Calendar 	type="Object" 	name="WeekDay" 		days="TEST   "		timeStart="10:30" 	timeEnd="12:30" tempObjective="19000" stopOnObjective="0"/>
-			<Calendar 	type="Object" 	name="WeekDay" 		days="Test"			timeStart="15:00" 	timeEnd="23:30" tempObjective="19000" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekDay" 		days="TESTDay"		timeStart="10:30" 	timeEnd="12:30" tempObjective="19000" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="15:00" 	timeEnd="23:30" tempObjective="19000" stopOnObjective="0"/>
 			
 			<Calendar 	type="Object" 	name="WeekEnd" 		days="WeekEnd"		timeStart="06:30" 	timeEnd="21:30" tempObjective="19000" stopOnObjective="0"/>
 			
