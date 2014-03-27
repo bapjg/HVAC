@@ -1,4 +1,5 @@
-package com.bapjg.hvac_client;
+package eRegulation;
+
 
 @SuppressWarnings("serial")
 public class Ctrl_Temperatures extends Ctrl_Abstract

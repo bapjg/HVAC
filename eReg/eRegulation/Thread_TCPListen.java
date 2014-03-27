@@ -11,9 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 
-import com.bapjg.hvac_client.Ctrl_Abstract;
-import com.bapjg.hvac_client.Ctrl_Temperatures;
-import com.bapjg.hvac_client.Ctrl_Temperatures.*;
+import eRegulation.Ctrl_Temperatures.*;
 
 public class Thread_TCPListen <SendType> implements Runnable
 {

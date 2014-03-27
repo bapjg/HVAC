@@ -10,6 +10,8 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import eReg.eRegulation.Ctrl_Temperatures;
+
 
 public class HTTP_Request
 {
