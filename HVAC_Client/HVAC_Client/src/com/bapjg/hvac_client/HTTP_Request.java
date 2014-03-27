@@ -11,6 +11,8 @@ import java.net.URL;
 import java.net.URLConnection;
 //import eRegulation.Ctrl_Abstract;
 import eRegulation.Ctrl_Temperatures;
+import eRegulation.Ctrl_Temperatures.Request;
+import eRegulation.Ctrl_Temperatures.Response;
 
 public class HTTP_Request
 {
@@ -35,8 +37,6 @@ public class HTTP_Request
 			System.out.println("Step 2");
 			ObjectOutputStream output 						= new ObjectOutputStream(clientSocket.getOutputStream());
 			System.out.println("Step 3");
-			ObjectInputStream input 						= new ObjectInputStream(clientSocket.getInputStream());
-			System.out.println("Step 3.1");
 		
 			Ctrl_Temperatures.Request send 					= new Ctrl_Temperatures().new Request();
 			System.out.println("Step 4");
@@ -46,7 +46,10 @@ public class HTTP_Request
 
 	        output.flush();
 	        output.close();
-	        
+
+			ObjectInputStream input 						= new ObjectInputStream(clientSocket.getInputStream());
+			System.out.println("Step 3.1");
+
 	        Object data_in									= input.readObject();
 			Ctrl_Temperatures.Response message_in 			= new Ctrl_Temperatures().new Response();
 			message_in										= (Ctrl_Temperatures.Response) data_in;
