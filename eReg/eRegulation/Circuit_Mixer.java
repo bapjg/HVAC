@@ -75,11 +75,11 @@ public class Circuit_Mixer extends Circuit_Abstract
 				temp												= temperatureGradient.getTempToTarget();
 				this.heatRequired.tempMinimum						= 60000;
 				this.heatRequired.tempMaximum						= 80000;
-				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective - 1000)		//Within 1 degree
-				{
-					this.heatRequired.tempMinimum					= 20000;
-					this.heatRequired.tempMaximum					= 20000;
-				}
+//				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective - 1000)		//Within 1 degree
+//				{
+//					this.heatRequired.tempMinimum					= 20000;
+//					this.heatRequired.tempMaximum					= 20000;
+//				}
 				
 				break;
 			case CIRCUIT_STATE_Stop_Requested:
