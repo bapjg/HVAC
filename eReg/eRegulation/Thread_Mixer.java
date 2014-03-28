@@ -40,11 +40,13 @@ public class Thread_Mixer implements Runnable
 			{
 				// Outside temp is high : no need to heat
 				targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
+				targetTemp									= circuitMixer.temperatureGradient.getTempToTarget();
 			}
 			else if (Global.thermoLivingRoom.reading > this.circuitMixer.taskActive.tempObjective - 1000)
 			{
 				// Inside temp is high : no need to heat (within 1 degree
 				targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
+				targetTemp									= circuitMixer.temperatureGradient.getTempToTarget();
 			}
 			else if (circuitMixer.state == circuitMixer.CIRCUIT_STATE_RampingUp) // This is to accelerate rampup
 			{
