@@ -137,7 +137,7 @@ public class Control
 		
 		//============================================================
 		//
-		// Start thread to handle UserInterface
+		// Start thread to handle UserInterface via Android etc
 		//
 		
 		Thread 			thread_tcpListen	 		= new Thread(new Thread_TCPListen(), "Thread_TCPListen");

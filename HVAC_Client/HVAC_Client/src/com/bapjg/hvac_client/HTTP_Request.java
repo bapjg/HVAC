@@ -57,6 +57,7 @@ public class HTTP_Request
 			System.out.println("Date : " + message_in.date);
 			System.out.println("Time : " + message_in.time);
 			System.out.println("tempBoiler : " + message_in.tempBoiler);
+			System.out.println("tempBoiler : " + message_in.tempBoiler);
 		}
 		catch(Exception e)
 		{
