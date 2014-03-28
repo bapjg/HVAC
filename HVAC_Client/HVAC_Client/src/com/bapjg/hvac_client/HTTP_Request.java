@@ -43,6 +43,7 @@ public class HTTP_Request
 
 			output.writeObject(send);
 			System.out.println("Step 5");
+			System.out.println("Step 5.1");
 
 	        output.flush();
 	        output.close();

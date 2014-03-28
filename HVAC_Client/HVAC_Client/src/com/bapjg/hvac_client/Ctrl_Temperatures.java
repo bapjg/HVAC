@@ -1,4 +1,5 @@
-package HVAC_Messages;
+package com.bapjg.hvac_client;
+
 
 
 
