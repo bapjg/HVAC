@@ -11,7 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 
-import eRegulation.Ctrl_Temperatures.*;
+import HVAC_Messages.*;
 
 public class Thread_TCPListen <SendType> implements Runnable
 {
@@ -22,8 +22,8 @@ public class Thread_TCPListen <SendType> implements Runnable
     {
 		LogIt.info("Thread_TCPListen", "Run", "Starting", true);            
  
-		Ctrl_Abstract					message_in 							= null;
-        Ctrl_Abstract					message_out 						= null;
+		HVAC_Messages.Ctrl_Abstract					message_in 							= null;
+		HVAC_Messages.Ctrl_Abstract					message_out 						= null;
 
 		try
 		{
@@ -44,18 +44,18 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        // This previous line results in an EOFException
 			        
 					LogIt.info("Thread_TCPListen", "Run", "input created and now readObject", true);            
-			        message_in 												= (Ctrl_Abstract) input.readObject();
+			        message_in 												= (HVAC_Messages.Ctrl_Abstract) input.readObject();
 					LogIt.info("Thread_TCPListen", "Run", "message_in read", true);            
 			        
 			    	if (message_in == null)
 			        {
 			            System.out.println("Thread_TCPListen/Run : Null received from client");
-			            message_out 										= new Ctrl_Abstract().new Nack();
+			            message_out 										= new HVAC_Messages.Ctrl_Abstract().new Nack();
 			        } 
-			    	else if (message_in instanceof Ctrl_Temperatures.Request)
+			    	else if (message_in instanceof HVAC_Messages.Ctrl_Temperatures.Request)
 			        {
 			            System.out.println("Thread_TCPListen/Run : Message received from client");
-			    		Ctrl_Temperatures.Response message_ou				= new Ctrl_Temperatures().new Response();
+			            HVAC_Messages.Ctrl_Temperatures.Response message_ou				= new HVAC_Messages.Ctrl_Temperatures().new Response();
 			            message_ou.dateTime 								= 3L;
 			            message_ou.date 									= "01/01/2001";
 			            message_ou.time  									= "15:15:15";

@@ -1,4 +1,5 @@
-package eRegulation;
+package HVAC_Messages;
+
 
 //This class was intended as abstract. But to be able to instanciate/reference inner classes
 //abstract has been removed
