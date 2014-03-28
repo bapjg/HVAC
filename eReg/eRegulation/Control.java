@@ -140,6 +140,7 @@ public class Control
 		// Start thread to handle UserInterface via Android etc
 		//
 		
+		int x = 1;
 		Thread 			thread_tcpListen	 		= new Thread(new Thread_TCPListen(), "Thread_TCPListen");
 		thread_tcpListen.start();
 		
