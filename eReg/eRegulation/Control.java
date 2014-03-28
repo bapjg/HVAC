@@ -141,8 +141,8 @@ public class Control
 		//
 		
 		int x = 1;
-		Thread 			thread_tcpListen	 		= new Thread(new Thread_TCPListen(), "Thread_TCPListen");
-		thread_tcpListen.start();
+		//Thread 			thread_tcpListen	 		= new Thread(new Thread_TCPListen(), "Thread_TCPListen");
+		//thread_tcpListen.start();
 		
 		//
 		//============================================================

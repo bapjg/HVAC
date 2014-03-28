@@ -1,6 +1,5 @@
 package com.bapjg.hvac_client;
 
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -9,10 +8,6 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
-import HVAC_Messages.*;
-
-
-
 
 public class HTTP_Request
 {
