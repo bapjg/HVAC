@@ -40,7 +40,7 @@ complete:
 
 ex:
 	git pull
-	sudo java -cp "../:../../HVAC_Client/bin/classes/" -Djava.library.path=./ eRegulation.Control
+	sudo java -cp "../:../../HVAC_Messages/bin/HVAC_Messages/" -Djava.library.path=./ eRegulation.Control
 
 help:
 	echo ex........... just execute as copiled in IDE
