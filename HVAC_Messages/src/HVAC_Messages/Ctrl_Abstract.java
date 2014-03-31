@@ -1,4 +1,4 @@
-package com.bapjg.hvac_client;
+package HVAC_Messages;
 
 
 //This class was intended as abstract. But to be able to instanciate/reference inner classes

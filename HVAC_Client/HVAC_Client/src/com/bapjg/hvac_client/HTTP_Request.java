@@ -9,6 +9,8 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import HVAC_Messages.*;
+
 public class HTTP_Request
 {
 	public URL						serverURL;
