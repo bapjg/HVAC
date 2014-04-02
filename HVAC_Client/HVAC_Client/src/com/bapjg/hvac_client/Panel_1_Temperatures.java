@@ -27,76 +27,87 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class Panel_1_Temperatures extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
+public class Panel_1_Temperatures extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, TCP_Task.displayTemps
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	// Inflate the layout for this fragment
-		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-
-		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+//		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		
+//		pi.connect();
+
+//		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+		
+        TCP_Task								task				= new TCP_Task(getActivity());
+
         return inflater.inflate(R.layout.panel_1_temperatures, container, false);
+        
+        
     }
-	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
-	{
-		public HTTP_Request				http;
-
-		public HTTP_Req_Temp()
-		{
-			http													= new HTTP_Request();
-		}
-		
-		@Override
-		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
-		{
-			if (Global.serverURL == "")
-			{
-				return new Mgmt_Msg_Abstract().new NoConnection();
-			}
-			else
-			{
-				return http.sendData(messageOut[0]);
-			}
-		}	
-		@Override
-		protected void onProgressUpdate(Void... progress)  { }
-		@Override
-	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
-		{             
-			if (result instanceof Mgmt_Msg_Temperatures.Data)
-			{
-				Mgmt_Msg_Temperatures.Data msg_received 	= (Mgmt_Msg_Temperatures.Data) result;
-				Activity a							= getActivity();
-
-				// Need to change this to avoid null pointer exception
-				// Probably due to (Activity) a not being current any more (clicking too fast)
-				
-				((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.date));
-				((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.time));
-				
-				((TextView) a.findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
-				((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
-				((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
-				((TextView) a.findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
-				((TextView) a.findViewById(R.id.BoilerOut)).setText(displayTemperature(msg_received.tempBoilerOut));
-				((TextView) a.findViewById(R.id.FloorIn)).setText(displayTemperature(msg_received.tempFloorIn));
-				((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
-				((TextView) a.findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
-				((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
-				((TextView) a.findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
-			}
-			else if (result instanceof Mgmt_Msg_Temperatures.NoConnection)
-			{
-				// Toast.makeText(getActivity(), "No Connection established yet", Toast.LENGTH_SHORT).show();
-			}
-			else
-			{
-				Toast.makeText(getActivity(), "A Nack has been returned", Toast.LENGTH_SHORT).show();
-			}
-	    }
-	}
+    @Override
+    public void displayTemps()
+    {
+    	
+    }
+//	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
+//	{
+//		public HTTP_Request				http;
+//
+//		public HTTP_Req_Temp()
+//		{
+//			http													= new HTTP_Request();
+//		}
+//		
+//		@Override
+//		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
+//		{
+//			if (Global.serverURL == "")
+//			{
+//				return new Mgmt_Msg_Abstract().new NoConnection();
+//			}
+//			else
+//			{
+//				return http.sendData(messageOut[0]);
+//			}
+//		}	
+//		@Override
+//		protected void onProgressUpdate(Void... progress)  { }
+//		@Override
+//	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
+//		{             
+//			if (result instanceof Mgmt_Msg_Temperatures.Data)
+//			{
+//				Mgmt_Msg_Temperatures.Data msg_received 	= (Mgmt_Msg_Temperatures.Data) result;
+//				Activity a							= getActivity();
+//
+//				// Need to change this to avoid null pointer exception
+//				// Probably due to (Activity) a not being current any more (clicking too fast)
+//				
+//				((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.date));
+//				((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.time));
+//				
+//				((TextView) a.findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
+//				((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
+//				((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
+//				((TextView) a.findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
+//				((TextView) a.findViewById(R.id.BoilerOut)).setText(displayTemperature(msg_received.tempBoilerOut));
+//				((TextView) a.findViewById(R.id.FloorIn)).setText(displayTemperature(msg_received.tempFloorIn));
+//				((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
+//				((TextView) a.findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
+//				((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
+//				((TextView) a.findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
+//			}
+//			else if (result instanceof Mgmt_Msg_Temperatures.NoConnection)
+//			{
+//				// Toast.makeText(getActivity(), "No Connection established yet", Toast.LENGTH_SHORT).show();
+//			}
+//			else
+//			{
+//				Toast.makeText(getActivity(), "A Nack has been returned", Toast.LENGTH_SHORT).show();
+//			}
+//	    }
+//	}
 	private String displayTemperature(Integer temperature)
 	{
 		int degrees = temperature/1000;

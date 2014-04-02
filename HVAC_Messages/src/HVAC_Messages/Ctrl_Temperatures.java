@@ -21,8 +21,6 @@ public class Ctrl_Temperatures extends Ctrl_Abstract
 	{
 		private static final long 		serialVersionUID 			= 1L;
 		public Long						dateTime;
-		public String					date;
-		public String					time;
 		
 		public Integer 					tempBoiler;
 		public Integer 					tempBoilerIn;

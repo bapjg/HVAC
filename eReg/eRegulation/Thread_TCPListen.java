@@ -54,21 +54,30 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        {
 			            System.out.println("Thread_TCPListen/Run : Message received from client");
 			            Ctrl_Temperatures.Response message_ou				= new Ctrl_Temperatures().new Response();
-			            message_ou.dateTime 								= 3L;
-			            message_ou.date 									= "01/01/2001";
-			            message_ou.time  									= "15:15:15";
-			            message_ou.tempBoiler	 							= 10;
-			            message_ou.tempBoilerIn	 							= 10;
-			            message_ou.tempBoilerOut	 						= 10;
+			            message_ou.dateTime 								= System.currentTimeMillis();
+
+			            message_ou.tempBoiler	 							= Global.thermoBoiler.reading;
+			            message_ou.tempBoilerIn	 							= Global.thermoBoilerIn.reading;
+			            message_ou.tempBoilerOut	 						= Global.thermoBoilerOut.reading;
 			    		
-			            message_ou.tempFloorIn	 							= 10;
-			            message_ou.tempFloorOut	 							= 10;
+			            message_ou.tempFloorIn	 							= Global.thermoFloorIn.reading;
+			            message_ou.tempFloorOut	 							= Global.thermoFloorOut.reading;
 			    		
-			            message_ou.tempRadiatorOut	 						= 10;
-			            message_ou.tempRadiatorIn	 						= 10;
-			            message_ou.tempHotWater	 							= 10;
-			            message_ou.tempOutside	 							= 10;
-			            message_ou.tempLivingRoom	 						= 10;
+			            message_ou.tempRadiatorIn	 						= Global.thermoRadiatorIn.reading;
+			            message_ou.tempRadiatorOut	 						= Global.thermoRadiatorOut.reading;
+
+			            message_ou.tempHotWater	 							= Global.thermoHotWater.reading;
+			            message_ou.tempOutside	 							= Global.thermoOutside.reading;
+			            message_ou.tempLivingRoom	 						= Global.thermoLivingRoom.reading;
+
+			            
+			            
+			            
+			            
+			            
+			            
+			            
+			            
 			            
 			            message_out											= message_ou;
 			        } 

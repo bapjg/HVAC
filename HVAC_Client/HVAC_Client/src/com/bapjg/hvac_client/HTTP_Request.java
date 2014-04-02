@@ -3,6 +3,7 @@ package com.bapjg.hvac_client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -24,44 +25,6 @@ public class HTTP_Request
 	//
 	public Mgmt_Msg_Abstract ping()
 	{
-		System.out.println("TCPRequest");
-		
-		try
-		{
-			System.out.println("Step 1");
-			Socket clientSocket 							= new Socket("192.168.5.51", 8889);
-//			Socket clientSocket 							= new Socket("home.bapjg.com", 8889);
-			System.out.println("Step 2");
-			ObjectOutputStream output 						= new ObjectOutputStream(clientSocket.getOutputStream());
-			System.out.println("Step 3");
-		
-			Ctrl_Temperatures.Request send 					= new Ctrl_Temperatures().new Request();
-			System.out.println("Step 4");
-
-			output.writeObject(send);
-			System.out.println("Step 5");
-			System.out.println("Step 5.1");
-
-	        output.flush();
-	        output.close();
-
-			ObjectInputStream input 						= new ObjectInputStream(clientSocket.getInputStream());
-			System.out.println("Step 3.1");
-
-	        Object data_in									= input.readObject();
-			Ctrl_Temperatures.Response message_in 			= new Ctrl_Temperatures().new Response();
-			message_in										= (Ctrl_Temperatures.Response) data_in;
-			
-			System.out.println("Date : " + message_in.date);
-			System.out.println("Time : " + message_in.time);
-			System.out.println("tempBoiler : " + message_in.tempBoiler);
-			System.out.println("tempBoiler : " + message_in.tempBoiler);
-		}
-		catch(Exception e)
-		{
-			System.out.print("Whoops! It didn't work!\n" + e);
-        	e.printStackTrace();
-		}
 		
 		System.out.println("Ping Started");
 		Mgmt_Msg_Abstract				messageReceive;

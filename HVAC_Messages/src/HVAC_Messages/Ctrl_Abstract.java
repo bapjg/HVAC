@@ -15,4 +15,12 @@ public class Ctrl_Abstract implements java.io.Serializable
 	public class Nack extends Ctrl_Abstract
 	{
 	}
+	@SuppressWarnings("serial")
+	public class Ping extends Ctrl_Abstract
+	{
+	}
+	@SuppressWarnings("serial")
+	public class NoConnection extends Ctrl_Abstract
+	{
+	}
 }

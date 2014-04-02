@@ -46,6 +46,8 @@ public class Activity_Main extends Activity
         global.actContext								= (Context)  this;
         global.activity									= (Activity) this;
         global.serverURL								= "";
+        global.piConnection								= new TCP_Connection();
+        
         ActionBar 				actionbar 				= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         
@@ -81,7 +83,9 @@ public class Activity_Main extends Activity
         actionbar.addTab(tabCalendars);
         actionbar.addTab(tabActions);
 
-        HTTP_Req_Ping								httpRequest			= new HTTP_Req_Ping();
+        Global.piConnection								= new TCP_Connection();
+        
+        HTTP_Req_Ping		httpRequest					= new HTTP_Req_Ping();
 		httpRequest.execute();
 		Global.initialisationCompleted					= true;
 	}
@@ -130,6 +134,7 @@ public class Activity_Main extends Activity
 	private class HTTP_Req_Ping extends AsyncTask <Void, Void, Mgmt_Msg_Abstract> 
 	{
 		public HTTP_Request				http;
+		
 		public HTTP_Req_Ping()
 		{
 			http													= new HTTP_Request();
