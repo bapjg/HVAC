@@ -52,15 +52,15 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Temperatures.Ping)
 			        {
-			            System.out.println("Thread_TCPListen/Run : Ping received from client");
+						LogIt.info("Thread_TCPListen", "Run", "Ping received from client", true);            
 			            Ctrl_Abstract.Ack message_ou						= new Ctrl_Abstract().new Ack();
-			            System.out.println("Thread_TCPListen/Run : Ack to Ping prepared");
+						LogIt.info("Thread_TCPListen", "Run", "Ack to Ping prepared", true);            
 			            
 			            message_out											= message_ou;
 			        }
 			    	else if (message_in instanceof Ctrl_Temperatures.Request)
 			        {
-			            System.out.println("Thread_TCPListen/Run : Message received from client");
+						LogIt.info("Thread_TCPListen", "Run", "Temp.Req Message received from client", true);            
 			            Ctrl_Temperatures.Response message_ou				= new Ctrl_Temperatures().new Response();
 			            message_ou.dateTime 								= System.currentTimeMillis();
 
@@ -81,13 +81,13 @@ public class Thread_TCPListen <SendType> implements Runnable
 			            message_out											= message_ou;
 			        } 
 			        ObjectOutputStream 		output							= null;
-		            System.out.println("Thread_TCPListen/Run : Will Respond");
+					LogIt.info("Thread_TCPListen", "Run", "Will Respond", true);            
 					
 					output 													= new ObjectOutputStream(UI_Socket.getOutputStream());
 					output.writeObject(message_out);
 			        output.flush();
 			        output.close();
-		            System.out.println("Thread_TCPListen/Run : Responded");
+					LogIt.info("Thread_TCPListen", "Run", "Responded", true);            
 				}
 		        catch (ClassNotFoundException eCNF)
 		        {
