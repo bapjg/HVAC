@@ -28,7 +28,7 @@ import android.widget.Toast;
 import android.widget.TabHost;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class Activity_Main extends Activity 
+public class Activity_Main 			extends Activity 
 {
 	public static	Global						global;
 

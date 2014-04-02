@@ -50,6 +50,14 @@ public class Thread_TCPListen <SendType> implements Runnable
 			            System.out.println("Thread_TCPListen/Run : Null received from client");
 			            message_out 										= new Ctrl_Abstract().new Nack();
 			        } 
+			    	else if (message_in instanceof Ctrl_Temperatures.Ping)
+			        {
+			            System.out.println("Thread_TCPListen/Run : Ping received from client");
+			            Ctrl_Abstract.Ack message_ou						= new Ctrl_Abstract().new Ack();
+			            System.out.println("Thread_TCPListen/Run : Ack to Ping prepared");
+			            
+			            message_out											= message_ou;
+			        }
 			    	else if (message_in instanceof Ctrl_Temperatures.Request)
 			        {
 			            System.out.println("Thread_TCPListen/Run : Message received from client");
@@ -69,15 +77,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 			            message_ou.tempHotWater	 							= Global.thermoHotWater.reading;
 			            message_ou.tempOutside	 							= Global.thermoOutside.reading;
 			            message_ou.tempLivingRoom	 						= Global.thermoLivingRoom.reading;
-
-			            
-			            
-			            
-			            
-			            
-			            
-			            
-			            
 			            
 			            message_out											= message_ou;
 			        } 
@@ -92,13 +91,13 @@ public class Thread_TCPListen <SendType> implements Runnable
 				}
 		        catch (ClassNotFoundException eCNF)
 		        {
-		        	System.out.println("Caught CNF");
+					LogIt.info("Thread_TCPListen", "Run", "Caught CNF", true);            
 		        	eCNF.printStackTrace();
 		            // message_out 							= new Message_Abstract().new Nack();
 		        }
 				catch (EOFException eEOF)
 				{
-		        	System.out.println("Caught EOF");
+					LogIt.info("Thread_TCPListen", "Run", "Caught EOF", true);            
 					// Do nothing we will loop and do another 10s wait unless stopNow activated
 				}
 				catch (SocketTimeoutException eTO)
@@ -107,10 +106,12 @@ public class Thread_TCPListen <SendType> implements Runnable
 				}
 				catch (IOException eIO)
 				{
+					LogIt.info("Thread_TCPListen", "Run", "Caught IO", true);            
 					eIO.printStackTrace();
 				}
 				catch (Exception e)
 				{
+					LogIt.info("Thread_TCPListen", "Run", "Caught other", true);            
 					e.printStackTrace();
 				}
 			}

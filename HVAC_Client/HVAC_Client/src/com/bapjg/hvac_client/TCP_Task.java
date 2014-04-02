@@ -9,12 +9,10 @@ import HVAC_Messages.*;
 
 public class TCP_Task extends AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
 {
-	public Activity						activity;
 	public TCP_Response					callBack;
 
-	public TCP_Task(Activity activity)
+	public TCP_Task()
 	{
-		this.activity										= Global.activity;
 		this.callBack										= null;
 	}
 	@Override
@@ -35,15 +33,15 @@ public class TCP_Task extends AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
 	{             
 		if (result instanceof Ctrl_Temperatures)
 		{
-			Toast.makeText(activity, "Great stuff", Toast.LENGTH_SHORT).show();
+			Toast.makeText(Global.activity, "Great stuff", Toast.LENGTH_SHORT).show();
 		}
 		else if (result instanceof Ctrl_Abstract.NoConnection)
 		{
-			Toast.makeText(activity, "No Connection established yet", Toast.LENGTH_SHORT).show();
+			Toast.makeText(Global.activity, "No Connection established yet", Toast.LENGTH_SHORT).show();
 		}
 		else
 		{
-			Toast.makeText(activity, "A Nack has been returned", Toast.LENGTH_SHORT).show();
+			Toast.makeText(Global.activity, "A Nack has been returned", Toast.LENGTH_SHORT).show();
 		}
 		callBack.processFinish(result);
     }

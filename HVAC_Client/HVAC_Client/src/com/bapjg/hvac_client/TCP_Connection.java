@@ -29,12 +29,13 @@ public class TCP_Connection
 		{
 			return true;
 		}
-		System.out.println("connect");
+		System.out.println("TCP must connect");
 		
 		try
 		{
 			piAddressV4										= InetAddress.getByName("192.168.5.51");
 			piSocket 										= new Socket(piAddressV4, 8889);
+			System.out.println("TCP connected local");
 		}
 		catch(Exception e)
 		{
@@ -43,6 +44,7 @@ public class TCP_Connection
 			{
 				piAddressV4 								= InetAddress.getByName("home.bapjg.com");
 				piSocket 									= new Socket(piAddressV4, 8889);
+				System.out.println("TCP connected remote");
 			}
 			catch(Exception e2)
 			{
@@ -51,6 +53,7 @@ public class TCP_Connection
 				return false;
 			}
 		}
+		piConnected											= true;
 		return true;
 	}
 	
@@ -58,66 +61,8 @@ public class TCP_Connection
 	public Ctrl_Abstract ping()
 	{
 		System.out.println("ping");
-		
-		try
-		{
-			piAddressV4										= InetAddress.getByName("192.168.5.51");
-			piSocket 										= new Socket(piAddressV4, 8889);
-		}
-		catch(Exception e)
-		{
-			// It Failed so now try over the internet
-			try
-			{
-				piAddressV4 								= InetAddress.getByName("home.bapjg.com");
-				piSocket 									= new Socket(piAddressV4, 8889);
-			}
-			catch(Exception e2)
-			{
-				// Major problem, return a nack.
-				piConnected									= false;
-				return new Ctrl_Abstract().new Nack();
-			}
-		}
-		
-		try
-		{
-			ObjectOutputStream 		piOutput 				= new ObjectOutputStream(piSocket.getOutputStream());
-			System.out.println("Step 3");
-		
-			Ctrl_Abstract.Ping 		piPingSend 				= new Ctrl_Abstract().new Ping();
-			System.out.println("Step 4");
-
-			piOutput.writeObject(piPingSend);
-			piOutput.flush();
-			
-			System.out.println("Step 5.1");
-
-
-
-			ObjectInputStream 		piInput 				= new ObjectInputStream(piSocket.getInputStream());
-			System.out.println("Step 3.1");
-
-	        Object 					data_in					= piInput.readObject();
-	        
-			if (data_in instanceof Ctrl_Abstract.Ack)
-			{
-				piConnected									= true;
-				return new Ctrl_Abstract().new Ack();
-			}
-			else
-			{
-				piConnected									= false;
-				return new Ctrl_Abstract().new Nack();
-			}
-		}
-		catch(Exception e)
-		{
-			System.out.print("Whoops! It didn't work!\n" + e);
-        	e.printStackTrace();
-			piConnected										= false;
-			return new Ctrl_Abstract().new Nack();
-		}
+		Ctrl_Abstract.Ping 		piPingSend 				= new Ctrl_Abstract().new Ping();
+		return piTransaction((Ctrl_Abstract) piPingSend);
 	}
 	public Ctrl_Abstract piTransaction(Ctrl_Abstract messageSend)
 	{
@@ -139,13 +84,13 @@ public class TCP_Connection
 			}
 			catch (SocketTimeoutException eTimeOut)
 			{
-				System.out.print("Whoops! It didn't work!\n" + eTimeOut);
+				System.out.println("Whoops! It didn't work eTimeOut");
 				eTimeOut.printStackTrace();
 				return new Ctrl_Abstract().new Nack();
 			}
 			catch(Exception e)
 			{
-				System.out.print("Whoops! It didn't work!\n" + e);
+				System.out.println("Whoops! It didn't work e");
 	        	e.printStackTrace();
 				return new Ctrl_Abstract().new Nack();
 			}

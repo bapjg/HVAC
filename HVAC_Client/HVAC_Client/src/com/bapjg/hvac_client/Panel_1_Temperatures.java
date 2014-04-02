@@ -27,66 +27,137 @@ import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Messages.*;
 
 
-public class Panel_1_Temperatures extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
+public class Panel_1_Temperatures 	extends 	Fragment 
+									implements 	View.OnClickListener, AdapterView.OnItemClickListener, TCP_Response
 {
-    @Override
+    public Activity						activity;
+	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	// Inflate the layout for this fragment
+    	this.activity										= getActivity();
+		// Inflate the layout for this fragment
 //		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
 		
 //		pi.connect();
 
 //		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
 		
-    	TCP_Request_Temperatures				task				= new TCP_Request_Temperatures(getActivity());
+    	TCP_Task						task				= new TCP_Task();
+    	task.callBack										= this;
     	task.execute(new Ctrl_Temperatures().new Request());
     	
         return inflater.inflate(R.layout.panel_1_temperatures, container, false);
-        
-        
     }
-    private class TCP_Request_Temperatures extends TCP_Task
-    {
-		public TCP_Request_Temperatures(Activity activity) 
+    public void processFinish(Ctrl_Abstract result) 
+	{             
+		Activity a							= activity;
+		Toast.makeText(a, "processFinish starting", Toast.LENGTH_SHORT).show();
+		if (result instanceof Ctrl_Temperatures.Response)
 		{
-			super(activity);
+			Ctrl_Temperatures.Response msg_received 	= (Ctrl_Temperatures.Response) result;
+			// Need to change this to avoid null pointer exception
+			// Probably due to (Activity) a not being current any more (clicking too fast)
+			
+//			((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.date));
+//			((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.time));
+			
+			((TextView) a.findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
+			((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
+			((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
+			((TextView) a.findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
+			((TextView) a.findViewById(R.id.BoilerOut)).setText(displayTemperature(msg_received.tempBoilerOut));
+			((TextView) a.findViewById(R.id.FloorIn)).setText(displayTemperature(msg_received.tempFloorIn));
+			((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
+			((TextView) a.findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
+			((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
+			((TextView) a.findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
 		}
-	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
-		{             
-			Activity a							= activity;
-			if (result instanceof Mgmt_Msg_Temperatures.Data)
-			{
-				Mgmt_Msg_Temperatures.Data msg_received 	= (Mgmt_Msg_Temperatures.Data) result;
-//				Activity a							= getActivity();
+		else if (result instanceof Ctrl_Temperatures.NoConnection)
+		{
+			Toast.makeText(a, "No Connection established yet", Toast.LENGTH_SHORT).show();
+		}
+		else
+		{
+			Toast.makeText(a, "A Nack has been returned", Toast.LENGTH_SHORT).show();
+		}
+    }    	
 
 
-				// Need to change this to avoid null pointer exception
-				// Probably due to (Activity) a not being current any more (clicking too fast)
-				
-				((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.date));
-				((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.time));
-				
-				((TextView) a.findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
-				((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
-				((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
-				((TextView) a.findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
-				((TextView) a.findViewById(R.id.BoilerOut)).setText(displayTemperature(msg_received.tempBoilerOut));
-				((TextView) a.findViewById(R.id.FloorIn)).setText(displayTemperature(msg_received.tempFloorIn));
-				((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
-				((TextView) a.findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
-				((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
-				((TextView) a.findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
-			}
-			else if (result instanceof Mgmt_Msg_Temperatures.NoConnection)
-			{
-				Toast.makeText(a, "No Connection established yet", Toast.LENGTH_SHORT).show();
-			}
-			else
-			{
-				Toast.makeText(a, "A Nack has been returned", Toast.LENGTH_SHORT).show();
-			}
-	    }    	
+	private String displayTemperature(Integer temperature)
+	{
+		int degrees = temperature/1000;
+		int decimal = (temperature - degrees*1000) / 100;
+		return degrees + "." + decimal;
+	}
+	private String displayDate(String date)
+	{
+		return date.substring(8,10) + "/" + date.substring(5,7);
+	}
+	private String displayTime(String time)
+	{
+		return time.substring(0,8);
+	}
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {}
+	@Override
+	public void onClick(View myView) 
+	{
+    	System.out.println("We have arrived in onClick again");
+    	Button 								myButton 					= (Button) myView;
+    	String								myCaption					= myButton.getText().toString();
+    	
+		// Set all textColours to white
+		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();
+		for (int i = 0; i < viewParent.getChildCount(); i++)
+		{
+			Button							buttonChild 				= (Button) viewParent.getChildAt(i);
+			buttonChild.setTextColor(Color.WHITE);
+		}
+		
+		((Button) myView).setTextColor(Color.YELLOW);
+    	
+    	if (myCaption.equalsIgnoreCase("Temperatures"))
+    	{
+    		buttonTemperaturesClick(myView);	
+    	}
+	}
+    public void buttonTemperaturesClick(View myView)
+    {
+//		if (!Global.initialisationCompleted)
+    	Toast.makeText(Global.appContext, "P1_Temperatures : buttonTemperaturesClick called", Toast.LENGTH_LONG).show();
+		if (true)
+		{
+    		if (! Global.piConnection.connect())
+    		{
+    			System.out.println("P1_Temperatures : Server connection not established");
+    			Toast.makeText(Global.appContext, "P1_Temperatures : Server connexion not yet established", Toast.LENGTH_LONG).show();
+    		}
+    		else
+    		{
+    			System.out.println("P1_Temperatures : connection established");
+    	    	TCP_Task				task							= new TCP_Task();
+    	    	task.callBack											= this;
+    	    	task.execute(new Ctrl_Temperatures().new Request());
+    		}
+		}
+
+// This sets up the code to display the panel and get clicks in order to display an update screen
+// All this comes from Thermometers
+//        ArrayList  	<Mgmt_Msg_Configuration.Thermometer>	data		= Global.configuration.thermometerList;
+//        Activity 							activity					= (Activity) Global.actContext;
+//        AdapterView <Adapter_Thermometers> 	view						= (AdapterView) activity.findViewById(R.id.List_View);
+//        
+//        Adapter_Thermometers 				adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
+//        
+//        view.setAdapter(adapter);
+//        view.setOnItemClickListener((OnItemClickListener) this);	
+    }
+    public void update()
+    {
+    	System.out.println("update called");
+    	TCP_Task						task							= new TCP_Task();
+    	task.callBack													= this;
+    	task.execute(new Ctrl_Temperatures().new Request());
     }
 //	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 //	{
@@ -146,80 +217,5 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 //			}
 //	    }
 //	}
-	private String displayTemperature(Integer temperature)
-	{
-		int degrees = temperature/1000;
-		int decimal = (temperature - degrees*1000) / 100;
-		return degrees + "." + decimal;
-	}
-	private String displayDate(String date)
-	{
-		return date.substring(8,10) + "/" + date.substring(5,7);
-	}
-	private String displayTime(String time)
-	{
-		return time.substring(0,8);
-	}
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {}
-	@Override
-	public void onClick(View myView) 
-	{
-    	System.out.println("We have arrived in onClick again");
-    	Button 								myButton 					= (Button) myView;
-    	String								myCaption					= myButton.getText().toString();
-    	
-		// Set all textColours to white
-		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();
-		for (int i = 0; i < viewParent.getChildCount(); i++)
-		{
-			Button							buttonChild 				= (Button) viewParent.getChildAt(i);
-			buttonChild.setTextColor(Color.WHITE);
-		}
-		
-		((Button) myView).setTextColor(Color.YELLOW);
-    	
-    	if (myCaption.equalsIgnoreCase("Temperatures"))
-    	{
-    		buttonTemperaturesClick(myView);	
-    	}
-	}
-    public void buttonTemperaturesClick(View myView)
-    {
-		if (!Global.initialisationCompleted)
-		{
-    		if (! Global.piConnection.connect())
-    		{
-    			System.out.println("P1_Temperatures : Server connection not established");
-    			Toast.makeText(Global.appContext, "P1_Temperatures : Server connexion not yet established", Toast.LENGTH_LONG).show();
-    		}
-    		else
-    		{
-    			System.out.println("P1_Temperatures : connection established");
-//    			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
-//    			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
-    			
-    	    	TCP_Request_Temperatures				task				= new TCP_Request_Temperatures(getActivity());
-    	    	task.execute(new Ctrl_Temperatures().new Request());
-    		}
-		}
-
-		// This sets up the code to display the panel and get clicks in order to display an update screen
-// All this comes from Thermometers
-//        ArrayList  	<Mgmt_Msg_Configuration.Thermometer>	data		= Global.configuration.thermometerList;
-//        Activity 							activity					= (Activity) Global.actContext;
-//        AdapterView <Adapter_Thermometers> 	view						= (AdapterView) activity.findViewById(R.id.List_View);
-//        
-//        Adapter_Thermometers 				adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
-//        
-//        view.setAdapter(adapter);
-//        view.setOnItemClickListener((OnItemClickListener) this);	
-    }
-    public void update()
-    {
-    	System.out.println("update called");
-    	TCP_Request_Temperatures						task				= new TCP_Request_Temperatures(getActivity());
-    	task.execute(new Ctrl_Temperatures().new Request());
-    }
 }
 
