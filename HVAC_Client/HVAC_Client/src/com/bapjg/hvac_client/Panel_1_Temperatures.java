@@ -9,9 +9,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-import com.bapjg.hvac_client.Mgmt_Msg_Temperatures.Request;
-
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -27,7 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class Panel_1_Temperatures extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, TCP_Task.displayTemps
+import HVAC_Messages.*;
+
+
+public class Panel_1_Temperatures extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
 {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
@@ -39,16 +39,54 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
 
 //		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
 		
-        TCP_Task								task				= new TCP_Task(getActivity());
-
+    	TCP_Request_Temperatures				task				= new TCP_Request_Temperatures(getActivity());
+    	task.execute(new Ctrl_Temperatures().new Request());
+    	
         return inflater.inflate(R.layout.panel_1_temperatures, container, false);
         
         
     }
-    @Override
-    public void displayTemps()
+    private class TCP_Request_Temperatures extends TCP_Task
     {
-    	
+		public TCP_Request_Temperatures(Activity activity) 
+		{
+			super(activity);
+		}
+	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
+		{             
+			Activity a							= activity;
+			if (result instanceof Mgmt_Msg_Temperatures.Data)
+			{
+				Mgmt_Msg_Temperatures.Data msg_received 	= (Mgmt_Msg_Temperatures.Data) result;
+//				Activity a							= getActivity();
+
+
+				// Need to change this to avoid null pointer exception
+				// Probably due to (Activity) a not being current any more (clicking too fast)
+				
+				((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.date));
+				((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.time));
+				
+				((TextView) a.findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
+				((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
+				((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
+				((TextView) a.findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
+				((TextView) a.findViewById(R.id.BoilerOut)).setText(displayTemperature(msg_received.tempBoilerOut));
+				((TextView) a.findViewById(R.id.FloorIn)).setText(displayTemperature(msg_received.tempFloorIn));
+				((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
+				((TextView) a.findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
+				((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
+				((TextView) a.findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
+			}
+			else if (result instanceof Mgmt_Msg_Temperatures.NoConnection)
+			{
+				Toast.makeText(a, "No Connection established yet", Toast.LENGTH_SHORT).show();
+			}
+			else
+			{
+				Toast.makeText(a, "A Nack has been returned", Toast.LENGTH_SHORT).show();
+			}
+	    }    	
     }
 //	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 //	{
@@ -150,7 +188,7 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
     {
 		if (!Global.initialisationCompleted)
 		{
-    		if (Global.serverURL.equalsIgnoreCase(""))
+    		if (! Global.piConnection.connect())
     		{
     			System.out.println("P1_Temperatures : Server connection not established");
     			Toast.makeText(Global.appContext, "P1_Temperatures : Server connexion not yet established", Toast.LENGTH_LONG).show();
@@ -158,8 +196,11 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
     		else
     		{
     			System.out.println("P1_Temperatures : connection established");
-    			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
-    			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+//    			HTTP_Req_Temp						httpRequest			= new HTTP_Req_Temp();
+//    			httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+    			
+    	    	TCP_Request_Temperatures				task				= new TCP_Request_Temperatures(getActivity());
+    	    	task.execute(new Ctrl_Temperatures().new Request());
     		}
 		}
 
@@ -177,8 +218,8 @@ public class Panel_1_Temperatures extends Fragment implements View.OnClickListen
     public void update()
     {
     	System.out.println("update called");
-		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
+    	TCP_Request_Temperatures						task				= new TCP_Request_Temperatures(getActivity());
+    	task.execute(new Ctrl_Temperatures().new Request());
     }
 }
 
