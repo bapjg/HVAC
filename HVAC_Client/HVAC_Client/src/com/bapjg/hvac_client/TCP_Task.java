@@ -31,18 +31,19 @@ public class TCP_Task extends AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
 	@Override
     protected void onPostExecute(Ctrl_Abstract result) 
 	{             
-		if (result instanceof Ctrl_Temperatures)
+		if (result instanceof Ctrl_Temperatures.Response)
 		{
-			Toast.makeText(Global.activity, "Great stuff", Toast.LENGTH_SHORT).show();
+			Toast.makeText(Global.activity, "PostExecute Great stuff", Toast.LENGTH_SHORT).show();
 		}
 		else if (result instanceof Ctrl_Abstract.NoConnection)
 		{
-			Toast.makeText(Global.activity, "No Connection established yet", Toast.LENGTH_SHORT).show();
+			Toast.makeText(Global.activity, "PostExecute No Connection established yet", Toast.LENGTH_SHORT).show();
 		}
 		else
 		{
-			Toast.makeText(Global.activity, "A Nack has been returned", Toast.LENGTH_SHORT).show();
+			Toast.makeText(Global.activity, "PostExecute A Nack has been returned", Toast.LENGTH_SHORT).show();
 		}
+		Toast.makeText(Global.activity, "PostExecute calling callBack", Toast.LENGTH_SHORT).show();
 		callBack.processFinish(result);
     }
 }

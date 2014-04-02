@@ -85,8 +85,8 @@ public class Activity_Main 			extends Activity
 
         Global.piConnection								= new TCP_Connection();
         
-        HTTP_Req_Ping		httpRequest					= new HTTP_Req_Ping();
-		httpRequest.execute();
+        //HTTP_Req_Ping		httpRequest					= new HTTP_Req_Ping();
+		//httpRequest.execute();
 		Global.initialisationCompleted					= true;
 	}
 	@Override

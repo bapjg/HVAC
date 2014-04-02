@@ -1,10 +1,5 @@
 package HVAC_Messages;
 
-
-
-
-
-
 @SuppressWarnings("serial")
 public class Ctrl_Temperatures extends Ctrl_Abstract
 {

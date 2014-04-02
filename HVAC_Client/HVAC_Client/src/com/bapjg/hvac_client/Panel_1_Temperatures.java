@@ -51,9 +51,12 @@ public class Panel_1_Temperatures 	extends 	Fragment
     public void processFinish(Ctrl_Abstract result) 
 	{             
 		Activity a							= activity;
-		Toast.makeText(a, "processFinish starting", Toast.LENGTH_SHORT).show();
+		Toast.makeText(a, "++++++processFinish starting", Toast.LENGTH_SHORT).show();
+		Toast.makeText(a, "++++++processFinish received : " + result.getClass().getName(), Toast.LENGTH_SHORT).show();
+		
 		if (result instanceof Ctrl_Temperatures.Response)
 		{
+			Toast.makeText(a, "++++++Ctrl_Temperatures.Response received", Toast.LENGTH_SHORT).show();
 			Ctrl_Temperatures.Response msg_received 	= (Ctrl_Temperatures.Response) result;
 			// Need to change this to avoid null pointer exception
 			// Probably due to (Activity) a not being current any more (clicking too fast)
@@ -74,11 +77,11 @@ public class Panel_1_Temperatures 	extends 	Fragment
 		}
 		else if (result instanceof Ctrl_Temperatures.NoConnection)
 		{
-			Toast.makeText(a, "No Connection established yet", Toast.LENGTH_SHORT).show();
+			Toast.makeText(a, "++++++No Connection established yet", Toast.LENGTH_SHORT).show();
 		}
 		else
 		{
-			Toast.makeText(a, "A Nack has been returned", Toast.LENGTH_SHORT).show();
+			Toast.makeText(a, "++++++A Nack has been returned", Toast.LENGTH_SHORT).show();
 		}
     }    	
 

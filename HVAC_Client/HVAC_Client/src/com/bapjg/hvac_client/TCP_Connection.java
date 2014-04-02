@@ -17,6 +17,8 @@ public class TCP_Connection
 	public Socket					piSocket;
 	public InetAddress				piAddressV4;
 	public Boolean					piConnected				= false;
+	public ObjectOutputStream 		piOutputStream 			= null;
+	public ObjectInputStream 		piInputStream			= null;
 
 	public TCP_Connection()
 	{
@@ -35,7 +37,8 @@ public class TCP_Connection
 		{
 			piAddressV4										= InetAddress.getByName("192.168.5.51");
 			piSocket 										= new Socket(piAddressV4, 8889);
-			System.out.println("TCP connected local");
+			piSocket.setKeepAlive(true);
+			System.out.println("TCP got socket local");
 		}
 		catch(Exception e)
 		{
@@ -44,6 +47,10 @@ public class TCP_Connection
 			{
 				piAddressV4 								= InetAddress.getByName("home.bapjg.com");
 				piSocket 									= new Socket(piAddressV4, 8889);
+				piSocket.setKeepAlive(true);
+				System.out.println("TCP got socket remote");
+				piInputStream								= new ObjectInputStream(piSocket.getInputStream());
+				piOutputStream 								= new ObjectOutputStream(piSocket.getOutputStream());
 				System.out.println("TCP connected remote");
 			}
 			catch(Exception e2)
@@ -67,18 +74,33 @@ public class TCP_Connection
 	public Ctrl_Abstract piTransaction(Ctrl_Abstract messageSend)
 	{
 		Ctrl_Abstract					messageReceive		= null;
-		ObjectOutputStream 				piOutputStream 		= null;
-		ObjectInputStream 				piInputStream		= null;
 		
 		if (piConnected)
 		{
 			try
 			{
 				piOutputStream 									= new ObjectOutputStream(piSocket.getOutputStream());
+				System.out.println("TCP got output local");
+
+
 				piOutputStream.writeObject(messageSend);
+				System.out.println("piTransaction : writeObj");
+				
 				piOutputStream.flush();
+				System.out.println("piTransaction : flush");
+				
 				piInputStream									= new ObjectInputStream(piSocket.getInputStream());
+				System.out.println("TCP got input local");
+				
 		        messageReceive									= (Ctrl_Abstract) piInputStream.readObject();
+				System.out.println("piTransaction : receive");
+				
+				piOutputStream.close();
+				piInputStream.close();
+				
+				piOutputStream									= null;
+				piInputStream									= null;
+				
 		        
 				return messageReceive;
 			}

@@ -34,7 +34,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 			{
 				try
 				{
-					LogIt.info("Thread_TCPListen", "Run", "In while", true);            
 					UI_Socket												= UI_Server.accept();
 					LogIt.info("Thread_TCPListen", "Run", "Socket created", true);            
 			        
@@ -47,7 +46,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        
 			    	if (message_in == null)
 			        {
-			            System.out.println("Thread_TCPListen/Run : Null received from client");
+						LogIt.info("Thread_TCPListen", "Run", "Null received from client", true);            
 			            message_out 										= new Ctrl_Abstract().new Nack();
 			        } 
 			    	else if (message_in instanceof Ctrl_Temperatures.Ping)
