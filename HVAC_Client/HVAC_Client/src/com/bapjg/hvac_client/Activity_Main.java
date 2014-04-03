@@ -83,8 +83,6 @@ public class Activity_Main 			extends Activity
         actionbar.addTab(tabCalendars);
         actionbar.addTab(tabActions);
 
-        Global.piConnection								= new TCP_Connection();
-        
         //HTTP_Req_Ping		httpRequest					= new HTTP_Req_Ping();
 		//httpRequest.execute();
 		Global.initialisationCompleted					= true;

@@ -18,32 +18,13 @@ public class TCP_Task extends AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
 	@Override
 	protected Ctrl_Abstract doInBackground(Ctrl_Abstract... messageOut) 
 	{
-		if (Global.piConnection.connect())
-		{
-			return Global.piConnection.piTransaction(messageOut[0]);
-		}
-		else
-		{
-			return new Ctrl_Abstract().new NoConnection();
-		}
+		return Global.piConnection.piTransaction(messageOut[0]);
 	}	
 	protected void onProgressUpdate(Void... progress)  { }
 	@Override
     protected void onPostExecute(Ctrl_Abstract result) 
 	{             
-		if (result instanceof Ctrl_Temperatures.Response)
-		{
-			Toast.makeText(Global.activity, "PostExecute Great stuff", Toast.LENGTH_SHORT).show();
-		}
-		else if (result instanceof Ctrl_Abstract.NoConnection)
-		{
-			Toast.makeText(Global.activity, "PostExecute No Connection established yet", Toast.LENGTH_SHORT).show();
-		}
-		else
-		{
-			Toast.makeText(Global.activity, "PostExecute A Nack has been returned", Toast.LENGTH_SHORT).show();
-		}
-		Toast.makeText(Global.activity, "PostExecute calling callBack", Toast.LENGTH_SHORT).show();
 		callBack.processFinish(result);
+		Global.piConnection.disconnect();
     }
 }

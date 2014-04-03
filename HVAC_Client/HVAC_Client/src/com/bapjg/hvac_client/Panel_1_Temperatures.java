@@ -7,7 +7,9 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -51,18 +53,15 @@ public class Panel_1_Temperatures 	extends 	Fragment
     public void processFinish(Ctrl_Abstract result) 
 	{             
 		Activity a							= activity;
-		Toast.makeText(a, "++++++processFinish starting", Toast.LENGTH_SHORT).show();
-		Toast.makeText(a, "++++++processFinish received : " + result.getClass().getName(), Toast.LENGTH_SHORT).show();
 		
 		if (result instanceof Ctrl_Temperatures.Response)
 		{
-			Toast.makeText(a, "++++++Ctrl_Temperatures.Response received", Toast.LENGTH_SHORT).show();
 			Ctrl_Temperatures.Response msg_received 	= (Ctrl_Temperatures.Response) result;
 			// Need to change this to avoid null pointer exception
 			// Probably due to (Activity) a not being current any more (clicking too fast)
 			
-//			((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.date));
-//			((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.time));
+			((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.dateTime));
+			((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));
 			
 			((TextView) a.findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
 			((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
@@ -77,11 +76,11 @@ public class Panel_1_Temperatures 	extends 	Fragment
 		}
 		else if (result instanceof Ctrl_Temperatures.NoConnection)
 		{
-			Toast.makeText(a, "++++++No Connection established yet", Toast.LENGTH_SHORT).show();
+			Toast.makeText(a, "No Connection established yet", Toast.LENGTH_SHORT).show();
 		}
 		else
 		{
-			Toast.makeText(a, "++++++A Nack has been returned", Toast.LENGTH_SHORT).show();
+			Toast.makeText(a, "A Nack has been returned", Toast.LENGTH_SHORT).show();
 		}
     }    	
 
@@ -118,7 +117,7 @@ public class Panel_1_Temperatures 	extends 	Fragment
 		}
 		
 		((Button) myView).setTextColor(Color.YELLOW);
-    	
+    	System.out.println("Could be here");
     	if (myCaption.equalsIgnoreCase("Temperatures"))
     	{
     		buttonTemperaturesClick(myView);	
@@ -157,11 +156,34 @@ public class Panel_1_Temperatures 	extends 	Fragment
     }
     public void update()
     {
-    	System.out.println("update called");
+    	System.out.println("Panel : update called");
     	TCP_Task						task							= new TCP_Task();
     	task.callBack													= this;
     	task.execute(new Ctrl_Temperatures().new Request());
     }
+    public String displayDate(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);
+    	
+    	return dateTimeString;
+    }
+    public String displayTime(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm:ss");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime); 
+    	
+    	return dateTimeString;
+    }
+
 //	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
 //	{
 //		public HTTP_Request				http;

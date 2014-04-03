@@ -19,7 +19,7 @@ public class Menu_1_Temperatures extends Menu_0_Fragment implements View.OnClick
 	}
 	public void onClick(View myView) 
 	{
-    	System.out.println("We have arrived in onClick again");
+    	System.out.println("Menu : We have arrived in onClick again");
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
     	
@@ -35,9 +35,9 @@ public class Menu_1_Temperatures extends Menu_0_Fragment implements View.OnClick
     	
     	if (myCaption.equalsIgnoreCase("Temperatures"))
     	{
-    		System.out.println("Temperatures Click again");
+    		System.out.println("Menu : Temperatures Click again");
     		Global.panelTemperatures.update();
-    		System.out.println("Temperatures Called update");
+    		System.out.println("Menu : Temperatures Called update");
     	}
 	}
 }
