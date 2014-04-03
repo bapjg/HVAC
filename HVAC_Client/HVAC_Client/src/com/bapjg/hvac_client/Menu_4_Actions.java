@@ -20,21 +20,10 @@ public class Menu_4_Actions extends Menu_0_Fragment implements View.OnClickListe
 	}
 	public void onClick(View myView) 
 	{
-    	System.out.println("Menu_4_Actions We have arrived in onClick again");
+		super.onClick(myView);
+		
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
-    	System.out.println("Menu_4_Actions Caption : " + myCaption);
-    	
-    	
-		// Set all textColours to white
-		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();
-		for (int i = 0; i < viewParent.getChildCount(); i++)
-		{
-			Button							buttonChild 				= (Button) viewParent.getChildAt(i);
-			buttonChild.setTextColor(Color.WHITE);
-		}
-		
-		((Button) myView).setTextColor(Color.YELLOW);
     	
     	if (myCaption.equalsIgnoreCase("Action1"))
     	{
@@ -45,7 +34,6 @@ public class Menu_4_Actions extends Menu_0_Fragment implements View.OnClickListe
     		transaction.replace(R.id.panel_container, panelFragment);
     		// and add the transaction to the back stack
     		transaction.addToBackStack(null);
-
     		transaction.commit();
     		System.out.println("Action1 processed");
     	}

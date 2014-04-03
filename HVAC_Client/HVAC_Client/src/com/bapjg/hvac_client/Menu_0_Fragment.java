@@ -30,15 +30,32 @@ public class Menu_0_Fragment extends Fragment
     {
     	// Inflate the menuLayout into container (menu_container)
     	View result = inflater.inflate(this.menuLayout, container, false);
-    	// The menuLayout contains only buttons. Set the OnClickListener to the panelFragment 
+    	
+    	// The menuLayout contains only buttons. Set the OnClickListener to the menuFragment object (ie this)
 		for (int i = 0; i < ((ViewGroup) result).getChildCount(); i++)
 		{
 			Button				buttonChild 			= (Button) ((ViewGroup) result).getChildAt(i);
 			buttonChild.setOnClickListener((OnClickListener) this);
 		}
-		//((OnClickListener) this.panelFragment).onClick((Button) ((ViewGroup) result).getChildAt(0));
+		
+		// Execute the onClickListener of the first button of this Menu_Fragment 		
 		((OnClickListener) this).onClick((Button) ((ViewGroup) result).getChildAt(0));
     	return result;
     }
+	public void onClick(View myView) // This is the onClick event from the Menu
+	{
+    	System.out.println("AbstractAbstract : We have arrived in onClick again");
+    	Button 								myButton 					= (Button) myView;
+    	
+		// Set all textColours to white
+		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();
+		for (int i = 0; i < viewParent.getChildCount(); i++)
+		{
+			Button							buttonChild 				= (Button) viewParent.getChildAt(i);
+			buttonChild.setTextColor(Color.WHITE);
+		}
+		
+		((Button) myView).setTextColor(Color.YELLOW);
+	}
 }
 

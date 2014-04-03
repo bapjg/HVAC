@@ -68,8 +68,8 @@ public class Activity_Main 			extends Activity
         //	
         Menu_1_Temperatures	menuTemperatures			= new Menu_1_Temperatures(global.panelTemperatures, 	R.layout.menu_1_temperatures);
         Menu_Fragment		menuConfiguration			= new Menu_Fragment(global.panelConfiguration, 			R.layout.menu_2_configuration);
-        Menu_4_Actions		menuActions					= new Menu_4_Actions(global.panelActions, 				R.layout.menu_4_actions);
         Menu_Fragment		menuCalendars				= new Menu_Fragment(global.panelCalendars, 				R.layout.menu_3_calendars);
+        Menu_4_Actions		menuActions					= new Menu_4_Actions(global.panelActions, 				R.layout.menu_4_actions);
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu fragment   ,  	panel object
@@ -118,6 +118,7 @@ public class Activity_Main 			extends Activity
 				return true;
 			case R.id.menuitem_quit:
 				Toast.makeText(Global.appContext, "quit", Toast.LENGTH_SHORT).show();
+				finish();
 				return true;
 		}
 		return false;

@@ -104,7 +104,7 @@ public class Panel_1_Temperatures 	extends 	Fragment
 	@Override
 	public void onClick(View myView) 
 	{
-    	System.out.println("We have arrived in onClick again");
+    	System.out.println("PanelPanel :::: We have arrived in onClick again");
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
     	
