@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-public class Menu_2_Configuration extends Menu_0_Fragment implements View.OnClickListener
+public class Menu_3_Calendars extends Menu_0_Fragment implements View.OnClickListener
 {
-	public Menu_2_Configuration(Fragment panelFragment, int menuLayout)
+	public Menu_3_Calendars(Fragment panelFragment, int menuLayout)
 	{
 		super(panelFragment, menuLayout);
 	}
@@ -24,10 +24,10 @@ public class Menu_2_Configuration extends Menu_0_Fragment implements View.OnClic
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
     	
-    	if (myCaption.equalsIgnoreCase("Temperatures"))
+    	if (myCaption.equalsIgnoreCase("Relays"))
     	{
     		System.out.println("Menu : Temperatures Click again");
-    		Global.panelTemperatures.update();
+    		//Global.panelRelays.update();
     		System.out.println("Menu : Temperatures Called update");
     	}
 	}

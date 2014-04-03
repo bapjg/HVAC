@@ -98,8 +98,8 @@ public class Panel_2_Configuration extends Fragment implements View.OnClickListe
     	View 						newView 							= myInflater.inflate(R.layout.panel_2_configuration, subContainer, true);
 
     	FragmentTransaction				ft								= myFragmentManager.beginTransaction();
-    	Panel_2_Configuration 			dt 								= new Panel_2_Configuration();
-    	ft.replace(R.id.panel_subcontainer, dt);
+    	//Panel_2_Configuration 			dt 								= new Panel_2_Configuration();
+    	ft.replace(R.id.panel_subcontainer, this);
     	ft.commit();
 
         // Set up the adapter for the data

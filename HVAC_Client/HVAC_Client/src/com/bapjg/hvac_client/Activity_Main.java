@@ -67,8 +67,8 @@ public class Activity_Main 			extends Activity
         // The onCreate method, calls the onClick argument of the first item in the list	
         //	
         Menu_1_Temperatures	menuTemperatures			= new Menu_1_Temperatures(global.panelTemperatures, 	R.layout.menu_1_temperatures);
-        Menu_Fragment		menuConfiguration			= new Menu_Fragment(global.panelConfiguration, 			R.layout.menu_2_configuration);
-        Menu_Fragment		menuCalendars				= new Menu_Fragment(global.panelCalendars, 				R.layout.menu_3_calendars);
+        Menu_2_Config 		menuConfiguration			= new Menu_2_Config(global.panelConfiguration, 			R.layout.menu_2_configuration);
+        Menu_3_Calendars	menuCalendars				= new Menu_3_Calendars(global.panelCalendars, 			R.layout.menu_3_calendars);
         Menu_4_Actions		menuActions					= new Menu_4_Actions(global.panelActions, 				R.layout.menu_4_actions);
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
