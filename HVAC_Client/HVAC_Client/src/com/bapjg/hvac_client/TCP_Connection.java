@@ -38,6 +38,7 @@ public class TCP_Connection
 			piAddressV4										= InetAddress.getByName("192.168.5.51");
 			piSocket 										= new Socket(piAddressV4, 8889);
 			piSocket.setKeepAlive(true);
+			piOutputStream 									= new ObjectOutputStream(piSocket.getOutputStream());
 			System.out.println("TCP got socket local");
 		}
 		catch(Exception e)
@@ -48,10 +49,8 @@ public class TCP_Connection
 				piAddressV4 								= InetAddress.getByName("home.bapjg.com");
 				piSocket 									= new Socket(piAddressV4, 8889);
 				piSocket.setKeepAlive(true);
-				System.out.println("TCP got socket remote");
-				piInputStream								= new ObjectInputStream(piSocket.getInputStream());
 				piOutputStream 								= new ObjectOutputStream(piSocket.getOutputStream());
-				System.out.println("TCP connected remote");
+				System.out.println("TCP got socket remote");
 			}
 			catch(Exception e2)
 			{
@@ -79,10 +78,6 @@ public class TCP_Connection
 		{
 			try
 			{
-				piOutputStream 									= new ObjectOutputStream(piSocket.getOutputStream());
-				System.out.println("TCP got output local");
-
-
 				piOutputStream.writeObject(messageSend);
 				System.out.println("piTransaction : writeObj");
 				
@@ -95,12 +90,8 @@ public class TCP_Connection
 		        messageReceive									= (Ctrl_Abstract) piInputStream.readObject();
 				System.out.println("piTransaction : receive");
 				
-				piOutputStream.close();
 				piInputStream.close();
-				
-				piOutputStream									= null;
 				piInputStream									= null;
-				
 		        
 				return messageReceive;
 			}

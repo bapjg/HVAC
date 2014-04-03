@@ -35,7 +35,8 @@ public class Thread_TCPListen <SendType> implements Runnable
 				try
 				{
 					UI_Socket												= UI_Server.accept();
-					LogIt.info("Thread_TCPListen", "Run", "Socket created", true);            
+					
+					LogIt.info("Thread_TCPListen", "Run", "Socket created, port " + UI_Socket.getPort() + ", AD " + UI_Socket.getRemoteSocketAddress(), true);            
 			        
 			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
 			        // This previous line results in an EOFException
@@ -118,6 +119,13 @@ public class Thread_TCPListen <SendType> implements Runnable
 		catch (IOException e)
 		{
 			e.printStackTrace();
+		}
+		try
+		{
+			UI_Server.close();
+		}
+		catch (IOException e)
+		{
 		}
  		LogIt.info("Thread_TCPListen", "Run", "Stopping", true);             
 	}
