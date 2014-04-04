@@ -12,7 +12,7 @@ public class Ctrl_Temperatures extends Ctrl_Abstract
 	public class Request extends Ctrl_Temperatures
 	{
 	}
-	public class Response extends Ctrl_Temperatures
+	public class Data extends Ctrl_Temperatures
 	{
 		private static final long 		serialVersionUID 			= 1L;
 		public Long						dateTime;

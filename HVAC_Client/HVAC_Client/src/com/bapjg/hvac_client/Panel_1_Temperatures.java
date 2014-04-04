@@ -54,9 +54,9 @@ public class Panel_1_Temperatures 	extends 	Fragment
 	{             
 		Activity a							= activity;
 		
-		if (result instanceof Ctrl_Temperatures.Response)
+		if (result instanceof Ctrl_Temperatures.Data)
 		{
-			Ctrl_Temperatures.Response msg_received 	= (Ctrl_Temperatures.Response) result;
+			Ctrl_Temperatures.Data msg_received 	= (Ctrl_Temperatures.Data) result;
 			// Need to change this to avoid null pointer exception
 			// Probably due to (Activity) a not being current any more (clicking too fast)
 			

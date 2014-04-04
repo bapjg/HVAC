@@ -61,7 +61,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			    	else if (message_in instanceof Ctrl_Temperatures.Request)
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "Temp.Req Message received from client", true);            
-			            Ctrl_Temperatures.Response message_ou				= new Ctrl_Temperatures().new Response();
+			            Ctrl_Temperatures.Data message_ou				= new Ctrl_Temperatures().new Data();
 			            message_ou.dateTime 								= System.currentTimeMillis();
 
 			            message_ou.tempBoiler	 							= Global.thermoBoiler.reading;
