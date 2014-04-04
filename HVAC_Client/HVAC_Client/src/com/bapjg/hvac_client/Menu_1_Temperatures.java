@@ -11,13 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-public class Menu_1_Temperatures extends Menu_0_Fragment implements View.OnClickListener
+public class Menu_1_Temperatures 	extends 	Menu_0_Fragment 
+									implements 	View.OnClickListener
 {
-	public Menu_1_Temperatures(Fragment panelFragment, int menuLayout)
+	public Menu_1_Temperatures(int menuLayout)
 	{
-		super(panelFragment, menuLayout);
+		super(menuLayout);
 	}
-	public void onClick(View myView) // This is the onClick event from the Menu
+	public void onClick(View myView) 									// This is the onClick event from the Menu
 	{
 		super.onClick(myView);
 		

@@ -12,7 +12,6 @@ import android.widget.Button;
 
 public class Panel_3_Calendars extends Fragment  implements View.OnClickListener, AdapterView.OnItemClickListener
 {
-	
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {

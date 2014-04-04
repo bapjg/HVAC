@@ -14,9 +14,9 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 public class Menu_4_Actions extends Menu_0_Fragment implements View.OnClickListener
 {
-	public Menu_4_Actions(Fragment panelFragment, int menuLayout)
+	public Menu_4_Actions(int menuLayout)
 	{
-		super(panelFragment, menuLayout);
+		super(menuLayout);
 	}
 	public void onClick(View myView) 
 	{
@@ -24,35 +24,32 @@ public class Menu_4_Actions extends Menu_0_Fragment implements View.OnClickListe
 		
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
+    	FragmentTransaction 				transaction					= getFragmentManager().beginTransaction();
+    	Fragment 							panelFragment;
     	
-    	if (myCaption.equalsIgnoreCase("Action1"))
+    	if (myCaption.equalsIgnoreCase("Hot Water"))
     	{
-    		System.out.println("Action1 Click");
-    		Fragment panelFragment = new Panel_41_Action();
-    		FragmentTransaction transaction = getFragmentManager().beginTransaction();
+    		System.out.println("Action Hot Water Click");
+    		panelFragment 												= new Panel_4_Action(R.layout.panel_4_actions_hotwater);
 
     		transaction.replace(R.id.panel_container, panelFragment);
-    		// and add the transaction to the back stack
     		transaction.addToBackStack(null);
     		transaction.commit();
-    		System.out.println("Action1 processed");
+    		System.out.println("Action Hot Water processed");
     	}
     	else if (myCaption.equalsIgnoreCase("Action2"))
     	{
     		System.out.println("Action2 Click");
-    		
     		System.out.println("Action2 processed");
     	}
     	else if (myCaption.equalsIgnoreCase("Action3"))
     	{
     		System.out.println("Action3 Click");
-    		
     		System.out.println("Action3 processed");
     	}
     	else if (myCaption.equalsIgnoreCase("Action4"))
     	{
     		System.out.println("Action4 Click");
-    		
     		System.out.println("Action4 processed");
     	}
 

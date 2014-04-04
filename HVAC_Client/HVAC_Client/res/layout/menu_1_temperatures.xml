@@ -9,9 +9,7 @@
 
 		<Button
             android:id					= "@+id/buttonTemperatures"
-            style						= "@style/AD_Button"
-            android:layout_width		= "match_parent"
-            android:layout_height		= "wrap_content"
+            style						= "@style/AD_MenuButton"
             android:text				= "Temperatures" 
         />
 </LinearLayout>

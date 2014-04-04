@@ -60,16 +60,16 @@ public class Activity_Main 			extends Activity
         global.panelTemperatures 						= new Panel_1_Temperatures();
         global.panelConfiguration 						= new Panel_2_Configuration();
         global.panelCalendars 							= new Panel_3_Calendars();
-        global.panelActions 							= new Panel_41_Action();
+        global.panelActions 							= new Panel_4_Action();
         
         // Setup the Menu Fragments
         // Menu_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
         // The onCreate method, calls the onClick argument of the first item in the list	
         //	
-        Menu_1_Temperatures	menuTemperatures			= new Menu_1_Temperatures(global.panelTemperatures, 	R.layout.menu_1_temperatures);
-        Menu_2_Config 		menuConfiguration			= new Menu_2_Config(global.panelConfiguration, 			R.layout.menu_2_configuration);
-        Menu_3_Calendars	menuCalendars				= new Menu_3_Calendars(global.panelCalendars, 			R.layout.menu_3_calendars);
-        Menu_4_Actions		menuActions					= new Menu_4_Actions(global.panelActions, 				R.layout.menu_4_actions);
+        Menu_1_Temperatures	menuTemperatures			= new Menu_1_Temperatures( 	R.layout.menu_1_temperatures);
+        Menu_2_Config 		menuConfiguration			= new Menu_2_Config( 		R.layout.menu_2_configuration);
+        Menu_3_Calendars	menuCalendars				= new Menu_3_Calendars(		R.layout.menu_3_calendars);
+        Menu_4_Actions		menuActions					= new Menu_4_Actions(		R.layout.menu_4_actions);
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu fragment   ,  	panel object

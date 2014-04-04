@@ -9,33 +9,23 @@
 	android:clickable 					= "true"
 >
 		<Button
-            style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
-            android:layout_height		= "wrap_content"
-            android:text				= "Action1" 
+            style						= "@style/AD_MenuButton"
+            android:text				= "Hot Water" 
         />
         <Button
-            style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
-            android:layout_height		= "wrap_content"
+            style						= "@style/AD_MenuButton"
             android:text				= "Action2" 
         />
         <Button
-            style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
-            android:layout_height		= "wrap_content"
+            style						= "@style/AD_MenuButton"
             android:text				= "Action3"
         />
 		<Button
-            style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
-            android:layout_height		= "wrap_content"
+            style						= "@style/AD_MenuButton"
             android:text				= "Action4" 
         />
 		<Button
-		    style						= "@style/AD_Button"
-		    android:layout_width		= "wrap_content"
-		    android:layout_height		= "wrap_content"
+		    style						= "@style/AD_MenuButton"
 		    android:text				= "Other" 
 		/>
 </LinearLayout>

@@ -9,33 +9,23 @@
 	android:clickable 					= "true"
 >
 		<Button
-            style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
-            android:layout_height		= "wrap_content"
+            style						= "@style/AD_MenuButton"
             android:text				= "Calendar1" 
         />
         <Button
-            style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
-            android:layout_height		= "wrap_content"
+            style						= "@style/AD_MenuButton"
             android:text				= "Calendar2" 
         />
         <Button
-            style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
-            android:layout_height		= "wrap_content"
+            style						= "@style/AD_MenuButton"
             android:text				= "Calendar3"
         />
 		<Button
-            style						= "@style/AD_Button"
-            android:layout_width		= "wrap_content"
-            android:layout_height		= "wrap_content"
+            style						= "@style/AD_MenuButton"
             android:text				= "Calendar4" 
         />
 		<Button
-		    style						= "@style/AD_Button"
-		    android:layout_width		= "wrap_content"
-		    android:layout_height		= "wrap_content"
+		    style						= "@style/AD_MenuButton"
 		    android:text				= "Other" 
 		/>
 </LinearLayout>

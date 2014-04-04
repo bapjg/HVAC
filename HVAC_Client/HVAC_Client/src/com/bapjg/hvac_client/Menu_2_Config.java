@@ -14,9 +14,9 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 public class Menu_2_Config extends Menu_0_Fragment implements View.OnClickListener
 {
-	public Menu_2_Config(Fragment panelFragment, int menuLayout)
+	public Menu_2_Config(int menuLayout)
 	{
-		super(panelFragment, menuLayout);
+		super( menuLayout);
 	}
 	public void onClick(View myView) // This is the onClick event from the Menu
 	{
