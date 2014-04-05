@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -28,37 +29,45 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import HVAC_Messages.*;
 
-
-public class Panel_1_Temperatures 	extends 	Fragment 
-									implements 	View.OnClickListener, AdapterView.OnItemClickListener, TCP_Response
+@SuppressLint("ValidFragment")
+public class Panel_1_Temperatures 	extends 	Panel_0_Fragment 
+									implements 	TCP_Response
 {
-    public Activity						activity;
+	public Panel_1_Temperatures()
+	{
+		super();
+	}
+	
+	public Panel_1_Temperatures(int menuLayout)
+    {
+		super(menuLayout);
+    }
+
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity										= getActivity();
-		// Inflate the layout for this fragment
-//		HTTP_Req_Temp							httpRequest			= new HTTP_Req_Temp();
-		
-//		pi.connect();
-
-//		httpRequest.execute(new Mgmt_Msg_Temperatures().new Request());
-		
+    	
+    	View							thisView			= inflater.inflate(R.layout.panel_1_temperatures, container, false);
+    	
     	TCP_Task						task				= new TCP_Task();
     	task.callBack										= this;
     	task.execute(new Ctrl_Temperatures().new Request());
     	
-        return inflater.inflate(R.layout.panel_1_temperatures, container, false);
+        return thisView;
     }
     public void processFinish(Ctrl_Abstract result) 
 	{             
-		Activity a							= activity;
+		Activity a							= getActivity();
 		
-		if (result instanceof Ctrl_Temperatures.Data)
+		System.out.println("activity = " + a);
+		if (a == null) 
+		{
+			// Do nothing
+		}
+		else if (result instanceof Ctrl_Temperatures.Data)
 		{
 			Ctrl_Temperatures.Data msg_received 	= (Ctrl_Temperatures.Data) result;
-			// Need to change this to avoid null pointer exception
-			// Probably due to (Activity) a not being current any more (clicking too fast)
 			
 			((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.dateTime));
 			((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));
@@ -83,8 +92,6 @@ public class Panel_1_Temperatures 	extends 	Fragment
 			Toast.makeText(a, "A Nack has been returned", Toast.LENGTH_SHORT).show();
 		}
     }    	
-
-
 	private String displayTemperature(Integer temperature)
 	{
 		int degrees = temperature/1000;
@@ -104,7 +111,7 @@ public class Panel_1_Temperatures 	extends 	Fragment
 	@Override
 	public void onClick(View myView) 
 	{
-    	System.out.println("PanelPanel :::: We have arrived in onClick again");
+    	System.out.println("PanelPanel :$$$$$$$$$$::: We have arrived in onClick again");
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
     	
@@ -117,7 +124,7 @@ public class Panel_1_Temperatures 	extends 	Fragment
 		}
 		
 		((Button) myView).setTextColor(Color.YELLOW);
-    	System.out.println("Could be here");
+
     	if (myCaption.equalsIgnoreCase("Temperatures"))
     	{
     		buttonTemperaturesClick(myView);	
@@ -184,63 +191,6 @@ public class Panel_1_Temperatures 	extends 	Fragment
     	return dateTimeString;
     }
 
-//	private class HTTP_Req_Temp extends AsyncTask <Mgmt_Msg_Abstract, Void, Mgmt_Msg_Abstract> 
-//	{
-//		public HTTP_Request				http;
-//
-//		public HTTP_Req_Temp()
-//		{
-//			http													= new HTTP_Request();
-//		}
-//		
-//		@Override
-//		protected Mgmt_Msg_Abstract doInBackground(Mgmt_Msg_Abstract... messageOut) 
-//		{
-//			if (Global.serverURL == "")
-//			{
-//				return new Mgmt_Msg_Abstract().new NoConnection();
-//			}
-//			else
-//			{
-//				return http.sendData(messageOut[0]);
-//			}
-//		}	
-//		@Override
-//		protected void onProgressUpdate(Void... progress)  { }
-//		@Override
-//	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
-//		{             
-//			if (result instanceof Mgmt_Msg_Temperatures.Data)
-//			{
-//				Mgmt_Msg_Temperatures.Data msg_received 	= (Mgmt_Msg_Temperatures.Data) result;
-//				Activity a							= getActivity();
-//
-//				// Need to change this to avoid null pointer exception
-//				// Probably due to (Activity) a not being current any more (clicking too fast)
-//				
-//				((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.date));
-//				((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.time));
-//				
-//				((TextView) a.findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
-//				((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
-//				((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
-//				((TextView) a.findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
-//				((TextView) a.findViewById(R.id.BoilerOut)).setText(displayTemperature(msg_received.tempBoilerOut));
-//				((TextView) a.findViewById(R.id.FloorIn)).setText(displayTemperature(msg_received.tempFloorIn));
-//				((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
-//				((TextView) a.findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
-//				((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
-//				((TextView) a.findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
-//			}
-//			else if (result instanceof Mgmt_Msg_Temperatures.NoConnection)
-//			{
-//				// Toast.makeText(getActivity(), "No Connection established yet", Toast.LENGTH_SHORT).show();
-//			}
-//			else
-//			{
-//				Toast.makeText(getActivity(), "A Nack has been returned", Toast.LENGTH_SHORT).show();
-//			}
-//	    }
-//	}
+
 }
 

@@ -14,9 +14,9 @@ public class Listener_Tabs implements ActionBar.TabListener
 	public Fragment 	menu;
 	public Fragment 	panel;
 	
-	public Listener_Tabs(Fragment choices, Fragment panel) 
+	public Listener_Tabs(Fragment menu, Fragment panel) 
 	{
-		this.menu 		= choices;
+		this.menu 		= menu;
 		this.panel 		= panel;
 	}
 	@Override
@@ -28,7 +28,7 @@ public class Listener_Tabs implements ActionBar.TabListener
 	{
 		// params for ft.replace : Destination in layout, Fragment_Object to be placed within
 		ft.replace(R.id.menu_container, menu);					
-		ft.replace(R.id.panel_container, panel);
+//		ft.replace(R.id.panel_container, panel);
 	}
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) 

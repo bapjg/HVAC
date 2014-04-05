@@ -13,21 +13,22 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 public class Menu_0_Fragment extends Fragment 
 {
-//	public  	Fragment			panelFragment;
 	private 	int					menuLayout;
 	
+	public Menu_0_Fragment()
+	{
+		super();
+	}
 	public Menu_0_Fragment(int menuLayout)
 	{
-		// fragment : object which maintains the panel fragment			eg : panelTemperatures = new Panel_1_Temperatures();
 		// layout   : id of the layout file								eg : R.layout.menu_1_temperatures
 		super();
-//		this.panelFragment								= panelFragment;
 		this.menuLayout									= menuLayout;
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	View thisView = inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
+    	View thisView 									= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
     	
 		for (int i = 0; i < ((ViewGroup) thisView).getChildCount(); i++)					// Set the OnClickListener to the menuFragment object (ie this)
 		{
@@ -38,7 +39,7 @@ public class Menu_0_Fragment extends Fragment
 		((OnClickListener) this).onClick((Button) ((ViewGroup) thisView).getChildAt(0));	// Execute the onClickListener of the first menu button
     	return thisView;
     }
-	public void onClick(View myView) 													// This is the onClick event from the Menu
+	public void onClick(View myView) 														// This is the onClick event from the Menu
 	{
     	System.out.println("AbstractAbstract : We have arrived in onClick again");
     	Button 								myButton 					= (Button) myView;

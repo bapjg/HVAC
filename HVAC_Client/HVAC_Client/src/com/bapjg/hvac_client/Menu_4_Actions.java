@@ -2,6 +2,7 @@ package com.bapjg.hvac_client;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,7 +25,8 @@ public class Menu_4_Actions extends Menu_0_Fragment implements View.OnClickListe
 		
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
-    	FragmentTransaction 				transaction					= getFragmentManager().beginTransaction();
+    	FragmentManager 					fManager					= getFragmentManager();
+    	FragmentTransaction					fTransaction;
     	Fragment 							panelFragment;
     	
     	if (myCaption.equalsIgnoreCase("Hot Water"))
@@ -32,9 +34,10 @@ public class Menu_4_Actions extends Menu_0_Fragment implements View.OnClickListe
     		System.out.println("Action Hot Water Click");
     		panelFragment 												= new Panel_4_Action(R.layout.panel_4_actions_hotwater);
 
-    		transaction.replace(R.id.panel_container, panelFragment);
-    		transaction.addToBackStack(null);
-    		transaction.commit();
+			fTransaction												= fManager.beginTransaction();
+    		fTransaction.replace(R.id.panel_container, panelFragment);
+    		fTransaction.addToBackStack(null);
+    		fTransaction.commit();
     		System.out.println("Action Hot Water processed");
     	}
     	else if (myCaption.equalsIgnoreCase("Action2"))

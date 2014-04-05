@@ -16,14 +16,13 @@ public class Ctrl_Actions_HotWater extends Ctrl_Abstract
 	{
 		private static final long 		serialVersionUID 			= 1L;
 		public Long						dateTime;
-		
-		public Integer 					targetTemp;
+		public Integer 					tempObjective;
+		public Long 					timeStart;
 	}
 	public class Update extends Ctrl_Actions_HotWater
 	{
 		private static final long 		serialVersionUID 			= 1L;
 		public Long						dateTime;
-		
-		public Integer 					targetTemp;
+		public Integer 					tempObjective;
 	}
 }

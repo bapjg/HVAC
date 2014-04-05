@@ -80,6 +80,56 @@ public class Thread_TCPListen <SendType> implements Runnable
 			            
 			            message_out											= message_ou;
 			        } 
+			    	else if (message_in instanceof Ctrl_Actions_HotWater.Request)
+			        {
+						LogIt.info("Thread_TCPListen", "Run", "HW.Req Message received from client", true);            
+						Ctrl_Actions_HotWater.Data message_ou				= new Ctrl_Actions_HotWater().new Data();
+						
+						Circuit_HotWater data_hw							= Global.circuitHotWater;
+
+						Long 					now							= Global.getTimeNowSinceMidnight();
+						Long					midnight					= 24L * 60 * 60 * 1000;
+						Long					nextStart					= midnight;
+						Integer					tempObjective				= 0;
+
+						if (data_hw.taskActive == null)
+						{
+							for (CircuitTask aTask : data_hw.circuitTaskList)			// Check to ensure there are no active tasks
+							{
+								if (	(aTask.days.contains(Global.getDayOfWeek(0))) 
+								&& 		(! aTask.active)
+								&&     	(aTask.timeStart > now )
+								&&     	(aTask.timeStart < nextStart ))
+								{
+									nextStart								= aTask.timeStart;
+									tempObjective							= aTask.tempObjective;
+								}
+							}
+						}
+						else
+						{
+							nextStart										= -1L;
+						}
+			            message_ou.dateTime 								= now;
+			            if (nextStart < midnight)
+			            {
+				            message_ou.timeStart	 						= nextStart;
+				            message_ou.tempObjective	 					= tempObjective;
+			            }
+			            else
+			            {
+				            message_ou.timeStart	 						= 0L;
+				            message_ou.tempObjective 						= 0;
+			            }
+			            
+			            message_out											= message_ou;
+			        } 
+			    	else if (message_in instanceof Ctrl_Actions_HotWater.Update)
+			        {
+						LogIt.info("Thread_TCPListen", "Run", "HW.Upd Message received from client", true);            
+						Ctrl_Abstract.Ack message_ou				= new Ctrl_Abstract().new Ack();
+			            message_out											= message_ou;
+			        } 
 			        ObjectOutputStream 		output							= null;
 					LogIt.info("Thread_TCPListen", "Run", "Will Respond", true);            
 					

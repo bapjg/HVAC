@@ -31,7 +31,8 @@ import HVAC_Messages.*;
 
 
 @SuppressLint("ValidFragment")
-public class Panel_0_Fragment 		extends 	Fragment 
+public class Panel_0_Fragment 		extends 	Fragment
+									implements 	View.OnClickListener, AdapterView.OnItemClickListener
 {
 	private 	int					menuLayout;
     public 		Activity			activity;
@@ -51,5 +52,13 @@ public class Panel_0_Fragment 		extends 	Fragment
     	View thisView = inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
 		return thisView;
     }
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
+	{
+	}
+	@Override
+	public void onClick(View v) 
+	{
+	}
 }
 

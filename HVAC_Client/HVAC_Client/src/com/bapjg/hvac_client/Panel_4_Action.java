@@ -1,5 +1,7 @@
 package com.bapjg.hvac_client;
 
+import HVAC_Messages.Ctrl_Temperatures;
+import HVAC_Messages.Ctrl_Temperatures.Request;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.Color;
@@ -21,6 +23,14 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
     public Panel_4_Action(int menuLayout)
     {
 		super(menuLayout);
+    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+    {
+    	this.activity										= getActivity();
+    	
+    	View							thisView			= inflater.inflate(R.layout.panel_4_actions_hotwater, container, false);
+    	
+        return thisView;
     }
 	public void onClick(View myView) 
 	{

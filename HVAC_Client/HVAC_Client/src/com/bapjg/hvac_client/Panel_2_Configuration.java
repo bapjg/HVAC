@@ -28,13 +28,22 @@ import android.widget.Toast;
 import android.widget.EditText;
 
 
-public class Panel_2_Configuration extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener
+public class Panel_2_Configuration 				extends 	Panel_0_Fragment 
 {
 	private Adapter_Thermometers 		adapter;
 	private LayoutInflater				myInflater;
 	private Activity					myActivity;
 	private ViewGroup					myContainer;
 	private FragmentManager				myFragmentManager;
+
+	public Panel_2_Configuration()
+	{
+		super();
+	}
+    public Panel_2_Configuration(int menuLayout)
+    {
+		super(menuLayout);
+    }
 
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 

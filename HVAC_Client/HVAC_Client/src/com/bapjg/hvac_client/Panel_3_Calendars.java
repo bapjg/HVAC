@@ -1,5 +1,6 @@
 package com.bapjg.hvac_client;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,14 +11,25 @@ import android.widget.AdapterView;
 import android.widget.Button;
 
 
-public class Panel_3_Calendars extends Fragment  implements View.OnClickListener, AdapterView.OnItemClickListener
+@SuppressLint("ValidFragment")
+public class Panel_3_Calendars extends Panel_0_Fragment
 {
+	public Panel_3_Calendars()
+	{
+		super();
+	}
+    public Panel_3_Calendars(int menuLayout)
+    {
+		super(menuLayout);
+    }
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.panel_3_calendars, container, false);
     }
+    @Override
 	public void onClick(View myView) 
 	{
     	System.out.println("We have arrived in onClick again");
