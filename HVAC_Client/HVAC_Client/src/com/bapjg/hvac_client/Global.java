@@ -1,5 +1,8 @@
 package com.bapjg.hvac_client;
 
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+
 import android.app.Activity;
 import android.content.Context;
 
@@ -30,6 +33,34 @@ public class Global
 	public Global() 
 	{
 		initialisationCompleted					= false;
+	}
+    public static String displayDate(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);
+    	
+    	return dateTimeString;
+    }
+    public static String displayTime(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm:ss");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime); 
+    	
+    	return dateTimeString;
+    }
+    public static String displayTemperature(Integer temperature)
+	{
+		int degrees = temperature/1000;
+		int decimal = (temperature - degrees*1000) / 100;
+		return degrees + "." + decimal;
 	}
 
 }

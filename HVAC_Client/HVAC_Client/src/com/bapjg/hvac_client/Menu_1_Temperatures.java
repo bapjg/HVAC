@@ -41,7 +41,7 @@ public class Menu_1_Temperatures 	extends 	Menu_0_Fragment
 
 			fTransaction												= fManager.beginTransaction();
     		fTransaction.replace(R.id.panel_container, panelFragment);
-    		fTransaction.addToBackStack(null);
+    	//	fTransaction.addToBackStack(null);
     		fTransaction.commit();
     		Global.panelTemperatures.update();
     		System.out.println("Menu : Temperatures Called update");

@@ -69,19 +69,19 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
 		{
 			Ctrl_Temperatures.Data msg_received 	= (Ctrl_Temperatures.Data) result;
 			
-			((TextView) a.findViewById(R.id.Date)).setText(displayDate(msg_received.dateTime));
-			((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));
+			((TextView) a.findViewById(R.id.Date)).setText(Global.displayDate(msg_received.dateTime));
+			((TextView) a.findViewById(R.id.Time)).setText(Global.displayTime(msg_received.dateTime));
 			
-			((TextView) a.findViewById(R.id.Boiler)).setText(displayTemperature(msg_received.tempBoiler));
-			((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
-			((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
-			((TextView) a.findViewById(R.id.BoilerIn)).setText(displayTemperature(msg_received.tempBoilerIn));
-			((TextView) a.findViewById(R.id.BoilerOut)).setText(displayTemperature(msg_received.tempBoilerOut));
-			((TextView) a.findViewById(R.id.FloorIn)).setText(displayTemperature(msg_received.tempFloorIn));
-			((TextView) a.findViewById(R.id.FloorOut)).setText(displayTemperature(msg_received.tempFloorOut));
-			((TextView) a.findViewById(R.id.RadiatorIn)).setText(displayTemperature(msg_received.tempRadiatorIn));
-			((TextView) a.findViewById(R.id.RadiatorOut)).setText(displayTemperature(msg_received.tempRadiatorOut));
-			((TextView) a.findViewById(R.id.LivingRoom)).setText(displayTemperature(msg_received.tempLivingRoom));
+			((TextView) a.findViewById(R.id.Boiler)).setText(Global.displayTemperature(msg_received.tempBoiler));
+			((TextView) a.findViewById(R.id.HotWater)).setText(Global.displayTemperature(msg_received.tempHotWater));
+			((TextView) a.findViewById(R.id.Outside)).setText(Global.displayTemperature(msg_received.tempOutside));
+			((TextView) a.findViewById(R.id.BoilerIn)).setText(Global.displayTemperature(msg_received.tempBoilerIn));
+			((TextView) a.findViewById(R.id.BoilerOut)).setText(Global.displayTemperature(msg_received.tempBoilerOut));
+			((TextView) a.findViewById(R.id.FloorIn)).setText(Global.displayTemperature(msg_received.tempFloorIn));
+			((TextView) a.findViewById(R.id.FloorOut)).setText(Global.displayTemperature(msg_received.tempFloorOut));
+			((TextView) a.findViewById(R.id.RadiatorIn)).setText(Global.displayTemperature(msg_received.tempRadiatorIn));
+			((TextView) a.findViewById(R.id.RadiatorOut)).setText(Global.displayTemperature(msg_received.tempRadiatorOut));
+			((TextView) a.findViewById(R.id.LivingRoom)).setText(Global.displayTemperature(msg_received.tempLivingRoom));
 		}
 		else if (result instanceof Ctrl_Temperatures.NoConnection)
 		{
@@ -92,20 +92,6 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
 			Toast.makeText(a, "A Nack has been returned", Toast.LENGTH_SHORT).show();
 		}
     }    	
-	private String displayTemperature(Integer temperature)
-	{
-		int degrees = temperature/1000;
-		int decimal = (temperature - degrees*1000) / 100;
-		return degrees + "." + decimal;
-	}
-	private String displayDate(String date)
-	{
-		return date.substring(8,10) + "/" + date.substring(5,7);
-	}
-	private String displayTime(String time)
-	{
-		return time.substring(0,8);
-	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {}
 	@Override
@@ -168,29 +154,5 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
     	task.callBack													= this;
     	task.execute(new Ctrl_Temperatures().new Request());
     }
-    public String displayDate(Long dateTime)
-    {
-    	String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
-        calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime);
-    	
-    	return dateTimeString;
-    }
-    public String displayTime(Long dateTime)
-    {
-    	String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm:ss");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
-        calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime); 
-    	
-    	return dateTimeString;
-    }
-
-
 }
 
