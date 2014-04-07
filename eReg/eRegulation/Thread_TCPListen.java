@@ -103,22 +103,29 @@ public class Thread_TCPListen <SendType> implements Runnable
 									tempObjective							= aTask.tempObjective;
 								}
 							}
+							
+				            if (nextStart < midnight)	// Task currently inactive but planned
+				            {
+				            	message_ou.executionActive					= false;
+								message_ou.executionPlanned					= true;
+					            message_ou.timeStart	 					= nextStart;
+					            message_ou.tempObjective	 				= tempObjective;
+				            }
+				            else						// Task currently inactive and not even planned
+				            {
+				            	message_ou.executionActive					= false;
+								message_ou.executionPlanned					= false;
+				            	message_ou.timeStart	 					= 0L;
+					            message_ou.tempObjective 					= 0;
+				            }
 						}
-						else
+						else		// Task currently active
 						{
-							nextStart										= -1L;
+							message_ou.executionActive						= true;
+							message_ou.executionPlanned						= false;
+							message_ou.timeStart							= 0L;
+							message_ou.tempObjective						= data_hw.taskActive.tempObjective;
 						}
-			            message_ou.dateTime 								= now;
-			            if (nextStart < midnight)
-			            {
-				            message_ou.timeStart	 						= nextStart;
-				            message_ou.tempObjective	 					= tempObjective;
-			            }
-			            else
-			            {
-				            message_ou.timeStart	 						= 0L;
-				            message_ou.tempObjective 						= 0;
-			            }
 			            
 			            message_out											= message_ou;
 			        } 

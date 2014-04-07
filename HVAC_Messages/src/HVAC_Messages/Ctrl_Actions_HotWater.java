@@ -15,7 +15,8 @@ public class Ctrl_Actions_HotWater extends Ctrl_Abstract
 	public class Data extends Ctrl_Actions_HotWater
 	{
 		private static final long 		serialVersionUID 			= 1L;
-		public Long						dateTime;
+		public Boolean					executionPlanned;
+		public Boolean					executionActive;
 		public Integer 					tempObjective;
 		public Long 					timeStart;
 	}

@@ -79,16 +79,20 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
 		{
 			Ctrl_Actions_HotWater.Data msg_received 	= (Ctrl_Actions_HotWater.Data) result;
 			
-			Long timeStart									= msg_received.timeStart;
-			if (timeStart == -1L)
+			if (msg_received.executionActive)
 			{
-				((TextView) a.findViewById(R.id.TimeStart)).setText("");
-				((TextView) a.findViewById(R.id.TargetTemp)).setText("");
+				((TextView) a.findViewById(R.id.TimeStart)).setText("Current");
+				((TextView) a.findViewById(R.id.TargetTemp)).setText((msg_received.tempObjective/1000));
+			}
+			else if (msg_received.executionPlanned)
+			{
+				((TextView) a.findViewById(R.id.TimeStart)).setText(Global.displayTime(msg_received.timeStart));
+				((TextView) a.findViewById(R.id.TargetTemp)).setText((msg_received.tempObjective/1000));
 			}
 			else
 			{
-				((TextView) a.findViewById(R.id.TimeStart)).setText(Global.displayTime(msg_received.timeStart));
-				((TextView) a.findViewById(R.id.TargetTemp)).setText(Global.displayTemperature(msg_received.tempObjective));
+				((TextView) a.findViewById(R.id.TimeStart)).setText(" ");
+				((TextView) a.findViewById(R.id.TargetTemp)).setText(" ");
 			}
 			String x = Global.displayTemperature(msg_received.tempObjective);
 			System.out.println("x = " + x);
@@ -104,9 +108,7 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
 		    np.setMaxValue(80);
 		    np.setWrapSelectorWheel(false);
 		    np.setDisplayedValues(temps);
-		    np.setValue((Integer) 35);
-
-
+		    np.setValue(35);
 		}
 		else if (result instanceof Ctrl_Actions_HotWater.NoConnection)
 		{
