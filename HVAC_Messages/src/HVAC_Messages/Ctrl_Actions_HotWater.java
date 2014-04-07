@@ -19,10 +19,13 @@ public class Ctrl_Actions_HotWater extends Ctrl_Abstract
 		public Integer 					tempObjective;
 		public Long 					timeStart;
 	}
-	public class Update extends Ctrl_Actions_HotWater
+	public class Execute extends Ctrl_Actions_HotWater
 	{
 		private static final long 		serialVersionUID 			= 1L;
-		public Long						dateTime;
 		public Integer 					tempObjective;
+	}
+	public class Ack extends Ctrl_Actions_HotWater
+	{
+		private static final long 		serialVersionUID 			= 1L;
 	}
 }

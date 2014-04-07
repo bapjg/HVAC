@@ -28,7 +28,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 			LogIt.info("Thread_TCPListen", "Run", "Creating Objects", true);            
 			UI_Server														= new ServerSocket(8889);
 			UI_Server.setSoTimeout(10 * 1000);
-			LogIt.info("Thread_TCPListen", "Run", "Server Created", true);            
 		
 			while (!Global.stopNow)
 			{
@@ -36,12 +35,11 @@ public class Thread_TCPListen <SendType> implements Runnable
 				{
 					UI_Socket												= UI_Server.accept();
 					
-					LogIt.info("Thread_TCPListen", "Run", "Socket created, port " + UI_Socket.getPort() + ", AD " + UI_Socket.getRemoteSocketAddress(), true);            
+					LogIt.info("Thread_TCPListen", "Run", "Socket accepted, port " + UI_Socket.getPort() + ", AD " + UI_Socket.getRemoteSocketAddress(), true);            
 			        
 			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
 			        // This previous line results in an EOFException
 			        
-					LogIt.info("Thread_TCPListen", "Run", "input created and now readObject", true);            
 			        message_in 												= (Ctrl_Abstract) input.readObject();
 					LogIt.info("Thread_TCPListen", "Run", "message_in read", true);            
 			        
@@ -124,10 +122,18 @@ public class Thread_TCPListen <SendType> implements Runnable
 			            
 			            message_out											= message_ou;
 			        } 
-			    	else if (message_in instanceof Ctrl_Actions_HotWater.Update)
+			    	else if (message_in instanceof Ctrl_Actions_HotWater.Execute)
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "HW.Upd Message received from client", true);            
+						LogIt.info("Thread_TCPListen", "Run", "HW.Execute Message received from client", true);            
 						Ctrl_Abstract.Ack message_ou				= new Ctrl_Abstract().new Ack();
+						
+						// This is where the code goes for activating HotWater
+						
+						Ctrl_Actions_HotWater.Execute buffer_in				= (Ctrl_Actions_HotWater.Execute) message_in;
+						LogIt.info("Thread_TCPListen", "Run", "HW.Execute temperature is : " + buffer_in.tempObjective, true);
+						
+						
+						
 			            message_out											= message_ou;
 			        } 
 			        ObjectOutputStream 		output							= null;

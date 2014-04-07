@@ -79,29 +79,33 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
 		{
 			Ctrl_Actions_HotWater.Data msg_received 	= (Ctrl_Actions_HotWater.Data) result;
 			
-//			((TextView) a.findViewById(R.id.timeStart)).setText(displayDate(msg_received.timeStart));
-//			((TextView) a.findViewById(R.id.Time)).setText(displayTime(msg_received.dateTime));
-			
+			Long timeStart									= msg_received.timeStart;
+			if (timeStart == -1L)
+			{
+				((TextView) a.findViewById(R.id.TimeStart)).setText("");
+				((TextView) a.findViewById(R.id.TargetTemp)).setText("");
+			}
+			else
+			{
+				((TextView) a.findViewById(R.id.TimeStart)).setText(Global.displayTime(msg_received.timeStart));
+				((TextView) a.findViewById(R.id.TargetTemp)).setText(Global.displayTemperature(msg_received.tempObjective));
+			}
 			String x = Global.displayTemperature(msg_received.tempObjective);
 			System.out.println("x = " + x);
 			
 			NumberPicker np = (NumberPicker) a.findViewById(R.id.tempObjective);
-		    String[] nums = new String[20];
-		    for(int i=0; i<nums.length; i++)
-		           nums[i] = Integer.toString(i + 20);
+		    String[] temps = new String[8];
+		    for(int i=0; i < temps.length; i++)
+		    {
+		    	temps[i] = Integer.toString(i*5 + 30);
+		    }
 
-		    np.setMinValue(20);
-		    np.setMaxValue(45);
+		    np.setMinValue(30);
+		    np.setMaxValue(80);
 		    np.setWrapSelectorWheel(false);
-		    np.setDisplayedValues(nums);
-		    np.setValue((Integer) msg_received.tempObjective);
-			
-			
-			
-			
-//			((NumberPicker) a.findViewById(R.id.tempObjective)).setValue(msg_received.tempObjective);
-//			((TextView) a.findViewById(R.id.HotWater)).setText(displayTemperature(msg_received.tempHotWater));
-//			((TextView) a.findViewById(R.id.Outside)).setText(displayTemperature(msg_received.tempOutside));
+		    np.setDisplayedValues(temps);
+		    np.setValue((Integer) 35);
+
 
 		}
 		else if (result instanceof Ctrl_Actions_HotWater.NoConnection)
