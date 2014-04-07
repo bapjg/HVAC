@@ -31,12 +31,15 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity										= getActivity();
-    	
+    	System.out.println("++Before inflate");
     	View							thisView			= inflater.inflate(R.layout.panel_4_actions_hotwater, container, false);
-
+    	System.out.println("++Before task create");
     	TCP_Task						task				= new TCP_Task();
+    	System.out.println("++Before task callback");
     	task.callBack										= this;
+    	System.out.println("++Before task execute");
     	task.execute(new Ctrl_Actions_HotWater().new Request());
+    	System.out.println("++Before return");
 
         return thisView;
     }
@@ -98,7 +101,7 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
 			System.out.println("x = " + x);
 			
 			NumberPicker np = (NumberPicker) a.findViewById(R.id.tempObjective);
-		    String[] temps = new String[8];
+		    String[] temps = new String[10];
 		    for(int i=0; i < temps.length; i++)
 		    {
 		    	temps[i] = Integer.toString(i*5 + 30);

@@ -13,7 +13,7 @@ public class Global
 	public static 	Activity 					activity;
 	
 	public static	String						serverURL;
-	public static	TCP_Connection				piConnection;
+//	public static	TCP_Connection				piConnection;
 	
 	public static 	Mgmt_Msg_Configuration 		configuration;
 	public static 	Mgmt_Msg_Calendar 			calendar;

@@ -33,6 +33,8 @@ import HVAC_Messages.*;
 public class Panel_1_Temperatures 	extends 	Panel_0_Fragment 
 									implements 	TCP_Response
 {
+	public TCP_Task							task;
+	
 	public Panel_1_Temperatures()
 	{
 		super();
@@ -46,14 +48,18 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity										= getActivity();
+    	System.out.println("Panel onCreateView Start");
+		this.activity										= getActivity();
     	
     	View							thisView			= inflater.inflate(R.layout.panel_1_temperatures, container, false);
     	
-    	TCP_Task						task				= new TCP_Task();
+    	System.out.println("Panel onCreateView new Task");
+    	task												= new TCP_Task();
+    	System.out.println("Panel onCreateView set callback");
     	task.callBack										= this;
+    	System.out.println("Panel onCreateView execute");
     	task.execute(new Ctrl_Temperatures().new Request());
-    	
+    	System.out.println("Panel onCreateView executedddddddddddddddd");
         return thisView;
     }
     public void processFinish(Ctrl_Abstract result) 
@@ -120,21 +126,11 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
     {
 //		if (!Global.initialisationCompleted)
     	Toast.makeText(Global.appContext, "P1_Temperatures : buttonTemperaturesClick called", Toast.LENGTH_LONG).show();
-		if (true)
-		{
-    		if (! Global.piConnection.connect())
-    		{
-    			System.out.println("P1_Temperatures : Server connection not established");
-    			Toast.makeText(Global.appContext, "P1_Temperatures : Server connexion not yet established", Toast.LENGTH_LONG).show();
-    		}
-    		else
-    		{
-    			System.out.println("P1_Temperatures : connection established");
-    	    	TCP_Task				task							= new TCP_Task();
-    	    	task.callBack											= this;
-    	    	task.execute(new Ctrl_Temperatures().new Request());
-    		}
-		}
+
+    	task													= new TCP_Task();
+    	task.callBack											= this;
+    	task.execute(new Ctrl_Temperatures().new Request());
+
 
 // This sets up the code to display the panel and get clicks in order to display an update screen
 // All this comes from Thermometers
@@ -150,8 +146,8 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
     public void update()
     {
     	System.out.println("Panel : update called");
-    	TCP_Task						task							= new TCP_Task();
-    	task.callBack													= this;
+    	task													= new TCP_Task();
+    	task.callBack											= this;
     	task.execute(new Ctrl_Temperatures().new Request());
     }
 }

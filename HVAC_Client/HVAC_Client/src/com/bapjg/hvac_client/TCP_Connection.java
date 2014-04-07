@@ -20,8 +20,9 @@ public class TCP_Connection
 	public ObjectInputStream 		piInputStream			= null;
 	public Boolean					piConnected				= false;
 	
-	public TCP_Connection()
+	public TCP_Connection(String fromWhom)
 	{
+		System.out.println("TCP_Connection Contrcutor : " + fromWhom);
 	}
 
 	public Boolean connect()
@@ -30,12 +31,12 @@ public class TCP_Connection
 //		{
 //			return true;
 //		}
+		System.out.println("TCP_Connection : Before socket");
 		
 		try													// Try local
 		{
 			piAddressV4										= InetAddress.getByName("192.168.5.51");
 			piSocket 										= new Socket(piAddressV4, 8889);
-			piSocket.setKeepAlive(true);
 			System.out.println("TCP_Connection : got socket local");
 		}
 		catch(Exception e)
@@ -44,7 +45,6 @@ public class TCP_Connection
 			{
 				piAddressV4 								= InetAddress.getByName("home.bapjg.com");
 				piSocket 									= new Socket(piAddressV4, 8889);
-				piSocket.setKeepAlive(true);
 				System.out.println("TCP_Connection : got socket remote");
 			}
 			catch(Exception e2)
@@ -53,6 +53,7 @@ public class TCP_Connection
 			}
 		}
 		piConnected											= true;
+		System.out.println("TCP_Connection : Ended");
 		return true;
 	}
 	public void disconnect()

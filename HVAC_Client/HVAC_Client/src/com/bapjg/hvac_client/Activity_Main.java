@@ -35,6 +35,7 @@ public class Activity_Main 			extends Activity
 	private 		Adapter_Thermometers 		adapter;
 	private			TabHost 					tabHost;
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -46,7 +47,7 @@ public class Activity_Main 			extends Activity
         global.actContext								= (Context)  this;
         global.activity									= (Activity) this;
         global.serverURL								= "";
-        global.piConnection								= new TCP_Connection();
+ //       global.piConnection								= new TCP_Connection("Main");
         
         ActionBar 				actionbar 				= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
