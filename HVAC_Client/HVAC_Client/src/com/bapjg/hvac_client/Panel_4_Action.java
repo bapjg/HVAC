@@ -5,11 +5,14 @@ import HVAC_Messages.Ctrl_Temperatures.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.NumberPicker;
@@ -31,39 +34,36 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity										= getActivity();
-    	System.out.println("++Before inflate");
     	View							thisView			= inflater.inflate(R.layout.panel_4_actions_hotwater, container, false);
-    	System.out.println("++Before task create");
     	TCP_Task						task				= new TCP_Task();
-    	System.out.println("++Before task callback");
     	task.callBack										= this;
-    	System.out.println("++Before task execute");
     	task.execute(new Ctrl_Actions_HotWater().new Request());
-    	System.out.println("++Before return");
 
+    	thisView.findViewById(R.id.buttonOk).setOnClickListener((OnClickListener) this);
         return thisView;
     }
 	public void onClick(View myView) 
 	{
-    	System.out.println("nonono We have arrived in onClick again");
+    	Button 								myButton 			= (Button) myView;
+    	String								myCaption			= myButton.getText().toString();
+    	FragmentManager 					fManager			= getFragmentManager();
+    	FragmentTransaction					fTransaction;
+    	Fragment 							panelFragment;
     	
-//    	Button 								myButton 					= (Button) myView;
-//    	String								myCaption					= myButton.getText().toString();
-//    	
-//		// Set all textColours to white
-//		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();
-//		for (int i = 0; i < viewParent.getChildCount(); i++)
-//		{
-//			Button							buttonChild 				= (Button) viewParent.getChildAt(i);
-//			buttonChild.setTextColor(Color.WHITE);
-//		}
-//		
-//		((Button) myView).setTextColor(Color.YELLOW);
-//    	
-//    	if (myCaption.equalsIgnoreCase("Thermometers"))
-//    	{
-//    		// buttonThermometersClick(myView);	
-//    	}
+    	if (myCaption.equalsIgnoreCase("Ok"))
+    	{
+    		System.out.println("Action Hot Water Click");
+
+    		Ctrl_Actions_HotWater.Execute	message_out			= new Ctrl_Actions_HotWater().new Execute();
+ 
+			NumberPicker 					np 					= (NumberPicker) getActivity().findViewById(R.id.tempObjective);
+	   		message_out.tempObjective							= ((np.getValue() - 30) * 5 + 30) * 1000; // getValue returns an index
+			
+        	TCP_Task						task				= new TCP_Task();
+        	task.callBack										= this;
+        	task.execute(message_out);
+    	}
+
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
@@ -89,20 +89,18 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
 			}
 			else if (msg_received.executionPlanned)
 			{
-				((TextView) a.findViewById(R.id.TimeStart)).setText(Global.displayTime(msg_received.timeStart));
-				((TextView) a.findViewById(R.id.TargetTemp)).setText((msg_received.tempObjective/1000));
+				((TextView) a.findViewById(R.id.TimeStart)).setText(Global.displayTimeShort(msg_received.timeStart));
+				((TextView) a.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
 			}
 			else
 			{
-				((TextView) a.findViewById(R.id.TimeStart)).setText(" ");
+				((TextView) a.findViewById(R.id.TimeStart)).setText("No Plan");
 				((TextView) a.findViewById(R.id.TargetTemp)).setText(" ");
 			}
-			String x = Global.displayTemperature(msg_received.tempObjective);
-			System.out.println("x = " + x);
 			
 			NumberPicker np = (NumberPicker) a.findViewById(R.id.tempObjective);
 		    String[] temps = new String[10];
-		    for(int i=0; i < temps.length; i++)
+		    for(int i =0; i < temps.length; i++)
 		    {
 		    	temps[i] = Integer.toString(i*5 + 30);
 		    }
@@ -111,17 +109,24 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
 		    np.setMaxValue(80);
 		    np.setWrapSelectorWheel(false);
 		    np.setDisplayedValues(temps);
-		    np.setValue(35);
+		    np.setValue(31);									// Min value + increment 5 = 35
 		}
 		else if (result instanceof Ctrl_Actions_HotWater.NoConnection)
 		{
 			Toast.makeText(a, "No Connection established yet", Toast.LENGTH_SHORT).show();
+		}
+		else if (result instanceof Ctrl_Actions_HotWater.Ack)
+		{
+			Toast.makeText(a, "Command accepted", Toast.LENGTH_SHORT).show();
+		}
+		else if (result instanceof Ctrl_Abstract.Ack)
+		{
+			Toast.makeText(a, "Command accepted", Toast.LENGTH_SHORT).show();
 		}
 		else
 		{
 			Toast.makeText(a, "A Nack has been returned", Toast.LENGTH_SHORT).show();
 		}		   
 	}
-
 }
 

@@ -7,8 +7,7 @@ public class Ctrl_Actions_HotWater extends Ctrl_Abstract
 
 	public Ctrl_Actions_HotWater()
 	{
-	}
-	
+	}	
 	public class Request extends Ctrl_Actions_HotWater
 	{
 	}

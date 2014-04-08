@@ -57,6 +57,18 @@ public class Global
     	
     	return dateTimeString;
     }
+    public static String displayTimeShort(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime); 
+    	
+    	return dateTimeString;
+    }
+    
     public static String displayTemperature(Integer temperature)
 	{
 		int degrees = temperature/1000;

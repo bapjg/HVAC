@@ -7,12 +7,15 @@
 	android:baselineAligned				= "false"
 	android:background					= "@color/background"
 >
+
 	<TableLayout
-		android:layout_width			= "wrap_content"
-		android:layout_height			= "match_parent"
-		android:layout_weight			= "1"
-	>
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" >
+
         <TableRow																					style	= "@style/AD_Row"   >
+            <TextView		android:text	= "Planned calendar events"								style	= "@style/AD_Text"  />
+		</TableRow>
+	    <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Time"     		   									style	= "@style/AD_Text"  />
             <TextView       android:text	= "Time"			android:id	= "@+id/TimeStart"			style	= "@style/AD_Data"	/>
 		</TableRow>
@@ -20,23 +23,34 @@
             <TextView		android:text	= "Temperature"     		   									style	= "@style/AD_Text"  />
             <TextView       android:text	= "Temp"			android:id	= "@+id/TargetTemp"			style	= "@style/AD_Data"	/>
 		</TableRow>
- 	</TableLayout>
+       <TableRow																					style	= "@style/AD_Row"   >
+            <TextView		android:text	= " "													style	= "@style/AD_Text"  />
+		</TableRow>
+       <TableRow																					style	= "@style/AD_Row"   >
+            <TextView		android:text	= "Select temperature to start now"								style	= "@style/AD_Text"  />
+		</TableRow>
+       	</TableLayout>
 
-       
-    <NumberPicker
-            android:id="@+id/tempObjective"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/textView1" />
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
 
+		<Button
+		    android:id="@+id/buttonOk"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_centerVertical="true"
+		    android:layout_toRightOf="@+id/tempObjective"
+		    android:text="Ok" />
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="Ok" />
+		<NumberPicker
+		    android:id="@+id/tempObjective"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentTop="true"
+		    android:layout_marginLeft="102dp" />
+
+	</RelativeLayout>
 
 </LinearLayout>

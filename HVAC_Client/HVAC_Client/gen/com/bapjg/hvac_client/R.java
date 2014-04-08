@@ -52,7 +52,7 @@ public final class R {
         public static final int Time=0x7f09000b;
         public static final int TimeStart=0x7f09001c;
         public static final int activity_container=0x7f090000;
-        public static final int button1=0x7f09001f;
+        public static final int buttonOk=0x7f09001e;
         public static final int buttonTemperatures=0x7f090008;
         public static final int friendlyName=0x7f090006;
         public static final int menu_container=0x7f090001;
@@ -65,7 +65,7 @@ public final class R {
         public static final int name=0x7f090005;
         public static final int panel_container=0x7f090002;
         public static final int panel_subcontainer=0x7f090009;
-        public static final int tempObjective=0x7f09001e;
+        public static final int tempObjective=0x7f09001f;
         public static final int textView1=0x7f09001b;
         public static final int thermoID=0x7f090007;
     }

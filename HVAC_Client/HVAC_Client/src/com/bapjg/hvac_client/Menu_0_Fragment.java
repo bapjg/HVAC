@@ -30,20 +30,20 @@ public class Menu_0_Fragment extends Fragment
     {
     	View thisView 									= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
     	
-		for (int i = 0; i < ((ViewGroup) thisView).getChildCount(); i++)					// Set the OnClickListener to the menuFragment object (ie this)
+		for (int i = 0; i < ((ViewGroup) thisView).getChildCount(); i++)													// Set the OnClickListener to the menuFragment object (ie this)
 		{
 			Button				buttonChild 			= (Button) ((ViewGroup) thisView).getChildAt(i);
 			buttonChild.setOnClickListener((OnClickListener) this);
 		}
 				
-		((OnClickListener) this).onClick((Button) ((ViewGroup) thisView).getChildAt(0));	// Execute the onClickListener of the first menu button
+		((OnClickListener) this).onClick((Button) ((ViewGroup) thisView).getChildAt(0));									// Execute the onClickListener of the first menu button
     	return thisView;
     }
-	public void onClick(View myView) 														// This is the onClick event from the Menu
+	public void onClick(View myView) 																						// This is the onClick event from the Menu
 	{
     	System.out.println("AbstractAbstract : We have arrived in onClick again");
     	Button 								myButton 					= (Button) myView;
-		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();	// Set all textColours to white
+		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();					// Set all textColours to white
 
 		for (int i = 0; i < viewParent.getChildCount(); i++)
 		{
