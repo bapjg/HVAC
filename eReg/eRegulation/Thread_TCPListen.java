@@ -131,26 +131,24 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_HotWater.Execute)
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "HW.Execute Message received from client", true);            
 						Ctrl_Abstract.Ack message_ou				= new Ctrl_Abstract().new Ack();
 						
 						// This is where the code goes for activating HotWater
 						
 						Ctrl_Actions_HotWater.Execute buffer_in				= (Ctrl_Actions_HotWater.Execute) message_in;
-						LogIt.info("Thread_TCPListen", "Run", "HW.Execute temperature is : " + buffer_in.tempObjective, true);
 						
 						
 						
 			            message_out											= message_ou;
 			        } 
 			        ObjectOutputStream 		output							= null;
-					LogIt.info("Thread_TCPListen", "Run", "Will Respond", true);            
 					
 					output 													= new ObjectOutputStream(UI_Socket.getOutputStream());
 					output.writeObject(message_out);
 			        output.flush();
 			        output.close();
 					LogIt.info("Thread_TCPListen", "Run", "Responded", true);            
+					LogIt.info("Thread_TCPListen", "Run", "=============================================", true);            
 				}
 		        catch (ClassNotFoundException eCNF)
 		        {
