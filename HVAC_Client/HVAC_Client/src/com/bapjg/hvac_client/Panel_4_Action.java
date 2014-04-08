@@ -85,7 +85,7 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
 			if (msg_received.executionActive)
 			{
 				((TextView) a.findViewById(R.id.TimeStart)).setText("Current");
-				((TextView) a.findViewById(R.id.TargetTemp)).setText((msg_received.tempObjective/1000));
+				((TextView) a.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
 			}
 			else if (msg_received.executionPlanned)
 			{
