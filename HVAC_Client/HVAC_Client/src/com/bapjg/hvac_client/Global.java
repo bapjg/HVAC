@@ -1,5 +1,6 @@
 package com.bapjg.hvac_client;
 
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
@@ -13,7 +14,7 @@ public class Global
 	public static 	Activity 					activity;
 	
 	public static	String						serverURL;
-//	public static	TCP_Connection				piConnection;
+	public static	InetAddress					piAddressV4;
 	
 	public static 	Mgmt_Msg_Configuration 		configuration;
 	public static 	Mgmt_Msg_Calendar 			calendar;

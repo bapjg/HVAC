@@ -15,14 +15,12 @@ import HVAC_Messages.*;
 public class TCP_Connection
 {
 	public Socket					piSocket;
-	public InetAddress				piAddressV4;
 	public ObjectOutputStream 		piOutputStream 			= null;
 	public ObjectInputStream 		piInputStream			= null;
 	public Boolean					piConnected				= false;
 	
 	public TCP_Connection(String fromWhom)
 	{
-		System.out.println("TCP_Connection Contrcutor : " + fromWhom);
 	}
 
 	public Boolean connect()
@@ -32,27 +30,39 @@ public class TCP_Connection
 //			return true;
 //		}
 		System.out.println("TCP_Connection : Before socket");
-		
-		try													// Try local
+		if (Global.piAddressV4 != null)
 		{
-			piAddressV4										= InetAddress.getByName("192.168.5.51");
-			piSocket 										= new Socket(piAddressV4, 8889);
+			try													// Try last known address
+			{
+				piSocket 										= new Socket(Global.piAddressV4, 8889);
+				return true;
+			}
+			catch(Exception e1)
+			{
+			}
+		}
+
+		try														// Try local
+		{
+			Global.piAddressV4									= InetAddress.getByName("192.168.5.51");
+			piSocket 											= new Socket(Global.piAddressV4, 8889);
 			System.out.println("TCP_Connection : got socket local");
 		}
-		catch(Exception e)
+		catch(Exception e2)
 		{
-			try												// It Failed so now try over the internet
+			try													// It Failed so now try over the internet
 			{
-				piAddressV4 								= InetAddress.getByName("home.bapjg.com");
-				piSocket 									= new Socket(piAddressV4, 8889);
+				Global.piAddressV4 								= InetAddress.getByName("home.bapjg.com");
+				piSocket 										= new Socket(Global.piAddressV4, 8889);
 				System.out.println("TCP_Connection : got socket remote");
 			}
-			catch(Exception e2)
+			catch(Exception e3)
 			{
+				System.out.println("TCP_Connection : Failed completely");
 				return false;
 			}
 		}
-		piConnected											= true;
+		piConnected												= true;
 		System.out.println("TCP_Connection : Ended");
 		return true;
 	}
@@ -86,7 +96,6 @@ public class TCP_Connection
 			}
 			catch (SocketTimeoutException eTimeOut)
 			{
-				eTimeOut.printStackTrace();
 				return new Ctrl_Abstract().new Nack();
 			}
 			catch(Exception e)

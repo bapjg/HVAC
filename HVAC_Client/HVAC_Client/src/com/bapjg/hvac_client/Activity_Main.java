@@ -46,8 +46,7 @@ public class Activity_Main 			extends Activity
         global.appContext 								= getApplicationContext();
         global.actContext								= (Context)  this;
         global.activity									= (Activity) this;
-        global.serverURL								= "";
- //       global.piConnection								= new TCP_Connection("Main");
+        global.piAddressV4								= null;
         
         ActionBar 				actionbar 				= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
