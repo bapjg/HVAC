@@ -131,13 +131,16 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_HotWater.Execute)
 			        {
-						Ctrl_Abstract.Ack message_ou				= new Ctrl_Abstract().new Ack();
+						LogIt.info("Thread_TCPListen", "Run", "HW.Execute Message received from client", true);            
+						Long	now											= Global.getTimeNowSinceMidnight();
 						
-						// This is where the code goes for activating HotWater
-						
-						Ctrl_Actions_HotWater.Execute buffer_in				= (Ctrl_Actions_HotWater.Execute) message_in;
-						
-						
+						Global.circuitHotWater.taskActive					= new CircuitTask(	now, 								// Time Start
+																								now + 30 * 60 * 1000, 				// TimeEnd
+																								((Ctrl_Actions_HotWater.Execute) message_in).tempObjective,		// TempObjective in millidesrees
+																								true,								// StopOnObjective
+																								"1, 2, 3, 4, 5, 6, 7");				// Days
+						Global.circuitHotWater.start();
+						Ctrl_Abstract.Ack message_ou						= new Ctrl_Abstract().new Ack();
 						
 			            message_out											= message_ou;
 			        } 
