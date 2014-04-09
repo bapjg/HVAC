@@ -20,11 +20,13 @@ public class Global
 	public static 	Mgmt_Msg_Calendar 			calendar;
 	
 	public static	Panel_1_Temperatures		panelTemperatures;
+	public static	Panel_2_Immediate			panelImmediate;	
 	public static	Panel_2_Configuration		panelConfiguration;
 	public static	Panel_3_Calendars			panelCalendars;
 	public static	Panel_4_Action				panelActions;	
 
 	public static	Menu_1_Temperatures			menuTemperatures;
+	public static	Menu_2_Immediate			menuImmediate;
 	public static	Menu_2_Config 				menuConfiguration;
 	public static	Menu_3_Calendars			menuCalendars;
 	public static	Menu_4_Actions				menuActions;

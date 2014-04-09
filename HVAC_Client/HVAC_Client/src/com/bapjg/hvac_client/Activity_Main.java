@@ -52,12 +52,14 @@ public class Activity_Main 			extends Activity
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         
         ActionBar.Tab 			tabTemperatures 		= actionbar.newTab().setText("Temperatures");
+        ActionBar.Tab 			tabImmediate	 		= actionbar.newTab().setText("Immediate");
         ActionBar.Tab 			tabConfiguration 		= actionbar.newTab().setText("Configuration");
         ActionBar.Tab 			tabCalendars		 	= actionbar.newTab().setText("Calendars");
         ActionBar.Tab 			tabActions				= actionbar.newTab().setText("Actions");
         
         // Global contains Objects Panel_1_xxx etc.
         global.panelTemperatures 						= new Panel_1_Temperatures	(R.layout.panel_1_temperatures);
+        global.panelImmediate	 						= new Panel_2_Immediate		(R.layout.panel_2_immediate);
         global.panelConfiguration 						= new Panel_2_Configuration	(R.layout.panel_2_configuration);
         global.panelCalendars 							= new Panel_3_Calendars		(R.layout.panel_3_calendars);
         global.panelActions 							= new Panel_4_Action		(R.layout.panel_4_actions_hotwater);
@@ -67,6 +69,7 @@ public class Activity_Main 			extends Activity
         // The onCreate method, calls the onClick argument of the first item in the list	
         //	
         global.menuTemperatures							= new Menu_1_Temperatures	(R.layout.menu_1_temperatures);
+        global.menuImmediate							= new Menu_2_Immediate		(R.layout.menu_2_immediate);
         global.menuConfiguration						= new Menu_2_Config			(R.layout.menu_2_configuration);
         global.menuCalendars							= new Menu_3_Calendars		(R.layout.menu_3_calendars);
         global.menuActions								= new Menu_4_Actions		(R.layout.menu_4_actions);
@@ -74,11 +77,13 @@ public class Activity_Main 			extends Activity
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu fragment   ,  	panel object
         tabTemperatures.setTabListener	(new Listener_Tabs(global.menuTemperatures, 	global.panelTemperatures));
+        tabImmediate.setTabListener		(new Listener_Tabs(global.menuImmediate, 		global.panelImmediate));
         tabConfiguration.setTabListener	(new Listener_Tabs(global.menuConfiguration, 	global.panelConfiguration));
         tabCalendars.setTabListener		(new Listener_Tabs(global.menuCalendars, 		global.panelCalendars));
         tabActions.setTabListener		(new Listener_Tabs(global.menuActions, 			global.panelActions));
         
         actionbar.addTab(tabTemperatures);
+        actionbar.addTab(tabImmediate);
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabCalendars);
         actionbar.addTab(tabActions);
