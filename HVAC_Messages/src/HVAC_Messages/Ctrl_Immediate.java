@@ -22,11 +22,11 @@ public class Ctrl_Immediate extends Ctrl_Abstract
 	public class Execute extends Ctrl_Immediate
 	{
 		private static final long 		serialVersionUID 			= 1L;
-		public String 					name;
+		public String 					circuitName;
 		public Integer 					tempObjective;
-		public Long 					endTime;
+		public Long 					timeEnd;
 		public Boolean 					stopOnObjective;
-		public Integer 					other;
+		public Boolean 					start;
 	}
 	public class Ack extends Ctrl_Immediate
 	{

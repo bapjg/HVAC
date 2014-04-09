@@ -59,7 +59,6 @@ public class Activity_Main 			extends Activity
         
         // Global contains Objects Panel_1_xxx etc.
         global.panelTemperatures 						= new Panel_1_Temperatures	(R.layout.panel_1_temperatures);
-        global.panelImmediate	 						= new Panel_2_Immediate		(R.layout.panel_2_immediate);
         global.panelConfiguration 						= new Panel_2_Configuration	(R.layout.panel_2_configuration);
         global.panelCalendars 							= new Panel_3_Calendars		(R.layout.panel_3_calendars);
         global.panelActions 							= new Panel_4_Action		(R.layout.panel_4_actions_hotwater);

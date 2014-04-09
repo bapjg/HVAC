@@ -17,24 +17,29 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
 public class Panel_2_Immediate 		extends 	Panel_0_Fragment  
 									implements 	TCP_Response
 {
+	public String						circuitName;
+	
 	public Panel_2_Immediate()
 	{
 		super();
+		circuitName											= "";
 	}
-    public Panel_2_Immediate(int menuLayout)
+    public Panel_2_Immediate(int menuLayout, String circuitName)
     {
 		super(menuLayout);
+		this.circuitName									= circuitName;
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity										= getActivity();
-    	View							thisView			= inflater.inflate(R.layout.panel_4_actions_hotwater, container, false);
+    	View							thisView			= inflater.inflate(R.layout.panel_2_immediate, container, false);
     	TCP_Task						task				= new TCP_Task();
     	task.callBack										= this;
     	task.execute(new Ctrl_Actions_HotWater().new Request());
@@ -50,18 +55,35 @@ public class Panel_2_Immediate 		extends 	Panel_0_Fragment
     	FragmentTransaction					fTransaction;
     	Fragment 							panelFragment;
     	
-    	if (myCaption.equalsIgnoreCase("Ok"))
+    	if (myCaption.equalsIgnoreCase("Start"))
     	{
-    		System.out.println("Action Hot Water Click");
+    		System.out.println("Action "+ this.circuitName + " Start Click");
 
-    		Ctrl_Actions_HotWater.Execute	message_out			= new Ctrl_Actions_HotWater().new Execute();
+    		Ctrl_Immediate.Execute			message_out			= new Ctrl_Immediate().new Execute();
  
 			NumberPicker 					np 					= (NumberPicker) getActivity().findViewById(R.id.tempObjective);
+	   		message_out.circuitName								= this.circuitName;
 	   		message_out.tempObjective							= ((np.getValue() - 30) * 5 + 30) * 1000; // getValue returns an index
+	   		message_out.start									= true;
+	   		message_out.stopOnObjective							= true;
+//	   		message_out.timeEnd									= 3L;
 			
         	TCP_Task						task				= new TCP_Task();
         	task.callBack										= this;
-        	task.execute(message_out);
+//        	task.execute(message_out);
+    	}
+    	else if (myCaption.equalsIgnoreCase("Stop"))
+    	{
+    		System.out.println("Action "+ this.circuitName + " Stop Click");
+
+    		Ctrl_Immediate.Execute			message_out			= new Ctrl_Immediate().new Execute();
+	   		message_out.circuitName								= this.circuitName;
+	   		message_out.start									= false;
+
+	
+        	TCP_Task						task				= new TCP_Task();
+        	task.callBack										= this;
+//        	task.execute(message_out);
     	}
 
 	}
@@ -73,36 +95,22 @@ public class Panel_2_Immediate 		extends 	Panel_0_Fragment
 	{  
 		Activity a							= getActivity();
 		
-		System.out.println("activity = " + a);
 		if (a == null) 
 		{
 			// Do nothing
 		}
-		else if (result instanceof Ctrl_Actions_HotWater.Data)
+		else if (result instanceof Ctrl_Immediate.Data)
 		{
-			Ctrl_Actions_HotWater.Data msg_received 	= (Ctrl_Actions_HotWater.Data) result;
+			Ctrl_Immediate.Data msg_received 	= (Ctrl_Immediate.Data) result;
 			
-			if (msg_received.executionActive)
-			{
-				((TextView) a.findViewById(R.id.TimeStart)).setText("Current");
-				((TextView) a.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
-			}
-			else if (msg_received.executionPlanned)
-			{
-				((TextView) a.findViewById(R.id.TimeStart)).setText(Global.displayTimeShort(msg_received.timeStart));
-				((TextView) a.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
-			}
-			else
-			{
-				((TextView) a.findViewById(R.id.TimeStart)).setText("No Plan");
-				((TextView) a.findViewById(R.id.TargetTemp)).setText(" ");
-			}
-			
-			NumberPicker np = (NumberPicker) a.findViewById(R.id.tempObjective);
-		    String[] temps = new String[10];
+			TimePicker tp 						= (TimePicker) a.findViewById(R.id.timeEnd);
+			tp.setIs24HourView(true);
+
+			NumberPicker np 					= (NumberPicker) a.findViewById(R.id.tempObjective);
+		    String[] temps 						= new String[10];
 		    for(int i =0; i < temps.length; i++)
 		    {
-		    	temps[i] = Integer.toString(i*5 + 30);
+		    	temps[i] 						= Integer.toString(i*5 + 30);
 		    }
 
 		    np.setMinValue(30);
@@ -110,12 +118,33 @@ public class Panel_2_Immediate 		extends 	Panel_0_Fragment
 		    np.setWrapSelectorWheel(false);
 		    np.setDisplayedValues(temps);
 		    np.setValue(31);									// Min value + increment 5 = 35
+
+			if (msg_received.executionActive)
+			{
+				((TextView) a.findViewById(R.id.TimeStart)).setText("Current");
+				((TextView) a.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
+				((Button) a.findViewById(R.id.buttonOk)).setText("Stop");
+				tp.setVisibility(View.GONE);
+				np.setVisibility(View.GONE);
+			}
+			else if (msg_received.executionPlanned)
+			{
+				((TextView) a.findViewById(R.id.TimeStart)).setText(Global.displayTimeShort(msg_received.timeStart));
+				((TextView) a.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
+				((Button) a.findViewById(R.id.buttonOk)).setText("Start");
+			}
+			else
+			{
+				((TextView) a.findViewById(R.id.TimeStart)).setText("No Plan");
+				((TextView) a.findViewById(R.id.TargetTemp)).setText(" ");
+				((Button) a.findViewById(R.id.buttonOk)).setText("Start");
+			}
 		}
-		else if (result instanceof Ctrl_Actions_HotWater.NoConnection)
+		else if (result instanceof Ctrl_Immediate.NoConnection)
 		{
 			Toast.makeText(a, "No Connection established yet", Toast.LENGTH_SHORT).show();
 		}
-		else if (result instanceof Ctrl_Actions_HotWater.Ack)
+		else if (result instanceof Ctrl_Immediate.Ack)
 		{
 			Toast.makeText(a, "Command accepted", Toast.LENGTH_SHORT).show();
 		}

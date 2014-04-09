@@ -32,29 +32,32 @@ public class Menu_2_Immediate extends Menu_0_Fragment implements View.OnClickLis
     	if (myCaption.equalsIgnoreCase("Hot Water"))
     	{
     		System.out.println("Action Hot Water Click");
-    		panelFragment 												= new Panel_4_Action(R.layout.panel_4_actions_hotwater);
+    		panelFragment 												= new Panel_2_Immediate(R.layout.panel_2_immediate, "Hot Water");
 
-			fTransaction												= fManager.beginTransaction();
+    		fTransaction												= fManager.beginTransaction();
     		fTransaction.replace(R.id.panel_container, panelFragment);
-    		fTransaction.addToBackStack(null);
     		fTransaction.commit();
     		System.out.println("Action Hot Water processed");
     	}
-    	else if (myCaption.equalsIgnoreCase("Action2"))
+    	else if (myCaption.equalsIgnoreCase("Radiator"))
     	{
-    		System.out.println("Action2 Click");
-    		System.out.println("Action2 processed");
-    	}
-    	else if (myCaption.equalsIgnoreCase("Action3"))
-    	{
-    		System.out.println("Action3 Click");
-    		System.out.println("Action3 processed");
-    	}
-    	else if (myCaption.equalsIgnoreCase("Action4"))
-    	{
-    		System.out.println("Action4 Click");
-    		System.out.println("Action4 processed");
-    	}
+    		System.out.println("Action Radiator Click");
+    		panelFragment 												= new Panel_2_Immediate(R.layout.panel_2_immediate, "Radiator");
 
+			fTransaction												= fManager.beginTransaction();
+    		fTransaction.replace(R.id.panel_container, panelFragment);
+    		fTransaction.commit();
+    		System.out.println("Action Radiator processed");
+    	}
+    	else if (myCaption.equalsIgnoreCase("Floor"))
+    	{
+    		System.out.println("Action Floor Click");
+    		panelFragment 												= new Panel_2_Immediate(R.layout.panel_2_immediate, "Floor");
+
+			fTransaction												= fManager.beginTransaction();
+    		fTransaction.replace(R.id.panel_container, panelFragment);
+     		fTransaction.commit();
+    		System.out.println("Action Floor processed");
+    	}
 	}
 }
