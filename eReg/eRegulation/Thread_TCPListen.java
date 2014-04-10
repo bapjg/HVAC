@@ -51,7 +51,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			    	else if (message_in instanceof Ctrl_Temperatures.Request)
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "Temp.Req Message received from client", true);            
-			            Ctrl_Temperatures.Data message_ou				= new Ctrl_Temperatures().new Data();
+			            Ctrl_Temperatures.Data message_ou					= new Ctrl_Temperatures().new Data();
 			            message_ou.dateTime 								= System.currentTimeMillis();
 
 			            message_ou.tempBoiler	 							= Global.thermoBoiler.reading;
@@ -138,7 +138,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Immediate.Execute)		//New New New
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "HW.Execute Message received from client", true);            
+						LogIt.info("Thread_TCPListen", "Run", "Immediate.Execute Message received from client", true);            
 						Long	now											= Global.getTimeNowSinceMidnight();
 						
 						Ctrl_Immediate.Execute	message_rcvd				= (Ctrl_Immediate.Execute) message_in;
