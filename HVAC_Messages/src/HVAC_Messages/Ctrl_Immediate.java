@@ -10,10 +10,12 @@ public class Ctrl_Immediate extends Ctrl_Abstract
 	}	
 	public class Request extends Ctrl_Immediate
 	{
+		public String 					circuitName;
 	}
 	public class Data extends Ctrl_Immediate
 	{
 		private static final long 		serialVersionUID 			= 1L;
+		public String 					circuitName;
 		public Boolean					executionPlanned;
 		public Boolean					executionActive;
 		public Integer 					tempObjective;

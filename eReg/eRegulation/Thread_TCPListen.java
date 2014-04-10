@@ -144,6 +144,81 @@ public class Thread_TCPListen <SendType> implements Runnable
 						
 			            message_out											= message_ou;
 			        } 
+			    	else if (message_in instanceof Ctrl_Immediate.Request)
+			        {
+						LogIt.info("Thread_TCPListen", "Run", "Immediate.Req Message received from client", true);            
+
+						Ctrl_Immediate.Request	message_rcvd				= (Ctrl_Immediate.Request ) message_in;
+						Ctrl_Immediate.Data 	message_ou					= new Ctrl_Immediate().new Data();
+						
+						String 					circuitName					= message_rcvd.circuitName;
+						
+						Circuit_Abstract 		data_hw						= Global.circuits.fetchcircuit(circuitName);
+						
+						LogIt.info("Thread_TCPListen", "Run", "             and it's from " + circuitName, true);            
+				
+						message_ou.circuitName								= circuitName;
+						
+
+						Long 					now							= Global.getTimeNowSinceMidnight();
+						Long					midnight					= 24L * 60 * 60 * 1000;
+						Long					nextStart					= midnight;
+						Integer					tempObjective				= 0;
+
+						if (data_hw.taskActive == null)
+						{
+							for (CircuitTask aTask : data_hw.circuitTaskList)			// Check to ensure there are no active tasks
+							{
+								if (	(aTask.days.contains(Global.getDayOfWeek(0))) 
+								&& 		(! aTask.active)
+								&&     	(aTask.timeStart > now )
+								&&     	(aTask.timeStart < nextStart ))
+								{
+									nextStart								= aTask.timeStart;
+									tempObjective							= aTask.tempObjective;
+								}
+							}
+							
+				            if (nextStart < midnight)	// Task currently inactive but planned
+				            {
+				            	message_ou.executionActive					= false;
+								message_ou.executionPlanned					= true;
+					            message_ou.timeStart	 					= nextStart;
+					            message_ou.tempObjective	 				= tempObjective;
+				            }
+				            else						// Task currently inactive and not even planned
+				            {
+				            	message_ou.executionActive					= false;
+								message_ou.executionPlanned					= false;
+				            	message_ou.timeStart	 					= 0L;
+					            message_ou.tempObjective 					= 0;
+				            }
+						}
+						else		// Task currently active
+						{
+							message_ou.executionActive						= true;
+							message_ou.executionPlanned						= false;
+							message_ou.timeStart							= 0L;
+							message_ou.tempObjective						= data_hw.taskActive.tempObjective;
+						}
+			            
+			            message_out											= message_ou;
+			        } 
+			    	else if (message_in instanceof Ctrl_Actions_HotWater.Execute)		//New New New
+			        {
+						LogIt.info("Thread_TCPListen", "Run", "HW.Execute Message received from client", true);            
+						Long	now											= Global.getTimeNowSinceMidnight();
+						
+						Global.circuitHotWater.taskActive					= new CircuitTask(	now, 								// Time Start
+																								now + 30 * 60 * 1000, 				// TimeEnd
+																								((Ctrl_Actions_HotWater.Execute) message_in).tempObjective,		// TempObjective in millidesrees
+																								true,								// StopOnObjective
+																								"1, 2, 3, 4, 5, 6, 7");				// Days
+						Global.circuitHotWater.start();
+						Ctrl_Abstract.Ack message_ou						= new Ctrl_Abstract().new Ack();
+						
+			            message_out											= message_ou;
+			        } 
 			    	else if (message_in instanceof Ctrl_Immediate.Execute)
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "HW.Execute Message received from client", true);            
