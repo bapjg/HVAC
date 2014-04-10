@@ -153,7 +153,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 						
 						String 					circuitName					= message_rcvd.circuitName;
 						
-						Circuit_Abstract 		circuitData					= Global.circuits.fetchcircuit(circuitName);
+						Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
 						
 						LogIt.info("Thread_TCPListen", "Run", "             and it's from " + circuitName, true);            
 				
@@ -163,10 +163,11 @@ public class Thread_TCPListen <SendType> implements Runnable
 						Long					midnight					= 24L * 60 * 60 * 1000;
 						Long					nextStart					= midnight;
 						Integer					tempObjective				= 0;
+						CircuitTask				selectedTask				= null;
 
-						if (circuitData.taskActive == null)
+						if (circuit.taskActive == null)
 						{
-							for (CircuitTask aTask : circuitData.circuitTaskList)			// Check to ensure there are no active tasks
+							for (CircuitTask aTask : circuit.circuitTaskList)			// Check to ensure there are no active tasks
 							{
 								if (	(aTask.days.contains(Global.getDayOfWeek(0))) 
 								&& 		(! aTask.active)
@@ -174,7 +175,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 								&&     	(aTask.timeStart < nextStart ))
 								{
 									nextStart								= aTask.timeStart;
-									tempObjective							= aTask.tempObjective;
+									selectedTask							= aTask;
 								}
 							}
 							
@@ -183,72 +184,76 @@ public class Thread_TCPListen <SendType> implements Runnable
 				            	message_ou.executionActive					= false;
 								message_ou.executionPlanned					= true;
 					            message_ou.timeStart	 					= nextStart;
-					            message_ou.tempObjective	 				= tempObjective;
+					            message_ou.timeEnd		 					= selectedTask.timeEnd;
+					            message_ou.tempObjective	 				= selectedTask.tempObjective;
+								message_ou.stopOnObjective					= selectedTask.stopOnObjective;
 				            }
 				            else						// Task currently inactive and not even planned
 				            {
 				            	message_ou.executionActive					= false;
 								message_ou.executionPlanned					= false;
-				            	message_ou.timeStart	 					= 0L;
+								message_ou.timeStart						= 0L;
+								message_ou.timeEnd							= 0L;
 					            message_ou.tempObjective 					= 0;
+					            message_ou.stopOnObjective					= false;
 				            }
 						}
 						else		// Task currently active
 						{
 							message_ou.executionActive						= true;
 							message_ou.executionPlanned						= false;
-							message_ou.timeStart							= 0L;
-							message_ou.tempObjective						= circuitData.taskActive.tempObjective;
+							message_ou.timeStart							= circuit.taskActive.timeStart;
+							message_ou.timeEnd								= circuit.taskActive.timeEnd;
+							message_ou.tempObjective						= circuit.taskActive.tempObjective;
+							message_ou.stopOnObjective						= circuit.taskActive.stopOnObjective;
 						}
 			            
 			            message_out											= message_ou;
 			        } 
-			    	else if (message_in instanceof Ctrl_Actions_HotWater.Execute)		//New New New
+			    	else if (message_in instanceof Ctrl_Immediate.Execute)		//New New New
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "HW.Execute Message received from client", true);            
 						Long	now											= Global.getTimeNowSinceMidnight();
 						
 						Ctrl_Immediate.Execute	message_rcvd				= (Ctrl_Immediate.Execute) message_in;
 						String 					circuitName					= message_rcvd.circuitName;
-						Circuit_Abstract 		circuitData					= Global.circuits.fetchcircuit(circuitName);
-
-						if (message_rcvd.start)
+						Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
+						Ctrl_Abstract 			message_ou;
+						
+						if (message_rcvd.action == Ctrl_Immediate.ACTION_Start)
 						{
-							circuitData.taskActive							= new CircuitTask(	now, 								// Time Start
-																			now + 30 * 60 * 1000, 				// TimeEnd
-																			message_rcvd.tempObjective,		// TempObjective in millidesrees
-																			true,								// StopOnObjective
-																			"1, 2, 3, 4, 5, 6, 7");				// Days
-							circuitData.start();
+							if (circuit.name.equalsIgnoreCase("Hot_Water"))
+							{
+								circuit.taskActive							= new CircuitTask(	now, 								// Time Start
+																					now + 30 * 60 * 1000, 				// TimeEnd
+																					message_rcvd.tempObjective,			// TempObjective in millidesrees
+																					true,								// StopOnObjective
+																					"1, 2, 3, 4, 5, 6, 7");				// Days
+							}
+							else
+							{
+								circuit.taskActive							= new CircuitTask(	now, 								// Time Start
+																					message_rcvd.timeEnd, 				// TimeEnd
+																					message_rcvd.tempObjective,			// TempObjective in millidesrees
+																					false,								// StopOnObjective
+																					"1, 2, 3, 4, 5, 6, 7");				// Days
+							}
+							circuit.start();
+							message_ou										= new Ctrl_Abstract().new Ack();
+						}
+						else if (message_rcvd.action == message_rcvd.ACTION_Stop)
+						{
+							circuit.stop();
+							message_ou										= new Ctrl_Abstract().new Ack();
 						}
 						else
 						{
-							circuitData.stop();
+							message_ou										= new Ctrl_Abstract().new Nack();
 						}
 						
-						Ctrl_Abstract.Ack message_ou						= new Ctrl_Abstract().new Ack();
-						
 			            message_out											= message_ou;
 			        } 
-			    	else if (message_in instanceof Ctrl_Immediate.Execute)
-			        {
-						LogIt.info("Thread_TCPListen", "Run", "HW.Execute Message received from client", true);            
-						Long	now											= Global.getTimeNowSinceMidnight();
 
-						Ctrl_Immediate.Execute	message_rcvd				= (Ctrl_Immediate.Execute) message_in;
-						String 					circuitName					= message_rcvd.circuitName;
-						Circuit_Abstract 		circuitData					= Global.circuits.fetchcircuit(circuitName);
-
-						circuitData.taskActive								= new CircuitTask(	now, 								// Time Start
-																								now + 30 * 60 * 1000, 				// TimeEnd
-																								message_rcvd.tempObjective,		// TempObjective in millidesrees
-																								true,								// StopOnObjective
-																								"1, 2, 3, 4, 5, 6, 7");				// Days
-						circuitData.start();
-						Ctrl_Abstract.Ack message_ou						= new Ctrl_Abstract().new Ack();
-						
-			            message_out											= message_ou;
-			        } 
 			        ObjectOutputStream 		output							= null;
 					
 					output 													= new ObjectOutputStream(UI_Socket.getOutputStream());
