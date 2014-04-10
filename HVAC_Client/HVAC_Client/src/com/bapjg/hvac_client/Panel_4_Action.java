@@ -113,19 +113,19 @@ public class Panel_4_Action 		extends 	Panel_0_Fragment
 		}
 		else if (result instanceof Ctrl_Actions_HotWater.NoConnection)
 		{
-			Toast.makeText(a, "No Connection established yet", Toast.LENGTH_SHORT).show();
+			Global.toast("No Connection established yet", true);
 		}
 		else if (result instanceof Ctrl_Actions_HotWater.Ack)
 		{
-			Toast.makeText(a, "Command accepted", Toast.LENGTH_SHORT).show();
+			Global.toast("Command accepted", true);
 		}
 		else if (result instanceof Ctrl_Abstract.Ack)
 		{
-			Toast.makeText(a, "Command accepted", Toast.LENGTH_SHORT).show();
+			Global.toast("Command accepted", true);
 		}
 		else
 		{
-			Toast.makeText(a, "A Nack has been returned", Toast.LENGTH_SHORT).show();
+			Global.toast("A Nack has been returned", true);
 		}		   
 	}
 }

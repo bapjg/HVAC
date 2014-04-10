@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.widget.Toast;
 
 public class Global 
 {
@@ -77,5 +78,15 @@ public class Global
 		int decimal = (temperature - degrees*1000) / 100;
 		return degrees + "." + decimal;
 	}
-
+    public static void toast(String message, Boolean longish)
+    {
+    	if (longish)
+    	{
+    		Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+    	}
+    	else
+    	{
+    		Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+    	}
+    }
 }

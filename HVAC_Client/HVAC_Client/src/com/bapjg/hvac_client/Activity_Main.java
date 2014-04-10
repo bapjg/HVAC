@@ -58,10 +58,10 @@ public class Activity_Main 			extends Activity
         ActionBar.Tab 			tabActions				= actionbar.newTab().setText("Actions");
         
         // Global contains Objects Panel_1_xxx etc.
-        global.panelTemperatures 						= new Panel_1_Temperatures	(R.layout.panel_1_temperatures);
-        global.panelConfiguration 						= new Panel_2_Configuration	(R.layout.panel_2_configuration);
-        global.panelCalendars 							= new Panel_3_Calendars		(R.layout.panel_3_calendars);
-        global.panelActions 							= new Panel_4_Action		(R.layout.panel_4_actions_hotwater);
+//      global.panelTemperatures 						= new Panel_1_Temperatures	(R.layout.panel_1_temperatures);
+//      global.panelConfiguration 						= new Panel_2_Configuration	(R.layout.panel_2_configuration);
+//      global.panelCalendars 							= new Panel_3_Calendars		(R.layout.panel_3_calendars);
+//      global.panelActions 							= new Panel_4_Action		(R.layout.panel_4_actions_hotwater);
         
         // Setup the Menu Fragments
         // Menu_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
@@ -75,11 +75,11 @@ public class Activity_Main 			extends Activity
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu fragment   ,  	panel object
-        tabTemperatures.setTabListener	(new Listener_Tabs(global.menuTemperatures, 	global.panelTemperatures));
-        tabImmediate.setTabListener		(new Listener_Tabs(global.menuImmediate, 		global.panelImmediate));
-        tabConfiguration.setTabListener	(new Listener_Tabs(global.menuConfiguration, 	global.panelConfiguration));
-        tabCalendars.setTabListener		(new Listener_Tabs(global.menuCalendars, 		global.panelCalendars));
-        tabActions.setTabListener		(new Listener_Tabs(global.menuActions, 			global.panelActions));
+        tabTemperatures.setTabListener	(new Listener_Tabs(global.menuTemperatures));
+        tabImmediate.setTabListener		(new Listener_Tabs(global.menuImmediate));
+        tabConfiguration.setTabListener	(new Listener_Tabs(global.menuConfiguration));
+        tabCalendars.setTabListener		(new Listener_Tabs(global.menuCalendars));
+        tabActions.setTabListener		(new Listener_Tabs(global.menuActions));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabImmediate);

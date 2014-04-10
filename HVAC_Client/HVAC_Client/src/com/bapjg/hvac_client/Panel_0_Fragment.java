@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 import HVAC_Messages.*;

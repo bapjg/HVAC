@@ -91,11 +91,11 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
 		}
 		else if (result instanceof Ctrl_Temperatures.NoConnection)
 		{
-			Toast.makeText(a, "No Connection established yet", Toast.LENGTH_SHORT).show();
+			Global.toast("No Connection established yet", false);
 		}
 		else
 		{
-			Toast.makeText(a, "A Nack has been returned", Toast.LENGTH_SHORT).show();
+			Global.toast("A Nack has been returned", false);
 		}
     }    	
 	@Override
@@ -125,8 +125,9 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
     public void buttonTemperaturesClick(View myView)
     {
 //		if (!Global.initialisationCompleted)
-    	Toast.makeText(Global.appContext, "P1_Temperatures : buttonTemperaturesClick called", Toast.LENGTH_LONG).show();
 
+    	Global.toast("P1_Temperatures : buttonTemperaturesClick called", true);
+    	
     	task													= new TCP_Task();
     	task.callBack											= this;
     	task.execute(new Ctrl_Temperatures().new Request());
