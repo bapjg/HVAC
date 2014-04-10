@@ -20,21 +20,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
-public class Panel_4_Action 		extends 	Panel_0_Fragment  
+public class Panel_5_Action 		extends 	Panel_0_Fragment  
 									implements 	TCP_Response
 {
-	public Panel_4_Action()
+	public Panel_5_Action()
 	{
 		super();
 	}
-    public Panel_4_Action(int menuLayout)
+    public Panel_5_Action(int menuLayout)
     {
 		super(menuLayout);
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity										= getActivity();
-    	View							thisView			= inflater.inflate(R.layout.panel_4_actions_hotwater, container, false);
+    	View							thisView			= inflater.inflate(R.layout.panel_5_actions_hotwater, container, false);
     	TCP_Task						task				= new TCP_Task();
     	task.callBack										= this;
     	task.execute(new Ctrl_Actions_HotWater().new Request());

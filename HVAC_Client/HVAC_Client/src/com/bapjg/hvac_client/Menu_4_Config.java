@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-public class Menu_2_Config extends Menu_0_Fragment implements View.OnClickListener
+public class Menu_4_Config extends Menu_0_Fragment implements View.OnClickListener
 {
-	public Menu_2_Config(int menuLayout)
+	public Menu_4_Config(int menuLayout)
 	{
 		super( menuLayout);
 	}

@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-public class Menu_4_Actions extends Menu_0_Fragment implements View.OnClickListener
+public class Menu_5_Actions extends Menu_0_Fragment implements View.OnClickListener
 {
-	public Menu_4_Actions(int menuLayout)
+	public Menu_5_Actions(int menuLayout)
 	{
 		super(menuLayout);
 	}
@@ -32,7 +32,7 @@ public class Menu_4_Actions extends Menu_0_Fragment implements View.OnClickListe
     	if (myCaption.equalsIgnoreCase("Hot Water"))
     	{
     		System.out.println("Action Hot Water Click");
-    		panelFragment 												= new Panel_4_Action(R.layout.panel_4_actions_hotwater);
+    		panelFragment 												= new Panel_5_Action(R.layout.panel_5_actions_hotwater);
 
 			fTransaction												= fManager.beginTransaction();
     		fTransaction.replace(R.id.panel_container, panelFragment);

@@ -27,7 +27,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 
-public class Panel_2_Configuration 				extends 	Panel_0_Fragment 
+public class Panel_4_Configuration 				extends 	Panel_0_Fragment 
 {
 	private Adapter_Thermometers 		adapter;
 	private LayoutInflater				myInflater;
@@ -35,11 +35,11 @@ public class Panel_2_Configuration 				extends 	Panel_0_Fragment
 	private ViewGroup					myContainer;
 	private FragmentManager				myFragmentManager;
 
-	public Panel_2_Configuration()
+	public Panel_4_Configuration()
 	{
 		super();
 	}
-    public Panel_2_Configuration(int menuLayout)
+    public Panel_4_Configuration(int menuLayout)
     {
 		super(menuLayout);
     }
@@ -103,7 +103,7 @@ public class Panel_2_Configuration 				extends 	Panel_0_Fragment
 
         // First, ensure that correct view is displayed
     	ViewGroup					subContainer						= (ViewGroup) myContainer.getChildAt(0);		
-    	View 						newView 							= myInflater.inflate(R.layout.panel_2_configuration, subContainer, true);
+    	View 						newView 							= myInflater.inflate(R.layout.panel_4_configuration, subContainer, true);
 
     	FragmentTransaction				ft								= myFragmentManager.beginTransaction();
     	//Panel_2_Configuration 			dt 								= new Panel_2_Configuration();

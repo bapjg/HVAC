@@ -69,16 +69,16 @@ public class Activity_Main 			extends Activity
         //	
         global.menuTemperatures							= new Menu_1_Temperatures	(R.layout.menu_1_temperatures);
         global.menuImmediate							= new Menu_2_Immediate		(R.layout.menu_2_immediate);
-        global.menuConfiguration						= new Menu_2_Config			(R.layout.menu_2_configuration);
         global.menuCalendars							= new Menu_3_Calendars		(R.layout.menu_3_calendars);
-        global.menuActions								= new Menu_4_Actions		(R.layout.menu_4_actions);
+        global.menuConfiguration						= new Menu_4_Config			(R.layout.menu_4_configuration);
+        global.menuActions								= new Menu_5_Actions		(R.layout.menu_5_actions);
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu fragment   ,  	panel object
         tabTemperatures.setTabListener	(new Listener_Tabs(global.menuTemperatures));
         tabImmediate.setTabListener		(new Listener_Tabs(global.menuImmediate));
-        tabConfiguration.setTabListener	(new Listener_Tabs(global.menuConfiguration));
         tabCalendars.setTabListener		(new Listener_Tabs(global.menuCalendars));
+        tabConfiguration.setTabListener	(new Listener_Tabs(global.menuConfiguration));
         tabActions.setTabListener		(new Listener_Tabs(global.menuActions));
         
         actionbar.addTab(tabTemperatures);
