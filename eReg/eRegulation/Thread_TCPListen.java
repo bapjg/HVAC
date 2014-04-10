@@ -234,13 +234,17 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "HW.Execute Message received from client", true);            
 						Long	now											= Global.getTimeNowSinceMidnight();
-						
-						Global.circuitHotWater.taskActive					= new CircuitTask(	now, 								// Time Start
+
+						Ctrl_Immediate.Execute	message_rcvd				= (Ctrl_Immediate.Execute) message_in;
+						String 					circuitName					= message_rcvd.circuitName;
+						Circuit_Abstract 		circuitData					= Global.circuits.fetchcircuit(circuitName);
+
+						circuitData.taskActive								= new CircuitTask(	now, 								// Time Start
 																								now + 30 * 60 * 1000, 				// TimeEnd
-																								((Ctrl_Actions_HotWater.Execute) message_in).tempObjective,		// TempObjective in millidesrees
+																								message_rcvd.tempObjective,		// TempObjective in millidesrees
 																								true,								// StopOnObjective
 																								"1, 2, 3, 4, 5, 6, 7");				// Days
-						Global.circuitHotWater.start();
+						circuitData.start();
 						Ctrl_Abstract.Ack message_ou						= new Ctrl_Abstract().new Ack();
 						
 			            message_out											= message_ou;
