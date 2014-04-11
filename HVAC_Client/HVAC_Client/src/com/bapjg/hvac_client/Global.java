@@ -1,7 +1,9 @@
 package com.bapjg.hvac_client;
 
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import android.app.Activity;
@@ -15,7 +17,7 @@ public class Global
 	public static 	Activity 					activity;
 	
 	public static	String						serverURL;
-	public static	InetAddress					piAddressV4;
+	public static	InetSocketAddress			piSocketAddress;
 	
 	public static 	Mgmt_Msg_Configuration 		configuration;
 	public static 	Mgmt_Msg_Calendar 			calendar;
@@ -82,11 +84,70 @@ public class Global
     {
     	if (longish)
     	{
-    		Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+    		Toast.makeText(actContext, message, Toast.LENGTH_LONG).show();
     	}
     	else
     	{
-    		Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+    		Toast.makeText(actContext, message, Toast.LENGTH_SHORT).show();
     	}
     }
+    public static void toast(Context c, String message, Boolean longish)
+    {
+    	if (longish)
+    	{
+    		Toast.makeText(c, message, Toast.LENGTH_LONG).show();
+    	}
+    	else
+    	{
+    		Toast.makeText(c, message, Toast.LENGTH_SHORT).show();
+    	}
+    }
+    public static void toaster(final String message, final Boolean longish)
+    {
+    	activity.runOnUiThread(new Runnable()
+		{
+			public void run() 
+			{
+				final String   myMessage = message;
+				final Boolean  mylongish = longish;
+				if (longish)
+				{
+					Toast.makeText(Global.activity, myMessage, Toast.LENGTH_LONG).show();
+				}	
+				else
+				{
+					Toast.makeText(Global.activity, myMessage, Toast.LENGTH_SHORT).show();
+				}
+			}
+		}
+		);
+    }
+	public static Long getTimeAtMidnight()
+	{
+		// Returns the system time last midnight
+		Calendar now		 				= Calendar.getInstance();
+		
+		now.set(Calendar.HOUR_OF_DAY, 0);
+		now.set(Calendar.MINUTE, 0);
+		now.set(Calendar.SECOND, 0);
+		now.set(Calendar.MILLISECOND, 0);
+		Long todayMidnight					= now.getTimeInMillis();
+		
+		return todayMidnight;
+	}
+	public static Long parseTime(String characters)
+	{
+		// Returns a supplied time in string form "hh:mm" 
+		// In milliseconds since last midnight
+		String splitCharacters[]			= characters.split(":");
+		
+		Calendar calendar					= Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 	Integer.parseInt(splitCharacters[0]));
+		calendar.set(Calendar.MINUTE,  		Integer.parseInt(splitCharacters[1]));
+		calendar.set(Calendar.SECOND, 		0);
+		calendar.set(Calendar.MILLISECOND, 	0);
+		
+		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
+	}
+
 }

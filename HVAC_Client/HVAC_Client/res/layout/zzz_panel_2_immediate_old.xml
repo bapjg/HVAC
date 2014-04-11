@@ -29,7 +29,18 @@
        <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Select temperature to start now"						style	= "@style/AD_Text"  />
 		</TableRow>
-       	</TableLayout>
+	    <TableRow																					style	= "@style/AD_Row"   >
+            <TextView		android:text	= "xxxx"     		   									style	= "@style/AD_Text"  />
+            <TextView       android:text	= " "			android:id	= "@+id/xxxxxxx"			style	= "@style/AD_Data"	/>
+		</TableRow>
+        <TableRow																					style	= "@style/AD_Row"   >
+            <TextView		android:text	= "yyyyyyyyyyy"     		   							style	= "@style/AD_Text"  />
+            <TextView       android:text	= " "			android:id	= "@+id/yyyyyyy"			style	= "@style/AD_Data"	/>
+		</TableRow>
+       <TableRow																					style	= "@style/AD_Row"   >
+            <TextView		android:text	= " "													style	= "@style/AD_Text"  />
+		</TableRow>
+	</TableLayout>
 
 	<LinearLayout
 	    android:layout_width="match_parent"

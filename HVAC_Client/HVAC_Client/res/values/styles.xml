@@ -31,7 +31,23 @@
 				wrap_content
 			</item> 
 	</style>
-	
+    <style name="AD_Title" parent="@android:style/TextAppearance.Large"> 
+			<item name="android:textSize">
+				20sp
+			</item> 
+			<item name="android:textStyle">
+				bold
+			</item> 
+			<item name="android:textColor">
+				#FFFF00
+			</item> 
+			<item name="android:layout_width">
+				250sp			</item> 
+			<item name="android:layout_height">
+				wrap_content
+			</item> 
+	</style>
+    	
     <style name="AD_Data" parent="@android:style/TextAppearance.Medium"> 
 			<item name="android:textSize">
 				15sp

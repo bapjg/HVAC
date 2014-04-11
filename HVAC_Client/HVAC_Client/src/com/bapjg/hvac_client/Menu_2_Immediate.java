@@ -21,7 +21,7 @@ public class Menu_2_Immediate extends Menu_0_Fragment implements View.OnClickLis
 	}
 	public void onClick(View myView) 
 	{
-		super.onClick(myView);
+   	 	super.onClick(myView);
 		
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
@@ -29,10 +29,9 @@ public class Menu_2_Immediate extends Menu_0_Fragment implements View.OnClickLis
     	FragmentTransaction					fTransaction;
     	Fragment 							panelFragment;
     	
-    	if (myCaption.equalsIgnoreCase("Hot_Water"))
+    	if (myCaption.equalsIgnoreCase("Hot Water"))
     	{
-    		System.out.println("Action Hot_Water Click");
-    		panelFragment 												= new Panel_2_Immediate(R.layout.panel_2_immediate, "Hot_Water");
+     		panelFragment 												= new Panel_2_Immediate(R.layout.panel_2_immediate, "Hot_Water");
 
     		fTransaction												= fManager.beginTransaction();
     		fTransaction.replace(R.id.panel_container, panelFragment);
@@ -42,7 +41,6 @@ public class Menu_2_Immediate extends Menu_0_Fragment implements View.OnClickLis
     	}
     	else if (myCaption.equalsIgnoreCase("Radiator"))
     	{
-    		System.out.println("Action Radiator Click");
     		panelFragment 												= new Panel_2_Immediate(R.layout.panel_2_immediate, "Radiator");
 
 			fTransaction												= fManager.beginTransaction();

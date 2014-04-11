@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+
+import android.widget.Toast;
 
 import HVAC_Messages.*;
 
@@ -19,22 +22,19 @@ public class TCP_Connection
 	public ObjectInputStream 		piInputStream			= null;
 	public Boolean					piConnected				= false;
 	
-	public TCP_Connection(String fromWhom)
+	public TCP_Connection()
 	{
 	}
 
 	public Boolean connect()
 	{
-//		if (piConnected)
-//		{
-//			return true;
-//		}
-		System.out.println("TCP_Connection : Before socket");
-		if (Global.piAddressV4 != null)
+		if (Global.piSocketAddress != null)
 		{
 			try													// Try last known address
 			{
-				piSocket 										= new Socket(Global.piAddressV4, 8889);
+				piSocket 										= new Socket();
+				piSocket.connect(Global.piSocketAddress,3000);
+				piSocket.setSoTimeout(3000);
 				return true;
 			}
 			catch(Exception e1)
@@ -44,26 +44,31 @@ public class TCP_Connection
 
 		try														// Try local
 		{
-			Global.piAddressV4									= InetAddress.getByName("192.168.5.51");
-			piSocket 											= new Socket(Global.piAddressV4, 8889);
-			System.out.println("TCP_Connection : got socket local");
+			Global.piSocketAddress								= new InetSocketAddress("192.168.5.51", 8889);
+			piSocket 											= new Socket();
+			piSocket.connect(Global.piSocketAddress, 1000);
+			piSocket.setSoTimeout(3000);
+			
+			Global.toaster("TCP_Connection : Connected to Local", true);
 		}
 		catch(Exception e2)
 		{
 			try													// It Failed so now try over the internet
 			{
-				Global.piAddressV4 								= InetAddress.getByName("home.bapjg.com");
-				piSocket 										= new Socket(Global.piAddressV4, 8889);
-				System.out.println("TCP_Connection : got socket remote");
+				Global.piSocketAddress 							= new InetSocketAddress("home.bapjg.com", 8889);
+				piSocket 										= new Socket();
+				piSocket.connect(Global.piSocketAddress, 3000);
+				piSocket.setSoTimeout(3000);
+
+				Global.toaster("TCP_Connection : Connected to Remote", true);
 			}
 			catch(Exception e3)
 			{
-				System.out.println("TCP_Connection : Failed completely");
+				Global.toaster("TCP_Connection : Failed completely", true);
 				return false;
 			}
 		}
 		piConnected												= true;
-		System.out.println("TCP_Connection : Ended");
 		return true;
 	}
 	public void disconnect()
@@ -75,11 +80,11 @@ public class TCP_Connection
 		try { piSocket.close(); }
 		catch(Exception e) {}
 	}
-	public Ctrl_Abstract ping()
-	{
-		Ctrl_Abstract.Ping 		piPingSend 				= new Ctrl_Abstract().new Ping();
-		return piTransaction((Ctrl_Abstract) piPingSend);
-	}
+//	public Ctrl_Abstract ping()
+//	{
+//		Ctrl_Abstract.Ping 		piPingSend 				= new Ctrl_Abstract().new Ping();
+//		return piTransaction((Ctrl_Abstract) piPingSend);
+//	}
 	public Ctrl_Abstract piTransaction(Ctrl_Abstract messageSend)
 	{
 		if(connect())

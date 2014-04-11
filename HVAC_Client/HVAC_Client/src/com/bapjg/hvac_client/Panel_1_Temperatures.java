@@ -55,10 +55,8 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
     	
     	System.out.println("Panel onCreateView new Task");
     	task												= new TCP_Task();
-    	System.out.println("Panel onCreateView set callback");
     	task.callBack										= this;
-    	System.out.println("Panel onCreateView execute");
-    	task.execute(new Ctrl_Temperatures().new Request());
+     	task.execute(new Ctrl_Temperatures().new Request());
     	System.out.println("Panel onCreateView executedddddddddddddddd");
         return thisView;
     }

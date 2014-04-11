@@ -14,7 +14,7 @@ public class TCP_Task extends AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
 
 	public TCP_Task()
 	{
-		this.piConnection									= new TCP_Connection("Here");
+		this.piConnection									= new TCP_Connection();
 		this.callBack										= null;
 	}
 	@Override
@@ -24,9 +24,9 @@ public class TCP_Task extends AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
 	}	
 	protected void onProgressUpdate(Void... progress)  { }
 	@Override
-    protected void onPostExecute(Ctrl_Abstract result) 
+    protected void onPostExecute(Ctrl_Abstract messageReturn) 
 	{             
-		callBack.processFinish(result);
+		callBack.processFinish(messageReturn);
 		piConnection.disconnect();
     }
 }

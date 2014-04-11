@@ -13,7 +13,7 @@
 	    android:layout_height="wrap_content" >
 
         <TableRow																					style	= "@style/AD_Row"   >
-            <TextView		android:text	= "Planned calendar events"								style	= "@style/AD_Text"  />
+            <TextView		android:text	= "Planned calendar events"								style	= "@style/AD_Title"  />
 		</TableRow>
 	    <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Time"     		   									style	= "@style/AD_Text"  />
