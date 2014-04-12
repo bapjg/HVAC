@@ -56,16 +56,6 @@ public class Panel_2_Immediate 		extends 	Panel_0_Fragment
     }
 	public void rowTempClick(View myView) 
 	{
-//		Dialog_Temperature df = new Dialog_Temperature();
-		
-//		df.tempMin		= 30;
-//		df.step			= 5;
-//		df.steps		= 7;
-//		df.tempInitial  = 35;
-//		df.callBack	  	= this;
-//		df.show(getFragmentManager(), "Dialog_Temperature");
-//		df.writeBack	= (TextView) ((ViewGroup) myView).getChildAt(1);
-		
 		TextView						writeBack			= (TextView) ((ViewGroup) myView).getChildAt(1);
 		Dialog_Temperature df = new Dialog_Temperature(writeBack, 25, 5, 8);
 		df.show(getFragmentManager(), "Dialog_Temperature");
@@ -147,10 +137,6 @@ public class Panel_2_Immediate 		extends 	Panel_0_Fragment
 			timeEnd.setText(Global.displayTimeShort(msg_received.timeStart + 60 * 60 * 1000));
 			tempObjective.setText(((Integer) (msg_received.tempObjective/1000)).toString());
 			
-//			TimePicker tp 						= (TimePicker) a.findViewById(R.id.timeEnd);
-//			tp.setIs24HourView(true);
-//
-
 			if (msg_received.executionActive)
 			{
 				((TextView) a.findViewById(R.id.TimeStart)).setText("Current");

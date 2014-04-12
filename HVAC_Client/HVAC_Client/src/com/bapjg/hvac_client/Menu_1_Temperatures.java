@@ -36,12 +36,10 @@ public class Menu_1_Temperatures 	extends 	Menu_0_Fragment
     	
     	if (myCaption.equalsIgnoreCase("Temperatures"))
     	{
-    		System.out.println("Menu : Temperatures Click again");
     		panelFragment 												= new Panel_1_Temperatures(R.layout.panel_1_temperatures);
 
 			fTransaction												= fManager.beginTransaction();
     		fTransaction.replace(R.id.panel_container, panelFragment);
-    	//	fTransaction.addToBackStack(null);
     		fTransaction.commit();
     	}
 	}

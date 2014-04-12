@@ -35,9 +35,7 @@ public class Menu_2_Immediate extends Menu_0_Fragment implements View.OnClickLis
 
     		fTransaction												= fManager.beginTransaction();
     		fTransaction.replace(R.id.panel_container, panelFragment);
-//    		fTransaction.addToBackStack(null);
     		fTransaction.commit();
-    		System.out.println("Action Hot Water processed");
     	}
     	else if (myCaption.equalsIgnoreCase("Radiator"))
     	{
@@ -45,20 +43,15 @@ public class Menu_2_Immediate extends Menu_0_Fragment implements View.OnClickLis
 
 			fTransaction												= fManager.beginTransaction();
     		fTransaction.replace(R.id.panel_container, panelFragment);
-//    		fTransaction.addToBackStack(null);
     		fTransaction.commit();
-    		System.out.println("Action Radiator processed");
-    	}
+     	}
     	else if (myCaption.equalsIgnoreCase("Floor"))
     	{
-    		System.out.println("Action Floor Click");
     		panelFragment 												= new Panel_2_Immediate(R.layout.panel_2_immediate, "Floor");
 
 			fTransaction												= fManager.beginTransaction();
     		fTransaction.replace(R.id.panel_container, panelFragment);
-//    		fTransaction.addToBackStack(null);
      		fTransaction.commit();
-    		System.out.println("Action Floor processed");
     	}
 	}
 }

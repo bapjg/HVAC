@@ -31,8 +31,6 @@ public class Menu_4_Config extends Menu_0_Fragment implements View.OnClickListen
     		FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
     		transaction.replace(R.id.panel_container, Global.panelConfiguration);
-    		// and add the transaction to the back stack
-    		transaction.addToBackStack(null);
     		transaction.commit();
     	}
 

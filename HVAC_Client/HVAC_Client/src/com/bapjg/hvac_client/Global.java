@@ -26,7 +26,7 @@ public class Global
 	public static	Panel_2_Immediate			panelImmediate;	
 	public static	Panel_3_Calendars			panelCalendars;
 	public static	Panel_4_Configuration		panelConfiguration;
-	public static	Panel_5_Action				panelActions;	
+	public static	Panel_5_Actions_Relays				panelActions;	
 
 	public static	Menu_1_Temperatures			menuTemperatures;
 	public static	Menu_2_Immediate			menuImmediate;

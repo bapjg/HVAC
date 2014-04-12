@@ -179,6 +179,47 @@ public class Thread_TCPListen <SendType> implements Runnable
 						
 			            message_out											= message_ou;
 			        } 
+			    	else if (message_in instanceof Ctrl_Actions_Relays.Request)
+			        {
+						LogIt.info("Thread_TCPListen", "Run", "Relays.Req Message received from client", true);            
+						Ctrl_Actions_Relays.Data message_ou					= new Ctrl_Actions_Relays().new Data();
+			            message_ou.burner 									= Global.burnerPower.isOn();
+
+			            message_ou.pumpHotWater	 							= Global.pumpWater.relay.isOn();
+			            message_ou.pumpFloor	 							= Global.pumpFloor.relay.isOn();
+			            message_ou.pumpRadiator	 							= Global.pumpRadiator.relay.isOn();
+		            
+			            message_out											= message_ou;
+			        } 
+			    	else if (message_in instanceof Ctrl_Actions_Relays.Execute)
+			        {
+						LogIt.info("Thread_TCPListen", "Run", "Relays.Execute Message received from client", true);            
+
+						// Switch on the relay
+						
+						String				relayName						= ((Ctrl_Actions_Relays.Execute) message_in).relayName;
+						if (((Ctrl_Actions_Relays.Execute) message_in).switchOn)
+						{
+							// Switchon
+						}
+						else if (((Ctrl_Actions_Relays.Execute) message_in).switchOff)
+						{
+							// Switchoff
+						}
+						else 
+						{
+							// Error
+						}
+						
+						Ctrl_Actions_Relays.Data message_ou					= new Ctrl_Actions_Relays().new Data();
+			            message_ou.burner 									= Global.burnerPower.isOn();
+
+			            message_ou.pumpHotWater	 							= Global.pumpWater.relay.isOn();
+			            message_ou.pumpFloor	 							= Global.pumpFloor.relay.isOn();
+			            message_ou.pumpRadiator	 							= Global.pumpRadiator.relay.isOn();
+		            
+			            message_out											= message_ou;
+			        } 
 
 			        ObjectOutputStream 		output							= null;
 					

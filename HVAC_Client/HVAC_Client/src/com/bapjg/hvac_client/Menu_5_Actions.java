@@ -29,16 +29,13 @@ public class Menu_5_Actions extends Menu_0_Fragment implements View.OnClickListe
     	FragmentTransaction					fTransaction;
     	Fragment 							panelFragment;
     	
-    	if (myCaption.equalsIgnoreCase("Hot Water"))
+    	if (myCaption.equalsIgnoreCase("Relays"))
     	{
-    		System.out.println("Action Hot Water Click");
-    		panelFragment 												= new Panel_5_Action(R.layout.panel_5_actions_hotwater);
+    		panelFragment 												= new Panel_5_Actions_Relays(R.layout.panel_5_actions_relays);
 
 			fTransaction												= fManager.beginTransaction();
     		fTransaction.replace(R.id.panel_container, panelFragment);
-    		fTransaction.addToBackStack(null);
     		fTransaction.commit();
-    		System.out.println("Action Hot Water processed");
     	}
     	else if (myCaption.equalsIgnoreCase("Action2"))
     	{
@@ -55,6 +52,5 @@ public class Menu_5_Actions extends Menu_0_Fragment implements View.OnClickListe
     		System.out.println("Action4 Click");
     		System.out.println("Action4 processed");
     	}
-
 	}
 }

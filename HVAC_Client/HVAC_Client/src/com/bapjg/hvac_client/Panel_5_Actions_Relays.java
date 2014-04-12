@@ -20,29 +20,50 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
-public class Panel_5_Action 		extends 	Panel_0_Fragment  
-									implements 	TCP_Response
+public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment  
+											implements 	TCP_Response
 {
-	public Panel_5_Action()
+	public Panel_5_Actions_Relays()
 	{
 		super();
 	}
-    public Panel_5_Action(int menuLayout)
+    public Panel_5_Actions_Relays(int menuLayout)
     {
 		super(menuLayout);
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity										= getActivity();
-    	View							thisView			= inflater.inflate(R.layout.panel_5_actions_hotwater, container, false);
+    	View							thisView			= inflater.inflate(R.layout.panel_5_actions_relays, container, false);
     	TCP_Task						task				= new TCP_Task();
     	task.callBack										= this;
-//    	task.execute(new Ctrl_Actions_HotWater().new Request());
+//    	task.execute(new Ctrl_Actions_Relays().new Request());
 
-    	thisView.findViewById(R.id.buttonOk).setOnClickListener((OnClickListener) this);
+    	
+    	
+    	thisView.findViewById(R.id.burner).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {burnerClick(v);		}});
+    	thisView.findViewById(R.id.hotwater).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {hotWaterClick(v);	}});
+    	thisView.findViewById(R.id.floor).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {floorClick(v);		}});
+    	thisView.findViewById(R.id.radiator).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {radiatorClick(v);	}});
         return thisView;
     }
-	public void onClick(View myView) 
+    public void burnerClick(View v)
+    {
+    	System.out.println("burnerClick");
+    }
+    public void hotWaterClick(View v)
+    {
+    	System.out.println("hotWaterClick");
+    }
+    public void floorClick(View v)
+    {
+    	System.out.println("floorClick");
+    }
+    public void radiatorClick(View v)
+    {
+    	System.out.println("RadiatorClick");
+    }
+    public void onClick(View myView) 
 	{
     	Button 								myButton 			= (Button) myView;
     	String								myCaption			= myButton.getText().toString();
