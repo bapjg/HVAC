@@ -1,5 +1,6 @@
 package com.bapjg.hvac_client;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -11,6 +12,7 @@ import android.view.*;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
+@SuppressLint("ValidFragment")
 public class Dialog_Temperature extends DialogFragment 
 {
 	public NumberPicker 			np;
@@ -25,6 +27,16 @@ public class Dialog_Temperature extends DialogFragment
 	public Dialog_Temperature() 
     {
     }
+	public Dialog_Temperature(TextView	writeBack, Integer	tempMin, Integer  step,Integer  steps) 
+    {
+		super();
+		this.writeBack											= writeBack;
+		this.tempMin											= tempMin;
+		this.step												= step;
+		this.steps												= steps;
+		this.tempInitial										= Integer.parseInt(writeBack.getText().toString());
+    }
+
 	public interface OnTemperatureSelectedListener 
     {
         public void onTemperatureSelected(Integer temperature);
@@ -56,16 +68,12 @@ public class Dialog_Temperature extends DialogFragment
 	    np.setDisplayedValues(temps);
 	    np.setValue(tempMin + (tempInitial - tempMin)/step);		// Min + index
        
-//        builder.setMessage("Are you sure?");
-        //null should be your on click listener
-        
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialog, int which) 
             {
              	Integer temperature =(np.getValue() - tempMin) * step + tempMin;
-//            	callBack.onTemperatureChange((np.getValue() - tempMin) * step + tempMin);
              	writeBack.setText(temperature.toString());
             	dialog.dismiss();
             }
