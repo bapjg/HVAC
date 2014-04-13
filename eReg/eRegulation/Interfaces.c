@@ -274,6 +274,7 @@ int Is_On(int Relay_Bank, int Relay_Number)
 	spi_txrx(buf, 2, 1);
 
 	close(spi_fd);
+	println("---relay " + Relay_Number + " is " + buf[2]);
 	return buf[2];
 }
 void Relays_OffAll(int Relay_Bank)
