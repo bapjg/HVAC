@@ -303,7 +303,7 @@ int main(int argc, char *argv[])
 	printf("result is %d \n", result);
 
 	Relay_Open(0);
-	result = get_reg_value8(0x23);
+	result = get_reg_value16(0x23);
 	printf("getreg result is %d \n", result);
 }
 
