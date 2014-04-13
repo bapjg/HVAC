@@ -300,5 +300,6 @@ int main(int argc, char *argv[])
 {
 	int result = 0;
 	result = Is_On(1, 3);
+	printf("result is %d", result);
 }
 
