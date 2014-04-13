@@ -37,6 +37,7 @@ public class Relay
 	{
 		Global.interfaceSemaphore.semaphoreLock("Relay.isOn");
 		Boolean result			= IsOn(relayBank, relayNumber);
+		System.out.println("Relay " + name + ", number " + relayNumber + " is " + result);
 		Global.interfaceSemaphore.semaphoreUnLock();
 		return result;
 	}
