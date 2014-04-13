@@ -299,7 +299,7 @@ void Relays_ScanAndSet(int Relay_Bank)
 int main(int argc, char *argv[])
 {
 	int result = 0;
-	result = Is_On(1, 3);
+	result = Is_On(0, 3);
 	printf("result is %d \n", result);
 }
 
