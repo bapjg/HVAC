@@ -241,6 +241,7 @@ void Relay_On(int Relay_Bank, int Relay_Number)
 	buf[1] 					= 0x20 + Relay_Number;
 	buf[2] 					= 1;
 	spi_txrx(buf, 3, 0);
+	printf("---relay open %d", Relay_Number);
 
 	close(spi_fd);
 }
