@@ -241,7 +241,7 @@ void Relay_On(int Relay_Bank, int Relay_Number)
 	buf[1] 					= 0x20 + Relay_Number;
 	buf[2] 					= 1;
 	spi_txrx(buf, 3, 0);
-	printf("---relay open %d", Relay_Number);
+	printf("---relay open %d \n", Relay_Number);
 
 	close(spi_fd);
 }
@@ -275,7 +275,7 @@ int Is_On(int Relay_Bank, int Relay_Number)
 	spi_txrx(buf, 2, 1);
 
 	close(spi_fd);
-	printf("---relay %d is %d", Relay_Number, buf[2]);
+	printf("---relay %d is %d \n", Relay_Number, buf[2]);
 	return buf[2];
 }
 void Relays_OffAll(int Relay_Bank)
