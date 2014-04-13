@@ -190,6 +190,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			            message_ou.pumpRadiator	 							= Global.pumpRadiator.relay.isOn();
 		            
 			            message_out											= message_ou;
+						LogIt.info("Thread_TCPListen", "Run", "Relays.Req Answer " + message_out.toString(), true);            
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_Relays.Execute)
 			        {
@@ -218,10 +219,12 @@ public class Thread_TCPListen <SendType> implements Runnable
 						{
 							if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_On)
 							{
+								LogIt.info("Thread_TCPListen", "Run", "Relay Action ON " + relayAction.relayName, true);            
 								relay.on();
 							}
 							else if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_Off)
 							{
+								LogIt.info("Thread_TCPListen", "Run", "Relay Action OFF " + relayAction.relayName, true);            
 								relay.off();
 							}
 						}
