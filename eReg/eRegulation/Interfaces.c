@@ -272,6 +272,7 @@ int Is_On(int Relay_Bank, int Relay_Number)
 
 	buf[0] 					= addr | 1;
 	buf[1] 					= 0x20 + Relay_Number;
+	buf[2] 					= 0;
 	spi_txrx(buf, 2, 1);
 
 	close(spi_fd);
