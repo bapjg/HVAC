@@ -190,7 +190,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			            message_ou.pumpRadiator	 							= Global.pumpRadiator.relay.isOn();
 		            
 			            message_out											= message_ou;
-						LogIt.info("Thread_TCPListen", "Run", "Relays.Req Answer " + message_out.toString(), true);            
+						LogIt.info("Thread_TCPListen", "Run", "Relays.Req Answer Burn : " + message_ou.burner +  ", HW : " + message_ou.pumpHotWater, true);            
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_Relays.Execute)
 			        {
