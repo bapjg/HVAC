@@ -10,22 +10,18 @@
 >
 		<Button
             style						= "@style/AD_MenuButton"
-            android:text				= "Calendar1" 
+            android:text				= "Relays" 
         />
         <Button
             style						= "@style/AD_MenuButton"
-            android:text				= "Calendar2" 
+            android:text				= "xxx" 
         />
         <Button
             style						= "@style/AD_MenuButton"
-            android:text				= "Calendar3"
+            android:text				= "yyy"
         />
 		<Button
             style						= "@style/AD_MenuButton"
-            android:text				= "Calendar4" 
+            android:text				= "zzz" 
         />
-		<Button
-		    style						= "@style/AD_MenuButton"
-		    android:text				= "Other" 
-		/>
 </LinearLayout>

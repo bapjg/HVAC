@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.NumberPicker;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,15 +35,13 @@ public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity										= getActivity();
-    	View							thisView			= inflater.inflate(R.layout.panel_5_actions_relays, container, false);
-    	TCP_Task						task				= new TCP_Task();
-    	task.callBack										= this;
-//    	task.execute(new Ctrl_Actions_Relays().new Request());
+    	this.activity											= getActivity();
+    	View								thisView			= inflater.inflate(R.layout.panel_5_actions_relays, container, false);
+    	TCP_Task							task				= new TCP_Task();
+    	task.callBack											= this;
+    	task.execute(new Ctrl_Actions_Relays().new Request());
 
-    	
-    	
-    	thisView.findViewById(R.id.burner).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {burnerClick(v);		}});
+    	thisView.findViewById(R.id.burner).setOnClickListener(new OnClickListener() 		{@Override public void onClick(View v) {burnerClick(v);		}});
     	thisView.findViewById(R.id.hotwater).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {hotWaterClick(v);	}});
     	thisView.findViewById(R.id.floor).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {floorClick(v);		}});
     	thisView.findViewById(R.id.radiator).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {radiatorClick(v);	}});
@@ -49,7 +49,27 @@ public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment
     }
     public void burnerClick(View v)
     {
-    	System.out.println("burnerClick");
+    	Switch							mySwitch				= (Switch) v;
+    	if (mySwitch.isChecked())
+    	{
+    		Ctrl_Actions_Relays.Execute	messageSend				= new Ctrl_Actions_Relays().new Execute();
+    		messageSend.relayName								= "Burner";
+    		messageSend.relayAction								= Ctrl_Actions_Relays.RELAY_On;
+    		
+    		TCP_Task						task				= new TCP_Task();
+    	   	task.callBack										= this;
+    	   	task.execute(messageSend);
+    	}
+    	else
+    	{
+    		Ctrl_Actions_Relays.Execute	messageSend				= new Ctrl_Actions_Relays().new Execute();
+    		messageSend.relayName								= "Burner";
+    		messageSend.relayAction								= Ctrl_Actions_Relays.RELAY_Off;
+    		
+    		TCP_Task						task				= new TCP_Task();
+    	   	task.callBack										= this;
+    	   	task.execute(messageSend);
+    	}
     }
     public void hotWaterClick(View v)
     {
@@ -63,29 +83,6 @@ public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment
     {
     	System.out.println("RadiatorClick");
     }
-    public void onClick(View myView) 
-	{
-    	Button 								myButton 			= (Button) myView;
-    	String								myCaption			= myButton.getText().toString();
-    	FragmentManager 					fManager			= getFragmentManager();
-    	FragmentTransaction					fTransaction;
-    	Fragment 							panelFragment;
-    	
-    	if (myCaption.equalsIgnoreCase("Ok"))
-    	{
-    		System.out.println("Action Hot Water Click");
-
- //   		Ctrl_Actions_HotWater.Execute	message_out			= new Ctrl_Actions_HotWater().new Execute();
- 
-			NumberPicker 					np 					= (NumberPicker) getActivity().findViewById(R.id.tempObjective);
-//	   		message_out.tempObjective							= ((np.getValue() - 30) * 5 + 30) * 1000; // getValue returns an index
-			
-        	TCP_Task						task				= new TCP_Task();
-        	task.callBack										= this;
-//        	task.execute(message_out);
-    	}
-
-	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 	{
@@ -95,59 +92,20 @@ public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment
 		Activity a							= getActivity();
 		
 		System.out.println("activity = " + a);
-//		if (a == null) 
-//		{
-//			// Do nothing
-//		}
-//		else if (result instanceof Ctrl_Actions_HotWater.Data)
-//		{
-//			Ctrl_Actions_HotWater.Data msg_received 	= (Ctrl_Actions_HotWater.Data) result;
-//			
-//			if (msg_received.executionActive)
-//			{
-//				((TextView) a.findViewById(R.id.TimeStart)).setText("Current");
-//				((TextView) a.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
-//			}
-//			else if (msg_received.executionPlanned)
-//			{
-//				((TextView) a.findViewById(R.id.TimeStart)).setText(Global.displayTimeShort(msg_received.timeStart));
-//				((TextView) a.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
-//			}
-//			else
-//			{
-//				((TextView) a.findViewById(R.id.TimeStart)).setText("No Plan");
-//				((TextView) a.findViewById(R.id.TargetTemp)).setText(" ");
-//			}
-//			
-//			NumberPicker np = (NumberPicker) a.findViewById(R.id.tempObjective);
-//		    String[] temps = new String[10];
-//		    for(int i =0; i < temps.length; i++)
-//		    {
-//		    	temps[i] = Integer.toString(i*5 + 30);
-//		    }
-//
-//		    np.setMinValue(30);
-//		    np.setMaxValue(80);
-//		    np.setWrapSelectorWheel(false);
-//		    np.setDisplayedValues(temps);
-//		    np.setValue(31);									// Min value + increment 5 = 35
-//		}
-//		else if (result instanceof Ctrl_Actions_HotWater.NoConnection)
-//		{
-//			Global.toast("No Connection established yet", true);
-//		}
-//		else if (result instanceof Ctrl_Actions_HotWater.Ack)
-//		{
-//			Global.toast("Command accepted", true);
-//		}
-//		else if (result instanceof Ctrl_Abstract.Ack)
-//		{
-//			Global.toast("Command accepted", true);
-//		}
-//		else
-//		{
-//			Global.toast("A Nack has been returned", true);
-//		}		   
+		if (a == null) 
+		{
+			// Do nothing
+		}
+		else if (result instanceof Ctrl_Actions_Relays.Data)
+		{
+			Ctrl_Actions_Relays.Data msg_received 	= (Ctrl_Actions_Relays.Data) result;
+			
+
+			((Switch) a.findViewById(R.id.burner)).setChecked(msg_received.burner);
+			((Switch) a.findViewById(R.id.hotwater)).setChecked(msg_received.pumpHotWater);
+			((Switch) a.findViewById(R.id.floor)).setChecked(msg_received.pumpFloor);
+			((Switch) a.findViewById(R.id.radiator)).setChecked(msg_received.pumpRadiator);
+		}   
 	}
 }
 

@@ -195,20 +195,35 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "Relays.Execute Message received from client", true);            
 
-						// Switch on the relay
+						Ctrl_Actions_Relays.Execute		relayAction			= (Ctrl_Actions_Relays.Execute) message_in;
+						Relay							relay				= null;
 						
-						String				relayName						= ((Ctrl_Actions_Relays.Execute) message_in).relayName;
-						if (((Ctrl_Actions_Relays.Execute) message_in).switchOn)
+						if (relayAction.relayName.equalsIgnoreCase("Burner"))
 						{
-							// Switchon
+							relay											= Global.burnerPower;
 						}
-						else if (((Ctrl_Actions_Relays.Execute) message_in).switchOff)
+						else if (relayAction.relayName.equalsIgnoreCase("HotWater"))
 						{
-							// Switchoff
+							relay											= Global.pumpWater.relay;
 						}
-						else 
+						else if (relayAction.relayName.equalsIgnoreCase("Floor"))
 						{
-							// Error
+							relay											= Global.pumpFloor.relay;
+						}
+						else if (relayAction.relayName.equalsIgnoreCase("Radiator"))
+						{
+							relay											= Global.pumpRadiator.relay;
+						}
+						if (relay != null)
+						{
+							if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_On)
+							{
+								relay.on();
+							}
+							else if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_Off)
+							{
+								relay.off();
+							}
 						}
 						
 						Ctrl_Actions_Relays.Data message_ou					= new Ctrl_Actions_Relays().new Data();

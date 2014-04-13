@@ -4,6 +4,9 @@ package HVAC_Messages;
 public class Ctrl_Actions_Relays extends Ctrl_Abstract
 {
 	private static final long 			serialVersionUID 			= 1L;
+	public 	static final int			RELAY_Unchanged				= 0;
+	public 	static final int			RELAY_On 					= 1;
+	public 	static final int			RELAY_Off 					= 2;
 
 	public Ctrl_Actions_Relays()
 	{
@@ -22,8 +25,7 @@ public class Ctrl_Actions_Relays extends Ctrl_Abstract
 	public class Execute extends Ctrl_Actions_Relays
 	{
 		public String					relayName;
-		public Boolean					switchOn;
-		public Boolean					switchOff;
+		public Integer					relayAction;
 	}
 	public class Ack extends Ctrl_Actions_Relays
 	{
