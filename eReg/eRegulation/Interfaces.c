@@ -141,7 +141,7 @@ static void spi_txrx(char *buf, int tlen, int rlen)
 //----------------------------------------------------------
 static int get_reg_value8(int reg)
 {
-	// Routine from WB_Tools, not used
+	// Routine from BW_Tools, not used
 
 	char buf[5]; 
 
@@ -154,7 +154,7 @@ static int get_reg_value8(int reg)
 //----------------------------------------------------------
 static int get_reg_value16(int reg)
 {
-	// Routine from WB_Tools, not used
+	// Routine from BW_Tools, not used
 
 	char buf[5];
 
@@ -162,7 +162,7 @@ static int get_reg_value16(int reg)
 	buf[1] 						= reg;
 	spi_txrx(buf, 2, 2);
 
-	return buf[2] |(buf[3] << 8);
+	return buf[2] | (buf[3] << 8);
 }
 static void scanAndSet()
 {
@@ -206,7 +206,7 @@ static void scanAndSet()
 		}
 		// Relay has no address at all. There's no point continuing
 		// As nothing (pump/burner/valve) can be actioned
-		printf("scanAndSet found no ralays - will now abort \n");
+		printf("scanAndSet found no relays - will now abort \n");
 		pabort("Aborting by scanAndSet \n");
 	}
 }
