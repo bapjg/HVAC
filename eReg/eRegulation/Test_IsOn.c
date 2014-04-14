@@ -252,7 +252,7 @@ void Relay_Off(int Relay_Bank, int Relay_Number)
 	close(spi_fd);
 }
 //----------------------------------------------------------
-int Is_On(int Relay_Bank, int Relay_Number)
+short Is_On(int Relay_Bank, int Relay_Number)
 {
 	// Routine to interrogate whether a relay is switched on or off
 	// Relay_Bank = 0 or 1. Relay number can be from 0 to 5
@@ -298,7 +298,7 @@ void Relays_ScanAndSet(int Relay_Bank)
 
 int main(int argc, char *argv[])
 {
-	int result = 0;
+	short result = 0;
 	result = Is_On(0, 3);
 	printf("result is %d \n", result);
 
