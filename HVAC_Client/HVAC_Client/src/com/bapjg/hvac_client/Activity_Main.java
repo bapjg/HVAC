@@ -35,7 +35,6 @@ public class Activity_Main 			extends Activity
 	private 		Adapter_Thermometers 		adapter;
 	private			TabHost 					tabHost;
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -56,12 +55,6 @@ public class Activity_Main 			extends Activity
         ActionBar.Tab 			tabConfiguration 		= actionbar.newTab().setText("Configuration");
         ActionBar.Tab 			tabCalendars		 	= actionbar.newTab().setText("Calendars");
         ActionBar.Tab 			tabActions				= actionbar.newTab().setText("Actions");
-        
-        // Global contains Objects Panel_1_xxx etc.
-//      global.panelTemperatures 						= new Panel_1_Temperatures	(R.layout.panel_1_temperatures);
-//      global.panelConfiguration 						= new Panel_2_Configuration	(R.layout.panel_2_configuration);
-//      global.panelCalendars 							= new Panel_3_Calendars		(R.layout.panel_3_calendars);
-//      global.panelActions 							= new Panel_4_Action		(R.layout.panel_4_actions_hotwater);
         
         // Setup the Menu Fragments
         // Menu_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
