@@ -37,9 +37,7 @@ public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment
     {
     	this.activity											= getActivity();
     	View								thisView			= inflater.inflate(R.layout.panel_5_actions_relays, container, false);
-    	TCP_Task							task				= new TCP_Task();
-    	task.callBack											= this;
-    	task.execute(new Ctrl_Actions_Relays().new Request());
+    	TCP_Send(new Ctrl_Actions_Relays().new Request());
 
     	thisView.findViewById(R.id.burner).setOnClickListener(new OnClickListener() 		{@Override public void onClick(View v) {burnerClick(v);		}});
     	thisView.findViewById(R.id.hotwater).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {hotWaterClick(v);	}});
@@ -49,43 +47,44 @@ public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment
     }
     public void burnerClick(View v)
     {
-    	Switch							mySwitch				= (Switch) v;
-    	if (mySwitch.isChecked())
-    	{
-    		Ctrl_Actions_Relays.Execute	messageSend				= new Ctrl_Actions_Relays().new Execute();
-    		messageSend.relayName								= "Burner";
-    		messageSend.relayAction								= Ctrl_Actions_Relays.RELAY_On;
-    		
-    		TCP_Task						task				= new TCP_Task();
-    	   	task.callBack										= this;
-    	   	task.execute(messageSend);
-    	}
-    	else
-    	{
-    		Ctrl_Actions_Relays.Execute	messageSend				= new Ctrl_Actions_Relays().new Execute();
-    		messageSend.relayName								= "Burner";
-    		messageSend.relayAction								= Ctrl_Actions_Relays.RELAY_Off;
-    		
-    		TCP_Task						task				= new TCP_Task();
-    	   	task.callBack										= this;
-    	   	task.execute(messageSend);
-    	}
+    	relayClickContinue("Burner",  (Switch) v);
     }
     public void hotWaterClick(View v)
     {
-    	System.out.println("hotWaterClick");
+    	relayClickContinue("HotWater",  (Switch) v);
     }
     public void floorClick(View v)
     {
-    	System.out.println("floorClick");
+    	relayClickContinue("Floor",  (Switch) v);
     }
     public void radiatorClick(View v)
     {
-    	System.out.println("RadiatorClick");
+    	relayClickContinue("Radiator",  (Switch) v);
     }
+    public void relayClickContinue(String relayName, Switch switchView)
+    {
+   		Ctrl_Actions_Relays.Execute	messageSend					= new Ctrl_Actions_Relays().new Execute();
+		messageSend.relayName									= relayName;
+    	if (switchView.isChecked())
+    	{
+    		messageSend.relayAction								= Ctrl_Actions_Relays.RELAY_On;
+    	}
+    	else
+    	{
+    		messageSend.relayAction								= Ctrl_Actions_Relays.RELAY_Off;
+    	}
+    	TCP_Send(messageSend);
+    }
+
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 	{
+	}
+	public void TCP_Send(Ctrl_Abstract message)
+	{
+		TCP_Task						task				= new TCP_Task();
+	   	task.callBack										= this;					// processFinish
+	   	task.execute(message);
 	}
 	public void processFinish(Ctrl_Abstract result) 
 	{  
@@ -99,7 +98,6 @@ public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment
 		else if (result instanceof Ctrl_Actions_Relays.Data)
 		{
 			Ctrl_Actions_Relays.Data msg_received 	= (Ctrl_Actions_Relays.Data) result;
-			
 
 			((Switch) a.findViewById(R.id.burner)).setChecked(msg_received.burner);
 			((Switch) a.findViewById(R.id.hotwater)).setChecked(msg_received.pumpHotWater);

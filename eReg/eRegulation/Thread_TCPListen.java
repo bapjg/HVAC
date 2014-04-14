@@ -179,18 +179,47 @@ public class Thread_TCPListen <SendType> implements Runnable
 						
 			            message_out											= message_ou;
 			        } 
+			    	else if (message_in instanceof Ctrl_Parameters.Request)
+			        {
+			    		Ctrl_Parameters.Data message_ou						= new Ctrl_Parameters().new Data();
+			    		
+			    		for (Thermometer globalThermometer : Global.thermometers.thermometerList)
+			    		{
+			    			Ctrl_Parameters.Thermometer paramThermometer	= new Ctrl_Parameters().new Thermometer();
+			    			paramThermometer.name							= globalThermometer.name;
+			    			paramThermometer.address						= globalThermometer.address;
+			    			message_ou.thermometerList.add(paramThermometer);
+			    		}
+			    		for (Relay globalRelay : Global.relays.relayList)
+			    		{
+			    			Ctrl_Parameters.Relay 		paramRelay			= new Ctrl_Parameters().new Relay();
+			    			paramRelay.name									= globalRelay.name;
+			    			paramRelay.relayBank							= globalRelay.relayBank;
+			    			paramRelay.relayNumber							= globalRelay.relayNumber;
+			    			message_ou.relayList.add(paramRelay);
+			    		}
+			    		for (Pump globalPump : Global.pumps.pumpList)
+			    		{
+			    			Ctrl_Parameters.Pump 		paramPump			= new Ctrl_Parameters().new Pump();
+			    			paramPump.name									= globalPump.name;
+			    			message_ou.pumpList.add(paramPump);
+			    		}
+			    		message_out											= message_ou;
+			        }
+			    	else if (message_in instanceof Ctrl_Parameters.Update)
+			        {
+						Ctrl_Actions_Relays.Data message_ou					= new Ctrl_Actions_Relays().new Data();
+			    		
+			        }
 			    	else if (message_in instanceof Ctrl_Actions_Relays.Request)
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "Relays.Req Message received from client", true);            
 						Ctrl_Actions_Relays.Data message_ou					= new Ctrl_Actions_Relays().new Data();
 			            message_ou.burner 									= Global.burnerPower.isOn();
-
 			            message_ou.pumpHotWater	 							= Global.pumpWater.relay.isOn();
 			            message_ou.pumpFloor	 							= Global.pumpFloor.relay.isOn();
 			            message_ou.pumpRadiator	 							= Global.pumpRadiator.relay.isOn();
 		            
 			            message_out											= message_ou;
-						LogIt.info("Thread_TCPListen", "Run", "Relays.Req Answer Burn : " + message_ou.burner +  ", HW : " + message_ou.pumpHotWater, true);            
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_Relays.Execute)
 			        {
@@ -219,19 +248,16 @@ public class Thread_TCPListen <SendType> implements Runnable
 						{
 							if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_On)
 							{
-								LogIt.info("Thread_TCPListen", "Run", "Relay Action ON " + relayAction.relayName, true);            
 								relay.on();
 							}
 							else if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_Off)
 							{
-								LogIt.info("Thread_TCPListen", "Run", "Relay Action OFF " + relayAction.relayName, true);            
 								relay.off();
 							}
 						}
 						
 						Ctrl_Actions_Relays.Data message_ou					= new Ctrl_Actions_Relays().new Data();
 			            message_ou.burner 									= Global.burnerPower.isOn();
-
 			            message_ou.pumpHotWater	 							= Global.pumpWater.relay.isOn();
 			            message_ou.pumpFloor	 							= Global.pumpFloor.relay.isOn();
 			            message_ou.pumpRadiator	 							= Global.pumpRadiator.relay.isOn();
@@ -245,8 +271,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 					output.writeObject(message_out);
 			        output.flush();
 			        output.close();
-					LogIt.info("Thread_TCPListen", "Run", "Responded", true);            
-					LogIt.info("Thread_TCPListen", "Run", "=============================================", true);            
 				}
 		        catch (ClassNotFoundException eCNF)
 		        {

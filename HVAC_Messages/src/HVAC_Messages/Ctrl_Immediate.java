@@ -1,20 +1,20 @@
 package HVAC_Messages;
 
 @SuppressWarnings("serial")
-public class Ctrl_Immediate extends Ctrl_Abstract
+public class Ctrl_Immediate 			extends 					Ctrl_Abstract
 {
 	private static final long 			serialVersionUID 			= 1L;
-	public 	static final int				ACTION_Start 				= 1;
-	public 	static final int				ACTION_Stop 				= 2;
+	public 	static final int			ACTION_Start 				= 1;
+	public 	static final int			ACTION_Stop 				= 2;
 
 	public Ctrl_Immediate()
 	{
 	}	
-	public class Request extends Ctrl_Immediate
+	public class Request 				extends 					Ctrl_Immediate
 	{
 		public String 					circuitName;
 	}
-	public class Data extends Ctrl_Immediate
+	public class Data 					extends 					Ctrl_Immediate
 	{
 		private static final long 		serialVersionUID 			= 1L;
 		public String 					circuitName;
@@ -25,7 +25,7 @@ public class Ctrl_Immediate extends Ctrl_Abstract
 		public Long 					timeEnd;
 		public Boolean 					stopOnObjective;
 	}
-	public class Execute extends Ctrl_Immediate
+	public class Execute 				extends 					Ctrl_Immediate
 	{
 		public String 					circuitName;
 		public Integer					action;
@@ -36,7 +36,7 @@ public class Ctrl_Immediate extends Ctrl_Abstract
 		public Long 					timeEnd;
 		public Boolean 					stopOnObjective;
 	}
-	public class Ack extends Ctrl_Immediate
+	public class Ack 					extends 					Ctrl_Immediate
 	{
 		private static final long 		serialVersionUID 			= 1L;
 	}

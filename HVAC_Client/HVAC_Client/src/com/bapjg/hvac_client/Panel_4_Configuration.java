@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import com.bapjg.hvac_client.Mgmt_Msg_Configuration;
 import com.bapjg.hvac_client.Mgmt_Msg_Configuration.Thermometer;
 
+import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl_Actions_Relays;
+import HVAC_Messages.Ctrl_Parameters;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -23,11 +26,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.EditText;
 
-
+@SuppressLint("ValidFragment")
 public class Panel_4_Configuration 				extends 	Panel_0_Fragment 
+												implements 	TCP_Response
 {
 	private Adapter_Thermometers 		adapter;
 	private LayoutInflater				myInflater;
@@ -54,6 +59,8 @@ public class Panel_4_Configuration 				extends 	Panel_0_Fragment
         myFragmentManager 												= myActivity.getFragmentManager();
 //        View 							myView 							= myInflater.inflate(R.layout.panel_2_configuration, myContainer, false);
         View 							myView 							= myInflater.inflate(R.layout.panel_0_subcontainer, myContainer, false);
+
+        TCP_Send(new Ctrl_Parameters().new Request());
         return myView;
     }
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
@@ -119,4 +126,32 @@ public class Panel_4_Configuration 				extends 	Panel_0_Fragment
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	
     }
+	public void TCP_Send(Ctrl_Abstract message)
+	{
+		TCP_Task						task				= new TCP_Task();
+	   	task.callBack										= this;					// processFinish
+	   	task.execute(message);
+	}
+	public void processFinish(Ctrl_Abstract result) 
+	{  
+		Activity a							= getActivity();
+		
+		System.out.println("activity = " + a);
+		if (a == null) 
+		{
+			// Do nothing
+		}
+		else if (result instanceof Ctrl_Parameters.Data)
+		{
+			Ctrl_Parameters.Data msg_received 				= (Ctrl_Parameters.Data) result;
+
+			Global.toaster("Data received", true);
+		}
+		else
+		{
+			Global.toaster("Data NOTNOTNOT received", true);
+		}
+			
+	}
+
 }
