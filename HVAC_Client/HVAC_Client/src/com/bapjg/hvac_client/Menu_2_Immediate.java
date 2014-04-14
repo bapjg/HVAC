@@ -13,7 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-public class Menu_2_Immediate extends Menu_0_Fragment implements View.OnClickListener
+public class Menu_2_Immediate 				extends 					Menu_0_Fragment 
+											implements 					View.OnClickListener
 {
 	public Menu_2_Immediate(int menuLayout)
 	{
