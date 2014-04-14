@@ -14,6 +14,8 @@
 
 #define ARRAY_SIZE(a)(sizeof(a) / sizeof((a)[0]))
 
+static int three = 3;
+
 static uint8_t 	spi_mode;
 static uint8_t 	bits 		= 8;
 static uint32_t speed 		= 50000;							//Was 100000
