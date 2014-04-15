@@ -102,8 +102,9 @@ public final class R {
         public static final int panel_52_actions=0x7f030010;
         public static final int panel_53_actions=0x7f030011;
         public static final int panel_5_actions_relays=0x7f030012;
-        public static final int row_thermometer=0x7f030013;
-        public static final int zzz_panel_2_immediate_old=0x7f030014;
+        public static final int panel_5_actions_test_mail=0x7f030013;
+        public static final int row_thermometer=0x7f030014;
+        public static final int zzz_panel_2_immediate_old=0x7f030015;
     }
     public static final class menu {
         public static final int main=0x7f080000;

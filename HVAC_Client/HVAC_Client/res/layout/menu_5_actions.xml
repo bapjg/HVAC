@@ -12,10 +12,11 @@
             style						= "@style/AD_MenuButton"
             android:text				= "Relays" 
         />
+
         <Button
-            style						= "@style/AD_MenuButton"
-            android:text				= "xxx" 
-        />
+            style="@style/AD_MenuButton"
+            android:text="Test Mail" />
+
         <Button
             style						= "@style/AD_MenuButton"
             android:text				= "yyy"
