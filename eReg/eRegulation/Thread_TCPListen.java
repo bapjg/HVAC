@@ -298,7 +298,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 		        catch (ClassNotFoundException eCNF)
 		        {
 					LogIt.info("Thread_TCPListen", "Run", "Caught CNF", true);            
-		        	eCNF.printStackTrace();
 		            // message_out 							= new Message_Abstract().new Nack();
 		        }
 				catch (EOFException eEOF)
@@ -313,12 +312,10 @@ public class Thread_TCPListen <SendType> implements Runnable
 				catch (IOException eIO)
 				{
 					LogIt.info("Thread_TCPListen", "Run", "Caught IO", true);            
-					eIO.printStackTrace();
 				}
 				catch (Exception e)
 				{
 					LogIt.info("Thread_TCPListen", "Run", "Caught other", true);            
-					e.printStackTrace();
 				}
 			}
 		}
