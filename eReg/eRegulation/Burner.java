@@ -44,6 +44,7 @@ public class Burner
 			else if (checkFault())
 			{
 				LogIt.error("Burner", "powerOn", "checkFault has revealed a problem");
+				Global.eMailMessage("Burner fault", "'checkfault()' has detected a fault");
 			// When burner starts fuel flow is detected
 				// a message has already been displayed
 				// Don't know what to do here
@@ -53,7 +54,8 @@ public class Burner
 				Global.waitSeconds(1);
 			}
 		}
-		System.out.println("Burner/powerOn no fuel flow detected : burner has tripped");
+		LogIt.error("Burner", "powerOn", "no fuel flow detected : burner has tripped");
+		Global.eMailMessage("Burner fault", "Burner/powerOn : no fuel flow detected, burner has tripped");
 	}
 	public void powerOff()
 	{
@@ -75,7 +77,7 @@ public class Burner
 			}
 		}
 		LogIt.error("Burner", "powerOff", "fuel flow still detected after 300 ms: burner has tripped");
-		System.out.println("Burner/powerOff and fuel flow still detected after 300 ms: burner has tripped");
+		Global.eMailMessage("Burner fault", "Burner/powerOff : fuel flow still detected after 300 ms: burner has tripped");
 	}
 	public void sequencer()
 	{
@@ -85,7 +87,8 @@ public class Burner
 		{
 			LogIt.error("Burner", "sequencer", "checkFault has detected a problem");
 			powerOff();
-			System.out.println("A Burner Fault has been detected by the burner Sequencer");
+			Global.eMailMessage("Burner fault", "Burner/sequencer : 'checkFault()' has detected a problem");
+
 		}
 
 		// Must also check max temp;
@@ -95,6 +98,7 @@ public class Burner
 		if (Global.burnerVoltages.isFault())
 		{
 			LogIt.error("Burner", "checkFault", "Over 4 volts indicates trip");
+			Global.eMailMessage("Burner fault", "Burner/checkFault : Over 4 volts indicates trip");
 			return true;
 		}
 		else

@@ -363,10 +363,9 @@ public class Global extends DefaultHandler
 
             message.setFrom(new InternetAddress("HVAC@bapjg.com"));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress("andre@bapjg.com"));
-            message.setSubject(subject);
+            message.setSubject("HVAC System : " + subject);
             message.setText(messageText);
             Transport.send(message);
-            System.out.println("Sent message successfully....");
         }
         catch (MessagingException mex) 
         {
