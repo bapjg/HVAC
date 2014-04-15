@@ -292,7 +292,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        
 			        if (Global.stopNow)
 			        {
-			        	Global.waitSeconds(3);								// If Ctrl_Actions_Stop received, allow Ack to go
+			        	Global.waitSeconds(2);								// If Ctrl_Actions_Stop received, allow Ack to go
 			        }
 				}
 		        catch (ClassNotFoundException eCNF)

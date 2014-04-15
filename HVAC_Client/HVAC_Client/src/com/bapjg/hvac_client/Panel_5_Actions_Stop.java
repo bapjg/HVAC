@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
-public class Panel_5_Actions_Stop 		extends 	Panel_0_Fragment  
+public class Panel_5_Actions_Stop 			extends 	Panel_0_Fragment  
 											implements 	TCP_Response
 {
 	public Panel_5_Actions_Stop()
@@ -65,7 +65,7 @@ public class Panel_5_Actions_Stop 		extends 	Panel_0_Fragment
 		{
 			// Do nothing
 		}
-		else if (result instanceof Ctrl_Actions_Test_Mail.Ack)
+		else if (result instanceof Ctrl_Actions_Stop.Ack)
 		{
 			Global.toaster("Stop Request accepted", true);
 		}   
