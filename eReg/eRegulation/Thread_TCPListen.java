@@ -268,7 +268,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "Mail.Execute Message received from client", true);            
 
-						Global.eMailMessage("Test Mail", "This is a test mail");
+						Global.eMailMessage("HVAC System : Test", "This is a test mail");
 						Ctrl_Actions_Test_Mail.Ack message_ou				= new Ctrl_Actions_Test_Mail().new Ack();
 		            
 			            message_out											= message_ou;

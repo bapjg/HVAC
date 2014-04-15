@@ -37,11 +37,16 @@ public class Panel_5_Actions_Test_Mail 		extends 	Panel_0_Fragment
     {
     	this.activity											= getActivity();
     	View								thisView			= inflater.inflate(R.layout.panel_5_actions_test_mail, container, false);
-    	TCP_Send(new Ctrl_Actions_Test_Mail().new Execute());
-
+ 
+    	thisView.findViewById(R.id.buttonSendMail).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {sendMail(v);	}});
+   	
         return thisView;
     }
-	@Override
+    public void sendMail(View v)
+    {
+    	TCP_Send(new Ctrl_Actions_Test_Mail().new Execute());
+    }
+    @Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 	{
 	}
@@ -62,7 +67,7 @@ public class Panel_5_Actions_Test_Mail 		extends 	Panel_0_Fragment
 		}
 		else if (result instanceof Ctrl_Actions_Test_Mail.Ack)
 		{
-			Global.toaster("email send", true);
+			Global.toaster("eMail sent", true);
 		}   
 	}
 }
