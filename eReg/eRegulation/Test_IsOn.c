@@ -96,8 +96,7 @@ static void spi_txrx(char *buf, int tlen, int rlen)
 		.bits_per_word 			= bits,
 	};
 
-	if (rlen > tlen) tr.len 	= rlen;
-	else			 tr.len 	= tlen;
+	tr.len 	= rlen + tlen;
 	 
 	tr.tx_buf 					=(unsigned long) buf;
 	tr.rx_buf 					=(unsigned long) buf;
