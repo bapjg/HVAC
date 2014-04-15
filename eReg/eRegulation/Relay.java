@@ -40,7 +40,7 @@ public class Relay
 	public Boolean isOn()
 	{
 //		return	relayOn;
-		
+String x = "5";		
 //		The Interfaces.c code does not work : There is a fault somewhere
 //		 Code comparison with bw_tool : cannot find the difference
 		Global.interfaceSemaphore.semaphoreLock("Relay.isOn");
