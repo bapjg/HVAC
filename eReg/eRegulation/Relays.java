@@ -31,10 +31,10 @@ public class Relays
 	{
 		Global.interfaceSemaphore.semaphoreLock("Relays.offAll");
 		OffAll(0);		// Bank 0 : Burner
-		for (Relay relay : relayList) 
-		{
-			relay.relayOn				= false;
-		}
+//		for (Relay relay : relayList) 
+//		{
+//			relay.relayOn				= false;
+//		}
 		
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
