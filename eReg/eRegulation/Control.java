@@ -51,6 +51,9 @@ public class Control
 		
 		Global.stopNow								= false;
 		LogIt.info("Control", "main", "Starting/BootSequence");
+		
+		Global.eMailMessage("Subject","Text");
+		LogIt.info("Control", "main", "email sent");
 
 		//
 		//============================================================

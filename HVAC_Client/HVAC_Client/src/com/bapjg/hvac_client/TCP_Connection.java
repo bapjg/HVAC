@@ -80,11 +80,6 @@ public class TCP_Connection
 		try { piSocket.close(); }
 		catch(Exception e) {}
 	}
-//	public Ctrl_Abstract ping()
-//	{
-//		Ctrl_Abstract.Ping 		piPingSend 				= new Ctrl_Abstract().new Ping();
-//		return piTransaction((Ctrl_Abstract) piPingSend);
-//	}
 	public Ctrl_Abstract piTransaction(Ctrl_Abstract messageSend)
 	{
 		if(connect())

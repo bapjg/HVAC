@@ -10,8 +10,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.*;
 import java.util.Calendar;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
+
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 public class Global extends DefaultHandler
 {
@@ -341,5 +346,31 @@ public class Global extends DefaultHandler
 			System.out.println(LogIt.dateTimeStamp() + " TryLock timed out ");
 			return;
 		}
+	}
+	public static void eMailMessage(String subject, String messageText)
+	{
+//      Properties properties 			= System.getProperties();
+		Properties props 				= new Properties();
+		props.setProperty("mail.user", 			"administrateur");
+    	props.setProperty("mail.password", 		"llenkcarb");
+    	props.setProperty("mail.smtp.host", 	"192.168.5.10");
+
+        Session session 				= Session.getDefaultInstance(props);
+
+        try
+        {
+            MimeMessage message 		= new MimeMessage(session);
+
+            message.setFrom(new InternetAddress("HVAC@bapjg.com"));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress("andre@bapjg.com"));
+            message.setSubject(subject);
+            message.setText(messageText);
+            Transport.send(message);
+            System.out.println("Sent message successfully....");
+        }
+        catch (MessagingException mex) 
+        {
+            mex.printStackTrace();
+        }
 	}
 }

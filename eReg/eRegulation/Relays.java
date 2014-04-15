@@ -30,12 +30,7 @@ public class Relays
 	public void offAll()
 	{
 		Global.interfaceSemaphore.semaphoreLock("Relays.offAll");
-		OffAll(0);		// Bank 0 : Burner
-//		for (Relay relay : relayList) 
-//		{
-//			relay.relayOn				= false;
-//		}
-		
+		OffAll(0);		// Bank 0 : Burner, pumps, mixer
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
 	public void scanAndSet()

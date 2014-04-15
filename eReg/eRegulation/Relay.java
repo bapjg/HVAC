@@ -39,13 +39,8 @@ public class Relay
 	}
 	public Boolean isOn()
 	{
-//		return	relayOn;
-
-//		The Interfaces.c code does not work : There is a fault somewhere
-//		 Code comparison with bw_tool : cannot find the difference
 		Global.interfaceSemaphore.semaphoreLock("Relay.isOn");
 		Boolean result			= IsOn(relayBank, relayNumber);
-		System.out.println("++++Relay " + name + ", number " + relayNumber + " is " + result);
 		Global.interfaceSemaphore.semaphoreUnLock();
 		return result;
 	}
