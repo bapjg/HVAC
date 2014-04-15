@@ -289,6 +289,11 @@ public class Thread_TCPListen <SendType> implements Runnable
 					output.writeObject(message_out);
 			        output.flush();
 			        output.close();
+			        
+			        if (Global.stopNow)
+			        {
+			        	Global.waitSeconds(3);								// If Ctrl_Actions_Stop received, allow Ack to go
+			        }
 				}
 		        catch (ClassNotFoundException eCNF)
 		        {
