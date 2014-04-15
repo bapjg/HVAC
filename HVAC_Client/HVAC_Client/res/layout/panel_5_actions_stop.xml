@@ -8,12 +8,12 @@
     android:orientation="vertical" >
 
 		<Button
-		    android:id="@+id/buttonSendMail"
+		    android:id="@+id/buttonStop"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_centerHorizontal="true"
 		    android:layout_centerVertical="true"
-		    android:text="Send Mail"
+		    android:text="Stop HVAC System"
 		    android:textColor="#FFFFFF" />
 		
 </RelativeLayout>

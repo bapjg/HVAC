@@ -273,6 +273,15 @@ public class Thread_TCPListen <SendType> implements Runnable
 		            
 			            message_out											= message_ou;
 			        } 
+			    	else if (message_in instanceof Ctrl_Actions_Stop.Execute)
+			        {
+						LogIt.info("Thread_TCPListen", "Run", "Stop.Execute Message received from client", true);            
+
+						Global.stopNow										= true;
+						Ctrl_Actions_Stop.Ack message_ou					= new Ctrl_Actions_Stop().new Ack();
+		            
+			            message_out											= message_ou;
+			        } 
 
 			        ObjectOutputStream 		output							= null;
 					

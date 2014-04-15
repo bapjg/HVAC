@@ -19,7 +19,7 @@
 
         <Button
             style						= "@style/AD_MenuButton"
-            android:text				= "yyy"
+            android:text				= "Stop"
         />
 		<Button
             style						= "@style/AD_MenuButton"

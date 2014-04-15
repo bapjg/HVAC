@@ -45,10 +45,13 @@ public class Menu_5_Actions extends Menu_0_Fragment implements View.OnClickListe
     		fTransaction.replace(R.id.panel_container, panelFragment);
     		fTransaction.commit();
     	}
-    	else if (myCaption.equalsIgnoreCase("Action3"))
+    	else if (myCaption.equalsIgnoreCase("Stop"))
     	{
-    		System.out.println("Action3 Click");
-    		System.out.println("Action3 processed");
+    		panelFragment 												= new Panel_5_Actions_Stop(R.layout.panel_5_actions_stop);
+
+			fTransaction												= fManager.beginTransaction();
+    		fTransaction.replace(R.id.panel_container, panelFragment);
+    		fTransaction.commit();
     	}
     	else if (myCaption.equalsIgnoreCase("Action4"))
     	{
