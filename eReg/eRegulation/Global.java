@@ -10,7 +10,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.*;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -372,5 +374,28 @@ public class Global extends DefaultHandler
         {
             mex.printStackTrace();
         }
+	}
+	public static void waitThreadTermination()
+	{
+		Boolean threadsAlive										= true;
+		
+		while (threadsAlive)
+		{
+			Set <Thread> threadSet = Thread.getAllStackTraces().keySet();
+			
+			Iterator<Thread> i = threadSet.iterator();
+			while(i.hasNext()) 
+			{
+				Thread j 											= i.next();
+				String threadName 									= j.getName();
+				if (threadName.substring(0,7).equals("Thread_"))
+				{
+						Global.waitSeconds(1);
+						break;
+				}
+			}
+			threadsAlive											= false;
+		}
+		
 	}
 }

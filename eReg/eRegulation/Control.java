@@ -238,11 +238,9 @@ public class Control
 		//
 		//=============================================================
 
- 		LogIt.info("Thread_Main", "main", "Stopping", true); 
- 		
 		boiler.requestIdle();
 		Global.relays.offAll();
-		Global.waitSeconds(11);							// Ensure that this is the last thread to stop
+		Global.waitThreadTermination();							// Ensure that this is the last thread to stop
 		switch (Global.exitStatus)
 		{
 		case 0:											// Stop App
