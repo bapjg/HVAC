@@ -25,7 +25,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 
 		try
 		{
-			LogIt.info("Thread_TCPListen", "Run", "Creating Objects", true);            
 			UI_Server														= new ServerSocket(8889);
 			UI_Server.setSoTimeout(10 * 1000);
 		
