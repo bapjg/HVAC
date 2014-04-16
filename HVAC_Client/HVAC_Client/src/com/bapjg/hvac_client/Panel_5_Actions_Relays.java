@@ -25,6 +25,8 @@ import android.widget.Toast;
 public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment  
 											implements 	TCP_Response
 {
+	public int								panelLayout;
+	
 	public Panel_5_Actions_Relays()
 	{
 		super();
@@ -32,11 +34,13 @@ public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment
     public Panel_5_Actions_Relays(int menuLayout)
     {
 		super(menuLayout);
+		this.panelLayout										= menuLayout;
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity											= getActivity();
-    	View								thisView			= inflater.inflate(R.layout.panel_5_actions_relays, container, false);
+//    	View								thisView			= inflater.inflate(R.layout.panel_5_actions_relays, container, false);
+    	View								thisView			= inflater.inflate(panelLayout, container, false);
     	TCP_Send(new Ctrl_Actions_Relays().new Request());
 
     	thisView.findViewById(R.id.burner).setOnClickListener(new OnClickListener() 		{@Override public void onClick(View v) {burnerClick(v);		}});

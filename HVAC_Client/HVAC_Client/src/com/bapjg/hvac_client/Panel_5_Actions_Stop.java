@@ -39,12 +39,28 @@ public class Panel_5_Actions_Stop 			extends 	Panel_0_Fragment
     	View								thisView			= inflater.inflate(R.layout.panel_5_actions_stop, container, false);
  
     	thisView.findViewById(R.id.buttonStop).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {stopHVAC(v);	}});
+    	thisView.findViewById(R.id.buttonRestart).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {restartHVAC(v);	}});
+    	thisView.findViewById(R.id.buttonReboot).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {rebootHVAC(v);	}});
    	
         return thisView;
     }
     public void stopHVAC(View v)
     {
-    	TCP_Send(new Ctrl_Actions_Stop().new Execute());
+    	Ctrl_Actions_Stop.Execute 			stopMessage			= new Ctrl_Actions_Stop().new Execute();
+    	stopMessage.exitStatus									= Ctrl_Actions_Stop.EXIT_Stop;
+    	TCP_Send(stopMessage);
+    }
+    public void restartHVAC(View v)
+    {
+       	Ctrl_Actions_Stop.Execute 			stopMessage			= new Ctrl_Actions_Stop().new Execute();
+    	stopMessage.exitStatus									= Ctrl_Actions_Stop.EXIT_Restart;
+    	TCP_Send(stopMessage);
+    }
+    public void rebootHVAC(View v)
+    {
+       	Ctrl_Actions_Stop.Execute 			stopMessage			= new Ctrl_Actions_Stop().new Execute();
+    	stopMessage.exitStatus									= Ctrl_Actions_Stop.EXIT_Reboot;
+    	TCP_Send(stopMessage);
     }
     @Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 

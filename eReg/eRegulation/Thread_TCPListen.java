@@ -35,13 +35,10 @@ public class Thread_TCPListen <SendType> implements Runnable
 				{
 					UI_Socket												= UI_Server.accept();
 					
-					LogIt.info("Thread_TCPListen", "Run", "Socket accepted, port " + UI_Socket.getPort() + ", AD " + UI_Socket.getRemoteSocketAddress(), true);            
-			        
 			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
 			        // This previous line results in an EOFException
 			        
 			        message_in 												= (Ctrl_Abstract) input.readObject();
-					LogIt.info("Thread_TCPListen", "Run", "message_in read", true);            
 			        
 			    	if (message_in == null)
 			        {
@@ -50,7 +47,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Temperatures.Request)
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "Temp.Req Message received from client", true);            
 			            Ctrl_Temperatures.Data message_ou					= new Ctrl_Temperatures().new Data();
 			            message_ou.dateTime 								= System.currentTimeMillis();
 
@@ -72,8 +68,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Immediate.Request)
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "Immediate.Req Message received from client", true);            
-
 						Ctrl_Immediate.Request	message_rcvd				= (Ctrl_Immediate.Request ) message_in;
 						Ctrl_Immediate.Data 	message_ou					= new Ctrl_Immediate().new Data();
 						
@@ -81,8 +75,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 						
 						Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
 						
-						LogIt.info("Thread_TCPListen", "Run", "             and it's from " + circuitName, true);            
-				
 						message_ou.circuitName								= circuitName;
 
 						Long 					now							= Global.getTimeNowSinceMidnight();
@@ -138,7 +130,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Immediate.Execute)		//New New New
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "Immediate.Execute Message received from client", true);            
 						Long	now											= Global.getTimeNowSinceMidnight();
 						
 						Ctrl_Immediate.Execute	message_rcvd				= (Ctrl_Immediate.Execute) message_in;
@@ -223,8 +214,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_Relays.Execute)
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "Relays.Execute Message received from client", true);            
-
 						Ctrl_Actions_Relays.Execute		relayAction			= (Ctrl_Actions_Relays.Execute) message_in;
 						Relay							relay				= null;
 						
@@ -266,8 +255,6 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_Test_Mail.Execute)
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "Mail.Execute Message received from client", true);            
-
 						Global.eMailMessage("Test", "This is a test mail");
 						Ctrl_Actions_Test_Mail.Ack message_ou				= new Ctrl_Actions_Test_Mail().new Ack();
 		            
@@ -275,9 +262,8 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_Stop.Execute)
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "Stop.Execute Message received from client", true);            
-
 						Global.stopNow										= true;
+						Global.exitStatus									= ((Ctrl_Actions_Stop.Execute) message_in).exitStatus;
 						Ctrl_Actions_Stop.Ack message_ou					= new Ctrl_Actions_Stop().new Ack();
 		            
 			            message_out											= message_ou;

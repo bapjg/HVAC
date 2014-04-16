@@ -238,6 +238,21 @@ public class Control
 		//
 		//=============================================================
 
+		switch (Global.exitStatus)
+		{
+		case 0:											// Stop App
+ 			LogIt.info("Thread_Main", "main", "Stopping", true);
+ 			System.exit(0);
+ 			break;
+		case 1:											// Restart App
+	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true); 
+ 			System.exit(1);
+ 			break;		
+ 		case 2:											// Reboot Pi
+	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true); 
+ 			System.exit(2);
+ 			break;
+ 		}
  		LogIt.info("Thread_Main", "main", "Stopping", true); 
  		
 		boiler.requestIdle();
