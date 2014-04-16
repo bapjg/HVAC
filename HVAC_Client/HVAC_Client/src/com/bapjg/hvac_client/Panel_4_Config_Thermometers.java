@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -59,8 +60,8 @@ public class Panel_4_Config_Thermometers 				extends 	Panel_0_Fragment
         myContainer 													= container;
         myActivity														= getActivity();
         myFragmentManager 												= myActivity.getFragmentManager();
-//        View 							myView 							= myInflater.inflate(R.layout.panel_4_configuration, myContainer, false);
-        View 							myView 							= myInflater.inflate(menuLayout, myContainer, false);
+        View 							myView 							= myInflater.inflate(R.layout.panel_4_config_thermometers, container, false);
+//        View 							myView 							= myInflater.inflate(menuLayout, myContainer, false);
 
         if (Global.eRegConfiguration == null)
         {
@@ -68,12 +69,12 @@ public class Panel_4_Config_Thermometers 				extends 	Panel_0_Fragment
         }
         else
         {
-            AdapterView <Adapter_Thermometers> 	view						= (AdapterView) myActivity.findViewById(R.id.List_View);
+            AdapterView <Adapter_Thermometers> 	view						= (AdapterView) myView.findViewById(R.id.List_View);
             
             Adapter_Thermometers 				adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
             
             view.setAdapter(adapter);
-            view.setOnItemClickListener((OnItemClickListener) this);	
+//            view.setOnItemClickListener((OnItemClickListener) this);	
          }
  
         return myView;

@@ -10,7 +10,7 @@ import android.widget.Button;
 import HVAC_Messages.*;
 
 
-public class Detail_Thermometer extends Fragment implements View.OnClickListener
+public class Detail_Thermometer_NotUsed_xxxxxxxxxxxxx extends Fragment implements View.OnClickListener
 {
 	public Ctrl_Parameters.Thermometer me;
 	
@@ -23,8 +23,6 @@ public class Detail_Thermometer extends Fragment implements View.OnClickListener
 //		((EditText) myView.findViewById(R.id.friendlyName)).setText(me.friendlyName);
 		((EditText) myView.findViewById(R.id.address)).setText(me.address);
 
-		((Button)   myView.findViewById(R.id.Ok)).setOnClickListener(this);
-		((Button)   myView.findViewById(R.id.Cancel)).setOnClickListener(this);
         return myView;
     }
 

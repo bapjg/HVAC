@@ -52,8 +52,8 @@ public class Activity_Main 			extends Activity
         
         ActionBar.Tab 			tabTemperatures 		= actionbar.newTab().setText("Temperatures");
         ActionBar.Tab 			tabImmediate	 		= actionbar.newTab().setText("Immediate");
-        ActionBar.Tab 			tabConfiguration 		= actionbar.newTab().setText("Configuration");
         ActionBar.Tab 			tabCalendars		 	= actionbar.newTab().setText("Calendars");
+        ActionBar.Tab 			tabConfiguration 		= actionbar.newTab().setText("Configuration");
         ActionBar.Tab 			tabActions				= actionbar.newTab().setText("Actions");
         
         // Setup the Menu Fragments
@@ -76,8 +76,8 @@ public class Activity_Main 			extends Activity
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabImmediate);
-        actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabCalendars);
+        actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
 
         //HTTP_Req_Ping		httpRequest					= new HTTP_Req_Ping();

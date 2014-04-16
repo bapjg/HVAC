@@ -14,14 +14,12 @@ public class Adapter_Thermometers extends ArrayAdapter
 {
     private ArrayList						listData;
     private LayoutInflater 					myInflater;
-    private Context 						myContext;
  
     public Adapter_Thermometers(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
         
         this.listData 					= listData;
-        this.myContext 					= context;
         this.myInflater					= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         System.out.println("Adapter constructer called");
     }
@@ -50,7 +48,6 @@ public class Adapter_Thermometers extends ArrayAdapter
         	convertView 				= myInflater.inflate(R.layout.row_thermometer, null);
             holder 						= new ViewHolder();
             holder.name 				= (TextView) convertView.findViewById(R.id.name);
-//            holder.friendlyName 		= (TextView) convertView.findViewById(R.id.friendlyName);
             holder.address 				= (TextView) convertView.findViewById(R.id.address);
             convertView.setTag(holder);
         } 
@@ -64,9 +61,7 @@ public class Adapter_Thermometers extends ArrayAdapter
            	holder.name.setText("Name");
             holder.name.setTextColor(Color.YELLOW);
             holder.name.setTypeface(null, Typeface.BOLD);
-            holder.friendlyName.setText("Friendly Name");
-            holder.friendlyName.setTextColor(Color.YELLOW);
-            holder.friendlyName.setTypeface(null, Typeface.BOLD);
+            
             holder.address.setText("Thermo ID");
             holder.address.setTextColor(Color.YELLOW);
             holder.address.setTypeface(null, Typeface.BOLD);
@@ -74,7 +69,6 @@ public class Adapter_Thermometers extends ArrayAdapter
         else
         {
 	        holder.name.setText(((Ctrl_Parameters.Thermometer) listData.get(position - 1)).name);
-//	        holder.friendlyName.setText(((Mgmt_Msg_Configuration.Thermometer) listData.get(position - 1)).friendlyName);
 	        holder.address.setText(((Ctrl_Parameters.Thermometer) listData.get(position - 1)).address);
         }
         return convertView;
@@ -82,7 +76,6 @@ public class Adapter_Thermometers extends ArrayAdapter
     static class ViewHolder 
     {
     	TextView 						name;
-    	TextView 						friendlyName;
     	TextView 						address;
     }
 //    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
