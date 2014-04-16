@@ -238,6 +238,10 @@ public class Control
 		//
 		//=============================================================
 
+ 		LogIt.info("Thread_Main", "main", "Stopping", true); 
+ 		
+		boiler.requestIdle();
+		Global.relays.offAll();
 		Global.waitSeconds(11);							// Ensure that this is the last thread to stop
 		switch (Global.exitStatus)
 		{
@@ -254,9 +258,5 @@ public class Control
  			System.exit(2);
  			break;
  		}
- 		LogIt.info("Thread_Main", "main", "Stopping", true); 
- 		
-		boiler.requestIdle();
-		Global.relays.offAll();
 	}
  }
