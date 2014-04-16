@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
+import HVAC_Messages.Ctrl_Actions_Stop;
+
 public class Control
 {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException
@@ -241,19 +243,24 @@ public class Control
 		boiler.requestIdle();
 		Global.relays.offAll();
 		Global.waitThreadTermination();							// Ensure that this is the last thread to stop
+		
+		System.out.println("exitStatus is : " + Global.exitStatus);
+		
+		
+		
 		switch (Global.exitStatus)
 		{
-		case 0:											// Stop App
+		case Ctrl_Actions_Stop.EXIT_Stop:											// Value 0 : Stop App
  			LogIt.info("Thread_Main", "main", "Stopping", true);
- 			System.exit(0);
+ 			System.exit(Ctrl_Actions_Stop.EXIT_Stop);
  			break;
-		case 1:											// Restart App
+		case Ctrl_Actions_Stop.EXIT_Restart:											// Value 1 : Restart App
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true); 
- 			System.exit(1);
+ 			System.exit(Ctrl_Actions_Stop.EXIT_Restart);
  			break;		
- 		case 2:											// Reboot Pi
+ 		case Ctrl_Actions_Stop.EXIT_Reboot:											// Value 2 : Reboot Pi
 	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true); 
- 			System.exit(2);
+ 			System.exit(Ctrl_Actions_Stop.EXIT_Reboot);
  			break;
  		}
 	}
