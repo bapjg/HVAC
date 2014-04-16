@@ -10,6 +10,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
+import HVAC_Messages.*;
+
 public class Global 
 {
 	public static 	Context 					appContext;
@@ -33,6 +35,8 @@ public class Global
 	public static	Menu_3_Calendars			menuCalendars;
 	public static	Menu_4_Config 				menuConfiguration;
 	public static	Menu_5_Actions				menuActions;
+	
+	public static	Ctrl_Parameters.Data		eRegConfiguration;
 
 	public static	Boolean						initialisationCompleted;
 

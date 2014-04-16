@@ -134,16 +134,13 @@ public class Panel_4_Configuration 				extends 	Panel_0_Fragment
 	}
 	public void processFinish(Ctrl_Abstract result) 
 	{  
-		Activity a							= getActivity();
-		
-		System.out.println("activity = " + a);
-		if (a == null) 
+//		if (a == null) 
+//		{
+//			// Do nothing
+//		}
+		if (result instanceof Ctrl_Parameters.Data)
 		{
-			// Do nothing
-		}
-		else if (result instanceof Ctrl_Parameters.Data)
-		{
-			Ctrl_Parameters.Data msg_received 				= (Ctrl_Parameters.Data) result;
+			Global.eRegConfiguration			 			= (Ctrl_Parameters.Data) result;
 
 			Global.toaster("Data received", true);
 		}

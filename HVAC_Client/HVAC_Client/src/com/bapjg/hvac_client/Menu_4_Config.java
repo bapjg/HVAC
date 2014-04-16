@@ -38,11 +38,5 @@ public class Menu_4_Config 							extends 			Menu_0_Fragment
     		fTransaction.replace(R.id.panel_container, panelFragment);
     		fTransaction.commit();
     	}
-    	
-    	
-//    	if (myCaption.equalsIgnoreCase("Thermometers"))
-//    	{
-//    		Global.panelConfiguration.menuButtonThermometersClick(myView);	
-//    	}
 	}
 }

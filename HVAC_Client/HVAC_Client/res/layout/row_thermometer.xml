@@ -8,12 +8,9 @@
     android:padding			="5dip" >
     <TextView
         android:id			="@+id/name"
-        style				= "@style/AD_Text" />
-    <TextView
-        android:id			="@+id/friendlyName"
-        style				= "@style/AD_Text"
-    	android:layout_width="300dp"  />
+        style				="@style/AD_Text" />
+
     <TextView
         android:id			="@+id/thermoID"
-        style				= "@style/AD_Text" />
+        style				="@style/AD_Text" />
 </LinearLayout>
