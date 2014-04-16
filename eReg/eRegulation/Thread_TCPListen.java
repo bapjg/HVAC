@@ -213,12 +213,15 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_Relays.Execute)
 			        {
-						Ctrl_Actions_Relays.Execute		relayAction			= (Ctrl_Actions_Relays.Execute) message_in;
+						// Action relays except for burner relay where prefer to use burner object
+			    		// to have fuel flow measured and fuel supply controlled
+			    		Ctrl_Actions_Relays.Execute		relayAction			= (Ctrl_Actions_Relays.Execute) message_in;
 						Relay							relay				= null;
+						Burner							burner				= null;
 						
 						if (relayAction.relayName.equalsIgnoreCase("Burner"))
 						{
-							relay											= Global.burnerPower;
+							burner											= Global.boiler.burner;
 						}
 						else if (relayAction.relayName.equalsIgnoreCase("HotWater"))
 						{
@@ -241,6 +244,17 @@ public class Thread_TCPListen <SendType> implements Runnable
 							else if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_Off)
 							{
 								relay.off();
+							}
+						}
+						else if (burner != null)
+						{
+							if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_On)
+							{
+								burner.powerOn();
+							}
+							else if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_Off)
+							{
+								burner.powerOff();
 							}
 						}
 						

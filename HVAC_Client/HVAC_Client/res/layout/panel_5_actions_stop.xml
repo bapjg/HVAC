@@ -18,23 +18,24 @@
 	        android:textColor="#FFFFFF" />
 
 	    <Button
-	        android:id="@+id/buttonReboot"
+	        android:id="@+id/buttonRestart"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/buttonStop"
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="30dp"
+	        android:text="Restart HVAC Application"
+	        android:textColor="#FFFFFF" />
+	    
+	    <Button
+	        android:id="@+id/buttonReboot"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/buttonRestart"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="30dp"
 	        android:text="Reboot HVAC System"
 	        android:textColor="#FFFFFF" />
 
-	    <Button
-	        android:id="@+id/buttonRestart"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/buttonReboot"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="30dp"
-	        android:text="Restart HVAC System"
-	        android:textColor="#FFFFFF" />
 		
 </RelativeLayout>

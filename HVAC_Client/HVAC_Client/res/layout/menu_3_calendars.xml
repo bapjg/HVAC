@@ -8,20 +8,9 @@
 	android:background					= "@color/background"
 	android:clickable 					= "true"
 >
-		<Button
-            style						= "@style/AD_MenuButton"
-            android:text				= "Relays" 
-        />
-        <Button
-            style						= "@style/AD_MenuButton"
-            android:text				= "xxx" 
-        />
-        <Button
-            style						= "@style/AD_MenuButton"
-            android:text				= "yyy"
-        />
-		<Button
-            style						= "@style/AD_MenuButton"
-            android:text				= "zzz" 
-        />
+	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Relays"         		/>
+	<Button	style	= "@style/AD_MenuButton" 	android:text	= "xxx"         		/>
+	<Button	style	= "@style/AD_MenuButton" 	android:text	= "yyy"         		/>
+	<Button	style	= "@style/AD_MenuButton" 	android:text	= "zzz"         		/>
+
 </LinearLayout>

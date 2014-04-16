@@ -10,9 +10,6 @@ package eRegulation;
 		I noted a lot of vapour in the circuit (floor, which tripped later)
  */
 
-
-
-
 public class Burner
 {
 	public 	Relay	   		burnerPower;
@@ -31,7 +28,6 @@ public class Burner
 		burnerPower.on();
 		
 		Integer i;
-		// System.out.println("===================Powered burner");
 		
 		for (i = 0; i < 30; i++)
 		{
@@ -86,9 +82,8 @@ public class Burner
 		if (checkFault())
 		{
 			LogIt.error("Burner", "sequencer", "checkFault has detected a problem");
-			powerOff();
 			Global.eMailMessage("Burner fault", "Burner/sequencer : 'checkFault()' has detected a problem");
-
+			powerOff();
 		}
 
 		// Must also check max temp;

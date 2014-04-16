@@ -38,9 +38,9 @@ public class Panel_5_Actions_Stop 			extends 	Panel_0_Fragment
     	this.activity											= getActivity();
     	View								thisView			= inflater.inflate(R.layout.panel_5_actions_stop, container, false);
  
-    	thisView.findViewById(R.id.buttonStop).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {stopHVAC(v);	}});
+    	thisView.findViewById(R.id.buttonStop).setOnClickListener(new View.OnClickListener() 		{@Override public void onClick(View v) {stopHVAC(v);	}});
     	thisView.findViewById(R.id.buttonRestart).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {restartHVAC(v);	}});
-    	thisView.findViewById(R.id.buttonReboot).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {rebootHVAC(v);	}});
+    	thisView.findViewById(R.id.buttonReboot).setOnClickListener(new View.OnClickListener() 		{@Override public void onClick(View v) {rebootHVAC(v);	}});
    	
         return thisView;
     }
