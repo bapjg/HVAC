@@ -14,5 +14,5 @@ do
 done
 
 if [ $STATUS -eq 2 ];then
-	shutdown -r now
+	sudo shutdown -r now
 fi
