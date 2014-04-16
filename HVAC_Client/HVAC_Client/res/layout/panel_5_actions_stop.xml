@@ -7,6 +7,7 @@
     android:baselineAligned="false"
     android:orientation="vertical" >
 
+
 	    <Button
 	        android:id="@+id/buttonStop"
 	        android:layout_width="wrap_content"
