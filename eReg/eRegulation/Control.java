@@ -238,6 +238,7 @@ public class Control
 		//
 		//=============================================================
 
+		Global.waitSeconds(11);							// Ensure that this is the last thread to stop
 		switch (Global.exitStatus)
 		{
 		case 0:											// Stop App
