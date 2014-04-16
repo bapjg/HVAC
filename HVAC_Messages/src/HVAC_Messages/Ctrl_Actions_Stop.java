@@ -3,6 +3,7 @@ package HVAC_Messages;
 @SuppressWarnings("serial")
 public class Ctrl_Actions_Stop 			extends 					Ctrl_Abstract
 {
+	private static final long 			serialVersionUID 			= 1L;
 	public 	static final int			EXIT_Stop					= 0;
 	public 	static final int			EXIT_Restart				= 1;
 	public 	static final int			EXIT_Reboot					= 2;
