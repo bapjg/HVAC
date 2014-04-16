@@ -32,7 +32,7 @@ public class Menu_4_Config 							extends 			Menu_0_Fragment
     	
     	if (myCaption.equalsIgnoreCase("Thermometers"))
     	{
-     		panelFragment 												= new Panel_4_Configuration(R.layout.panel_4_configuration);
+     		panelFragment 												= new Panel_4_Config_Thermometers(R.layout.panel_4_config_thermometers);
 
     		fTransaction												= fManager.beginTransaction();
     		fTransaction.replace(R.id.panel_container, panelFragment);

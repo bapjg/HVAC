@@ -7,11 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Button;
+import HVAC_Messages.*;
 
 
 public class Detail_Thermometer extends Fragment implements View.OnClickListener
 {
-	public Mgmt_Msg_Configuration.Thermometer me;
+	public Ctrl_Parameters.Thermometer me;
 	
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
@@ -19,8 +20,8 @@ public class Detail_Thermometer extends Fragment implements View.OnClickListener
 		View myView =  inflater.inflate(R.layout.detail_thermometer, container, false);
 		
        	((EditText) myView.findViewById(R.id.name)).setText(me.name);
-		((EditText) myView.findViewById(R.id.friendlyName)).setText(me.friendlyName);
-		((EditText) myView.findViewById(R.id.thermoID)).setText(me.thermoID);
+//		((EditText) myView.findViewById(R.id.friendlyName)).setText(me.friendlyName);
+		((EditText) myView.findViewById(R.id.address)).setText(me.address);
 
 		((Button)   myView.findViewById(R.id.Ok)).setOnClickListener(this);
 		((Button)   myView.findViewById(R.id.Cancel)).setOnClickListener(this);

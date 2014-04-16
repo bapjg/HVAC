@@ -31,22 +31,24 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 @SuppressLint("ValidFragment")
-public class Panel_4_Configuration 				extends 	Panel_0_Fragment 
-												implements 	TCP_Response
+public class Panel_4_Config_Thermometers 				extends 	Panel_0_Fragment 
+														implements 	TCP_Response
 {
 	private Adapter_Thermometers 		adapter;
 	private LayoutInflater				myInflater;
 	private Activity					myActivity;
 	private ViewGroup					myContainer;
 	private FragmentManager				myFragmentManager;
+	private int							menuLayout;
 
-	public Panel_4_Configuration()
+	public Panel_4_Config_Thermometers()
 	{
 		super();
 	}
-    public Panel_4_Configuration(int menuLayout)
+    public Panel_4_Config_Thermometers(int menuLayout)
     {
 		super(menuLayout);
+		this.menuLayout													= menuLayout;
     }
 
 	@Override
@@ -57,10 +59,23 @@ public class Panel_4_Configuration 				extends 	Panel_0_Fragment
         myContainer 													= container;
         myActivity														= getActivity();
         myFragmentManager 												= myActivity.getFragmentManager();
-//        View 							myView 							= myInflater.inflate(R.layout.panel_2_configuration, myContainer, false);
-        View 							myView 							= myInflater.inflate(R.layout.panel_0_subcontainer, myContainer, false);
+//        View 							myView 							= myInflater.inflate(R.layout.panel_4_configuration, myContainer, false);
+        View 							myView 							= myInflater.inflate(menuLayout, myContainer, false);
 
-        TCP_Send(new Ctrl_Parameters().new Request());
+        if (Global.eRegConfiguration == null)
+        {
+        	TCP_Send(new Ctrl_Parameters().new Request());
+        }
+        else
+        {
+            AdapterView <Adapter_Thermometers> 	view						= (AdapterView) myActivity.findViewById(R.id.List_View);
+            
+            Adapter_Thermometers 				adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+            
+            view.setAdapter(adapter);
+            view.setOnItemClickListener((OnItemClickListener) this);	
+         }
+ 
         return myView;
     }
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
@@ -72,9 +87,9 @@ public class Panel_4_Configuration 				extends 	Panel_0_Fragment
         	View 						newView 						= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
 
         	FragmentTransaction 		ft 								= myFragmentManager.beginTransaction();
-        	Detail_Thermometer 			dt 								= new Detail_Thermometer();
-        	dt.me														= Global.configuration.thermometerList.get(position -1);	//position 0 contains titles
-        	ft.replace(R.id.panel_container, dt);
+        	Ctrl_Parameters.Thermometer dt								= Global.eRegConfiguration.thermometerList.get(position -1);
+
+     //   	ft.replace(R.id.panel_container, dt);
         	ft.commit();
         }
         else
@@ -110,7 +125,7 @@ public class Panel_4_Configuration 				extends 	Panel_0_Fragment
 
         // First, ensure that correct view is displayed
     	ViewGroup					subContainer						= (ViewGroup) myContainer.getChildAt(0);		
-    	View 						newView 							= myInflater.inflate(R.layout.panel_4_configuration, subContainer, true);
+    	View 						newView 							= myInflater.inflate(R.layout.panel_4_config_thermometers, subContainer, true);
 
     	FragmentTransaction				ft								= myFragmentManager.beginTransaction();
     	//Panel_2_Configuration 			dt 								= new Panel_2_Configuration();
@@ -118,10 +133,10 @@ public class Panel_4_Configuration 				extends 	Panel_0_Fragment
     	ft.commit();
 
         // Set up the adapter for the data
-    	ArrayList  	<Mgmt_Msg_Configuration.Thermometer>	data		= Global.configuration.thermometerList;
+    	//ArrayList  	<Ctrl_Configuration.Thermometer>	data		= Global.configuration.thermometerList;
         AdapterView <Adapter_Thermometers> 	view						= (AdapterView) myActivity.findViewById(R.id.List_View);
         
-        Adapter_Thermometers 				adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
+        Adapter_Thermometers 				adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
         
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	

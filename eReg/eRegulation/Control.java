@@ -244,10 +244,6 @@ public class Control
 		Global.relays.offAll();
 		Global.waitThreadTermination();							// Ensure that this is the last thread to stop
 		
-		System.out.println("exitStatus is : " + Global.exitStatus);
-		
-		
-		
 		switch (Global.exitStatus)
 		{
 		case Ctrl_Actions_Stop.EXIT_Stop:											// Value 0 : Stop App

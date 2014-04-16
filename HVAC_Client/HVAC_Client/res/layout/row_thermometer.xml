@@ -11,6 +11,6 @@
         style				="@style/AD_Text" />
 
     <TextView
-        android:id			="@+id/thermoID"
+        android:id			="@+id/address"
         style				="@style/AD_Text" />
 </LinearLayout>

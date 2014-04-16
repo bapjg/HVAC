@@ -147,13 +147,8 @@ public class Activity_Main 			extends Activity
 		{             
 			if (result instanceof Mgmt_Msg_Abstract.Ack)
 			{
-				Toast.makeText(Global.appContext, "Connected to server : " + Global.serverURL.replace("http://", "").replace("/hvac/Management", "").replace(":8888", ""), Toast.LENGTH_LONG).show();
 		        HTTP_Req_Configuration			httpRequest			= new HTTP_Req_Configuration();
 				httpRequest.execute();
-			}
-			else
-			{
-				Toast.makeText(Global.appContext, "Not Connected, no server replied", Toast.LENGTH_LONG).show();
 			}
 	    }
 	}
@@ -184,11 +179,7 @@ public class Activity_Main 			extends Activity
 			if (result instanceof Mgmt_Msg_Configuration.Data)
 			{
 				Mgmt_Msg_Configuration.Data msg_received 			= (Mgmt_Msg_Configuration.Data) result;
-				Global.configuration					 			= msg_received;
-			}
-			else
-			{
-				Toast.makeText(Global.appContext, "Activity_Main : A Nack has been returned from " + Global.serverURL, Toast.LENGTH_LONG).show();
+//				Global.configuration					 			= msg_received;
 			}
 	    }
 	}

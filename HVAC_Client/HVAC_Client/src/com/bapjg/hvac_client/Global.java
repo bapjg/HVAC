@@ -21,14 +21,11 @@ public class Global
 	public static	String						serverURL;
 	public static	InetSocketAddress			piSocketAddress;
 	
-	public static 	Mgmt_Msg_Configuration 		configuration;
-	public static 	Mgmt_Msg_Calendar 			calendar;
-	
 	public static	Panel_1_Temperatures		panelTemperatures;
 	public static	Panel_2_Immediate			panelImmediate;	
 	public static	Panel_3_Calendars			panelCalendars;
-	public static	Panel_4_Configuration		panelConfiguration;
-	public static	Panel_5_Actions_Relays				panelActions;	
+	public static	Panel_4_Config_Thermometers	panelConfiguration;
+	public static	Panel_5_Actions_Relays		panelActions;	
 
 	public static	Menu_1_Temperatures			menuTemperatures;
 	public static	Menu_2_Immediate			menuImmediate;
@@ -37,6 +34,7 @@ public class Global
 	public static	Menu_5_Actions				menuActions;
 	
 	public static	Ctrl_Parameters.Data		eRegConfiguration;
+	public static	String						eRegCalendar;
 
 	public static	Boolean						initialisationCompleted;
 

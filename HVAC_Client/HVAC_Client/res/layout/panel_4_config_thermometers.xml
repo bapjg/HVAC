@@ -7,25 +7,25 @@
 	android:baselineAligned				= "false"
 	android:background					= "@color/background">
 	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="50sp"
-	    android:background="@color/background"
-	    android:baselineAligned="false"
-	    android:gravity="right"
-	    android:orientation="horizontal" >
+	    android:layout_width			="match_parent"
+	    android:layout_height			="50sp"
+	    android:background				="@color/background"
+	    android:baselineAligned			="false"
+	    android:gravity					="right"
+	    android:orientation				="horizontal" >
 	    
 	    <Button
-	        android:id="@+id/Minus"
-	        style="@style/AD_Button"
-	        android:layout_width="50dp"
-	        android:layout_height="wrap_content"
-	        android:text="-" />
+	        android:id					="@+id/Minus"
+	        style						="@style/AD_Button"
+	        android:layout_width		="50dp"
+	        android:layout_height		="wrap_content"
+	        android:text				="-" />
 	    <Button
-	        android:id="@+id/Plus"
-	        android:layout_width="50dp"
-	        android:layout_height="wrap_content"
+	        android:id					="@+id/Plus"
+	        android:layout_width		="50dp"
+	        android:layout_height		="wrap_content"
 			style						= "@style/AD_Button"
-	        android:text="+" />
+	        android:text				="+" />
 	</LinearLayout>    
     <LinearLayout
 		android:id						= "@+id/Detail_View"
