@@ -108,7 +108,7 @@ public class Thread_TCPListen <SendType> implements Runnable
  		LogIt.info("Thread_TCPListen", "Run", "Stopping", true);             
 	}
 	
-	private Ctrl_Temperatures.Data	process_Ctrl_Temperatures_Request(Ctrl_Temperatures.Request message_in)
+	private Ctrl_Temperatures.Data		process_Ctrl_Temperatures_Request		(Ctrl_Temperatures.Request message_in)
 	{
         Ctrl_Temperatures.Data message_return				= new Ctrl_Temperatures().new Data();
         message_return.dateTime 							= System.currentTimeMillis();
@@ -130,7 +130,7 @@ public class Thread_TCPListen <SendType> implements Runnable
         return message_return;
 		
 	}
-	private	Ctrl_Immediate.Data			process_Ctrl_Immediate_Request(Ctrl_Immediate.Request message_in)
+	private	Ctrl_Immediate.Data			process_Ctrl_Immediate_Request			(Ctrl_Immediate.Request message_in)
 	{
 		Ctrl_Immediate.Data 	message_return				= new Ctrl_Immediate().new Data();
 		
@@ -190,7 +190,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 		}
          return message_return;
 	}
-	private Ctrl_Abstract				process_Ctrl_Immediate_Execute(Ctrl_Immediate.Execute message_in)
+	private Ctrl_Abstract				process_Ctrl_Immediate_Execute			(Ctrl_Immediate.Execute message_in)
 	{
 		Long	now											= Global.getTimeNowSinceMidnight();
 		
@@ -231,7 +231,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 		
 		return message_return;
 	}
-  	private Ctrl_Parameters.Data 		process_Ctrl_Parameters_Request()
+  	private Ctrl_Parameters.Data 		process_Ctrl_Parameters_Request			()
 	{
 		Ctrl_Parameters.Data message_return						= new Ctrl_Parameters().new Data();
 		
@@ -276,7 +276,7 @@ public class Thread_TCPListen <SendType> implements Runnable
  		// Do something with message_in
  		return process_Ctrl_Parameters_Request();
 	}
-	private Ctrl_Actions_Relays.Data	process_Ctrl_Actions_Relays_Request()
+	private Ctrl_Actions_Relays.Data	process_Ctrl_Actions_Relays_Request		()
 	{
 		Ctrl_Actions_Relays.Data message_return				= new Ctrl_Actions_Relays().new Data();
 		message_return.burner 								= Global.burnerPower.isOn();
@@ -285,7 +285,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 		message_return.pumpRadiator	 						= Global.pumpRadiator.relay.isOn();
         return message_return;
 	}
-	private Ctrl_Actions_Relays.Data 	process_Ctrl_Actions_Relays_Execute(Ctrl_Actions_Relays.Execute message_in)
+	private Ctrl_Actions_Relays.Data 	process_Ctrl_Actions_Relays_Execute		(Ctrl_Actions_Relays.Execute message_in)
 	{
 		// Action relays except for burner relay where prefer to use burner object
 		// to have fuel flow measured and fuel supply controlled
@@ -338,12 +338,12 @@ public class Thread_TCPListen <SendType> implements Runnable
 		message_return.pumpRadiator	 						= Global.pumpRadiator.relay.isOn();
 		return message_return;
 	}
-	private Ctrl_Actions_Test_Mail.Ack	process_Ctrl_Actions_Test_Mail_Execute()
+	private Ctrl_Actions_Test_Mail.Ack	process_Ctrl_Actions_Test_Mail_Execute	()
 	{
 		Global.eMailMessage("Test", "This is a test mail");
 		return new Ctrl_Actions_Test_Mail().new Ack();
 	}
-	private Ctrl_Actions_Stop.Ack		process_Ctrl_Actions_Stop_Execute(Ctrl_Actions_Stop.Execute message_in)
+	private Ctrl_Actions_Stop.Ack		process_Ctrl_Actions_Stop_Execute		(Ctrl_Actions_Stop.Execute message_in)
 	{
 		Global.stopNow										= true;
 		Global.exitStatus									= message_in.exitStatus;
