@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-public class Menu_4_Config 							extends 			Menu_0_Fragment 
-													implements 			View.OnClickListener
+//Template										variable			= something
+//Template										ext/imp				class
+public class Menu_4_Config 						extends 			Menu_0_Fragment 
+												implements 			View.OnClickListener
 {
 	public Menu_4_Config(int menuLayout)
 	{
@@ -24,15 +26,19 @@ public class Menu_4_Config 							extends 			Menu_0_Fragment
 	{
 		super.onClick(myView);
 		
-    	Button 								myButton 					= (Button) myView;
-    	String								myCaption					= myButton.getText().toString();
-    	FragmentManager 					fManager					= getFragmentManager();
-    	FragmentTransaction					fTransaction				= fManager.beginTransaction();
-    	Fragment 							panelFragment				= null;
+    	Button 									myButton 			= (Button) myView;
+    	String									myCaption			= myButton.getText().toString();
+    	FragmentManager 						fManager			= getFragmentManager();
+    	FragmentTransaction						fTransaction		= fManager.beginTransaction();
+    	Fragment 								panelFragment		= null;
     	
     	if (myCaption.equalsIgnoreCase("Thermometers"))
     	{
-     		panelFragment 												= new Panel_4_Config_Thermometers(R.layout.panel_4_config_thermometers);
+     		panelFragment 											= new Panel_4_Config_Thermometers(R.layout.panel_4_config_thermometers);
+    	}
+    	else if (myCaption.equalsIgnoreCase("Relays"))
+    	{
+     		panelFragment 											= new Panel_4_Config_Relays(R.layout.panel_4_config_thermometers);
     	}
     	if (panelFragment != null)
     	{

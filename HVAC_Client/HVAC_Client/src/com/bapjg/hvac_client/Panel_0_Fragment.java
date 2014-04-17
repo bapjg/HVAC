@@ -30,8 +30,10 @@ import HVAC_Messages.*;
 
 
 @SuppressLint("ValidFragment")
-public class Panel_0_Fragment 				extends 	Fragment
-											implements 	View.OnClickListener, AdapterView.OnItemClickListener
+//Template										variable			= something
+//Template										ext/imp				class
+public class Panel_0_Fragment 					extends 			Fragment
+												implements 			View.OnClickListener, AdapterView.OnItemClickListener
 {
 	private 	int					menuLayout;
     public 		Activity			activity;
@@ -41,8 +43,8 @@ public class Panel_0_Fragment 				extends 	Fragment
     }
     public Panel_0_Fragment(int menuLayout)
     {
-		this.menuLayout									= menuLayout;
-    	this.activity									= getActivity();
+		this.menuLayout												= menuLayout;
+    	this.activity												= getActivity();
     }
     
 	@Override

@@ -14,8 +14,10 @@ import android.widget.Button;
 
 
 @SuppressLint("ValidFragment")
-public class Panel_3_Calendars 				extends 			Panel_0_Fragment
-											implements 			TCP_Response
+//Template										variable			= something
+//Template										ext/imp				class
+public class Panel_3_Calendars 					extends 			Panel_0_Fragment
+												implements 			TCP_Response
 {
 	public Panel_3_Calendars()
 	{
@@ -37,14 +39,14 @@ public class Panel_3_Calendars 				extends 			Panel_0_Fragment
 	{
     	System.out.println("We have arrived in onClick again");
     	
-    	Button 								myButton 			= (Button) myView;
-    	String								myCaption			= myButton.getText().toString();
+    	Button 									myButton 			= (Button) myView;
+    	String									myCaption			= myButton.getText().toString();
     	
 		// Set all textColours to white
-		ViewGroup 							viewParent			= (ViewGroup) myView.getParent();
+		ViewGroup 								viewParent			= (ViewGroup) myView.getParent();
 		for (int i = 0; i < viewParent.getChildCount(); i++)
 		{
-			Button							buttonChild 		= (Button) viewParent.getChildAt(i);
+			Button								buttonChild 		= (Button) viewParent.getChildAt(i);
 			buttonChild.setTextColor(Color.WHITE);
 		}
 		
@@ -63,13 +65,13 @@ public class Panel_3_Calendars 				extends 			Panel_0_Fragment
 	}
 	public void TCP_Send(Ctrl_Abstract message)
 	{
-		TCP_Task						task					= new TCP_Task();
-	   	task.callBack											= this;					// processFinish
+		TCP_Task								task				= new TCP_Task();
+	   	task.callBack												= this;					// processFinish
 	   	task.execute(message);
 	}
 	public void processFinish(Ctrl_Abstract result) 
 	{
-		Activity							activity					= getActivity();		
+		Activity								activity			= getActivity();		
 	}
 }
 

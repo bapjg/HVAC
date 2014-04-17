@@ -22,28 +22,30 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
-public class Panel_2_Immediate 				extends 			Panel_0_Fragment  
-											implements 			TCP_Response
+//Template										variable			= something
+//Template										ext/imp				class
+public class Panel_2_Immediate 					extends 			Panel_0_Fragment  
+												implements 			TCP_Response
 {
-	public String							circuitName;
+	public String								circuitName;
 	
 	public Panel_2_Immediate()
 	{
 		super();
-		circuitName												= "";
+		circuitName													= "";
 	}
     public Panel_2_Immediate(int menuLayout, String circuitName)
     {
 		super(menuLayout);
-		this.circuitName										= circuitName;
+		this.circuitName											= circuitName;
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity											= getActivity();
-    	View								thisView			= inflater.inflate(R.layout.panel_2_immediate, container, false);
+    	this.activity												= getActivity();
+    	View									thisView			= inflater.inflate(R.layout.panel_2_immediate, container, false);
 
-    	Ctrl_Immediate.Request				taskRequest			= new Ctrl_Immediate().new Request();
-    	taskRequest.circuitName									= this.circuitName;
+    	Ctrl_Immediate.Request					taskRequest			= new Ctrl_Immediate().new Request();
+    	taskRequest.circuitName										= this.circuitName;
     	
     	TCP_Send(taskRequest);
 
@@ -54,83 +56,82 @@ public class Panel_2_Immediate 				extends 			Panel_0_Fragment
     }
 	public void rowTempClick(View myView) 
 	{
-		TextView							writeBack			= (TextView) ((ViewGroup) myView).getChildAt(1);
+		TextView								writeBack			= (TextView) ((ViewGroup) myView).getChildAt(1);
 		Dialog_Temperature df = new Dialog_Temperature(writeBack, 25, 5, 8);
 		df.show(getFragmentManager(), "Dialog_Temperature");
 	}
 	public void rowTimeClick(View myView) 
 	{
-		 
 	}
 	public void onClick(View myView)
 	{
-    	Button 								myButton 			= (Button) myView;
-    	String								myCaption			= myButton.getText().toString();
-    	FragmentManager 					fManager			= getFragmentManager();
-    	FragmentTransaction					fTransaction;
-    	Fragment 							panelFragment;
+    	Button 									myButton 			= (Button) myView;
+    	String									myCaption			= myButton.getText().toString();
+    	FragmentManager 						fManager			= getFragmentManager();
+    	FragmentTransaction						fTransaction;
+    	Fragment 								panelFragment;
     	
     	if (myCaption.equalsIgnoreCase("Start"))
     	{
     		System.out.println("Action "+ this.circuitName + " Start Click");
 
-    		Ctrl_Immediate.Execute			message_out			= new Ctrl_Immediate().new Execute();
+    		Ctrl_Immediate.Execute				message_out			= new Ctrl_Immediate().new Execute();
  
-//			NumberPicker 					np 					= (NumberPicker) getActivity().findViewById(R.id.tempObjective);
+//			NumberPicker 						np 					= (NumberPicker) getActivity().findViewById(R.id.tempObjective);
 	   		message_out.circuitName									= this.circuitName;
-	   		TextView						temp				= (TextView) getActivity().findViewById(R.id.TempObjective);
+	   		TextView							temp				= (TextView) getActivity().findViewById(R.id.TempObjective);
 	   		
-	   		message_out.tempObjective							= Integer.parseInt(temp.getText().toString()) * 1000;
+	   		message_out.tempObjective								= Integer.parseInt(temp.getText().toString()) * 1000;
 	   		
 	   		if (this.circuitName.equalsIgnoreCase("Hot_Water"))
 	   		{
-	   			message_out.stopOnObjective						= true;
+	   			message_out.stopOnObjective							= true;
 	   		}
 	   		else
 	   		{
-	   			message_out.stopOnObjective						= false;
+	   			message_out.stopOnObjective							= false;
 	   		}
-	   		message_out.action									= message_out.ACTION_Start;
+	   		message_out.action										= message_out.ACTION_Start;
 	   		
-	   		temp												= (TextView) getActivity().findViewById(R.id.TimeEnd);
-	   		message_out.timeEnd									= Global.parseTime(temp.getText().toString());
+	   		temp													= (TextView) getActivity().findViewById(R.id.TimeEnd);
+	   		message_out.timeEnd										= Global.parseTime(temp.getText().toString());
 			
-        	TCP_Task						task				= new TCP_Task();
-        	task.callBack										= this;
-        	task.execute(message_out);
+//        	TCP_Task							task				= new TCP_Task();
+//        	task.callBack											= this;
+        	TCP_Send(message_out);
     	}
     	else if (myCaption.equalsIgnoreCase("Stop"))
     	{
     		System.out.println("Action "+ this.circuitName + " Stop Click");
 
-    		Ctrl_Immediate.Execute			message_out			= new Ctrl_Immediate().new Execute();
-	   		message_out.circuitName								= this.circuitName;
-	   		message_out.action									= message_out.ACTION_Stop;
+    		Ctrl_Immediate.Execute				message_out			= new Ctrl_Immediate().new Execute();
+	   		message_out.circuitName									= this.circuitName;
+	   		message_out.action										= message_out.ACTION_Stop;
 
         	TCP_Send(message_out);
     	}
 	}
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
-	{
-	}
+//	@Override
+//	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
+//	{
+//	}
 	public void TCP_Send(Ctrl_Abstract message)
 	{
-		TCP_Task						task					= new TCP_Task();
-	   	task.callBack											= this;					// processFinish
+		TCP_Task								task				= new TCP_Task();
+	   	task.callBack												= this;					// processFinish
 	   	task.execute(message);
 	}
 	public void processFinish(Ctrl_Abstract result) 
 	{  
-		Activity							activity					= getActivity();		
+		Activity								activity			= getActivity();		
 
 		
 		if (result instanceof Ctrl_Immediate.Data)
 		{
-			Ctrl_Immediate.Data msg_received 					= (Ctrl_Immediate.Data) result;
+			Ctrl_Immediate.Data msg_received 						= (Ctrl_Immediate.Data) result;
 			
-			TextView		timeEnd								= (TextView) activity.findViewById(R.id.TimeEnd);
-			TextView		tempObjective						= (TextView) activity.findViewById(R.id.TempObjective);
+			TextView							timeEnd				= (TextView) activity.findViewById(R.id.TimeEnd);
+			TextView							tempObjective		= (TextView) activity.findViewById(R.id.TempObjective);
 			
 			timeEnd.setText(Global.displayTimeShort(msg_received.timeStart + 60 * 60 * 1000));
 			tempObjective.setText(((Integer) (msg_received.tempObjective/1000)).toString());
@@ -171,10 +172,10 @@ public class Panel_2_Immediate 				extends 			Panel_0_Fragment
 			Global.toast("A Nack has been returned", true);
 		}	
 	}
-	public void onTemperatureChange(Integer temperature)
-	{
+//	public void onTemperatureChange(Integer temperature)
+//	{
 //		System.out.println("temp is" + temperature);
 //		((TextView) getActivity().findViewById(R.id.TempObjective)).setText(temperature.toString());
-	}
+//	}
 }
 

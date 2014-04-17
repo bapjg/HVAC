@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
+//Template										variable			= something
+//Template										ext/imp				class
 public class Menu_5_Actions extends Menu_0_Fragment implements View.OnClickListener
 {
 	public Menu_5_Actions(int menuLayout)
@@ -23,23 +25,23 @@ public class Menu_5_Actions extends Menu_0_Fragment implements View.OnClickListe
 	{
 		super.onClick(myView);
 		
-    	Button 								myButton 					= (Button) myView;
-    	String								myCaption					= myButton.getText().toString();
-    	FragmentManager 					fManager					= getFragmentManager();
-    	FragmentTransaction					fTransaction				= fManager.beginTransaction();
-    	Fragment 							panelFragment				= null;
+    	Button 									myButton 			= (Button) myView;
+    	String									myCaption			= myButton.getText().toString();
+    	FragmentManager 						fManager			= getFragmentManager();
+    	FragmentTransaction						fTransaction		= fManager.beginTransaction();
+    	Fragment 								panelFragment		= null;
     	
     	if (myCaption.equalsIgnoreCase("Relays"))
     	{
-    		panelFragment 												= new Panel_5_Actions_Relays(R.layout.panel_5_actions_relays);
+    		panelFragment 											= new Panel_5_Actions_Relays(R.layout.panel_5_actions_relays);
     	}
     	else if (myCaption.equalsIgnoreCase("Test Mail"))
     	{
-    		panelFragment 												= new Panel_5_Actions_Test_Mail(R.layout.panel_5_actions_test_mail);
+    		panelFragment 											= new Panel_5_Actions_Test_Mail(R.layout.panel_5_actions_test_mail);
     	}
     	else if (myCaption.equalsIgnoreCase("Stop"))
     	{
-    		panelFragment 												= new Panel_5_Actions_Stop(R.layout.panel_5_actions_stop);
+    		panelFragment 											= new Panel_5_Actions_Stop(R.layout.panel_5_actions_stop);
     	}
     	else if (myCaption.equalsIgnoreCase("Action4"))
     	{

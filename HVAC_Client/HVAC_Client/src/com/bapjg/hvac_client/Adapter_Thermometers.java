@@ -58,18 +58,18 @@ public class Adapter_Thermometers extends ArrayAdapter
         
         if (position == 0)
         {
-           	holder.name.setText("Name");
-            holder.name.setTextColor(Color.YELLOW);
-            holder.name.setTypeface(null, Typeface.BOLD);
+           	holder.name.setText				("Name");
+            holder.name.setTextColor		(Color.YELLOW);
+            holder.name.setTypeface			(null, Typeface.BOLD);
             
-            holder.address.setText("Thermo ID");
-            holder.address.setTextColor(Color.YELLOW);
-            holder.address.setTypeface(null, Typeface.BOLD);
+            holder.address.setText			("Thermo ID");
+            holder.address.setTextColor		(Color.YELLOW);
+            holder.address.setTypeface		(null, Typeface.BOLD);
         }
         else
         {
-	        holder.name.setText(((Ctrl_Parameters.Thermometer) listData.get(position - 1)).name);
-	        holder.address.setText(((Ctrl_Parameters.Thermometer) listData.get(position - 1)).address);
+	        holder.name.setText				(((Ctrl_Parameters.Thermometer) listData.get(position - 1)).name);
+	        holder.address.setText			(((Ctrl_Parameters.Thermometer) listData.get(position - 1)).address);
         }
         return convertView;
     }
