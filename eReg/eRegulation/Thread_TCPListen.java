@@ -256,7 +256,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 		}
  		LogIt.info("Thread_TCPListen", "Run", "Stopping", true);             
 	}
-	private Ctrl_Parameters.Data process_Ctrl_Parameters_Request()
+	private Ctrl_Parameters.Data 		process_Ctrl_Parameters_Request()
 	{
 		Ctrl_Parameters.Data message_return						= new Ctrl_Parameters().new Data();
 		
@@ -281,6 +281,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 		{
 			Ctrl_Parameters.Pump 		paramPump			= new Ctrl_Parameters().new Pump();
 			paramPump.name									= globalPump.name;
+			paramPump.relay									= globalPump.relay.name;
 			message_return.pumpList.add(paramPump);
 		}
 
@@ -295,7 +296,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 		}
 		return message_return;
 	}
-	private Ctrl_Actions_Relays.Data process_Ctrl_Actions_Relays_Execute(Ctrl_Actions_Relays.Execute message_in)
+	private Ctrl_Actions_Relays.Data 	process_Ctrl_Actions_Relays_Execute(Ctrl_Actions_Relays.Execute message_in)
 	{
 		// Action relays except for burner relay where prefer to use burner object
 		// to have fuel flow measured and fuel supply controlled
