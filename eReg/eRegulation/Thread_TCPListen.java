@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 import HVAC_Messages.*;
+import HVAC_Messages.Ctrl_Actions_Relays.Execute;
 
 
 public class Thread_TCPListen <SendType> implements Runnable
@@ -44,167 +45,17 @@ public class Thread_TCPListen <SendType> implements Runnable
 						LogIt.info("Thread_TCPListen", "Run", "Null received from client", true);            
 			            message_out 										= new Ctrl_Abstract().new Nack();
 			        } 
-			    	else if (message_in instanceof Ctrl_Temperatures.Request)
-			        {
-			            Ctrl_Temperatures.Data message_ou					= new Ctrl_Temperatures().new Data();
-			            message_ou.dateTime 								= System.currentTimeMillis();
-
-			            message_ou.tempBoiler	 							= Global.thermoBoiler.reading;
-			            message_ou.tempBoilerIn	 							= Global.thermoBoilerIn.reading;
-			            message_ou.tempBoilerOut	 						= Global.thermoBoilerOut.reading;
-			    		
-			            message_ou.tempFloorIn	 							= Global.thermoFloorIn.reading;
-			            message_ou.tempFloorOut	 							= Global.thermoFloorOut.reading;
-			    		
-			            message_ou.tempRadiatorIn	 						= Global.thermoRadiatorIn.reading;
-			            message_ou.tempRadiatorOut	 						= Global.thermoRadiatorOut.reading;
-
-			            message_ou.tempHotWater	 							= Global.thermoHotWater.reading;
-			            message_ou.tempOutside	 							= Global.thermoOutside.reading;
-			            message_ou.tempLivingRoom	 						= Global.thermoLivingRoom.reading;
-			            
-			            message_out											= message_ou;
-			        } 
-			    	else if (message_in instanceof Ctrl_Immediate.Request)
-			        {
-						Ctrl_Immediate.Request	message_rcvd				= (Ctrl_Immediate.Request ) message_in;
-						Ctrl_Immediate.Data 	message_ou					= new Ctrl_Immediate().new Data();
-						
-						String 					circuitName					= message_rcvd.circuitName;
-						
-						Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
-						
-						message_ou.circuitName								= circuitName;
-
-						Long 					now							= Global.getTimeNowSinceMidnight();
-						Long					midnight					= 24L * 60 * 60 * 1000;
-						Long					nextStart					= midnight;
-						Integer					tempObjective				= 0;
-						CircuitTask				selectedTask				= null;
-
-						if (circuit.taskActive == null)
-						{
-							for (CircuitTask aTask : circuit.circuitTaskList)			// Check to ensure there are no active tasks
-							{
-								if (	(aTask.days.contains(Global.getDayOfWeek(0))) 
-								&& 		(! aTask.active)
-								&&     	(aTask.timeStart > now )
-								&&     	(aTask.timeStart < nextStart ))
-								{
-									nextStart								= aTask.timeStart;
-									selectedTask							= aTask;
-								}
-							}
-							
-				            if (nextStart < midnight)	// Task currently inactive but planned
-				            {
-				            	message_ou.executionActive					= false;
-								message_ou.executionPlanned					= true;
-					            message_ou.timeStart	 					= nextStart;
-					            message_ou.timeEnd		 					= selectedTask.timeEnd;
-					            message_ou.tempObjective	 				= selectedTask.tempObjective;
-								message_ou.stopOnObjective					= selectedTask.stopOnObjective;
-				            }
-				            else						// Task currently inactive and not even planned
-				            {
-				            	message_ou.executionActive					= false;
-								message_ou.executionPlanned					= false;
-								message_ou.timeStart						= 0L;
-								message_ou.timeEnd							= 0L;
-					            message_ou.tempObjective 					= 0;
-					            message_ou.stopOnObjective					= false;
-				            }
-						}
-						else		// Task currently active
-						{
-							message_ou.executionActive						= true;
-							message_ou.executionPlanned						= false;
-							message_ou.timeStart							= circuit.taskActive.timeStart;
-							message_ou.timeEnd								= circuit.taskActive.timeEnd;
-							message_ou.tempObjective						= circuit.taskActive.tempObjective;
-							message_ou.stopOnObjective						= circuit.taskActive.stopOnObjective;
-						}
-			            
-			            message_out											= message_ou;
-			        } 
-			    	else if (message_in instanceof Ctrl_Immediate.Execute)		//New New New
-			        {
-						Long	now											= Global.getTimeNowSinceMidnight();
-						
-						Ctrl_Immediate.Execute	message_rcvd				= (Ctrl_Immediate.Execute) message_in;
-						String 					circuitName					= message_rcvd.circuitName;
-						Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
-						Ctrl_Abstract 			message_ou;
-						
-						if (message_rcvd.action == Ctrl_Immediate.ACTION_Start)
-						{
-							if (circuit.name.equalsIgnoreCase("Hot_Water"))
-							{
-								circuit.taskActive							= new CircuitTask(	now, 								// Time Start
-																					now + 30 * 60 * 1000, 				// TimeEnd
-																					message_rcvd.tempObjective,			// TempObjective in millidesrees
-																					true,								// StopOnObjective
-																					"1, 2, 3, 4, 5, 6, 7");				// Days
-							}
-							else
-							{
-								circuit.taskActive							= new CircuitTask(	now, 								// Time Start
-																					message_rcvd.timeEnd, 				// TimeEnd
-																					message_rcvd.tempObjective,			// TempObjective in millidesrees
-																					false,								// StopOnObjective
-																					"1, 2, 3, 4, 5, 6, 7");				// Days
-							}
-							circuit.start();
-							message_ou										= new Ctrl_Abstract().new Ack();
-						}
-						else if (message_rcvd.action == message_rcvd.ACTION_Stop)
-						{
-							circuit.stop();
-							message_ou										= new Ctrl_Abstract().new Ack();
-						}
-						else
-						{
-							message_ou										= new Ctrl_Abstract().new Nack();
-						}
-						
-			            message_out											= message_ou;
-			        } 
-			    	else if (message_in instanceof Ctrl_Parameters.Request)
-			        {
-			    		message_out											= process_Ctrl_Parameters_Request();
-			        }
-			    	else if (message_in instanceof Ctrl_Parameters.Update)
-			        {
-						Ctrl_Actions_Relays.Data message_ou					= new Ctrl_Actions_Relays().new Data();
-			        }
-			    	else if (message_in instanceof Ctrl_Actions_Relays.Request)
-			        {
-						Ctrl_Actions_Relays.Data message_ou					= new Ctrl_Actions_Relays().new Data();
-			            message_ou.burner 									= Global.burnerPower.isOn();
-			            message_ou.pumpHotWater	 							= Global.pumpWater.relay.isOn();
-			            message_ou.pumpFloor	 							= Global.pumpFloor.relay.isOn();
-			            message_ou.pumpRadiator	 							= Global.pumpRadiator.relay.isOn();
-		            
-			            message_out											= message_ou;
-			        } 
-			    	else if (message_in instanceof Ctrl_Actions_Relays.Execute)
-			        {
-			            message_out											= process_Ctrl_Actions_Relays_Execute((Ctrl_Actions_Relays.Execute) message_in);
-			        } 
-			    	else if (message_in instanceof Ctrl_Actions_Test_Mail.Execute)
-			        {
-						Global.eMailMessage("Test", "This is a test mail");
-						Ctrl_Actions_Test_Mail.Ack message_ou				= new Ctrl_Actions_Test_Mail().new Ack();
-		            
-			            message_out											= message_ou;
-			        } 
-			    	else if (message_in instanceof Ctrl_Actions_Stop.Execute)
-			        {
-						Global.stopNow										= true;
-						Global.exitStatus									= ((Ctrl_Actions_Stop.Execute) message_in).exitStatus;
-						Ctrl_Actions_Stop.Ack message_ou					= new Ctrl_Actions_Stop().new Ack();
-		            
-			            message_out											= message_ou;
+			    	else
+			    	{
+			    		if (message_in instanceof Ctrl_Temperatures.Request) 			message_out = process_Ctrl_Temperatures_Request		((Ctrl_Temperatures.Request) message_in);
+			    		else if (message_in instanceof Ctrl_Immediate.Request)			message_out	= process_Ctrl_Immediate_Request		((Ctrl_Immediate.Request) message_in);
+			    		else if (message_in instanceof Ctrl_Immediate.Execute)			message_out	= process_Ctrl_Immediate_Execute		((Ctrl_Immediate.Execute) message_in); 
+			    		else if (message_in instanceof Ctrl_Parameters.Request)			message_out	= process_Ctrl_Parameters_Request		();
+			    		else if (message_in instanceof Ctrl_Parameters.Update) 			message_out	= process_Ctrl_Parameters_Update		((Ctrl_Parameters.Update) message_in);
+			    		else if (message_in instanceof Ctrl_Actions_Relays.Request)		message_out	= process_Ctrl_Actions_Relays_Request	();
+			    		else if (message_in instanceof Ctrl_Actions_Relays.Execute)		message_out	= process_Ctrl_Actions_Relays_Execute	((Ctrl_Actions_Relays.Execute) message_in);
+			    		else if (message_in instanceof Ctrl_Actions_Test_Mail.Execute)	message_out	= process_Ctrl_Actions_Test_Mail_Execute();
+			    		else if (message_in instanceof Ctrl_Actions_Stop.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
 			        } 
 
 			        ObjectOutputStream 		output							= null;
@@ -256,7 +107,131 @@ public class Thread_TCPListen <SendType> implements Runnable
 		}
  		LogIt.info("Thread_TCPListen", "Run", "Stopping", true);             
 	}
-	private Ctrl_Parameters.Data 		process_Ctrl_Parameters_Request()
+	
+	private Ctrl_Temperatures.Data	process_Ctrl_Temperatures_Request(Ctrl_Temperatures.Request message_in)
+	{
+        Ctrl_Temperatures.Data message_return				= new Ctrl_Temperatures().new Data();
+        message_return.dateTime 							= System.currentTimeMillis();
+
+        message_return.tempBoiler	 						= Global.thermoBoiler.reading;
+        message_return.tempBoilerIn	 						= Global.thermoBoilerIn.reading;
+        message_return.tempBoilerOut	 					= Global.thermoBoilerOut.reading;
+		
+        message_return.tempFloorIn	 						= Global.thermoFloorIn.reading;
+        message_return.tempFloorOut	 						= Global.thermoFloorOut.reading;
+		
+        message_return.tempRadiatorIn	 					= Global.thermoRadiatorIn.reading;
+        message_return.tempRadiatorOut	 					= Global.thermoRadiatorOut.reading;
+
+        message_return.tempHotWater	 						= Global.thermoHotWater.reading;
+        message_return.tempOutside	 						= Global.thermoOutside.reading;
+        message_return.tempLivingRoom	 					= Global.thermoLivingRoom.reading;
+        
+        return message_return;
+		
+	}
+	private	Ctrl_Immediate.Data			process_Ctrl_Immediate_Request(Ctrl_Immediate.Request message_in)
+	{
+		Ctrl_Immediate.Data 	message_return				= new Ctrl_Immediate().new Data();
+		
+		String 					circuitName					= message_in.circuitName;
+		
+		Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
+		
+		message_return.circuitName								= circuitName;
+
+		Long 					now							= Global.getTimeNowSinceMidnight();
+		Long					midnight					= 24L * 60 * 60 * 1000;
+		Long					nextStart					= midnight;
+		Integer					tempObjective				= 0;
+		CircuitTask				selectedTask				= null;
+
+		if (circuit.taskActive == null)
+		{
+			for (CircuitTask aTask : circuit.circuitTaskList)			// Check to ensure there are no active tasks
+			{
+				if (	(aTask.days.contains(Global.getDayOfWeek(0))) 
+				&& 		(! aTask.active)
+				&&     	(aTask.timeStart > now )
+				&&     	(aTask.timeStart < nextStart ))
+				{
+					nextStart								= aTask.timeStart;
+					selectedTask							= aTask;
+				}
+			}
+			
+            if (nextStart < midnight)	// Task currently inactive but planned
+            {
+            	message_return.executionActive				= false;
+            	message_return.executionPlanned				= true;
+            	message_return.timeStart	 				= nextStart;
+            	message_return.timeEnd		 				= selectedTask.timeEnd;
+            	message_return.tempObjective 				= selectedTask.tempObjective;
+            	message_return.stopOnObjective				= selectedTask.stopOnObjective;
+            }
+            else						// Task currently inactive and not even planned
+            {
+            	message_return.executionActive				= false;
+            	message_return.executionPlanned				= false;
+            	message_return.timeStart					= 0L;
+            	message_return.timeEnd						= 0L;
+            	message_return.tempObjective 				= 0;
+            	message_return.stopOnObjective				= false;
+            }
+		}
+		else		// Task currently active
+		{
+			message_return.executionActive					= true;
+			message_return.executionPlanned					= false;
+			message_return.timeStart						= circuit.taskActive.timeStart;
+			message_return.timeEnd							= circuit.taskActive.timeEnd;
+			message_return.tempObjective					= circuit.taskActive.tempObjective;
+			message_return.stopOnObjective					= circuit.taskActive.stopOnObjective;
+		}
+         return message_return;
+	}
+	private Ctrl_Abstract				process_Ctrl_Immediate_Execute(Ctrl_Immediate.Execute message_in)
+	{
+		Long	now											= Global.getTimeNowSinceMidnight();
+		
+		String 					circuitName					= message_in.circuitName;
+		Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
+		Ctrl_Abstract 			message_return;
+		
+		if (message_in.action == Ctrl_Immediate.ACTION_Start)
+		{
+			if (circuit.name.equalsIgnoreCase("Hot_Water"))
+			{
+				circuit.taskActive							= new CircuitTask(	now, 								// Time Start
+																	now + 30 * 60 * 1000, 				// TimeEnd
+																	message_in.tempObjective,			// TempObjective in millidesrees
+																	true,								// StopOnObjective
+																	"1, 2, 3, 4, 5, 6, 7");				// Days
+			}
+			else
+			{
+				circuit.taskActive							= new CircuitTask(	now, 								// Time Start
+																	message_in.timeEnd, 				// TimeEnd
+																	message_in.tempObjective,			// TempObjective in millidesrees
+																	false,								// StopOnObjective
+																	"1, 2, 3, 4, 5, 6, 7");				// Days
+			}
+			circuit.start();
+			message_return									= new Ctrl_Abstract().new Ack();
+		}
+		else if (message_in.action == message_in.ACTION_Stop)
+		{
+			circuit.stop();
+			message_return									= new Ctrl_Abstract().new Ack();
+		}
+		else
+		{
+			message_return									= new Ctrl_Abstract().new Nack();
+		}
+		
+		return message_return;
+	}
+  	private Ctrl_Parameters.Data 		process_Ctrl_Parameters_Request()
 	{
 		Ctrl_Parameters.Data message_return						= new Ctrl_Parameters().new Data();
 		
@@ -295,6 +270,20 @@ public class Thread_TCPListen <SendType> implements Runnable
 			message_return.circuitList.add(paramCircuit);
 		}
 		return message_return;
+	}
+ 	private Ctrl_Parameters.Data 		process_Ctrl_Parameters_Update(Ctrl_Parameters.Update message_in)
+ 	{
+ 		// Do something with message_in
+ 		return process_Ctrl_Parameters_Request();
+	}
+	private Ctrl_Actions_Relays.Data	process_Ctrl_Actions_Relays_Request()
+	{
+		Ctrl_Actions_Relays.Data message_return				= new Ctrl_Actions_Relays().new Data();
+		message_return.burner 								= Global.burnerPower.isOn();
+		message_return.pumpHotWater	 						= Global.pumpWater.relay.isOn();
+		message_return.pumpFloor	 						= Global.pumpFloor.relay.isOn();
+		message_return.pumpRadiator	 						= Global.pumpRadiator.relay.isOn();
+        return message_return;
 	}
 	private Ctrl_Actions_Relays.Data 	process_Ctrl_Actions_Relays_Execute(Ctrl_Actions_Relays.Execute message_in)
 	{
@@ -349,5 +338,16 @@ public class Thread_TCPListen <SendType> implements Runnable
 		message_return.pumpRadiator	 						= Global.pumpRadiator.relay.isOn();
 		return message_return;
 	}
+	private Ctrl_Actions_Test_Mail.Ack	process_Ctrl_Actions_Test_Mail_Execute()
+	{
+		Global.eMailMessage("Test", "This is a test mail");
+		return new Ctrl_Actions_Test_Mail().new Ack();
+	}
+	private Ctrl_Actions_Stop.Ack		process_Ctrl_Actions_Stop_Execute(Ctrl_Actions_Stop.Execute message_in)
+	{
+		Global.stopNow										= true;
+		Global.exitStatus									= message_in.exitStatus;
+        return	new Ctrl_Actions_Stop().new Ack();
+    } 
 }
  
