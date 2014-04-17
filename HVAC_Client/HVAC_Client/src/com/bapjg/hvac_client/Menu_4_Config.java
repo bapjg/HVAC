@@ -34,11 +34,19 @@ public class Menu_4_Config 						extends 			Menu_0_Fragment
     	
     	if (myCaption.equalsIgnoreCase("Thermometers"))
     	{
-     		panelFragment 											= new Panel_4_Config_Thermometers(R.layout.panel_4_config_thermometers);
+     		panelFragment 											= new Panel_4_Config_Thermometers();
     	}
     	else if (myCaption.equalsIgnoreCase("Relays"))
     	{
-     		panelFragment 											= new Panel_4_Config_Relays(R.layout.panel_4_config_thermometers);
+     		panelFragment 											= new Panel_4_Config_Relays();
+    	}
+    	else if (myCaption.equalsIgnoreCase("Pumps"))
+    	{
+     		panelFragment 											= new Panel_4_Config_Pumps();
+    	}
+    	else if (myCaption.equalsIgnoreCase("Circuits"))
+    	{
+     		panelFragment 											= new Panel_4_Config_Circuits();
     	}
     	if (panelFragment != null)
     	{

@@ -44,17 +44,17 @@ public class Panel_4_Config_Thermometers 		extends 			Panel_0_Fragment
 	private ViewGroup							myContainer;
 	private View								myAdapterView;
 	private FragmentManager						myFragmentManager;
-	private int									menuLayout;
+//	private int									menuLayout;
 
 	public Panel_4_Config_Thermometers()
 	{
 		super();
 	}
-    public Panel_4_Config_Thermometers(int menuLayout)
-    {
-		super(menuLayout);
-		this.menuLayout												= menuLayout;
-    }
+//    public Panel_4_Config_Thermometers(int menuLayout)
+//    {
+//		super(menuLayout);
+//		this.menuLayout												= menuLayout;
+//    }
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -63,7 +63,7 @@ public class Panel_4_Config_Thermometers 		extends 			Panel_0_Fragment
         myContainer 												= container;
         myActivity													= getActivity();
         myFragmentManager 											= myActivity.getFragmentManager();
-        View 									myView 				= myInflater.inflate(R.layout.panel_4_config_thermometers, container, false);
+        View 									myView 				= myInflater.inflate(R.layout.panel_4_config_header, container, false);
         myAdapterView												= (AdapterView) myView.findViewById(R.id.List_View);
 
         TCP_Send(new Ctrl_Parameters().new Request());

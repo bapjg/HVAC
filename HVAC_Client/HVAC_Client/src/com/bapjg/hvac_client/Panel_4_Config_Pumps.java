@@ -35,7 +35,7 @@ import android.widget.EditText;
 //Template										variable			= something
 //Template										ext/imp				class
 
-public class Panel_4_Config_Relays 		extends 			Panel_0_Fragment 
+public class Panel_4_Config_Pumps 				extends 			Panel_0_Fragment 
 												implements 			TCP_Response
 {
 	private Adapter_Relays		 				adapter;
@@ -44,17 +44,11 @@ public class Panel_4_Config_Relays 		extends 			Panel_0_Fragment
 	private ViewGroup							myContainer;
 	private View								myAdapterView;
 	private FragmentManager						myFragmentManager;
-//	private int									menuLayout;
 
-	public Panel_4_Config_Relays()
+	public Panel_4_Config_Pumps()
 	{
 		super();
 	}
-//    public Panel_4_Config_Relays(int menuLayout)
-//    {
-//		super(menuLayout);
-//		this.menuLayout												= menuLayout;
-//    }
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -67,19 +61,6 @@ public class Panel_4_Config_Relays 		extends 			Panel_0_Fragment
         myAdapterView												= (AdapterView) myView.findViewById(R.id.List_View);
 
         TCP_Send(new Ctrl_Parameters().new Request());
- 
-        
-//        if (Global.eRegConfiguration == null)
-//        {
-//        	TCP_Send(new Ctrl_Parameters().new Request());
-//        }
-//        else
-//        {
-//            AdapterView <Adapter_Thermometers> 	view			= (AdapterView) myView.findViewById(R.id.List_View);
-//            Adapter_Thermometers 				adapter			= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-//            view.setAdapter(adapter);
-//        //    view.setOnItemClickListener((OnItemClickListener) this);	
-//         }
  
         return myView;
     }
@@ -161,8 +142,8 @@ public class Panel_4_Config_Relays 		extends 			Panel_0_Fragment
 		if (result instanceof Ctrl_Parameters.Data)
 		{
 		Global.eRegConfiguration			 						= (Ctrl_Parameters.Data) result;
-        AdapterView <Adapter_Relays> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
-        Adapter_Relays 							adapter				= new Adapter_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
+        AdapterView <Adapter_Pumps> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
+        Adapter_Pumps							adapter				= new Adapter_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
         view.setAdapter(adapter);
 		}
 		else

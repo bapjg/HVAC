@@ -21,6 +21,7 @@ public class Ctrl_Parameters 			extends 					Ctrl_Abstract
 		public ArrayList<Thermometer> 	thermometerList 			= new ArrayList<Thermometer>();
 		public ArrayList<Relay> 		relayList 					= new ArrayList<Relay>();
 		public ArrayList<Pump> 			pumpList 					= new ArrayList<Pump>();
+		public ArrayList<Circuit> 		circuitList 				= new ArrayList<Circuit>();
 	}
 	public class Update 				extends 					Ctrl_Parameters
 	{
@@ -46,5 +47,14 @@ public class Ctrl_Parameters 			extends 					Ctrl_Abstract
 	{
 		private static final long 		serialVersionUID 			= 1L;
 		public String 					name;
+		public String 					relay;
+	}
+	public class Circuit 				extends  					Ctrl_Parameters
+	{
+		private static final long 		serialVersionUID 			= 1L;
+		public String 					name;
+		public String 					pump;
+		public String 					thermometer;
+		public String 					type;
 	}
 }

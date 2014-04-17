@@ -180,7 +180,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			    			paramThermometer.address						= globalThermometer.address;
 			    			message_ou.thermometerList.add(paramThermometer);
 			    		}
-			    		int i = 0;
+
 			    		for (Relay globalRelay : Global.relays.relayList)
 			    		{
 			    			Ctrl_Parameters.Relay 		paramRelay			= new Ctrl_Parameters().new Relay();
@@ -188,16 +188,23 @@ public class Thread_TCPListen <SendType> implements Runnable
 			    			paramRelay.relayBank							= globalRelay.relayBank;
 			    			paramRelay.relayNumber							= globalRelay.relayNumber;
 			    			message_ou.relayList.add(paramRelay);
-			    			i++;
 			    		}
-			    		System.out.println("TCP_Thread : relays counted at : " + i);
-			    		
 			    		
 			    		for (Pump globalPump : Global.pumps.pumpList)
 			    		{
 			    			Ctrl_Parameters.Pump 		paramPump			= new Ctrl_Parameters().new Pump();
 			    			paramPump.name									= globalPump.name;
 			    			message_ou.pumpList.add(paramPump);
+			    		}
+
+			    		for (Circuit_Abstract globalCircuit : Global.circuits.circuitList)
+			    		{
+			    			Ctrl_Parameters.Circuit		paramCircuit		= new Ctrl_Parameters().new Circuit();
+			    			paramCircuit.name								= globalCircuit.name;
+			    			paramCircuit.pump								= "pump"; //globalCircuit.relayBank;
+			    			paramCircuit.thermometer						= "thermo"; //globalCircuit.relayNumber;
+			    			paramCircuit.type								= "type"; //globalCircuit.relayNumber;
+			    			message_ou.circuitList.add(paramCircuit);
 			    		}
 			    		message_out											= message_ou;
 			        }
