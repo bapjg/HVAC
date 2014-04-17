@@ -46,13 +46,13 @@
 			</TempGradient>
 		</Circuit>
 
-		<Circuit type="Object" name="Radiator" tempMax="90000" circuitType="tempGradient" friendlyName="Radiateurs" rampUpTime="0" summerActivity="0">
+		<Circuit type="Object" name="Radiator" tempMax="90000" circuitType="TempGradient" friendlyName="Radiateurs" rampUpTime="0" summerActivity="0">
 			<TempGradient type="Object" name="Mixer" outsideLow="-15000"
 				tempLow="80000" outsideHigh="15000" tempHigh="35000">
 			</TempGradient>
 		</Circuit>
 
-		<Circuit type="Object" name="Hot_Water" tempMax="75000" circuitType="hotWater" friendlyName="ECS" outsideLow="9900" tempLow="9900" outsideHigh="9900" tempHigh="9900" rampUpTime="0"
+		<Circuit type="Object" name="Hot_Water" tempMax="75000" circuitType="HotWater" friendlyName="ECS" outsideLow="9900" tempLow="9900" outsideHigh="9900" tempHigh="9900" rampUpTime="0"
 			summerActivity="1">
 		</Circuit>
 

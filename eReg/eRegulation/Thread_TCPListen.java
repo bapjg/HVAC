@@ -203,7 +203,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			    			paramCircuit.name								= globalCircuit.name;
 			    			paramCircuit.pump								= "pump"; //globalCircuit.relayBank;
 			    			paramCircuit.thermometer						= "thermo"; //globalCircuit.relayNumber;
-			    			paramCircuit.type								= "type"; //globalCircuit.relayNumber;
+			    			paramCircuit.type								= globalCircuit.circuitType;
 			    			message_ou.circuitList.add(paramCircuit);
 			    		}
 			    		message_out											= message_ou;
