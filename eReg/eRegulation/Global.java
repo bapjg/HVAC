@@ -204,8 +204,9 @@ public class Global extends DefaultHandler
 				else if (tagName.equalsIgnoreCase("Pump"))
 				{
 					String name 						= attributes.getValue("name");
+					String relayName					= attributes.getValue("relay");
 
-					Global.pumps.addFromXML(name);
+					Global.pumps.addFromXML(name, relayName);
 				}
 				else if (tagName.equalsIgnoreCase("Params"))
 				{

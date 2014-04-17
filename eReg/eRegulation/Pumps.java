@@ -8,9 +8,9 @@ public class Pumps
 {
 	public ArrayList<Pump> pumpList = new ArrayList<Pump>();
 	
-	public void addFromXML(String name)
+	public void addFromXML(String name, String relayName)
 	{
-		Pump pumpItem 				= new Pump(name);
+		Pump pumpItem 				= new Pump(name, relayName);
 		pumpList.add(pumpItem);
 	}
 	public Pump fetchPump(String name)

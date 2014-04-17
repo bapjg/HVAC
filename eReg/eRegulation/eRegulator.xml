@@ -24,9 +24,9 @@
 	</Relays>
 
 	<Pumps type="Collection">
-		<Pump type="Object" name="Pump_Water">			</Pump>
-		<Pump type="Object" name="Pump_Radiator">		</Pump>
-		<Pump type="Object" name="Pump_Floor">			</Pump>
+		<Pump type="Object"  name="Pump_Water"		relay ="Pump_Water">			</Pump>
+		<Pump type="Object"  name="Pump_Radiator"	relay ="Pump_Radiator">			</Pump>
+		<Pump type="Object"  name="Pump_Floor"		relay ="Pump_Floor">			</Pump>
 	</Pumps>
 	
 	

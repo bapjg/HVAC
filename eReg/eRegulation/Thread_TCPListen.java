@@ -171,47 +171,11 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Parameters.Request)
 			        {
-			    		Ctrl_Parameters.Data message_ou						= new Ctrl_Parameters().new Data();
-			    		
-			    		for (Thermometer globalThermometer : Global.thermometers.thermometerList)
-			    		{
-			    			Ctrl_Parameters.Thermometer paramThermometer	= new Ctrl_Parameters().new Thermometer();
-			    			paramThermometer.name							= globalThermometer.name;
-			    			paramThermometer.address						= globalThermometer.address;
-			    			message_ou.thermometerList.add(paramThermometer);
-			    		}
-
-			    		for (Relay globalRelay : Global.relays.relayList)
-			    		{
-			    			Ctrl_Parameters.Relay 		paramRelay			= new Ctrl_Parameters().new Relay();
-			    			paramRelay.name									= globalRelay.name;
-			    			paramRelay.relayBank							= globalRelay.relayBank;
-			    			paramRelay.relayNumber							= globalRelay.relayNumber;
-			    			message_ou.relayList.add(paramRelay);
-			    		}
-			    		
-			    		for (Pump globalPump : Global.pumps.pumpList)
-			    		{
-			    			Ctrl_Parameters.Pump 		paramPump			= new Ctrl_Parameters().new Pump();
-			    			paramPump.name									= globalPump.name;
-			    			message_ou.pumpList.add(paramPump);
-			    		}
-
-			    		for (Circuit_Abstract globalCircuit : Global.circuits.circuitList)
-			    		{
-			    			Ctrl_Parameters.Circuit		paramCircuit		= new Ctrl_Parameters().new Circuit();
-			    			paramCircuit.name								= globalCircuit.name;
-			    			paramCircuit.pump								= "pump"; //globalCircuit.relayBank;
-			    			paramCircuit.thermometer						= "thermo"; //globalCircuit.relayNumber;
-			    			paramCircuit.type								= globalCircuit.circuitType;
-			    			message_ou.circuitList.add(paramCircuit);
-			    		}
-			    		message_out											= message_ou;
+			    		message_out											= process_Ctrl_Parameters_Request();
 			        }
 			    	else if (message_in instanceof Ctrl_Parameters.Update)
 			        {
 						Ctrl_Actions_Relays.Data message_ou					= new Ctrl_Actions_Relays().new Data();
-			    		
 			        }
 			    	else if (message_in instanceof Ctrl_Actions_Relays.Request)
 			        {
@@ -225,58 +189,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_Relays.Execute)
 			        {
-						// Action relays except for burner relay where prefer to use burner object
-			    		// to have fuel flow measured and fuel supply controlled
-			    		Ctrl_Actions_Relays.Execute		relayAction			= (Ctrl_Actions_Relays.Execute) message_in;
-						Relay							relay				= null;
-						Burner							burner				= null;
-						
-						if (relayAction.relayName.equalsIgnoreCase("Burner"))
-						{
-							burner											= Global.boiler.burner;
-						}
-						else if (relayAction.relayName.equalsIgnoreCase("HotWater"))
-						{
-							relay											= Global.pumpWater.relay;
-						}
-						else if (relayAction.relayName.equalsIgnoreCase("Floor"))
-						{
-							relay											= Global.pumpFloor.relay;
-						}
-						else if (relayAction.relayName.equalsIgnoreCase("Radiator"))
-						{
-							relay											= Global.pumpRadiator.relay;
-						}
-						if (relay != null)
-						{
-							if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_On)
-							{
-								relay.on();
-							}
-							else if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_Off)
-							{
-								relay.off();
-							}
-						}
-						else if (burner != null)
-						{
-							if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_On)
-							{
-								burner.powerOn();
-							}
-							else if (relayAction.relayAction == Ctrl_Actions_Relays.RELAY_Off)
-							{
-								burner.powerOff();
-							}
-						}
-						
-						Ctrl_Actions_Relays.Data message_ou					= new Ctrl_Actions_Relays().new Data();
-			            message_ou.burner 									= Global.burnerPower.isOn();
-			            message_ou.pumpHotWater	 							= Global.pumpWater.relay.isOn();
-			            message_ou.pumpFloor	 							= Global.pumpFloor.relay.isOn();
-			            message_ou.pumpRadiator	 							= Global.pumpRadiator.relay.isOn();
-		            
-			            message_out											= message_ou;
+			            message_out											= process_Ctrl_Actions_Relays_Execute((Ctrl_Actions_Relays.Execute) message_in);
 			        } 
 			    	else if (message_in instanceof Ctrl_Actions_Test_Mail.Execute)
 			        {
@@ -342,6 +255,98 @@ public class Thread_TCPListen <SendType> implements Runnable
 		{
 		}
  		LogIt.info("Thread_TCPListen", "Run", "Stopping", true);             
+	}
+	private Ctrl_Parameters.Data process_Ctrl_Parameters_Request()
+	{
+		Ctrl_Parameters.Data message_return						= new Ctrl_Parameters().new Data();
+		
+		for (Thermometer globalThermometer : Global.thermometers.thermometerList)
+		{
+			Ctrl_Parameters.Thermometer paramThermometer	= new Ctrl_Parameters().new Thermometer();
+			paramThermometer.name							= globalThermometer.name;
+			paramThermometer.address						= globalThermometer.address;
+			message_return.thermometerList.add(paramThermometer);
+		}
+
+		for (Relay globalRelay : Global.relays.relayList)
+		{
+			Ctrl_Parameters.Relay 		paramRelay			= new Ctrl_Parameters().new Relay();
+			paramRelay.name									= globalRelay.name;
+			paramRelay.relayBank							= globalRelay.relayBank;
+			paramRelay.relayNumber							= globalRelay.relayNumber;
+			message_return.relayList.add(paramRelay);
+		}
+		
+		for (Pump globalPump : Global.pumps.pumpList)
+		{
+			Ctrl_Parameters.Pump 		paramPump			= new Ctrl_Parameters().new Pump();
+			paramPump.name									= globalPump.name;
+			message_return.pumpList.add(paramPump);
+		}
+
+		for (Circuit_Abstract globalCircuit : Global.circuits.circuitList)
+		{
+			Ctrl_Parameters.Circuit		paramCircuit		= new Ctrl_Parameters().new Circuit();
+			paramCircuit.name								= globalCircuit.name;
+			paramCircuit.pump								= "pump"; //globalCircuit.relayBank;
+			paramCircuit.thermometer						= "thermo"; //globalCircuit.relayNumber;
+			paramCircuit.type								= globalCircuit.circuitType;
+			message_return.circuitList.add(paramCircuit);
+		}
+		return message_return;
+	}
+	private Ctrl_Actions_Relays.Data process_Ctrl_Actions_Relays_Execute(Ctrl_Actions_Relays.Execute message_in)
+	{
+		// Action relays except for burner relay where prefer to use burner object
+		// to have fuel flow measured and fuel supply controlled
+		Relay							relay				= null;
+		Burner							burner				= null;
+		
+		if (message_in.relayName.equalsIgnoreCase("Burner"))
+		{
+			burner											= Global.boiler.burner;
+		}
+		else if (message_in.relayName.equalsIgnoreCase("HotWater"))
+		{
+			relay											= Global.pumpWater.relay;
+		}
+		else if (message_in.relayName.equalsIgnoreCase("Floor"))
+		{
+			relay											= Global.pumpFloor.relay;
+		}
+		else if (message_in.relayName.equalsIgnoreCase("Radiator"))
+		{
+			relay											= Global.pumpRadiator.relay;
+		}
+		if (relay != null)
+		{
+			if (message_in.relayAction == Ctrl_Actions_Relays.RELAY_On)
+			{
+				relay.on();
+			}
+			else if (message_in.relayAction == Ctrl_Actions_Relays.RELAY_Off)
+			{
+				relay.off();
+			}
+		}
+		else if (burner != null)
+		{
+			if (message_in.relayAction == Ctrl_Actions_Relays.RELAY_On)
+			{
+				burner.powerOn();
+			}
+			else if (message_in.relayAction == Ctrl_Actions_Relays.RELAY_Off)
+			{
+				burner.powerOff();
+			}
+		}
+		
+		Ctrl_Actions_Relays.Data message_return				= new Ctrl_Actions_Relays().new Data();
+		message_return.burner 								= Global.burnerPower.isOn();
+		message_return.pumpHotWater	 						= Global.pumpWater.relay.isOn();
+		message_return.pumpFloor	 						= Global.pumpFloor.relay.isOn();
+		message_return.pumpRadiator	 						= Global.pumpRadiator.relay.isOn();
+		return message_return;
 	}
 }
  

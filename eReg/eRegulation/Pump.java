@@ -4,30 +4,30 @@ public class Pump
 {
 	public String 			name;
 	public Relay			relay;
-	public Boolean			isOn;
 	
-	public Pump(String name)
+	public Pump(String name, String relayName)
 	{
 		this.name 		    		= name;
-		this.relay					= Global.relays.fetchRelay(name);
-		this.isOn					= false;
+		this.relay					= Global.relays.fetchRelay(relayName);
 	}
 	public void on()
 	{
-		if (!isOn)
+		if (!isOn())
 		{
 			LogIt.action(this.name, "On");
 			relay.on();
-			isOn					= true;
 		}
 	}
 	public void off()
 	{
-		if (isOn)
+		if (isOn())
 		{
 			LogIt.action(this.name, "Off");
 			relay.off();
-			isOn					= false;
 		}
+	}
+	public Boolean isOn()
+	{
+		return relay.isOn();
 	}
 }
