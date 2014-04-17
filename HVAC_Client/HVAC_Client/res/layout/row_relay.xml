@@ -8,13 +8,13 @@
     <TextView
         android:id			="@+id/name"
         style				="@style/AD_Text"
-    	android:layout_width="100dp"/>
+    	android:layout_width="140dp"/>
     <TextView
         android:id			="@+id/relayBank"
         style				="@style/AD_Data" 
-    	android:layout_width="wrap_content"/>
+    	android:layout_width="70dp"/>
     <TextView
         android:id			="@+id/relayNumber"
         style				="@style/AD_Data" 
-    	android:layout_width="wrap_content"/>
+    	android:layout_width="120dp"/>
 </LinearLayout>

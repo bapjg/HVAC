@@ -10,18 +10,20 @@ import android.graphics.Typeface;
 import android.view.*;
 import android.widget.*;
 
-public class Adapter_Thermometers extends ArrayAdapter
+//Template										variable			= something
+//Template										ext/imp				class
+public class Adapter_Thermometers 				extends 			ArrayAdapter
 {
-    private ArrayList						listData;
-    private LayoutInflater 					myInflater;
+    private ArrayList							listData;
+    private LayoutInflater 						myInflater;
  
     public Adapter_Thermometers(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
         
-        this.listData 					= listData;
-        this.myInflater					= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        System.out.println("Adapter constructer called");
+        this.listData 												= listData;
+        this.myInflater												= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        System.out.println("Adapter constructer Thermo called");
     }
     @Override
     public int getCount() 
@@ -45,10 +47,10 @@ public class Adapter_Thermometers extends ArrayAdapter
     	
         if (convertView == null) 
         {
-        	convertView 				= myInflater.inflate(R.layout.row_thermometer, null);
-            holder 						= new ViewHolder();
-            holder.name 				= (TextView) convertView.findViewById(R.id.name);
-            holder.address 				= (TextView) convertView.findViewById(R.id.address);
+        	convertView 											= myInflater.inflate(R.layout.row_thermometer, null);
+            holder 													= new ViewHolder();
+            holder.name 											= (TextView) convertView.findViewById(R.id.name);
+            holder.address 											= (TextView) convertView.findViewById(R.id.address);
             convertView.setTag(holder);
         } 
         else 
@@ -71,12 +73,13 @@ public class Adapter_Thermometers extends ArrayAdapter
 	        holder.name.setText				(((Ctrl_Parameters.Thermometer) listData.get(position - 1)).name);
 	        holder.address.setText			(((Ctrl_Parameters.Thermometer) listData.get(position - 1)).address);
         }
+        System.out.println("Adapter getView Thermo called, position " + position);
         return convertView;
     }
     static class ViewHolder 
     {
-    	TextView 						name;
-    	TextView 						address;
+    	TextView 							name;
+    	TextView 							address;
     }
 //    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
 //    {
