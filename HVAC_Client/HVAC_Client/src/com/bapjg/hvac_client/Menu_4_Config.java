@@ -22,21 +22,22 @@ public class Menu_4_Config 							extends 			Menu_0_Fragment
 	}
 	public void onClick(View myView) // This is the onClick event from the Menu
 	{
-   	 	super.onClick(myView);
+		super.onClick(myView);
 		
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
     	FragmentManager 					fManager					= getFragmentManager();
-    	FragmentTransaction					fTransaction;
-    	Fragment 							panelFragment;
+    	FragmentTransaction					fTransaction				= fManager.beginTransaction();
+    	Fragment 							panelFragment				= null;
     	
     	if (myCaption.equalsIgnoreCase("Thermometers"))
     	{
      		panelFragment 												= new Panel_4_Config_Thermometers(R.layout.panel_4_config_thermometers);
-
-    		fTransaction												= fManager.beginTransaction();
-    		fTransaction.replace(R.id.panel_container, panelFragment);
-    		fTransaction.commit();
     	}
+    	if (panelFragment != null)
+    	{
+    		fTransaction.replace(R.id.panel_container, panelFragment);
+    	}
+		fTransaction.commit();
 	}
 }

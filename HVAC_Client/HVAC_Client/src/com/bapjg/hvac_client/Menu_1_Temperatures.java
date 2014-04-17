@@ -31,16 +31,17 @@ public class Menu_1_Temperatures 	extends 	Menu_0_Fragment
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
     	FragmentManager 					fManager					= getFragmentManager();
-    	FragmentTransaction					fTransaction;
-    	Fragment 							panelFragment;
+    	FragmentTransaction					fTransaction				= fManager.beginTransaction();
+    	Fragment 							panelFragment				= null;
     	
     	if (myCaption.equalsIgnoreCase("Temperatures"))
     	{
     		panelFragment 												= new Panel_1_Temperatures(R.layout.panel_1_temperatures);
-
-			fTransaction												= fManager.beginTransaction();
-    		fTransaction.replace(R.id.panel_container, panelFragment);
-    		fTransaction.commit();
     	}
+    	if (panelFragment != null)
+    	{
+    		fTransaction.replace(R.id.panel_container, panelFragment);
+    	}
+		fTransaction.commit();
 	}
 }

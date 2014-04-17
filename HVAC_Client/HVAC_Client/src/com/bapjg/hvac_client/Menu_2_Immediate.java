@@ -23,36 +23,31 @@ public class Menu_2_Immediate 				extends 					Menu_0_Fragment
 	public void onClick(View myView) 
 	{
    	 	super.onClick(myView);
+
+		super.onClick(myView);
 		
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
     	FragmentManager 					fManager					= getFragmentManager();
-    	FragmentTransaction					fTransaction;
-    	Fragment 							panelFragment;
+    	FragmentTransaction					fTransaction				= fManager.beginTransaction();
+    	Fragment 							panelFragment				= null;
     	
     	if (myCaption.equalsIgnoreCase("Hot Water"))
     	{
      		panelFragment 												= new Panel_2_Immediate(R.layout.panel_2_immediate, "Hot_Water");
-
-    		fTransaction												= fManager.beginTransaction();
-    		fTransaction.replace(R.id.panel_container, panelFragment);
-    		fTransaction.commit();
     	}
     	else if (myCaption.equalsIgnoreCase("Radiator"))
     	{
     		panelFragment 												= new Panel_2_Immediate(R.layout.panel_2_immediate, "Radiator");
-
-			fTransaction												= fManager.beginTransaction();
-    		fTransaction.replace(R.id.panel_container, panelFragment);
-    		fTransaction.commit();
      	}
     	else if (myCaption.equalsIgnoreCase("Floor"))
     	{
     		panelFragment 												= new Panel_2_Immediate(R.layout.panel_2_immediate, "Floor");
-
-			fTransaction												= fManager.beginTransaction();
-    		fTransaction.replace(R.id.panel_container, panelFragment);
-     		fTransaction.commit();
     	}
+    	if (panelFragment != null)
+    	{
+    		fTransaction.replace(R.id.panel_container, panelFragment);
+    	}
+    	fTransaction.commit();   	 	
 	}
 }

@@ -26,37 +26,30 @@ public class Menu_5_Actions extends Menu_0_Fragment implements View.OnClickListe
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
     	FragmentManager 					fManager					= getFragmentManager();
-    	FragmentTransaction					fTransaction;
-    	Fragment 							panelFragment;
+    	FragmentTransaction					fTransaction				= fManager.beginTransaction();
+    	Fragment 							panelFragment				= null;
     	
     	if (myCaption.equalsIgnoreCase("Relays"))
     	{
     		panelFragment 												= new Panel_5_Actions_Relays(R.layout.panel_5_actions_relays);
-
-			fTransaction												= fManager.beginTransaction();
-    		fTransaction.replace(R.id.panel_container, panelFragment);
-    		fTransaction.commit();
     	}
     	else if (myCaption.equalsIgnoreCase("Test Mail"))
     	{
     		panelFragment 												= new Panel_5_Actions_Test_Mail(R.layout.panel_5_actions_test_mail);
-
-			fTransaction												= fManager.beginTransaction();
-    		fTransaction.replace(R.id.panel_container, panelFragment);
-    		fTransaction.commit();
     	}
     	else if (myCaption.equalsIgnoreCase("Stop"))
     	{
     		panelFragment 												= new Panel_5_Actions_Stop(R.layout.panel_5_actions_stop);
-
-			fTransaction												= fManager.beginTransaction();
-    		fTransaction.replace(R.id.panel_container, panelFragment);
-    		fTransaction.commit();
     	}
     	else if (myCaption.equalsIgnoreCase("Action4"))
     	{
     		System.out.println("Action4 Click");
     		System.out.println("Action4 processed");
     	}
+    	if (panelFragment != null)
+    	{
+    		fTransaction.replace(R.id.panel_container, panelFragment);
+    	}
+		fTransaction.commit();
 	}
 }

@@ -2,6 +2,8 @@ package com.bapjg.hvac_client;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,12 +25,22 @@ public class Menu_3_Calendars extends Menu_0_Fragment implements View.OnClickLis
 		
     	Button 								myButton 					= (Button) myView;
     	String								myCaption					= myButton.getText().toString();
+    	FragmentManager 					fManager					= getFragmentManager();
+    	FragmentTransaction					fTransaction				= fManager.beginTransaction();
+    	Fragment 							panelFragment				= null;
     	
     	if (myCaption.equalsIgnoreCase("Relays"))
     	{
-    		System.out.println("Menu : Temperatures Click again");
-    		//Global.panelRelays.update();
-    		System.out.println("Menu : Temperatures Called update");
+//    		panelFragment 												= new Panel_1_Temperatures(R.layout.panel_1_temperatures);
     	}
+    	else if (myCaption.equalsIgnoreCase("Widgets"))
+    	{
+//    		panelFragment 												= new Panel_1_Temperatures(R.layout.panel_1_temperatures);
+    	}
+    	if (panelFragment != null)
+    	{
+    		fTransaction.replace(R.id.panel_container, panelFragment);
+    	}
+		fTransaction.commit();
 	}
 }
