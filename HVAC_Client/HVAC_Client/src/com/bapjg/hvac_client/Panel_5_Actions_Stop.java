@@ -74,14 +74,9 @@ public class Panel_5_Actions_Stop 			extends 	Panel_0_Fragment
 	}
 	public void processFinish(Ctrl_Abstract result) 
 	{  
-		Activity 						a					= getActivity();
-		
-		System.out.println("activity = " + a);
-		if (a == null) 
-		{
-			// Do nothing
-		}
-		else if (result instanceof Ctrl_Actions_Stop.Ack)
+		Activity							activity					= getActivity();		
+
+		if (result instanceof Ctrl_Actions_Stop.Ack)
 		{
 			Global.toaster("Stop Request accepted", true);
 		}   

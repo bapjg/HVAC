@@ -32,8 +32,10 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 @SuppressLint("ValidFragment")
-public class Panel_4_Config_Thermometers 				extends 	Panel_0_Fragment 
-														implements 	TCP_Response
+//Template									variable			= something
+//Template									ext/imp				clasee
+public class Panel_4_Config_Thermometers 	extends 			Panel_0_Fragment 
+											implements 			TCP_Response
 {
 	private Adapter_Thermometers 		adapter;
 	private LayoutInflater				myInflater;
@@ -49,19 +51,18 @@ public class Panel_4_Config_Thermometers 				extends 	Panel_0_Fragment
     public Panel_4_Config_Thermometers(int menuLayout)
     {
 		super(menuLayout);
-		this.menuLayout													= menuLayout;
+		this.menuLayout											= menuLayout;
     }
-
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        myInflater														= inflater;
-        myContainer 													= container;
-        myActivity														= getActivity();
-        myFragmentManager 												= myActivity.getFragmentManager();
-        View 							myView 							= myInflater.inflate(R.layout.panel_4_config_thermometers, container, false);
-//        View 							myView 							= myInflater.inflate(menuLayout, myContainer, false);
+        myInflater												= inflater;
+        myContainer 											= container;
+        myActivity												= getActivity();
+        myFragmentManager 										= myActivity.getFragmentManager();
+        View 								myView 				= myInflater.inflate(R.layout.panel_4_config_thermometers, container, false);
+//        View 								myView 				= myInflater.inflate(menuLayout, myContainer, false);
 
         if (Global.eRegConfiguration == null)
         {
@@ -69,9 +70,9 @@ public class Panel_4_Config_Thermometers 				extends 	Panel_0_Fragment
         }
         else
         {
-            AdapterView <Adapter_Thermometers> 	view						= (AdapterView) myView.findViewById(R.id.List_View);
+            AdapterView <Adapter_Thermometers> 	view			= (AdapterView) myView.findViewById(R.id.List_View);
             
-            Adapter_Thermometers 				adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+            Adapter_Thermometers 				adapter			= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
             
             view.setAdapter(adapter);
 //            view.setOnItemClickListener((OnItemClickListener) this);	
@@ -84,11 +85,11 @@ public class Panel_4_Config_Thermometers 				extends 	Panel_0_Fragment
         if (position > 0)
         {
         	System.out.println("position : " + position);
-	        ViewGroup 					viewGroup						= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
-        	View 						newView 						= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
+	        ViewGroup 					viewGroup				= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
+        	View 						newView 				= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
 
-        	FragmentTransaction 		ft 								= myFragmentManager.beginTransaction();
-        	Ctrl_Parameters.Thermometer dt								= Global.eRegConfiguration.thermometerList.get(position -1);
+        	FragmentTransaction 		ft 						= myFragmentManager.beginTransaction();
+        	Ctrl_Parameters.Thermometer dt						= Global.eRegConfiguration.thermometerList.get(position -1);
 
      //   	ft.replace(R.id.panel_container, dt);
         	ft.commit();
@@ -100,15 +101,17 @@ public class Panel_4_Config_Thermometers 				extends 	Panel_0_Fragment
    	}
     public void onClick(View myView)
     {
-     	// onClick for all buttons in Menu_Pane
-    	Button 								myButton 					= (Button) myView;
-    	String								myCaption					= myButton.getText().toString();
+// Template									variable			= something
+// Template									ext/imp				clasee
+    	// onClick for all buttons in Menu_Pane
+    	Button 								myButton 			= (Button) myView;
+    	String								myCaption			= myButton.getText().toString();
     	
 		// Set all textColours to white
-		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();
+		ViewGroup 							viewParent			= (ViewGroup) myView.getParent();
 		for (int i = 0; i < viewParent.getChildCount(); i++)
 		{
-			Button							buttonChild 				= (Button) viewParent.getChildAt(i);
+			Button							buttonChild			= (Button) viewParent.getChildAt(i);
 			buttonChild.setTextColor(Color.WHITE);
 		}
 		
@@ -125,11 +128,11 @@ public class Panel_4_Config_Thermometers 				extends 	Panel_0_Fragment
     	// This sets up the code to display the panel and get clicks in order to display an update screen
 
         // First, ensure that correct view is displayed
-    	ViewGroup					subContainer						= (ViewGroup) myContainer.getChildAt(0);		
-    	View 						newView 							= myInflater.inflate(R.layout.panel_4_config_thermometers, subContainer, true);
+    	ViewGroup							subContainer				= (ViewGroup) myContainer.getChildAt(0);		
+    	View 								newView 					= myInflater.inflate(R.layout.panel_4_config_thermometers, subContainer, true);
 
-    	FragmentTransaction				ft								= myFragmentManager.beginTransaction();
-    	//Panel_2_Configuration 			dt 								= new Panel_2_Configuration();
+    	FragmentTransaction					ft							= myFragmentManager.beginTransaction();
+    	//Panel_2_Configuration 			dt 							= new Panel_2_Configuration();
     	ft.replace(R.id.panel_subcontainer, this);
     	ft.commit();
 
@@ -144,21 +147,18 @@ public class Panel_4_Config_Thermometers 				extends 	Panel_0_Fragment
     }
 	public void TCP_Send(Ctrl_Abstract message)
 	{
-		TCP_Task						task				= new TCP_Task();
-	   	task.callBack										= this;					// processFinish
+		TCP_Task							task						= new TCP_Task();
+	   	task.callBack													= this;					// processFinish
 	   	task.execute(message);
 	}
 	public void processFinish(Ctrl_Abstract result) 
 	{  
-//		if (a == null) 
-//		{
-//			// Do nothing
-//		}
+		Activity							activity					= getActivity();		
+
 		if (result instanceof Ctrl_Parameters.Data)
 		{
-			Global.eRegConfiguration			 			= (Ctrl_Parameters.Data) result;
-
-			Global.toaster("Data received", true);
+			Global.eRegConfiguration			 						= (Ctrl_Parameters.Data) result;
+			Global.toaster("Data received", true);	
 		}
 		else
 		{

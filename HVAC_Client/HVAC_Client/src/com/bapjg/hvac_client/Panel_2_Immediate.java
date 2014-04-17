@@ -22,32 +22,30 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
-public class Panel_2_Immediate 		extends 	Panel_0_Fragment  
-									implements 	TCP_Response					// , Dialog_Response
+public class Panel_2_Immediate 				extends 			Panel_0_Fragment  
+											implements 			TCP_Response
 {
-	public String						circuitName;
+	public String							circuitName;
 	
 	public Panel_2_Immediate()
 	{
 		super();
-		circuitName											= "";
+		circuitName												= "";
 	}
     public Panel_2_Immediate(int menuLayout, String circuitName)
     {
 		super(menuLayout);
-		this.circuitName									= circuitName;
+		this.circuitName										= circuitName;
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity										= getActivity();
-    	View							thisView			= inflater.inflate(R.layout.panel_2_immediate, container, false);
+    	this.activity											= getActivity();
+    	View								thisView			= inflater.inflate(R.layout.panel_2_immediate, container, false);
 
-    	Ctrl_Immediate.Request			taskRequest			= new Ctrl_Immediate().new Request();
-    	taskRequest.circuitName								= this.circuitName;
+    	Ctrl_Immediate.Request				taskRequest			= new Ctrl_Immediate().new Request();
+    	taskRequest.circuitName									= this.circuitName;
     	
-    	TCP_Task						task				= new TCP_Task();
-    	task.callBack										= this;
-    	task.execute(taskRequest);
+    	TCP_Send(taskRequest);
 
     	thisView.findViewById(R.id.buttonOk).setOnClickListener((OnClickListener) this);
     	thisView.findViewById(R.id.RowTime).setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {rowTimeClick(v);}});
@@ -56,7 +54,7 @@ public class Panel_2_Immediate 		extends 	Panel_0_Fragment
     }
 	public void rowTempClick(View myView) 
 	{
-		TextView						writeBack			= (TextView) ((ViewGroup) myView).getChildAt(1);
+		TextView							writeBack			= (TextView) ((ViewGroup) myView).getChildAt(1);
 		Dialog_Temperature df = new Dialog_Temperature(writeBack, 25, 5, 8);
 		df.show(getFragmentManager(), "Dialog_Temperature");
 	}
@@ -79,7 +77,7 @@ public class Panel_2_Immediate 		extends 	Panel_0_Fragment
     		Ctrl_Immediate.Execute			message_out			= new Ctrl_Immediate().new Execute();
  
 //			NumberPicker 					np 					= (NumberPicker) getActivity().findViewById(R.id.tempObjective);
-	   		message_out.circuitName								= this.circuitName;
+	   		message_out.circuitName									= this.circuitName;
 	   		TextView						temp				= (TextView) getActivity().findViewById(R.id.TempObjective);
 	   		
 	   		message_out.tempObjective							= Integer.parseInt(temp.getText().toString()) * 1000;
@@ -109,55 +107,55 @@ public class Panel_2_Immediate 		extends 	Panel_0_Fragment
 	   		message_out.circuitName								= this.circuitName;
 	   		message_out.action									= message_out.ACTION_Stop;
 
-	
-        	TCP_Task						task				= new TCP_Task();
-        	task.callBack										= this;
-        	task.execute(message_out);
+        	TCP_Send(message_out);
     	}
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 	{
 	}
+	public void TCP_Send(Ctrl_Abstract message)
+	{
+		TCP_Task						task					= new TCP_Task();
+	   	task.callBack											= this;					// processFinish
+	   	task.execute(message);
+	}
 	public void processFinish(Ctrl_Abstract result) 
 	{  
-		Activity a							= getActivity();
+		Activity							activity					= getActivity();		
+
 		
-		if (a == null) 
+		if (result instanceof Ctrl_Immediate.Data)
 		{
-			// Do nothing
-		}
-		else if (result instanceof Ctrl_Immediate.Data)
-		{
-			Ctrl_Immediate.Data msg_received 	= (Ctrl_Immediate.Data) result;
+			Ctrl_Immediate.Data msg_received 					= (Ctrl_Immediate.Data) result;
 			
-			TextView		timeEnd				= (TextView) a.findViewById(R.id.TimeEnd);
-			TextView		tempObjective		= (TextView) a.findViewById(R.id.TempObjective);
+			TextView		timeEnd								= (TextView) activity.findViewById(R.id.TimeEnd);
+			TextView		tempObjective						= (TextView) activity.findViewById(R.id.TempObjective);
 			
 			timeEnd.setText(Global.displayTimeShort(msg_received.timeStart + 60 * 60 * 1000));
 			tempObjective.setText(((Integer) (msg_received.tempObjective/1000)).toString());
 			
 			if (msg_received.executionActive)
 			{
-				((TextView) a.findViewById(R.id.TimeStart)).setText("Current");
-				((TextView) a.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
-				((Button) a.findViewById(R.id.buttonOk)).setText("Stop");
-				((View) a.findViewById(R.id.RowTitle)).setVisibility(View.GONE);
-				((View) a.findViewById(R.id.RowTime)).setVisibility(View.GONE);
-				((View) a.findViewById(R.id.RowTemp)).setVisibility(View.GONE);
+				((TextView) 	activity.findViewById(R.id.TimeStart)).setText("Current");
+				((TextView) 	activity.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
+				((Button) 		activity.findViewById(R.id.buttonOk)).setText("Stop");
+				((View) 		activity.findViewById(R.id.RowTitle)).setVisibility(View.GONE);
+				((View) 		activity.findViewById(R.id.RowTime)).setVisibility(View.GONE);
+				((View) 		activity.findViewById(R.id.RowTemp)).setVisibility(View.GONE);
 				
 			}
 			else if (msg_received.executionPlanned)
 			{
-				((TextView) a.findViewById(R.id.TimeStart)).setText(Global.displayTimeShort(msg_received.timeStart));
-				((TextView) a.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
-				((Button) a.findViewById(R.id.buttonOk)).setText("Start");
+				((TextView) 	activity.findViewById(R.id.TimeStart)).setText(Global.displayTimeShort(msg_received.timeStart));
+				((TextView) 	activity.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
+				((Button) 		activity.findViewById(R.id.buttonOk)).setText("Start");
 			}
 			else
 			{
-				((TextView) a.findViewById(R.id.TimeStart)).setText("No Plan");
-				((TextView) a.findViewById(R.id.TargetTemp)).setText(" ");
-				((Button) a.findViewById(R.id.buttonOk)).setText("Start");
+				((TextView) 	activity.findViewById(R.id.TimeStart)).setText("No Plan");
+				((TextView) 	activity.findViewById(R.id.TargetTemp)).setText(" ");
+				((Button) 		activity.findViewById(R.id.buttonOk)).setText("Start");
 			}
 		}
 		else if (result instanceof Ctrl_Immediate.NoConnection)

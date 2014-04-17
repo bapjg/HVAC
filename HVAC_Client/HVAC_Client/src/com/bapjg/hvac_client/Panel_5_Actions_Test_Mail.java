@@ -35,8 +35,8 @@ public class Panel_5_Actions_Test_Mail 		extends 	Panel_0_Fragment
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity											= getActivity();
-    	View								thisView			= inflater.inflate(R.layout.panel_5_actions_test_mail, container, false);
+    	this.activity													= getActivity();
+    	View								thisView					= inflater.inflate(R.layout.panel_5_actions_test_mail, container, false);
  
     	thisView.findViewById(R.id.buttonSendMail).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {sendMail(v);	}});
    	
@@ -52,20 +52,15 @@ public class Panel_5_Actions_Test_Mail 		extends 	Panel_0_Fragment
 	}
 	public void TCP_Send(Ctrl_Abstract message)
 	{
-		TCP_Task						task				= new TCP_Task();
-	   	task.callBack										= this;					// processFinish
+		TCP_Task							task						= new TCP_Task();
+	   	task.callBack													= this;					// processFinish
 	   	task.execute(message);
 	}
 	public void processFinish(Ctrl_Abstract result) 
 	{  
-		Activity 						a					= getActivity();
-		
-		System.out.println("activity = " + a);
-		if (a == null) 
-		{
-			// Do nothing
-		}
-		else if (result instanceof Ctrl_Actions_Test_Mail.Ack)
+		Activity							activity					= getActivity();		
+
+		if (result instanceof Ctrl_Actions_Test_Mail.Ack)
 		{
 			Global.toaster("eMail sent", true);
 		}   

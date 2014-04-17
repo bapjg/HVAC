@@ -30,8 +30,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Messages.*;
 
 @SuppressLint("ValidFragment")
-public class Panel_1_Temperatures 	extends 	Panel_0_Fragment 
-									implements 	TCP_Response
+public class Panel_1_Temperatures 			extends 			Panel_0_Fragment 
+											implements 			TCP_Response
 {
 	public TCP_Task							task;
 	
@@ -48,30 +48,27 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	System.out.println("Panel onCreateView Start");
-		this.activity										= getActivity();
+		this.activity											= getActivity();
     	
-    	View							thisView			= inflater.inflate(R.layout.panel_1_temperatures, container, false);
+    	View								thisView			= inflater.inflate(R.layout.panel_1_temperatures, container, false);
     	
-    	System.out.println("Panel onCreateView new Task");
-    	task												= new TCP_Task();
-    	task.callBack										= this;
-     	task.execute(new Ctrl_Temperatures().new Request());
-    	System.out.println("Panel onCreateView executedddddddddddddddd");
+    	TCP_Send(new Ctrl_Temperatures().new Request());
+    	
         return thisView;
     }
-    public void processFinish(Ctrl_Abstract result) 
+	public void TCP_Send(Ctrl_Abstract message)
+	{
+		TCP_Task							task				= new TCP_Task();
+	   	task.callBack											= this;					// processFinish
+	   	task.execute(message);
+	}
+	public void processFinish(Ctrl_Abstract result) 
 	{             
-		Activity a							= getActivity();
-		
-		System.out.println("activity = " + a);
-		if (a == null) 
+		Activity							activity					= getActivity();		
+
+		if (result instanceof Ctrl_Temperatures.Data)
 		{
-			// Do nothing
-		}
-		else if (result instanceof Ctrl_Temperatures.Data)
-		{
-			Ctrl_Temperatures.Data msg_received 	= (Ctrl_Temperatures.Data) result;
+			Ctrl_Temperatures.Data msg_received 				= (Ctrl_Temperatures.Data) result;
 			
 			((TextView) a.findViewById(R.id.Date)).setText(Global.displayDate(msg_received.dateTime));
 			((TextView) a.findViewById(R.id.Time)).setText(Global.displayTime(msg_received.dateTime));
@@ -95,59 +92,6 @@ public class Panel_1_Temperatures 	extends 	Panel_0_Fragment
 		{
 			Global.toast("A Nack has been returned", false);
 		}
-    }    	
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {}
-	@Override
-	public void onClick(View myView) 
-	{
-    	System.out.println("PanelPanel :$$$$$$$$$$::: We have arrived in onClick again");
-    	Button 								myButton 					= (Button) myView;
-    	String								myCaption					= myButton.getText().toString();
-    	
-		// Set all textColours to white
-		ViewGroup 							viewParent					= (ViewGroup) myView.getParent();
-		for (int i = 0; i < viewParent.getChildCount(); i++)
-		{
-			Button							buttonChild 				= (Button) viewParent.getChildAt(i);
-			buttonChild.setTextColor(Color.WHITE);
-		}
-		
-		((Button) myView).setTextColor(Color.YELLOW);
-
-    	if (myCaption.equalsIgnoreCase("Temperatures"))
-    	{
-    		buttonTemperaturesClick(myView);	
-    	}
-	}
-    public void buttonTemperaturesClick(View myView)
-    {
-//		if (!Global.initialisationCompleted)
-
-    	Global.toast("P1_Temperatures : buttonTemperaturesClick called", true);
-    	
-    	task													= new TCP_Task();
-    	task.callBack											= this;
-    	task.execute(new Ctrl_Temperatures().new Request());
-
-
-// This sets up the code to display the panel and get clicks in order to display an update screen
-// All this comes from Thermometers
-//        ArrayList  	<Mgmt_Msg_Configuration.Thermometer>	data		= Global.configuration.thermometerList;
-//        Activity 							activity					= (Activity) Global.actContext;
-//        AdapterView <Adapter_Thermometers> 	view						= (AdapterView) activity.findViewById(R.id.List_View);
-//        
-//        Adapter_Thermometers 				adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, data);
-//        
-//        view.setAdapter(adapter);
-//        view.setOnItemClickListener((OnItemClickListener) this);	
-    }
-    public void update()
-    {
-    	System.out.println("Panel : update called");
-    	task													= new TCP_Task();
-    	task.callBack											= this;
-    	task.execute(new Ctrl_Temperatures().new Request());
-    }
+    } 
 }
 

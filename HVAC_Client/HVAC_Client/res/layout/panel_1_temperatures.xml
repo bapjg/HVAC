@@ -13,11 +13,7 @@
 	    android:layout_height="wrap_content" >
 
         <TableRow																					style	= "@style/AD_Row"   >
-
-            <TextView
-                style="@style/AD_Text"
-                android:text="Date" />
-
+            <TextView		android:text="Date"														style	= "@style/AD_Data"  />
             <TextView       android:text	= " "				android:id	= "@+id/Date"			style	= "@style/AD_Data"	/>
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >

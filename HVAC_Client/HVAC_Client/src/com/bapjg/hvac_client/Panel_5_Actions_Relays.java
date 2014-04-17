@@ -94,21 +94,16 @@ public class Panel_5_Actions_Relays 		extends 			Panel_0_Fragment
 	}
 	public void processFinish(Ctrl_Abstract result) 
 	{  
-		Activity a														= getActivity();
-		
-		System.out.println("activity = " + a);
-		if (a == null) 
-		{
-			// Do nothing
-		}
-		else if (result instanceof Ctrl_Actions_Relays.Data)
+		Activity							activity					= getActivity();		
+
+		if (result instanceof Ctrl_Actions_Relays.Data)
 		{
 			Ctrl_Actions_Relays.Data 				msg_received 		= (Ctrl_Actions_Relays.Data) result;
 
-			((Switch) a.findViewById(R.id.burner)).setChecked(msg_received.burner);
-			((Switch) a.findViewById(R.id.hotwater)).setChecked(msg_received.pumpHotWater);
-			((Switch) a.findViewById(R.id.floor)).setChecked(msg_received.pumpFloor);
-			((Switch) a.findViewById(R.id.radiator)).setChecked(msg_received.pumpRadiator);
+			((Switch) activity.findViewById(R.id.burner)).setChecked(msg_received.burner);
+			((Switch) activity.findViewById(R.id.hotwater)).setChecked(msg_received.pumpHotWater);
+			((Switch) activity.findViewById(R.id.floor)).setChecked(msg_received.pumpFloor);
+			((Switch) activity.findViewById(R.id.radiator)).setChecked(msg_received.pumpRadiator);
 		}   
 	}
 }

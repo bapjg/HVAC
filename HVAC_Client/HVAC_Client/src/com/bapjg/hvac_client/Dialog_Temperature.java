@@ -13,15 +13,15 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
-public class Dialog_Temperature extends DialogFragment 
+public class Dialog_Temperature 								extends 		DialogFragment 
 {
 	public NumberPicker 			np;
-	public Dialog_Response			callBack;
-	public Integer	tempMin;
-	public Integer  step;
-	public Integer  steps;
-	public Integer  tempInitial;
-	public TextView	writeBack;
+	public Interface_Response			callBack;
+	public Integer					tempMin;
+	public Integer  				step;
+	public Integer  				steps;
+	public Integer  				tempInitial;
+	public TextView					writeBack;
 	
 	
 	public Dialog_Temperature() 
@@ -59,7 +59,7 @@ public class Dialog_Temperature extends DialogFragment
 	    String[] 				temps 							= new String[steps + 1];
 	    for(int i = 0; i < steps + 1; i++)
 	    {
-	    	temps[i] 											= Integer.toString(i*step + tempMin);
+	    	temps[i] 											= Integer.toString(i * step + tempMin);
 	    }
 
 	    np.setMinValue(tempMin);
@@ -68,26 +68,19 @@ public class Dialog_Temperature extends DialogFragment
 	    np.setDisplayedValues(temps);
 	    np.setValue(tempMin + (tempInitial - tempMin)/step);		// Min + index
        
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which) 
-            {
-             	Integer temperature =(np.getValue() - tempMin) * step + tempMin;
-             	writeBack.setText(temperature.toString());
-            	dialog.dismiss();
-            }
-        }
-        );
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
-        {
-           @Override
-            public void onClick(DialogInterface dialog, int which) 
-            {
-                dialog.dismiss();
-            }
-        }
-        );
+        builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
+
         return builder.create();
+    }
+    public void buttonOk (DialogInterface dialog, int which)
+    {
+     	Integer temperature =(np.getValue() - tempMin) * step + tempMin;
+     	writeBack.setText(temperature.toString());
+    	dialog.dismiss();
+    }
+    public void buttonCancel (DialogInterface dialog, int which)
+    {
+    	dialog.dismiss();
     }
 }

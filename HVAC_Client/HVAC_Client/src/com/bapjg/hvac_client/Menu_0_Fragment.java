@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-public class Menu_0_Fragment extends Fragment 
+public class Menu_0_Fragment 							extends 			Fragment 
 {
 	private 	int					menuLayout;
 	

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 @SuppressLint("ValidFragment")
-public class Dialog_Time extends DialogFragment 
+public class Dialog_Time 										extends 		DialogFragment 
 {
 	public TimePicker 	tp;
 	public Integer		tempMin;
@@ -53,26 +53,19 @@ public class Dialog_Time extends DialogFragment
 		tp 														= (TimePicker) dialogView.findViewById(R.id.timeObjective);
 		tp.setIs24HourView(true);
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which) 
-            {
-//             	Integer temperature =(tp.getValue() - tempMin) * step + tempMin;
-//             	writeBack.setText(temperature.toString());
-            	dialog.dismiss();
-            }
-        }
-        );
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
-        {
-           @Override
-            public void onClick(DialogInterface dialog, int which) 
-            {
-                dialog.dismiss();
-            }
-        }
-        );
+        builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
         return builder.create();
     }
+    public void buttonOk (DialogInterface dialog, int which)
+    {
+//     	Integer temperature =(np.getValue() - tempMin) * step + tempMin;
+//     	writeBack.setText(temperature.toString());
+    	dialog.dismiss();
+    }
+    public void buttonCancel (DialogInterface dialog, int which)
+    {
+    	dialog.dismiss();
+    }
+
 }
