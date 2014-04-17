@@ -21,9 +21,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// Template									variable			= something
+// Template									ext/imp				clasee
 @SuppressLint("ValidFragment")
-public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment  
-											implements 	TCP_Response
+public class Panel_5_Actions_Relays 		extends 			Panel_0_Fragment  
+											implements 			TCP_Response
 {
 	public int								panelLayout;
 	
@@ -86,13 +88,13 @@ public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment
 	}
 	public void TCP_Send(Ctrl_Abstract message)
 	{
-		TCP_Task						task				= new TCP_Task();
-	   	task.callBack										= this;					// processFinish
+		TCP_Task									task				= new TCP_Task();
+	   	task.callBack													= this;					// processFinish
 	   	task.execute(message);
 	}
 	public void processFinish(Ctrl_Abstract result) 
 	{  
-		Activity a							= getActivity();
+		Activity a														= getActivity();
 		
 		System.out.println("activity = " + a);
 		if (a == null) 
@@ -101,7 +103,7 @@ public class Panel_5_Actions_Relays 		extends 	Panel_0_Fragment
 		}
 		else if (result instanceof Ctrl_Actions_Relays.Data)
 		{
-			Ctrl_Actions_Relays.Data msg_received 	= (Ctrl_Actions_Relays.Data) result;
+			Ctrl_Actions_Relays.Data 				msg_received 		= (Ctrl_Actions_Relays.Data) result;
 
 			((Switch) a.findViewById(R.id.burner)).setChecked(msg_received.burner);
 			((Switch) a.findViewById(R.id.hotwater)).setChecked(msg_received.pumpHotWater);
