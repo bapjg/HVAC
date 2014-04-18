@@ -2,7 +2,7 @@ package eRegulation;
 
 public class Circuit_HotWater extends Circuit_Abstract
 {
-	public Circuit_HotWater(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
+	public Circuit_HotWater(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 	}

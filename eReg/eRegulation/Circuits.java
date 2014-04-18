@@ -12,24 +12,28 @@ public class Circuits implements java.io.Serializable
 		(
 		String 			name, 
 		String 			friendlyName,  
-		String 			circuitType, 
+		String			circuitType, 
 		String			tempMax, 
 		String			rampUpTime
 		)
 	{
-		if (circuitType.equalsIgnoreCase("hotWater"))
+		//Berk berk berkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+		
+		Integer			circuitTypeInteger	=	Integer.parseInt(circuitType);
+		
+		if (circuitTypeInteger == Circuit_Abstract.CIRCUIT_TYPE_HotWater)
 		{
-			Circuit_HotWater circuitItem = new Circuit_HotWater(name, friendlyName, circuitType, tempMax, rampUpTime);
+			Circuit_HotWater circuitItem = new Circuit_HotWater(name, friendlyName, circuitTypeInteger, tempMax, rampUpTime);
 			circuitList.add(circuitItem);
 		}
-		else if (circuitType.equalsIgnoreCase("tempGradient"))
+		else if (circuitTypeInteger == Circuit_Abstract.CIRCUIT_TYPE_Gradient)
 		{
-			Circuit_Radiator circuitItem = new Circuit_Radiator(name, friendlyName, circuitType, tempMax, rampUpTime);
+			Circuit_Radiator circuitItem = new Circuit_Radiator(name, friendlyName, circuitTypeInteger, tempMax, rampUpTime);
 			circuitList.add(circuitItem);
 		}
-		else if (circuitType.equalsIgnoreCase("Mixer"))
+		else if (circuitTypeInteger == Circuit_Abstract.CIRCUIT_TYPE_Mixer)
 		{
-			Circuit_Mixer circuitItem = new Circuit_Mixer(name, friendlyName, circuitType, tempMax, rampUpTime);
+			Circuit_Mixer circuitItem = new Circuit_Mixer(name, friendlyName, circuitTypeInteger, tempMax, rampUpTime);
 			circuitList.add(circuitItem);
 		}
 	}

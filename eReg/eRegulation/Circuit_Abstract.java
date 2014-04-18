@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 abstract class Circuit_Abstract
 {
+	public static final int			CIRCUIT_TYPE_HotWater			= 0;
+	public static final int			CIRCUIT_TYPE_Gradient			= 1;
+	public static final int			CIRCUIT_TYPE_Mixer				= 2;
+
 	public String 					name;
 	public String 					friendlyName;
-	public String 					circuitType;
+	public Integer 					circuitType;
 	public Integer 					tempMax;
 
 	public Long 					rampUpTime						= 0L;
@@ -14,10 +18,6 @@ abstract class Circuit_Abstract
 	public Thermometer				thermoToMonitor;					//Used with above
 
 	public Integer					state;
-	
-	public static final int			CIRCUIT_TYPE_HotWater			= 0;
-	public static final int			CIRCUIT_TYPE_Gradient			= 1;
-	public static final int			CIRCUIT_TYPE_Mixer				= 2;
 	
 	public static final int			CIRCUIT_STATE_Off 				= 0;
 	public static final int			CIRCUIT_STATE_Starting 			= 1;
@@ -47,7 +47,7 @@ abstract class Circuit_Abstract
 //	public Circuit_Abstract()
 //	{	
 //	}
-	public Circuit_Abstract(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
+	public Circuit_Abstract(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
 	{	
 		this.name													= name;
 		this.friendlyName											= friendlyName;

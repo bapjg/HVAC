@@ -3,7 +3,7 @@ package eRegulation;
 public class Circuit_Mixer extends Circuit_Abstract
 {
 
-	public Circuit_Mixer(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
+	public Circuit_Mixer(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 	}

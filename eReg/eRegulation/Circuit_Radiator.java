@@ -3,7 +3,7 @@ package eRegulation;
 public class Circuit_Radiator extends Circuit_Abstract
 {
 
-	public Circuit_Radiator(String name, String friendlyName, String circuitType, String tempMax, String rampUpTime)
+	public Circuit_Radiator(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 	}

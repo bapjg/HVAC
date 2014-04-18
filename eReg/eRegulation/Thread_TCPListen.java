@@ -47,11 +47,11 @@ public class Thread_TCPListen <SendType> implements Runnable
 			        } 
 			    	else
 			    	{
-			    		if (message_in instanceof Ctrl_Temperatures.Request) 			message_out = process_Ctrl_Temperatures_Request		((Ctrl_Temperatures.Request) message_in);
+			    		if (	 message_in instanceof Ctrl_Temperatures.Request) 		message_out = process_Ctrl_Temperatures_Request		((Ctrl_Temperatures.Request) message_in);
 			    		else if (message_in instanceof Ctrl_Immediate.Request)			message_out	= process_Ctrl_Immediate_Request		((Ctrl_Immediate.Request) message_in);
 			    		else if (message_in instanceof Ctrl_Immediate.Execute)			message_out	= process_Ctrl_Immediate_Execute		((Ctrl_Immediate.Execute) message_in); 
-			    		else if (message_in instanceof Ctrl_Configuration.Request)			message_out	= process_Ctrl_Parameters_Request		();
-			    		else if (message_in instanceof Ctrl_Configuration.Update) 			message_out	= process_Ctrl_Parameters_Update		((Ctrl_Configuration.Update) message_in);
+			    		else if (message_in instanceof Ctrl_Configuration.Request)		message_out	= process_Ctrl_Configuration_Request		();
+			    		else if (message_in instanceof Ctrl_Configuration.Update) 		message_out	= process_Ctrl_Configuration_Update		((Ctrl_Configuration.Update) message_in);
 			    		else if (message_in instanceof Ctrl_Actions_Relays.Request)		message_out	= process_Ctrl_Actions_Relays_Request	();
 			    		else if (message_in instanceof Ctrl_Actions_Relays.Execute)		message_out	= process_Ctrl_Actions_Relays_Execute	((Ctrl_Actions_Relays.Execute) message_in);
 			    		else if (message_in instanceof Ctrl_Actions_Test_Mail.Execute)	message_out	= process_Ctrl_Actions_Test_Mail_Execute();
@@ -231,9 +231,16 @@ public class Thread_TCPListen <SendType> implements Runnable
 		
 		return message_return;
 	}
-  	private Ctrl_Configuration.Data 		process_Ctrl_Parameters_Request			()
+  	private Ctrl_Configuration.Data 		process_Ctrl_Configuration_Request			()
 	{
-		Ctrl_Configuration.Data message_return						= new Ctrl_Configuration().new Data();
+		// Returns the current configuration in operation
+  		// It is timestamped now(). It should be timestamped with date/time recovered either from server or local file
+  		
+  		Ctrl_Configuration.Data message_return				= new Ctrl_Configuration().new Data();
+		
+		// This timestamp needs to be looked at in grater detail
+		
+		message_return.dateTime								= Global.now();
 		
 		for (Thermometer globalThermometer : Global.thermometers.thermometerList)
 		{
@@ -245,7 +252,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 
 		for (Relay globalRelay : Global.relays.relayList)
 		{
-			Ctrl_Configuration.Relay 		paramRelay			= new Ctrl_Configuration().new Relay();
+			Ctrl_Configuration.Relay 		paramRelay		= new Ctrl_Configuration().new Relay();
 			paramRelay.name									= globalRelay.name;
 			paramRelay.relayBank							= globalRelay.relayBank;
 			paramRelay.relayNumber							= globalRelay.relayNumber;
@@ -254,7 +261,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 		
 		for (Pump globalPump : Global.pumps.pumpList)
 		{
-			Ctrl_Configuration.Pump 		paramPump			= new Ctrl_Configuration().new Pump();
+			Ctrl_Configuration.Pump 		paramPump		= new Ctrl_Configuration().new Pump();
 			paramPump.name									= globalPump.name;
 			paramPump.relay									= globalPump.relay.name;
 			message_return.pumpList.add(paramPump);
@@ -262,7 +269,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 
 		for (Circuit_Abstract globalCircuit : Global.circuits.circuitList)
 		{
-			Ctrl_Configuration.Circuit		paramCircuit		= new Ctrl_Configuration().new Circuit();
+			Ctrl_Configuration.Circuit		paramCircuit	= new Ctrl_Configuration().new Circuit();
 			paramCircuit.name								= globalCircuit.name;
 			paramCircuit.pump								= "pump"; //globalCircuit.relayBank;
 			paramCircuit.thermometer						= "thermo"; //globalCircuit.relayNumber;
@@ -271,10 +278,10 @@ public class Thread_TCPListen <SendType> implements Runnable
 		}
 		return message_return;
 	}
- 	private Ctrl_Configuration.Data 		process_Ctrl_Parameters_Update(Ctrl_Configuration.Update message_in)
+ 	private Ctrl_Configuration.Data 		process_Ctrl_Configuration_Update(Ctrl_Configuration.Update message_in)
  	{
  		// Do something with message_in
- 		return process_Ctrl_Parameters_Request();
+ 		return process_Ctrl_Configuration_Request();
 	}
 	private Ctrl_Actions_Relays.Data	process_Ctrl_Actions_Relays_Request		()
 	{
