@@ -65,21 +65,25 @@ public final class R {
         public static final int friendlyName=0x7f090004;
         public static final int hotwater=0x7f090023;
         public static final int menu_container=0x7f090001;
-        public static final int menuitem_about=0x7f090030;
-        public static final int menuitem_add=0x7f09002d;
-        public static final int menuitem_feedback=0x7f09002f;
-        public static final int menuitem_quit=0x7f090031;
-        public static final int menuitem_search=0x7f09002c;
-        public static final int menuitem_share=0x7f09002e;
+        public static final int menuitem_about=0x7f090034;
+        public static final int menuitem_add=0x7f090031;
+        public static final int menuitem_feedback=0x7f090033;
+        public static final int menuitem_quit=0x7f090035;
+        public static final int menuitem_search=0x7f090030;
+        public static final int menuitem_share=0x7f090032;
         public static final int name=0x7f090003;
         public static final int panel_container=0x7f090002;
         public static final int panel_subcontainer=0x7f09000b;
+        public static final int pump=0x7f09002a;
         public static final int radiator=0x7f090025;
-        public static final int relayBank=0x7f09002a;
-        public static final int relayNumber=0x7f09002b;
+        public static final int relay=0x7f09002d;
+        public static final int relayBank=0x7f09002e;
+        public static final int relayNumber=0x7f09002f;
         public static final int tempObjective=0x7f090008;
         public static final int textView1=0x7f090020;
+        public static final int thermometer=0x7f09002b;
         public static final int timeObjective=0x7f090009;
+        public static final int type=0x7f09002c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -96,15 +100,17 @@ public final class R {
         public static final int panel_1_temperatures=0x7f03000b;
         public static final int panel_2_immediate=0x7f03000c;
         public static final int panel_3_calendars=0x7f03000d;
-        public static final int panel_4_config_thermometers=0x7f03000e;
+        public static final int panel_4_config_header=0x7f03000e;
         public static final int panel_51_actions=0x7f03000f;
         public static final int panel_52_actions=0x7f030010;
         public static final int panel_53_actions=0x7f030011;
         public static final int panel_5_actions_relays=0x7f030012;
         public static final int panel_5_actions_stop=0x7f030013;
         public static final int panel_5_actions_test_mail=0x7f030014;
-        public static final int row_relay=0x7f030015;
-        public static final int row_thermometer=0x7f030016;
+        public static final int row_circuit=0x7f030015;
+        public static final int row_pump=0x7f030016;
+        public static final int row_relay=0x7f030017;
+        public static final int row_thermometer=0x7f030018;
     }
     public static final class menu {
         public static final int main=0x7f080000;
