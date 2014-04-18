@@ -10,6 +10,8 @@ public class Ctrl_Configuration 			extends 					Ctrl_Abstract
 	public final Integer				CIRCUIT_TYPE_HotWater		= 0;
 	public final Integer				CIRCUIT_TYPE_Gradient		= 1;
 	public final Integer				CIRCUIT_TYPE_Mixer			= 2;
+	
+	public Long							dateTime;
 
 	public Ctrl_Configuration()
 	{
