@@ -7,6 +7,9 @@ import java.util.ArrayList;
 public class Ctrl_Parameters 			extends 					Ctrl_Abstract
 {
 	private static final long 			serialVersionUID 			= 1L;
+	public final Integer				CIRCUIT_TYPE_HotWater		= 0;
+	public final Integer				CIRCUIT_TYPE_Gradient		= 1;
+	public final Integer				CIRCUIT_TYPE_Mixer			= 2;
 
 	public Ctrl_Parameters()
 	{
@@ -22,6 +25,8 @@ public class Ctrl_Parameters 			extends 					Ctrl_Abstract
 		public ArrayList<Relay> 		relayList 					= new ArrayList<Relay>();
 		public ArrayList<Pump> 			pumpList 					= new ArrayList<Pump>();
 		public ArrayList<Circuit> 		circuitList 				= new ArrayList<Circuit>();
+		public Burner					burner						= new Burner();
+		public Boiler					Boiler						= new Boiler();
 	}
 	public class Update 				extends 					Ctrl_Parameters
 	{
@@ -55,6 +60,20 @@ public class Ctrl_Parameters 			extends 					Ctrl_Abstract
 		public String 					name;
 		public String 					pump;
 		public String 					thermometer;
-		public String 					type;
+		public Integer 					type;
+	}
+	public class Burner 				extends  					Ctrl_Parameters
+	{
+		private static final long 		serialVersionUID 			= 1L;
+		public String 					relay;
+		public Long 					fuelConsumption;
+	}
+	public class Boiler 				extends  					Ctrl_Parameters
+	{
+		private static final long 		serialVersionUID 			= 1L;
+		public String 					relay;
+		public String 					thermometer;
+		public Integer					tempNeverExceed;
+		public Integer					tempOverShoot;
 	}
 }

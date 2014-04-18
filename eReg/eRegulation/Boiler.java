@@ -90,8 +90,6 @@ public class Boiler
 	}	
 	public void sequencer()
 	{
-		//LogIt.info("Boiler", "sequencer", "state is : " + state);
-		
 		// Take unCached temperature. The value is then cached
 		
 		Integer	tempNow =  Global.thermoBoiler.readUnCached();

@@ -47,7 +47,7 @@ public class Adapter_Pumps 						extends 			ArrayAdapter
 
         if (convertView == null) 
         {
-        	convertView 											= myInflater.inflate(R.layout.row_circuit, null);
+        	convertView 											= myInflater.inflate(R.layout.row_pump, null);
             holder 													= new ViewHolder();
             holder.name 											= (TextView) convertView.findViewById(R.id.name);
             holder.relay 											= (TextView) convertView.findViewById(R.id.relay);
@@ -63,7 +63,7 @@ public class Adapter_Pumps 						extends 			ArrayAdapter
             holder.name.setTextColor		(Color.YELLOW);
             holder.name.setTypeface			(null, Typeface.BOLD);
             
-            holder.relay.setText			("Bank");
+            holder.relay.setText			("Relay");
             holder.relay.setTextColor		(Color.YELLOW);
             holder.relay.setTypeface		(null, Typeface.BOLD);
             

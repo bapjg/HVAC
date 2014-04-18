@@ -52,6 +52,7 @@ public class Adapter_Circuits 					extends 			ArrayAdapter
             holder.name 											= (TextView) convertView.findViewById(R.id.name);
             holder.pump 											= (TextView) convertView.findViewById(R.id.pump);
             holder.thermometer 										= (TextView) convertView.findViewById(R.id.thermometer);
+            holder.type		 										= (TextView) convertView.findViewById(R.id.type);
             convertView.setTag(holder);
         } 
         else 
