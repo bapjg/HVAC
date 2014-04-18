@@ -17,12 +17,19 @@ public class Test
 	{
 		Control 		Me 							= new Control();
 		
-		Thermometer thermo1							= new Thermometer("Test1", "28.1C01 8F04 0000", "Test friend", false);
-		Thermometer thermo2							= new Thermometer("Test2", "28.629F 8E04 0000", "Test friend", false);
-		Thermometer thermo3							= new Thermometer("Test3", "28.4492 8E04 0000", "Test friend", false);
-
-		thermo1.readAll();
-
+		TestXML x	= new Test().new TestXML();
+		XML y = new XML();
+		
+		try
+		{
+			String z = y.getXML(x);
+			System.out.println(z);
+		}
+		catch (Exception e)
+		{
+			
+		}
+		
 		Global.waitSeconds(3);
 		
 //		Integer i;
@@ -209,4 +216,9 @@ public class Test
             exception.printStackTrace();
         }
     }
+	public class TestXML
+	{
+		String thermo1							= "abc";
+		Integer thermo2							= 2;
+	}
 }
