@@ -2,7 +2,7 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-import HVAC_Messages.Ctrl_Parameters;
+import HVAC_Messages.Ctrl_Configuration;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -31,9 +31,9 @@ public class Adapter_Thermometers 				extends 			ArrayAdapter
         return listData.size() + 1;
     }
     @Override
-    public Ctrl_Parameters.Thermometer    getItem(int position) 
+    public Ctrl_Configuration.Thermometer    getItem(int position) 
     {
-        return (Ctrl_Parameters.Thermometer) listData.get(position - 1);
+        return (Ctrl_Configuration.Thermometer) listData.get(position - 1);
     }
     @Override
     public long getItemId(int position) 
@@ -70,8 +70,8 @@ public class Adapter_Thermometers 				extends 			ArrayAdapter
         }
         else
         {
-	        holder.name.setText				(((Ctrl_Parameters.Thermometer) listData.get(position - 1)).name);
-	        holder.address.setText			(((Ctrl_Parameters.Thermometer) listData.get(position - 1)).address);
+	        holder.name.setText				(((Ctrl_Configuration.Thermometer) listData.get(position - 1)).name);
+	        holder.address.setText			(((Ctrl_Configuration.Thermometer) listData.get(position - 1)).address);
         }
         System.out.println("Adapter getView Thermo called, position " + position);
         return convertView;

@@ -31,9 +31,9 @@ public class Adapter_Pumps 						extends 			ArrayAdapter
         return listData.size() + 1;
     }
     @Override
-    public Ctrl_Parameters.Pump getItem(int position) 
+    public Ctrl_Configuration.Pump getItem(int position) 
     {
-        return (Ctrl_Parameters.Pump) listData.get(position - 1);
+        return (Ctrl_Configuration.Pump) listData.get(position - 1);
     }
     @Override
     public long getItemId(int position) 
@@ -70,8 +70,8 @@ public class Adapter_Pumps 						extends 			ArrayAdapter
          }
         else
         {
-        	holder.name.setText				(((Ctrl_Parameters.Pump) listData.get(position - 1)).name);
-	        holder.relay.setText			(((Ctrl_Parameters.Pump) listData.get(position - 1)).relay);
+        	holder.name.setText				(((Ctrl_Configuration.Pump) listData.get(position - 1)).name);
+	        holder.relay.setText			(((Ctrl_Configuration.Pump) listData.get(position - 1)).relay);
         }
         return convertView;
     }

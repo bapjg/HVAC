@@ -7,7 +7,7 @@ import com.bapjg.hvac_client.Mgmt_Msg_Configuration.Thermometer;
 
 import HVAC_Messages.Ctrl_Abstract;
 import HVAC_Messages.Ctrl_Actions_Relays;
-import HVAC_Messages.Ctrl_Parameters;
+import HVAC_Messages.Ctrl_Configuration;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -60,7 +60,7 @@ public class Panel_4_Config_Circuits 		extends 			Panel_0_Fragment
         View 									myView 				= myInflater.inflate(R.layout.panel_4_config_header, container, false);
         myAdapterView												= (AdapterView) myView.findViewById(R.id.List_View);
 
-        TCP_Send(new Ctrl_Parameters().new Request());
+        TCP_Send(new Ctrl_Configuration().new Request());
  
         return myView;
     }
@@ -73,7 +73,7 @@ public class Panel_4_Config_Circuits 		extends 			Panel_0_Fragment
 //        	View 								newView 			= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
 
         	FragmentTransaction 				ft 					= myFragmentManager.beginTransaction();
-        	Ctrl_Parameters.Thermometer 		dt					= Global.eRegConfiguration.thermometerList.get(position -1);
+        	Ctrl_Configuration.Thermometer 		dt					= Global.eRegConfiguration.thermometerList.get(position -1);
 
      //   	ft.replace(R.id.panel_container, dt);
         	ft.commit();
@@ -139,9 +139,9 @@ public class Panel_4_Config_Circuits 		extends 			Panel_0_Fragment
 	{  
 		Activity								activity			= getActivity();		
 
-		if (result instanceof Ctrl_Parameters.Data)
+		if (result instanceof Ctrl_Configuration.Data)
 		{
-		Global.eRegConfiguration			 						= (Ctrl_Parameters.Data) result;
+		Global.eRegConfiguration			 						= (Ctrl_Configuration.Data) result;
         AdapterView <Adapter_Circuits> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
         Adapter_Circuits						adapter				= new Adapter_Circuits(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
         view.setAdapter(adapter);

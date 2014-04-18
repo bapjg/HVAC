@@ -50,8 +50,8 @@ public class Thread_TCPListen <SendType> implements Runnable
 			    		if (message_in instanceof Ctrl_Temperatures.Request) 			message_out = process_Ctrl_Temperatures_Request		((Ctrl_Temperatures.Request) message_in);
 			    		else if (message_in instanceof Ctrl_Immediate.Request)			message_out	= process_Ctrl_Immediate_Request		((Ctrl_Immediate.Request) message_in);
 			    		else if (message_in instanceof Ctrl_Immediate.Execute)			message_out	= process_Ctrl_Immediate_Execute		((Ctrl_Immediate.Execute) message_in); 
-			    		else if (message_in instanceof Ctrl_Parameters.Request)			message_out	= process_Ctrl_Parameters_Request		();
-			    		else if (message_in instanceof Ctrl_Parameters.Update) 			message_out	= process_Ctrl_Parameters_Update		((Ctrl_Parameters.Update) message_in);
+			    		else if (message_in instanceof Ctrl_Configuration.Request)			message_out	= process_Ctrl_Parameters_Request		();
+			    		else if (message_in instanceof Ctrl_Configuration.Update) 			message_out	= process_Ctrl_Parameters_Update		((Ctrl_Configuration.Update) message_in);
 			    		else if (message_in instanceof Ctrl_Actions_Relays.Request)		message_out	= process_Ctrl_Actions_Relays_Request	();
 			    		else if (message_in instanceof Ctrl_Actions_Relays.Execute)		message_out	= process_Ctrl_Actions_Relays_Execute	((Ctrl_Actions_Relays.Execute) message_in);
 			    		else if (message_in instanceof Ctrl_Actions_Test_Mail.Execute)	message_out	= process_Ctrl_Actions_Test_Mail_Execute();
@@ -231,13 +231,13 @@ public class Thread_TCPListen <SendType> implements Runnable
 		
 		return message_return;
 	}
-  	private Ctrl_Parameters.Data 		process_Ctrl_Parameters_Request			()
+  	private Ctrl_Configuration.Data 		process_Ctrl_Parameters_Request			()
 	{
-		Ctrl_Parameters.Data message_return						= new Ctrl_Parameters().new Data();
+		Ctrl_Configuration.Data message_return						= new Ctrl_Configuration().new Data();
 		
 		for (Thermometer globalThermometer : Global.thermometers.thermometerList)
 		{
-			Ctrl_Parameters.Thermometer paramThermometer	= new Ctrl_Parameters().new Thermometer();
+			Ctrl_Configuration.Thermometer paramThermometer	= new Ctrl_Configuration().new Thermometer();
 			paramThermometer.name							= globalThermometer.name;
 			paramThermometer.address						= globalThermometer.address;
 			message_return.thermometerList.add(paramThermometer);
@@ -245,7 +245,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 
 		for (Relay globalRelay : Global.relays.relayList)
 		{
-			Ctrl_Parameters.Relay 		paramRelay			= new Ctrl_Parameters().new Relay();
+			Ctrl_Configuration.Relay 		paramRelay			= new Ctrl_Configuration().new Relay();
 			paramRelay.name									= globalRelay.name;
 			paramRelay.relayBank							= globalRelay.relayBank;
 			paramRelay.relayNumber							= globalRelay.relayNumber;
@@ -254,7 +254,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 		
 		for (Pump globalPump : Global.pumps.pumpList)
 		{
-			Ctrl_Parameters.Pump 		paramPump			= new Ctrl_Parameters().new Pump();
+			Ctrl_Configuration.Pump 		paramPump			= new Ctrl_Configuration().new Pump();
 			paramPump.name									= globalPump.name;
 			paramPump.relay									= globalPump.relay.name;
 			message_return.pumpList.add(paramPump);
@@ -262,7 +262,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 
 		for (Circuit_Abstract globalCircuit : Global.circuits.circuitList)
 		{
-			Ctrl_Parameters.Circuit		paramCircuit		= new Ctrl_Parameters().new Circuit();
+			Ctrl_Configuration.Circuit		paramCircuit		= new Ctrl_Configuration().new Circuit();
 			paramCircuit.name								= globalCircuit.name;
 			paramCircuit.pump								= "pump"; //globalCircuit.relayBank;
 			paramCircuit.thermometer						= "thermo"; //globalCircuit.relayNumber;
@@ -271,7 +271,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 		}
 		return message_return;
 	}
- 	private Ctrl_Parameters.Data 		process_Ctrl_Parameters_Update(Ctrl_Parameters.Update message_in)
+ 	private Ctrl_Configuration.Data 		process_Ctrl_Parameters_Update(Ctrl_Configuration.Update message_in)
  	{
  		// Do something with message_in
  		return process_Ctrl_Parameters_Request();

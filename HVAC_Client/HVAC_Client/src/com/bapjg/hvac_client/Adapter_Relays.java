@@ -33,10 +33,10 @@ public class Adapter_Relays 					extends 			ArrayAdapter
         return listData.size() + 1;
     }
     @Override
-    public Ctrl_Parameters.Relay getItem(int position) 
+    public Ctrl_Configuration.Relay getItem(int position) 
     {
         System.out.println("Adapter getItem Relay called, position " + position);
-        return (Ctrl_Parameters.Relay) listData.get(position - 1);
+        return (Ctrl_Configuration.Relay) listData.get(position - 1);
     }
     @Override
     public long getItemId(int position) 
@@ -77,9 +77,9 @@ public class Adapter_Relays 					extends 			ArrayAdapter
         }
         else
         {
-        	holder.name.setText				(((Ctrl_Parameters.Relay) listData.get(position - 1)).name);
-	        holder.relayBank.setText		(((Ctrl_Parameters.Relay) listData.get(position - 1)).relayBank.toString());
-	        holder.relayNumber.setText		(((Ctrl_Parameters.Relay) listData.get(position - 1)).relayNumber.toString());
+        	holder.name.setText				(((Ctrl_Configuration.Relay) listData.get(position - 1)).name);
+	        holder.relayBank.setText		(((Ctrl_Configuration.Relay) listData.get(position - 1)).relayBank.toString());
+	        holder.relayNumber.setText		(((Ctrl_Configuration.Relay) listData.get(position - 1)).relayNumber.toString());
         }
         return convertView;
     }

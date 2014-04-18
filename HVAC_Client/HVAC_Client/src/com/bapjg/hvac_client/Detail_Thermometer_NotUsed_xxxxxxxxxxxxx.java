@@ -12,7 +12,7 @@ import HVAC_Messages.*;
 
 public class Detail_Thermometer_NotUsed_xxxxxxxxxxxxx extends Fragment implements View.OnClickListener
 {
-	public Ctrl_Parameters.Thermometer me;
+	public Ctrl_Configuration.Thermometer me;
 	
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 

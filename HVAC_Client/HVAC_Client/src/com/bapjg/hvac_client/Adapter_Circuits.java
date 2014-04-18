@@ -31,9 +31,9 @@ public class Adapter_Circuits 					extends 			ArrayAdapter
         return listData.size() + 1;
     }
     @Override
-    public Ctrl_Parameters.Circuit getItem(int position) 
+    public Ctrl_Configuration.Circuit getItem(int position) 
     {
-        return (Ctrl_Parameters.Circuit) listData.get(position - 1);
+        return (Ctrl_Configuration.Circuit) listData.get(position - 1);
     }
     @Override
     public long getItemId(int position) 
@@ -79,10 +79,10 @@ public class Adapter_Circuits 					extends 			ArrayAdapter
 }
         else
         {
-        	holder.name.setText				(((Ctrl_Parameters.Circuit) listData.get(position - 1)).name);
-	        holder.pump.setText				(((Ctrl_Parameters.Circuit) listData.get(position - 1)).pump);
-	        holder.thermometer.setText		(((Ctrl_Parameters.Circuit) listData.get(position - 1)).thermometer);
-	        holder.type.setText				(((Ctrl_Parameters.Circuit) listData.get(position - 1)).type);
+        	holder.name.setText				(((Ctrl_Configuration.Circuit) listData.get(position - 1)).name);
+	        holder.pump.setText				(((Ctrl_Configuration.Circuit) listData.get(position - 1)).pump);
+	        holder.thermometer.setText		(((Ctrl_Configuration.Circuit) listData.get(position - 1)).thermometer);
+	        holder.type.setText				(((Ctrl_Configuration.Circuit) listData.get(position - 1)).type);
         }
         return convertView;
     }

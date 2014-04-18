@@ -33,7 +33,7 @@ public class Global
 	public static	Menu_4_Config 				menuConfiguration;
 	public static	Menu_5_Actions				menuActions;
 	
-	public static	Ctrl_Parameters.Data		eRegConfiguration;
+	public static	Ctrl_Configuration.Data		eRegConfiguration;
 	public static	String						eRegCalendar;
 
 	public static	Boolean						initialisationCompleted;
