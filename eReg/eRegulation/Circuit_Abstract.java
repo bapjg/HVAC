@@ -15,6 +15,10 @@ abstract class Circuit_Abstract
 
 	public Integer					state;
 	
+	public static final int			CIRCUIT_TYPE_HotWater			= 0;
+	public static final int			CIRCUIT_TYPE_Gradient			= 1;
+	public static final int			CIRCUIT_TYPE_Mixer				= 2;
+	
 	public static final int			CIRCUIT_STATE_Off 				= 0;
 	public static final int			CIRCUIT_STATE_Starting 			= 1;
 	public static final int			CIRCUIT_STATE_RampingUp			= 2;
