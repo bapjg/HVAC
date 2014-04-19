@@ -8,7 +8,7 @@
 				
 		<Word 			type="object"	name="HalfDay"		use="days"		days="4      "			/>
 		<Word 			type="object"	name="TestDay"		use="days"		days="TTT  TT"			/>			
-			</Vocabulary>
+	</Vocabulary>
 	<Circuits 			type="Collection">
 		<Circuit 		type="Object" 	name="Hot_Water">
 			<Calendar 	type="Object" 	name="EveryDay" 	days="WeekDay" 		timeStart="06:15" 	timeEnd="06:45" tempObjective="35000" stopOnObjective="1"/>
