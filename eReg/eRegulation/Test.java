@@ -17,8 +17,22 @@ public class Test
 	{
 		Control 		Me 							= new Control();
 		
-		TestXML x	= new TestXML();
+		TestXML 			x						= new TestXML();
+		TestXML.SubClass 	xx1 					= x.new SubClass();
+		xx1.henry 									= 45;
+		xx1.alf 									= "Andre";
+		
+		x.subs.add(xx1);
+
+		xx1 										= x.new SubClass();
+		xx1.henry 									= 99;
+		xx1.alf 									= "Brigitte";
+		
+		x.subs.add(xx1);
+
+		
 		XML y = new XML();
+		
 		String z ="";
 		
 		try

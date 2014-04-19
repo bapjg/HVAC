@@ -4,10 +4,8 @@ import java.lang.reflect.Field;
 
 public class XML
 {
-        public String header;
-        public String inner;
-        public String footer;
-        public String fileHeader = "<?xml version = '1.0' encoding = 'UTF-8'>";
+        public String 	header;
+        public String 	fileHeader = "<?xml version = '1.0' encoding = 'UTF-8'?>";
 
         public String getXML(Object object) throws IllegalArgumentException, IllegalAccessException
         {
@@ -16,10 +14,11 @@ public class XML
 
                 System.out.println("className " + className);
                 
-                header = "<" + getClassName(object) + " ";
-                footer = "</" + getClassName(object) + ">";
+                String 	header 									= "<" + getClassName(object) + " ";
+                String 	footer 									= "</" + getClassName(object) + ">";
+                Boolean hasSubs									= false;
                 
-                inner = "type = 'Object' ";
+                String	inner 									= "type = 'Object' ";
                 
                 for (Field field : object.getClass().getDeclaredFields())
                 {
@@ -33,19 +32,22 @@ public class XML
                         ||  (fieldType.endsWith("int")) 
                         )
                         {
-                               inner = inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
+                            inner 								= inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
                         }
                         else if ((fieldType.endsWith("Long"))
                              ||  (fieldType.endsWith("long"))) 
                         {
-                               inner = inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
+                            // Either Date or Time   
+                        	inner 								= inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
                         }
                         else if (fieldType.endsWith("Boolean"))
                         {
-                               inner = inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
+                            // Yes or No
+                        	inner 								= inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
                         }
                         else if (fieldType.endsWith("List"))
                         {
+                            hasSubs								= true; 
 //                             for (element : field.get(object).item())
 //                             {
 //                                     inner = inner + "type = 'Collection'"
@@ -54,13 +56,58 @@ public class XML
                         }
                         else
                         {
-                               XML             inside                                         = new XML();
-                               
-                               inner = inner +"> " + inside.getXML(field.get(object));
+                            hasSubs								= true; 
+//                        		XML             inside                                         = new XML();
+//                               
+//                               inner = inner +"> " + inside.getXML(field.get(object));
                         }
                 }
+                if (hasSubs)
+                {
+                    for (Field field : object.getClass().getDeclaredFields())
+                    {
+                            String fieldType = getFieldType(field);
+                            
+                            System.out.println("field name " + field.getName());
+                            System.out.println("field type " + fieldType);
+                            
+                            if ((fieldType.endsWith("String"))
+                            ||  (fieldType.endsWith("Integer"))    
+                            ||  (fieldType.endsWith("int")) 
+                            )
+                            {
+                            }
+                            else if ((fieldType.endsWith("Long"))
+                                 ||  (fieldType.endsWith("long"))) 
+                            {
+                            }
+                            else if (fieldType.endsWith("Boolean"))
+                            {
+                            }
+                            else if (fieldType.endsWith("List"))
+                            {
+                                hasSubs								= true; 
+//                                 for (element : field.get(object).item())
+//                                 {
+//                                         inner = inner + "type = 'Collection'"
+//                                         inner = inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
+//                                 }
+                            }
+                            else
+                            {
+                                hasSubs								= true; 
+//                            		XML             inside                                         = new XML();
+//                                   
+//                                   inner = inner +"> " + inside.getXML(field.get(object));
+                            }
+                    }
+                    xml 										= header + inner + "> " + footer;
+                }
+                else
+                {
+                	xml 										= header + inner + "> " + footer;
+                }
                 
-                xml = header + inner + "> " + footer;
                 
                 return xml;
         }
