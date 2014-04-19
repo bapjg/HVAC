@@ -28,7 +28,7 @@ public class Ctrl_Configuration 			extends 					Ctrl_Abstract
 		public ArrayList<Pump> 			pumpList 					= new ArrayList<Pump>();
 		public ArrayList<Circuit> 		circuitList 				= new ArrayList<Circuit>();
 		public Burner					burner						= new Burner();
-		public Boiler					Boiler						= new Boiler();
+		public Boiler					boiler						= new Boiler();
 	}
 	public class Update 				extends 					Ctrl_Configuration
 	{
