@@ -276,6 +276,11 @@ public class Thread_TCPListen <SendType> implements Runnable
 			paramCircuit.type								= globalCircuit.circuitType;
 			message_return.circuitList.add(paramCircuit);
 		}
+		message_return.burner.relay							= Global.burnerPower.name;
+		message_return.boiler.tempNeverExceed				= Global.boiler.tempNeverExceed;
+		message_return.boiler.tempOverShoot					= Global.boiler.tempOvershoot;
+		
+		
 		return message_return;
 	}
  	private Ctrl_Configuration.Data 		process_Ctrl_Configuration_Update(Ctrl_Configuration.Update message_in)

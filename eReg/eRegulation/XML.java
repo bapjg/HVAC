@@ -12,14 +12,21 @@ public class XML
         public String getXML(Object object) throws IllegalArgumentException, IllegalAccessException
         {
                 String xml = "";
-                header = "<" + object.getClass().getName() + " ";
-                footer = "</" + object.getClass().getName() + ">";
+                String className	=	getClassName(object);
+
+                System.out.println("className " + className);
+                
+                header = "<" + getClassName(object) + " ";
+                footer = "</" + getClassName(object) + ">";
                 
                 inner = "type = 'Object' ";
                 
                 for (Field field : object.getClass().getDeclaredFields())
                 {
-                        String fieldType = field.getType().toString();
+                        String fieldType = getFieldType(field);
+                        
+                        System.out.println("field name " + field.getName());
+                        System.out.println("field type " + fieldType);
                         
                         if ((fieldType.endsWith("String"))
                         ||  (fieldType.endsWith("Integer"))    
@@ -63,4 +70,21 @@ public class XML
                 xmlFile = xmlFile + "<eRegulation>" + getXML(object) +  "</eRegulation>";
                 return xmlFile;
         }
+        private String getClassName(Object object)
+        {
+        	String						objectName					= object.getClass().toString();
+        	objectName												= objectName.replace("$", ".");
+        	objectName												= objectName.substring(objectName.lastIndexOf(".") + 1);
+        	
+        	return objectName;
+        }
+        private String getFieldType(Field field)
+        {
+        	String						fieldName					= field.getType().toString();
+        	fieldName												= fieldName.replace("$", ".");
+        	fieldName												= fieldName.substring(fieldName.lastIndexOf(".") + 1);
+        	
+        	return fieldName;
+        }
+
 }

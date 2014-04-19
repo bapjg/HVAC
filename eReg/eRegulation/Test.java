@@ -17,17 +17,20 @@ public class Test
 	{
 		Control 		Me 							= new Control();
 		
-		TestXML x	= new Test().new TestXML();
+		TestXML x	= new TestXML();
 		XML y = new XML();
+		String z ="";
 		
 		try
 		{
-			String z = y.getXML(x);
+			z = y.createXMLFile(x);
 			System.out.println(z);
+			z = z + " ";
 		}
 		catch (Exception e)
 		{
-			
+			System.out.println(e);
+			e.printStackTrace();
 		}
 		
 		Global.waitSeconds(3);
@@ -216,9 +219,4 @@ public class Test
             exception.printStackTrace();
         }
     }
-	public class TestXML
-	{
-		String thermo1							= "abc";
-		Integer thermo2							= 2;
-	}
 }

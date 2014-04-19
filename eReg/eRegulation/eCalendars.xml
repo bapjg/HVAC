@@ -31,7 +31,7 @@
 		    <Calendar 	type="Object" 	name="WeekDay" 		days="WeekDay"		timeStart="05:00" 	timeEnd="07:30" tempObjective="19000" stopOnObjective="0"/>
 			<Calendar 	type="Object" 	name="WeekDay" 		days="ZeekDay"		timeStart="15:00" 	timeEnd="23:30" tempObjective="19000" stopOnObjective="0"/>
 			
-			<Calendar 	type="Object" 	name="WeekEnd" 		days="ZeekEnd"		timeStart="06:30" 	timeEnd="21:30" tempObjective="19000" stopOnObjective="0"/>
+			<Calendar 	type="Object" 	name="WeekEnd" 		days="WeekEnd"		timeStart="06:30" 	timeEnd="21:30" tempObjective="19000" stopOnObjective="0"/>
 			
 			<Calendar 	type="Object" 	name="Locataire" 	days="HalfDay"		timeStart="12:45" 	timeEnd="14:45" tempObjective="50000" stopOnObjective="0"/>
 		</Circuit>
