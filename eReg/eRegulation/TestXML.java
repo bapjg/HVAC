@@ -6,10 +6,10 @@ public class TestXML
 {
 	public String thermo1							= "abc";
 	public Integer thermo2							= 2;
-	public SubClass subk							= new SubClass();
-	public ArrayList <SubClass> subs				= new ArrayList<SubClass>(); 
+	public Thermometer subk							= new Thermometer();
+	public ArrayList <Thermometer> ThermometerList	= new ArrayList<Thermometer>(); 
 	
-	public class SubClass
+	public class Thermometer
 	{
 		Integer	henry						= 3;
 		String	alf							= "alf";

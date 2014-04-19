@@ -1,6 +1,7 @@
 package eRegulation;
 
 import java.io.*;
+
 import java.io.FileWriter;
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -9,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.*;
 import java.util.logging.*;
+import com.google.gson.Gson;
 
 public class Test
 {
@@ -17,35 +19,44 @@ public class Test
 	{
 		Control 		Me 							= new Control();
 		
+		//================================================================
+		//
+		// Json example
+		//
+		
+		// Create object
+		
+		
 		TestXML 			x						= new TestXML();
-		TestXML.SubClass 	xx1 					= x.new SubClass();
+		TestXML.Thermometer 	xx1 					= x.new Thermometer();
 		xx1.henry 									= 45;
 		xx1.alf 									= "Andre";
 		
-		x.subs.add(xx1);
+		x.ThermometerList.add(xx1);
 
-		xx1 										= x.new SubClass();
+		xx1 										= x.new Thermometer();
 		xx1.henry 									= 99;
 		xx1.alf 									= "Brigitte";
 		
-		x.subs.add(xx1);
+		x.ThermometerList.add(xx1);
+
+		// Convert object(x) to Json string(z)
+		
+		Gson gson = new Gson();
+		
+		String z = gson.toJson(x);
+		System.out.println(z);
+		
+		// Convert Json string(z) back to object(xyx) 
 
 		
-		XML y = new XML();
+		TestXML xyz		= gson.fromJson(z, TestXML.class);
+
+		//
+		//================================================================
+
 		
-		String z ="";
-		
-		try
-		{
-			z = y.createXMLFile(x);
-			System.out.println(z);
-			z = z + " ";
-		}
-		catch (Exception e)
-		{
-			System.out.println(e);
-			e.printStackTrace();
-		}
+
 		
 		Global.waitSeconds(3);
 		

@@ -9,107 +9,119 @@ public class XML
 
         public String getXML(Object object) throws IllegalArgumentException, IllegalAccessException
         {
-                String xml = "";
-                String className	=	getClassName(object);
+            String xml 										= "";
+            String className								= getClassName(object);
 
-                System.out.println("className " + className);
+            System.out.println("className full " + object.getClass().toString());
+            System.out.println("className part " + className);
+            
+            String 	header 									= "<" + getClassName(object) + " ";
+            String 	footer 									= "</" + getClassName(object) + ">";
+            Boolean hasSubs									= false;
+            
+            String	inner 									= "type = 'Object' ";
                 
-                String 	header 									= "<" + getClassName(object) + " ";
-                String 	footer 									= "</" + getClassName(object) + ">";
-                Boolean hasSubs									= false;
+            for (Field field : object.getClass().getDeclaredFields())
+            {
+                String fieldType = getFieldType(field);
                 
-                String	inner 									= "type = 'Object' ";
-                
-                for (Field field : object.getClass().getDeclaredFields())
+                System.out.println("field name " + field.getName());
+                System.out.println("field type full " + field.getType().toString());
+                System.out.println("field type part " + fieldType);
+                    
+                if 
+                (	(fieldType.endsWith("String")	)
+                ||  (fieldType.endsWith("Integer")	)    
+                ||  (fieldType.endsWith("int")		)
+                )
                 {
-                        String fieldType = getFieldType(field);
-                        
-                        System.out.println("field name " + field.getName());
-                        System.out.println("field type " + fieldType);
-                        
-                        if ((fieldType.endsWith("String"))
-                        ||  (fieldType.endsWith("Integer"))    
-                        ||  (fieldType.endsWith("int")) 
-                        )
-                        {
-                            inner 								= inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
-                        }
-                        else if ((fieldType.endsWith("Long"))
-                             ||  (fieldType.endsWith("long"))) 
-                        {
-                            // Either Date or Time   
-                        	inner 								= inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
-                        }
-                        else if (fieldType.endsWith("Boolean"))
-                        {
-                            // Yes or No
-                        	inner 								= inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
-                        }
-                        else if (fieldType.endsWith("List"))
-                        {
-                            hasSubs								= true; 
+                    inner 									= inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
+                }
+                else if
+                (	(fieldType.endsWith("Long")		)
+                ||  (fieldType.endsWith("long")		)
+                )
+                {
+                    // Either Date or Time   
+                	inner 									= inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
+                }
+                else if (fieldType.endsWith("Boolean"))
+                {
+                    // Yes or No
+                	inner 									= inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
+                }
+                else if (fieldType.endsWith("Class"))		// or SubClass
+                {
+                    hasSubs									= true; 
+                }
+                else if (fieldType.endsWith("ArrayList"))
+                {
+                    hasSubs									= true; 
+                }
+                else
+                {
+                    hasSubs									= true; 
 //                             for (element : field.get(object).item())
 //                             {
 //                                     inner = inner + "type = 'Collection'"
 //                                     inner = inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
 //                             }
-                        }
-                        else
-                        {
-                            hasSubs								= true; 
-//                        		XML             inside                                         = new XML();
-//                               
-//                               inner = inner +"> " + inside.getXML(field.get(object));
-                        }
                 }
-                if (hasSubs)
+            }
+            if (hasSubs)
+            {
+                for (Field field : object.getClass().getDeclaredFields())
                 {
-                    for (Field field : object.getClass().getDeclaredFields())
+                    String fieldType = getFieldType(field);
+                    
+                    System.out.println("field name " + field.getName());
+                    System.out.println("field type " + fieldType);
+                    
+                    if 
+                    (	(fieldType.endsWith("String")	)
+                    ||  (fieldType.endsWith("Integer")  )
+                    ||  (fieldType.endsWith("int") 		)
+                    ||  (fieldType.endsWith("Long")		)
+                    ||  (fieldType.endsWith("long") 	)
+                    ||  (fieldType.endsWith("Boolean")	)
+                    )
                     {
-                            String fieldType = getFieldType(field);
-                            
-                            System.out.println("field name " + field.getName());
-                            System.out.println("field type " + fieldType);
-                            
-                            if ((fieldType.endsWith("String"))
-                            ||  (fieldType.endsWith("Integer"))    
-                            ||  (fieldType.endsWith("int")) 
-                            )
-                            {
-                            }
-                            else if ((fieldType.endsWith("Long"))
-                                 ||  (fieldType.endsWith("long"))) 
-                            {
-                            }
-                            else if (fieldType.endsWith("Boolean"))
-                            {
-                            }
-                            else if (fieldType.endsWith("List"))
-                            {
-                                hasSubs								= true; 
-//                                 for (element : field.get(object).item())
-//                                 {
-//                                         inner = inner + "type = 'Collection'"
-//                                         inner = inner + field.getName()  + " = '" + field.get(object).toString() + "' ";
-//                                 }
-                            }
-                            else
-                            {
-                                hasSubs								= true; 
+                    }
+                    if  (fieldType.endsWith("Class"))		// or SubClass
+                    {
+                    	System.out.println("CLASS DETECTED");
+                    }
+                    else if (fieldType.endsWith("ArrayList"))
+                    {
+                    	
+                    	
+//                       inner = inner + "<Relays type = 'Collection'";
+	                     inner = inner + "XXX" + field.getName()  + "YYY";
+	                    
+	
+	                     for (Field innerField : field.getClass().getDeclaredFields())
+	            		 {
+	            			inner = inner + getXML(innerField) + "ZZZ"; 
+	            		 }
+	            		 inner = inner + getXML(field) + "AAA"; 
+
+                    }
+                    else
+                    {
 //                            		XML             inside                                         = new XML();
 //                                   
 //                                   inner = inner +"> " + inside.getXML(field.get(object));
-                            }
                     }
-                    xml 										= header + inner + "> " + footer;
                 }
-                else
-                {
-                	xml 										= header + inner + "> " + footer;
-                }
-                
-                
-                return xml;
+                xml 										= header + inner + "> " + footer;
+            }
+            else
+            {
+            	xml 										= header + inner + "/> " + footer;
+            }
+            
+            
+            return xml;
         }
         public String createXMLFile(Object object) throws IllegalArgumentException, IllegalAccessException
         {
