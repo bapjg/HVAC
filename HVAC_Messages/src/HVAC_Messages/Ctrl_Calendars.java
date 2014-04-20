@@ -25,6 +25,13 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		public ArrayList<Word> 					WordList 					= new ArrayList<Word>();
 
 	}
+	public static class Word					extends 					Ctrl_Calendars
+	{
+		private static final long 				serialVersionUID 			= 1L;
+		public String 							word;
+		public String							days;
+		
+	}
 
 
 }
