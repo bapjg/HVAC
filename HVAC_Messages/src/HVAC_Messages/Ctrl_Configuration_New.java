@@ -6,28 +6,28 @@ import java.util.ArrayList;
 @SuppressWarnings("serial")
 public class Ctrl_Configuration_New 			extends 					Ctrl_Abstract
 {
-	private static final long 			serialVersionUID 			= 1L;
-	public final Integer				CIRCUIT_TYPE_HotWater		= 0;
-	public final Integer				CIRCUIT_TYPE_Gradient		= 1;
-	public final Integer				CIRCUIT_TYPE_Mixer			= 2;
+	private static final long 					serialVersionUID 			= 1L;
+	public final Integer						CIRCUIT_TYPE_HotWater		= 0;
+	public final Integer						CIRCUIT_TYPE_Gradient		= 1;
+	public final Integer						CIRCUIT_TYPE_Mixer			= 2;
 	
-	public Long							dateTime;
+	public Long									dateTime;
 
 	public Ctrl_Configuration_New()
 	{
 	}
 	
-	public class Request 				extends 					Ctrl_Configuration_New
+	public class Request 						extends 					Ctrl_Configuration_New
 	{
 	}
 	public static class Data					extends 					Ctrl_Configuration_New
 	{
-		private static final long 		serialVersionUID 			= 1L;
-		public ArrayList<PID_Data> 		pidList 					= new ArrayList<PID_Data>();
-		public ArrayList<Thermometer> 	thermometerList 			= new ArrayList<Thermometer>();
-		public ArrayList<Relay> 		relayList 					= new ArrayList<Relay>();
-		public ArrayList<Pump> 			pumpList 					= new ArrayList<Pump>();
-		public ArrayList<Circuit> 		circuitList 				= new ArrayList<Circuit>();
+		private static final long 				serialVersionUID 			= 1L;
+		public ArrayList<PID_Data> 				pidList 					= new ArrayList<PID_Data>();
+		public ArrayList<Thermometer> 			thermometerList 			= new ArrayList<Thermometer>();
+		public ArrayList<Relay> 				relayList 					= new ArrayList<Relay>();
+		public ArrayList<Pump> 					pumpList 					= new ArrayList<Pump>();
+		public ArrayList<Circuit> 				circuitList 				= new ArrayList<Circuit>();
 		public Burner					burner						= new Burner();
 		public Boiler					Boiler						= new Boiler();
 	}
