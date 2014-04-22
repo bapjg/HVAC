@@ -55,6 +55,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		public String							timeEnd;
 		public String							tempObjective;
 		public String							stopOnObjective;
+		public String							active;
 	}
 	
 	
@@ -104,6 +105,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													="06:45";
 		calendar.tempObjective												="35000";
 		calendar.stopOnObjective											="1";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 		
 		calendar															= new Calendar();
@@ -113,6 +115,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													="22:00";
 		calendar.tempObjective												="35000";
 		calendar.stopOnObjective											="1";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -123,6 +126,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													="08:30";
 		calendar.tempObjective												="35000";
 		calendar.stopOnObjective											="1";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -133,6 +137,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													="18:30";
 		calendar.tempObjective												="45000";
 		calendar.stopOnObjective											="1";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -143,6 +148,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													="18:30";
 		calendar.tempObjective												="40000";
 		calendar.stopOnObjective											="1";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 		
 		circuit																= new Circuit();
@@ -156,6 +162,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													= "08:00";
 		calendar.tempObjective												= "50000";
 		calendar.stopOnObjective											= "0";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -166,6 +173,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													= "09:00";
 		calendar.tempObjective												= "50000";
 		calendar.stopOnObjective											= "0";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -176,6 +184,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													= "22:00";
 		calendar.tempObjective												= "50000";
 		calendar.stopOnObjective											= "0";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -186,6 +195,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													= "22:00";
 		calendar.tempObjective												= "50000";
 		calendar.stopOnObjective											= "0";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -196,6 +206,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													= "16:30";
 		calendar.tempObjective												= "50000";
 		calendar.stopOnObjective											= "0";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 		
 		
@@ -213,6 +224,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													= "23:59";
 		calendar.tempObjective												= "19000";
 		calendar.stopOnObjective											= "0";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -224,6 +236,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													= "07:30";
 		calendar.tempObjective												= "19000";
 		calendar.stopOnObjective											= "0";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -234,6 +247,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													= "23:30";
 		calendar.tempObjective												= "19000";
 		calendar.stopOnObjective											= "0";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -245,6 +259,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													= "21:30";
 		calendar.tempObjective												= "19000";
 		calendar.stopOnObjective											= "0";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 
@@ -256,6 +271,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeEnd													= "14:45";
 		calendar.tempObjective												= "50000";
 		calendar.stopOnObjective											= "0";
+		calendar.active														="1";
 		circuit.calendarList.add(calendar);
 
 	

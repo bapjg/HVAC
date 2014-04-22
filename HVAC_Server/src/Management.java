@@ -22,6 +22,11 @@ import com.bapjg.hvac_client.Mgmt_Msg_Abstract.Ping;
 import com.bapjg.hvac_client.Mgmt_Msg_Calendar.Data;
 import com.bapjg.hvac_client.Mgmt_Msg_Configuration.Thermometer;
 
+import HVAC_Messages.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class Management extends HttpServlet
 {
 
@@ -55,6 +60,8 @@ public class Management extends HttpServlet
     {
         Object 							message_in 	= null;
         Mgmt_Msg_Abstract 				message_out = null;
+        Ctrl_Abstract	 				message_new = null;
+        Boolean							new_format	= false;
         
         try
         {
@@ -77,6 +84,12 @@ public class Management extends HttpServlet
             message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
         }
         
+        if (message_in != null)
+        {
+            System.out.println("Class received : " + message_in.getClass().toString());
+        } 
+
+        
         if (message_in == null)
         {
             message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
@@ -85,7 +98,17 @@ public class Management extends HttpServlet
         {
             message_out 							= processTemperaturesReq();
         } 
-		else if (message_in instanceof Mgmt_Msg_Configuration.Request)
+		else if (message_in instanceof Ctrl_Configuration_New.Request)								//NEW
+        {
+			new_format								= true;
+			message_new 							= processConfigurationRequest_New();
+        } 
+		else if (message_in instanceof Ctrl_Configuration_New.Update)								//NEW
+        {
+			new_format								= true;
+			message_new 							= processConfigurationUpdate_New((Ctrl_Configuration_New.Update) message_in);
+        } 
+		else if (message_in instanceof Mgmt_Msg_Configuration.Request)							//OLD
         {
             message_out 							= processConfigurationRequest();
         } 
@@ -102,8 +125,15 @@ public class Management extends HttpServlet
             System.out.println("Unsupported message class received from client");
             message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
         }
-        reply(response, message_out);
-    }
+        if (new_format)																			// Berk
+        {
+        	reply(response, message_new);
+        }
+        else
+        {
+        	reply(response, message_out);
+        }
+     }
     public void dbOpen()
     {
         try
@@ -121,7 +151,7 @@ public class Management extends HttpServlet
             e.printStackTrace();
         }
     }
-    public Mgmt_Msg_Temperatures.Data processTemperaturesReq()
+    public Mgmt_Msg_Temperatures.Data 			processTemperaturesReq()
     {
         dbOpen();
         
@@ -174,7 +204,7 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Mgmt_Msg_Calendar.Data processCalendarRequestIndex()
+    public Mgmt_Msg_Calendar.Data 				processCalendarRequestIndex()
     {
         dbOpen();
         
@@ -198,7 +228,7 @@ public class Management extends HttpServlet
 
         return returnBuffer;
     }
-    public Mgmt_Msg_Calendar.Data processCalendarRequest()
+    public Mgmt_Msg_Calendar.Data 				processCalendarRequest()
     {
         dbOpen();
         
@@ -220,7 +250,7 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Mgmt_Msg_Configuration.Data processConfigurationRequest()
+    public Mgmt_Msg_Configuration.Data 			processConfigurationRequest()
     {
         dbOpen();
         
@@ -261,7 +291,76 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
+    public Ctrl_Abstract		 				processConfigurationRequest_New()				//NEW
+    {
+        dbOpen();
+        
+        Ctrl_Abstract 									returnBuffer		= new Ctrl_Abstract().new Nack();
+
+        try
+        {
+            dbStatement 													= dbConnection.createStatement(1004, 1008);
+            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, configuration FROM configuration ORDER BY dateTime DESC LIMIT 1");
+            dbResultSet.next();
+
+            Long										dbDateTime			= dbResultSet.getLong("dateTime");
+            String										dbJsonString		= dbResultSet.getString("configuration");
+
+    		Gson gson = new Gson();
+    		
+    		returnBuffer													= gson.fromJson(dbJsonString, Ctrl_Configuration_New.Data.class);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return returnBuffer;
+    }
+    public Ctrl_Abstract		 				processConfigurationUpdate_New(Ctrl_Configuration_New.Update message_in)				//NEW
+    {
+    	dbOpen();
+        
+        Ctrl_Abstract 									returnBuffer		= new Ctrl_Abstract().new Ack();
+
+        try
+        {
+            dbStatement 													= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, Date, Time, Configuration FROM configuration ORDER BY dateTime DESC LIMIT 1");
+
+            Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
+    		String 										dbJsonString 		= gson.toJson(message_in);
+
+    		dbResultSet.moveToInsertRow();
+            dbResultSet.updateDouble	("dateTime", 				message_in.dateTime);
+            dbResultSet.updateString	("date", 					dateTime2Date(message_in.dateTime));
+            dbResultSet.updateString	("time", 					dateTime2Time(message_in.dateTime));
+            dbResultSet.updateString	("Configuration", 			dbJsonString);
+            dbResultSet.insertRow();
+
+            dbStatement.close();
+            dbConnection.close();
+
+            returnBuffer													= new Ctrl_Abstract().new Ack();
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+            returnBuffer													= new Ctrl_Abstract().new Nack();
+        }
+        return returnBuffer;
+    }
     public void reply(HttpServletResponse response, Mgmt_Msg_Abstract message_out) throws IOException 
+    {
+    	response.reset();
+        response.setHeader("Content-Type", "application/x-java-serialized-object");
+        ObjectOutputStream 		output				= null;;
+		
+		output 										= new ObjectOutputStream(response.getOutputStream());
+		output.writeObject(message_out);
+        output.flush();
+        output.close();
+    }
+    public void reply(HttpServletResponse response, Ctrl_Abstract message_out) throws IOException 
     {
         response.reset();
         response.setHeader("Content-Type", "application/x-java-serialized-object");
@@ -277,6 +376,28 @@ public class Management extends HttpServlet
     	String					dateTimeString		= "";
  
         SimpleDateFormat 		sdf 				= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);
+    	
+    	return dateTimeString;
+    }
+    public String dateTime2Date(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("yyyy_MM_dd");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);
+    	
+    	return dateTimeString;
+    }
+    public String dateTime2Time(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm:ss.SSS");
         GregorianCalendar 		calendar 			= new GregorianCalendar();
         calendar.setTimeInMillis(dateTime);
         dateTimeString								= sdf.format(dateTime);
