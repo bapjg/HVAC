@@ -20,6 +20,7 @@ public class Thread_Thermometers implements Runnable
 					else
 					{
 						thisThermometer.read();
+						System.out.println("Incremented pid " + thisThermometer.name + " / " + thisThermometer.pidControler.increment);
 						if (thisThermometer.pidControler.increment == 0)
 						{
 							thisThermometer.pidControler.add(thisThermometer.reading);
