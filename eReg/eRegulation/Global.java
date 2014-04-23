@@ -226,11 +226,11 @@ public class Global extends DefaultHandler
 			}
 		}
 
-		Global.boiler									= new Boiler(
-																configurationData.boiler.thermometer,
-																configurationData.burner.relay,
-																configurationData.boiler.tempNeverExceed,
-																configurationData.boiler.tempOverShoot);
+		Global.boiler									= new Boiler(configurationData.boiler);
+//																configurationData.boiler.thermometer,
+//																configurationData.burner.relay,
+//																configurationData.boiler.tempNeverExceed,
+//																configurationData.boiler.tempOverShoot);
 				
 
 		
