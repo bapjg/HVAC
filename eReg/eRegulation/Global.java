@@ -128,7 +128,7 @@ public class Global extends DefaultHandler
 			
 		Ctrl_Abstract 											messageReceive 		= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Ctrl_Abstract.Ack))
+		if (!(messageReceive instanceof Ctrl_Configuration_New.Data))
 		{
 			System.out.println(dateTimeStamp() + " Global.constructor messageType is : Nack" + messageReceive.getClass().toString());
 			
