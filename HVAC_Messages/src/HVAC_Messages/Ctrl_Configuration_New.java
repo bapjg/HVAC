@@ -118,7 +118,7 @@ public class Ctrl_Configuration_New 			extends 					Ctrl_Abstract
 		PID_Data								pid							= new PID_Data();
 		pid.name															= "Floor_In";
 		pid.depth															= 10;
-		pid.sampleIncrement													= 4;
+		pid.sampleIncrement													= 90;		// 90 x 10s = 900s = 15 mins
 		confUpdate.pidList.add(pid);
 		
 		pid																	= new PID_Data();
@@ -136,7 +136,7 @@ public class Ctrl_Configuration_New 			extends 					Ctrl_Abstract
 		pid																	= new PID_Data();
 		pid.name															= "Living_Room";
 		pid.depth															= 10;
-		pid.sampleIncrement													= 1;
+		pid.sampleIncrement													= 180;		// 180 x 10s = 900s = 30 mins
 		confUpdate.pidList.add(pid);
 
 		// Thermometers

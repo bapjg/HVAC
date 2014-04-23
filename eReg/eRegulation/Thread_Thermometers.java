@@ -6,7 +6,7 @@ public class Thread_Thermometers implements Runnable
 	{
 		LogIt.info("Thread_Thermometers", "Run", "Starting", true);		
 
-		while (!Global.stopNow)
+		while (!Global.stopNow)										// Read each thermometer and add to PID if appropriate
 		{
 			for (Thermometer thisThermometer : Global.thermometers.thermometerList)
 			{
@@ -22,19 +22,11 @@ public class Thread_Thermometers implements Runnable
 					else
 					{
 						thisThermometer.read();
-						PID thidPID				= thisThermometer.pidControler;
-						thidPID.increment = ++thidPID.increment % thidPID.sampleIncrement;
-						System.out.println("Incremented pid " + thisThermometer.name + " Values ins/Sample " + thidPID.increment + " / " + thidPID.sampleIncrement);
-						
-						
-						if (thidPID.increment == 0)
+						thisThermometer.pidControler.increment = ++thisThermometer.pidControler.increment % thisThermometer.pidControler.sampleIncrement;
+
+						if (thisThermometer.pidControler.increment == 0)
 						{
 							thisThermometer.pidControler.add(thisThermometer.reading);
-							System.out.println("Incremented pid addEDEDED " + thisThermometer.name);
-						}
-						else
-						{
-							System.out.println("Incremented no pid add " + thisThermometer.name);
 						}
 					}
 				}
