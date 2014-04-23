@@ -253,8 +253,8 @@ public class Global extends DefaultHandler
 					String tempMax 						= attributes.getValue("tempMax");
 					String rampUpTime					= attributes.getValue("rampUpTime");
 
-					Global.circuits.add(name, friendlyName, circuitType, tempMax, rampUpTime);
-					this.circuit 						= Global.circuits.fetchcircuit(name);
+//					Global.circuits.add(name, friendlyName, circuitType, tempMax, rampUpTime);
+//					this.circuit 						= Global.circuits.fetchcircuit(name);
 				}	
 				else if (tagName.equalsIgnoreCase("tempGradient"))
 				{
@@ -263,7 +263,7 @@ public class Global extends DefaultHandler
 					String outsideHigh 					= attributes.getValue("outsideHigh");
 					String tempHigh 					= attributes.getValue("tempHigh");
 					
-					this.circuit.temperatureGradient	= new TemperatureGradient(outsideLow, tempLow, outsideHigh, tempHigh);
+//					this.circuit.temperatureGradient	= new TemperatureGradient(outsideLow, tempLow, outsideHigh, tempHigh);
 				}
 				else if (tagName.equalsIgnoreCase("Relay"))
 				{
@@ -283,7 +283,7 @@ public class Global extends DefaultHandler
 					String timeI						= attributes.getValue("timeI");
 					String gainI						= attributes.getValue("gainI");
 
-					this.circuit.mixer					= new Mixer(name, swingTime, lagTime, gainP, timeD, timeI, gainI);
+//					this.circuit.mixer					= new Mixer(name, swingTime, lagTime, gainP, timeD, timeI, gainI);
 				}
 				else if (tagName.equalsIgnoreCase("Pump"))
 				{

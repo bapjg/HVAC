@@ -93,9 +93,9 @@ public class Control
 		Global.thermoHotWater						= Global.thermometers.fetchThermometer("Hot_Water");
 
 		Global.burnerPower	 						= Global.relays.fetchRelay("Burner");
-		Global.pumpWater 							= Global.pumps.fetchPump("Pump_Water");
-		Global.pumpFloor	 						= Global.pumps.fetchPump("Pump_Floor");
-		Global.pumpRadiator 						= Global.pumps.fetchPump("Pump_Radiator");
+//		Global.pumpWater 							= Global.pumps.fetchPump("Pump_Water");
+//		Global.pumpFloor	 						= Global.pumps.fetchPump("Pump_Floor");
+//		Global.pumpRadiator 						= Global.pumps.fetchPump("Pump_Radiator");
 
 		Global.mixerUp		 						= Global.relays.fetchRelay("Mixer_Up");
 		Global.mixerDown	 						= Global.relays.fetchRelay("Mixer_Down");
