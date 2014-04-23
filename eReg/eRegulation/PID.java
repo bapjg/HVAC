@@ -20,7 +20,7 @@ public class PID
     {
     	this.name		 						= name;
     	this.sampleIncrement		 			= Integer.parseInt(sampleIncrement);
-    	this.increment				 			= 0;
+    	this.increment				 			= 1;
     	this.indexEnqueue 						= 0;
         this.target 							= 0;
         this.count								= 0;
@@ -38,7 +38,7 @@ public class PID
     {
     	this.name		 						= name;
     	this.sampleIncrement		 			= sampleIncrement;
-    	this.increment				 			= 0;
+    	this.increment				 			= 1;
     	this.indexEnqueue 						= 0;
         this.target 							= 0;
         this.count								= 0;
@@ -57,7 +57,9 @@ public class PID
     	this.indexEnqueue 						= 0;
         this.target 							= 0;
         this.count								= 0;
-        
+    	this.sampleIncrement		 			= 1;
+    	this.increment				 			= 1;
+       
         this.pidDepth							= pidDepth;
         this.entries							= new PID_Entry[pidDepth];
         
