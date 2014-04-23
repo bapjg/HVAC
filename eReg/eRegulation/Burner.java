@@ -1,5 +1,7 @@
 package eRegulation;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 /*
 	Experiment 23/10/2013
 	=====================
@@ -29,6 +31,17 @@ public class Burner
 		fuelflow									= new FuelFlow();
 		burnerPower.off();
 	}
+	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
+	{
+		burnerPower									= Global.relays.fetchRelay(burnerparams.relay);
+		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
+		fuelflow									= new FuelFlow();
+		burnerPower.off();
+	}
+	
+	
+	
+	
 	public void powerOn()
 	{
 		LogIt.action("Burner", "On");

@@ -1,5 +1,7 @@
 package eRegulation;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 public class Boiler
 {
 	// ===========================================================================================
@@ -62,6 +64,18 @@ public class Boiler
 		this.tempMin 											= -1;
 		this.tempNeverExceed									= tempNeverExceed;
 		this.tempOvershoot										= tempOvershoot;
+		state													= STATE_Off;
+	}
+	public Boiler(Ctrl_Configuration.Data.Boiler boilerparams)
+	{
+		this.thermoBoiler 										= Global.thermometers.fetchThermometer(boilerparams.thermometer);
+		
+		burner													= new Burner(boilerparams.burner);
+
+		this.tempMax 											= -1;
+		this.tempMin 											= -1;
+		this.tempNeverExceed									= boilerparams.tempNeverExceed;
+		this.tempOvershoot										= boilerparams.tempOverShoot;
 		state													= STATE_Off;
 	}
 	public void requestHeat(HeatRequired eR)
