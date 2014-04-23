@@ -137,27 +137,27 @@ public class Calendars extends DefaultHandler
 		}
 		
 		// Write serialised object to file
-		try
-		{
-			OutputStream 		file 				= new FileOutputStream("eCalendars_obj.txt");
-			ObjectOutputStream 	output 				= new ObjectOutputStream(file);
-		    try
-		    {
-		    	output.writeObject(Global.circuits);
-		    }
-			catch(IOException ex)
-			{
-				System.out.println("I/O error on writeObject : " + ex);
-			}	
-		    finally
-		    {
-		        output.close();
-		    }
-		}  
-		catch(IOException ex)
-		{
-			System.out.println("I/O error on open : " + ex);
-		}	
+//		try
+//		{
+//			OutputStream 		file 				= new FileOutputStream("eCalendars_obj.txt");
+//			ObjectOutputStream 	output 				= new ObjectOutputStream(file);
+//		    try
+//		    {
+//		    	output.writeObject(Global.circuits);
+//		    }
+//			catch(IOException ex)
+//			{
+//				System.out.println("I/O error on writeObject : " + ex);
+//			}	
+//		    finally
+//		    {
+//		        output.close();
+//		    }
+//		}  
+//		catch(IOException ex)
+//		{
+//			System.out.println("I/O error on open : " + ex);
+//		}	
 
 	}
 	public void startElement(String uri, String localName, String tagName, Attributes attributes) throws SAXException 

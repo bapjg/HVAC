@@ -6,6 +6,10 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.*;
@@ -130,7 +134,7 @@ public class Global extends DefaultHandler
 		
 		Ctrl_Configuration.Request	 						messageSend 		= new Ctrl_Configuration().new Request();
 			
-		Ctrl_Abstract 											messageReceive 		= httpRequest.sendData(messageSend);
+		Ctrl_Abstract 										messageReceive 		= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Ctrl_Configuration.Data))
 		{
@@ -231,6 +235,31 @@ public class Global extends DefaultHandler
 		//==================================================================================
 		
 		
+		try
+		{
+			OutputStream 		file 				= new FileOutputStream("eRegulator_Json.txt");
+			ObjectOutputStream 	output 				= new ObjectOutputStream(file);
+		    try
+		    {
+				Gson gson = new GsonBuilder().setPrettyPrinting().create();
+				
+				String messageJson = gson.toJson((Ctrl_Configuration.Data) messageReceive);
+
+				output.writeObject(messageJson);
+		    }
+			catch(IOException ex)
+			{
+				System.out.println("I/O error on writeObject : " + ex);
+			}	
+		    finally
+		    {
+		        output.close();
+		    }
+		}  
+		catch(IOException ex)
+		{
+			System.out.println("I/O error on open : " + ex);
+		}	
 		
 		
 		
