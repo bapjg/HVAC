@@ -158,6 +158,7 @@ public class Global extends DefaultHandler
 		{
 			if (configurationDetail.pidName == null)
 			{
+				System.out.println(dateTimeDisplay() + " NULLNULLNULL " + configurationDetail.name);
 				System.out.println(dateTimeDisplay() + " Thermo added " + configurationDetail.name);
 				System.out.println(dateTimeDisplay() + " Thermo added ad" + configurationDetail.address);
 				System.out.println(dateTimeDisplay() + " xxx" );
