@@ -157,17 +157,7 @@ public class Global extends DefaultHandler
 
 		for (Ctrl_Configuration_New.Thermometer configurationDetail : configurationData.thermometerList)
 		{
-			if (configurationDetail.pidName == null)
-			{
-				System.out.println(dateTimeDisplay() + " NULLNULLNULL " + configurationDetail.name);
-				System.out.println(dateTimeDisplay() + " Thermo added ad" + configurationDetail.address);
-				System.out.println(dateTimeDisplay() + " yyyyyyy" );
-				Global.thermometers.addFromObject(configurationDetail.name, configurationDetail.address, configurationDetail.pidName);
-			}
-			else
-			{
-				Global.thermometers.addFromObject(configurationDetail.name, configurationDetail.address, configurationDetail.pidName);
-			}
+			Global.thermometers.addFromObject(configurationDetail.name, configurationDetail.address, configurationDetail.pidName);
 		}
 		
 		
