@@ -132,7 +132,13 @@ public class Ctrl_Configuration_New 			extends 					Ctrl_Abstract
 		pid.depth															= 10;
 		pid.sampleIncrement													= 1;
 		confUpdate.pidList.add(pid);
-		
+
+		pid																	= new PID_Data();
+		pid.name															= "Living_Room";
+		pid.depth															= 10;
+		pid.sampleIncrement													= 1;
+		confUpdate.pidList.add(pid);
+
 		// Thermometers
 		Thermometer								thermometer					= new Thermometer();
 		thermometer.name													= "Boiler";
