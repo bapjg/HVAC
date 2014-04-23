@@ -59,6 +59,20 @@ public class Thermometer
 			pidControler										= null;
 		}
 	}
+	public Thermometer(String name, String address)
+	{
+		this.name 		    									= name;
+		this.friendlyName  										= "No Name";
+		this.address  											= address;
+		
+		String prefix											= "/mnt/1wire/";
+		String suffix											= "/";
+
+		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		
+		pidControler										= null;
+	}
     public void readAll()
 	{
 		try
