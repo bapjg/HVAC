@@ -237,34 +237,23 @@ public class Global extends DefaultHandler
 		
 		try
 		{
-			OutputStream 		file 				= new FileOutputStream("eRegulator_Json.txt");
-			ObjectOutputStream 	output 				= new ObjectOutputStream(file);
-		    try
-		    {
-				Gson gson = new GsonBuilder().setPrettyPrinting().create();
-				
-				String messageJson = gson.toJson((Ctrl_Configuration.Data) messageReceive);
+//			OutputStream 		file 				= new FileOutputStream("eRegulator_Json.txt");
+//			ObjectOutputStream 	output 				= new ObjectOutputStream(file);
 
-				output.writeObject(messageJson);
-		    }
-			catch(IOException ex)
-			{
-				System.out.println("I/O error on writeObject : " + ex);
-			}	
-		    finally
-		    {
-		        output.close();
-		    }
+			FileWriter 			file 				= new FileWriter("eRegulator_Json.txt");
+			
+			Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
+			
+			String 				messageJson 		= gson.toJson((Ctrl_Configuration.Data) messageReceive);
+
+			file.write(messageJson);
+			file.flush();
+			file.close();
 		}  
 		catch(IOException ex)
 		{
 			System.out.println("I/O error on open : " + ex);
 		}	
-		
-		
-		
-		
-		
 		
 		try 
 		{
