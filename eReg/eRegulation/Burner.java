@@ -17,20 +17,6 @@ public class Burner
 	public 	Relay	   		burnerPower;
 	public  FuelFlow		fuelflow;
 	
-	public Burner()
-	{
-		burnerPower									= Global.burnerPower;
-		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
-		fuelflow									= new FuelFlow();
-		burnerPower.off();
-	}
-	public Burner(String relayName)
-	{
-		burnerPower									= Global.relays.fetchRelay(relayName);
-		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
-		fuelflow									= new FuelFlow();
-		burnerPower.off();
-	}
 	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
 	{
 		burnerPower									= Global.relays.fetchRelay(burnerparams.relay);

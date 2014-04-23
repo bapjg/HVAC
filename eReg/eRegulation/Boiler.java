@@ -40,32 +40,6 @@ public class Boiler
 	public final int 		STATE_Error	 						= -1;
 	
 
-	public Boiler()
-	{
-		thermometers 											= new Thermometers();
-		thermoBoiler 											= thermometers.fetchThermometer("Boiler");
-		pidControler											= new PID(10);
-		
-		burner													= new Burner();
-
-		tempMax 												= -1;
-		tempMin 												= -1;
-		tempNeverExceed											= 95000;
-		tempOvershoot											= 15000;
-		state													= STATE_Off;
-	}
-	public Boiler(String thermoName, String relayName, Integer tempNeverExceed, Integer tempOvershoot)
-	{
-		this.thermoBoiler 										= Global.thermometers.fetchThermometer(thermoName);
-		
-		burner													= new Burner(relayName);
-
-		this.tempMax 											= -1;
-		this.tempMin 											= -1;
-		this.tempNeverExceed									= tempNeverExceed;
-		this.tempOvershoot										= tempOvershoot;
-		state													= STATE_Off;
-	}
 	public Boiler(Ctrl_Configuration.Data.Boiler boilerparams)
 	{
 		this.thermoBoiler 										= Global.thermometers.fetchThermometer(boilerparams.thermometer);

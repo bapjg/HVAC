@@ -149,18 +149,6 @@ public class Control
 		//============================================================
 		
 		
-		//============================================================
-		//
-		// To be transferred elsewhere
-		//
-
-		Boiler 			boiler						= new Boiler();
-		Global.boiler								= boiler;
-
-		//
-		//============================================================
-		
-
 		//=============================================================
 		//
 		// Section for debugging
@@ -192,7 +180,7 @@ public class Control
 		{
 			Global.waitSeconds(5);
 		
-			boiler.sequencer();
+			Global.boiler.sequencer();
 			
 			globalHeatRequired.tempMaximum 						= -1;
 			globalHeatRequired.tempMinimum 						= -1;
@@ -215,7 +203,7 @@ public class Control
 				}
 			}
 			
-			boiler.requestHeat(globalHeatRequired);
+			Global.boiler.requestHeat(globalHeatRequired);
 			
 			// We should only do this if no circuit active otherwise we will be heating the house in mid summer
 			
@@ -240,7 +228,7 @@ public class Control
 		//
 		//=============================================================
 
-		boiler.requestIdle();
+		Global.boiler.requestIdle();
 		Global.relays.offAll();
 		Global.waitThreadTermination();							// Ensure that this is the last thread to stop
 		

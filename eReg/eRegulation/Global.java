@@ -175,7 +175,7 @@ public class Global extends DefaultHandler
 		
 		for (Ctrl_Configuration.Pump		 	configurationDetail : configurationData.pumpList)
 		{
-			Global.pumps.addFromObject(configurationDetail.name, configurationDetail.relay);
+			Global.pumps.addFromObject(configurationDetail);
 		}
 
 		for (Ctrl_Configuration.Circuit		 	configurationDetail : configurationData.circuitList)
@@ -227,12 +227,6 @@ public class Global extends DefaultHandler
 		}
 
 		Global.boiler									= new Boiler(configurationData.boiler);
-//																configurationData.boiler.thermometer,
-//																configurationData.burner.relay,
-//																configurationData.boiler.tempNeverExceed,
-//																configurationData.boiler.tempOverShoot);
-				
-
 		
 		Global.summerPumpDuration						= 300;
 		// Global.summerPumpTime							= 0L;	Need to do

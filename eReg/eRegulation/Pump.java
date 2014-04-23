@@ -1,17 +1,28 @@
 package eRegulation;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 public class Pump
 {
 	public String 			name;
 	public Relay			relay;
 	
-	public Pump(String name, String relayName)
+//	public Pump(String name, String relayName)
+//	{
+//		this.name 		    		= name;
+//		this.relay					= Global.relays.fetchRelay(relayName);
+//		if (this.relay == null)
+//		{
+//			System.out.println("Relay.Constructor Pump : " + this.name + ", invalid relayName : " +relayName);
+//		}
+//	}
+	public Pump(Ctrl_Configuration.Data.Pump pumpParam)
 	{
-		this.name 		    		= name;
-		this.relay					= Global.relays.fetchRelay(relayName);
+		this.name 		    		= pumpParam.name;
+		this.relay					= Global.relays.fetchRelay(pumpParam.relay);
 		if (this.relay == null)
 		{
-			System.out.println("Relay.Constructor Pump : " + this.name + ", invalid relayName : " +relayName);
+			System.out.println("Relay.Constructor Pump : " + this.name + ", invalid relayName : " + pumpParam.relay);
 		}
 	}
 	public void on()
