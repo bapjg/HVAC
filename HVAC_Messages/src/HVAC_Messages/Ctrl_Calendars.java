@@ -2,13 +2,13 @@ package HVAC_Messages;
 
 import java.util.ArrayList;
 
-import HVAC_Messages.Ctrl_Configuration_New.Boiler;
-import HVAC_Messages.Ctrl_Configuration_New.Burner;
-import HVAC_Messages.Ctrl_Configuration_New.Circuit;
-import HVAC_Messages.Ctrl_Configuration_New.PID_Data;
-import HVAC_Messages.Ctrl_Configuration_New.Pump;
-import HVAC_Messages.Ctrl_Configuration_New.Relay;
-import HVAC_Messages.Ctrl_Configuration_New.Thermometer;
+import HVAC_Messages.Ctrl_Configuration.Boiler;
+import HVAC_Messages.Ctrl_Configuration.Burner;
+import HVAC_Messages.Ctrl_Configuration.Circuit;
+import HVAC_Messages.Ctrl_Configuration.PID_Data;
+import HVAC_Messages.Ctrl_Configuration.Pump;
+import HVAC_Messages.Ctrl_Configuration.Relay;
+import HVAC_Messages.Ctrl_Configuration.Thermometer;
 
 public class Ctrl_Calendars 					extends 					Ctrl_Abstract 
 {

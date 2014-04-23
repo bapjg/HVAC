@@ -23,7 +23,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 import HVAC_Messages.*;
-import HVAC_Messages.Ctrl_Configuration_New.Circuit;
+import HVAC_Messages.Ctrl_Configuration.Circuit;
 
 public class Global extends DefaultHandler
 {
@@ -126,13 +126,13 @@ public class Global extends DefaultHandler
 			return;
 		}
 
-		HTTP_Request	<Ctrl_Configuration_New.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration_New.Request> ("Management");
+		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
 		
-		Ctrl_Configuration_New.Request	 						messageSend 		= new Ctrl_Configuration_New().new Request();
+		Ctrl_Configuration.Request	 						messageSend 		= new Ctrl_Configuration().new Request();
 			
 		Ctrl_Abstract 											messageReceive 		= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Ctrl_Configuration_New.Data))
+		if (!(messageReceive instanceof Ctrl_Configuration.Data))
 		{
 			System.out.println(dateTimeDisplay() + " Global.constructor messageType is : Nack" + messageReceive.getClass().toString());
 			
@@ -142,7 +142,7 @@ public class Global extends DefaultHandler
 		
 		// Need to write file locally if TLM changed
 		
-		Ctrl_Configuration_New.Data								configurationData	= (Ctrl_Configuration_New.Data) messageReceive;
+		Ctrl_Configuration.Data								configurationData	= (Ctrl_Configuration.Data) messageReceive;
 		
 		
 		
@@ -154,32 +154,36 @@ public class Global extends DefaultHandler
 		//
 		// Get message from server
 		//
-		for (Ctrl_Configuration_New.PID_Data 		configurationDetail : configurationData.pidList)
+		for (Ctrl_Configuration.PID_Data 		configurationDetail : configurationData.pidList)
 		{
 			Global.pids.addFromObject(configurationDetail.name, configurationDetail.depth, configurationDetail.sampleIncrement);
 		}
 
-		for (Ctrl_Configuration_New.Thermometer 	configurationDetail : configurationData.thermometerList)
+		for (Ctrl_Configuration.Thermometer 	configurationDetail : configurationData.thermometerList)
 		{
 			Global.thermometers.addFromObject(configurationDetail.name, configurationDetail.address, configurationDetail.pidName);
 		}
 		
-		for (Ctrl_Configuration_New.Relay		 	configurationDetail : configurationData.relayList)
+		for (Ctrl_Configuration.Relay		 	configurationDetail : configurationData.relayList)
 		{
 			Global.relays.addFromObject(configurationDetail.name, configurationDetail.relayBank, configurationDetail.relayNumber);
 		}
 		
-		for (Ctrl_Configuration_New.Pump		 	configurationDetail : configurationData.pumpList)
+		for (Ctrl_Configuration.Pump		 	configurationDetail : configurationData.pumpList)
 		{
 			Global.pumps.addFromObject(configurationDetail.name, configurationDetail.relay);
 		}
 
-		for (Ctrl_Configuration_New.Circuit		 	configurationDetail : configurationData.circuitList)
+		for (Ctrl_Configuration.Circuit		 	configurationDetail : configurationData.circuitList)
 		{
-			System.out.println("Adding circuit " + configurationDetail.name + " type : " + configurationDetail.type);
 			Global.circuits.addFromObject(configurationDetail.name, configurationDetail.type, configurationDetail.pump, configurationDetail.thermometer);
 		}
 
+		// Boiler
+		
+		// Burner
+		
+		
 		//
 		//==================================================================================
 		

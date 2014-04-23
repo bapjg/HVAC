@@ -98,15 +98,15 @@ public class Management extends HttpServlet
         {
             message_out 							= processTemperaturesReq();
         } 
-		else if (message_in instanceof Ctrl_Configuration_New.Request)								//NEW
+		else if (message_in instanceof Ctrl_Configuration.Request)								//NEW
         {
 			new_format								= true;
 			message_new 							= processConfigurationRequest_New();
         } 
-		else if (message_in instanceof Ctrl_Configuration_New.Update)								//NEW
+		else if (message_in instanceof Ctrl_Configuration.Update)								//NEW
         {
 			new_format								= true;
-			message_new 							= processConfigurationUpdate_New((Ctrl_Configuration_New.Update) message_in);
+			message_new 							= processConfigurationUpdate_New((Ctrl_Configuration.Update) message_in);
         } 
 		else if (message_in instanceof Mgmt_Msg_Configuration.Request)							//OLD
         {
@@ -308,7 +308,7 @@ public class Management extends HttpServlet
 
     		Gson gson = new Gson();
     		
-    		returnBuffer													= gson.fromJson(dbJsonString, Ctrl_Configuration_New.Data.class);
+    		returnBuffer													= gson.fromJson(dbJsonString, Ctrl_Configuration.Data.class);
         }
         catch(Exception e)
         {
@@ -316,7 +316,7 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Ctrl_Abstract		 				processConfigurationUpdate_New(Ctrl_Configuration_New.Update message_in)				//NEW
+    public Ctrl_Abstract		 				processConfigurationUpdate_New(Ctrl_Configuration.Update message_in)				//NEW
     {
     	dbOpen();
         

@@ -12,7 +12,7 @@ import HVAC_Messages.*;
 import HVAC_Messages.Ctrl_Actions_Relays.Execute;
 
 
-public class Thread_TCPListen <SendType> implements Runnable
+public class Thread_TCPListen 			implements Runnable
 {
 	ServerSocket						UI_Server;
 	Socket								UI_Socket;
@@ -236,13 +236,13 @@ public class Thread_TCPListen <SendType> implements Runnable
 		// Returns the current configuration in operation
   		// It is timestamped now(). It should be timestamped with date/time recovered either from server or local file
   		
-  		Ctrl_Configuration.Data message_return				= new Ctrl_Configuration().new Data();
+  		Ctrl_Configuration.Data 			message_return	= new Ctrl_Configuration.Data();
 		
 		// This timestamp needs to be looked at in grater detail
 		
 		message_return.dateTime								= Global.now();
 		
-		for (Thermometer globalThermometer : Global.thermometers.thermometerList)
+		for (Thermometer 			globalThermometer : Global.thermometers.thermometerList)
 		{
 			Ctrl_Configuration.Thermometer paramThermometer	= new Ctrl_Configuration().new Thermometer();
 			paramThermometer.name							= globalThermometer.name;
@@ -250,7 +250,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			message_return.thermometerList.add(paramThermometer);
 		}
 
-		for (Relay globalRelay : Global.relays.relayList)
+		for (Relay 					globalRelay : Global.relays.relayList)
 		{
 			Ctrl_Configuration.Relay 		paramRelay		= new Ctrl_Configuration().new Relay();
 			paramRelay.name									= globalRelay.name;
@@ -259,7 +259,7 @@ public class Thread_TCPListen <SendType> implements Runnable
 			message_return.relayList.add(paramRelay);
 		}
 		
-		for (Pump globalPump : Global.pumps.pumpList)
+		for (Pump 					globalPump : Global.pumps.pumpList)
 		{
 			Ctrl_Configuration.Pump 		paramPump		= new Ctrl_Configuration().new Pump();
 			paramPump.name									= globalPump.name;
@@ -267,12 +267,12 @@ public class Thread_TCPListen <SendType> implements Runnable
 			message_return.pumpList.add(paramPump);
 		}
 
-		for (Circuit_Abstract globalCircuit : Global.circuits.circuitList)
+		for (Circuit_Abstract 		globalCircuit : Global.circuits.circuitList)
 		{
 			Ctrl_Configuration.Circuit		paramCircuit	= new Ctrl_Configuration().new Circuit();
 			paramCircuit.name								= globalCircuit.name;
-			paramCircuit.pump								= "pump"; //globalCircuit.relayBank;
-			paramCircuit.thermometer						= "thermo"; //globalCircuit.relayNumber;
+			paramCircuit.pump								= globalCircuit.circuitPump.name;
+			paramCircuit.thermometer						= globalCircuit.circuitThermo.name;
 			paramCircuit.type								= globalCircuit.circuitType;
 			message_return.circuitList.add(paramCircuit);
 		}

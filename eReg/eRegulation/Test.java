@@ -21,7 +21,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import HVAC_Messages.Ctrl_Abstract;
-import HVAC_Messages.Ctrl_Configuration_New;
+import HVAC_Messages.Ctrl_Configuration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -41,8 +41,8 @@ public class Test
 		// Create object
 		
 		
-		Ctrl_Configuration_New.Update 			messageSend			= new Ctrl_Configuration_New().new Update();
-		((Ctrl_Configuration_New) messageSend).initialise();
+		Ctrl_Configuration.Update 			messageSend			= new Ctrl_Configuration().new Update();
+		((Ctrl_Configuration) messageSend).initialise();
 
 		URL										serverURL;
 		URLConnection							servletConnection;
@@ -106,7 +106,7 @@ public class Test
     		 System.out.println("Error " + e);
 		}
 
-		Ctrl_Configuration_New.Request 			messageSend2		= new Ctrl_Configuration_New().new Request();
+		Ctrl_Configuration.Request 			messageSend2		= new Ctrl_Configuration().new Request();
 
 
 			
@@ -156,7 +156,7 @@ public class Test
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		
-		String z = gson.toJson((Ctrl_Configuration_New.Data) messageReceive);
+		String z = gson.toJson((Ctrl_Configuration.Data) messageReceive);
 		System.out.println(z);
 		
 		// Convert Json string(z) back to object(xyx) 
