@@ -43,6 +43,8 @@ public class Global extends DefaultHandler
 	public static 	Boolean							stopNow;
 	public static 	int								exitStatus			= 0;	// 0 = stop app, 1 = restart app, 2 = reboot
 	
+	public static	PIDs							pids;
+	
 	public static 	Thermometers 					thermometers;
 	
 	public static 	Thermometer 					thermoBoiler;
@@ -99,8 +101,9 @@ public class Global extends DefaultHandler
 		Integer x = 0;
 		x++;
 
-		Global.display 								= new LCD();
-		Global.buttons 								= new Buttons();	
+		Global.display 																= new LCD();
+		Global.buttons 																= new Buttons();	
+		Global.pids																	= new PIDs();
 
 		display.clear();
 		display.blinkOff();
@@ -111,18 +114,41 @@ public class Global extends DefaultHandler
 		//
 		// Get message from server
 		//
+		if (!Global.httpSemaphore.semaphoreLock("LogIt.logMessage"))
+		{
+			System.out.println(now() + " Global.constructor Lock timedout, owned by " + Global.httpSemaphore.owner);
+			return;
+		}
+
+		HTTP_Request	<Ctrl_Configuration_New.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration_New.Request> ("Management");
+		
+		Ctrl_Configuration_New.Request	 						messageSend 		= new Ctrl_Configuration_New().new Request();
+			
+		Ctrl_Abstract 											messageReceive 		= httpRequest.sendData(messageSend);
+			
+		if (!(messageReceive instanceof Ctrl_Abstract.Ack))
+		{
+			System.out.println(now() + " Global.constructor messageType is : Nack");
+			
+			// Need to read file locally
+		}
+
+		Global.httpSemaphore.semaphoreUnLock();			
+		
+		// Need to write file locally if TLM changed
+		
+		Ctrl_Configuration_New.Data								configurationData	= (Ctrl_Configuration_New.Data) messageReceive;
 		
 		
+		for (Ctrl_Configuration_New.PID_Data configurationPID : configurationData.pidList)
+		{
+			Global.pids.addFromObject(configurationPID.name, configurationPID.depth, configurationPID.sampleIncrement);
+			System.out.println("PID added " + configurationPID.name);
+		}
 		
 		
 		//
 		//==================================================================================
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -357,6 +383,9 @@ public class Global extends DefaultHandler
 		// Evacutae heat (over temperature by any means) hot water is usefull even in summer
 		
 		System.out.println("Global/burnerPanic called : will stop all" + reason);
+
+		// Should send EMAIL xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+		
 		Global.burnerPower.off();
 	}
 	public static void semaphoreLock(ReentrantLock semaphore)

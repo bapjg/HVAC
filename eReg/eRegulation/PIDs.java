@@ -13,6 +13,11 @@ public class PIDs
 		PID pidItem 				= new PID(name, depth, sampleIncrement);
 		pidList.add(pidItem);
 	}
+	public void addFromObject(String name, Integer depth, Integer sampleIncrement)
+	{
+		PID pidItem 				= new PID(name, depth, sampleIncrement);
+		pidList.add(pidItem);
+	}
 	public PID fetchPID(String name)
 	{
 		for (PID element : pidList) 

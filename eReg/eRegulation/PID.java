@@ -32,6 +32,23 @@ public class PID
         	this.entries[i]						= new PID_Entry();
         }
     }
+    public PID(String name, Integer pidDepth, Integer sampleIncrement) 
+    {
+    	this.name		 						= name;
+    	this.sampleIncrement		 			= sampleIncrement;
+    	this.indexEnqueue 						= 0;
+        this.target 							= 0;
+        this.count								= 0;
+        
+        this.pidDepth							= pidDepth;
+        this.entries							= new PID_Entry[this.pidDepth];
+        
+        int i;
+        for (i = 0; i < this.pidDepth; i++)
+        {
+        	this.entries[i]						= new PID_Entry();
+        }
+    }
     public PID(Integer pidDepth) 
     {
     	this.indexEnqueue 						= 0;

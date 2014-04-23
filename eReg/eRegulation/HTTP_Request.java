@@ -8,6 +8,8 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import HVAC_Messages.*;
+
 public class HTTP_Request <SendType>
 {
 	public URL						serverURL;
@@ -42,7 +44,7 @@ public class HTTP_Request <SendType>
 		servletConnection.setReadTimeout(1000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 	}
-	public Message_Abstract sendData(SendType messageSend)
+	public Message_Abstract sendData(Message_Abstract messageSend)
 	{
 		Message_Abstract				messageReceive		= null;
 
@@ -67,6 +69,48 @@ public class HTTP_Request <SendType>
 		{
 			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
 			messageReceive 									= (Message_Abstract) response.readObject();
+		}
+    	catch (ClassNotFoundException eClassNotFound) 
+    	{
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP ClassNotFound : " + eClassNotFound);
+		}
+		catch (SocketTimeoutException eTimeOut)
+		{
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP TimeOut on read  : " + eTimeOut);
+		}
+		catch (Exception eReceive) 
+		{
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Other : " + eReceive);
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Other : " + eReceive.getMessage());
+		}
+			
+		return messageReceive;			
+	}
+	public Ctrl_Abstract sendData(Ctrl_Abstract messageSend)
+	{
+		Ctrl_Abstract					messageReceive		= null;
+
+		try
+		{
+			ObjectOutputStream 			outputToServlet;
+			outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
+			outputToServlet.writeObject(messageSend);
+			outputToServlet.flush();
+			outputToServlet.close();
+		}
+		catch (SocketTimeoutException eTimeOut)
+		{
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP TimeOut on write : " + eTimeOut);
+		}
+		catch (Exception eSend) 
+		{
+    		// System.out.println(LogIt.dateTimeStamp() + " LogIt_HTTP Send : " + eSend);
+		}
+
+		try
+		{
+			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
+			messageReceive 									= (Ctrl_Abstract) response.readObject();
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{
