@@ -23,13 +23,13 @@ public class Thread_Thermometers implements Runnable
 						if (thisThermometer.pidControler.increment == 0)
 						{
 							thisThermometer.pidControler.add(thisThermometer.reading);
-							System.out.println("Incremented pid addEDEDED " + thisThermometer.name)
+							System.out.println("Incremented pid addEDEDED " + thisThermometer.name);
 						}
 						else
 						{
 							PID thidPID				= thisThermometer.pidControler;
 							thidPID.increment = thidPID.increment++ % thidPID.sampleIncrement;
-							System.out.println("Incremented no pid add " + thisThermometer.name)
+							System.out.println("Incremented no pid add " + thisThermometer.name);
 						}
 					}
 				}
