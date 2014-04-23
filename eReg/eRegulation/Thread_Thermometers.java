@@ -21,6 +21,10 @@ public class Thread_Thermometers implements Runnable
 						System.out.println("ThermoName NON = " + thisThermometer.name);
 					}
 				}
+				else
+				{
+					// Read no pid
+				}
 			}
 			
 			Global.thermoFloorOut.readUnCached();
