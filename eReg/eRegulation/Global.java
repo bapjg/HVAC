@@ -20,6 +20,8 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+import HVAC_Messages.*;
+
 public class Global extends DefaultHandler
 {
 	//===================================================================
@@ -104,6 +106,31 @@ public class Global extends DefaultHandler
 		display.blinkOff();
 		display.writeAtPosition(0, 0, "Initialising");
 		display.writeAtPosition(1, 0, " Reading params");
+		
+		//==================================================================================
+		//
+		// Get message from server
+		//
+		
+		
+		
+		
+		//
+		//==================================================================================
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		try 
 		{
