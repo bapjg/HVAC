@@ -19,11 +19,6 @@ public class Thermometers
 		Thermometer thermometerItem 	= new Thermometer(name, address.replace(" ", ""), "friendlyName", pid);
 		thermometerList.add(thermometerItem);
 	}
-	public void addFromObject(String name, String address)
-	{
-		Thermometer thermometerItem 	= new Thermometer(name, address.replace(" ", ""));
-		thermometerList.add(thermometerItem);
-	}
 	public Thermometer fetchThermometer(String name)
 	{
 		for (Thermometer element : thermometerList) 

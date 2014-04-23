@@ -162,7 +162,7 @@ public class Global extends DefaultHandler
 				System.out.println(dateTimeDisplay() + " NULLNULLNULL " + configurationDetail.name);
 				System.out.println(dateTimeDisplay() + " Thermo added ad" + configurationDetail.address);
 				System.out.println(dateTimeDisplay() + " yyyyyyy" );
-				Global.thermometers.addFromObject(configurationDetail.name, configurationDetail.address);
+				Global.thermometers.addFromObject(configurationDetail.name, configurationDetail.address, configurationDetail.pidName);
 			}
 			else
 			{
