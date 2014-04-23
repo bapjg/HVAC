@@ -37,6 +37,24 @@ public class Thermometer
 			pidControler										= new PID(10);
 		}
 	}
+	public Thermometer(String name, String address, String friendlyName, String pid)
+	{
+		this.name 		    									= name;
+		this.friendlyName  										= friendlyName;
+		this.address  											= address;
+		
+		String prefix											= "/mnt/1wire/";
+		String suffix											= "/";
+
+		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		
+		if (! pid.equalsIgnoreCase(""))
+		{
+			PID thisPID											= Global.pids.fetchPID(pid);
+			pidControler										= thisPID;
+		}
+	}
     public void readAll()
 	{
 		try

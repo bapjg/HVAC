@@ -46,7 +46,6 @@ public class Global extends DefaultHandler
 	public static 	int								exitStatus			= 0;	// 0 = stop app, 1 = restart app, 2 = reboot
 	
 	public static	PIDs							pids;
-	
 	public static 	Thermometers 					thermometers;
 	
 	public static 	Thermometer 					thermoBoiler;
@@ -134,7 +133,6 @@ public class Global extends DefaultHandler
 			
 			// Need to read file locally
 		}
-
 		Global.httpSemaphore.semaphoreUnLock();			
 		
 		// Need to write file locally if TLM changed
@@ -142,15 +140,29 @@ public class Global extends DefaultHandler
 		Ctrl_Configuration_New.Data								configurationData	= (Ctrl_Configuration_New.Data) messageReceive;
 		
 		
-		for (Ctrl_Configuration_New.PID_Data configurationPID : configurationData.pidList)
-		{
-			Global.pids.addFromObject(configurationPID.name, configurationPID.depth, configurationPID.sampleIncrement);
-		}
 		
 		
 		//
 		//==================================================================================
 		
+		//==================================================================================
+		//
+		// Get message from server
+		//
+		for (Ctrl_Configuration_New.PID_Data configurationDetail : configurationData.pidList)
+		{
+			Global.pids.addFromObject(configurationDetail.name, configurationDetail.depth, configurationDetail.sampleIncrement);
+		}
+
+		for (Ctrl_Configuration_New.Thermometer configurationDetail : configurationData.thermometerList)
+		{
+			Global.thermometers.addFromObject(configurationDetail.name, configurationDetail.address, configurationDetail.pidName);
+			System.out.println(dateTimeDisplay() + " Thermo added " + configurationDetail.name + " pid " + configurationDetail.pidName);
+		}
+		
+		
+		//
+		//==================================================================================
 		
 		
 		
