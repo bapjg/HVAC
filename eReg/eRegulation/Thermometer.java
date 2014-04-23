@@ -54,6 +54,10 @@ public class Thermometer
 			PID thisPID											= Global.pids.fetchPID(pid);
 			pidControler										= thisPID;
 		}
+		else
+		{
+			pidControler										= null;
+		}
 	}
     public void readAll()
 	{
