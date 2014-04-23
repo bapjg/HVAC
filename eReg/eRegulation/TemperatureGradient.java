@@ -13,12 +13,30 @@ public class TemperatureGradient
 	public Float 	a;
 	public Float 	b;
 	
-	public TemperatureGradient(String outsideLow, String tempLow, String outsideHigh, String tempHigh)
+//	public TemperatureGradient(String outsideLow, String tempLow, String outsideHigh, String tempHigh)
+//	{
+//		this.outsideLow					= Integer.parseInt(outsideLow);
+//		this.tempLow					= Integer.parseInt(tempLow);
+//		this.outsideHigh				= Integer.parseInt(outsideHigh);
+//		this.tempHigh					= Integer.parseInt(tempHigh);
+//		
+//		Float gradient					= (this.tempHigh.floatValue() - this.tempLow.floatValue()) / (this.outsideHigh.floatValue() - this.outsideLow.floatValue());
+//		
+//		this.a							= gradient;
+//		
+//		// as y = gradient.x + b
+//		//    b = y - grandient.x
+//		
+//		Float intercept					= this.tempHigh.floatValue() - this.outsideHigh.floatValue() * gradient;			
+//
+//		this.b							= intercept;
+//	}
+	public TemperatureGradient(Integer outsideLow, Integer tempLow, Integer outsideHigh, Integer tempHigh)
 	{
-		this.outsideLow					= Integer.parseInt(outsideLow);
-		this.tempLow					= Integer.parseInt(tempLow);
-		this.outsideHigh				= Integer.parseInt(outsideHigh);
-		this.tempHigh					= Integer.parseInt(tempHigh);
+		this.outsideLow					= outsideLow;
+		this.tempLow					= tempLow;
+		this.outsideHigh				= outsideHigh;
+		this.tempHigh					= tempHigh;
 		
 		Float gradient					= (this.tempHigh.floatValue() - this.tempLow.floatValue()) / (this.outsideHigh.floatValue() - this.outsideLow.floatValue());
 		

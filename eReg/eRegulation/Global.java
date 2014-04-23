@@ -176,7 +176,50 @@ public class Global extends DefaultHandler
 
 		for (Ctrl_Configuration.Circuit		 	configurationDetail : configurationData.circuitList)
 		{
-			Global.circuits.addFromObject(configurationDetail.name, configurationDetail.type, configurationDetail.pump, configurationDetail.thermometer);
+			Global.circuits.addFromObject(		configurationDetail.name, 
+												configurationDetail.type, 
+												configurationDetail.pump, 
+												configurationDetail.thermometer,
+												configurationDetail.tempMax);
+			
+			switch (configurationDetail.type)
+			{
+			case Circuit_Abstract.CIRCUIT_TYPE_HotWater :
+				break;
+			case Circuit_Abstract.CIRCUIT_TYPE_Mixer :
+
+				Circuit_Mixer circuitMixer				= (Circuit_Mixer) Global.circuits.fetchcircuit(configurationDetail.name);
+				
+				circuitMixer.mixer						= new Mixer("No Name", 
+																configurationDetail.mixer.swingTime,
+																configurationDetail.mixer.lagTime,
+																configurationDetail.mixer.pidParams.gainP, 
+																configurationDetail.mixer.pidParams.timeD, 
+																configurationDetail.mixer.pidParams.timeI, 
+																configurationDetail.mixer.pidParams.gainI,
+																configurationDetail.mixer.relayUp,
+																configurationDetail.mixer.relayDown);
+
+				circuitMixer.temperatureGradient		= new TemperatureGradient(
+																configurationDetail.tempGradient.outsideLow, 
+																configurationDetail.tempGradient.tempLow, 
+																configurationDetail.tempGradient.outsideHigh, 
+																configurationDetail.tempGradient.tempHigh);
+
+				break;
+				
+			case Circuit_Abstract.CIRCUIT_TYPE_Gradient :
+				
+				Circuit_Radiator circuitRadiator		= (Circuit_Radiator) Global.circuits.fetchcircuit(configurationDetail.name);
+
+				circuitRadiator.temperatureGradient		= new TemperatureGradient(
+																configurationDetail.tempGradient.outsideLow, 
+																configurationDetail.tempGradient.tempLow, 
+																configurationDetail.tempGradient.outsideHigh, 
+																configurationDetail.tempGradient.tempHigh);
+				
+				break;
+			}
 		}
 
 		// Boiler

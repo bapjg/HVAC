@@ -107,7 +107,9 @@ public class Ctrl_Configuration 			extends 					Ctrl_Abstract
 	{
 		public String							name;
 		public Integer							swingTime;
-		public Long								lagTime;
+		public Integer							lagTime;
+		public String							relayUp;
+		public String							relayDown;
 		public PID_Params						pidParams;
 	}
 	public void initialise()
@@ -288,14 +290,16 @@ public class Ctrl_Configuration 			extends 					Ctrl_Abstract
 		circuit																= new Circuit();
 		circuit.name 														= "Floor";
 		circuit.pump														= "Pump_Floor";
-		circuit.thermometer													= "Floor_Out";
+		circuit.thermometer													= "Living_Room";
 		circuit.type														= CIRCUIT_TYPE_Mixer;
 		circuit.tempMax														= 50000;
 		circuit.mixer														= new Mixer();
-		circuit.mixer.swingTime												= 92;
-		circuit.mixer.lagTime												= 20000L;
+		circuit.mixer.swingTime												= 92000;
+		circuit.mixer.lagTime												= 20000;
+		circuit.mixer.relayUp												= "Mixer_Up";
+		circuit.mixer.relayDown												= "Mixer_Down";
 		circuit.mixer.pidParams												= new PID_Params();
-		circuit.mixer.pidParams.thermometer									= "Living_Room";
+		circuit.mixer.pidParams.thermometer									= "Floor_Out";
 		circuit.mixer.pidParams.gainP										= 0.9F;
 		circuit.mixer.pidParams.timeD										= 90F;
 		circuit.mixer.pidParams.gainI										= 0F;

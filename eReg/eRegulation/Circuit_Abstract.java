@@ -46,22 +46,22 @@ abstract class Circuit_Abstract
 	
 	public Boolean					willBeSingleCircuit				= false;
 
-	public Circuit_Abstract(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
-	{	
-		this.name													= name;
-		this.friendlyName											= friendlyName;
-		this.circuitType											= circuitType;
-		this.tempMax												= Integer.parseInt(tempMax);
-		this.rampUpTime												= Long.parseLong(rampUpTime);
-		this.state													= CIRCUIT_STATE_Off;
-		this.heatRequired											= null;
-	}
-	public Circuit_Abstract(String name, Integer circuitType, String pumpName, String thermometerName)			// New
+//	public Circuit_Abstract(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
+//	{	
+//		this.name													= name;
+//		this.friendlyName											= friendlyName;
+//		this.circuitType											= circuitType;
+//		this.tempMax												= Integer.parseInt(tempMax);
+//		this.rampUpTime												= Long.parseLong(rampUpTime);
+//		this.state													= CIRCUIT_STATE_Off;
+//		this.heatRequired											= null;
+//	}
+	public Circuit_Abstract(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
 	{	
 		this.name													= name;
 		this.friendlyName											= "";
 		this.circuitType											= circuitType;
-//		this.tempMax												= Integer.parseInt(tempMax);
+		this.tempMax												= tempMax;
 		this.circuitPump											= Global.pumps.fetchPump(pumpName);
 		if (this.circuitPump == null)
 		{

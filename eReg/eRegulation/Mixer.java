@@ -10,8 +10,8 @@ package eRegulation;
 public class Mixer
 {
 	public String 			name;
-	public Integer 			swingTime 								= 90;
-	public Integer 			lagTime 								= 30;
+	public Integer 			swingTime 								= 90000;
+	public Integer 			lagTime 								= 30000;
 
 	public Integer 			tempMax 								= 48000;	
 	public Integer 			tempDontMove							= 20;
@@ -24,6 +24,10 @@ public class Mixer
 	public Float			timeD									= 0F;
 	public Float			timeI									= 0F;
 	
+	public Relay			mixerUp;
+	public Relay			mixerDown;
+	
+	
 	public Integer			state									= 0;
 	public static final int	MIXER_STATE_Off 						= 0;
 	public static final int	MIXER_STATE_Normal_Operating			= 1;
@@ -35,25 +39,58 @@ public class Mixer
 
 	public Long				timeToStop;
 
- 	public Mixer
+// 	public Mixer
+//		(
+//			String name, 
+//			String swingTime, 
+//			String lagTime, 
+//			String gainP, 
+//			String timeD, 
+//			String timeI, 
+//			String gainI
+//		)
+//    {
+//		this.name 									= name;
+//		this.swingTime								= Integer.parseInt(swingTime);
+//		this.lagTime								= Integer.parseInt(lagTime);
+//		this.gainP									= Float.parseFloat(gainP);
+//		this.timeD									= Float.parseFloat(timeD);
+//		this.gainD									= this.gainP * this.timeD;
+//		this.timeI									= Float.parseFloat(timeI);
+//		this.gainI									= Float.parseFloat(gainI);
+//		this.state									= MIXER_STATE_Off;
+//	}
+ 	public Mixer																			// New
 		(
-			String name, 
-			String swingTime, 
-			String lagTime, 
-			String gainP, 
-			String timeD, 
-			String timeI, 
-			String gainI
+			String 	name, 
+			Integer swingTime, 
+			Integer lagTime, 
+			Float 	gainP, 
+			Float 	timeD, 
+			Float 	timeI, 
+			Float 	gainI,
+			// Thermometer
+			// Max Temp
+			String	relayUp,
+			String 	relayDown
 		)
     {
 		this.name 									= name;
-		this.swingTime								= Integer.parseInt(swingTime);
-		this.lagTime								= Integer.parseInt(lagTime);
-		this.gainP									= Float.parseFloat(gainP);
-		this.timeD									= Float.parseFloat(timeD);
+		this.swingTime								= swingTime;
+		this.lagTime								= lagTime;
+		this.gainP									= gainP;
+		this.timeD									= timeD;
 		this.gainD									= this.gainP * this.timeD;
-		this.timeI									= Float.parseFloat(timeI);
-		this.gainI									= Float.parseFloat(gainI);
+		this.timeI									= timeI;
+		this.gainI									= gainI;
+		
+		this.mixerUp								= Global.relays.fetchRelay(relayUp);
+		this.mixerDown								= Global.relays.fetchRelay(relayDown);
+		
+		if ((this.mixerUp == null) || (this.mixerDown == null))
+		{
+			System.out.println("Mixer.Contructor : Unknown mixer relay");
+		}
 		this.state									= MIXER_STATE_Off;
 	}
 	public void sequencer(Integer targetTemp)
@@ -154,18 +191,18 @@ public class Mixer
 	public void positionZero()
 	{
 		allOff();
-		Global.mixerDown.on();
-		Global.waitMilliSeconds(1000 * swingTime);
-		Global.mixerDown.off();
+		mixerDown.on();
+		Global.waitMilliSeconds(swingTime);
+		mixerDown.off();
 		positionTracked									= 0;
 	}
 	public void positionFull()
 	{
 		allOff();
-		Global.mixerUp.on();
-		Global.waitMilliSeconds(1000 * swingTime);
-		Global.mixerUp.off();
-		positionTracked									= swingTime * 1000;
+		mixerUp.on();
+		Global.waitMilliSeconds(swingTime);
+		mixerUp.off();
+		positionTracked									= swingTime;
 	}
 	public void positionAbsolute(float proportion)
 	{
@@ -176,23 +213,23 @@ public class Mixer
 		if (proportion > 0.5F)
 		{
 			positionFull();
-			Global.mixerDown.on();
-			timeToWait									= 1000 * swingTime * (1F - proportion);
+			mixerDown.on();
+			timeToWait									= swingTime * (1F - proportion);
 			timeStart									= Global.now();
 			Global.waitMilliSeconds(timeToWait.intValue());
-			Global.mixerDown.off();
+			mixerDown.off();
 			timeEnd										= Global.now();
 			positionDiff   								= timeEnd - timeStart;
-	 		positionTracked								= 1000 * swingTime - positionDiff.intValue();		
+	 		positionTracked								=  swingTime - positionDiff.intValue();		
 		}
 		else
 		{
 			positionZero();
-			Global.mixerUp.on();
-			timeToWait									= 1000 * swingTime * proportion;
+			mixerUp.on();
+			timeToWait									= swingTime * proportion;
 			timeStart									= Global.now();
 			Global.waitMilliSeconds(timeToWait.intValue());
-			Global.mixerUp.off();
+			mixerUp.off();
 			timeEnd										= Global.now();
 			positionDiff   								= timeEnd - timeStart;
 	 		positionTracked								= positionDiff.intValue();		
@@ -201,9 +238,9 @@ public class Mixer
 	public void allOff()
 	{
 		Global.waitMilliSeconds(100);
-		Global.mixerDown.off();
+		mixerDown.off();
 		Global.waitMilliSeconds(100);
-		Global.mixerUp.off();
+		mixerUp.off();
 		Global.waitMilliSeconds(100);
 	}
 	private MixerMove_Report mixerMoveUp(Integer swingTimeRequired)
@@ -211,17 +248,17 @@ public class Mixer
 		Long				positionChange				= 0L;
 		MixerMove_Report	report						= new MixerMove_Report();
 		
-		Global.mixerUp.on();
+		mixerUp.on();
 		report.timeStart								= Global.now();
 		Global.waitMilliSeconds(swingTimeRequired);
-		Global.mixerUp.off();
+		mixerUp.off();
 		report.timeEnd									= Global.now();
 		positionChange									= report.timeEnd - report.timeStart;		// Positive number as moved up
 		report.swingTimePerformed						= positionChange.intValue();
 		report.positionTracked							= positionTracked + report.swingTimePerformed;
-		if (report.positionTracked > swingTime * 1000)
+		if (report.positionTracked > swingTime)
 		{
-			report.positionTracked 						= swingTime * 1000;
+			report.positionTracked 						= swingTime;
 		}
 		return report;
 	}
@@ -230,10 +267,10 @@ public class Mixer
 		Long				positionChange				= 0L;
 		MixerMove_Report	report						= new MixerMove_Report();
 		
-		Global.mixerDown.on();
+		mixerDown.on();
 		report.timeStart								= Global.now();
 		Global.waitMilliSeconds(-swingTimeRequired);
-		Global.mixerDown.off();
+		mixerDown.off();
 		report.timeEnd									= Global.now();
 		positionChange									= report.timeStart - report.timeEnd;		// Negative number as moved down
 		report.swingTimePerformed						= positionChange.intValue();

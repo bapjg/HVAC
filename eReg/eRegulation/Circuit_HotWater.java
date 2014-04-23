@@ -2,13 +2,13 @@ package eRegulation;
 
 public class Circuit_HotWater extends Circuit_Abstract
 {
-	public Circuit_HotWater(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
+//	public Circuit_HotWater(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
+//	{	
+//		super(name, friendlyName, circuitType, tempMax, rampUpTime);
+//	}
+	public Circuit_HotWater(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
 	{	
-		super(name, friendlyName, circuitType, tempMax, rampUpTime);
-	}
-	public Circuit_HotWater(String name, Integer circuitType, String pumpName, String thermometerName)			// New
-	{	
-		super(name, circuitType, pumpName, thermometerName);
+		super(name, circuitType, pumpName, thermometerName, tempMax);
 	}
 	@Override
 	public void sequencer()
