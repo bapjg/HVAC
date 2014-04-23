@@ -105,6 +105,7 @@ public class Global extends DefaultHandler
 		Global.display 																= new LCD();
 		Global.buttons 																= new Buttons();	
 		Global.pids																	= new PIDs();
+		Global.thermometers															= new Thermometers();
 
 		display.clear();
 		display.blinkOff();
