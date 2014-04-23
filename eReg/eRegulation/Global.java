@@ -9,7 +9,9 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
@@ -116,7 +118,7 @@ public class Global extends DefaultHandler
 		//
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.logMessage"))
 		{
-			System.out.println(now() + " Global.constructor Lock timedout, owned by " + Global.httpSemaphore.owner);
+			System.out.println(dateTimeStamp() + " Global.constructor Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
 
@@ -128,7 +130,7 @@ public class Global extends DefaultHandler
 			
 		if (!(messageReceive instanceof Ctrl_Abstract.Ack))
 		{
-			System.out.println(now() + " Global.constructor messageType is : Nack");
+			System.out.println(dateTimeStamp() + " Global.constructor messageType is : Nack" + messageReceive.getClass().toString());
 			
 			// Need to read file locally
 		}
@@ -143,7 +145,7 @@ public class Global extends DefaultHandler
 		for (Ctrl_Configuration_New.PID_Data configurationPID : configurationData.pidList)
 		{
 			Global.pids.addFromObject(configurationPID.name, configurationPID.depth, configurationPID.sampleIncrement);
-			System.out.println("PID added " + configurationPID.name);
+			System.out.println(dateTimeStamp() + "PID added " + configurationPID.name);
 		}
 		
 		
@@ -456,4 +458,12 @@ public class Global extends DefaultHandler
 		}
 		
 	}
+    public static String  dateTimeStamp()
+	{
+		Date now = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		String nowFormatted = dateFormat.format(now);
+		return nowFormatted;
+	}
+
 }
