@@ -157,6 +157,8 @@ public class Global extends DefaultHandler
 		for (Ctrl_Configuration_New.Thermometer configurationDetail : configurationData.thermometerList)
 		{
 			System.out.println(dateTimeDisplay() + " Thermo added " + configurationDetail.name);
+			System.out.println(dateTimeDisplay() + " Thermo added ad" + configurationDetail.address);
+			System.out.println(dateTimeDisplay() + " Thermo added pid" + configurationDetail.pidName);
 			Global.thermometers.addFromObject(configurationDetail.name, configurationDetail.address, configurationDetail.pidName);
 		}
 		
