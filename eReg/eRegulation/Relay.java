@@ -22,6 +22,15 @@ public class Relay
 		this.relayNumber			= Integer.parseInt(address);
 		this.relayOn				= false;
 	}
+	public Relay(String name, Integer relayBank, Integer relayNumber)
+	{
+		relayBank 					= relayBank;
+		
+		this.name 		    		= name;
+		this.friendlyName   		= "";
+		this.relayNumber			= relayNumber;
+		this.relayOn				= false;
+	}
 	public void on()
 	{
 		Global.interfaceSemaphore.semaphoreLock("Relay.on");

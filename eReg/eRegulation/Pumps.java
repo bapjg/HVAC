@@ -13,6 +13,11 @@ public class Pumps
 		Pump pumpItem 				= new Pump(name, relayName);
 		pumpList.add(pumpItem);
 	}
+	public void addFromObject(String name, String relayName)
+	{
+		Pump pumpItem 				= new Pump(name, relayName);
+		pumpList.add(pumpItem);
+	}
 	public Pump fetchPump(String name)
 	{
 		for (Pump element : pumpList) 

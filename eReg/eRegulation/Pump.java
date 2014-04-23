@@ -9,6 +9,10 @@ public class Pump
 	{
 		this.name 		    		= name;
 		this.relay					= Global.relays.fetchRelay(relayName);
+		if (this.relay == null)
+		{
+			System.out.println("Relay.Constructor Pump : " + this.name + ", invalid relayName : " +relayName);
+		}
 	}
 	public void on()
 	{

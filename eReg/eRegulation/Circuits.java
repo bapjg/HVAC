@@ -37,6 +37,33 @@ public class Circuits implements java.io.Serializable
 			circuitList.add(circuitItem);
 		}
 	}
+	public void addFromObject
+		(
+		String 			name, 
+		Integer			circuitType, 
+		String			pumpName, 
+		String			thermometerName
+		)
+	{
+		//Berk berk berkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+		
+		
+		if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_HotWater)
+		{
+			Circuit_HotWater circuitItem 				= new Circuit_HotWater(name, circuitType, pumpName, thermometerName);
+			circuitList.add(circuitItem);
+		}
+		else if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_Gradient)
+		{
+			Circuit_Radiator circuitItem 				= new Circuit_Radiator(name, circuitType, pumpName, thermometerName);
+			circuitList.add(circuitItem);
+		}
+		else if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_Mixer)
+		{
+			Circuit_Mixer circuitItem 					= new Circuit_Mixer(name, circuitType, pumpName, thermometerName);
+			circuitList.add(circuitItem);
+		}
+	}
 	public Boolean isSingleActiveCircuit()
 	{
 		/*

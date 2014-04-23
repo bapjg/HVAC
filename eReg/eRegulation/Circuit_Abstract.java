@@ -16,7 +16,9 @@ abstract class Circuit_Abstract
 	public Long 					rampUpTime						= 0L;
 	public Integer					tempToTrack;						// Used to recalculate ax+b;
 	public Thermometer				thermoToMonitor;					//Used with above
-
+	public Pump						circuitPump;
+	public Thermometer				circuitThermo;
+	
 	public Integer					state;
 	
 	public static final int			CIRCUIT_STATE_Off 				= 0;
@@ -44,9 +46,6 @@ abstract class Circuit_Abstract
 	
 	public Boolean					willBeSingleCircuit				= false;
 
-//	public Circuit_Abstract()
-//	{	
-//	}
 	public Circuit_Abstract(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
 	{	
 		this.name													= name;
@@ -57,7 +56,27 @@ abstract class Circuit_Abstract
 		this.state													= CIRCUIT_STATE_Off;
 		this.heatRequired											= null;
 	}
-	public void addCircuitTask
+	public Circuit_Abstract(String name, Integer circuitType, String pumpName, String thermometerName)			// New
+	{	
+		this.name													= name;
+		this.friendlyName											= "";
+		this.circuitType											= circuitType;
+//		this.tempMax												= Integer.parseInt(tempMax);
+		this.circuitPump											= Global.pumps.fetchPump(pumpName);
+		if (this.circuitPump == null)
+		{
+			System.out.println("Circuit.Constructor : " + name + " invalid pump " + pumpName);
+		}
+		this.circuitThermo											= Global.thermometers.fetchThermometer(thermometerName);
+		if (this.circuitThermo == null)
+		{
+			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + thermometerName);
+		}
+		
+		this.state													= CIRCUIT_STATE_Off;
+		this.heatRequired											= null;
+	}
+public void addCircuitTask
 		(
 		String 			timeStart, 
 		String 			timeEnd,  

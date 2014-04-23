@@ -16,6 +16,11 @@ public class Relays
 		Relay relayItem 				= new Relay(name, address, friendlyName);
 		relayList.add(relayItem);
 	}
+	public void addFromObject(String name, Integer address, Integer friendlyName)
+	{
+		Relay relayItem 				= new Relay(name, address, friendlyName);
+		relayList.add(relayItem);
+	}
 	public Relay fetchRelay(String name)
 	{
 		for (Relay element : relayList) 

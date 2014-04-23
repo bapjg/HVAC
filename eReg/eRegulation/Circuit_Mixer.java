@@ -7,6 +7,10 @@ public class Circuit_Mixer extends Circuit_Abstract
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 	}
+	public Circuit_Mixer(String name, Integer circuitType, String pumpName, String thermometerName)			// New
+	{	
+		super(name, circuitType, pumpName, thermometerName);
+	}
 	public Long getRampUpTime()
 	{
 		return 0L;
@@ -57,7 +61,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			case CIRCUIT_STATE_AwaitingHeat:
 				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
 				{
-					Global.pumpFloor.on();
+					circuitPump.on();
 					state											= CIRCUIT_STATE_RampingUp;
 				}
 				break;
@@ -96,7 +100,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				}
 				else
 				{
-					Global.pumpFloor.off();
+					circuitPump.off();
 					this.shutDown();					// shutDown sets state to off. Threadmixer looks at this as signal to stop
 				}
 				break;

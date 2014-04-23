@@ -7,6 +7,10 @@ public class Circuit_Radiator extends Circuit_Abstract
 	{	
 		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 	}
+	public Circuit_Radiator(String name, Integer circuitType, String pumpName, String thermometerName)			// New
+	{	
+		super(name, circuitType, pumpName, thermometerName);
+	}
 	public Long getRampUpTime()
 	{
 		return 0L;
@@ -52,7 +56,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
 				{
 					LogIt.action("PumpRadiator", "On");
-					Global.pumpRadiator.on();
+					circuitPump.on();
 					state										= CIRCUIT_STATE_Running;
 				}
 				break;
@@ -75,7 +79,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 				else
 				{
 					LogIt.action("PumpRadiator", "Off");
-					Global.pumpRadiator.off();
+					circuitPump.off();
 					this.shutDown();
 				}
 				break;

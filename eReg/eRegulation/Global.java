@@ -23,6 +23,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 import HVAC_Messages.*;
+import HVAC_Messages.Ctrl_Configuration_New.Circuit;
 
 public class Global extends DefaultHandler
 {
@@ -106,6 +107,9 @@ public class Global extends DefaultHandler
 		Global.buttons 																= new Buttons();	
 		Global.pids																	= new PIDs();
 		Global.thermometers															= new Thermometers();
+		Global.relays																= new Relays();
+		Global.pumps 																= new Pumps(); 
+		Global.circuits 															= new Circuits(); 
 
 		display.clear();
 		display.blinkOff();
@@ -150,17 +154,31 @@ public class Global extends DefaultHandler
 		//
 		// Get message from server
 		//
-		for (Ctrl_Configuration_New.PID_Data configurationDetail : configurationData.pidList)
+		for (Ctrl_Configuration_New.PID_Data 		configurationDetail : configurationData.pidList)
 		{
 			Global.pids.addFromObject(configurationDetail.name, configurationDetail.depth, configurationDetail.sampleIncrement);
 		}
 
-		for (Ctrl_Configuration_New.Thermometer configurationDetail : configurationData.thermometerList)
+		for (Ctrl_Configuration_New.Thermometer 	configurationDetail : configurationData.thermometerList)
 		{
 			Global.thermometers.addFromObject(configurationDetail.name, configurationDetail.address, configurationDetail.pidName);
 		}
 		
+		for (Ctrl_Configuration_New.Relay		 	configurationDetail : configurationData.relayList)
+		{
+			Global.relays.addFromObject(configurationDetail.name, configurationDetail.relayBank, configurationDetail.relayNumber);
+		}
 		
+		for (Ctrl_Configuration_New.Pump		 	configurationDetail : configurationData.pumpList)
+		{
+			Global.pumps.addFromObject(configurationDetail.name, configurationDetail.relay);
+		}
+
+		for (Ctrl_Configuration_New.Circuit		 	configurationDetail : configurationData.circuitList)
+		{
+			Global.circuits.addFromObject(configurationDetail.name, configurationDetail.type, configurationDetail.pump, configurationDetail.thermometer);
+		}
+
 		//
 		//==================================================================================
 		
@@ -198,15 +216,15 @@ public class Global extends DefaultHandler
 				}
 				else if (tagName.equalsIgnoreCase("Relays"))
 				{
-					Global.relays 						= new Relays(); 
+//					Global.relays 						= new Relays(); 
 				}
 				else if (tagName.equalsIgnoreCase("Circuits"))
 				{
-					Global.circuits 					= new Circuits(); 
+//					Global.circuits 					= new Circuits(); 
 				}
 				else if (tagName.equalsIgnoreCase("Pumps"))
 				{
-					Global.pumps 					= new Pumps(); 
+//					Global.pumps 					= new Pumps(); 
 				}
 			}
 			else if (attributes.getValue("type").equalsIgnoreCase("Object"))
@@ -253,7 +271,7 @@ public class Global extends DefaultHandler
 					String address 						= attributes.getValue("address");
 					String friendlyName					= attributes.getValue("friendlyName");
 
-					Global.relays.addFromXML(name, address, friendlyName);
+//					Global.relays.addFromXML(name, address, friendlyName);
 				}
 				else if (tagName.equalsIgnoreCase("Mixer"))
 				{
@@ -272,7 +290,7 @@ public class Global extends DefaultHandler
 					String name 						= attributes.getValue("name");
 					String relayName					= attributes.getValue("relay");
 
-					Global.pumps.addFromXML(name, relayName);
+//					Global.pumps.addFromXML(name, relayName);
 				}
 				else if (tagName.equalsIgnoreCase("Params"))
 				{
