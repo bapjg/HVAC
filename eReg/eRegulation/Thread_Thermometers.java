@@ -8,6 +8,21 @@ public class Thread_Thermometers implements Runnable
 
 		while (!Global.stopNow)
 		{
+			for (Thermometer thisThermometer : Global.thermometers.thermometerList)
+			{
+				if (thisThermometer.pidControler != null)
+				{
+					if (thisThermometer.pidControler.sampleIncrement == 1)
+					{
+						System.out.println("ThermoName YES = " + thisThermometer.name);
+					}
+					else
+					{
+						System.out.println("ThermoName NON = " + thisThermometer.name);
+					}
+				}
+			}
+			
 			Global.thermoFloorOut.readUnCached();
 			Global.thermoFloorOut.pidControler.add(Global.thermoFloorOut.reading);
 			
