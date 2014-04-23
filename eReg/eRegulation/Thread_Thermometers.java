@@ -10,24 +10,32 @@ public class Thread_Thermometers implements Runnable
 		{
 			for (Thermometer thisThermometer : Global.thermometers.thermometerList)
 			{
-				System.out.println("thisThermo " + thisThermometer.name);
-
 				if (thisThermometer.pidControler != null)
 				{
-					System.out.println("thisThermo.pid " + thisThermometer.pidControler.name);
-
 					if (thisThermometer.pidControler.sampleIncrement == 1)
 					{
-						System.out.println("ThermoName YES = " + thisThermometer.name);
+						thisThermometer.readUnCached();
+						thisThermometer.pidControler.add(thisThermometer.reading);
 					}
 					else
 					{
-						System.out.println("ThermoName NON = " + thisThermometer.name);
+						thisThermometer.read();
+						if (thisThermometer.pidControler.increment == 0)
+						{
+							thisThermometer.pidControler.add(thisThermometer.reading);
+							System.out.println("Incremented pid addEDEDED " + thisThermometer.name)
+						}
+						else
+						{
+							PID thidPID				= thisThermometer.pidControler;
+							thidPID.increment = thidPID.increment++ % thidPID.sampleIncrement;
+							System.out.println("Incremented no pid add " + thisThermometer.name)
+						}
 					}
 				}
 				else
 				{
-					// Read no pid
+					thisThermometer.readUnCached();
 				}
 			}
 			
