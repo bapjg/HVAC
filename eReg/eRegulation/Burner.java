@@ -22,6 +22,13 @@ public class Burner
 		fuelflow									= new FuelFlow();
 		burnerPower.off();
 	}
+	public Burner(String relayName)
+	{
+		burnerPower									= Global.relays.fetchRelay(relayName);
+		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
+		fuelflow									= new FuelFlow();
+		burnerPower.off();
+	}
 	public void powerOn()
 	{
 		LogIt.action("Burner", "On");

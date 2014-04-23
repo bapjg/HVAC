@@ -52,6 +52,18 @@ public class Boiler
 		tempOvershoot											= 15000;
 		state													= STATE_Off;
 	}
+	public Boiler(String thermoName, String relayName, Integer tempNeverExceed, Integer tempOvershoot)
+	{
+		this.thermoBoiler 										= Global.thermometers.fetchThermometer(thermoName);
+		
+		burner													= new Burner(relayName);
+
+		this.tempMax 											= -1;
+		this.tempMin 											= -1;
+		this.tempNeverExceed									= tempNeverExceed;
+		this.tempOvershoot										= tempOvershoot;
+		state													= STATE_Off;
+	}
 	public void requestHeat(HeatRequired eR)
 	{
 		tempMax 												= eR.tempMaximum;

@@ -226,11 +226,16 @@ public class Global extends DefaultHandler
 			}
 		}
 
-		// Boiler
+		Global.boiler									= new Boiler(
+																configurationData.boiler.thermometer,
+																configurationData.burner.relay,
+																configurationData.boiler.tempNeverExceed,
+																configurationData.boiler.tempOverShoot);
+				
+
 		
-		// Burner
-		
-		summerPumpDuration								= 300;
+		Global.summerPumpDuration						= 300;
+		// Global.summerPumpTime							= 0L;	Need to do
 		
 		//
 		//==================================================================================
@@ -361,10 +366,10 @@ public class Global extends DefaultHandler
 				}
 				else if (tagName.equalsIgnoreCase("Params"))
 				{
-					Global.summerTemp					= Integer.parseInt(attributes.getValue("summerTemp"));
-					Global.summerPumpDuration			= Integer.parseInt(attributes.getValue("summerPumpDuration"));
+//					Global.summerTemp					= Integer.parseInt(attributes.getValue("summerTemp"));
+//					Global.summerPumpDuration			= Integer.parseInt(attributes.getValue("summerPumpDuration"));
 					Global.summerPumpTime				= Global.parseTime(attributes.getValue("summerPumpTime"));	
-					Global.summerWorkDone				= false;	
+//					Global.summerWorkDone				= false;	
 				}
 			}
 			else
