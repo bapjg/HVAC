@@ -97,14 +97,14 @@ public class Control
 //		Global.pumpFloor	 						= Global.pumps.fetchPump("Pump_Floor");
 //		Global.pumpRadiator 						= Global.pumps.fetchPump("Pump_Radiator");
 
-		Global.mixerUp		 						= Global.relays.fetchRelay("Mixer_Up");
-		Global.mixerDown	 						= Global.relays.fetchRelay("Mixer_Down");
+//		Global.mixerUp		 						= Global.relays.fetchRelay("Mixer_Up");
+//		Global.mixerDown	 						= Global.relays.fetchRelay("Mixer_Down");
 
 		Global.circuitFloor							= (Circuit_Mixer) 		Global.circuits.fetchcircuit("Floor");
 		Global.circuitGradient						= (Circuit_Radiator) 	Global.circuits.fetchcircuit("Radiator");
 		Global.circuitHotWater						= (Circuit_HotWater) 	Global.circuits.fetchcircuit("Hot_Water");
 
-		Global.mixer								= Global.circuitFloor.mixer;
+//		Global.mixer								= Global.circuitFloor.mixer;
 		
 		//
 		//============================================================

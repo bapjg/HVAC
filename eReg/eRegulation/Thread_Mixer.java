@@ -20,7 +20,8 @@ public class Thread_Mixer implements Runnable
 		LogIt.mixerData(timeStart, 0, Global.now(), mixer.swingTime * 300);
 		
 		Global.waitSeconds(1);
-		Global.pumpFloor.on();
+		circuitMixer.circuitPump.on();
+//		Global.pumpFloor.on();								// Need to get this from circuit
 		Global.waitSeconds(1);
 		Integer i								= 0; // Used for loop waiting 20 s
 		
@@ -88,7 +89,8 @@ public class Thread_Mixer implements Runnable
 			}
 		}
 		// Optimise if singlecircuit
-		Global.pumpFloor.off();
+		circuitMixer.circuitPump.off();
+//		Global.pumpFloor.off();
 		LogIt.info("Thread_Mixer", "Run", "Floor Thread ending", true);	
 	}
 }

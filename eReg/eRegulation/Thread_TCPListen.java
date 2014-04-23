@@ -50,7 +50,7 @@ public class Thread_TCPListen 			implements Runnable
 			    		if (	 message_in instanceof Ctrl_Temperatures.Request) 		message_out = process_Ctrl_Temperatures_Request		((Ctrl_Temperatures.Request) message_in);
 			    		else if (message_in instanceof Ctrl_Immediate.Request)			message_out	= process_Ctrl_Immediate_Request		((Ctrl_Immediate.Request) message_in);
 			    		else if (message_in instanceof Ctrl_Immediate.Execute)			message_out	= process_Ctrl_Immediate_Execute		((Ctrl_Immediate.Execute) message_in); 
-			    		else if (message_in instanceof Ctrl_Configuration.Request)		message_out	= process_Ctrl_Configuration_Request		();
+			    		else if (message_in instanceof Ctrl_Configuration.Request)		message_out	= process_Ctrl_Configuration_Request	();
 			    		else if (message_in instanceof Ctrl_Configuration.Update) 		message_out	= process_Ctrl_Configuration_Update		((Ctrl_Configuration.Update) message_in);
 			    		else if (message_in instanceof Ctrl_Actions_Relays.Request)		message_out	= process_Ctrl_Actions_Relays_Request	();
 			    		else if (message_in instanceof Ctrl_Actions_Relays.Execute)		message_out	= process_Ctrl_Actions_Relays_Execute	((Ctrl_Actions_Relays.Execute) message_in);

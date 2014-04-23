@@ -10,7 +10,9 @@ public class Thread_Summer implements Runnable
 	{
 		Integer i;
 		
-		LogIt.info("Thread_Summer", "Run", "Starting", true);		
+		LogIt.info("Thread_Summer", "Run", "Starting", true);
+		
+		// Do for each circuit where type <> hotwater =>>>   circuit.circuitPump.on().
 		
 		LogIt.action("PumpFloor", "On");
 		Global.pumpFloor.on();

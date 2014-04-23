@@ -72,8 +72,8 @@ public class Global extends DefaultHandler
 	
 	public static 	Relays	 						relays;
 	public static 	Relay							burnerPower;
-	public static 	Relay							mixerUp;
-	public static 	Relay							mixerDown;
+//	public static 	Relay							mixerUp;
+//	public static 	Relay							mixerDown;
 	
 	public static 	Circuits	 					circuits;
 	public static 	Circuit_HotWater				circuitHotWater;
@@ -85,7 +85,7 @@ public class Global extends DefaultHandler
 	public static 	Pump							pumpFloor;
 	public static 	Pump							pumpRadiator;
 
-	public static 	Mixer							mixer;
+//	public static 	Mixer							mixer;
 
 	public static 	Integer							summerTemp;
 	public static 	Integer							summerPumpDuration;	
@@ -230,6 +230,7 @@ public class Global extends DefaultHandler
 		
 		// Burner
 		
+		summerPumpDuration								= 300;
 		
 		//
 		//==================================================================================
