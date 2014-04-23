@@ -118,7 +118,7 @@ public class Ctrl_Configuration_New 			extends 					Ctrl_Abstract
 		PID_Data								pid							= new PID_Data();
 		pid.name															= "Floor_In";
 		pid.depth															= 10;
-		pid.sampleIncrement													= 1;
+		pid.sampleIncrement													= 4;
 		confUpdate.pidList.add(pid);
 		
 		pid																	= new PID_Data();
