@@ -176,6 +176,7 @@ public class Global extends DefaultHandler
 
 		for (Ctrl_Configuration_New.Circuit		 	configurationDetail : configurationData.circuitList)
 		{
+			System.out.println("Adding circuit " + configurationDetail.name + " type : " + configurationDetail.type);
 			Global.circuits.addFromObject(configurationDetail.name, configurationDetail.type, configurationDetail.pump, configurationDetail.thermometer);
 		}
 
