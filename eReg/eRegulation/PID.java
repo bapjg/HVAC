@@ -6,13 +6,32 @@ import java.util.Calendar;
 
 public class PID 
 {
-    private Integer 	indexEnqueue;	// Separate index to ensure enqueue happens at the end
+	public  String		name;
+	public  Integer		sampleIncrement;
+	private Integer 	indexEnqueue;	// Separate index to ensure enqueue happens at the end
     private Integer 	count;			// Count is the number of entries in the PID Table <= pidDepth
     public 	Integer 	target;
 
     private	Integer		pidDepth;		// Depth is the size of the PID table
     private PID_Entry[]	entries;
     
+    public PID(String name, String pidDepth, String sampleIncrement) 
+    {
+    	this.name		 						= name;
+    	this.sampleIncrement		 			= Integer.parseInt(sampleIncrement);
+    	this.indexEnqueue 						= 0;
+        this.target 							= 0;
+        this.count								= 0;
+        
+        this.pidDepth							= Integer.parseInt(pidDepth);
+        this.entries							= new PID_Entry[this.pidDepth];
+        
+        int i;
+        for (i = 0; i < this.pidDepth; i++)
+        {
+        	this.entries[i]						= new PID_Entry();
+        }
+    }
     public PID(Integer pidDepth) 
     {
     	this.indexEnqueue 						= 0;
