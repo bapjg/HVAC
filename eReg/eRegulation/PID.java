@@ -8,6 +8,7 @@ public class PID
 {
 	public  String		name;
 	public  Integer		sampleIncrement;
+	public  Integer		increment;
 	private Integer 	indexEnqueue;	// Separate index to ensure enqueue happens at the end
     private Integer 	count;			// Count is the number of entries in the PID Table <= pidDepth
     public 	Integer 	target;
@@ -19,6 +20,7 @@ public class PID
     {
     	this.name		 						= name;
     	this.sampleIncrement		 			= Integer.parseInt(sampleIncrement);
+    	this.increment				 			= 0;
     	this.indexEnqueue 						= 0;
         this.target 							= 0;
         this.count								= 0;
@@ -36,6 +38,7 @@ public class PID
     {
     	this.name		 						= name;
     	this.sampleIncrement		 			= sampleIncrement;
+    	this.increment				 			= 0;
     	this.indexEnqueue 						= 0;
         this.target 							= 0;
         this.count								= 0;
