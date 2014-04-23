@@ -49,7 +49,7 @@ public class Thermometer
 		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 		
-		if (! pid.equalsIgnoreCase(""))
+		if (pid != null)
 		{
 			PID thisPID											= Global.pids.fetchPID(pid);
 			pidControler										= thisPID;
