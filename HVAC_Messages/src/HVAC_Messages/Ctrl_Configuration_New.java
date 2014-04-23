@@ -264,7 +264,7 @@ public class Ctrl_Configuration_New 			extends 					Ctrl_Abstract
 		circuit.name 														= "Hot_Water";
 		circuit.pump														= "Pump_Water";
 		circuit.thermometer													= "Hot_Water";
-		circuit.type														= 2;
+		circuit.type														= CIRCUIT_TYPE_HotWater;
 		circuit.tempMax														= 75000;
 		circuit.mixer														= null;
 		circuit.tempGradient												= null;
@@ -274,7 +274,7 @@ public class Ctrl_Configuration_New 			extends 					Ctrl_Abstract
 		circuit.name 														= "Radiator";
 		circuit.pump														= "Pump_Radiator";
 		circuit.thermometer													= "Radiator_Out";
-		circuit.type														= 1;
+		circuit.type														= CIRCUIT_TYPE_Gradient;
 		circuit.tempMax														= 90000;
 		circuit.mixer														= null;
 		circuit.tempGradient												= new TempGradient();
@@ -288,7 +288,7 @@ public class Ctrl_Configuration_New 			extends 					Ctrl_Abstract
 		circuit.name 														= "Floor";
 		circuit.pump														= "Pump_Floor";
 		circuit.thermometer													= "Floor_Out";
-		circuit.type														= 2;
+		circuit.type														= CIRCUIT_TYPE_Mixer;
 		circuit.tempMax														= 50000;
 		circuit.mixer														= new Mixer();
 		circuit.mixer.swingTime												= 92;
