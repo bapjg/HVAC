@@ -25,6 +25,7 @@ public class Thermometer
 		this.name 		    									= name;
 		this.friendlyName  										= friendlyName;
 		this.address  											= address;
+		this.pidControler										= null;
 		
 		String prefix											= "/mnt/1wire/";
 		String suffix											= "/";
@@ -42,6 +43,7 @@ public class Thermometer
 		this.name 		    									= name;
 		this.friendlyName  										= friendlyName;
 		this.address  											= address;
+		this.pidControler										= null;
 		
 		String prefix											= "/mnt/1wire/";
 		String suffix											= "/";
