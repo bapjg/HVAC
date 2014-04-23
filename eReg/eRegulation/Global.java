@@ -194,7 +194,7 @@ public class Global extends DefaultHandler
 			{
 				if (tagName.equalsIgnoreCase("Thermometers"))
 				{
-					Global.thermometers 				= new Thermometers(); 
+//					Global.thermometers 				= new Thermometers(); 
 				}
 				else if (tagName.equalsIgnoreCase("Relays"))
 				{
@@ -220,11 +220,11 @@ public class Global extends DefaultHandler
 					
 					if (pid.equalsIgnoreCase("Yes"))
 					{
-						Global.thermometers.add(name, address, friendlyName, true);
+//						Global.thermometers.add(name, address, friendlyName, true);
 					}
 					else
 					{
-						Global.thermometers.add(name, address, friendlyName, false);
+//						Global.thermometers.add(name, address, friendlyName, false);
 					}
 				}
 				else if (tagName.equalsIgnoreCase("Circuit"))
