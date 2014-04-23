@@ -10,10 +10,12 @@ public class Thread_Thermometers implements Runnable
 		{
 			for (Thermometer thisThermometer : Global.thermometers.thermometerList)
 			{
+				System.out.println("thisThermo " + thisThermometer.name);
+
 				if (thisThermometer.pidControler != null)
 				{
-					System.out.println("thisThermo " + thisThermometer.name);
 					System.out.println("thisThermo.pid " + thisThermometer.pidControler.name);
+
 					if (thisThermometer.pidControler.sampleIncrement == 1)
 					{
 						System.out.println("ThermoName YES = " + thisThermometer.name);
