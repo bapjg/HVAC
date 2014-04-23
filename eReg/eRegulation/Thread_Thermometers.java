@@ -24,8 +24,10 @@ public class Thread_Thermometers implements Runnable
 						thisThermometer.read();
 						PID thidPID				= thisThermometer.pidControler;
 						thidPID.increment = thidPID.increment++ % thidPID.sampleIncrement;
-						System.out.println("Incremented pid " + thisThermometer.name + " / " + thisThermometer.pidControler.increment);
-						if (thisThermometer.pidControler.increment == 0)
+						System.out.println("Incremented pid " + thisThermometer.name + " Values ins/Sample " + thisThermometer.pidControler.increment + " / " + thisThermometer.pidControler.sampleIncrement);
+						
+						
+						if (thidPID.increment == thidPID.sampleIncrement)
 						{
 							thisThermometer.pidControler.add(thisThermometer.reading);
 							System.out.println("Incremented pid addEDEDED " + thisThermometer.name);
