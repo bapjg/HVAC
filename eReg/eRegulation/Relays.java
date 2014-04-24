@@ -13,19 +13,19 @@ public class Relays
 	public native void OffAll(int Relay_Bank);
 	public native void ScanAndSet(int Relay_Bank);
 
-	public void addFromXML(String name, String address, String friendlyName)
-	{
-		Relay relayItem 				= new Relay(name, address, friendlyName);
-		relayList.add(relayItem);
-	}
-	public void addFromObject(String name, Integer address, Integer friendlyName)
-	{
-		Relay relayItem 				= new Relay(name, address, friendlyName);
-		relayList.add(relayItem);
-	}
+//	public void addFromXML(String name, String address, String friendlyName)
+//	{
+//		Relay relayItem 				= new Relay(name, address, friendlyName);
+//		relayList.add(relayItem);
+//	}
+//	public void addFromObject(String name, Integer address, Integer friendlyName)
+//	{
+//		Relay relayItem 				= new Relay(name, address, friendlyName);
+//		relayList.add(relayItem);
+//	}
 	public void addFromObject(Ctrl_Configuration.Relay relayParam)
 	{
-		Relay relayItem 				= new Relay(relayParam.name, relayParam.relayBank, relayParam.relayNumber);
+		Relay relayItem 				= new Relay(relayParam);
 		relayList.add(relayItem);
 	}
 	public Relay fetchRelay(String name)
