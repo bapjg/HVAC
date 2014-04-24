@@ -29,6 +29,7 @@ public class CircuitTask
 
 	public CircuitTask(Ctrl_Calendars.Calendar paramCalendar)
 	{
+		System.out.println("tE " + paramCalendar.stopCriterion.timeEnd);
 		this.state												= TASK_STATE_WaitingToStart;
 		this.active												= false;
 		this.timeStart											= Global.parseTime(paramCalendar.timeStart);
@@ -38,7 +39,6 @@ public class CircuitTask
 		this.tempObjective										= paramCalendar.tempObjective;
 		this.days												= paramCalendar.days;
 		this.dateLastRun										= 0L;
-		
 		
 		// How to handle duration/EndTime
 		
