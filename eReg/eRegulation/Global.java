@@ -138,21 +138,20 @@ public class Global extends DefaultHandler
 			// There is a problem, so read the last file received
 			try
 			{
-				File				file				= new File("eRegulator_Json.txt");
-				FileInputStream  	fileread			= new FileInputStream (file);
-				String 				messageJson 		= "";
-				byte[] 				data 				= new byte[(int) file.length()];
+				File						file			= new File("eRegulator_Json.txt");
+				FileInputStream  			fileread		= new FileInputStream (file);
+				String 						messageJson 	= "";
+				byte[] 						data 			= new byte[(int) file.length()];
 				fileread.read(data);
 				fileread.close();
 
-			    String 				dataIn 				= new String(data);
+			    String 						dataIn 			= new String(data);
 				
 			    System.out.println( "Data is ");
 			    System.out.println(dataIn);
-			    
 				
-			    Ctrl_Configuration.Data	dataInJson 		= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
-				messageReceive							= (Ctrl_Abstract) dataInJson;
+			    Ctrl_Configuration.Data		dataInJson 		= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
+				messageReceive								= (Ctrl_Abstract) dataInJson;
 			}  
 			catch(IOException ex)
 			{
@@ -176,7 +175,7 @@ public class Global extends DefaultHandler
 						System.out.println("Global.constructor writing eRegulator_Json.txt file");
 						try
 						{
-							FileWriter 			filewrite				= new FileWriter("eRegulator_Json.txt");
+							FileWriter 			filewrite			= new FileWriter("eRegulator_Json.txt");
 							
 							Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
 							

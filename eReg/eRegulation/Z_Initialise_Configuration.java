@@ -80,7 +80,6 @@ public class Z_Initialise_Configuration
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 
 		messageSend.dateTime 										= System.currentTimeMillis();
-
 			
 		Ctrl_Abstract							messageReceive		= null;
 
