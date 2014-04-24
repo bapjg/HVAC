@@ -152,7 +152,8 @@ public class Global extends DefaultHandler
 
 			    String 				dataIn 				= new String(data);
 				
-			    System.out.println( "Data is " + dataIn);
+			    System.out.println( "Data is ");
+			    System.out.println(dataIn);
 			    
 				
 			    Ctrl_Configuration.Data	dataInJson 		= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
