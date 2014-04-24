@@ -1,14 +1,21 @@
 package eRegulation;
 
-public class Thread_Summer implements Runnable
+public class Thread_BackgroundTasks implements Runnable
 {
-	public Thread_Summer()
+	public Thread_BackgroundTasks()
 	{
 
 	}
 	public void run()
 	{
 		Integer i;
+		
+		// This task must handle :
+		//   Summer pump running
+		//   Antifreeze
+		//   Optimisation
+		//   Getting expected weather predictions
+		
 		
 		LogIt.info("Thread_Summer", "Run", "Starting", true);
 		

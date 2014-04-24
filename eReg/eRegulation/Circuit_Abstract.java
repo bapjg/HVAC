@@ -104,27 +104,21 @@ abstract class Circuit_Abstract
 		CircuitTask 	circuitTaskItem 							= new CircuitTask(paramCalendar);
 		circuitTaskList.add(circuitTaskItem);
 	}
-
-	
-	
-	
-	
-	
-	public void addCircuitTask
-		(
-		String 			timeStart, 
-		String 			timeEnd,  
-		String 			tempObjective, 
-		String			stopOnObjective,
-		String			days
-		)
-	{
-		CircuitTask 	circuitTaskItem 							= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
-		circuitTaskList.add(circuitTaskItem);
-	}
+//	public void addCircuitTask
+//		(
+//		String 			timeStart, 
+//		String 			timeEnd,  
+//		String 			tempObjective, 
+//		String			stopOnObjective,
+//		String			days
+//		)
+//	{
+//		CircuitTask 	circuitTaskItem 							= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
+//		circuitTaskList.add(circuitTaskItem);
+//	}
 	public Long getRampUpTime() 			{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
 	public Long calculatePerformance()		{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
-	public void sequencer()					{ /* OverRidden in Circuit_XXX classes */	}
+	public void sequencer()					{  /* OverRidden in Circuit_XXX classes */	}
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");

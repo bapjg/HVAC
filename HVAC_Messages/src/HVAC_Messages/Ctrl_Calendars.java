@@ -24,7 +24,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		private static final long 				serialVersionUID 			= 1L;
 		public ArrayList<Word> 					wordList 					= new ArrayList<Word>();
 		public ArrayList<Circuit>				circuitList 				= new ArrayList<Circuit>();
-		public ArrayList<Circuit>				awayList 					= new ArrayList<Circuit>();
+		public ArrayList<Away>					awayList 					= new ArrayList<Away>();
 	}
 	public class Update							extends 					Ctrl_Calendars.Data
 	{
@@ -59,12 +59,17 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	public static class Stop_Criterion			extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
-		public  static final Integer			STOP_REASON_OnObjective		= 0;
-		public  static final Integer			STOP_REASON_OnEndTime		= 1;
-		public  static final Integer			STOP_REASON_OnDuration		= 2;
+		public Boolean 							stopOnObjective;
+		public Boolean 							endOnDuration;
 		public Integer 							stopReason;
 		public String							timeEnd;
 		public String							timeDuration;
+	}
+	public static class Away					extends 					Ctrl_Calendars
+	{
+		private static final long 				serialVersionUID 			= 1L;
+		public String 							dateTimeStart;
+		public String 							dateTimeEnd;
 	}
 	
 	
@@ -73,7 +78,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		Update									calendarUpdate				= (Update) this;
 		calendarUpdate.dateTime												= System.currentTimeMillis();
 		
-		// PIDs
+		// Vocabulary
 		Ctrl_Calendars.Word						word						= new Word();
 		word.name															= "EveryDay";
 		word.days															= "1234567";
@@ -109,16 +114,17 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		// Circuit : Hot Water
 		//
 		
-		Ctrl_Calendars.Circuit						circuit					= new Circuit();
+		Ctrl_Calendars.Circuit					circuit						= new Circuit();
 		circuit.name														= "Hot_Water";
 		calendarUpdate.circuitList.add(circuit);
 
-		Ctrl_Calendars.Calendar						calendar				= new Calendar();
+		Ctrl_Calendars.Calendar					calendar					= new Calendar();
 		calendar.name														= "EveryDay";
 		calendar.days														= "WeekDay";
 		calendar.timeStart													= "06:15";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
+		calendar.stopCriterion.stopOnObjective								= true;
+		calendar.stopCriterion.endOnDuration								= true;
 		calendar.stopCriterion.timeEnd										= "07:00";
 		calendar.stopCriterion.timeDuration									= "00:45";
 		calendar.tempObjective												= 40000;
@@ -130,8 +136,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "EveryDay";
 		calendar.timeStart													= "21:30";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
-		calendar.stopCriterion.timeEnd										= "22:00";
+		calendar.stopCriterion.stopOnObjective								= true;
+		calendar.stopCriterion.endOnDuration								= true;
 		calendar.stopCriterion.timeDuration									= "00:45";
 		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
@@ -142,8 +148,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "WeekEnd";
 		calendar.timeStart													= "07:30";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
-		calendar.stopCriterion.timeEnd										= "08:15";
+		calendar.stopCriterion.stopOnObjective								= true;
+		calendar.stopCriterion.endOnDuration								= true;
 		calendar.stopCriterion.timeDuration									= "00:45";
 		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
@@ -154,8 +160,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "WeekEnd";
 		calendar.timeStart													= "17:30";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
-		calendar.stopCriterion.timeEnd										= "19:00";
+		calendar.stopCriterion.stopOnObjective								= true;
+		calendar.stopCriterion.endOnDuration								= true;
 		calendar.stopCriterion.timeDuration									= "00:45";
 		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
@@ -166,8 +172,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "EveryDay";
 		calendar.timeStart													= "18:00";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
-		calendar.stopCriterion.timeEnd										= "18:45";
+		calendar.stopCriterion.stopOnObjective								= true;
+		calendar.stopCriterion.endOnDuration								= true;
 		calendar.stopCriterion.timeDuration									= "00:45";
 		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
@@ -190,7 +196,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "WeekDay";
 		calendar.timeStart													= "07:00";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
 		calendar.stopCriterion.timeEnd										= "08:00";
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 50000;
@@ -202,7 +209,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "WeekEnd";
 		calendar.timeStart													= "08:00";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
 		calendar.stopCriterion.timeEnd										= "09:00";
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 50000;
@@ -214,7 +222,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "EveryDay";
 		calendar.timeStart													= "21:30";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
 		calendar.stopCriterion.timeEnd										= "22:00";
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 50000;
@@ -226,7 +235,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "Locataire"	;
 		calendar.timeStart													= "17:00";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
 		calendar.stopCriterion.timeEnd										= "22:00";
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 50000;
@@ -238,7 +248,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "HalfDay";
 		calendar.timeStart													= "14:00";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
 		calendar.stopCriterion.timeEnd										= "16:30";
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 50000;
@@ -262,7 +273,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "TestDay";
 		calendar.timeStart													= "00:01";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
 		calendar.stopCriterion.timeEnd										= "23:59";
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 20000;
@@ -274,7 +286,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "WeekDay";
 		calendar.timeStart													= "05:00";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
 		calendar.stopCriterion.timeEnd										= "07:30";
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 20000;
@@ -286,7 +299,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "ZeekDay";
 		calendar.timeStart													= "15:00";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
 		calendar.stopCriterion.timeEnd										= "23:30";
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 20000;
@@ -298,7 +312,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "WeekEnd";
 		calendar.timeStart													= "06:30";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
 		calendar.stopCriterion.timeEnd										= "21:30";
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 20000;
@@ -310,7 +325,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.days														= "HalfDay";
 		calendar.timeStart													= "12:45";
 		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
 		calendar.stopCriterion.timeEnd										= "14:45";
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 20000;
@@ -319,6 +335,20 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		
 		//
 		//=========================================================================================
+
+		//=========================================================================================
+		//
+		// Away List
+		//
+
+		Away									awayItem					= new Away();
+		awayItem.dateTimeStart												= "02/04/2014 08:00:00";
+		awayItem.dateTimeEnd												= "02/04/2015 08:00:00";
+		calendarUpdate.awayList.add(awayItem);
+		
+		//
+		//=========================================================================================
+
 
 	}
 }

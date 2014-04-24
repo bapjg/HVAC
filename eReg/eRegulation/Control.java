@@ -206,6 +206,7 @@ public class Control
 			Global.boiler.requestHeat(globalHeatRequired);
 			
 			// We should only do this if no circuit active otherwise we will be heating the house in mid summer
+			// This should be changed to run continuously
 			
 			if (Global.thermoOutside.reading > Global.summerTemp)
 			{
@@ -216,7 +217,7 @@ public class Control
 					{
 						Global.summerWorkDone					= true;
 						
-						Thread 			thread_summer 			= new Thread(new Thread_Summer(), "Thread_Summer");
+						Thread 			thread_summer 			= new Thread(new Thread_BackgroundTasks(), "Thread_Summer");
 						thread_summer.start();
 					}
 				}

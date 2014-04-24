@@ -29,20 +29,17 @@ public class CircuitTask
 
 	public CircuitTask(Ctrl_Calendars.Calendar paramCalendar)
 	{
-		System.out.println("tE " + paramCalendar.stopCriterion.timeEnd);
 		this.state												= TASK_STATE_WaitingToStart;
 		this.active												= false;
 		this.timeStart											= Global.parseTime(paramCalendar.timeStart);
 		this.timeStartDisplay									= paramCalendar.timeStart;
-		this.timeEnd											= Global.parseTime(paramCalendar.stopCriterion.timeEnd);
-		this.timeEndDisplay										= paramCalendar.stopCriterion.timeEnd;
 		this.tempObjective										= paramCalendar.tempObjective;
 		this.days												= paramCalendar.days;
 		this.dateLastRun										= 0L;
 		
-		// How to handle duration/EndTime
+		// Handle duration/EndTime
 		
-		if (paramCalendar.stopCriterion.stopReason == Ctrl_Calendars.Stop_Criterion.STOP_REASON_OnObjective)
+		if (paramCalendar.stopCriterion.stopOnObjective)
 		{
 			this.stopOnObjective								= true;
 		}
@@ -50,35 +47,47 @@ public class CircuitTask
 		{
 			this.stopOnObjective								= false;			
 		}
-	}
-	public CircuitTask
-		(
-			String 				timeStart, 
-			String 				timeEnd,  
-			String 				tempObjective, 
-			String				stopOnObjective,
-			String				days
-		)
-	{
-		this.state												= TASK_STATE_WaitingToStart;
-		this.active												= false;
-		this.timeStart											= Global.parseTime(timeStart);
-		this.timeStartDisplay									= timeStart;
-		this.timeEnd											= Global.parseTime(timeEnd);
-		this.timeEndDisplay										= timeEnd;
-		this.tempObjective										= Integer.parseInt(tempObjective);
-		this.days												= days;
-		this.dateLastRun										= 0L;
 		
-		if (stopOnObjective.equalsIgnoreCase("1"))
+		if (paramCalendar.stopCriterion.endOnDuration)
 		{
-			this.stopOnObjective								= true;
+			// This can screw up if we go over midnight
+			this.timeEnd										= Global.parseTime(paramCalendar.timeStart) + Global.parseTime(paramCalendar.stopCriterion.timeDuration);
 		}
 		else
 		{
-			this.stopOnObjective								= false;			
+			this.timeEnd										= Global.parseTime(paramCalendar.stopCriterion.timeEnd);
 		}
+		this.timeEndDisplay										= paramCalendar.stopCriterion.timeEnd;
+
 	}
+//	public CircuitTask
+//		(
+//			String 				timeStart, 
+//			String 				timeEnd,  
+//			String 				tempObjective, 
+//			String				stopOnObjective,
+//			String				days
+//		)
+//	{
+//		this.state												= TASK_STATE_WaitingToStart;
+//		this.active												= false;
+//		this.timeStart											= Global.parseTime(timeStart);
+//		this.timeStartDisplay									= timeStart;
+//		this.timeEnd											= Global.parseTime(timeEnd);
+//		this.timeEndDisplay										= timeEnd;
+//		this.tempObjective										= Integer.parseInt(tempObjective);
+//		this.days												= days;
+//		this.dateLastRun										= 0L;
+//		
+//		if (stopOnObjective.equalsIgnoreCase("1"))
+//		{
+//			this.stopOnObjective								= true;
+//		}
+//		else
+//		{
+//			this.stopOnObjective								= false;			
+//		}
+//	}
 	public CircuitTask												// Used to create dynamically (ie not on calendars) an immediatetask
 		(
 			Long 				timeStart, 
