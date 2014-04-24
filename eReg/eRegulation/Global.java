@@ -154,9 +154,8 @@ public class Global extends DefaultHandler
 				
 			    System.out.println( "Data is " + dataIn);
 			    
-				Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
 				
-				Ctrl_Configuration.Data	dataInJson 		= gson.fromJson(dataIn, Ctrl_Configuration.Data.class);
+				Ctrl_Configuration.Data	dataInJson 		= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
 				dataInJson.dateTime						= now();												// This avoids rewiting the file at end
 				messageReceive							= (Ctrl_Abstract) dataInJson;
 			}  
