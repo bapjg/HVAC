@@ -119,7 +119,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeStart													= "06:15";
 		calendar.stopCriterion												= new Stop_Criterion();
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
-		calendar.stopCriterion.timeEnd										= null;
+		calendar.stopCriterion.timeEnd										= "07:00";
 		calendar.stopCriterion.timeDuration									= "00:45";
 		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
@@ -131,7 +131,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeStart													= "21:30";
 		calendar.stopCriterion												= new Stop_Criterion();
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
-		calendar.stopCriterion.timeEnd										= null;
+		calendar.stopCriterion.timeEnd										= "22:00";
 		calendar.stopCriterion.timeDuration									= "00:45";
 		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
@@ -143,7 +143,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeStart													= "07:30";
 		calendar.stopCriterion												= new Stop_Criterion();
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
-		calendar.stopCriterion.timeEnd										= null;
+		calendar.stopCriterion.timeEnd										= "08:15";
 		calendar.stopCriterion.timeDuration									= "00:45";
 		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
@@ -155,7 +155,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeStart													= "17:30";
 		calendar.stopCriterion												= new Stop_Criterion();
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
-		calendar.stopCriterion.timeEnd										= null;
+		calendar.stopCriterion.timeEnd										= "19:00";
 		calendar.stopCriterion.timeDuration									= "00:45";
 		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
@@ -167,7 +167,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.timeStart													= "18:00";
 		calendar.stopCriterion												= new Stop_Criterion();
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
-		calendar.stopCriterion.timeEnd										= null;
+		calendar.stopCriterion.timeEnd										= "18:45";
 		calendar.stopCriterion.timeDuration									= "00:45";
 		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
