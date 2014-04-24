@@ -229,7 +229,8 @@ public class Global extends DefaultHandler
 		Global.boiler									= new Boiler(configurationData.boiler);
 		
 		Global.summerPumpDuration						= 300;
-		// Global.summerPumpTime							= 0L;	Need to do
+		Global.summerWorkDone							= false;
+		Global.summerPumpTime							= 60 * 60 * 1000L;		// 1 a.m.
 		
 		//
 		//==================================================================================
