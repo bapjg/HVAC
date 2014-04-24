@@ -135,7 +135,7 @@ public class Z_Initialise_Configuration
 		// Send second message to Server to receive what was just sent
 		//
 
-		Ctrl_Configuration.Request 			messageSend2		= new Ctrl_Configuration().new Request();
+		Ctrl_Configuration.Request 			messageSend2			= new Ctrl_Configuration().new Request();
 			
 		messageReceive												= null;
 

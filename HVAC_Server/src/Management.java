@@ -328,7 +328,7 @@ public class Management extends HttpServlet
             ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, Date, Time, Configuration FROM configuration ORDER BY dateTime DESC LIMIT 1");
 
             Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
-    		String 										dbJsonString 		= gson.toJson(message_in);
+    		String 										dbJsonString 		= gson.toJson((Ctrl_Configuration.Data) message_in);
 
     		dbResultSet.moveToInsertRow();
             dbResultSet.updateDouble	("dateTime", 				message_in.dateTime);
