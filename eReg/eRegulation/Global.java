@@ -145,9 +145,7 @@ public class Global extends DefaultHandler
 				File				file				= new File("eRegulator_Json.txt");
 				FileInputStream  	fileread			= new FileInputStream (file);
 				String 				messageJson 		= "";
-				Integer				length				= fileread.read();
-//				byte[] 				data 				= new byte[(int) file.length()];
-				byte[] 				data 				= new byte[5];
+				byte[] 				data 				= new byte[(int) file.length()];
 				fileread.read(data);
 				fileread.close();
 
