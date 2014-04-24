@@ -361,7 +361,7 @@ public class Management extends HttpServlet
         {
             e.printStackTrace();
         }
-        System.out.println("Class is " + returnBuffer.getClass().toString());
+        System.out.println("----Class replied " + returnBuffer.getClass().toString());
         return returnBuffer;
     }
 

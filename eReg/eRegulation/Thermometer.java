@@ -39,7 +39,6 @@ public class Thermometer
 		{
 			PID thisPID											= Global.pids.fetchPID(paramThermometer.pidName);
 			pidControler										= thisPID;
-			System.out.println("pid found " + paramThermometer.pidName);
 		}
 		else
 		{

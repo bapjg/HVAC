@@ -144,7 +144,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "EveryDay";
+		calendar.name														= "WeekEnd";
 		calendar.days														= "WeekEnd";
 		calendar.timeStart													= "07:30";
 		calendar.stopCriterion												= new Stop_Criterion();
@@ -156,7 +156,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "EveryDay";
+		calendar.name														= "WeekEnd";
 		calendar.days														= "WeekEnd";
 		calendar.timeStart													= "17:30";
 		calendar.stopCriterion												= new Stop_Criterion();
@@ -170,12 +170,12 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar															= new Calendar();
 		calendar.name														= "Test";
 		calendar.days														= "EveryDay";
-		calendar.timeStart													= "18:00";
+		calendar.timeStart													= "23:45";
 		calendar.stopCriterion												= new Stop_Criterion();
 		calendar.stopCriterion.stopOnObjective								= true;
 		calendar.stopCriterion.endOnDuration								= true;
 		calendar.stopCriterion.timeDuration									= "00:45";
-		calendar.tempObjective												= 40000;
+		calendar.tempObjective												= 45000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 		

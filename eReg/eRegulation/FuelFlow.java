@@ -49,6 +49,7 @@ public class FuelFlow
 		{
 			System.out.println(LogIt.dateTimeStamp() + " Fuelflow.Constructor Fuel level recovered from network");
 			consumption												= ((Ctrl_Fuel_Consumption.Data) messageReceive).fuelConsumed;
+	    	timeLastStart											= -1L;		// Is this right
 		}
 		else
 		{
