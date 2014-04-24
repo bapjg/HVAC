@@ -342,7 +342,7 @@ public class Management extends HttpServlet
         try
         {
             dbStatement 													= dbConnection.createStatement(1004, 1008);
-            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, FuelConsummed FROM Fuel ORDER BY dateTime DESC LIMIT 1");
+            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, FuelConsumed FROM Fuel ORDER BY dateTime DESC LIMIT 1");
             dbResultSet.next();
 
             Long										dbDateTime			= dbResultSet.getLong("dateTime");
