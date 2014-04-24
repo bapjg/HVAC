@@ -22,7 +22,7 @@ public class Thread_BackgroundTasks implements Runnable
 		// Do for each circuit where type <> hotwater =>>>   circuit.circuitPump.on().
 		
 		LogIt.action("PumpFloor", "On");
-		Global.pumpFloor.on();
+		Global.pumps.fetchPump("Pump_Floor").on();
 		
 		for (i = 0; (i < Global.summerPumpDuration) && (!Global.stopNow); i++)
 		{
@@ -30,10 +30,10 @@ public class Thread_BackgroundTasks implements Runnable
 		}
 		
 		LogIt.action("PumpFloor", "Off");
-		Global.pumpFloor.off();
+		Global.pumps.fetchPump("Pump_Floor").off();
 
 		LogIt.action("PumpRadiator", "On");
-		Global.pumpRadiator.on();
+		Global.pumps.fetchPump("Pump_Radiator").on();
 		
 		for (i = 0; (i < Global.summerPumpDuration) && (!Global.stopNow); i++)
 		{
@@ -41,7 +41,7 @@ public class Thread_BackgroundTasks implements Runnable
 		}
 		
 		LogIt.action("PumpRadiator", "Off");
-		Global.pumpRadiator.off();
+		Global.pumps.fetchPump("Pump_Radiator").off();
 		
 		LogIt.info("Thread_Summer", "Run", "Stopping", true);		
 	}
