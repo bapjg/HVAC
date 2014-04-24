@@ -138,7 +138,7 @@ public class Global extends DefaultHandler
 			
 		if (!(messageReceive instanceof Ctrl_Configuration.Data))
 		{
-			System.out.println(dateTimeDisplay() + " Global.constructor messageType is : Nack" + messageReceive.getClass().toString());
+			System.out.println(dateTimeDisplay() + " Global.constructor messageType is : Nack");
 			
 			try
 			{
