@@ -314,15 +314,15 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		else if (message_in.relayName.equalsIgnoreCase("HotWater"))
 		{
-			relay											= Global.pumps.fetchPump("Hot_Water").relay;
+			relay											= Global.pumps.fetchPump("Pump_Water").relay;
 		}
 		else if (message_in.relayName.equalsIgnoreCase("Floor"))
 		{
-			relay											= Global.pumps.fetchPump("Floor").relay;
+			relay											= Global.pumps.fetchPump("Pump_Floor").relay;
 		}
 		else if (message_in.relayName.equalsIgnoreCase("Radiator"))
 		{
-			relay											= Global.pumps.fetchPump("Radiator").relay;
+			relay											= Global.pumps.fetchPump("Pump_Radiator").relay;
 		}
 		if (relay != null)
 		{
