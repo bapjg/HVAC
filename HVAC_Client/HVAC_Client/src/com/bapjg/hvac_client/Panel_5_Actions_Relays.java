@@ -94,7 +94,7 @@ public class Panel_5_Actions_Relays 			extends 			Panel_0_Fragment
 	}
 	public void processFinish(Ctrl_Abstract result) 
 	{  
-		Activity							activity				= getActivity();		
+		Activity								activity			= getActivity();		
 
 		if (result instanceof Ctrl_Actions_Relays.Data)
 		{

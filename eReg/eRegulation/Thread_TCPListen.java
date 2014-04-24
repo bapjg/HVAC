@@ -90,7 +90,7 @@ public class Thread_TCPListen 			implements Runnable
 				}
 				catch (Exception e)
 				{
-					LogIt.info("Thread_TCPListen", "Run", "Caught other", true);            
+					LogIt.info("Thread_TCPListen", "Run", "Caught other" + e, true);            
 				}
 			}
 		}
