@@ -146,14 +146,15 @@ public class Global extends DefaultHandler
 				FileInputStream  	fileread			= new FileInputStream (file);
 				String 				messageJson 		= "";
 				Integer				length				= fileread.read();
-				byte[] 				data 				= new byte[(int) file.length()+1];
+//				byte[] 				data 				= new byte[(int) file.length()];
+				byte[] 				data 				= new byte[5];
 				fileread.read(data);
 				fileread.close();
 
 			    String 				dataIn 				= new String(data);
 				
 			    System.out.println( "Data is ");
-			    System.out.println(dataIn.substring(0, 5));
+			    System.out.println(dataIn);
 			    
 				
 			    Ctrl_Configuration.Data	dataInJson 		= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
