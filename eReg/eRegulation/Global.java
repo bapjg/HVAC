@@ -177,7 +177,7 @@ public class Global extends DefaultHandler
 			File				file					= new File("eRegulator_Json.txt");
 			if (file.exists())
 			{
-				System.out.println("Global.constructor TLM = " + file.lastModified());
+				System.out.println("Global.constructor TLM = " + dateTimeDisplay(file.lastModified()));
 			}
 		}
 		catch (Exception e)
@@ -506,6 +506,12 @@ public class Global extends DefaultHandler
 		Date now = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 		String nowFormatted = dateFormat.format(now);
+		return nowFormatted;
+	}
+    public static String  dateTimeDisplay(Long milliSeconds)
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		String nowFormatted = dateFormat.format(milliSeconds);
 		return nowFormatted;
 	}
 
