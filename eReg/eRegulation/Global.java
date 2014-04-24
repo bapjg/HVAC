@@ -177,7 +177,8 @@ public class Global extends DefaultHandler
 			File				file					= new File("eRegulator_Json.txt");
 			if (file.exists())
 			{
-				System.out.println("Global.constructor TLM = " + dateTimeDisplay(file.lastModified()));
+				System.out.println("Global.constructor TLM  = " + dateTimeDisplay(file.lastModified()));
+				System.out.println("Global.constructor data = " + dateTimeDisplay(configurationData.dateTime));
 			}
 		}
 		catch (Exception e)
