@@ -124,7 +124,7 @@ public class Global
 			return;
 		}
 
-		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("Managementxx");
+		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
 		
 		Ctrl_Configuration.Request	 						messageSend 		= new Ctrl_Configuration().new Request();
 		Ctrl_Abstract 										messageReceive 		= httpRequest.sendData(messageSend);

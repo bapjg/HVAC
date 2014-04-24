@@ -125,8 +125,6 @@ public class Management extends HttpServlet
         } 
         
         
-        
-        
 		else if (message_in instanceof Mgmt_Msg_Abstract.Ping)
         {
             message_out 													= (new Mgmt_Msg_Abstract()).new Ack();
@@ -238,7 +236,6 @@ public class Management extends HttpServlet
         {
             e.printStackTrace();
         }
-        System.out.println("Class is " + returnBuffer.getClass().toString());
         return returnBuffer;
     }
     public Ctrl_Abstract		 				processCalendars_Update(Ctrl_Calendars.Update message_in)
@@ -361,12 +358,12 @@ public class Management extends HttpServlet
         {
             e.printStackTrace();
         }
-        System.out.println("----Class replied " + returnBuffer.getClass().toString());
         return returnBuffer;
     }
 
     public void reply(HttpServletResponse response, Mgmt_Msg_Abstract message_out) throws IOException 
     {
+        System.out.println("----Class replied " + message_out.getClass().toString());
     	response.reset();
         response.setHeader("Content-Type", "application/x-java-serialized-object");
         ObjectOutputStream 		output				= null;;
@@ -378,6 +375,7 @@ public class Management extends HttpServlet
     }
     public void reply(HttpServletResponse response, Ctrl_Abstract message_out) throws IOException 
     {
+        System.out.println("----Class replied " + message_out.getClass().toString());
         response.reset();
         response.setHeader("Content-Type", "application/x-java-serialized-object");
         ObjectOutputStream 		output				= null;;
