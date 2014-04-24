@@ -140,11 +140,30 @@ public class Global extends DefaultHandler
 		{
 			System.out.println(dateTimeDisplay() + " Global.constructor messageType is : Nack" + messageReceive.getClass().toString());
 			
-			// Need to read file locally
+			try
+			{
+				File				file				= new File("eRegulator_Json.txt");
+				FileInputStream  	fileread			= new FileInputStream (file);
+				String 				messageJson 		= "";
+				Integer				length				= fileread.read();
+				byte[] 				data 				= new byte[(int)file.length()];
+				fileread.read(data);
+				fileread.close();
+
+			    String 				dataIn 				= new String(data, "UTF-8");
+				
+				Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
+				
+				Ctrl_Configuration.Data	dataInJson 		= gson.fromJson(dataIn, Ctrl_Configuration.Data.class);
+				dataInJson.dateTime						= now();												// This avoids rewiting the file at end
+				messageReceive							= (Ctrl_Abstract) dataInJson;
+			}  
+			catch(IOException ex)
+			{
+				System.out.println("I/O error on open : " + ex);
+			}	
 		}
 		Global.httpSemaphore.semaphoreUnLock();			
-		
-		// Need to write file locally if TLM changed
 		
 		Ctrl_Configuration.Data								configurationData	= (Ctrl_Configuration.Data) messageReceive;
 
@@ -155,11 +174,13 @@ public class Global extends DefaultHandler
 		//
 		// Got message from server
 		//
+		System.out.println("Ok");
 		Global.pids.configure(configurationData.pidList);
 		Global.thermometers.configure(configurationData.thermometerList);
 		Global.relays.configure(configurationData.relayList);
 		Global.pumps.configure(configurationData.pumpList);
 		Global.circuits.configure(configurationData.circuitList);
+		System.out.println("Ok");
 
 
 		Global.boiler									= new Boiler(configurationData.boiler);
@@ -177,8 +198,31 @@ public class Global extends DefaultHandler
 			File				file					= new File("eRegulator_Json.txt");
 			if (file.exists())
 			{
-				System.out.println("Global.constructor TLM  = " + dateTimeDisplay(file.lastModified()));
-				System.out.println("Global.constructor data = " + dateTimeDisplay(configurationData.dateTime));
+				Long timeFile							= file.lastModified();
+				Long timeData							= configurationData.dateTime;
+				
+				if (timeData > timeFile)
+				{
+					System.out.println("Global.constructor writing eRegulator_Json.txt file");
+					try
+					{
+						FileWriter 			filewrite				= new FileWriter("eRegulator_Json.txt");
+						
+						Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
+						
+						String 				messageJson 		= gson.toJson((Ctrl_Configuration.Data) messageReceive);
+
+						filewrite.write(messageJson);
+						filewrite.flush();
+						filewrite.close();
+					}  
+					catch(IOException ex)
+					{
+						System.out.println("I/O error on open : " + ex);
+					}	
+					
+				}
+
 			}
 		}
 		catch (Exception e)
@@ -186,147 +230,130 @@ public class Global extends DefaultHandler
 			System.out.println("Global.constructor Exception = ");
 		}
 
-
-		try
-		{
-			FileWriter 			file 				= new FileWriter("eRegulator_Json.txt");
-			
-			Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
-			
-			String 				messageJson 		= gson.toJson((Ctrl_Configuration.Data) messageReceive);
-
-			file.write(messageJson);
-			file.flush();
-			file.close();
-		}  
-		catch(IOException ex)
-		{
-			System.out.println("I/O error on open : " + ex);
-		}	
 		
-		try 
-		{
-			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
-			SAXParser 			saxParser 			= saxFactory.newSAXParser();
-			
-			saxParser.parse("eRegulator.xml", this);
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		} 		
+//		try 
+//		{
+//			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
+//			SAXParser 			saxParser 			= saxFactory.newSAXParser();
+//			
+//			saxParser.parse("eRegulator.xml", this);
+//		} 
+//		catch (Exception e) 
+//		{
+//			e.printStackTrace();
+//		} 		
 		
 		display.writeAtPosition(1, 18, "Ok");
 		// Other initialisation messages are displayed by Control.java
 	}
-	public void startElement(String uri, String localName, String tagName, Attributes attributes) throws SAXException 
-    {
-		if (attributes.getLength() > 0)
-		{
-			if (attributes.getValue("type").equalsIgnoreCase("Collection")) 
-			{
-				if (tagName.equalsIgnoreCase("Thermometers"))
-				{
-//					Global.thermometers 				= new Thermometers(); 
-				}
-				else if (tagName.equalsIgnoreCase("Relays"))
-				{
-//					Global.relays 						= new Relays(); 
-				}
-				else if (tagName.equalsIgnoreCase("Circuits"))
-				{
-//					Global.circuits 					= new Circuits(); 
-				}
-				else if (tagName.equalsIgnoreCase("Pumps"))
-				{
-//					Global.pumps 					= new Pumps(); 
-				}
-			}
-			else if (attributes.getValue("type").equalsIgnoreCase("Object"))
-			{
-				if (tagName.equalsIgnoreCase("Thermometer"))
-				{
-					String name 						= attributes.getValue("name");
-					String address 						= attributes.getValue("address");
-					String friendlyName					= attributes.getValue("friendlyName");
-					String pid							= attributes.getValue("pid");
-					
-					if (pid.equalsIgnoreCase("Yes"))
-					{
-//						Global.thermometers.add(name, address, friendlyName, true);
-					}
-					else
-					{
-//						Global.thermometers.add(name, address, friendlyName, false);
-					}
-				}
-				else if (tagName.equalsIgnoreCase("Circuit"))
-				{
-					String name 						= attributes.getValue("name");
-					String friendlyName					= attributes.getValue("friendlyName");
-					String circuitType					= attributes.getValue("circuitType");
-					String tempMax 						= attributes.getValue("tempMax");
-					String rampUpTime					= attributes.getValue("rampUpTime");
-
-//					Global.circuits.add(name, friendlyName, circuitType, tempMax, rampUpTime);
-//					this.circuit 						= Global.circuits.fetchcircuit(name);
-				}	
-				else if (tagName.equalsIgnoreCase("tempGradient"))
-				{
-					String outsideLow 					= attributes.getValue("outsideLow");
-					String tempLow 						= attributes.getValue("tempLow");
-					String outsideHigh 					= attributes.getValue("outsideHigh");
-					String tempHigh 					= attributes.getValue("tempHigh");
-					
-//					this.circuit.temperatureGradient	= new TemperatureGradient(outsideLow, tempLow, outsideHigh, tempHigh);
-				}
-				else if (tagName.equalsIgnoreCase("Relay"))
-				{
-					String name 						= attributes.getValue("name");
-					String address 						= attributes.getValue("address");
-					String friendlyName					= attributes.getValue("friendlyName");
-
-//					Global.relays.addFromXML(name, address, friendlyName);
-				}
-				else if (tagName.equalsIgnoreCase("Mixer"))
-				{
-					String name 						= attributes.getValue("name");
-					String swingTime					= attributes.getValue("swingTime");
-					String lagTime						= attributes.getValue("lagTime");
-					String gainP						= attributes.getValue("gainP");
-					String timeD						= attributes.getValue("timeD");
-					String timeI						= attributes.getValue("timeI");
-					String gainI						= attributes.getValue("gainI");
-
-//					this.circuit.mixer					= new Mixer(name, swingTime, lagTime, gainP, timeD, timeI, gainI);
-				}
-				else if (tagName.equalsIgnoreCase("Pump"))
-				{
-					String name 						= attributes.getValue("name");
-					String relayName					= attributes.getValue("relay");
-
-//					Global.pumps.addFromXML(name, relayName);
-				}
-				else if (tagName.equalsIgnoreCase("Params"))
-				{
-//					Global.summerTemp					= Integer.parseInt(attributes.getValue("summerTemp"));
-//					Global.summerPumpDuration			= Integer.parseInt(attributes.getValue("summerPumpDuration"));
-					Global.summerPumpTime				= Global.parseTime(attributes.getValue("summerPumpTime"));	
-//					Global.summerWorkDone				= false;	
-				}
-			}
-			else
-			{
-				// Nothing of interest
-			}
-		}
-	}
-	public void endElement(String uri, String localName, String tagName) throws SAXException 
-	{
-	}
-	public void characters(char ch[], int start, int length) throws SAXException
-	{
-	}
+//	public void startElement(String uri, String localName, String tagName, Attributes attributes) throws SAXException 
+//    {
+//		if (attributes.getLength() > 0)
+//		{
+//			if (attributes.getValue("type").equalsIgnoreCase("Collection")) 
+//			{
+//				if (tagName.equalsIgnoreCase("Thermometers"))
+//				{
+////					Global.thermometers 				= new Thermometers(); 
+//				}
+//				else if (tagName.equalsIgnoreCase("Relays"))
+//				{
+////					Global.relays 						= new Relays(); 
+//				}
+//				else if (tagName.equalsIgnoreCase("Circuits"))
+//				{
+////					Global.circuits 					= new Circuits(); 
+//				}
+//				else if (tagName.equalsIgnoreCase("Pumps"))
+//				{
+////					Global.pumps 					= new Pumps(); 
+//				}
+//			}
+//			else if (attributes.getValue("type").equalsIgnoreCase("Object"))
+//			{
+//				if (tagName.equalsIgnoreCase("Thermometer"))
+//				{
+//					String name 						= attributes.getValue("name");
+//					String address 						= attributes.getValue("address");
+//					String friendlyName					= attributes.getValue("friendlyName");
+//					String pid							= attributes.getValue("pid");
+//					
+//					if (pid.equalsIgnoreCase("Yes"))
+//					{
+////						Global.thermometers.add(name, address, friendlyName, true);
+//					}
+//					else
+//					{
+////						Global.thermometers.add(name, address, friendlyName, false);
+//					}
+//				}
+//				else if (tagName.equalsIgnoreCase("Circuit"))
+//				{
+//					String name 						= attributes.getValue("name");
+//					String friendlyName					= attributes.getValue("friendlyName");
+//					String circuitType					= attributes.getValue("circuitType");
+//					String tempMax 						= attributes.getValue("tempMax");
+//					String rampUpTime					= attributes.getValue("rampUpTime");
+//
+////					Global.circuits.add(name, friendlyName, circuitType, tempMax, rampUpTime);
+////					this.circuit 						= Global.circuits.fetchcircuit(name);
+//				}	
+//				else if (tagName.equalsIgnoreCase("tempGradient"))
+//				{
+//					String outsideLow 					= attributes.getValue("outsideLow");
+//					String tempLow 						= attributes.getValue("tempLow");
+//					String outsideHigh 					= attributes.getValue("outsideHigh");
+//					String tempHigh 					= attributes.getValue("tempHigh");
+//					
+////					this.circuit.temperatureGradient	= new TemperatureGradient(outsideLow, tempLow, outsideHigh, tempHigh);
+//				}
+//				else if (tagName.equalsIgnoreCase("Relay"))
+//				{
+//					String name 						= attributes.getValue("name");
+//					String address 						= attributes.getValue("address");
+//					String friendlyName					= attributes.getValue("friendlyName");
+//
+////					Global.relays.addFromXML(name, address, friendlyName);
+//				}
+//				else if (tagName.equalsIgnoreCase("Mixer"))
+//				{
+//					String name 						= attributes.getValue("name");
+//					String swingTime					= attributes.getValue("swingTime");
+//					String lagTime						= attributes.getValue("lagTime");
+//					String gainP						= attributes.getValue("gainP");
+//					String timeD						= attributes.getValue("timeD");
+//					String timeI						= attributes.getValue("timeI");
+//					String gainI						= attributes.getValue("gainI");
+//
+////					this.circuit.mixer					= new Mixer(name, swingTime, lagTime, gainP, timeD, timeI, gainI);
+//				}
+//				else if (tagName.equalsIgnoreCase("Pump"))
+//				{
+//					String name 						= attributes.getValue("name");
+//					String relayName					= attributes.getValue("relay");
+//
+////					Global.pumps.addFromXML(name, relayName);
+//				}
+//				else if (tagName.equalsIgnoreCase("Params"))
+//				{
+////					Global.summerTemp					= Integer.parseInt(attributes.getValue("summerTemp"));
+////					Global.summerPumpDuration			= Integer.parseInt(attributes.getValue("summerPumpDuration"));
+//					Global.summerPumpTime				= Global.parseTime(attributes.getValue("summerPumpTime"));	
+////					Global.summerWorkDone				= false;	
+//				}
+//			}
+//			else
+//			{
+//				// Nothing of interest
+//			}
+//		}
+//	}
+//	public void endElement(String uri, String localName, String tagName) throws SAXException 
+//	{
+//	}
+//	public void characters(char ch[], int start, int length) throws SAXException
+//	{
+//	}
 	public static Long getTimeAtMidnight()
 	{
 		// Returns the system time last midnight
