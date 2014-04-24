@@ -140,15 +140,11 @@ public class Global extends DefaultHandler
 			{
 				File						file			= new File("eRegulator_Json.txt");
 				FileInputStream  			fileread		= new FileInputStream (file);
-				String 						messageJson 	= "";
 				byte[] 						data 			= new byte[(int) file.length()];
 				fileread.read(data);
 				fileread.close();
 
 			    String 						dataIn 			= new String(data);
-				
-			    System.out.println( "Data is ");
-			    System.out.println(dataIn);
 				
 			    Ctrl_Configuration.Data		dataInJson 		= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
 				messageReceive								= (Ctrl_Abstract) dataInJson;
@@ -208,15 +204,11 @@ public class Global extends DefaultHandler
 		//
 		// Got message from server
 		//
-		System.out.println("Ok");
 		Global.pids.configure(configurationData.pidList);
 		Global.thermometers.configure(configurationData.thermometerList);
 		Global.relays.configure(configurationData.relayList);
 		Global.pumps.configure(configurationData.pumpList);
 		Global.circuits.configure(configurationData.circuitList);
-		System.out.println("Ok");
-
-
 		Global.boiler									= new Boiler(configurationData.boiler);
 		
 		Global.summerPumpDuration						= 300;
