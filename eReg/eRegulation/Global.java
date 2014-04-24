@@ -13,11 +13,6 @@ import com.google.gson.GsonBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.FileTime;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -177,11 +172,19 @@ public class Global extends DefaultHandler
 		//
 		//==================================================================================
 		
-		Path 					path 					= Paths.get("eRegulator_Json.txt");
-		BasicFileAttributes 	attributes 				= Files.readAttributes(path, BasicFileAttributes.class);
-		FileTime 				creationTime 			= attributes.creationTime();	
-		
-		System.out.println("Global.constructor TLM = " + creationTime);
+		try
+		{
+			File				file					= new File("eRegulator_Json.txt");
+			if (file.exists())
+			{
+				System.out.println("Global.constructor TLM = " + file.lastModified());
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Global.constructor Exception = ");
+		}
+
 
 		try
 		{
