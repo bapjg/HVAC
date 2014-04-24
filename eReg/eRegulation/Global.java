@@ -146,7 +146,7 @@ public class Global extends DefaultHandler
 				FileInputStream  	fileread			= new FileInputStream (file);
 				String 				messageJson 		= "";
 				Integer				length				= fileread.read();
-				byte[] 				data 				= new byte[(int) file.length()];
+				byte[] 				data 				= new byte[(int) file.length()+1];
 				fileread.read(data);
 				fileread.close();
 
