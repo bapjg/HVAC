@@ -11,6 +11,8 @@ import java.text.*;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
 
+import HVAC_Messages.*;
+
 public class LogIt
 {
 	public static Boolean 						logDisplay 			= true;
@@ -207,21 +209,20 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request							httpRequest			= new HTTP_Request <Message_Fuel.Update> ("Monitor");
+		HTTP_Request							httpRequest			= new HTTP_Request <Ctrl_Fuel_Consumption.Update> ("Monitor");
 			
-		Message_Fuel.Update	 					messageSend 		= (new Message_Fuel()).new Update();
+		Ctrl_Fuel_Consumption.Update	 		messageSend 		= (new Ctrl_Fuel_Consumption()).new Update();
 		messageSend.dateTime 										= System.currentTimeMillis();
 		messageSend.fuelConsumed 									= fuelConsumed;
 			
-		Message_Abstract 						messageReceive	 	= httpRequest.sendData(messageSend);
+		Ctrl_Abstract 							messageReceive	 	= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Message_Abstract.Ack))
+		if (!(messageReceive instanceof Ctrl_Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " Fuel data  is : Nack");
 		}
 
 		Global.httpSemaphore.semaphoreUnLock();			
-
     }
 	public static void action(String device, String action)
     {

@@ -1,16 +1,10 @@
 package eRegulation;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -27,9 +21,9 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 import HVAC_Messages.*;
-import HVAC_Messages.Ctrl_Configuration.Circuit;
 
-public class Global extends DefaultHandler
+
+public class Global 
 {
 	//===================================================================
 	//
@@ -102,7 +96,7 @@ public class Global extends DefaultHandler
 
 	public static 	String							calendarsDateTime;	// Used to dateTime the Calendar version in use
 
-	public Global() throws IOException, SAXException, ParserConfigurationException
+	public Global()
 	{
 		Global.display 																= new LCD();
 		Global.buttons 																= new Buttons();	

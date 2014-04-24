@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl_Fuel_Consumption;
+import HVAC_Messages.Ctrl_Fuel_Consumption.Update;
+
 public class FuelFlow
 {
 	public Long			timeLastStart;
@@ -27,30 +31,53 @@ public class FuelFlow
 	
 	public  FuelFlow()
 	{
-		try
+		if (!Global.httpSemaphore.semaphoreLock("LogIt.fuelData"))
 		{
-			InputStream  	file 					= new FileInputStream("FuelConsumed.txt");
-			DataInputStream	input  					= new DataInputStream (file);
-		    try
-		    {
-		    	consumption							= input.readLong();
-		    }
-		    finally
-		    {
-		    	timeLastStart						= -1L;
-		    	input.close();
-		    }
-		}  
-		catch(FileNotFoundException ex)
-		{
-			System.out.println("File FuelConsumed.txt not found : creating it");
-    
-			consumption								= 0L;
-			saveFuelFlow();
+			System.out.println(LogIt.dateTimeStamp() + " Fuelflow.Constructor Lock timedout, owned by " + Global.httpSemaphore.owner);
+			return;
 		}
-		catch(IOException ex)
+
+		HTTP_Request							httpRequest			= new HTTP_Request <Ctrl_Fuel_Consumption.Request> ("Management");
+			
+		Ctrl_Fuel_Consumption.Request	 		messageSend 		= (new Ctrl_Fuel_Consumption()).new Request();
+			
+		Ctrl_Abstract 							messageReceive	 	= httpRequest.sendData(messageSend);
+			
+		Global.httpSemaphore.semaphoreUnLock();			
+
+		if (messageReceive instanceof Ctrl_Fuel_Consumption.Data)
 		{
-			System.out.println("I/O error when reading FuelConsumed.txt");
+			System.out.println(LogIt.dateTimeStamp() + " Fuelflow.Constructor Fuel level recovered from network");
+			consumption												= ((Ctrl_Fuel_Consumption.Data) messageReceive).fuelConsumed;
+		}
+		else
+		{
+			System.out.println(LogIt.dateTimeStamp() + " Fuelflow.Constructor Network failed, recovering from local file");
+			try
+			{
+				InputStream  	file 					= new FileInputStream("FuelConsumed.txt");
+				DataInputStream	input  					= new DataInputStream (file);
+			    try
+			    {
+			    	consumption							= input.readLong();
+			    }
+			    finally
+			    {
+			    	timeLastStart						= -1L;
+			    	input.close();
+			    }
+			}  
+			catch(FileNotFoundException ex)
+			{
+				System.out.println(" Fuelflow.Constructor File FuelConsumed.txt not found : creating it");
+	    
+				consumption								= 0L;
+				saveFuelFlow();
+			}
+			catch(IOException ex)
+			{
+				System.out.println(" Fuelflow.Constructor I/O error when reading FuelConsumed.txt");
+			}			
 		}
 	}
 	public void saveFuelFlow()

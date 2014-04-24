@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
 
+import HVAC_Messages.Ctrl_Fuel_Consumption;
+
 public class Monitor extends HttpServlet
 {
 
@@ -94,9 +96,9 @@ public class Monitor extends HttpServlet
     		Message_Temperatures 		readings 	= (Message_Temperatures) message_in;
             message_out								= processTemperatures(readings);
          } 
-		else if (message_in instanceof Message_Fuel.Update)
+		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)
         {
-            Message_Fuel.Update			readings 	= (Message_Fuel.Update) message_in;
+            Ctrl_Fuel_Consumption.Update			readings 	= (Ctrl_Fuel_Consumption.Update) message_in;
             message_out								= processFuel(readings);
         } 
 		else if (message_in instanceof Message_Report)
@@ -294,7 +296,7 @@ public class Monitor extends HttpServlet
         }
         return new Message_Abstract().new Ack();
     }
-    public Message_Abstract processFuel(Message_Fuel.Update readings)
+    public Message_Abstract processFuel(Ctrl_Fuel_Consumption.Update readings)
     {
         dbOpen();
 

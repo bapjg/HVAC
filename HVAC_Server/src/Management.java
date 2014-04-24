@@ -117,7 +117,16 @@ public class Management extends HttpServlet
         {
 			new_format														= true;
 			message_new 													= processCalendars_Update((Ctrl_Calendars.Update) message_in);
+        }
+		else if (message_in instanceof Ctrl_Fuel_Consumption.Request)
+        {
+			new_format														= true;
+			message_new 													= processFuelConsumption_Request();
         } 
+        
+        
+        
+        
 		else if (message_in instanceof Mgmt_Msg_Abstract.Ping)
         {
             message_out 													= (new Mgmt_Msg_Abstract()).new Ack();
@@ -324,6 +333,38 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
+    public Ctrl_Abstract 						processFuelConsumption_Request()
+    {
+        dbOpen();
+        
+        Ctrl_Abstract									returnBuffer 		= new Ctrl_Abstract().new Nack();
+
+        try
+        {
+            dbStatement 													= dbConnection.createStatement(1004, 1008);
+            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, FuelConsummed FROM Fuel ORDER BY dateTime DESC LIMIT 1");
+            dbResultSet.next();
+
+            Long										dbDateTime			= dbResultSet.getLong("dateTime");
+            Long										dbFuelConsumed		= dbResultSet.getLong("FuelConsummed");
+            
+            Ctrl_Fuel_Consumption.Data					dbData				= new Ctrl_Fuel_Consumption.Data();
+    		dbData.fuelConsumed												= dbFuelConsumed;
+    		dbData.dateTime													= dbDateTime;
+
+    		returnBuffer													= (Ctrl_Abstract) dbData;
+    		
+    		dbStatement.close();
+            dbConnection.close();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+        System.out.println("Class is " + returnBuffer.getClass().toString());
+        return returnBuffer;
+    }
+
     public void reply(HttpServletResponse response, Mgmt_Msg_Abstract message_out) throws IOException 
     {
     	response.reset();
