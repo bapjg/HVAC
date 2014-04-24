@@ -153,7 +153,7 @@ public class Global extends DefaultHandler
 			    String 				dataIn 				= new String(data);
 				
 			    System.out.println( "Data is ");
-			    System.out.println(dataIn);
+			    System.out.println(dataIn.substring(0, 5));
 			    
 				
 			    Ctrl_Configuration.Data	dataInJson 		= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
