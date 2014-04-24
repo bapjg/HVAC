@@ -1,5 +1,7 @@
 package eRegulation;
 
+import HVAC_Messages.Ctrl_Calendars;
+
 public class CircuitTask
 {
 	public Long					timeStart;
@@ -25,6 +27,30 @@ public class CircuitTask
 	public static final int 	TASK_STATE_RampUp   			= -3;
 	public static final int 	TASK_STATE_RampDown   			= -4;
 
+	public CircuitTask(Ctrl_Calendars.Calendar paramCalendar)
+	{
+		this.state												= TASK_STATE_WaitingToStart;
+		this.active												= false;
+		this.timeStart											= Global.parseTime(paramCalendar.timeStart);
+		this.timeStartDisplay									= paramCalendar.timeStart;
+		this.timeEnd											= Global.parseTime(paramCalendar.stopCriterion.timeEnd);
+		this.timeEndDisplay										= paramCalendar.stopCriterion.timeEnd;
+		this.tempObjective										= paramCalendar.tempObjective;
+		this.days												= paramCalendar.days;
+		this.dateLastRun										= 0L;
+		
+		
+		// How to handle duration/EndTime
+		
+		if (paramCalendar.stopCriterion.stopReason == Ctrl_Calendars.Stop_Criterion.STOP_REASON_OnObjective)
+		{
+			this.stopOnObjective								= true;
+		}
+		else
+		{
+			this.stopOnObjective								= false;			
+		}
+	}
 	public CircuitTask
 		(
 			String 				timeStart, 

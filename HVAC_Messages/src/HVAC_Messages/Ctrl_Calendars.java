@@ -9,16 +9,12 @@ import HVAC_Messages.Ctrl_Configuration.PID_Data;
 import HVAC_Messages.Ctrl_Configuration.Pump;
 import HVAC_Messages.Ctrl_Configuration.Relay;
 import HVAC_Messages.Ctrl_Configuration.Thermometer;
+import HVAC_Messages.Ctrl_Configuration.Update;
 
 public class Ctrl_Calendars 					extends 					Ctrl_Abstract 
 {
 	public Long dateTime;
 	private static final long 					serialVersionUID 			= 1L;
-
-	public String w1 = "How to deal with away";
-	public String w2 = "is it inside circuits or outside (favour)";
-	public String w3 = "look at away list";
-	public String w4 = "anti freeze should be percircuit in eReg";
 	
 	public Ctrl_Calendars()
 	{
@@ -30,7 +26,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		public ArrayList<Circuit>				circuitList 				= new ArrayList<Circuit>();
 		public ArrayList<Circuit>				awayList 					= new ArrayList<Circuit>();
 	}
-	public static class Update					extends 					Ctrl_Calendars.Data
+	public class Update							extends 					Ctrl_Calendars.Data
 	{
 		private static final long 				serialVersionUID 			= 1L;
 	}
@@ -41,7 +37,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	public static class Word					extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
-		public String 							word;
+		public String 							name;
 		public String							days;
 	}
 	public static class Circuit					extends 					Ctrl_Calendars
@@ -56,16 +52,16 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		public String 							name;
 		public String							days;
 		public String							timeStart;
-		public String							tempObjective;
+		public Integer							tempObjective;
 		public Stop_Criterion					stopCriterion;
 		public String							active;
 	}
 	public static class Stop_Criterion			extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
-		private static final Integer			STOP_REASON_OnObjective		= 0;
-		private static final Integer			STOP_REASON_OnEndTime		= 1;
-		private static final Integer			STOP_REASON_OnDuration		= 2;
+		public  static final Integer			STOP_REASON_OnObjective		= 0;
+		public  static final Integer			STOP_REASON_OnEndTime		= 1;
+		public  static final Integer			STOP_REASON_OnDuration		= 2;
 		public Integer 							stopReason;
 		public String							timeEnd;
 		public String							timeDuration;
@@ -74,36 +70,37 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	
 	public void initialise()
 	{
-		Ctrl_Calendars.Data						calendarUpdate				= new Ctrl_Calendars.Data();
+		Update									calendarUpdate				= (Update) this;
+		calendarUpdate.dateTime												= System.currentTimeMillis();
 		
 		// PIDs
 		Ctrl_Calendars.Word						word						= new Word();
-		word.word															= "EveryDay";
+		word.name															= "EveryDay";
 		word.days															= "1234567";
 		calendarUpdate.wordList.add(word);
 
 		word																= new Word();
-		word.word															= "TestDay";
+		word.name															= "TestDay";
 		word.days															= "";
 		calendarUpdate.wordList.add(word);
 
 		word																= new Word();
-		word.word															= "HalfDay";
+		word.name															= "HalfDay";
 		word.days															= "4";
 		calendarUpdate.wordList.add(word);
 
 		word																= new Word();
-		word.word															= "Locataire";
+		word.name															= "Locataire";
 		word.days															= "";
 		calendarUpdate.wordList.add(word);
 
 		word																= new Word();
-		word.word															= "WeekEnd";
+		word.name															= "WeekEnd";
 		word.days															= "67";
 		calendarUpdate.wordList.add(word);
 
 		word																= new Word();
-		word.word															= "WeekDay";
+		word.name															= "WeekDay";
 		word.days															= "12345";
 		calendarUpdate.wordList.add(word);
 
@@ -124,6 +121,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
 		calendar.stopCriterion.timeEnd										= null;
 		calendar.stopCriterion.timeDuration									= "00:45";
+		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 		
@@ -135,6 +133,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
 		calendar.stopCriterion.timeEnd										= null;
 		calendar.stopCriterion.timeDuration									= "00:45";
+		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -146,6 +145,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
 		calendar.stopCriterion.timeEnd										= null;
 		calendar.stopCriterion.timeDuration									= "00:45";
+		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -157,6 +157,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
 		calendar.stopCriterion.timeEnd										= null;
 		calendar.stopCriterion.timeDuration									= "00:45";
+		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -168,6 +169,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnObjective;
 		calendar.stopCriterion.timeEnd										= null;
 		calendar.stopCriterion.timeDuration									= "00:45";
+		calendar.tempObjective												= 40000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 		
@@ -191,7 +193,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
 		calendar.stopCriterion.timeEnd										= "08:00";
 		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= "50000";
+		calendar.tempObjective												= 50000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -203,7 +205,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
 		calendar.stopCriterion.timeEnd										= "09:00";
 		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= "50000";
+		calendar.tempObjective												= 50000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -215,7 +217,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
 		calendar.stopCriterion.timeEnd										= "22:00";
 		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= "50000";
+		calendar.tempObjective												= 50000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -227,7 +229,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
 		calendar.stopCriterion.timeEnd										= "22:00";
 		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= "50000";
+		calendar.tempObjective												= 50000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -239,7 +241,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
 		calendar.stopCriterion.timeEnd										= "16:30";
 		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= "50000";
+		calendar.tempObjective												= 50000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 		
@@ -263,7 +265,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
 		calendar.stopCriterion.timeEnd										= "23:59";
 		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= "50000";
+		calendar.tempObjective												= 20000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -275,7 +277,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
 		calendar.stopCriterion.timeEnd										= "07:30";
 		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= "50000";
+		calendar.tempObjective												= 20000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -287,7 +289,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
 		calendar.stopCriterion.timeEnd										= "23:30";
 		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= "50000";
+		calendar.tempObjective												= 20000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -299,7 +301,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
 		calendar.stopCriterion.timeEnd										= "21:30";
 		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= "50000";
+		calendar.tempObjective												= 20000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 
@@ -311,7 +313,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.stopReason									= Stop_Criterion.STOP_REASON_OnEndTime;
 		calendar.stopCriterion.timeEnd										= "14:45";
 		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= "50000";
+		calendar.tempObjective												= 20000;
 		calendar.active														= "1";
 		circuit.calendarList.add(calendar);
 		

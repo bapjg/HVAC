@@ -20,8 +20,7 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import HVAC_Messages.Ctrl_Abstract;
-import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Messages.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -38,8 +37,8 @@ public class Z_Initialise_Calendars
 		// Create object to be sent
 		//
 		
-		Ctrl_Configuration.Update 			messageSend			= new Ctrl_Configuration().new Update();
-		((Ctrl_Configuration) messageSend).initialise();												// This is what sets up the data
+		Ctrl_Calendars.Update 					messageSend			= new Ctrl_Calendars().new Update();
+		messageSend.initialise();												// This is what sets up the data
 
 		//
 		//================================================================================================================================
@@ -95,6 +94,9 @@ public class Z_Initialise_Calendars
 		{
 			ObjectOutputStream 			outputToServlet;
 			outputToServlet 										= new ObjectOutputStream(servletConnection.getOutputStream());
+
+			System.out.println("Sending message " + messageSend.getClass().toString());
+			
 			outputToServlet.writeObject(messageSend);
 			outputToServlet.flush();
 			outputToServlet.close();
@@ -134,7 +136,7 @@ public class Z_Initialise_Calendars
 		// Send second message to Server to receive what was just sent
 		//
 
-		Ctrl_Configuration.Request 			messageSend2			= new Ctrl_Configuration().new Request();
+		Ctrl_Calendars.Request 				messageSend2			= new Ctrl_Calendars.Request();
 			
 		messageReceive												= null;
 
@@ -182,6 +184,7 @@ public class Z_Initialise_Calendars
 		{
 			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
 			messageReceive 									= (Ctrl_Abstract) response.readObject();
+			System.out.println("Class " + messageReceive.getClass().toString());
 		}
     	catch (Exception e) 
     	{
@@ -198,7 +201,7 @@ public class Z_Initialise_Calendars
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		
-		String z = gson.toJson((Ctrl_Configuration.Data) messageReceive);
+		String z = gson.toJson((Ctrl_Calendars.Data) messageReceive);
 		System.out.println(z);
 		
 		//

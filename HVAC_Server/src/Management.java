@@ -229,6 +229,7 @@ public class Management extends HttpServlet
         {
             e.printStackTrace();
         }
+        System.out.println("Class is " + returnBuffer.getClass().toString());
         return returnBuffer;
     }
     public Ctrl_Abstract		 				processCalendars_Update(Ctrl_Calendars.Update message_in)

@@ -2,6 +2,7 @@ package eRegulation;
 
 import java.util.ArrayList;
 
+import HVAC_Messages.Ctrl_Calendars;
 import HVAC_Messages.Ctrl_Configuration;
 
 abstract class Circuit_Abstract
@@ -98,6 +99,17 @@ abstract class Circuit_Abstract
 		this.state													= CIRCUIT_STATE_Off;
 		this.heatRequired											= null;
 	}
+	public void addCircuitTask(Ctrl_Calendars.Calendar paramCalendar)
+	{
+		CircuitTask 	circuitTaskItem 							= new CircuitTask(paramCalendar);
+		circuitTaskList.add(circuitTaskItem);
+	}
+
+	
+	
+	
+	
+	
 	public void addCircuitTask
 		(
 		String 			timeStart, 
