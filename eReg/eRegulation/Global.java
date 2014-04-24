@@ -131,7 +131,7 @@ public class Global
 			
 		if (!(messageReceive instanceof Ctrl_Configuration.Data))
 		{
-			System.out.println(dateTimeDisplay() + " Global.constructor messageType is : Nack");
+			System.out.println(dateTimeDisplay() + " Global.constructor messageType is : Nack using local disk configuration");
 			// There is a problem, so read the last file received
 			try
 			{
@@ -153,6 +153,7 @@ public class Global
 		}
 		else
 		{
+			System.out.println(dateTimeDisplay() + " Global.constructor messageType is : Ok using remote configuration");
 			// All is Ok, so see if we need to write a copy locally
 			try
 			{
