@@ -127,7 +127,7 @@ public class Global extends DefaultHandler
 			return;
 		}
 
-		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
+		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("Managementxx");
 		
 		Ctrl_Configuration.Request	 						messageSend 		= new Ctrl_Configuration().new Request();
 		Ctrl_Abstract 										messageReceive 		= httpRequest.sendData(messageSend);
