@@ -1,5 +1,7 @@
 package eRegulation;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 public class Relay
 {
 	private native void 	On(int Relay_Bank, int Relay_Number);
@@ -29,6 +31,15 @@ public class Relay
 		this.name 		    		= name;
 		this.friendlyName   		= "";
 		this.relayNumber			= relayNumber;
+		this.relayOn				= false;
+	}
+	public Relay(Ctrl_Configuration.Relay relayParam)
+	{
+		relayBank 					= 0;
+		
+		this.name 		    		= relayParam.name;
+		this.friendlyName   		= "";
+		this.relayNumber			= relayParam.relayNumber;
 		this.relayOn				= false;
 	}
 	public void on()

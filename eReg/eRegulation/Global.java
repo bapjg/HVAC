@@ -170,7 +170,7 @@ public class Global extends DefaultHandler
 		
 		for (Ctrl_Configuration.Relay		 	configurationDetail : configurationData.relayList)
 		{
-			Global.relays.addFromObject(configurationDetail.name, configurationDetail.relayBank, configurationDetail.relayNumber);
+			Global.relays.addFromObject(configurationDetail);
 		}
 		
 		for (Ctrl_Configuration.Pump		 	configurationDetail : configurationData.pumpList)

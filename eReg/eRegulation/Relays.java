@@ -3,6 +3,8 @@ package eRegulation;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 
 public class Relays
 {
@@ -19,6 +21,11 @@ public class Relays
 	public void addFromObject(String name, Integer address, Integer friendlyName)
 	{
 		Relay relayItem 				= new Relay(name, address, friendlyName);
+		relayList.add(relayItem);
+	}
+	public void addFromObject(Ctrl_Configuration.Relay relayParam)
+	{
+		Relay relayItem 				= new Relay(relayParam.name, relayParam.relayBank, relayParam.relayNumber);
 		relayList.add(relayItem);
 	}
 	public Relay fetchRelay(String name)
