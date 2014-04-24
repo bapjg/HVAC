@@ -215,6 +215,7 @@ public class Global
 		
 		for (String eMail : configurationData.eMailList)
 		{
+			System.out.println("emails added to Gl " + eMail);
 			Global.eMails.add(eMail);
 		}
 		//
@@ -489,6 +490,7 @@ public class Global
             
             for (String eMail : Global.eMails)
             {
+            	System.out.println("email " + eMail);
             	message.addRecipient(Message.RecipientType.TO, new InternetAddress(eMail));
             }
             message.setSubject("HVAC System : " + subject);
