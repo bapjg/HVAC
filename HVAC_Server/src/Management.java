@@ -58,30 +58,30 @@ public class Management extends HttpServlet
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        Object 							message_in 	= null;
-        Mgmt_Msg_Abstract 				message_out = null;
-        Ctrl_Abstract	 				message_new = null;
-        Boolean							new_format	= false;
+        Object 							message_in 							= null;
+        Mgmt_Msg_Abstract 				message_out 						= null;
+        Ctrl_Abstract	 				message_new 						= null;
+        Boolean							new_format							= false;
         
         try
         {
-            ObjectInputStream 			input 		= new ObjectInputStream(request.getInputStream());
-            message_in 								= input.readObject();
+            ObjectInputStream 			input 								= new ObjectInputStream(request.getInputStream());
+            message_in 														= input.readObject();
         }
         catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
-            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
+            message_out 													= (new Mgmt_Msg_Abstract()).new Nack();
         }
         catch (IOException eIO)
         {
             System.out.println("An IO Exception occured : " + eIO);
-            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
+            message_out 													= (new Mgmt_Msg_Abstract()).new Nack();
         }
         catch (Exception e)
         {
             System.out.println("An Exception occured : " + e);
-            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
+            message_out 													= (new Mgmt_Msg_Abstract()).new Nack();
         }
         
         if (message_in != null)
@@ -92,38 +92,40 @@ public class Management extends HttpServlet
         
         if (message_in == null)
         {
-            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();
+            message_out 													= (new Mgmt_Msg_Abstract()).new Nack();
         } 
         else if (message_in instanceof Mgmt_Msg_Temperatures.Request)
         {
-            message_out 							= processTemperaturesReq();
+            message_out 													= processTemperaturesReq();
         } 
 		else if (message_in instanceof Ctrl_Configuration.Request)								//NEW
         {
-			new_format								= true;
-			message_new 							= processConfigurationRequest_New();
+			new_format														= true;
+			message_new 													= processConfiguration_Request();
         } 
 		else if (message_in instanceof Ctrl_Configuration.Update)								//NEW
         {
-			new_format								= true;
-			message_new 							= processConfigurationUpdate_New((Ctrl_Configuration.Update) message_in);
+			new_format														= true;
+			message_new 													= processConfiguration_Update((Ctrl_Configuration.Update) message_in);
         } 
-		else if (message_in instanceof Mgmt_Msg_Configuration.Request)							//OLD
+		else if (message_in instanceof Ctrl_Calendars.Request)
         {
-            message_out 							= processConfigurationRequest();
+			new_format														= true;
+			message_new 													= processCalendars_Request();
         } 
-		else if (message_in instanceof Mgmt_Msg_Calendar.Request)
+		else if (message_in instanceof Ctrl_Calendars.Update)								//NEW
         {
-            message_out 							= processCalendarRequest();
+			new_format														= true;
+			message_new 													= processCalendars_Update((Ctrl_Calendars.Update) message_in);
         } 
 		else if (message_in instanceof Mgmt_Msg_Abstract.Ping)
         {
-            message_out 							= (new Mgmt_Msg_Abstract()).new Ack();
+            message_out 													= (new Mgmt_Msg_Abstract()).new Ack();
         } 
 		else
         {
             System.out.println("Unsupported message class received from client");
-            message_out 							= (new Mgmt_Msg_Abstract()).new Nack();;
+            message_out 													= (new Mgmt_Msg_Abstract()).new Nack();;
         }
         if (new_format)																			// Berk
         {
@@ -139,8 +141,8 @@ public class Management extends HttpServlet
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            dbName 								= "jdbc:mysql://localhost/hvac_database";
-            dbConnection 						= DriverManager.getConnection(dbName, "root", "llenkcarb");
+            dbName 									= "jdbc:mysql://localhost/hvac_database";
+            dbConnection 							= DriverManager.getConnection(dbName, "root", "llenkcarb");
         }
         catch(ClassNotFoundException e)
         {
@@ -204,43 +206,22 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Mgmt_Msg_Calendar.Data 				processCalendarRequestIndex()
+    public Ctrl_Abstract 						processCalendars_Request()
     {
         dbOpen();
         
-        Mgmt_Msg_Calendar.Data 		returnBuffer 	= new Mgmt_Msg_Calendar().new Data();
-
-//        returnBuffer.calendars 					= "";
-//        try
-//        {
-//            dbStatement 						= dbConnection.createStatement(1004, 1008);
-//            ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT MAX(dateTime) AS dateTime FROM calendars");
-//            dbResultSet.next();
-//            returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
-//            dbStatement.close();
-//            dbConnection.close();
-//        }
-//        catch(SQLException eSQL)
-//        {
-//            eSQL.printStackTrace();
-//        }
-        returnBuffer.dateTime 					= "2013_01_01 00:01:02";
-
-        return returnBuffer;
-    }
-    public Mgmt_Msg_Calendar.Data 				processCalendarRequest()
-    {
-        dbOpen();
-        
-        Mgmt_Msg_Calendar.Data 	returnBuffer 	= new Mgmt_Msg_Calendar().new Data();
-
+        Ctrl_Abstract									returnBuffer 		= new Ctrl_Abstract().new Nack();
 
         try
         {
-            dbStatement 						= dbConnection.createStatement(1004, 1008);
-            ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT dateTime, calendars FROM calendars ORDER BY dateTime DESC LIMIT 1");
+            dbStatement 													= dbConnection.createStatement(1004, 1008);
+            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, calendars FROM calendars ORDER BY dateTime DESC LIMIT 1");
             dbResultSet.next();
-            //returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
+
+            Long										dbDateTime			= dbResultSet.getLong("dateTime");
+            String										dbJsonString		= dbResultSet.getString("calendars");
+    		
+    		returnBuffer													= new Gson().fromJson(dbJsonString, Ctrl_Calendars.Data.class);
             dbStatement.close();
             dbConnection.close();
         }
@@ -250,48 +231,40 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Mgmt_Msg_Configuration.Data 			processConfigurationRequest()
+    public Ctrl_Abstract		 				processCalendars_Update(Ctrl_Calendars.Update message_in)
     {
-        dbOpen();
+    	dbOpen();
         
-        Mgmt_Msg_Configuration.Data 					returnBuffer 		= new Mgmt_Msg_Configuration().new Data();
-
+        Ctrl_Abstract 									returnBuffer		= new Ctrl_Abstract().new Ack();
 
         try
         {
-//            dbStatement 						= dbConnection.createStatement(1004, 1008);
-//            ResultSet 			dbResultSet 	= dbStatement.executeQuery("SELECT dateTime, calendars FROM calendars ORDER BY dateTime DESC LIMIT 1");
-//            dbResultSet.next();
-//            //returnBuffer.dateTime 				= dbResultSet.getString("dateTime");
-//            dbStatement.close();
-//            dbConnection.close();
+            dbStatement 													= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, Date, Time, Calendars FROM Calendars ORDER BY dateTime DESC LIMIT 1");
 
-        	Mgmt_Msg_Configuration.Thermometer 			thermometer 		= returnBuffer.new Thermometer();
-        	thermometer.name 												= "tempBoiler";
-        	thermometer.friendlyName 										= "Chaudiere";
-        	thermometer.thermoID 											= "028-0000xxxx";
-        	returnBuffer.thermometerList.add(thermometer);
-     
-        	thermometer 													= returnBuffer.new Thermometer();
-            thermometer.name 												= "tempHotWater";
-            thermometer.friendlyName 										= "Eau Chaude Sanitaire";
-            thermometer.thermoID 											= "028-0000yyyy";
-            returnBuffer.thermometerList.add(thermometer);
-     
-        	thermometer 													= returnBuffer.new Thermometer();
-        	thermometer.name 												= "tempRadiator";
-            thermometer.friendlyName 										= "Radiateur";
-            thermometer.thermoID 											= "028-0000abcd";
-            returnBuffer.thermometerList.add(thermometer);
+            Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
+    		String 										dbJsonString 		= gson.toJson((Ctrl_Calendars.Data) message_in);
+
+    		dbResultSet.moveToInsertRow();
+            dbResultSet.updateDouble	("dateTime", 				message_in.dateTime);
+            dbResultSet.updateString	("date", 					dateTime2Date(message_in.dateTime));
+            dbResultSet.updateString	("time", 					dateTime2Time(message_in.dateTime));
+            dbResultSet.updateString	("Calendars", 				dbJsonString);
+            dbResultSet.insertRow();
+
+            dbStatement.close();
+            dbConnection.close();
+
+            returnBuffer													= new Ctrl_Abstract().new Ack();
         }
         catch(Exception e)
-//        catch(SQLException e)
         {
-            e.printStackTrace();
+        	e.printStackTrace();
+            returnBuffer													= new Ctrl_Abstract().new Nack();
         }
         return returnBuffer;
     }
-    public Ctrl_Abstract		 				processConfigurationRequest_New()				//NEW
+    public Ctrl_Abstract		 				processConfiguration_Request()
     {
         dbOpen();
         
@@ -305,18 +278,19 @@ public class Management extends HttpServlet
 
             Long										dbDateTime			= dbResultSet.getLong("dateTime");
             String										dbJsonString		= dbResultSet.getString("configuration");
-
-    		Gson gson = new Gson();
     		
-    		returnBuffer													= gson.fromJson(dbJsonString, Ctrl_Configuration.Data.class);
-        }
+            dbStatement.close();
+            dbConnection.close();
+ 
+    		returnBuffer													= new Gson().fromJson(dbJsonString, Ctrl_Configuration.Data.class);
+}
         catch(Exception e)
         {
             e.printStackTrace();
         }
         return returnBuffer;
     }
-    public Ctrl_Abstract		 				processConfigurationUpdate_New(Ctrl_Configuration.Update message_in)				//NEW
+    public Ctrl_Abstract		 				processConfiguration_Update(Ctrl_Configuration.Update message_in)
     {
     	dbOpen();
         
