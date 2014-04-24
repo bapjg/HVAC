@@ -22,7 +22,7 @@ public class Thermometer
  	public Integer 					reading;
 	public PID						pidControler;
 	
-	public Thermometer(Ctrl_Configuration.Thermometer paramThermometer)
+	public Thermometer(Ctrl_Configuration.Thermometer 			paramThermometer)
 	{
 		this.name 		    									= paramThermometer.name;
 		this.friendlyName  										= "";

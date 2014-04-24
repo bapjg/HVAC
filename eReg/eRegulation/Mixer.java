@@ -1,5 +1,7 @@
 package eRegulation;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 // Notes
 // =====
 // For small mixer valve openings (ie swing proportion close to zero (ie cold)
@@ -86,6 +88,26 @@ public class Mixer
 		
 		this.mixerUp								= Global.relays.fetchRelay(relayUp);
 		this.mixerDown								= Global.relays.fetchRelay(relayDown);
+		
+		if ((this.mixerUp == null) || (this.mixerDown == null))
+		{
+			System.out.println("Mixer.Contructor : Unknown mixer relay");
+		}
+		this.state									= MIXER_STATE_Off;
+	}
+ 	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
+    {
+		this.name 									= paramMixer.name;
+		this.swingTime								= paramMixer.swingTime;
+		this.lagTime								= paramMixer.lagTime;
+		this.gainP									= paramMixer.pidParams.gainP;
+		this.timeD									= paramMixer.pidParams.timeD;
+		this.gainD									= this.gainP * this.timeD;
+		this.timeI									= paramMixer.pidParams.timeI;
+		this.gainI									= paramMixer.pidParams.gainI;
+		
+		this.mixerUp								= Global.relays.fetchRelay(paramMixer.relayUp);
+		this.mixerDown								= Global.relays.fetchRelay(paramMixer.relayDown);
 		
 		if ((this.mixerUp == null) || (this.mixerDown == null))
 		{

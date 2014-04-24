@@ -311,14 +311,13 @@ public class Ctrl_Configuration 			extends 					Ctrl_Abstract
 		circuit.tempGradient.tempHigh										= 30000;
 		confUpdate.circuitList.add(circuit);
 		
-		Burner									burner						= new Burner();
-		burner.relay														= "Burner";
-		
+		// Boiler/Burner
 		Boiler									boiler						= new Boiler();
 		boiler.thermometer													= "Boiler";
 		boiler.tempNeverExceed												= 95000;
 		boiler.tempOverShoot												= 18000;
-		boiler.burner														= burner;
+		boiler.burner														= new Burner();
+		boiler.burner.relay													= "Burner";
 		confUpdate.boiler													= boiler;
 	}
 }

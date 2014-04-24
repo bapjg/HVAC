@@ -33,7 +33,7 @@ public class Relay
 //		this.relayNumber			= relayNumber;
 //		this.relayOn				= false;
 //	}
-	public Relay(Ctrl_Configuration.Relay relayParam)
+	public Relay(Ctrl_Configuration.Relay 				relayParam)
 	{
 		relayBank 					= 0;
 		

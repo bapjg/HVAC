@@ -2,6 +2,8 @@ package eRegulation;
 
 import java.util.ArrayList;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 abstract class Circuit_Abstract
 {
 	public static final int			CIRCUIT_TYPE_HotWater			= 0;
@@ -56,27 +58,47 @@ abstract class Circuit_Abstract
 //		this.state													= CIRCUIT_STATE_Off;
 //		this.heatRequired											= null;
 //	}
-	public Circuit_Abstract(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
-	{	
-		this.name													= name;
+//	public Circuit_Abstract(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
+//	{	
+//		this.name													= name;
+//		this.friendlyName											= "";
+//		this.circuitType											= circuitType;
+//		this.tempMax												= tempMax;
+//		this.circuitPump											= Global.pumps.fetchPump(pumpName);
+//		if (this.circuitPump == null)
+//		{
+//			System.out.println("Circuit.Constructor : " + name + " invalid pump " + pumpName);
+//		}
+//		this.circuitThermo											= Global.thermometers.fetchThermometer(thermometerName);
+//		if (this.circuitThermo == null)
+//		{
+//			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + thermometerName);
+//		}
+//		
+//		this.state													= CIRCUIT_STATE_Off;
+//		this.heatRequired											= null;
+//	}
+	public Circuit_Abstract(Ctrl_Configuration.Circuit 				paramCircuit)
+	{
+		this.name													= paramCircuit.name;
 		this.friendlyName											= "";
-		this.circuitType											= circuitType;
-		this.tempMax												= tempMax;
-		this.circuitPump											= Global.pumps.fetchPump(pumpName);
+		this.circuitType											= paramCircuit.type;
+		this.tempMax												= paramCircuit.tempMax;
+		this.circuitPump											= Global.pumps.fetchPump(paramCircuit.pump);
 		if (this.circuitPump == null)
 		{
-			System.out.println("Circuit.Constructor : " + name + " invalid pump " + pumpName);
+			System.out.println("Circuit.Constructor : " + name + " invalid pump " + paramCircuit.pump);
 		}
-		this.circuitThermo											= Global.thermometers.fetchThermometer(thermometerName);
+		this.circuitThermo											= Global.thermometers.fetchThermometer(paramCircuit.thermometer);
 		if (this.circuitThermo == null)
 		{
-			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + thermometerName);
+			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + paramCircuit.thermometer);
 		}
 		
 		this.state													= CIRCUIT_STATE_Off;
 		this.heatRequired											= null;
 	}
-public void addCircuitTask
+	public void addCircuitTask
 		(
 		String 			timeStart, 
 		String 			timeEnd,  

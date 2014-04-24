@@ -1,5 +1,7 @@
 package eRegulation;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 public class Circuit_Radiator extends Circuit_Abstract
 {
 
@@ -7,9 +9,15 @@ public class Circuit_Radiator extends Circuit_Abstract
 //	{	
 //		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 //	}
-	public Circuit_Radiator(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
+//	public Circuit_Radiator(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
+//	{	
+//		super(name, circuitType, pumpName, thermometerName, tempMax);
+//	}
+	public Circuit_Radiator(Ctrl_Configuration.Circuit				paramCircuit)			// New
 	{	
-		super(name, circuitType, pumpName, thermometerName, tempMax);
+		super(paramCircuit);
+
+		this.temperatureGradient				= new TemperatureGradient(paramCircuit.tempGradient);
 	}
 	public Long getRampUpTime()
 	{

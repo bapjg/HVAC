@@ -1,5 +1,7 @@
 package eRegulation;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 public class Circuit_Mixer extends Circuit_Abstract
 {
 
@@ -7,9 +9,17 @@ public class Circuit_Mixer extends Circuit_Abstract
 //	{	
 //		super(name, friendlyName, circuitType, tempMax, rampUpTime);
 //	}
-	public Circuit_Mixer(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
-	{	
-		super(name, circuitType, pumpName, thermometerName, tempMax);
+//	public Circuit_Mixer(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
+//	{	
+//		super(name, circuitType, pumpName, thermometerName, tempMax);
+//	}
+	public Circuit_Mixer(Ctrl_Configuration.Circuit paramCircuit)
+	{
+		super(paramCircuit);
+
+		this.temperatureGradient				= new TemperatureGradient(paramCircuit.tempGradient);
+		this.mixer								= new Mixer(paramCircuit.mixer);
+
 	}
 	public Long getRampUpTime()
 	{

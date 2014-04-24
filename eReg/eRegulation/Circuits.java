@@ -2,6 +2,8 @@ package eRegulation;
 
 import java.util.ArrayList;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 public class Circuits implements java.io.Serializable
 {
 	private static final 	long 		serialVersionUID = 999999L;
@@ -37,32 +39,53 @@ public class Circuits implements java.io.Serializable
 //			circuitList.add(circuitItem);
 //		}
 //	}
-	public void addFromObject
-		(
-		String 			name, 
-		Integer			circuitType, 
-		String			pumpName, 
-		String			thermometerName,
-		Integer			tempMax
-		)
+//	public void addFromObject
+//		(
+//		String 			name, 
+//		Integer			circuitType, 
+//		String			pumpName, 
+//		String			thermometerName,
+//		Integer			tempMax
+//		)
+//	{
+//		//Berk berk berkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+//		
+//		
+//		if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_HotWater)
+//		{
+//			Circuit_HotWater circuitItem 				= new Circuit_HotWater(name, circuitType, pumpName, thermometerName, tempMax);
+//			circuitList.add(circuitItem);
+//		}
+//		else if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_Gradient)
+//		{
+//			Circuit_Radiator circuitItem 				= new Circuit_Radiator(name, circuitType, pumpName, thermometerName, tempMax);
+//			circuitList.add(circuitItem);
+//		}
+//		else if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_Mixer)
+//		{
+//			Circuit_Mixer circuitItem 					= new Circuit_Mixer(name, circuitType, pumpName, thermometerName, tempMax);
+//			circuitList.add(circuitItem);
+//		}
+//	}
+	public void configure(ArrayList<Ctrl_Configuration.Circuit> paramCircuits)
 	{
-		//Berk berk berkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-		
-		
-		if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_HotWater)
+		for (Ctrl_Configuration.Circuit		 	paramCircuit : paramCircuits)
 		{
-			Circuit_HotWater circuitItem 				= new Circuit_HotWater(name, circuitType, pumpName, thermometerName, tempMax);
-			circuitList.add(circuitItem);
-		}
-		else if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_Gradient)
-		{
-			Circuit_Radiator circuitItem 				= new Circuit_Radiator(name, circuitType, pumpName, thermometerName, tempMax);
-			circuitList.add(circuitItem);
-		}
-		else if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_Mixer)
-		{
-			Circuit_Mixer circuitItem 					= new Circuit_Mixer(name, circuitType, pumpName, thermometerName, tempMax);
-			circuitList.add(circuitItem);
+			if (paramCircuit.type == Circuit_Abstract.CIRCUIT_TYPE_HotWater)
+			{
+				Circuit_HotWater circuitItem 				= new Circuit_HotWater(paramCircuit);
+				circuitList.add(circuitItem);
+			}
+			else if (paramCircuit.type == Circuit_Abstract.CIRCUIT_TYPE_Gradient)
+			{
+				Circuit_Radiator circuitItem 				= new Circuit_Radiator(paramCircuit);
+				circuitList.add(circuitItem);
+			}
+			else if (paramCircuit.type == Circuit_Abstract.CIRCUIT_TYPE_Mixer)
+			{
+				Circuit_Mixer circuitItem 					= new Circuit_Mixer(paramCircuit);
+				circuitList.add(circuitItem);
+			}
 		}
 	}
 	public Boolean isSingleActiveCircuit()
