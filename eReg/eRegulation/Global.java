@@ -104,9 +104,6 @@ public class Global extends DefaultHandler
 
 	public Global() throws IOException, SAXException, ParserConfigurationException
 	{
-		Integer x = 0;
-		x++;
-
 		Global.display 																= new LCD();
 		Global.buttons 																= new Buttons();	
 		Global.pids																	= new PIDs();
@@ -130,16 +127,15 @@ public class Global extends DefaultHandler
 			return;
 		}
 
-		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("ManagementXXX");
+		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
 		
 		Ctrl_Configuration.Request	 						messageSend 		= new Ctrl_Configuration().new Request();
-			
 		Ctrl_Abstract 										messageReceive 		= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Ctrl_Configuration.Data))
 		{
 			System.out.println(dateTimeDisplay() + " Global.constructor messageType is : Nack");
-			
+			// There is a problem, so read the last file received
 			try
 			{
 				File				file				= new File("eRegulator_Json.txt");
@@ -156,13 +152,51 @@ public class Global extends DefaultHandler
 			    
 				
 			    Ctrl_Configuration.Data	dataInJson 		= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
-				dataInJson.dateTime						= now();												// This avoids rewiting the file at end
 				messageReceive							= (Ctrl_Abstract) dataInJson;
 			}  
 			catch(IOException ex)
 			{
 				System.out.println("I/O error on open : " + ex);
 			}	
+		}
+		else
+		{
+			// All is Ok, so see if we need to write a copy locally
+			try
+			{
+				File				file					= new File("eRegulator_Json.txt");
+				if (file.exists())
+				{
+					Long timeFile							= file.lastModified();
+					Ctrl_Configuration.Data thisData		= (Ctrl_Configuration.Data) messageReceive;
+					Long timeData							= thisData.dateTime;
+					
+					if (timeData > timeFile)
+					{
+						System.out.println("Global.constructor writing eRegulator_Json.txt file");
+						try
+						{
+							FileWriter 			filewrite				= new FileWriter("eRegulator_Json.txt");
+							
+							Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
+							
+							String 				messageJson 		= gson.toJson((Ctrl_Configuration.Data) messageReceive);
+
+							filewrite.write(messageJson);
+							filewrite.flush();
+							filewrite.close();
+						}  
+						catch(IOException ex)
+						{
+							System.out.println("I/O error on open : " + ex);
+						}	
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				System.out.println("Global.constructor Exception = ");
+			}
 		}
 		Global.httpSemaphore.semaphoreUnLock();			
 		
@@ -194,42 +228,6 @@ public class Global extends DefaultHandler
 		//
 		//==================================================================================
 		
-		try
-		{
-			File				file					= new File("eRegulator_Json.txt");
-			if (file.exists())
-			{
-				Long timeFile							= file.lastModified();
-				Long timeData							= configurationData.dateTime;
-				
-				if (timeData > timeFile)
-				{
-					System.out.println("Global.constructor writing eRegulator_Json.txt file");
-					try
-					{
-						FileWriter 			filewrite				= new FileWriter("eRegulator_Json.txt");
-						
-						Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
-						
-						String 				messageJson 		= gson.toJson((Ctrl_Configuration.Data) messageReceive);
-
-						filewrite.write(messageJson);
-						filewrite.flush();
-						filewrite.close();
-					}  
-					catch(IOException ex)
-					{
-						System.out.println("I/O error on open : " + ex);
-					}	
-					
-				}
-
-			}
-		}
-		catch (Exception e)
-		{
-			System.out.println("Global.constructor Exception = ");
-		}
 
 		
 //		try 
