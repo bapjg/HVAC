@@ -30,6 +30,7 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 		public ArrayList<Circuit> 				circuitList 				= new ArrayList<Circuit>();
 		public Boiler							boiler						= new Boiler();
 		public Burner							burner						= new Burner();
+		public ArrayList<String>				eMailList					= new ArrayList<String>();
 	}
 	public class Update 						extends 					Ctrl_Configuration.Data
 	{
@@ -319,5 +320,9 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 		boiler.burner														= new Burner();
 		boiler.burner.relay													= "Burner";
 		confUpdate.boiler													= boiler;
+		
+		confUpdate.eMailList.add(new String("andre@bapjg.com"));
+		confUpdate.eMailList.add(new String("brigitte@bapjg.com"));
+		
 	}
 }

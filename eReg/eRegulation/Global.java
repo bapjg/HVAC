@@ -91,8 +91,10 @@ public class Global
 	public static 	LCD								display;	
 	public static 	ADC								burnerVoltages;	
 	public static 	Buttons							buttons;	
-	
-	private 		Circuit_Abstract 				circuit;			// Used during XMLparsing		
+
+	public static 	ArrayList<String>				eMails;	
+
+//	private 		Circuit_Abstract 				circuit;			// Used during XMLparsing		
 
 	public static 	String							calendarsDateTime;	// Used to dateTime the Calendar version in use
 
@@ -105,6 +107,7 @@ public class Global
 		Global.relays																= new Relays();
 		Global.pumps 																= new Pumps(); 
 		Global.circuits 															= new Circuits(); 
+		Global.eMails	 															= new ArrayList<String>(); 
 
 		display.clear();
 		display.blinkOff();
@@ -210,6 +213,10 @@ public class Global
 		Global.summerPumpTime							= 60 * 60 * 1000L;		// 1 a.m.
 		Global.summerTemp								= 15000;
 		
+		for (String eMail : configurationData.eMailList)
+		{
+			Global.eMails.add(eMail);
+		}
 		//
 		//==================================================================================
 		
@@ -479,8 +486,11 @@ public class Global
             MimeMessage message 		= new MimeMessage(session);
 
             message.setFrom(new InternetAddress("HVAC@bapjg.com"));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("andre@bapjg.com"));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("brigitte@bapjg.com"));
+            
+            for (String eMail : Global.eMails)
+            {
+            	message.addRecipient(Message.RecipientType.TO, new InternetAddress(eMail));
+            }
             message.setSubject("HVAC System : " + subject);
             message.setText(messageText);
             Transport.send(message);

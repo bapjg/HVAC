@@ -65,7 +65,11 @@ public class Panel_5_Actions_Test_Mail 			extends 			Panel_0_Fragment
 		if (result instanceof Ctrl_Actions_Test_Mail.Ack)
 		{
 			Global.toaster("eMail sent", true);
-		}   
+		}
+		else
+		{
+			Global.toaster("eMail received " + result.getClass().toString(), true);
+		}
 	}
 }
 
