@@ -346,7 +346,7 @@ public class Management extends HttpServlet
             dbResultSet.next();
 
             Long										dbDateTime			= dbResultSet.getLong("dateTime");
-            Long										dbFuelConsumed		= dbResultSet.getLong("FuelConsummed");
+            Long										dbFuelConsumed		= dbResultSet.getLong("FuelConsumed");
             
             Ctrl_Fuel_Consumption.Data					dbData				= new Ctrl_Fuel_Consumption.Data();
     		dbData.fuelConsumed												= dbFuelConsumed;
