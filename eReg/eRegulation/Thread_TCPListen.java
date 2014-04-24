@@ -291,11 +291,14 @@ public class Thread_TCPListen 			implements Runnable
 	}
 	private Ctrl_Actions_Relays.Data	process_Ctrl_Actions_Relays_Request		()
 	{
-		Ctrl_Actions_Relays.Data message_return				= new Ctrl_Actions_Relays().new Data();
+		Ctrl_Actions_Relays.Data 		message_return		= new Ctrl_Actions_Relays().new Data();
 		message_return.burner 								= Global.burnerPower.isOn();
-		message_return.pumpHotWater	 						= Global.pumps.fetchPump("Hot_Water").relay.isOn();
-		message_return.pumpFloor	 						= Global.pumps.fetchPump("Floor").relay.isOn();
-		message_return.pumpRadiator	 						= Global.pumps.fetchPump("Radiator").relay.isOn();
+//		System.out.println("HW" + Global.pumps.fetchPump("Hot_Water").name);
+//		System.out.println("HW" + Global.pumps.fetchPump("Hot_Water").relay.name);
+		
+		message_return.pumpHotWater	 						= Global.pumps.fetchPump("Pump_Water").relay.isOn();
+		message_return.pumpFloor	 						= Global.pumps.fetchPump("Pump_Floor").relay.isOn();
+		message_return.pumpRadiator	 						= Global.pumps.fetchPump("Pump_Radiator").relay.isOn();
         return message_return;
 	}
 	private Ctrl_Actions_Relays.Data 	process_Ctrl_Actions_Relays_Execute		(Ctrl_Actions_Relays.Execute message_in)
