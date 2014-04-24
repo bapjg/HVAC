@@ -130,7 +130,7 @@ public class Global extends DefaultHandler
 			return;
 		}
 
-		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
+		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("ManagementXXX");
 		
 		Ctrl_Configuration.Request	 						messageSend 		= new Ctrl_Configuration().new Request();
 			
@@ -150,7 +150,7 @@ public class Global extends DefaultHandler
 				fileread.read(data);
 				fileread.close();
 
-			    String 				dataIn 				= new String(data, "UTF-8");
+			    String 				dataIn 				= new String(data);
 				
 			    System.out.println( "Data is " + dataIn);
 			    
