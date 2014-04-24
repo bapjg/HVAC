@@ -3,6 +3,8 @@ package eRegulation;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 
 public class PID 
 {
@@ -16,51 +18,71 @@ public class PID
     private	Integer		pidDepth;		// Depth is the size of the PID table
     private PID_Entry[]	entries;
     
-    public PID(String name, String pidDepth, String sampleIncrement) 
+//    public PID(String name, String pidDepth, String sampleIncrement) 
+//    {
+//    	this.name		 						= name;
+//    	this.sampleIncrement		 			= Integer.parseInt(sampleIncrement);
+//    	this.increment				 			= 1;
+//    	this.indexEnqueue 						= 0;
+//        this.target 							= 0;
+//        this.count								= 0;
+//        
+//        this.pidDepth							= Integer.parseInt(pidDepth);
+//        this.entries							= new PID_Entry[this.pidDepth];
+//        
+//        int i;
+//        for (i = 0; i < this.pidDepth; i++)
+//        {
+//        	this.entries[i]						= new PID_Entry();
+//        }
+//    }
+//    public PID(String name, Integer pidDepth, Integer sampleIncrement) 
+//    {
+//    	this.name		 						= name;
+//    	this.sampleIncrement		 			= sampleIncrement;
+//    	this.increment				 			= 1;
+//    	this.indexEnqueue 						= 0;
+//        this.target 							= 0;
+//        this.count								= 0;
+//        
+//        this.pidDepth							= pidDepth;
+//        this.entries							= new PID_Entry[this.pidDepth];
+//        
+//        int i;
+//        for (i = 0; i < this.pidDepth; i++)
+//        {
+//        	this.entries[i]						= new PID_Entry();
+//        }
+//    }
+//    public PID(Integer pidDepth) 
+//    {
+//    	this.indexEnqueue 						= 0;
+//        this.target 							= 0;
+//        this.count								= 0;
+//    	this.sampleIncrement		 			= 1;
+//    	this.increment				 			= 1;
+//       
+//        this.pidDepth							= pidDepth;
+//        this.entries							= new PID_Entry[pidDepth];
+//        
+//        int i;
+//        for (i = 0; i < pidDepth; i++)
+//        {
+//        	this.entries[i]						= new PID_Entry();
+//        }
+//    }
+    public PID(Ctrl_Configuration.PID_Data 		paramPID) 
     {
-    	this.name		 						= name;
-    	this.sampleIncrement		 			= Integer.parseInt(sampleIncrement);
-    	this.increment				 			= 1;
-    	this.indexEnqueue 						= 0;
-        this.target 							= 0;
-        this.count								= 0;
-        
-        this.pidDepth							= Integer.parseInt(pidDepth);
-        this.entries							= new PID_Entry[this.pidDepth];
-        
-        int i;
-        for (i = 0; i < this.pidDepth; i++)
-        {
-        	this.entries[i]						= new PID_Entry();
-        }
-    }
-    public PID(String name, Integer pidDepth, Integer sampleIncrement) 
-    {
-    	this.name		 						= name;
-    	this.sampleIncrement		 			= sampleIncrement;
-    	this.increment				 			= 1;
-    	this.indexEnqueue 						= 0;
-        this.target 							= 0;
-        this.count								= 0;
-        
-        this.pidDepth							= pidDepth;
-        this.entries							= new PID_Entry[this.pidDepth];
-        
-        int i;
-        for (i = 0; i < this.pidDepth; i++)
-        {
-        	this.entries[i]						= new PID_Entry();
-        }
-    }
-    public PID(Integer pidDepth) 
-    {
-    	this.indexEnqueue 						= 0;
+    	this.name		 						= paramPID.name;
+    	this.sampleIncrement		 			= paramPID.sampleIncrement;
+       	this.increment				 			= 1;
+        this.indexEnqueue 						= 0;
         this.target 							= 0;
         this.count								= 0;
     	this.sampleIncrement		 			= 1;
     	this.increment				 			= 1;
        
-        this.pidDepth							= pidDepth;
+        this.pidDepth							= paramPID.depth;
         this.entries							= new PID_Entry[pidDepth];
         
         int i;

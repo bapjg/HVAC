@@ -158,25 +158,11 @@ public class Global extends DefaultHandler
 		//
 		// Get message from server
 		//
-		for (Ctrl_Configuration.PID_Data 		configurationDetail : configurationData.pidList)
-		{
-			Global.pids.addFromObject(configurationDetail.name, configurationDetail.depth, configurationDetail.sampleIncrement);
-		}
+		Global.pids.configure(configurationData.pidList);
+		Global.thermometers.configure(configurationData.thermometerList);
+		Global.relays.configure(configurationData.relayList);
+		Global.pumps.configure(configurationData.pumpList);
 
-		for (Ctrl_Configuration.Thermometer 	configurationDetail : configurationData.thermometerList)
-		{
-			Global.thermometers.addFromObject(configurationDetail.name, configurationDetail.address, configurationDetail.pidName);
-		}
-		
-		for (Ctrl_Configuration.Relay		 	configurationDetail : configurationData.relayList)
-		{
-			Global.relays.addFromObject(configurationDetail);
-		}
-		
-		for (Ctrl_Configuration.Pump		 	configurationDetail : configurationData.pumpList)
-		{
-			Global.pumps.addFromObject(configurationDetail);
-		}
 
 		for (Ctrl_Configuration.Circuit		 	configurationDetail : configurationData.circuitList)
 		{

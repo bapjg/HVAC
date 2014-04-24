@@ -23,11 +23,20 @@ public class Relays
 //		Relay relayItem 				= new Relay(name, address, friendlyName);
 //		relayList.add(relayItem);
 //	}
-	public void addFromObject(Ctrl_Configuration.Relay relayParam)
+	public void configure(ArrayList <Ctrl_Configuration.Relay> paramRelays)
 	{
-		Relay relayItem 				= new Relay(relayParam);
-		relayList.add(relayItem);
+		for (Ctrl_Configuration.Relay		 	paramRelay : paramRelays)
+		{
+			Relay relayItem 				= new Relay(paramRelay);
+			relayList.add(relayItem);
+		}
 	}
+	
+//	public void addFromObject(Ctrl_Configuration.Relay relayParam)
+//	{
+//		Relay relayItem 				= new Relay(relayParam);
+//		relayList.add(relayItem);
+//	}
 	public Relay fetchRelay(String name)
 	{
 		for (Relay element : relayList) 

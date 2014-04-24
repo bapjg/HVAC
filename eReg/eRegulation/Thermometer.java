@@ -10,6 +10,8 @@ import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 public class Thermometer
 {
 	public String 					name;
@@ -20,11 +22,11 @@ public class Thermometer
  	public Integer 					reading;
 	public PID						pidControler;
 	
-	public Thermometer(String name, String address, String friendlyName, Boolean pid)
+	public Thermometer(Ctrl_Configuration.Thermometer paramThermometer)
 	{
-		this.name 		    									= name;
-		this.friendlyName  										= friendlyName;
-		this.address  											= address;
+		this.name 		    									= paramThermometer.name;
+		this.friendlyName  										= "";
+		this.address  											= paramThermometer.address;
 		this.pidControler										= null;
 		
 		String prefix											= "/mnt/1wire/";
@@ -33,36 +35,18 @@ public class Thermometer
 		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 		
-		if (pid)
+		if (paramThermometer.pidName != null)
 		{
-			pidControler										= new PID(10);
-		}
-	}
-	public Thermometer(String name, String address, String friendlyName, String pid)
-	{
-		this.name 		    									= name;
-		this.friendlyName  										= friendlyName;
-		this.address  											= address;
-		this.pidControler										= null;
-		
-		String prefix											= "/mnt/1wire/";
-		String suffix											= "/";
-
-		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
-		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
-		
-		if (pid != null)
-		{
-			PID thisPID											= Global.pids.fetchPID(pid);
+			PID thisPID											= Global.pids.fetchPID(paramThermometer.pidName);
 			pidControler										= thisPID;
-			System.out.println("pid found " + pid);
+			System.out.println("pid found " + paramThermometer.pidName);
 		}
 		else
 		{
 			pidControler										= null;
 		}
 	}
-    public void readAll()
+	public void readAll()
 	{
 		try
 		{

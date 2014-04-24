@@ -20,11 +20,19 @@ public class Pumps
 //		Pump pumpItem 				= new Pump(name, relayName);
 //		pumpList.add(pumpItem);
 //	}
-	public void addFromObject(Ctrl_Configuration.Data.Pump pumpParam)
+	public void configure(ArrayList <Ctrl_Configuration.Pump> paramPumps)
 	{
-		Pump pumpItem 				= new Pump(pumpParam);
-		pumpList.add(pumpItem);
+		for (Ctrl_Configuration.Pump 	paramPump : paramPumps)
+		{
+			Pump pumpItem 				= new Pump(paramPump);
+			pumpList.add(pumpItem);
+		}
 	}
+//	public void addFromObject(Ctrl_Configuration.Data.Pump pumpParam)
+//	{
+//		Pump pumpItem 				= new Pump(pumpParam);
+//		pumpList.add(pumpItem);
+//	}
 	public Pump fetchPump(String name)
 	{
 		for (Pump element : pumpList) 

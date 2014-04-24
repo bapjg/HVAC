@@ -2,6 +2,8 @@ package eRegulation;
 
 import java.util.ArrayList;
 
+import HVAC_Messages.Ctrl_Configuration;
+
 public class Thermometers
 {
 	public ArrayList<Thermometer> thermometerList = new ArrayList<Thermometer>();
@@ -9,15 +11,13 @@ public class Thermometers
 	public Thermometers()
 	{
 	}
-	public void add(String name, String address, String friendlyName, Boolean pid)
+	public void configure(ArrayList <Ctrl_Configuration.Thermometer> paramThermometers)
 	{
-		Thermometer thermometerItem 	= new Thermometer(name, address, friendlyName, pid);
-		thermometerList.add(thermometerItem);
-	}
-	public void addFromObject(String name, String address, String pid)
-	{
-		Thermometer thermometerItem 	= new Thermometer(name, address.replace(" ", ""), "friendlyName", pid);
-		thermometerList.add(thermometerItem);
+		for (Ctrl_Configuration.Thermometer 	paramThermometer : paramThermometers)
+		{
+			Thermometer thermometerItem 	= new Thermometer(paramThermometer);
+			thermometerList.add(thermometerItem);
+		}
 	}
 	public Thermometer fetchThermometer(String name)
 	{
