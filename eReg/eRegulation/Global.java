@@ -231,6 +231,7 @@ public class Global extends DefaultHandler
 		Global.summerPumpDuration						= 300;
 		Global.summerWorkDone							= false;
 		Global.summerPumpTime							= 60 * 60 * 1000L;		// 1 a.m.
+		Global.summerTemp								= 15000;
 		
 		//
 		//==================================================================================
