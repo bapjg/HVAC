@@ -9,14 +9,14 @@ import HVAC_Messages.*;
 //Template										variable			= something
 //Template										ext/imp				class
 
-public class TCP_Task 							extends 			AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
+public class HTTP_Task 							extends 			AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
 {
-	public TCP_Response							callBack;
-	public TCP_Connection						piConnection;
+	public HTTP_Response							callBack;
+	public HTTP_Connection						piConnection;
 
-	public TCP_Task()
+	public HTTP_Task()
 	{
-		this.piConnection											= new TCP_Connection();
+		this.piConnection											= new HTTP_Connection();
 		this.callBack												= null;
 	}
 	@Override

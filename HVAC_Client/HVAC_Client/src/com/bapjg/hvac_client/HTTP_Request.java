@@ -12,10 +12,13 @@ import java.net.URLConnection;
 
 import HVAC_Messages.*;
 
+//Template										variable			= something
+//Template										ext/imp				class
+
 public class HTTP_Request
 {
-	public URL						serverURL;
-	public URLConnection			servletConnection;
+	public URL									serverURL;
+	public URLConnection						servletConnection;
 
 	public HTTP_Request()
 	{
@@ -27,25 +30,25 @@ public class HTTP_Request
 	{
 		
 		System.out.println("Ping Started");
-		Mgmt_Msg_Abstract				messageReceive;
-		Mgmt_Msg_Abstract.Ping			messageSend			= (new Mgmt_Msg_Abstract()).new Ping();
-		messageReceive										= sendIt(messageSend, "http://192.168.5.20:8888/hvac/Management");
+		Mgmt_Msg_Abstract						messageReceive;
+		Mgmt_Msg_Abstract.Ping					messageSend			= (new Mgmt_Msg_Abstract()).new Ping();
+		messageReceive												= sendIt(messageSend, "http://192.168.5.20:8888/hvac/Management");
 		System.out.println("Ping sent/replied local");
 
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
 			System.out.println("Ping Ack retruned from local");
-			Global.serverURL								= "http://192.168.5.20:8080/hvac/Management";
+			Global.serverURL										= "http://192.168.5.20:8080/hvac/Management";
 			return new Mgmt_Msg_Abstract().new Ack();	
 		}
 		System.out.println("Ping sent remote");
 
-		messageReceive										= sendIt(messageSend, "http://home.bapjg.com:8888/hvac/Management");
+		messageReceive												= sendIt(messageSend, "http://home.bapjg.com:8888/hvac/Management");
 		System.out.println("Ping sent/replied retruned from remote");
 		if (messageReceive instanceof Mgmt_Msg_Abstract.Ack)
 		{
 			System.out.println("Ping Ack remote");
-			Global.serverURL								= "http://home.bapjg.com:8888/hvac/Management";
+			Global.serverURL										= "http://home.bapjg.com:8888/hvac/Management";
 			return new Mgmt_Msg_Abstract().new Ack();	
 		}
 		System.out.println("Ping Nack giveup");
@@ -61,8 +64,8 @@ public class HTTP_Request
 	public Mgmt_Msg_Abstract sendData(Mgmt_Msg_Abstract messageSend)
 	{
 System.out.println("Mgmt_Msg_Abstract/sendData Started");
-		servletConnection									= null;
-		Mgmt_Msg_Abstract				messageReceive		= null;
+		servletConnection											= null;
+		Mgmt_Msg_Abstract						messageReceive		= null;
 		if (Global.serverURL.equalsIgnoreCase(""))
 		{
 System.out.println("Mgmt_Msg_Abstract/sendData empty serverURL detected, must wait");
@@ -95,8 +98,8 @@ System.out.println("Mgmt_Msg_Abstract/sendData MalformedURLException : " + eMUE)
 
 		try
 		{
-			ObjectOutputStream 			outputToServlet;
-			outputToServlet 								= new ObjectOutputStream(servletConnection.getOutputStream());
+			ObjectOutputStream 					outputToServlet;
+			outputToServlet 										= new ObjectOutputStream(servletConnection.getOutputStream());
 			outputToServlet.writeObject(messageSend);
 			outputToServlet.flush();
 			outputToServlet.close();
@@ -113,7 +116,7 @@ System.out.println("Mgmt_Msg_Abstract/sendData MalformedURLException : " + eMUE)
 
 		try
 		{
-			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
+			ObjectInputStream 					response 			= new ObjectInputStream(servletConnection.getInputStream());
 			messageReceive 									= (Mgmt_Msg_Abstract) response.readObject();
 		}
     	catch (ClassNotFoundException eClassNotFound) 

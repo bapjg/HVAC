@@ -73,12 +73,9 @@ public class TCP_Connection
 	}
 	public void disconnect()
 	{
-		try { piOutputStream.close(); }
-		catch(Exception e) {}
-		try { piInputStream.close(); }
-		catch(Exception e) {}
-		try { piSocket.close(); }
-		catch(Exception e) {}
+		try { piOutputStream.close(); 	}				catch(Exception e) {}
+		try { piInputStream.close(); 	}				catch(Exception e) {}
+		try { piSocket.close(); 		}				catch(Exception e) {}
 	}
 	public Ctrl_Abstract piTransaction(Ctrl_Abstract messageSend)
 	{

@@ -35,7 +35,7 @@ import android.widget.EditText;
 //Template										variable			= something
 //Template										ext/imp				class
 
-public class Panel_4_Config_Circuits 		extends 			Panel_0_Fragment 
+public class Panel_4_Config_Circuits 			extends 			Panel_0_Fragment 
 												implements 			TCP_Response
 {
 	private Adapter_Relays		 				adapter;
