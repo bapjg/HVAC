@@ -42,10 +42,10 @@ public class Activity_Main 			extends Activity
         setContentView(R.layout.activity_main); // Contains activity_container which contains choices_container (left) and panel_container(right)
         
         global											= new Global();
-        global.appContext 								= getApplicationContext();
-        global.actContext								= (Context)  this;
-        global.activity									= (Activity) this;
-        global.piSocketAddress							= null;
+        Global.appContext 								= getApplicationContext();
+        Global.actContext								= (Context)  this;
+        Global.activity									= (Activity) this;
+        Global.piSocketAddress							= null;
         
         ActionBar 				actionbar 				= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -60,19 +60,19 @@ public class Activity_Main 			extends Activity
         // Menu_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
         // The onCreate method, calls the onClick argument of the first item in the list	
         //	
-        global.menuTemperatures							= new Menu_1_Temperatures	(R.layout.menu_1_temperatures);
-        global.menuImmediate							= new Menu_2_Immediate		(R.layout.menu_2_immediate);
-        global.menuCalendars							= new Menu_3_Calendars		(R.layout.menu_3_calendars);
-        global.menuConfiguration						= new Menu_4_Config			(R.layout.menu_4_configuration);
-        global.menuActions								= new Menu_5_Actions		(R.layout.menu_5_actions);
+        Global.menuTemperatures							= new Menu_1_Temperatures	(R.layout.menu_1_temperatures);
+        Global.menuImmediate							= new Menu_2_Immediate		(R.layout.menu_2_immediate);
+        Global.menuCalendars							= new Menu_3_Calendars		(R.layout.menu_3_calendars);
+        Global.menuConfiguration						= new Menu_4_Config			(R.layout.menu_4_configuration);
+        Global.menuActions								= new Menu_5_Actions		(R.layout.menu_5_actions);
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu fragment   ,  	panel object
-        tabTemperatures.setTabListener	(new Listener_Tabs(global.menuTemperatures));
-        tabImmediate.setTabListener		(new Listener_Tabs(global.menuImmediate));
-        tabCalendars.setTabListener		(new Listener_Tabs(global.menuCalendars));
-        tabConfiguration.setTabListener	(new Listener_Tabs(global.menuConfiguration));
-        tabActions.setTabListener		(new Listener_Tabs(global.menuActions));
+        tabTemperatures.setTabListener	(new Listener_Tabs(Global.menuTemperatures));
+        tabImmediate.setTabListener		(new Listener_Tabs(Global.menuImmediate));
+        tabCalendars.setTabListener		(new Listener_Tabs(Global.menuCalendars));
+        tabConfiguration.setTabListener	(new Listener_Tabs(Global.menuConfiguration));
+        tabActions.setTabListener		(new Listener_Tabs(Global.menuActions));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabImmediate);
@@ -82,7 +82,6 @@ public class Activity_Main 			extends Activity
 
         //HTTP_Req_Ping		httpRequest					= new HTTP_Req_Ping();
 		//httpRequest.execute();
-		Global.initialisationCompleted					= true;
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -91,6 +90,9 @@ public class Activity_Main 			extends Activity
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	
+	
 	//===========================================================================================================================
 	//
 	//
@@ -119,69 +121,6 @@ public class Activity_Main 			extends Activity
 				return true;
 		}
 		return false;
-	}
-	//
-	//
-	//===========================================================================================================================
-
-	//===========================================================================================================================
-	//
-	//
-	private class HTTP_Req_Ping extends AsyncTask <Void, Void, Mgmt_Msg_Abstract> 
-	{
-		public HTTP_Request				http;
-		
-		public HTTP_Req_Ping()
-		{
-			http													= new HTTP_Request();
-		}
-		@Override
-		protected Mgmt_Msg_Abstract doInBackground(Void... params) 
-		{
-			return http.ping();
-		}
-		@Override
-		protected void onProgressUpdate(Void... progress) {}
-		@Override
-	    protected void onPostExecute(Mgmt_Msg_Abstract result) 
-		{             
-			if (result instanceof Mgmt_Msg_Abstract.Ack)
-			{
-		        HTTP_Req_Configuration			httpRequest			= new HTTP_Req_Configuration();
-				httpRequest.execute();
-			}
-	    }
-	}
-	//
-	//
-	//===========================================================================================================================
-
-	//===========================================================================================================================
-	//
-	//
-	private class HTTP_Req_Configuration extends AsyncTask <Void, Void, Mgmt_Msg_Abstract> 
-	{
-		public HTTP_Request				http;
-		public HTTP_Req_Configuration()
-		{
-			http													= new HTTP_Request();
-		}
-		@Override
-		protected Mgmt_Msg_Abstract doInBackground(Void... messageOut) 
-		{
-			return http.sendData(new Mgmt_Msg_Configuration().new Request());			
-		}
-		@Override
-		protected void onProgressUpdate(Void... progress) {}
-		@Override
-	    protected void onPostExecute(Mgmt_Msg_Abstract result)
-		{             
-			if (result instanceof Mgmt_Msg_Configuration.Data)
-			{
-				Mgmt_Msg_Configuration.Data msg_received 			= (Mgmt_Msg_Configuration.Data) result;
-//				Global.configuration					 			= msg_received;
-			}
-	    }
 	}
 	//
 	//

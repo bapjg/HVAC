@@ -17,11 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import com.bapjg.hvac_client.*;
-import com.bapjg.hvac_client.Mgmt_Msg_Abstract.Ping;
-import com.bapjg.hvac_client.Mgmt_Msg_Calendar.Data;
-import com.bapjg.hvac_client.Mgmt_Msg_Configuration.Thermometer;
-
 import HVAC_Messages.*;
 
 import com.google.gson.Gson;
@@ -59,9 +54,7 @@ public class Management extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         Object 							message_in 							= null;
-        Mgmt_Msg_Abstract 				message_out 						= null;
-        Ctrl_Abstract	 				message_new 						= null;
-        Boolean							new_format							= false;
+        Ctrl_Abstract	 				message_out 						= null;
         
         try
         {
@@ -71,17 +64,17 @@ public class Management extends HttpServlet
         catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
-            message_out 													= (new Mgmt_Msg_Abstract()).new Nack();
+            message_out 													= (new Ctrl_Abstract()).new Nack();
         }
         catch (IOException eIO)
         {
             System.out.println("An IO Exception occured : " + eIO);
-            message_out 													= (new Mgmt_Msg_Abstract()).new Nack();
+            message_out 													= (new Ctrl_Abstract()).new Nack();
         }
         catch (Exception e)
         {
             System.out.println("An Exception occured : " + e);
-            message_out 													= (new Mgmt_Msg_Abstract()).new Nack();
+            message_out 													= (new Ctrl_Abstract()).new Nack();
         }
         
         if (message_in != null)
@@ -90,58 +83,20 @@ public class Management extends HttpServlet
         } 
 
         
-        if (message_in == null)
-        {
-            message_out 													= (new Mgmt_Msg_Abstract()).new Nack();
-        } 
-        else if (message_in instanceof Mgmt_Msg_Temperatures.Request)
-        {
-            message_out 													= processTemperaturesReq();
-        } 
-		else if (message_in instanceof Ctrl_Configuration.Request)								//NEW
-        {
-			new_format														= true;
-			message_new 													= processConfiguration_Request();
-        } 
-		else if (message_in instanceof Ctrl_Configuration.Update)								//NEW
-        {
-			new_format														= true;
-			message_new 													= processConfiguration_Update((Ctrl_Configuration.Update) message_in);
-        } 
-		else if (message_in instanceof Ctrl_Calendars.Request)
-        {
-			new_format														= true;
-			message_new 													= processCalendars_Request();
-        } 
-		else if (message_in instanceof Ctrl_Calendars.Update)								//NEW
-        {
-			new_format														= true;
-			message_new 													= processCalendars_Update((Ctrl_Calendars.Update) message_in);
-        }
-		else if (message_in instanceof Ctrl_Fuel_Consumption.Request)
-        {
-			new_format														= true;
-			message_new 													= processFuelConsumption_Request();
-        } 
+        if      (message_in == null)         								message_out 	= (new Ctrl_Abstract()).new Nack();
+		else if (message_in instanceof Ctrl_Configuration.Request)			message_out 	= processConfiguration_Request();
+		else if (message_in instanceof Ctrl_Configuration.Update)			message_out 	= processConfiguration_Update((Ctrl_Configuration.Update) message_in);
         
+		else if (message_in instanceof Ctrl_Calendars.Request)				message_out 	= processCalendars_Request();
+		else if (message_in instanceof Ctrl_Calendars.Update)				message_out 	= processCalendars_Update((Ctrl_Calendars.Update) message_in);
         
-		else if (message_in instanceof Mgmt_Msg_Abstract.Ping)
-        {
-            message_out 													= (new Mgmt_Msg_Abstract()).new Ack();
-        } 
-		else
+		else if (message_in instanceof Ctrl_Fuel_Consumption.Request)		message_out 	= processFuelConsumption_Request();
+ 		else
         {
             System.out.println("Unsupported message class received from client");
-            message_out 													= (new Mgmt_Msg_Abstract()).new Nack();;
+            message_out 													= (new Ctrl_Abstract()).new Nack();;
         }
-        if (new_format)																			// Berk
-        {
-        	reply(response, message_new);
-        }
-        else
-        {
-        	reply(response, message_out);
-        }
+       	reply(response, message_out);
      }
     public void dbOpen()
     {
@@ -160,59 +115,59 @@ public class Management extends HttpServlet
             e.printStackTrace();
         }
     }
-    public Mgmt_Msg_Temperatures.Data 			processTemperaturesReq()
-    {
-        dbOpen();
-        
-        Mgmt_Msg_Temperatures.Data 	returnBuffer  	= new Mgmt_Msg_Temperatures().new Data();
-
-        try
-        {
-            dbStatement 							= dbConnection.createStatement(1004, 1008);
-            
-            String				dbSQL				= "";
-            dbSQL									+= "SELECT     dateTime,        ";	
-            dbSQL									+= "           date,            ";	
-            dbSQL									+= "           time,            ";	
-            dbSQL									+= "           tempHotWater,    ";	
-            dbSQL									+= "           tempBoiler,      ";	
-            dbSQL									+= "           tempBoilerIn,    ";
-            dbSQL									+= "           tempBoilerOut,   ";
-            dbSQL									+= "           tempFloorIn,     ";
-            dbSQL									+= "           tempFloorOut,    ";
-            dbSQL									+= "           tempRadiatorIn,  ";
-            dbSQL									+= "           tempRadiatorOut, ";
-            dbSQL									+= "           tempOutside,     ";
-            dbSQL									+= "           tempLivingRoom	";
-            dbSQL									+= "FROM       temperatures     ";	
-            dbSQL									+= "ORDER BY   dateTime DESC    ";	
-            dbSQL									+= "LIMIT      1                ";	
-            
-            ResultSet 			dbResultSet 		= dbStatement.executeQuery(dbSQL);
-            dbResultSet.next();
-            returnBuffer.dateTime 					= dbResultSet.getLong("dateTime");
-            returnBuffer.date 						= dbResultSet.getString("date");
-            returnBuffer.time 						= dbResultSet.getString("time");
-            returnBuffer.tempHotWater 				= dbResultSet.getInt("tempHotWater");
-            returnBuffer.tempBoiler 				= dbResultSet.getInt("tempBoiler");
-            returnBuffer.tempBoilerIn 				= dbResultSet.getInt("tempBoilerIn");
-            returnBuffer.tempBoilerOut				= dbResultSet.getInt("tempBoilerOut");
-            returnBuffer.tempFloorIn 				= dbResultSet.getInt("tempFloorIn");
-            returnBuffer.tempFloorOut 				= dbResultSet.getInt("tempFloorOut");
-            returnBuffer.tempRadiatorIn 			= dbResultSet.getInt("tempRadiatorIn");
-            returnBuffer.tempRadiatorOut 			= dbResultSet.getInt("tempRadiatorOut");
-            returnBuffer.tempOutside 				= dbResultSet.getInt("tempOutside");
-            returnBuffer.tempLivingRoom 			= dbResultSet.getInt("tempLivingRoom");
-            
-            dbStatement.close();
-            dbConnection.close();
-        }
-        catch(SQLException eSQL)
-        {
-            eSQL.printStackTrace();
-        }
-        return returnBuffer;
-    }
+//    public Ctrl_Abstract.Data 			processTemperaturesReq()
+//    {
+//        dbOpen();
+//        
+//        Mgmt_Msg_Temperatures.Data 	returnBuffer  	= new Mgmt_Msg_Temperatures().new Data();
+//
+//        try
+//        {
+//            dbStatement 							= dbConnection.createStatement(1004, 1008);
+//            
+//            String				dbSQL				= "";
+//            dbSQL									+= "SELECT     dateTime,        ";	
+//            dbSQL									+= "           date,            ";	
+//            dbSQL									+= "           time,            ";	
+//            dbSQL									+= "           tempHotWater,    ";	
+//            dbSQL									+= "           tempBoiler,      ";	
+//            dbSQL									+= "           tempBoilerIn,    ";
+//            dbSQL									+= "           tempBoilerOut,   ";
+//            dbSQL									+= "           tempFloorIn,     ";
+//            dbSQL									+= "           tempFloorOut,    ";
+//            dbSQL									+= "           tempRadiatorIn,  ";
+//            dbSQL									+= "           tempRadiatorOut, ";
+//            dbSQL									+= "           tempOutside,     ";
+//            dbSQL									+= "           tempLivingRoom	";
+//            dbSQL									+= "FROM       temperatures     ";	
+//            dbSQL									+= "ORDER BY   dateTime DESC    ";	
+//            dbSQL									+= "LIMIT      1                ";	
+//            
+//            ResultSet 			dbResultSet 		= dbStatement.executeQuery(dbSQL);
+//            dbResultSet.next();
+//            returnBuffer.dateTime 					= dbResultSet.getLong("dateTime");
+//            returnBuffer.date 						= dbResultSet.getString("date");
+//            returnBuffer.time 						= dbResultSet.getString("time");
+//            returnBuffer.tempHotWater 				= dbResultSet.getInt("tempHotWater");
+//            returnBuffer.tempBoiler 				= dbResultSet.getInt("tempBoiler");
+//            returnBuffer.tempBoilerIn 				= dbResultSet.getInt("tempBoilerIn");
+//            returnBuffer.tempBoilerOut				= dbResultSet.getInt("tempBoilerOut");
+//            returnBuffer.tempFloorIn 				= dbResultSet.getInt("tempFloorIn");
+//            returnBuffer.tempFloorOut 				= dbResultSet.getInt("tempFloorOut");
+//            returnBuffer.tempRadiatorIn 			= dbResultSet.getInt("tempRadiatorIn");
+//            returnBuffer.tempRadiatorOut 			= dbResultSet.getInt("tempRadiatorOut");
+//            returnBuffer.tempOutside 				= dbResultSet.getInt("tempOutside");
+//            returnBuffer.tempLivingRoom 			= dbResultSet.getInt("tempLivingRoom");
+//            
+//            dbStatement.close();
+//            dbConnection.close();
+//        }
+//        catch(SQLException eSQL)
+//        {
+//            eSQL.printStackTrace();
+//        }
+//        return returnBuffer;
+//    }
     public Ctrl_Abstract 						processCalendars_Request()
     {
         dbOpen();
@@ -361,26 +316,12 @@ public class Management extends HttpServlet
         return returnBuffer;
     }
 
-    public void reply(HttpServletResponse response, Mgmt_Msg_Abstract message_out) throws IOException 
-    {
-        System.out.println("----Class replied " + message_out.getClass().toString());
-    	response.reset();
-        response.setHeader("Content-Type", "application/x-java-serialized-object");
-        ObjectOutputStream 		output				= null;;
-		
-		output 										= new ObjectOutputStream(response.getOutputStream());
-		output.writeObject(message_out);
-        output.flush();
-        output.close();
-    }
     public void reply(HttpServletResponse response, Ctrl_Abstract message_out) throws IOException 
     {
         System.out.println("----Class replied " + message_out.getClass().toString());
         response.reset();
         response.setHeader("Content-Type", "application/x-java-serialized-object");
-        ObjectOutputStream 		output				= null;;
-		
-		output 										= new ObjectOutputStream(response.getOutputStream());
+        ObjectOutputStream 								output 				= new ObjectOutputStream(response.getOutputStream());
 		output.writeObject(message_out);
         output.flush();
         output.close();

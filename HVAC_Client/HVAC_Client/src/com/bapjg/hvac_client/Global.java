@@ -36,11 +36,8 @@ public class Global
 	public static	Ctrl_Configuration.Data		eRegConfiguration;
 	public static	String						eRegCalendar;
 
-	public static	Boolean						initialisationCompleted;
-
 	public Global() 
 	{
-		initialisationCompleted					= false;
 	}
     public static String displayDate(Long dateTime)
     {

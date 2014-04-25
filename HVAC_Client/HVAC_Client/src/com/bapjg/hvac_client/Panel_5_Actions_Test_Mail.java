@@ -58,7 +58,7 @@ public class Panel_5_Actions_Test_Mail 			extends 			Panel_0_Fragment
 	   	task.callBack												= this;					// processFinish
 	   	task.execute(message);
 	}
-	public void processFinish(Ctrl_Abstract result) 
+	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
 		Activity								activity			= getActivity();		
 

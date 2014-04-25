@@ -28,7 +28,7 @@ public class TCP_Task 							extends 			AsyncTask <Ctrl_Abstract, Void, Ctrl_Abs
 	@Override
     protected void onPostExecute(Ctrl_Abstract messageReturn) 
 	{             
-		callBack.processFinish(messageReturn);
+		callBack.processFinishTCP(messageReturn);
 		piConnection.disconnect();
     }
 }

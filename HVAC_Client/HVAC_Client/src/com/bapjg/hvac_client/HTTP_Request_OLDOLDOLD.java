@@ -15,12 +15,12 @@ import HVAC_Messages.*;
 //Template										variable			= something
 //Template										ext/imp				class
 
-public class HTTP_Request
+public class HTTP_Request_OLDOLDOLD
 {
 	public URL									serverURL;
 	public URLConnection						servletConnection;
 
-	public HTTP_Request()
+	public HTTP_Request_OLDOLDOLD()
 	{
 	}
 	//===========================================================================================================================

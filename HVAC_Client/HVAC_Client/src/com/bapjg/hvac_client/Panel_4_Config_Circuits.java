@@ -2,9 +2,6 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-import com.bapjg.hvac_client.Mgmt_Msg_Configuration;
-import com.bapjg.hvac_client.Mgmt_Msg_Configuration.Thermometer;
-
 import HVAC_Messages.Ctrl_Abstract;
 import HVAC_Messages.Ctrl_Actions_Relays;
 import HVAC_Messages.Ctrl_Configuration;
@@ -135,7 +132,7 @@ public class Panel_4_Config_Circuits 			extends 			Panel_0_Fragment
 	   	task.callBack												= this;					// processFinish
 	   	task.execute(message);
 	}
-	public void processFinish(Ctrl_Abstract result) 
+	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
 		Activity								activity			= getActivity();		
 

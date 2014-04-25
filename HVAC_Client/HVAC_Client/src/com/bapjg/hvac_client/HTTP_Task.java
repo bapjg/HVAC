@@ -11,24 +11,23 @@ import HVAC_Messages.*;
 
 public class HTTP_Task 							extends 			AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
 {
-	public HTTP_Response							callBack;
-	public HTTP_Connection						piConnection;
+	public HTTP_Response						callBack;
+	public HTTP_Connection						serverConnection;
 
 	public HTTP_Task()
 	{
-		this.piConnection											= new HTTP_Connection();
+		this.serverConnection										= new HTTP_Connection();
 		this.callBack												= null;
 	}
 	@Override
 	protected Ctrl_Abstract doInBackground(Ctrl_Abstract... messageOut) 
 	{
-		return piConnection.piTransaction(messageOut[0]);
+		return serverConnection.serverTransaction(messageOut[0]);
 	}	
 	protected void onProgressUpdate(Void... progress)  { }
 	@Override
     protected void onPostExecute(Ctrl_Abstract messageReturn) 
 	{             
-		callBack.processFinish(messageReturn);
-		piConnection.disconnect();
+		callBack.processFinishHTTP(messageReturn);
     }
 }
