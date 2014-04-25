@@ -128,12 +128,15 @@ public class Calendars extends DefaultHandler
 		
 			for (Ctrl_Calendars.Calendar 					paramCalendar 		: paramCircuit.calendarList)
 			{
-				for (Ctrl_Calendars.Word 					word 				: calendarData.wordList) 
+				if (paramCalendar.active)
 				{
-					paramCalendar.days 												= paramCalendar.days.replace(word.name, word.days);
+					for (Ctrl_Calendars.Word 					word 				: calendarData.wordList) 
+					{
+						paramCalendar.days 												= paramCalendar.days.replace(word.name, word.days);
+					}
+					circuit.addCircuitTask(paramCalendar);
+					LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart + "/" + paramCalendar.stopCriterion.timeEnd + " Days " + paramCalendar.days);
 				}
-				circuit.addCircuitTask(paramCalendar);
-				LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart + "/" + paramCalendar.stopCriterion.timeEnd + " Days " + paramCalendar.days);
 			}
 		}
 
