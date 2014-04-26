@@ -34,20 +34,20 @@ public class Thread_Thermometers implements Runnable
 				}
 			}
 			
-			Global.thermoFloorOut.readUnCached();
-			Global.thermoFloorOut.pidControler.add(Global.thermoFloorOut.reading);
-			
-			Global.thermoBoiler.readUnCached();
-			Global.thermoBoilerOut.readUnCached();
-			Global.thermoBoilerOut.pidControler.add(Global.thermoBoilerOut.reading);
-			
-			Global.thermoBoilerIn.read();
-			Global.thermoFloorIn.read();
-			Global.thermoRadiatorOut.read();
-			Global.thermoRadiatorIn.read();
-			Global.thermoOutside.read();
-			Global.thermoLivingRoom.read();
-			Global.thermoHotWater.read();
+//			Global.thermoFloorOut.readUnCached();
+//			Global.thermoFloorOut.pidControler.add(Global.thermoFloorOut.reading);
+//			
+//			Global.thermoBoiler.readUnCached();
+//			Global.thermoBoilerOut.readUnCached();
+//			Global.thermoBoilerOut.pidControler.add(Global.thermoBoilerOut.reading);
+//			
+//			Global.thermoBoilerIn.read();
+//			Global.thermoFloorIn.read();
+//			Global.thermoRadiatorOut.read();
+//			Global.thermoRadiatorIn.read();
+//			Global.thermoOutside.read();
+//			Global.thermoLivingRoom.read();
+//			Global.thermoHotWater.read();
 
 			LogIt.tempData();
 

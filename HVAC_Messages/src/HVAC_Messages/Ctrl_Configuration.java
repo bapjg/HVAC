@@ -19,6 +19,7 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 	
 	public class Request 						extends 					Ctrl_Configuration
 	{
+		private static final long 				serialVersionUID 			= 1L;
 	}
 	public static class Data					extends 					Ctrl_Configuration
 	{
@@ -92,12 +93,14 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 	}
 	public class PID_Data						extends  					Ctrl_Configuration
 	{
+		private static final long 				serialVersionUID 			= 1L;
 		public String							name;
 		public Integer							depth;
 		public Integer							sampleIncrement;
 	}
 	public class PID_Params						extends  					Ctrl_Configuration
 	{
+		private static final long 				serialVersionUID 			= 1L;
 		public String							thermometer;
 		public Float							gainP;
 		public Float							timeD;
@@ -108,6 +111,7 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 	}
 	public class Mixer							extends  					Ctrl_Configuration
 	{
+		private static final long 				serialVersionUID 			= 1L;
 		public String							name;
 		public Integer							swingTime;
 		public String							relayUp;

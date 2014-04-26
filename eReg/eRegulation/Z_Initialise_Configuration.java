@@ -27,7 +27,6 @@ import com.google.gson.GsonBuilder;
 
 public class Z_Initialise_Configuration
 {
-
 	public static void main(String[] args)
 	{
 		Control 								Me 					= new Control();

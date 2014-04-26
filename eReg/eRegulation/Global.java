@@ -200,7 +200,7 @@ public class Global
 		
 		//==================================================================================
 		//
-		// Got message from server
+		// Got configuration message from server or locally
 		//
 		Global.pids.configure(configurationData.pidList);
 		Global.thermometers.configure(configurationData.thermometerList);

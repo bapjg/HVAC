@@ -21,7 +21,6 @@ public class Thread_Mixer implements Runnable
 		
 		Global.waitSeconds(1);
 		circuitMixer.circuitPump.on();
-//		Global.pumpFloor.on();								// Need to get this from circuit
 		Global.waitSeconds(1);
 		Integer i								= 0; // Used for loop waiting 20 s
 		
@@ -68,6 +67,9 @@ public class Thread_Mixer implements Runnable
 			Integer tempNow;
 			Integer tempPrevious							= Global.thermoFloorOut.readUnCached();
 
+			// Idea is to upto temeProject in 5s intervals.
+			// The first intervals upto timeDelay, no decision is made
+			// Thereafter, if projected temperature is out of bound, the loop stops and the PID reactivated for recalculation
 			for (i = 0; (i < indexProject) && (! Global.stopNow); i++)
 			{
 				Global.waitSeconds(5);									// indexWait loops of 5s
