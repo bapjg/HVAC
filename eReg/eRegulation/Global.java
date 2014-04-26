@@ -432,5 +432,16 @@ public class Global
 		String nowFormatted = dateFormat.format(milliSeconds);
 		return nowFormatted;
 	}
-
+    public static Boolean isAway()
+    {
+		for (Calendars.Away awayItem : awayList)
+		{
+			Long now												= Global.now();
+			if ((now > awayItem.dateTimeStart) && (now < awayItem.dateTimeEnd))
+			{
+				return true;
+			}
+		}
+		return false;
+    }
 }

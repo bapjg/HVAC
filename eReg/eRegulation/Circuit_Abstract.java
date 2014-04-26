@@ -237,12 +237,12 @@ abstract class Circuit_Abstract
 			}
 		}
 		
-//		if (away)
-//		{
+		if (! Global.isAway())				// We are at home so get going
+		{
 			if (taskFound != null)
 			{
 				taskActivate(taskFound);
 			}
-//		}
+		}
 	}
 }
