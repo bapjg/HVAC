@@ -103,6 +103,28 @@ public class Thread_BackgroundTasks implements Runnable
 					}
 				}
 			}
+			
+			if (Global.thermoHotWater.reading < Global.antiFreeze)
+			{
+				// Start HW temp objective antiFreeze + 2000
+			}
+			if ((Global.thermoBoiler.reading < Global.antiFreeze   )
+			||  (Global.thermoBoilerIn.reading < Global.antiFreeze )
+			||  (Global.thermoBoilerOut.reading < Global.antiFreeze))
+			{
+				
+			}
+			if ((Global.thermoLivingRoom.reading < Global.antiFreeze)
+			||  (Global.thermoFloorIn.reading < Global.antiFreeze   )
+			||  (Global.thermoFloorOut.reading < Global.antiFreeze  ))
+			{
+				// Start Floor temp objective antiFreeze + 2000
+			}
+			if ((Global.thermoRadiatorIn.reading < Global.antiFreeze )
+			||  (Global.thermoRadiatorOut.reading < Global.antiFreeze))
+			{
+				// Start Radiator temp objective antiFreeze + 2000
+			}
 			Global.waitSeconds(10);
 		}
 		LogIt.info("Thread_Background", "Run", "Stopping", true);		

@@ -25,6 +25,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		public ArrayList<Word> 					wordList 					= new ArrayList<Word>();
 		public ArrayList<Circuit>				circuitList 				= new ArrayList<Circuit>();
 		public ArrayList<Away>					awayList 					= new ArrayList<Away>();
+		public Integer							antiFreeze 					= 5;
 	}
 	public class Update							extends 					Ctrl_Calendars.Data
 	{
@@ -68,8 +69,8 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	public static class Away					extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
-		public String 							dateTimeStart;
-		public String 							dateTimeEnd;
+		public Long 							dateTimeStart;
+		public Long 							dateTimeEnd;
 	}
 	
 	
@@ -342,9 +343,20 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		//
 
 		Away									awayItem					= new Away();
-		awayItem.dateTimeStart												= "02/04/2014 08:00:00";
-		awayItem.dateTimeEnd												= "02/04/2015 08:00:00";
+//		awayItem.dateTimeStart												= 0L;
+//		awayItem.dateTimeEnd												= 0L;
 		calendarUpdate.awayList.add(awayItem);
+		
+		//
+		//=========================================================================================
+
+
+		//=========================================================================================
+		//
+		// AntiFreeze
+		//
+
+		calendarUpdate.antiFreeze											= 5000;
 		
 		//
 		//=========================================================================================

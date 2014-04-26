@@ -26,11 +26,11 @@ public class HTTP_Connection
 
 	public Boolean connect()
 	{
-		if (server != null)
+		if (server == null)
 		{
 			try													// Try last known address
 			{
-				server 										= new URL("home.bapjg.com:8888");
+				server 										= new URL("http://home.bapjg.com:8888/hvac/Management");
 				serverConnection 							= server.openConnection();
 				serverConnection.setDoOutput(true);
 				serverConnection.setUseCaches(false);
@@ -49,7 +49,7 @@ public class HTTP_Connection
 	}
 	public Ctrl_Abstract serverTransaction(Ctrl_Abstract messageSend)
 	{
-		if(connect())
+		if (connect())
 		{
 			try
 			{
@@ -58,7 +58,6 @@ public class HTTP_Connection
 				serverSend.writeObject(messageSend);
 				serverSend.flush();
 				serverSend.close();
-	    		System.out.println(" HTTP_Request Sent ");
 				ObjectInputStream 			serverReceive		= new ObjectInputStream(serverConnection.getInputStream());
 				Ctrl_Abstract				returnMessage  		= (Ctrl_Abstract) serverReceive.readObject();
 				serverReceive.close();
@@ -68,11 +67,12 @@ public class HTTP_Connection
 			{
 	    		// Failure occurred perhaps due to old connection, so set it to null
 				// to force a reconnection
-				server											= null;
-				return serverTransaction(messageSend);
+				server 											= null;
+				return new Ctrl_Abstract().new Nack();
 			}
 			catch(Exception e)
 			{
+				server 											= null;
 				return new Ctrl_Abstract().new Nack();
 			}
 		}

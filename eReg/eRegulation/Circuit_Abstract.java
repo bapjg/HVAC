@@ -49,36 +49,6 @@ abstract class Circuit_Abstract
 	
 	public Boolean					willBeSingleCircuit				= false;
 
-//	public Circuit_Abstract(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
-//	{	
-//		this.name													= name;
-//		this.friendlyName											= friendlyName;
-//		this.circuitType											= circuitType;
-//		this.tempMax												= Integer.parseInt(tempMax);
-//		this.rampUpTime												= Long.parseLong(rampUpTime);
-//		this.state													= CIRCUIT_STATE_Off;
-//		this.heatRequired											= null;
-//	}
-//	public Circuit_Abstract(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
-//	{	
-//		this.name													= name;
-//		this.friendlyName											= "";
-//		this.circuitType											= circuitType;
-//		this.tempMax												= tempMax;
-//		this.circuitPump											= Global.pumps.fetchPump(pumpName);
-//		if (this.circuitPump == null)
-//		{
-//			System.out.println("Circuit.Constructor : " + name + " invalid pump " + pumpName);
-//		}
-//		this.circuitThermo											= Global.thermometers.fetchThermometer(thermometerName);
-//		if (this.circuitThermo == null)
-//		{
-//			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + thermometerName);
-//		}
-//		
-//		this.state													= CIRCUIT_STATE_Off;
-//		this.heatRequired											= null;
-//	}
 	public Circuit_Abstract(Ctrl_Configuration.Circuit 				paramCircuit)
 	{
 		this.name													= paramCircuit.name;
@@ -104,24 +74,19 @@ abstract class Circuit_Abstract
 		CircuitTask 	circuitTaskItem 							= new CircuitTask(paramCalendar);
 		circuitTaskList.add(circuitTaskItem);
 	}
-//	public void addCircuitTask
-//		(
-//		String 			timeStart, 
-//		String 			timeEnd,  
-//		String 			tempObjective, 
-//		String			stopOnObjective,
-//		String			days
-//		)
-//	{
-//		CircuitTask 	circuitTaskItem 							= new CircuitTask(timeStart, timeEnd, tempObjective, stopOnObjective, days);
-//		circuitTaskList.add(circuitTaskItem);
-//	}
 	public Long getRampUpTime() 			{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
 	public Long calculatePerformance()		{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
 	public void sequencer()					{  /* OverRidden in Circuit_XXX classes */	}
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
+		this.state													= CIRCUIT_STATE_Start_Requested;
+		this.heatRequired											= new HeatRequired();
+	}
+	public void start(CircuitTask thisTask)
+	{
+		LogIt.action(this.name, "Start called with circuitTask");
+		this.taskActive												= thisTask;
 		this.state													= CIRCUIT_STATE_Start_Requested;
 		this.heatRequired											= new HeatRequired();
 	}
@@ -222,7 +187,7 @@ abstract class Circuit_Abstract
 		
 		if (taskActive != null)
 		{
-			if (	(now > taskActive.timeEnd) 
+			if (	(now > taskActive.timeEnd) 							// taskActive : Time up
 			&& 		(this.state != CIRCUIT_STATE_Stop_Requested) 
 			&&		(this.state != CIRCUIT_STATE_Stopping)   
 			&&		(this.state != CIRCUIT_STATE_Optimising)   )
@@ -271,9 +236,13 @@ abstract class Circuit_Abstract
 				}
 			}
 		}
-		if (taskFound != null)
-		{
-			taskActivate(taskFound);
-		}
+		
+//		if (away)
+//		{
+			if (taskFound != null)
+			{
+				taskActivate(taskFound);
+			}
+//		}
 	}
 }

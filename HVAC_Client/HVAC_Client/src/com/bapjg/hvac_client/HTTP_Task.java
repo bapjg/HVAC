@@ -22,6 +22,7 @@ public class HTTP_Task 							extends 			AsyncTask <Ctrl_Abstract, Void, Ctrl_Ab
 	@Override
 	protected Ctrl_Abstract doInBackground(Ctrl_Abstract... messageOut) 
 	{
+		System.out.println("sending message");
 		return serverConnection.serverTransaction(messageOut[0]);
 	}	
 	protected void onProgressUpdate(Void... progress)  { }

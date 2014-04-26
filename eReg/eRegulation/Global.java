@@ -79,8 +79,6 @@ public class Global
 	public static 	Pump							pumpFloor;
 	public static 	Pump							pumpRadiator;
 
-//	public static 	Mixer							mixer;
-
 	public static 	Integer							summerTemp;
 	public static 	Integer							summerPumpDuration;	
 	public static 	Long							summerPumpTime;	
@@ -94,10 +92,12 @@ public class Global
 
 	public static 	ArrayList<String>				eMails;	
 
-//	private 		Circuit_Abstract 				circuit;			// Used during XMLparsing		
-
 	public static 	String							calendarsDateTime;	// Used to dateTime the Calendar version in use
 
+	public static	ArrayList<Calendars.Away>		awayList;
+	public static	Integer							antiFreeze;
+
+	
 	public Global()
 	{
 		Global.display 																= new LCD();
@@ -222,130 +222,11 @@ public class Global
 		//==================================================================================
 		
 
-		
-//		try 
-//		{
-//			SAXParserFactory 	saxFactory 			= SAXParserFactory.newInstance();
-//			SAXParser 			saxParser 			= saxFactory.newSAXParser();
-//			
-//			saxParser.parse("eRegulator.xml", this);
-//		} 
-//		catch (Exception e) 
-//		{
-//			e.printStackTrace();
-//		} 		
+	
 		
 		display.writeAtPosition(1, 18, "Ok");
 		// Other initialisation messages are displayed by Control.java
 	}
-//	public void startElement(String uri, String localName, String tagName, Attributes attributes) throws SAXException 
-//    {
-//		if (attributes.getLength() > 0)
-//		{
-//			if (attributes.getValue("type").equalsIgnoreCase("Collection")) 
-//			{
-//				if (tagName.equalsIgnoreCase("Thermometers"))
-//				{
-////					Global.thermometers 				= new Thermometers(); 
-//				}
-//				else if (tagName.equalsIgnoreCase("Relays"))
-//				{
-////					Global.relays 						= new Relays(); 
-//				}
-//				else if (tagName.equalsIgnoreCase("Circuits"))
-//				{
-////					Global.circuits 					= new Circuits(); 
-//				}
-//				else if (tagName.equalsIgnoreCase("Pumps"))
-//				{
-////					Global.pumps 					= new Pumps(); 
-//				}
-//			}
-//			else if (attributes.getValue("type").equalsIgnoreCase("Object"))
-//			{
-//				if (tagName.equalsIgnoreCase("Thermometer"))
-//				{
-//					String name 						= attributes.getValue("name");
-//					String address 						= attributes.getValue("address");
-//					String friendlyName					= attributes.getValue("friendlyName");
-//					String pid							= attributes.getValue("pid");
-//					
-//					if (pid.equalsIgnoreCase("Yes"))
-//					{
-////						Global.thermometers.add(name, address, friendlyName, true);
-//					}
-//					else
-//					{
-////						Global.thermometers.add(name, address, friendlyName, false);
-//					}
-//				}
-//				else if (tagName.equalsIgnoreCase("Circuit"))
-//				{
-//					String name 						= attributes.getValue("name");
-//					String friendlyName					= attributes.getValue("friendlyName");
-//					String circuitType					= attributes.getValue("circuitType");
-//					String tempMax 						= attributes.getValue("tempMax");
-//					String rampUpTime					= attributes.getValue("rampUpTime");
-//
-////					Global.circuits.add(name, friendlyName, circuitType, tempMax, rampUpTime);
-////					this.circuit 						= Global.circuits.fetchcircuit(name);
-//				}	
-//				else if (tagName.equalsIgnoreCase("tempGradient"))
-//				{
-//					String outsideLow 					= attributes.getValue("outsideLow");
-//					String tempLow 						= attributes.getValue("tempLow");
-//					String outsideHigh 					= attributes.getValue("outsideHigh");
-//					String tempHigh 					= attributes.getValue("tempHigh");
-//					
-////					this.circuit.temperatureGradient	= new TemperatureGradient(outsideLow, tempLow, outsideHigh, tempHigh);
-//				}
-//				else if (tagName.equalsIgnoreCase("Relay"))
-//				{
-//					String name 						= attributes.getValue("name");
-//					String address 						= attributes.getValue("address");
-//					String friendlyName					= attributes.getValue("friendlyName");
-//
-////					Global.relays.addFromXML(name, address, friendlyName);
-//				}
-//				else if (tagName.equalsIgnoreCase("Mixer"))
-//				{
-//					String name 						= attributes.getValue("name");
-//					String swingTime					= attributes.getValue("swingTime");
-//					String lagTime						= attributes.getValue("lagTime");
-//					String gainP						= attributes.getValue("gainP");
-//					String timeD						= attributes.getValue("timeD");
-//					String timeI						= attributes.getValue("timeI");
-//					String gainI						= attributes.getValue("gainI");
-//
-////					this.circuit.mixer					= new Mixer(name, swingTime, lagTime, gainP, timeD, timeI, gainI);
-//				}
-//				else if (tagName.equalsIgnoreCase("Pump"))
-//				{
-//					String name 						= attributes.getValue("name");
-//					String relayName					= attributes.getValue("relay");
-//
-////					Global.pumps.addFromXML(name, relayName);
-//				}
-//				else if (tagName.equalsIgnoreCase("Params"))
-//				{
-////					Global.summerTemp					= Integer.parseInt(attributes.getValue("summerTemp"));
-////					Global.summerPumpDuration			= Integer.parseInt(attributes.getValue("summerPumpDuration"));
-//					Global.summerPumpTime				= Global.parseTime(attributes.getValue("summerPumpTime"));	
-////					Global.summerWorkDone				= false;	
-//				}
-//			}
-//			else
-//			{
-//				// Nothing of interest
-//			}
-//		}
-//	}
-//	public void endElement(String uri, String localName, String tagName) throws SAXException 
-//	{
-//	}
-//	public void characters(char ch[], int start, int length) throws SAXException
-//	{
-//	}
 	public static Long getTimeAtMidnight()
 	{
 		// Returns the system time last midnight
@@ -396,6 +277,21 @@ public class Global
 		calendar.set(Calendar.MILLISECOND, 	0);
 		
 		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
+	}
+	public static Long parseDateTime(String characters)
+	{
+		// Returns a supplied time in string form "hh:mm" 
+		// In milliseconds since last midnight
+//		String splitCharacters[]			= characters.split(":");
+//		
+//		Calendar calendar					= Calendar.getInstance();
+//		calendar.set(Calendar.HOUR_OF_DAY, 	Integer.parseInt(splitCharacters[0]));
+//		calendar.set(Calendar.MINUTE,  		Integer.parseInt(splitCharacters[1]));
+//		calendar.set(Calendar.SECOND, 		0);
+//		calendar.set(Calendar.MILLISECOND, 	0);
+//		
+//		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
+		return -1L;
 	}
 	public static Boolean waitSeconds(Integer seconds)
 	{

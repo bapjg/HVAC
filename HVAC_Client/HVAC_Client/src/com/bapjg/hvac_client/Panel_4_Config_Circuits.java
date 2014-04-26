@@ -2,9 +2,7 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-import HVAC_Messages.Ctrl_Abstract;
-import HVAC_Messages.Ctrl_Actions_Relays;
-import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Messages.*;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -33,7 +31,7 @@ import android.widget.EditText;
 //Template										ext/imp				class
 
 public class Panel_4_Config_Circuits 			extends 			Panel_0_Fragment 
-												implements 			TCP_Response
+												implements 			HTTP_Response
 {
 	private Adapter_Relays		 				adapter;
 	private LayoutInflater						myInflater;
@@ -57,7 +55,7 @@ public class Panel_4_Config_Circuits 			extends 			Panel_0_Fragment
         View 									myView 				= myInflater.inflate(R.layout.panel_4_config_header, container, false);
         myAdapterView												= (AdapterView) myView.findViewById(R.id.List_View);
 
-        TCP_Send(new Ctrl_Configuration().new Request());
+        HTTP_Send(new Ctrl_Configuration().new Request());
  
         return myView;
     }
@@ -126,13 +124,19 @@ public class Panel_4_Config_Circuits 			extends 			Panel_0_Fragment
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	
     }
-	public void TCP_Send(Ctrl_Abstract message)
+//	public void TCP_Send(Ctrl_Abstract message)
+//	{
+//		TCP_Task								task				= new TCP_Task();
+//	   	task.callBack												= this;					// processFinish
+//	   	task.execute(message);
+//	}
+	public void HTTP_Send(Ctrl_Abstract message)
 	{
-		TCP_Task								task				= new TCP_Task();
+		HTTP_Task								task				= new HTTP_Task();
 	   	task.callBack												= this;					// processFinish
 	   	task.execute(message);
 	}
-	public void processFinishTCP(Ctrl_Abstract result) 
+	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
 		Activity								activity			= getActivity();		
 

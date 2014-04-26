@@ -48,13 +48,18 @@ public class Thread_TCPListen 			implements Runnable
 			    	else
 			    	{
 			    		if (	 message_in instanceof Ctrl_Temperatures.Request) 		message_out = process_Ctrl_Temperatures_Request		((Ctrl_Temperatures.Request) message_in);
+			    		
 			    		else if (message_in instanceof Ctrl_Immediate.Request)			message_out	= process_Ctrl_Immediate_Request		((Ctrl_Immediate.Request) message_in);
 			    		else if (message_in instanceof Ctrl_Immediate.Execute)			message_out	= process_Ctrl_Immediate_Execute		((Ctrl_Immediate.Execute) message_in); 
+			    		
 			    		else if (message_in instanceof Ctrl_Configuration.Request)		message_out	= process_Ctrl_Configuration_Request	();
 			    		else if (message_in instanceof Ctrl_Configuration.Update) 		message_out	= process_Ctrl_Configuration_Update		((Ctrl_Configuration.Update) message_in);
+			    		
 			    		else if (message_in instanceof Ctrl_Actions_Relays.Request)		message_out	= process_Ctrl_Actions_Relays_Request	();
 			    		else if (message_in instanceof Ctrl_Actions_Relays.Execute)		message_out	= process_Ctrl_Actions_Relays_Execute	((Ctrl_Actions_Relays.Execute) message_in);
+			    		
 			    		else if (message_in instanceof Ctrl_Actions_Test_Mail.Execute)	message_out	= process_Ctrl_Actions_Test_Mail_Execute();
+			    		
 			    		else if (message_in instanceof Ctrl_Actions_Stop.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
 			        } 
 
@@ -197,7 +202,7 @@ public class Thread_TCPListen 			implements Runnable
 		
 		String 					circuitName					= message_in.circuitName;
 		Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
-		Ctrl_Abstract 			message_return;
+		Ctrl_Abstract 			message_return				= new Ctrl_Abstract().new Ack();;
 		
 		if (message_in.action == Ctrl_Immediate.ACTION_Start)
 		{
@@ -218,12 +223,10 @@ public class Thread_TCPListen 			implements Runnable
 																	"1, 2, 3, 4, 5, 6, 7");				// Days
 			}
 			circuit.start();
-			message_return									= new Ctrl_Abstract().new Ack();
 		}
 		else if (message_in.action == message_in.ACTION_Stop)
 		{
 			circuit.stop();
-			message_return									= new Ctrl_Abstract().new Ack();
 		}
 		else
 		{

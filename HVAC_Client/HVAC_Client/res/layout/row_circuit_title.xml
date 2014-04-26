@@ -9,17 +9,17 @@
         android:id			="@+id/name"
         style				="@style/AD_Text"
     	android:layout_width="140dp"/>
-    <CheckBox 
+    <TextView 
         android:id			="@+id/gradient"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text		=""
+        android:text		="Gradient"
     />
-    <CheckBox 
+     <TextView 
         android:id			="@+id/mixer"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text		=""
+        android:text		="Mixer"
     />
     	
 </LinearLayout>

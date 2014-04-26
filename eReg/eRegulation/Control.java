@@ -93,12 +93,6 @@ public class Control
 		Global.thermoHotWater						= Global.thermometers.fetchThermometer("Hot_Water");
 
 		Global.burnerPower	 						= Global.relays.fetchRelay("Burner");
-//		Global.pumpWater 							= Global.pumps.fetchPump("Pump_Water");
-//		Global.pumpFloor	 						= Global.pumps.fetchPump("Pump_Floor");
-//		Global.pumpRadiator 						= Global.pumps.fetchPump("Pump_Radiator");
-
-//		Global.mixerUp		 						= Global.relays.fetchRelay("Mixer_Up");
-//		Global.mixerDown	 						= Global.relays.fetchRelay("Mixer_Down");
 
 		Global.circuitFloor							= (Circuit_Mixer) 		Global.circuits.fetchcircuit("Floor");
 		Global.circuitGradient						= (Circuit_Radiator) 	Global.circuits.fetchcircuit("Radiator");
@@ -135,7 +129,20 @@ public class Control
 		
 		//
 		//============================================================
+
 		
+		//============================================================
+		//
+		// Start thread to handle Mixer
+		//
+// Must do for each mixer		
+//		Thread 			thread_mixer			 		= new Thread(new Thread_Mixer(), "Thread_Mixer");
+//		thread_mixer.start();
+		
+		//
+		//============================================================
+		
+
 		
 		//============================================================
 		//
@@ -213,9 +220,7 @@ public class Control
 					}
 				}
 			}
-			
 			Global.boiler.requestHeat(globalHeatRequired);
-			
 		}
 		
 		//

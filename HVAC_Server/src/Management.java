@@ -68,18 +68,18 @@ public class Management extends HttpServlet
         }
         catch (IOException eIO)
         {
-            System.out.println("An IO Exception occured : " + eIO);
+            System.out.println(dateTime2Time(now()) + "An IO Exception occured : " + eIO);
             message_out 													= (new Ctrl_Abstract()).new Nack();
         }
         catch (Exception e)
         {
-            System.out.println("An Exception occured : " + e);
+            System.out.println(dateTime2Time(now()) + "An Exception occurred : " + e);
             message_out 													= (new Ctrl_Abstract()).new Nack();
         }
         
         if (message_in != null)
         {
-            System.out.println("Class received : " + message_in.getClass().toString());
+            System.out.println(dateTime2Time(now()) + "Class received : " + message_in.getClass().toString());
         } 
 
         
@@ -93,7 +93,7 @@ public class Management extends HttpServlet
 		else if (message_in instanceof Ctrl_Fuel_Consumption.Request)		message_out 	= processFuelConsumption_Request();
  		else
         {
-            System.out.println("Unsupported message class received from client");
+            System.out.println(dateTime2Time(now()) + "Unsupported message class received from client");
             message_out 													= (new Ctrl_Abstract()).new Nack();;
         }
        	reply(response, message_out);
@@ -318,7 +318,7 @@ public class Management extends HttpServlet
 
     public void reply(HttpServletResponse response, Ctrl_Abstract message_out) throws IOException 
     {
-        System.out.println("----Class replied " + message_out.getClass().toString());
+        System.out.println(dateTime2Time(now()) + "----Class replied " + message_out.getClass().toString());
         response.reset();
         response.setHeader("Content-Type", "application/x-java-serialized-object");
         ObjectOutputStream 								output 				= new ObjectOutputStream(response.getOutputStream());
@@ -358,5 +358,9 @@ public class Management extends HttpServlet
         dateTimeString								= sdf.format(dateTime);
     	
     	return dateTimeString;
+    }
+    public Long now()
+    {
+    	return System.currentTimeMillis();
     }
 }

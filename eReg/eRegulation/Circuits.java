@@ -10,63 +10,6 @@ public class Circuits implements java.io.Serializable
 	
 	public ArrayList<Circuit_Abstract> circuitList = new ArrayList<Circuit_Abstract>();
 	
-//	public void add
-//		(
-//		String 			name, 
-//		String 			friendlyName,  
-//		String			circuitType, 
-//		String			tempMax, 
-//		String			rampUpTime
-//		)
-//	{
-//		//Berk berk berkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-//		
-//		Integer			circuitTypeInteger	=	Integer.parseInt(circuitType);
-//		
-//		if (circuitTypeInteger == Circuit_Abstract.CIRCUIT_TYPE_HotWater)
-//		{
-//			Circuit_HotWater circuitItem = new Circuit_HotWater(name, friendlyName, circuitTypeInteger, tempMax, rampUpTime);
-//			circuitList.add(circuitItem);
-//		}
-//		else if (circuitTypeInteger == Circuit_Abstract.CIRCUIT_TYPE_Gradient)
-//		{
-//			Circuit_Radiator circuitItem = new Circuit_Radiator(name, friendlyName, circuitTypeInteger, tempMax, rampUpTime);
-//			circuitList.add(circuitItem);
-//		}
-//		else if (circuitTypeInteger == Circuit_Abstract.CIRCUIT_TYPE_Mixer)
-//		{
-//			Circuit_Mixer circuitItem = new Circuit_Mixer(name, friendlyName, circuitTypeInteger, tempMax, rampUpTime);
-//			circuitList.add(circuitItem);
-//		}
-//	}
-//	public void addFromObject
-//		(
-//		String 			name, 
-//		Integer			circuitType, 
-//		String			pumpName, 
-//		String			thermometerName,
-//		Integer			tempMax
-//		)
-//	{
-//		//Berk berk berkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-//		
-//		
-//		if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_HotWater)
-//		{
-//			Circuit_HotWater circuitItem 				= new Circuit_HotWater(name, circuitType, pumpName, thermometerName, tempMax);
-//			circuitList.add(circuitItem);
-//		}
-//		else if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_Gradient)
-//		{
-//			Circuit_Radiator circuitItem 				= new Circuit_Radiator(name, circuitType, pumpName, thermometerName, tempMax);
-//			circuitList.add(circuitItem);
-//		}
-//		else if (circuitType == Circuit_Abstract.CIRCUIT_TYPE_Mixer)
-//		{
-//			Circuit_Mixer circuitItem 					= new Circuit_Mixer(name, circuitType, pumpName, thermometerName, tempMax);
-//			circuitList.add(circuitItem);
-//		}
-//	}
 	public void configure(ArrayList<Ctrl_Configuration.Circuit> paramCircuits)
 	{
 		for (Ctrl_Configuration.Circuit		 	paramCircuit : paramCircuits)
