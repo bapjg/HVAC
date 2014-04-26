@@ -108,6 +108,7 @@ public class Global
 		Global.pumps 																= new Pumps(); 
 		Global.circuits 															= new Circuits(); 
 		Global.eMails	 															= new ArrayList<String>(); 
+		Global.awayList	 															= new ArrayList<Calendars.Away>(); 
 
 		display.clear();
 		display.blinkOff();

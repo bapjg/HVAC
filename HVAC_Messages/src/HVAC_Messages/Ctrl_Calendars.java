@@ -297,7 +297,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 
 		calendar															= new Calendar();
 		calendar.name														= "WeekDay";
-		calendar.days														= "ZeekDay";
+		calendar.days														= "1234567";
 		calendar.timeStart													= "15:00";
 		calendar.stopCriterion												= new Stop_Criterion();
 		calendar.stopCriterion.stopOnObjective								= false;
