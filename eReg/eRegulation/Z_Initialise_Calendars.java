@@ -49,10 +49,10 @@ public class Z_Initialise_Calendars
 		//
 		
 		URL										serverURL;
-		URLConnection							servletConnection;
+		URLConnection							serverConnection;
 
 		serverURL													= null;
-		servletConnection											= null;
+		serverConnection											= null;
 		
 		try
 		{
@@ -65,18 +65,18 @@ public class Z_Initialise_Calendars
 
 		try
 		{
-			servletConnection 										= serverURL.openConnection();
+			serverConnection 										= serverURL.openConnection();
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
 
-		servletConnection.setDoOutput(true);
-		servletConnection.setUseCaches(false);
-		servletConnection.setConnectTimeout(1000);
-		servletConnection.setReadTimeout(1000);
-		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
+		serverConnection.setDoOutput(true);
+		serverConnection.setUseCaches(false);
+		serverConnection.setConnectTimeout(1000);
+		serverConnection.setReadTimeout(1000);
+		serverConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 
 		messageSend.dateTime 										= System.currentTimeMillis();
 			
@@ -93,7 +93,7 @@ public class Z_Initialise_Calendars
 		try
 		{
 			ObjectOutputStream 			outputToServlet;
-			outputToServlet 										= new ObjectOutputStream(servletConnection.getOutputStream());
+			outputToServlet 										= new ObjectOutputStream(serverConnection.getOutputStream());
 
 			System.out.println("Sending message " + messageSend.getClass().toString());
 			
@@ -120,7 +120,7 @@ public class Z_Initialise_Calendars
 
 		try
 		{
-			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
+			ObjectInputStream 		response 				= new ObjectInputStream(serverConnection.getInputStream());
 			messageReceive 									= (Ctrl_Abstract) response.readObject();
 		}
     	catch (Exception e) 
@@ -142,23 +142,23 @@ public class Z_Initialise_Calendars
 
 		try
 		{
-			servletConnection 										= serverURL.openConnection();
+			serverConnection 										= serverURL.openConnection();
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
 
-		servletConnection.setDoOutput(true);
-		servletConnection.setUseCaches(false);
-		servletConnection.setConnectTimeout(1000);
-		servletConnection.setReadTimeout(1000);
-		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
+		serverConnection.setDoOutput(true);
+		serverConnection.setUseCaches(false);
+		serverConnection.setConnectTimeout(1000);
+		serverConnection.setReadTimeout(1000);
+		serverConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 
 		try
 		{
 			ObjectOutputStream 			outputToServlet;
-			outputToServlet 										= new ObjectOutputStream(servletConnection.getOutputStream());
+			outputToServlet 										= new ObjectOutputStream(serverConnection.getOutputStream());
 			outputToServlet.writeObject(messageSend2);
 			outputToServlet.flush();
 			outputToServlet.close();
@@ -182,7 +182,7 @@ public class Z_Initialise_Calendars
 
 		try
 		{
-			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
+			ObjectInputStream 		response 				= new ObjectInputStream(serverConnection.getInputStream());
 			messageReceive 									= (Ctrl_Abstract) response.readObject();
 			System.out.println("Class " + messageReceive.getClass().toString());
 		}
