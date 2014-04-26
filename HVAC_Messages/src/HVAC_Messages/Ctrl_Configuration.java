@@ -103,12 +103,13 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 		public Float							timeD;
 		public Float							gainI;
 		public Float							timeI;
+		public Integer							timeDelay;
+		public Integer							timeProject;
 	}
 	public class Mixer							extends  					Ctrl_Configuration
 	{
 		public String							name;
 		public Integer							swingTime;
-		public Integer							lagTime;
 		public String							relayUp;
 		public String							relayDown;
 		public PID_Params						pidParams;
@@ -296,7 +297,6 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 		circuit.tempMax														= 50000;
 		circuit.mixer														= new Mixer();
 		circuit.mixer.swingTime												= 92000;
-		circuit.mixer.lagTime												= 20000;
 		circuit.mixer.relayUp												= "Mixer_Up";
 		circuit.mixer.relayDown												= "Mixer_Down";
 		circuit.mixer.pidParams												= new PID_Params();
@@ -305,6 +305,8 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 		circuit.mixer.pidParams.timeD										= 90F;
 		circuit.mixer.pidParams.gainI										= 0F;
 		circuit.mixer.pidParams.timeI										= 0F;		
+		circuit.mixer.pidParams.timeDelay									= 30000;
+		circuit.mixer.pidParams.timeProject									= 50000;
 		circuit.tempGradient												= new TempGradient();
 		circuit.tempGradient.outsideLow										= -15000;
 		circuit.tempGradient.tempLow										= 45000;

@@ -13,7 +13,8 @@ public class Mixer
 {
 	public String 			name;
 	public Integer 			swingTime 								= 90000;
-	public Integer 			lagTime 								= 30000;
+	public Integer 			timeDelay 								= 30000;
+	public Integer 			timeProject								= 30000;
 
 	public Integer 			tempMax 								= 48000;	
 	public Integer 			tempDontMove							= 20;
@@ -79,7 +80,7 @@ public class Mixer
     {
 		this.name 									= name;
 		this.swingTime								= swingTime;
-		this.lagTime								= lagTime;
+//		this.lagTime								= lagTime;
 		this.gainP									= gainP;
 		this.timeD									= timeD;
 		this.gainD									= this.gainP * this.timeD;
@@ -99,7 +100,8 @@ public class Mixer
     {
 		this.name 									= paramMixer.name;
 		this.swingTime								= paramMixer.swingTime;
-		this.lagTime								= paramMixer.lagTime;
+		this.timeDelay								= paramMixer.pidParams.timeDelay;
+		this.timeProject							= paramMixer.pidParams.timeProject;
 		this.gainP									= paramMixer.pidParams.gainP;
 		this.timeD									= paramMixer.pidParams.timeD;
 		this.gainD									= this.gainP * this.timeD;

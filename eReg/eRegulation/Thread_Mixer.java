@@ -59,28 +59,28 @@ public class Thread_Mixer implements Runnable
 			}
 			this.mixer.sequencer(targetTemp);
 
-			Integer timeWait								= 50;
-			Integer timeInterupt							= 30;
+			Integer timeProject								= mixer.timeProject/1000;		// Time over which to project temperature change : Convert ms -> s
+			Integer timeDelay								= mixer.timeDelay/1000;			// Time to wait before doing any calculations : Convert ms -> s
 			
-			Integer indexWait								= timeWait/5;
-			Integer indexInterupt							= timeInterupt/5;
+			Integer indexProject							= timeProject/5;
+			Integer indexDelay								= timeDelay/5;
 			Integer temperatureProjected					= 0;
 			Integer tempNow;
 			Integer tempPrevious							= Global.thermoFloorOut.readUnCached();
 
-			for (i = 0; (i < indexWait) && (! Global.stopNow); i++)
+			for (i = 0; (i < indexProject) && (! Global.stopNow); i++)
 			{
 				Global.waitSeconds(5);									// indexWait loops of 5s
 				
 				tempNow										= Global.thermoFloorOut.readUnCached();
 				
-				if (i >= indexInterupt)									// We have waited for dTdt to settle a bit
+				if (i >= indexDelay)									// We have waited for dTdt to settle a bit
 				{
-					temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeWait)).intValue();
+					temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProject)).intValue();
 					
 					if (Math.abs(temperatureProjected - targetTemp) > 2000)		// More than 2 degrees difference (either over or under)
 					{
-						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeWait + "s wait after " + (i * 5) +"s");
+						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProject + "s wait after " + (i * 5) +"s");
 						LogIt.display("Thread_Mixer", "mainLoop", "temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
 						break;
 					}
