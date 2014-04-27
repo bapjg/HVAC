@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 import HVAC_Messages.Ctrl_Configuration;
 
-public class Circuits implements java.io.Serializable
+public class Circuits
 {
-	private static final 	long 		serialVersionUID = 999999L;
-	
+	// Was serialisable no longer since 23/04/2014
 	public ArrayList<Circuit_Abstract> circuitList = new ArrayList<Circuit_Abstract>();
 	
 	public void configure(ArrayList<Ctrl_Configuration.Circuit> paramCircuits)

@@ -114,15 +114,12 @@ public class Calendars
 		
 			for (Ctrl_Calendars.Calendar 					paramCalendar 		: paramCircuit.calendarList)
 			{
-				if (paramCalendar.active)
+				for (Ctrl_Calendars.Word 				word 				: calendarData.wordList) 
 				{
-					for (Ctrl_Calendars.Word 				word 				: calendarData.wordList) 
-					{
-						paramCalendar.days 										= paramCalendar.days.replace(word.name, word.days);
-					}
-					circuit.addCircuitTask(paramCalendar);
-					LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart + "/" + paramCalendar.stopCriterion.timeEnd + " Days " + paramCalendar.days);
+					paramCalendar.days 										= paramCalendar.days.replace(word.name, word.days);
 				}
+				circuit.addCircuitTask(paramCalendar);
+				LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart + "/" + paramCalendar.stopCriterion.timeEnd + " Days " + paramCalendar.days);
 			}
 		}
 

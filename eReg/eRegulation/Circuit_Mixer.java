@@ -4,22 +4,12 @@ import HVAC_Messages.Ctrl_Configuration;
 
 public class Circuit_Mixer extends Circuit_Abstract
 {
-
-//	public Circuit_Mixer(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
-//	{	
-//		super(name, friendlyName, circuitType, tempMax, rampUpTime);
-//	}
-//	public Circuit_Mixer(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
-//	{	
-//		super(name, circuitType, pumpName, thermometerName, tempMax);
-//	}
 	public Circuit_Mixer(Ctrl_Configuration.Circuit paramCircuit)
 	{
 		super(paramCircuit);
 
 		this.temperatureGradient				= new TemperatureGradient(paramCircuit.tempGradient);
 		this.mixer								= new Mixer(paramCircuit.mixer);
-
 	}
 	public Long getRampUpTime()
 	{
@@ -63,9 +53,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 					state											= CIRCUIT_STATE_AwaitingHeat;
 
 					LogIt.info("Circuit_" + this.name, "sequencer", "Thread Started");
-					Global.waitSeconds(1);
-					Thread thread_mixer 							= new Thread(new Thread_Mixer(mixer, this), "Mixer");
-					thread_mixer.start();
 				}
 				break;
 			case CIRCUIT_STATE_AwaitingHeat:
@@ -76,11 +63,11 @@ public class Circuit_Mixer extends Circuit_Abstract
 				}
 				break;
 			case CIRCUIT_STATE_RampingUp:
-				if (Global.thermoLivingRoom.reading > (20000 - 2000))
-				{
-					LogIt.display("Circuit_Mixer", "sequencer", "RampUpFinished as livingroom temp is " + Global.thermoLivingRoom.reading);
-					state											= CIRCUIT_STATE_Running;
-				}
+//				if (Global.thermoLivingRoom.reading > (20000 - 2000))
+//				{
+//					LogIt.display("Circuit_Mixer", "sequencer", "RampUpFinished as livingroom temp is " + Global.thermoLivingRoom.reading);
+//					state											= CIRCUIT_STATE_Running;
+//				}
 				temp												= 43000;
 				this.heatRequired.tempMinimum						= 60000;
 				this.heatRequired.tempMaximum						= 80000;

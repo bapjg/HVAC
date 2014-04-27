@@ -235,7 +235,6 @@ public class Mixer
 					positionTracked						= report.positionTracked;
 				}
 			}
-			
 			LogIt.mixerData(report.timeStart, positionTracked, report.timeEnd, report.positionTracked);
 		}
 		else
@@ -246,58 +245,64 @@ public class Mixer
 	}
 	public void positionZero()
 	{
-		allOff();
-		mixerDown.on();
-		Global.waitMilliSeconds(swingTime);
-		mixerDown.off();
-		positionTracked									= 0;
+		if ((positionTracked != null) && (positionTracked != 0))
+		{
+			allOff();
+			mixerDown.on();
+			Global.waitMilliSeconds(swingTime);
+			mixerDown.off();
+			positionTracked								= 0;
+		}
 	}
 	public void positionFull()
 	{
-		allOff();
-		mixerUp.on();
-		Global.waitMilliSeconds(swingTime);
-		mixerUp.off();
-		positionTracked									= swingTime;
-	}
-	public void positionAbsolute(float proportion)
-	{
-		Long 											positionDiff;
-		Float 											timeToWait;
-		Long											timeStart;
-		Long											timeEnd;
-		if (proportion > 0.5F)
+		if ((positionTracked != null) && (positionTracked != swingTime))
 		{
-			positionFull();
-			mixerDown.on();
-			timeToWait									= swingTime * (1F - proportion);
-			timeStart									= Global.now();
-			Global.waitMilliSeconds(timeToWait.intValue());
-			mixerDown.off();
-			timeEnd										= Global.now();
-			positionDiff   								= timeEnd - timeStart;
-	 		positionTracked								=  swingTime - positionDiff.intValue();		
-		}
-		else
-		{
-			positionZero();
+			allOff();
 			mixerUp.on();
-			timeToWait									= swingTime * proportion;
-			timeStart									= Global.now();
-			Global.waitMilliSeconds(timeToWait.intValue());
+			Global.waitMilliSeconds(swingTime);
 			mixerUp.off();
-			timeEnd										= Global.now();
-			positionDiff   								= timeEnd - timeStart;
-	 		positionTracked								= positionDiff.intValue();		
+			positionTracked								= swingTime;
 		}
 	}
+//	public void positionAbsolute(float proportion)
+//	{
+//		Long 											positionDiff;
+//		Float 											timeToWait;
+//		Long											timeStart;
+//		Long											timeEnd;
+//		if (proportion > 0.5F)
+//		{
+//			positionFull();
+//			mixerDown.on();
+//			timeToWait									= swingTime * (1F - proportion);
+//			timeStart									= Global.now();
+//			Global.waitMilliSeconds(timeToWait.intValue());
+//			mixerDown.off();
+//			timeEnd										= Global.now();
+//			positionDiff   								= timeEnd - timeStart;
+//	 		positionTracked								=  swingTime - positionDiff.intValue();		
+//		}
+//		else
+//		{
+//			positionZero();
+//			mixerUp.on();
+//			timeToWait									= swingTime * proportion;
+//			timeStart									= Global.now();
+//			Global.waitMilliSeconds(timeToWait.intValue());
+//			mixerUp.off();
+//			timeEnd										= Global.now();
+//			positionDiff   								= timeEnd - timeStart;
+//	 		positionTracked								= positionDiff.intValue();		
+//		}
+//	}
 	public void positionAbsolute(Integer position)
 	{
 		Long 											positionDiff;
 		Integer											timeToWait;
 		Long											timeStart;
 		Long											timeEnd;
-		if (position == null)
+		if (positionTracked == null)
 		{
 			positionZero();
 		}

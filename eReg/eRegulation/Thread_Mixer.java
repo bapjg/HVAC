@@ -3,12 +3,12 @@ package eRegulation;
 public class Thread_Mixer implements Runnable
 {
 	public Mixer				mixer;
-	public Circuit_Mixer		circuitMixer;
+	public Circuit_Mixer		circuit;
 	
-	public Thread_Mixer(Mixer mixer, Circuit_Mixer circuitMixer)
+	public Thread_Mixer(Circuit_Mixer circuit)
 	{
-		this.mixer 								= mixer;		// object Global.mixer
-		this.circuitMixer 						= circuitMixer; // object Circuit_Mixer
+		this.circuit 							= circuit; 				// circuit for which this thread operates
+		this.mixer 								= circuit.mixer;		// mixer on this circuit to be controlled
 	}
 	public void run()
 	{
@@ -19,7 +19,7 @@ public class Thread_Mixer implements Runnable
 		LogIt.mixerData(timeStart, 0, Global.now(), mixer.positionTracked);
 		
 		Global.waitSeconds(1);
-		circuitMixer.circuitPump.on();
+		circuit.circuitPump.on();
 		Global.waitSeconds(1);
 		Integer 				i							= 0; 	// Used for loop waiting 20 s
 		Integer 				targetTemp;
@@ -32,67 +32,87 @@ public class Thread_Mixer implements Runnable
 		
 		
 		
-		
-		while ((!Global.stopNow) && (circuitMixer.state != circuitMixer.CIRCUIT_STATE_Off))
+		while (!Global.stopNow)
+//		while ((!Global.stopNow) && (circuitMixer.state != circuitMixer.CIRCUIT_STATE_Off))
 		{
-			// Note that Mixer calls go to sleep when positionning the mixer.
+//			Mixer states can be 
+//				- starting/running
+//				- stoping/off
+//				- running cold
+//			if stopping/off do nothing
+//			if running cold just carry on at cold position (do we need to call sequencer ?)
+//			if running/starting do below	
 			
-			// Notes
-			// Try introducing PID (especially Differential
-			// If dT/dt is of wrong sign then we are overshooting
-			// We could try Koeff = K/tempMixHot (higher Koeff for lower temps)
-			// MixCold > 25 degrees indicates trip, could try sitching on radiators to induce water flow, but would need to put Mix to Hot for the duration
-			// perhaps not that feasible
-			
-			if (Global.thermoOutside.reading > 17000)
+			if  (circuit.state != circuit.CIRCUIT_STATE_Off)
 			{
-				// Outside temp is high : no need to heat
-				targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
-				targetTemp									= circuitMixer.temperatureGradient.getTempToTarget();
-			}
-			else if (Global.thermoLivingRoom.reading > this.circuitMixer.taskActive.tempObjective - 1000)
-			{
-				// Must replace by PID
-				// Inside temp is high : no need to heat (within 1 degree
-				targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
-				targetTemp									= circuitMixer.temperatureGradient.getTempToTarget();
-			}
-			else if (circuitMixer.state == circuitMixer.CIRCUIT_STATE_RampingUp) // This is to accelerate rampup
-			{
-				targetTemp									= 43000;						// Trip avoidance kicks in at 450
-			}
-			else
-			{
-				targetTemp									= circuitMixer.temperatureGradient.getTempToTarget();
-			}
-			this.mixer.sequencer(targetTemp);
-
-			Integer temperatureProjected					= 0;
-			Integer tempNow;
-
-			// Idea is to upto temeProject in 5s intervals.
-			// The first intervals upto timeDelay, no decision is made
-			// Thereafter, if projected temperature is out of bound, the loop stops and the PID reactivated for recalculation
-			for (i = 0; (i < indexProject) && (! Global.stopNow); i++)
-			{
-				Global.waitSeconds(5);									// indexWait loops of 5s
+				// Note that Mixer calls go to sleep when positionning the mixer.
 				
-				tempNow										= Global.thermoFloorOut.readUnCached();
+				// Notes
+				// Try introducing PID (especially Differential
+				// If dT/dt is of wrong sign then we are overshooting
+				// We could try Koeff = K/tempMixHot (higher Koeff for lower temps)
+				// MixCold > 25 degrees indicates trip, could try sitching on radiators to induce water flow, but would need to put Mix to Hot for the duration
+				// perhaps not that feasible
 				
-				if (i >= indexDelay)									// We have waited for dTdt to settle a bit
+				if (Global.thermoOutside.reading > 17000)
 				{
-					temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProjectInSeconds)).intValue();
+					// Outside temp is high : no need to heat
+					targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
+					targetTemp									= circuit.temperatureGradient.getTempToTarget();
+				}
+				else if (Global.thermoLivingRoom.reading > this.circuit.taskActive.tempObjective - 1000)
+				{
+					// Must replace by PID
+					// Inside temp is high : no need to heat (within 1 degree
+					targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
+					targetTemp									= circuit.temperatureGradient.getTempToTarget();
+				}
+				else if (circuit.state == circuit.CIRCUIT_STATE_RampingUp) // This is to accelerate rampup
+				{
+					targetTemp									= 43000;						// Trip avoidance kicks in at 450
+				}
+				else
+				{
+					targetTemp									= circuit.temperatureGradient.getTempToTarget();
+				}
+				this.mixer.sequencer(targetTemp);
+	
+				Integer temperatureProjected					= 0;
+				Integer tempNow;
+	
+				// Idea is to upto temeProject in 5s intervals.
+				// The first intervals upto timeDelay, no decision is made
+				// Thereafter, if projected temperature is out of bound, the loop stops and the PID reactivated for recalculation
+				for (i = 0; (i < indexProject) && (! Global.stopNow); i++)
+				{
+					Global.waitSeconds(5);									// indexWait loops of 5s
 					
-					if (Math.abs(temperatureProjected - targetTemp) > 2000)		// More than 2 degrees difference (either over or under)
+					tempNow										= Global.thermoFloorOut.readUnCached();
+					
+					if (i >= indexDelay)									// We have waited for dTdt to settle a bit
 					{
-						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProjectInSeconds + "s wait after " + (i * 5) +"s, temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
-						break;
+						temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProjectInSeconds)).intValue();
+						
+						if (Math.abs(temperatureProjected - targetTemp) > 2000)		// More than 2 degrees difference (either over or under)
+						{
+							LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProjectInSeconds + "s wait after " + (i * 5) +"s, temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
+							break;
+						}
 					}
 				}
 			}
+			if  (circuit.state == circuit.CIRCUIT_STATE_Off )  //Running Cold
+			{
+				// Keep the mixer cold to ensure that floor_Base temperature is correctly recorded
+				
+				// Notes
+			}
+			if  (circuit.state == circuit.CIRCUIT_STATE_Off )  //Running Cold
+			{
+				mixer.positionZero();
+			}
 		}
-		// Optimise if singlecircuit
-		circuitMixer.circuitPump.off();
+		circuit.circuitPump.off();
 		LogIt.info("Thread_Mixer", "Run", "Floor Thread ending", true);	
 	}
 }

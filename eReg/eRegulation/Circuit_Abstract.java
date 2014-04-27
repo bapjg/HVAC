@@ -56,11 +56,11 @@ abstract class Circuit_Abstract
 		this.circuitType											= paramCircuit.type;
 		this.tempMax												= paramCircuit.tempMax;
 		this.circuitPump											= Global.pumps.fetchPump(paramCircuit.pump);
+		this.circuitThermo											= Global.thermometers.fetchThermometer(paramCircuit.thermometer);
 		if (this.circuitPump == null)
 		{
 			System.out.println("Circuit.Constructor : " + name + " invalid pump " + paramCircuit.pump);
 		}
-		this.circuitThermo											= Global.thermometers.fetchThermometer(paramCircuit.thermometer);
 		if (this.circuitThermo == null)
 		{
 			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + paramCircuit.thermometer);
@@ -69,7 +69,7 @@ abstract class Circuit_Abstract
 		this.state													= CIRCUIT_STATE_Off;
 		this.heatRequired											= null;
 	}
-	public void addCircuitTask(Ctrl_Calendars.Calendar paramCalendar)
+	public void addCircuitTask(Ctrl_Calendars.Calendar 				paramCalendar)
 	{
 		CircuitTask 	circuitTaskItem 							= new CircuitTask(paramCalendar);
 		circuitTaskList.add(circuitTaskItem);
@@ -83,7 +83,7 @@ abstract class Circuit_Abstract
 		this.state													= CIRCUIT_STATE_Start_Requested;
 		this.heatRequired											= new HeatRequired();
 	}
-	public void start(CircuitTask thisTask)
+	public void start(CircuitTask 									thisTask)
 	{
 		LogIt.action(this.name, "Start called with circuitTask");
 		this.taskActive												= thisTask;
@@ -133,7 +133,7 @@ abstract class Circuit_Abstract
 		LogIt.action(this.name, "Resume called");
 		this.state													= CIRCUIT_STATE_Resuming;
 	}
-	public void taskActivate(CircuitTask thisTask)
+	public void taskActivate(CircuitTask 							thisTask)
 	{
 		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated ");
 		for (CircuitTask aTask : this.circuitTaskList)			// Check to ensure there are no active tasks
@@ -199,15 +199,15 @@ abstract class Circuit_Abstract
 
 //		System.out.println("Circuit : " + this.name);
 
-		for (CircuitTask circuitTask : circuitTaskList) 												// Go through all tasks
+		for (CircuitTask circuitTask : circuitTaskList) 													// Go through all tasks
 		{	
 //			System.out.println("Schedule times : " + circuitTask.timeStartDisplay + " - " + circuitTask.timeEndDisplay);
 //			System.out.println("Schedule days  : " + circuitTask.days);
 //			System.out.println("Schedule tlr   : " + circuitTask.dateLastRun);
 //			System.out.println("Schedule away  : " + Global.isAway());
 			
-			if (	(circuitTask.days.contains(day)) 
-			&& 		(! circuitTask.active)	          )
+			if (	(  circuitTask.days.contains(day)	) 
+			&& 		(! circuitTask.active				)	   )
 			{
 				// This circuitTask must run today and is not active
 				// - It can already have run and finished
@@ -216,15 +216,15 @@ abstract class Circuit_Abstract
 				// - It can be running (Not possible in this branch of code)
 				// - It can be yet to run
 				
-				if (		(circuitTask.timeStart - this.getRampUpTime() > now)							// This task has yet to be performed (timeStart future
-				&& 			(circuitTask.timeEnd > now)        )											// Or time End future
+				if (		(  circuitTask.timeStart - this.getRampUpTime() > now	)						// This task has yet to be performed (timeStart future
+				&& 			(  circuitTask.timeEnd > now)        					)						// Or time End future
 				{
 					// This task has yet to run : both start and end are in the future
 					// Nothing todo
 				}
-				else if (	(circuitTask.timeStart - this.getRampUpTime() < now)							// This task has yet to be performed (timeStart is past
-				&& 			(circuitTask.timeEnd > now)       												// and time End is future
-				&&			(!circuitTask.dateLastRun.equals(today))						)						// and the last run wasn't today					
+				else if (	(  circuitTask.timeStart - this.getRampUpTime() < now	)						// This task has yet to be performed (timeStart is past
+				&& 			(  circuitTask.timeEnd > now							)   					// and time End is future
+				&&			(! circuitTask.dateLastRun.equals(today)				)		)				// and the last run wasn't today					
 				{
 					// This task should be run : start is past and end is the future
 					// We can swap this task in

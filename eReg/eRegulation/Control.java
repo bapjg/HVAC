@@ -135,9 +135,16 @@ public class Control
 		//
 		// Start thread to handle Mixer
 		//
-// Must do for each mixer		
-//		Thread 			thread_mixer			 		= new Thread(new Thread_Mixer(), "Thread_Mixer");
-//		thread_mixer.start();
+		
+		for (Circuit_Abstract circuit : Global.circuits.circuitList)
+		{
+			if (circuit.mixer != null)
+			{
+				Thread 			thread_mixer			 		= new Thread(new Thread_Mixer((Circuit_Mixer) circuit), "Thread_Mixer_" + circuit.name);
+				thread_mixer.start();
+			}
+		}
+		
 		
 		//
 		//============================================================

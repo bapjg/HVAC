@@ -27,7 +27,7 @@ public class CircuitTask
 	public static final int 	TASK_STATE_RampUp   			= -3;
 	public static final int 	TASK_STATE_RampDown   			= -4;
 
-	public CircuitTask(Ctrl_Calendars.Calendar paramCalendar)
+	public CircuitTask(Ctrl_Calendars.Calendar 					paramCalendar)
 	{
 		this.state												= TASK_STATE_WaitingToStart;
 		this.active												= false;
