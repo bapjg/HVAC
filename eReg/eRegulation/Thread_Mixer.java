@@ -12,15 +12,11 @@ public class Thread_Mixer implements Runnable
 	}
 	public void run()
 	{
-		LogIt.info("Thread_Mixer", "Run", "Floor Starting", true);		
+		LogIt.info("Thread_Mixer", "Run", "Starting", true);		
 
-		Long timeStart							= Global.now();
-		mixer.positionAbsolute(mixer.swingUsableMin);
-		LogIt.mixerData(timeStart, 0, Global.now(), mixer.positionTracked);
+		mixer.positionZero();
+		LogIt.mixerData(Global.now(), 0, Global.now(), mixer.positionTracked);
 		
-		Global.waitSeconds(1);
-		circuit.circuitPump.on();
-		Global.waitSeconds(1);
 		Integer 				i							= 0; 	// Used for loop waiting 20 s
 		Integer 				targetTemp;
 		Integer 				timeProjectInSeconds		= mixer.timeProject/1000;		// Time over which to project temperature change : Convert ms -> s
@@ -28,9 +24,6 @@ public class Thread_Mixer implements Runnable
 		
 		Integer indexProject								= timeProjectInSeconds/5;				// Used during 5sec delay loop
 		Integer indexDelay									= timeDelayInSeconds/5;
-
-		
-		
 		
 		while (!Global.stopNow)
 //		while ((!Global.stopNow) && (circuitMixer.state != circuitMixer.CIRCUIT_STATE_Off))

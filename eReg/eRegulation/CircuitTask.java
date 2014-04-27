@@ -12,7 +12,7 @@ public class CircuitTask
 	public Boolean 				stopOnObjective;
 	public String				days;
 
-	public Boolean				active;
+//	public Boolean				active;
 	public Integer				state;
 	public Long					dateLastRun;
 	
@@ -30,7 +30,7 @@ public class CircuitTask
 	public CircuitTask(Ctrl_Calendars.Calendar 					paramCalendar)
 	{
 		this.state												= TASK_STATE_WaitingToStart;
-		this.active												= false;
+//		this.active												= false;
 		this.timeStart											= Global.parseTime(paramCalendar.timeStart);
 		this.timeStartDisplay									= paramCalendar.timeStart;
 		this.tempObjective										= paramCalendar.tempObjective;

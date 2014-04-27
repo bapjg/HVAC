@@ -86,7 +86,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 
 		word																= new Word();
 		word.name															= "TestDay";
-		word.days															= "12345678";
+		word.days															= "1234567";
 		calendarUpdate.wordList.add(word);
 
 		word																= new Word();

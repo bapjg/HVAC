@@ -112,7 +112,7 @@ abstract class Circuit_Abstract
 		LogIt.action(this.name, "Closing down completely");
 		this.state													= CIRCUIT_STATE_Off;
 		this.heatRequired											= null;
-		this.taskActive.active										= false; // What happens if the task has been switched to a new one
+//		this.taskActive.active										= false; // What happens if the task has been switched to a new one
 		taskDeactivate(this.taskActive);
 	}
 	public void interupt()
@@ -136,31 +136,38 @@ abstract class Circuit_Abstract
 	public void taskActivate(CircuitTask 							thisTask)
 	{
 		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated ");
-		for (CircuitTask aTask : this.circuitTaskList)			// Check to ensure there are no active tasks
+//		for (CircuitTask aTask : this.circuitTaskList)			// Check to ensure there are no active tasks
+//		{
+//			if (aTask.active)
+//			{
+//				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
+//				aTask.active										= false;
+//			}
+//		}
+//		thisTask.active												= true;
+		if (this.taskActive == null)
 		{
-			if (aTask.active)
-			{
-				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
-				aTask.active										= false;
-			}
-		}
-		thisTask.active												= true;
 		this.taskActive												= thisTask;
 		this.start();
 		this.taskActive.dateLastRun									= Global.getTimeAtMidnight();
+		}
+		else
+		{
+			LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
+		}
 	}
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
 		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated ");
-		thisTask.active												= false;
-		for (CircuitTask aTask : this.circuitTaskList)
-		{
-			if (aTask.active)
-			{
-				LogIt.error("Circuit_Abstract", "taskDeactivate", "A task is active when it shouldn't be");
-				aTask.active										= false;
-			}
-		}
+//		thisTask.active												= false;
+//		for (CircuitTask aTask : this.circuitTaskList)
+//		{
+//			if (aTask.active)
+//			{
+//				LogIt.error("Circuit_Abstract", "taskDeactivate", "A task is active when it shouldn't be");
+//				aTask.active										= false;
+//			}
+//		}
 		this.taskActive.dateLastRun									= Global.getTimeAtMidnight();
 		this.taskActive												= null;
 	}
@@ -207,7 +214,8 @@ abstract class Circuit_Abstract
 //			System.out.println("Schedule away  : " + Global.isAway());
 			
 			if (	(  circuitTask.days.contains(day)	) 
-			&& 		(! circuitTask.active				)	   )
+//			&& 		(! circuitTask.active				)	   )
+					)
 			{
 				// This circuitTask must run today and is not active
 				// - It can already have run and finished

@@ -157,7 +157,7 @@ public class Thread_TCPListen 			implements Runnable
 			for (CircuitTask aTask : circuit.circuitTaskList)			// Check to ensure there are no active tasks
 			{
 				if (	(aTask.days.contains(Global.getDayOfWeek(0))) 
-				&& 		(! aTask.active)
+//				&& 		(! aTask.active)
 				&&     	(aTask.timeStart > now )
 				&&     	(aTask.timeStart < nextStart ))
 				{
