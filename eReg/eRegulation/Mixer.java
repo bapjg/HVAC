@@ -216,12 +216,12 @@ public class Mixer
 		 			swingTimeRequired 					= swingTimeRequired - (positionTracked - swingTime * 9 /10);	//Bring it down to 10% and then start the motion
 
 					swingTimeRequired 					= this.swingUseableMax - this.positionTracked;	//Negative as Tracked > max
-					report								= mixerMoveUp(swingTimeRequired);
+					report								= mixerMoveDown(swingTimeRequired);
 					positionTracked						= report.positionTracked;					
 		 		}
 				else
 				{
-					report								= mixerMoveUp(swingTimeRequired);
+					report								= mixerMoveDown(swingTimeRequired);
 					positionTracked						= report.positionTracked;
 				}
 			}
