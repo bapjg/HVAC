@@ -102,8 +102,8 @@ public class Mixer
     {
 		this.name 									= paramMixer.name;
 		this.swingTime								= paramMixer.swingTime;
-		this.swingUsableMax						= this.swingTime * 90 /100;
-		this.swingUsableMin						= this.swingTime * 30 /100;
+		this.swingUsableMax							= this.swingTime * 90 /100;
+		this.swingUsableMin							= this.swingTime * 30 /100;
 		this.timeDelay								= paramMixer.pidParams.timeDelay;
 		this.timeProject							= paramMixer.pidParams.timeProject;
 		this.gainP									= paramMixer.pidParams.gainP;
@@ -191,18 +191,18 @@ public class Mixer
 					report								= mixerMoveUp(swingTimeRequired);
 					positionTracked						= this.swingTime;					
 		 		}
-				else if (positionProjected > this.swingUsableMax)										// We are in usable range, bring up immediately%
-		 		{
-					swingTimeRequired 					= this.swingUsableMax - this.positionTracked;	//Bring it to usable max only
-					report								= mixerMoveUp(swingTimeRequired);
-					positionTracked						= report.positionTracked;					
-		 		}
-				else if (positionProjected < this.swingUsableMin)										// We are under usable range, bring up immediately%
-		 		{
-					swingTimeRequired 					= this.swingUsableMin - this.positionTracked;	//Bring it to usable range before next movement
-					report								= mixerMoveUp(swingTimeRequired);
-					positionTracked						= report.positionTracked;					
-		 		}
+//				else if (positionProjected > this.swingUsableMax)										// We are in usable range, bring up immediately%
+//		 		{
+//					swingTimeRequired 					= this.swingUsableMax - this.positionTracked;	//Bring it to usable max only
+//					report								= mixerMoveUp(swingTimeRequired);
+//					positionTracked						= report.positionTracked;					
+//		 		}
+//				else if (positionProjected < this.swingUsableMin)										// We are under usable range, bring up immediately%
+//		 		{
+//					swingTimeRequired 					= this.swingUsableMin - this.positionTracked;	//Bring it to usable range before next movement
+//					report								= mixerMoveUp(swingTimeRequired);
+//					positionTracked						= report.positionTracked;					
+//		 		}
 				else																					// Normal operating
 				{
 					report								= mixerMoveUp(swingTimeRequired);
@@ -217,18 +217,18 @@ public class Mixer
 					report								= mixerMoveDown(swingTimeRequired);
 					positionTracked						= 0;					
 		 		}
-				else if (positionProjected > this.swingUsableMax)										// Bring to limit of usable range
-		 		{
-					swingTimeRequired 					= this.swingUsableMax - this.positionTracked;	//Negative as Tracked > max
-					report								= mixerMoveDown(swingTimeRequired);
-					positionTracked						= report.positionTracked;					
-		 		}
-				else if (positionProjected < this.swingUsableMin)										// We are over 90%, last 10% swing gives no change
-		 		{
-					swingTimeRequired 					= this.swingUsableMin - this.positionTracked;	// Negative as Tracked > max
-					report								= mixerMoveDown(swingTimeRequired);
-					positionTracked						= report.positionTracked;					
-		 		}
+//				else if (positionProjected > this.swingUsableMax)										// Bring to limit of usable range
+//		 		{
+//					swingTimeRequired 					= this.swingUsableMax - this.positionTracked;	//Negative as Tracked > max
+//					report								= mixerMoveDown(swingTimeRequired);
+//					positionTracked						= report.positionTracked;					
+//		 		}
+//				else if (positionProjected < this.swingUsableMin)										// We are over 90%, last 10% swing gives no change
+//		 		{
+//					swingTimeRequired 					= this.swingUsableMin - this.positionTracked;	// Negative as Tracked > max
+//					report								= mixerMoveDown(swingTimeRequired);
+//					positionTracked						= report.positionTracked;					
+//		 		}
 				else																					// Normal operating
 				{
 					report								= mixerMoveDown(swingTimeRequired);
