@@ -13,6 +13,8 @@ public class Mixer
 {
 	public String 			name;
 	public Integer 			swingTime 								= 90000;
+	public Integer 			swingUseableMax							= 90000;
+	public Integer 			swingUseableMin							= 0;
 	public Integer 			timeDelay 								= 30000;
 	public Integer 			timeProject								= 30000;
 
@@ -100,6 +102,8 @@ public class Mixer
     {
 		this.name 									= paramMixer.name;
 		this.swingTime								= paramMixer.swingTime;
+		this.swingUseableMax						= this.swingTime * 90 /100;
+		this.swingUseableMin						= this.swingTime * 30 /100;
 		this.timeDelay								= paramMixer.pidParams.timeDelay;
 		this.timeProject							= paramMixer.pidParams.timeProject;
 		this.gainP									= paramMixer.pidParams.gainP;
@@ -110,6 +114,8 @@ public class Mixer
 		
 		this.mixerUp								= Global.relays.fetchRelay(paramMixer.relayUp);
 		this.mixerDown								= Global.relays.fetchRelay(paramMixer.relayDown);
+		
+		System.out.println("SwingTme : " + this.swingTime + ", Min :" + this.swingUseableMin + ", Max : " + this.swingUseableMax);
 		
 		if ((this.mixerUp == null) || (this.mixerDown == null))
 		{
@@ -174,33 +180,50 @@ public class Mixer
 		
 		if (Math.abs(swingTimeRequired) > 500)												// Less than half a second
 		{
+			Integer positionProjected					= positionTracked + swingTimeRequired;
+
 			if (swingTimeRequired > 0)		// Moving hotter
 			{
-				if (positionTracked + swingTimeRequired > this.swingTime * 1000)
+				if (positionProjected > this.swingTime)
 		 		{
-		 			swingTimeRequired 					= this.swingTime * 1000 - positionTracked + 2000;	//No point waiting over maximum add extra 2 seconds to be sure of end point
+		 			swingTimeRequired 					= this.swingTime - positionTracked + 2000;	//No point waiting over maximum add extra 2 seconds to be sure of end point
+					report								= mixerMoveUp(swingTimeRequired);
+					positionTracked						= report.positionTracked;					
 		 		}
-				if (positionTracked < swingTime * 300)										// We are under 30%, first 30% swing gives no change
+				else if (positionProjected < this.swingUseableMin)									// We are under 30%, bring up immediately to 30%
 		 		{
-		 			// Empty swing is (swingTime * 300 - positionTracked)
-					swingTimeRequired 					= swingTimeRequired + (swingTime * 300 - positionTracked);	//Bring it down to 10% and then start the motion
+					swingTimeRequired 					= this.swingUseableMin - this.positionTracked;	//Bring it to 30% before next movement
+					report								= mixerMoveUp(swingTimeRequired);
+					positionTracked						= report.positionTracked;					
 		 		}
-		 		
-				report									= mixerMoveUp(swingTimeRequired);
+				else
+				{
+					report								= mixerMoveUp(swingTimeRequired);
+					positionTracked						= report.positionTracked;
+				}
 			}
 			else							// Moving colder
 			{
-				if (positionTracked + swingTimeRequired < 0)
+				if (positionProjected < 0)
 		 		{
 		 			swingTimeRequired 					= - (positionTracked + 2000);		//No point waiting under minimum add extra 2 seconds to be sure of end point
+					report								= mixerMoveDown(swingTimeRequired);
+					positionTracked						= report.positionTracked;					
 		 		}
-				if (positionTracked > swingTime * 900)										// We are over 90%, last 10% swing gives no change
+				else if (positionProjected > this.swingUseableMax)										// We are over 90%, last 10% swing gives no change
 		 		{
 		 			// Empty swing is (positionTracked - swingTime * 900) Make it negative to make it a down movement
-		 			swingTimeRequired 					= swingTimeRequired - (positionTracked - swingTime * 900);	//Bring it down to 10% and then start the motion
+		 			swingTimeRequired 					= swingTimeRequired - (positionTracked - swingTime * 9 /10);	//Bring it down to 10% and then start the motion
+
+					swingTimeRequired 					= this.swingUseableMax - this.positionTracked;	//Negative as Tracked > max
+					report								= mixerMoveUp(swingTimeRequired);
+					positionTracked						= report.positionTracked;					
 		 		}
-				
-				report									= mixerMoveDown(swingTimeRequired);
+				else
+				{
+					report								= mixerMoveUp(swingTimeRequired);
+					positionTracked						= report.positionTracked;
+				}
 			}
 			
 			LogIt.mixerData(report.timeStart, positionTracked, report.timeEnd, report.positionTracked);

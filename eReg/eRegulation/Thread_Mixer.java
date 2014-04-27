@@ -92,7 +92,6 @@ public class Thread_Mixer implements Runnable
 		}
 		// Optimise if singlecircuit
 		circuitMixer.circuitPump.off();
-//		Global.pumpFloor.off();
 		LogIt.info("Thread_Mixer", "Run", "Floor Thread ending", true);	
 	}
 }
