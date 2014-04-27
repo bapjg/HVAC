@@ -15,14 +15,23 @@ public class Thread_Mixer implements Runnable
 		LogIt.info("Thread_Mixer", "Run", "Floor Starting", true);		
 
 		Long timeStart							= Global.now();
-		mixer.positionAbsolute(0.30F);
-		LogIt.info("Thread_Mixer", "Run", "Floor Initialised (30%)");		
-		LogIt.mixerData(timeStart, 0, Global.now(), mixer.swingTime * 300);
+		mixer.positionAbsolute(mixer.swingUsableMin);
+		LogIt.mixerData(timeStart, 0, Global.now(), mixer.positionTracked);
 		
 		Global.waitSeconds(1);
 		circuitMixer.circuitPump.on();
 		Global.waitSeconds(1);
-		Integer i								= 0; // Used for loop waiting 20 s
+		Integer 				i							= 0; 	// Used for loop waiting 20 s
+		Integer 				targetTemp;
+		Integer 				timeProjectInSeconds		= mixer.timeProject/1000;		// Time over which to project temperature change : Convert ms -> s
+		Integer 				timeDelayInSeconds			= mixer.timeDelay/1000;			// Time to wait before doing any calculations : Convert ms -> s
+		
+		Integer indexProject								= timeProjectInSeconds/5;				// Used during 5sec delay loop
+		Integer indexDelay									= timeDelayInSeconds/5;
+
+		
+		
+		
 		
 		while ((!Global.stopNow) && (circuitMixer.state != circuitMixer.CIRCUIT_STATE_Off))
 		{
@@ -35,7 +44,6 @@ public class Thread_Mixer implements Runnable
 			// MixCold > 25 degrees indicates trip, could try sitching on radiators to induce water flow, but would need to put Mix to Hot for the duration
 			// perhaps not that feasible
 			
-			Integer targetTemp;
 			if (Global.thermoOutside.reading > 17000)
 			{
 				// Outside temp is high : no need to heat
@@ -44,6 +52,7 @@ public class Thread_Mixer implements Runnable
 			}
 			else if (Global.thermoLivingRoom.reading > this.circuitMixer.taskActive.tempObjective - 1000)
 			{
+				// Must replace by PID
 				// Inside temp is high : no need to heat (within 1 degree
 				targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
 				targetTemp									= circuitMixer.temperatureGradient.getTempToTarget();
@@ -58,14 +67,8 @@ public class Thread_Mixer implements Runnable
 			}
 			this.mixer.sequencer(targetTemp);
 
-			Integer timeProject								= mixer.timeProject/1000;		// Time over which to project temperature change : Convert ms -> s
-			Integer timeDelay								= mixer.timeDelay/1000;			// Time to wait before doing any calculations : Convert ms -> s
-			
-			Integer indexProject							= timeProject/5;
-			Integer indexDelay								= timeDelay/5;
 			Integer temperatureProjected					= 0;
 			Integer tempNow;
-			Integer tempPrevious							= Global.thermoFloorOut.readUnCached();
 
 			// Idea is to upto temeProject in 5s intervals.
 			// The first intervals upto timeDelay, no decision is made
@@ -78,16 +81,14 @@ public class Thread_Mixer implements Runnable
 				
 				if (i >= indexDelay)									// We have waited for dTdt to settle a bit
 				{
-					temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProject)).intValue();
+					temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProjectInSeconds)).intValue();
 					
 					if (Math.abs(temperatureProjected - targetTemp) > 2000)		// More than 2 degrees difference (either over or under)
 					{
-						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProject + "s wait after " + (i * 5) +"s");
-						LogIt.display("Thread_Mixer", "mainLoop", "temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
+						LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProjectInSeconds + "s wait after " + (i * 5) +"s, temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
 						break;
 					}
 				}
-				tempPrevious								= tempNow;
 			}
 		}
 		// Optimise if singlecircuit

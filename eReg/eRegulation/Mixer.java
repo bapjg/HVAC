@@ -13,8 +13,8 @@ public class Mixer
 {
 	public String 			name;
 	public Integer 			swingTime 								= 90000;
-	public Integer 			swingUseableMax							= 90000;
-	public Integer 			swingUseableMin							= 0;
+	public Integer 			swingUsableMax							= 90000;
+	public Integer 			swingUsableMin							= 0;
 	public Integer 			timeDelay 								= 30000;
 	public Integer 			timeProject								= 30000;
 
@@ -102,8 +102,8 @@ public class Mixer
     {
 		this.name 									= paramMixer.name;
 		this.swingTime								= paramMixer.swingTime;
-		this.swingUseableMax						= this.swingTime * 90 /100;
-		this.swingUseableMin						= this.swingTime * 30 /100;
+		this.swingUsableMax						= this.swingTime * 90 /100;
+		this.swingUsableMin						= this.swingTime * 30 /100;
 		this.timeDelay								= paramMixer.pidParams.timeDelay;
 		this.timeProject							= paramMixer.pidParams.timeProject;
 		this.gainP									= paramMixer.pidParams.gainP;
@@ -115,7 +115,7 @@ public class Mixer
 		this.mixerUp								= Global.relays.fetchRelay(paramMixer.relayUp);
 		this.mixerDown								= Global.relays.fetchRelay(paramMixer.relayDown);
 		
-		System.out.println("SwingTme : " + this.swingTime + ", Min :" + this.swingUseableMin + ", Max : " + this.swingUseableMax);
+		System.out.println("SwingTme : " + this.swingTime + ", Min :" + this.swingUsableMin + ", Max : " + this.swingUsableMax);
 		
 		if ((this.mixerUp == null) || (this.mixerDown == null))
 		{
@@ -160,6 +160,7 @@ public class Mixer
 		Integer tempFloorOut							= Global.thermoFloorOut.readUnCached();
 		
 		swingTimeRequired								= pidControler.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
+		LogIt.display("Mixer", "sequencer", "============================================================================================================");
 		LogIt.display("Mixer", "sequencer", "swingTimeRequired : " + swingTimeRequired +", targetTemp : " + targetTemp +", tempFloorOut : " + tempFloorOut);
 		if (tempFloorOut > 50000)
 		{
@@ -182,44 +183,53 @@ public class Mixer
 		{
 			Integer positionProjected					= positionTracked + swingTimeRequired;
 
-			if (swingTimeRequired > 0)		// Moving hotter
+			if (swingTimeRequired > 0)								// Moving hotter
 			{
-				if (positionProjected > this.swingTime)
+				if (positionProjected > this.swingTime)													// Should never happen as algorith maintains with usable range
 		 		{
-		 			swingTimeRequired 					= this.swingTime - positionTracked + 2000;	//No point waiting over maximum add extra 2 seconds to be sure of end point
+		 			swingTimeRequired 					= this.swingTime - positionTracked + 2000;		//No point waiting over maximum add extra 2 seconds to be sure of end point
+					report								= mixerMoveUp(swingTimeRequired);
+					positionTracked						= this.swingTime;					
+		 		}
+				else if (positionProjected > this.swingUsableMax)										// We are in usable range, bring up immediately%
+		 		{
+					swingTimeRequired 					= this.swingUsableMax - this.positionTracked;	//Bring it to usable max only
 					report								= mixerMoveUp(swingTimeRequired);
 					positionTracked						= report.positionTracked;					
 		 		}
-				else if (positionProjected < this.swingUseableMin)									// We are under 30%, bring up immediately to 30%
+				else if (positionProjected < this.swingUsableMin)										// We are under usable range, bring up immediately%
 		 		{
-					swingTimeRequired 					= this.swingUseableMin - this.positionTracked;	//Bring it to 30% before next movement
+					swingTimeRequired 					= this.swingUsableMin - this.positionTracked;	//Bring it to usable range before next movement
 					report								= mixerMoveUp(swingTimeRequired);
 					positionTracked						= report.positionTracked;					
 		 		}
-				else
+				else																					// Normal operating
 				{
 					report								= mixerMoveUp(swingTimeRequired);
 					positionTracked						= report.positionTracked;
 				}
 			}
-			else							// Moving colder
+			else													// Moving colder
 			{
-				if (positionProjected < 0)
+				if (positionProjected < 0)																// Should never happen
 		 		{
-		 			swingTimeRequired 					= - (positionTracked + 2000);		//No point waiting under minimum add extra 2 seconds to be sure of end point
+		 			swingTimeRequired 					= - (positionTracked + 2000);					//Add extra 2 seconds to be sure of end point
+					report								= mixerMoveDown(swingTimeRequired);
+					positionTracked						= 0;					
+		 		}
+				else if (positionProjected > this.swingUsableMax)										// Bring to limit of usable range
+		 		{
+					swingTimeRequired 					= this.swingUsableMax - this.positionTracked;	//Negative as Tracked > max
 					report								= mixerMoveDown(swingTimeRequired);
 					positionTracked						= report.positionTracked;					
 		 		}
-				else if (positionProjected > this.swingUseableMax)										// We are over 90%, last 10% swing gives no change
+				else if (positionProjected < this.swingUsableMin)										// We are over 90%, last 10% swing gives no change
 		 		{
-		 			// Empty swing is (positionTracked - swingTime * 900) Make it negative to make it a down movement
-		 			swingTimeRequired 					= swingTimeRequired - (positionTracked - swingTime * 9 /10);	//Bring it down to 10% and then start the motion
-
-					swingTimeRequired 					= this.swingUseableMax - this.positionTracked;	//Negative as Tracked > max
+					swingTimeRequired 					= this.swingUsableMin - this.positionTracked;	// Negative as Tracked > max
 					report								= mixerMoveDown(swingTimeRequired);
 					positionTracked						= report.positionTracked;					
 		 		}
-				else
+				else																					// Normal operating
 				{
 					report								= mixerMoveDown(swingTimeRequired);
 					positionTracked						= report.positionTracked;
@@ -227,13 +237,12 @@ public class Mixer
 			}
 			
 			LogIt.mixerData(report.timeStart, positionTracked, report.timeEnd, report.positionTracked);
-			
-			positionTracked								= report.positionTracked;
 		}
 		else
 		{
 			// Less that 500 ms. Do nought
 		}
+		LogIt.display("Mixer", "sequencer", "============================================================================================================");
 	}
 	public void positionZero()
 	{
@@ -274,6 +283,41 @@ public class Mixer
 			positionZero();
 			mixerUp.on();
 			timeToWait									= swingTime * proportion;
+			timeStart									= Global.now();
+			Global.waitMilliSeconds(timeToWait.intValue());
+			mixerUp.off();
+			timeEnd										= Global.now();
+			positionDiff   								= timeEnd - timeStart;
+	 		positionTracked								= positionDiff.intValue();		
+		}
+	}
+	public void positionAbsolute(Integer position)
+	{
+		Long 											positionDiff;
+		Integer											timeToWait;
+		Long											timeStart;
+		Long											timeEnd;
+		if (position == null)
+		{
+			positionZero();
+		}
+		if (position > swingTime / 2)
+		{
+			positionFull();
+			mixerDown.on();
+			timeToWait									= swingTime - position;
+			timeStart									= Global.now();
+			Global.waitMilliSeconds(timeToWait);
+			mixerDown.off();
+			timeEnd										= Global.now();
+			positionDiff   								= timeEnd - timeStart;
+	 		positionTracked								= swingTime - positionDiff.intValue();		
+		}
+		else
+		{
+			positionZero();
+			mixerUp.on();
+			timeToWait									= position;
 			timeStart									= Global.now();
 			Global.waitMilliSeconds(timeToWait.intValue());
 			mixerUp.off();
