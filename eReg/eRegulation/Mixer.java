@@ -117,8 +117,6 @@ public class Mixer
 		this.mixerUp								= Global.relays.fetchRelay(paramMixer.relayUp);
 		this.mixerDown								= Global.relays.fetchRelay(paramMixer.relayDown);
 		
-		System.out.println("SwingTme : " + this.swingTime + ", Min :" + this.swingUsableMin + ", Max : " + this.swingUsableMax);
-		
 		if ((this.mixerUp == null) || (this.mixerDown == null))
 		{
 			System.out.println("Mixer.Contructor : Unknown mixer relay");

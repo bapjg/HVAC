@@ -224,6 +224,7 @@ public class Global
 		
 		display.writeAtPosition(1, 18, "Ok");
 		// Other initialisation messages are displayed by Control.java
+		int x = 1;
 	}
 	public static Long getTimeAtMidnight()
 	{
