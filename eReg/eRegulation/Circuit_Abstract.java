@@ -196,9 +196,16 @@ abstract class Circuit_Abstract
 				this.stop();
 			}
 		}
-		
+
+		System.out.println("Circuit : " + this.name);
+
 		for (CircuitTask circuitTask : circuitTaskList) 												// Go through all tasks
 		{	
+			System.out.println("Schedule times : " + circuitTask.timeStartDisplay + " - " + circuitTask.timeEndDisplay);
+			System.out.println("Schedule days  : " + circuitTask.days);
+			System.out.println("Schedule tlr   : " + circuitTask.dateLastRun);
+			System.out.println("Schedule away  : " + Global.isAway());
+			
 			if (	(circuitTask.days.contains(day)) 
 			&& 		(! circuitTask.active)	          )
 			{
