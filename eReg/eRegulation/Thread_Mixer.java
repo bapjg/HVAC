@@ -5,7 +5,7 @@ public class Thread_Mixer implements Runnable
 	public Mixer				mixer;
 	public Circuit_Mixer		circuit;
 	
-	public Thread_Mixer(Circuit_Mixer circuit)
+	public Thread_Mixer(Circuit_Mixer 						circuit)
 	{
 		this.circuit 							= circuit; 				// circuit for which this thread operates
 		this.mixer 								= circuit.mixer;		// mixer on this circuit to be controlled

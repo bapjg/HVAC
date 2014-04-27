@@ -98,77 +98,32 @@ public class Control
 		Global.circuitGradient						= (Circuit_Radiator) 	Global.circuits.fetchcircuit("Radiator");
 		Global.circuitHotWater						= (Circuit_HotWater) 	Global.circuits.fetchcircuit("Hot_Water");
 
-//		Global.mixer								= Global.circuitFloor.mixer;
-		
 		//
 		//============================================================
 		
 		
 		//============================================================
 		//
-		// Start thread to continuously read the thermometers
+		// Start threads 
 		//
 		
-		Global.display.writeAtPosition(3, 0, " Thermometers");
-		Thread 			thread_thermometers 		= new Thread(new Thread_Thermometers(), "Thread_Thermometers");
-		thread_thermometers.start();
+		new Thread(new Thread_Thermometers(), 								"Thread_Thermometers").start();
+
 		Global.display.writeAtPosition(3, 18, "Ok");
 		Global.waitSeconds(15);														// Must wait 15 secs for all thermometers to be read and have values + allow for retries
-		
-		//
-		//============================================================
-		
-		
-		//============================================================
-		//
-		// Start thread to handle UserInterface
-		//
-		
-		Thread 			thread_userInterface 		= new Thread(new Thread_UserInterface(), "Thread_UserInteface");
-		thread_userInterface.start();
-		
-		//
-		//============================================================
 
-		
-		//============================================================
-		//
-		// Start thread to handle Mixer
-		//
-		
+		new Thread(new Thread_UserInterface(), 								"Thread_UserInteface").start();
+
 		for (Circuit_Abstract circuit : Global.circuits.circuitList)
 		{
 			if (circuit.mixer != null)
 			{
-				Thread 			thread_mixer			 		= new Thread(new Thread_Mixer((Circuit_Mixer) circuit), "Thread_Mixer_" + circuit.name);
-				thread_mixer.start();
+				new Thread(new Thread_Mixer((Circuit_Mixer) circuit), 		"Thread_Mixer_" + circuit.name).start();
 			}
 		}
 		
-		
-		//
-		//============================================================
-		
-
-		
-		//============================================================
-		//
-		// Start thread to handle UserInterface via Android etc
-		//
-		
-		Thread 			thread_tcpListen	 		= new Thread(new Thread_TCPListen(), "Thread_TCPListen");
-		thread_tcpListen.start();
-		
-		//
-		//============================================================
-
-		//============================================================
-		//
-		// Start thread to run background work
-		//
-		
-		Thread 			thread_background 			= new Thread(new Thread_BackgroundTasks(), "Thread_BackgroundTasks");
-		thread_background.start();
+		new Thread(new Thread_TCPListen(), 									"Thread_TCPListen").start();
+		new Thread(new Thread_BackgroundTasks(), 							"Thread_BackgroundTasks").start();
 		
 		//
 		//============================================================
