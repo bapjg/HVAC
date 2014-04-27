@@ -259,18 +259,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendarUpdate.circuitList.add(circuit);
 
 		calendar															= new Calendar();
-		calendar.name														= "TestDay";
-		calendar.days														= "TestDay";
-		calendar.timeStart													= "00:01";
-		calendar.stopCriterion												= new Stop_Criterion();
-		calendar.stopCriterion.stopOnObjective								= false;
-		calendar.stopCriterion.endOnDuration								= false;
-		calendar.stopCriterion.timeEnd										= "23:59";
-		calendar.stopCriterion.timeDuration									= null;
-		calendar.tempObjective												= 20000;
-		circuit.calendarList.add(calendar);
-
-		calendar															= new Calendar();
 		calendar.name														= "WeekDay";
 		calendar.days														= "WeekDay";
 		calendar.timeStart													= "05:00";
@@ -317,6 +305,19 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendar.stopCriterion.timeDuration									= null;
 		calendar.tempObjective												= 20000;
 		circuit.calendarList.add(calendar);
+
+		calendar															= new Calendar();
+		calendar.name														= "TestDay";
+		calendar.days														= "ZZZZDay";
+		calendar.timeStart													= "00:01";
+		calendar.stopCriterion												= new Stop_Criterion();
+		calendar.stopCriterion.stopOnObjective								= false;
+		calendar.stopCriterion.endOnDuration								= false;
+		calendar.stopCriterion.timeEnd										= "23:59";
+		calendar.stopCriterion.timeDuration									= null;
+		calendar.tempObjective												= 20000;
+		circuit.calendarList.add(calendar);
+
 		
 		//
 		//=========================================================================================
