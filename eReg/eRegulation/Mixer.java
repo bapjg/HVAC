@@ -63,39 +63,39 @@ public class Mixer
 //		this.gainI									= Float.parseFloat(gainI);
 //		this.state									= MIXER_STATE_Off;
 //	}
- 	public Mixer																			// New
-		(
-			String 	name, 
-			Integer swingTime, 
-			Integer lagTime, 
-			Float 	gainP, 
-			Float 	timeD, 
-			Float 	timeI, 
-			Float 	gainI,
-			// Thermometer
-			// Max Temp
-			String	relayUp,
-			String 	relayDown
-		)
-    {
-		this.name 									= name;
-		this.swingTime								= swingTime;
-//		this.lagTime								= lagTime;
-		this.gainP									= gainP;
-		this.timeD									= timeD;
-		this.gainD									= this.gainP * this.timeD;
-		this.timeI									= timeI;
-		this.gainI									= gainI;
-		
-		this.mixerUp								= Global.relays.fetchRelay(relayUp);
-		this.mixerDown								= Global.relays.fetchRelay(relayDown);
-		
-		if ((this.mixerUp == null) || (this.mixerDown == null))
-		{
-			System.out.println("Mixer.Contructor : Unknown mixer relay");
-		}
-		this.state									= MIXER_STATE_Off;
-	}
+// 	public Mixer																			// New
+//		(
+//			String 	name, 
+//			Integer swingTime, 
+//			Integer lagTime, 
+//			Float 	gainP, 
+//			Float 	timeD, 
+//			Float 	timeI, 
+//			Float 	gainI,
+//			// Thermometer
+//			// Max Temp
+//			String	relayUp,
+//			String 	relayDown
+//		)
+//    {
+//		this.name 									= name;
+//		this.swingTime								= swingTime;
+////		this.lagTime								= lagTime;
+//		this.gainP									= gainP;
+//		this.timeD									= timeD;
+//		this.gainD									= this.gainP * this.timeD;
+//		this.timeI									= timeI;
+//		this.gainI									= gainI;
+//		
+//		this.mixerUp								= Global.relays.fetchRelay(relayUp);
+//		this.mixerDown								= Global.relays.fetchRelay(relayDown);
+//		
+//		if ((this.mixerUp == null) || (this.mixerDown == null))
+//		{
+//			System.out.println("Mixer.Contructor : Unknown mixer relay");
+//		}
+//		this.state									= MIXER_STATE_Off;
+//	}
  	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
     {
 		this.name 									= paramMixer.name;
