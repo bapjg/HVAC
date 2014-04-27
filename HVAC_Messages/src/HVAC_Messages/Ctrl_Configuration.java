@@ -107,7 +107,8 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 		public Float							gainI;
 		public Float							timeI;
 		public Integer							timeDelay;
-		public Integer							timeProject;
+		public Integer							timeProjection;
+		public Integer							marginProjection;
 	}
 	public class Mixer							extends  					Ctrl_Configuration
 	{
@@ -310,7 +311,8 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 		circuit.mixer.pidParams.gainI										= 0F;
 		circuit.mixer.pidParams.timeI										= 0F;		
 		circuit.mixer.pidParams.timeDelay									= 30000;
-		circuit.mixer.pidParams.timeProject									= 50000;
+		circuit.mixer.pidParams.timeProjection								= 50000;
+		circuit.mixer.pidParams.marginProjection							= 2000;
 		circuit.tempGradient												= new TempGradient();
 		circuit.tempGradient.outsideLow										= -15000;
 		circuit.tempGradient.tempLow										= 45000;

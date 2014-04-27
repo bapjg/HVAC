@@ -12,14 +12,14 @@ public class Thread_Mixer implements Runnable
 	}
 	public void run()
 	{
-		LogIt.info("Thread_Mixer", "Run", "Starting", true);		
+		LogIt.info("Thread_Mixer_" + circuit.name, "Run", "Starting", true);		
 
 		mixer.positionZero();
 		LogIt.mixerData(Global.now(), 0, Global.now(), mixer.positionTracked);
 		
 		Integer 				i							= 0; 	// Used for loop waiting 20 s
 		Integer 				targetTemp;
-		Integer 				timeProjectInSeconds		= mixer.timeProject/1000;		// Time over which to project temperature change : Convert ms -> s
+		Integer 				timeProjectInSeconds		= mixer.timeProjection/1000;		// Time over which to project temperature change : Convert ms -> s
 		Integer 				timeDelayInSeconds			= mixer.timeDelay/1000;			// Time to wait before doing any calculations : Convert ms -> s
 		
 		Integer indexProject								= timeProjectInSeconds/5;				// Used during 5sec delay loop
@@ -86,7 +86,7 @@ public class Thread_Mixer implements Runnable
 					{
 						temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProjectInSeconds)).intValue();
 						
-						if (Math.abs(temperatureProjected - targetTemp) > 2000)		// More than 2 degrees difference (either over or under)
+						if (Math.abs(temperatureProjected - targetTemp) > mixer.marginProjection)		// More than 2 degrees difference (either over or under)
 						{
 							LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProjectInSeconds + "s wait after " + (i * 5) +"s, temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
 							break;

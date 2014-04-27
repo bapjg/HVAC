@@ -16,7 +16,8 @@ public class Mixer
 	public Integer 			swingUsableMax							= 90000;
 	public Integer 			swingUsableMin							= 0;
 	public Integer 			timeDelay 								= 30000;
-	public Integer 			timeProject								= 30000;
+	public Integer 			timeProjection							= 30000;
+	public Integer 			marginProjection						= 2000;
 
 	public Integer 			tempMax 								= 48000;	
 	public Integer 			tempDontMove							= 20;
@@ -105,7 +106,8 @@ public class Mixer
 		this.swingUsableMax							= this.swingTime * 90 /100;
 		this.swingUsableMin							= this.swingTime * 30 /100;
 		this.timeDelay								= paramMixer.pidParams.timeDelay;
-		this.timeProject							= paramMixer.pidParams.timeProject;
+		this.timeProjection							= paramMixer.pidParams.timeProjection;
+		this.marginProjection						= paramMixer.pidParams.marginProjection;
 		this.gainP									= paramMixer.pidParams.gainP;
 		this.timeD									= paramMixer.pidParams.timeD;
 		this.gainD									= this.gainP * this.timeD;
