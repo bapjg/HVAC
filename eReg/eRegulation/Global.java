@@ -121,7 +121,7 @@ public class Global
 		//
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.logMessage"))
 		{
-			System.out.println(dateTimeDisplay() + " Global.constructor Lock timedout, owned by " + Global.httpSemaphore.owner);
+			LogIt.info("Global", "constructor", "Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
 
@@ -132,7 +132,7 @@ public class Global
 			
 		if (!(messageReceive instanceof Ctrl_Configuration.Data))
 		{
-			System.out.println(dateTimeDisplay() + " Global.constructor messageType is : Nack using local disk configuration");
+			LogIt.info("Global", "constructor", "MessageType is : Nack using local disk configuration");
 			// There is a problem, so read the last file received
 			try
 			{
@@ -154,7 +154,7 @@ public class Global
 		}
 		else
 		{
-			System.out.println(dateTimeDisplay() + " Global.constructor messageType is : Ok using remote configuration");
+			LogIt.info("Global", "constructor", "MessageType is : Ok using remote configuration");
 			// All is Ok, so see if we need to write a copy locally
 			try
 			{
@@ -167,7 +167,7 @@ public class Global
 					
 					if (timeData > timeFile)
 					{
-						System.out.println("Global.constructor writing eRegulator_Json.txt file");
+						LogIt.info("Global", "constructor", "Writing eRegulator_Json.txt file");
 						try
 						{
 							FileWriter 			filewrite			= new FileWriter("eRegulator_Json.txt");
@@ -182,14 +182,14 @@ public class Global
 						}  
 						catch(IOException ex)
 						{
-							System.out.println("I/O error on open : " + ex);
+							LogIt.info("Global", "constructor", "I/O error on open : " + ex);
 						}	
 					}
 				}
 			}
 			catch (Exception e)
 			{
-				System.out.println("Global.constructor Exception = ");
+				LogIt.info("Global", "constructor", "I/O error on open : " + e);
 			}
 		}
 		Global.httpSemaphore.semaphoreUnLock();			
@@ -221,9 +221,6 @@ public class Global
 		}
 		//
 		//==================================================================================
-		
-
-	
 		
 		display.writeAtPosition(1, 18, "Ok");
 		// Other initialisation messages are displayed by Control.java

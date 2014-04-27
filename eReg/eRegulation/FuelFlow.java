@@ -33,27 +33,25 @@ public class FuelFlow
 	{
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.fuelData"))
 		{
-			System.out.println(LogIt.dateTimeStamp() + " Fuelflow.Constructor Lock timedout, owned by " + Global.httpSemaphore.owner);
+			LogIt.info("Fuelflow", "constructor", "Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
 
 		HTTP_Request							httpRequest			= new HTTP_Request <Ctrl_Fuel_Consumption.Request> ("Management");
-			
 		Ctrl_Fuel_Consumption.Request	 		messageSend 		= (new Ctrl_Fuel_Consumption()).new Request();
-			
 		Ctrl_Abstract 							messageReceive	 	= httpRequest.sendData(messageSend);
 			
 		Global.httpSemaphore.semaphoreUnLock();			
 
 		if (messageReceive instanceof Ctrl_Fuel_Consumption.Data)
 		{
-			System.out.println(LogIt.dateTimeStamp() + " Fuelflow.Constructor Fuel level recovered from network");
+			LogIt.info("Fuelflow", "constructor", "Fuel level recovered from network");
 			consumption												= ((Ctrl_Fuel_Consumption.Data) messageReceive).fuelConsumed;
 	    	timeLastStart											= -1L;		// Is this right
 		}
 		else
 		{
-			System.out.println(LogIt.dateTimeStamp() + " Fuelflow.Constructor Network failed, recovering from local file");
+			LogIt.info("Fuelflow", "constructor", "Network failed, recovering from local file");
 			try
 			{
 				InputStream  	file 					= new FileInputStream("FuelConsumed.txt");
@@ -70,14 +68,14 @@ public class FuelFlow
 			}  
 			catch(FileNotFoundException ex)
 			{
-				System.out.println(" Fuelflow.Constructor File FuelConsumed.txt not found : creating it");
+				LogIt.info("Fuelflow", "constructor", "FuelConsumed.txt not found : creating it");
 	    
 				consumption								= 0L;
 				saveFuelFlow();
 			}
 			catch(IOException ex)
 			{
-				System.out.println(" Fuelflow.Constructor I/O error when reading FuelConsumed.txt");
+				LogIt.info("Fuelflow", "constructor", "I/O error when reading FuelConsumed.txt : " + ex);
 			}			
 		}
 	}
@@ -99,7 +97,7 @@ public class FuelFlow
 		}  
 		catch(IOException ex)
 		{
-			System.out.println("I/O error when writing FuelConsumed.txt");
+			LogIt.info("Fuelflow", "saveFuelFlow", "I/O error when writing FuelConsumed.txt : " + ex);
 		}
     }
 	public void update()
