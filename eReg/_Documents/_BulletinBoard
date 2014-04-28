@@ -53,4 +53,6 @@ alias go		='cd /home/pi/Eclipse/eRegulation/src/eRegulation/;make ex'
 
 Weather forecast
 http://api.openweathermap.org/data/2.5/forecast?q=chambery,fr&mode=xml contains forecast on 3hr intervals
+http://api.openweathermap.org/data/2.5/forecast?q=chambery,fr&mode=json
+http://api.openweathermap.org/data/2.5/forecast/daily?q=chambery,fr&mode=xml
 

@@ -91,10 +91,12 @@ public class Thread_BackgroundTasks implements Runnable
 			
 			
 			// Optimise : Particulary hot water in summer and floor in winter
+//		if summer	
+//			circuit.hotwater.state = optimising
 			
-			
-			
-			
+//		if winter			
+//			circuit.floor.state = optimising
+//			
 			// Get the weather forecast
 		}
 		LogIt.info("Thread_Background", "Run", "Stopping", true);		

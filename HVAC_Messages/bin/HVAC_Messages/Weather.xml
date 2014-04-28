@@ -1,0 +1,431 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<weatherdata>
+  <location>
+    <name>Chambery</name>
+    <type/>
+    <country>FR</country>
+    <timezone/>
+    <location altitude="0" latitude="45.566669" longitude="5.93333" geobase="geonames" geobaseid="0"/>
+  </location>
+  <credit/>
+  <meta>
+    <lastupdate/>
+    <calctime>0.0491</calctime>
+    <nextupdate/>
+  </meta>
+  <sun rise="2014-04-28T04:27:54" set="2014-04-28T18:39:29"/>
+  <forecast>
+    <time from="2014-04-28T18:00:00" to="2014-04-28T21:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="356.008" code="" name=""/>
+      <windSpeed mps="2.48" name="Light breeze"/>
+      <temperature unit="celsius" value="10" min="10" max="10.53"/>
+      <pressure unit="hPa" value="976.55"/>
+      <humidity value="70" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-04-28T21:00:00" to="2014-04-29T00:00:00">
+      <symbol number="500" name="light rain" var="10n"/>
+      <precipitation value="0.5" unit="3h" type="rain"/>
+      <windDirection deg="11.5027" code="NNE" name="North-northeast"/>
+      <windSpeed mps="1.67" name="Light breeze"/>
+      <temperature unit="celsius" value="8.73" min="8.73" max="9.24"/>
+      <pressure unit="hPa" value="977.82"/>
+      <humidity value="81" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-04-29T00:00:00" to="2014-04-29T03:00:00">
+      <symbol number="802" name="scattered clouds" var="03n"/>
+      <precipitation/>
+      <windDirection deg="352.502" code="" name=""/>
+      <windSpeed mps="1.25" name="Calm"/>
+      <temperature unit="celsius" value="7.76" min="7.76" max="8.24"/>
+      <pressure unit="hPa" value="978.14"/>
+      <humidity value="89" unit="%"/>
+      <clouds value="scattered clouds" all="32" unit="%"/>
+    </time>
+    <time from="2014-04-29T03:00:00" to="2014-04-29T06:00:00">
+      <symbol number="803" name="broken clouds" var="04n"/>
+      <precipitation/>
+      <windDirection deg="346.502" code="NNW" name="North-northwest"/>
+      <windSpeed mps="1.38" name="Calm"/>
+      <temperature unit="celsius" value="6.82" min="6.82" max="7.27"/>
+      <pressure unit="hPa" value="977.42"/>
+      <humidity value="95" unit="%"/>
+      <clouds value="broken clouds" all="56" unit="%"/>
+    </time>
+    <time from="2014-04-29T06:00:00" to="2014-04-29T09:00:00">
+      <symbol number="500" name="light rain" var="10d"/>
+      <precipitation value="0.5" unit="3h" type="rain"/>
+      <windDirection deg="12.5001" code="NNE" name="North-northeast"/>
+      <windSpeed mps="1.6" name="Light breeze"/>
+      <temperature unit="celsius" value="7.45" min="7.45" max="7.88"/>
+      <pressure unit="hPa" value="977.59"/>
+      <humidity value="96" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-04-29T09:00:00" to="2014-04-29T12:00:00">
+      <symbol number="802" name="scattered clouds" var="03d"/>
+      <precipitation/>
+      <windDirection deg="11.5049" code="NNE" name="North-northeast"/>
+      <windSpeed mps="1.88" name="Light breeze"/>
+      <temperature unit="celsius" value="11.32" min="11.32" max="11.72"/>
+      <pressure unit="hPa" value="977.98"/>
+      <humidity value="76" unit="%"/>
+      <clouds value="scattered clouds" all="36" unit="%"/>
+    </time>
+    <time from="2014-04-29T12:00:00" to="2014-04-29T15:00:00">
+      <symbol number="803" name="broken clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="5.0022" code="N" name="North"/>
+      <windSpeed mps="2.49" name="Light breeze"/>
+      <temperature unit="celsius" value="14.24" min="14.24" max="14.62"/>
+      <pressure unit="hPa" value="976.8"/>
+      <humidity value="65" unit="%"/>
+      <clouds value="broken clouds" all="64" unit="%"/>
+    </time>
+    <time from="2014-04-29T15:00:00" to="2014-04-29T18:00:00">
+      <symbol number="803" name="broken clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="2.00049" code="N" name="North"/>
+      <windSpeed mps="2.48" name="Light breeze"/>
+      <temperature unit="celsius" value="14.72" min="14.72" max="15.06"/>
+      <pressure unit="hPa" value="975.54"/>
+      <humidity value="57" unit="%"/>
+      <clouds value="broken clouds" all="68" unit="%"/>
+    </time>
+    <time from="2014-04-29T18:00:00" to="2014-04-29T21:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="29.0006" code="NNE" name="North-northeast"/>
+      <windSpeed mps="2.05" name="Light breeze"/>
+      <temperature unit="celsius" value="13.48" min="13.48" max="13.81"/>
+      <pressure unit="hPa" value="974.39"/>
+      <humidity value="55" unit="%"/>
+      <clouds value="overcast clouds" all="88" unit="%"/>
+    </time>
+    <time from="2014-04-29T21:00:00" to="2014-04-30T00:00:00">
+      <symbol number="804" name="overcast clouds" var="04n"/>
+      <precipitation/>
+      <windDirection deg="11.508" code="NNE" name="North-northeast"/>
+      <windSpeed mps="1.13" name="Calm"/>
+      <temperature unit="celsius" value="9.37" min="9.37" max="9.66"/>
+      <pressure unit="hPa" value="974.49"/>
+      <humidity value="76" unit="%"/>
+      <clouds value="overcast clouds" all="88" unit="%"/>
+    </time>
+    <time from="2014-04-30T00:00:00" to="2014-04-30T03:00:00">
+      <symbol number="500" name="light rain" var="10n"/>
+      <precipitation value="1" unit="3h" type="rain"/>
+      <windDirection deg="77.0006" code="ENE" name="East-northeast"/>
+      <windSpeed mps="1.14" name="Calm"/>
+      <temperature unit="celsius" value="8.27" min="8.27" max="8.54"/>
+      <pressure unit="hPa" value="974.08"/>
+      <humidity value="93" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-04-30T03:00:00" to="2014-04-30T06:00:00">
+      <symbol number="501" name="moderate rain" var="10n"/>
+      <precipitation value="4" unit="3h" type="rain"/>
+      <windDirection deg="16.5045" code="NNE" name="North-northeast"/>
+      <windSpeed mps="1.36" name="Calm"/>
+      <temperature unit="celsius" value="7.97" min="7.97" max="8.21"/>
+      <pressure unit="hPa" value="974.12"/>
+      <humidity value="100" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-04-30T06:00:00" to="2014-04-30T09:00:00">
+      <symbol number="500" name="light rain" var="10d"/>
+      <precipitation value="2" unit="3h" type="rain"/>
+      <windDirection deg="338.001" code="NNW" name="North-northwest"/>
+      <windSpeed mps="1.62" name="Light breeze"/>
+      <temperature unit="celsius" value="8.36" min="8.36" max="8.58"/>
+      <pressure unit="hPa" value="975.16"/>
+      <humidity value="100" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-04-30T09:00:00" to="2014-04-30T12:00:00">
+      <symbol number="500" name="light rain" var="10d"/>
+      <precipitation value="0.5" unit="3h" type="rain"/>
+      <windDirection deg="337" code="NNW" name="North-northwest"/>
+      <windSpeed mps="2.87" name="Light breeze"/>
+      <temperature unit="celsius" value="10.42" min="10.42" max="10.61"/>
+      <pressure unit="hPa" value="976.39"/>
+      <humidity value="98" unit="%"/>
+      <clouds value="broken clouds" all="64" unit="%"/>
+    </time>
+    <time from="2014-04-30T12:00:00" to="2014-04-30T15:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="348.002" code="NNW" name="North-northwest"/>
+      <windSpeed mps="3.77" name="Gentle Breeze"/>
+      <temperature unit="celsius" value="12.31" min="12.31" max="12.47"/>
+      <pressure unit="hPa" value="976.69"/>
+      <humidity value="89" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-04-30T15:00:00" to="2014-04-30T18:00:00">
+      <symbol number="500" name="light rain" var="10d"/>
+      <precipitation value="1" unit="3h" type="rain"/>
+      <windDirection deg="353.501" code="" name=""/>
+      <windSpeed mps="3.04" name="Light breeze"/>
+      <temperature unit="celsius" value="12.2" min="12.2" max="12.34"/>
+      <pressure unit="hPa" value="977.15"/>
+      <humidity value="94" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-04-30T18:00:00" to="2014-04-30T21:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="6.50122" code="N" name="North"/>
+      <windSpeed mps="1.73" name="Light breeze"/>
+      <temperature unit="celsius" value="12.2" min="12.2" max="12.31"/>
+      <pressure unit="hPa" value="977.46"/>
+      <humidity value="91" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-04-30T21:00:00" to="2014-05-01T00:00:00">
+      <symbol number="803" name="broken clouds" var="04n"/>
+      <precipitation/>
+      <windDirection deg="16.0067" code="NNE" name="North-northeast"/>
+      <windSpeed mps="0.71" name="Calm"/>
+      <temperature unit="celsius" value="10.24" min="10.24" max="10.32"/>
+      <pressure unit="hPa" value="978.67"/>
+      <humidity value="97" unit="%"/>
+      <clouds value="broken clouds" all="64" unit="%"/>
+    </time>
+    <time from="2014-05-01T00:00:00" to="2014-05-01T03:00:00">
+      <symbol number="500" name="light rain" var="10n"/>
+      <precipitation value="1" unit="3h" type="rain"/>
+      <windDirection deg="177.5" code="S" name="South"/>
+      <windSpeed mps="1.04" name="Calm"/>
+      <temperature unit="celsius" value="8.36" min="8.36" max="8.42"/>
+      <pressure unit="hPa" value="978.25"/>
+      <humidity value="100" unit="%"/>
+      <clouds value="broken clouds" all="64" unit="%"/>
+    </time>
+    <time from="2014-05-01T03:00:00" to="2014-05-01T06:00:00">
+      <symbol number="803" name="broken clouds" var="04n"/>
+      <precipitation/>
+      <windDirection deg="145.502" code="SE" name="SouthEast"/>
+      <windSpeed mps="1.46" name="Calm"/>
+      <temperature unit="celsius" value="7.98" min="7.98" max="8.01"/>
+      <pressure unit="hPa" value="977.86"/>
+      <humidity value="100" unit="%"/>
+      <clouds value="broken clouds" all="76" unit="%"/>
+    </time>
+    <time from="2014-05-01T06:00:00" to="2014-05-01T09:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="136.501" code="SE" name="SouthEast"/>
+      <windSpeed mps="1.57" name=""/>
+      <temperature unit="celsius" value="9.46" min="9.46" max="9.46"/>
+      <pressure unit="hPa" value="977.94"/>
+      <humidity value="97" unit="%"/>
+      <clouds value="overcast clouds" all="88" unit="%"/>
+    </time>
+    <time from="2014-05-01T09:00:00" to="2014-05-01T12:00:00">
+      <symbol number="803" name="broken clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="19.5107" code="NNE" name="North-northeast"/>
+      <windSpeed mps="1.16" name="Calm"/>
+      <temperature unit="celsius" value="12.32" min="12.32" max="12.32"/>
+      <pressure unit="hPa" value="978.14"/>
+      <humidity value="94" unit="%"/>
+      <clouds value="broken clouds" all="76" unit="%"/>
+    </time>
+    <time from="2014-05-01T12:00:00" to="2014-05-01T15:00:00">
+      <symbol number="803" name="broken clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="305.002" code="NW" name="Northwest"/>
+      <windSpeed mps="1.66" name="Light breeze"/>
+      <temperature unit="celsius" value="15.51" min="15.51" max="15.51"/>
+      <pressure unit="hPa" value="977.12"/>
+      <humidity value="83" unit="%"/>
+      <clouds value="broken clouds" all="56" unit="%"/>
+    </time>
+    <time from="2014-05-01T15:00:00" to="2014-05-01T18:00:00">
+      <symbol number="802" name="scattered clouds" var="03d"/>
+      <precipitation/>
+      <windDirection deg="247.508" code="WSW" name="West-southwest"/>
+      <windSpeed mps="1.81" name="Light breeze"/>
+      <temperature unit="celsius" value="17.06" min="17.06" max="17.06"/>
+      <pressure unit="hPa" value="975.42"/>
+      <humidity value="67" unit="%"/>
+      <clouds value="scattered clouds" all="32" unit="%"/>
+    </time>
+    <time from="2014-05-01T18:00:00" to="2014-05-01T21:00:00">
+      <symbol number="500" name="light rain" var="10d"/>
+      <precipitation value="1" unit="3h" type="rain"/>
+      <windDirection deg="294.5" code="WNW" name="West-northwest"/>
+      <windSpeed mps="1.76" name="Light breeze"/>
+      <temperature unit="celsius" value="14.17" min="14.17" max="14.17"/>
+      <pressure unit="hPa" value="975.04"/>
+      <humidity value="79" unit="%"/>
+      <clouds value="overcast clouds" all="88" unit="%"/>
+    </time>
+    <time from="2014-05-01T21:00:00" to="2014-05-02T00:00:00">
+      <symbol number="501" name="moderate rain" var="10n"/>
+      <precipitation value="4" unit="3h" type="rain"/>
+      <windDirection deg="61.5001" code="ENE" name="East-northeast"/>
+      <windSpeed mps="0.47" name="Calm"/>
+      <temperature unit="celsius" value="9.97" min="9.97" max="9.97"/>
+      <pressure unit="hPa" value="976.08"/>
+      <humidity value="97" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-05-02T00:00:00" to="2014-05-02T03:00:00">
+      <symbol number="500" name="light rain" var="10n"/>
+      <precipitation value="1" unit="3h" type="rain"/>
+      <windDirection deg="117.503" code="ESE" name="East-southeast"/>
+      <windSpeed mps="1.38" name="Calm"/>
+      <temperature unit="celsius" value="8.2" min="8.2" max="8.2"/>
+      <pressure unit="hPa" value="975.68"/>
+      <humidity value="100" unit="%"/>
+      <clouds value="scattered clouds" all="44" unit="%"/>
+    </time>
+    <time from="2014-05-02T03:00:00" to="2014-05-02T06:00:00">
+      <symbol number="500" name="light rain" var="10n"/>
+      <precipitation value="1" unit="3h" type="rain"/>
+      <windDirection deg="136.001" code="SE" name="SouthEast"/>
+      <windSpeed mps="1.31" name="Calm"/>
+      <temperature unit="celsius" value="6.66" min="6.66" max="6.66"/>
+      <pressure unit="hPa" value="974.43"/>
+      <humidity value="95" unit="%"/>
+      <clouds value="broken clouds" all="80" unit="%"/>
+    </time>
+    <time from="2014-05-02T06:00:00" to="2014-05-02T09:00:00">
+      <symbol number="500" name="light rain" var="10d"/>
+      <precipitation value="1" unit="3h" type="rain"/>
+      <windDirection deg="243.5" code="WSW" name="West-southwest"/>
+      <windSpeed mps="1.16" name="Calm"/>
+      <temperature unit="celsius" value="8.48" min="8.48" max="8.48"/>
+      <pressure unit="hPa" value="974.32"/>
+      <humidity value="100" unit="%"/>
+      <clouds value="broken clouds" all="76" unit="%"/>
+    </time>
+    <time from="2014-05-02T09:00:00" to="2014-05-02T12:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="300.502" code="WNW" name="West-northwest"/>
+      <windSpeed mps="1.83" name="Light breeze"/>
+      <temperature unit="celsius" value="9.81" min="9.81" max="9.81"/>
+      <pressure unit="hPa" value="974.4"/>
+      <humidity value="100" unit="%"/>
+      <clouds value="overcast clouds" all="88" unit="%"/>
+    </time>
+    <time from="2014-05-02T12:00:00" to="2014-05-02T15:00:00">
+      <symbol number="500" name="light rain" var="10d"/>
+      <precipitation value="2" unit="3h" type="rain"/>
+      <windDirection deg="316.501" code="NW" name="Northwest"/>
+      <windSpeed mps="1.81" name="Light breeze"/>
+      <temperature unit="celsius" value="9.86" min="9.86" max="9.86"/>
+      <pressure unit="hPa" value="974.57"/>
+      <humidity value="100" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-05-02T15:00:00" to="2014-05-02T18:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="343.001" code="NNW" name="North-northwest"/>
+      <windSpeed mps="2.84" name="Light breeze"/>
+      <temperature unit="celsius" value="10.49" min="10.49" max="10.49"/>
+      <pressure unit="hPa" value="974.11"/>
+      <humidity value="95" unit="%"/>
+      <clouds value="overcast clouds" all="88" unit="%"/>
+    </time>
+    <time from="2014-05-02T18:00:00" to="2014-05-02T21:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="350.507" code="" name=""/>
+      <windSpeed mps="2.74" name="Light breeze"/>
+      <temperature unit="celsius" value="10.17" min="10.17" max="10.17"/>
+      <pressure unit="hPa" value="973.44"/>
+      <humidity value="93" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-05-02T21:00:00" to="2014-05-03T00:00:00">
+      <symbol number="500" name="light rain" var="10n"/>
+      <precipitation value="2" unit="3h" type="rain"/>
+      <windDirection deg="338.004" code="NNW" name="North-northwest"/>
+      <windSpeed mps="3.06" name="Light breeze"/>
+      <temperature unit="celsius" value="8.33" min="8.33" max="8.33"/>
+      <pressure unit="hPa" value="973.46"/>
+      <humidity value="97" unit="%"/>
+      <clouds value="broken clouds" all="76" unit="%"/>
+    </time>
+    <time from="2014-05-03T00:00:00" to="2014-05-03T03:00:00">
+      <symbol number="802" name="scattered clouds" var="03n"/>
+      <precipitation/>
+      <windDirection deg="343.502" code="NNW" name="North-northwest"/>
+      <windSpeed mps="3.32" name=""/>
+      <temperature unit="celsius" value="7.26" min="7.26" max="7.26"/>
+      <pressure unit="hPa" value="972.65"/>
+      <humidity value="99" unit="%"/>
+      <clouds value="scattered clouds" all="48" unit="%"/>
+    </time>
+    <time from="2014-05-03T03:00:00" to="2014-05-03T06:00:00">
+      <symbol number="804" name="overcast clouds" var="04n"/>
+      <precipitation/>
+      <windDirection deg="349.501" code="" name=""/>
+      <windSpeed mps="3.01" name="Light breeze"/>
+      <temperature unit="celsius" value="7.56" min="7.56" max="7.56"/>
+      <pressure unit="hPa" value="970.8"/>
+      <humidity value="99" unit="%"/>
+      <clouds value="overcast clouds" all="88" unit="%"/>
+    </time>
+    <time from="2014-05-03T06:00:00" to="2014-05-03T09:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="357.502" code="" name=""/>
+      <windSpeed mps="4.26" name="Gentle Breeze"/>
+      <temperature unit="celsius" value="8.18" min="8.18" max="8.18"/>
+      <pressure unit="hPa" value="970.72"/>
+      <humidity value="99" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-05-03T09:00:00" to="2014-05-03T12:00:00">
+      <symbol number="500" name="light rain" var="10d"/>
+      <precipitation value="2" unit="3h" type="rain"/>
+      <windDirection deg="354" code="" name=""/>
+      <windSpeed mps="6.18" name="Moderate breeze"/>
+      <temperature unit="celsius" value="8.93" min="8.93" max="8.93"/>
+      <pressure unit="hPa" value="970.85"/>
+      <humidity value="100" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-05-03T12:00:00" to="2014-05-03T15:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="356.5" code="" name=""/>
+      <windSpeed mps="7.37" name="Moderate breeze"/>
+      <temperature unit="celsius" value="10.11" min="10.11" max="10.11"/>
+      <pressure unit="hPa" value="970.79"/>
+      <humidity value="96" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-05-03T15:00:00" to="2014-05-03T18:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="2.50244" code="N" name="North"/>
+      <windSpeed mps="8.06" name="Fresh Breeze"/>
+      <temperature unit="celsius" value="9.44" min="9.44" max="9.44"/>
+      <pressure unit="hPa" value="971.67"/>
+      <humidity value="91" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+    <time from="2014-05-03T18:00:00" to="2014-05-03T21:00:00">
+      <symbol number="804" name="overcast clouds" var="04d"/>
+      <precipitation/>
+      <windDirection deg="7.50241" code="N" name="North"/>
+      <windSpeed mps="8.17" name="Fresh Breeze"/>
+      <temperature unit="celsius" value="8.72" min="8.72" max="8.72"/>
+      <pressure unit="hPa" value="973.01"/>
+      <humidity value="87" unit="%"/>
+      <clouds value="overcast clouds" all="92" unit="%"/>
+    </time>
+  </forecast>
+</weatherdata>
+
