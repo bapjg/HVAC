@@ -7,6 +7,8 @@ public class Ctrl_Actions_Stop 			extends 					Ctrl_Abstract
 	public 	static final int			EXIT_Stop					= 0;
 	public 	static final int			EXIT_Restart				= 1;
 	public 	static final int			EXIT_Reboot					= 2;
+//	public 	static final int			EXIT_Reload_Configuration	= 3;
+	public 	static final int			EXIT_Reload_Calendars		= 3;
 
 	public Ctrl_Actions_Stop()
 	{

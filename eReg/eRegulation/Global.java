@@ -80,8 +80,6 @@ public class Global
 	public static 	Pump							pumpRadiator;
 
 	public static 	Integer							summerTemp;
-	public static 	Integer							summerPumpDuration;	
-	public static 	Long							summerPumpTime;	
 	
 	public static	Boiler							boiler;
 
@@ -94,8 +92,7 @@ public class Global
 	public static 	String							calendarsDateTime;	// Used to dateTime the Calendar version in use
 
 	public static	ArrayList	<Calendars.Away>	awayList;
-	public static	Integer							antiFreeze;
-
+	public static	Calendars.TasksBackGround		tasksBackGround;
 	
 	public Global()
 	{
@@ -208,10 +205,6 @@ public class Global
 		Global.pumps.configure(configurationData.pumpList);
 		Global.circuits.configure(configurationData.circuitList);
 		Global.boiler									= new Boiler(configurationData.boiler);
-		
-		Global.summerPumpDuration						= 300;
-		Global.summerPumpTime							= 60 * 60 * 1000L;		// 1 a.m.
-		Global.summerTemp								= 15000;
 		
 		for (String eMail : configurationData.eMailList)
 		{

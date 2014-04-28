@@ -25,7 +25,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		public ArrayList<Word> 					wordList 					= new ArrayList<Word>();
 		public ArrayList<Circuit>				circuitList 				= new ArrayList<Circuit>();
 		public ArrayList<Away>					awayList 					= new ArrayList<Away>();
-		public Integer							antiFreeze 					= 5;
+		public TasksBackGround					tasksBackGround				= new TasksBackGround();
 	}
 	public class Update							extends 					Ctrl_Calendars.Data
 	{
@@ -70,6 +70,13 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		private static final long 				serialVersionUID 			= 1L;
 		public Long 							dateTimeStart;
 		public Long 							dateTimeEnd;
+	}
+	public static class TasksBackGround			extends 					Ctrl_Calendars
+	{
+		private static final long 				serialVersionUID 			= 1L;
+		public Long 							pumpCleanTime;
+		public Integer							pumpCleanDurationSeconds;
+		public Integer							antiFreeze;
 	}
 	
 	
@@ -341,8 +348,10 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		// AntiFreeze
 		//
 
-		calendarUpdate.antiFreeze											= 5000;
-		
+		calendarUpdate.tasksBackGround.antiFreeze							= 5000;
+		calendarUpdate.tasksBackGround.pumpCleanTime						= 60 * 60 * 1000L; // 1 am
+		calendarUpdate.tasksBackGround.pumpCleanDurationSeconds				= 300;
+
 		//
 		//=========================================================================================
 

@@ -9,7 +9,7 @@ import HVAC_Messages.Ctrl_Configuration;
 public class Pumps
 {
 	public ArrayList<Pump> pumpList = new ArrayList<Pump>();
-	public Long							dateLastClean;
+	public Long							dateTimeLastClean;
 	
 	public void configure(ArrayList <Ctrl_Configuration.Pump> paramPumps)
 	{
@@ -18,7 +18,7 @@ public class Pumps
 			Pump pumpItem 				= new Pump(paramPump);
 			pumpList.add(pumpItem);
 		}
-		dateLastClean					= 0L;
+		dateTimeLastClean				= 0L;
 	}
 	public Pump fetchPump(String name)
 	{

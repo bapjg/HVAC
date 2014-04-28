@@ -102,33 +102,33 @@ public class Calendars
 		//
 
 		
-//		this.vocabulary.configure(calendarData.wordList);
-		for (Ctrl_Calendars.Word 					word 				: calendarData.wordList) 
+		//		get words/wordList/vocabulary
+		for (Ctrl_Calendars.Word 							word 				: calendarData.wordList) 
 		{
 			LogIt.info("Vocabulary Entry", word.name, "Days " + word.days);
 		}
-		
+		//		get circuit tasks
 		for (Ctrl_Calendars.Circuit 						paramCircuit 		: calendarData.circuitList)
 		{
 			Circuit_Abstract								circuit				= Global.circuits.fetchcircuit(paramCircuit.name);
 		
 			for (Ctrl_Calendars.Calendar 					paramCalendar 		: paramCircuit.calendarList)
 			{
-				for (Ctrl_Calendars.Word 				word 				: calendarData.wordList) 
+				for (Ctrl_Calendars.Word 					word 				: calendarData.wordList) 
 				{
-					paramCalendar.days 										= paramCalendar.days.replace(word.name, word.days);
+					paramCalendar.days 											= paramCalendar.days.replace(word.name, word.days);
 				}
 				circuit.addCircuitTask(paramCalendar);
 				LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart + "/" + paramCalendar.stopCriterion.timeEnd + " Days " + paramCalendar.days);
 			}
 		}
-
+		//		get away calendar
 		for (Ctrl_Calendars.Away 							paramAway 			: calendarData.awayList)
 		{
 			Global.awayList.add(new Away(paramAway));
 		}
-		
-		Global.antiFreeze														= calendarData.antiFreeze;
+		//		get tasksBackGround information
+		Global.tasksBackGround													= new TasksBackGround(calendarData.tasksBackGround);
 		//
 		//==================================================================================
 	}
@@ -137,10 +137,25 @@ public class Calendars
 		public Long 							dateTimeStart;
 		public Long 							dateTimeEnd;
 		
-		public Away(Ctrl_Calendars.Away away)
+		public Away(Ctrl_Calendars.Away 							away)
 		{
 			this.dateTimeStart										= away.dateTimeStart;
 			this.dateTimeEnd										= away.dateTimeEnd;
 		}
 	}
+	public class TasksBackGround
+	{
+		public Long 							pumpCleanTime;
+		public Integer 							pumpCleanDurationSeconds;
+		public Integer							antiFreeze;
+
+		public TasksBackGround(Ctrl_Calendars.TasksBackGround 		tasksBackGround)
+		{
+			this.pumpCleanTime										= tasksBackGround.pumpCleanTime;
+			this.pumpCleanDurationSeconds							= tasksBackGround.pumpCleanDurationSeconds;
+			this.antiFreeze											= tasksBackGround.antiFreeze;
+			
+		}
+	}
+
 }
