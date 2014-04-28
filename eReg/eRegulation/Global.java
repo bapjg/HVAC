@@ -82,7 +82,6 @@ public class Global
 	public static 	Integer							summerTemp;
 	public static 	Integer							summerPumpDuration;	
 	public static 	Long							summerPumpTime;	
-	public static 	Boolean							summerWorkDone;
 	
 	public static	Boiler							boiler;
 
@@ -90,11 +89,11 @@ public class Global
 	public static 	ADC								burnerVoltages;	
 	public static 	Buttons							buttons;	
 
-	public static 	ArrayList<String>				eMails;	
+	public static 	ArrayList	<String>			eMails;	
 
 	public static 	String							calendarsDateTime;	// Used to dateTime the Calendar version in use
 
-	public static	ArrayList<Calendars.Away>		awayList;
+	public static	ArrayList	<Calendars.Away>	awayList;
 	public static	Integer							antiFreeze;
 
 	
@@ -211,7 +210,6 @@ public class Global
 		Global.boiler									= new Boiler(configurationData.boiler);
 		
 		Global.summerPumpDuration						= 300;
-		Global.summerWorkDone							= false;
 		Global.summerPumpTime							= 60 * 60 * 1000L;		// 1 a.m.
 		Global.summerTemp								= 15000;
 		
@@ -238,6 +236,9 @@ public class Global
 		
 		return todayMidnight;
 	}
+	public static Long today()							{return getTimeAtMidnight();								}
+	public static Long yesterday()						{return dateOnly(-1);										}
+	public static Long dateOnly(Integer days)			{return getTimeAtMidnight() - 24 * 60 * 60 * 1000L * days;	}
 	public static Long getTimeNowSinceMidnight()
 	{
 		// Returns the number of milliseconds since last midnight

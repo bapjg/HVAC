@@ -33,6 +33,17 @@ public class Thread_BackgroundTasks implements Runnable
 			// This should be changed to run continuously
 			
 			// We should log last pump run it will be cleaner/easier		xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			/*
 			 * for each pump
@@ -79,30 +90,48 @@ public class Thread_BackgroundTasks implements Runnable
 			 */
 			
 			
-			if (Global.thermoOutside.reading > Global.summerTemp)
+			if (	(Global.getTimeNowSinceMidnight() 	> Global.summerPumpTime)
+//					&&
+//					(Global.pumps.dateLastClean 		< Global.summerPumpTime + 1000L * 60 * 2) // 2 min window 
+			   )
 			{
-				if ((Global.getTimeNowSinceMidnight() > Global.summerPumpTime) 
-				&& (Global.getTimeNowSinceMidnight() < Global.summerPumpTime + 30 * 60 * 1000L)) // 30 mins
-				{
-					if (!Global.summerWorkDone)
-					{
-						Global.summerWorkDone					= true;
-						LogIt.action("Summer Pumps", "On");
-						Global.pumps.fetchPump("Pump_Floor").on();
-						Global.pumps.fetchPump("Pump_Radiator").on();
-						
-						for (i = 0; (i < Global.summerPumpDuration) && (!Global.stopNow); i++)
-						{
-							Global.waitSeconds(1);
-						}
-						
-						LogIt.action("Summer Pumps", "Off");
-						Global.pumps.fetchPump("Pump_Floor").off();
-						Global.pumps.fetchPump("Pump_Radiator").off();
+				LogIt.action("Summer Pumps", "On");
 				
+				
+				
+				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
+				{
+					Pump		thisPump						= circuit.circuitPump;
+					
+					if (thisPump.dateLastOperated < Global.pumps.dateLastClean + Global.summerPumpTime)		// pump not used since 24hours
+					{
+						if (!circuit.circuitPump.isOn())
+						{
+							circuit.circuitPump.relay.on();			// circuitPump.on() updates timeLastOperated, 
+						}											// whereas circuitPump.relay.on() does not.
 					}
 				}
+
+				Global.pumps.dateLastClean						= Global.today();
+
+				for (i = 0; (i < Global.summerPumpDuration) && (!Global.stopNow); i++)
+				{
+					Global.waitSeconds(1);
+				}
+				
+				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
+				{
+					if (circuit.taskActive == null)		// pump not used since 24hours
+					{
+						if (!circuit.circuitPump.isOn())
+						{
+							circuit.circuitPump.off();
+						}
+					}
+				}
+				LogIt.action("Summer Pumps", "Off");
 			}
+
 			
 			if (Global.thermoHotWater.reading < Global.antiFreeze)
 			{
@@ -125,7 +154,7 @@ public class Thread_BackgroundTasks implements Runnable
 			{
 				// Start Radiator temp objective antiFreeze + 2000
 			}
-			Global.waitSeconds(10);
+			Global.waitSeconds(300);							// Wait 5 mins
 		}
 		LogIt.info("Thread_Background", "Run", "Stopping", true);		
 	}

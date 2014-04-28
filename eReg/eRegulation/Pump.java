@@ -6,7 +6,7 @@ public class Pump
 {
 	public String 			name;
 	public Relay			relay;
-	public Long				dateTimeLastRun;
+	public Long				dateLastOperated;
 	
 //	public Pump(String name, String relayName)
 //	{
@@ -21,7 +21,7 @@ public class Pump
 	{
 		this.name 		    		= paramPump.name;
 		this.relay					= Global.relays.fetchRelay(paramPump.relay);
-		this.dateTimeLastRun		= 0L;
+		this.dateLastOperated		= 0L;
 		if (this.relay == null)
 		{
 			System.out.println("Relay.Constructor Pump : " + this.name + ", invalid relayName : " + paramPump.relay);
@@ -33,7 +33,7 @@ public class Pump
 		{
 			LogIt.action(this.name, "On");
 			relay.on();
-			this.dateTimeLastRun	= Global.now();
+			this.dateLastOperated	= Global.today();				
 		}
 	}
 	public void off()
@@ -42,7 +42,6 @@ public class Pump
 		{
 			LogIt.action(this.name, "Off");
 			relay.off();
-			this.dateTimeLastRun	= Global.now();
 		}
 	}
 	public Boolean isOn()

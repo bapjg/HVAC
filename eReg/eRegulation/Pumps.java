@@ -9,17 +9,8 @@ import HVAC_Messages.Ctrl_Configuration;
 public class Pumps
 {
 	public ArrayList<Pump> pumpList = new ArrayList<Pump>();
+	public Long							dateLastClean;
 	
-//	public void addFromXML(String name, String relayName)
-//	{
-//		Pump pumpItem 				= new Pump(name, relayName);
-//		pumpList.add(pumpItem);
-//	}
-//	public void addFromObject(String name, String relayName)
-//	{
-//		Pump pumpItem 				= new Pump(name, relayName);
-//		pumpList.add(pumpItem);
-//	}
 	public void configure(ArrayList <Ctrl_Configuration.Pump> paramPumps)
 	{
 		for (Ctrl_Configuration.Pump 	paramPump : paramPumps)
@@ -27,12 +18,8 @@ public class Pumps
 			Pump pumpItem 				= new Pump(paramPump);
 			pumpList.add(pumpItem);
 		}
+		dateLastClean					= 0L;
 	}
-//	public void addFromObject(Ctrl_Configuration.Data.Pump pumpParam)
-//	{
-//		Pump pumpItem 				= new Pump(pumpParam);
-//		pumpList.add(pumpItem);
-//	}
 	public Pump fetchPump(String name)
 	{
 		for (Pump element : pumpList) 
