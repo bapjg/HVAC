@@ -50,7 +50,6 @@ public class Control
 
 		@SuppressWarnings("unused")
 		Global 			global 						= new Global();
-		
 		Global.stopNow								= false;
 		LogIt.info("Control", "main", "Starting/BootSequence");
 
@@ -109,11 +108,10 @@ public class Control
 		
 		Global.display.writeAtPosition(3, 0, " Thermometers");
 		new Thread(new Thread_Thermometers(), 								"Thread_Thermometers").start();
-		Global.display.writeAtPosition(3, 18, "Ok");
 		Global.waitSeconds(15);														// Must wait 15 secs for all thermometers to be read and have values + allow for retries
+		Global.display.writeAtPosition(3, 18, "Ok");
 
 		new Thread(new Thread_UserInterface(), 								"Thread_UserInteface").start();
-
 		for (Circuit_Abstract circuit : Global.circuits.circuitList)
 		{
 			if (circuit.mixer != null)
@@ -121,7 +119,6 @@ public class Control
 				new Thread(new Thread_Mixer((Circuit_Mixer) circuit), 		"Thread_Mixer_" + circuit.name).start();
 			}
 		}
-		
 		new Thread(new Thread_TCPListen(), 									"Thread_TCPListen").start();
 		new Thread(new Thread_BackgroundTasks(), 							"Thread_BackgroundTasks").start();
 		
