@@ -108,7 +108,9 @@ public class Thread_BackgroundTasks implements Runnable
 			{
 				try
 				{
+System.out.println("Getting weather");
 					Global.weatherData							= new Ctrl_WeatherData();
+					System.out.println("Got weather");
 				}
 				catch (Exception e)
 				{
