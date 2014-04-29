@@ -83,7 +83,7 @@ public class FuelFlow
     {
 		try
 		{
-			OutputStream 		file 				= new FileOutputStream("FuelConsumed.txt");
+			OutputStream 		file 				= new FileOutputStream("/home/pi/HVAC_Data/FuelConsumed.txt");
 		    DataOutputStream 	output 				= new DataOutputStream(file);
 		    try
 		    {
