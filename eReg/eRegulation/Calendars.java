@@ -48,7 +48,7 @@ public class Calendars
 			catch(IOException ex)
 			{
 				System.out.println("I/O error on open : " + ex);		//Probably file dont exist. Can only bomb out
-				System.exit(Ctrl_Actions_Stop.EXIT_Reboot);				// 0 = stop application
+				System.exit(Ctrl_Actions_Stop.EXIT_Stop);				// 0 = stop application
 			}	
 		}
 		else
