@@ -362,7 +362,7 @@ public class Thread_TCPListen 			implements Runnable
 	private Ctrl_Actions_Stop.Ack		process_Ctrl_Actions_Stop_Execute		(Ctrl_Actions_Stop.Execute message_in)
 	{
 		Global.stopNow										= true;
-		Global.exitStatus									= message_in.exitStatus;
+		Global.exitStatus									= message_in.exitStatus;	// 0 = stop app, 1 = restart app, 2 = reboot
         return	new Ctrl_Actions_Stop().new Ack();
     } 
 }
