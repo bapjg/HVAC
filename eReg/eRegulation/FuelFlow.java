@@ -54,7 +54,7 @@ public class FuelFlow
 			LogIt.info("Fuelflow", "constructor", "Network failed, recovering from local file");
 			try
 			{
-				InputStream  	file 					= new FileInputStream("FuelConsumed.txt");
+				InputStream  	file 					= new FileInputStream("/home/pi/HVAC_Data/FuelConsumed.txt");
 				DataInputStream	input  					= new DataInputStream (file);
 			    try
 			    {
