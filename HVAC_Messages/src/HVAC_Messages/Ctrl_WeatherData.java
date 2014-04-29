@@ -114,8 +114,8 @@ public class Ctrl_WeatherData 						extends DefaultHandler
 			URL 									serverURL 						= new URL("http://api.openweathermap.org/data/2.5/forecast/city?q=chambery,fr&mode=xml&units=metric&type=accurate");
 			HttpURLConnection  						serverConnection 				= (HttpURLConnection) serverURL.openConnection();
 			serverConnection.setRequestMethod("GET");
-			serverConnection.setConnectTimeout(1000);
-			serverConnection.setReadTimeout(5000);
+			serverConnection.setConnectTimeout(5000);
+			serverConnection.setReadTimeout(10000);
 			serverConnection.setRequestProperty("Accept", "application/xml");
 
 			int 									responseCode 					= serverConnection.getResponseCode();
@@ -131,7 +131,8 @@ public class Ctrl_WeatherData 						extends DefaultHandler
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			System.out.println("Ctrl_WeatherData/Constructor error on contacting the weather server");
+			return;	// Will try again in 5 mins (loop timer)
 		}
 		//
 		//=====================================================================
@@ -146,7 +147,7 @@ public class Ctrl_WeatherData 						extends DefaultHandler
 		} 
 		catch (Exception e) 
 		{
-			e.printStackTrace();
+			System.out.println("Ctrl_WeatherData/Constructor error parsing the xml");
 		}
 		
 	}
