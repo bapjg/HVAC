@@ -130,6 +130,7 @@ public class Calendars
 		}
 		//		get tasksBackGround information
 		System.out.println("tBG");
+		System.out.println(calendarData.tasksBackGround.pumpCleanTime);
 		Global.tasksBackGround													= new TasksBackGround(calendarData.tasksBackGround);
 		//
 		//==================================================================================
