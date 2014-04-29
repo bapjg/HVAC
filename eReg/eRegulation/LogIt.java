@@ -51,8 +51,8 @@ public class LogIt
 	
 	public static void  display(String className, String methodName, String message)
 	{
-		System.out.println(dateTimeStamp() + " : Display: " + className + "/" + methodName + " - " + message);
-
+		String classMethod											= (className + "/" + methodName + "                                             ").substring(0,30);
+		System.out.println(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
 	}
 	public static void  info(String className, String methodName, String message)
 	{
@@ -60,7 +60,8 @@ public class LogIt
 
 		if (logDisplay)
 		{
-			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
+			String classMethod											= (className + "/" + methodName + "                                             ").substring(0,30);
+			System.out.println(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 		}
 	}
 	public static void  info(String className, String methodName, String message, Boolean display)
@@ -69,7 +70,8 @@ public class LogIt
 
 		if (display)
 		{
-			System.out.println(dateTimeStamp() + " : Info   : " + className + "/" + methodName + " - " + message);
+			String classMethod											= (className + "/" + methodName + "                                             ").substring(0,30);
+			System.out.println(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 		}
 	}
 	public static void  error(String className, String methodName, String message)
@@ -78,7 +80,8 @@ public class LogIt
 
 		if (logDisplay)
 		{
-			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
+			String classMethod											= (className + "/" + methodName + "                                             ").substring(0,30);
+			System.out.println(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 		}
 	}
 	public static void  error(String className, String methodName, String message, Boolean display)
@@ -87,7 +90,8 @@ public class LogIt
 
 		if (display)
 		{
-			System.out.println(dateTimeStamp() + " : Error  : " + className + "/" + methodName + " - " + message);
+			String classMethod											= (className + "/" + methodName + "                                             ").substring(0,30);
+			System.out.println(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 		}
 	}
 	public static void pidData
