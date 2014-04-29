@@ -28,12 +28,6 @@ public class Thread_BackgroundTasks implements Runnable
 		
 		while (!Global.stopNow)
 		{
-			System.out.println("tasksBackGround.pumpCleanTime" + tasksBackGround.pumpCleanTime);
-			System.out.println("Global.getTimeNowSinceMidnight" + Global.getTimeNowSinceMidnight());
-			System.out.println("Global.pumps.dateTimeLastClean" + Global.pumps.dateTimeLastClean);
-			System.out.println("Global.today()" + Global.today());
-			if ( Global.pumps.dateTimeLastClean 	< Global.today()				) System.out.println("c1");
-			if   (Global.getTimeNowSinceMidnight() 	> tasksBackGround.pumpCleanTime	) System.out.println("c2");		
 			if ( (Global.pumps.dateTimeLastClean 	< Global.today()				)	 // last run was yerterday
 			&&   (Global.getTimeNowSinceMidnight() 	> tasksBackGround.pumpCleanTime	) )	 // time to do it has arrived		
 			{
@@ -59,12 +53,13 @@ public class Thread_BackgroundTasks implements Runnable
 					{
 						if (!circuit.circuitPump.isOn())			// Not really possible otherwise
 						{
-							circuit.circuitPump.relay.on();			// circuitPump.on() updates timeLastOperated, 
-						}											// whereas circuitPump.relay.on() does not.
+							circuit.circuitPump.relay.on();			// circuitPump.on() updates timeLastOperated, whereas circuitPump.relay.on() does not.
+							Global.waitMilliSeconds(500);			// Avoid switch all the relays at the same time
+						}
 					}
 				}
 
-				Global.pumps.dateTimeLastClean					= Global.now();
+				Global.pumps.dateTimeLastClean					= Global.now(); // This value will be higher then dateLastOperated, ensuring a run next day even if unused
 
 				for (i = 0; (i < tasksBackGround.pumpCleanDurationSeconds) && (!Global.stopNow); i++)
 				{
@@ -78,6 +73,7 @@ public class Thread_BackgroundTasks implements Runnable
 						if (!circuit.circuitPump.isOn())
 						{
 							circuit.circuitPump.off();
+							Global.waitMilliSeconds(500);			// Avoid switch all the relays at the same time
 						}
 					}
 				}
