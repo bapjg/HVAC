@@ -19,7 +19,7 @@ public class Calendars
 		//
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.logMessage"))
 		{
-			System.out.println(Global.dateTimeDisplay() + " Calendars.constructor Lock timedout, owned by " + Global.httpSemaphore.owner);
+			LogIt.info("Calendars", "constructor", "Lock timedout, owned by " + Global.httpSemaphore.owner);
 			return;
 		}
 
@@ -30,7 +30,7 @@ public class Calendars
 			
 		if (!(messageReceive instanceof Ctrl_Calendars.Data))
 		{
-			System.out.println(Global.dateTimeDisplay() + " Calendars.constructor messageType is : Nack");
+			LogIt.info("Calendars", "constructor", "Calendars.constructor messageType is : Nack");
 			// There is a problem, so read the last file received
 			try
 			{
@@ -47,7 +47,7 @@ public class Calendars
 			}  
 			catch(IOException ex)
 			{
-				System.out.println("I/O error on open : eCalendars_Json.txt " + ex);		//Probably file dont exist. Can only bomb out
+				LogIt.info("Calendars", "constructor", "I/O error on open : eCalendars_Json.txt " + ex);		//Probably file dont exist. Can only bomb out
 				System.exit(Ctrl_Actions_Stop.EXIT_Stop);				// 0 = stop application
 			}	
 		}
@@ -65,7 +65,7 @@ public class Calendars
 					
 					if (timeData > timeFile)
 					{
-						System.out.println("Calendars.constructor writing eRegulator_Json.txt file");
+						LogIt.info("Calendars", "constructor", "Writing eCalendars_Json.txt");
 						try
 						{
 							FileWriter 						filewrite			= new FileWriter("/home/pi/HVAC_Data/eCalendars_Json.txt");
@@ -80,9 +80,29 @@ public class Calendars
 						}  
 						catch(IOException ex)
 						{
-							System.out.println("I/O error on open : eCalendars_Json.txt " + ex);
+							LogIt.info("Calendars", "constructor", "I/O error on open : eCalendars_Json.txt " + ex);
 						}	
 					}
+				}
+				else
+				{
+					LogIt.info("Calendars", "constructor", "Writing eCalendars_Json.txt file");
+					try
+					{
+						FileWriter 						filewrite			= new FileWriter("/home/pi/HVAC_Data/eCalendars_Json.txt");
+						
+						Gson 							gson 				= new GsonBuilder().setPrettyPrinting().create();
+						
+						String 							messageJson 		= gson.toJson((Ctrl_Calendars.Data) messageReceive);
+
+						filewrite.write(messageJson);
+						filewrite.flush();
+						filewrite.close();
+					}  
+					catch(IOException ex)
+					{
+						LogIt.info("Calendars", "constructor", "I/O error on open : eCalendars_Json.txt " + ex);
+					}	
 				}
 			}
 			catch (Exception e)

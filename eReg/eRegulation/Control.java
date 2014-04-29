@@ -107,8 +107,8 @@ public class Control
 		// Start threads 
 		//
 		
+		Global.display.writeAtPosition(3, 0, " Reading params");
 		new Thread(new Thread_Thermometers(), 								"Thread_Thermometers").start();
-
 		Global.display.writeAtPosition(3, 18, "Ok");
 		Global.waitSeconds(15);														// Must wait 15 secs for all thermometers to be read and have values + allow for retries
 

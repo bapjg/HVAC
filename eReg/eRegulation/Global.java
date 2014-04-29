@@ -154,7 +154,7 @@ public class Global
 			// All is Ok, so see if we need to write a copy locally
 			try
 			{
-				File				file					= new File("eRegulator_Json.txt");
+				File				file					= new File("/home/pi/HVAC_Data/eRegulator_Json.txt");
 				if (file.exists())
 				{
 					Long timeFile							= file.lastModified();
@@ -166,7 +166,7 @@ public class Global
 						LogIt.info("Global", "constructor", "Writing eRegulator_Json.txt file");
 						try
 						{
-							FileWriter 			filewrite			= new FileWriter("eRegulator_Json.txt");
+							FileWriter 			filewrite			= new FileWriter("/home/pi/HVAC_Data/eRegulator_Json.txt");
 							
 							Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
 							
@@ -181,6 +181,26 @@ public class Global
 							LogIt.info("Global", "constructor", "I/O error on open : eRegulator_Json.txt " + ex);
 						}	
 					}
+				}
+				else
+				{
+					LogIt.info("Global", "constructor", "Writing eRegulator_Json.txt file");
+					try
+					{
+						FileWriter 			filewrite			= new FileWriter("/home/pi/HVAC_Data/eRegulator_Json.txt");
+						
+						Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
+						
+						String 				messageJson 		= gson.toJson((Ctrl_Configuration.Data) messageReceive);
+
+						filewrite.write(messageJson);
+						filewrite.flush();
+						filewrite.close();
+					}  
+					catch(IOException ex)
+					{
+						LogIt.info("Global", "constructor", "I/O error on open : eRegulator_Json.txt " + ex);
+					}	
 				}
 			}
 			catch (Exception e)
