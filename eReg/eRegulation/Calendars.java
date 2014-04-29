@@ -153,7 +153,7 @@ public class Calendars
 
 		public TasksBackGround(Ctrl_Calendars.TasksBackGround 		tasksBackGround)
 		{
-			System.out.println("1");
+			System.out.println("1"+tasksBackGround.pumpCleanTime);
 			this.pumpCleanTime										= tasksBackGround.pumpCleanTime;
 			System.out.println("2");
 			this.pumpCleanDurationSeconds							= tasksBackGround.pumpCleanDurationSeconds;
