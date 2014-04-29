@@ -55,7 +55,7 @@ public class Thread_BackgroundTasks implements Runnable
 				{
 					Pump		thisPump						= circuit.circuitPump;
 					
-					if (thisPump.dateLastOperated < Global.pumps.dateTimeLastClean)		// pump not used since last clean
+					if (thisPump.dateLastOperated <= Global.pumps.dateTimeLastClean)		// pump not used since last clean
 					{
 						if (!circuit.circuitPump.isOn())			// Not really possible otherwise
 						{
