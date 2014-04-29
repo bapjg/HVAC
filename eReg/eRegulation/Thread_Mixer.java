@@ -106,6 +106,6 @@ public class Thread_Mixer implements Runnable
 			}
 		}
 		circuit.circuitPump.off();
-		LogIt.info("Thread_Mixer", "Run", "Floor Thread ending", true);	
+		LogIt.info("Thread_Mixer", "Run", "Stopping", true);	
 	}
 }

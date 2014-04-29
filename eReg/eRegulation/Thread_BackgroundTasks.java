@@ -34,7 +34,15 @@ public class Thread_BackgroundTasks implements Runnable
 			System.out.println("Global.today()" + Global.today());
 			if ( Global.pumps.dateTimeLastClean 	< Global.today()				) System.out.println("c1");
 			if   (Global.getTimeNowSinceMidnight() 	> tasksBackGround.pumpCleanTime	) System.out.println("c2");		
-			
+			if ( (Global.pumps.dateTimeLastClean 	< Global.today()				)	 // last run was yerterday
+			&&   (Global.getTimeNowSinceMidnight() 	> tasksBackGround.pumpCleanTime	) )	 // time to do it has arrived		
+			{
+				System.out.println("d1");
+			}
+			else
+			{
+				System.out.println("d2");
+			}
 			
 			
 			// CleanPumps : particularly in summer
