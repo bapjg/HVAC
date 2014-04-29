@@ -93,6 +93,7 @@ public class Global
 
 	public static	ArrayList	<Calendars.Away>	awayList;
 	public static	Calendars.TasksBackGround		tasksBackGround;
+	public static	Ctrl_WeatherData				weatherData;
 	
 	public Global()
 	{

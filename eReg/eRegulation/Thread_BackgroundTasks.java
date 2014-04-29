@@ -1,5 +1,7 @@
 package eRegulation;
 
+import HVAC_Messages.Ctrl_WeatherData;
+
 public class Thread_BackgroundTasks implements Runnable
 {
 	public static final int			SUMMER_PUMPS_Waiting			= 0;
@@ -12,8 +14,7 @@ public class Thread_BackgroundTasks implements Runnable
 	}
 	public void run()
 	{
-		Integer i;
-		
+		int i;
 		// This task must handle :
 		//   Summer pump running
 		//   Antifreeze
@@ -23,6 +24,7 @@ public class Thread_BackgroundTasks implements Runnable
 		LogIt.info("Thread_Background", "Run", "Starting", true);
 		
 		Calendars.TasksBackGround			tasksBackGround			= Global.tasksBackGround;
+											
 		
 		while (!Global.stopNow)
 		{
@@ -87,7 +89,6 @@ public class Thread_BackgroundTasks implements Runnable
 			{
 				// Start Radiator temp objective antiFreeze + 2000
 			}
-			Global.waitSeconds(300);							// Wait 5 mins
 			
 			
 			// Optimise : Particulary hot water in summer and floor in winter
@@ -96,8 +97,25 @@ public class Thread_BackgroundTasks implements Runnable
 			
 //		if winter			
 //			circuit.floor.state = optimising
-//			
-			// Get the weather forecast
+//
+			
+			
+			
+			// Get the weather forecast after startup (= null) OR last forecast before latest 6hour interval within the day
+			
+			if ( (Global.weatherData == null)
+			||	 (Global.weatherData.dateTimeObtained < Global.getTimeAtMidnight() + Global.getTimeNowSinceMidnight() / (6 * 60 * 60 * 1000L))   ) // Latest 6 hour interval in day
+			{
+				try
+				{
+					Global.weatherData							= new Ctrl_WeatherData();
+				}
+				catch (Exception e)
+				{
+				}
+			}
+			Global.waitSeconds(300);							// Wait 5 mins
+
 		}
 		LogIt.info("Thread_Background", "Run", "Stopping", true);		
 	}
