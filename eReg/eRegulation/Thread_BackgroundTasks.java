@@ -28,6 +28,7 @@ public class Thread_BackgroundTasks implements Runnable
 		
 		while (!Global.stopNow)
 		{
+			System.out.println("tasksBackGround.pumpCleanTime" + tasksBackGround.pumpCleanTime);
 			// CleanPumps : particularly in summer
 			if ( (Global.pumps.dateTimeLastClean 	< Global.today()				)	 // last run was yerterday
 			&&   (Global.getTimeNowSinceMidnight() 	> tasksBackGround.pumpCleanTime	) )	 // time to do it has arrived		
