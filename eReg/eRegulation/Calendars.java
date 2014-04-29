@@ -129,8 +129,6 @@ public class Calendars
 			Global.awayList.add(new Away(paramAway));
 		}
 		//		get tasksBackGround information
-		System.out.println("tBG");
-		System.out.println(calendarData.tasksBackGround.pumpCleanTime);
 		Global.tasksBackGround													= new TasksBackGround(calendarData.tasksBackGround);
 		//
 		//==================================================================================
@@ -154,11 +152,8 @@ public class Calendars
 
 		public TasksBackGround(Ctrl_Calendars.TasksBackGround 		tasksBackGround)
 		{
-			System.out.println("1"+tasksBackGround.pumpCleanTime);
 			this.pumpCleanTime										= tasksBackGround.pumpCleanTime;
-			System.out.println("2");
 			this.pumpCleanDurationSeconds							= tasksBackGround.pumpCleanDurationSeconds;
-			System.out.println("3");
 			this.antiFreeze											= tasksBackGround.antiFreeze;
 			
 		}
