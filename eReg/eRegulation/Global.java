@@ -66,8 +66,6 @@ public class Global
 	
 	public static 	Relays	 						relays;
 	public static 	Relay							burnerPower;
-//	public static 	Relay							mixerUp;
-//	public static 	Relay							mixerDown;
 	
 	public static 	Circuits	 					circuits;
 	public static 	Circuit_HotWater				circuitHotWater;
@@ -133,7 +131,7 @@ public class Global
 			// There is a problem, so read the last file received
 			try
 			{
-				File						file			= new File("eRegulator_Json.txt");
+				File						file			= new File("/home/pi/HVAC_Data/eRegulator_Json.txt");
 				FileInputStream  			fileread		= new FileInputStream (file);
 				byte[] 						data 			= new byte[(int) file.length()];
 				fileread.read(data);
@@ -146,7 +144,8 @@ public class Global
 			}  
 			catch(IOException ex)
 			{
-				System.out.println("I/O error on open : " + ex);
+				System.out.println("I/O error on open : eRegulator_Json " + ex);
+				System.exit(Ctrl_Actions_Stop.EXIT_Stop);				// 0 = stop application
 			}	
 		}
 		else
@@ -179,14 +178,14 @@ public class Global
 						}  
 						catch(IOException ex)
 						{
-							LogIt.info("Global", "constructor", "I/O error on open : " + ex);
+							LogIt.info("Global", "constructor", "I/O error on open : eRegulator_Json.txt " + ex);
 						}	
 					}
 				}
 			}
 			catch (Exception e)
 			{
-				LogIt.info("Global", "constructor", "I/O error on open : " + e);
+				LogIt.info("Global", "constructor", "I/O error on open : eRegulator_Json.txt " + e);
 			}
 		}
 		Global.httpSemaphore.semaphoreUnLock();			

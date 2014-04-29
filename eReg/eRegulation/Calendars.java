@@ -34,7 +34,7 @@ public class Calendars
 			// There is a problem, so read the last file received
 			try
 			{
-				File										file				= new File("eCalendars_Json.txt");
+				File										file				= new File("/home/pi/HVAC_Data/eCalendars_Json.txt");
 				FileInputStream  							fileread			= new FileInputStream (file);
 				byte[] 										data 				= new byte[(int) file.length()];
 				fileread.read(data);
@@ -47,7 +47,7 @@ public class Calendars
 			}  
 			catch(IOException ex)
 			{
-				System.out.println("I/O error on open : " + ex);		//Probably file dont exist. Can only bomb out
+				System.out.println("I/O error on open : eCalendars_Json.txt " + ex);		//Probably file dont exist. Can only bomb out
 				System.exit(Ctrl_Actions_Stop.EXIT_Stop);				// 0 = stop application
 			}	
 		}
@@ -56,7 +56,7 @@ public class Calendars
 			// All is Ok, so see if we need to write a copy locally
 			try
 			{
-				File										file				= new File("eCalendars_Json.txt");
+				File										file				= new File("/home/pi/HVAC_Data/eCalendars_Json.txt");
 				if (file.exists())
 				{
 					Long timeFile												= file.lastModified();
@@ -68,26 +68,26 @@ public class Calendars
 						System.out.println("Calendars.constructor writing eRegulator_Json.txt file");
 						try
 						{
-							FileWriter 						filewrite			= new FileWriter("eRegulator_Json.txt");
+							FileWriter 						filewrite			= new FileWriter("/home/pi/HVAC_Data/eCalendars_Json.txt");
 							
 							Gson 							gson 				= new GsonBuilder().setPrettyPrinting().create();
 							
 							String 							messageJson 		= gson.toJson((Ctrl_Calendars.Data) messageReceive);
-
+	
 							filewrite.write(messageJson);
 							filewrite.flush();
 							filewrite.close();
 						}  
 						catch(IOException ex)
 						{
-							System.out.println("I/O error on open : " + ex);
+							System.out.println("I/O error on open : eCalendars_Json.txt " + ex);
 						}	
 					}
 				}
 			}
 			catch (Exception e)
 			{
-				System.out.println("Calendars.constructor Exception = ");
+				System.out.println("Calendars.constructor Exception = " + e);
 			}
 		}
 		Global.httpSemaphore.semaphoreUnLock();			
