@@ -31,10 +31,6 @@ public class Z_Initialise_Weather
 		}
 		//
 		//================================================================================================================================
-	
-		
-		
-		
 		
     }
 	public static Long dateTimeFromUTC(String utc)
