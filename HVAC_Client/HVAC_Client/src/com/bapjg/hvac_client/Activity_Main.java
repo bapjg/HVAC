@@ -73,12 +73,14 @@ public class Activity_Main 			extends Activity
         tabTemperatures.setTabListener	(new Listener_Tabs(Global.menuTemperatures));
         tabImmediate.setTabListener		(new Listener_Tabs(Global.menuImmediate));
         tabCalendars.setTabListener		(new Listener_Tabs(Global.menuCalendars));
+        tabWeather.setTabListener		(new Listener_Tabs(Global.menuWeather));
         tabConfiguration.setTabListener	(new Listener_Tabs(Global.menuConfiguration));
         tabActions.setTabListener		(new Listener_Tabs(Global.menuActions));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabImmediate);
         actionbar.addTab(tabCalendars);
+        actionbar.addTab(tabWeather);
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
 

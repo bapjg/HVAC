@@ -18,10 +18,6 @@ import android.widget.Button;
 public class Menu_1_Temperatures 	extends 	Menu_0_Fragment 
 									implements 	View.OnClickListener
 {
-	public Menu_1_Temperatures()
-	{
-		super();
-	}
 	public Menu_1_Temperatures(int menuLayout)
 	{
 		super(menuLayout);

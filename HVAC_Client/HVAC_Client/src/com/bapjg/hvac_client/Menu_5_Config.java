@@ -20,7 +20,7 @@ public class Menu_5_Config 						extends 			Menu_0_Fragment
 {
 	public Menu_5_Config(int menuLayout)
 	{
-		super( menuLayout);
+		super(menuLayout);
 	}
 	public void onClick(View myView) // This is the onClick event from the Menu
 	{
