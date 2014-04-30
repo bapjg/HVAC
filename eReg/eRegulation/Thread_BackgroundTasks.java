@@ -24,22 +24,13 @@ public class Thread_BackgroundTasks implements Runnable
 		LogIt.info("Thread_Background", "Run", "Starting", true);
 		
 		Calendars.TasksBackGround			tasksBackGround			= Global.tasksBackGround;
-											
 		
 		while (!Global.stopNow)
 		{
-			if ( (Global.pumps.dateTimeLastClean 	< Global.today()				)	 // last run was yerterday
-			&&   (Global.getTimeNowSinceMidnight() 	> tasksBackGround.pumpCleanTime	) )	 // time to do it has arrived		
-			{
-				System.out.println("d1");
-			}
-			else
-			{
-				System.out.println("d2");
-			}
-			
-			
+			//=========================================================================================================================================
+			//
 			// CleanPumps : particularly in summer
+			//
 			if ( (Global.pumps.dateTimeLastClean 	< Global.today()				)	 // last run was yerterday
 			&&   (Global.getTimeNowSinceMidnight() 	> tasksBackGround.pumpCleanTime	) )	 // time to do it has arrived		
 			{
@@ -79,8 +70,13 @@ public class Thread_BackgroundTasks implements Runnable
 				}
 				LogIt.action("Summer Pumps", "Off");
 			}
+			//
+			//=========================================================================================================================================
 
+			//=========================================================================================================================================
+			//
 			// Ensure no freezing : Particulary in winter
+			//
 			if (Global.thermoHotWater.reading 		< tasksBackGround.antiFreeze)
 			{
 				// Start HW temp objective antiFreeze + 2000
@@ -102,8 +98,13 @@ public class Thread_BackgroundTasks implements Runnable
 			{
 				// Start Radiator temp objective antiFreeze + 2000
 			}
-			
-			
+			//
+			//=========================================================================================================================================
+
+			//=========================================================================================================================================
+			//
+			// Ensure no freezing : Particulary in winter
+			//
 			// Optimise : Particulary hot water in summer and floor in winter
 //		if summer	
 //			circuit.hotwater.state = optimising
@@ -111,11 +112,13 @@ public class Thread_BackgroundTasks implements Runnable
 //		if winter			
 //			circuit.floor.state = optimising
 //
-			
-			
-			
+			//
+			//=========================================================================================================================================
+
+			//=========================================================================================================================================
+			//
 			// Get the weather forecast after startup (= null) OR last forecast before latest 6hour interval within the day
-			
+			//
 			if ( (Global.weatherData == null)
 			||	 (Global.weatherData.dateTimeObtained < Global.getTimeAtMidnight() + Global.getTimeNowSinceMidnight() / (6 * 60 * 60 * 1000L))   ) // Latest 6 hour interval in day
 			{
@@ -127,6 +130,9 @@ public class Thread_BackgroundTasks implements Runnable
 				{
 				}
 			}
+			//
+			//=========================================================================================================================================
+
 			Global.waitSeconds(300);							// Wait 5 mins
 
 		}
