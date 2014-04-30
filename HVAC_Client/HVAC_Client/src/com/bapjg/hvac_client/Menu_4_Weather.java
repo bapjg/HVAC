@@ -15,10 +15,10 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 //Template										variable			= something
 //Template										ext/imp				class
-public class Menu_4_Config 						extends 			Menu_0_Fragment 
+public class Menu_4_Weather 					extends 			Menu_0_Fragment 
 												implements 			View.OnClickListener
 {
-	public Menu_4_Config(int menuLayout)
+	public Menu_4_Weather(int menuLayout)
 	{
 		super( menuLayout);
 	}
@@ -32,21 +32,13 @@ public class Menu_4_Config 						extends 			Menu_0_Fragment
     	FragmentTransaction						fTransaction		= fManager.beginTransaction();
     	Fragment 								panelFragment		= null;
     	
-    	if (myCaption.equalsIgnoreCase("Thermometers"))
+    	if (myCaption.equalsIgnoreCase("Relays"))
     	{
-     		panelFragment 											= new Panel_4_Config_Thermometers();
+//    		panelFragment 											= new Panel_1_Temperatures(R.layout.panel_1_temperatures);
     	}
-    	else if (myCaption.equalsIgnoreCase("Relays"))
+    	else if (myCaption.equalsIgnoreCase("Widgets"))
     	{
-     		panelFragment 											= new Panel_4_Config_Relays();
-    	}
-    	else if (myCaption.equalsIgnoreCase("Pumps"))
-    	{
-     		panelFragment 											= new Panel_4_Config_Pumps();
-    	}
-    	else if (myCaption.equalsIgnoreCase("Circuits"))
-    	{
-     		panelFragment 											= new Panel_4_Config_Circuits();
+//    		panelFragment 											= new Panel_1_Temperatures(R.layout.panel_1_temperatures);
     	}
     	if (panelFragment != null)
     	{

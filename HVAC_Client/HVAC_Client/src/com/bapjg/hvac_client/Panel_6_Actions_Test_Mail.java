@@ -24,21 +24,21 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 //Template										variable			= something
 //Template										ext/imp				class
-public class Panel_5_Actions_Test_Mail 			extends 			Panel_0_Fragment  
+public class Panel_6_Actions_Test_Mail 			extends 			Panel_0_Fragment  
 												implements 			TCP_Response
 {
-	public Panel_5_Actions_Test_Mail()
+	public Panel_6_Actions_Test_Mail()
 	{
 		super();
 	}
-    public Panel_5_Actions_Test_Mail(int menuLayout)
+    public Panel_6_Actions_Test_Mail(int menuLayout)
     {
 		super(menuLayout);
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity												= getActivity();
-    	View									thisView			= inflater.inflate(R.layout.panel_5_actions_test_mail, container, false);
+    	View									thisView			= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
  
     	thisView.findViewById(R.id.buttonSendMail).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {sendMail(v);	}});
    	

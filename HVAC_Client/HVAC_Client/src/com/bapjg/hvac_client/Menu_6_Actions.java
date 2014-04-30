@@ -15,9 +15,9 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 //Template										variable			= something
 //Template										ext/imp				class
-public class Menu_5_Actions extends Menu_0_Fragment implements View.OnClickListener
+public class Menu_6_Actions extends Menu_0_Fragment implements View.OnClickListener
 {
-	public Menu_5_Actions(int menuLayout)
+	public Menu_6_Actions(int menuLayout)
 	{
 		super(menuLayout);
 	}
@@ -33,15 +33,15 @@ public class Menu_5_Actions extends Menu_0_Fragment implements View.OnClickListe
     	
     	if (myCaption.equalsIgnoreCase("Relays"))
     	{
-    		panelFragment 											= new Panel_5_Actions_Relays(R.layout.panel_5_actions_relays);
+    		panelFragment 											= new Panel_6_Actions_Relays(R.layout.panel_6_actions_relays);
     	}
     	else if (myCaption.equalsIgnoreCase("Test Mail"))
     	{
-    		panelFragment 											= new Panel_5_Actions_Test_Mail(R.layout.panel_5_actions_test_mail);
+    		panelFragment 											= new Panel_6_Actions_Test_Mail(R.layout.panel_6_actions_test_mail);
     	}
     	else if (myCaption.equalsIgnoreCase("Stop"))
     	{
-    		panelFragment 											= new Panel_5_Actions_Stop(R.layout.panel_5_actions_stop);
+    		panelFragment 											= new Panel_6_Actions_Stop(R.layout.panel_6_actions_stop);
     	}
     	else if (myCaption.equalsIgnoreCase("Action4"))
     	{

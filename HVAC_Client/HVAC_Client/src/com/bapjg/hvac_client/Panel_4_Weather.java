@@ -16,14 +16,14 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 //Template										variable			= something
 //Template										ext/imp				class
-public class Panel_3_Calendars 					extends 			Panel_0_Fragment
+public class Panel_4_Weather 					extends 			Panel_0_Fragment
 												implements 			TCP_Response
 {
-	public Panel_3_Calendars()
+	public Panel_4_Weather()
 	{
 		super();
 	}
-    public Panel_3_Calendars(int menuLayout)
+    public Panel_4_Weather(int menuLayout)
     {
 		super(menuLayout);
     }

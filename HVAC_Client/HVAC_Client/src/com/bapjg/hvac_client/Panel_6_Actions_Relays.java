@@ -24,16 +24,16 @@ import android.widget.Toast;
 //Template										variable			= something
 //Template										ext/imp				class
 @SuppressLint("ValidFragment")
-public class Panel_5_Actions_Relays 			extends 			Panel_0_Fragment  
+public class Panel_6_Actions_Relays 			extends 			Panel_0_Fragment  
 												implements 			TCP_Response
 {
 	public int									panelLayout;
 		
-	public Panel_5_Actions_Relays()
+	public Panel_6_Actions_Relays()
 	{
 		super();
 	}
-    public Panel_5_Actions_Relays(int menuLayout)
+    public Panel_6_Actions_Relays(int menuLayout)
     {
 		super(menuLayout);
 		this.panelLayout											= menuLayout;

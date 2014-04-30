@@ -33,7 +33,7 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			if ( (Global.pumps.dateTimeLastClean 	< 	Global.today()										)	 		// last run was yerterday
 			&&   (tasksBackGround.pumpCleanTime		> 	Global.getTimeNowSinceMidnight()						) 		// time to do it has arrived		
-			&&   (tasksBackGround.pumpCleanTime		< 	Global.getTimeNowSinceMidnight() + (30 * 60 * 1000L)	) 	)	// but not too late		
+			&&   (tasksBackGround.pumpCleanTime		< 	Global.getTimeNowSinceMidnight() + (30 * 60 * 1000L)	) 	)	// but not too late	(allow 30 mins	
 			{
 				LogIt.action("Summer Pumps", "On");
 				

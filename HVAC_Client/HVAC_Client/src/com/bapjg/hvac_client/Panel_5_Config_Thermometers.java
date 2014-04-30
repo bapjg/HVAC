@@ -32,7 +32,7 @@ import android.widget.EditText;
 //Template										variable			= something
 //Template										ext/imp				class
 
-public class Panel_4_Config_Thermometers 		extends 			Panel_0_Fragment 
+public class Panel_5_Config_Thermometers 		extends 			Panel_0_Fragment 
 												implements 			TCP_Response
 {
 	private Adapter_Thermometers 				adapter;
@@ -43,7 +43,7 @@ public class Panel_4_Config_Thermometers 		extends 			Panel_0_Fragment
 	private FragmentManager						myFragmentManager;
 //	private int									menuLayout;
 
-	public Panel_4_Config_Thermometers()
+	public Panel_5_Config_Thermometers()
 	{
 		super();
 	}
@@ -60,7 +60,7 @@ public class Panel_4_Config_Thermometers 		extends 			Panel_0_Fragment
         myContainer 												= container;
         myActivity													= getActivity();
         myFragmentManager 											= myActivity.getFragmentManager();
-        View 									myView 				= myInflater.inflate(R.layout.panel_4_config_header, container, false);
+        View 									myView 				= myInflater.inflate(R.layout.panel_5_config_header, container, false);
         myAdapterView												= (AdapterView) myView.findViewById(R.id.List_View);
 
         TCP_Send(new Ctrl_Configuration().new Request());
