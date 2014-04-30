@@ -52,12 +52,12 @@ public class Panel_5_Config_Circuits 			extends 			Panel_0_Fragment
         myContainer 												= container;
         myActivity													= getActivity();
         myFragmentManager 											= myActivity.getFragmentManager();
-        View 									myView 				= myInflater.inflate(R.layout.panel_5_config_header, container, false);
-        myAdapterView												= (AdapterView) myView.findViewById(R.id.List_View);
+        View 									panelView 				= myInflater.inflate(R.layout.panel_5_config_header, container, false);
+        myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
 
         HTTP_Send(new Ctrl_Configuration().new Request());
  
-        return myView;
+        return panelView;
     }
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
 	{
@@ -83,23 +83,23 @@ public class Panel_5_Config_Circuits 			extends 			Panel_0_Fragment
 // Template										variable			= something
 // Template										ext/imp				class
     	// onClick for all buttons in Menu_Pane
-    	Button 									myButton 			= (Button) myView;
-    	String									myCaption			= myButton.getText().toString();
-    	
-		// Set all textColours to white
-		ViewGroup 								viewParent			= (ViewGroup) myView.getParent();
-		for (int i = 0; i < viewParent.getChildCount(); i++)
-		{
-			Button								buttonChild			= (Button) viewParent.getChildAt(i);
-			buttonChild.setTextColor(Color.WHITE);
-		}
-		
-		((Button) myView).setTextColor(Color.YELLOW);
-    	
-    	if (myCaption.equalsIgnoreCase("Thermometers"))
-    	{
-    		menuButtonThermometersClick(myView);	
-    	}
+//    	Button 									myButton 			= (Button) myView;
+//    	String									myCaption			= myButton.getText().toString();
+//    	
+//		// Set all textColours to white
+//		ViewGroup 								viewParent			= (ViewGroup) myView.getParent();
+//		for (int i = 0; i < viewParent.getChildCount(); i++)
+//		{
+//			Button								buttonChild			= (Button) viewParent.getChildAt(i);
+//			buttonChild.setTextColor(Color.WHITE);
+//		}
+//		
+//		((Button) myView).setTextColor(Color.YELLOW);
+//    	
+//    	if (myCaption.equalsIgnoreCase("Thermometers"))
+//    	{
+//    		menuButtonThermometersClick(myView);	
+//    	}
     }
     public void menuButtonThermometersClick(View myView)
     {
@@ -124,12 +124,6 @@ public class Panel_5_Config_Circuits 			extends 			Panel_0_Fragment
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	
     }
-//	public void TCP_Send(Ctrl_Abstract message)
-//	{
-//		TCP_Task								task				= new TCP_Task();
-//	   	task.callBack												= this;					// processFinish
-//	   	task.execute(message);
-//	}
 	public void HTTP_Send(Ctrl_Abstract message)
 	{
 		HTTP_Task								task				= new HTTP_Task();

@@ -34,8 +34,12 @@ public class Menu_3_Calendars 					extends 			Menu_0_Fragment
     	
     	if (myCaption.equalsIgnoreCase("Hot Water"))
     	{
-     		panelFragment 											= new Panel_3_Calendars(R.layout.panel_3_calendars, "Hot_Water");
+     		panelFragment 											= new Panel_3_Calendars(R.layout.panel_3_calendars, "Vocabulary");
     	}
+    	else if (myCaption.equalsIgnoreCase("Hot Water"))
+    	{
+    		panelFragment 											= new Panel_3_Calendars(R.layout.panel_3_calendars, "Radiator");
+     	}
     	else if (myCaption.equalsIgnoreCase("Radiator"))
     	{
     		panelFragment 											= new Panel_3_Calendars(R.layout.panel_3_calendars, "Radiator");

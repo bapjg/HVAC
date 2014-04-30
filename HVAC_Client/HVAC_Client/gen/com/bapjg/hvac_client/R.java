@@ -38,7 +38,7 @@ public final class R {
         public static final int FloorIn=0x7f090013;
         public static final int FloorOut=0x7f090012;
         public static final int HotWater=0x7f09000f;
-        public static final int List_View=0x7f090021;
+        public static final int List_View=0x7f090020;
         public static final int LivingRoom=0x7f090011;
         public static final int Ok=0x7f090007;
         public static final int Outside=0x7f090010;
@@ -81,7 +81,7 @@ public final class R {
         public static final int relayBank=0x7f09002d;
         public static final int relayNumber=0x7f09002e;
         public static final int tempObjective=0x7f090008;
-        public static final int textView1=0x7f090020;
+        public static final int textView1=0x7f090021;
         public static final int timeObjective=0x7f090009;
     }
     public static final class layout {

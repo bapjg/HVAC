@@ -1,9 +1,12 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +22,13 @@ import android.widget.Button;
 public class Panel_3_Calendars 					extends 			Panel_0_Fragment
 												implements 			TCP_Response
 {
+	private Adapter_Circuits	 				adapter;
+	private LayoutInflater						myInflater;
+	private Activity							myActivity;
+	private ViewGroup							myContainer;
+	private View								myAdapterView;
+	private FragmentManager						myFragmentManager;
+	
 	public String								circuitName;
 
 	public Panel_3_Calendars()
@@ -35,13 +45,29 @@ public class Panel_3_Calendars 					extends 			Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
+//OLDOLDOLD
+    	// Inflate the layout for this fragment
+//        return inflater.inflate(R.layout.panel_3_calendars, container, false);
+
+        
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.panel_3_calendars, container, false);
+        myInflater													= inflater;
+        myContainer 												= container;
+        myActivity													= getActivity();
+        myFragmentManager 											= myActivity.getFragmentManager();
+        View 									panelView			= myInflater.inflate(R.layout.panel_5_config_header, container, false);
+        myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
+
+
+// From configuration        
+//        HTTP_Send(new Ctrl_Configuration().new Request());
+ 
+        return panelView;
     }
     @Override
 	public void onClick(View myView) 
 	{
-    	System.out.println("We have arrived in onClick again");
+    	System.out.println("We have arrived in onClick/panel3Calendars again");
     	
     	Button 									myButton 			= (Button) myView;
     	String									myCaption			= myButton.getText().toString();
