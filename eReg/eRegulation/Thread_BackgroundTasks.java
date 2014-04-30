@@ -103,15 +103,27 @@ public class Thread_BackgroundTasks implements Runnable
 
 			//=========================================================================================================================================
 			//
-			// Ensure no freezing : Particulary in winter
-			//
 			// Optimise : Particulary hot water in summer and floor in winter
-//		if summer	
-//			circuit.hotwater.state = optimising
+			//
 			
-//		if winter			
-//			circuit.floor.state = optimising
-//
+			
+			// Must also run floor pump for a certain time to get good reading of concrete/floor temp
+			if (Global.circuits.activeCircuitCount() > 0)
+			{
+				if (Global.boiler.thermoBoiler.reading > 45000)
+				{
+					// Hotwater
+				}
+				else if (Global.circuits.activeCircuitCount() > 18000)
+				{
+					// Floor
+				}
+
+			}
+			else
+			{
+				// Are there any circuit that we were optimising and are left on
+			}
 			//
 			//=========================================================================================================================================
 

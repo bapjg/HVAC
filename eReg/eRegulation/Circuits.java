@@ -30,6 +30,22 @@ public class Circuits
 			}
 		}
 	}
+	public Integer activeCircuitCount()
+	{
+	/*
+	 * Returns the count of active circuits.
+	 */
+		Integer count = 0;
+	
+		for (Circuit_Abstract circuit : circuitList) 
+		{
+			if (circuit.taskActive != null)
+			{
+				count++;
+			}
+		}
+		return count;
+	}
 	public Boolean isSingleActiveCircuit()
 	{
 		/*
