@@ -31,8 +31,9 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			// CleanPumps : particularly in summer
 			//
-			if ( (Global.pumps.dateTimeLastClean 	< Global.today()				)	 // last run was yerterday
-			&&   (Global.getTimeNowSinceMidnight() 	> tasksBackGround.pumpCleanTime	) )	 // time to do it has arrived		
+			if ( (Global.pumps.dateTimeLastClean 	< 	Global.today()										)	 		// last run was yerterday
+			&&   (tasksBackGround.pumpCleanTime		> 	Global.getTimeNowSinceMidnight()						) 		// time to do it has arrived		
+			&&   (tasksBackGround.pumpCleanTime		< 	Global.getTimeNowSinceMidnight() + (30 * 60 * 1000L)	) 	)	// but not too late		
 			{
 				LogIt.action("Summer Pumps", "On");
 				
@@ -52,11 +53,13 @@ public class Thread_BackgroundTasks implements Runnable
 
 				Global.pumps.dateTimeLastClean					= Global.now(); // This value will be higher then dateLastOperated, ensuring a run next day even if unused
 
-				for (i = 0; (i < tasksBackGround.pumpCleanDurationSeconds) && (!Global.stopNow); i++)
+				// This is a wait which allows loop exit if stopButton pressed
+				for (i = 0; (i < tasksBackGround.pumpCleanDurationSeconds) && (!Global.stopNow); i++)			
 				{
 					Global.waitSeconds(1);
 				}
 				
+				// Switch off all pumps but inspect each circuit to see if a task is ow active
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
 					if (circuit.taskActive == null)		// pump not used since 24hours
