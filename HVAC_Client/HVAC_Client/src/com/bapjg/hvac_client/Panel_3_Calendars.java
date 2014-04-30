@@ -19,20 +19,24 @@ import android.widget.Button;
 public class Panel_3_Calendars 					extends 			Panel_0_Fragment
 												implements 			TCP_Response
 {
+	public String								circuitName;
+
 	public Panel_3_Calendars()
 	{
 		super();
+		circuitName													= "";
 	}
-    public Panel_3_Calendars(int menuLayout)
+    public Panel_3_Calendars(int menuLayout, String circuitName)
     {
 		super(menuLayout);
-    }
+		this.circuitName											= circuitName;
+   }
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.panel_4_calendars, container, false);
+        return inflater.inflate(R.layout.panel_3_calendars, container, false);
     }
     @Override
 	public void onClick(View myView) 

@@ -99,19 +99,21 @@ public final class R {
         public static final int panel_0_subcontainer=0x7f03000b;
         public static final int panel_1_temperatures=0x7f03000c;
         public static final int panel_2_immediate=0x7f03000d;
-        public static final int panel_4_calendars=0x7f03000e;
-        public static final int panel_5_config_header=0x7f03000f;
-        public static final int panel_61_actions=0x7f030010;
-        public static final int panel_62_actions=0x7f030011;
-        public static final int panel_63_actions=0x7f030012;
-        public static final int panel_6_actions_relays=0x7f030013;
-        public static final int panel_6_actions_stop=0x7f030014;
-        public static final int panel_6_actions_test_mail=0x7f030015;
-        public static final int row_circuit=0x7f030016;
-        public static final int row_circuit_title=0x7f030017;
-        public static final int row_pump=0x7f030018;
-        public static final int row_relay=0x7f030019;
-        public static final int row_thermometer=0x7f03001a;
+        public static final int panel_3_calendars=0x7f03000e;
+        public static final int panel_4_calendars=0x7f03000f;
+        public static final int panel_5_config_header=0x7f030010;
+        public static final int panel_61_actions=0x7f030011;
+        public static final int panel_62_actions=0x7f030012;
+        public static final int panel_63_actions=0x7f030013;
+        public static final int panel_6_actions_relays=0x7f030014;
+        public static final int panel_6_actions_stop=0x7f030015;
+        public static final int panel_6_actions_test_mail=0x7f030016;
+        public static final int row_circuit=0x7f030017;
+        public static final int row_circuit_title=0x7f030018;
+        public static final int row_circuit_xxx=0x7f030019;
+        public static final int row_pump=0x7f03001a;
+        public static final int row_relay=0x7f03001b;
+        public static final int row_thermometer=0x7f03001c;
     }
     public static final class menu {
         public static final int main=0x7f080000;

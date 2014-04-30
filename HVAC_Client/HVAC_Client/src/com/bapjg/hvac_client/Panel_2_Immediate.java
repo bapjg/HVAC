@@ -29,11 +29,11 @@ public class Panel_2_Immediate 					extends 			Panel_0_Fragment
 {
 	public String								circuitName;
 	
-	public Panel_2_Immediate()
-	{
-		super();
-		circuitName													= "";
-	}
+//	public Panel_2_Immediate()
+//	{
+//		super();
+//		circuitName													= "";
+//	}
     public Panel_2_Immediate(int menuLayout, String circuitName)
     {
 		super(menuLayout);
