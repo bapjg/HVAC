@@ -1,5 +1,7 @@
 package com.bapjg.hvac_client;
 
+import java.util.ArrayList;
+
 import HVAC_Messages.*;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 @SuppressLint("ValidFragment")
@@ -25,14 +28,17 @@ public class Panel_4_Weather 					extends 			Panel_0_Fragment
 	private ViewGroup							myContainer;
 	private View								myAdapterView;
 	private FragmentManager						myFragmentManager;
+	private String								when;
+	private ArrayList <Ctrl_WeatherData.Forecast> forecastList;			
 	
 	public Panel_4_Weather()
 	{
 		super();
 	}
-    public Panel_4_Weather(int menuLayout)
+    public Panel_4_Weather(String when)
     {
-		super(menuLayout);
+		super();
+		this.when													= when;				
     }
     
     @Override
@@ -42,13 +48,25 @@ public class Panel_4_Weather 					extends 			Panel_0_Fragment
         myContainer 												= container;
         myActivity													= getActivity();
         myFragmentManager 											= myActivity.getFragmentManager();
-        View 									panelView			= myInflater.inflate(R.layout.panel_5_config_header, container, false);
+        View 									panelView			= myInflater.inflate(R.layout.panel_4_weather, container, false);
+        TextView 								textview			= (TextView) panelView.findViewById(R.id.dateTime);
+		if (when.equalsIgnoreCase("Today"))
+		{
+	        textview.setText (Global.displayDate(Global.getTimeAtMidnight()));
+		}
+		else if (when.equalsIgnoreCase("Tomorrow"))
+		{
+	        textview.setText (Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+		}
+		else if (when.equalsIgnoreCase("Beyond"))
+		{
+	        textview.setText ("> " + Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+		}
         myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
 
-        // This part can be in processFinishTCP/HTTP 
         TCP_Send(new Ctrl_Weather().new Request());
-        
-        return panelView;    }
+        return panelView;
+    }
     @Override
 	public void onClick(View myView) 
 	{
@@ -94,7 +112,43 @@ public class Panel_4_Weather 					extends 			Panel_0_Fragment
 			Ctrl_Weather.Data						resulatWeather		= (Ctrl_Weather.Data) result;
 			Global.weatherForecast				 						= (Ctrl_WeatherData) resulatWeather.weatherData;
 	        AdapterView <Adapter_Weather> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
-	        Adapter_Weather							adapter				= new Adapter_Weather(Global.actContext, R.id.List_View, Global.weatherForecast.forecasts);
+	        
+			if (when.equalsIgnoreCase("Today"))
+			{
+		        forecastList											= new ArrayList <Ctrl_WeatherData.Forecast> ();
+		        for (Ctrl_WeatherData.Forecast forcastItem : Global.weatherForecast.forecasts)
+		        {
+		        	if  ((forcastItem.dateTime.from > Global.getTimeAtMidnight())
+		        	&& 	 (forcastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L))
+		        	{
+		        		forecastList.add(forcastItem);
+		        	}
+		        }
+			}
+			else if (when.equalsIgnoreCase("Tomorrow"))
+			{
+		        forecastList											= new ArrayList <Ctrl_WeatherData.Forecast> ();
+		        for (Ctrl_WeatherData.Forecast forcastItem : Global.weatherForecast.forecasts)
+		        {
+		        	if  ((forcastItem.dateTime.from > Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L)
+		        	&& 	 (forcastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L * 2))
+		        	{
+		        		forecastList.add(forcastItem);
+		        	}
+		        }
+			}
+			else if (when.equalsIgnoreCase("Beyond"))
+			{
+		        forecastList											= new ArrayList <Ctrl_WeatherData.Forecast> ();
+		        for (Ctrl_WeatherData.Forecast forcastItem : Global.weatherForecast.forecasts)
+		        {
+		        	if  (forcastItem.dateTime.from > Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L * 3)
+		        	{
+		        		forecastList.add(forcastItem);
+		        	}
+		        }
+			}
+	        Adapter_Weather							adapter				= new Adapter_Weather(Global.actContext, R.id.List_View, forecastList);
 	        view.setAdapter(adapter);
 		}
 		else

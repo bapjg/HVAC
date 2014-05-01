@@ -42,40 +42,6 @@ public class Global
 	public Global() 
 	{
 	}
-    public static String displayDate(Long dateTime)
-    {
-    	String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
-        calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime);
-    	
-    	return dateTimeString;
-    }
-    public static String displayTime(Long dateTime)
-    {
-    	String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm:ss");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
-        calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime); 
-    	
-    	return dateTimeString;
-    }
-    public static String displayTimeShort(Long dateTime)
-    {
-    	String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
-        calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime); 
-    	
-    	return dateTimeString;
-    }
-    
     public static String displayTemperature(Integer temperature)
 	{
 		int degrees = temperature/1000;
@@ -123,6 +89,43 @@ public class Global
 			}
 		}
 		);
+    }
+	public static Long now()
+    {
+    	return System.currentTimeMillis();
+    }
+	public static String displayDate(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);
+    	
+    	return dateTimeString;
+    }
+    public static String displayTime(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm:ss");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime); 
+    	
+    	return dateTimeString;
+    }
+    public static String displayTimeShort(Long dateTime)
+    {
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime); 
+    	
+    	return dateTimeString;
     }
 	public static Long getTimeAtMidnight()
 	{

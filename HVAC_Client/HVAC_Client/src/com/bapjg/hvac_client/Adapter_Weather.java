@@ -58,22 +58,27 @@ public class Adapter_Weather 					extends 			ArrayAdapter
     	row.cloudValue											= (TextView) convertView.findViewById(R.id.cloudValue);
     	row.cloudAll											= (TextView) convertView.findViewById(R.id.cloudAll);
 
-    	Ctrl_WeatherData.Forecast				listItem		= (Ctrl_WeatherData.Forecast) listData.get(position - 1);
+    	Ctrl_WeatherData.Forecast				listItem		= (Ctrl_WeatherData.Forecast) listData.get(position);
     	
-       	row.time.setText								(listItem.dateTime.from + " - " + listItem.dateTime.from);											
+    	String 									time_from		= Global.displayTimeShort(listItem.dateTime.from);
+    	String 									time_to			= Global.displayTimeShort(listItem.dateTime.to);
+    	
+       	row.time.setText								(time_from + " - " + time_to);											
        	row.temperature.setText							(listItem.temperature.value.toString());											
-    	row.temperatureMinMax.setText					(listItem.temperature.min.toString() + " - " + listItem.temperature.max.toString());								
-    	row.precipitationValue.setText					(listItem.precipitation.value.toString());									
-    	row.precipitationType.setText					(listItem.precipitation.type);								
+    	row.temperatureMinMax.setText					(Math.round(listItem.temperature.min) + " - " + Math.round(listItem.temperature.max));								
+    	if (listItem.precipitation != null)
+    	{
+    		row.precipitationValue.setText				(listItem.precipitation.value.toString());									
+    		row.precipitationType.setText				(listItem.precipitation.type);
+    	}
     	row.windSpeed.setText							(listItem.windSpeed.speed.toString());													
     	row.windName.setText							(listItem.windSpeed.name);													
     	row.windDirection.setText						(listItem.windDirection.code);											
-    	row.cloudValue.setText							(listItem.clouds.value.toString());												
     	row.cloudAll.setText							(listItem.clouds.all.toString());	
+    	row.cloudValue.setText							(listItem.clouds.value);												
 
     	convertView.setTag(row);
-
-    return convertView;
+    	return convertView;
     }
     static class RowHolder 
     {
@@ -85,8 +90,8 @@ public class Adapter_Weather 					extends 			ArrayAdapter
     	TextView 							windSpeed;
     	TextView 							windName;
     	TextView 							windDirection;
-    	TextView 							cloudValue;
     	TextView 							cloudAll;
+    	TextView 							cloudValue;
     }	
 //    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
 //    {

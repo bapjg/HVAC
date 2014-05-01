@@ -37,8 +37,8 @@ public class Thread_TCPListen 			implements Runnable
 			        // This previous line results in an EOFException
 			        
 			        message_in 												= (Ctrl_Abstract) input.readObject();
-			        System.out.println("message_in.gc " + message_in.getClass().toString());
-			    	if (message_in == null)
+
+			        if (message_in == null)
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "Null received from client", true);            
 			            message_out 										= new Ctrl_Abstract().new Nack();
@@ -64,7 +64,6 @@ public class Thread_TCPListen 			implements Runnable
 			        } 
 
 			        ObjectOutputStream 		output							= null;
-			        System.out.println("message_in.gc " + message_out.getClass().toString());
 					
 					output 													= new ObjectOutputStream(UI_Socket.getOutputStream());
 					output.writeObject(message_out);
