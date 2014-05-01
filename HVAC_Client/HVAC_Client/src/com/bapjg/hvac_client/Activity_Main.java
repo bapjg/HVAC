@@ -83,9 +83,6 @@ public class Activity_Main 			extends Activity
         actionbar.addTab(tabWeather);
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
-
-        //HTTP_Req_Ping		httpRequest					= new HTTP_Req_Ping();
-		//httpRequest.execute();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 

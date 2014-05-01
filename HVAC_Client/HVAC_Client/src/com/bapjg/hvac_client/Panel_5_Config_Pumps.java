@@ -136,10 +136,10 @@ public class Panel_5_Config_Pumps 				extends 			Panel_0_Fragment
 
 		if (result instanceof Ctrl_Configuration.Data)
 		{
-		Global.eRegConfiguration			 						= (Ctrl_Configuration.Data) result;
-        AdapterView <Adapter_Pumps> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
-        Adapter_Pumps							adapter				= new Adapter_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
-        view.setAdapter(adapter);
+			Global.eRegConfiguration								= (Ctrl_Configuration.Data) result;
+	        AdapterView <Adapter_Pumps> 		view				= (AdapterView) myContainer.findViewById(R.id.List_View);
+	        Adapter_Pumps						adapter				= new Adapter_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
+	        view.setAdapter(adapter);
 		}
 		else
 		{

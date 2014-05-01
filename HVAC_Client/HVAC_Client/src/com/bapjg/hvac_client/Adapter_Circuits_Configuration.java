@@ -13,12 +13,12 @@ import HVAC_Messages.*;
 
 //Template										variable			= something
 //Template										ext/imp				class
-public class Adapter_Circuits 					extends 			ArrayAdapter
+public class Adapter_Circuits_Configuration 	extends 			ArrayAdapter
 {
     private ArrayList							listData;
     private LayoutInflater 						myInflater;
  
-    public Adapter_Circuits(Context context, int resource, ArrayList listData) 
+    public Adapter_Circuits_Configuration(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
         
@@ -61,7 +61,7 @@ public class Adapter_Circuits 					extends 			ArrayAdapter
 //        }
         if (position == 0)
         {
-        	convertView 											= myInflater.inflate(R.layout.row_circuit_title, null);
+        	convertView 											= myInflater.inflate(R.layout.row_circuit_configuration_title, null);
         	title 													= new TitleHolder();
         	title.name 												= (TextView) convertView.findViewById(R.id.name);
         	title.gradient 											= (TextView) convertView.findViewById(R.id.gradient);
@@ -79,7 +79,7 @@ public class Adapter_Circuits 					extends 			ArrayAdapter
         }
         else
         {
-        	convertView 											= myInflater.inflate(R.layout.row_circuit, null);
+        	convertView 											= myInflater.inflate(R.layout.row_circuit_configuration, null);
         	row 													= new RowHolder();
         	row.name 												= (TextView) convertView.findViewById(R.id.name);
         	row.gradient 											= (CheckBox) convertView.findViewById(R.id.gradient);

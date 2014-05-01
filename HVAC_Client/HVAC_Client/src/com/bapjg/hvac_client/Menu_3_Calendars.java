@@ -32,23 +32,12 @@ public class Menu_3_Calendars 					extends 			Menu_0_Fragment
     	FragmentTransaction						fTransaction		= fManager.beginTransaction();
     	Fragment 								panelFragment		= null;
     	
-    	if (myCaption.equalsIgnoreCase("Hot Water"))
-    	{
-     		panelFragment 											= new Panel_3_Calendars(R.layout.panel_3_calendars, "Vocabulary");
-    	}
-    	else if (myCaption.equalsIgnoreCase("Hot Water"))
-    	{
-    		panelFragment 											= new Panel_3_Calendars(R.layout.panel_3_calendars, "Radiator");
-     	}
-    	else if (myCaption.equalsIgnoreCase("Radiator"))
-    	{
-    		panelFragment 											= new Panel_3_Calendars(R.layout.panel_3_calendars, "Radiator");
-     	}
-    	else if (myCaption.equalsIgnoreCase("Floor"))
-    	{
-    		panelFragment 											= new Panel_3_Calendars(R.layout.panel_3_calendars, "Floor");
-    	}
-    	if (panelFragment != null)
+    	if      (myCaption.equalsIgnoreCase("Vocabulary")) 		panelFragment 	= new Panel_3_Calendars_Vocabulary();
+    	else if (myCaption.equalsIgnoreCase("Hot Water"))   	panelFragment 	= new Panel_3_Calendars_Circuits(R.layout.panel_3_calendars, "Hot_Water");
+     	else if (myCaption.equalsIgnoreCase("Radiator"))		panelFragment 	= new Panel_3_Calendars_Circuits(R.layout.panel_3_calendars, "Radiator");
+    	else if (myCaption.equalsIgnoreCase("Floor"))			panelFragment 	= new Panel_3_Calendars_Circuits(R.layout.panel_3_calendars, "Floor");
+
+    	if 		(panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);
     	}

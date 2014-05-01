@@ -60,8 +60,8 @@ public class Panel_5_Config_Thermometers 		extends 			Panel_0_Fragment
         myContainer 												= container;
         myActivity													= getActivity();
         myFragmentManager 											= myActivity.getFragmentManager();
-        View 									myView 				= myInflater.inflate(R.layout.panel_5_config_header, container, false);
-        myAdapterView												= (AdapterView) myView.findViewById(R.id.List_View);
+        View 									panelView			= myInflater.inflate(R.layout.panel_5_config_header, container, false);
+        myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
 
         TCP_Send(new Ctrl_Configuration().new Request());
  
@@ -78,7 +78,7 @@ public class Panel_5_Config_Thermometers 		extends 			Panel_0_Fragment
 //        //    view.setOnItemClickListener((OnItemClickListener) this);	
 //         }
  
-        return myView;
+        return panelView;
     }
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
 	{
@@ -158,9 +158,9 @@ public class Panel_5_Config_Thermometers 		extends 			Panel_0_Fragment
 		if (result instanceof Ctrl_Configuration.Data)
 		{
 			Global.eRegConfiguration			 					= (Ctrl_Configuration.Data) result;
-			AdapterView <Adapter_Thermometers> 	view				= (AdapterView) myContainer.findViewById(R.id.List_View);
+			AdapterView <Adapter_Thermometers> 	listView			= (AdapterView) myContainer.findViewById(R.id.List_View);
 			Adapter_Thermometers 				adapter				= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-			view.setAdapter(adapter);
+			listView.setAdapter(adapter);
 		}
 		else
 		{

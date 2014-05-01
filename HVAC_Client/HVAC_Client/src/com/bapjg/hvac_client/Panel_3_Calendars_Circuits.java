@@ -1,6 +1,7 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl_Calendars;
 import HVAC_Messages.Ctrl_Configuration;
 import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
@@ -19,10 +20,9 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 //Template										variable			= something
 //Template										ext/imp				class
-public class Panel_3_Calendars 					extends 			Panel_0_Fragment
-												implements 			TCP_Response
+public class Panel_3_Calendars_Circuits 		extends 			Panel_0_Fragment
 {
-	private Adapter_Circuits	 				adapter;
+	private Adapter_Circuits_Calendars 			adapter;
 	private LayoutInflater						myInflater;
 	private Activity							myActivity;
 	private ViewGroup							myContainer;
@@ -31,12 +31,12 @@ public class Panel_3_Calendars 					extends 			Panel_0_Fragment
 	
 	public String								circuitName;
 
-	public Panel_3_Calendars()
+	public Panel_3_Calendars_Circuits()
 	{
 		super();
 		circuitName													= "";
 	}
-    public Panel_3_Calendars(int menuLayout, String circuitName)
+    public Panel_3_Calendars_Circuits(int menuLayout, String circuitName)
     {
 		super(menuLayout);
 		this.circuitName											= circuitName;
@@ -45,10 +45,6 @@ public class Panel_3_Calendars 					extends 			Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//OLDOLDOLD
-    	// Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.panel_3_calendars, container, false);
-
         
         // Inflate the layout for this fragment
         myInflater													= inflater;
@@ -58,10 +54,18 @@ public class Panel_3_Calendars 					extends 			Panel_0_Fragment
         View 									panelView			= myInflater.inflate(R.layout.panel_5_config_header, container, false);
         myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
 
+//        AdapterView <Adapter_Circuits_Calendars> 	view			= (AdapterView) myContainer.findViewById(R.id.List_View);
+        AdapterView <Adapter_Circuits_Calendars> 	view			= (AdapterView) panelView.findViewById(R.id.List_View);
 
-// From configuration        
-//        HTTP_Send(new Ctrl_Configuration().new Request());
- 
+        Adapter_Circuits_Calendars					adapter			= null;	
+        for (Ctrl_Calendars.Circuit 	circuit : Global.eRegCalendars.circuitList)
+        {
+        	if (circuit.name.equalsIgnoreCase(this.circuitName))
+        	{
+                adapter												= new Adapter_Circuits_Calendars(Global.actContext, R.id.List_View, circuit.calendarList);
+        	}
+        }
+        view.setAdapter(adapter);
         return panelView;
     }
     @Override
@@ -92,16 +96,6 @@ public class Panel_3_Calendars 					extends 			Panel_0_Fragment
 	{
 		// TODO Auto-generated method stub
 		
-	}
-	public void TCP_Send(Ctrl_Abstract message)
-	{
-		TCP_Task								task				= new TCP_Task();
-	   	task.callBack												= this;					// processFinish
-	   	task.execute(message);
-	}
-	public void processFinishTCP(Ctrl_Abstract result) 
-	{
-		Activity								activity			= getActivity();		
 	}
 }
 

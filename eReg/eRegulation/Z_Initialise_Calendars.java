@@ -136,7 +136,7 @@ public class Z_Initialise_Calendars
 		// Send second message to Server to receive what was just sent
 		//
 
-		Ctrl_Calendars.Request 				messageSend2			= new Ctrl_Calendars.Request();
+		Ctrl_Calendars.Request 				messageSend2			= new Ctrl_Calendars().new Request();
 			
 		messageReceive												= null;
 

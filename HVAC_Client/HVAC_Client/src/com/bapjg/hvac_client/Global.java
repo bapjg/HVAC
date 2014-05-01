@@ -23,7 +23,7 @@ public class Global
 	
 	public static	Panel_1_Temperatures		panelTemperatures;
 	public static	Panel_2_Immediate			panelImmediate;	
-	public static	Panel_3_Calendars			panelCalendars;
+	public static	Panel_3_Calendars_Circuits			panelCalendars;
 	public static	Panel_4_Weather				panelWeather;
 	public static	Panel_5_Config_Thermometers	panelConfiguration;
 	public static	Panel_6_Actions_Relays		panelActions;	
@@ -36,7 +36,7 @@ public class Global
 	public static	Menu_6_Actions				menuActions;
 	
 	public static	Ctrl_Configuration.Data		eRegConfiguration;
-	public static	String						eRegCalendar;
+	public static	Ctrl_Calendars.Data			eRegCalendars;
 
 	public Global() 
 	{

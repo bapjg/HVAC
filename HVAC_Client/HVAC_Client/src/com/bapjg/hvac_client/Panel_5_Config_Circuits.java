@@ -137,8 +137,8 @@ public class Panel_5_Config_Circuits 			extends 			Panel_0_Fragment
 		if (result instanceof Ctrl_Configuration.Data)
 		{
 		Global.eRegConfiguration			 						= (Ctrl_Configuration.Data) result;
-        AdapterView <Adapter_Circuits> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
-        Adapter_Circuits						adapter				= new Adapter_Circuits(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
+        AdapterView <Adapter_Circuits_Configuration> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
+        Adapter_Circuits_Configuration						adapter				= new Adapter_Circuits_Configuration(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
         view.setAdapter(adapter);
 		}
 		else

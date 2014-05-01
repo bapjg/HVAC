@@ -22,16 +22,16 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	public static class Data					extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
-		public ArrayList<Word> 					wordList 					= new ArrayList<Word>();
-		public ArrayList<Circuit>				circuitList 				= new ArrayList<Circuit>();
-		public ArrayList<Away>					awayList 					= new ArrayList<Away>();
+		public ArrayList <Word>					wordList 					= new ArrayList <Word>();
+		public ArrayList <Circuit>				circuitList 				= new ArrayList <Circuit>();
+		public ArrayList <Away>					awayList 					= new ArrayList <Away>();
 		public TasksBackGround					tasksBackGround				= new TasksBackGround();
 	}
 	public class Update							extends 					Ctrl_Calendars.Data
 	{
 		private static final long 				serialVersionUID 			= 1L;
 	}
-	public static class Request					extends 					Ctrl_Calendars
+	public class Request						extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 	}

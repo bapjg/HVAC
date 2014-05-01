@@ -25,7 +25,7 @@ public class Calendars
 
 		HTTP_Request	<Ctrl_Calendars.Request>			httpRequest			= new HTTP_Request <Ctrl_Calendars.Request> ("Management");
 		
-		Ctrl_Calendars.Request	 							messageSend 		= new Ctrl_Calendars.Request();
+		Ctrl_Calendars.Request	 							messageSend 		= new Ctrl_Calendars().new Request();
 		Ctrl_Abstract 										messageReceive 		= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Ctrl_Calendars.Data))
