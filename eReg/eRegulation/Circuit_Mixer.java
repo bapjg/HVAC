@@ -51,8 +51,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 					this.heatRequired.tempMinimum					= 60000;
 					this.heatRequired.tempMaximum					= 80000;
 					state											= CIRCUIT_STATE_AwaitingHeat;
-
-					LogIt.info("Circuit_" + this.name, "sequencer", "Thread Started");
 				}
 				break;
 			case CIRCUIT_STATE_AwaitingHeat:
@@ -89,7 +87,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				//Now fall through
 			case CIRCUIT_STATE_Stopping:
 				if 	(	(Global.circuits.isSingleActiveCircuit())
-//				&& 		(Global.thermoBoiler.reading > taskActive.tempObjective + 30)   )		// Care, we can be above objective while pumpting heat out !!!
+//				&& 		(Global.thermoBoiler.reading > taskActive.tempObjective + 30)   )		// Care, we can be above objective while pumping heat out !!!
 				&& 		(Global.thermoBoiler.reading > Global.thermoFloorIn.reading + 3000)   )	// Solution : Continue while more than 3 degrees than return temp
 				{
 					// We are alone, so as long as there is heat to get out of the system
