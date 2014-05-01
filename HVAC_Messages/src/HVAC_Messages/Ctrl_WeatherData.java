@@ -31,7 +31,7 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 	public	Long									dateTimeObtained;
 	private Forecast								forecast;
 	
-	public class Forecast
+	public class Forecast							implements 		java.io.Serializable
 	{
 		public DateTime								dateTime;		// Tag forcast/time
 		public Symbol								symbol;			// Tag symbol
@@ -44,59 +44,59 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 		public Clouds 								clouds;			// Tag Clouds
 	}
 	
-	public class DateTime
+	public class DateTime							implements 		java.io.Serializable
 	{
 		public Long 								from;			//Tag time/from
 		public Long 								to;				//Tag time/to
 	}
-	public class Symbol
+	public class Symbol								implements 		java.io.Serializable
 	{
 		public Number 								number;			//Tag number
 		public String 								name;			//Tag name
 		public String 								var;			//Tag var
 	}
-	public class Precipitation
+	public class Precipitation						implements 		java.io.Serializable
 	{
 		public Float 								value;			//Tag value
 		public String 								unit;			//Tag unit
 		public String 								type;			//Tag type
 	}
-	public class WindDirection 
+	public class WindDirection 						implements 		java.io.Serializable
 	{
 		public Float 								degrees;		//Tag degrees
 		public String 								code;			//Tag direction eg NNE
 		public String 								name;			//Tag name e.g. North-northeast
 	}
-	public class WindSpeed
+	public class WindSpeed							implements 		java.io.Serializable
 	{
 		public Float 								speed;			//Tag mps (metres per second)
 		public String 								name;			//Tag name (e.g. light breeze)
 	}
-	public class Temperature 
+	public class Temperature 						implements 		java.io.Serializable
 	{
 		public String 								unit;			//Tag unit (Celsius)
 		public Float 								value;			//Tag value
 		public Float 								min;			//Tag value
 		public Float 								max;			//Tag value
 	}
-	public class Pressure 
+	public class Pressure 							implements 		java.io.Serializable
 	{
 		public String 								unit;			//Tag unit (hPa)
 		public Number 								value;			//Tag value
 	}
-	public class Humidity
+	public class Humidity							implements 		java.io.Serializable
 	{
 		public Number 								value;			//Tag value
 		public String 								unit;			//Tag unit "%"
 		public String 								var;			//Tag 
 	}
-	public class Clouds 
+	public class Clouds 							implements 		java.io.Serializable
 	{
 		public String 								value;			//Tag value
 		public Number 								all;			//Tag all (e.g. 92)
 		public String 								unit;			//Tag unit "%"
 	}
-	public class Sun 
+	public class Sun 								implements 		java.io.Serializable
 	{
 		public Long 								sunRise;		//Tag sun/rise
 		public Long 								sunSet;			//Tag sun/set
