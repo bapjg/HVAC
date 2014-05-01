@@ -86,7 +86,8 @@ public class Panel_4_Weather 					extends 			Panel_0_Fragment
 	}
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{
-		Activity								activity			= getActivity();		
+		Activity								activity			= getActivity();	
+		System.out.println("gc " + result.getClass().toString());
 
 		if (result instanceof Ctrl_Weather.Data)
 		{

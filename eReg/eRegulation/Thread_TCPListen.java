@@ -37,7 +37,7 @@ public class Thread_TCPListen 			implements Runnable
 			        // This previous line results in an EOFException
 			        
 			        message_in 												= (Ctrl_Abstract) input.readObject();
-			        
+			        System.out.println("message_in.gc " + message_in.getClass().toString());
 			    	if (message_in == null)
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "Null received from client", true);            
