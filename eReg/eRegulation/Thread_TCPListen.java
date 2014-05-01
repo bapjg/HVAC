@@ -64,6 +64,7 @@ public class Thread_TCPListen 			implements Runnable
 			        } 
 
 			        ObjectOutputStream 		output							= null;
+			        System.out.println("message_in.gc " + message_out.getClass().toString());
 					
 					output 													= new ObjectOutputStream(UI_Socket.getOutputStream());
 					output.writeObject(message_out);
@@ -91,7 +92,7 @@ public class Thread_TCPListen 			implements Runnable
 				}
 				catch (IOException eIO)
 				{
-					LogIt.info("Thread_TCPListen", "Run", "Caught IO", true);            
+					LogIt.info("Thread_TCPListen", "Run", "Caught IO " + eIO, true);            
 				}
 				catch (Exception e)
 				{
