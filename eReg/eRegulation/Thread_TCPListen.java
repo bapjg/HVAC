@@ -9,8 +9,6 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 import HVAC_Messages.*;
-import HVAC_Messages.Ctrl_Actions_Relays.Execute;
-
 
 public class Thread_TCPListen 			implements Runnable
 {
@@ -54,6 +52,8 @@ public class Thread_TCPListen 			implements Runnable
 			    		
 			    		else if (message_in instanceof Ctrl_Configuration.Request)		message_out	= process_Ctrl_Configuration_Request	();
 			    		else if (message_in instanceof Ctrl_Configuration.Update) 		message_out	= process_Ctrl_Configuration_Update		((Ctrl_Configuration.Update) message_in);
+
+			    		else if (message_in instanceof Ctrl_Weather.Request)			message_out	= process_Ctrl_Weather_Request			();
 			    		
 			    		else if (message_in instanceof Ctrl_Actions_Relays.Request)		message_out	= process_Ctrl_Actions_Relays_Request	();
 			    		else if (message_in instanceof Ctrl_Actions_Relays.Execute)		message_out	= process_Ctrl_Actions_Relays_Execute	((Ctrl_Actions_Relays.Execute) message_in);
@@ -235,7 +235,7 @@ public class Thread_TCPListen 			implements Runnable
 		
 		return message_return;
 	}
-  	private Ctrl_Configuration.Data 		process_Ctrl_Configuration_Request			()
+  	private Ctrl_Configuration.Data 	process_Ctrl_Configuration_Request		()
 	{
 		// Returns the current configuration in operation
   		// It is timestamped now(). It should be timestamped with date/time recovered either from server or local file
@@ -287,10 +287,29 @@ public class Thread_TCPListen 			implements Runnable
 		
 		return message_return;
 	}
- 	private Ctrl_Configuration.Data 		process_Ctrl_Configuration_Update(Ctrl_Configuration.Update message_in)
+ 	private Ctrl_Configuration.Data 	process_Ctrl_Configuration_Update		(Ctrl_Configuration.Update message_in)
  	{
  		// Do something with message_in
  		return process_Ctrl_Configuration_Request();
+	}
+	private Ctrl_Weather.Data 			process_Ctrl_Weather_Request			()
+	{
+		// Returns the current configuration in operation
+  		// It is timestamped now(). It should be timestamped with date/time recovered either from server or local file
+  		
+		Ctrl_Weather.Data 						message_return	= new Ctrl_Weather().new Data();			
+		if (Global.weatherData == null)
+		{
+			message_return														= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
+			message_return.weatherData											= null;
+		}
+		else
+		{
+			message_return														= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
+			message_return.weatherData											= Global.weatherData;
+		}
+		return message_return;
+		
 	}
 	private Ctrl_Actions_Relays.Data	process_Ctrl_Actions_Relays_Request		()
 	{

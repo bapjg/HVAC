@@ -32,18 +32,14 @@ public class Menu_4_Weather 					extends 			Menu_0_Fragment
     	FragmentTransaction						fTransaction		= fManager.beginTransaction();
     	Fragment 								panelFragment		= null;
     	
-    	if (myCaption.equalsIgnoreCase("Relays"))
-    	{
-//    		panelFragment 											= new Panel_1_Temperatures(R.layout.panel_1_temperatures);
-    	}
-    	else if (myCaption.equalsIgnoreCase("Widgets"))
-    	{
-//    		panelFragment 											= new Panel_1_Temperatures(R.layout.panel_1_temperatures);
-    	}
-    	if (panelFragment != null)
+    	if      (myCaption.equalsIgnoreCase("Today")) 		panelFragment 	= new Panel_4_Weather();
+    	else if (myCaption.equalsIgnoreCase("Tomorrow"))   	panelFragment 	= new Panel_4_Weather();
+     	else if (myCaption.equalsIgnoreCase("Beyond"))		panelFragment 	= new Panel_4_Weather();
+
+    	if 		(panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);
     	}
-		fTransaction.commit();
+    	fTransaction.commit();  
 	}
 }
