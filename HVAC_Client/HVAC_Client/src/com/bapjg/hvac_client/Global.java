@@ -37,6 +37,7 @@ public class Global
 	
 	public static	Ctrl_Configuration.Data		eRegConfiguration;
 	public static	Ctrl_Calendars.Data			eRegCalendars;
+	public static	Ctrl_WeatherData			weatherForecast;
 
 	public Global() 
 	{

@@ -35,12 +35,12 @@ public class Ctrl_WeatherData 						extends DefaultHandler
 		public DateTime								dateTime;		// Tag forcast/time
 		public Symbol								symbol;			// Tag symbol
 		public Precipitation						precipitation;	// Tag precipitation
-		public WindDirection 						windDirection ;	// Tag WindDirection	
-		public WindSpeed 							windSpeed ;		// Tag WindSpeed
-		public Temperature 							temperature ;	// Tag Temperature
-		public Pressure 							pressure ;		// Tag Pressure
-		public Humidity 							humidity ;		// Tag Humidity
-		public Clouds 								clouds ;		// Tag Clouds
+		public WindDirection 						windDirection;	// Tag WindDirection	
+		public WindSpeed 							windSpeed;		// Tag WindSpeed
+		public Temperature 							temperature;	// Tag Temperature
+		public Pressure 							pressure;		// Tag Pressure
+		public Humidity 							humidity;		// Tag Humidity
+		public Clouds 								clouds;			// Tag Clouds
 	}
 	
 	public class DateTime

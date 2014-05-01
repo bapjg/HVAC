@@ -20,7 +20,6 @@ import android.widget.Button;
 public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
 												implements 			HTTP_Response
 {
-//	private Adapter_Words		 				adapter;
 	private LayoutInflater						myInflater;
 	private Activity							myActivity;
 	private ViewGroup							myContainer;
@@ -97,8 +96,6 @@ public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
 		{
 			Global.toaster("Data NOTNOTNOT received", true);
 		}
-			
 	}
-
 }
 
