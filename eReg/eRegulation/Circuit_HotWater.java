@@ -3,7 +3,7 @@ package eRegulation;
 import HVAC_Messages.Ctrl_Configuration;
 
 public class Circuit_HotWater extends Circuit_Abstract
-{int x = 1;
+{
 //	public Circuit_HotWater(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
 //	{	
 //		super(name, friendlyName, circuitType, tempMax, rampUpTime);
