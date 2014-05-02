@@ -3,7 +3,7 @@ package eRegulation;
 import HVAC_Messages.Ctrl_WeatherData;
 
 public class Thread_BackgroundTasks implements Runnable
-{int x = 1;
+{
 	public static final int			SUMMER_PUMPS_Waiting			= 0;
 	public static final int			SUMMER_PUMPS_Running			= 1;
 	public static final int			SUMMER_PUMPS_FinishedToDay		= 2;

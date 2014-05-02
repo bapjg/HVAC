@@ -9,7 +9,7 @@ import java.util.TimeZone;
 import HVAC_Messages.*;
 
 public class Z_Initialise_Weather
-{int x = 1;
+{
 	public static void main(String[] args)
 	{
 		

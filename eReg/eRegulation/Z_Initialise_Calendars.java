@@ -26,7 +26,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Z_Initialise_Calendars
-{int x = 1;
+{
 
 	public static void main(String[] args)
 	{
