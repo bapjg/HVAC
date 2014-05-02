@@ -7,7 +7,7 @@ import HVAC_Messages.Ctrl_Configuration;
 
 
 public class PIDs
-{
+{int x = 1;
 	public ArrayList<PID> pidList = new ArrayList<PID>();
 	
 //	public void addFromXML(String name, String depth, String sampleIncrement)
