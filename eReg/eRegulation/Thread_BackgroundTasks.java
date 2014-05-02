@@ -22,6 +22,7 @@ public class Thread_BackgroundTasks implements Runnable
 		//   Getting expected weather predictions
 
 		LogIt.info("Thread_Background", "Run", "Starting", true);
+		LogIt.info("Thread_Background", "Run", "Starting again", true);
 		try
 		{
 			Calendars.TasksBackGround			tasksBackGround			= Global.tasksBackGround;
