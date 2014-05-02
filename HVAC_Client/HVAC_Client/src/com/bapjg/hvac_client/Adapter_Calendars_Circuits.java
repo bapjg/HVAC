@@ -13,12 +13,12 @@ import HVAC_Messages.*;
 
 //Template										variable			= something
 //Template										ext/imp				class
-public class Adapter_Circuits_Calendars 		extends 			ArrayAdapter
+public class Adapter_Calendars_Circuits 		extends 			ArrayAdapter
 {
     private ArrayList							listData;
     private LayoutInflater 						myInflater;
  
-    public Adapter_Circuits_Calendars(Context context, int resource, ArrayList listData) 
+    public Adapter_Calendars_Circuits(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
         

@@ -20,43 +20,43 @@
         	android:id			 	= "@+id/day_1"
         	android:text		 	= "1"
         	style				 	= "@style/AD_Text"
-    		android:layout_width 	= "10dp"
+    		android:layout_width 	= "20dp"
    		/>                       	  
     	   	<TextView            	  
         	android:id			 	= "@+id/day_2"
  	      	android:text		 	= "2"
         	style				 	= "@style/AD_Text"
-    		android:layout_width 	= "10dp"
+    		android:layout_width 	= "20dp"
    		/>                       	  
     	   	<TextView            	  
         	android:id			 	= "@+id/day_3"
 	       	android:text		 	= "3"
         	style				 	= "@style/AD_Text"
-    		android:layout_width 	= "10dp"
+    		android:layout_width 	= "20dp"
    		/>
     	<TextView
         	android:id			 	= "@+id/day_4"
 			android:text		 	= "4"
         	style				 	= "@style/AD_Text"
-    		android:layout_width 	= "10dp"
+    		android:layout_width 	= "20dp"
    		/>                       	  
     	<TextView                	  
         	android:id			 	= "@+id/day_5"
  	       	android:text		 	= "5"
 			style				 	= "@style/AD_Text"
-    		android:layout_width 	= "10dp"
+    		android:layout_width 	= "20dp"
    		/>                       	  
     	<TextView                	  
         	android:id			 	= "@+id/empty"
  	       	android:text		 	= ""
 			style				 	= "@style/AD_Text"
-    		android:layout_width 	= "10dp"
+    		android:layout_width 	= "20dp"
    		/>                         
     	<TextView                  
         	android:id			 	= "@+id/day_6"
  	       	android:text		 	= "6"
 			style				 	= "@style/AD_Text"
-    		android:layout_width 	= "10dp"
+    		android:layout_width 	= "20dp"
    		/>                       	
     	<TextView                	
         	android:id			 	= "@+id/day_7"
