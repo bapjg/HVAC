@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class Dialog_Temperature 								extends 		DialogFragment 
 {
 	public NumberPicker 			temperaturePicker;
-	public Interface_Response		callBack;
+//	public Interface_Response		callBack;
 	public Integer					tempMin;
 	public Integer  				step;
 	public Integer  				steps;
