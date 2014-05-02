@@ -9,47 +9,47 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.*;
+import android.widget.DatePicker;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 @SuppressLint("ValidFragment")
-public class Dialog_Time 										extends 		DialogFragment 
+public class Dialog_Date 										extends 		DialogFragment 
 {
-	public TimePicker 	timePicker;
-	public Integer  	timeInitialHour;
-	public Integer  	timeInitialMinute;
+	public DatePicker 	datePicker;
+	public Integer  	dateInitialDay;
+	public Integer  	dateInitialMonth;
+	public Integer  	dateInitialYear;
 	public TextView		writeBack;
 	
-	public Dialog_Time() 
+	public Dialog_Date() 
     {
     }
-	public Dialog_Time(TextView	writeBack) 
+	public Dialog_Date(TextView	writeBack) 
     {
 		super();
 		this.writeBack											= writeBack;
 		
-		String 					timeInitial						= writeBack.getText().toString();
-		String[] 				timeInitialParts				= timeInitial.split(":");
+		String 					dateInitial						= writeBack.getText().toString();
+		String[] 				dateInitialParts				= dateInitial.split("/");
 		
-		this.timeInitialHour									= Integer.parseInt(timeInitialParts[0]);
-		this.timeInitialMinute									= Integer.parseInt(timeInitialParts[1]);
+		this.dateInitialDay										= Integer.parseInt(dateInitialParts[0]);
+		this.dateInitialMonth									= Integer.parseInt(dateInitialParts[1]);
+		this.dateInitialYear									= Integer.parseInt(dateInitialParts[2]);
     }
-
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
     {
         AlertDialog.Builder 	builder 						= new AlertDialog.Builder(getActivity());
         LayoutInflater 			inflater 						= getActivity().getLayoutInflater();
         
-        View					dialogView						= inflater.inflate(R.layout.dialog_time, null);
+        View					dialogView						= inflater.inflate(R.layout.dialog_date, null);
         builder.setView(dialogView);
-        builder.setTitle("Select time");
+        builder.setTitle("Select date");
          
-		timePicker 												= (TimePicker) dialogView.findViewById(R.id.timeObjective);
-		timePicker.setIs24HourView		(true);
-		timePicker.setCurrentHour		(timeInitialHour);
-		timePicker.setCurrentMinute		(timeInitialMinute);
+        datePicker 												= (DatePicker) dialogView.findViewById(R.id.dateObjective);
+        datePicker.init(dateInitialYear, dateInitialMonth, dateInitialDay, null);
 
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
@@ -57,9 +57,10 @@ public class Dialog_Time 										extends 		DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	Integer 				hour 							= timePicker.getCurrentHour();
-     	Integer 				minute 							= timePicker.getCurrentMinute();
-     	writeBack.setText(hour.toString() + ":" + minute.toString());
+     	Integer 				day 							= datePicker.getDayOfMonth();
+     	Integer 				month 							= datePicker.getMonth();
+     	Integer 				year 							= datePicker.getYear();
+     	writeBack.setText(day.toString() + "/" + ((Integer) (month + 1)).toString() + "/" + year.toString());
     	dialog.dismiss();
     }
     public void buttonCancel (DialogInterface dialog, int which)
