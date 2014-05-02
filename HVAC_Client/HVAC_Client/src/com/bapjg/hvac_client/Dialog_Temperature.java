@@ -15,8 +15,8 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 public class Dialog_Temperature 								extends 		DialogFragment 
 {
-	public NumberPicker 			np;
-	public Interface_Response			callBack;
+	public NumberPicker 			temperaturePicker;
+	public Interface_Response		callBack;
 	public Integer					tempMin;
 	public Integer  				step;
 	public Integer  				steps;
@@ -50,23 +50,20 @@ public class Dialog_Temperature 								extends 		DialogFragment
         
         View					dialogView						= inflater.inflate(R.layout.dialog_temperature, null);
         builder.setView(dialogView);
-
-        
         builder.setTitle("Select temperature");
-        
-        
-		np 														= (NumberPicker) dialogView.findViewById(R.id.tempObjective);
+         
+		temperaturePicker 										= (NumberPicker) dialogView.findViewById(R.id.tempObjective);
 	    String[] 				temps 							= new String[steps + 1];
 	    for(int i = 0; i < steps + 1; i++)
 	    {
 	    	temps[i] 											= Integer.toString(i * step + tempMin);
 	    }
 
-	    np.setMinValue(tempMin);
-	    np.setMaxValue(tempMin + steps);
-	    np.setWrapSelectorWheel(false);
-	    np.setDisplayedValues(temps);
-	    np.setValue(tempMin + (tempInitial - tempMin)/step);		// Min + index
+	    temperaturePicker.setMinValue(tempMin);
+	    temperaturePicker.setMaxValue(tempMin + steps);
+	    temperaturePicker.setWrapSelectorWheel(false);
+	    temperaturePicker.setDisplayedValues(temps);
+	    temperaturePicker.setValue(tempMin + (tempInitial - tempMin)/step);		// Min + index
        
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
@@ -75,7 +72,7 @@ public class Dialog_Temperature 								extends 		DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	Integer temperature =(np.getValue() - tempMin) * step + tempMin;
+     	Integer temperature =(temperaturePicker.getValue() - tempMin) * step + tempMin;
      	writeBack.setText(temperature.toString());
     	dialog.dismiss();
     }
