@@ -10,7 +10,6 @@ public class Message_Abstract implements java.io.Serializable
 	@SuppressWarnings("serial")
 	public class Ack extends Message_Abstract
 	{
-			int x = 1;
 	}
 	@SuppressWarnings("serial")
 	public class Nack extends Message_Abstract
