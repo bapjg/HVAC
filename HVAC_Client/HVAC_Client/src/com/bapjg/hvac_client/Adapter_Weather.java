@@ -82,7 +82,7 @@ public class Adapter_Weather 					extends 			ArrayAdapter
     	if (position % 2 == 1)
     	{
     		convertView.findViewById(R.id.row).setBackgroundColor(0x800000ff);
-//    		 (0xff0000ff)
+//  BLUE =   		 (0xff0000ff)
     	}
     	
     	
