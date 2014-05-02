@@ -3,7 +3,7 @@ package eRegulation;
 import HVAC_Messages.Ctrl_Configuration;
 
 public class Circuit_Radiator extends Circuit_Abstract
-{
+{int x = 1;
 
 //	public Circuit_Radiator(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
 //	{	

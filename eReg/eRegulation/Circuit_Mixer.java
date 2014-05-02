@@ -3,7 +3,7 @@ package eRegulation;
 import HVAC_Messages.Ctrl_Configuration;
 
 public class Circuit_Mixer extends Circuit_Abstract
-{
+{int x = 1;
 	public Circuit_Mixer(Ctrl_Configuration.Circuit paramCircuit)
 	{
 		super(paramCircuit);
