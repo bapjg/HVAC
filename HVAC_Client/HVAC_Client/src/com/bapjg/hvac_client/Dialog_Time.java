@@ -47,9 +47,10 @@ public class Dialog_Time 										extends 		DialogFragment
         builder.setTitle("Select time");
          
 		timePicker 												= (TimePicker) dialogView.findViewById(R.id.timeObjective);
+		timePicker.setIs24HourView		(true);
 		timePicker.setCurrentHour		(timeInitialHours);
 		timePicker.setCurrentMinute		(timeInitialMinutes);
-		timePicker.setIs24HourView		(true);
+
 
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
