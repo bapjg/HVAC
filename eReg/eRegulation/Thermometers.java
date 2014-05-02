@@ -9,7 +9,7 @@ public class Thermometers
 	public ArrayList<Thermometer> thermometerList = new ArrayList<Thermometer>();
 	
 	public Thermometers()
-	{
+	{ 
 	}
 	public void configure(ArrayList <Ctrl_Configuration.Thermometer> paramThermometers)
 	{
