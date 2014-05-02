@@ -47,13 +47,13 @@ public class Adapter_Circuits_Calendars 		extends 			ArrayAdapter
 
         if (position == 0)
         {
-        	convertView 											= myInflater.inflate(R.layout.row_circuit_calendar_title, null);
+        	convertView 											= myInflater.inflate(R.layout.row_calendar_circuit_title, null);
 //            convertView.setTag(title);
 
         }
         else
         {
-        	convertView 											= myInflater.inflate(R.layout.row_circuit_calendar, null);
+        	convertView 											= myInflater.inflate(R.layout.row_calendar_circuit, null);
         	row														= new RowHolder();
         	row.name												= (TextView) convertView.findViewById(R.id.name);
         	row.days												= (TextView) convertView.findViewById(R.id.days);

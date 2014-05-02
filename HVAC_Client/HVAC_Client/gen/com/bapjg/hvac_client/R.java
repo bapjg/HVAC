@@ -129,10 +129,10 @@ public final class R {
         public static final int panel_6_actions_relays=0x7f030011;
         public static final int panel_6_actions_stop=0x7f030012;
         public static final int panel_6_actions_test_mail=0x7f030013;
-        public static final int row_circuit_calendar=0x7f030014;
-        public static final int row_circuit_calendar_title=0x7f030015;
-        public static final int row_circuit_configuration=0x7f030016;
-        public static final int row_circuit_configuration_title=0x7f030017;
+        public static final int row_calendar_circuit=0x7f030014;
+        public static final int row_calendar_circuit_title=0x7f030015;
+        public static final int row_configuration_circuit=0x7f030016;
+        public static final int row_configuration_circuit_title=0x7f030017;
         public static final int row_pump=0x7f030018;
         public static final int row_relay=0x7f030019;
         public static final int row_thermometer=0x7f03001a;
