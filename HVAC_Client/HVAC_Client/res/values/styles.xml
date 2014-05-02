@@ -22,12 +22,12 @@
 			wrap_content
 		</item> 
 		<item name="android:layout_height">
-			35dp
+			30dp
 		</item> 
 	</style>
 	<style name="AD_Title" parent="@android:style/TextAppearance.Large"> 
 		<item name="android:textSize">
-			30sp
+			25sp
 		</item> 
 		<item name="android:textStyle">
 			bold
@@ -44,7 +44,7 @@
 	</style>
     <style name="AD_Text" parent="@android:style/TextAppearance.Medium"> 
 			<item name="android:textSize">
-				25sp
+				20sp
 			</item> 
 			<item name="android:textColor">
 				#FFFFFF
@@ -57,7 +57,7 @@
 	</style>
 	    <style name="AD_Data" parent="@android:style/TextAppearance.Medium"> 
 			<item name="android:textSize">
-				25sp
+				20sp
 			</item> 
 			<item name="android:textColor">
 				#FFFF00
@@ -87,7 +87,7 @@
 	</style>
     <style name="AD_Switch" parent="@android:style/TextAppearance.Medium"> 
 			<item name="android:textSize">
-				15sp
+				25sp
 			</item> 
 			<item name="android:textColor">
 				#FFFF00
@@ -107,7 +107,7 @@
 
     <style name="AD_Button" parent="@android:style/TextAppearance.Medium"> 
 			<item name="android:textSize">
-				15sp
+				25sp
 			</item> 
 			<item name="android:textColor">
 				#FFFFFF
