@@ -23,7 +23,6 @@ public class Thread_BackgroundTasks implements Runnable
 
 		LogIt.info("Thread_Background", "Run", "Starting", true);
 		LogIt.info("Thread_Background", "Run", "Starting", true);
-		LogIt.info("Thread_Background", "Run", "Starting", true);
 		Calendars.TasksBackGround			tasksBackGround			= Global.tasksBackGround;
 		
 		LogIt.info("Thread_Background", "Run", "Started", true);
