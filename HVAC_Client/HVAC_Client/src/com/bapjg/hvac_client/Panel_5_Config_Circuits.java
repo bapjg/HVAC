@@ -31,7 +31,6 @@ import android.widget.EditText;
 //Template										ext/imp				class
 
 public class Panel_5_Config_Circuits 			extends 			Panel_0_Fragment 
-												implements 			HTTP_Response
 {
 	private Adapter_Relays		 				adapter;
 	private LayoutInflater						myInflater;
@@ -124,12 +123,6 @@ public class Panel_5_Config_Circuits 			extends 			Panel_0_Fragment
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	
     }
-	public void HTTP_Send(Ctrl_Abstract message)
-	{
-		HTTP_Task								task				= new HTTP_Task();
-	   	task.callBack												= this;					// processFinish
-	   	task.execute(message);
-	}
 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
 		Activity								activity			= getActivity();		

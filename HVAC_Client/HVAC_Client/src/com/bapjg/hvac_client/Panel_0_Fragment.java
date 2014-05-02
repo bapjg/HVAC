@@ -33,7 +33,10 @@ import HVAC_Messages.*;
 //Template										variable			= something
 //Template										ext/imp				class
 public class Panel_0_Fragment 					extends 			Fragment
-												implements 			View.OnClickListener, AdapterView.OnItemClickListener, TCP_Response
+												implements 			View.OnClickListener, 
+																	AdapterView.OnItemClickListener, 
+																	TCP_Response,
+																	HTTP_Response
 {
 	private 	int					menuLayout;
     public 		Activity			activity;
@@ -46,8 +49,12 @@ public class Panel_0_Fragment 					extends 			Fragment
 		this.menuLayout												= menuLayout;
     	this.activity												= getActivity();
     }
-    
-	
+	public void HTTP_Send(Ctrl_Abstract message)
+	{
+		HTTP_Task								task				= new HTTP_Task();
+	   	task.callBack												= this;					// processFinish
+	   	task.execute(message);
+	}
 	public void TCP_Send(Ctrl_Abstract message)
 	{
 		TCP_Task								task				= new TCP_Task();
@@ -60,17 +67,9 @@ public class Panel_0_Fragment 					extends 			Fragment
     	View thisView = inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
 		return thisView;
     }
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
-	{
-	}
-	@Override
-	public void onClick(View v) 
-	{
-	}
-	@Override
-	public void processFinishTCP(Ctrl_Abstract result) 
-	{
-	}
+	@Override	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 			{}
+	@Override	public void onClick(View v) 																{}
+	@Override	public void processFinishTCP(Ctrl_Abstract result) 											{}
+	@Override	public void processFinishHTTP(Ctrl_Abstract result) 										{}
 }
 

@@ -33,7 +33,6 @@ import android.widget.EditText;
 //Template										ext/imp				class
 
 public class Panel_5_Config_Thermometers 		extends 			Panel_0_Fragment 
-												implements 			TCP_Response
 {
 	private Adapter_Thermometers 				adapter;
 	private LayoutInflater						myInflater;
@@ -145,13 +144,7 @@ public class Panel_5_Config_Thermometers 		extends 			Panel_0_Fragment
 //        view.setAdapter(adapter);
 //        view.setOnItemClickListener((OnItemClickListener) this);	
     }
-	public void TCP_Send(Ctrl_Abstract message)
-	{
-		TCP_Task								task				= new TCP_Task();
-	   	task.callBack												= this;					// processFinish
-	   	task.execute(message);
-	}
-	public void processFinishTCP(Ctrl_Abstract result) 
+		public void processFinishTCP(Ctrl_Abstract result) 
 	{  
 		Activity								activity			= getActivity();		
 

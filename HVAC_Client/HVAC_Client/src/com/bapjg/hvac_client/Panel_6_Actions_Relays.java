@@ -25,7 +25,6 @@ import android.widget.Toast;
 //Template										ext/imp				class
 @SuppressLint("ValidFragment")
 public class Panel_6_Actions_Relays 			extends 			Panel_0_Fragment  
-												implements 			TCP_Response
 {
 	public int									panelLayout;
 		
@@ -86,13 +85,7 @@ public class Panel_6_Actions_Relays 			extends 			Panel_0_Fragment
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 	{
 	}
-	public void TCP_Send(Ctrl_Abstract message)
-	{
-		TCP_Task								task				= new TCP_Task();
-	   	task.callBack												= this;					// processFinish
-	   	task.execute(message);
-	}
-	public void processFinishTCP(Ctrl_Abstract result) 
+		public void processFinishTCP(Ctrl_Abstract result) 
 	{  
 		Activity								activity			= getActivity();		
 

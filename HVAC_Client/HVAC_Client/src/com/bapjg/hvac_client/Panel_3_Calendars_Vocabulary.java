@@ -18,7 +18,6 @@ import android.widget.Button;
 //Template										variable			= something
 //Template										ext/imp				class
 public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
-												implements 			HTTP_Response
 {
 	private LayoutInflater						myInflater;
 	private Activity							myActivity;
@@ -74,12 +73,6 @@ public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
 	{
 		// TODO Auto-generated method stub
 		
-	}
-	public void HTTP_Send(Ctrl_Abstract message)
-	{
-		HTTP_Task								task				= new HTTP_Task();
-	   	task.callBack												= this;					// processFinish
-	   	task.execute(message);
 	}
 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
