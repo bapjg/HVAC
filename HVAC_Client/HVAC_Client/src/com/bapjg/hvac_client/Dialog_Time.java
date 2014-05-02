@@ -51,15 +51,15 @@ public class Dialog_Time 										extends 		DialogFragment
 		timePicker.setCurrentHour		(timeInitialHours);
 		timePicker.setCurrentMinute		(timeInitialMinutes);
 
-
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
         return builder.create();
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-//     	Integer temperature =(np.getValue() - tempMin) * step + tempMin;
-//     	writeBack.setText(temperature.toString());
+     	Integer 				hours 							= timePicker.getCurrentHour();
+     	Integer 				minutes 						= timePicker.getCurrentMinute();
+     	writeBack.setText(hours.toString() + ":" + minutes.toString());
     	dialog.dismiss();
     }
     public void buttonCancel (DialogInterface dialog, int which)
