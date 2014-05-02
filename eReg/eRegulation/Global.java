@@ -24,7 +24,7 @@ import HVAC_Messages.*;
 
 
 public class Global 
-{int x = 1;
+{
 	//===================================================================
 	//
 	// Create semaphore to thread protect Interfaces.c code

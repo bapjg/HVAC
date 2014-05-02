@@ -7,7 +7,7 @@ import HVAC_Messages.Ctrl_Configuration;
 
 
 public class PID 
-{int x = 1;
+{
 	public  String		name;
 	public  Integer		sampleIncrement;
 	public  Integer		increment;
