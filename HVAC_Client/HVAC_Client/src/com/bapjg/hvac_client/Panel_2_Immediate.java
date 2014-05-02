@@ -29,11 +29,6 @@ public class Panel_2_Immediate 					extends 			Panel_0_Fragment
 {
 	public String								circuitName;
 	
-//	public Panel_2_Immediate()
-//	{
-//		super();
-//		circuitName													= "";
-//	}
     public Panel_2_Immediate(int menuLayout, String circuitName)
     {
 		super(menuLayout);
@@ -50,18 +45,21 @@ public class Panel_2_Immediate 					extends 			Panel_0_Fragment
     	TCP_Send(taskRequest);
 
     	thisView.findViewById(R.id.buttonOk).setOnClickListener((OnClickListener) this);
-    	thisView.findViewById(R.id.RowTime).setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {rowTimeClick(v);}});
     	thisView.findViewById(R.id.RowTemp).setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {rowTempClick(v);}});
+    	thisView.findViewById(R.id.RowTime).setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {rowTimeClick(v);}});
         return thisView;
     }
 	public void rowTempClick(View myView) 
 	{
 		TextView								writeBack			= (TextView) ((ViewGroup) myView).getChildAt(1);
-		Dialog_Temperature df = new Dialog_Temperature(writeBack, 25, 5, 8);
+		Dialog_Temperature 						df 					= new Dialog_Temperature(writeBack, 25, 5, 8);
 		df.show(getFragmentManager(), "Dialog_Temperature");
 	}
 	public void rowTimeClick(View myView) 
 	{
+		TextView								writeBack			= (TextView) ((ViewGroup) myView).getChildAt(1);
+		Dialog_Time		 						df 					= new Dialog_Time(writeBack);
+		df.show(getFragmentManager(), "Dialog_Time");
 	}
 	public void onClick(View myView)
 	{
@@ -96,8 +94,6 @@ public class Panel_2_Immediate 					extends 			Panel_0_Fragment
 	   		temp													= (TextView) getActivity().findViewById(R.id.TimeEnd);
 	   		message_out.timeEnd										= Global.parseTime(temp.getText().toString());
 			
-//        	TCP_Task							task				= new TCP_Task();
-//        	task.callBack											= this;
         	TCP_Send(message_out);
     	}
     	else if (myCaption.equalsIgnoreCase("Stop"))
@@ -111,10 +107,6 @@ public class Panel_2_Immediate 					extends 			Panel_0_Fragment
         	TCP_Send(message_out);
     	}
 	}
-//	@Override
-//	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
-//	{
-//	}
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
 		Activity								activity			= getActivity();		
