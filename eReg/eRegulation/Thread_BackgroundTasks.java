@@ -27,6 +27,7 @@ public class Thread_BackgroundTasks implements Runnable
 		
 		while (!Global.stopNow)
 		{
+			LogIt.info("Thread_Background", "Run", "Looping 1", true);
 			//=========================================================================================================================================
 			//
 			// CleanPumps : particularly in summer
@@ -75,6 +76,7 @@ public class Thread_BackgroundTasks implements Runnable
 			}
 			//
 			//=========================================================================================================================================
+			LogIt.info("Thread_Background", "Run", "Looping after pumps", true);
 
 			//=========================================================================================================================================
 			//
@@ -103,6 +105,7 @@ public class Thread_BackgroundTasks implements Runnable
 			}
 			//
 			//=========================================================================================================================================
+			LogIt.info("Thread_Background", "Run", "Looping after antifreeze", true);
 
 			//=========================================================================================================================================
 			//
@@ -129,6 +132,7 @@ public class Thread_BackgroundTasks implements Runnable
 			}
 			//
 			//=========================================================================================================================================
+			LogIt.info("Thread_Background", "Run", "Looping after optimisation", true);
 
 			//=========================================================================================================================================
 			//
@@ -148,6 +152,7 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			//=========================================================================================================================================
 
+			LogIt.info("Thread_Background", "Run", "Looping after weather and before wait", true);
 			Global.waitSeconds(300);							// Wait 5 mins
 
 		}
