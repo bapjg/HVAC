@@ -10,7 +10,7 @@ import HVAC_Messages.Ctrl_Configuration;
 // is much longer than with much larger valve openings
 
 public class Mixer
-{int x = 1;
+{
 	public String 			name;
 	public Integer 			swingTime 								= 90000;
 	public Integer 			swingUsableMax							= 90000;
