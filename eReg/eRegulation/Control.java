@@ -9,7 +9,7 @@ import org.xml.sax.SAXException;
 import HVAC_Messages.Ctrl_Actions_Stop;
 
 public class Control
-{
+{int x = 1;
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException
 	{
     	//============================================================

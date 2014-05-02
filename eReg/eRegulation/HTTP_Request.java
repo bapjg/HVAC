@@ -11,7 +11,7 @@ import java.net.URLConnection;
 import HVAC_Messages.*;
 
 public class HTTP_Request <SendType>
-{
+{int x = 1;
 	public URL						serverURL;
 	public URLConnection			servletConnection;
 	

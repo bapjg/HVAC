@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 import HVAC_Messages.*;
 
 public class LogIt
-{
+{int x = 1;
 	public static Boolean 						logDisplay 			= true;
 	
 	public LogIt()
