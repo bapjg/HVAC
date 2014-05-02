@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import HVAC_Messages.Ctrl_Configuration;
 
 public class Circuits
-{
+{int x = 1;
 	// Was serialisable no longer since 23/04/2014
 	public ArrayList<Circuit_Abstract> circuitList = new ArrayList<Circuit_Abstract>();
 	

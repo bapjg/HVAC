@@ -1,7 +1,7 @@
 package eRegulation;
 
 public class ADC
-{
+{int x = 1;
 	// Modified after Merge Panic
 	private native void 	Initialise(int ADC_Channels, int ADC_Samples, int ADC_Bits_To_Shift);
 	private native int 		Read();

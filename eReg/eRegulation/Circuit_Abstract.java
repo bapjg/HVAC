@@ -6,7 +6,7 @@ import HVAC_Messages.Ctrl_Calendars;
 import HVAC_Messages.Ctrl_Configuration;
 
 abstract class Circuit_Abstract
-{
+{int x = 1;
 	public static final int			CIRCUIT_TYPE_HotWater			= 0;
 	public static final int			CIRCUIT_TYPE_Gradient			= 1;
 	public static final int			CIRCUIT_TYPE_Mixer				= 2;

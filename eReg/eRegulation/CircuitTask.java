@@ -3,7 +3,7 @@ package eRegulation;
 import HVAC_Messages.Ctrl_Calendars;
 
 public class CircuitTask
-{
+{int x = 1;
 	public Long					timeStart;
 	public Long					timeEnd;
 	public String				timeStartDisplay;

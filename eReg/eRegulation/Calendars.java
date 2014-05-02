@@ -8,7 +8,7 @@ import java.io.*;
 
 
 public class Calendars
-{
+{int x = 1;
 	private Circuit_Abstract	circuit;
 	
 	public Calendars() throws IOException
