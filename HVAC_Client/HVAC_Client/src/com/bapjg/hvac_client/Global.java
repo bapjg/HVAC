@@ -94,8 +94,25 @@ public class Global
     {
     	return System.currentTimeMillis();
     }
+	public static String displayDateTimeShort(Long dateTime)
+    {
+		//==============================================================
+		// returns supplied dateTime in the form dd/mm hh:mm
+		//==============================================================
+		String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM HH:mm");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);
+    	
+    	return dateTimeString;
+    }
 	public static String displayDate(Long dateTime)
     {
+		//==============================================================
+		// returns supplied dateTime in the form dd/mm
+		//==============================================================
     	String					dateTimeString		= "";
  
         SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM");
@@ -105,8 +122,24 @@ public class Global
     	
     	return dateTimeString;
     }
+	public static String displayDayOfWeek(Long dateTime)
+    {
+		//==============================================================
+		// returns supplied dateTime in the form Monday, Tuesday etc.
+		//==============================================================
+		String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("EEEE");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime);        
+        return dateTimeString;
+    }
     public static String displayTime(Long dateTime)
     {
+		//==============================================================
+		// returns supplied dateTime in the form hh:mm:ss
+		//==============================================================
     	String					dateTimeString		= "";
  
         SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm:ss");
@@ -118,6 +151,9 @@ public class Global
     }
     public static String displayTimeShort(Long dateTime)
     {
+		//==============================================================
+		// returns supplied dateTime in the form hh:mm
+		//==============================================================
     	String					dateTimeString		= "";
  
         SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm");
@@ -129,7 +165,9 @@ public class Global
     }
 	public static Long getTimeAtMidnight()
 	{
+		//==============================================================
 		// Returns the system time last midnight
+		//==============================================================
 		Calendar now		 				= Calendar.getInstance();
 		
 		now.set(Calendar.HOUR_OF_DAY, 0);
@@ -142,8 +180,10 @@ public class Global
 	}
 	public static Long parseTime(String characters)
 	{
+		//==============================================================
 		// Returns a supplied time in string form "hh:mm" 
 		// In milliseconds since last midnight
+		//==============================================================
 		String splitCharacters[]			= characters.split(":");
 		
 		Calendar calendar					= Calendar.getInstance();

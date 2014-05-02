@@ -1,40 +1,17 @@
 package com.bapjg.hvac_client;
 
-import java.util.ArrayList;
-
-import com.bapjg.hvac_client.Mgmt_Msg_Temperatures.Request;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.app.ActionBar;
 import android.app.Activity;
-
 import android.content.Context;
-
-import android.graphics.Color;
-
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-
-
-import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.TabHost;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class Activity_Main 			extends Activity 
 {
 	public static	Global						global;
 
-	private 		Adapter_Thermometers 		adapter;
-	private			TabHost 					tabHost;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -91,12 +68,6 @@ public class Activity_Main 			extends Activity
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
-	
-	
-	//===========================================================================================================================
-	//
-	//
 	public boolean onOptionsItemSelected(MenuItem item) 
 	{
 		switch(item.getItemId()) 
@@ -123,7 +94,4 @@ public class Activity_Main 			extends Activity
 		}
 		return false;
 	}
-	//
-	//
-	//===========================================================================================================================
 }

@@ -49,18 +49,18 @@ public class Panel_4_Weather 					extends 			Panel_0_Fragment
         myActivity													= getActivity();
         myFragmentManager 											= myActivity.getFragmentManager();
         View 									panelView			= myInflater.inflate(R.layout.panel_4_weather, container, false);
-        TextView 								textview			= (TextView) panelView.findViewById(R.id.dateTime);
+        TextView 								dateTime			= (TextView) panelView.findViewById(R.id.dateTime);
 		if (when.equalsIgnoreCase("Today"))
 		{
-	        textview.setText (Global.displayDate(Global.getTimeAtMidnight()));
+			dateTime.setText (Global.displayDate(Global.getTimeAtMidnight()));
 		}
 		else if (when.equalsIgnoreCase("Tomorrow"))
 		{
-	        textview.setText (Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+			dateTime.setText (Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
 		}
 		else if (when.equalsIgnoreCase("Beyond"))
 		{
-	        textview.setText ("> " + Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+			dateTime.setText ("> " + Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
 		}
         myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
 
@@ -105,7 +105,6 @@ public class Panel_4_Weather 					extends 			Panel_0_Fragment
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{
 		Activity								activity			= getActivity();	
-		System.out.println("gc " + result.getClass().toString());
 
 		if (result instanceof Ctrl_Weather.Data)
 		{
@@ -113,7 +112,10 @@ public class Panel_4_Weather 					extends 			Panel_0_Fragment
 			Global.weatherForecast				 						= (Ctrl_WeatherData) resulatWeather.weatherData;
 	        AdapterView <Adapter_Weather> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
 	        
-			if (when.equalsIgnoreCase("Today"))
+	        TextView 								dateTimeObtained	= (TextView) myContainer.findViewById(R.id.dateTimeObtained);
+	        dateTimeObtained.setText (Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
+	        
+	        if (when.equalsIgnoreCase("Today"))
 			{
 		        forecastList											= new ArrayList <Ctrl_WeatherData.Forecast> ();
 		        for (Ctrl_WeatherData.Forecast forcastItem : Global.weatherForecast.forecasts)

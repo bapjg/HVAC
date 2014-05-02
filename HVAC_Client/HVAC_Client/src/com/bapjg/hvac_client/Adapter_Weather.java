@@ -60,12 +60,14 @@ public class Adapter_Weather 					extends 			ArrayAdapter
 
     	Ctrl_WeatherData.Forecast				listItem		= (Ctrl_WeatherData.Forecast) listData.get(position);
     	
+    	String 									day				= Global.displayDayOfWeek((listItem.dateTime.from));
     	String 									time_from		= Global.displayTimeShort(listItem.dateTime.from);
     	String 									time_to			= Global.displayTimeShort(listItem.dateTime.to);
     	
-       	row.time.setText								(time_from + " - " + time_to);											
+       	row.time.setText								(day + " " + time_from + " - " + time_to);											
+//       	row.time.setText								(Global.displayDayOfWeek(listItem.dateTime.from));										
        	row.temperature.setText							(listItem.temperature.value.toString());											
-    	row.temperatureMinMax.setText					(Math.round(listItem.temperature.min) + " - " + Math.round(listItem.temperature.max));								
+    	row.temperatureMinMax.setText					(Math.round(listItem.temperature.min) + "/" + Math.round(listItem.temperature.max));								
     	if (listItem.precipitation != null)
     	{
     		row.precipitationValue.setText				(listItem.precipitation.value.toString());									
@@ -75,8 +77,23 @@ public class Adapter_Weather 					extends 			ArrayAdapter
     	row.windName.setText							(listItem.windSpeed.name);													
     	row.windDirection.setText						(listItem.windDirection.code);											
     	row.cloudAll.setText							(listItem.clouds.all.toString());	
-    	row.cloudValue.setText							(listItem.clouds.value);												
-
+    	row.cloudValue.setText							(listItem.clouds.value);
+    	
+    	if (position % 2 == 1)
+    	{
+    		convertView.findViewById(R.id.row).setBackgroundColor(0x800000ff);
+//    		 (0xff0000ff)
+    	}
+    	
+    	
+    	if ( (listItem.dateTime.from 	< Global.now())
+		&&   (listItem.dateTime.to 		> Global.now()) )
+    	{
+    		convertView.findViewById(R.id.row).setBackgroundColor(Color.BLACK);
+    	}
+    	
+    	
+    	
     	convertView.setTag(row);
     	return convertView;
     }
