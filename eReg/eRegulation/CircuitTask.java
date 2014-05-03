@@ -39,7 +39,7 @@ public class CircuitTask
 		
 		// Handle duration/EndTime
 		
-		if (paramCalendar.stopCriterion.stopOnObjective)
+		if (paramCalendar.stopOnObjective)
 		{
 			this.stopOnObjective								= true;
 		}
@@ -48,16 +48,8 @@ public class CircuitTask
 			this.stopOnObjective								= false;			
 		}
 		
-		if (paramCalendar.stopCriterion.endOnDuration)
-		{
-			// This can screw up if we go over midnight
-			this.timeEnd										= Global.parseTime(paramCalendar.timeStart) + Global.parseTime(paramCalendar.stopCriterion.timeDuration);
-		}
-		else
-		{
-			this.timeEnd										= Global.parseTime(paramCalendar.stopCriterion.timeEnd);
-		}
-		this.timeEndDisplay										= paramCalendar.stopCriterion.timeEnd;
+		this.timeEnd											= Global.parseTime(paramCalendar.timeEnd);
+		this.timeEndDisplay										= paramCalendar.timeEnd;
 
 	}
 //	public CircuitTask

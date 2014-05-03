@@ -140,7 +140,7 @@ public class Calendars
 					paramCalendar.days 											= paramCalendar.days.replace(word.name, word.days);
 				}
 				circuit.addCircuitTask(paramCalendar);
-				LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart + "/" + paramCalendar.stopCriterion.timeEnd + " Days " + paramCalendar.days);
+				LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart + "/" + paramCalendar.timeEnd + " Days " + paramCalendar.days);
 			}
 		}
 		//		get away calendar
