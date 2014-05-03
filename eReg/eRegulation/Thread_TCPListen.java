@@ -297,8 +297,18 @@ public class Thread_TCPListen 			implements Runnable
 		// Returns the current configuration in operation
   		// It is timestamped now(). It should be timestamped with date/time recovered either from server or local file
   		
-		Ctrl_Weather.Data 						message_return	= new Ctrl_Weather().new Data();			
+		Ctrl_Weather.Data 						message_return					= new Ctrl_Weather().new Data();			
 		if (Global.weatherData == null)
+		{
+			try			// Getting new data
+			{
+				Global.weatherData												= new Ctrl_WeatherData();
+			}
+			catch (Exception e)
+			{
+			}
+		}
+		if (Global.weatherData == null)		// still no data
 		{
 			message_return														= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
 			message_return.weatherData											= null;
@@ -309,7 +319,6 @@ public class Thread_TCPListen 			implements Runnable
 			message_return.weatherData											= Global.weatherData;
 		}
 		return message_return;
-		
 	}
 	private Ctrl_Actions_Relays.Data	process_Ctrl_Actions_Relays_Request		()
 	{

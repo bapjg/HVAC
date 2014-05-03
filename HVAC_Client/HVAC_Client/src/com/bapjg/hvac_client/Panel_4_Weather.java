@@ -101,48 +101,55 @@ public class Panel_4_Weather 					extends 			Panel_0_Fragment
 		{
 			Ctrl_Weather.Data						resulatWeather		= (Ctrl_Weather.Data) result;
 			Global.weatherForecast				 						= (Ctrl_WeatherData) resulatWeather.weatherData;
-	        AdapterView <Adapter_4_Weather> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
-	        
-	        TextView 								dateTimeObtained	= (TextView) myContainer.findViewById(R.id.dateTimeObtained);
-	        dateTimeObtained.setText (Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
-	        
-	        if (when.equalsIgnoreCase("Today"))
+			if (Global.weatherForecast != null)
 			{
-		        forecastList											= new ArrayList <Ctrl_WeatherData.Forecast> ();
-		        for (Ctrl_WeatherData.Forecast forcastItem : Global.weatherForecast.forecasts)
-		        {
-		        	if  ((forcastItem.dateTime.from > Global.getTimeAtMidnight())
-		        	&& 	 (forcastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L))
-		        	{
-		        		forecastList.add(forcastItem);
-		        	}
-		        }
+		        AdapterView <Adapter_4_Weather> 		view				= (AdapterView) myContainer.findViewById(R.id.List_View);
+		        
+		        TextView 								dateTimeObtained	= (TextView) myContainer.findViewById(R.id.dateTimeObtained);
+		        dateTimeObtained.setText (Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
+		        
+		        if (when.equalsIgnoreCase("Today"))
+				{
+			        forecastList											= new ArrayList <Ctrl_WeatherData.Forecast> ();
+			        for (Ctrl_WeatherData.Forecast forcastItem : Global.weatherForecast.forecasts)
+			        {
+			        	if  ((forcastItem.dateTime.from > Global.getTimeAtMidnight())
+			        	&& 	 (forcastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L))
+			        	{
+			        		forecastList.add(forcastItem);
+			        	}
+			        }
+				}
+				else if (when.equalsIgnoreCase("Tomorrow"))
+				{
+			        forecastList											= new ArrayList <Ctrl_WeatherData.Forecast> ();
+			        for (Ctrl_WeatherData.Forecast forcastItem : Global.weatherForecast.forecasts)
+			        {
+			        	if  ((forcastItem.dateTime.from > Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L)
+			        	&& 	 (forcastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L * 2))
+			        	{
+			        		forecastList.add(forcastItem);
+			        	}
+			        }
+				}
+				else if (when.equalsIgnoreCase("Beyond"))
+				{
+			        forecastList											= new ArrayList <Ctrl_WeatherData.Forecast> ();
+			        for (Ctrl_WeatherData.Forecast forcastItem : Global.weatherForecast.forecasts)
+			        {
+			        	if  (forcastItem.dateTime.from > Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L * 3)
+			        	{
+			        		forecastList.add(forcastItem);
+			        	}
+			        }
+				}
+		        Adapter_4_Weather							adapter				= new Adapter_4_Weather(Global.actContext, R.id.List_View, forecastList);
+		        view.setAdapter(adapter);
 			}
-			else if (when.equalsIgnoreCase("Tomorrow"))
+			else
 			{
-		        forecastList											= new ArrayList <Ctrl_WeatherData.Forecast> ();
-		        for (Ctrl_WeatherData.Forecast forcastItem : Global.weatherForecast.forecasts)
-		        {
-		        	if  ((forcastItem.dateTime.from > Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L)
-		        	&& 	 (forcastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L * 2))
-		        	{
-		        		forecastList.add(forcastItem);
-		        	}
-		        }
+				Global.toaster("HTTP Response is null,  server must be delaying... try later", true);
 			}
-			else if (when.equalsIgnoreCase("Beyond"))
-			{
-		        forecastList											= new ArrayList <Ctrl_WeatherData.Forecast> ();
-		        for (Ctrl_WeatherData.Forecast forcastItem : Global.weatherForecast.forecasts)
-		        {
-		        	if  (forcastItem.dateTime.from > Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L * 3)
-		        	{
-		        		forecastList.add(forcastItem);
-		        	}
-		        }
-			}
-	        Adapter_4_Weather							adapter				= new Adapter_4_Weather(Global.actContext, R.id.List_View, forecastList);
-	        view.setAdapter(adapter);
 		}
 		else
 		{
