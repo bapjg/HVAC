@@ -61,7 +61,7 @@ public class Adapter_3_Calendars_Circuits 				extends 					ArrayAdapter
       	row.tempObjective.setText						(tempObjective.toString() + " °C");
     	row.days.setText								(listItem.days);
         row.timeStart.setText							(listItem.timeStart);
-        row.timeEnd.setText								(listItem.stopCriterion.timeEnd);
+        row.timeEnd.setText								(listItem.timeEnd);
 
         // Now handle the non-standard stuff
      	// Replace word in listItem.days be their corresponding day numbers from Vocabulary
@@ -110,13 +110,13 @@ public class Adapter_3_Calendars_Circuits 				extends 					ArrayAdapter
         Long											QuarterHour					= 15 * 60 * 1000L;
     	Long											timeStart					= Global.parseTime(listItem.timeStart);
     	Long											timeEnd;
-        if (listItem.stopCriterion.timeEnd == null)
+        if (listItem.timeEnd == null)
         {
         	timeEnd																	= timeStart + QuarterHour + QuarterHour;		//just add 1/2 hour
         }
         else
         {
-        	timeEnd																	= Global.parseTime(listItem.stopCriterion.timeEnd);
+        	timeEnd																	= Global.parseTime(listItem.timeEnd);
         }
     	
     	
