@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 @SuppressLint("ValidFragment")
@@ -37,7 +38,10 @@ public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
         myContainer 												= container;
         myActivity													= getActivity();
         myFragmentManager 											= myActivity.getFragmentManager();
-        View 									panelView			= myInflater.inflate(R.layout.panel_5_config_header, container, false);
+        View 									panelView			= myInflater.inflate(R.layout.panel_3_calendars, container, false);
+        TextView 								name				= (TextView) panelView.findViewById(R.id.name);
+        name.setText("Vocabulary");
+        
         myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
 
         // This part can be in processFinishTCP/HTTP 
@@ -81,8 +85,9 @@ public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
 		if (result instanceof Ctrl_Calendars.Data)
 		{
 			Global.eRegCalendars				 						= (Ctrl_Calendars.Data) result;
-	        AdapterView <Adapter_Words> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
-	        Adapter_Words							adapter				= new Adapter_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
+	        AdapterView <Adapter_3_Calendars_Words> 
+	        									view				= (AdapterView) myContainer.findViewById(R.id.List_View);
+	        Adapter_3_Calendars_Words			adapter				= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
 	        view.setAdapter(adapter);
 		}
 		else

@@ -14,7 +14,7 @@
 	   <TextView	                  
 			android:text			= "Forecast"
 			style					= "@style/AD_Text"
-			android:layout_width	= "120sp"
+			android:layout_width	= "150sp"
 		/>
 	   <TextView	                  
 			android:id				= "@+id/time"
@@ -23,7 +23,7 @@
 		/>
 
 	</LinearLayout>
-    	<LinearLayout 	                  
+    <LinearLayout 	                  
 		android:layout_width		= "match_parent"
 		android:layout_height		= "wrap_content"
 		android:orientation			= "horizontal"
@@ -31,28 +31,31 @@
 	   <TextView	                  
 			android:text			= "Temperature"
 			style					= "@style/AD_Text"
-			android:layout_width	= "120sp"
+			android:layout_width	= "150dp"
 		/>
 		<TextView	                  
 			android:id				= "@+id/temperature"
+			android:gravity			= "left"
 			style					= "@style/AD_Data" 
-			android:layout_width	= "50sp"
+			android:layout_width	= "80dp"
 		/>
-		<TextView	                  
-			style					= "@style/AD_Text" 
-			android:text			= "°C"
-			android:layout_width	= "40sp"
-		/>
-
+	</LinearLayout>
+    <LinearLayout 	                  
+		android:layout_width		= "match_parent"
+		android:layout_height		= "wrap_content"
+		android:orientation			= "horizontal"
+	>	                              
+		
 		<TextView
 		    style="@style/AD_Text"
-		    android:layout_width="wrap_content"
+		    android:layout_width="150sp"
 		    android:text="Min/Max" />
 
 		<TextView
 		    android:id="@+id/temperatureMinMax"
+			android:gravity			= "left"
 		    style="@style/AD_Data"
-		    android:layout_width="match_parent" />
+		    android:layout_width="80dp" />
 
 	</LinearLayout>
 	
@@ -63,19 +66,32 @@
 	>	                              
 	   <TextView	                  
 			style					= "@style/AD_Text"
-			android:layout_width	= "100dp"
+			android:layout_width	= "150dp"
 			android:text			= "Precipitation"
 		/>
 		<TextView	                  
 			android:id				= "@+id/precipitationValue"
+			android:gravity			= "left"
 			style					= "@style/AD_Data" 
-			android:layout_width	= "30sp"
+			android:layout_width	= "80dp"
 		/>
-		<TextView	                  
-			android:id				= "@+id/precipitationType"
-			style					= "@style/AD_Text" 
+	</LinearLayout>
+	<LinearLayout 	                  
+		android:layout_width		= "match_parent"
+		android:layout_height		= "wrap_content"
+		android:orientation			= "horizontal"
+	>	                              
+	   <TextView	                  
+			style					= "@style/AD_Text"
+			android:layout_width	= "150dp"
 			android:text			= ""
-			android:layout_width	= "120sp"
+		/>
+				<TextView	                  
+			android:id				= "@+id/precipitationType"
+			style					= "@style/AD_Data" 
+			android:gravity			= "left"
+			android:text			= ""
+			android:layout_width	= "150sp"
 		/>
 
 	</LinearLayout>
@@ -87,28 +103,37 @@
 	>	                              
 	   <TextView	                  
 			style					= "@style/AD_Text"
-			android:layout_width	= "100dp"
+			android:layout_width	= "150dp"
 			android:text			= "Wind"
 		/>
 		<TextView	                  
 			android:id				= "@+id/windSpeed"
 			style					= "@style/AD_Data" 
-			android:layout_width	= "30sp"
-		/>
-		<TextView	                  
-			style					= "@style/AD_Text" 
-			android:text			= "m/s"
-			android:layout_width	= "40sp"
+			android:gravity			= "left"
+			android:layout_width	= "80sp"
 		/>
 		<TextView	                  
 			android:id				= "@+id/windDirection"
-			style					= "@style/AD_Text" 
+			style					= "@style/AD_Data" 
 			android:layout_width	= "50sp"
 		/>
+	</LinearLayout>
 
+	<LinearLayout 	                  
+		android:layout_width		= "match_parent"
+		android:layout_height		= "wrap_content"
+		android:orientation			= "horizontal"
+	>	                              
+	   <TextView	                  
+			style					= "@style/AD_Text"
+			android:layout_width	= "150dp"
+			android:text			= ""
+		/>
+		
 		<TextView
 		    android:id="@+id/windName"
-		    style="@style/AD_Text"
+			android:gravity			= "left"
+		    style="@style/AD_Data"
 		    android:layout_width="match_parent" />
 
 	</LinearLayout>
@@ -120,21 +145,29 @@
 	>	                              
 	   <TextView	                  
 			style					= "@style/AD_Text"
-			android:layout_width	= "100dp"
+			android:layout_width	= "150dp"
 			android:text			= "Clouds"
 		/>
 		<TextView	                  
 			android:id				= "@+id/cloudAll"
-			style					= "@style/AD_Text"
-			android:gravity			= "right"
-			android:layout_width	= "30sp"
-		/>
-		<TextView	                  
-			style					= "@style/AD_Text" 
-			android:text			= "%"
-			android:layout_width	= "40sp"
+			style					= "@style/AD_Data"
+			android:gravity			= "left"
+			android:layout_width	= "80dp"
 		/>
 
+	</LinearLayout>
+
+	<LinearLayout 	                  
+		android:layout_width		= "match_parent"
+		android:layout_height		= "wrap_content"
+		android:orientation			= "horizontal"
+	>	                              
+	   <TextView	                  
+			style					= "@style/AD_Text"
+			android:layout_width	= "150dp"
+			android:text			= ""
+		/>
+		
 		<TextView
 		    android:id="@+id/cloudValue"
 		    style="@style/AD_Data"

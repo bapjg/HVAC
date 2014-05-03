@@ -127,13 +127,11 @@ public class Global
 		//==============================================================
 		// returns supplied dateTime in the form Monday, Tuesday etc.
 		//==============================================================
-		String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("EEEE");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        Calendar 				calendar 			= Calendar.getInstance();
         calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime);        
-        return dateTimeString;
+        int						day					= calendar.get(Calendar.DAY_OF_WEEK);
+        String[] days = {"Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"};       
+        return days[day - 1];		// Day is between 1 and 7
     }
     public static String displayTime(Long dateTime)
     {

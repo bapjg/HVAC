@@ -13,12 +13,12 @@ import HVAC_Messages.*;
 
 //Template										variable			= something
 //Template										ext/imp				class
-public class Adapter_Weather 					extends 			ArrayAdapter
+public class Adapter_4_Weather 					extends 			ArrayAdapter
 {
     private ArrayList							listData;
     private LayoutInflater 						myInflater;
  
-    public Adapter_Weather(Context context, int resource, ArrayList listData) 
+    public Adapter_4_Weather(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
         
@@ -45,7 +45,7 @@ public class Adapter_Weather 					extends 			ArrayAdapter
     {
      	RowHolder 								row;
 
-    	convertView 											= myInflater.inflate(R.layout.row_weather, null);
+    	convertView 											= myInflater.inflate(R.layout.row_4_weather, null);
     	row														= new RowHolder();
        	row.time												= (TextView) convertView.findViewById(R.id.time);
        	row.temperature											= (TextView) convertView.findViewById(R.id.temperature);
@@ -65,34 +65,29 @@ public class Adapter_Weather 					extends 			ArrayAdapter
     	String 									time_to			= Global.displayTimeShort(listItem.dateTime.to);
     	
        	row.time.setText								(day + " " + time_from + " - " + time_to);											
-//       	row.time.setText								(Global.displayDayOfWeek(listItem.dateTime.from));										
-       	row.temperature.setText							(listItem.temperature.value.toString());											
+       	row.temperature.setText							(listItem.temperature.value.toString() + " °C");											
     	row.temperatureMinMax.setText					(Math.round(listItem.temperature.min) + "/" + Math.round(listItem.temperature.max));								
     	if (listItem.precipitation != null)
     	{
-    		row.precipitationValue.setText				(listItem.precipitation.value.toString());									
+    		row.precipitationValue.setText				(listItem.precipitation.value.toString() + " " + listItem.precipitation.unit);									
     		row.precipitationType.setText				(listItem.precipitation.type);
     	}
-    	row.windSpeed.setText							(listItem.windSpeed.speed.toString());													
+    	row.windSpeed.setText							(listItem.windSpeed.speed.toString() + " m/s");													
     	row.windName.setText							(listItem.windSpeed.name);													
     	row.windDirection.setText						(listItem.windDirection.code);											
-    	row.cloudAll.setText							(listItem.clouds.all.toString());	
+    	row.cloudAll.setText							(listItem.clouds.all.toString() + " %");	
     	row.cloudValue.setText							(listItem.clouds.value);
     	
     	if (position % 2 == 1)
     	{
-    		convertView.findViewById(R.id.row).setBackgroundColor(0x800000ff);
-//  BLUE =   		 (0xff0000ff)
+    		convertView.findViewById(R.id.row).setBackgroundColor(0x800000ff); //  BLUE =  (0xff0000ff) (first byte = intensity)
     	}
-    	
     	
     	if ( (listItem.dateTime.from 	< Global.now())
 		&&   (listItem.dateTime.to 		> Global.now()) )
     	{
     		convertView.findViewById(R.id.row).setBackgroundColor(Color.BLACK);
     	}
-    	
-    	
     	
     	convertView.setTag(row);
     	return convertView;
@@ -110,10 +105,4 @@ public class Adapter_Weather 					extends 			ArrayAdapter
     	TextView 							cloudAll;
     	TextView 							cloudValue;
     }	
-//    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
-//    {
-//        // Object 		o 								= view.getItemAtPosition(position);
-//        // NewsItem 	newsData 						= (NewsItem) o;
-//		Toast.makeText(myContext, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();
-//    }
 }

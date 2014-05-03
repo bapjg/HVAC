@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 @SuppressLint("ValidFragment")
@@ -22,7 +23,7 @@ import android.widget.Button;
 //Template										ext/imp				class
 public class Panel_3_Calendars_Circuits 		extends 			Panel_0_Fragment
 {
-	private Adapter_Calendars_Circuits 			adapter;
+	private Adapter_3_Calendars_Circuits 		adapter;
 	private LayoutInflater						myInflater;
 	private Activity							myActivity;
 	private ViewGroup							myContainer;
@@ -51,18 +52,20 @@ public class Panel_3_Calendars_Circuits 		extends 			Panel_0_Fragment
         myContainer 												= container;
         myActivity													= getActivity();
         myFragmentManager 											= myActivity.getFragmentManager();
-        View 									panelView			= myInflater.inflate(R.layout.panel_5_config_header, container, false);
+        View 									panelView			= myInflater.inflate(R.layout.panel_3_calendars, container, false);
+        TextView 								name				= (TextView) panelView.findViewById(R.id.name);
+        name.setText(this.circuitName);
+
         myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
 
-//        AdapterView <Adapter_Circuits_Calendars> 	view			= (AdapterView) myContainer.findViewById(R.id.List_View);
-        AdapterView <Adapter_Calendars_Circuits> 	view			= (AdapterView) panelView.findViewById(R.id.List_View);
+        AdapterView <Adapter_3_Calendars_Circuits> 	view			= (AdapterView) panelView.findViewById(R.id.List_View);
 
-        Adapter_Calendars_Circuits					adapter			= null;	
+        Adapter_3_Calendars_Circuits					adapter			= null;	
         for (Ctrl_Calendars.Circuit 	circuit : Global.eRegCalendars.circuitList)
         {
         	if (circuit.name.equalsIgnoreCase(this.circuitName))
         	{
-                adapter												= new Adapter_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
+                adapter												= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
         	}
         }
         view.setAdapter(adapter);

@@ -7,6 +7,29 @@
 	android:baselineAligned				= "false"
 	android:background					= "@color/background">
 
+    <LinearLayout
+        android:layout_width			= "match_parent"
+        android:layout_height			= "40dp"
+        android:background				= "@color/background"
+        android:baselineAligned			= "false"
+        android:gravity					= "center_vertical"
+        android:orientation				= "horizontal" >
+
+        <TextView
+            style="@style/AD_Text"
+            android:layout_height="wrap_content"
+         android:layout_width			= "150dp"
+            android:text="Calendars" />
+
+        <TextView
+            android:id					= "@+id/name"
+            style						= "@style/AD_Text"
+            android:layout_width		= "100dp"
+            android:layout_height		= "wrap_content"
+            android:text				= "xxx" 
+        />
+    </LinearLayout>
+    
 		<ListView
 		    android:id					= "@+id/List_View"
 		    android:layout_width		= "match_parent"

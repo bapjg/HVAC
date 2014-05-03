@@ -101,7 +101,7 @@ public class Panel_4_Weather 					extends 			Panel_0_Fragment
 		{
 			Ctrl_Weather.Data						resulatWeather		= (Ctrl_Weather.Data) result;
 			Global.weatherForecast				 						= (Ctrl_WeatherData) resulatWeather.weatherData;
-	        AdapterView <Adapter_Weather> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
+	        AdapterView <Adapter_4_Weather> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
 	        
 	        TextView 								dateTimeObtained	= (TextView) myContainer.findViewById(R.id.dateTimeObtained);
 	        dateTimeObtained.setText (Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
@@ -141,7 +141,7 @@ public class Panel_4_Weather 					extends 			Panel_0_Fragment
 		        	}
 		        }
 			}
-	        Adapter_Weather							adapter				= new Adapter_Weather(Global.actContext, R.id.List_View, forecastList);
+	        Adapter_4_Weather							adapter				= new Adapter_4_Weather(Global.actContext, R.id.List_View, forecastList);
 	        view.setAdapter(adapter);
 		}
 		else
