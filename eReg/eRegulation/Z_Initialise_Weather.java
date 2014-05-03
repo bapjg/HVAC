@@ -13,22 +13,6 @@ public class Z_Initialise_Weather
 	public static void main(String[] args)
 	{
 		
-		Long SIX_HOURS 			= 6 * 60 * 60 * 1000L;
-		Long Inc_6h   			= Global.getTimeNowSinceMidnight()/SIX_HOURS;
-		Long Time_Last_Inc		= Global.getTimeAtMidnight() + SIX_HOURS * Inc_6h;
-		
-		
-		System.out.println ("midnight : " + Global.getTimeAtMidnight());
-		System.out.println ("6h       : " + SIX_HOURS);
-		System.out.println ("Inc       : " + Global.getTimeNowSinceMidnight()/SIX_HOURS);
-		System.out.println ("Inc.t     : " + Time_Last_Inc);
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		String utct = "2014-05-04T15:00:00";

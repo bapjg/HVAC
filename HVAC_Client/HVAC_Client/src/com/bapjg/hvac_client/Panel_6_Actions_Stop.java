@@ -30,10 +30,6 @@ public class Panel_6_Actions_Stop 				extends 			Panel_0_Fragment
 	{
 		super();
 	}
-    public Panel_6_Actions_Stop(int menuLayout)
-    {
-		super(menuLayout);
-    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity												= getActivity();

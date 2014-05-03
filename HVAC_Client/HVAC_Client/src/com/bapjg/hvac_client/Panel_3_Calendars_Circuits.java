@@ -21,29 +21,28 @@ import android.widget.TextView;
 
 
 @SuppressLint("ValidFragment")
-//Template										variable			= something
-//Template										ext/imp				class
-public class Panel_3_Calendars_Circuits 		extends 			Panel_0_Fragment
-												implements			AdapterView.OnItemClickListener	
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
+public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
+														implements					AdapterView.OnItemClickListener	
 {
-	private Adapter_3_Calendars_Circuits 		adapter;
-	private LayoutInflater						myInflater;
-	private Activity							myActivity;
-	private ViewGroup							myContainer;
-	private View								myAdapterView;
-	private FragmentManager						myFragmentManager;
+	private LayoutInflater								myInflater;
+	private Activity									myActivity;
+	private ViewGroup									myContainer;
+	private FragmentManager								myFragmentManager;
 	
-	public String								circuitName;
+	public String										circuitName;
 
 	public Panel_3_Calendars_Circuits()
 	{
 		super();
-		circuitName													= "";
+		circuitName																	= "";
 	}
-    public Panel_3_Calendars_Circuits(int menuLayout, String circuitName)
+    public Panel_3_Calendars_Circuits(String circuitName)
     {
-		super(menuLayout);
-		this.circuitName											= circuitName;
+		super();
+		this.circuitName															= circuitName;
    }
     
     @Override
@@ -51,77 +50,67 @@ public class Panel_3_Calendars_Circuits 		extends 			Panel_0_Fragment
     {
         
         // Inflate the layout for this fragment
-        myInflater													= inflater;
-        myContainer 												= container;
-        myActivity													= getActivity();
-        myFragmentManager 											= myActivity.getFragmentManager();
-        View 									panelView			= myInflater.inflate(R.layout.panel_3_calendars, container, false);
-        TextView 								name				= (TextView) panelView.findViewById(R.id.name);
-        name.setText(this.circuitName);
+        myInflater																	= inflater;
+        myContainer 																= container;
+        myActivity																	= getActivity();
+        myFragmentManager 															= myActivity.getFragmentManager();
+        View 											panelView					= myInflater.inflate(R.layout.panel_3_calendars, container, false);
+        TextView 										heading						= (TextView) panelView.findViewById(R.id.name);
+        heading.setText(this.circuitName);	
 
-        myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
+        AdapterView <Adapter_3_Calendars_Circuits>		adapterView					= (AdapterView) panelView.findViewById(R.id.List_View);
 
-        AdapterView <Adapter_3_Calendars_Circuits> 	view			= (AdapterView) panelView.findViewById(R.id.List_View);
-//        ArrayAdapter <?> 	view			= (ArrayAdapter <?>) panelView.findViewById(R.id.List_View);
-
-        Adapter_3_Calendars_Circuits			adapter				= null;	
-        for (Ctrl_Calendars.Circuit 	circuit : Global.eRegCalendars.circuitList)
+        Adapter_3_Calendars_Circuits					arrayAdapter				= null;	
+        for (Ctrl_Calendars.Circuit 		circuit 	: Global.eRegCalendars.circuitList)
         {
         	if (circuit.name.equalsIgnoreCase(this.circuitName))
         	{
-                adapter												= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
+        		arrayAdapter														= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
         	}
         }
         
-        view.setAdapter(adapter);
-//        view.setOnItemClickListener(new AdapterView.OnItemClickListener() 
-//        {
-//        	@Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id)   
-//        	{
-//            	System.out.println("onItemClick inLine");
-//            	Global.toaster("selected Item position is " + position, true);
-//            }
-//        });
-//        view.setOnItemClickListener((OnItemClickListener) this); 
-        view.setOnItemClickListener((OnItemClickListener) this.itemListener);
+        adapterView.setAdapter(arrayAdapter);
+       	adapterView.setOnItemClickListener((OnItemClickListener) this.itemListener);
 
         return panelView;
     }
-    @Override
-	public void onClick(View myView) 
-	{
-    	System.out.println("We have arrived in onClick/panel3Calendars again");
-    	
-    	Button 									myButton 			= (Button) myView;
-    	String									myCaption			= myButton.getText().toString();
-    	
-		// Set all textColours to white
-		ViewGroup 								viewParent			= (ViewGroup) myView.getParent();
-		for (int i = 0; i < viewParent.getChildCount(); i++)
-		{
-			Button								buttonChild 		= (Button) viewParent.getChildAt(i);
-			buttonChild.setTextColor(Color.WHITE);
-		}
-		
-		((Button) myView).setTextColor(Color.YELLOW);
-    	
-    	if (myCaption.equalsIgnoreCase("Thermometers"))
-    	{
-    		// buttonThermometersClick(myView);	
-    	}
-	}
+//    @Override
+//	public void onClick(View myView) 
+//	{
+//    	System.out.println("We have arrived in onClick/panel3Calendars again");
+//    	
+//    	Button 											myButton 					= (Button) myView;
+//    	String											myCaption					= myButton.getText().toString();
+//    	
+//		// Set all textColours to white
+//		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
+//		for (int i = 0; i < viewParent.getChildCount(); i++)
+//		{
+//			Button										buttonChild 				= (Button) viewParent.getChildAt(i);
+//			buttonChild.setTextColor(Color.WHITE);
+//		}
+//		
+//		((Button) myView).setTextColor(Color.YELLOW);
+//    	
+//    	if (myCaption.equalsIgnoreCase("Thermometers"))
+//    	{
+//    		// buttonThermometersClick(myView);	
+//    	}
+//	}
 //	@Override
 	public void OnItemClick(AdapterView<?> parent, View view, int position, long id) 
 	{
     	System.out.println("onItemClick");
+    	System.out.println("position :" + position);
 	}
-    private OnItemClickListener itemListener = new OnItemClickListener()
+    private OnItemClickListener 						itemListener 				= new OnItemClickListener()
     {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
 		{
 	    	System.out.println("onItemClick");
+	    	System.out.println("position :" + position);
+	    	System.out.println("id :" + id);
 		}
 	};
 }

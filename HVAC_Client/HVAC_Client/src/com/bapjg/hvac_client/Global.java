@@ -182,6 +182,11 @@ public class Global
 		// Returns a supplied time in string form "hh:mm" 
 		// In milliseconds since last midnight
 		//==============================================================
+		if (characters.equalsIgnoreCase(""))
+		{
+			return 0L;
+		}
+		
 		String splitCharacters[]			= characters.split(":");
 		
 		Calendar calendar					= Calendar.getInstance();

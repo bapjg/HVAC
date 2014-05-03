@@ -30,10 +30,6 @@ public class Panel_6_Actions_Test_Mail 			extends 			Panel_0_Fragment
 	{
 		super();
 	}
-    public Panel_6_Actions_Test_Mail(int menuLayout)
-    {
-		super(menuLayout);
-    }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity												= getActivity();
