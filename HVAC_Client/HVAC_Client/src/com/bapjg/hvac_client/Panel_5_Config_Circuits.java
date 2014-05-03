@@ -32,7 +32,7 @@ import android.widget.EditText;
 
 public class Panel_5_Config_Circuits 			extends 			Panel_0_Fragment 
 {
-	private Adapter_Relays		 				adapter;
+	private Adapter_5_Configuration_Relays		 				adapter;
 	private LayoutInflater						myInflater;
 	private Activity							myActivity;
 	private ViewGroup							myContainer;
@@ -116,9 +116,9 @@ public class Panel_5_Config_Circuits 			extends 			Panel_0_Fragment
 
         // Set up the adapter for the data
     	//ArrayList  	<Ctrl_Configuration.Thermometer>	data	= Global.configuration.thermometerList;
-        AdapterView <Adapter_Thermometers> 		view				= (AdapterView) myActivity.findViewById(R.id.List_View);
+        AdapterView <Adapter_5_Configuration_Thermometers> 		view				= (AdapterView) myActivity.findViewById(R.id.List_View);
         
-        Adapter_Thermometers 					adapter				= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+        Adapter_5_Configuration_Thermometers 					adapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
         
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	

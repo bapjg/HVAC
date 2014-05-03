@@ -78,7 +78,7 @@ public final class R {
         public static final int empty=0x7f090037;
         public static final int floor=0x7f090026;
         public static final int friendlyName=0x7f090004;
-        public static final int gradient=0x7f090045;
+        public static final int gradient=0x7f090048;
         public static final int hotwater=0x7f090025;
         public static final int menu_container=0x7f090001;
         public static final int menuitem_about=0x7f09004d;
@@ -87,16 +87,16 @@ public final class R {
         public static final int menuitem_quit=0x7f09004e;
         public static final int menuitem_search=0x7f090049;
         public static final int menuitem_share=0x7f09004b;
-        public static final int mixer=0x7f090044;
+        public static final int mixer=0x7f090047;
         public static final int name=0x7f090003;
         public static final int panel_container=0x7f090002;
         public static final int panel_subcontainer=0x7f09000c;
         public static final int precipitationType=0x7f09003e;
         public static final int precipitationValue=0x7f09003d;
         public static final int radiator=0x7f090027;
-        public static final int relay=0x7f090046;
-        public static final int relayBank=0x7f090047;
-        public static final int relayNumber=0x7f090048;
+        public static final int relay=0x7f090044;
+        public static final int relayBank=0x7f090045;
+        public static final int relayNumber=0x7f090046;
         public static final int row=0x7f09002c;
         public static final int tempObjective=0x7f090009;
         public static final int temperature=0x7f09003b;
@@ -135,12 +135,12 @@ public final class R {
         public static final int row_3_calendar_circuit=0x7f030015;
         public static final int row_3_calendars_word=0x7f030016;
         public static final int row_4_weather=0x7f030017;
-        public static final int row_calendar_circuit_title=0x7f030018;
-        public static final int row_configuration_circuit=0x7f030019;
-        public static final int row_configuration_circuit_title=0x7f03001a;
-        public static final int row_pump=0x7f03001b;
-        public static final int row_relay=0x7f03001c;
-        public static final int row_thermometer=0x7f03001d;
+        public static final int row_5_configuration_pump=0x7f030018;
+        public static final int row_5_configuration_relay=0x7f030019;
+        public static final int row_5_configuration_thermometer=0x7f03001a;
+        public static final int row_calendar_circuit_title=0x7f03001b;
+        public static final int row_configuration_circuit=0x7f03001c;
+        public static final int row_configuration_circuit_title=0x7f03001d;
     }
     public static final class menu {
         public static final int main=0x7f080000;

@@ -32,7 +32,7 @@ import android.widget.EditText;
 
 public class Panel_5_Config_Pumps 				extends 			Panel_0_Fragment 
 {
-	private Adapter_Relays		 				adapter;
+	private Adapter_5_Configuration_Relays		 				adapter;
 	private LayoutInflater						myInflater;
 	private Activity							myActivity;
 	private ViewGroup							myContainer;
@@ -116,9 +116,9 @@ public class Panel_5_Config_Pumps 				extends 			Panel_0_Fragment
 
         // Set up the adapter for the data
     	//ArrayList  	<Ctrl_Configuration.Thermometer>	data	= Global.configuration.thermometerList;
-        AdapterView <Adapter_Thermometers> 		view				= (AdapterView) myActivity.findViewById(R.id.List_View);
+        AdapterView <Adapter_5_Configuration_Thermometers> 		view				= (AdapterView) myActivity.findViewById(R.id.List_View);
         
-        Adapter_Thermometers 					adapter				= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+        Adapter_5_Configuration_Thermometers 					adapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
         
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	
@@ -130,8 +130,8 @@ public class Panel_5_Config_Pumps 				extends 			Panel_0_Fragment
 		if (result instanceof Ctrl_Configuration.Data)
 		{
 			Global.eRegConfiguration								= (Ctrl_Configuration.Data) result;
-	        AdapterView <Adapter_Pumps> 		view				= (AdapterView) myContainer.findViewById(R.id.List_View);
-	        Adapter_Pumps						adapter				= new Adapter_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
+	        AdapterView <Adapter_5_Configuration_Pumps> 		view				= (AdapterView) myContainer.findViewById(R.id.List_View);
+	        Adapter_5_Configuration_Pumps						adapter				= new Adapter_5_Configuration_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
 	        view.setAdapter(adapter);
 		}
 		else

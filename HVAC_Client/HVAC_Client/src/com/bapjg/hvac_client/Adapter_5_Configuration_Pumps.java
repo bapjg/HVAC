@@ -13,12 +13,12 @@ import HVAC_Messages.*;
 
 //Template										variable			= something
 //Template										ext/imp				class
-public class Adapter_Pumps 						extends 			ArrayAdapter
+public class Adapter_5_Configuration_Pumps 						extends 			ArrayAdapter
 {
     private ArrayList							listData;
     private LayoutInflater 						myInflater;
  
-    public Adapter_Pumps(Context context, int resource, ArrayList listData) 
+    public Adapter_5_Configuration_Pumps(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
         
@@ -47,7 +47,7 @@ public class Adapter_Pumps 						extends 			ArrayAdapter
 
         if (convertView == null) 
         {
-        	convertView 											= myInflater.inflate(R.layout.row_pump, null);
+        	convertView 											= myInflater.inflate(R.layout.row_5_configuration_pump, null);
             holder 													= new ViewHolder();
             holder.name 											= (TextView) convertView.findViewById(R.id.name);
             holder.relay 											= (TextView) convertView.findViewById(R.id.relay);

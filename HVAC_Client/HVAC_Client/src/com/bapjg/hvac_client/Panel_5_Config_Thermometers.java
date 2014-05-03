@@ -34,7 +34,7 @@ import android.widget.EditText;
 
 public class Panel_5_Config_Thermometers 		extends 			Panel_0_Fragment 
 {
-	private Adapter_Thermometers 				adapter;
+	private Adapter_5_Configuration_Thermometers 				adapter;
 	private LayoutInflater						myInflater;
 	private Activity							myActivity;
 	private ViewGroup							myContainer;
@@ -151,8 +151,8 @@ public class Panel_5_Config_Thermometers 		extends 			Panel_0_Fragment
 		if (result instanceof Ctrl_Configuration.Data)
 		{
 			Global.eRegConfiguration			 					= (Ctrl_Configuration.Data) result;
-			AdapterView <Adapter_Thermometers> 	listView			= (AdapterView) myContainer.findViewById(R.id.List_View);
-			Adapter_Thermometers 				adapter				= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+			AdapterView <Adapter_5_Configuration_Thermometers> 	listView			= (AdapterView) myContainer.findViewById(R.id.List_View);
+			Adapter_5_Configuration_Thermometers 				adapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
 			listView.setAdapter(adapter);
 		}
 		else
