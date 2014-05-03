@@ -122,7 +122,7 @@ public class Adapter_3_Calendars_Circuits 				extends 					ArrayAdapter
             timeSlot.setLayoutParams					(timeSlotLayout);
             
             if ((timeEnd 	> slotStart )
-            || 	(timeStart 	> slotEnd ) )
+            && 	(timeStart 	< slotEnd ) )
             {
             	timeSlot.setBackgroundColor(Color.RED);
             }
