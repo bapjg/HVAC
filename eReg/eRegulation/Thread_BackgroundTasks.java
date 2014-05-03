@@ -126,6 +126,7 @@ public class Thread_BackgroundTasks implements Runnable
 				else if (Global.boiler.thermoBoiler.reading > 18000)
 				{
 					// Floor
+					// ensure mixer is in the correct position
 				}
 
 			}

@@ -14,37 +14,42 @@
 	   	<TextView
 	        android:id				= "@+id/name"
 	        style					= "@style/AD_Text"
-	    	android:layout_width	= "140dp"
+	    	android:layout_width	= "100dp"
 	   	/>
-         	<TextView
+         <TextView
         	android:id			 	= "@+id/day_1"
         	android:text		 	= "1"
+        	android:gravity			= "center_horizontal"
         	style				 	= "@style/AD_Text"
-    		android:layout_width 	= "20dp"
+    		android:layout_width 	= "30dp"
    		/>                       	  
-    	   	<TextView            	  
+    	<TextView            	  
         	android:id			 	= "@+id/day_2"
  	      	android:text		 	= "2"
+        	android:gravity			= "center_horizontal"
         	style				 	= "@style/AD_Text"
-    		android:layout_width 	= "20dp"
+    		android:layout_width 	= "30dp"
    		/>                       	  
-    	   	<TextView            	  
+    	<TextView            	  
         	android:id			 	= "@+id/day_3"
 	       	android:text		 	= "3"
+         	android:gravity			= "center_horizontal"
         	style				 	= "@style/AD_Text"
-    		android:layout_width 	= "20dp"
+    		android:layout_width 	= "30dp"
    		/>
     	<TextView
         	android:id			 	= "@+id/day_4"
 			android:text		 	= "4"
+        	android:gravity			= "center_horizontal"
         	style				 	= "@style/AD_Text"
-    		android:layout_width 	= "20dp"
+    		android:layout_width 	= "30dp"
    		/>                       	  
     	<TextView                	  
         	android:id			 	= "@+id/day_5"
  	       	android:text		 	= "5"
+        	android:gravity			= "center_horizontal"
 			style				 	= "@style/AD_Text"
-    		android:layout_width 	= "20dp"
+    		android:layout_width 	= "30dp"
    		/>                       	  
     	<TextView                	  
         	android:id			 	= "@+id/empty"
@@ -55,14 +60,16 @@
     	<TextView                  
         	android:id			 	= "@+id/day_6"
  	       	android:text		 	= "6"
+        	android:gravity			= "center_horizontal"
 			style				 	= "@style/AD_Text"
-    		android:layout_width 	= "20dp"
+    		android:layout_width 	= "30dp"
    		/>                       	
     	<TextView                	
         	android:id			 	= "@+id/day_7"
   	       	android:text		 	= "7"
+        	android:gravity			= "center_horizontal"
 			style				 	= "@style/AD_Text"
-    		android:layout_width 	= "10dp"
+    		android:layout_width 	= "30dp"
    		/>
     	   	   	   	
     </LinearLayout>

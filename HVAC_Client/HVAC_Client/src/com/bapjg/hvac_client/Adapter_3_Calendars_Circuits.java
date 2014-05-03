@@ -63,6 +63,10 @@ public class Adapter_3_Calendars_Circuits 				extends 					ArrayAdapter
         row.timeStart.setText							(listItem.timeStart);
         row.timeEnd.setText								(listItem.timeEnd);
 
+    	if (position % 2 == 0)
+    	{
+    		adapterView.findViewById(R.id.row).setBackgroundColor(0x800000ff); //  BLUE =  (0xff0000ff) (first byte = intensity)
+    	}
         // Now handle the non-standard stuff
      	// Replace word in listItem.days be their corresponding day numbers from Vocabulary
     	String											days						= listItem.days;
