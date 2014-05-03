@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ import android.widget.TextView;
 //Template										variable			= something
 //Template										ext/imp				class
 public class Panel_3_Calendars_Circuits 		extends 			Panel_0_Fragment
+												implements			AdapterView.OnItemClickListener	
 {
 	private Adapter_3_Calendars_Circuits 		adapter;
 	private LayoutInflater						myInflater;
@@ -59,8 +62,9 @@ public class Panel_3_Calendars_Circuits 		extends 			Panel_0_Fragment
         myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
 
         AdapterView <Adapter_3_Calendars_Circuits> 	view			= (AdapterView) panelView.findViewById(R.id.List_View);
+//        ArrayAdapter <?> 	view			= (ArrayAdapter <?>) panelView.findViewById(R.id.List_View);
 
-        Adapter_3_Calendars_Circuits					adapter			= null;	
+        Adapter_3_Calendars_Circuits			adapter				= null;	
         for (Ctrl_Calendars.Circuit 	circuit : Global.eRegCalendars.circuitList)
         {
         	if (circuit.name.equalsIgnoreCase(this.circuitName))
@@ -68,7 +72,20 @@ public class Panel_3_Calendars_Circuits 		extends 			Panel_0_Fragment
                 adapter												= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
         	}
         }
+        
         view.setAdapter(adapter);
+//        view.setOnItemClickListener(new AdapterView.OnItemClickListener() 
+//        {
+//        	@Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id)   
+//        	{
+//            	System.out.println("onItemClick inLine");
+//            	Global.toaster("selected Item position is " + position, true);
+//            }
+//        });
+//        view.setOnItemClickListener((OnItemClickListener) this); 
+        view.setOnItemClickListener((OnItemClickListener) this.itemListener);
+
         return panelView;
     }
     @Override
@@ -94,11 +111,18 @@ public class Panel_3_Calendars_Circuits 		extends 			Panel_0_Fragment
     		// buttonThermometersClick(myView);	
     	}
 	}
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
+//	@Override
+	public void OnItemClick(AdapterView<?> parent, View view, int position, long id) 
 	{
-		// TODO Auto-generated method stub
-		
+    	System.out.println("onItemClick");
 	}
+    private OnItemClickListener itemListener = new OnItemClickListener()
+    {
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
+		{
+	    	System.out.println("onItemClick");
+		}
+	};
 }
 

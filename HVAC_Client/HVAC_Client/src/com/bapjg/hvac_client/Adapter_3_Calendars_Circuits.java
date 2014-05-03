@@ -8,7 +8,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.*;
-import android.view.View.OnClickListener;
 import android.widget.*;
 
 import HVAC_Messages.*;
@@ -16,7 +15,6 @@ import HVAC_Messages.*;
 //Template										variable			= something
 //Template										ext/imp				class
 public class Adapter_3_Calendars_Circuits 		extends 			ArrayAdapter
-												implements			View.OnClickListener
 {
     private ArrayList							listData;
     private LayoutInflater 						myInflater;
@@ -92,7 +90,7 @@ public class Adapter_3_Calendars_Circuits 		extends 			ArrayAdapter
     		row.stopOnObjective.setChecked(true);
     	}
         
-        row.day_1.setOnClickListener((OnClickListener) this);
+//        row.day_1.setOnClickListener((OnClickListener) this);
 //        row.day_2.setOnClickListener((View.OnClickListener) this);
 //        row.day_3.setOnClickListener((View.OnClickListener) this);
 //        row.day_4.setOnClickListener((View.OnClickListener) this);
@@ -116,17 +114,17 @@ public class Adapter_3_Calendars_Circuits 		extends 			ArrayAdapter
     	TextView 							tempObjective;
     	CheckBox 							stopOnObjective;
     }
-    public void  onClick(View view)
-    {
-    	System.out.println("onclick simple");
-        int position = this.getPosition(this);
-        
-        System.out.println("pos " + position);
-    }
-    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
-    {
-        // Object 		o 								= view.getItemAtPosition(position);
-        // NewsItem 	newsData 						= (NewsItem) o;
-		Global.toaster("Selected Something, perhaps : " + position, true);
-    }
+//    public void  onClick(View view)
+//    {
+//    	System.out.println("onclick simple");
+//        int position = this.getPosition(this);
+//        
+//        System.out.println("pos " + position);
+//    }
+//    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
+//    {
+//        // Object 		o 								= view.getItemAtPosition(position);
+//        // NewsItem 	newsData 						= (NewsItem) o;
+//		Global.toaster("Selected Something, perhaps : " + position, true);
+//    }
 }

@@ -7,6 +7,7 @@ public class Thread_BackgroundTasks implements Runnable
 	public static final int			SUMMER_PUMPS_Waiting			= 0;
 	public static final int			SUMMER_PUMPS_Running			= 1;
 	public static final int			SUMMER_PUMPS_FinishedToDay		= 2;
+	public static final Long		SIX_HOURS						= 6 * 60 * 60 * 1000L;
 
 	
 	public Thread_BackgroundTasks()
@@ -23,20 +24,20 @@ public class Thread_BackgroundTasks implements Runnable
 
 		LogIt.info("Thread_Background", "Run", "Starting", true);
 		Calendars.TasksBackGround			tasksBackGround			= Global.tasksBackGround;
-		LogIt.info("Thread_Background", "Run", "Calendars setup", true);
 		
 		while (!Global.stopNow)
 		{
-			LogIt.info("Thread_Background", "Run", "Looping 1", true);
 			//=========================================================================================================================================
 			//
 			// CleanPumps : particularly in summer
 			//
+			LogIt.info("Thread_Background", "Run", "Pump Use", true);
 			if ( (Global.pumps.dateTimeLastClean 	< 	Global.today()											)	 		// last run was yerterday
 			&&   (tasksBackGround.pumpCleanTime		> 	Global.getTimeNowSinceMidnight()						) 		// time to do it has arrived		
 			&&   (tasksBackGround.pumpCleanTime		< 	Global.getTimeNowSinceMidnight() + (30 * 60 * 1000L)	) 	)	// but not too late	(allow 30 mins	
 			{
 				LogIt.action("Summer Pumps", "On");
+				LogIt.info("Thread_Background", "Run", "Summer Pumps On", true);
 				
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
@@ -46,6 +47,7 @@ public class Thread_BackgroundTasks implements Runnable
 					{
 						if (!circuit.circuitPump.isOn())			// Not really possible otherwise
 						{
+							LogIt.info("Thread_Background", "Run", "Clean pump " + circuit.circuitPump.name, true);
 							circuit.circuitPump.relay.on();			// circuitPump.on() updates timeLastOperated, whereas circuitPump.relay.on() does not.
 							Global.waitMilliSeconds(500);			// Avoid switch all the relays at the same time
 						}
@@ -54,6 +56,7 @@ public class Thread_BackgroundTasks implements Runnable
 
 				Global.pumps.dateTimeLastClean					= Global.now(); // This value will be higher then dateLastOperated, ensuring a run next day even if unused
 
+				LogIt.info("Thread_Background", "Run", "Summer Pumps Wait", true);
 				// This is a wait which allows loop exit if stopButton pressed
 				for (i = 0; (i < tasksBackGround.pumpCleanDurationSeconds) && (!Global.stopNow); i++)			
 				{
@@ -63,20 +66,21 @@ public class Thread_BackgroundTasks implements Runnable
 				// Switch off all pumps but inspect each circuit to see if a task is ow active
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
-					if (circuit.taskActive == null)		// pump not used since 24hours
+					if (circuit.taskActive == null)	
 					{
 						if (!circuit.circuitPump.isOn())
 						{
+							LogIt.info("Thread_Background", "Run", "Clean pump off " + circuit.circuitPump.name, true);
 							circuit.circuitPump.off();
 							Global.waitMilliSeconds(500);			// Avoid switch all the relays at the same time
 						}
 					}
 				}
 				LogIt.action("Summer Pumps", "Off");
+				LogIt.info("Thread_Background", "Run", "Clean pump finished", true);
 			}
 			//
 			//=========================================================================================================================================
-			LogIt.info("Thread_Background", "Run", "Looping after pumps", true);
 
 			//=========================================================================================================================================
 			//
@@ -105,7 +109,6 @@ public class Thread_BackgroundTasks implements Runnable
 			}
 			//
 			//=========================================================================================================================================
-			LogIt.info("Thread_Background", "Run", "Looping after antifreeze", true);
 
 			//=========================================================================================================================================
 			//
@@ -132,15 +135,19 @@ public class Thread_BackgroundTasks implements Runnable
 			}
 			//
 			//=========================================================================================================================================
-			LogIt.info("Thread_Background", "Run", "Looping after optimisation", true);
 
 			//=========================================================================================================================================
 			//
 			// Get the weather forecast after startup (= null) OR last forecast before latest 6hour interval within the day
 			//
+			Long Inc_6h_Number		= Global.getTimeNowSinceMidnight()/SIX_HOURS;					// Number of 6hour increments since last midnight
+			Long Inc_6h_Time		= Global.getTimeAtMidnight() + SIX_HOURS * Inc_6h_Number;		// DateTime of last increment
+			
+
 			if ( (Global.weatherData == null)
-			||	 (Global.weatherData.dateTimeObtained < Global.getTimeAtMidnight() + Global.getTimeNowSinceMidnight() / (6 * 60 * 60 * 1000L))   ) // Latest 6 hour interval in day
+			||	 (Global.weatherData.dateTimeObtained < Inc_6h_Time)   ) 							// Latest 6 hour interval in day
 			{
+				LogIt.info("Thread_Background", "Run", "Weather : getIt", true);
 				try
 				{
 					Global.weatherData							= new Ctrl_WeatherData();
@@ -152,7 +159,6 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			//=========================================================================================================================================
 
-			LogIt.info("Thread_Background", "Run", "Looping after weather and before wait", true);
 			Global.waitSeconds(300);							// Wait 5 mins
 
 		}
