@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -70,38 +71,18 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
         }
         
         adapterView.setAdapter(arrayAdapter);
-       	adapterView.setOnItemClickListener((OnItemClickListener) this.itemListener);
+//       	adapterView.setOnItemClickListener((OnItemClickListener) this.itemListener);
+       	adapterView.setOnItemClickListener((OnItemClickListener) this);
 
         return panelView;
     }
-//    @Override
-//	public void onClick(View myView) 
-//	{
-//    	System.out.println("We have arrived in onClick/panel3Calendars again");
-//    	
-//    	Button 											myButton 					= (Button) myView;
-//    	String											myCaption					= myButton.getText().toString();
-//    	
-//		// Set all textColours to white
-//		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
-//		for (int i = 0; i < viewParent.getChildCount(); i++)
-//		{
-//			Button										buttonChild 				= (Button) viewParent.getChildAt(i);
-//			buttonChild.setTextColor(Color.WHITE);
-//		}
-//		
-//		((Button) myView).setTextColor(Color.YELLOW);
-//    	
-//    	if (myCaption.equalsIgnoreCase("Thermometers"))
-//    	{
-//    		// buttonThermometersClick(myView);	
-//    	}
-//	}
-//	@Override
 	public void OnItemClick(AdapterView<?> parent, View view, int position, long id) 
 	{
-    	System.out.println("onItemClick");
-    	System.out.println("position :" + position);
+		myActivity																	= getActivity();
+    	FragmentTransaction								fTransaction				= getActivity().getFragmentManager().beginTransaction();
+    	Fragment 										panelFragment				= new Panel_3_Calendars_Circuits_Item;
+    	fTransaction.replace(R.id.panel_container, panelFragment);
+    	fTransaction.commit();  
 	}
     private OnItemClickListener 						itemListener 				= new OnItemClickListener()
     {

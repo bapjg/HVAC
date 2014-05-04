@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -73,11 +74,25 @@ public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
     	}
 	}
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
-		// TODO Auto-generated method stub
-		
-	}
+        if (position > 0)
+        {
+        	System.out.println("position : " + position);
+//	        ViewGroup 							viewGroup			= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
+//        	View 								newView 			= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
+
+        	FragmentTransaction 				ft 					= myFragmentManager.beginTransaction();
+        	Ctrl_Configuration.Thermometer 		dt					= Global.eRegConfiguration.thermometerList.get(position -1);
+
+     //   	ft.replace(R.id.panel_container, dt);
+        	ft.commit();
+        }
+        else
+        {
+        	// We have clicked in title area
+        }
+   	}
 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
 		Activity								activity			= getActivity();		
@@ -89,6 +104,9 @@ public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
 	        									view				= (AdapterView) myContainer.findViewById(R.id.List_View);
 	        Adapter_3_Calendars_Words			adapter				= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
 	        view.setAdapter(adapter);
+	        
+	        view.setOnItemClickListener((OnItemClickListener) this);	
+
 		}
 		else
 		{

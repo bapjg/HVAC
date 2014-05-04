@@ -58,7 +58,7 @@ public class Panel_5_Config_Pumps 				extends 			Panel_0_Fragment
  
         return myView;
     }
-    public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
+    public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
 	{
         if (position > 0)
         {
