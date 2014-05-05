@@ -16,7 +16,7 @@ import HVAC_Messages.*;
 //Template												NEWNEWNEW					= NEWNEWNEW
 //Template												variable					= something
 //Template												ext/imp						class
-public class Adapter_3_Calendars_Circuits 				extends 					Adapter_0_Adapter
+public class Adapter_3_Calendars_Circuits 				extends 					Adapter_0_Abstract
 {
     private ArrayList									listData;
     private LayoutInflater 								myInflater;
