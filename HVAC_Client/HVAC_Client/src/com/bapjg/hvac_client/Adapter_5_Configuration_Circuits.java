@@ -13,10 +13,10 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-public class Adapter_Configuration_Circuits 			extends 			Adapter_0_Abstract
+public class Adapter_5_Configuration_Circuits 			extends 			Adapter_0_Abstract
 {
  
-    public Adapter_Configuration_Circuits(Context context, int resource, ArrayList listData) 
+    public Adapter_5_Configuration_Circuits(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
     }
@@ -33,23 +33,9 @@ public class Adapter_Configuration_Circuits 			extends 			Adapter_0_Abstract
         adapterView.setTag(row);
 
         row.name.setText					(listItem.name);
-	        
-       	if (listItem.tempGradient == null)
-        {
-        	row.gradient.setChecked(false);
-        }
-        else
-        {
-        	row.gradient.setChecked(true);
-        }
-        if (listItem.mixer == null)
-        {
-           	row.mixer.setChecked(false);
-        }
-        else
-        {
-        	row.mixer.setChecked(true);
-        }
+       	row.gradient.setChecked				( ! (listItem.tempGradient == null));
+       	row.mixer.setChecked				( ! (listItem.mixer == null));
+
         return adapterView;
     }
     static class RowHolder 
