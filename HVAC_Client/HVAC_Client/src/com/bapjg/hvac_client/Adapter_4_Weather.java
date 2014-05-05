@@ -11,41 +11,20 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-//Template										variable			= something
-//Template										ext/imp				class
-public class Adapter_4_Weather 					extends 			ArrayAdapter
+public class Adapter_4_Weather 								extends 			Adapter_0_Abstract
 {
-    private ArrayList							listData;
-    private LayoutInflater 						myInflater;
  
     public Adapter_4_Weather(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
-        
-        this.listData 												= listData;
-        this.myInflater												= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-    @Override
-    public int getCount() 
-    {
-        return listData.size();
-    }
-    @Override
-    public Ctrl_Calendars.Calendar getItem(int position) 
-    {
-        return (Ctrl_Calendars.Calendar) listData.get(position);
-    }
-    @Override
-    public long getItemId(int position) 
-    {
-        return position;
     }
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
      	RowHolder 								row;
+    	Ctrl_WeatherData.Forecast				listItem		= (Ctrl_WeatherData.Forecast) listData.get(position);
 
-    	adapterView 											= myInflater.inflate(R.layout.row_4_weather, null);
+    	adapterView 											= inflater.inflate(R.layout.row_4_weather, null);
     	row														= new RowHolder();
        	row.time												= (TextView) adapterView.findViewById(R.id.time);
        	row.temperature											= (TextView) adapterView.findViewById(R.id.temperature);
@@ -57,12 +36,10 @@ public class Adapter_4_Weather 					extends 			ArrayAdapter
     	row.windDirection										= (TextView) adapterView.findViewById(R.id.windDirection);
     	row.cloudValue											= (TextView) adapterView.findViewById(R.id.cloudValue);
     	row.cloudAll											= (TextView) adapterView.findViewById(R.id.cloudAll);
-
-    	Ctrl_WeatherData.Forecast				listItem		= (Ctrl_WeatherData.Forecast) listData.get(position);
     	
-    	String 									day				= Global.displayDayOfWeek((listItem.dateTime.from));
-    	String 									time_from		= Global.displayTimeShort(listItem.dateTime.from);
-    	String 									time_to			= Global.displayTimeShort(listItem.dateTime.to);
+    	String 								day					= Global.displayDayOfWeek((listItem.dateTime.from));
+    	String 								time_from			= Global.displayTimeShort(listItem.dateTime.from);
+    	String 								time_to				= Global.displayTimeShort(listItem.dateTime.to);
     	
        	row.time.setText								(day + " " + time_from + " - " + time_to);											
        	row.temperature.setText							(listItem.temperature.value.toString() + " °C");											

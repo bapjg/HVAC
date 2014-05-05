@@ -11,71 +11,30 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-//Template										variable			= something
-//Template										ext/imp				class
-public class Adapter_5_Configuration_Pumps 						extends 			ArrayAdapter
+public class Adapter_5_Configuration_Pumps 					extends 			Adapter_0_Abstract
 {
-    private ArrayList							listData;
-    private LayoutInflater 						myInflater;
- 
+  
     public Adapter_5_Configuration_Pumps(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
-        
-        this.listData 												= listData;
-        this.myInflater												= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     @Override
-    public int getCount() 
+    public View getView(int position, View adapterView, ViewGroup parent) 
     {
-        return listData.size() + 1;
-    }
-    @Override
-    public Ctrl_Configuration.Pump getItem(int position) 
-    {
-        return (Ctrl_Configuration.Pump) listData.get(position - 1);
-    }
-    @Override
-    public long getItemId(int position) 
-    {
-        return position;
-    }
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) 
-    {
-    	ViewHolder 								holder;
+    	RowHolder 							row;
+    	Ctrl_Configuration.Pump				listItem			= (Ctrl_Configuration.Pump) listData.get(position);
 
-        if (convertView == null) 
-        {
-        	convertView 											= myInflater.inflate(R.layout.row_5_configuration_pump, null);
-            holder 													= new ViewHolder();
-            holder.name 											= (TextView) convertView.findViewById(R.id.name);
-            holder.relay 											= (TextView) convertView.findViewById(R.id.relay);
-            convertView.setTag(holder);
-        } 
-        else 
-        {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        if (position == 0)
-        {
-           	holder.name.setText				("Name");
-            holder.name.setTextColor		(Color.YELLOW);
-            holder.name.setTypeface			(null, Typeface.BOLD);
-            
-            holder.relay.setText			("Relay");
-            holder.relay.setTextColor		(Color.YELLOW);
-            holder.relay.setTypeface		(null, Typeface.BOLD);
-            
-         }
-        else
-        {
-        	holder.name.setText				(((Ctrl_Configuration.Pump) listData.get(position - 1)).name);
-	        holder.relay.setText			(((Ctrl_Configuration.Pump) listData.get(position - 1)).relay);
-        }
-        return convertView;
+        adapterView 											= inflater.inflate(R.layout.row_5_configuration_pump, null);
+        row 													= new RowHolder();
+        row.name 												= (TextView) adapterView.findViewById(R.id.name);
+        row.relay 												= (TextView) adapterView.findViewById(R.id.relay);
+        adapterView.setTag(row);
+    	row.name.setText					(listItem.name);
+        row.relay.setText					(listItem.relay);
+        
+        return adapterView;
     }
-    static class ViewHolder 
+    static class RowHolder 
     {
     	TextView 							name;
     	TextView 							relay;

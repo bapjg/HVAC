@@ -15,8 +15,8 @@ import HVAC_Messages.*;
 
 public class Adapter_0_Abstract 							extends 					ArrayAdapter
 {
-    private ArrayList									listData;
-    private LayoutInflater 								inflater;
+    public ArrayList										listData;
+    public LayoutInflater 									inflater;
  
     public Adapter_0_Abstract(Context context, int resource, ArrayList listData) 
     {

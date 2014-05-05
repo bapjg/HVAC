@@ -13,55 +13,32 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
 public class Adapter_3_Calendars_Circuits 				extends 					Adapter_0_Abstract
 {
-    private ArrayList									listData;
-    private LayoutInflater 								myInflater;
  
     public Adapter_3_Calendars_Circuits(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
-        
-        this.listData 																= listData;
-        this.myInflater																= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-//    @Override
-//    public int getCount() 
-//    {
-//        return listData.size();
-//    }
-//    @Override
-//    public Ctrl_Calendars.Calendar getItem(int position) 
-//    {
-//        return (Ctrl_Calendars.Calendar) listData.get(position);
-//    }
-//    @Override
-//    public long getItemId(int position) 
-//    {
-//        return position;
-//    }
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
      	RowHolder 										row;
+    	Ctrl_Calendars.Calendar							listItem					= (Ctrl_Calendars.Calendar) listData.get(position);
 
-    	adapterView 																= myInflater.inflate(R.layout.row_3_calendar_circuit, null);
+    	adapterView 																= inflater.inflate(R.layout.row_3_calendar_circuit, null);
     	row																			= new RowHolder();
      	row.days																	= (TextView) adapterView.findViewById(R.id.days);
      	row.timeStart																= (TextView) adapterView.findViewById(R.id.timeStart);
     	row.timeEnd																	= (TextView) adapterView.findViewById(R.id.timeEnd);
     	row.tempObjective															= (TextView) adapterView.findViewById(R.id.tempObjective);
-       	// Get the current listItel
-    	Ctrl_Calendars.Calendar							listItem					= (Ctrl_Calendars.Calendar) listData.get(position);
+
     	// Update the entries using standard ArrayAdapter technique
-    	Integer											tempObjective				= listItem.tempObjective/1000;
-      	row.tempObjective.setText						(tempObjective.toString() + " °C");
-    	row.days.setText								(listItem.days);
-        row.timeStart.setText							(listItem.timeStart);
-        row.timeEnd.setText								(listItem.timeEnd);
+    	Integer									tempObjective						= listItem.tempObjective/1000;
+      	row.tempObjective.setText				(tempObjective.toString() + " °C");
+    	row.days.setText						(listItem.days);
+        row.timeStart.setText					(listItem.timeStart);
+        row.timeEnd.setText						(listItem.timeEnd);
 
     	if (position % 2 == 0)
     	{

@@ -11,53 +11,29 @@ import android.graphics.Typeface;
 import android.view.*;
 import android.widget.*;
 
-//Template										variable			= something
-//Template										ext/imp				class
-public class Adapter_3_Calendars_Words 						extends 			ArrayAdapter
+public class Adapter_3_Calendars_Words 						extends 			Adapter_0_Abstract
 {
-    private ArrayList							listData;
-    private LayoutInflater 						myInflater;
  
     public Adapter_3_Calendars_Words(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
-        
-        this.listData 												= listData;
-        this.myInflater												= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-    @Override
-    public int getCount() 
+    public View getView(int position, View adapterView, ViewGroup parent) 
     {
-        return listData.size();
-    }
-    @Override
-    public Ctrl_Calendars.Word    				getItem(int position) 
-    {
-        return (Ctrl_Calendars.Word) listData.get(position);
-    }
-    @Override
-    public long getItemId(int position) 
-    {
-        return position;
-    }
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) 
-    {
-    	ViewHolder 							row;
-    	
-    	convertView 											= myInflater.inflate(R.layout.row_3_calendars_word, null);
-    	row 													= new ViewHolder();
-    	row.name 												= (TextView) convertView.findViewById(R.id.name);
-    	row.day_1 												= (TextView) convertView.findViewById(R.id.day_1);
-    	row.day_2 												= (TextView) convertView.findViewById(R.id.day_2);
-    	row.day_3 												= (TextView) convertView.findViewById(R.id.day_3);
-    	row.day_4 												= (TextView) convertView.findViewById(R.id.day_4);
-    	row.day_5 												= (TextView) convertView.findViewById(R.id.day_5);
-    	row.day_6 												= (TextView) convertView.findViewById(R.id.day_6);
-    	row.day_7 												= (TextView) convertView.findViewById(R.id.day_7);
-        convertView.setTag(row);
-    
+    	RowHolder 							row;
         Ctrl_Calendars.Word					listItem			= (Ctrl_Calendars.Word) listData.get(position);
+    	
+    	adapterView 											= inflater.inflate(R.layout.row_3_calendars_word, null);
+    	row 													= new RowHolder();
+    	row.name 												= (TextView) adapterView.findViewById(R.id.name);
+    	row.day_1 												= (TextView) adapterView.findViewById(R.id.day_1);
+    	row.day_2 												= (TextView) adapterView.findViewById(R.id.day_2);
+    	row.day_3 												= (TextView) adapterView.findViewById(R.id.day_3);
+    	row.day_4 												= (TextView) adapterView.findViewById(R.id.day_4);
+    	row.day_5 												= (TextView) adapterView.findViewById(R.id.day_5);
+    	row.day_6 												= (TextView) adapterView.findViewById(R.id.day_6);
+    	row.day_7 												= (TextView) adapterView.findViewById(R.id.day_7);
+        adapterView.setTag(row);
 
         row.name.setText					(listItem.name);
         if ((listItem.days).indexOf("1") > -1)	row.day_1.setBackgroundColor(Color.RED); else row.day_1.setBackgroundColor(Color.BLUE);
@@ -68,9 +44,9 @@ public class Adapter_3_Calendars_Words 						extends 			ArrayAdapter
         if ((listItem.days).indexOf("6") > -1)	row.day_6.setBackgroundColor(Color.RED); else row.day_6.setBackgroundColor(Color.BLUE);
         if ((listItem.days).indexOf("7") > -1)	row.day_7.setBackgroundColor(Color.RED); else row.day_7.setBackgroundColor(Color.BLUE);
 
-        return convertView;
+        return adapterView;
     }
-    static class ViewHolder 
+    static class RowHolder 
     {
     	TextView 							name;
     	TextView 							day_1;
