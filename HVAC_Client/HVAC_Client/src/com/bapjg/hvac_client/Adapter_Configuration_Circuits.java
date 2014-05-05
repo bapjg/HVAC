@@ -2,6 +2,8 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
+import com.bapjg.hvac_client.Adapter_5_Configuration_Thermometers.RowHolder;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -11,108 +13,46 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-//Template										variable			= something
-//Template										ext/imp				class
-public class Adapter_Configuration_Circuits 	extends 			ArrayAdapter
+public class Adapter_Configuration_Circuits 			extends 			Adapter_0_Abstract
 {
-    private ArrayList							listData;
-    private LayoutInflater 						myInflater;
  
     public Adapter_Configuration_Circuits(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
-        
-        this.listData 												= listData;
-        this.myInflater												= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     @Override
-    public int getCount() 
+    public View getView(int position, View adapterView, ViewGroup parent) 
     {
-        return listData.size() + 1;
-    }
-    @Override
-    public Ctrl_Configuration.Circuit getItem(int position) 
-    {
-        return (Ctrl_Configuration.Circuit) listData.get(position - 1);
-    }
-    @Override
-    public long getItemId(int position) 
-    {
-        return position;
-    }
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) 
-    {
-    	TitleHolder 							title;
-    	RowHolder 								row;
+    	RowHolder 							row					= new RowHolder();
+    	Ctrl_Configuration.Circuit			listItem			= (Ctrl_Configuration.Circuit) listData.get(position);
+    	
+        adapterView 											= inflater.inflate(R.layout.row_configuration_circuit, null);
+        row 													= new RowHolder();
+        row.name 												= (TextView) adapterView.findViewById(R.id.name);
+        row.gradient 											= (CheckBox) adapterView.findViewById(R.id.gradient);
+        row.mixer	 											= (CheckBox) adapterView.findViewById(R.id.mixer);
+        adapterView.setTag(row);
 
-//        if (convertView == null) 
-//        {
-//        	convertView 											= myInflater.inflate(R.layout.row_circuit, null);
-//            holder 													= new ViewHolder();
-//            holder.name 											= (TextView) convertView.findViewById(R.id.name);
-//            holder.gradient 										= (CheckBox) convertView.findViewById(R.id.gradient);
-//
-//            convertView.setTag(holder);
-//        } 
-//        else 
-//        {
-//            holder = (ViewHolder) convertView.getTag();
-//        }
-        if (position == 0)
+        row.name.setText					(listItem.name);
+	        
+       	if (listItem.tempGradient == null)
         {
-        	convertView 											= myInflater.inflate(R.layout.row_configuration_circuit_title, null);
-        	title 													= new TitleHolder();
-        	title.name 												= (TextView) convertView.findViewById(R.id.name);
-        	title.gradient 											= (TextView) convertView.findViewById(R.id.gradient);
-        	title.mixer 											= (TextView) convertView.findViewById(R.id.mixer);
-            convertView.setTag(title);
-
-            title.name.setTextColor			(Color.YELLOW);
-            title.name.setTypeface			(null, Typeface.BOLD);
-            
-            title.gradient.setTextColor		(Color.YELLOW);
-            title.gradient.setTypeface		(null, Typeface.BOLD);
-
-            title.mixer.setTextColor		(Color.YELLOW);
-            title.mixer.setTypeface			(null, Typeface.BOLD);
+        	row.gradient.setChecked(false);
         }
         else
         {
-        	convertView 											= myInflater.inflate(R.layout.row_configuration_circuit, null);
-        	row 													= new RowHolder();
-        	row.name 												= (TextView) convertView.findViewById(R.id.name);
-        	row.gradient 											= (CheckBox) convertView.findViewById(R.id.gradient);
-        	row.mixer	 											= (CheckBox) convertView.findViewById(R.id.mixer);
-            convertView.setTag(row);
-
-            row.name.setText				(((Ctrl_Configuration.Circuit) listData.get(position - 1)).name);
-	        
-        	if ((((Ctrl_Configuration.Circuit) listData.get(position - 1)).tempGradient) == null)
-        	{
-        		row.gradient.setChecked(false);
-        	}
-        	else
-        	{
-        		row.gradient.setChecked(true);
-        	}
-           	if ((((Ctrl_Configuration.Circuit) listData.get(position - 1)).mixer) == null)
-        	{
-           		row.mixer.setChecked(false);
-        	}
-        	else
-        	{
-        		row.mixer.setChecked(true);
-        	}
+        	row.gradient.setChecked(true);
         }
-        return convertView;
+        if (listItem.mixer == null)
+        {
+           	row.mixer.setChecked(false);
+        }
+        else
+        {
+        	row.mixer.setChecked(true);
+        }
+        return adapterView;
     }
-    static class TitleHolder 
-    {
-    	TextView 							name;
-    	TextView 							gradient;
-    	TextView 							mixer;
-    }	
     static class RowHolder 
     {
     	TextView 							name;
