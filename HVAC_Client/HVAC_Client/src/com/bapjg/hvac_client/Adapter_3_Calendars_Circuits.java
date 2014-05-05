@@ -16,7 +16,7 @@ import HVAC_Messages.*;
 //Template												NEWNEWNEW					= NEWNEWNEW
 //Template												variable					= something
 //Template												ext/imp						class
-public class Adapter_3_Calendars_Circuits 				extends 					ArrayAdapter
+public class Adapter_3_Calendars_Circuits 				extends 					Adapter_0_Adapter
 {
     private ArrayList									listData;
     private LayoutInflater 								myInflater;
@@ -28,21 +28,21 @@ public class Adapter_3_Calendars_Circuits 				extends 					ArrayAdapter
         this.listData 																= listData;
         this.myInflater																= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-    @Override
-    public int getCount() 
-    {
-        return listData.size();
-    }
-    @Override
-    public Ctrl_Calendars.Calendar getItem(int position) 
-    {
-        return (Ctrl_Calendars.Calendar) listData.get(position);
-    }
-    @Override
-    public long getItemId(int position) 
-    {
-        return position;
-    }
+//    @Override
+//    public int getCount() 
+//    {
+//        return listData.size();
+//    }
+//    @Override
+//    public Ctrl_Calendars.Calendar getItem(int position) 
+//    {
+//        return (Ctrl_Calendars.Calendar) listData.get(position);
+//    }
+//    @Override
+//    public long getItemId(int position) 
+//    {
+//        return position;
+//    }
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
