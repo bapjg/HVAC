@@ -22,9 +22,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
 public class Panel_2_Immediate 							extends 					Panel_0_Fragment  
 														implements 					TCP_Response
 {			
@@ -37,7 +34,7 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity																= getActivity();
+//    	this.activity																= getActivity();
     	View											thisView					= inflater.inflate(R.layout.panel_2_immediate, container, false);
 				
     	Ctrl_Immediate.Request							taskRequest					= new Ctrl_Immediate().new Request();
@@ -111,58 +108,45 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
 		Activity										activity					= getActivity();		
+		if 		(result instanceof Ctrl_Immediate.Data)						displayContents((Ctrl_Immediate.Data) result);
+		else if (result instanceof Ctrl_Immediate.Ack)						Global.toast("Command accepted", false);
+		else if (result instanceof Ctrl_Abstract.Ack)						Global.toast("Command accepted", false);
+		else if (result instanceof Ctrl_Temperatures.NoConnection)			Global.toast("No Connection established yet", false);
+		else																Global.toast("A Nack has been returned", false);
+	}
+	public void displayHeader()
+	{
+	}
+	public void displayContents(Ctrl_Immediate.Data msg_received)
+	{
+		TextView									timeEnd						= (TextView) getActivity().findViewById(R.id.TimeEnd);
+		TextView									tempObjective				= (TextView) getActivity().findViewById(R.id.TempObjective);
 		
-				
-		if (result instanceof Ctrl_Immediate.Data)		
-		{		
-			Ctrl_Immediate.Data msg_received 										= (Ctrl_Immediate.Data) result;
-					
-			TextView									timeEnd						= (TextView) activity.findViewById(R.id.TimeEnd);
-			TextView									tempObjective				= (TextView) activity.findViewById(R.id.TempObjective);
-			
-			timeEnd.setText(Global.displayTimeShort(msg_received.timeStart + 60 * 60 * 1000));
-			tempObjective.setText(((Integer) (msg_received.tempObjective/1000)).toString());
-			
-			if (msg_received.executionActive)
-			{
-				((TextView) 	activity.findViewById(R.id.TimeStart)).setText("Current");
-				((TextView) 	activity.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
-				((Button) 		activity.findViewById(R.id.buttonOk)).setText("Stop");
-				((View) 		activity.findViewById(R.id.RowTitle)).setVisibility(View.GONE);
-				((View) 		activity.findViewById(R.id.RowTime)).setVisibility(View.GONE);
-				((View) 		activity.findViewById(R.id.RowTemp)).setVisibility(View.GONE);
-				
-			}
-			else if (msg_received.executionPlanned)
-			{
-				((TextView) 	activity.findViewById(R.id.TimeStart)).setText(Global.displayTimeShort(msg_received.timeStart));
-				((TextView) 	activity.findViewById(R.id.TargetTemp)).setText(((Integer) (msg_received.tempObjective/1000)).toString());
-				((Button) 		activity.findViewById(R.id.buttonOk)).setText("Start");
-			}
-			else
-			{
-				((TextView) 	activity.findViewById(R.id.TimeStart)).setText("No Plan");
-				((TextView) 	activity.findViewById(R.id.TargetTemp)).setText(" ");
-				((Button) 		activity.findViewById(R.id.buttonOk)).setText("Start");
-			}
-		}
-		else if (result instanceof Ctrl_Immediate.NoConnection)
+		timeEnd.setText(Global.displayTimeShort(msg_received.timeStart + 60 * 60 * 1000));
+		tempObjective.setText(((Integer) (msg_received.tempObjective/1000)).toString());
+		
+		if (msg_received.executionActive)
 		{
-			Global.toast("No Connection established yet", true);
+			((TextView) 	getActivity().findViewById(R.id.TimeStart)).setText		("Current");
+			((TextView) 	getActivity().findViewById(R.id.TargetTemp)).setText	(((Integer) (msg_received.tempObjective/1000)).toString());
+			((Button) 		getActivity().findViewById(R.id.buttonOk)).setText		("Stop");
+			((View) 		getActivity().findViewById(R.id.RowTitle)).setVisibility(View.GONE);
+			((View) 		getActivity().findViewById(R.id.RowTime)).setVisibility	(View.GONE);
+			((View) 		getActivity().findViewById(R.id.RowTemp)).setVisibility	(View.GONE);
+			
 		}
-		else if ((result instanceof Ctrl_Immediate.Ack) || (result instanceof Ctrl_Abstract.Ack))
+		else if (msg_received.executionPlanned)
 		{
-			Global.toast("Command accepted", true);
+			((TextView) 	getActivity().findViewById(R.id.TimeStart)).setText		(Global.displayTimeShort(msg_received.timeStart));
+			((TextView) 	getActivity().findViewById(R.id.TargetTemp)).setText	(((Integer) (msg_received.tempObjective/1000)).toString());
+			((Button) 		getActivity().findViewById(R.id.buttonOk)).setText		("Start");
 		}
 		else
 		{
-			Global.toast("A Nack has been returned", true);
-		}	
+			((TextView) 	getActivity().findViewById(R.id.TimeStart)).setText		("No Plan");
+			((TextView) 	getActivity().findViewById(R.id.TargetTemp)).setText	(" ");
+			((Button) 		getActivity().findViewById(R.id.buttonOk)).setText		("Start");
+		}
 	}
-//	public void onTemperatureChange(Integer temperature)
-//	{
-//		System.out.println("temp is" + temperature);
-//		((TextView) getActivity().findViewById(R.id.TempObjective)).setText(temperature.toString());
-//	}
 }
 

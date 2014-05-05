@@ -3,6 +3,7 @@ package com.bapjg.hvac_client;
 import HVAC_Messages.Ctrl_Abstract;
 import HVAC_Messages.Ctrl_Calendars;
 import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Messages.Ctrl_Temperatures;
 import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,9 +23,6 @@ import android.widget.TextView;
 
 
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
 public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 														implements					AdapterView.OnItemClickListener	
 {
@@ -51,11 +49,8 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
     {
         
         // Inflate the layout for this fragment
-        myInflater																	= inflater;
-        myContainer 																= container;
-        myActivity																	= getActivity();
-        myFragmentManager 															= myActivity.getFragmentManager();
-        View 											panelView					= myInflater.inflate(R.layout.panel_3_calendars, container, false);
+//        myFragmentManager 															= myActivity.getFragmentManager();
+        View 											panelView					= inflater.inflate(R.layout.panel_3_calendars, container, false);
         TextView 										heading						= (TextView) panelView.findViewById(R.id.name);
         heading.setText(this.circuitName);	
 
@@ -71,8 +66,7 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
         }
         
         adapterView.setAdapter(arrayAdapter);
-//       	adapterView.setOnItemClickListener((OnItemClickListener) this.itemListener);
-       	adapterView.setOnItemClickListener((OnItemClickListener) this);
+      	adapterView.setOnItemClickListener((OnItemClickListener) this);
 
         return panelView;
     }
@@ -94,5 +88,11 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 	    	System.out.println("id :" + id);
 		}
 	};
+	public void displayHeader()
+	{
+	}
+	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	{
+	}
 }
 
