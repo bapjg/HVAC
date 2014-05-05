@@ -45,11 +45,6 @@ public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment
 	{
 		super();
 	}
-//    public Panel_4_Config_Relays(int menuLayout)
-//    {
-//		super(menuLayout);
-//		this.menuLayout																= menuLayout;
-//    }
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -62,19 +57,6 @@ public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment
         myAdapterView																= (AdapterView) myView.findViewById(R.id.List_View);
 
         TCP_Send(new Ctrl_Configuration().new Request());
- 
-        
-//        if (Global.eRegConfiguration == null)
-//        {
-//        	TCP_Send(new Ctrl_Parameters().new Request());
-//        }
-//        else
-//        {
-//            AdapterView <Adapter_Thermometers> 		view						= (AdapterView) myView.findViewById(R.id.List_View);
-//            Adapter_Thermometers 						adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-//            view.setAdapter(adapter);
-//        //    view.setOnItemClickListener((OnItemClickListener) this);	
-//         }
  
         return myView;
     }
@@ -99,8 +81,6 @@ public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment
    	}
     public void onClick(View myView)
     {
-// Template												variable					= something
-// Template												ext/imp						class
     	// onClick for all buttons in Menu_Pane				
     	Button 											myButton 					= (Button) myView;
     	String											myCaption					= myButton.getText().toString();
@@ -158,5 +138,11 @@ public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment
 		{
 			Global.toaster("Data NOTNOTNOT received", true);
 		}
+	}
+	public void displayHeader()
+	{
+	}
+	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	{
 	}
 }

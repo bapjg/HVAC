@@ -33,14 +33,14 @@ public final class R {
         public static final int Boiler=0x7f09000f;
         public static final int BoilerIn=0x7f090018;
         public static final int BoilerOut=0x7f090015;
-        public static final int Cancel=0x7f090006;
+        public static final int Cancel=0x7f090005;
         public static final int Date=0x7f09000d;
         public static final int FloorIn=0x7f090014;
         public static final int FloorOut=0x7f090013;
         public static final int HotWater=0x7f090010;
         public static final int List_View=0x7f090021;
         public static final int LivingRoom=0x7f090012;
-        public static final int Ok=0x7f090007;
+        public static final int Ok=0x7f090006;
         public static final int Outside=0x7f090011;
         public static final int RadiatorIn=0x7f090017;
         public static final int RadiatorOut=0x7f090016;
@@ -53,7 +53,7 @@ public final class R {
         public static final int TimeEnd=0x7f09001d;
         public static final int TimeStart=0x7f090019;
         public static final int activity_container=0x7f090000;
-        public static final int address=0x7f090005;
+        public static final int address=0x7f090004;
         public static final int burner=0x7f090024;
         public static final int buttonOk=0x7f090020;
         public static final int buttonReboot=0x7f09002a;
@@ -77,7 +77,7 @@ public final class R {
         public static final int days=0x7f09002d;
         public static final int empty=0x7f090037;
         public static final int floor=0x7f090026;
-        public static final int friendlyName=0x7f090004;
+        public static final int friendlyName=0x7f090007;
         public static final int gradient=0x7f090048;
         public static final int hotwater=0x7f090025;
         public static final int menu_container=0x7f090001;

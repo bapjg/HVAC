@@ -149,8 +149,9 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 		catch (Exception e) 
 		{
 			System.out.println("Ctrl_WeatherData/Constructor error parsing the xml");
+			this.dateTimeObtained													= null;
+			this.forecasts															= null;
 		}
-		
 	}
 	@Override
 	public void startElement(String uri, String localName, String tagName, Attributes attributes) throws SAXException 

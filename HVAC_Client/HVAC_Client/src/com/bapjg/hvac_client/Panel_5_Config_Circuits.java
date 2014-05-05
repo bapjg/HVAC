@@ -136,7 +136,11 @@ public class Panel_5_Config_Circuits 					extends 			Panel_0_Fragment
 		{
 			Global.toaster("Data NOTNOTNOT received", true);
 		}
-			
 	}
-
+	public void displayHeader()
+	{
+	}
+	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	{
+	}
 }

@@ -155,6 +155,8 @@ public class Thread_BackgroundTasks implements Runnable
 				}
 				catch (Exception e)
 				{
+					LogIt.info("Thread_Background", "Run", "Weather : getIt returned error " + e, true);
+					Global.weatherData							= null;
 				}
 			}
 			//
