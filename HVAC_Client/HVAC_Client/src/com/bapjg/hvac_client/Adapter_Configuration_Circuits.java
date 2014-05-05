@@ -25,9 +25,8 @@ public class Adapter_Configuration_Circuits 			extends 			Adapter_0_Abstract
     {
     	RowHolder 							row					= new RowHolder();
     	Ctrl_Configuration.Circuit			listItem			= (Ctrl_Configuration.Circuit) listData.get(position);
-    	
         adapterView 											= inflater.inflate(R.layout.row_configuration_circuit, null);
-        row 													= new RowHolder();
+
         row.name 												= (TextView) adapterView.findViewById(R.id.name);
         row.gradient 											= (CheckBox) adapterView.findViewById(R.id.gradient);
         row.mixer	 											= (CheckBox) adapterView.findViewById(R.id.mixer);
