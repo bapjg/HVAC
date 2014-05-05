@@ -3,6 +3,8 @@ package com.bapjg.hvac_client;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bapjg.hvac_client.Adapter_5_Configuration_Relays.RowHolder;
+
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Context;
@@ -23,11 +25,10 @@ public class Adapter_3_Calendars_Circuits 				extends 					Adapter_0_Abstract
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-     	RowHolder 										row;
+    	RowHolder 							row					= new RowHolder();
     	Ctrl_Calendars.Calendar							listItem					= (Ctrl_Calendars.Calendar) listData.get(position);
 
     	adapterView 																= inflater.inflate(R.layout.row_3_calendar_circuit, null);
-    	row																			= new RowHolder();
      	row.days																	= (TextView) adapterView.findViewById(R.id.days);
      	row.timeStart																= (TextView) adapterView.findViewById(R.id.timeStart);
     	row.timeEnd																	= (TextView) adapterView.findViewById(R.id.timeEnd);

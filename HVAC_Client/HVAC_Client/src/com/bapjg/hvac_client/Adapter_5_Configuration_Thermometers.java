@@ -21,11 +21,10 @@ public class Adapter_5_Configuration_Thermometers 			extends 			Adapter_0_Abstra
     }
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-    	RowHolder 							row;
+    	RowHolder 							row					= new RowHolder();
     	Ctrl_Configuration.Thermometer		listItem			= (Ctrl_Configuration.Thermometer) listData.get(position);
     	
         adapterView 											= inflater.inflate(R.layout.row_5_configuration_thermometer, null);
-        row 													= new RowHolder();
         row.name 												= (TextView) adapterView.findViewById(R.id.name);
         row.address 											= (TextView) adapterView.findViewById(R.id.address);
         adapterView.setTag(row);

@@ -23,11 +23,11 @@ public class Adapter_5_Configuration_Relays 				extends 			Adapter_0_Abstract
     @Override
      public View getView(int position, View adapterView, ViewGroup parent) 
     {
-    	RowHolder 							row;
+    	RowHolder 							row					= new RowHolder();
     	Ctrl_Configuration.Relay			listItem			= (Ctrl_Configuration.Relay) listData.get(position);
  
     	adapterView 											= inflater.inflate(R.layout.row_5_configuration_relay, null);
-    	row 													= new RowHolder();
+
     	row.name 												= (TextView) adapterView.findViewById(R.id.name);
     	row.relayBank 											= (TextView) adapterView.findViewById(R.id.relayBank);
     	row.relayNumber 										= (TextView) adapterView.findViewById(R.id.relayNumber);
