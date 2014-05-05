@@ -13,10 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-//Template										variable			= something
-//Template										ext/imp				class
-public class Menu_1_Temperatures 	extends 	Menu_0_Fragment 
-									implements 	View.OnClickListener
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
+public class Menu_1_Temperatures 						extends 					Menu_0_Fragment 
+														implements 					View.OnClickListener
 {
 	public Menu_1_Temperatures(int menuLayout)
 	{
@@ -26,16 +27,12 @@ public class Menu_1_Temperatures 	extends 	Menu_0_Fragment
 	{
 		super.onClick(myView);
 		
-    	Button 									myButton 			= (Button) myView;
-    	String									myCaption			= myButton.getText().toString();
-    	FragmentManager 						fManager			= getFragmentManager();
-    	FragmentTransaction						fTransaction		= fManager.beginTransaction();
-    	Fragment 								panelFragment		= null;
-    	
-    	if (myCaption.equalsIgnoreCase("Temperatures"))
-    	{
-    		panelFragment 											= new Panel_1_Temperatures(R.layout.panel_1_temperatures);
-    	}
+    	String											caption						= ((Button) myView).getText().toString();
+    	FragmentTransaction								fTransaction				= getFragmentManager().beginTransaction();
+    	Fragment 										panelFragment				= null;
+		
+    	if   (caption.equalsIgnoreCase("Temperatures"))	panelFragment 				= new Panel_1_Temperatures();
+
     	if (panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);

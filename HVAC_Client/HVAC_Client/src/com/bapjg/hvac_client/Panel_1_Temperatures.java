@@ -30,28 +30,23 @@ import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Messages.*;
 
 @SuppressLint("ValidFragment")
-//Template										variable			= something
-//Template										ext/imp				class
-public class Panel_1_Temperatures 				extends 			Panel_0_Fragment 
-{
-	public TCP_Task								task;
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
+public class Panel_1_Temperatures 						extends 					Panel_0_Fragment 
+{		
+	public TCP_Task										task;
 	
 	public Panel_1_Temperatures()
 	{
 		super();
 	}
-	
-	public Panel_1_Temperatures(int menuLayout)
-    {
-		super(menuLayout);
-    }
-
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-		this.activity												= getActivity();
+		this.activity																= getActivity();
     	
-    	View									thisView			= inflater.inflate(R.layout.panel_1_temperatures, container, false);
+    	View											thisView					= inflater.inflate(R.layout.panel_1_temperatures, container, false);
     	
     	TCP_Send(new Ctrl_Temperatures().new Request());
     	
@@ -59,11 +54,11 @@ public class Panel_1_Temperatures 				extends 			Panel_0_Fragment
     }
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{             
-		Activity								activity			= getActivity();		
+		Activity										activity					= getActivity();		
 
 		if (result instanceof Ctrl_Temperatures.Data)
 		{
-			Ctrl_Temperatures.Data 				msg_received 		= (Ctrl_Temperatures.Data) result;
+			Ctrl_Temperatures.Data 						msg_received 				= (Ctrl_Temperatures.Data) result;
 			
 			((TextView) activity.findViewById(R.id.Date)).setText(Global.displayDate(msg_received.dateTime));
 			((TextView) activity.findViewById(R.id.Time)).setText(Global.displayTime(msg_received.dateTime));

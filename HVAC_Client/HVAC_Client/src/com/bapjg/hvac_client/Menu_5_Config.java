@@ -13,10 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-//Template										variable			= something
-//Template										ext/imp				class
-public class Menu_5_Config 						extends 			Menu_0_Fragment 
-												implements 			View.OnClickListener
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
+public class Menu_5_Config 								extends 					Menu_0_Fragment 
+														implements 					View.OnClickListener
 {
 	public Menu_5_Config(int menuLayout)
 	{
@@ -26,28 +27,15 @@ public class Menu_5_Config 						extends 			Menu_0_Fragment
 	{
 		super.onClick(myView);
 		
-    	Button 									myButton 			= (Button) myView;
-    	String									myCaption			= myButton.getText().toString();
-    	FragmentManager 						fManager			= getFragmentManager();
-    	FragmentTransaction						fTransaction		= fManager.beginTransaction();
-    	Fragment 								panelFragment		= null;
+    	String											caption						= ((Button) myView).getText().toString();
+    	FragmentTransaction								fTransaction				= getFragmentManager().beginTransaction();
+    	Fragment 										panelFragment				= null;
     	
-    	if (myCaption.equalsIgnoreCase("Thermometers"))
-    	{
-     		panelFragment 											= new Panel_5_Config_Thermometers();
-    	}
-    	else if (myCaption.equalsIgnoreCase("Relays"))
-    	{
-     		panelFragment 											= new Panel_5_Config_Relays();
-    	}
-    	else if (myCaption.equalsIgnoreCase("Pumps"))
-    	{
-     		panelFragment 											= new Panel_5_Config_Pumps();
-    	}
-    	else if (myCaption.equalsIgnoreCase("Circuits"))
-    	{
-     		panelFragment 											= new Panel_5_Config_Circuits();
-    	}
+    	if      (caption.equalsIgnoreCase("Thermometers"))	panelFragment 			= new Panel_5_Config_Thermometers();
+    	else if (caption.equalsIgnoreCase("Relays"))	panelFragment 				= new Panel_5_Config_Relays();
+    	else if (caption.equalsIgnoreCase("Pumps"))		panelFragment 				= new Panel_5_Config_Pumps();
+    	else if (caption.equalsIgnoreCase("Circuits"))	panelFragment 				= new Panel_5_Config_Circuits();
+
     	if (panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);

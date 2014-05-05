@@ -22,9 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
-//Template										variable			= something
-//Template										ext/imp				class
-public class Panel_6_Actions_Stop 				extends 			Panel_0_Fragment  
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
+public class Panel_6_Actions_Stop 						extends 					Panel_0_Fragment  
 {
 	public Panel_6_Actions_Stop()
 	{
@@ -32,8 +33,8 @@ public class Panel_6_Actions_Stop 				extends 			Panel_0_Fragment
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity												= getActivity();
-    	View									thisView			= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
+    	this.activity																= getActivity();
+    	View											thisView					= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
  
     	thisView.findViewById(R.id.buttonStop).setOnClickListener(new View.OnClickListener() 		{@Override public void onClick(View v) {stopHVAC(v);	}});
     	thisView.findViewById(R.id.buttonRestart).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {restartHVAC(v);	}});
@@ -43,21 +44,21 @@ public class Panel_6_Actions_Stop 				extends 			Panel_0_Fragment
     }
     public void stopHVAC(View v)
     {
-    	Ctrl_Actions_Stop.Execute 				stopMessage			= new Ctrl_Actions_Stop().new Execute();
-    	stopMessage.exitStatus										= Ctrl_Actions_Stop.EXIT_Stop;
-    	TCP_Send(stopMessage);
-    }
-    public void restartHVAC(View v)
-    {
-       	Ctrl_Actions_Stop.Execute 				stopMessage			= new Ctrl_Actions_Stop().new Execute();
-    	stopMessage.exitStatus										= Ctrl_Actions_Stop.EXIT_Restart;
-    	TCP_Send(stopMessage);
-    }
-    public void rebootHVAC(View v)
-    {
-       	Ctrl_Actions_Stop.Execute 				stopMessage			= new Ctrl_Actions_Stop().new Execute();
-    	stopMessage.exitStatus										= Ctrl_Actions_Stop.EXIT_Reboot;
-    	TCP_Send(stopMessage);
+    	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
+    	stopMessage.exitStatus														= Ctrl_Actions_Stop.EXIT_Stop;
+    	TCP_Send(stopMessage);				
+    }				
+    public void restartHVAC(View v)				
+    {				
+       	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
+    	stopMessage.exitStatus														= Ctrl_Actions_Stop.EXIT_Restart;
+    	TCP_Send(stopMessage);				
+    }				
+    public void rebootHVAC(View v)				
+    {				
+       	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
+    	stopMessage.exitStatus														= Ctrl_Actions_Stop.EXIT_Reboot;
+    	TCP_Send(stopMessage);		
     }
     @Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
@@ -65,7 +66,7 @@ public class Panel_6_Actions_Stop 				extends 			Panel_0_Fragment
 	}
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
-		Activity								activity			= getActivity();		
+		Activity										activity					= getActivity();		
 
 		if (result instanceof Ctrl_Actions_Stop.Ack)
 		{

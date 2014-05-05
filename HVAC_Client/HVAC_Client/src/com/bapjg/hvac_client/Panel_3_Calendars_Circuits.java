@@ -80,8 +80,8 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 	{
 		myActivity																	= getActivity();
     	FragmentTransaction								fTransaction				= getActivity().getFragmentManager().beginTransaction();
-    	Fragment 										panelFragment				= new Panel_3_Calendars_Circuits_Item;
-    	fTransaction.replace(R.id.panel_container, panelFragment);
+//    	Fragment 										panelFragment				= new Item_3_Calendars_Circuits();
+//    	fTransaction.replace(R.id.panel_container, panelFragment);
     	fTransaction.commit();  
 	}
     private OnItemClickListener 						itemListener 				= new OnItemClickListener()

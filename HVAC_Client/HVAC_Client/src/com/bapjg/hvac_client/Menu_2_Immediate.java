@@ -13,10 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-//Template										variable			= something
-//Template										ext/imp				class
-public class Menu_2_Immediate 					extends 			Menu_0_Fragment 
-												implements 			View.OnClickListener
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
+public class Menu_2_Immediate 							extends 					Menu_0_Fragment 
+														implements 					View.OnClickListener
 {
 	public Menu_2_Immediate(int menuLayout)
 	{
@@ -24,28 +25,16 @@ public class Menu_2_Immediate 					extends 			Menu_0_Fragment
 	}
 	public void onClick(View myView) 
 	{
-   	 	super.onClick(myView);
-
 		super.onClick(myView);
 		
-    	Button 									myButton 			= (Button) myView;
-    	String									myCaption			= myButton.getText().toString();
-    	FragmentManager 						fManager			= getFragmentManager();
-    	FragmentTransaction						fTransaction		= fManager.beginTransaction();
-    	Fragment 								panelFragment		= null;
+    	String											caption						= ((Button) myView).getText().toString();
+    	FragmentTransaction								fTransaction				= getFragmentManager().beginTransaction();
+    	Fragment 										panelFragment				= null;
     	
-    	if (myCaption.equalsIgnoreCase("Hot Water"))
-    	{
-     		panelFragment 											= new Panel_2_Immediate(R.layout.panel_2_immediate, "Hot_Water");
-    	}
-    	else if (myCaption.equalsIgnoreCase("Radiator"))
-    	{
-    		panelFragment 											= new Panel_2_Immediate(R.layout.panel_2_immediate, "Radiator");
-     	}
-    	else if (myCaption.equalsIgnoreCase("Floor"))
-    	{
-    		panelFragment 											= new Panel_2_Immediate(R.layout.panel_2_immediate, "Floor");
-    	}
+    	if      (caption.equalsIgnoreCase("Hot Water"))	panelFragment 				= new Panel_2_Immediate("Hot_Water");
+    	else if (caption.equalsIgnoreCase("Radiator"))	panelFragment 				= new Panel_2_Immediate("Radiator");
+    	else if (caption.equalsIgnoreCase("Floor"))		panelFragment 				= new Panel_2_Immediate("Floor");
+
     	if (panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);

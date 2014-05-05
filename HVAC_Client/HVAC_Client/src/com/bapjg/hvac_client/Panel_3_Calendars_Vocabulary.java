@@ -17,15 +17,16 @@ import android.widget.TextView;
 
 
 @SuppressLint("ValidFragment")
-//Template										variable			= something
-//Template										ext/imp				class
-public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
-{
-	private LayoutInflater						myInflater;
-	private Activity							myActivity;
-	private ViewGroup							myContainer;
-	private View								myAdapterView;
-	private FragmentManager						myFragmentManager;
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
+public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
+{		
+	private LayoutInflater								myInflater;
+	private Activity									myActivity;
+	private ViewGroup									myContainer;
+	private View										myAdapterView;
+	private FragmentManager								myFragmentManager;
 	
 	public Panel_3_Calendars_Vocabulary()
 	{
@@ -35,15 +36,15 @@ public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        myInflater													= inflater;
-        myContainer 												= container;
-        myActivity													= getActivity();
-        myFragmentManager 											= myActivity.getFragmentManager();
-        View 									panelView			= myInflater.inflate(R.layout.panel_3_calendars, container, false);
-        TextView 								name				= (TextView) panelView.findViewById(R.id.name);
-        name.setText("Vocabulary");
+        myInflater																	= inflater;
+        myContainer 																= container;
+        myActivity																	= getActivity();
+        myFragmentManager 															= myActivity.getFragmentManager();
+        View 											panelView					= myInflater.inflate(R.layout.panel_3_calendars, container, false);
+        TextView 										name						= (TextView) panelView.findViewById(R.id.name);
+        name.setText("Vocabulary");		
         
-        myAdapterView												= (AdapterView) panelView.findViewById(R.id.List_View);
+        myAdapterView																= (AdapterView) panelView.findViewById(R.id.List_View);
 
         // This part can be in processFinishTCP/HTTP 
         HTTP_Send(new Ctrl_Calendars().new Request());
@@ -55,14 +56,14 @@ public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
 	{
     	System.out.println("We have arrived in onClick/panel3Calendars again");
     	
-    	Button 									myButton 			= (Button) myView;
-    	String									myCaption			= myButton.getText().toString();
-    	
-		// Set all textColours to white
-		ViewGroup 								viewParent			= (ViewGroup) myView.getParent();
+    	Button 											myButton 					= (Button) myView;
+    	String											myCaption					= myButton.getText().toString();
+						
+		// Set all textColours to white				
+		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
 		for (int i = 0; i < viewParent.getChildCount(); i++)
 		{
-			Button								buttonChild 		= (Button) viewParent.getChildAt(i);
+			Button										buttonChild 				= (Button) viewParent.getChildAt(i);
 			buttonChild.setTextColor(Color.WHITE);
 		}
 		
@@ -79,11 +80,11 @@ public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
         if (position > 0)
         {
         	System.out.println("position : " + position);
-//	        ViewGroup 							viewGroup			= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
-//        	View 								newView 			= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
-
-        	FragmentTransaction 				ft 					= myFragmentManager.beginTransaction();
-        	Ctrl_Configuration.Thermometer 		dt					= Global.eRegConfiguration.thermometerList.get(position -1);
+//	        ViewGroup 									viewGroup					= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
+//        	View 										newView 					= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
+				
+        	FragmentTransaction 						ft 							= myFragmentManager.beginTransaction();
+        	Ctrl_Configuration.Thermometer 				dt							= Global.eRegConfiguration.thermometerList.get(position -1);
 
      //   	ft.replace(R.id.panel_container, dt);
         	ft.commit();
@@ -95,17 +96,17 @@ public class Panel_3_Calendars_Vocabulary 		extends 			Panel_0_Fragment
    	}
 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
-		Activity								activity			= getActivity();		
+		Activity										activity					= getActivity();		
 
 		if (result instanceof Ctrl_Calendars.Data)
 		{
-			Global.eRegCalendars				 						= (Ctrl_Calendars.Data) result;
+			Global.eRegCalendars				 									= (Ctrl_Calendars.Data) result;
 	        AdapterView <Adapter_3_Calendars_Words> 
-	        									view				= (AdapterView) myContainer.findViewById(R.id.List_View);
-	        Adapter_3_Calendars_Words			adapter				= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
+														view						= (AdapterView) myContainer.findViewById(R.id.List_View);
+	        Adapter_3_Calendars_Words					adapter						= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
 	        view.setAdapter(adapter);
 	        
-	        view.setOnItemClickListener((OnItemClickListener) this);	
+//	        view.setOnItemClickListener((OnItemClickListener) this);	
 
 		}
 		else

@@ -21,10 +21,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//Template										variable			= something
-//Template										ext/imp				class
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
 @SuppressLint("ValidFragment")
-public class Panel_6_Actions_Relays 			extends 			Panel_0_Fragment  
+public class Panel_6_Actions_Relays 					extends 					Panel_0_Fragment  
 {
 	public Panel_6_Actions_Relays()
 	{
@@ -32,8 +33,8 @@ public class Panel_6_Actions_Relays 			extends 			Panel_0_Fragment
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity												= getActivity();
-    	View									thisView			= inflater.inflate(R.layout.panel_6_actions_relays, container, false);
+    	this.activity																= getActivity();
+    	View											thisView					= inflater.inflate(R.layout.panel_6_actions_relays, container, false);
     	TCP_Send(new Ctrl_Actions_Relays().new Request());
 
     	thisView.findViewById(R.id.burner).setOnClickListener(new OnClickListener() 		{@Override public void onClick(View v) {burnerClick(v);		}});
@@ -60,15 +61,15 @@ public class Panel_6_Actions_Relays 			extends 			Panel_0_Fragment
     }
     public void relayClickContinue(String relayName, Switch switchView)
     {
-   		Ctrl_Actions_Relays.Execute	messageSend						= new Ctrl_Actions_Relays().new Execute();
-		messageSend.relayName										= relayName;
-    	if (switchView.isChecked())
-    	{
-    		messageSend.relayAction									= Ctrl_Actions_Relays.RELAY_On;
-    	}
-    	else
-    	{
-    		messageSend.relayAction									= Ctrl_Actions_Relays.RELAY_Off;
+   		Ctrl_Actions_Relays.Execute	messageSend										= new Ctrl_Actions_Relays().new Execute();
+		messageSend.relayName														= relayName;
+    	if (switchView.isChecked())				
+    	{				
+    		messageSend.relayAction													= Ctrl_Actions_Relays.RELAY_On;
+    	}				
+    	else				
+    	{				
+    		messageSend.relayAction													= Ctrl_Actions_Relays.RELAY_Off;
     	}
     	TCP_Send(messageSend);
     }
@@ -79,11 +80,11 @@ public class Panel_6_Actions_Relays 			extends 			Panel_0_Fragment
 	}
 		public void processFinishTCP(Ctrl_Abstract result) 
 	{  
-		Activity								activity			= getActivity();		
-
-		if (result instanceof Ctrl_Actions_Relays.Data)
-		{
-			Ctrl_Actions_Relays.Data 			msg_received 		= (Ctrl_Actions_Relays.Data) result;
+		Activity										activity					= getActivity();		
+		
+		if (result instanceof Ctrl_Actions_Relays.Data)		
+		{		
+			Ctrl_Actions_Relays.Data 					msg_received 				= (Ctrl_Actions_Relays.Data) result;
 
 			((Switch) activity.findViewById(R.id.burner)).setChecked(msg_received.burner);
 			((Switch) activity.findViewById(R.id.hotwater)).setChecked(msg_received.pumpHotWater);

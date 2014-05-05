@@ -13,10 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-//Template										variable			= something
-//Template										ext/imp				class
-public class Menu_3_Calendars 					extends 			Menu_0_Fragment 
-												implements 			View.OnClickListener
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
+public class Menu_3_Calendars 							extends 					Menu_0_Fragment 
+														implements 					View.OnClickListener
 {
 	public Menu_3_Calendars(int menuLayout)
 	{
@@ -26,16 +27,14 @@ public class Menu_3_Calendars 					extends 			Menu_0_Fragment
 	{
 		super.onClick(myView);
 		
-    	Button 									myButton 			= (Button) myView;
-    	String									myCaption			= myButton.getText().toString();
-    	FragmentManager 						fManager			= getFragmentManager();
-    	FragmentTransaction						fTransaction		= fManager.beginTransaction();
-    	Fragment 								panelFragment		= null;
-    	
-    	if      (myCaption.equalsIgnoreCase("Vocabulary")) 		panelFragment 	= new Panel_3_Calendars_Vocabulary();
-    	else if (myCaption.equalsIgnoreCase("Hot Water"))   	panelFragment 	= new Panel_3_Calendars_Circuits("Hot_Water");
-     	else if (myCaption.equalsIgnoreCase("Radiator"))		panelFragment 	= new Panel_3_Calendars_Circuits("Radiator");
-    	else if (myCaption.equalsIgnoreCase("Floor"))			panelFragment 	= new Panel_3_Calendars_Circuits("Floor");
+    	String											caption						= ((Button) myView).getText().toString();
+    	FragmentTransaction								fTransaction				= getFragmentManager().beginTransaction();
+    	Fragment 										panelFragment				= null;
+   	
+    	if      (caption.equalsIgnoreCase("Vocabulary"))panelFragment 		= new Panel_3_Calendars_Vocabulary();
+    	else if (caption.equalsIgnoreCase("Hot Water")) panelFragment 		= new Panel_3_Calendars_Circuits("Hot_Water");
+     	else if (caption.equalsIgnoreCase("Radiator"))	panelFragment 		= new Panel_3_Calendars_Circuits("Radiator");
+    	else if (caption.equalsIgnoreCase("Floor"))		panelFragment 		= new Panel_3_Calendars_Circuits("Floor");
 
     	if 		(panelFragment != null)
     	{

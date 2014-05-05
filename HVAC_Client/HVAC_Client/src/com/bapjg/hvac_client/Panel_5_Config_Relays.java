@@ -27,18 +27,19 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 @SuppressLint("ValidFragment")
-//Template										variable			= something
-//Template										ext/imp				class
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
 
-public class Panel_5_Config_Relays 				extends 			Panel_0_Fragment 
+public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment 
 {
-	private Adapter_5_Configuration_Relays		 				adapter;
-	private LayoutInflater						myInflater;
-	private Activity							myActivity;
-	private ViewGroup							myContainer;
-	private View								myAdapterView;
-	private FragmentManager						myFragmentManager;
-//	private int									menuLayout;
+	private Adapter_5_Configuration_Relays				adapter;
+	private LayoutInflater								myInflater;
+	private Activity									myActivity;
+	private ViewGroup									myContainer;
+	private View										myAdapterView;
+	private FragmentManager								myFragmentManager;
+//	private int											menuLayout;
 
 	public Panel_5_Config_Relays()
 	{
@@ -47,18 +48,18 @@ public class Panel_5_Config_Relays 				extends 			Panel_0_Fragment
 //    public Panel_4_Config_Relays(int menuLayout)
 //    {
 //		super(menuLayout);
-//		this.menuLayout												= menuLayout;
+//		this.menuLayout																= menuLayout;
 //    }
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        myInflater													= inflater;
-        myContainer 												= container;
-        myActivity													= getActivity();
-        myFragmentManager 											= myActivity.getFragmentManager();
-        View 									myView 				= myInflater.inflate(R.layout.panel_5_config_header, container, false);
-        myAdapterView												= (AdapterView) myView.findViewById(R.id.List_View);
+        myInflater																	= inflater;
+        myContainer 																= container;
+        myActivity																	= getActivity();
+        myFragmentManager 															= myActivity.getFragmentManager();
+        View 											myView 						= myInflater.inflate(R.layout.panel_5_config_header, container, false);
+        myAdapterView																= (AdapterView) myView.findViewById(R.id.List_View);
 
         TCP_Send(new Ctrl_Configuration().new Request());
  
@@ -69,8 +70,8 @@ public class Panel_5_Config_Relays 				extends 			Panel_0_Fragment
 //        }
 //        else
 //        {
-//            AdapterView <Adapter_Thermometers> 	view			= (AdapterView) myView.findViewById(R.id.List_View);
-//            Adapter_Thermometers 				adapter			= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+//            AdapterView <Adapter_Thermometers> 		view						= (AdapterView) myView.findViewById(R.id.List_View);
+//            Adapter_Thermometers 						adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
 //            view.setAdapter(adapter);
 //        //    view.setOnItemClickListener((OnItemClickListener) this);	
 //         }
@@ -82,11 +83,11 @@ public class Panel_5_Config_Relays 				extends 			Panel_0_Fragment
         if (position > 0)
         {
         	System.out.println("position : " + position);
-//	        ViewGroup 							viewGroup			= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
-//        	View 								newView 			= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
-
-        	FragmentTransaction 				ft 					= myFragmentManager.beginTransaction();
-        	Ctrl_Configuration.Thermometer 		dt					= Global.eRegConfiguration.thermometerList.get(position -1);
+//	        ViewGroup 									viewGroup					= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
+//        	View 										newView 					= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
+				
+        	FragmentTransaction 						ft 							= myFragmentManager.beginTransaction();
+        	Ctrl_Configuration.Thermometer 				dt							= Global.eRegConfiguration.thermometerList.get(position -1);
 
      //   	ft.replace(R.id.panel_container, dt);
         	ft.commit();
@@ -98,17 +99,17 @@ public class Panel_5_Config_Relays 				extends 			Panel_0_Fragment
    	}
     public void onClick(View myView)
     {
-// Template										variable			= something
-// Template										ext/imp				class
-    	// onClick for all buttons in Menu_Pane
-    	Button 									myButton 			= (Button) myView;
-    	String									myCaption			= myButton.getText().toString();
-    	
-		// Set all textColours to white
-		ViewGroup 								viewParent			= (ViewGroup) myView.getParent();
+// Template												variable					= something
+// Template												ext/imp						class
+    	// onClick for all buttons in Menu_Pane				
+    	Button 											myButton 					= (Button) myView;
+    	String											myCaption					= myButton.getText().toString();
+						
+		// Set all textColours to white				
+		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
 		for (int i = 0; i < viewParent.getChildCount(); i++)
 		{
-			Button								buttonChild			= (Button) viewParent.getChildAt(i);
+			Button										buttonChild					= (Button) viewParent.getChildAt(i);
 			buttonChild.setTextColor(Color.WHITE);
 		}
 		
@@ -125,32 +126,32 @@ public class Panel_5_Config_Relays 				extends 			Panel_0_Fragment
     	// This sets up the code to display the panel and get clicks in order to display an update screen
 
         // First, ensure that correct view is displayed
-    	ViewGroup								subContainer		= (ViewGroup) myContainer.getChildAt(0);		
-    	View 									newView 			= myInflater.inflate(R.layout.panel_5_config_header, subContainer, true);
-
-    	FragmentTransaction						ft					= myFragmentManager.beginTransaction();
-    	//Panel_2_Configuration 				dt 					= new Panel_2_Configuration();
+    	ViewGroup										subContainer				= (ViewGroup) myContainer.getChildAt(0);		
+    	View 											newView 					= myInflater.inflate(R.layout.panel_5_config_header, subContainer, true);
+				
+    	FragmentTransaction								ft							= myFragmentManager.beginTransaction();
+    	//Panel_2_Configuration 						dt 							= new Panel_2_Configuration();
     	ft.replace(R.id.panel_subcontainer, this);
     	ft.commit();
 
         // Set up the adapter for the data
     	//ArrayList  	<Ctrl_Configuration.Thermometer>	data	= Global.configuration.thermometerList;
-        AdapterView <Adapter_5_Configuration_Thermometers> 		view				= (AdapterView) myActivity.findViewById(R.id.List_View);
+        AdapterView <Adapter_5_Configuration_Thermometers> 	view					= (AdapterView) myActivity.findViewById(R.id.List_View);
         
-        Adapter_5_Configuration_Thermometers 					adapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+        Adapter_5_Configuration_Thermometers 			adapter						= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
         
         view.setAdapter(adapter);
         view.setOnItemClickListener((OnItemClickListener) this);	
     }
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
-		Activity								activity			= getActivity();		
+		Activity										activity					= getActivity();		
 
 		if (result instanceof Ctrl_Configuration.Data)
 		{
-		Global.eRegConfiguration			 						= (Ctrl_Configuration.Data) result;
-        AdapterView <Adapter_5_Configuration_Relays> 			view				= (AdapterView) myContainer.findViewById(R.id.List_View);
-        Adapter_5_Configuration_Relays 							adapter				= new Adapter_5_Configuration_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
+		Global.eRegConfiguration			 										= (Ctrl_Configuration.Data) result;
+        AdapterView <Adapter_5_Configuration_Relays> 	view						= (AdapterView) myContainer.findViewById(R.id.List_View);
+        Adapter_5_Configuration_Relays 					adapter						= new Adapter_5_Configuration_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
         view.setAdapter(adapter);
 		}
 		else

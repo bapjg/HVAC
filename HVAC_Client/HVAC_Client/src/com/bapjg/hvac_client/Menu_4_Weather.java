@@ -13,10 +13,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-//Template										variable			= something
-//Template										ext/imp				class
-public class Menu_4_Weather 					extends 			Menu_0_Fragment 
-												implements 			View.OnClickListener
+//Template												NEWNEWNEW					= NEWNEWNEW
+//Template												variable					= something
+//Template												ext/imp						class
+public class Menu_4_Weather 							extends 					Menu_0_Fragment 
+														implements 					View.OnClickListener
 {
 	public Menu_4_Weather(int menuLayout)
 	{
@@ -26,15 +27,13 @@ public class Menu_4_Weather 					extends 			Menu_0_Fragment
 	{
 		super.onClick(myView);
 		
-    	Button 									myButton 			= (Button) myView;
-    	String									myCaption			= myButton.getText().toString();
-    	FragmentManager 						fManager			= getFragmentManager();
-    	FragmentTransaction						fTransaction		= fManager.beginTransaction();
-    	Fragment 								panelFragment		= null;
+    	String											caption						= ((Button) myView).getText().toString();
+    	FragmentTransaction								fTransaction				= getFragmentManager().beginTransaction();
+    	Fragment 										panelFragment				= null;
     	
-    	if      (myCaption.equalsIgnoreCase("Today")) 		panelFragment 	= new Panel_4_Weather("Today");
-    	else if (myCaption.equalsIgnoreCase("Tomorrow"))   	panelFragment 	= new Panel_4_Weather("Tomorrow");
-     	else if (myCaption.equalsIgnoreCase("Beyond"))		panelFragment 	= new Panel_4_Weather("Beyond");
+    	if      (caption.equalsIgnoreCase("Today")) 	panelFragment 				= new Panel_4_Weather("Today");
+    	else if (caption.equalsIgnoreCase("Tomorrow"))  panelFragment 				= new Panel_4_Weather("Tomorrow");
+     	else if (caption.equalsIgnoreCase("Beyond"))	panelFragment 				= new Panel_4_Weather("Beyond");
 
     	if 		(panelFragment != null)
     	{
