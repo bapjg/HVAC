@@ -19,9 +19,10 @@ import android.widget.Button;
 public class Menu_3_Calendars 							extends 					Menu_0_Fragment 
 														implements 					View.OnClickListener
 {
-	public Menu_3_Calendars(int menuLayout)
+	public Menu_3_Calendars()
 	{
-		super(menuLayout);
+		super();
+		this.menuLayout																= R.layout.menu_3_calendars;
 	}
 	public void onClick(View myView) // This is the onClick event from the Menu
 	{

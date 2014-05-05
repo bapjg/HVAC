@@ -38,12 +38,12 @@ public class Activity_Main 			extends Activity
         // Menu_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
         // The onCreate method, calls the onClick argument of the first item in the list	
         //	
-        Global.menuTemperatures							= new Menu_1_Temperatures	(R.layout.menu_1_temperatures);
-        Global.menuImmediate							= new Menu_2_Immediate		(R.layout.menu_2_immediate);
-        Global.menuCalendars							= new Menu_3_Calendars		(R.layout.menu_3_calendars);
-        Global.menuWeather								= new Menu_4_Weather		(R.layout.menu_4_weather);
-        Global.menuConfiguration						= new Menu_5_Config			(R.layout.menu_5_configuration);
-        Global.menuActions								= new Menu_6_Actions		(R.layout.menu_6_actions);
+        Global.menuTemperatures							= new Menu_1_Temperatures	();
+        Global.menuImmediate							= new Menu_2_Immediate		();
+        Global.menuCalendars							= new Menu_3_Calendars		();
+        Global.menuWeather								= new Menu_4_Weather		();
+        Global.menuConfiguration						= new Menu_5_Config			();
+        Global.menuActions								= new Menu_6_Actions		();
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu fragment   ,  	panel object

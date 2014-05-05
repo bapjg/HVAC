@@ -19,9 +19,10 @@ import android.widget.Button;
 public class Menu_1_Temperatures 						extends 					Menu_0_Fragment 
 														implements 					View.OnClickListener
 {
-	public Menu_1_Temperatures(int menuLayout)
+	public Menu_1_Temperatures()
 	{
-		super(menuLayout);
+		super();
+		this.menuLayout																= R.layout.menu_1_temperatures;
 	}
 	public void onClick(View myView) 									// This is the onClick event from the Menu
 	{

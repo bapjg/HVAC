@@ -16,16 +16,11 @@ import android.widget.Button;
 //Template												ext/imp						class
 public class Menu_0_Fragment 							extends 					Fragment 
 {
-	private 	int										menuLayout;
+	public 	int										menuLayout;
 	
 	public Menu_0_Fragment()
 	{
 		super();
-	}
-	public Menu_0_Fragment(int menuLayout)																					// layout   : id of the layout file	eg : R.layout.menu_1_temperatures
-	{
-		super();
-		this.menuLayout															 	= menuLayout;
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 

@@ -19,9 +19,10 @@ import android.widget.Button;
 public class Menu_2_Immediate 							extends 					Menu_0_Fragment 
 														implements 					View.OnClickListener
 {
-	public Menu_2_Immediate(int menuLayout)
+	public Menu_2_Immediate()
 	{
-		super(menuLayout);
+		super();
+		this.menuLayout																= R.layout.menu_2_immediate;
 	}
 	public void onClick(View myView) 
 	{

@@ -19,9 +19,10 @@ import android.widget.Button;
 public class Menu_5_Config 								extends 					Menu_0_Fragment 
 														implements 					View.OnClickListener
 {
-	public Menu_5_Config(int menuLayout)
+	public Menu_5_Config()
 	{
-		super(menuLayout);
+		super();
+		this.menuLayout																= R.layout.menu_5_configuration;
 	}
 	public void onClick(View myView) // This is the onClick event from the Menu
 	{

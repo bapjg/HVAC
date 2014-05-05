@@ -18,9 +18,10 @@ import android.widget.Button;
 //Template												ext/imp						class
 public class Menu_6_Actions extends Menu_0_Fragment implements View.OnClickListener
 {
-	public Menu_6_Actions(int menuLayout)
+	public Menu_6_Actions()
 	{
-		super(menuLayout);
+		super();
+		this.menuLayout																= R.layout.menu_6_actions;
 	}
 	public void onClick(View myView) 
 	{
