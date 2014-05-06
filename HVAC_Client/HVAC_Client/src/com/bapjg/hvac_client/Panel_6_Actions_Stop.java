@@ -1,6 +1,7 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Messages.*;
+import HVAC_Messages.Ctrl_Actions_Test_Mail.Execute;
 import HVAC_Messages.Ctrl_Temperatures.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -33,42 +34,28 @@ public class Panel_6_Actions_Stop 						extends 					Panel_0_Fragment
     	this.activity																= getActivity();
     	View											thisView					= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
  
-    	thisView.findViewById(R.id.buttonStop).setOnClickListener(new View.OnClickListener() 		{@Override public void onClick(View v) {stopHVAC(v);	}});
-    	thisView.findViewById(R.id.buttonRestart).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {restartHVAC(v);	}});
-    	thisView.findViewById(R.id.buttonReboot).setOnClickListener(new View.OnClickListener() 		{@Override public void onClick(View v) {rebootHVAC(v);	}});
+    	thisView.findViewById(R.id.buttonStop).setOnClickListener(this);
+    	thisView.findViewById(R.id.buttonRestart).setOnClickListener(this);
+    	thisView.findViewById(R.id.buttonReboot).setOnClickListener(this);
    	
         return thisView;
     }
-    public void stopHVAC(View v)
+    public void onClick(View view)
     {
     	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
-    	stopMessage.exitStatus														= Ctrl_Actions_Stop.EXIT_Stop;
-    	TCP_Send(stopMessage);				
-    }				
-    public void restartHVAC(View v)				
-    {				
-       	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
-    	stopMessage.exitStatus														= Ctrl_Actions_Stop.EXIT_Restart;
-    	TCP_Send(stopMessage);				
-    }				
-    public void rebootHVAC(View v)				
-    {				
-       	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
-    	stopMessage.exitStatus														= Ctrl_Actions_Stop.EXIT_Reboot;
-    	TCP_Send(stopMessage);		
+    	if (view instanceof Button)
+    	{
+    		if      (view.getId()==R.id.buttonStop)		stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Stop;
+    		else if (view.getId()==R.id.buttonRestart)	stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Restart;
+    		else if (view.getId()==R.id.buttonReboot)	stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Reboot;
+        	TCP_Send(stopMessage);
+    	}
     }
-    @Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
-	{
-	}
+     @Override
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
-		Activity										activity					= getActivity();		
-
-		if (result instanceof Ctrl_Actions_Stop.Ack)
-		{
-			Global.toaster("Stop Request accepted", true);
-		}   
+		if (result instanceof Ctrl_Actions_Stop.Ack)								Global.toaster("Stop Request accepted", true);
+		else   																		Global.toaster("Stop generated error " + result.getClass().toString(), true);
 	}
 }
 

@@ -31,32 +31,20 @@ public class Panel_6_Actions_Test_Mail 					extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.activity																= getActivity();
-    	View											thisView					= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
+    	View											panelView					= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
  
-    	thisView.findViewById(R.id.buttonSendMail).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {sendMail(v);	}});
+    	panelView.findViewById(R.id.buttonSendMail).setOnClickListener(this);
    	
-        return thisView;
+        return panelView;
     }
-    public void sendMail(View v)
+    public void onClick(View view)
     {
     	TCP_Send(new Ctrl_Actions_Test_Mail().new Execute());
     }
-    @Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
-	{
-	}
-	public void processFinishTCP(Ctrl_Abstract result) 
+ 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
-		Activity										activity					= getActivity();		
-
-		if (result instanceof Ctrl_Actions_Test_Mail.Ack)
-		{
-			Global.toaster("eMail sent", true);
-		}
-		else
-		{
-			Global.toaster("eMail received " + result.getClass().toString(), true);
-		}
+		if (result instanceof Ctrl_Actions_Test_Mail.Ack)							Global.toaster("eMail sent", true);
+		else																		Global.toaster("eMail error " + result.getClass().toString(), true);
 	}
 }
 
