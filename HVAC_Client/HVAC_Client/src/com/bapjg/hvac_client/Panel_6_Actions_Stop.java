@@ -22,9 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
 public class Panel_6_Actions_Stop 						extends 					Panel_0_Fragment  
 {
 	public Panel_6_Actions_Stop()

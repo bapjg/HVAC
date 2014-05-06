@@ -21,7 +21,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 														implements					AdapterView.OnItemClickListener	

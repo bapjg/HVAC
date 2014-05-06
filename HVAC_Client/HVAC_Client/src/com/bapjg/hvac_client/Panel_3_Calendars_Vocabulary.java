@@ -15,11 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
 public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 {		
 	private LayoutInflater								myInflater;
@@ -50,29 +46,6 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
         
         return panelView;
      }
-//    @Override
-//	public void onClick(View myView) 
-//	{
-//    	System.out.println("We have arrived in onClick/panel3Calendars again");
-//    	
-//    	Button 											myButton 					= (Button) myView;
-//    	String											myCaption					= myButton.getText().toString();
-//						
-//		// Set all textColours to white				
-//		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
-//		for (int i = 0; i < viewParent.getChildCount(); i++)
-//		{
-//			Button										buttonChild 				= (Button) viewParent.getChildAt(i);
-//			buttonChild.setTextColor(Color.WHITE);
-//		}
-//		
-//		((Button) myView).setTextColor(Color.YELLOW);
-//    	
-//    	if (myCaption.equalsIgnoreCase("Thermometers"))
-//    	{
-//    		// buttonThermometersClick(myView);	
-//    	}
-//	}
 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
 		Activity										activity					= getActivity();		

@@ -29,10 +29,6 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
-
 public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment 
 {
 	private Adapter_5_Configuration_Thermometers 		adapter;
@@ -58,19 +54,6 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
         View 											panelView					= myInflater.inflate(R.layout.panel_5_config_header, container, false);
         myAdapterView																= (AdapterView) panelView.findViewById(R.id.List_View);
 
-        
-//        if (Global.eRegConfiguration == null)
-//        {
-//        	TCP_Send(new Ctrl_Parameters().new Request());
-//        }
-//        else
-//        {
-//            AdapterView <Adapter_Thermometers> 		view						= (AdapterView) myView.findViewById(R.id.List_View);
-//            Adapter_Thermometers 						adapter						= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-//            view.setAdapter(adapter);
-//        //    view.setOnItemClickListener((OnItemClickListener) this);	
-//         }
- 
         return panelView;
     }
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
@@ -114,30 +97,7 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
 //    		menuButtonThermometersClick(myView);	
 //    	}
     }
-    public void menuButtonThermometersClick(View myView)
-    {
-		// Called by onClick when Thermometers button pressed
-    	// This sets up the code to display the panel and get clicks in order to display an update screen
-
-        // First, ensure that correct view is displayed
-//    	ViewGroup								subContainer		= (ViewGroup) myContainer.getChildAt(0);		
-//    	View 									newView 			= myInflater.inflate(R.layout.panel_4_config_thermometers, subContainer, true);
-//
-//    	FragmentTransaction						ft					= myFragmentManager.beginTransaction();
-//    	//Panel_2_Configuration 				dt 					= new Panel_2_Configuration();
-//    	ft.replace(R.id.panel_subcontainer, this);
-//    	ft.commit();
-//
-//        // Set up the adapter for the data
-//    	//ArrayList  	<Ctrl_Configuration.Thermometer>	data	= Global.configuration.thermometerList;
-//        AdapterView <Adapter_Thermometers> 		view				= (AdapterView) myActivity.findViewById(R.id.List_View);
-//        
-//        Adapter_Thermometers 					adapter				= new Adapter_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-//        
-//        view.setAdapter(adapter);
-//        view.setOnItemClickListener((OnItemClickListener) this);	
-    }
-	public void processFinishTCP(Ctrl_Abstract result) 
+ 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
 		Activity										activity					= getActivity();		
 
@@ -152,7 +112,5 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
 		{
 			Global.toaster("Data NOTNOTNOT received", true);
 		}
-			
 	}
-
 }

@@ -16,11 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
 public class Panel_4_Weather 							extends 					Panel_0_Fragment
 {
 	private LayoutInflater								myInflater;

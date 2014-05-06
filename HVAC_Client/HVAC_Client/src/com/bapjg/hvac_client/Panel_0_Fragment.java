@@ -30,9 +30,6 @@ import HVAC_Messages.*;
 
 
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
 public class Panel_0_Fragment 							extends 					Fragment
 														implements 					View.OnClickListener, 
 																					AdapterView.OnItemClickListener, 
