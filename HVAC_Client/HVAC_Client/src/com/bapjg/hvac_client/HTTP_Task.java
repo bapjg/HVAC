@@ -2,6 +2,7 @@ package com.bapjg.hvac_client;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class HTTP_Task 							extends 			AsyncTask <Ctrl_Abstract, Void, Ctrl_Ab
 	@Override
 	protected Ctrl_Abstract doInBackground(Ctrl_Abstract... messageOut) 
 	{
-		System.out.println("sending message");
+		Log.v("App", "sending message");
 		return serverConnection.serverTransaction(messageOut[0]);
 	}	
 	protected void onProgressUpdate(Void... progress)  { }

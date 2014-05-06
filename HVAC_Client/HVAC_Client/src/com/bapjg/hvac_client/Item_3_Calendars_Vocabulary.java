@@ -63,7 +63,7 @@ public class Item_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
     @Override
 	public void onClick(View myView) 
 	{
-    	System.out.println("We have arrived in onClick/itemView");
+    	Log.v("App", "We have arrived in onClick/itemView");
     	
     	if (myView.getId() == R.id.ok)
     	{

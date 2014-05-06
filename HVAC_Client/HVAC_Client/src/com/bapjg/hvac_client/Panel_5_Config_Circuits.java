@@ -57,22 +57,11 @@ public class Panel_5_Config_Circuits 					extends 			Panel_0_Fragment
     }
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
 	{
-        if (position > 0)
-        {
-        	System.out.println("position : " + position);
-//	        ViewGroup 									viewGroup					= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
-//        	View 										newView 					= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
-				
-        	FragmentTransaction 						ft 							= myFragmentManager.beginTransaction();
-        	Ctrl_Configuration.Thermometer 				dt							= Global.eRegConfiguration.thermometerList.get(position -1);
+    	FragmentTransaction 							ft 							= myFragmentManager.beginTransaction();
+    	Ctrl_Configuration.Thermometer 					dt							= Global.eRegConfiguration.thermometerList.get(position);
 
-     //   	ft.replace(R.id.panel_container, dt);
-        	ft.commit();
-        }
-        else
-        {
-        	// We have clicked in title area
-        }
+ //   	ft.replace(R.id.panel_container, dt);
+    	ft.commit();
    	}
     public void onClick(View myView)
     {

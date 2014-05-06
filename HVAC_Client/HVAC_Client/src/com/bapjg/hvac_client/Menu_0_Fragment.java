@@ -16,7 +16,7 @@ import android.widget.Button;
 //Template												ext/imp						class
 public class Menu_0_Fragment 							extends 					Fragment 
 {
-	public 	int										menuLayout;
+	public 	int											menuLayout;
 	
 	public Menu_0_Fragment()
 	{
@@ -42,9 +42,17 @@ public class Menu_0_Fragment 							extends 					Fragment
 	{
 		for (int i = 0; i < thisView.getChildCount(); i++)																	
 		{
-			Button										buttonChild 				= (Button) thisView.getChildAt(i);
-			buttonChild.setOnClickListener((OnClickListener) this);															// Set the OnClickListener to the menuFragment object (ie this)
-			buttonChild.setTextColor(Color.WHITE);																			// Colour white
+			View											viewChild				= (View) thisView.getChildAt(i);
+			if (viewChild instanceof Button)
+			{
+				Button										buttonChild 			= (Button) thisView.getChildAt(i);
+				buttonChild.setOnClickListener((OnClickListener) this);															// Set the OnClickListener to the menuFragment object (ie this)
+				buttonChild.setTextColor(Color.WHITE);																			// Colour white
+			}
+			else if (viewChild instanceof ViewGroup)
+			{
+				allButtonsSetup((ViewGroup) viewChild);
+			}
 		}
 	}
 }

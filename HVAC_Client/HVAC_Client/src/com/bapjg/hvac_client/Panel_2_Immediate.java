@@ -9,6 +9,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,6 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.activity																= getActivity();
     	View											thisView					= inflater.inflate(R.layout.panel_2_immediate, container, false);
 				
     	Ctrl_Immediate.Request							taskRequest					= new Ctrl_Immediate().new Request();
@@ -69,7 +69,7 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     	
     	if (myCaption.equalsIgnoreCase("Start"))
     	{
-    		System.out.println("Action "+ this.circuitName + " Start Click");
+    		Log.v( "App", "Action "+ this.circuitName + " Start Click");
 
     		Ctrl_Immediate.Execute						message_out					= new Ctrl_Immediate().new Execute();
 					
@@ -96,7 +96,7 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     	}
     	else if (myCaption.equalsIgnoreCase("Stop"))
     	{
-    		System.out.println("Action "+ this.circuitName + " Stop Click");
+    		Log.v( "App", "Action "+ this.circuitName + " Stop Click");
 
     		Ctrl_Immediate.Execute						message_out					= new Ctrl_Immediate().new Execute();
 	   		message_out.circuitName													= this.circuitName;

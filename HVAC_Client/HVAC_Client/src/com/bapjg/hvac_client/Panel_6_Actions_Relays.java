@@ -1,6 +1,7 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Messages.*;
+import HVAC_Messages.Ctrl_Actions_Stop.Execute;
 import HVAC_Messages.Ctrl_Temperatures.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -34,44 +35,29 @@ public class Panel_6_Actions_Relays 					extends 					Panel_0_Fragment
     	View											thisView					= inflater.inflate(R.layout.panel_6_actions_relays, container, false);
     	TCP_Send(new Ctrl_Actions_Relays().new Request());
 
-    	thisView.findViewById(R.id.burner).setOnClickListener(new OnClickListener() 		{@Override public void onClick(View v) {burnerClick(v);		}});
-    	thisView.findViewById(R.id.hotwater).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {hotWaterClick(v);	}});
-    	thisView.findViewById(R.id.floor).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {floorClick(v);		}});
-    	thisView.findViewById(R.id.radiator).setOnClickListener(new View.OnClickListener() 	{@Override public void onClick(View v) {radiatorClick(v);	}});
+    	thisView.findViewById(R.id.burner).setOnClickListener(this);
+    	thisView.findViewById(R.id.hotwater).setOnClickListener(this);
+    	thisView.findViewById(R.id.floor).setOnClickListener(this);
+    	thisView.findViewById(R.id.radiator).setOnClickListener(this);
         return thisView;
     }
-    public void burnerClick(View v)
+    public void onClick(View view)
     {
-    	relayClickContinue("Burner",  (Switch) v);
-    }
-    public void hotWaterClick(View v)
-    {
-    	relayClickContinue("HotWater",  (Switch) v);
-    }
-    public void floorClick(View v)
-    {
-    	relayClickContinue("Floor",  (Switch) v);
-    }
-    public void radiatorClick(View v)
-    {
-    	relayClickContinue("Radiator",  (Switch) v);
-    }
-    public void relayClickContinue(String relayName, Switch switchView)
-    {
-   		Ctrl_Actions_Relays.Execute	messageSend										= new Ctrl_Actions_Relays().new Execute();
-		messageSend.relayName														= relayName;
-    	if (switchView.isChecked())				
-    	{				
-    		messageSend.relayAction													= Ctrl_Actions_Relays.RELAY_On;
-    	}				
-    	else				
-    	{				
-    		messageSend.relayAction													= Ctrl_Actions_Relays.RELAY_Off;
-    	}
-    	TCP_Send(messageSend);
-    }
+   		Ctrl_Actions_Relays.Execute						messageSend					= new Ctrl_Actions_Relays().new Execute();
+    	if (view instanceof Switch)
+    	{
+			if      (view.getId() == R.id.burner)		messageSend.relayName		= "Burner";
+			else if (view.getId() == R.id.hotwater)		messageSend.relayName		= "HotWater";
+			else if (view.getId() == R.id.floor)		messageSend.relayName		= "Floor";
+			else if (view.getId() == R.id.radiator)		messageSend.relayName		= "Radiator";
+    		
+    		if    (((Switch) view).isChecked())			messageSend.relayAction		= Ctrl_Actions_Relays.RELAY_On;
+    		else										messageSend.relayAction		= Ctrl_Actions_Relays.RELAY_Off;
 
-	@Override
+    		TCP_Send(messageSend);
+    	}
+    }
+ 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 	{
 	}

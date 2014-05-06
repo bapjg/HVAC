@@ -12,6 +12,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,18 +26,14 @@ import android.widget.TextView;
 public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 														implements					AdapterView.OnItemClickListener	
 {
-	private LayoutInflater								myInflater;
-	private Activity									myActivity;
-	private ViewGroup									myContainer;
-	private FragmentManager								myFragmentManager;
-	
+
 	public String										circuitName;
 
-	public Panel_3_Calendars_Circuits()
-	{
-		super();
-		circuitName																	= "";
-	}
+//	public Panel_3_Calendars_Circuits()
+//	{
+//		super();
+//		circuitName																	= "";
+//	}
     public Panel_3_Calendars_Circuits(String circuitName)
     {
 		super();
@@ -48,7 +45,6 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
     {
         
         // Inflate the layout for this fragment
-//        myFragmentManager 															= myActivity.getFragmentManager();
         View 											panelView					= inflater.inflate(R.layout.panel_3_calendars, container, false);
         TextView 										heading						= (TextView) panelView.findViewById(R.id.name);
         heading.setText(this.circuitName);	
@@ -71,7 +67,6 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
     }
 	public void OnItemClick(AdapterView<?> parent, View view, int position, long id) 
 	{
-		myActivity																	= getActivity();
     	FragmentTransaction								fTransaction				= getActivity().getFragmentManager().beginTransaction();
 //    	Fragment 										panelFragment				= new Item_3_Calendars_Circuits();
 //    	fTransaction.replace(R.id.panel_container, panelFragment);
@@ -82,9 +77,9 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
 		{
-	    	System.out.println("onItemClick");
-	    	System.out.println("position :" + position);
-	    	System.out.println("id :" + id);
+	    	Log.v( "App", "onItemClick");
+	    	Log.v( "App", "position :" + position);
+	    	Log.v( "App", "id :" + id);
 		}
 	};
 	public void displayHeader()

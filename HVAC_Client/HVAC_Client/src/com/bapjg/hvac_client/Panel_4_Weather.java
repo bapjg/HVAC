@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.util.Log;
 
 @SuppressLint("ValidFragment")
 public class Panel_4_Weather 							extends 					Panel_0_Fragment
@@ -45,19 +46,12 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
         myActivity																	= getActivity();
         myFragmentManager 															= myActivity.getFragmentManager();
         View 											panelView					= myInflater.inflate(R.layout.panel_4_weather, container, false);
-        TextView 										dateTime					= (TextView) panelView.findViewById(R.id.dateTime);
-		if (when.equalsIgnoreCase("Today"))
-		{
-			dateTime.setText (Global.displayDate(Global.getTimeAtMidnight()));
-		}
-		else if (when.equalsIgnoreCase("Tomorrow"))
-		{
-			dateTime.setText (Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
-		}
-		else if (when.equalsIgnoreCase("Beyond"))
-		{
-			dateTime.setText ("> " + Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
-		}
+
+//        TextView 										dateTime					= (TextView) panelView.findViewById(R.id.dateTime);
+//		if 		(when.equalsIgnoreCase("Today"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight()));
+//		else if (when.equalsIgnoreCase("Tomorrow"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+//		else if (when.equalsIgnoreCase("Beyond"))		dateTime.setText 			("> " + Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+
         myAdapterView																= (AdapterView) panelView.findViewById(R.id.List_View);
 
         TCP_Send(new Ctrl_Weather().new Request());
@@ -66,7 +60,7 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
     @Override
 	public void onClick(View myView) 
 	{
-    	System.out.println("We have arrived in onClick again");
+    	Log.v("App", "We have arrived in onClick again");
     	
     	Button 											myButton 					= (Button) myView;
     	String											myCaption					= myButton.getText().toString();
@@ -114,9 +108,14 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
 		}
 	}
 	public void displayHeader()
-	{
-        TextView 								dateTimeObtained			= (TextView) myContainer.findViewById(R.id.dateTimeObtained);
-        dateTimeObtained.setText (Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
+	{	
+        TextView 										dateTimeObtained			= (TextView) myContainer.findViewById(R.id.dateTimeObtained);
+        dateTimeObtained.setText 													(Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
+        
+        TextView 										dateTime					= (TextView) myContainer.findViewById(R.id.dateTime);
+		if 		(when.equalsIgnoreCase("Today"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight()));
+		else if (when.equalsIgnoreCase("Tomorrow"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+		else if (when.equalsIgnoreCase("Beyond"))		dateTime.setText 			("> " + Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
 	}
 	public void displayContents()
 	{

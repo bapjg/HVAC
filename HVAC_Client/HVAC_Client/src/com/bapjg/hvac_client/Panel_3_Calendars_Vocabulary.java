@@ -8,6 +8,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +38,6 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
         myActivity																	= getActivity();
         myFragmentManager 															= myActivity.getFragmentManager();
         View 											panelView					= myInflater.inflate(R.layout.panel_3_calendars, container, false);
-        TextView 										name						= (TextView) panelView.findViewById(R.id.name);
-        name.setText("Vocabulary");		
         
         myAdapterView																= (AdapterView) panelView.findViewById(R.id.List_View);
 
@@ -66,23 +65,25 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 	}
 	public void displayHeader()
 	{
+        TextView 										name						= (TextView) myContainer.findViewById(R.id.name);
+        name.setText("Vocabulary");		
 	}
 	public void displayContents()
 	{
-        AdapterView <Adapter_3_Calendars_Words> 	view						= (AdapterView) myContainer.findViewById(R.id.List_View);
-		Adapter_3_Calendars_Words					adapter						= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
+        AdapterView <Adapter_3_Calendars_Words> 	view							= (AdapterView) myContainer.findViewById(R.id.List_View);
+		Adapter_3_Calendars_Words					adapter							= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
 		view.setAdapter(adapter);
 		view.setOnItemClickListener(this);
 	}
 	@Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
-     	System.out.println("position : " + position);
-    	Ctrl_Calendars.Word							itemData					= Global.eRegCalendars.wordList.get(position);
+     	Log.v( "App", "position : " + position);
+    	Ctrl_Calendars.Word							itemData						= Global.eRegCalendars.wordList.get(position);
 
-    	Item_3_Calendars_Vocabulary					itemFragment				= new Item_3_Calendars_Vocabulary(itemData);
+    	Item_3_Calendars_Vocabulary					itemFragment					= new Item_3_Calendars_Vocabulary(itemData);
    	 			
-    	FragmentTransaction 						fTransaction 				= myFragmentManager.beginTransaction();
+    	FragmentTransaction 						fTransaction 					= myFragmentManager.beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();

@@ -51,7 +51,7 @@ public class Panel_6_Actions_Stop 						extends 					Panel_0_Fragment
         	TCP_Send(stopMessage);
     	}
     }
-     @Override
+    @Override
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
 		if (result instanceof Ctrl_Actions_Stop.Ack)								Global.toaster("Stop Request accepted", true);

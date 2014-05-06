@@ -36,17 +36,23 @@ public class Panel_0_Fragment 							extends 					Fragment
 																					TCP_Response,
 																					HTTP_Response
 {
-	private 	int										menuLayout;
+//	private 	int										menuLayout;
     public 		Activity								activity;
     
     public Panel_0_Fragment()
     {
     }
-    public Panel_0_Fragment(int menuLayout)
-    {
-		this.menuLayout																= menuLayout;
-    	this.activity																= getActivity();
-    }
+//    public Panel_0_Fragment(int menuLayout)
+//    {
+//		this.menuLayout																= menuLayout;
+//    	this.activity																= getActivity();
+//    }
+//	@Override
+//	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+//    {
+//    	View thisView = inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
+//		return thisView;
+//    }
 	public void HTTP_Send(Ctrl_Abstract message)
 	{
 		HTTP_Task										task						= new HTTP_Task();
@@ -59,12 +65,7 @@ public class Panel_0_Fragment 							extends 					Fragment
 	   	task.callBack																= this;					// processFinish
 	   	task.execute(message);
 	}
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-    {
-    	View thisView = inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
-		return thisView;
-    }
+
 	@Override	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 			{}
 	@Override	public void onClick(View v) 																{}
 	@Override	public void processFinishTCP(Ctrl_Abstract result) 											{}
