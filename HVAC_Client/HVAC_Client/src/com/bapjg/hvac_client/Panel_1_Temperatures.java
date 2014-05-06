@@ -18,6 +18,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,19 +58,22 @@ public class Panel_1_Temperatures 						extends 					Panel_0_Fragment
 	}
 	public void displayContents(Ctrl_Temperatures.Data msg_received)
 	{
-		((TextView) getActivity().findViewById(R.id.Date)).setText			(Global.displayDate			(msg_received.dateTime));
-		((TextView) getActivity().findViewById(R.id.Time)).setText			(Global.displayTime			(msg_received.dateTime));
-		
-		((TextView) getActivity().findViewById(R.id.Boiler)).setText		(Global.displayTemperature	(msg_received.tempBoiler));
-		((TextView) getActivity().findViewById(R.id.HotWater)).setText		(Global.displayTemperature	(msg_received.tempHotWater));
-		((TextView) getActivity().findViewById(R.id.Outside)).setText		(Global.displayTemperature	(msg_received.tempOutside));
-		((TextView) getActivity().findViewById(R.id.BoilerIn)).setText		(Global.displayTemperature	(msg_received.tempBoilerIn));
-		((TextView) getActivity().findViewById(R.id.BoilerOut)).setText		(Global.displayTemperature	(msg_received.tempBoilerOut));
-		((TextView) getActivity().findViewById(R.id.FloorIn)).setText		(Global.displayTemperature	(msg_received.tempFloorIn));
-		((TextView) getActivity().findViewById(R.id.FloorOut)).setText		(Global.displayTemperature	(msg_received.tempFloorOut));
-		((TextView) getActivity().findViewById(R.id.RadiatorIn)).setText	(Global.displayTemperature	(msg_received.tempRadiatorIn));
-		((TextView) getActivity().findViewById(R.id.RadiatorOut)).setText	(Global.displayTemperature	(msg_received.tempRadiatorOut));
-		((TextView) getActivity().findViewById(R.id.LivingRoom)).setText	(Global.displayTemperature	(msg_received.tempLivingRoom));
+		if (getActivity() != null)			// The user has not changed the screen
+		{
+			((TextView) getActivity().findViewById(R.id.Date)).setText			(Global.displayDate			(msg_received.dateTime));
+			((TextView) getActivity().findViewById(R.id.Time)).setText			(Global.displayTime			(msg_received.dateTime));
+			
+			((TextView) getActivity().findViewById(R.id.Boiler)).setText		(Global.displayTemperature	(msg_received.tempBoiler));
+			((TextView) getActivity().findViewById(R.id.HotWater)).setText		(Global.displayTemperature	(msg_received.tempHotWater));
+			((TextView) getActivity().findViewById(R.id.Outside)).setText		(Global.displayTemperature	(msg_received.tempOutside));
+			((TextView) getActivity().findViewById(R.id.BoilerIn)).setText		(Global.displayTemperature	(msg_received.tempBoilerIn));
+			((TextView) getActivity().findViewById(R.id.BoilerOut)).setText		(Global.displayTemperature	(msg_received.tempBoilerOut));
+			((TextView) getActivity().findViewById(R.id.FloorIn)).setText		(Global.displayTemperature	(msg_received.tempFloorIn));
+			((TextView) getActivity().findViewById(R.id.FloorOut)).setText		(Global.displayTemperature	(msg_received.tempFloorOut));
+			((TextView) getActivity().findViewById(R.id.RadiatorIn)).setText	(Global.displayTemperature	(msg_received.tempRadiatorIn));
+			((TextView) getActivity().findViewById(R.id.RadiatorOut)).setText	(Global.displayTemperature	(msg_received.tempRadiatorOut));
+			((TextView) getActivity().findViewById(R.id.LivingRoom)).setText	(Global.displayTemperature	(msg_received.tempLivingRoom));
+		}
 	}
 }
 

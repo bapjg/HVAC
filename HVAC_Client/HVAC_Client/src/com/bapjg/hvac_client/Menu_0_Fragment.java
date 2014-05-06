@@ -17,6 +17,7 @@ import android.widget.Button;
 public class Menu_0_Fragment 							extends 					Fragment 
 {
 	public 	int											menuLayout;
+	private ViewGroup									container;
 	
 	public Menu_0_Fragment()
 	{
@@ -27,6 +28,7 @@ public class Menu_0_Fragment 							extends 					Fragment
     {
     	View 											thisView 					= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
     	Button											firstButton					= (Button) ((ViewGroup) thisView).getChildAt(0);
+    	this.container																=container;
     	allButtonsSetup((ViewGroup) thisView);
 		((OnClickListener) this).onClick(firstButton);																		// Execute the onClickListener of the first menu button
     	return thisView;
@@ -35,7 +37,8 @@ public class Menu_0_Fragment 							extends 					Fragment
 	{
     	Button 											myButton 					= (Button) myView;
 		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();									// Set all textColours to white
-		allButtonsSetup(viewParent);
+//		allButtonsSetup(viewParent);
+		allButtonsSetup(container);
     	myButton.setTextColor(Color.YELLOW);
 	}
 	public void allButtonsSetup(ViewGroup thisView)

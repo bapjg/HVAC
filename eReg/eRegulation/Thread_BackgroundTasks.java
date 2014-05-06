@@ -68,7 +68,7 @@ public class Thread_BackgroundTasks implements Runnable
 				{
 					if (circuit.taskActive == null)	
 					{
-						if (!circuit.circuitPump.isOn())
+						if (circuit.circuitPump.isOn())
 						{
 							LogIt.info("Thread_Background", "Run", "Clean pump off " + circuit.circuitPump.name, true);
 							circuit.circuitPump.off();

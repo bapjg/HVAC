@@ -86,13 +86,13 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
 	}
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{
-		Activity										activity					= getActivity();	
-
 		if (result instanceof Ctrl_Weather.Data)
 		{
 			Ctrl_Weather.Data							resultWeather				= (Ctrl_Weather.Data) result;
 			Global.weatherForecast				 									= (Ctrl_WeatherData) resultWeather.weatherData;
-			if (Global.weatherForecast != null)
+			if ((Global.weatherForecast != null)
+			&&  (Global.weatherForecast.forecasts != null) 
+			&&  (Global.weatherForecast.forecasts.size() != 0) )
 			{
 				displayHeader();
 				displayContents();
@@ -110,7 +110,8 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
 	public void displayHeader()
 	{	
         TextView 										dateTimeObtained			= (TextView) myContainer.findViewById(R.id.dateTimeObtained);
-        dateTimeObtained.setText 													(Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
+        if (Global.weatherForecast.dateTimeObtained == null) dateTimeObtained.setText("xxx");
+        else dateTimeObtained.setText 													(Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
         
         TextView 										dateTime					= (TextView) myContainer.findViewById(R.id.dateTime);
 		if 		(when.equalsIgnoreCase("Today"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight()));
@@ -121,13 +122,13 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
 	{
         AdapterView <Adapter_4_Weather> 		view						= (AdapterView) myContainer.findViewById(R.id.List_View);
         
+        forecastList														= new ArrayList <Ctrl_WeatherData.Forecast> ();
         if (when.equalsIgnoreCase("Today"))
 		{
-	        forecastList													= new ArrayList <Ctrl_WeatherData.Forecast> ();
 	        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherForecast.forecasts)
 	        {
-	        	if  ((forecastItem.dateTime.from > Global.getTimeAtMidnight())
-	        	&& 	 (forecastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L))
+	        	if  ((forecastItem.dateTime.from > Global.getTimeAtMidnight())							// timeStamp > last midnight
+	        	&& 	 (forecastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L))	// timeStamp < next midnight
 	        	{
 	        		forecastList.add(forecastItem);
 	        	}
@@ -135,7 +136,6 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
 		}
 		else if (when.equalsIgnoreCase("Tomorrow"))
 		{
-	        forecastList													= new ArrayList <Ctrl_WeatherData.Forecast> ();
 	        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherForecast.forecasts)
 	        {
 	        	if  ((forecastItem.dateTime.from > Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L)
@@ -147,7 +147,6 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
 		}
 		else if (when.equalsIgnoreCase("Beyond"))
 		{
-	        forecastList													= new ArrayList <Ctrl_WeatherData.Forecast> ();
 	        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherForecast.forecasts)
 	        {
 	        	if  (forecastItem.dateTime.from > Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L * 3)

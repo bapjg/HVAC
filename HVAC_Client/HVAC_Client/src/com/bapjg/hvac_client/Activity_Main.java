@@ -30,6 +30,10 @@ public class Activity_Main 						extends 		Activity
         Global.actContext								= (Context)  this;
         Global.activity									= (Activity) this;
         Global.piSocketAddress							= null;
+
+        HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
+        TCP_Send	(new Ctrl_Configuration().new Request());
+
         
         ActionBar 				actionbar 				= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -68,8 +72,6 @@ public class Activity_Main 						extends 		Activity
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
         
-        HTTP_Send	(new Ctrl_Calendars().new Request());
-        TCP_Send	(new Ctrl_Configuration().new Request());
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 

@@ -1,6 +1,7 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Messages.*;
+import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -19,11 +20,13 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 {		
-	private LayoutInflater								myInflater;
-	private Activity									myActivity;
-	private ViewGroup									myContainer;
-	private View										myAdapterView;
-	private FragmentManager								myFragmentManager;
+//	private LayoutInflater								myInflater;
+//	private Activity									myActivity;
+//	private ViewGroup									myContainer;
+//	private View										myAdapterView;
+//	private FragmentManager								myFragmentManager;
+
+	private View										panelView;
 	
 	public Panel_3_Calendars_Vocabulary()
 	{
@@ -33,22 +36,25 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        myInflater																	= inflater;
-        myContainer 																= container;
-        myActivity																	= getActivity();
-        myFragmentManager 															= myActivity.getFragmentManager();
-        View 											panelView					= myInflater.inflate(R.layout.panel_3_calendars, container, false);
-        
-        myAdapterView																= (AdapterView) panelView.findViewById(R.id.List_View);
-
+        this.panelView																= inflater.inflate(R.layout.panel_3_calendars, container, false);
+ 
         // This part can be in processFinishTCP/HTTP 
         
+        if ((Global.eRegCalendars != null)
+        &&  (Global.eRegCalendars.wordList != null))
+        {
+        	displayHeader();
+        	displayContents();
+        }
+        else // we need to reconnect to the server
+        {
+        	Global.toaster("Please refresh", true);
+        }
+        
         return panelView;
-     }
+      }
 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
-		Activity										activity					= getActivity();		
-
 		if (result instanceof Ctrl_Calendars.Data)
 		{
 			Global.eRegCalendars				 									= (Ctrl_Calendars.Data) result;
@@ -65,15 +71,16 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 	}
 	public void displayHeader()
 	{
-        TextView 										name						= (TextView) myContainer.findViewById(R.id.name);
+        TextView 										name						= (TextView) panelView.findViewById(R.id.name);
         name.setText("Vocabulary");		
 	}
 	public void displayContents()
 	{
-        AdapterView <Adapter_3_Calendars_Words> 	view							= (AdapterView) myContainer.findViewById(R.id.List_View);
-		Adapter_3_Calendars_Words					adapter							= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
-		view.setAdapter(adapter);
-		view.setOnItemClickListener(this);
+		AdapterView <Adapter_3_Calendars_Words>			adapterView					= (AdapterView) panelView.findViewById(R.id.List_View);
+		Adapter_3_Calendars_Words						adapter						= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
+		adapterView.setAdapter(adapter);
+		adapterView.setOnItemClickListener(this);
+
 	}
 	@Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -83,7 +90,7 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 
     	Item_3_Calendars_Vocabulary					itemFragment					= new Item_3_Calendars_Vocabulary(itemData);
    	 			
-    	FragmentTransaction 						fTransaction 					= myFragmentManager.beginTransaction();
+    	FragmentTransaction 						fTransaction 					= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();

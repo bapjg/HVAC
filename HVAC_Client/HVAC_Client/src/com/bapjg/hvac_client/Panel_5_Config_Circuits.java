@@ -3,6 +3,7 @@ package com.bapjg.hvac_client;
 import java.util.ArrayList;
 
 import HVAC_Messages.*;
+import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -29,12 +30,9 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_5_Config_Circuits 					extends 			Panel_0_Fragment 
 {
-	private Adapter_5_Configuration_Relays		 		adapter;
-	private LayoutInflater								myInflater;
-	private Activity									myActivity;
-	private ViewGroup									myContainer;
-	private View										myAdapterView;
-	private FragmentManager								myFragmentManager;
+	private Activity									activity;
+	private ViewGroup									container;
+	private View										adapterView;
 
 	public Panel_5_Config_Circuits()
 	{
@@ -44,25 +42,32 @@ public class Panel_5_Config_Circuits 					extends 			Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        myInflater																	= inflater;
-        myContainer 																= container;
-        myActivity																	= getActivity();
-        myFragmentManager 															= myActivity.getFragmentManager();
-        View 											panelView 					= myInflater.inflate(R.layout.panel_5_config_header, container, false);
-        myAdapterView																= (AdapterView) panelView.findViewById(R.id.List_View);
+        this.container 																= container;
+        this.activity																= getActivity();
+        View 											panelView 					= inflater.inflate(R.layout.panel_5_config_header, container, false);
+        this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
 
-        HTTP_Send(new Ctrl_Configuration().new Request());
+        if ((Global.eRegConfiguration != null)
+        ||  (Global.eRegConfiguration.circuitList != null))
+        {
+        	displayHeader();
+        	displayContents();
+        }
+        else // we need to reconnect to the server
+        {
+            HTTP_Send(new Ctrl_Configuration().new Request());
+        }
  
         return panelView;
     }
-    public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
-	{
-    	FragmentTransaction 							ft 							= myFragmentManager.beginTransaction();
-    	Ctrl_Configuration.Thermometer 					dt							= Global.eRegConfiguration.thermometerList.get(position);
-
- //   	ft.replace(R.id.panel_container, dt);
-    	ft.commit();
-   	}
+//    public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
+//	{
+//    	FragmentTransaction 							ft 							= myFragmentManager.beginTransaction();
+//    	Ctrl_Configuration.Thermometer 					dt							= Global.eRegConfiguration.thermometerList.get(position);
+//
+// //   	ft.replace(R.id.panel_container, dt);
+//    	ft.commit();
+//   	}
     public void onClick(View myView)
     {
     	// onClick for all buttons in Menu_Pane				
@@ -84,33 +89,31 @@ public class Panel_5_Config_Circuits 					extends 			Panel_0_Fragment
 //    		menuButtonThermometersClick(myView);	
 //    	}
     }
-    public void menuButtonThermometersClick(View myView)
-    {
-		// Called by onClick when Thermometers button pressed
-    	// This sets up the code to display the panel and get clicks in order to display an update screen
-
-        // First, ensure that correct view is displayed
-    	ViewGroup										subContainer				= (ViewGroup) myContainer.getChildAt(0);		
-    	View 											newView 					= myInflater.inflate(R.layout.panel_5_config_header, subContainer, true);
-				
-    	FragmentTransaction								ft							= myFragmentManager.beginTransaction();
-    	//Panel_2_Configuration 						dt 							= new Panel_2_Configuration();
-    	ft.replace(R.id.panel_subcontainer, this);
-    	ft.commit();
-
-        // Set up the adapter for the data
-    	//ArrayList  	<Ctrl_Configuration.Thermometer>	data	= Global.configuration.thermometerList;
-        AdapterView <Adapter_5_Configuration_Thermometers> 	view					= (AdapterView) myActivity.findViewById(R.id.List_View);
-        
-        Adapter_5_Configuration_Thermometers 			adapter						= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-        
-        view.setAdapter(adapter);
-        view.setOnItemClickListener((OnItemClickListener) this);	
-    }
+//    public void menuButtonThermometersClick(View myView)
+//    {
+//		// Called by onClick when Thermometers button pressed
+//    	// This sets up the code to display the panel and get clicks in order to display an update screen
+//
+//        // First, ensure that correct view is displayed
+//    	ViewGroup										subContainer				= (ViewGroup) myContainer.getChildAt(0);		
+//    	View 											newView 					= myInflater.inflate(R.layout.panel_5_config_header, subContainer, true);
+//				
+//    	FragmentTransaction								ft							= myFragmentManager.beginTransaction();
+//    	//Panel_2_Configuration 						dt 							= new Panel_2_Configuration();
+//    	ft.replace(R.id.panel_subcontainer, this);
+//    	ft.commit();
+//
+//        // Set up the adapter for the data
+//    	//ArrayList  	<Ctrl_Configuration.Thermometer>	data	= Global.configuration.thermometerList;
+//        AdapterView <Adapter_5_Configuration_Thermometers> 	view					= (AdapterView) myActivity.findViewById(R.id.List_View);
+//        
+//        Adapter_5_Configuration_Thermometers 			adapter						= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+//        
+//        view.setAdapter(adapter);
+//        view.setOnItemClickListener((OnItemClickListener) this);	
+//    }
 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
-		Activity										activity					= getActivity();		
-
 		if (result instanceof Ctrl_Configuration.Data)
 		{
 			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
@@ -127,8 +130,8 @@ public class Panel_5_Config_Circuits 					extends 			Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-		AdapterView <Adapter_5_Configuration_Circuits> 	view						= (AdapterView) myContainer.findViewById(R.id.List_View);
-		Adapter_5_Configuration_Circuits				adapter						= new Adapter_5_Configuration_Circuits(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
-		view.setAdapter(adapter);
+		View											 		listView			= (View) adapterView.findViewById(R.id.List_View);
+		Adapter_5_Configuration_Circuits						adapter				= new Adapter_5_Configuration_Circuits(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
+		((AdapterView <Adapter_5_Configuration_Circuits>) listView).setAdapter(adapter);
 	}
 }

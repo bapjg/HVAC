@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import HVAC_Messages.Ctrl_Abstract;
 import HVAC_Messages.Ctrl_Actions_Relays;
 import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Messages.Ctrl_Configuration.Data;
+import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -32,13 +34,9 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment 
 {
-	private Adapter_5_Configuration_Thermometers 		adapter;
-	private LayoutInflater								myInflater;
-	private Activity									myActivity;
-	private ViewGroup									myContainer;
-	private View										myAdapterView;
-	private FragmentManager								myFragmentManager;
-//	private int											menuLayout;
+	private Activity									activity;
+	private ViewGroup									container;
+	private View										adapterView;
 
 	public Panel_5_Config_Thermometers()
 	{
@@ -48,17 +46,23 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        myInflater																	= inflater;
-        myContainer 																= container;
-        myActivity																	= getActivity();
-        myFragmentManager 															= myActivity.getFragmentManager();
-        View 											panelView					= myInflater.inflate(R.layout.panel_5_config_header, container, false);
-        myAdapterView																= (AdapterView) panelView.findViewById(R.id.List_View);
+        this.container 																= container;
+        this.activity																= getActivity();
+        View 											panelView					= inflater.inflate(R.layout.panel_5_config_header, container, false);
+        this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
+        Data x = Global.eRegConfiguration;
         
-        if (Global.eRegConfiguration.thermometerList != null)
+        Global.eRegConfiguration = null;
+        
+        if ((Global.eRegConfiguration != null)
+        &&  (Global.eRegConfiguration.thermometerList != null))
         {
         	displayHeader();
         	displayContents();
+        }
+        else // we need to reconnect to the server
+        {
+            HTTP_Send(new Ctrl_Configuration().new Request());
         }
 
         return panelView;
@@ -104,16 +108,16 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
 //    		menuButtonThermometersClick(myView);	
 //    	}
     }
- 	public void processFinishTCP(Ctrl_Abstract result) 
+ 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
 		Activity												activity			= getActivity();		
 
 		if (result instanceof Ctrl_Configuration.Data)
 		{
 			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
-			AdapterView <Adapter_5_Configuration_Thermometers> 	listView			= (AdapterView) myContainer.findViewById(R.id.List_View);
-			Adapter_5_Configuration_Thermometers 				adapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-			listView.setAdapter(adapter);
+			View											 		listView		= (View) adapterView.findViewById(R.id.List_View);
+			Adapter_5_Configuration_Thermometers 					adapter			= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+			((AdapterView <Adapter_5_Configuration_Thermometers>) listView).setAdapter(adapter);
 		}
 		else
 		{
@@ -125,10 +129,8 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-		View											 	listView			= (View) myContainer.findViewById(R.id.List_View);
-		Log.v("App", "listview " + listView);
-		Adapter_5_Configuration_Thermometers 				adapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-		Log.v("App", "adapter " + adapter);
+		View											 		listView			= (View) adapterView.findViewById(R.id.List_View);
+		Adapter_5_Configuration_Thermometers 					adapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
 		((AdapterView <Adapter_5_Configuration_Thermometers>) listView).setAdapter(adapter);
 	}
 }

@@ -26,9 +26,12 @@ import android.widget.TextView;
 public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 														implements					AdapterView.OnItemClickListener	
 {
-
 	public String										circuitName;
 
+	private View										panelView;
+	
+	
+	
 //	public Panel_3_Calendars_Circuits()
 //	{
 //		super();
@@ -43,26 +46,18 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
+        panelView																	= inflater.inflate(R.layout.panel_3_calendars, container, false);
         
-        // Inflate the layout for this fragment
-        View 											panelView					= inflater.inflate(R.layout.panel_3_calendars, container, false);
-        TextView 										heading						= (TextView) panelView.findViewById(R.id.name);
-        heading.setText(this.circuitName);	
-
-        AdapterView <Adapter_3_Calendars_Circuits>		adapterView					= (AdapterView) panelView.findViewById(R.id.List_View);
-
-        Adapter_3_Calendars_Circuits					arrayAdapter				= null;	
-        for (Ctrl_Calendars.Circuit 		circuit 	: Global.eRegCalendars.circuitList)
+        if ((Global.eRegCalendars != null)
+        &&  (Global.eRegCalendars.circuitList != null))
         {
-        	if (circuit.name.equalsIgnoreCase(this.circuitName))
-        	{
-        		arrayAdapter														= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
-        	}
+        	displayHeader();
+        	displayContents();
         }
-        
-        adapterView.setAdapter(arrayAdapter);
-      	adapterView.setOnItemClickListener((OnItemClickListener) this);
-
+        else // we need to reconnect to the server
+        {
+        	Global.toaster("Please refresh", true);
+        }
         return panelView;
     }
 	public void OnItemClick(AdapterView<?> parent, View view, int position, long id) 
@@ -84,11 +79,23 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 	};
 	public void displayHeader()
 	{
-//        TextView 										heading						= (TextView) panelView.findViewById(R.id.name);
-//        heading.setText(this.circuitName);	
+		TextView 										heading						= (TextView) panelView.findViewById(R.id.name);
+        heading.setText(this.circuitName);	
 	}
-	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	public void displayContents()
 	{
+        AdapterView <Adapter_3_Calendars_Circuits>		adapterView					= (AdapterView) panelView.findViewById(R.id.List_View);
+
+        Adapter_3_Calendars_Circuits					arrayAdapter				= null;	
+        for (Ctrl_Calendars.Circuit 		circuit 	: Global.eRegCalendars.circuitList)
+        {
+        	if (circuit.name.equalsIgnoreCase(this.circuitName))
+        	{
+        		arrayAdapter														= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
+        	}
+        }
+        adapterView.setAdapter(arrayAdapter);
+      	adapterView.setOnItemClickListener((OnItemClickListener) this);
 	}
 }
 
