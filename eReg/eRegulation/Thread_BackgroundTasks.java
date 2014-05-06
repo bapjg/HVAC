@@ -112,7 +112,7 @@ public class Thread_BackgroundTasks implements Runnable
 
 			//=========================================================================================================================================
 			//
-			// Optimise : Particulary hot water in summer and floor in winter
+			// Optimise : Particularly hot water in summer and floor in winter
 			//
 			
 			

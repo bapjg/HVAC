@@ -47,11 +47,6 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
 	{
 		super();
 	}
-//    public Panel_4_Config_Thermometers(int menuLayout)
-//    {
-//		super(menuLayout);
-//		this.menuLayout																= menuLayout;
-//    }
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -63,8 +58,6 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
         View 											panelView					= myInflater.inflate(R.layout.panel_5_config_header, container, false);
         myAdapterView																= (AdapterView) panelView.findViewById(R.id.List_View);
 
-        TCP_Send(new Ctrl_Configuration().new Request());
- 
         
 //        if (Global.eRegConfiguration == null)
 //        {
@@ -144,7 +137,7 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
 //        view.setAdapter(adapter);
 //        view.setOnItemClickListener((OnItemClickListener) this);	
     }
-		public void processFinishTCP(Ctrl_Abstract result) 
+	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
 		Activity										activity					= getActivity();		
 

@@ -44,7 +44,6 @@ public class Panel_1_Temperatures 						extends 					Panel_0_Fragment
     	View											panelView					= inflater.inflate(R.layout.panel_1_temperatures, container, false);
     	
     	TCP_Send(new Ctrl_Temperatures().new Request());
-    	
         return panelView;
     }
 	public void processFinishTCP(Ctrl_Abstract result) 

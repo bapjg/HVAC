@@ -8,14 +8,23 @@
 	android:background					= "@color/background"
 	android:clickable 					= "true"
 >
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Thermometers"      	/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Relays"         		/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Pumps"       	  	/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Circuits"         	/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Burner"         		/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "PIDs"      	/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Gradients"      	/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Summer"      	/>
-
-
+	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Thermometers"      	/>
+	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Relays"         		/>
+	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Pumps"       	  	/>
+	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Circuits"         	/>
+	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Burner"         		/>
+	<Button	style		= "@style/AD_MenuButton" 	android:text	= "PIDs"      	        />
+	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Gradients"      		/>
+	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Summer"      		/>
+	<LinearLayout 
+		android:layout_width			= "match_parent"
+		android:layout_height			= "match_parent"
+		android:orientation				= "vertical"
+		android:gravity					= "center|bottom"
+		android:background				= "@color/background"
+		android:clickable 				= "true"
+	>
+		<Button	style	= "@style/AD_MenuButton" 	android:text	= "Refresh"      		/>
+		<Button	style	= "@style/AD_MenuButton" 	android:text	= "Update"       		/>
+	</LinearLayout>
 </LinearLayout>

@@ -1,14 +1,21 @@
 package com.bapjg.hvac_client;
 
+import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl_Calendars;
+import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Messages.Ctrl_Calendars.Request;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
-public class Activity_Main 			extends Activity 
+public class Activity_Main 						extends 		Activity 
+												implements		TCP_Response,
+																HTTP_Response
 {
 	public static	Global						global;
 
@@ -60,6 +67,9 @@ public class Activity_Main 			extends Activity
         actionbar.addTab(tabWeather);
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
+        
+        HTTP_Send	(new Ctrl_Calendars().new Request());
+        TCP_Send	(new Ctrl_Configuration().new Request());
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -93,5 +103,27 @@ public class Activity_Main 			extends Activity
 				return true;
 		}
 		return false;
+	}
+	public void TCP_Send(Ctrl_Abstract message)		
+	{		
+		TCP_Task										task						= new TCP_Task();
+	   	task.callBack																= this;					// processFinish
+	   	task.execute(message);
+	}
+	public void HTTP_Send(Ctrl_Abstract message)
+	{
+		HTTP_Task										task						= new HTTP_Task();
+	   	task.callBack																= this;					// processFinish
+	   	task.execute(message);		
+	}		
+	public void processFinishHTTP(Ctrl_Abstract result) 
+	{  
+		if (result instanceof Ctrl_Calendars.Data)		Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
+		else											Global.toaster("Data NOTNOTNOT received", true);
+	}
+	public void processFinishTCP(Ctrl_Abstract result) 
+	{  
+		if (result instanceof Ctrl_Configuration.Data)	Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
+		else											Global.toaster("Data NOTNOTNOT received", true);
 	}
 }

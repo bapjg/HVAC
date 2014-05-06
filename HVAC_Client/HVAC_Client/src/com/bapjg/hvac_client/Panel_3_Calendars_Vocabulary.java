@@ -47,7 +47,6 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
         myAdapterView																= (AdapterView) panelView.findViewById(R.id.List_View);
 
         // This part can be in processFinishTCP/HTTP 
-        HTTP_Send(new Ctrl_Calendars().new Request());
         
         return panelView;
      }
@@ -109,9 +108,6 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
     	Ctrl_Calendars.Word							itemData					= Global.eRegCalendars.wordList.get(position);
 
     	Item_3_Calendars_Vocabulary					itemFragment				= new Item_3_Calendars_Vocabulary(itemData);
-    	
-//        ViewGroup 									viewGroup					= (ViewGroup) myActivity.findViewById(R.id.panel_container);
-//        	View 										newView 					= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
    	 			
     	FragmentTransaction 						fTransaction 				= myFragmentManager.beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
