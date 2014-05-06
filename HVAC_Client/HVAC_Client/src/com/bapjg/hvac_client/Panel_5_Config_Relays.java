@@ -129,11 +129,10 @@ public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment
 
 		if (result instanceof Ctrl_Configuration.Data)
 		{
-		Global.eRegConfiguration			 										= (Ctrl_Configuration.Data) result;
-        AdapterView <Adapter_5_Configuration_Relays> 	view						= (AdapterView) myContainer.findViewById(R.id.List_View);
-        Adapter_5_Configuration_Relays 					adapter						= new Adapter_5_Configuration_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
-        view.setAdapter(adapter);
-		}
+			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
+			displayHeader();
+			displayContents();
+ 		}
 		else
 		{
 			Global.toaster("Data NOTNOTNOT received", true);
@@ -142,7 +141,10 @@ public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment
 	public void displayHeader()
 	{
 	}
-	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	public void displayContents()
 	{
+	       AdapterView <Adapter_5_Configuration_Relays> 	view						= (AdapterView) myContainer.findViewById(R.id.List_View);
+	        Adapter_5_Configuration_Relays 					adapter						= new Adapter_5_Configuration_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
+	        view.setAdapter(adapter);
 	}
 }

@@ -130,9 +130,8 @@ public class Panel_5_Config_Pumps 						extends 					Panel_0_Fragment
 		if (result instanceof Ctrl_Configuration.Data)
 		{
 			Global.eRegConfiguration												= (Ctrl_Configuration.Data) result;
-	        AdapterView <Adapter_5_Configuration_Pumps> view						= (AdapterView) myContainer.findViewById(R.id.List_View);
-	        Adapter_5_Configuration_Pumps				adapter						= new Adapter_5_Configuration_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
-	        view.setAdapter(adapter);
+			displayHeader();
+			displayContents();
 		}
 		else
 		{
@@ -142,7 +141,10 @@ public class Panel_5_Config_Pumps 						extends 					Panel_0_Fragment
 	public void displayHeader()
 	{
 	}
-	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	public void displayContents()
 	{
+        AdapterView <Adapter_5_Configuration_Pumps> view						= (AdapterView) myContainer.findViewById(R.id.List_View);
+        Adapter_5_Configuration_Pumps				adapter						= new Adapter_5_Configuration_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
+        view.setAdapter(adapter);
 	}
 }

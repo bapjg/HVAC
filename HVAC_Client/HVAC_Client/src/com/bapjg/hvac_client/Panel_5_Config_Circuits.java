@@ -127,10 +127,9 @@ public class Panel_5_Config_Circuits 					extends 			Panel_0_Fragment
 
 		if (result instanceof Ctrl_Configuration.Data)
 		{
-		Global.eRegConfiguration			 										= (Ctrl_Configuration.Data) result;
-        AdapterView <Adapter_5_Configuration_Circuits> 	view						= (AdapterView) myContainer.findViewById(R.id.List_View);
-        Adapter_5_Configuration_Circuits					adapter						= new Adapter_5_Configuration_Circuits(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
-        view.setAdapter(adapter);
+			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
+			displayHeader();
+			displayContents();
 		}
 		else
 		{
@@ -140,7 +139,10 @@ public class Panel_5_Config_Circuits 					extends 			Panel_0_Fragment
 	public void displayHeader()
 	{
 	}
-	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	public void displayContents()
 	{
+		AdapterView <Adapter_5_Configuration_Circuits> 	view						= (AdapterView) myContainer.findViewById(R.id.List_View);
+		Adapter_5_Configuration_Circuits				adapter						= new Adapter_5_Configuration_Circuits(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
+		view.setAdapter(adapter);
 	}
 }

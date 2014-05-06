@@ -51,49 +51,29 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
         
         return panelView;
      }
-    @Override
-	public void onClick(View myView) 
-	{
-    	System.out.println("We have arrived in onClick/panel3Calendars again");
-    	
-    	Button 											myButton 					= (Button) myView;
-    	String											myCaption					= myButton.getText().toString();
-						
-		// Set all textColours to white				
-		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
-		for (int i = 0; i < viewParent.getChildCount(); i++)
-		{
-			Button										buttonChild 				= (Button) viewParent.getChildAt(i);
-			buttonChild.setTextColor(Color.WHITE);
-		}
-		
-		((Button) myView).setTextColor(Color.YELLOW);
-    	
-    	if (myCaption.equalsIgnoreCase("Thermometers"))
-    	{
-    		// buttonThermometersClick(myView);	
-    	}
-	}
-	@Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-	{
-        if (position > 0)
-        {
-        	System.out.println("position : " + position);
-//	        ViewGroup 									viewGroup					= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
-//        	View 										newView 					= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
-				
-        	FragmentTransaction 						ft 							= myFragmentManager.beginTransaction();
-        	Ctrl_Configuration.Thermometer 				dt							= Global.eRegConfiguration.thermometerList.get(position -1);
-
-     //   	ft.replace(R.id.panel_container, dt);
-        	ft.commit();
-        }
-        else
-        {
-        	// We have clicked in title area
-        }
-   	}
+//    @Override
+//	public void onClick(View myView) 
+//	{
+//    	System.out.println("We have arrived in onClick/panel3Calendars again");
+//    	
+//    	Button 											myButton 					= (Button) myView;
+//    	String											myCaption					= myButton.getText().toString();
+//						
+//		// Set all textColours to white				
+//		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
+//		for (int i = 0; i < viewParent.getChildCount(); i++)
+//		{
+//			Button										buttonChild 				= (Button) viewParent.getChildAt(i);
+//			buttonChild.setTextColor(Color.WHITE);
+//		}
+//		
+//		((Button) myView).setTextColor(Color.YELLOW);
+//    	
+//    	if (myCaption.equalsIgnoreCase("Thermometers"))
+//    	{
+//    		// buttonThermometersClick(myView);	
+//    	}
+//	}
 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
 		Activity										activity					= getActivity();		
@@ -101,10 +81,8 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 		if (result instanceof Ctrl_Calendars.Data)
 		{
 			Global.eRegCalendars				 									= (Ctrl_Calendars.Data) result;
-	        AdapterView <Adapter_3_Calendars_Words> 
-														view						= (AdapterView) myContainer.findViewById(R.id.List_View);
-	        Adapter_3_Calendars_Words					adapter						= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
-	        view.setAdapter(adapter);
+			displayHeader();
+			displayContents();
 	        
 //	        view.setOnItemClickListener((OnItemClickListener) this);	
 
@@ -117,8 +95,28 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 	public void displayHeader()
 	{
 	}
-	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	public void displayContents()
 	{
+        AdapterView <Adapter_3_Calendars_Words> 	view						= (AdapterView) myContainer.findViewById(R.id.List_View);
+		Adapter_3_Calendars_Words					adapter						= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
+		view.setAdapter(adapter);
+		view.setOnItemClickListener(this);
 	}
+	@Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+	{
+     	System.out.println("position : " + position);
+    	Ctrl_Calendars.Word							itemData					= Global.eRegCalendars.wordList.get(position);
+
+    	Item_3_Calendars_Vocabulary					itemFragment				= new Item_3_Calendars_Vocabulary(itemData);
+    	
+//        ViewGroup 									viewGroup					= (ViewGroup) myActivity.findViewById(R.id.panel_container);
+//        	View 										newView 					= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
+   	 			
+    	FragmentTransaction 						fTransaction 				= myFragmentManager.beginTransaction();
+   		fTransaction.replace(R.id.panel_container, itemFragment);
+   		fTransaction.addToBackStack(null);
+   		fTransaction.commit();
+   	}
 }
 

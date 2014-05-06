@@ -25,7 +25,7 @@ public class Adapter_5_Configuration_Circuits 			extends 			Adapter_0_Abstract
     {
     	RowHolder 							row					= new RowHolder();
     	Ctrl_Configuration.Circuit			listItem			= (Ctrl_Configuration.Circuit) listData.get(position);
-        adapterView 											= inflater.inflate(R.layout.row_configuration_circuit, null);
+        adapterView 											= inflater.inflate(R.layout.row_5_configuration_circuit, null);
 
         row.name 												= (TextView) adapterView.findViewById(R.id.name);
         row.gradient 											= (CheckBox) adapterView.findViewById(R.id.gradient);
