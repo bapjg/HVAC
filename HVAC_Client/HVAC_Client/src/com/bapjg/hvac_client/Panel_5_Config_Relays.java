@@ -27,10 +27,6 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
-
 public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment 
 {
 	private Adapter_5_Configuration_Relays				adapter;

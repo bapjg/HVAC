@@ -16,10 +16,10 @@
         android:orientation				= "horizontal" >
 
         <TextView
-            style="@style/AD_Text"
-            android:layout_height="wrap_content"
-         android:layout_width			= "150dp"
-            android:text="Calendars" />
+            style						= "@style/AD_Text"
+            android:layout_height		= "wrap_content"
+         	android:layout_width		= "150dp"
+            android:text				= "Calendars" />
 
         <TextView
             android:id					= "@+id/name"

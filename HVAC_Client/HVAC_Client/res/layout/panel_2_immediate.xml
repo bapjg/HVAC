@@ -41,19 +41,19 @@
     </TableLayout>
 
 	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation	= "vertical"
+	    android:layout_width			= "match_parent"
+	    android:layout_height			= "wrap_content"
+	    android:orientation				= "vertical"
 	 >
 
 		<Button
-		    android:id="@+id/buttonOk"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_centerVertical="true"
-		    android:layout_gravity="center_horizontal"
-		    android:textColor= "#FFFFFF"
-		    android:text="Ok" />
+		    android:id					= "@+id/buttonOk"
+		    android:layout_width		= "wrap_content"
+		    android:layout_height		= "wrap_content"
+		    android:layout_centerVertical= "true"
+		    android:layout_gravity		="center_horizontal"
+		    android:textColor			= "#FFFFFF"
+		    android:text				= "Ok" />
 				
 	</LinearLayout>
 

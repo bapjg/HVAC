@@ -16,10 +16,10 @@
         android:orientation				= "horizontal" >
 
         <TextView
-            style="@style/AD_Text"
-            android:layout_height="wrap_content"
-         android:layout_width			= "150dp"
-            android:text="Weather Report" />
+            style						= "@style/AD_Text"
+            android:layout_height		= "wrap_content"
+         	android:layout_width		= "150dp"
+            android:text				= "Weather Report" />
 
         <TextView
             android:id					= "@+id/dateTime"
@@ -39,10 +39,10 @@
 	    android:orientation				= "horizontal" >
 
 	    <TextView
-	        style="@style/AD_Text"
-	        android:layout_width="150dp"
-	        android:layout_height="wrap_content"
-	        android:text="Obtained" />
+	        style						= "@style/AD_Text"
+	        android:layout_width		= "150dp"
+	        android:layout_height		= "wrap_content"
+	        android:text				= "Obtained" />
 
 	    <TextView
 	        android:id					= "@+id/dateTimeObtained"
