@@ -20,13 +20,8 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 {		
-//	private LayoutInflater								myInflater;
-//	private Activity									myActivity;
-//	private ViewGroup									myContainer;
-//	private View										myAdapterView;
-//	private FragmentManager								myFragmentManager;
-
-	private View										panelView;
+	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View										adapterView;			// This corresponds to the inflated list view within the panel view (R.id.List_View)
 	
 	public Panel_3_Calendars_Vocabulary()
 	{
@@ -37,6 +32,7 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
     {
         // Inflate the layout for this fragment
         this.panelView																= inflater.inflate(R.layout.panel_3_calendars, container, false);
+        this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
  
         // This part can be in processFinishTCP/HTTP 
         
@@ -76,11 +72,10 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-		AdapterView <Adapter_3_Calendars_Words>			adapterView					= (AdapterView) panelView.findViewById(R.id.List_View);
-		Adapter_3_Calendars_Words						adapter						= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
-		adapterView.setAdapter(adapter);
-		adapterView.setOnItemClickListener(this);
-
+		AdapterView <Adapter_3_Calendars_Words>			adapterViewList				= (AdapterView <Adapter_3_Calendars_Words>) adapterView;
+		Adapter_3_Calendars_Words						arrayAdapter						= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
+		adapterViewList.setAdapter(arrayAdapter);
+		adapterViewList.setOnItemClickListener(this);
 	}
 	@Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)

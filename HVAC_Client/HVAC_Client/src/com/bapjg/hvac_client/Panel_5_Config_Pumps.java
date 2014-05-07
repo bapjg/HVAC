@@ -37,9 +37,8 @@ public class Panel_5_Config_Pumps 						extends 					Panel_0_Fragment
 //	private View										myAdapterView;
 //	private FragmentManager								myFragmentManager;
 	
-	private View										adapterView;
-	private View										panelView;
-	
+	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View										adapterView;			// This corresponds to the inflated list view within the panel view (R.id.List_View)
 
 	public Panel_5_Config_Pumps()
 	{
@@ -49,7 +48,7 @@ public class Panel_5_Config_Pumps 						extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        this.panelView																= inflater.inflate(R.layout.panel_5_config_header, container, false);
+        this.panelView																= inflater.inflate(R.layout.panel_5_configuration_header, container, false);
         this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
 
         if ((Global.eRegConfiguration != null)
@@ -135,11 +134,14 @@ public class Panel_5_Config_Pumps 						extends 					Panel_0_Fragment
 	}
 	public void displayHeader()
 	{
+		TextView												title				= (TextView) panelView.findViewById(R.id.name);
+		title.setText("Pumps");
 	}
 	public void displayContents()
 	{
-		View											 		listView			= (View) adapterView.findViewById(R.id.List_View);
-        Adapter_5_Configuration_Pumps							adapter				= new Adapter_5_Configuration_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
-        ((AdapterView <Adapter_5_Configuration_Pumps>) listView).setAdapter(adapter);
+	    AdapterView <Adapter_5_Configuration_Pumps>				adapterViewList		= (AdapterView <Adapter_5_Configuration_Pumps>) adapterView;
+        Adapter_5_Configuration_Pumps							arrayAdapter		= new Adapter_5_Configuration_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
+        adapterViewList.setAdapter(arrayAdapter);
+//		adapterViewList.setOnItemClickListener(this);
 	}
 }

@@ -30,8 +30,8 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment 
 {
-	private View										adapterView;
-	private View										panelView;
+	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View										adapterView;			// This corresponds to the inflated list view within the panel view (R.id.List_View)
 
 	public Panel_5_Config_Relays()
 	{
@@ -41,7 +41,7 @@ public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        this.panelView 																= inflater.inflate(R.layout.panel_5_config_header, container, false);
+        this.panelView 																= inflater.inflate(R.layout.panel_5_configuration_header, container, false);
         this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
 
         if ((Global.eRegConfiguration != null)
@@ -127,11 +127,15 @@ public class Panel_5_Config_Relays 						extends 					Panel_0_Fragment
 	}
 	public void displayHeader()
 	{
+		TextView												title				= (TextView) panelView.findViewById(R.id.name);
+		title.setText("Relays");
 	}
 	public void displayContents()
 	{
-		View											 		listView			= (View) adapterView.findViewById(R.id.List_View);
-		Adapter_5_Configuration_Relays							adapter				= new Adapter_5_Configuration_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
-		((AdapterView <Adapter_5_Configuration_Relays>) listView).setAdapter(adapter);
+	    AdapterView <Adapter_5_Configuration_Relays>			adapterViewList		= (AdapterView <Adapter_5_Configuration_Relays>) adapterView;
+		Adapter_5_Configuration_Relays							arrayAdapter		= new Adapter_5_Configuration_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
+		adapterViewList.setAdapter(arrayAdapter);
+//		adapterViewList.setOnItemClickListener(this);
+
 	}
 }

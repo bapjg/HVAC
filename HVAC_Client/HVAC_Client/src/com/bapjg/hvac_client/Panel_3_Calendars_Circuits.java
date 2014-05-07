@@ -28,15 +28,9 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 {
 	public String										circuitName;
 
-	private View										panelView;
+	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View										adapterView;			// This corresponds to the inflated list view within the panel view (R.id.List_View)
 	
-	
-	
-//	public Panel_3_Calendars_Circuits()
-//	{
-//		super();
-//		circuitName																	= "";
-//	}
     public Panel_3_Calendars_Circuits(String circuitName)
     {
 		super();
@@ -46,7 +40,8 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        panelView																	= inflater.inflate(R.layout.panel_3_calendars, container, false);
+    	this.panelView																= inflater.inflate(R.layout.panel_3_calendars, container, false);
+        this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
         
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.circuitList != null))
@@ -84,9 +79,9 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-        AdapterView <Adapter_3_Calendars_Circuits>		adapterView					= (AdapterView) panelView.findViewById(R.id.List_View);
-
+        AdapterView <Adapter_3_Calendars_Circuits>		adapterViewList				= (AdapterView <Adapter_3_Calendars_Circuits>) adapterView;
         Adapter_3_Calendars_Circuits					arrayAdapter				= null;	
+
         for (Ctrl_Calendars.Circuit 		circuit 	: Global.eRegCalendars.circuitList)
         {
         	if (circuit.name.equalsIgnoreCase(this.circuitName))
@@ -94,8 +89,9 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
         		arrayAdapter														= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
         	}
         }
-        adapterView.setAdapter(arrayAdapter);
-      	adapterView.setOnItemClickListener((OnItemClickListener) this);
+
+        adapterViewList.setAdapter(arrayAdapter);
+        adapterViewList.setOnItemClickListener((OnItemClickListener) this);
 	}
 }
 

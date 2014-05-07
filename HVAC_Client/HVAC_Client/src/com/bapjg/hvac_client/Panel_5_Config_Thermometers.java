@@ -34,8 +34,8 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment 
 {
-//	private View										adapterView;
-	private View										panelView;
+	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View										adapterView;			// This corresponds to the inflated list view within the panel view (R.id.List_View)
 
 	public Panel_5_Config_Thermometers()
 	{
@@ -45,8 +45,9 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-		this.panelView 																= inflater.inflate(R.layout.panel_5_config_header, container, false);
-//        this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
+		this.panelView 																= inflater.inflate(R.layout.panel_5_configuration_header, container, false);
+        this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
+ 
         Data x = Global.eRegConfiguration;
         
         if ((Global.eRegConfiguration != null)
@@ -121,20 +122,14 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
 //	}
 	public void displayHeader()
 	{
+		TextView												title				= (TextView) panelView.findViewById(R.id.name);
+		title.setText("Circuits");
 	}
 	public void displayContents()
 	{
-//		View											 		listView			= (View) adapterView.findViewById(R.id.List_View);
-//		Adapter_5_Configuration_Thermometers 					adapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-//		((AdapterView <Adapter_5_Configuration_Thermometers>) listView).setAdapter(adapter);
-	    AdapterView <Adapter_5_Configuration_Thermometers>		adapterView			= (AdapterView) panelView.findViewById(R.id.List_View);
-		Adapter_5_Configuration_Thermometers 					adapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-		((AdapterView <Adapter_5_Configuration_Thermometers>) adapterView).setAdapter(adapter);	
-	
-	
-	
-	
-	
-	
+	    AdapterView <Adapter_5_Configuration_Thermometers>		adapterViewList		= (AdapterView <Adapter_5_Configuration_Thermometers>) adapterView;
+		Adapter_5_Configuration_Thermometers 					arrayAdapter		= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+		adapterViewList.setAdapter(arrayAdapter);
+//		adapterViewList.setOnItemClickListener(this);
 	}
 }
