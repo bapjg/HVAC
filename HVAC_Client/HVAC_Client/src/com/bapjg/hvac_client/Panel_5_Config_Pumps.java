@@ -37,8 +37,6 @@ public class Panel_5_Config_Pumps 						extends 					Panel_0_Fragment
 //	private View										myAdapterView;
 //	private FragmentManager								myFragmentManager;
 	
-	private Activity									activity;
-	private ViewGroup									container;
 	private View										adapterView;
 	private View										panelView;
 	
@@ -51,7 +49,6 @@ public class Panel_5_Config_Pumps 						extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        this.container 																= container;
         this.panelView																= inflater.inflate(R.layout.panel_5_config_header, container, false);
         this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
 
