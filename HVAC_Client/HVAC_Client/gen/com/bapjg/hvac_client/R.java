@@ -131,19 +131,22 @@ public final class R {
         public static final int panel_2_immediate=0x7f03000f;
         public static final int panel_3_calendars=0x7f030010;
         public static final int panel_4_weather=0x7f030011;
-        public static final int panel_5_configuration_header=0x7f030012;
-        public static final int panel_6_actions_relays=0x7f030013;
-        public static final int panel_6_actions_stop=0x7f030014;
-        public static final int panel_6_actions_test_mail=0x7f030015;
-        public static final int row_3_calendar_circuit=0x7f030016;
-        public static final int row_3_calendars_word=0x7f030017;
-        public static final int row_4_weather=0x7f030018;
-        public static final int row_5_configuration_circuit=0x7f030019;
-        public static final int row_5_configuration_pump=0x7f03001a;
-        public static final int row_5_configuration_relay=0x7f03001b;
-        public static final int row_5_configuration_thermometer=0x7f03001c;
-        public static final int row_calendar_circuit_title=0x7f03001d;
-        public static final int row_configuration_circuit_title=0x7f03001e;
+        public static final int panel_5_configuration_circuits=0x7f030012;
+        public static final int panel_5_configuration_pumps=0x7f030013;
+        public static final int panel_5_configuration_relays=0x7f030014;
+        public static final int panel_5_configuration_thermometers=0x7f030015;
+        public static final int panel_6_actions_relays=0x7f030016;
+        public static final int panel_6_actions_stop=0x7f030017;
+        public static final int panel_6_actions_test_mail=0x7f030018;
+        public static final int row_3_calendar_circuit=0x7f030019;
+        public static final int row_3_calendars_word=0x7f03001a;
+        public static final int row_4_weather=0x7f03001b;
+        public static final int row_5_configuration_circuit=0x7f03001c;
+        public static final int row_5_configuration_pump=0x7f03001d;
+        public static final int row_5_configuration_relay=0x7f03001e;
+        public static final int row_5_configuration_thermometer=0x7f03001f;
+        public static final int row_calendar_circuit_title=0x7f030020;
+        public static final int row_configuration_circuit_title=0x7f030021;
     }
     public static final class menu {
         public static final int main=0x7f080000;

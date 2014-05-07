@@ -20,13 +20,13 @@ import android.widget.Button;
 //Template												NEWNEWNEW					= NEWNEWNEW
 //Template												variable					= something
 //Template												ext/imp						class
-public class Menu_4_Weather 							extends 					Menu_0_Fragment 
+public class Menu_5_Configuration 						extends 					Menu_0_Fragment 
 														implements 					View.OnClickListener
 {
-	public Menu_4_Weather()
+	public Menu_5_Configuration()
 	{
 		super();
-		this.menuLayout																= R.layout.menu_4_weather;
+		this.menuLayout																= R.layout.menu_5_configuration;
 	}
 	public void onClick(View myView) // This is the onClick event from the Menu
 	{
@@ -36,22 +36,29 @@ public class Menu_4_Weather 							extends 					Menu_0_Fragment
     	FragmentTransaction								fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 										panelFragment				= null;
     	
-    	if      (caption.equalsIgnoreCase("Today")) 	panelFragment 				= new Panel_4_Weather("Today");
-    	else if (caption.equalsIgnoreCase("Tomorrow"))  panelFragment 				= new Panel_4_Weather("Tomorrow");
-     	else if (caption.equalsIgnoreCase("Beyond"))	panelFragment 				= new Panel_4_Weather("Beyond");
+    	if      (caption.equalsIgnoreCase("Thermometers"))	panelFragment 			= new Panel_5_Configuration_Thermometers();
+    	else if (caption.equalsIgnoreCase("Relays"))	panelFragment 				= new Panel_5_Configuration_Relays();
+    	else if (caption.equalsIgnoreCase("Pumps"))		panelFragment 				= new Panel_5_Configuration_Pumps();
+    	else if (caption.equalsIgnoreCase("Circuits"))	panelFragment 				= new Panel_5_Configuration_Circuits();
     	else if (caption.equalsIgnoreCase("Refresh"))	doRefresh();
+    	else if (caption.equalsIgnoreCase("Update"))	doUpdate();
 
-    	if 		(panelFragment != null)
+    	if (panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);
     	}
-    	fTransaction.commit();  
+		fTransaction.commit();
 	}
 	public void doRefresh()
+	{
+		Global.toaster("doRefresh", false);
+        TCP_Send	(new Ctrl_Configuration().new Request());
+	}
+	public void doUpdate()
 	{
         HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
         TCP_Send	(new Ctrl_Configuration().new Request());
         TCP_Send	(new Ctrl_Weather().new Request());
-		Global.toaster("doRefresh", false);
+		Global.toaster("doUpdate", false);
 	}
 }

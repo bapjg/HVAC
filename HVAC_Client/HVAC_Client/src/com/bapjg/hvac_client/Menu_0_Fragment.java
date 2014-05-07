@@ -1,5 +1,10 @@
 package com.bapjg.hvac_client;
 
+import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl_Calendars;
+import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Messages.Ctrl_Weather;
+import HVAC_Messages.Ctrl_WeatherData;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.Color;
@@ -15,6 +20,8 @@ import android.widget.Button;
 //Template												variable					= something
 //Template												ext/imp						class
 public class Menu_0_Fragment 							extends 					Fragment 
+														implements					TCP_Response,
+																					HTTP_Response
 {
 	public 	int											menuLayout;
 	private ViewGroup									container;
@@ -56,6 +63,41 @@ public class Menu_0_Fragment 							extends 					Fragment
 			{
 				allButtonsSetup((ViewGroup) viewChild);
 			}
+		}
+	}
+	public void HTTP_Send(Ctrl_Abstract message)
+	{
+		HTTP_Task										task						= new HTTP_Task();
+	   	task.callBack																= this;					// processFinish
+	   	task.execute(message);		
+	}		
+	public void TCP_Send(Ctrl_Abstract message)		
+	{		
+		TCP_Task										task						= new TCP_Task();
+	   	task.callBack																= this;					// processFinish
+	   	task.execute(message);
+	}
+//	@Override	public void processFinishTCP(Ctrl_Abstract result) 											{}
+//	@Override	public void processFinishHTTP(Ctrl_Abstract result) 										{}
+	public void processFinishHTTP(Ctrl_Abstract result) 
+	{  
+		if (result instanceof Ctrl_Calendars.Data)		Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
+		else											Global.toaster("Data NOTNOTNOT received", true);
+	}
+	public void processFinishTCP(Ctrl_Abstract result) 
+	{  
+		if (result instanceof Ctrl_Configuration.Data)
+		{
+			Global.eRegConfiguration												= (Ctrl_Configuration.Data) result;
+		}
+		else if (result instanceof Ctrl_Weather.Data)
+		{
+			Ctrl_Weather.Data							resultWeather				= (Ctrl_Weather.Data) result;
+			Global.weatherForecast				 									= (Ctrl_WeatherData) resultWeather.weatherData;
+		}
+		else
+		{
+			Global.toaster("Data NOTNOTNOT received", true);
 		}
 	}
 }

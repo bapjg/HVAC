@@ -25,14 +25,14 @@ public class Global
 	public static	Panel_2_Immediate			panelImmediate;	
 	public static	Panel_3_Calendars_Circuits	panelCalendars;
 	public static	Panel_4_Weather				panelWeather;
-	public static	Panel_5_Config_Thermometers	panelConfiguration;
+	public static	Panel_5_Configuration_Thermometers	panelConfiguration;
 	public static	Panel_6_Actions_Relays		panelActions;	
 
 	public static	Menu_1_Temperatures			menuTemperatures;
 	public static	Menu_2_Immediate			menuImmediate;
 	public static	Menu_3_Calendars			menuCalendars;
 	public static	Menu_4_Weather				menuWeather;
-	public static	Menu_5_Config 				menuConfiguration;
+	public static	Menu_5_Configuration 				menuConfiguration;
 	public static	Menu_6_Actions				menuActions;
 	
 	public static	Ctrl_Configuration.Data		eRegConfiguration;

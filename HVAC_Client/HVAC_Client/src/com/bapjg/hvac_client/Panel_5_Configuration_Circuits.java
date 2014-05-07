@@ -28,12 +28,12 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 @SuppressLint("ValidFragment")
-public class Panel_5_Config_Circuits 					extends 			Panel_0_Fragment 
+public class Panel_5_Configuration_Circuits 					extends 			Panel_0_Fragment 
 {
 	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 	private View										adapterView;			// This corresponds to the inflated list view within the panel view (R.id.List_View)
 
-	public Panel_5_Config_Circuits()
+	public Panel_5_Configuration_Circuits()
 	{
 		super();
 	}
@@ -41,7 +41,7 @@ public class Panel_5_Config_Circuits 					extends 			Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        this.panelView 																= inflater.inflate(R.layout.panel_5_configuration_header, container, false);
+        this.panelView 																= inflater.inflate(R.layout.panel_5_configuration_circuits, container, false);
         this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
 
         if ((Global.eRegConfiguration != null)

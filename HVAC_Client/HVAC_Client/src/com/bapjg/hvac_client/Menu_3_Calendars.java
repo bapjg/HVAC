@@ -1,5 +1,9 @@
 package com.bapjg.hvac_client;
 
+import HVAC_Messages.Ctrl_Calendars;
+import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Messages.Ctrl_Weather;
+import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -32,15 +36,28 @@ public class Menu_3_Calendars 							extends 					Menu_0_Fragment
     	FragmentTransaction								fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 										panelFragment				= null;
    	
-    	if      (caption.equalsIgnoreCase("Vocabulary"))panelFragment 		= new Panel_3_Calendars_Vocabulary();
-    	else if (caption.equalsIgnoreCase("Hot Water")) panelFragment 		= new Panel_3_Calendars_Circuits("Hot_Water");
-     	else if (caption.equalsIgnoreCase("Radiator"))	panelFragment 		= new Panel_3_Calendars_Circuits("Radiator");
-    	else if (caption.equalsIgnoreCase("Floor"))		panelFragment 		= new Panel_3_Calendars_Circuits("Floor");
+    	if      (caption.equalsIgnoreCase("Vocabulary"))panelFragment 				= new Panel_3_Calendars_Vocabulary();
+    	else if (caption.equalsIgnoreCase("Hot Water")) panelFragment 				= new Panel_3_Calendars_Circuits("Hot_Water");
+     	else if (caption.equalsIgnoreCase("Radiator"))	panelFragment 				= new Panel_3_Calendars_Circuits("Radiator");
+    	else if (caption.equalsIgnoreCase("Floor"))		panelFragment 				= new Panel_3_Calendars_Circuits("Floor");
+       	else if (caption.equalsIgnoreCase("Refresh"))	doRefresh();
+    	else if (caption.equalsIgnoreCase("Update"))	doUpdate();
 
     	if 		(panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);
     	}
     	fTransaction.commit();  
+	}
+	public void doRefresh()
+	{
+        HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
+        TCP_Send	(new Ctrl_Configuration().new Request());
+        TCP_Send	(new Ctrl_Weather().new Request());
+		Global.toaster("doRefresh", false);
+	}
+	public void doUpdate()
+	{
+		Global.toaster("doUpdate", false);
 	}
 }
