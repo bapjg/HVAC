@@ -3,6 +3,8 @@ package com.bapjg.hvac_client;
 import HVAC_Messages.Ctrl_Abstract;
 import HVAC_Messages.Ctrl_Calendars;
 import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Messages.Ctrl_Weather;
+import HVAC_Messages.Ctrl_WeatherData;
 import HVAC_Messages.Ctrl_Calendars.Request;
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -33,6 +35,7 @@ public class Activity_Main 						extends 		Activity
 
         HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
         TCP_Send	(new Ctrl_Configuration().new Request());
+        TCP_Send	(new Ctrl_Weather().new Request());
 
         
         ActionBar 				actionbar 				= getActionBar();
@@ -125,7 +128,18 @@ public class Activity_Main 						extends 		Activity
 	}
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
-		if (result instanceof Ctrl_Configuration.Data)	Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
-		else											Global.toaster("Data NOTNOTNOT received", true);
+		if (result instanceof Ctrl_Configuration.Data)
+		{
+			Global.eRegConfiguration												= (Ctrl_Configuration.Data) result;
+		}
+		else if (result instanceof Ctrl_Weather.Data)
+		{
+			Ctrl_Weather.Data							resultWeather				= (Ctrl_Weather.Data) result;
+			Global.weatherForecast				 									= (Ctrl_WeatherData) resultWeather.weatherData;
+		}
+		else
+		{
+			Global.toaster("Data NOTNOTNOT received", true);
+		}
 	}
 }

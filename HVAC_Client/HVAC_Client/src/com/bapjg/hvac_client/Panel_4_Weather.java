@@ -20,13 +20,9 @@ import android.util.Log;
 @SuppressLint("ValidFragment")
 public class Panel_4_Weather 							extends 					Panel_0_Fragment
 {
-	private LayoutInflater								myInflater;
-	private Activity									myActivity;
-	private ViewGroup									myContainer;
-	private View										myAdapterView;
-	private FragmentManager								myFragmentManager;
 	private String										when;
-	private ArrayList <Ctrl_WeatherData.Forecast> 		forecastList;			
+	private ArrayList <Ctrl_WeatherData.Forecast> 		forecastList;
+	private View										panelView;
 	
 	public Panel_4_Weather()
 	{
@@ -41,86 +37,64 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        myInflater																	= inflater;
-        myContainer 																= container;
-        myActivity																	= getActivity();
-        myFragmentManager 															= myActivity.getFragmentManager();
-        View 											panelView					= myInflater.inflate(R.layout.panel_4_weather, container, false);
+        this.panelView																= inflater.inflate(R.layout.panel_4_weather, container, false);
 
-//        TextView 										dateTime					= (TextView) panelView.findViewById(R.id.dateTime);
-//		if 		(when.equalsIgnoreCase("Today"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight()));
-//		else if (when.equalsIgnoreCase("Tomorrow"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
-//		else if (when.equalsIgnoreCase("Beyond"))		dateTime.setText 			("> " + Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
-
-        myAdapterView																= (AdapterView) panelView.findViewById(R.id.List_View);
-
-        TCP_Send(new Ctrl_Weather().new Request());
+		if ((Global.weatherForecast != null)
+		&&  (Global.weatherForecast.forecasts != null) 
+		&&  (Global.weatherForecast.forecasts.size() != 0) )
+		{
+			displayHeader();
+			displayContents();
+		}
+		else
+		{
+			Global.toaster("HTTP Response is null,  server must be delaying... try later", true);
+		}
         return panelView;
     }
-    @Override
-	public void onClick(View myView) 
-	{
-    	Log.v("App", "We have arrived in onClick again");
-    	
-    	Button 											myButton 					= (Button) myView;
-    	String											myCaption					= myButton.getText().toString();
-						
-		// Set all textColours to white				
-		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
-		for (int i = 0; i < viewParent.getChildCount(); i++)
-		{
-			Button										buttonChild 				= (Button) viewParent.getChildAt(i);
-			buttonChild.setTextColor(Color.WHITE);
-		}
-		
-		((Button) myView).setTextColor(Color.YELLOW);
-    	
-    	if (myCaption.equalsIgnoreCase("Thermometers"))
-    	{
-    		// buttonThermometersClick(myView);	
-    	}
-	}
+//  @Override
+//	public void onClick(View myView) 
+//	{
+//    	Log.v("App", "We have arrived in onClick again");
+//    	
+//    	Button 											myButton 					= (Button) myView;
+//    	String											myCaption					= myButton.getText().toString();
+//						
+//		// Set all textColours to white				
+//		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
+//		for (int i = 0; i < viewParent.getChildCount(); i++)
+//		{
+//			Button										buttonChild 				= (Button) viewParent.getChildAt(i);
+//			buttonChild.setTextColor(Color.WHITE);
+//		}
+//		
+//		((Button) myView).setTextColor(Color.YELLOW);
+//    	
+//    	if (myCaption.equalsIgnoreCase("Thermometers"))
+//    	{
+//    		// buttonThermometersClick(myView);	
+//    	}
+//	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 	{
 	}
-	public void processFinishTCP(Ctrl_Abstract result) 
-	{
-		if (result instanceof Ctrl_Weather.Data)
-		{
-			Ctrl_Weather.Data							resultWeather				= (Ctrl_Weather.Data) result;
-			Global.weatherForecast				 									= (Ctrl_WeatherData) resultWeather.weatherData;
-			if ((Global.weatherForecast != null)
-			&&  (Global.weatherForecast.forecasts != null) 
-			&&  (Global.weatherForecast.forecasts.size() != 0) )
-			{
-				displayHeader();
-				displayContents();
-			}
-			else
-			{
-				Global.toaster("HTTP Response is null,  server must be delaying... try later", true);
-			}
-		}
-		else
-		{
-			Global.toaster("Data NOTNOTNOT received", true);
-		}
-	}
 	public void displayHeader()
 	{	
-        TextView 										dateTimeObtained			= (TextView) myContainer.findViewById(R.id.dateTimeObtained);
-        if (Global.weatherForecast.dateTimeObtained == null) dateTimeObtained.setText("xxx");
-        else dateTimeObtained.setText 													(Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
+		Ctrl_WeatherData xxx = Global.weatherForecast;
+		
+		
+		TextView 										dateTimeObtained			= (TextView) panelView.findViewById(R.id.dateTimeObtained);
+        dateTimeObtained.setText 													(Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
         
-        TextView 										dateTime					= (TextView) myContainer.findViewById(R.id.dateTime);
+        TextView 										dateTime					= (TextView) panelView.findViewById(R.id.dateTime);
 		if 		(when.equalsIgnoreCase("Today"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight()));
 		else if (when.equalsIgnoreCase("Tomorrow"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
 		else if (when.equalsIgnoreCase("Beyond"))		dateTime.setText 			("> " + Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
 	}
 	public void displayContents()
 	{
-        AdapterView <Adapter_4_Weather> 		view						= (AdapterView) myContainer.findViewById(R.id.List_View);
+        AdapterView <Adapter_4_Weather> 		view						= (AdapterView) panelView.findViewById(R.id.List_View);
         
         forecastList														= new ArrayList <Ctrl_WeatherData.Forecast> ();
         if (when.equalsIgnoreCase("Today"))

@@ -9,8 +9,17 @@
 	android:clickable 					= "true"
 >
 	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Today"         		/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Tomorrow"         		/>
+	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Tomorrow"         	/>
 	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Beyond"         		/>
 	<Button	style	= "@style/AD_MenuButton" 	android:text	= "zzz"         		/>
-
+	<LinearLayout 
+		android:layout_width			= "match_parent"
+		android:layout_height			= "match_parent"
+		android:orientation				= "vertical"
+		android:gravity					= "center|bottom"
+		android:background				= "@color/background"
+		android:clickable 				= "true"
+	>
+		<Button	style	= "@style/AD_MenuButton" 	android:text	= "Refresh"      	/>
+	</LinearLayout>	
 </LinearLayout>

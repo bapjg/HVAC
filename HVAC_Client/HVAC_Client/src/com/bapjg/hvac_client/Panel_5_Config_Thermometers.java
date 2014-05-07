@@ -52,8 +52,6 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
         this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
         Data x = Global.eRegConfiguration;
         
-        Global.eRegConfiguration = null;
-        
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.thermometerList != null))
         {
@@ -62,7 +60,7 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
         }
         else // we need to reconnect to the server
         {
-            HTTP_Send(new Ctrl_Configuration().new Request());
+            Global.toaster("Please wait for data to arrive or refresh", true);
         }
 
         return panelView;
@@ -108,22 +106,22 @@ public class Panel_5_Config_Thermometers 				extends 					Panel_0_Fragment
 //    		menuButtonThermometersClick(myView);	
 //    	}
     }
- 	public void processFinishHTTP(Ctrl_Abstract result) 
-	{  
-		Activity												activity			= getActivity();		
-
-		if (result instanceof Ctrl_Configuration.Data)
-		{
-			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
-			View											 		listView		= (View) adapterView.findViewById(R.id.List_View);
-			Adapter_5_Configuration_Thermometers 					adapter			= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-			((AdapterView <Adapter_5_Configuration_Thermometers>) listView).setAdapter(adapter);
-		}
-		else
-		{
-			Global.toaster("Data NOTNOTNOT received", true);
-		}
-	}
+// 	public void processFinishHTTP(Ctrl_Abstract result) 
+//	{  
+//		Activity												activity			= getActivity();		
+//
+//		if (result instanceof Ctrl_Configuration.Data)
+//		{
+//			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
+//			View											 		listView		= (View) adapterView.findViewById(R.id.List_View);
+//			Adapter_5_Configuration_Thermometers 					adapter			= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+//			((AdapterView <Adapter_5_Configuration_Thermometers>) listView).setAdapter(adapter);
+//		}
+//		else
+//		{
+//			Global.toaster("Data NOTNOTNOT received", true);
+//		}
+//	}
 	public void displayHeader()
 	{
 	}
