@@ -34,7 +34,8 @@ public class Panel_0_Fragment 							extends 					Fragment
 														implements 					View.OnClickListener, 
 																					AdapterView.OnItemClickListener, 
 																					TCP_Response,
-																					HTTP_Response
+																					HTTP_Response,
+																					Dialog_Response
 {
 //	private 	int										menuLayout;
     public 		Activity								activity;
@@ -70,5 +71,6 @@ public class Panel_0_Fragment 							extends 					Fragment
 	@Override	public void onClick(View v) 																{}
 	@Override	public void processFinishTCP(Ctrl_Abstract result) 											{}
 	@Override	public void processFinishHTTP(Ctrl_Abstract result) 										{}
+	@Override	public void processFinishDialog()					 										{}
 }
 

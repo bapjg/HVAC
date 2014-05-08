@@ -32,9 +32,8 @@ import HVAC_Messages.*;
 
 @SuppressLint("ValidFragment")
 public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
-																implements					Dialog_Response
 {		
-	public TCP_Task										task;
+	public TCP_Task												task;
 	
 	public Panel_5_Configuration_Boiler()
 	{
@@ -43,7 +42,7 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	View											panelView					= inflater.inflate(R.layout.panel_5_configuration_boiler, container, false);
+    	View													panelView					= inflater.inflate(R.layout.panel_5_configuration_boiler, container, false);
     	return panelView;
     }
 	public void displayHeader()
