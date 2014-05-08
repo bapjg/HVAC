@@ -52,29 +52,25 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-		Ctrl_Configuration.Boiler bb	=	Global.eRegConfiguration.boiler;
-		
-		((TextView) panelView.findViewById(R.id.thermoName)).setText		(Global.eRegConfiguration.boiler.thermometer);
-		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setText	(Global.displayTemperature(Global.eRegConfiguration.boiler.tempNeverExceed));
-		((TextView) panelView.findViewById(R.id.tempOverShoot)).setText		(Global.displayTemperature(Global.eRegConfiguration.boiler.tempOverShoot));
+		((TextView) panelView.findViewById(R.id.thermoName)).setText					(Global.eRegConfiguration.boiler.thermometer);
+		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setText				(Global.displayTemperature(Global.eRegConfiguration.boiler.tempNeverExceed));
+		((TextView) panelView.findViewById(R.id.tempOverShoot)).setText					(Global.displayTemperature(Global.eRegConfiguration.boiler.tempOverShoot));
 
-		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setOnClickListener(this);
-		((TextView) panelView.findViewById(R.id.tempOverShoot)).setOnClickListener(this);
+		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setOnClickListener	(this);
+		((TextView) panelView.findViewById(R.id.tempOverShoot)).setOnClickListener		(this);
 	}
 	public void onClick(View view)
 	{
 		if (view.getId() == R.id.tempNeverExceed)
 		{
-			Ctrl_Configuration.Boiler bb	=	Global.eRegConfiguration.boiler;
-			
 			Integer											temperature					= Global.eRegConfiguration.boiler.tempNeverExceed;
-			Dialog_Temperature							df 							= new Dialog_Temperature(this, view.getId(), temperature, 85, 1, 20);
+			Dialog_Temperature								df 							= new Dialog_Temperature(this, view.getId(), temperature, 85, 1, 20);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
 		else if (view.getId() == R.id.tempOverShoot)
 		{
 			Integer											temperature					= Global.eRegConfiguration.boiler.tempOverShoot;
-			Dialog_Temperature 							df 							= new Dialog_Temperature(this, view.getId(), temperature, 10, 1, 15);
+			Dialog_Temperature 								df 							= new Dialog_Temperature(this, view.getId(), temperature, 10, 1, 15);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
 	}

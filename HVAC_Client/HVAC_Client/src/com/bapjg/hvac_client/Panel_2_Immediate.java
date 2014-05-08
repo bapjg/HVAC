@@ -50,7 +50,7 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	public void rowTempClick(View myView) 
 	{
 		TextView										writeBack					= (TextView) ((ViewGroup) myView).getChildAt(1);
-		Dialog_Temperature_Old 								df 							= new Dialog_Temperature_Old(writeBack, 25, 5, 8);
+		Dialog_Temperature_Old 							df 							= new Dialog_Temperature_Old(writeBack, 25, 5, 8);
 		df.show(getFragmentManager(), "Dialog_Temperature");
 	}
 	public void rowTimeClick(View myView) 
