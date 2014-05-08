@@ -31,7 +31,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Messages.*;
 
 @SuppressLint("ValidFragment")
-public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment 
+public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
+																implements					Dialog_Response
 {		
 	public TCP_Task										task;
 	
@@ -43,21 +44,41 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	View											panelView					= inflater.inflate(R.layout.panel_5_configuration_boiler, container, false);
-    	
-        return panelView;
+    	return panelView;
     }
 	public void displayHeader()
 	{
 	}
-	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	public void displayContents()
 	{
 		if (getActivity() != null)			// The user has not changed the screen
 		{
-			((TextView) getActivity().findViewById(R.id.Name)).setText			(Global.eRegConfiguration.burner.relay);
-			((TextView) getActivity().findViewById(R.id.Fuel)).setText			(Global.eRegConfiguration.burner.fuelConsumption.toString());
-			((TextView) getActivity().findViewById(R.id.TempMax)).setText		("xxx"); //(Global.eRegConfiguration.burner.relay);
-			((TextView) getActivity().findViewById(R.id.TempOvershoot)).setText	("xxx"); //(Global.eRegConfiguration.burner.relay);
+			((TextView) getActivity().findViewById(R.id.ThermoName)).setText		(Global.eRegConfiguration.boiler.thermometer);
+			((TextView) getActivity().findViewById(R.id.TempNeverExceed)).setText	(Global.displayTemperature(Global.eRegConfiguration.boiler.tempNeverExceed));
+			((TextView) getActivity().findViewById(R.id.TempOvershoot)).setText		(Global.displayTemperature(Global.eRegConfiguration.boiler.tempOverShoot));
+
+			((TextView) getActivity().findViewById(R.id.TempNeverExceed)).setOnClickListener(this);
+			((TextView) getActivity().findViewById(R.id.TempOvershoot)).setOnClickListener(this);
 		}
+	}
+	public void onClick(View view)
+	{
+		if (view.getId() == R.id.TempNeverExceed)
+		{
+			Integer											writeBack					= Global.eRegConfiguration.boiler.tempNeverExceed;
+			Dialog_Temperature_New							df 							= new Dialog_Temperature_New(this, writeBack, 85, 1, 20);
+			df.show(getFragmentManager(), "Dialog_Temperature");
+		}
+		else if (view.getId() == R.id.TempNeverExceed)
+		{
+			Integer											writeBack					= Global.eRegConfiguration.boiler.tempNeverExceed;
+			Dialog_Temperature_New 							df 							= new Dialog_Temperature_New(this, writeBack, 10, 1, 15);
+			df.show(getFragmentManager(), "Dialog_Temperature");
+		}
+	}
+	public void processFinishDialog()
+	{
+		displayContents();
 	}
 }
 

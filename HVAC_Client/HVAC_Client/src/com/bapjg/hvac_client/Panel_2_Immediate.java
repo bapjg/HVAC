@@ -63,17 +63,11 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	{
     	Button 											myButton 					= (Button) myView;
     	String											myCaption					= myButton.getText().toString();
-    	FragmentManager 								fManager					= getFragmentManager();
-    	FragmentTransaction								fTransaction;
-    	Fragment 										panelFragment;
     	
     	if (myCaption.equalsIgnoreCase("Start"))
     	{
-    		Log.v( "App", "Action "+ this.circuitName + " Start Click");
-
     		Ctrl_Immediate.Execute						message_out					= new Ctrl_Immediate().new Execute();
 					
-//			NumberPicker 								np 							= (NumberPicker) getActivity().findViewById(R.id.tempObjective);
 	   		message_out.circuitName													= this.circuitName;
 	   		TextView									temp						= (TextView) getActivity().findViewById(R.id.TempObjective);
 	   		
@@ -96,8 +90,6 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     	}
     	else if (myCaption.equalsIgnoreCase("Stop"))
     	{
-    		Log.v( "App", "Action "+ this.circuitName + " Stop Click");
-
     		Ctrl_Immediate.Execute						message_out					= new Ctrl_Immediate().new Execute();
 	   		message_out.circuitName													= this.circuitName;
 	   		message_out.action														= message_out.ACTION_Stop;

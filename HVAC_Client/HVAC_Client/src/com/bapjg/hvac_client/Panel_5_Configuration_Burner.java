@@ -55,8 +55,6 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 		{
 			((TextView) getActivity().findViewById(R.id.Name)).setText			(Global.eRegConfiguration.burner.relay);
 			((TextView) getActivity().findViewById(R.id.Fuel)).setText			(Global.eRegConfiguration.burner.fuelConsumption.toString());
-			((TextView) getActivity().findViewById(R.id.TempMax)).setText		("xxx"); //(Global.eRegConfiguration.burner.relay);
-			((TextView) getActivity().findViewById(R.id.TempOvershoot)).setText	("xxx"); //(Global.eRegConfiguration.burner.relay);
 		}
 	}
 }

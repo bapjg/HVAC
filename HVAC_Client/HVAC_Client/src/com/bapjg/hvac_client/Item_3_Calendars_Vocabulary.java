@@ -96,7 +96,6 @@ public class Item_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 	}
 	public void displayHeader()
 	{
-//		((TextView) myContainer.findViewById(R.id.name)).setText("Vocabulary");	
 	}
 	public void displayContents()
 	{

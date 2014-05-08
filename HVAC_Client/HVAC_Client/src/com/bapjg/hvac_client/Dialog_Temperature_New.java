@@ -13,28 +13,30 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
-public class Dialog_Temperature 								extends 		DialogFragment 
+public class Dialog_Temperature_New 								extends 		DialogFragment 
 {
+	public Dialog_Response			callBack;
+
 	public NumberPicker 			temperaturePicker;
-//	public Interface_Response		callBack;
 	public Integer					tempMin;
 	public Integer  				step;
 	public Integer  				steps;
 	public Integer  				tempInitial;
-	public TextView					writeBack;
+	public Integer					writeBack;
 	
 	
-	public Dialog_Temperature() 
+	public Dialog_Temperature_New() 
     {
     }
-	public Dialog_Temperature(TextView	writeBack, Integer	tempMin, Integer  step, Integer  steps) 
+	public Dialog_Temperature_New(Dialog_Response callBack, Integer writeBack, Integer tempMin, Integer step, Integer steps) 
     {
 		super();
+		this.callBack											= callBack;
 		this.writeBack											= writeBack;
 		this.tempMin											= tempMin;
 		this.step												= step;
 		this.steps												= steps;
-		this.tempInitial										= Integer.parseInt(writeBack.getText().toString());
+		this.tempInitial										= writeBack/1000;
     }
 
 	public interface OnTemperatureSelectedListener 
@@ -73,7 +75,8 @@ public class Dialog_Temperature 								extends 		DialogFragment
     public void buttonOk (DialogInterface dialog, int which)
     {
      	Integer temperature =(temperaturePicker.getValue() - tempMin) * step + tempMin;
-     	writeBack.setText(temperature.toString());
+     	writeBack												= temperature * 1000;
+     	callBack.processFinishDialog();
     	dialog.dismiss();
     }
     public void buttonCancel (DialogInterface dialog, int which)
