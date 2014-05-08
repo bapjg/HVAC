@@ -75,7 +75,7 @@ public class Dialog_Time 										extends 		DialogFragment
      	Integer 				minute 							= timePicker.getCurrentMinute();
      	if (callBackLong)
      	{
-    		callBack.processFinishDialogLong(fieldId, hour * 3600 * 1000 + minute * 60 * 1000);
+    		callBack.processFinishDialogLong(fieldId, hour * 3600 * 1000L + minute * 60 * 1000L);
     	}
      	else
      	{

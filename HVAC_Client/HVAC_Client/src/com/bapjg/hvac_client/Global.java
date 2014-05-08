@@ -176,6 +176,14 @@ public class Global
 		
 		return todayMidnight;
 	}
+	public static Long getTimeNowSinceMidnight()
+	{
+		//==============================================================
+		// Returns the number of milliseconds since last midnight
+		//==============================================================
+		Long now							= Calendar.getInstance().getTimeInMillis() - Global.getTimeAtMidnight();		
+		return now;
+	}
 	public static Long parseTime(String characters)
 	{
 		//==============================================================
