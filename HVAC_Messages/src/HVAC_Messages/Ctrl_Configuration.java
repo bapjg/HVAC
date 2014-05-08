@@ -122,7 +122,7 @@ public class Ctrl_Configuration 				extends 					Ctrl_Abstract
 	public void initialise()
 	{
 		Update	confUpdate													= (Update) this;
-		confUpdate.dateTime													= System.currentTimeMillis();
+		confUpdate.dateTime													= null;			// Server is used as utlimate arbitrator for time
 		
 		// PIDs
 		PID_Data								pid							= new PID_Data();

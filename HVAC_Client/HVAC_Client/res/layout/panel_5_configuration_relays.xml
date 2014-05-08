@@ -2,13 +2,13 @@
 <LinearLayout 
 	xmlns:android						= "http://schemas.android.com/apk/res/android"
 	android:layout_width				= "match_parent"
-	android:layout_height="40dp" android:background="@color/background" android:baselineAligned="false" android:gravity="center_vertical" android:orientation="horizontal">
+	android:layout_height="match_parent" android:background="@color/background" android:baselineAligned="false" android:orientation="vertical">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="40dp" android:background="@color/background" android:baselineAligned="false" android:gravity="center_vertical" android:orientation="horizontal">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/background" android:gravity="center_vertical" android:orientation="horizontal">
     	<TextView style="@style/AD_Text" android:layout_height="wrap_content" android:layout_width="150dp" android:text="Configuration"></TextView>
-    	<TextView style="@style/AD_Text" android:layout_width="100dp" android:layout_height="wrap_content" android:text="Thermometers"></TextView></LinearLayout><LinearLayout
+    	<TextView style="@style/AD_Text" android:layout_width="100dp" android:layout_height="wrap_content" android:text="Relays"></TextView></LinearLayout><LinearLayout
         android:layout_width			= "match_parent"
-        android:layout_height			= "40dp"
+        android:layout_height			= "50dp"
         android:background				= "@color/background"
         android:baselineAligned			= "false"
         android:gravity					= "center_vertical"
@@ -17,15 +17,15 @@
         <TextView
             style						= "@style/AD_Text"
             android:layout_height		= "wrap_content"
-         	android:layout_width		= "70dp"
-            android:text				= "Relay Bank" />
+         	android:layout_width		= "140dp"
+            android:text				= "Name" />
 
-        <TextView style="@style/AD_Text" android:layout_width="70dp" android:layout_height="wrap_content" android:text="Relay Bank" /><TextView
+        <TextView style="@style/AD_Text" android:layout_width="70dp" android:layout_height="wrap_content" android:text="Bank" android:gravity="right"/><TextView
             style						= "@style/AD_Text"
             android:layout_width		= "120dp"
             android:layout_height		= "wrap_content"
-            android:text				= "Relay Number" 
-        ></TextView>
+            android:text				= "Number" 
+        android:gravity="right"></TextView>
         </LinearLayout>
     
 		<ListView

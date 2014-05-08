@@ -56,9 +56,6 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 			Global.eRegCalendars				 									= (Ctrl_Calendars.Data) result;
 			displayHeader();
 			displayContents();
-	        
-//	        view.setOnItemClickListener((OnItemClickListener) this);	
-
 		}
 		else
 		{
@@ -72,8 +69,9 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-		AdapterView <Adapter_3_Calendars_Words>			adapterViewList				= (AdapterView <Adapter_3_Calendars_Words>) adapterView;
-		Adapter_3_Calendars_Words						arrayAdapter						= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
+    	Log.v( "App", "contentSize : " + Global.eRegCalendars.wordList.size());
+    	AdapterView <Adapter_3_Calendars_Words>			adapterViewList				= (AdapterView <Adapter_3_Calendars_Words>) adapterView;
+		Adapter_3_Calendars_Words						arrayAdapter				= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
 		adapterViewList.setAdapter(arrayAdapter);
 		adapterViewList.setOnItemClickListener(this);
 	}

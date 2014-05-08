@@ -75,7 +75,7 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	public void initialise()
 	{
 		Update									calendarUpdate				= (Update) this;
-		calendarUpdate.dateTime												= System.currentTimeMillis();
+		calendarUpdate.dateTime												= null;			// Server is used as utlimate arbitrator for time
 		
 		// Vocabulary
 		Ctrl_Calendars.Word						word						= new Word();

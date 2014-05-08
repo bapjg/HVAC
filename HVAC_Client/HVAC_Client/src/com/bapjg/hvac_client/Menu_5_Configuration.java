@@ -40,6 +40,8 @@ public class Menu_5_Configuration 						extends 					Menu_0_Fragment
     	else if (caption.equalsIgnoreCase("Relays"))	panelFragment 				= new Panel_5_Configuration_Relays();
     	else if (caption.equalsIgnoreCase("Pumps"))		panelFragment 				= new Panel_5_Configuration_Pumps();
     	else if (caption.equalsIgnoreCase("Circuits"))	panelFragment 				= new Panel_5_Configuration_Circuits();
+    	else if (caption.equalsIgnoreCase("Burner"))	panelFragment 				= new Panel_5_Configuration_Burner();
+    	else if (caption.equalsIgnoreCase("Boiler"))	panelFragment 				= new Panel_5_Configuration_Boiler();
     	else if (caption.equalsIgnoreCase("Refresh"))	doRefresh();
     	else if (caption.equalsIgnoreCase("Update"))	doUpdate();
 
@@ -52,13 +54,11 @@ public class Menu_5_Configuration 						extends 					Menu_0_Fragment
 	public void doRefresh()
 	{
 		Global.toaster("doRefresh", false);
-        TCP_Send	(new Ctrl_Configuration().new Request());
+        HTTP_Send	(new Ctrl_Configuration().new Request());
 	}
 	public void doUpdate()
 	{
-        HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
-        TCP_Send	(new Ctrl_Configuration().new Request());
-        TCP_Send	(new Ctrl_Weather().new Request());
+        HTTP_Send	(new Ctrl_Configuration().new Update());
 		Global.toaster("doUpdate", false);
 	}
 }

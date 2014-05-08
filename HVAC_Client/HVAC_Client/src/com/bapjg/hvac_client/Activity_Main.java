@@ -34,7 +34,7 @@ public class Activity_Main 						extends 		Activity
         Global.piSocketAddress							= null;
 
         HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
-        TCP_Send	(new Ctrl_Configuration().new Request());
+        HTTP_Send	(new Ctrl_Configuration().new Request());
         TCP_Send	(new Ctrl_Weather().new Request());
 
         
@@ -123,16 +123,18 @@ public class Activity_Main 						extends 		Activity
 	}		
 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
-		if (result instanceof Ctrl_Calendars.Data)		Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
-		else											Global.toaster("Data NOTNOTNOT received", true);
+		if 		(result instanceof Ctrl_Calendars.Data)		Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
+		else if (result instanceof Ctrl_Configuration.Data)	Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
+		else												Global.toaster("Data NOTNOTNOT received", true);
 	}
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
-		if (result instanceof Ctrl_Configuration.Data)
-		{
-			Global.eRegConfiguration												= (Ctrl_Configuration.Data) result;
-		}
-		else if (result instanceof Ctrl_Weather.Data)
+//		if (result instanceof Ctrl_Configuration.Data)								// No longer used
+//		{
+//			Global.eRegConfiguration												= (Ctrl_Configuration.Data) result;
+//		}
+//		else if (result instanceof Ctrl_Weather.Data)
+		if (result instanceof Ctrl_Weather.Data)
 		{
 			Ctrl_Weather.Data							resultWeather				= (Ctrl_Weather.Data) result;
 			Global.weatherForecast				 									= (Ctrl_WeatherData) resultWeather.weatherData;

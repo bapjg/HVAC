@@ -49,8 +49,6 @@ public class Menu_4_Weather 							extends 					Menu_0_Fragment
 	}
 	public void doRefresh()
 	{
-        HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
-        TCP_Send	(new Ctrl_Configuration().new Request());
         TCP_Send	(new Ctrl_Weather().new Request());
 		Global.toaster("doRefresh", false);
 	}

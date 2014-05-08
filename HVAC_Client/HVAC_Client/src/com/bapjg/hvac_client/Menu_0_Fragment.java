@@ -81,16 +81,19 @@ public class Menu_0_Fragment 							extends 					Fragment
 //	@Override	public void processFinishHTTP(Ctrl_Abstract result) 										{}
 	public void processFinishHTTP(Ctrl_Abstract result) 
 	{  
-		if (result instanceof Ctrl_Calendars.Data)		Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
-		else											Global.toaster("Data NOTNOTNOT received", true);
+		if 		(result instanceof Ctrl_Calendars.Data)		Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
+		else if (result instanceof Ctrl_Configuration.Data)	Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
+		else if (result instanceof Ctrl_Abstract.Ack)		/* All is Ok */ ;
+		else												Global.toaster("Data NOTNOTNOT received", true);
 	}
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
-		if (result instanceof Ctrl_Configuration.Data)
-		{
-			Global.eRegConfiguration												= (Ctrl_Configuration.Data) result;
-		}
-		else if (result instanceof Ctrl_Weather.Data)
+//		if (result instanceof Ctrl_Configuration.Data)
+//		{
+//			Global.eRegConfiguration												= (Ctrl_Configuration.Data) result;
+//		}
+//		else if (result instanceof Ctrl_Weather.Data)
+		if (result instanceof Ctrl_Weather.Data)
 		{
 			Ctrl_Weather.Data							resultWeather				= (Ctrl_Weather.Data) result;
 			Global.weatherForecast				 									= (Ctrl_WeatherData) resultWeather.weatherData;

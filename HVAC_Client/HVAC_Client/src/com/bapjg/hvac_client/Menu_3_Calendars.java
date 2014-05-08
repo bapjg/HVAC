@@ -52,12 +52,18 @@ public class Menu_3_Calendars 							extends 					Menu_0_Fragment
 	public void doRefresh()
 	{
         HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
-        TCP_Send	(new Ctrl_Configuration().new Request());
-        TCP_Send	(new Ctrl_Weather().new Request());
 		Global.toaster("doRefresh", false);
 	}
 	public void doUpdate()
 	{
+		Ctrl_Calendars.Data									sendData					= Global.eRegCalendars;
+		Ctrl_Calendars.Update								sendUpdate					= new Ctrl_Calendars().new Update();
+		sendUpdate.wordList																= sendData.wordList;
+		sendUpdate.circuitList															= sendData.circuitList;
+		sendUpdate.awayList																= sendData.awayList;
+		sendUpdate.tasksBackGround														= sendData.tasksBackGround;
+		
+		HTTP_Send	(sendUpdate);
 		Global.toaster("doUpdate", false);
 	}
 }

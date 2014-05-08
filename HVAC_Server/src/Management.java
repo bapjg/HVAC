@@ -207,10 +207,12 @@ public class Management extends HttpServlet
             Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
     		String 										dbJsonString 		= gson.toJson((Ctrl_Calendars.Data) message_in);
 
-    		dbResultSet.moveToInsertRow();
-            dbResultSet.updateDouble	("dateTime", 				message_in.dateTime);
-            dbResultSet.updateString	("date", 					dateTime2Date(message_in.dateTime));
-            dbResultSet.updateString	("time", 					dateTime2Time(message_in.dateTime));
+    		Long										dateTime			= System.currentTimeMillis();		// Do not use dateTime supplied in input message
+    		
+    		dbResultSet.moveToInsertRow();		
+            dbResultSet.updateDouble	("dateTime", 				dateTime);
+            dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
+            dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
             dbResultSet.updateString	("Calendars", 				dbJsonString);
             dbResultSet.insertRow();
 
@@ -266,10 +268,12 @@ public class Management extends HttpServlet
             Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
     		String 										dbJsonString 		= gson.toJson((Ctrl_Configuration.Data) message_in);
 
+    		Long										dateTime			= System.currentTimeMillis();		// Do not use dateTime supplied in input message
+    		
     		dbResultSet.moveToInsertRow();
-            dbResultSet.updateDouble	("dateTime", 				message_in.dateTime);
-            dbResultSet.updateString	("date", 					dateTime2Date(message_in.dateTime));
-            dbResultSet.updateString	("time", 					dateTime2Time(message_in.dateTime));
+            dbResultSet.updateDouble	("dateTime", 				dateTime);
+            dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
+            dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
             dbResultSet.updateString	("Configuration", 			dbJsonString);
             dbResultSet.insertRow();
 

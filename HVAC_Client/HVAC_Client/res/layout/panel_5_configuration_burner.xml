@@ -1,0 +1,85 @@
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<LinearLayout 
+	xmlns:android						= "http://schemas.android.com/apk/res/android"
+	android:layout_width				= "match_parent"
+	android:layout_height="match_parent" android:background="@color/background" android:baselineAligned="false" android:orientation="vertical">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="50dp" android:background="@color/background" android:gravity="center_vertical" android:orientation="horizontal">
+    	<TextView style="@style/AD_Text" android:layout_height="wrap_content" android:layout_width="200dp" android:text="Relay"></TextView>
+
+    	<TextView
+    	    android:id="@+id/Name"
+    	    style="@style/AD_Text"
+    	    android:layout_width="100dp"
+    	    android:layout_height="wrap_content"
+    	    android:text="name" >
+</TextView>
+    	
+    	</LinearLayout>
+    	<LinearLayout
+        android:layout_width			= "match_parent"
+        android:layout_height			= "50dp"
+        android:background				= "@color/background"
+        android:gravity					= "center_vertical"
+        android:orientation				= "horizontal" >
+
+        <TextView
+            style						= "@style/AD_Text"
+            android:layout_height		= "wrap_content"
+         	android:layout_width		= "200dp"
+            android:text				= "Fuel Consumption" />
+
+        <TextView
+            android:id="@+id/Fuel"
+            style="@style/AD_Text"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="Address" />
+
+        </LinearLayout>
+        <LinearLayout
+        android:layout_width			= "match_parent"
+        android:layout_height			= "50dp"
+        android:background				= "@color/background"
+        android:gravity					= "center_vertical"
+        android:orientation				= "horizontal" >
+
+        <TextView
+            style						= "@style/AD_Text"
+            android:layout_height		= "wrap_content"
+         	android:layout_width		= "200dp"
+            android:text				= "Max Temperature" />
+
+        <TextView
+            android:id="@+id/TempMax"
+            style="@style/AD_Text"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="Address" />
+
+        </LinearLayout>
+        <LinearLayout
+        android:layout_width			= "match_parent"
+        android:layout_height			= "50dp"
+        android:background				= "@color/background"
+        android:gravity					= "center_vertical"
+        android:orientation				= "horizontal" >
+
+        <TextView
+            style						= "@style/AD_Text"
+            android:layout_height		= "wrap_content"
+         	android:layout_width		= "200dp"
+            android:text				= "Temp Overshoot" />
+
+        <TextView
+            android:id="@+id/TempOvershoot"
+            style="@style/AD_Text"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="Address" />
+
+        </LinearLayout>
+</LinearLayout>

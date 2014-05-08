@@ -59,7 +59,7 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
         }
         else // we need to reconnect to the server
         {
-        	TCP_Send(new Ctrl_Configuration().new Request());
+        	HTTP_Send(new Ctrl_Configuration().new Request());
         }
         
         return panelView;
@@ -134,8 +134,8 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 	}
 	public void displayHeader()
 	{
-		TextView												title				= (TextView) panelView.findViewById(R.id.name);
-		title.setText("Pumps");
+//		TextView												title				= (TextView) panelView.findViewById(R.id.name);
+//		title.setText("Pumps");
 	}
 	public void displayContents()
 	{

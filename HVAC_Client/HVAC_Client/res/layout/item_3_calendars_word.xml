@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:orientation="horizontal" >
 
         <Button
@@ -27,7 +27,7 @@
 
      <LinearLayout 
     	android:layout_width	 	= "match_parent"
-    	android:layout_height	 	= "30dp"
+    	android:layout_height	 	= "50dp"
     	android:orientation		 	= "horizontal"
 	>
 	   	<TextView
@@ -38,12 +38,12 @@
         <EditText
 	        android:id				= "@+id/name"
 	        style					= "@style/AD_Text"
-	    	android:layout_width	= "100dp"
+	    	android:layout_width	= "150dp"
 	   	/>
     </LinearLayout>
     <LinearLayout 
     	android:layout_width	 	= "match_parent"
-    	android:layout_height	 	= "30dp"
+    	android:layout_height	 	= "50dp"
     	android:orientation		 	= "horizontal"
 	>
 	   	<TextView
