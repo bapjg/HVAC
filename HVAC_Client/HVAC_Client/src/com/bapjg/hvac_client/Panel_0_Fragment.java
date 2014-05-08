@@ -71,6 +71,7 @@ public class Panel_0_Fragment 							extends 					Fragment
 	@Override	public void onClick(View v) 																{}
 	@Override	public void processFinishTCP(Ctrl_Abstract result) 											{}
 	@Override	public void processFinishHTTP(Ctrl_Abstract result) 										{}
-	@Override	public void processFinishDialog(int fieldId, Integer temperature)							{}
+	@Override	public void processFinishDialogInteger(int fieldId, Integer response)						{}
+	@Override	public void processFinishDialogString (int fieldId, String  response)						{}
 }
 

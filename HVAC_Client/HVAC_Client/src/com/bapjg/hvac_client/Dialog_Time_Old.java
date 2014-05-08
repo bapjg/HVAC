@@ -14,42 +14,28 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 @SuppressLint("ValidFragment")
-public class Dialog_Time 										extends 		DialogFragment 
+public class Dialog_Time_Old 										extends 		DialogFragment 
 {
-	private Dialog_Response			callBack;
-	private int						fieldId;
-	private	Boolean					callBackLong;
-	private TimePicker 				timePicker;
-	private Integer  				timeInitialHour;
-	private Integer  				timeInitialMinute;
+	public TimePicker 	timePicker;
+	public Integer  	timeInitialHour;
+	public Integer  	timeInitialMinute;
+	public TextView		writeBack;
 	
-	public Dialog_Time() 
+	public Dialog_Time_Old() 
     {
     }
-	public Dialog_Time(Dialog_Response callBack, int fieldId, Long time) 
+	public Dialog_Time_Old(TextView	writeBack) 
     {
 		super();
-		this.callBack											= callBack;
-		this.fieldId											= fieldId;
+		this.writeBack											= writeBack;
 		
-		Long 					hours							= time/3600/1000;
-		Long 					minutes							= time/60/1000 - hours * 60L;
-		this.timeInitialHour									= hours.intValue();
-		this.timeInitialMinute									= minutes.intValue();
-		this.callBackLong										= true;
-    }
-	public Dialog_Time(Dialog_Response callBack, int fieldId, String time) 
-    {
-		super();
-		this.callBack											= callBack;
-		this.fieldId											= fieldId;
-		
-		String[] 				timeInitialParts				= time.split(":");
+		String 					timeInitial						= writeBack.getText().toString();
+		String[] 				timeInitialParts				= timeInitial.split(":");
 		
 		this.timeInitialHour									= Integer.parseInt(timeInitialParts[0]);
 		this.timeInitialMinute									= Integer.parseInt(timeInitialParts[1]);
-		this.callBackLong										= false;
     }
+
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
     {
@@ -73,14 +59,7 @@ public class Dialog_Time 										extends 		DialogFragment
     {
      	Integer 				hour 							= timePicker.getCurrentHour();
      	Integer 				minute 							= timePicker.getCurrentMinute();
-     	if (callBackLong)
-     	{
-    		callBack.processFinishDialogLong(fieldId, hour * 3600 * 1000 + minute * 60 * 1000);
-    	}
-     	else
-     	{
-     		callBack.processFinishDialogString(fieldId, hour.toString() + ":" + minute.toString());
-     	}
+     	writeBack.setText(hour.toString() + ":" + minute.toString());
     	dialog.dismiss();
     }
     public void buttonCancel (DialogInterface dialog, int which)

@@ -16,16 +16,14 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 public class Dialog_Temperature 								extends 		DialogFragment 
 {
-	public Dialog_Response			callBack;
-
-	public NumberPicker 			temperaturePicker;
-	public Integer					tempMin;
-	public Integer  				step;
-	public Integer  				steps;
-	public Integer  				tempInitial;
-	public Integer					temperature;
-	public int						fieldId;
-	
+	private Dialog_Response			callBack;
+	private int						fieldId;
+	private NumberPicker 			temperaturePicker;
+	private Integer					tempMin;
+	private Integer  				step;
+	private Integer  				steps;
+	private Integer  				tempInitial;
+	private Integer					temperature;
 	
 	public Dialog_Temperature() 
     {
@@ -34,12 +32,12 @@ public class Dialog_Temperature 								extends 		DialogFragment
     {
 		super();
 		this.callBack											= callBack;
+		this.fieldId											= fieldId;
 		this.temperature										= temperature;
 		this.tempMin											= tempMin;
 		this.step												= step;
 		this.steps												= steps;
 		this.tempInitial										= temperature/1000;
-		this.fieldId											= fieldId;
     }
 
 	public interface OnTemperatureSelectedListener 
@@ -79,7 +77,7 @@ public class Dialog_Temperature 								extends 		DialogFragment
     {
      	Integer 				newTemperature 					=(temperaturePicker.getValue() - tempMin) * step + tempMin;
      	temperature												= newTemperature * 1000;
-     	callBack.processFinishDialog(fieldId, temperature);
+     	callBack.processFinishDialogInteger(fieldId, temperature);
     	dialog.dismiss();
     }
     public void buttonCancel (DialogInterface dialog, int which)

@@ -1,6 +1,9 @@
 package com.bapjg.hvac_client;
 
-public interface Dialog_Response 
+public interface Dialog_Response
 {
-	void processFinishDialog(int fieldId, Integer temperature);
+	void processFinishDialogInteger	(int fieldId, Integer 	reponse);
+	void processFinishDialogString	(int fieldId, String 	reponse);
+	void processFinishDialogLong	(int fieldId, Long 		reponse);
 }
+

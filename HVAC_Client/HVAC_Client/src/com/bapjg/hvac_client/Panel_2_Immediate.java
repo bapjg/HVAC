@@ -27,6 +27,8 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 														implements 					TCP_Response
 {			
 	public String										circuitName;
+	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private Ctrl_Immediate.Execute						messageExecute				= new Ctrl_Immediate().new Execute();
 	
     public Panel_2_Immediate(String circuitName)
     {
@@ -35,17 +37,17 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	View											thisView					= inflater.inflate(R.layout.panel_2_immediate, container, false);
+    	this.panelView																= inflater.inflate(R.layout.panel_2_immediate, container, false);
 				
     	Ctrl_Immediate.Request							taskRequest					= new Ctrl_Immediate().new Request();
     	taskRequest.circuitName														= this.circuitName;
     	
-    	TCP_Send(taskRequest);
+    	TCP_Send(taskRequest);							// This returns list of what is currently active on each circuit
 
-    	thisView.findViewById(R.id.buttonOk).setOnClickListener((OnClickListener) this);
-    	thisView.findViewById(R.id.RowTemp).setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {rowTempClick(v);}});
-    	thisView.findViewById(R.id.RowTime).setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {rowTimeClick(v);}});
-        return thisView;
+    	panelView.findViewById(R.id.buttonOk).setOnClickListener((OnClickListener) this);
+    	panelView.findViewById(R.id.RowTemp).setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {rowTempClick(v);}});
+    	panelView.findViewById(R.id.RowTime).setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {rowTimeClick(v);}});
+        return panelView;
     }
 	public void rowTempClick(View myView) 
 	{
@@ -56,7 +58,7 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	public void rowTimeClick(View myView) 
 	{
 		TextView										writeBack					= (TextView) ((ViewGroup) myView).getChildAt(1);
-		Dialog_Time		 								df 							= new Dialog_Time(writeBack);
+		Dialog_Time_Old		 							df 							= new Dialog_Time_Old(writeBack);
 		df.show(getFragmentManager(), "Dialog_Time");
 	}
 	public void onClick(View myView)
@@ -66,40 +68,36 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     	
     	if (myCaption.equalsIgnoreCase("Start"))
     	{
-    		Ctrl_Immediate.Execute						message_out					= new Ctrl_Immediate().new Execute();
-					
-	   		message_out.circuitName													= this.circuitName;
+    		messageExecute.circuitName												= this.circuitName;
 	   		TextView									temp						= (TextView) getActivity().findViewById(R.id.TempObjective);
 	   		
-	   		message_out.tempObjective												= Integer.parseInt(temp.getText().toString()) * 1000;
+	   		messageExecute.tempObjective											= Integer.parseInt(temp.getText().toString()) * 1000;
 							
 	   		if (this.circuitName.equalsIgnoreCase("Hot_Water"))				
 	   		{				
-	   			message_out.stopOnObjective											= true;
+	   			messageExecute.stopOnObjective										= true;
 	   		}				
 	   		else				
 	   		{				
-	   			message_out.stopOnObjective											= false;
+	   			messageExecute.stopOnObjective										= false;
 	   		}				
-	   		message_out.action														= message_out.ACTION_Start;
+	   		messageExecute.action													= messageExecute.ACTION_Start;
 							
 	   		temp																	= (TextView) getActivity().findViewById(R.id.TimeEnd);
-	   		message_out.timeEnd														= Global.parseTime(temp.getText().toString());
+	   		messageExecute.timeEnd													= Global.parseTime(temp.getText().toString());
 			
-        	TCP_Send(message_out);
+        	TCP_Send(messageExecute);
     	}
     	else if (myCaption.equalsIgnoreCase("Stop"))
     	{
-    		Ctrl_Immediate.Execute						message_out					= new Ctrl_Immediate().new Execute();
-	   		message_out.circuitName													= this.circuitName;
-	   		message_out.action														= message_out.ACTION_Stop;
+    		messageExecute.circuitName												= this.circuitName;
+    		messageExecute.action													= messageExecute.ACTION_Stop;
 
-        	TCP_Send(message_out);
+        	TCP_Send(messageExecute);
     	}
 	}
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{  
-		Activity										activity					= getActivity();		
 		if 		(result instanceof Ctrl_Immediate.Data)						displayContents((Ctrl_Immediate.Data) result);
 		else if (result instanceof Ctrl_Immediate.Ack)						Global.toast("Command accepted", false);
 		else if (result instanceof Ctrl_Abstract.Ack)						Global.toast("Command accepted", false);
@@ -111,33 +109,40 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	}
 	public void displayContents(Ctrl_Immediate.Data msg_received)
 	{
-		TextView									timeEnd						= (TextView) getActivity().findViewById(R.id.TimeEnd);
-		TextView									tempObjective				= (TextView) getActivity().findViewById(R.id.TempObjective);
+		
+		messageExecute.tempObjective = 3;
+		messageExecute.timeEnd = "zz";
+		
+		
+		
+		
+		TextView									timeEnd						= (TextView) panelView.findViewById(R.id.TimeEnd);
+		TextView									tempObjective				= (TextView) panelView.findViewById(R.id.TempObjective);
 		
 		timeEnd.setText(Global.displayTimeShort(msg_received.timeStart + 60 * 60 * 1000));
 		tempObjective.setText(((Integer) (msg_received.tempObjective/1000)).toString());
 		
 		if (msg_received.executionActive)
 		{
-			((TextView) 	getActivity().findViewById(R.id.TimeStart)).setText		("Current");
-			((TextView) 	getActivity().findViewById(R.id.TargetTemp)).setText	(((Integer) (msg_received.tempObjective/1000)).toString());
-			((Button) 		getActivity().findViewById(R.id.buttonOk)).setText		("Stop");
-			((View) 		getActivity().findViewById(R.id.RowTitle)).setVisibility(View.GONE);
-			((View) 		getActivity().findViewById(R.id.RowTime)).setVisibility	(View.GONE);
-			((View) 		getActivity().findViewById(R.id.RowTemp)).setVisibility	(View.GONE);
+			((TextView) 	panelView.findViewById(R.id.TimeStart)).setText		("Current");
+			((TextView) 	panelView.findViewById(R.id.TargetTemp)).setText	(((Integer) (msg_received.tempObjective/1000)).toString());
+			((Button) 		panelView.findViewById(R.id.buttonOk)).setText		("Stop");
+			((View) 		panelView.findViewById(R.id.RowTitle)).setVisibility(View.GONE);
+			((View) 		panelView.findViewById(R.id.RowTime)).setVisibility	(View.GONE);
+			((View) 		panelView.findViewById(R.id.RowTemp)).setVisibility	(View.GONE);
 			
 		}
 		else if (msg_received.executionPlanned)
 		{
-			((TextView) 	getActivity().findViewById(R.id.TimeStart)).setText		(Global.displayTimeShort(msg_received.timeStart));
-			((TextView) 	getActivity().findViewById(R.id.TargetTemp)).setText	(((Integer) (msg_received.tempObjective/1000)).toString());
-			((Button) 		getActivity().findViewById(R.id.buttonOk)).setText		("Start");
+			((TextView) 	panelView.findViewById(R.id.TimeStart)).setText		(Global.displayTimeShort(msg_received.timeStart));
+			((TextView) 	panelView.findViewById(R.id.TargetTemp)).setText	(((Integer) (msg_received.tempObjective/1000)).toString());
+			((Button) 		panelView.findViewById(R.id.buttonOk)).setText		("Start");
 		}
 		else
 		{
-			((TextView) 	getActivity().findViewById(R.id.TimeStart)).setText		("No Plan");
-			((TextView) 	getActivity().findViewById(R.id.TargetTemp)).setText	(" ");
-			((Button) 		getActivity().findViewById(R.id.buttonOk)).setText		("Start");
+			((TextView) 	panelView.findViewById(R.id.TimeStart)).setText		("No Plan");
+			((TextView) 	panelView.findViewById(R.id.TargetTemp)).setText	(" ");
+			((Button) 		panelView.findViewById(R.id.buttonOk)).setText		("Start");
 		}
 	}
 }
