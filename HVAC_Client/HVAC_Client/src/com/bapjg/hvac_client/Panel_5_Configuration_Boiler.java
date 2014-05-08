@@ -56,28 +56,32 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 		
 		((TextView) panelView.findViewById(R.id.thermoName)).setText		(Global.eRegConfiguration.boiler.thermometer);
 		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setText	(Global.displayTemperature(Global.eRegConfiguration.boiler.tempNeverExceed));
-		((TextView) panelView.findViewById(R.id.tempOvershoot)).setText		(Global.displayTemperature(Global.eRegConfiguration.boiler.tempOverShoot));
+		((TextView) panelView.findViewById(R.id.tempOverShoot)).setText		(Global.displayTemperature(Global.eRegConfiguration.boiler.tempOverShoot));
 
 		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setOnClickListener(this);
-		((TextView) panelView.findViewById(R.id.tempOvershoot)).setOnClickListener(this);
+		((TextView) panelView.findViewById(R.id.tempOverShoot)).setOnClickListener(this);
 	}
 	public void onClick(View view)
 	{
 		if (view.getId() == R.id.tempNeverExceed)
 		{
-			Integer											writeBack					= Global.eRegConfiguration.boiler.tempNeverExceed;
-			Dialog_Temperature_New							df 							= new Dialog_Temperature_New(this, writeBack, 85, 1, 20);
+			Ctrl_Configuration.Boiler bb	=	Global.eRegConfiguration.boiler;
+			
+			Integer											temperature					= Global.eRegConfiguration.boiler.tempNeverExceed;
+			Dialog_Temperature							df 							= new Dialog_Temperature(this, view.getId(), temperature, 85, 1, 20);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
-		else if (view.getId() == R.id.tempNeverExceed)
+		else if (view.getId() == R.id.tempOverShoot)
 		{
-			Integer											writeBack					= Global.eRegConfiguration.boiler.tempNeverExceed;
-			Dialog_Temperature_New 							df 							= new Dialog_Temperature_New(this, writeBack, 10, 1, 15);
+			Integer											temperature					= Global.eRegConfiguration.boiler.tempOverShoot;
+			Dialog_Temperature 							df 							= new Dialog_Temperature(this, view.getId(), temperature, 10, 1, 15);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
 	}
-	public void processFinishDialog()
+	public void processFinishDialog(int fieldId, Integer temperature)
 	{
+		if (fieldId == R.id.tempNeverExceed)	Global.eRegConfiguration.boiler.tempNeverExceed 	= temperature;
+		if (fieldId == R.id.tempOverShoot)		Global.eRegConfiguration.boiler.tempOverShoot 		= temperature;
 		displayContents();
 	}
 }

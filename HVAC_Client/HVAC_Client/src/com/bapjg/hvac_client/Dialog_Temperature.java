@@ -1,5 +1,6 @@
 package com.bapjg.hvac_client;
 
+import HVAC_Messages.Ctrl_Configuration;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,26 +16,30 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 public class Dialog_Temperature 								extends 		DialogFragment 
 {
+	public Dialog_Response			callBack;
+
 	public NumberPicker 			temperaturePicker;
-//	public Interface_Response		callBack;
 	public Integer					tempMin;
 	public Integer  				step;
 	public Integer  				steps;
 	public Integer  				tempInitial;
-	public TextView					writeBack;
+	public Integer					temperature;
+	public int						fieldId;
 	
 	
 	public Dialog_Temperature() 
     {
     }
-	public Dialog_Temperature(TextView	writeBack, Integer	tempMin, Integer  step, Integer  steps) 
+	public Dialog_Temperature(Dialog_Response callBack, int fieldId, Integer temperature, Integer tempMin, Integer step, Integer steps) 
     {
 		super();
-		this.writeBack											= writeBack;
+		this.callBack											= callBack;
+		this.temperature										= temperature;
 		this.tempMin											= tempMin;
 		this.step												= step;
 		this.steps												= steps;
-		this.tempInitial										= Integer.parseInt(writeBack.getText().toString());
+		this.tempInitial										= temperature/1000;
+		this.fieldId											= fieldId;
     }
 
 	public interface OnTemperatureSelectedListener 
@@ -72,8 +77,9 @@ public class Dialog_Temperature 								extends 		DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	Integer temperature =(temperaturePicker.getValue() - tempMin) * step + tempMin;
-     	writeBack.setText(temperature.toString());
+     	Integer 				newTemperature 					=(temperaturePicker.getValue() - tempMin) * step + tempMin;
+     	temperature												= newTemperature * 1000;
+     	callBack.processFinishDialog(fieldId, temperature);
     	dialog.dismiss();
     }
     public void buttonCancel (DialogInterface dialog, int which)

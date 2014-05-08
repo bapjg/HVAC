@@ -104,7 +104,7 @@ public final class R {
         public static final int row=0x7f09000b;
         public static final int tempNeverExceed=0x7f090030;
         public static final int tempObjective=0x7f090009;
-        public static final int tempOvershoot=0x7f090031;
+        public static final int tempOverShoot=0x7f090031;
         public static final int temperature=0x7f090042;
         public static final int temperatureMinMax=0x7f090043;
         public static final int thermoName=0x7f09002f;

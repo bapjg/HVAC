@@ -84,7 +84,7 @@
             android:text				= "Temp Overshoot" />
 
         <TextView
-            android:id="@+id/tempOvershoot"
+            android:id="@+id/tempOverShoot"
             style="@style/AD_Text"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
