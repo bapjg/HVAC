@@ -1,8 +1,7 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
 <LinearLayout 
-	xmlns:android						= "http://schemas.android.com/apk/res/android"
 	android:layout_width				= "match_parent"
-	android:layout_height="match_parent" android:background="@color/background" android:baselineAligned="false" android:orientation="vertical">
+	android:layout_height="match_parent" android:background="@color/background" android:baselineAligned="false" android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +21,9 @@
             style="@style/AD_Text"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="Boiler" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -39,7 +40,7 @@
             android:text="Thermometer" />
 
         <TextView
-            android:id="@+id/ThermoName"
+            android:id="@+id/thermoName"
             style="@style/AD_Text"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -61,7 +62,7 @@
             android:text="Temp Never Exceed" />
 
         <TextView
-            android:id="@+id/TempNeverExceed"
+            android:id="@+id/tempNeverExceed"
             style="@style/AD_Text"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -83,7 +84,7 @@
             android:text				= "Temp Overshoot" />
 
         <TextView
-            android:id="@+id/TempOvershoot"
+            android:id="@+id/tempOvershoot"
             style="@style/AD_Text"
             android:layout_width="100dp"
             android:layout_height="wrap_content"

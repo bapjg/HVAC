@@ -34,6 +34,7 @@ import HVAC_Messages.*;
 public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 {		
 	public TCP_Task												task;
+	private View												panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 	
 	public Panel_5_Configuration_Boiler()
 	{
@@ -42,7 +43,8 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	View													panelView					= inflater.inflate(R.layout.panel_5_configuration_boiler, container, false);
+    	this.panelView																	= inflater.inflate(R.layout.panel_5_configuration_boiler, container, false);
+    	displayContents();
     	return panelView;
     }
 	public void displayHeader()
@@ -50,25 +52,24 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-		if (getActivity() != null)			// The user has not changed the screen
-		{
-			((TextView) getActivity().findViewById(R.id.ThermoName)).setText		(Global.eRegConfiguration.boiler.thermometer);
-			((TextView) getActivity().findViewById(R.id.TempNeverExceed)).setText	(Global.displayTemperature(Global.eRegConfiguration.boiler.tempNeverExceed));
-			((TextView) getActivity().findViewById(R.id.TempOvershoot)).setText		(Global.displayTemperature(Global.eRegConfiguration.boiler.tempOverShoot));
+		Ctrl_Configuration.Boiler bb	=	Global.eRegConfiguration.boiler;
+		
+		((TextView) panelView.findViewById(R.id.thermoName)).setText		(Global.eRegConfiguration.boiler.thermometer);
+		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setText	(Global.displayTemperature(Global.eRegConfiguration.boiler.tempNeverExceed));
+		((TextView) panelView.findViewById(R.id.tempOvershoot)).setText		(Global.displayTemperature(Global.eRegConfiguration.boiler.tempOverShoot));
 
-			((TextView) getActivity().findViewById(R.id.TempNeverExceed)).setOnClickListener(this);
-			((TextView) getActivity().findViewById(R.id.TempOvershoot)).setOnClickListener(this);
-		}
+		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setOnClickListener(this);
+		((TextView) panelView.findViewById(R.id.tempOvershoot)).setOnClickListener(this);
 	}
 	public void onClick(View view)
 	{
-		if (view.getId() == R.id.TempNeverExceed)
+		if (view.getId() == R.id.tempNeverExceed)
 		{
 			Integer											writeBack					= Global.eRegConfiguration.boiler.tempNeverExceed;
 			Dialog_Temperature_New							df 							= new Dialog_Temperature_New(this, writeBack, 85, 1, 20);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
-		else if (view.getId() == R.id.TempNeverExceed)
+		else if (view.getId() == R.id.tempNeverExceed)
 		{
 			Integer											writeBack					= Global.eRegConfiguration.boiler.tempNeverExceed;
 			Dialog_Temperature_New 							df 							= new Dialog_Temperature_New(this, writeBack, 10, 1, 15);
