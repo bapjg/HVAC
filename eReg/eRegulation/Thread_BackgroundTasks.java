@@ -146,10 +146,11 @@ public class Thread_BackgroundTasks implements Runnable
 			if ( (Global.weatherData == null)
 			||	 (Global.weatherData.dateTimeObtained < Inc_6h_Time)   ) 							// Latest 6 hour interval in day
 			{
-				LogIt.info("Thread_Background", "Run", "Weather : getIt", true);
+				LogIt.info("Thread_Background", "Run", "Weather : get It", true);
 				try
 				{
 					Global.weatherData							= new Ctrl_WeatherData();
+					LogIt.info("Thread_Background", "Run", "Weather : fetched", true);
 				}
 				catch (Exception e)
 				{

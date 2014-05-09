@@ -56,9 +56,12 @@ public class Calendars
 			// All is Ok, so see if we need to write a copy locally
 			try
 			{
+				LogIt.info("Calendars", "constructor", "============before File");
 				File										file				= new File("/home/pi/HVAC_Data/eCalendars_Json.txt");
+				LogIt.info("Calendars", "constructor", "============after File");
 				if (file.exists())
 				{
+					LogIt.info("Calendars", "constructor", "============if If File exists");
 					Long timeFile												= file.lastModified();
 					Ctrl_Calendars.Data thisData								= (Ctrl_Calendars.Data) messageReceive;
 					Long timeData												= thisData.dateTime;
