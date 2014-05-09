@@ -86,28 +86,12 @@ public class Calendars
 				}
 				else
 				{
-					LogIt.info("Calendars", "constructor", "Writing eCalendars_Json.txt file");
-					try
-					{
-						FileWriter 						filewrite			= new FileWriter("/home/pi/HVAC_Data/eCalendars_Json.txt");
-						
-						Gson 							gson 				= new GsonBuilder().setPrettyPrinting().create();
-						
-						String 							messageJson 		= gson.toJson((Ctrl_Calendars.Data) messageReceive);
-
-						filewrite.write(messageJson);
-						filewrite.flush();
-						filewrite.close();
-					}  
-					catch(IOException ex)
-					{
-						LogIt.info("Calendars", "constructor", "I/O error on open : eCalendars_Json.txt " + ex);
-					}	
+					LogIt.info("Calendars", "constructor", "Data in eCalendars_Json.txt file is still up to date");
 				}
 			}
 			catch (Exception e)
 			{
-				System.out.println("Calendars.constructor Exception = " + e);
+				LogIt.info("Calendars", "constructor", "============Exception " + e);
 			}
 		}
 		Global.httpSemaphore.semaphoreUnLock();			
