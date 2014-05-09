@@ -184,6 +184,10 @@ public class Global
 							LogIt.info("Global", "constructor", "I/O error on open : eRegulator_Json.txt " + ex);
 						}	
 					}
+					else
+					{
+						LogIt.info("Global", "constructor", "File eRegulator_Json.txt is still up to date");
+					}
 				}
 				else
 				{
