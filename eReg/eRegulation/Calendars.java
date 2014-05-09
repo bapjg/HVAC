@@ -62,13 +62,10 @@ public class Calendars
 					Long timeFile												= file.lastModified();
 					Ctrl_Calendars.Data thisData								= (Ctrl_Calendars.Data) messageReceive;
 					Long timeData												= thisData.dateTime;
-					LogIt.info("Calendars", "constructor", "============if 3");
-					LogIt.info("Calendars", "constructor", "============if timeFile" + timeFile);
-					LogIt.info("Calendars", "constructor", "============if timeData" + timeData);
 					
 					if (timeData > timeFile)
 					{
-						LogIt.info("Calendars", "constructor", "Writing eCalendars_Json.txt");
+						LogIt.info("Calendars", "constructor", "Over writing eCalendars_Json.txt");
 						try
 						{
 							FileWriter 						filewrite			= new FileWriter("/home/pi/HVAC_Data/eCalendars_Json.txt");
@@ -86,15 +83,35 @@ public class Calendars
 							LogIt.info("Calendars", "constructor", "I/O error on open : eCalendars_Json.txt " + ex);
 						}	
 					}
+					else
+					{
+						LogIt.info("Calendars", "constructor", "Data in eCalendars_Json.txt file is still up to date");
+					}
 				}
 				else
 				{
-					LogIt.info("Calendars", "constructor", "Data in eCalendars_Json.txt file is still up to date");
+					LogIt.info("Calendars", "constructor", "Creating eCalendars_Json.txt");
+					try
+					{
+						FileWriter 						filewrite			= new FileWriter("/home/pi/HVAC_Data/eCalendars_Json.txt");
+						
+						Gson 							gson 				= new GsonBuilder().setPrettyPrinting().create();
+						
+						String 							messageJson 		= gson.toJson((Ctrl_Calendars.Data) messageReceive);
+
+						filewrite.write(messageJson);
+						filewrite.flush();
+						filewrite.close();
+					}  
+					catch(IOException ex)
+					{
+						LogIt.info("Calendars", "constructor", "I/O error on create/open : eCalendars_Json.txt " + ex);
+					}	
 				}
 			}
 			catch (Exception e)
 			{
-				LogIt.info("Calendars", "constructor", "============Exception " + e);
+				LogIt.info("Calendars", "constructor", "Exception " + e);
 			}
 		}
 		Global.httpSemaphore.semaphoreUnLock();			
