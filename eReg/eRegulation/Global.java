@@ -161,6 +161,9 @@ public class Global
 					Ctrl_Configuration.Data thisData		= (Ctrl_Configuration.Data) messageReceive;
 					Long timeData							= thisData.dateTime;
 					
+					System.out.println("timeFile" + timeFile);
+					System.out.println("timeData" + timeData);
+					
 					if (timeData > timeFile)
 					{
 						LogIt.info("Global", "constructor", "Writing eRegulator_Json.txt file");
