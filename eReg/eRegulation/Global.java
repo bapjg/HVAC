@@ -161,18 +161,13 @@ public class Global
 					Ctrl_Configuration.Data thisData		= (Ctrl_Configuration.Data) messageReceive;
 					Long timeData							= thisData.dateTime;
 					
-					System.out.println("timeFile" + timeFile);
-					System.out.println("timeData" + timeData);
-					
 					if (timeData > timeFile)
 					{
-						LogIt.info("Global", "constructor", "Writing eRegulator_Json.txt file");
+						LogIt.info("Global", "constructor", "Over writing eRegulator_Json.txt file");
 						try
 						{
 							FileWriter 			filewrite			= new FileWriter("/home/pi/HVAC_Data/eRegulator_Json.txt");
-							
 							Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
-							
 							String 				messageJson 		= gson.toJson((Ctrl_Configuration.Data) messageReceive);
 
 							filewrite.write(messageJson);
@@ -195,9 +190,7 @@ public class Global
 					try
 					{
 						FileWriter 			filewrite			= new FileWriter("/home/pi/HVAC_Data/eRegulator_Json.txt");
-						
 						Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
-						
 						String 				messageJson 		= gson.toJson((Ctrl_Configuration.Data) messageReceive);
 
 						filewrite.write(messageJson);

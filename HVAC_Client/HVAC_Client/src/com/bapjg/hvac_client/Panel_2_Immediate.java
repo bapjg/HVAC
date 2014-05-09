@@ -21,6 +21,11 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	private Ctrl_Immediate.Execute						messageExecute				= new Ctrl_Immediate().new Execute();
 	private Ctrl_Immediate.Data							messageReceived;
 	
+   public Panel_2_Immediate()
+    {
+		super();
+		this.circuitName															= "";
+    }
     public Panel_2_Immediate(String circuitName)
     {
 		super();
