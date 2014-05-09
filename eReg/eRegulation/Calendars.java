@@ -66,6 +66,8 @@ public class Calendars
 					LogIt.info("Calendars", "constructor", "============if 2");
 					Long timeData												= thisData.dateTime;
 					LogIt.info("Calendars", "constructor", "============if 3");
+					LogIt.info("Calendars", "constructor", "============if timeFile" + timeFile);
+					LogIt.info("Calendars", "constructor", "============if timeData" + timeData);
 					
 					if (timeData > timeFile)
 					{
