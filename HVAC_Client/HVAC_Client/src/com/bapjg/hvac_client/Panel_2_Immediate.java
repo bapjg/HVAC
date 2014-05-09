@@ -62,8 +62,8 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     	{
 	    	if (((Button) view).getText().toString().equalsIgnoreCase("Start"))
 	    	{
-	    		if 	((messageExecute.timeStart >= messageExecute.timeEnd)
-	    		|| 	 (Global.getTimeNowSinceMidnight() >= messageExecute.timeStart))
+	    		if 	((messageExecute.timeStart >= messageExecute.timeEnd))
+//	    		|| 	 (Global.getTimeNowSinceMidnight() >= messageExecute.timeStart))
 	    		{
 	    			Global.toaster("Time start must be after now and before time end", false);
 	    		}
@@ -71,6 +71,7 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	    		{
 		    		messageExecute.circuitName											= this.circuitName;
 			   		messageExecute.action												= messageExecute.ACTION_Start;
+			   		messageExecute.stopOnObjective										= ((CheckBox) panelView.findViewById(R.id.stopOnObjective)).isChecked();
 					
 		        	TCP_Send(messageExecute);
 	        	}

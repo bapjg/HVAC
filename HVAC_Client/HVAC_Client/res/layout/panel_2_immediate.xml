@@ -81,7 +81,7 @@
 
 	<LinearLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
+	    android:layout_height="40dp"
 	    android:orientation="horizontal" >
 
 	    <TextView
@@ -93,13 +93,13 @@
 	        style="@style/AD_Data"
 	     />
 	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+	<LinearLayout android:layout_width="match_parent" android:layout_height="40dp" android:orientation="horizontal">
 
 		<TextView android:text="Time End" style="@style/AD_Text" />
 		<TextView android:id="@+id/timeEnd" style="@style/AD_Data" />
 				
 	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+	<LinearLayout android:layout_width="match_parent" android:layout_height="40dp" android:orientation="horizontal">
 
 		<TextView android:text="Temperature" style="@style/AD_Text" />
 		<TextView android:id="@+id/tempObjective" style="@style/AD_Data" />
@@ -108,7 +108,7 @@
 
 	<LinearLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
+	    android:layout_height="40dp"
 	    android:orientation="horizontal" >
 
 	    <TextView
