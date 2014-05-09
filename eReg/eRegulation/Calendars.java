@@ -59,11 +59,8 @@ public class Calendars
 				File										file				= new File("/home/pi/HVAC_Data/eCalendars_Json.txt");
 				if (file.exists())
 				{
-					LogIt.info("Calendars", "constructor", "============if If File exists");
 					Long timeFile												= file.lastModified();
-					LogIt.info("Calendars", "constructor", "============if 1");
 					Ctrl_Calendars.Data thisData								= (Ctrl_Calendars.Data) messageReceive;
-					LogIt.info("Calendars", "constructor", "============if 2");
 					Long timeData												= thisData.dateTime;
 					LogIt.info("Calendars", "constructor", "============if 3");
 					LogIt.info("Calendars", "constructor", "============if timeFile" + timeFile);

@@ -246,8 +246,10 @@ public class Management extends HttpServlet
             dbStatement.close();
             dbConnection.close();
  
-    		returnBuffer													= new Gson().fromJson(dbJsonString, Ctrl_Configuration.Data.class);
-}
+            Ctrl_Configuration.Data						returnBufferPrep	= new Gson().fromJson(dbJsonString, Ctrl_Configuration.Data.class);
+    		returnBufferPrep.dateTime										= dbDateTime;											// Add time stamp to mesage
+    		returnBuffer													= (Ctrl_Abstract) returnBufferPrep;
+        }
         catch(Exception e)
         {
             e.printStackTrace();
