@@ -5,6 +5,7 @@ import java.net.InetSocketAddress;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import android.app.Activity;
 import android.content.Context;
@@ -152,6 +153,34 @@ public class Global
 		//==============================================================
 		// returns supplied dateTime in the form hh:mm
 		//==============================================================
+
+//		SimpleDateFormat 	utcFormat						= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+//		utcFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+//		GregorianCalendar 	calendar					= new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+//		try
+//		{
+//			calendar.setTime(utcFormat.parse(utc));
+//			return calendar.getTimeInMillis();
+//		}
+//		catch (ParseException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return 0L;
+
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	String					dateTimeString		= "";
  
         SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm");
