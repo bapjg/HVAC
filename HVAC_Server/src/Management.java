@@ -188,10 +188,7 @@ public class Management extends HttpServlet
  
             Ctrl_Calendars.Data							returnBufferPrep	= new Gson().fromJson(dbJsonString, Ctrl_Calendars.Data.class);
     		returnBufferPrep.dateTime										= dbDateTime;											// Add time stamp to mesage
-    		
-    		System.out.println("dt " + returnBufferPrep.dateTime);
-    		
-    		returnBuffer													= (Ctrl_Abstract) returnBufferPrep;
+     		returnBuffer													= (Ctrl_Abstract) returnBufferPrep;
         }
         catch(SQLException e)
         {
