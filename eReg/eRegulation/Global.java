@@ -184,7 +184,7 @@ public class Global
 				}
 				else
 				{
-					LogIt.info("Global", "constructor", "Writing eRegulator_Json.txt file");
+					LogIt.info("Global", "constructor", "Creating eRegulator_Json.txt file");
 					try
 					{
 						FileWriter 			filewrite			= new FileWriter("/home/pi/HVAC_Data/eRegulator_Json.txt");
@@ -199,7 +199,7 @@ public class Global
 					}  
 					catch(IOException ex)
 					{
-						LogIt.info("Global", "constructor", "I/O error on open : eRegulator_Json.txt " + ex);
+						LogIt.info("Global", "constructor", "I/O error on creation/open : eRegulator_Json.txt " + ex);
 					}	
 				}
 			}
