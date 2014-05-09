@@ -85,12 +85,12 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
 		
 		
 		TextView 										dateTimeObtained			= (TextView) panelView.findViewById(R.id.dateTimeObtained);
-        dateTimeObtained.setText 													(Global.displayDateTimeShort(Global.weatherForecast.dateTimeObtained));
+        dateTimeObtained.setText 													(Global.displayTimeShort(Global.weatherForecast.dateTimeObtained));
         
         TextView 										dateTime					= (TextView) panelView.findViewById(R.id.dateTime);
-		if 		(when.equalsIgnoreCase("Today"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight()));
-		else if (when.equalsIgnoreCase("Tomorrow"))		dateTime.setText 			(Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
-		else if (when.equalsIgnoreCase("Beyond"))		dateTime.setText 			("> " + Global.displayDate(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+		if 		(when.equalsIgnoreCase("Today"))		dateTime.setText 			(Global.displayDateShort(Global.getTimeAtMidnight()));
+		else if (when.equalsIgnoreCase("Tomorrow"))		dateTime.setText 			(Global.displayDateShort(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+		else if (when.equalsIgnoreCase("Beyond"))		dateTime.setText 			("> " + Global.displayDateShort(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
 	}
 	public void displayContents()
 	{

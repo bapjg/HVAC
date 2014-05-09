@@ -99,7 +99,6 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	public void displayContents(Ctrl_Immediate.Data msg_received)
 	{
 		messageReceived																= msg_received;
-
 		messageExecute.timeStart 													= Global.getTimeNowSinceMidnight();
 		messageExecute.timeEnd 														= Global.getTimeNowSinceMidnight() + 3600 * 1000L;
 		messageExecute.stopOnObjective 												= true;
@@ -109,19 +108,18 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-		
 		if (messageReceived.executionActive)
 		{
 			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("Current");
-			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
+			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShortUTC(messageReceived.timeEnd));
 			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(((Integer) (messageReceived.tempObjective/1000)).toString());
 			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
 			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Stop");
 		}
 		else if (messageReceived.executionPlanned)
 		{
-			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			(Global.displayTimeShort(messageReceived.timeStart));
-			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
+			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			(Global.displayTimeShortUTC(messageReceived.timeStart));
+			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShortUTC(messageReceived.timeEnd));
 			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(((Integer) (messageReceived.tempObjective/1000)).toString());
 			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
 			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Start");
@@ -132,10 +130,9 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(" ");
 			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Start");
 		}
-		((TextView) 		panelView.findViewById(R.id.timeStart)).setText					(Global.displayTimeShort(messageExecute.timeStart));
-		((TextView) 		panelView.findViewById(R.id.timeEnd)).setText					(Global.displayTimeShort(messageExecute.timeEnd));	
+		((TextView) 		panelView.findViewById(R.id.timeStart)).setText					(Global.displayTimeShortUTC(messageExecute.timeStart));
+		((TextView) 		panelView.findViewById(R.id.timeEnd)).setText					(Global.displayTimeShortUTC(messageExecute.timeEnd));	
 
-		Integer x = ((Integer) (messageExecute.tempObjective / 1000));	
 		((TextView) 		panelView.findViewById(R.id.tempObjective)).setText				(((Integer) (messageExecute.tempObjective / 1000)).toString());	
 		((CheckBox) 		panelView.findViewById(R.id.stopOnObjective)).setChecked		(messageExecute.stopOnObjective);
 	}

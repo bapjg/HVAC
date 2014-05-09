@@ -238,7 +238,9 @@ public class Global
 	}
 	public static Long getTimeAtMidnight()
 	{
+		//==============================================================
 		// Returns the system time last midnight
+		//==============================================================
 		Calendar now		 				= Calendar.getInstance();
 		
 		now.set(Calendar.HOUR_OF_DAY, 0);
@@ -254,9 +256,10 @@ public class Global
 	public static Long dateOnly(Integer days)			{return getTimeAtMidnight() - 24 * 60 * 60 * 1000L * days;	}
 	public static Long getTimeNowSinceMidnight()
 	{
+		//==============================================================
 		// Returns the number of milliseconds since last midnight
-		Long now							= Calendar.getInstance().getTimeInMillis() - Global.getTimeAtMidnight();		
-		return now;
+		//==============================================================
+		return Calendar.getInstance().getTimeInMillis() - Global.getTimeAtMidnight();		
 	}
 	public static String getDayOfWeek()
 	{
@@ -346,7 +349,7 @@ public class Global
 	public static Long now()
 	{
 		// Determine from outside temperature whether summer or not
-		return System.currentTimeMillis();
+		return Calendar.getInstance().getTimeInMillis();
  	}
 	public static void burnerPanic(String reason)
 	{
@@ -433,15 +436,15 @@ public class Global
 	}
     public static String  dateTimeDisplay()
 	{
-		Date now = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-		String nowFormatted = dateFormat.format(now);
+		Date 								now 					= new Date();
+		SimpleDateFormat dateFormat 								= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		String nowFormatted 										= dateFormat.format(now);
 		return nowFormatted;
 	}
     public static String  dateTimeDisplay(Long milliSeconds)
 	{
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-		String nowFormatted = dateFormat.format(milliSeconds);
+		SimpleDateFormat dateFormat 								= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		String nowFormatted 										= dateFormat.format(milliSeconds);
 		return nowFormatted;
 	}
     public static Boolean isAway()

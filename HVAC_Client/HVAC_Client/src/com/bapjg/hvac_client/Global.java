@@ -6,9 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
-
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import HVAC_Messages.*;
@@ -51,25 +51,13 @@ public class Global
 	}
     public static void toast(String message, Boolean longish)
     {
-    	if (longish)
-    	{
-    		Toast.makeText(actContext, message, Toast.LENGTH_LONG).show();
-    	}
-    	else
-    	{
-    		Toast.makeText(actContext, message, Toast.LENGTH_SHORT).show();
-    	}
+    	if (longish)			Toast.makeText(actContext, message, Toast.LENGTH_LONG).show();
+    	else					Toast.makeText(actContext, message, Toast.LENGTH_SHORT).show();
     }
     public static void toast(Context c, String message, Boolean longish)
     {
-    	if (longish)
-    	{
-    		Toast.makeText(c, message, Toast.LENGTH_LONG).show();
-    	}
-    	else
-    	{
-    		Toast.makeText(c, message, Toast.LENGTH_SHORT).show();
-    	}
+    	if (longish)			Toast.makeText(c, message, Toast.LENGTH_LONG).show();
+    	else					Toast.makeText(c, message, Toast.LENGTH_SHORT).show();
     }
     public static void toaster(final String message, final Boolean longish)
     {
@@ -79,53 +67,36 @@ public class Global
 			{
 				final String   myMessage = message;
 				final Boolean  mylongish = longish;
-				if (longish)
-				{
-					Toast.makeText(Global.activity, myMessage, Toast.LENGTH_LONG).show();
-				}	
-				else
-				{
-					Toast.makeText(Global.activity, myMessage, Toast.LENGTH_SHORT).show();
-				}
+				if (longish)			Toast.makeText(Global.activity, myMessage, Toast.LENGTH_LONG).show();
+				else					Toast.makeText(Global.activity, myMessage, Toast.LENGTH_SHORT).show();
 			}
 		}
 		);
     }
 	public static Long now()
     {
-    	return System.currentTimeMillis();
+    	return Calendar.getInstance().getTimeInMillis();
     }
-	public static String displayDateTimeShort(Long dateTime)
+	public static String displayTimeShortUTC(Long dateTime)
     {
 		//==============================================================
-		// returns supplied dateTime in the form dd/mm hh:mm
+		// Accepts as input a number of miiliseconds from local midnight
+		// returns supplied dateTime in the form hh:mm
+		// Hence TimeZone UTC is used to avoid 1 or 2 hour adjustment
 		//==============================================================
 		String					dateTimeString		= "";
  
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM HH:mm");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm");
+        Calendar 				calendar 			= Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
         calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime);
-    	
-    	return dateTimeString;
-    }
-	public static String displayDate(Long dateTime)
-    {
-		//==============================================================
-		// returns supplied dateTime in the form dd/mm
-		//==============================================================
-    	String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
-        calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime);
-    	
-    	return dateTimeString;
+
+        return 					sdf.format(dateTime);
     }
 	public static String displayDayOfWeek(Long dateTime)
     {
 		//==============================================================
+		// Accepts a full dateTime argument if UTC and adjusts for local Timezone
 		// returns supplied dateTime in the form Monday, Tuesday etc.
 		//==============================================================
         Calendar 				calendar 			= Calendar.getInstance();
@@ -137,6 +108,7 @@ public class Global
     public static String displayTime(Long dateTime)
     {
 		//==============================================================
+		// Accepts a full dateTime argument if UTC and adjusts for local Timezone
 		// returns supplied dateTime in the form hh:mm:ss
 		//==============================================================
     	String					dateTimeString		= "";
@@ -148,42 +120,44 @@ public class Global
     	
     	return dateTimeString;
     }
+	public static String displayDate(Long dateTime)
+    {
+		//==============================================================
+		// Accepts a full dateTime argument if UTC and adjusts for local Timezone
+		// returns supplied dateTime in the form dd/mm
+		//==============================================================
+		String					dateTimeString		= "";
+		 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM/yyyy");
+        Calendar 				calendar 			= Calendar.getInstance();
+        calendar.setTimeInMillis(dateTime);
+
+        return 					sdf.format(dateTime);
+    }
     public static String displayTimeShort(Long dateTime)
     {
 		//==============================================================
+		// Accepts a full dateTime argument if UTC and adjusts for local Timezone
 		// returns supplied dateTime in the form hh:mm
 		//==============================================================
-
-//		SimpleDateFormat 	utcFormat						= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-//		utcFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-//		GregorianCalendar 	calendar					= new GregorianCalendar(TimeZone.getTimeZone("UTC"));
-//		try
-//		{
-//			calendar.setTime(utcFormat.parse(utc));
-//			return calendar.getTimeInMillis();
-//		}
-//		catch (ParseException e)
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return 0L;
-
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
     	String					dateTimeString		= "";
  
         SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime); 
+    	
+    	return dateTimeString;
+    }
+    public static String displayDateShort(Long dateTime)
+    {
+		//==============================================================
+		// Accepts a full dateTime argument if UTC and adjusts for local Timezone
+		// returns supplied dateTime in the form dd/mm
+		//==============================================================
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM");
         GregorianCalendar 		calendar 			= new GregorianCalendar();
         calendar.setTimeInMillis(dateTime);
         dateTimeString								= sdf.format(dateTime); 
@@ -210,8 +184,7 @@ public class Global
 		//==============================================================
 		// Returns the number of milliseconds since last midnight
 		//==============================================================
-		Long now							= Calendar.getInstance().getTimeInMillis() - Global.getTimeAtMidnight();		
-		return now;
+		return Calendar.getInstance().getTimeInMillis() - Global.getTimeAtMidnight();		
 	}
 	public static Long parseTime(String characters)
 	{
@@ -234,5 +207,4 @@ public class Global
 		
 		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
 	}
-
 }

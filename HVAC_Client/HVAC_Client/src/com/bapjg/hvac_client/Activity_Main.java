@@ -1,5 +1,7 @@
 package com.bapjg.hvac_client;
 
+import java.util.TimeZone;
+
 import HVAC_Messages.Ctrl_Abstract;
 import HVAC_Messages.Ctrl_Calendars;
 import HVAC_Messages.Ctrl_Configuration;
@@ -26,7 +28,7 @@ public class Activity_Main 						extends 		Activity
 	{
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main); // Contains activity_container which contains choices_container (left) and panel_container(right)
-        
+
         global											= new Global();
         Global.appContext 								= getApplicationContext();
         Global.actContext								= (Context)  this;

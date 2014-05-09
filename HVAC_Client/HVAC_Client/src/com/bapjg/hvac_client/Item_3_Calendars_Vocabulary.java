@@ -63,14 +63,10 @@ public class Item_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
     @Override
 	public void onClick(View myView) 
 	{
-    	Log.v("App", "We have arrived in onClick/itemView");
-    	
-    	if (myView.getId() == R.id.ok)
+     	if (myView.getId() == R.id.ok)
     	{
     		myItemData.name															= ((EditText) myItemView.findViewById(R.id.name)).getText().toString();
-    		System.out.println("name " + myItemData.name);
-    		Log.v  ("TAG", "name " + myItemData.name);
-    		getFragmentManager().popBackStackImmediate();
+      		getFragmentManager().popBackStackImmediate();
     	}
     	else if ((myView.getId() == R.id.day_1)
     	||		 (myView.getId() == R.id.day_2)
