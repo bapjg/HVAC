@@ -59,7 +59,7 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 		}
 		else
 		{
-			Global.toaster("Data NOTNOTNOT received", true);
+			Global.toaster("Please refresh", true);
 		}
 	}
 	public void displayHeader()

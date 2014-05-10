@@ -62,16 +62,16 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 //    	fTransaction.replace(R.id.panel_container, panelFragment);
     	fTransaction.commit();  
 	}
-    private OnItemClickListener 						itemListener 				= new OnItemClickListener()
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
-		{
-	    	Log.v( "App", "onItemClick");
-	    	Log.v( "App", "position :" + position);
-	    	Log.v( "App", "id :" + id);
-		}
-	};
+    	Ctrl_Calendars.Calendar							itemData						= Global.eRegCalendars.calendarList.get(position);
+
+    	Item_3_Calendars_Circuits					itemFragment					= new Item_3_Calendars_Circuits(itemData);
+    	FragmentTransaction 						fTransaction 					= getActivity().getFragmentManager().beginTransaction();
+   		fTransaction.replace(R.id.panel_container, itemFragment);
+   		fTransaction.addToBackStack(null);
+   		fTransaction.commit();
+	}
 	public void displayHeader()
 	{
 		TextView 										heading						= (TextView) panelView.findViewById(R.id.name);

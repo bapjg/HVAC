@@ -44,6 +44,7 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     	panelView.findViewById(R.id.tempObjective).setOnClickListener(this);
     	panelView.findViewById(R.id.timeStart).setOnClickListener(this);
     	panelView.findViewById(R.id.timeEnd).setOnClickListener(this);
+    	panelView.findViewById(R.id.stopOnObjective).setOnClickListener(this);
         return panelView;
     }
 	public void onClick(View view)
@@ -63,10 +64,20 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     		Dialog_Time		 							df 							= new Dialog_Time(this, R.id.timeEnd, messageExecute.timeEnd);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
+    	else if (view.getId() == R.id.stopOnObjective)
+    	{
+    		messageExecute.stopOnObjective											= ! messageExecute.stopOnObjective;
+    		displayContents();
+    	}
     	else if (view.getId() == R.id.buttonOkCancel)
     	{
 	    	if (((Button) view).getText().toString().equalsIgnoreCase("Start"))
 	    	{
+	    		Log.v ("App", "ts " +  messageExecute.timeStart);
+	    		Log.v ("App", "tes " +  messageExecute.timeEnd);
+	    		Log.v ("App", "tn " +  Global.getTimeNowSinceMidnight());
+
+	    		
 	    		if 	((messageExecute.timeStart >= messageExecute.timeEnd))
 //	    		|| 	 (Global.getTimeNowSinceMidnight() >= messageExecute.timeStart))
 	    		{
@@ -74,9 +85,9 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	    		}
 	    		else
 	    		{
-		    		messageExecute.circuitName											= this.circuitName;
-			   		messageExecute.action												= messageExecute.ACTION_Start;
-			   		messageExecute.stopOnObjective										= ((CheckBox) panelView.findViewById(R.id.stopOnObjective)).isChecked();
+		    		messageExecute.circuitName										= this.circuitName;
+			   		messageExecute.action											= messageExecute.ACTION_Start;
+			   		messageExecute.stopOnObjective									= ((CheckBox) panelView.findViewById(R.id.stopOnObjective)).isChecked();
 					
 		        	TCP_Send(messageExecute);
 	        	}

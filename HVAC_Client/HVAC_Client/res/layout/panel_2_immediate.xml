@@ -8,9 +8,13 @@
 	android:background					= "@color/background"
 >
 
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="left"
+	    android:orientation="horizontal" >
 
-		<TextView android:text="Planned calendar events" style="@style/AD_Title" />
+		<TextView android:text="Planned calendar events" android:layout_width="match_parent" style="@style/AD_Title" />
 				
 	</LinearLayout>
 	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
@@ -75,7 +79,9 @@
 
 	    <TextView
 	        style="@style/AD_Title"
-	        android:text="Select new parameters" />
+	        android:text="Select new parameters" 
+	        android:layout_width="match_parent"
+	        />
 	</LinearLayout>
 
 	<LinearLayout
