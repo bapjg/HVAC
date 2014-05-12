@@ -49,6 +49,7 @@ public class Panel_5_Configuration_Circuits 					extends 			Panel_0_Fragment
         {
         	displayHeader();
         	displayContents();
+            setListens();
         }
         else // we need to reconnect to the server
         {
@@ -116,6 +117,7 @@ public class Panel_5_Configuration_Circuits 					extends 			Panel_0_Fragment
 			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
 			displayHeader();
 			displayContents();
+			setListens();
 		}
 		else
 		{
@@ -132,6 +134,9 @@ public class Panel_5_Configuration_Circuits 					extends 			Panel_0_Fragment
 		AdapterView <Adapter_5_Configuration_Circuits>			adapterViewList		= (AdapterView <Adapter_5_Configuration_Circuits>) adapterView;
 		Adapter_5_Configuration_Circuits						arrayAdapter				= new Adapter_5_Configuration_Circuits(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
 		adapterViewList.setAdapter(arrayAdapter);
+	}
+	public void setListens()
+	{
 //		adapterViewList.setOnItemClickListener(this);
 	}
 }

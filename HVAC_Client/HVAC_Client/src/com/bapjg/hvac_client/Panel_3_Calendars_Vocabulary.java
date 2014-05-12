@@ -34,14 +34,13 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
         this.panelView																= inflater.inflate(R.layout.panel_3_calendars, container, false);
         this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
  
-        // This part can be in processFinishTCP/HTTP 
-        
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.wordList != null))
         {
         	displayHeader();
         	displayContents();
-        }
+            setListens();
+       }
         else // we need to reconnect to the server
         {
         	Global.toaster("Please refresh", true);
@@ -49,19 +48,19 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
         
         return panelView;
       }
-	public void processFinishHTTP(Ctrl_Abstract result) 
-	{  
-		if (result instanceof Ctrl_Calendars.Data)
-		{
-			Global.eRegCalendars				 									= (Ctrl_Calendars.Data) result;
-			displayHeader();
-			displayContents();
-		}
-		else
-		{
-			Global.toaster("Please refresh", true);
-		}
-	}
+//	public void processFinishHTTP(Ctrl_Abstract result) 
+//	{  
+//		if (result instanceof Ctrl_Calendars.Data)
+//		{
+//			Global.eRegCalendars				 									= (Ctrl_Calendars.Data) result;
+//			displayHeader();
+//			displayContents();
+//		}
+//		else
+//		{
+//			Global.toaster("Please refresh", true);
+//		}
+//	}
 	public void displayHeader()
 	{
         TextView 										name						= (TextView) panelView.findViewById(R.id.name);
@@ -72,7 +71,10 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
     	AdapterView <Adapter_3_Calendars_Words>			adapterViewList				= (AdapterView <Adapter_3_Calendars_Words>) adapterView;
 		Adapter_3_Calendars_Words						arrayAdapter				= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
 		adapterViewList.setAdapter(arrayAdapter);
-		adapterViewList.setOnItemClickListener(this);
+	}
+	public void setListens()
+	{
+		((AdapterView<?>) adapterView).setOnItemClickListener(this);
 	}
 	@Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)

@@ -25,29 +25,42 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 public class Panel_6_Actions_Stop 						extends 					Panel_0_Fragment  
 {
+	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+
 	public Panel_6_Actions_Stop()
 	{
 		super();
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity																= getActivity();
-    	View											thisView					= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
- 
-    	thisView.findViewById(R.id.buttonStop).setOnClickListener(this);
-    	thisView.findViewById(R.id.buttonRestart).setOnClickListener(this);
-    	thisView.findViewById(R.id.buttonReboot).setOnClickListener(this);
+     	this.panelView															= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
+
+    	displayHeader();
+    	displayContents();
+        setListens();
    	
-        return thisView;
+        return panelView;
     }
-    public void onClick(View view)
+	public void displayHeader()
+	{
+	}
+	public void displayContents()
+	{
+	}
+	public void setListens()
+	{
+		panelView.findViewById(R.id.buttonStop).setOnClickListener(this);
+		panelView.findViewById(R.id.buttonRestart).setOnClickListener(this);
+		panelView.findViewById(R.id.buttonReboot).setOnClickListener(this);
+	}
+	public void onClick(View clickedView)
     {
     	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
-    	if (view instanceof Button)
+    	if (clickedView instanceof Button)
     	{
-    		if      (view.getId()==R.id.buttonStop)		stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Stop;
-    		else if (view.getId()==R.id.buttonRestart)	stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Restart;
-    		else if (view.getId()==R.id.buttonReboot)	stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Reboot;
+    		if      (clickedView.getId()==R.id.buttonStop)		stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Stop;
+    		else if (clickedView.getId()==R.id.buttonRestart)	stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Restart;
+    		else if (clickedView.getId()==R.id.buttonReboot)	stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Reboot;
         	TCP_Send(stopMessage);
     	}
     }

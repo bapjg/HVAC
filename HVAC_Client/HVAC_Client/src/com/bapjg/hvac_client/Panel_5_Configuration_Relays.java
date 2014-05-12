@@ -49,6 +49,7 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
         {
         	displayHeader();
         	displayContents();
+            setListens();
         }
         else // we need to reconnect to the server
         {
@@ -57,6 +58,22 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
  
         return panelView;
     }
+	public void displayHeader()
+	{
+//		TextView												title				= (TextView) panelView.findViewById(R.id.name);
+//		title.setText("Relays");
+	}
+	public void displayContents()
+	{
+	    AdapterView <Adapter_5_Configuration_Relays>			adapterViewList		= (AdapterView <Adapter_5_Configuration_Relays>) adapterView;
+		Adapter_5_Configuration_Relays							arrayAdapter		= new Adapter_5_Configuration_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
+		adapterViewList.setAdapter(arrayAdapter);
+//		adapterViewList.setOnItemClickListener(this);
+
+	}
+	public void setListens()
+	{
+	}
 //    public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
 //	{
 ////	        ViewGroup 									viewGroup					= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
@@ -119,23 +136,11 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
 			displayHeader();
 			displayContents();
+	        setListens();
  		}
 		else
 		{
 			Global.toaster("Data NOTNOTNOT received", true);
 		}
-	}
-	public void displayHeader()
-	{
-//		TextView												title				= (TextView) panelView.findViewById(R.id.name);
-//		title.setText("Relays");
-	}
-	public void displayContents()
-	{
-	    AdapterView <Adapter_5_Configuration_Relays>			adapterViewList		= (AdapterView <Adapter_5_Configuration_Relays>) adapterView;
-		Adapter_5_Configuration_Relays							arrayAdapter		= new Adapter_5_Configuration_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
-		adapterViewList.setAdapter(arrayAdapter);
-//		adapterViewList.setOnItemClickListener(this);
-
 	}
 }

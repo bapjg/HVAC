@@ -43,7 +43,6 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	View											panelView					= inflater.inflate(R.layout.panel_5_configuration_burner, container, false);
-    	
         return panelView;
     }
 	public void displayHeader()
@@ -56,6 +55,9 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 			((TextView) getActivity().findViewById(R.id.Name)).setText			(Global.eRegConfiguration.burner.relay);
 			((TextView) getActivity().findViewById(R.id.Fuel)).setText			(Global.eRegConfiguration.burner.fuelConsumption.toString());
 		}
+	}
+	public void setListens()
+	{
 	}
 }
 

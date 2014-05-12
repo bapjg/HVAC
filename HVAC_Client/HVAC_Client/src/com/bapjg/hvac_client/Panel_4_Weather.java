@@ -45,6 +45,7 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
 		{
 			displayHeader();
 			displayContents();
+	        setListens();
 		}
 		else
 		{
@@ -131,6 +132,9 @@ public class Panel_4_Weather 							extends 					Panel_0_Fragment
 		}
         Adapter_4_Weather						adapter						= new Adapter_4_Weather(Global.actContext, R.id.List_View, forecastList);
         view.setAdapter(adapter);
+	}
+	public void setListens()
+	{
 	}
 }
 

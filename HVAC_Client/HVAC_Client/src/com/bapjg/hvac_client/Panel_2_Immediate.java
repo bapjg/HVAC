@@ -40,12 +40,9 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     	
     	TCP_Send(taskRequest);							// This returns list of what is currently active on each circuit
 
-    	panelView.findViewById(R.id.buttonOkCancel).setOnClickListener(this);
-    	panelView.findViewById(R.id.tempObjective).setOnClickListener(this);
-    	panelView.findViewById(R.id.timeStart).setOnClickListener(this);
-    	panelView.findViewById(R.id.timeEnd).setOnClickListener(this);
-    	panelView.findViewById(R.id.stopOnObjective).setOnClickListener(this);
-        return panelView;
+        setListens();
+
+       return panelView;
     }
 	public void onClick(View view)
 	{
@@ -164,5 +161,13 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     	if      (fieldId == R.id.tempObjective)		messageExecute.tempObjective 			= value;
     	displayContents();
 	}
+	public void setListens()
+	{
+        panelView.findViewById(R.id.buttonOkCancel)		.setOnClickListener(this);
+    	panelView.findViewById(R.id.tempObjective)		.setOnClickListener(this);
+    	panelView.findViewById(R.id.timeStart)			.setOnClickListener(this);
+    	panelView.findViewById(R.id.timeEnd)			.setOnClickListener(this);
+    	panelView.findViewById(R.id.stopOnObjective)	.setOnClickListener(this);
+ 	}
 }
 

@@ -6,6 +6,24 @@
     android:gravity="center_vertical"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/buttonCancel"
+            style="@style/AD_Text"
+            android:layout_width="100dp"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/buttonOk"
+            style="@style/AD_Text"
+            android:layout_width="100dp"
+            android:text="Ok" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/days"
         style="@style/AD_Text"

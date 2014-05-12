@@ -55,7 +55,8 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
         {
         	displayHeader();
         	displayContents();
-        }
+            setListens();
+                    }
         else // we need to reconnect to the server
         {
             Global.toaster("Please wait for data to arrive or refresh", true);
@@ -63,7 +64,21 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
 
         return panelView;
     }
-    public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
+	public void displayHeader()
+	{
+//		TextView												title				= (TextView) panelView.findViewById(R.id.name);
+//		title.setText("Circuits");
+	}
+	public void displayContents()
+	{
+	    AdapterView <Adapter_5_Configuration_Thermometers>		adapterViewList		= (AdapterView <Adapter_5_Configuration_Thermometers>) adapterView;
+		Adapter_5_Configuration_Thermometers 					arrayAdapter		= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+		adapterViewList.setAdapter(arrayAdapter);
+//		adapterViewList.setOnItemClickListener(this);
+	}
+	public void setListens()
+	{
+	}    public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
 	{
 //        if (position > 0)
 //        {
@@ -120,16 +135,4 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
 //			Global.toaster("Data NOTNOTNOT received", true);
 //		}
 //	}
-	public void displayHeader()
-	{
-//		TextView												title				= (TextView) panelView.findViewById(R.id.name);
-//		title.setText("Circuits");
-	}
-	public void displayContents()
-	{
-	    AdapterView <Adapter_5_Configuration_Thermometers>		adapterViewList		= (AdapterView <Adapter_5_Configuration_Thermometers>) adapterView;
-		Adapter_5_Configuration_Thermometers 					arrayAdapter		= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-		adapterViewList.setAdapter(arrayAdapter);
-//		adapterViewList.setOnItemClickListener(this);
-	}
 }

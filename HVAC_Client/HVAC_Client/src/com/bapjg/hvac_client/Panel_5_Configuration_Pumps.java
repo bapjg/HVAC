@@ -56,6 +56,7 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
         {
         	displayHeader();
         	displayContents();
+            setListens();
         }
         else // we need to reconnect to the server
         {
@@ -143,5 +144,8 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
         Adapter_5_Configuration_Pumps							arrayAdapter		= new Adapter_5_Configuration_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
         adapterViewList.setAdapter(arrayAdapter);
 //		adapterViewList.setOnItemClickListener(this);
+	}
+	public void setListens()
+	{
 	}
 }

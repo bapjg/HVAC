@@ -49,9 +49,15 @@ public class Panel_1_Temperatures 						extends 					Panel_0_Fragment
     }
 	public void processFinishTCP(Ctrl_Abstract result) 
 	{             
-		if 		(result instanceof Ctrl_Temperatures.Data)					displayContents		((Ctrl_Temperatures.Data) result);
+		if 		(result instanceof Ctrl_Temperatures.Data)
+			{
+				displayHeader();
+				displayContents		((Ctrl_Temperatures.Data) result);
+		        setListens();
+			}
 		else if (result instanceof Ctrl_Temperatures.NoConnection)			Global.toast		("No Connection established yet", false);
 		else																Global.toast		("A Nack has been returned", false);
+        setListens();
     } 
 	public void displayHeader()
 	{
@@ -74,6 +80,9 @@ public class Panel_1_Temperatures 						extends 					Panel_0_Fragment
 			((TextView) getActivity().findViewById(R.id.RadiatorOut)).setText	(Global.displayTemperature	(msg_received.tempRadiatorOut));
 			((TextView) getActivity().findViewById(R.id.LivingRoom)).setText	(Global.displayTemperature	(msg_received.tempLivingRoom));
 		}
+	}
+	public void setListens()
+	{
 	}
 }
 

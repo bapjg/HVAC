@@ -25,11 +25,8 @@ import android.widget.TextView;
 public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
 {		
 //	private LayoutInflater								myInflater;
-	private Activity									myActivity;
-	private ViewGroup									myContainer;
-	private FragmentManager								myFragmentManager;
 	private Ctrl_Calendars.Calendar 					itemData;
-	private ViewGroup									myItemView;
+	private ViewGroup									itemView;
 	
 	public Item_3_Calendars_Circuits(Ctrl_Calendars.Calendar itemData)
 	{
@@ -40,44 +37,73 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        myContainer 																= container;
-        myActivity																	= getActivity();
-        myFragmentManager 															= myActivity.getFragmentManager();
         View 											itemView					= inflater.inflate(R.layout.item_3_calendars_circuit, container, false);
-        myItemView																	= (ViewGroup) itemView;
+        itemView																	= (ViewGroup) itemView;
 
         displayHeader();
         displayContents();
-	
-//        ((Button) itemView.findViewById(R.id.ok)).setOnClickListener(this);
-        ((TextView) itemView.findViewById(R.id.day_1)).setOnClickListener(this);
-        ((TextView) itemView.findViewById(R.id.day_2)).setOnClickListener(this);
-        ((TextView) itemView.findViewById(R.id.day_3)).setOnClickListener(this);
-        ((TextView) itemView.findViewById(R.id.day_4)).setOnClickListener(this);
-        ((TextView) itemView.findViewById(R.id.day_5)).setOnClickListener(this);
-        ((TextView) itemView.findViewById(R.id.day_6)).setOnClickListener(this);
-        ((TextView) itemView.findViewById(R.id.day_7)).setOnClickListener(this);
+        setListens();
         
         return itemView;
-     }
-    @Override
-	public void onClick(View myView) 
+    }
+	public void displayHeader()
 	{
-     	if (myView.getId() == R.id.ok)
+	}
+	public void displayContents()
+	{
+		TextView										days 						= (TextView) itemView.findViewById(R.id.days);
+    	TextView 										day_1 						= (TextView) itemView.findViewById(R.id.day_1);
+    	TextView 										day_2 						= (TextView) itemView.findViewById(R.id.day_2);
+    	TextView 										day_3 						= (TextView) itemView.findViewById(R.id.day_3);
+    	TextView 										day_4 						= (TextView) itemView.findViewById(R.id.day_4);
+    	TextView 										day_5 						= (TextView) itemView.findViewById(R.id.day_5);
+    	TextView 										day_6 						= (TextView) itemView.findViewById(R.id.day_6);
+    	TextView 										day_7 						= (TextView) itemView.findViewById(R.id.day_7);
+
+    	days.setText(itemData.days);
+    	
+        if ((itemData.days).indexOf("1") > -1)	day_1.setBackgroundColor(Color.RED); else day_1.setBackgroundColor(Color.BLUE);
+        if ((itemData.days).indexOf("2") > -1)	day_2.setBackgroundColor(Color.RED); else day_2.setBackgroundColor(Color.BLUE);
+        if ((itemData.days).indexOf("3") > -1)	day_3.setBackgroundColor(Color.RED); else day_3.setBackgroundColor(Color.BLUE);
+        if ((itemData.days).indexOf("4") > -1)	day_4.setBackgroundColor(Color.RED); else day_4.setBackgroundColor(Color.BLUE);
+        if ((itemData.days).indexOf("5") > -1)	day_5.setBackgroundColor(Color.RED); else day_5.setBackgroundColor(Color.BLUE);
+        if ((itemData.days).indexOf("6") > -1)	day_6.setBackgroundColor(Color.RED); else day_6.setBackgroundColor(Color.BLUE);
+        if ((itemData.days).indexOf("7") > -1)	day_7.setBackgroundColor(Color.RED); else day_7.setBackgroundColor(Color.BLUE);
+	}
+	public void setListens()
+	{
+//    ((Button) itemView.findViewById(R.id.ok)).setOnClickListener(this);
+      ((TextView) itemView.findViewById(R.id.day_1)).setOnClickListener(this);
+      ((TextView) itemView.findViewById(R.id.day_2)).setOnClickListener(this);
+      ((TextView) itemView.findViewById(R.id.day_3)).setOnClickListener(this);
+      ((TextView) itemView.findViewById(R.id.day_4)).setOnClickListener(this);
+      ((TextView) itemView.findViewById(R.id.day_5)).setOnClickListener(this);
+      ((TextView) itemView.findViewById(R.id.day_6)).setOnClickListener(this);
+      ((TextView) itemView.findViewById(R.id.day_7)).setOnClickListener(this);
+	}
+    @Override
+	public void onClick(View clickedView) 
+	{
+     	if (clickedView.getId() == R.id.buttonOk)
     	{
-    		itemData.name															= ((EditText) myItemView.findViewById(R.id.name)).getText().toString();
+    		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
       		getFragmentManager().popBackStackImmediate();
     	}
-    	else if ((myView.getId() == R.id.day_1)
-    	||		 (myView.getId() == R.id.day_2)
-    	||		 (myView.getId() == R.id.day_3)
-    	||		 (myView.getId() == R.id.day_4)
-    	||		 (myView.getId() == R.id.day_5)
-    	||		 (myView.getId() == R.id.day_6)
-    	||		 (myView.getId() == R.id.day_7)
-    	||       (myView instanceof TextView)     )
+     	else if (clickedView.getId() == R.id.buttonCancel)
     	{
-    		String day = ((TextView) myView).getText().toString();
+//     		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
+//      	getFragmentManager().popBackStackImmediate();
+    	}
+    	else if ((clickedView.getId() == R.id.day_1)
+    	||		 (clickedView.getId() == R.id.day_2)
+    	||		 (clickedView.getId() == R.id.day_3)
+    	||		 (clickedView.getId() == R.id.day_4)
+    	||		 (clickedView.getId() == R.id.day_5)
+    	||		 (clickedView.getId() == R.id.day_6)
+    	||		 (clickedView.getId() == R.id.day_7)
+    	||       (clickedView instanceof TextView)     )
+    	{
+    		String day = ((TextView) clickedView).getText().toString();
     		if ((itemData.days).indexOf(day) > -1)
     		{
     			itemData.days = itemData.days.replace(day,"");
@@ -88,30 +114,6 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     		}
     		displayContents();
     	}
-
-	}
-	public void displayHeader()
-	{
-	}
-	public void displayContents()
-	{
-		TextView										days 						= (TextView) myItemView.findViewById(R.id.days);
-    	TextView 										day_1 						= (TextView) myItemView.findViewById(R.id.day_1);
-    	TextView 										day_2 						= (TextView) myItemView.findViewById(R.id.day_2);
-    	TextView 										day_3 						= (TextView) myItemView.findViewById(R.id.day_3);
-    	TextView 										day_4 						= (TextView) myItemView.findViewById(R.id.day_4);
-    	TextView 										day_5 						= (TextView) myItemView.findViewById(R.id.day_5);
-    	TextView 										day_6 						= (TextView) myItemView.findViewById(R.id.day_6);
-    	TextView 										day_7 						= (TextView) myItemView.findViewById(R.id.day_7);
-
-    	days.setText(itemData.days);
-        if ((itemData.days).indexOf("1") > -1)	day_1.setBackgroundColor(Color.RED); else day_1.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("2") > -1)	day_2.setBackgroundColor(Color.RED); else day_2.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("3") > -1)	day_3.setBackgroundColor(Color.RED); else day_3.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("4") > -1)	day_4.setBackgroundColor(Color.RED); else day_4.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("5") > -1)	day_5.setBackgroundColor(Color.RED); else day_5.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("6") > -1)	day_6.setBackgroundColor(Color.RED); else day_6.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("7") > -1)	day_7.setBackgroundColor(Color.RED); else day_7.setBackgroundColor(Color.BLUE);
 	}
 }
 

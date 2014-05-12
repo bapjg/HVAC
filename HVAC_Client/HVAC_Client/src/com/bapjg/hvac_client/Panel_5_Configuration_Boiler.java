@@ -47,18 +47,6 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
     	displayContents();
     	return panelView;
     }
-	public void displayHeader()
-	{
-	}
-	public void displayContents()
-	{
-		((TextView) panelView.findViewById(R.id.thermoName)).setText					(Global.eRegConfiguration.boiler.thermometer);
-		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setText				(Global.displayTemperature(Global.eRegConfiguration.boiler.tempNeverExceed));
-		((TextView) panelView.findViewById(R.id.tempOverShoot)).setText					(Global.displayTemperature(Global.eRegConfiguration.boiler.tempOverShoot));
-
-		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setOnClickListener	(this);
-		((TextView) panelView.findViewById(R.id.tempOverShoot)).setOnClickListener		(this);
-	}
 	public void onClick(View view)
 	{
 		if (view.getId() == R.id.tempNeverExceed)
@@ -79,6 +67,22 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 		if (fieldId == R.id.tempNeverExceed)	Global.eRegConfiguration.boiler.tempNeverExceed 	= temperature;
 		if (fieldId == R.id.tempOverShoot)		Global.eRegConfiguration.boiler.tempOverShoot 		= temperature;
 		displayContents();
+        setListens();
+	}
+	public void displayHeader()
+	{
+	}
+	public void displayContents()
+	{
+		((TextView) panelView.findViewById(R.id.thermoName)).setText					(Global.eRegConfiguration.boiler.thermometer);
+		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setText				(Global.displayTemperature(Global.eRegConfiguration.boiler.tempNeverExceed));
+		((TextView) panelView.findViewById(R.id.tempOverShoot)).setText					(Global.displayTemperature(Global.eRegConfiguration.boiler.tempOverShoot));
+
+	}
+	public void setListens()
+	{
+		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setOnClickListener	(this);
+		((TextView) panelView.findViewById(R.id.tempOverShoot)).setOnClickListener		(this);
 	}
 }
 
