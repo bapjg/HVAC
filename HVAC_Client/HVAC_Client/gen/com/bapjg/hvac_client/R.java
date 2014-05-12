@@ -39,8 +39,8 @@ public final class R {
         public static final int FloorOut=0x7f090027;
         public static final int Fuel=0x7f09003b;
         public static final int HotWater=0x7f090024;
-        public static final int LinearLayout01=0x7f09000d;
-        public static final int LinearLayout02=0x7f09000f;
+        public static final int LinearLayout01=0x7f090015;
+        public static final int LinearLayout02=0x7f090017;
         public static final int List_View=0x7f090034;
         public static final int LivingRoom=0x7f090026;
         public static final int Name=0x7f09003a;
@@ -48,7 +48,7 @@ public final class R {
         public static final int Outside=0x7f090025;
         public static final int RadiatorIn=0x7f09002b;
         public static final int RadiatorOut=0x7f09002a;
-        public static final int TextView01=0x7f090010;
+        public static final int TextView01=0x7f090018;
         public static final int Time=0x7f090022;
         public static final int activity_container=0x7f090000;
         public static final int address=0x7f090004;
@@ -59,23 +59,23 @@ public final class R {
         public static final int buttonSendMail=0x7f090043;
         public static final int buttonStop=0x7f090040;
         public static final int buttonTemperatures=0x7f09001f;
-        public static final int cancel=0x7f090015;
-        public static final int checkBox1=0x7f090013;
+        public static final int cancel=0x7f09001d;
+        public static final int checkBox1=0x7f09001b;
         public static final int cloudAll=0x7f09004d;
         public static final int cloudValue=0x7f09004e;
         public static final int dateObjective=0x7f090008;
         public static final int dateTime=0x7f090035;
         public static final int dateTimeObtained=0x7f090036;
         public static final int daySlots=0x7f09000c;
-        public static final int day_1=0x7f090017;
-        public static final int day_2=0x7f090018;
-        public static final int day_3=0x7f090019;
-        public static final int day_4=0x7f09001a;
-        public static final int day_5=0x7f09001b;
-        public static final int day_6=0x7f09001d;
-        public static final int day_7=0x7f09001e;
+        public static final int day_1=0x7f09000d;
+        public static final int day_2=0x7f09000e;
+        public static final int day_3=0x7f09000f;
+        public static final int day_4=0x7f090010;
+        public static final int day_5=0x7f090011;
+        public static final int day_6=0x7f090013;
+        public static final int day_7=0x7f090014;
         public static final int days=0x7f09000b;
-        public static final int empty=0x7f09001c;
+        public static final int empty=0x7f090012;
         public static final int floor=0x7f09003e;
         public static final int friendlyName=0x7f090007;
         public static final int gradient=0x7f09004f;
@@ -89,7 +89,7 @@ public final class R {
         public static final int menuitem_share=0x7f090056;
         public static final int mixer=0x7f090050;
         public static final int name=0x7f090003;
-        public static final int ok=0x7f090016;
+        public static final int ok=0x7f09001e;
         public static final int panel_container=0x7f090002;
         public static final int panel_subcontainer=0x7f090020;
         public static final int plannedStopOnObjective=0x7f090030;
@@ -102,8 +102,8 @@ public final class R {
         public static final int relay=0x7f090051;
         public static final int relayBank=0x7f090052;
         public static final int relayNumber=0x7f090053;
-        public static final int row=0x7f090014;
-        public static final int ss=0x7f090012;
+        public static final int row=0x7f09001c;
+        public static final int ss=0x7f09001a;
         public static final int stopOnObjective=0x7f090032;
         public static final int tempNeverExceed=0x7f090038;
         public static final int tempObjective=0x7f090009;
@@ -115,11 +115,11 @@ public final class R {
         public static final int timeEnd=0x7f090031;
         public static final int timeObjective=0x7f09000a;
         public static final int timeSlots=0x7f090044;
-        public static final int timeStart=0x7f09000e;
+        public static final int timeStart=0x7f090016;
         public static final int windDirection=0x7f09004b;
         public static final int windName=0x7f09004c;
         public static final int windSpeed=0x7f09004a;
-        public static final int xx=0x7f090011;
+        public static final int xx=0x7f090019;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

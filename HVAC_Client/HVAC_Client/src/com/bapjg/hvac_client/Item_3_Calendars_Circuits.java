@@ -49,7 +49,7 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
         displayHeader();
         displayContents();
 	
-        ((Button) itemView.findViewById(R.id.ok)).setOnClickListener(this);
+//        ((Button) itemView.findViewById(R.id.ok)).setOnClickListener(this);
         ((TextView) itemView.findViewById(R.id.day_1)).setOnClickListener(this);
         ((TextView) itemView.findViewById(R.id.day_2)).setOnClickListener(this);
         ((TextView) itemView.findViewById(R.id.day_3)).setOnClickListener(this);
@@ -95,11 +95,7 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-		EditText et = (EditText) myItemView.findViewById(R.id.name);
-		String ev = itemData.name;
-		
-		((EditText) myItemView.findViewById(R.id.name)).setText(itemData.name);
-		
+		TextView										days 						= (TextView) myItemView.findViewById(R.id.days);
     	TextView 										day_1 						= (TextView) myItemView.findViewById(R.id.day_1);
     	TextView 										day_2 						= (TextView) myItemView.findViewById(R.id.day_2);
     	TextView 										day_3 						= (TextView) myItemView.findViewById(R.id.day_3);
@@ -108,6 +104,7 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     	TextView 										day_6 						= (TextView) myItemView.findViewById(R.id.day_6);
     	TextView 										day_7 						= (TextView) myItemView.findViewById(R.id.day_7);
 
+    	days.setText(itemData.days);
         if ((itemData.days).indexOf("1") > -1)	day_1.setBackgroundColor(Color.RED); else day_1.setBackgroundColor(Color.BLUE);
         if ((itemData.days).indexOf("2") > -1)	day_2.setBackgroundColor(Color.RED); else day_2.setBackgroundColor(Color.BLUE);
         if ((itemData.days).indexOf("3") > -1)	day_3.setBackgroundColor(Color.RED); else day_3.setBackgroundColor(Color.BLUE);

@@ -64,10 +64,10 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 	}
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-    	Ctrl_Calendars.Calendar							itemData						= Global.eRegCalendars.calendarList.get(position);
+    	Ctrl_Calendars.Calendar							itemData					= Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.get(position);
 
-    	Item_3_Calendars_Circuits					itemFragment					= new Item_3_Calendars_Circuits(itemData);
-    	FragmentTransaction 						fTransaction 					= getActivity().getFragmentManager().beginTransaction();
+    	Item_3_Calendars_Circuits						itemFragment				= new Item_3_Calendars_Circuits(itemData);
+    	FragmentTransaction 							fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
@@ -81,15 +81,15 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
 	{
         AdapterView <Adapter_3_Calendars_Circuits>		adapterViewList				= (AdapterView <Adapter_3_Calendars_Circuits>) adapterView;
         Adapter_3_Calendars_Circuits					arrayAdapter				= null;	
-
-        for (Ctrl_Calendars.Circuit 		circuit 	: Global.eRegCalendars.circuitList)
-        {
-        	if (circuit.name.equalsIgnoreCase(this.circuitName))
-        	{
-        		arrayAdapter														= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
-        	}
-        }
-
+        Ctrl_Calendars.Circuit							circuit						= Global.eRegCalendars.fetchCircuit(this.circuitName);
+        arrayAdapter																= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
+//        for (Ctrl_Calendars.Circuit 		circuit 	: Global.eRegCalendars.circuitList)
+//        {
+//        	if (circuit.name.equalsIgnoreCase(this.circuitName))
+//        	{
+//        		arrayAdapter														= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
+//        	}
+//        }
         adapterViewList.setAdapter(arrayAdapter);
         adapterViewList.setOnItemClickListener((OnItemClickListener) this);
 	}

@@ -23,9 +23,22 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public ArrayList <Word>					wordList 					= new ArrayList <Word>();
-		public ArrayList <Circuit>				circuitList 				= new ArrayList <Circuit>();
+		public static ArrayList <Circuit>		circuitList 				= new ArrayList <Circuit>();
 		public ArrayList <Away>					awayList 					= new ArrayList <Away>();
 		public TasksBackGround					tasksBackGround				= new TasksBackGround();
+		
+		public static Circuit fetchCircuit(String name)
+		{
+	        for (Circuit 						circuit 					: circuitList)
+	        {
+	        	if (circuit.name.equalsIgnoreCase(name))
+	        	{
+	        		return circuit;
+	        	}
+	        }
+	        return null;
+		}
+
 	}
 	public class Update							extends 					Ctrl_Calendars.Data
 	{
@@ -70,8 +83,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		public Integer							pumpCleanDurationSeconds;
 		public Integer							antiFreeze;
 	}
-	
-	
 	public void initialise()
 	{
 		Update									calendarUpdate				= (Update) this;
