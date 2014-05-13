@@ -6,29 +6,38 @@
     android:gravity="center_vertical"
     android:orientation="vertical" >
 
-     <LinearLayout
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/buttonDelete"
+            android:id="@+id/Button01"
             style="@style/AD_ImageButton"
-            android:layout_width="200dp"
+            android:layout_width="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="left"
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/button_delete"
-            android:text="Delete" />
+            android:gravity="center"
+            android:minHeight="40dp"
+            android:minWidth="0dp"
+            android:text="Delete"
+            android:width="20dp" />
 
         <Button
-            android:id="@+id/buttonOk"
+            android:id="@+id/Button02"
             style="@style/AD_ImageButton"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/button_ok"
-            android:text="Ok"
-            android:textColor="@color/Gray" />
-
-    </LinearLayout>
+            android:gravity="center"
+            android:text="Ok" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/days"
