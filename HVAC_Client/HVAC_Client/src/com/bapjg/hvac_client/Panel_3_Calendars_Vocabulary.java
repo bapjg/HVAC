@@ -75,6 +75,20 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 	public void setListens()
 	{
 		((AdapterView<?>) adapterView).setOnItemClickListener(this);
+		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
+	}
+	@Override
+    public void onClick(View clickedView)
+	{
+		if (clickedView.getId() == R.id.buttonAdd)
+		{
+			Ctrl_Calendars.Word							itemNew						= new Ctrl_Calendars().new Word();
+			itemNew.name															= "new";
+			itemNew.days															= "";
+			Global.eRegCalendars.wordList.add(itemNew);
+			displayContents();
+			setListens();
+		}
 	}
 	@Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)

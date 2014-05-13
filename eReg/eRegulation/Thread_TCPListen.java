@@ -387,11 +387,52 @@ public class Thread_TCPListen 			implements Runnable
 		Global.eMailMessage("Test", "This is a test mail");
 		return new Ctrl_Actions_Test_Mail().new Ack();
 	}
-	private Ctrl_Actions_Stop.Ack		process_Ctrl_Actions_Stop_Execute		(Ctrl_Actions_Stop.Execute message_in)
+	private Ctrl_Actions_Stop		process_Ctrl_Actions_Stop_Execute		(Ctrl_Actions_Stop.Execute message_in)
 	{
-		Global.stopNow										= true;
-		Global.exitStatus									= message_in.exitStatus;	// 0 = stop app, 1 = restart app, 2 = reboot
-        return	new Ctrl_Actions_Stop().new Ack();
+		if ( (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Stop   )
+		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reboot )
+		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Restart) )
+		{
+			Global.stopNow									= true;
+			Global.exitStatus								= message_in.actionRequest;	// 0 = stop app, 1 = restart app, 2 = reboot
+			return	new Ctrl_Actions_Stop().new Ack();
+		}
+		else if (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reload_Configuration)
+		{
+			Global.stopNow									= true;
+			Global.exitStatus								= Ctrl_Actions_Stop.ACTION_Restart;	// 0 = stop app, 1 = restart app, 2 = reboot
+			return	new Ctrl_Actions_Stop().new Ack();
+		}
+		else if (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reload_Calendars)
+		{
+			LogIt.display("TCP_Listener", "process_Ctrl_Actions_Stop_Execute", "Stopping all circuits");
+			for (Circuit_Abstract circuit : Global.circuits.circuitList)
+			{
+				circuit.stop();
+				circuit.circuitTaskList						= null;
+			}
+			for (Circuit_Abstract circuit : Global.circuits.circuitList)
+			{
+				while (circuit.taskActive != null)
+				{
+					Global.waitSeconds(2);
+					LogIt.display("TCP_Listener", "process_Ctrl_Actions_Stop_Execute", "Wait for circuit to stop : " + circuit.name);
+				}
+			}
+			Global.tasksBackGround							= null;
+			Global.awayList									= null;
+			try
+			{
+				Calendars		calendars 					= new Calendars();
+			}
+			catch (Exception e)
+			{
+				LogIt.display("TCP_Listener", "process_Ctrl_Actions_Stop_Execute", "Couldn't reload calendars " + e);
+			}
+			
+			return	new Ctrl_Actions_Stop().new Ack();
+		}
+		return new Ctrl_Actions_Stop().new Nack();
     } 
 }
  

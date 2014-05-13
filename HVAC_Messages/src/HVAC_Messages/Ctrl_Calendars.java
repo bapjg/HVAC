@@ -19,15 +19,15 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	public Ctrl_Calendars()
 	{
 	}
-	public static class Data					extends 					Ctrl_Calendars
+	public class Data							extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public ArrayList <Word>					wordList 					= new ArrayList <Word>();
-		public static ArrayList <Circuit>		circuitList 				= new ArrayList <Circuit>();
+		public ArrayList <Circuit>				circuitList 				= new ArrayList <Circuit>();
 		public ArrayList <Away>					awayList 					= new ArrayList <Away>();
 		public TasksBackGround					tasksBackGround				= new TasksBackGround();
 		
-		public static Circuit fetchCircuit(String name)
+		public Circuit fetchCircuit(String name)
 		{
 	        for (Circuit 						circuit 					: circuitList)
 	        {
@@ -38,29 +38,32 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	        }
 	        return null;
 		}
-
 	}
-	public class Update							extends 					Ctrl_Calendars.Data
+	public class Update							extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
+		public ArrayList <Word>					wordList 					= new ArrayList <Word>();
+		public ArrayList <Circuit>				circuitList 				= new ArrayList <Circuit>();
+		public ArrayList <Away>					awayList 					= new ArrayList <Away>();
+		public TasksBackGround					tasksBackGround				= new TasksBackGround();
 	}
 	public class Request						extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 	}
-	public static class Word					extends 					Ctrl_Calendars
+	public class Word					extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
 		public String							days;
 	}
-	public static class Circuit					extends 					Ctrl_Calendars
+	public class Circuit					extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
 		public ArrayList<Calendar>				calendarList 				= new ArrayList<Calendar>();
 	}
-	public static class Calendar				extends 					Ctrl_Calendars
+	public class Calendar				extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
@@ -70,13 +73,13 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		public Integer							tempObjective;
 		public Boolean							stopOnObjective;
 	}
-	public static class Away					extends 					Ctrl_Calendars
+	public class Away					extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public Long 							dateTimeStart;
 		public Long 							dateTimeEnd;
 	}
-	public static class TasksBackGround			extends 					Ctrl_Calendars
+	public class TasksBackGround			extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public Long 							pumpCleanTime;

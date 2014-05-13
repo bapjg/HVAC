@@ -208,7 +208,7 @@ public class Management extends HttpServlet
             ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, Date, Time, Calendars FROM Calendars ORDER BY dateTime DESC LIMIT 1");
 
             Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
-    		String 										dbJsonString 		= gson.toJson((Ctrl_Calendars.Data) message_in);
+    		String 										dbJsonString 		= gson.toJson((Ctrl_Calendars.Update) message_in);
 
     		Long										dateTime			= System.currentTimeMillis();		// Do not use dateTime supplied in input message
     		

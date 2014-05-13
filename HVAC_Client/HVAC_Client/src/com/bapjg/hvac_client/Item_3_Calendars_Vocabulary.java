@@ -69,14 +69,15 @@ public class Item_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-		((Button)   itemView.findViewById(R.id.buttonOk)).setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_1)).setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_2)).setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_3)).setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_4)).setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_5)).setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_6)).setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_7)).setOnClickListener(this);
+		itemView.findViewById(R.id.buttonOk).setOnClickListener(this);
+		itemView.findViewById(R.id.buttonDelete).setOnClickListener(this);
+	    itemView.findViewById(R.id.day_1).setOnClickListener(this);
+	    itemView.findViewById(R.id.day_2).setOnClickListener(this);
+	    itemView.findViewById(R.id.day_3).setOnClickListener(this);
+	    itemView.findViewById(R.id.day_4).setOnClickListener(this);
+	    itemView.findViewById(R.id.day_5).setOnClickListener(this);
+	    itemView.findViewById(R.id.day_6).setOnClickListener(this);
+	    itemView.findViewById(R.id.day_7).setOnClickListener(this);
 	}
     @Override
 	public void onClick(View clickedView) 
@@ -86,10 +87,10 @@ public class Item_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
      		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
       		getFragmentManager().popBackStackImmediate();
     	}
-     	else if (clickedView.getId() == R.id.buttonCancel)
+     	else if (clickedView.getId() == R.id.buttonDelete)
     	{
-//     		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
-//      	getFragmentManager().popBackStackImmediate();
+     		Global.eRegCalendars.wordList.remove(itemData);
+     		getFragmentManager().popBackStackImmediate();
     	}
     	else if ((clickedView.getId() == R.id.day_1)
     	||		 (clickedView.getId() == R.id.day_2)
@@ -109,6 +110,7 @@ public class Item_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
     		{
     			itemData.days = itemData.days + day;
     		}
+    		itemData.name 														= ((EditText) itemView.findViewById(R.id.name)).getText().toString();		//It may have changed
     		displayContents();
     	}
 	}

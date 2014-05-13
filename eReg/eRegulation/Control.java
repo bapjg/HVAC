@@ -64,8 +64,10 @@ public class Control
 		
 		Global.display.writeAtPosition(2, 0, " Calendar");
 		@SuppressWarnings("unused")
-		Calendars 		calendars 					= new Calendars();
+		Calendars		calendars 					= new Calendars();
 		Global.display.writeAtPosition(2, 18, "Ok");
+
+		calendars									= null;				// To avoid memory use in the event of a new calendar later
 		
 		//
 		//============================================================
@@ -172,17 +174,17 @@ public class Control
 		
 		switch (Global.exitStatus)
 		{
-		case Ctrl_Actions_Stop.EXIT_Stop:											// Value 0 : Stop App
+		case Ctrl_Actions_Stop.ACTION_Stop:											// Value 0 : Stop App
  			LogIt.info("Thread_Main", "main", "Stopping", true);
- 			System.exit(Ctrl_Actions_Stop.EXIT_Stop);
+ 			System.exit(Ctrl_Actions_Stop.ACTION_Stop);
  			break;
-		case Ctrl_Actions_Stop.EXIT_Restart:											// Value 1 : Restart App
+		case Ctrl_Actions_Stop.ACTION_Restart:											// Value 1 : Restart App
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true); 
- 			System.exit(Ctrl_Actions_Stop.EXIT_Restart);
+ 			System.exit(Ctrl_Actions_Stop.ACTION_Restart);
  			break;		
- 		case Ctrl_Actions_Stop.EXIT_Reboot:											// Value 2 : Reboot Pi
+ 		case Ctrl_Actions_Stop.ACTION_Reboot:											// Value 2 : Reboot Pi
 	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true); 
- 			System.exit(Ctrl_Actions_Stop.EXIT_Reboot);
+ 			System.exit(Ctrl_Actions_Stop.ACTION_Reboot);
  			break;
  		}
 	}

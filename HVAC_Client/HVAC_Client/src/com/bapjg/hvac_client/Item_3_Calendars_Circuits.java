@@ -72,14 +72,15 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-//    ((Button) itemView.findViewById(R.id.ok)).setOnClickListener(this);
-      ((TextView) itemView.findViewById(R.id.day_1)).setOnClickListener(this);
-      ((TextView) itemView.findViewById(R.id.day_2)).setOnClickListener(this);
-      ((TextView) itemView.findViewById(R.id.day_3)).setOnClickListener(this);
-      ((TextView) itemView.findViewById(R.id.day_4)).setOnClickListener(this);
-      ((TextView) itemView.findViewById(R.id.day_5)).setOnClickListener(this);
-      ((TextView) itemView.findViewById(R.id.day_6)).setOnClickListener(this);
-      ((TextView) itemView.findViewById(R.id.day_7)).setOnClickListener(this);
+		((Button) itemView.findViewById(R.id.buttonOk))		.setOnClickListener(this);
+		((Button) itemView.findViewById(R.id.buttonDelete))	.setOnClickListener(this);
+	    ((TextView) itemView.findViewById(R.id.day_1))		.setOnClickListener(this);
+	    ((TextView) itemView.findViewById(R.id.day_2))		.setOnClickListener(this);
+	    ((TextView) itemView.findViewById(R.id.day_3))		.setOnClickListener(this);
+	    ((TextView) itemView.findViewById(R.id.day_4))		.setOnClickListener(this);
+	    ((TextView) itemView.findViewById(R.id.day_5))		.setOnClickListener(this);
+	    ((TextView) itemView.findViewById(R.id.day_6))		.setOnClickListener(this);
+	    ((TextView) itemView.findViewById(R.id.day_7))		.setOnClickListener(this);
 	}
     @Override
 	public void onClick(View clickedView) 
@@ -89,7 +90,7 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
       		getFragmentManager().popBackStackImmediate();
     	}
-     	else if (clickedView.getId() == R.id.buttonCancel)
+     	else if (clickedView.getId() == R.id.buttonDelete)
     	{
 //     		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
 //      	getFragmentManager().popBackStackImmediate();

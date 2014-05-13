@@ -145,7 +145,7 @@ public class Global
 			catch(IOException ex)
 			{
 				System.out.println("I/O error on open : eRegulator_Json " + ex);
-				System.exit(Ctrl_Actions_Stop.EXIT_Stop);				// 0 = stop application
+				System.exit(Ctrl_Actions_Stop.ACTION_Stop);				// 0 = stop application
 			}	
 		}
 		else

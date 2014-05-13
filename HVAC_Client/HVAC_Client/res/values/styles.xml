@@ -107,7 +107,7 @@
 
     <style name="AD_Button" parent="@android:style/TextAppearance.Medium"> 
 			<item name="android:textSize">
-				25sp
+				15sp
 			</item> 
 			<item name="android:textColor">
 				#FFFFFF

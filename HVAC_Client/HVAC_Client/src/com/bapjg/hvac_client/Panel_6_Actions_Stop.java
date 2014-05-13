@@ -58,9 +58,9 @@ public class Panel_6_Actions_Stop 						extends 					Panel_0_Fragment
     	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
     	if (clickedView instanceof Button)
     	{
-    		if      (clickedView.getId()==R.id.buttonStop)		stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Stop;
-    		else if (clickedView.getId()==R.id.buttonRestart)	stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Restart;
-    		else if (clickedView.getId()==R.id.buttonReboot)	stopMessage.exitStatus		= Ctrl_Actions_Stop.EXIT_Reboot;
+    		if      (clickedView.getId()==R.id.buttonStop)		stopMessage.actionRequest		= Ctrl_Actions_Stop.ACTION_Stop;
+    		else if (clickedView.getId()==R.id.buttonRestart)	stopMessage.actionRequest		= Ctrl_Actions_Stop.ACTION_Restart;
+    		else if (clickedView.getId()==R.id.buttonReboot)	stopMessage.actionRequest		= Ctrl_Actions_Stop.ACTION_Reboot;
         	TCP_Send(stopMessage);
     	}
     }

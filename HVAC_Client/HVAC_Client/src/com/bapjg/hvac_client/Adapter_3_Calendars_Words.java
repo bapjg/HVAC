@@ -34,8 +34,9 @@ public class Adapter_3_Calendars_Words 						extends 			Adapter_0_Abstract
     	row.day_6 												= (TextView) adapterView.findViewById(R.id.day_6);
     	row.day_7 												= (TextView) adapterView.findViewById(R.id.day_7);
         adapterView.setTag(row);
-
-        row.name.setText					(listItem.name);
+        
+        row.name.setText(listItem.name);
+        
         if ((listItem.days).indexOf("1") > -1)	row.day_1.setBackgroundColor(Color.RED); else row.day_1.setBackgroundColor(Color.BLUE);
         if ((listItem.days).indexOf("2") > -1)	row.day_2.setBackgroundColor(Color.RED); else row.day_2.setBackgroundColor(Color.BLUE);
         if ((listItem.days).indexOf("3") > -1)	row.day_3.setBackgroundColor(Color.RED); else row.day_3.setBackgroundColor(Color.BLUE);

@@ -10,6 +10,7 @@ import java.io.*;
 public class Calendars
 {
 	private Circuit_Abstract	circuit;
+	public  Ctrl_Calendars.Data	calendars;
 	
 	public Calendars() throws IOException
     {
@@ -48,7 +49,7 @@ public class Calendars
 			catch(IOException ex)
 			{
 				LogIt.info("Calendars", "constructor", "I/O error on open : eCalendars_Json.txt " + ex);		//Probably file dont exist. Can only bomb out
-				System.exit(Ctrl_Actions_Stop.EXIT_Stop);				// 0 = stop application
+				System.exit(Ctrl_Actions_Stop.ACTION_Stop);				// 0 = stop application
 			}	
 		}
 		else

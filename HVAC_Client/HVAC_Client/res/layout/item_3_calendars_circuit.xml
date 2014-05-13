@@ -6,21 +6,25 @@
     android:gravity="center_vertical"
     android:orientation="vertical" >
 
-    <LinearLayout
+     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/buttonCancel"
-            style="@style/AD_Text"
-            android:layout_width="100dp"
-            android:text="Cancel" />
+            android:id="@+id/buttonDelete"
+            style="@style/AD_Button"
+            android:layout_width="200dp"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/button_delete"
+            android:text="Delete" />
 
         <Button
             android:id="@+id/buttonOk"
-            style="@style/AD_Text"
+            style="@style/AD_Button"
             android:layout_width="100dp"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/button_ok"
             android:text="Ok" />
     </LinearLayout>
 
