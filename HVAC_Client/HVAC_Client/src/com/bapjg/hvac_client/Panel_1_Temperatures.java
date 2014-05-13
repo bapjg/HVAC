@@ -67,7 +67,7 @@ public class Panel_1_Temperatures 						extends 					Panel_0_Fragment
 		if (getActivity() != null)			// The user has not changed the screen
 		{
 			((TextView) getActivity().findViewById(R.id.Date)).setText			(Global.displayDateShort	(msg_received.dateTime));
-			((TextView) getActivity().findViewById(R.id.Time)).setText			(Global.displayTime			(msg_received.dateTime));
+			((TextView) getActivity().findViewById(R.id.Time)).setText			(Global.displayTimeShort	(msg_received.dateTime));
 			
 			((TextView) getActivity().findViewById(R.id.Boiler)).setText		(Global.displayTemperature	(msg_received.tempBoiler));
 			((TextView) getActivity().findViewById(R.id.HotWater)).setText		(Global.displayTemperature	(msg_received.tempHotWater));

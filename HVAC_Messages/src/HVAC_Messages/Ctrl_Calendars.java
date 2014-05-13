@@ -51,19 +51,34 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	{
 		private static final long 				serialVersionUID 			= 1L;
 	}
-	public class Word					extends 					Ctrl_Calendars
+	public class Word							extends 					Ctrl_Calendars
+												implements					Cloneable
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
 		public String							days;
+		
+		public Object clone() 
+		{
+			Object cloneObject 												= null;
+			try 
+			{
+				cloneObject 												= super.clone();
+			} 
+			catch(CloneNotSupportedException cnse) 
+			{
+				cnse.printStackTrace(System.err);
+			}
+			return cloneObject;
+		}
 	}
-	public class Circuit					extends 					Ctrl_Calendars
+	public class Circuit						extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
 		public ArrayList<Calendar>				calendarList 				= new ArrayList<Calendar>();
 	}
-	public class Calendar				extends 					Ctrl_Calendars
+	public class Calendar						extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
@@ -73,13 +88,13 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		public Integer							tempObjective;
 		public Boolean							stopOnObjective;
 	}
-	public class Away					extends 					Ctrl_Calendars
+	public class Away							extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public Long 							dateTimeStart;
 		public Long 							dateTimeEnd;
 	}
-	public class TasksBackGround			extends 					Ctrl_Calendars
+	public class TasksBackGround				extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public Long 							pumpCleanTime;

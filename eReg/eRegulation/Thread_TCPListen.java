@@ -408,9 +408,14 @@ public class Thread_TCPListen 			implements Runnable
 			LogIt.display("TCP_Listener", "process_Ctrl_Actions_Stop_Execute", "Stopping all circuits");
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{
-				circuit.stop();
+				for (CircuitTask task : circuit.circuitTaskList)
+				{
+					task									= null;
+				}
 				circuit.circuitTaskList						= null;
+				circuit.stop();
 			}
+			// Now wait for each circuit to stop
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{
 				while (circuit.taskActive != null)
@@ -419,6 +424,7 @@ public class Thread_TCPListen 			implements Runnable
 					LogIt.display("TCP_Listener", "process_Ctrl_Actions_Stop_Execute", "Wait for circuit to stop : " + circuit.name);
 				}
 			}
+			// TODO : Should we not stop the Background thread
 			Global.tasksBackGround							= null;
 			Global.awayList									= null;
 			try
@@ -429,7 +435,7 @@ public class Thread_TCPListen 			implements Runnable
 			{
 				LogIt.display("TCP_Listener", "process_Ctrl_Actions_Stop_Execute", "Couldn't reload calendars " + e);
 			}
-			
+			// TODO : Should we not restart the Background thread
 			return	new Ctrl_Actions_Stop().new Ack();
 		}
 		return new Ctrl_Actions_Stop().new Nack();

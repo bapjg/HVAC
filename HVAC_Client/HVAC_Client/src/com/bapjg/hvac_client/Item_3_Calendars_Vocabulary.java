@@ -1,6 +1,7 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Messages.*;
+import HVAC_Messages.Ctrl_Calendars.Word;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -24,12 +25,13 @@ import android.widget.TextView;
 public class Item_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
 {		
 	private Ctrl_Calendars.Word 						itemData;
+	private Ctrl_Calendars.Word 						itemDataWork;
 	private ViewGroup									itemView;
 	
 	public Item_3_Calendars_Vocabulary(Ctrl_Calendars.Word itemData)
 	{
 		super();
-		this.itemData									= itemData;
+		this.itemData																= itemData;
 	}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
@@ -104,13 +106,13 @@ public class Item_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
     		String day = ((TextView) clickedView).getText().toString();
     		if ((itemData.days).indexOf(day) > -1)
     		{
-    			itemData.days = itemData.days.replace(day,"");
+    			itemData.days = itemData.days.replace(day,"");						// Remove the day from the list
     		}
     		else
     		{
-    			itemData.days = itemData.days + day;
+    			itemData.days = itemData.days + day;								// Add the day from the list
     		}
-    		itemData.name 														= ((EditText) itemView.findViewById(R.id.name)).getText().toString();		//It may have changed
+    		itemData.name 															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();		//It may have changed
     		displayContents();
     	}
 	}

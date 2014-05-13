@@ -14,31 +14,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
 
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
 public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
 {		
-//	private LayoutInflater								myInflater;
 	private Ctrl_Calendars.Calendar 					itemData;
-	private ViewGroup									itemView;
+	private View										itemView;
+	private	String										daysWords;
+	private	String										daysNumbers;
+	
 	
 	public Item_3_Calendars_Circuits(Ctrl_Calendars.Calendar itemData)
 	{
 		super();
-		this.itemData									= itemData;
+		this.itemData																= itemData;
+		this.daysWords																= "";
+		this.daysNumbers															= "";
+		
+		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
+		{
+			if (word.name.indexOf(itemData.name) < 0)
+			{
+				daysWords															= word.name;
+				daysNumbers															= itemData.name.replace(word.name, "");
+			}
+		}
 	}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        // Inflate the layout for this fragment
-        View 											itemView					= inflater.inflate(R.layout.item_3_calendars_circuit, container, false);
-        itemView																	= (ViewGroup) itemView;
+        this.itemView																= inflater.inflate(R.layout.item_3_calendars_circuit, container, false);
 
         displayHeader();
         displayContents();
@@ -60,27 +69,35 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     	TextView 										day_6 						= (TextView) itemView.findViewById(R.id.day_6);
     	TextView 										day_7 						= (TextView) itemView.findViewById(R.id.day_7);
 
-    	days.setText(itemData.days);
-    	
-        if ((itemData.days).indexOf("1") > -1)	day_1.setBackgroundColor(Color.RED); else day_1.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("2") > -1)	day_2.setBackgroundColor(Color.RED); else day_2.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("3") > -1)	day_3.setBackgroundColor(Color.RED); else day_3.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("4") > -1)	day_4.setBackgroundColor(Color.RED); else day_4.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("5") > -1)	day_5.setBackgroundColor(Color.RED); else day_5.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("6") > -1)	day_6.setBackgroundColor(Color.RED); else day_6.setBackgroundColor(Color.BLUE);
-        if ((itemData.days).indexOf("7") > -1)	day_7.setBackgroundColor(Color.RED); else day_7.setBackgroundColor(Color.BLUE);
+        if ((daysNumbers).indexOf("1") > -1)	day_1.setBackgroundColor(Color.RED); else day_1.setBackgroundColor(Color.BLUE);
+        if ((daysNumbers).indexOf("2") > -1)	day_2.setBackgroundColor(Color.RED); else day_2.setBackgroundColor(Color.BLUE);
+        if ((daysNumbers).indexOf("3") > -1)	day_3.setBackgroundColor(Color.RED); else day_3.setBackgroundColor(Color.BLUE);
+        if ((daysNumbers).indexOf("4") > -1)	day_4.setBackgroundColor(Color.RED); else day_4.setBackgroundColor(Color.BLUE);
+        if ((daysNumbers).indexOf("5") > -1)	day_5.setBackgroundColor(Color.RED); else day_5.setBackgroundColor(Color.BLUE);
+        if ((daysNumbers).indexOf("6") > -1)	day_6.setBackgroundColor(Color.RED); else day_6.setBackgroundColor(Color.BLUE);
+        if ((daysNumbers).indexOf("7") > -1)	day_7.setBackgroundColor(Color.RED); else day_7.setBackgroundColor(Color.BLUE);
+        
+
+        ((TextView) itemView.findViewById(R.id.timeStart))			.setText(itemData.timeStart);
+        ((TextView) itemView.findViewById(R.id.timeEnd))			.setText(itemData.timeEnd);
+        
+        Integer tempObjective =itemData.tempObjective/1000;
+        
+        ((TextView) itemView.findViewById(R.id.tempObjective))		.setText(tempObjective.toString() + " °C");
+        ((CheckBox) itemView.findViewById(R.id.stopOnObjective))	.setChecked(itemData.stopOnObjective);
+         
 	}
 	public void setListens()
 	{
-		((Button) itemView.findViewById(R.id.buttonOk))		.setOnClickListener(this);
-		((Button) itemView.findViewById(R.id.buttonDelete))	.setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_1))		.setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_2))		.setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_3))		.setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_4))		.setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_5))		.setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_6))		.setOnClickListener(this);
-	    ((TextView) itemView.findViewById(R.id.day_7))		.setOnClickListener(this);
+		itemView.findViewById(R.id.buttonOk)		.setOnClickListener(this);
+		itemView.findViewById(R.id.buttonDelete)	.setOnClickListener(this);
+	    itemView.findViewById(R.id.day_1)			.setOnClickListener(this);
+	    itemView.findViewById(R.id.day_2)			.setOnClickListener(this);
+	    itemView.findViewById(R.id.day_3)			.setOnClickListener(this);
+	    itemView.findViewById(R.id.day_4)			.setOnClickListener(this);
+	    itemView.findViewById(R.id.day_5)			.setOnClickListener(this);
+	    itemView.findViewById(R.id.day_6)			.setOnClickListener(this);
+	    itemView.findViewById(R.id.day_7)			.setOnClickListener(this);
 	}
     @Override
 	public void onClick(View clickedView) 
@@ -88,12 +105,13 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
      	if (clickedView.getId() == R.id.buttonOk)
     	{
     		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
-      		getFragmentManager().popBackStackImmediate();
+       		itemData.days															= daysNumbers;
+       	    getFragmentManager().popBackStackImmediate();
     	}
      	else if (clickedView.getId() == R.id.buttonDelete)
     	{
-//     		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
-//      	getFragmentManager().popBackStackImmediate();
+     		Global.eRegCalendars.fetchCircuit("TODO").calendarList.remove(itemData);
+     		getFragmentManager().popBackStackImmediate();
     	}
     	else if ((clickedView.getId() == R.id.day_1)
     	||		 (clickedView.getId() == R.id.day_2)
@@ -105,13 +123,13 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     	||       (clickedView instanceof TextView)     )
     	{
     		String day = ((TextView) clickedView).getText().toString();
-    		if ((itemData.days).indexOf(day) > -1)
+    		if ((daysNumbers).indexOf(day) > -1)
     		{
-    			itemData.days = itemData.days.replace(day,"");
+    			daysNumbers = daysNumbers.replace(day,"");
     		}
     		else
     		{
-    			itemData.days = itemData.days + day;
+    			daysNumbers = daysNumbers + day;
     		}
     		displayContents();
     	}

@@ -3,5 +3,6 @@
     <color name="background">#000099</color> 
     <color name="textNormal">#FFFF00</color> 
     <color name="Yellow">#FFFF00</color>
-    <color name="Black">#000000</color>    
+    <color name="Black">#000000</color>
+    <color name="Gray">#101010</color>    
 </resources>
