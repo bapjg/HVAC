@@ -81,7 +81,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 	public class Calendar						extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
-		public String 							name;
 		public String							days;
 		public String							timeStart;
 		public String							timeEnd;
@@ -147,7 +146,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendarUpdate.circuitList.add(circuit);
 
 		Ctrl_Calendars.Calendar					calendar					= new Calendar();
-		calendar.name														= "EveryDay";
 		calendar.days														= "WeekDay";
 		calendar.timeStart													= "06:15";
 		calendar.timeEnd													= "07:00";
@@ -156,7 +154,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 		
 		calendar															= new Calendar();
-		calendar.name														= "EveryDay";
 		calendar.days														= "EveryDay";
 		calendar.timeStart													= "21:30";
 		calendar.timeEnd													= "22:00";
@@ -165,7 +162,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "WeekEnd";
 		calendar.days														= "WeekEnd";
 		calendar.timeStart													= "07:30";
 		calendar.timeEnd													= "08:00";
@@ -174,7 +170,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "WeekEnd";
 		calendar.days														= "WeekEnd";
 		calendar.timeStart													= "17:30";
 		calendar.timeEnd													= "18:15";
@@ -183,7 +178,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "Test";
 		calendar.days														= "EveryDay";
 		calendar.timeStart													= "22:00";
 		calendar.timeEnd													= "22:60";
@@ -204,7 +198,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendarUpdate.circuitList.add(circuit);
 
 		calendar															= new Calendar();
-		calendar.name														= "WeekDay";
 		calendar.days														= "WeekDay";
 		calendar.timeStart													= "07:00";
 		calendar.timeEnd													= "08:00";
@@ -213,7 +206,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "WeekEnd";
 		calendar.days														= "WeekEnd";
 		calendar.timeStart													= "08:00";
 		calendar.timeEnd													= "09:00";
@@ -222,7 +214,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "EveryDay";
 		calendar.days														= "EveryDay";
 		calendar.timeStart													= "21:30";
 		calendar.timeEnd													= "22:00";
@@ -231,7 +222,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "Locataire";
 		calendar.days														= "Locataire"	;
 		calendar.timeStart													= "17:00";
 		calendar.timeEnd													= "22:00";
@@ -240,7 +230,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "Locataire";
 		calendar.days														= "HalfDay";
 		calendar.timeStart													= "14:00";
 		calendar.timeEnd													= "22:00";
@@ -261,7 +250,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		calendarUpdate.circuitList.add(circuit);
 
 		calendar															= new Calendar();
-		calendar.name														= "WeekDay";
 		calendar.days														= "WeekDay";
 		calendar.timeStart													= "05:00";
 		calendar.timeEnd													= "07:30";
@@ -270,7 +258,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "WeekDay";
 		calendar.days														= "WeekDay";
 		calendar.timeStart													= "15:00";
 		calendar.timeEnd													= "22:00";
@@ -279,7 +266,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "WeekEnd";
 		calendar.days														= "WeekEnd";
 		calendar.timeStart													= "06:30";
 		calendar.timeEnd													= "21:30";
@@ -288,7 +274,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "HalfDay";
 		calendar.days														= "HalfDay";
 		calendar.timeStart													= "11:45";
 		calendar.timeEnd													= "14:45";
@@ -297,7 +282,6 @@ public class Ctrl_Calendars 					extends 					Ctrl_Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.name														= "TestDay";
 		calendar.days														= "ZZZZDay";
 		calendar.timeStart													= "00:01";
 		calendar.timeEnd													= "23:50";

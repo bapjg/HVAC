@@ -1,9 +1,7 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Messages.Ctrl_Calendars;
-import HVAC_Messages.Ctrl_Configuration;
-import HVAC_Messages.Ctrl_Weather;
-import HVAC_Messages.Ctrl_Configuration.Request;
+import HVAC_Messages.*;
+import HVAC_Messages.Ctrl_Actions_Stop.Execute;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -21,7 +19,9 @@ import android.widget.Button;
 //Template												variable					= something
 //Template												ext/imp						class
 public class Menu_3_Calendars 							extends 					Menu_0_Fragment 
-														implements 					View.OnClickListener
+														implements 					View.OnClickListener,
+																					HTTP_Response,
+																					TCP_Response
 {
 	public Menu_3_Calendars()
 	{
@@ -64,6 +64,30 @@ public class Menu_3_Calendars 							extends 					Menu_0_Fragment
 		sendUpdate.tasksBackGround														= sendData.tasksBackGround;
 		
 		HTTP_Send	(sendUpdate);
-		Global.toaster("doUpdate", false);
 	}
+	public void processFinishHTTP(Ctrl_Abstract messageReturn)
+	{
+		if (messageReturn instanceof Ctrl_Abstract.Ack)
+		{
+			Global.toaster("Server updated", false);
+	    	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
+// TODO	    	stopMessage.actionRequest													= Ctrl_Actions_Stop.ACTION_Reload_Calendars;
+	    	stopMessage.actionRequest													= Ctrl_Actions_Stop.ACTION_Restart;
+	    	TCP_Send	(stopMessage);
+		}
+		Global.toaster(messageReturn.getClass().toString(), false);
+		
+	}
+	public void processFinishTCP(Ctrl_Abstract messageReturn)
+	{
+		if (messageReturn instanceof Ctrl_Actions_Stop.Ack)
+		{
+			Global.toaster("Controler accepted the request", false);
+		}
+		else
+		{
+			Global.toaster("Controler refused (Nack)", false);
+		}
+	}
+
 }

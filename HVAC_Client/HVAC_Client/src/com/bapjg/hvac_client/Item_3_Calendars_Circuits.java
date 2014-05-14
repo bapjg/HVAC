@@ -24,23 +24,26 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
 {		
 	private Ctrl_Calendars.Calendar 					itemData;
 	private View										itemView;
-	private	String										daysWords;
+	private	String										daysWord;
 	private	String										daysNumbers;
+	private	String										daysWordNumbers;
 	
 	
 	public Item_3_Calendars_Circuits(Ctrl_Calendars.Calendar itemData)
 	{
 		super();
 		this.itemData																= itemData;
-		this.daysWords																= "";
-		this.daysNumbers															= "";
+		this.daysWord																= "";
+		this.daysNumbers															= itemData.days; //name or days
+		this.daysWordNumbers														= ""; //name or days
 		
 		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
 		{
-			if (word.name.indexOf(itemData.name) < 0)
+			if (word.name.indexOf(itemData.days) > -1)
 			{
-				daysWords															= word.name;
-				daysNumbers															= itemData.name.replace(word.name, "");
+				daysWord															= word.name;
+				daysNumbers															= "";
+				daysWordNumbers														= word.days;
 			}
 		}
 	}
@@ -69,14 +72,23 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     	TextView 										day_6 						= (TextView) itemView.findViewById(R.id.day_6);
     	TextView 										day_7 						= (TextView) itemView.findViewById(R.id.day_7);
 
-        if ((daysNumbers).indexOf("1") > -1)	day_1.setBackgroundColor(Color.RED); else day_1.setBackgroundColor(Color.BLUE);
-        if ((daysNumbers).indexOf("2") > -1)	day_2.setBackgroundColor(Color.RED); else day_2.setBackgroundColor(Color.BLUE);
-        if ((daysNumbers).indexOf("3") > -1)	day_3.setBackgroundColor(Color.RED); else day_3.setBackgroundColor(Color.BLUE);
-        if ((daysNumbers).indexOf("4") > -1)	day_4.setBackgroundColor(Color.RED); else day_4.setBackgroundColor(Color.BLUE);
-        if ((daysNumbers).indexOf("5") > -1)	day_5.setBackgroundColor(Color.RED); else day_5.setBackgroundColor(Color.BLUE);
-        if ((daysNumbers).indexOf("6") > -1)	day_6.setBackgroundColor(Color.RED); else day_6.setBackgroundColor(Color.BLUE);
-        if ((daysNumbers).indexOf("7") > -1)	day_7.setBackgroundColor(Color.RED); else day_7.setBackgroundColor(Color.BLUE);
-        
+        ((TextView) itemView.findViewById(R.id.days))			.setText(daysWord);
+
+    	if ((daysWordNumbers).indexOf("1") > -1)	day_1.setBackgroundColor(Color.RED); else day_1.setBackgroundColor(Color.BLUE);
+        if ((daysWordNumbers).indexOf("2") > -1)	day_2.setBackgroundColor(Color.RED); else day_2.setBackgroundColor(Color.BLUE);
+        if ((daysWordNumbers).indexOf("3") > -1)	day_3.setBackgroundColor(Color.RED); else day_3.setBackgroundColor(Color.BLUE);
+        if ((daysWordNumbers).indexOf("4") > -1)	day_4.setBackgroundColor(Color.RED); else day_4.setBackgroundColor(Color.BLUE);
+        if ((daysWordNumbers).indexOf("5") > -1)	day_5.setBackgroundColor(Color.RED); else day_5.setBackgroundColor(Color.BLUE);
+        if ((daysWordNumbers).indexOf("6") > -1)	day_6.setBackgroundColor(Color.RED); else day_6.setBackgroundColor(Color.BLUE);
+        if ((daysWordNumbers).indexOf("7") > -1)	day_7.setBackgroundColor(Color.RED); else day_7.setBackgroundColor(Color.BLUE);       
+
+    	if ((daysNumbers).indexOf("1") > -1)		day_1.setBackgroundColor(Color.RED);
+        if ((daysNumbers).indexOf("2") > -1)		day_2.setBackgroundColor(Color.RED);
+        if ((daysNumbers).indexOf("3") > -1)		day_3.setBackgroundColor(Color.RED);
+        if ((daysNumbers).indexOf("4") > -1)		day_4.setBackgroundColor(Color.RED);
+        if ((daysNumbers).indexOf("5") > -1)		day_5.setBackgroundColor(Color.RED);
+        if ((daysNumbers).indexOf("6") > -1)		day_6.setBackgroundColor(Color.RED);
+        if ((daysNumbers).indexOf("7") > -1)		day_7.setBackgroundColor(Color.RED);      
 
         ((TextView) itemView.findViewById(R.id.timeStart))			.setText(itemData.timeStart);
         ((TextView) itemView.findViewById(R.id.timeEnd))			.setText(itemData.timeEnd);
@@ -85,12 +97,12 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
         
         ((TextView) itemView.findViewById(R.id.tempObjective))		.setText(tempObjective.toString() + " °C");
         ((CheckBox) itemView.findViewById(R.id.stopOnObjective))	.setChecked(itemData.stopOnObjective);
-         
-	}
+ 	}
 	public void setListens()
 	{
 		itemView.findViewById(R.id.buttonOk)		.setOnClickListener(this);
 		itemView.findViewById(R.id.buttonDelete)	.setOnClickListener(this);
+	    itemView.findViewById(R.id.days)			.setOnClickListener(this);
 	    itemView.findViewById(R.id.day_1)			.setOnClickListener(this);
 	    itemView.findViewById(R.id.day_2)			.setOnClickListener(this);
 	    itemView.findViewById(R.id.day_3)			.setOnClickListener(this);
@@ -98,14 +110,25 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
 	    itemView.findViewById(R.id.day_5)			.setOnClickListener(this);
 	    itemView.findViewById(R.id.day_6)			.setOnClickListener(this);
 	    itemView.findViewById(R.id.day_7)			.setOnClickListener(this);
+	    itemView.findViewById(R.id.timeStart)		.setOnClickListener(this);
+	    itemView.findViewById(R.id.timeEnd)			.setOnClickListener(this);
+	    itemView.findViewById(R.id.tempObjective)	.setOnClickListener(this);
+	    itemView.findViewById(R.id.stopOnObjective)	.setOnClickListener(this);
 	}
     @Override
 	public void onClick(View clickedView) 
 	{
      	if (clickedView.getId() == R.id.buttonOk)
     	{
-    		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
-       		itemData.days															= daysNumbers;
+    		itemData.days															= daysWord;				// ((EditText) itemView.findViewById(R.id.name)).getText().toString();
+       		itemData.days															= itemData.days + daysNumbers;
+       		itemData.timeStart														= ((TextView) itemView.findViewById(R.id.timeStart)).getText().toString();
+       		itemData.timeEnd														= ((TextView) itemView.findViewById(R.id.timeEnd)).getText().toString();
+       		
+       		String										tempObjective				= ((TextView) itemView.findViewById(R.id.tempObjective)).getText().toString();
+       		tempObjective															= tempObjective.replace(" °C", "");
+       		itemData.tempObjective													= (Integer) (Integer.parseInt(tempObjective) * 1000);
+       		itemData.stopOnObjective												= ((CheckBox) itemView.findViewById(R.id.stopOnObjective)).isChecked();
        	    getFragmentManager().popBackStackImmediate();
     	}
      	else if (clickedView.getId() == R.id.buttonDelete)
@@ -113,14 +136,29 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
      		Global.eRegCalendars.fetchCircuit("TODO").calendarList.remove(itemData);
      		getFragmentManager().popBackStackImmediate();
     	}
+     	else if (clickedView.getId() == R.id.days)
+    	{
+    		Dialog_String_List		 							df 					= new Dialog_String_List(this, R.id.days);
+    		df.items.add("");
+    		df.itemSelected															= "";
+
+    		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
+    		{
+    			if(word.name.equalsIgnoreCase(daysWord))
+    			{
+    				df.itemSelected													= daysWord;
+    			}
+    			df.items.add(word.name);
+    		}
+    		df.show(getFragmentManager(), "Dialog_List");
+    	}
     	else if ((clickedView.getId() == R.id.day_1)
     	||		 (clickedView.getId() == R.id.day_2)
     	||		 (clickedView.getId() == R.id.day_3)
     	||		 (clickedView.getId() == R.id.day_4)
     	||		 (clickedView.getId() == R.id.day_5)
     	||		 (clickedView.getId() == R.id.day_6)
-    	||		 (clickedView.getId() == R.id.day_7)
-    	||       (clickedView instanceof TextView)     )
+    	||		 (clickedView.getId() == R.id.day_7)   )
     	{
     		String day = ((TextView) clickedView).getText().toString();
     		if ((daysNumbers).indexOf(day) > -1)
@@ -133,6 +171,42 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     		}
     		displayContents();
     	}
+     	else if (clickedView.getId() == R.id.timeStart)
+    	{
+    		Dialog_Time		 							df 							= new Dialog_Time(this, R.id.timeStart, itemData.timeStart);
+    		df.show(getFragmentManager(), "Dialog_Time");
+    	}
+     	else if (clickedView.getId() == R.id.timeEnd)
+    	{
+    		Dialog_Time		 							df 							= new Dialog_Time(this, R.id.timeEnd, itemData.timeEnd);
+    		df.show(getFragmentManager(), "Dialog_Time");
+    	}
+     	else if (clickedView.getId() == R.id.tempObjective)
+    	{
+    		Dialog_Temperature 							df 							= new Dialog_Temperature(this, R.id.tempObjective, 25, 25, 5, 8);
+    		df.show(getFragmentManager(), "Dialog_Temperature");
+    	}
+     	else if (clickedView.getId() == R.id.stopOnObjective)
+    	{
+     		((CheckBox) itemView.findViewById(R.id.stopOnObjective)).isChecked();
+    		displayContents();
+    	}
 	}
+    public void processFinishDialogString(int fieldId, String value)
+    {
+    	if ((fieldId == R.id.timeStart)
+    	||  (fieldId == R.id.timeEnd)    )
+    	{
+    		((TextView) itemView.findViewById(fieldId))			.setText(value);
+    	}
+    }
+    public void processFinishDialogInteger(int fieldId, Integer value)
+    {
+    	if (fieldId == R.id.tempObjective)
+    	{
+    		Integer										tempObjective				= value/1000;
+    		((TextView) itemView.findViewById(fieldId))			.setText(tempObjective.toString() + " °C");
+    	}
+    }
 }
 

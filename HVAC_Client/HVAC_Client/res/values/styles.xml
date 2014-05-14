@@ -138,7 +138,7 @@
 				15sp
 			</item> 
 			<item name="android:textColor">
-				#FFcccccc
+				#ffcccccc
 			</item> 
 			<item name="android:layout_width">
 				wrap_content

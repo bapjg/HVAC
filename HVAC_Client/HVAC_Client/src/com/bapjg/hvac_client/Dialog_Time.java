@@ -79,7 +79,7 @@ public class Dialog_Time 										extends 		DialogFragment
     	}
      	else
      	{
-     		callBack.processFinishDialogString(fieldId, hour.toString() + ":" + minute.toString());
+     		callBack.processFinishDialogString(fieldId, String.format("%02d", hour)  + ":" +String.format("%02d", minute));
      	}
     	dialog.dismiss();
     }

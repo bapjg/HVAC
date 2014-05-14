@@ -25,7 +25,7 @@ public class Adapter_3_Calendars_Circuits 				extends 					Adapter_0_Abstract
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-    	RowHolder 							row					= new RowHolder();
+    	RowHolder 										row							= new RowHolder();
     	Ctrl_Calendars.Calendar							listItem					= (Ctrl_Calendars.Calendar) listData.get(position);
 
     	adapterView 																= inflater.inflate(R.layout.row_3_calendar_circuit, null);

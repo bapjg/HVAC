@@ -4,6 +4,7 @@ import HVAC_Messages.Ctrl_Abstract;
 import HVAC_Messages.Ctrl_Calendars;
 import HVAC_Messages.Ctrl_Configuration;
 import HVAC_Messages.Ctrl_Temperatures;
+import HVAC_Messages.Ctrl_Calendars.Word;
 import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -48,6 +49,7 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
         {
         	displayHeader();
         	displayContents();
+        	setListens();
         }
         else // we need to reconnect to the server
         {
@@ -55,23 +57,6 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
         }
         return panelView;
     }
-	public void OnItemClick(AdapterView<?> parent, View view, int position, long id) 
-	{
-    	FragmentTransaction								fTransaction				= getActivity().getFragmentManager().beginTransaction();
-//    	Fragment 										panelFragment				= new Item_3_Calendars_Circuits();
-//    	fTransaction.replace(R.id.panel_container, panelFragment);
-    	fTransaction.commit();  
-	}
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-    	Ctrl_Calendars.Calendar							itemData					= Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.get(position);
-
-    	Item_3_Calendars_Circuits						itemFragment				= new Item_3_Calendars_Circuits(itemData);
-    	FragmentTransaction 							fTransaction 				= getActivity().getFragmentManager().beginTransaction();
-   		fTransaction.replace(R.id.panel_container, itemFragment);
-   		fTransaction.addToBackStack(null);
-   		fTransaction.commit();
-	}
 	public void displayHeader()
 	{
 		TextView 										heading						= (TextView) panelView.findViewById(R.id.name);
@@ -83,15 +68,49 @@ public class Panel_3_Calendars_Circuits 				extends 					Panel_0_Fragment
         Adapter_3_Calendars_Circuits					arrayAdapter				= null;	
         Ctrl_Calendars.Circuit							circuit						= Global.eRegCalendars.fetchCircuit(this.circuitName);
         arrayAdapter																= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
-//        for (Ctrl_Calendars.Circuit 		circuit 	: Global.eRegCalendars.circuitList)
-//        {
-//        	if (circuit.name.equalsIgnoreCase(this.circuitName))
-//        	{
-//        		arrayAdapter														= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
-//        	}
-//        }
         adapterViewList.setAdapter(arrayAdapter);
-        adapterViewList.setOnItemClickListener((OnItemClickListener) this);
+	}
+	public void setListens()
+	{
+		((AdapterView<?>) adapterView).setOnItemClickListener(this);
+		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
+	}
+
+//	public void OnItemClick(AdapterView<?> parent, View view, int position, long id) 
+//	{
+//    	FragmentTransaction								fTransaction				= getActivity().getFragmentManager().beginTransaction();
+//    	Fragment 										panelFragment				= new Item_3_Calendars_Circuits();
+//    	fTransaction.replace(R.id.panel_container, panelFragment);
+//    	fTransaction.commit();  
+//	}
+	@Override
+    public void onClick(View clickedView)
+	{
+		if (clickedView.getId() == R.id.buttonAdd)
+		{
+			Ctrl_Calendars.Calendar							itemNew					= new Ctrl_Calendars().new Calendar();
+
+			itemNew.days															= "";
+			itemNew.timeStart														= "09:00";
+			itemNew.timeEnd															= "10:00";
+			itemNew.tempObjective													= 30000;
+			itemNew.stopOnObjective													= true;
+
+			Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.add(itemNew);
+			displayContents();
+			setListens();
+		}
+	}
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+    	Ctrl_Calendars.Calendar							itemData					= Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.get(position);
+
+    	Item_3_Calendars_Circuits						itemFragment				= new Item_3_Calendars_Circuits(itemData);
+ 
+    	FragmentTransaction 							fTransaction 				= getActivity().getFragmentManager().beginTransaction();
+   		fTransaction.replace(R.id.panel_container, itemFragment);
+   		fTransaction.addToBackStack(null);
+   		fTransaction.commit();
 	}
 }
 
