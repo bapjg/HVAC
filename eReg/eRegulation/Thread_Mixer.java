@@ -94,13 +94,7 @@ public class Thread_Mixer implements Runnable
 					}
 				}
 			}
-			if  (circuit.state == circuit.CIRCUIT_STATE_Off )  //Running Cold
-			{
-				// Keep the mixer cold to ensure that floor_Base temperature is correctly recorded
-				
-				// Notes
-			}
-			if  (circuit.state == circuit.CIRCUIT_STATE_Off )  //Running Cold
+			else if  (circuit.state == circuit.CIRCUIT_STATE_Off )  //Running Cold
 			{
 				mixer.positionZero();
 			}

@@ -37,6 +37,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				break;
 			case CIRCUIT_STATE_Start_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
+				circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
 				state												= CIRCUIT_STATE_Starting;
 				//Now fall through
 			case CIRCUIT_STATE_Starting:
@@ -56,7 +57,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 			case CIRCUIT_STATE_AwaitingHeat:
 				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
 				{
-					circuitPump.on();
 					state											= CIRCUIT_STATE_RampingUp;
 				}
 				break;
