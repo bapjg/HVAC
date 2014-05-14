@@ -45,60 +45,6 @@ public class Mixer
 
 	public Long				timeToStop;
 
-// 	public Mixer
-//		(
-//			String name, 
-//			String swingTime, 
-//			String lagTime, 
-//			String gainP, 
-//			String timeD, 
-//			String timeI, 
-//			String gainI
-//		)
-//    {
-//		this.name 									= name;
-//		this.swingTime								= Integer.parseInt(swingTime);
-//		this.lagTime								= Integer.parseInt(lagTime);
-//		this.gainP									= Float.parseFloat(gainP);
-//		this.timeD									= Float.parseFloat(timeD);
-//		this.gainD									= this.gainP * this.timeD;
-//		this.timeI									= Float.parseFloat(timeI);
-//		this.gainI									= Float.parseFloat(gainI);
-//		this.state									= MIXER_STATE_Off;
-//	}
-// 	public Mixer																			// New
-//		(
-//			String 	name, 
-//			Integer swingTime, 
-//			Integer lagTime, 
-//			Float 	gainP, 
-//			Float 	timeD, 
-//			Float 	timeI, 
-//			Float 	gainI,
-//			// Thermometer
-//			// Max Temp
-//			String	relayUp,
-//			String 	relayDown
-//		)
-//    {
-//		this.name 									= name;
-//		this.swingTime								= swingTime;
-////		this.lagTime								= lagTime;
-//		this.gainP									= gainP;
-//		this.timeD									= timeD;
-//		this.gainD									= this.gainP * this.timeD;
-//		this.timeI									= timeI;
-//		this.gainI									= gainI;
-//		
-//		this.mixerUp								= Global.relays.fetchRelay(relayUp);
-//		this.mixerDown								= Global.relays.fetchRelay(relayDown);
-//		
-//		if ((this.mixerUp == null) || (this.mixerDown == null))
-//		{
-//			System.out.println("Mixer.Contructor : Unknown mixer relay");
-//		}
-//		this.state									= MIXER_STATE_Off;
-//	}
  	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
     {
 		this.name 									= paramMixer.name;
@@ -249,7 +195,15 @@ public class Mixer
 		{
 			allOff();
 			mixerDown.on();
-			Global.waitMilliSeconds(swingTime);
+			Global.waitMilliSeconds(positionTracked + 2000);					// Add 2 extra seconds to be certain
+			mixerDown.off();
+			positionTracked								= 0;
+		}
+		else
+		{
+			allOff();
+			mixerDown.on();
+			Global.waitMilliSeconds(swingTime + 2000);
 			mixerDown.off();
 			positionTracked								= 0;
 		}
@@ -260,42 +214,19 @@ public class Mixer
 		{
 			allOff();
 			mixerUp.on();
-			Global.waitMilliSeconds(swingTime);
+			Global.waitMilliSeconds(swingTime - positionTracked + 2000);		// Add 2 extra seconds to be certain
 			mixerUp.off();
 			positionTracked								= swingTime;
 		}
+		else
+		{
+			allOff();
+			mixerUp.on();
+			Global.waitMilliSeconds(swingTime + 2000);
+			mixerUp.off();
+			positionTracked								= 0;
+		}
 	}
-//	public void positionAbsolute(float proportion)
-//	{
-//		Long 											positionDiff;
-//		Float 											timeToWait;
-//		Long											timeStart;
-//		Long											timeEnd;
-//		if (proportion > 0.5F)
-//		{
-//			positionFull();
-//			mixerDown.on();
-//			timeToWait									= swingTime * (1F - proportion);
-//			timeStart									= Global.now();
-//			Global.waitMilliSeconds(timeToWait.intValue());
-//			mixerDown.off();
-//			timeEnd										= Global.now();
-//			positionDiff   								= timeEnd - timeStart;
-//	 		positionTracked								=  swingTime - positionDiff.intValue();		
-//		}
-//		else
-//		{
-//			positionZero();
-//			mixerUp.on();
-//			timeToWait									= swingTime * proportion;
-//			timeStart									= Global.now();
-//			Global.waitMilliSeconds(timeToWait.intValue());
-//			mixerUp.off();
-//			timeEnd										= Global.now();
-//			positionDiff   								= timeEnd - timeStart;
-//	 		positionTracked								= positionDiff.intValue();		
-//		}
-//	}
 	public void positionAbsolute(Integer position)
 	{
 		Long 											positionDiff;
