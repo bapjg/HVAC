@@ -77,7 +77,7 @@ public class Dialog_Temperature 								extends 		DialogFragment
     {
      	Integer 				newTemperature 					=(temperaturePicker.getValue() - tempMin) * step + tempMin;
      	temperature												= newTemperature * 1000;
-     	callBack.processFinishDialogInteger(fieldId, temperature);
+     	callBack.onReturnTemperature(fieldId, temperature);
     	dialog.dismiss();
     }
     public void buttonCancel (DialogInterface dialog, int which)

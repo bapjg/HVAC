@@ -77,22 +77,6 @@ public class Global
     {
     	return Calendar.getInstance().getTimeInMillis();
     }
-	public static String displayTimeShortUTC(Long dateTime)
-    {
-		//==============================================================
-		// Accepts as input a number of miiliseconds from local midnight
-		// returns supplied dateTime in the form hh:mm
-		// Hence TimeZone UTC is used to avoid 1 or 2 hour adjustment
-		//==============================================================
-		String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm");
-        Calendar 				calendar 			= Calendar.getInstance();
-        calendar.setTimeZone(TimeZone.getTimeZone("UTC"));
-        calendar.setTimeInMillis(dateTime);
-
-        return 					sdf.format(dateTime);
-    }
 	public static String displayDayOfWeek(Long dateTime)
     {
 		//==============================================================
@@ -137,16 +121,26 @@ public class Global
     public static String displayTimeShort(Long dateTime)
     {
 		//==============================================================
-		// Accepts a full dateTime argument if UTC and adjusts for local Timezone
+		// Accepts a TimeSinceMidnight argument if UTC and adjusts for local Timezone
 		// returns supplied dateTime in the form hh:mm
 		//==============================================================
-    	String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
-        calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime); 
     	
+    	String 					dateTimeString;
+    	Long					days				= dateTime / 1000 / 3600 / 24;		//millisecs -> secs -> hours -> days
+    	if (days > 0)																	// We need to use the TimeZoned calendar to workout time
+    	{
+          SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm");
+          GregorianCalendar 	calendar 			= new GregorianCalendar();
+          calendar.setTimeInMillis(dateTime);
+          dateTimeString							= sdf.format(dateTime);
+    	}
+    	else																			// Must calculate manually as time is since local midnight
+    	{
+    		Integer				seconds				= (int) (long) (dateTime / 1000);
+    		Integer				hours				= seconds / 3600;
+    		Integer				minutes				= (seconds - hours * 3600)/60;
+    		dateTimeString							= String.format("%02d", hours)  + ":" +String.format("%02d", minutes);
+    	}
     	return dateTimeString;
     }
     public static String displayDateShort(Long dateTime)

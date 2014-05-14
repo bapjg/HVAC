@@ -1,146 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
-	xmlns:android						= "http://schemas.android.com/apk/res/android"
-	android:layout_width				= "match_parent"
-	android:layout_height				= "match_parent"
-	android:orientation					= "vertical"
-	android:baselineAligned				= "false"
-	android:background					= "@color/background"
->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:baselineAligned="false"
+    android:orientation="vertical" >
 
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:gravity="left"
-	    android:orientation="horizontal" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal" >
 
-		<TextView android:text="Planned calendar events" android:layout_width="match_parent" style="@style/AD_Title" />
-				
-	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView
+            style="@style/AD_Title"
+            android:layout_width="match_parent"
+            android:text="Planned calendar events" />
+    </LinearLayout>
 
-		<TextView android:text="" style="@style/AD_Title" />
-				
-	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-		<TextView android:text="Time Start" style="@style/AD_Text" />
-		<TextView android:id="@+id/plannedTimeStart" style="@style/AD_Data" android:text=" " />
-				
-	</LinearLayout>
+        <TextView
+            style="@style/AD_Title"
+            android:text="" />
+    </LinearLayout>
 
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-	    <TextView
-	        style="@style/AD_Text"
-	        android:text="Time End" />
+        <TextView
+            style="@style/AD_Text"
+            android:text="Time Start" />
 
-	    <TextView
-	        android:id="@+id/plannedTimeEnd"
-	        style="@style/AD_Data"
-	        android:text=" " />
-	</LinearLayout>
+        <TextView
+            android:id="@+id/plannedTimeStart"
+            style="@style/AD_Data"
+            android:text=" " />
+    </LinearLayout>
 
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-		<TextView android:text="Temperature" style="@style/AD_Text" />
-		<TextView android:id="@+id/plannedTargetTemp" style="@style/AD_Data" android:text=" " />
-				
-	</LinearLayout>
+        <TextView
+            style="@style/AD_Text"
+            android:text="Time End" />
 
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal" >
+        <TextView
+            android:id="@+id/plannedTimeEnd"
+            style="@style/AD_Data"
+            android:text=" " />
+    </LinearLayout>
 
-	    <TextView
-	        style="@style/AD_Text"
-	        android:text="Stop On Objective" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-	    <CheckBox
-	        android:id="@+id/plannedStopOnObjective"
-	        style="@style/AD_Data"
-	        android:text=" " />
-	</LinearLayout>
+        <TextView
+            style="@style/AD_Text"
+            android:text="Temperature" />
 
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView
+            android:id="@+id/plannedTargetTemp"
+            style="@style/AD_Data"
+            android:text=" " />
+    </LinearLayout>
 
-		<TextView android:text="" style="@style/AD_Title" />
-				
-	</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="horizontal" >
+        <TextView
+            style="@style/AD_Text"
+            android:text="Stop On Objective" />
 
-	    <TextView
-	        style="@style/AD_Title"
-	        android:text="Select new parameters" 
-	        android:layout_width="match_parent"
-	        />
-	</LinearLayout>
+        <CheckBox
+            android:id="@+id/plannedStopOnObjective"
+            style="@style/AD_Data"
+            android:text=" " />
+    </LinearLayout>
 
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="40dp"
-	    android:orientation="horizontal" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-	    <TextView
-	        style="@style/AD_Text"
-	        android:text="Time Start" />
+        <TextView
+            style="@style/AD_Title"
+            android:text="" />
+    </LinearLayout>
 
-	    <TextView
-	        android:id="@+id/timeStart"
-	        style="@style/AD_Data"
-	     />
-	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent" android:layout_height="40dp" android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-		<TextView android:text="Time End" style="@style/AD_Text" />
-		<TextView android:id="@+id/timeEnd" style="@style/AD_Data" />
-				
-	</LinearLayout>
-	<LinearLayout android:layout_width="match_parent" android:layout_height="40dp" android:orientation="horizontal">
+        <TextView
+            style="@style/AD_Title"
+            android:layout_width="match_parent"
+            android:text="Select new parameters" />
+    </LinearLayout>
 
-		<TextView android:text="Temperature" style="@style/AD_Text" />
-		<TextView android:id="@+id/tempObjective" style="@style/AD_Data" />
-				
-	</LinearLayout>
+    <LinearLayout
+        android:id="@+id/bottomPart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="40dp"
-	    android:orientation="horizontal" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
 
-	    <TextView
-	        style="@style/AD_Text"
-	        android:text="Stop On Objective" />
+            <TextView
+                style="@style/AD_Text"
+                android:text="Time Start" />
 
-	    <CheckBox
-	        android:id="@+id/stopOnObjective"
-	        style="@style/AD_Data"
-	        android:text=" " />
-	</LinearLayout>
+            <TextView
+                android:id="@+id/timeStart"
+                style="@style/AD_Data" />
+        </LinearLayout>
 
-	<LinearLayout
-	    android:layout_width			= "match_parent"
-	    android:layout_height			= "wrap_content"
-	    android:orientation				= "vertical"
-	 >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
 
-		<Button
-		    android:id					= "@+id/buttonOkCancel"
-		    android:layout_width		= "wrap_content"
-		    android:layout_height		= "wrap_content"
-		    android:layout_centerVertical= "true"
-		    android:layout_gravity		="center_horizontal"
-		    android:textColor			= "#FFFFFF"
-		    android:text				= "Ok" />
-				
-	</LinearLayout>
+            <TextView
+                style="@style/AD_Text"
+                android:text="Time End" />
+
+            <TextView
+                android:id="@+id/timeEnd"
+                style="@style/AD_Data" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AD_Text"
+                android:text="Temperature" />
+
+            <TextView
+                android:id="@+id/tempObjective"
+                style="@style/AD_Data" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/AD_Text"
+                android:text="Stop On Objective" />
+
+            <CheckBox
+                android:id="@+id/stopOnObjective"
+                style="@style/AD_Data"
+                android:text=" " />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/buttonOkCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:text="Ok"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 
 </LinearLayout>

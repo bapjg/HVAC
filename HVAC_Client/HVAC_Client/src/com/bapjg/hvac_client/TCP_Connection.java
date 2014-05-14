@@ -35,13 +35,13 @@ public class TCP_Connection
 				piSocket 										= new Socket();
 				piSocket.connect(Global.piSocketAddress,3000);
 				piSocket.setSoTimeout(3000);
-				return true;
+				return true;									// Exit procedure as we are connected - NormalOperating
 			}
 			catch(Exception e1)
 			{
 			}
 		}
-
+																// There has been a problem... so :
 		try														// Try local
 		{
 			Global.piSocketAddress								= new InetSocketAddress("192.168.5.51", 8889);

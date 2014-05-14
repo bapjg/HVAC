@@ -71,8 +71,8 @@ public class Panel_0_Fragment 							extends 					Fragment
 	@Override	public void onClick(View v) 																{}
 	@Override	public void processFinishTCP(Ctrl_Abstract result) 											{}
 	@Override	public void processFinishHTTP(Ctrl_Abstract result) 										{}
-	@Override	public void processFinishDialogInteger(int fieldId, Integer response)						{}
-	@Override	public void processFinishDialogString (int fieldId, String  response)						{}
-	@Override	public void processFinishDialogLong   (int fieldId, Long  	response)						{}
+	@Override	public void onReturnTemperature			(int fieldId, Integer response)						{}
+	@Override	public void onReturnTime 				(int fieldId, String  response)						{}
+	@Override	public void onReturnTime   				(int fieldId, Long    response)						{}
 }
 

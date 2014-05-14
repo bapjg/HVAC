@@ -17,8 +17,8 @@ import HVAC_Messages.*;
 
 public class HTTP_Connection
 {
-	public URL						server;
-	public URLConnection	 		serverConnection;
+	public static							URL				server;
+	public 									URLConnection	serverConnection;
 	
 	public HTTP_Connection()
 	{
@@ -28,7 +28,7 @@ public class HTTP_Connection
 	{
 		if (server == null)
 		{
-			try													// Try last known address
+			try												// Try last known address - DNS always resolves home.bapjg.com, either to local or remote
 			{
 				server 										= new URL("http://home.bapjg.com:8888/hvac/Management");
 				serverConnection 							= server.openConnection();
@@ -37,7 +37,6 @@ public class HTTP_Connection
 				serverConnection.setConnectTimeout(5000);
 				serverConnection.setReadTimeout(5000);
 				serverConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-				Global.toaster("HTTP_Connection : Connected ", true);
 				return true;
 			}
 			catch(Exception e1)

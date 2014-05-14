@@ -98,6 +98,14 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 	    	}
     	}
 	}
+	public void processFinishTCP(Ctrl_Abstract result) 
+	{  
+		if 		(result instanceof Ctrl_Immediate.Data)						displayContents((Ctrl_Immediate.Data) result);
+		else if (result instanceof Ctrl_Immediate.Ack)						Global.toast("Command accepted", false);
+		else if (result instanceof Ctrl_Abstract.Ack)						Global.toast("Command accepted", false);
+		else if (result instanceof Ctrl_Temperatures.NoConnection)			Global.toast("No Connection established yet", false);
+		else																Global.toast("A Nack has been returned", false);
+	}
 	public void displayHeader()
 	{
 	}
@@ -117,15 +125,15 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 		if (messageReceived.executionActive)
 		{
 			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("Current");
-			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShortUTC(messageReceived.timeEnd));
+			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
 			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(((Integer) (messageReceived.tempObjective/1000)).toString());
 			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
 			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Stop");
 		}
 		else if (messageReceived.executionPlanned)
 		{
-			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			(Global.displayTimeShortUTC(messageReceived.timeStart));
-			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShortUTC(messageReceived.timeEnd));
+			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			(Global.displayTimeShort(messageReceived.timeStart));
+			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
 			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(((Integer) (messageReceived.tempObjective/1000)).toString());
 			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
 			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Start");
@@ -137,11 +145,18 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
 			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Start");
 		}
 		// Bottom part of the screen : "Select new parameters"
-		((TextView) 		panelView.findViewById(R.id.timeStart)).setText					(Global.displayTimeShortUTC(messageExecute.timeStart));
-		((TextView) 		panelView.findViewById(R.id.timeEnd)).setText					(Global.displayTimeShortUTC(messageExecute.timeEnd));	
+		if (messageReceived.executionActive)
+		{
+			((ViewGroup) 	panelView.findViewById(R.id.bottomPart)).setVisibility(View.GONE);
+		}
+		else
+		{
+			((TextView) 		panelView.findViewById(R.id.timeStart)).setText					(Global.displayTimeShort(messageExecute.timeStart));
+			((TextView) 		panelView.findViewById(R.id.timeEnd)).setText					(Global.displayTimeShort(messageExecute.timeEnd));	
 
-		((TextView) 		panelView.findViewById(R.id.tempObjective)).setText				(((Integer) (messageExecute.tempObjective / 1000)).toString());	
-		((CheckBox) 		panelView.findViewById(R.id.stopOnObjective)).setChecked		(messageExecute.stopOnObjective);
+			((TextView) 		panelView.findViewById(R.id.tempObjective)).setText				(((Integer) (messageExecute.tempObjective / 1000)).toString());	
+			((CheckBox) 		panelView.findViewById(R.id.stopOnObjective)).setChecked		(messageExecute.stopOnObjective);
+		}
 	}
 	public void setListens()
 	{
@@ -152,21 +167,13 @@ public class Panel_2_Immediate 							extends 					Panel_0_Fragment
     	panelView.findViewById(R.id.stopOnObjective)	.setOnClickListener(this);
  	}
 	@Override
-	public void processFinishTCP(Ctrl_Abstract result) 
-	{  
-		if 		(result instanceof Ctrl_Immediate.Data)						displayContents((Ctrl_Immediate.Data) result);
-		else if (result instanceof Ctrl_Immediate.Ack)						Global.toast("Command accepted", false);
-		else if (result instanceof Ctrl_Abstract.Ack)						Global.toast("Command accepted", false);
-		else if (result instanceof Ctrl_Temperatures.NoConnection)			Global.toast("No Connection established yet", false);
-		else																Global.toast("A Nack has been returned", false);
-	}
-	public void processFinishDialogLong(int fieldId, Long value)
+	public void onReturnTime(int fieldId, Long value)
 	{
 		if 		(fieldId == R.id.timeStart)    		messageExecute.timeStart 				= value;
 		else if	(fieldId == R.id.timeEnd)    		messageExecute.timeEnd 					= value;
     	displayContents();	
 	}
-	public void processFinishDialogInteger(int fieldId, Integer value)
+	public void onReturnTemperature(int fieldId, Integer value)
 	{
     	if      (fieldId == R.id.tempObjective)		messageExecute.tempObjective 			= value;
     	displayContents();

@@ -192,7 +192,7 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     		displayContents();
     	}
 	}
-    public void processFinishDialogString(int fieldId, String value)
+    public void onReturnTime(int fieldId, String value)
     {
     	if ((fieldId == R.id.timeStart)
     	||  (fieldId == R.id.timeEnd)    )
@@ -200,7 +200,7 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     		((TextView) itemView.findViewById(fieldId))			.setText(value);
     	}
     }
-    public void processFinishDialogInteger(int fieldId, Integer value)
+    public void onReturnTemperature(int fieldId, Integer value)
     {
     	if (fieldId == R.id.tempObjective)
     	{
