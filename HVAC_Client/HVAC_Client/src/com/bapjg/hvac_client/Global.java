@@ -89,7 +89,22 @@ public class Global
         String[] days = {"Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"};       
         return days[day - 1];		// Day is between 1 and 7
     }
-    public static String displayTime(Long dateTime)
+   public static String displayDateTime(Long dateTime)
+    {
+		//==============================================================
+		// Accepts a full dateTime argument if UTC and adjusts for local Timezone
+		// returns supplied dateTime in the form hh:mm:ss
+		//==============================================================
+    	String					dateTimeString		= "";
+ 
+        SimpleDateFormat 		sdf 				= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        GregorianCalendar 		calendar 			= new GregorianCalendar();
+        calendar.setTimeInMillis(dateTime);
+        dateTimeString								= sdf.format(dateTime); 
+    	
+    	return dateTimeString;
+    }
+   public static String displayTime(Long dateTime)
     {
 		//==============================================================
 		// Accepts a full dateTime argument if UTC and adjusts for local Timezone

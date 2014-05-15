@@ -40,6 +40,7 @@ public class Menu_3_Calendars 							extends 					Menu_0_Fragment
     	else if (caption.equalsIgnoreCase("Hot Water")) panelFragment 				= new Panel_3_Calendars_Circuits("Hot_Water");
      	else if (caption.equalsIgnoreCase("Radiator"))	panelFragment 				= new Panel_3_Calendars_Circuits("Radiator");
     	else if (caption.equalsIgnoreCase("Floor"))		panelFragment 				= new Panel_3_Calendars_Circuits("Floor");
+    	else if (caption.equalsIgnoreCase("Away List"))	panelFragment 				= new Panel_3_Calendars_Away();
        	else if (caption.equalsIgnoreCase("Refresh"))	doRefresh();
     	else if (caption.equalsIgnoreCase("Update"))	doUpdate();
 

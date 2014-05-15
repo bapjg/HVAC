@@ -67,7 +67,7 @@ public class Dialog_Temperature 								extends 		DialogFragment
 	    }
 	    
 	    EditText				tempChild						= (EditText) temperaturePicker.getChildAt(0);
-	    tempChild.setOnFocusChangeListener((OnFocusChangeListener) this);
+//	    tempChild.setOnFocusChangeListener((OnFocusChangeListener) this);
 	    tempChild.setFocusable(false);
 	    tempChild.setInputType(InputType.TYPE_NULL);
 	    
