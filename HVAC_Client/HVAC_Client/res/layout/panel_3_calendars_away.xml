@@ -47,23 +47,19 @@
         <TextView
             style						= "@style/AD_Text"
             android:layout_height		= "wrap_content"
-         	android:layout_width		= "140dp"
-            android:text				= "Name" />
+         	android:layout_width		= "150dp"
+            android:text				= "Name" 
+            android:gravity				="center_horizontal"
+        />
 
         <TextView 
             style						="@style/AD_Text" 
-            android:layout_width		="70dp" 
+            android:layout_width		="150dp" 
             android:layout_height		="wrap_content" 
             android:text				="Bank" 
-            android:gravity				="right"
+            android:gravity				="center_horizontal"
         />
-        <TextView
-            style						= "@style/AD_Text"
-            android:layout_width		= "120dp"
-            android:layout_height		= "wrap_content"
-            android:text				= "Number" 
-        	android:gravity="right"
-       />
+
 
 	</LinearLayout>
     

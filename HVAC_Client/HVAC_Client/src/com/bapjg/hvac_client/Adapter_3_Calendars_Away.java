@@ -38,12 +38,12 @@ public class Adapter_3_Calendars_Away 						extends 			Adapter_0_Abstract
         String												stringDateStart		= Global.displayDate(dateTimeStart);
         String												stringTimeStart		= Global.displayTime(dateTimeEnd);
         String												stringDateEnd		= Global.displayDate(dateTimeStart);
-        String												stringTimeSEnd		= Global.displayTime(dateTimeEnd);
+        String												stringTimeEnd		= Global.displayTime(dateTimeEnd);
 
         row.dateStart.setText(stringDateStart);
         row.timeStart.setText(stringTimeStart);
         row.dateEnd.setText(stringDateEnd);
-        row.timeEnd.setText(stringTimeSEnd);
+        row.timeEnd.setText(stringTimeEnd);
        
          return adapterView;
     }

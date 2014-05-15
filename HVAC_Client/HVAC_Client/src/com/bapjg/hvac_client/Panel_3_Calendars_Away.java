@@ -3,6 +3,7 @@ package com.bapjg.hvac_client;
 import java.util.ArrayList;
 
 import HVAC_Messages.*;
+import HVAC_Messages.Ctrl_Calendars.Calendar;
 import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,6 +13,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -49,7 +51,7 @@ public class Panel_3_Calendars_Away 						extends 					Panel_0_Fragment
         {
         	displayHeader();
         	displayContents();
-//          setListens();
+        	setListens();
         }
         else // we need to reconnect to the server
         {
@@ -73,6 +75,7 @@ public class Panel_3_Calendars_Away 						extends 					Panel_0_Fragment
 	public void setListens()
 	{
 //		adapterViewList.setOnItemClickListener(this);
+		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
@@ -87,5 +90,22 @@ public class Panel_3_Calendars_Away 						extends 					Panel_0_Fragment
 //		{
 //			Global.toaster("Data NOTNOTNOT received", true);
 //		}
+	}
+	public void onClick(View clickedView)
+	{
+		if (clickedView.getId() == R.id.buttonAdd)
+		{
+			Ctrl_Calendars.Away							itemNew						= new Ctrl_Calendars().new Away();
+	
+			itemNew.dateTimeStart													= Global.now();
+			itemNew.dateTimeEnd														= Global.now() + 24 * 60 * 60 * 1000L;
+			
+			Log.v("App", Global.displayDateTime(itemNew.dateTimeStart));	
+			Log.v("App", Global.displayDateTime(itemNew.dateTimeEnd));
+			
+			Global.eRegCalendars.awayList.add(itemNew);
+			displayContents();
+			setListens();
+		}
 	}
 }
