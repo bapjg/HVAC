@@ -300,9 +300,14 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 
 		Away									awayItem					= new Away();
 		awayItem.dateTimeStart												= System.currentTimeMillis();
-		awayItem.dateTimeEnd												= System.currentTimeMillis() + 30 * 60 * 1000L; // 30 mins
+		awayItem.dateTimeEnd												= awayItem.dateTimeStart + 30 * 60 * 1000L; // 30 mins
 		calendarUpdate.awayList.add(awayItem);
-		
+
+		awayItem															= new Away();
+		awayItem.dateTimeStart												= System.currentTimeMillis() + 60 * 60 * 1000L;
+		awayItem.dateTimeEnd												= awayItem.dateTimeStart + 30 * 60 * 1000L; // 30 mins
+		calendarUpdate.awayList.add(awayItem);
+
 		//
 		//=========================================================================================
 

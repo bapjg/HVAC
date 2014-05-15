@@ -108,4 +108,15 @@ public class Panel_3_Calendars_Away 						extends 					Panel_0_Fragment
 			setListens();
 		}
 	}
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+    	Ctrl_Calendars.Away								itemData					= Global.eRegCalendars.awayList.get(position);
+
+    	Item_3_Calendars_Away							itemFragment				= new Item_3_Calendars_Away(itemData);
+ 
+    	FragmentTransaction 							fTransaction 				= getActivity().getFragmentManager().beginTransaction();
+   		fTransaction.replace(R.id.panel_container, itemFragment);
+   		fTransaction.addToBackStack(null);
+   		fTransaction.commit();
+	}
 }
