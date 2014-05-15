@@ -9,12 +9,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.*;
+import android.view.View.OnFocusChangeListener;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
-public class Dialog_Temperature 								extends 		DialogFragment 
+public class Dialog_Temperature 								extends 		DialogFragment
+																implements		EditText.OnFocusChangeListener
 {
 	private Dialog_Response			callBack;
 	private int						fieldId;
@@ -61,7 +66,12 @@ public class Dialog_Temperature 								extends 		DialogFragment
 	    {
 	    	temps[i] 											= Integer.toString(i * step + tempMin);
 	    }
-
+	    
+	    EditText				tempChild						= (EditText) temperaturePicker.getChildAt(0);
+	    tempChild.setOnFocusChangeListener((OnFocusChangeListener) this);
+	    tempChild.setFocusable(false);
+	    tempChild.setInputType(InputType.TYPE_NULL);
+	    
 	    temperaturePicker.setMinValue(tempMin);
 	    temperaturePicker.setMaxValue(tempMin + steps);
 	    temperaturePicker.setWrapSelectorWheel(false);
@@ -84,4 +94,8 @@ public class Dialog_Temperature 								extends 		DialogFragment
     {
     	dialog.dismiss();
     }
+	public void onFocusChange(View v, boolean hasFocus) 
+	{
+		// TODO Auto-generated method stub
+	}
 }

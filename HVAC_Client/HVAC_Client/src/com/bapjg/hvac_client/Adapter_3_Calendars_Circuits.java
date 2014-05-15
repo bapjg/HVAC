@@ -28,7 +28,7 @@ public class Adapter_3_Calendars_Circuits 				extends 					Adapter_0_Abstract
     	RowHolder 										row							= new RowHolder();
     	Ctrl_Calendars.Calendar							listItem					= (Ctrl_Calendars.Calendar) listData.get(position);
 
-    	adapterView 																= inflater.inflate(R.layout.row_3_calendar_circuit, null);
+    	adapterView 																= inflater.inflate(R.layout.row_3_calendars_circuit, null);
      	row.days																	= (TextView) adapterView.findViewById(R.id.days);
      	row.timeStart																= (TextView) adapterView.findViewById(R.id.timeStart);
     	row.timeEnd																	= (TextView) adapterView.findViewById(R.id.timeEnd);
