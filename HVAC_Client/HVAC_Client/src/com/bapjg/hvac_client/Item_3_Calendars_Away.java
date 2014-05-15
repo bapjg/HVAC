@@ -85,18 +85,22 @@ public class Item_3_Calendars_Away 						extends 					Panel_0_Fragment
     	}
     	else if (clickedView.getId() == R.id.dateStart)
     	{
-     		getFragmentManager().popBackStackImmediate();
+     		// TODO
+    		getFragmentManager().popBackStackImmediate();
     	}
     	else if (clickedView.getId() == R.id.timeStart)
     	{
+     		// TODO
       		getFragmentManager().popBackStackImmediate();
     	}
     	else if (clickedView.getId() == R.id.dateEnd)
     	{
+     		// TODO
      		getFragmentManager().popBackStackImmediate();
     	}
     	else if (clickedView.getId() == R.id.timeEnd)
     	{
+     		// TODO
      		getFragmentManager().popBackStackImmediate();
     	}
  	}
