@@ -12,7 +12,8 @@
 	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Radiator"     		/>
 	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Floor"        		/>
 	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Vocabulary"   		/>
-		<LinearLayout 
+	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Away List"   		/>
+			<LinearLayout 
 		android:layout_width			= "match_parent"
 		android:layout_height			= "match_parent"
 		android:orientation				= "vertical"
