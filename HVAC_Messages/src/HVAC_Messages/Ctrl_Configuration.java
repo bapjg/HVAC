@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 @SuppressWarnings("serial")
-public class Ctrl_Configuration 				extends 					Ctrl_Abstract
+public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 {
 	private static final long 					serialVersionUID 			= 1L;
 	public final transient Integer				CIRCUIT_TYPE_HotWater		= 0;

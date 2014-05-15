@@ -1,6 +1,6 @@
 package HVAC_Messages;
 
-public class Ctrl_Weather 								extends 					Ctrl_Abstract
+public class Ctrl_Weather 								extends 					Ctrl__Abstract
 {
 	private static final long 							serialVersionUID 			= 1L;
 	

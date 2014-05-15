@@ -4,5 +4,5 @@ import HVAC_Messages.*;
 
 public interface HTTP_Response 
 {
-	void processFinishHTTP(Ctrl_Abstract output);
+	void processFinishHTTP(Ctrl__Abstract output);
 }

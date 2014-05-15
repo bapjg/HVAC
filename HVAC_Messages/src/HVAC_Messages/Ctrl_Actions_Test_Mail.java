@@ -1,7 +1,7 @@
 package HVAC_Messages;
 
 @SuppressWarnings("serial")
-public class Ctrl_Actions_Test_Mail 	extends 					Ctrl_Abstract
+public class Ctrl_Actions_Test_Mail 	extends 					Ctrl__Abstract
 {
 	public Ctrl_Actions_Test_Mail()
 	{

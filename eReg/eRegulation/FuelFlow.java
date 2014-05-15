@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl__Abstract;
 import HVAC_Messages.Ctrl_Fuel_Consumption;
 import HVAC_Messages.Ctrl_Fuel_Consumption.Update;
 
@@ -39,7 +39,7 @@ public class FuelFlow
 
 		HTTP_Request							httpRequest			= new HTTP_Request <Ctrl_Fuel_Consumption.Request> ("Management");
 		Ctrl_Fuel_Consumption.Request	 		messageSend 		= (new Ctrl_Fuel_Consumption()).new Request();
-		Ctrl_Abstract 							messageReceive	 	= httpRequest.sendData(messageSend);
+		Ctrl__Abstract 							messageReceive	 	= httpRequest.sendData(messageSend);
 			
 		Global.httpSemaphore.semaphoreUnLock();			
 

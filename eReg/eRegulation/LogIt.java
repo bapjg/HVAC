@@ -219,9 +219,9 @@ public class LogIt
 		messageSend.dateTime 										= System.currentTimeMillis();
 		messageSend.fuelConsumed 									= fuelConsumed;
 			
-		Ctrl_Abstract 							messageReceive	 	= httpRequest.sendData(messageSend);
+		Ctrl__Abstract 							messageReceive	 	= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Ctrl_Abstract.Ack))
+		if (!(messageReceive instanceof Ctrl__Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " Fuel data  is : Nack");
 		}

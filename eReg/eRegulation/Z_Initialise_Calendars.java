@@ -80,7 +80,7 @@ public class Z_Initialise_Calendars
 
 		messageSend.dateTime 										= System.currentTimeMillis();
 			
-		Ctrl_Abstract							messageReceive		= null;
+		Ctrl__Abstract							messageReceive		= null;
 
 		//
 		//================================================================================================================================
@@ -121,7 +121,7 @@ public class Z_Initialise_Calendars
 		try
 		{
 			ObjectInputStream 		response 				= new ObjectInputStream(serverConnection.getInputStream());
-			messageReceive 									= (Ctrl_Abstract) response.readObject();
+			messageReceive 									= (Ctrl__Abstract) response.readObject();
 		}
     	catch (Exception e) 
     	{
@@ -183,7 +183,7 @@ public class Z_Initialise_Calendars
 		try
 		{
 			ObjectInputStream 		response 				= new ObjectInputStream(serverConnection.getInputStream());
-			messageReceive 									= (Ctrl_Abstract) response.readObject();
+			messageReceive 									= (Ctrl__Abstract) response.readObject();
 			System.out.println("Class " + messageReceive.getClass().toString());
 		}
     	catch (Exception e) 

@@ -47,7 +47,7 @@ public class Panel_1_Temperatures 						extends 					Panel_0_Fragment
     	TCP_Send(new Ctrl_Temperatures().new Request());
         return panelView;
     }
-	public void processFinishTCP(Ctrl_Abstract result) 
+	public void processFinishTCP(Ctrl__Abstract result) 
 	{             
 		if 		(result instanceof Ctrl_Temperatures.Data)
 			{

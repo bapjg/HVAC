@@ -29,9 +29,9 @@ public class Adapter_0_Abstract 							extends 					ArrayAdapter
     {
         return listData.size();
     }
-    public Ctrl_Abstract getItem(int position) 
+    public Ctrl__Abstract getItem(int position) 
     {
-        return (Ctrl_Abstract) listData.get(position);
+        return (Ctrl__Abstract) listData.get(position);
     }
     public long getItemId(int position) 
     {

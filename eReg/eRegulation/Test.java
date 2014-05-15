@@ -20,7 +20,7 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl__Abstract;
 import HVAC_Messages.Ctrl_Configuration;
 
 import com.google.gson.Gson;

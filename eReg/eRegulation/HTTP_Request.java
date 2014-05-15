@@ -86,9 +86,9 @@ public class HTTP_Request <SendType>
 			
 		return messageReceive;			
 	}
-	public Ctrl_Abstract sendData(Ctrl_Abstract messageSend)
+	public Ctrl__Abstract sendData(Ctrl__Abstract messageSend)
 	{
-		Ctrl_Abstract					messageReceive		= null;
+		Ctrl__Abstract					messageReceive		= null;
 
 		try
 		{
@@ -110,7 +110,7 @@ public class HTTP_Request <SendType>
 		try
 		{
 			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 									= (Ctrl_Abstract) response.readObject();
+			messageReceive 									= (Ctrl__Abstract) response.readObject();
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{

@@ -1,7 +1,7 @@
 package HVAC_Messages;
 
 @SuppressWarnings("serial")
-public class Ctrl_Temperatures extends Ctrl_Abstract
+public class Ctrl_Temperatures extends Ctrl__Abstract
 {
 	private static final long 			serialVersionUID 			= 1L;
 

@@ -1,6 +1,6 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl__Abstract;
 import HVAC_Messages.Ctrl_Calendars;
 import HVAC_Messages.Ctrl_Configuration;
 import HVAC_Messages.Ctrl_Temperatures;

@@ -79,7 +79,7 @@ public class Z_Initialise_Configuration
 
 		messageSend.dateTime 										= System.currentTimeMillis();
 			
-		Ctrl_Abstract							messageReceive		= null;
+		Ctrl__Abstract							messageReceive		= null;
 
 		//
 		//================================================================================================================================
@@ -117,7 +117,7 @@ public class Z_Initialise_Configuration
 		try
 		{
 			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 									= (Ctrl_Abstract) response.readObject();
+			messageReceive 									= (Ctrl__Abstract) response.readObject();
 		}
     	catch (Exception e) 
     	{
@@ -179,7 +179,7 @@ public class Z_Initialise_Configuration
 		try
 		{
 			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 									= (Ctrl_Abstract) response.readObject();
+			messageReceive 									= (Ctrl__Abstract) response.readObject();
 		}
     	catch (Exception e) 
     	{

@@ -19,8 +19,8 @@ public class Thread_TCPListen 			implements Runnable
     {
 		LogIt.info("Thread_TCPListen", "Run", "Starting", true);            
  
-		Ctrl_Abstract					message_in 							= null;
-		Ctrl_Abstract					message_out 						= null;
+		Ctrl__Abstract					message_in 							= null;
+		Ctrl__Abstract					message_out 						= null;
 
 		try
 		{
@@ -36,12 +36,12 @@ public class Thread_TCPListen 			implements Runnable
 			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
 			        // This previous line results in an EOFException
 			        
-			        message_in 												= (Ctrl_Abstract) input.readObject();
+			        message_in 												= (Ctrl__Abstract) input.readObject();
 
 			        if (message_in == null)
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "Null received from client", true);            
-			            message_out 										= new Ctrl_Abstract().new Nack();
+			            message_out 										= new Ctrl__Abstract().new Nack();
 			        } 
 			    	else
 			    	{
@@ -196,13 +196,13 @@ public class Thread_TCPListen 			implements Runnable
 		}
          return message_return;
 	}
-	private Ctrl_Abstract				process_Ctrl_Immediate_Execute			(Ctrl_Immediate.Execute message_in)
+	private Ctrl__Abstract				process_Ctrl_Immediate_Execute			(Ctrl_Immediate.Execute message_in)
 	{
 		Long	now											= Global.getTimeNowSinceMidnight();
 		
 		String 					circuitName					= message_in.circuitName;
 		Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
-		Ctrl_Abstract 			message_return				= new Ctrl_Abstract().new Ack();;
+		Ctrl__Abstract 			message_return				= new Ctrl__Abstract().new Ack();;
 		
 		if (message_in.action == Ctrl_Immediate.ACTION_Start)
 		{
@@ -230,7 +230,7 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		else
 		{
-			message_return									= new Ctrl_Abstract().new Nack();
+			message_return									= new Ctrl__Abstract().new Nack();
 		}
 		
 		return message_return;

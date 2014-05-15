@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 public class Dialog_Temperature 								extends 		DialogFragment
-																implements		EditText.OnFocusChangeListener
 {
 	private Dialog_Response			callBack;
 	private int						fieldId;
@@ -53,7 +52,7 @@ public class Dialog_Temperature 								extends 		DialogFragment
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
     {
-        AlertDialog.Builder 	builder 						= new AlertDialog.Builder(getActivity());
+    	AlertDialog.Builder 	builder 						= new AlertDialog.Builder(getActivity());
         LayoutInflater 			inflater 						= getActivity().getLayoutInflater();
         
         View					dialogView						= inflater.inflate(R.layout.dialog_temperature, null);
@@ -94,8 +93,4 @@ public class Dialog_Temperature 								extends 		DialogFragment
     {
     	dialog.dismiss();
     }
-	public void onFocusChange(View v, boolean hasFocus) 
-	{
-		// TODO Auto-generated method stub
-	}
 }

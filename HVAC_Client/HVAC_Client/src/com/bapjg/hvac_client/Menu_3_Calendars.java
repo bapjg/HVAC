@@ -65,9 +65,9 @@ public class Menu_3_Calendars 							extends 					Menu_0_Fragment
 		
 		HTTP_Send	(sendUpdate);
 	}
-	public void processFinishHTTP(Ctrl_Abstract messageReturn)
+	public void processFinishHTTP(Ctrl__Abstract messageReturn)
 	{
-		if (messageReturn instanceof Ctrl_Abstract.Ack)
+		if (messageReturn instanceof Ctrl__Abstract.Ack)
 		{
 			Global.toaster("Server updated", false);
 	    	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
@@ -78,7 +78,7 @@ public class Menu_3_Calendars 							extends 					Menu_0_Fragment
 		Global.toaster(messageReturn.getClass().toString(), false);
 		
 	}
-	public void processFinishTCP(Ctrl_Abstract messageReturn)
+	public void processFinishTCP(Ctrl__Abstract messageReturn)
 	{
 		if (messageReturn instanceof Ctrl_Actions_Stop.Ack)
 		{

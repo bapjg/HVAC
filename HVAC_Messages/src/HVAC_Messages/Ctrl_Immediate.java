@@ -1,7 +1,7 @@
 package HVAC_Messages;
 
 @SuppressWarnings("serial")
-public class Ctrl_Immediate 			extends 					Ctrl_Abstract
+public class Ctrl_Immediate 			extends 					Ctrl__Abstract
 {
 	private static final long 			serialVersionUID 			= 1L;
 	public 	static final int			ACTION_Start 				= 1;

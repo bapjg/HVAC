@@ -9,7 +9,7 @@ import HVAC_Messages.*;
 //Template										variable			= something
 //Template										ext/imp				class
 
-public class TCP_Task 							extends 			AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
+public class TCP_Task 							extends 			AsyncTask <Ctrl__Abstract, Void, Ctrl__Abstract>
 {
 	public TCP_Response							callBack;
 	public TCP_Connection						piConnection;
@@ -20,13 +20,13 @@ public class TCP_Task 							extends 			AsyncTask <Ctrl_Abstract, Void, Ctrl_Abs
 		this.callBack												= null;
 	}
 	@Override
-	protected Ctrl_Abstract doInBackground(Ctrl_Abstract... messageOut) 
+	protected Ctrl__Abstract doInBackground(Ctrl__Abstract... messageOut) 
 	{
 		return piConnection.piTransaction(messageOut[0]);
 	}	
 	protected void onProgressUpdate(Void... progress)  { }
 	@Override
-    protected void onPostExecute(Ctrl_Abstract messageReturn) 
+    protected void onPostExecute(Ctrl__Abstract messageReturn) 
 	{             
 		callBack.processFinishTCP(messageReturn);
 		piConnection.disconnect();

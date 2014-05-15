@@ -120,7 +120,7 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 //        view.setAdapter(adapter);
 //        view.setOnItemClickListener((OnItemClickListener) this);	
     }
-	public void processFinishTCP(Ctrl_Abstract result) 
+	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
 		if (result instanceof Ctrl_Configuration.Data)
 		{

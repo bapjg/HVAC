@@ -2,7 +2,7 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl__Abstract;
 import HVAC_Messages.Ctrl_Actions_Relays;
 import HVAC_Messages.Ctrl_Configuration;
 import HVAC_Messages.Ctrl_Configuration.Data;

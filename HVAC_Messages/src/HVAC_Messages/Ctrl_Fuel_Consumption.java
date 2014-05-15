@@ -1,7 +1,7 @@
 package HVAC_Messages;
 
 
-public class Ctrl_Fuel_Consumption 						extends 					Ctrl_Abstract
+public class Ctrl_Fuel_Consumption 						extends 					Ctrl__Abstract
 {
 	private static final long 		serialVersionUID 			= 1L;
 	

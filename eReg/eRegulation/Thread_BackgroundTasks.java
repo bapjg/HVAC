@@ -143,7 +143,8 @@ public class Thread_BackgroundTasks implements Runnable
 			Long Inc_6h_Time		= Global.getTimeAtMidnight() + SIX_HOURS * Inc_6h_Number;		// DateTime of last increment
 			
 
-			if ( (Global.weatherData == null)
+			if ( (Global.weatherData == null                       )
+			||	 (Global.weatherData.dateTimeObtained == null      )								// dateTimeObtained can be null if previous attempt had http failure
 			||	 (Global.weatherData.dateTimeObtained < Inc_6h_Time)   ) 							// Latest 6 hour interval in day
 			{
 				LogIt.info("Thread_Background", "Run", "Weather : get It", true);

@@ -54,13 +54,13 @@ public class Panel_0_Fragment 							extends 					Fragment
 //    	View thisView = inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
 //		return thisView;
 //    }
-	public void HTTP_Send(Ctrl_Abstract message)
+	public void HTTP_Send(Ctrl__Abstract message)
 	{
 		HTTP_Task										task						= new HTTP_Task();
 	   	task.callBack																= this;					// processFinish
 	   	task.execute(message);		
 	}		
-	public void TCP_Send(Ctrl_Abstract message)		
+	public void TCP_Send(Ctrl__Abstract message)		
 	{		
 		TCP_Task										task						= new TCP_Task();
 	   	task.callBack																= this;					// processFinish
@@ -69,8 +69,8 @@ public class Panel_0_Fragment 							extends 					Fragment
 
 	@Override	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 			{}
 	@Override	public void onClick(View v) 																{}
-	@Override	public void processFinishTCP(Ctrl_Abstract result) 											{}
-	@Override	public void processFinishHTTP(Ctrl_Abstract result) 										{}
+	@Override	public void processFinishTCP(Ctrl__Abstract result) 											{}
+	@Override	public void processFinishHTTP(Ctrl__Abstract result) 										{}
 	@Override	public void onReturnTemperature			(int fieldId, Integer response)						{}
 	@Override	public void onReturnTime 				(int fieldId, String  response)						{}
 	@Override	public void onReturnTime   				(int fieldId, Long    response)						{}

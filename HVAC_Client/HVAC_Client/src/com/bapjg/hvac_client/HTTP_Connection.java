@@ -46,7 +46,7 @@ public class HTTP_Connection
 		}
 		return true;
 	}
-	public Ctrl_Abstract serverTransaction(Ctrl_Abstract messageSend)
+	public Ctrl__Abstract serverTransaction(Ctrl__Abstract messageSend)
 	{
 		if (connect())
 		{
@@ -58,7 +58,7 @@ public class HTTP_Connection
 				serverSend.flush();
 				serverSend.close();
 				ObjectInputStream 			serverReceive		= new ObjectInputStream(serverConnection.getInputStream());
-				Ctrl_Abstract				returnMessage  		= (Ctrl_Abstract) serverReceive.readObject();
+				Ctrl__Abstract				returnMessage  		= (Ctrl__Abstract) serverReceive.readObject();
 				serverReceive.close();
 				return returnMessage;
 			}
@@ -67,17 +67,17 @@ public class HTTP_Connection
 	    		// Failure occurred perhaps due to old connection, so set it to null
 				// to force a reconnection
 				server 											= null;
-				return new Ctrl_Abstract().new Nack();
+				return new Ctrl__Abstract().new Nack();
 			}
 			catch(Exception e)
 			{
 				server 											= null;
-				return new Ctrl_Abstract().new Nack();
+				return new Ctrl__Abstract().new Nack();
 			}
 		}
 		else
 		{
-			return new Ctrl_Abstract().new NoConnection();
+			return new Ctrl__Abstract().new NoConnection();
 		}
 	}
 }

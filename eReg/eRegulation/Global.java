@@ -123,7 +123,7 @@ public class Global
 		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
 		
 		Ctrl_Configuration.Request	 						messageSend 		= new Ctrl_Configuration().new Request();
-		Ctrl_Abstract 										messageReceive 		= httpRequest.sendData(messageSend);
+		Ctrl__Abstract 										messageReceive 		= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Ctrl_Configuration.Data))
 		{
@@ -140,7 +140,7 @@ public class Global
 			    String 						dataIn 			= new String(data);
 				
 			    Ctrl_Configuration.Data		dataInJson 		= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
-				messageReceive								= (Ctrl_Abstract) dataInJson;
+				messageReceive								= (Ctrl__Abstract) dataInJson;
 			}  
 			catch(IOException ex)
 			{

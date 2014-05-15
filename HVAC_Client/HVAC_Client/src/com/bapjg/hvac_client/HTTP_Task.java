@@ -10,7 +10,7 @@ import HVAC_Messages.*;
 //Template										variable			= something
 //Template										ext/imp				class
 
-public class HTTP_Task 							extends 			AsyncTask <Ctrl_Abstract, Void, Ctrl_Abstract>
+public class HTTP_Task 							extends 			AsyncTask <Ctrl__Abstract, Void, Ctrl__Abstract>
 {
 	public HTTP_Response						callBack;
 	public HTTP_Connection						serverConnection;
@@ -21,14 +21,14 @@ public class HTTP_Task 							extends 			AsyncTask <Ctrl_Abstract, Void, Ctrl_Ab
 		this.callBack												= null;
 	}
 	@Override
-	protected Ctrl_Abstract doInBackground(Ctrl_Abstract... messageOut) 
+	protected Ctrl__Abstract doInBackground(Ctrl__Abstract... messageOut) 
 	{
 		Log.v("App", "sending message");
 		return serverConnection.serverTransaction(messageOut[0]);
 	}	
 	protected void onProgressUpdate(Void... progress)  { }
 	@Override
-    protected void onPostExecute(Ctrl_Abstract messageReturn) 
+    protected void onPostExecute(Ctrl__Abstract messageReturn) 
 	{             
 		callBack.processFinishHTTP(messageReturn);
     }

@@ -2,7 +2,7 @@ package com.bapjg.hvac_client;
 
 import java.util.TimeZone;
 
-import HVAC_Messages.Ctrl_Abstract;
+import HVAC_Messages.Ctrl__Abstract;
 import HVAC_Messages.Ctrl_Calendars;
 import HVAC_Messages.Ctrl_Configuration;
 import HVAC_Messages.Ctrl_Weather;
@@ -111,25 +111,25 @@ public class Activity_Main 						extends 		Activity
 		}
 		return false;
 	}
-	public void TCP_Send(Ctrl_Abstract message)		
+	public void TCP_Send(Ctrl__Abstract message)		
 	{		
 		TCP_Task										task						= new TCP_Task();
 	   	task.callBack																= this;					// processFinish
 	   	task.execute(message);
 	}
-	public void HTTP_Send(Ctrl_Abstract message)
+	public void HTTP_Send(Ctrl__Abstract message)
 	{
 		HTTP_Task										task						= new HTTP_Task();
 	   	task.callBack																= this;					// processFinish
 	   	task.execute(message);		
 	}		
-	public void processFinishHTTP(Ctrl_Abstract result) 
+	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
 		if 		(result instanceof Ctrl_Calendars.Data)		Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
 		else if (result instanceof Ctrl_Configuration.Data)	Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
 		else												Global.toaster("Data NOTNOTNOT received", true);
 	}
-	public void processFinishTCP(Ctrl_Abstract result) 
+	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
 //		if (result instanceof Ctrl_Configuration.Data)								// No longer used
 //		{

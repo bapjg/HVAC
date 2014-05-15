@@ -4,5 +4,5 @@ import HVAC_Messages.*;
 
 public interface TCP_Response 
 {
-	void processFinishTCP(Ctrl_Abstract output);
+	void processFinishTCP(Ctrl__Abstract output);
 }

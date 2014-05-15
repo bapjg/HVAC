@@ -65,7 +65,7 @@ public class Panel_6_Actions_Stop 						extends 					Panel_0_Fragment
     	}
     }
     @Override
-	public void processFinishTCP(Ctrl_Abstract result) 
+	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
 		if (result instanceof Ctrl_Actions_Stop.Ack)								Global.toaster("Stop Request accepted", true);
 		else   																		Global.toaster("Stop generated error " + result.getClass().toString(), true);

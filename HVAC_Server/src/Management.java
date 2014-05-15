@@ -54,7 +54,7 @@ public class Management extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         Object 							message_in 							= null;
-        Ctrl_Abstract	 				message_out 						= null;
+        Ctrl__Abstract	 				message_out 						= null;
         
         try
         {
@@ -64,17 +64,17 @@ public class Management extends HttpServlet
         catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
-            message_out 													= (new Ctrl_Abstract()).new Nack();
+            message_out 													= (new Ctrl__Abstract()).new Nack();
         }
         catch (IOException eIO)
         {
             System.out.println(dateTime2Time(now()) + " An IO Exception occured : " + eIO);
-            message_out 													= (new Ctrl_Abstract()).new Nack();
+            message_out 													= (new Ctrl__Abstract()).new Nack();
         }
         catch (Exception e)
         {
             System.out.println(dateTime2Time(now()) + " An Exception occurred : " + e);
-            message_out 													= (new Ctrl_Abstract()).new Nack();
+            message_out 													= (new Ctrl__Abstract()).new Nack();
         }
         
         if (message_in != null)
@@ -83,7 +83,7 @@ public class Management extends HttpServlet
         } 
 
         
-        if      (message_in == null)         								message_out 	= (new Ctrl_Abstract()).new Nack();
+        if      (message_in == null)         								message_out 	= (new Ctrl__Abstract()).new Nack();
 		else if (message_in instanceof Ctrl_Configuration.Request)			message_out 	= processConfiguration_Request();
 		else if (message_in instanceof Ctrl_Configuration.Update)			message_out 	= processConfiguration_Update((Ctrl_Configuration.Update) message_in);
         
@@ -94,7 +94,7 @@ public class Management extends HttpServlet
  		else
         {
             System.out.println(dateTime2Time(now()) + " Unsupported message class received from client");
-            message_out 													= (new Ctrl_Abstract()).new Nack();;
+            message_out 													= (new Ctrl__Abstract()).new Nack();;
         }
        	reply(response, message_out);
      }
@@ -168,11 +168,11 @@ public class Management extends HttpServlet
 //        }
 //        return returnBuffer;
 //    }
-    public Ctrl_Abstract 						processCalendars_Request()
+    public Ctrl__Abstract 						processCalendars_Request()
     {
         dbOpen();
         
-        Ctrl_Abstract									returnBuffer 		= new Ctrl_Abstract().new Nack();
+        Ctrl__Abstract									returnBuffer 		= new Ctrl__Abstract().new Nack();
 
         try
         {
@@ -188,7 +188,7 @@ public class Management extends HttpServlet
  
             Ctrl_Calendars.Data							returnBufferPrep	= new Gson().fromJson(dbJsonString, Ctrl_Calendars.Data.class);
     		returnBufferPrep.dateTime										= dbDateTime;											// Add time stamp to mesage
-     		returnBuffer													= (Ctrl_Abstract) returnBufferPrep;
+     		returnBuffer													= (Ctrl__Abstract) returnBufferPrep;
         }
         catch(SQLException e)
         {
@@ -196,11 +196,11 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Ctrl_Abstract		 				processCalendars_Update(Ctrl_Calendars.Update message_in)
+    public Ctrl__Abstract		 				processCalendars_Update(Ctrl_Calendars.Update message_in)
     {
     	dbOpen();
         
-        Ctrl_Abstract 									returnBuffer		= new Ctrl_Abstract().new Ack();
+        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Ack();
 
         try
         {
@@ -222,20 +222,20 @@ public class Management extends HttpServlet
             dbStatement.close();
             dbConnection.close();
 
-            returnBuffer													= new Ctrl_Abstract().new Ack();
+            returnBuffer													= new Ctrl__Abstract().new Ack();
         }
         catch(Exception e)
         {
         	e.printStackTrace();
-            returnBuffer													= new Ctrl_Abstract().new Nack();
+            returnBuffer													= new Ctrl__Abstract().new Nack();
         }
         return returnBuffer;
     }
-    public Ctrl_Abstract		 				processConfiguration_Request()
+    public Ctrl__Abstract		 				processConfiguration_Request()
     {
         dbOpen();
         
-        Ctrl_Abstract 									returnBuffer		= new Ctrl_Abstract().new Nack();
+        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Nack();
 
         try
         {
@@ -251,7 +251,7 @@ public class Management extends HttpServlet
  
             Ctrl_Configuration.Data						returnBufferPrep	= new Gson().fromJson(dbJsonString, Ctrl_Configuration.Data.class);
     		returnBufferPrep.dateTime										= dbDateTime;											// Add time stamp to mesage
-    		returnBuffer													= (Ctrl_Abstract) returnBufferPrep;
+    		returnBuffer													= (Ctrl__Abstract) returnBufferPrep;
         }
         catch(Exception e)
         {
@@ -259,11 +259,11 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Ctrl_Abstract		 				processConfiguration_Update(Ctrl_Configuration.Update message_in)
+    public Ctrl__Abstract		 				processConfiguration_Update(Ctrl_Configuration.Update message_in)
     {
     	dbOpen();
         
-        Ctrl_Abstract 									returnBuffer		= new Ctrl_Abstract().new Ack();
+        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Ack();
 
         try
         {
@@ -285,20 +285,20 @@ public class Management extends HttpServlet
             dbStatement.close();
             dbConnection.close();
 
-            returnBuffer													= new Ctrl_Abstract().new Ack();
+            returnBuffer													= new Ctrl__Abstract().new Ack();
         }
         catch(Exception e)
         {
         	e.printStackTrace();
-            returnBuffer													= new Ctrl_Abstract().new Nack();
+            returnBuffer													= new Ctrl__Abstract().new Nack();
         }
         return returnBuffer;
     }
-    public Ctrl_Abstract 						processFuelConsumption_Request()
+    public Ctrl__Abstract 						processFuelConsumption_Request()
     {
         dbOpen();
         
-        Ctrl_Abstract									returnBuffer 		= new Ctrl_Abstract().new Nack();
+        Ctrl__Abstract									returnBuffer 		= new Ctrl__Abstract().new Nack();
 
         try
         {
@@ -313,7 +313,7 @@ public class Management extends HttpServlet
     		dbData.fuelConsumed												= dbFuelConsumed;
     		dbData.dateTime													= dbDateTime;
 
-    		returnBuffer													= (Ctrl_Abstract) dbData;
+    		returnBuffer													= (Ctrl__Abstract) dbData;
     		
     		dbStatement.close();
             dbConnection.close();
@@ -325,7 +325,7 @@ public class Management extends HttpServlet
         return returnBuffer;
     }
 
-    public void reply(HttpServletResponse response, Ctrl_Abstract message_out) throws IOException 
+    public void reply(HttpServletResponse response, Ctrl__Abstract message_out) throws IOException 
     {
         System.out.println(dateTime2Time(now()) + " ----Class replied " + message_out.getClass().toString());
         response.reset();
