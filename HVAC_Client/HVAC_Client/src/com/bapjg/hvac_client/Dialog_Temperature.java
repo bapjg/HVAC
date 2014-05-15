@@ -1,6 +1,6 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Messages.*;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
