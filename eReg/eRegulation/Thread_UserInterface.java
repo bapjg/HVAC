@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.*;
 
-import eRegulation.Message_Abstract.Nack;
+import HVAC_Messages.Rpt_Abstract.Nack;
+
  
 public class Thread_UserInterface implements Runnable
 {

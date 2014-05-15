@@ -44,9 +44,9 @@ public class HTTP_Request <SendType>
 		servletConnection.setReadTimeout(1000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 	}
-	public Message_Abstract sendData(Message_Abstract messageSend)
+	public Rpt_Abstract sendData(Rpt_Abstract messageSend)
 	{
-		Message_Abstract				messageReceive		= null;
+		Rpt_Abstract				messageReceive		= null;
 
 		try
 		{
@@ -68,7 +68,7 @@ public class HTTP_Request <SendType>
 		try
 		{
 			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 									= (Message_Abstract) response.readObject();
+			messageReceive 									= (Rpt_Abstract) response.readObject();
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{

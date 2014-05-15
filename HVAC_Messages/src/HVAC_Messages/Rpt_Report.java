@@ -1,6 +1,7 @@
-package eRegulation;
+package HVAC_Messages;
 
-public class Message_Report extends Message_Abstract
+
+public class Rpt_Report extends Rpt_Abstract
 {
 	private static final long 		serialVersionUID 			= 1L;
 	public Long						dateTime;

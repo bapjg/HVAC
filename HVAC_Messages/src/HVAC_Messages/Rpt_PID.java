@@ -1,13 +1,14 @@
-package eRegulation;
+package HVAC_Messages;
 
-public class Message_PID extends Message_Abstract
+
+public class Rpt_PID extends Rpt_Abstract
 {
 	private static final long 		serialVersionUID 			= 1L;
 	
-	public Message_PID()
+	public Rpt_PID()
 	{
 	}
-	public class Data extends Message_Abstract
+	public class Data extends Rpt_Abstract
 	{
 		private static final long 		serialVersionUID 			= 1L;
 		public Long						dateTime;
@@ -22,10 +23,10 @@ public class Message_PID extends Message_Abstract
 		public Integer					tempOut;	
 		public Integer					tempBoiler;	
 	}
-	public class Request extends Message_Abstract
+	public class Request extends Rpt_Abstract
 	{
 	}
-	public class Update extends Message_PID.Data
+	public class Update extends Rpt_PID.Data
 	{
 	}
 }

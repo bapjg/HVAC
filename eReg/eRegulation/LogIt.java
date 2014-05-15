@@ -30,18 +30,18 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request	<Message_Report>		httpRequest			= new HTTP_Request <Message_Report> ("Monitor");
+		HTTP_Request	<Rpt_Report>		httpRequest			= new HTTP_Request <Rpt_Report> ("Monitor");
 		
-		Message_Report	 						messageSend 		= new Message_Report();
+		Rpt_Report	 						messageSend 		= new Rpt_Report();
 		messageSend.dateTime 										= System.currentTimeMillis();
 		messageSend.reportType 										= messageType;
 		messageSend.className 										= className;
 		messageSend.methodName 										= methodName;
 		messageSend.reportText 										= message;
 			
-		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		Rpt_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Message_Abstract.Ack))
+		if (!(messageReceive instanceof Rpt_Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " Logit.logMessage" + messageType + "  is : Nack");
 		}
@@ -114,9 +114,9 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request 							httpRequest			= new HTTP_Request <Message_PID.Update> ("Monitor");
+		HTTP_Request 							httpRequest			= new HTTP_Request <Rpt_PID.Update> ("Monitor");
 		
-		Message_PID.Data 						messageSend 		= (new Message_PID()).new Update();
+		Rpt_PID.Data 						messageSend 		= (new Rpt_PID()).new Update();
 		messageSend.dateTime 										= System.currentTimeMillis();
 		messageSend.target		 									= target; 
 		messageSend.proportional		 							= proportional; 
@@ -129,9 +129,9 @@ public class LogIt
 		messageSend.tempOut		 									= tempOut;
 		messageSend.tempBoiler		 								= tempBoiler;
 			
-		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		Rpt_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 		
-		if (!(messageReceive instanceof Message_Abstract.Ack))
+		if (!(messageReceive instanceof Rpt_Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " pid data  is : Nack");
 		}
@@ -146,9 +146,9 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request <Message_Temperatures>		httpRequest			= new HTTP_Request <Message_Temperatures> ("Monitor");
+		HTTP_Request <Rpt_Temperatures>		httpRequest			= new HTTP_Request <Rpt_Temperatures> ("Monitor");
 		
-		Message_Temperatures 					messageSend 		= new Message_Temperatures();
+		Rpt_Temperatures 					messageSend 		= new Rpt_Temperatures();
 		messageSend.dateTime 										= System.currentTimeMillis();
 		
 		messageSend.tempBoiler 										= Global.thermoBoiler.reading;
@@ -171,9 +171,9 @@ public class LogIt
 		messageSend.pidMixerDifferential							= Global.thermoFloorOut.pidControler.dTdt();
 		messageSend.pidBoilerOutDifferential						= Global.thermoBoilerOut.pidControler.dTdt();
 
-		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		Rpt_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 		
-		if (!(messageReceive instanceof Message_Abstract.Ack))
+		if (!(messageReceive instanceof Rpt_Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " Temp data  is : Nack");
 		}
@@ -188,17 +188,17 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request <Message_MixerMouvement>	httpRequest			= new HTTP_Request <Message_MixerMouvement> ("Monitor");
+		HTTP_Request <Rpt_MixerMouvement>	httpRequest			= new HTTP_Request <Rpt_MixerMouvement> ("Monitor");
 		
-		Message_MixerMouvement 					messageSend 		= new Message_MixerMouvement();
+		Rpt_MixerMouvement 					messageSend 		= new Rpt_MixerMouvement();
 		messageSend.dateTimeStart 									= dateTimeStart;
 		messageSend.positionTrackedStart 							= positionTrackedStart;
 		messageSend.dateTimeEnd 									= dateTimeEnd;
 		messageSend.positionTrackedEnd								= positionTrackedEnd;
 		
-		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		Rpt_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 		
-		if (!(messageReceive instanceof Message_Abstract.Ack))
+		if (!(messageReceive instanceof Rpt_Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " Temp data  is : Nack");
 		}
@@ -236,16 +236,16 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request <Message_Action>			httpRequest			= new HTTP_Request <Message_Action> ("Monitor");
+		HTTP_Request <Rpt_Action>			httpRequest			= new HTTP_Request <Rpt_Action> ("Monitor");
 
-		Message_Action	 						messageSend 		= new Message_Action();
+		Rpt_Action	 						messageSend 		= new Rpt_Action();
 		messageSend.dateTime 										= System.currentTimeMillis();
 		messageSend.device 											= device;
 		messageSend.action 											= action;
 			
-		Message_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		Rpt_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Message_Abstract.Ack))
+		if (!(messageReceive instanceof Rpt_Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " Action data  is : Nack");
 		}

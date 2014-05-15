@@ -1,6 +1,7 @@
-package eRegulation;
+package HVAC_Messages;
 
-public class Message_MixerMouvement extends Message_Abstract
+
+public class Rpt_MixerMouvement extends Rpt_Abstract
 {
 	private static final long 		serialVersionUID 			= 1L;
 	public Long						dateTimeStart;

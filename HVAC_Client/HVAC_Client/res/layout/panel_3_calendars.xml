@@ -30,7 +30,7 @@
         />
         <Button
             android:id					="@+id/buttonAdd"
-            style						="@style/AD_Button"
+            style						="@style/AD_ImageButton"
             android:layout_width		="100dp"
             android:background			="@android:color/transparent"
             android:drawableTop			="@drawable/button_add"

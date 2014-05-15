@@ -1,7 +1,7 @@
-package eRegulation;
+package HVAC_Messages;
 
 @SuppressWarnings("serial")
-public class Message_Temperatures extends Message_Abstract
+public class Rpt_Temperatures extends Rpt_Abstract
 {
 	private static final long 		serialVersionUID 			= 1L;
 	public Long						dateTime;
