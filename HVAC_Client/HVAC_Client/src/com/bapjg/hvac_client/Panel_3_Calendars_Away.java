@@ -74,22 +74,21 @@ public class Panel_3_Calendars_Away 						extends 					Panel_0_Fragment
 	public void setListens()
 	{
 		((AdapterView <Adapter_3_Calendars_Away>) adapterView).setOnItemClickListener(this);
-//		adapterViewList.setOnItemClickListener(this);
 		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
-//		if (result instanceof Ctrl_Calendars.Data)
-//		{
-//			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
-//			displayHeader();
-//			displayContents();
-//	        setListens();
-// 		}
-//		else
-//		{
-//			Global.toaster("Data NOTNOTNOT received", true);
-//		}
+		if (result instanceof Ctrl_Calendars.Data)
+		{
+			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
+			displayHeader();
+			displayContents();
+	        setListens();
+ 		}
+		else
+		{
+			Global.toaster("Data NOTNOTNOT received", true);
+		}
 	}
 	public void onClick(View clickedView)
 	{
@@ -99,9 +98,6 @@ public class Panel_3_Calendars_Away 						extends 					Panel_0_Fragment
 	
 			itemNew.dateTimeStart													= Global.now();
 			itemNew.dateTimeEnd														= Global.now() + 24 * 60 * 60 * 1000L;
-			
-			Log.v("App", Global.displayDateTime(itemNew.dateTimeStart));	
-			Log.v("App", Global.displayDateTime(itemNew.dateTimeEnd));
 			
 			Global.eRegCalendars.awayList.add(itemNew);
 			displayContents();

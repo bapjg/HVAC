@@ -1,8 +1,8 @@
 package com.bapjg.hvac_client;
 
-public class ZZ_ThrowAway_Mgmt_Msg_Temperatures   extends Mgmt_Msg_Abstract
+public class ZZ_ThrowAway_Mgmt_Msg_Temperatures   extends ZZ_ThrowAway_Mgmt_Msg_Abstract
 {
-	public class Data   extends Mgmt_Msg_Abstract
+	public class Data   extends ZZ_ThrowAway_Mgmt_Msg_Abstract
 	{
 		public  Long				dateTime;
 		public  String				date;
@@ -18,7 +18,7 @@ public class ZZ_ThrowAway_Mgmt_Msg_Temperatures   extends Mgmt_Msg_Abstract
 		public  Integer				tempOutside;
 		public  Integer				tempLivingRoom;
 	}
-	public class Request   extends Mgmt_Msg_Abstract
+	public class Request   extends ZZ_ThrowAway_Mgmt_Msg_Abstract
 	{
 	}
 }

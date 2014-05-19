@@ -62,7 +62,8 @@ public class Thread_TCPListen 			implements Runnable
 			    		
 			    		else if (message_in instanceof Ctrl_Actions_Stop.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
 			        } 
-
+					LogIt.info("Thread_TCPListen", "Run", "Received : " + message_in.getClass().toString()+ ", Returned : " + message_out.getClass().toString(), true);            
+			        
 			        ObjectOutputStream 		output							= null;
 					
 					output 													= new ObjectOutputStream(UI_Socket.getOutputStream());
