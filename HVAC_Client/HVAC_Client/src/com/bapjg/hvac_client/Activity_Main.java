@@ -38,7 +38,6 @@ public class Activity_Main 						extends 		Activity
         HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
         HTTP_Send	(new Ctrl_Configuration().new Request());
         TCP_Send	(new Ctrl_Weather().new Request());
-
         
         ActionBar 				actionbar 				= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -58,7 +57,7 @@ public class Activity_Main 						extends 		Activity
         Global.menuImmediate							= new Menu_2_Immediate		();
         Global.menuCalendars							= new Menu_3_Calendars		();
         Global.menuWeather								= new Menu_4_Weather		();
-        Global.menuConfiguration						= new Menu_5_Configuration			();
+        Global.menuConfiguration						= new Menu_5_Configuration	();
         Global.menuActions								= new Menu_6_Actions		();
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
@@ -143,6 +142,7 @@ public class Activity_Main 						extends 		Activity
 		}
 		else
 		{
+			Global.toaster("We are in Activity_Main", true);
 			Global.toaster("Data NOTNOTNOT received", true);
 		}
 	}

@@ -1,6 +1,6 @@
 package com.bapjg.hvac_client;
 
-public class Mgmt_Msg_Temperatures   extends Mgmt_Msg_Abstract
+public class ZZ_ThrowAway_Mgmt_Msg_Temperatures   extends Mgmt_Msg_Abstract
 {
 	public class Data   extends Mgmt_Msg_Abstract
 	{
