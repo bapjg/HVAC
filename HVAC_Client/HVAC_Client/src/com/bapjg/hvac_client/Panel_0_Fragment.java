@@ -69,10 +69,11 @@ public class Panel_0_Fragment 							extends 					Fragment
 
 	@Override	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 			{}
 	@Override	public void onClick(View v) 																{}
-	@Override	public void processFinishTCP(Ctrl__Abstract result) 											{}
+	@Override	public void processFinishTCP(Ctrl__Abstract result) 										{}
 	@Override	public void processFinishHTTP(Ctrl__Abstract result) 										{}
 	@Override	public void onReturnTemperature			(int fieldId, Integer response)						{}
 	@Override	public void onReturnTime 				(int fieldId, String  response)						{}
 	@Override	public void onReturnTime   				(int fieldId, Long    response)						{}
+	@Override	public void onReturnString 				(int fieldId, String  response)						{}
 }
 

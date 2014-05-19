@@ -18,7 +18,7 @@ public class Pumps
 			Pump pumpItem 				= new Pump(paramPump);
 			pumpList.add(pumpItem);
 		}
-		dateTimeLastClean				= 0L;
+		dateTimeLastClean				= Global.now();						// Avoid cleaning just after reboot
 	}
 	public Pump fetchPump(String name)
 	{

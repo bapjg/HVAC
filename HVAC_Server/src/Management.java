@@ -217,6 +217,9 @@ public class Management extends HttpServlet
             dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
             dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
             dbResultSet.updateString	("Calendars", 				dbJsonString);
+//            dbResultSet.updateString	("date", 					"xxx");
+//            dbResultSet.updateString	("time", 					"xxx");
+//            dbResultSet.updateString	("Calendars", 				"xxx");
             dbResultSet.insertRow();
 
             dbStatement.close();

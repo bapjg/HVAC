@@ -74,7 +74,7 @@ public class Menu_3_Calendars 							extends 					Menu_0_Fragment
 	    	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
 // TODO	    	stopMessage.actionRequest													= Ctrl_Actions_Stop.ACTION_Reload_Calendars;
 	    	stopMessage.actionRequest													= Ctrl_Actions_Stop.ACTION_Restart;
-	    	TCP_Send	(stopMessage);
+//	    	TCP_Send	(stopMessage);
 		}
 		Global.toaster(messageReturn.getClass().toString(), false);
 		

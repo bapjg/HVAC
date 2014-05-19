@@ -27,15 +27,16 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
 	private	String										daysWord;
 	private	String										daysNumbers;
 	private	String										daysWordNumbers;
+	private String										circuitName;
 	
-	
-	public Item_3_Calendars_Circuits(Ctrl_Calendars.Calendar itemData)
+	public Item_3_Calendars_Circuits(Ctrl_Calendars.Calendar itemData, String circuitName)
 	{
 		super();
 		this.itemData																= itemData;
 		this.daysWord																= "";
 		this.daysNumbers															= itemData.days; //name or days
 		this.daysWordNumbers														= ""; //name or days
+		this.circuitName															= circuitName;
 		
 		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
 		{
@@ -133,7 +134,7 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     	}
      	else if (clickedView.getId() == R.id.buttonDelete)
     	{
-     		Global.eRegCalendars.fetchCircuit("TODO").calendarList.remove(itemData);
+     		Global.eRegCalendars.fetchCircuit(circuitName).calendarList.remove(itemData);
      		getFragmentManager().popBackStackImmediate();
     	}
      	else if (clickedView.getId() == R.id.days)
@@ -206,6 +207,14 @@ public class Item_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     	{
     		Integer										tempObjective				= value/1000;
     		((TextView) itemView.findViewById(fieldId))			.setText(tempObjective.toString() + " °C");
+    	}
+    }
+    public void onReturnString(int fieldId, String value)
+    {
+    	if (fieldId == R.id.days)
+    	{
+    		itemData.days															= value;
+    		((TextView) itemView.findViewById(fieldId))			.setText(value);
     	}
     }
 }
