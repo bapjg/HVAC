@@ -70,10 +70,10 @@ public class Panel_3_Calendars_Away 						extends 					Panel_0_Fragment
 	    AdapterView <Adapter_3_Calendars_Away>					adapterViewList		= (AdapterView <Adapter_3_Calendars_Away>) adapterView;
 	    Adapter_3_Calendars_Away								arrayAdapter		= new Adapter_3_Calendars_Away(Global.actContext, R.id.List_View, Global.eRegCalendars.awayList);
 		adapterViewList.setAdapter(arrayAdapter);
-
 	}
 	public void setListens()
 	{
+		((AdapterView <Adapter_3_Calendars_Away>) adapterView).setOnItemClickListener(this);
 //		adapterViewList.setOnItemClickListener(this);
 		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
 	}
