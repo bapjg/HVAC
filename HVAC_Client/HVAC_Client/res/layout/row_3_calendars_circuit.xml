@@ -1,26 +1,37 @@
 <?xml version= "1.0" encoding= "utf-8"?>
-<LinearLayout 
-    xmlns:android					="http://schemas.android.com/apk/res/android"
-    android:id						= "@+id/row"
-    android:layout_width			= "288dp"
-    android:layout_height			= "wrap_content"
-    android:gravity					= "center_vertical"
-    android:background				= "@color/background"
-    android:orientation				= "vertical"
-    android:descendantFocusability	= "blocksDescendants"
-  >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/AD_Text"
+            android:layout_width="200dp"
+            android:layout_height="15dp" />
+    </LinearLayout>
+
    	<TextView
-        android:id					= "@+id/days"
-        style						= "@style/AD_Text"
- 		android:gravity				= "center_horizontal"
-    	android:layout_width		= "288dp"
-   	/>
-   	<LinearLayout 
-    	android:layout_width	 	= "match_parent"
-    	android:layout_height	 	= "40dp"
-    	android:orientation		 	= "horizontal"
-        android:id			 		= "@+id/daySlots"
-	>
+   	    android:id="@+id/days"
+   	    style="@style/AD_Text"
+   	    android:layout_width="288dp"
+   	    android:layout_height="wrap_content"
+   	    android:gravity="center_horizontal" />
+
+   	<LinearLayout
+   	    android:id="@+id/daySlots"
+   	    android:layout_width="match_parent"
+   	    android:layout_height="wrap_content"
+   	    android:orientation="horizontal" >
+
  	    <!-- Days of the week -->
    	    
     </LinearLayout>
@@ -109,21 +120,13 @@
 	    android:layout_height		= "wrap_content"
 	    android:orientation			= "horizontal"
 	>
-	    <!-- Black seperator + Empty Line -->
+	    <!-- Empty Line -->
 
       	<TextView
-      	    style					= "@style/AD_Text"
-      	    android:layout_width	= "288dp"
-      	    android:layout_height	= "8dp"
-      	    android:background		= "@color/Black"
-      	    android:text			= ""
-     	/>
-
-      	<TextView
-	        style					= "@style/AD_Text"
-        	android:text			= ""
-	    	android:layout_width	= "200dp"
-	    />
+      	    style="@style/AD_Text"
+      	    android:layout_width="200dp"
+      	    android:layout_height="15dp"
+      	    android:text="" />
 	    
 	</LinearLayout>
 		

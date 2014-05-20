@@ -55,7 +55,7 @@ public class Adapter_3_Calendars_Circuits 				extends 					Adapter_0_Abstract
     	}
     	// Get the space reserved for days of week, create and colour the texts view (Red=Used, Blue=Unused
         ViewGroup 										daySlots					= (ViewGroup) adapterView.findViewById(R.id.daySlots);
-        LayoutParams 									daySlotLayout				= new LayoutParams(40, LayoutParams.MATCH_PARENT);	//Width=20
+        LayoutParams 									daySlotLayout				= new LayoutParams(40, LayoutParams.MATCH_PARENT);	//Width=40
         TextView										daySlot;
     	
     	for (Integer i = 1; i < 8; i++)	//Monday to Sunday
