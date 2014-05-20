@@ -15,7 +15,8 @@ public class Thread_Mixer implements Runnable
 		LogIt.info("Thread_Mixer_" + circuit.name, "Run", "Starting", true);		
 
 		mixer.positionZero();
-		LogIt.mixerData(Global.now(), 0, Global.now(), mixer.positionTracked);
+//		LogIt.mixerData(Global.now(), 0, Global.now(), mixer.positionTracked);	// Problem with dbInsert if timeStart = timeEnd (primary Index)
+		LogIt.mixerData(Global.now(), 0, 0L, 0);								// If timeEnd = 0, then the second part is not inserted into DataBase
 		
 		Integer 				i							= 0; 	// Used for loop waiting 20 s
 		Integer 				targetTemp;

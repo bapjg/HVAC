@@ -348,7 +348,6 @@ public class Global
  	}
 	public static Long now()
 	{
-		// Determine from outside temperature whether summer or not
 		return Calendar.getInstance().getTimeInMillis();
  	}
 	public static void burnerPanic(String reason)

@@ -180,7 +180,7 @@ public class LogIt
 
 		Global.httpSemaphore.semaphoreUnLock();			
     }
-	public static void mixerData(Long dateTimeStart,Integer positionTrackedStart, Long dateTimeEnd, Integer positionTrackedEnd)
+	public static void mixerData(Long dateTimeStart, Integer positionTrackedStart, Long dateTimeEnd, Integer positionTrackedEnd)
     {
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.mixerData"))
 		{
