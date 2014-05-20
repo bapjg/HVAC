@@ -13,7 +13,8 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-public class Adapter_0_String_List 			extends 			Adapter_0_Abstract
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Adapter_0_String_List 								extends 					Adapter_0_Abstract
 {
  
     public Adapter_0_String_List(Context context, int resource, ArrayList listData) 
@@ -23,11 +24,11 @@ public class Adapter_0_String_List 			extends 			Adapter_0_Abstract
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-    	RowHolder 							row					= new RowHolder();
-    	String								listItem			= (String) listData.get(position);
-        adapterView 											= inflater.inflate(R.layout.row_0_string_list, null);
+    	RowHolder 												row							= new RowHolder();
+    	String													listItem					= (String) listData.get(position);
+        adapterView 																		= inflater.inflate(R.layout.row_0_string_list, null);
 
-        row.rowItem 											= (TextView) adapterView.findViewById(R.id.rowItem);
+        row.rowItem 																		= (TextView) adapterView.findViewById(R.id.rowItem);
 
         adapterView.setTag(row);
 
@@ -37,12 +38,6 @@ public class Adapter_0_String_List 			extends 			Adapter_0_Abstract
     }
     static class RowHolder 
     {
-    	TextView 							rowItem;
+    	TextView 												rowItem;
     }	
-//    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
-//    {
-//        // Object 		o 								= view.getItemAtPosition(position);
-//        // NewsItem 	newsData 						= (NewsItem) o;
-//		Toast.makeText(myContext, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();
-//    }
 }

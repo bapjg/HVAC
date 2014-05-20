@@ -16,12 +16,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
-public class Menu_4_Weather 							extends 					Menu_0_Fragment 
-														implements 					View.OnClickListener
+public class Menu_4_Weather 									extends 					Menu_0_Fragment 
+																implements 					View.OnClickListener
 {
 	public Menu_4_Weather()
 	{

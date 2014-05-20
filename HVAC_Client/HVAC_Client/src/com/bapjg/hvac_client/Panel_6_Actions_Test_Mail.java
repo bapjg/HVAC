@@ -21,8 +21,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Panel_6_Actions_Test_Mail 					extends 					Panel_0_Fragment  
+public class Panel_6_Actions_Test_Mail 							extends 					Panel_0_Fragment  
 {
 	public Panel_6_Actions_Test_Mail()
 	{
@@ -30,8 +31,8 @@ public class Panel_6_Actions_Test_Mail 					extends 					Panel_0_Fragment
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity																= getActivity();
-    	View											panelView					= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
+    	this.activity																		= getActivity();
+    	View													panelView					= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
  
     	panelView.findViewById(R.id.buttonSendMail).setOnClickListener(this);
    	

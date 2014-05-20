@@ -11,7 +11,8 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-public class Adapter_5_Configuration_Pumps 					extends 			Adapter_0_Abstract
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Adapter_5_Configuration_Pumps 						extends 					Adapter_0_Abstract
 {
   
     public Adapter_5_Configuration_Pumps(Context context, int resource, ArrayList listData) 

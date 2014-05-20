@@ -13,28 +13,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
-public class Menu_2_Immediate 							extends 					Menu_0_Fragment 
-														implements 					View.OnClickListener
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+
+public class Menu_2_Immediate 									extends 					Menu_0_Fragment 
+																implements 					View.OnClickListener
 {
 	public Menu_2_Immediate()
 	{
 		super();
-		this.menuLayout																= R.layout.menu_2_immediate;
+		this.menuLayout																		= R.layout.menu_2_immediate;
 	}
 	public void onClick(View myView) 
 	{
 		super.onClick(myView);
 		
-    	String											caption						= ((Button) myView).getText().toString();
-    	FragmentTransaction								fTransaction				= getFragmentManager().beginTransaction();
-    	Fragment 										panelFragment				= null;
+    	String													caption						= ((Button) myView).getText().toString();
+    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
+    	Fragment 												panelFragment				= null;
     	
-    	if      (caption.equalsIgnoreCase("Hot Water"))	panelFragment 				= new Panel_2_Immediate("Hot_Water");
-    	else if (caption.equalsIgnoreCase("Radiator"))	panelFragment 				= new Panel_2_Immediate("Radiator");
-    	else if (caption.equalsIgnoreCase("Floor"))		panelFragment 				= new Panel_2_Immediate("Floor");
+    	if      (caption.equalsIgnoreCase("Hot Water"))			panelFragment 				= new Panel_2_Immediate("Hot_Water");
+		else if (caption.equalsIgnoreCase("Radiator"))			panelFragment 				= new Panel_2_Immediate("Radiator");
+		else if (caption.equalsIgnoreCase("Floor"))				panelFragment 				= new Panel_2_Immediate("Floor");
 
     	if (panelFragment != null)
     	{

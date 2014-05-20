@@ -13,7 +13,8 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-public class Adapter_5_Configuration_Circuits 			extends 			Adapter_0_Abstract
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Adapter_5_Configuration_Circuits 					extends 					Adapter_0_Abstract
 {
  
     public Adapter_5_Configuration_Circuits(Context context, int resource, ArrayList listData) 
@@ -33,8 +34,10 @@ public class Adapter_5_Configuration_Circuits 			extends 			Adapter_0_Abstract
         adapterView.setTag(row);
 
         row.name.setText					(listItem.name);
-       	row.gradient.setChecked				( ! (listItem.tempGradient == null));
-       	row.mixer.setChecked				( ! (listItem.mixer == null));
+       	row.gradient.setChecked				( ! (listItem.tempGradient 	== null));
+       	row.gradient.setEnabled(false);
+       	row.mixer.setChecked				( ! (listItem.mixer 		== null));
+       	row.mixer.setEnabled(false);
 
         return adapterView;
     }

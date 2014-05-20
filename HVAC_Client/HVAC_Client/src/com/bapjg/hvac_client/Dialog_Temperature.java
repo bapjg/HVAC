@@ -18,9 +18,10 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
-public class Dialog_Temperature 								extends 		DialogFragment
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Dialog_Temperature 								extends 					DialogFragment
 {
-	private Dialog_Response			callBack;
+	private Dialog_Response										callBack;
 	private int						fieldId;
 	private NumberPicker 			temperaturePicker;
 	private Integer					tempMin;

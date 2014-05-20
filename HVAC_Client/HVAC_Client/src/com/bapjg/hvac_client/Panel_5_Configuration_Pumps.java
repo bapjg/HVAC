@@ -27,6 +27,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.EditText;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment 
 {

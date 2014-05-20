@@ -15,7 +15,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 @SuppressLint("ValidFragment")
-public class Dialog_Date 										extends 		DialogFragment 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Dialog_Date 										extends 					DialogFragment 
 {
 	public DatePicker 	datePicker;
 	public Integer  	dateInitialDay;
@@ -29,14 +30,14 @@ public class Dialog_Date 										extends 		DialogFragment
 	public Dialog_Date(TextView	writeBack) 
     {
 		super();
-		this.writeBack											= writeBack;
+		this.writeBack																		= writeBack;
 		
-		String 					dateInitial						= writeBack.getText().toString();
-		String[] 				dateInitialParts				= dateInitial.split("/");
+		String 													dateInitial					= writeBack.getText().toString();
+		String[] 												dateInitialParts			= dateInitial.split("/");
 		
-		this.dateInitialDay										= Integer.parseInt(dateInitialParts[0]);
-		this.dateInitialMonth									= Integer.parseInt(dateInitialParts[1]);
-		this.dateInitialYear									= Integer.parseInt(dateInitialParts[2]);
+		this.dateInitialDay																	= Integer.parseInt(dateInitialParts[0]);
+		this.dateInitialMonth																= Integer.parseInt(dateInitialParts[1]);
+		this.dateInitialYear																= Integer.parseInt(dateInitialParts[2]);
     }
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 

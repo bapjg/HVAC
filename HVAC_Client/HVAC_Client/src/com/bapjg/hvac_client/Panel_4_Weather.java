@@ -17,12 +17,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.util.Log;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Panel_4_Weather 							extends 					Panel_0_Fragment
+public class Panel_4_Weather 									extends 					Panel_0_Fragment
 {
-	private String										when;
-	private ArrayList <Ctrl_WeatherData.Forecast> 		forecastList;
-	private View										panelView;
+	private String												when;
+	private ArrayList <Ctrl_WeatherData.Forecast> 				forecastList;
+	private View												panelView;
 	
 	public Panel_4_Weather()
 	{

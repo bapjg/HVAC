@@ -15,10 +15,11 @@ import android.widget.Toast;
 
 import HVAC_Messages.*;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class HTTP_Connection
 {
-	public static							URL				server;
-	public 									URLConnection	serverConnection;
+	public static	URL											server;
+	public 			URLConnection								serverConnection;
 	
 	public HTTP_Connection()
 	{
@@ -28,10 +29,10 @@ public class HTTP_Connection
 	{
 		if (server == null)
 		{
-			try												// Try last known address - DNS always resolves home.bapjg.com, either to local or remote
+			try																				// Try last known address - DNS always resolves home.bapjg.com, either to local or remote
 			{
-				server 										= new URL("http://home.bapjg.com:8888/hvac/Management");
-				serverConnection 							= server.openConnection();
+				server 																		= new URL("http://home.bapjg.com:8888/hvac/Management");
+				serverConnection 															= server.openConnection();
 				serverConnection.setDoOutput(true);
 				serverConnection.setUseCaches(false);
 				serverConnection.setConnectTimeout(5000);
@@ -52,13 +53,13 @@ public class HTTP_Connection
 		{
 			try
 			{
-				ObjectOutputStream 			serverSend;
-				serverSend 										= new ObjectOutputStream(serverConnection.getOutputStream());
+				ObjectOutputStream 								serverSend;
+				serverSend 																	= new ObjectOutputStream(serverConnection.getOutputStream());
 				serverSend.writeObject(messageSend);
 				serverSend.flush();
 				serverSend.close();
-				ObjectInputStream 			serverReceive		= new ObjectInputStream(serverConnection.getInputStream());
-				Ctrl__Abstract				returnMessage  		= (Ctrl__Abstract) serverReceive.readObject();
+				ObjectInputStream 								serverReceive				= new ObjectInputStream(serverConnection.getInputStream());
+				Ctrl__Abstract									returnMessage  				= (Ctrl__Abstract) serverReceive.readObject();
 				serverReceive.close();
 				return returnMessage;
 			}
@@ -66,12 +67,12 @@ public class HTTP_Connection
 			{
 	    		// Failure occurred perhaps due to old connection, so set it to null
 				// to force a reconnection
-				server 											= null;
+				server 																		= null;
 				return new Ctrl__Abstract().new Nack();
 			}
 			catch(Exception e)
 			{
-				server 											= null;
+				server 																		= null;
 				return new Ctrl__Abstract().new Nack();
 			}
 		}

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import HVAC_Messages.*;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class TCP_Connection
 {
 	public Socket					piSocket;

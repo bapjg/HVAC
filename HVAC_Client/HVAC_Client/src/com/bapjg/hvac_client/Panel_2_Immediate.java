@@ -12,9 +12,10 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Panel_2_Immediate 							extends 					Panel_0_Fragment  
-														implements 					TCP_Response
+public class Panel_2_Immediate 									extends 					Panel_0_Fragment  
+																implements 					TCP_Response
 {			
 	public String										circuitName;
 	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)

@@ -15,7 +15,8 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-public class Adapter_3_Calendars_Circuits 				extends 					Adapter_0_Abstract
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
 {
  
     public Adapter_3_Calendars_Circuits(Context context, int resource, ArrayList listData) 
@@ -25,14 +26,14 @@ public class Adapter_3_Calendars_Circuits 				extends 					Adapter_0_Abstract
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-    	RowHolder 										row							= new RowHolder();
-    	Ctrl_Calendars.Calendar							listItem					= (Ctrl_Calendars.Calendar) listData.get(position);
+    	RowHolder 												row							= new RowHolder();
+    	Ctrl_Calendars.Calendar									listItem					= (Ctrl_Calendars.Calendar) listData.get(position);
 
-    	adapterView 																= inflater.inflate(R.layout.row_3_calendars_circuit, null);
-     	row.days																	= (TextView) adapterView.findViewById(R.id.days);
-     	row.timeStart																= (TextView) adapterView.findViewById(R.id.timeStart);
-    	row.timeEnd																	= (TextView) adapterView.findViewById(R.id.timeEnd);
-    	row.tempObjective															= (TextView) adapterView.findViewById(R.id.tempObjective);
+    	adapterView 																		= inflater.inflate(R.layout.row_3_calendars_circuit, null);
+     	row.days																			= (TextView) adapterView.findViewById(R.id.days);
+     	row.timeStart																		= (TextView) adapterView.findViewById(R.id.timeStart);
+    	row.timeEnd																			= (TextView) adapterView.findViewById(R.id.timeEnd);
+    	row.tempObjective																	= (TextView) adapterView.findViewById(R.id.tempObjective);
 
     	// Update the entries using standard ArrayAdapter technique
     	Integer									tempObjective						= listItem.tempObjective/1000;

@@ -14,14 +14,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
-public class Menu_3_Calendars 							extends 					Menu_0_Fragment 
-														implements 					View.OnClickListener,
-																					HTTP_Response,
-																					TCP_Response
+public class Menu_3_Calendars 									extends 					Menu_0_Fragment 
+																implements 					View.OnClickListener,
+																							HTTP_Response,
+																							TCP_Response
 {
 	public Menu_3_Calendars()
 	{

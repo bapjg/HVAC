@@ -9,7 +9,8 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.view.Menu;
 
-public class Listener_Tabs implements ActionBar.TabListener
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Listener_Tabs 										implements 					ActionBar.TabListener
 {
 	public Fragment 	menu;
 //	public Fragment 	panel;

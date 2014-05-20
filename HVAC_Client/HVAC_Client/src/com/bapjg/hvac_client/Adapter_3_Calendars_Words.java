@@ -11,7 +11,8 @@ import android.graphics.Typeface;
 import android.view.*;
 import android.widget.*;
 
-public class Adapter_3_Calendars_Words 						extends 			Adapter_0_Abstract
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Adapter_3_Calendars_Words 							extends 					Adapter_0_Abstract
 {
  
     public Adapter_3_Calendars_Words(Context context, int resource, ArrayList listData) 

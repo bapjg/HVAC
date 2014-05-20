@@ -13,17 +13,18 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-public class Adapter_0_Abstract 							extends 					ArrayAdapter
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Adapter_0_Abstract 								extends 					ArrayAdapter
 {
-    public ArrayList										listData;
-    public LayoutInflater 									inflater;
+    public ArrayList											listData;
+    public LayoutInflater 										inflater;
  
     public Adapter_0_Abstract(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
         
-        this.listData 																= listData;
-        this.inflater																= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.listData 																		= listData;
+        this.inflater																		= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     public int getCount() 
     {

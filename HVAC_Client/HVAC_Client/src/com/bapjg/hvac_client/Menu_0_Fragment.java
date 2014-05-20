@@ -16,15 +16,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
-public class Menu_0_Fragment 							extends 					Fragment 
-														implements					TCP_Response,
-																					HTTP_Response
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+
+public class Menu_0_Fragment 									extends 					Fragment 
+																implements					TCP_Response,
+																							HTTP_Response
 {
-	public 	int											menuLayout;
-	private ViewGroup									container;
+	public 	int													menuLayout;
+	private ViewGroup											container;
 	
 	public Menu_0_Fragment()
 	{
@@ -33,9 +32,9 @@ public class Menu_0_Fragment 							extends 					Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	View 											thisView 					= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
-    	Button											firstButton					= (Button) ((ViewGroup) thisView).getChildAt(0);
-    	this.container																=container;
+    	View 													thisView 					= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
+    	Button													firstButton					= (Button) ((ViewGroup) thisView).getChildAt(0);
+    	this.container																		=container;
     	allButtonsSetup((ViewGroup) thisView);
 		((OnClickListener) this).onClick(firstButton);																		// Execute the onClickListener of the first menu button
     	return thisView;

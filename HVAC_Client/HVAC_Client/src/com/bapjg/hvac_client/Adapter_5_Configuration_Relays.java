@@ -13,7 +13,8 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-public class Adapter_5_Configuration_Relays 				extends 			Adapter_0_Abstract
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Adapter_5_Configuration_Relays 					extends 					Adapter_0_Abstract
 {
  
     public Adapter_5_Configuration_Relays(Context context, int resource, ArrayList listData) 

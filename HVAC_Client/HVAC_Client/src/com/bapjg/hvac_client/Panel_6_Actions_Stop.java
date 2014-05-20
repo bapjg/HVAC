@@ -22,10 +22,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Panel_6_Actions_Stop 						extends 					Panel_0_Fragment  
+public class Panel_6_Actions_Stop 								extends 					Panel_0_Fragment  
 {
-	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View												panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 
 	public Panel_6_Actions_Stop()
 	{
@@ -33,7 +34,7 @@ public class Panel_6_Actions_Stop 						extends 					Panel_0_Fragment
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-     	this.panelView															= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
+     	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
 
     	displayHeader();
     	displayContents();
@@ -55,20 +56,20 @@ public class Panel_6_Actions_Stop 						extends 					Panel_0_Fragment
 	}
 	public void onClick(View clickedView)
     {
-    	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
+    	Ctrl_Actions_Stop.Execute 								stopMessage					= new Ctrl_Actions_Stop().new Execute();
     	if (clickedView instanceof Button)
     	{
-    		if      (clickedView.getId()==R.id.buttonStop)		stopMessage.actionRequest		= Ctrl_Actions_Stop.ACTION_Stop;
-    		else if (clickedView.getId()==R.id.buttonRestart)	stopMessage.actionRequest		= Ctrl_Actions_Stop.ACTION_Restart;
-    		else if (clickedView.getId()==R.id.buttonReboot)	stopMessage.actionRequest		= Ctrl_Actions_Stop.ACTION_Reboot;
+    		if      (clickedView.getId()==R.id.buttonStop)		stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Stop;
+    		else if (clickedView.getId()==R.id.buttonRestart)	stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Restart;
+    		else if (clickedView.getId()==R.id.buttonReboot)	stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Reboot;
         	TCP_Send(stopMessage);
     	}
     }
     @Override
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
-		if (result instanceof Ctrl_Actions_Stop.Ack)								Global.toaster("Stop Request accepted", true);
-		else   																		Global.toaster("Stop generated error " + result.getClass().toString(), true);
+		if (result instanceof Ctrl_Actions_Stop.Ack)			Global.toaster("Stop Request accepted", true);
+		else   													Global.toaster("Stop generated error " + result.getClass().toString(), true);
 	}
 }
 

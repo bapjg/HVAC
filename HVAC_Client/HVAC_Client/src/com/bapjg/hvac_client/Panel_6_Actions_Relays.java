@@ -22,10 +22,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Panel_6_Actions_Relays 					extends 					Panel_0_Fragment  
+public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment  
 {
-	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 
 	public Panel_6_Actions_Relays()
 	{
@@ -33,8 +34,8 @@ public class Panel_6_Actions_Relays 					extends 					Panel_0_Fragment
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity																= getActivity();
-    	this.panelView																= inflater.inflate(R.layout.panel_6_actions_relays, container, false);
+    	this.activity																		= getActivity();
+    	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_relays, container, false);
     	TCP_Send(new Ctrl_Actions_Relays().new Request());
 
         
@@ -59,7 +60,7 @@ public class Panel_6_Actions_Relays 					extends 					Panel_0_Fragment
 	}
     public void onClick(View clickedView)
     {
-   		Ctrl_Actions_Relays.Execute						messageSend					= new Ctrl_Actions_Relays().new Execute();
+   		Ctrl_Actions_Relays.Execute								messageSend					= new Ctrl_Actions_Relays().new Execute();
     	if (clickedView instanceof Switch)
     	{
 			if      (clickedView.getId() == R.id.burner)		messageSend.relayName		= "Burner";
@@ -79,11 +80,11 @@ public class Panel_6_Actions_Relays 					extends 					Panel_0_Fragment
 //	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
-		Activity										activity					= getActivity();		
+		Activity												activity					= getActivity();		
 		
 		if (result instanceof Ctrl_Actions_Relays.Data)		
 		{		
-			Ctrl_Actions_Relays.Data 					msg_received 				= (Ctrl_Actions_Relays.Data) result;
+			Ctrl_Actions_Relays.Data 							msg_received 				= (Ctrl_Actions_Relays.Data) result;
 
 			((Switch) activity.findViewById(R.id.burner))		.setChecked(msg_received.burner);
 			((Switch) activity.findViewById(R.id.hotwater))		.setChecked(msg_received.pumpHotWater);

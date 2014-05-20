@@ -2,6 +2,7 @@ package com.bapjg.hvac_client;
 
 import HVAC_Messages.*;
 import HVAC_Messages.Ctrl_Calendars.Word;
+import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -21,13 +22,13 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
-public class Item_3_Calendars_Away 								extends 					Panel_0_Fragment
+public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 {		
-	private Ctrl_Calendars.Away 								itemData;
-	private Ctrl_Calendars.Away 								itemDataWork;
+	private Ctrl_Configuration.Circuit	 						itemData;
+	private Ctrl_Configuration.Circuit 							itemDataWork;
 	private ViewGroup											itemView;
 	
-	public Item_3_Calendars_Away(Ctrl_Calendars.Away itemData)
+	public Item_5_Configuration_Circuit(Ctrl_Configuration.Circuit itemData)
 	{
 		super();
 		this.itemData																		= itemData;
@@ -35,12 +36,20 @@ public class Item_3_Calendars_Away 								extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        View 													itemView					= inflater.inflate(R.layout.item_3_calendars_away, container, false);
+        View 													itemView					= inflater.inflate(R.layout.item_5_configuration_circuit, container, false);
         this.itemView																		= (ViewGroup) itemView;
 
-        displayHeader();
-        displayContents();
-        setListens();
+        if ((Global.eRegConfiguration != null)
+        &&  (Global.eRegConfiguration.circuitList != null))
+        {
+        	displayHeader();
+        	displayContents();
+            setListens();
+        }
+        else // we need to reconnect to the server
+        {
+            Global.toaster("Please wait for data to arrive", false);
+        }
         
         return itemView;
     }
@@ -49,25 +58,20 @@ public class Item_3_Calendars_Away 								extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-    	TextView 										dateStart 					= (TextView) itemView.findViewById(R.id.dateStart);
-    	TextView 										dateEnd						= (TextView) itemView.findViewById(R.id.dateEnd);
-    	TextView 										timeStart					= (TextView) itemView.findViewById(R.id.timeStart);
-    	TextView 										timeEnd						= (TextView) itemView.findViewById(R.id.timeEnd);
- 
-    	dateStart.setText(Global.displayDate(itemData.dateTimeStart));
-    	timeStart.setText(Global.displayTime(itemData.dateTimeStart));
-    	
-    	dateEnd.setText(Global.displayDate(itemData.dateTimeEnd));
-    	timeEnd.setText(Global.displayTime(itemData.dateTimeEnd));
+    	TextView 										pumpName 					= (TextView) itemView.findViewById(R.id.pumpName);
+    	TextView 										thermometerName				= (TextView) itemView.findViewById(R.id.thermometerName);
+
+    	pumpName.setText								(itemData.pump);
+    	thermometerName.setText							(itemData.thermometer);
    	}
 	public void setListens()
 	{
-		itemView.findViewById(R.id.buttonOk).setOnClickListener(this);
-		itemView.findViewById(R.id.buttonDelete).setOnClickListener(this);
-	    itemView.findViewById(R.id.dateStart).setOnClickListener(this);
-	    itemView.findViewById(R.id.dateEnd).setOnClickListener(this);
-	    itemView.findViewById(R.id.timeStart).setOnClickListener(this);
-	    itemView.findViewById(R.id.timeEnd).setOnClickListener(this);
+//		itemView.findViewById(R.id.buttonOk).setOnClickListener(this);
+//		itemView.findViewById(R.id.buttonDelete).setOnClickListener(this);
+//	    itemView.findViewById(R.id.dateStart).setOnClickListener(this);
+//	    itemView.findViewById(R.id.dateEnd).setOnClickListener(this);
+//	    itemView.findViewById(R.id.timeStart).setOnClickListener(this);
+//	    itemView.findViewById(R.id.timeEnd).setOnClickListener(this);
 	}
     @Override
 	public void onClick(View clickedView) 

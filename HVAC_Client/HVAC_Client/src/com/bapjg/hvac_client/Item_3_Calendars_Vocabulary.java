@@ -19,14 +19,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
-//Template												NEWNEWNEW					= NEWNEWNEW
-//Template												variable					= something
-//Template												ext/imp						class
-public class Item_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+
+public class Item_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 {		
-	private Ctrl_Calendars.Word 						itemData;
-	private Ctrl_Calendars.Word 						itemDataWork;
-	private ViewGroup									itemView;
+	private Ctrl_Calendars.Word 								itemData;
+	private Ctrl_Calendars.Word 								itemDataWork;
+	private ViewGroup											itemView;
 	
 	public Item_3_Calendars_Vocabulary(Ctrl_Calendars.Word itemData)
 	{

@@ -11,7 +11,8 @@ import android.widget.*;
 
 import HVAC_Messages.*;
 
-public class Adapter_4_Weather 								extends 			Adapter_0_Abstract
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Adapter_4_Weather 									extends 					Adapter_0_Abstract
 {
  
     public Adapter_4_Weather(Context context, int resource, ArrayList listData) 
@@ -21,12 +22,12 @@ public class Adapter_4_Weather 								extends 			Adapter_0_Abstract
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-     	RowHolder 								row;
-    	Ctrl_WeatherData.Forecast				listItem		= (Ctrl_WeatherData.Forecast) listData.get(position);
+     	RowHolder 												row;
+    	Ctrl_WeatherData.Forecast								listItem					= (Ctrl_WeatherData.Forecast) listData.get(position);
 
-    	adapterView 											= inflater.inflate(R.layout.row_4_weather, null);
-    	row														= new RowHolder();
-       	row.time												= (TextView) adapterView.findViewById(R.id.time);
+    	adapterView 																		= inflater.inflate(R.layout.row_4_weather, null);
+    	row																					= new RowHolder();
+       	row.time																			= (TextView) adapterView.findViewById(R.id.time);
        	row.temperature											= (TextView) adapterView.findViewById(R.id.temperature);
     	row.temperatureMinMax									= (TextView) adapterView.findViewById(R.id.temperatureMinMax);
     	row.precipitationValue									= (TextView) adapterView.findViewById(R.id.precipitationValue);

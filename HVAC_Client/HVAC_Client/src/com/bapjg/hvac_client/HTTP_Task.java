@@ -7,18 +7,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import HVAC_Messages.*;
-//Template										variable			= something
-//Template										ext/imp				class
-
-public class HTTP_Task 							extends 			AsyncTask <Ctrl__Abstract, Void, Ctrl__Abstract>
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class HTTP_Task 											extends 					AsyncTask <Ctrl__Abstract, Void, Ctrl__Abstract>
 {
-	public HTTP_Response						callBack;
-	public HTTP_Connection						serverConnection;
+	public HTTP_Response										callBack;
+	public HTTP_Connection										serverConnection;
 
 	public HTTP_Task()
 	{
-		this.serverConnection										= new HTTP_Connection();
-		this.callBack												= null;
+		this.serverConnection																= new HTTP_Connection();
+		this.callBack																		= null;
 	}
 	@Override
 	protected Ctrl__Abstract doInBackground(Ctrl__Abstract... messageOut) 

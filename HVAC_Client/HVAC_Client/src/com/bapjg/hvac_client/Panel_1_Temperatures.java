@@ -30,10 +30,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import HVAC_Messages.*;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Panel_1_Temperatures 						extends 					Panel_0_Fragment 
+public class Panel_1_Temperatures 								extends 					Panel_0_Fragment 
 {		
-	public TCP_Task										task;
+	public TCP_Task												task;
 	
 	public Panel_1_Temperatures()
 	{
@@ -49,12 +50,12 @@ public class Panel_1_Temperatures 						extends 					Panel_0_Fragment
     }
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{             
-		if 		(result instanceof Ctrl_Temperatures.Data)
-			{
-				displayHeader();
-				displayContents		((Ctrl_Temperatures.Data) result);
-		        setListens();
-			}
+		if 	(result instanceof Ctrl_Temperatures.Data)
+		{
+			displayHeader();
+			displayContents		((Ctrl_Temperatures.Data) result);		// TODO BERK BERK BERK
+	        setListens();
+		}
 		else if (result instanceof Ctrl_Temperatures.NoConnection)			Global.toast		("No Connection established yet", false);
 		else																Global.toast		("A Nack has been returned", false);
         setListens();

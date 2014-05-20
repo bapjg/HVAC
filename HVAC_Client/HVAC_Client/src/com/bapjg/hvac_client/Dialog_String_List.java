@@ -22,8 +22,9 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
-public class Dialog_String_List 								extends 		DialogFragment 
-																implements		AdapterView.OnItemClickListener	
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Dialog_String_List 								extends 					DialogFragment 
+																implements					AdapterView.OnItemClickListener	
 {
 	private Dialog_Response										callBack;
 	private int													fieldId;
@@ -36,9 +37,9 @@ public class Dialog_String_List 								extends 		DialogFragment
 	public Dialog_String_List(Dialog_Response callBack, int fieldId) 
     {
 		super();
-		this.callBack															= callBack;
-		this.fieldId															= fieldId;
-		this.items 																= new ArrayList<String>();
+		this.callBack																		= callBack;
+		this.fieldId																		= fieldId;
+		this.items 																			= new ArrayList<String>();
     }
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 

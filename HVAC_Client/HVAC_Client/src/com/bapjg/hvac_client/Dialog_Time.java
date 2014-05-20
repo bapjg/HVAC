@@ -14,14 +14,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 @SuppressLint("ValidFragment")
-public class Dialog_Time 										extends 		DialogFragment 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Dialog_Time 										extends 					DialogFragment 
 {
-	private Dialog_Response			callBack;
-	private int						fieldId;
-	private	Boolean					callBackLong;
-	private TimePicker 				timePicker;
-	private Integer  				timeInitialHour;
-	private Integer  				timeInitialMinute;
+	private Dialog_Response										callBack;
+	private int													fieldId;
+	private	Boolean												callBackLong;
+	private TimePicker 											timePicker;
+	private Integer  											timeInitialHour;
+	private Integer  											timeInitialMinute;
 	
 	public Dialog_Time() 
     {
@@ -29,14 +30,14 @@ public class Dialog_Time 										extends 		DialogFragment
 	public Dialog_Time(Dialog_Response callBack, int fieldId, Long time) 
     {
 		super();
-		this.callBack											= callBack;
-		this.fieldId											= fieldId;
+		this.callBack																		= callBack;
+		this.fieldId																		= fieldId;
 		
-		Long 					hours							= time/3600/1000;
-		Long 					minutes							= time/60/1000 - hours * 60L;
-		this.timeInitialHour									= hours.intValue();
-		this.timeInitialMinute									= minutes.intValue();
-		this.callBackLong										= true;
+		Long 													hours						= time/3600/1000;
+		Long 													minutes						= time/60/1000 - hours * 60L;
+		this.timeInitialHour																= hours.intValue();
+		this.timeInitialMinute																= minutes.intValue();
+		this.callBackLong																	= true;
     }
 	public Dialog_Time(Dialog_Response callBack, int fieldId, String time) 
     {

@@ -30,11 +30,12 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import HVAC_Messages.*;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 {		
 	public TCP_Task												task;
-	private View												panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 	
 	public Panel_5_Configuration_Boiler()
 	{
@@ -43,7 +44,7 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelView																	= inflater.inflate(R.layout.panel_5_configuration_boiler, container, false);
+    	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_boiler, container, false);
 
     	if ( (Global.eRegConfiguration 			!= 	null)
         &&   (Global.eRegConfiguration.boiler 	!= 	null)	)

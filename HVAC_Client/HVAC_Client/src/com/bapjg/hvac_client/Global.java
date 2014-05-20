@@ -13,36 +13,38 @@ import android.widget.Toast;
 
 import HVAC_Messages.*;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Global 
 {
-	public static 	Context 					appContext;
-	public static 	Context 					actContext;
-	public static 	Activity 					activity;
+	public static 	Context 									appContext;
+	public static 	Context 									actContext;
+	public static 	Activity 									activity;
 	
-	public static	String						serverURL;
-	public static	InetSocketAddress			piSocketAddress;
+	public static	String										serverURL;
+	public static	InetSocketAddress							piSocketAddress;
 	
-	public static	Panel_1_Temperatures		panelTemperatures;
-	public static	Panel_2_Immediate			panelImmediate;	
-	public static	Panel_3_Calendars_Circuits	panelCalendars;
-	public static	Panel_4_Weather				panelWeather;
-	public static	Panel_5_Configuration_Thermometers	panelConfiguration;
-	public static	Panel_6_Actions_Relays		panelActions;	
+	public static	Panel_1_Temperatures						panelTemperatures;
+	public static	Panel_2_Immediate							panelImmediate;	
+	public static	Panel_3_Calendars_Circuits					panelCalendars;
+	public static	Panel_4_Weather								panelWeather;
+	public static	Panel_5_Configuration_Thermometers			panelConfiguration;
+	public static	Panel_6_Actions_Relays						panelActions;	
 
-	public static	Menu_1_Temperatures			menuTemperatures;
-	public static	Menu_2_Immediate			menuImmediate;
-	public static	Menu_3_Calendars			menuCalendars;
-	public static	Menu_4_Weather				menuWeather;
-	public static	Menu_5_Configuration 				menuConfiguration;
-	public static	Menu_6_Actions				menuActions;
+	public static	Menu_1_Temperatures							menuTemperatures;
+	public static	Menu_2_Immediate							menuImmediate;
+	public static	Menu_3_Calendars							menuCalendars;
+	public static	Menu_4_Weather								menuWeather;
+	public static	Menu_5_Configuration 						menuConfiguration;
+	public static	Menu_6_Actions								menuActions;
 	
-	public static	Ctrl_Configuration.Data		eRegConfiguration;
-	public static	Ctrl_Calendars.Data			eRegCalendars;
-	public static	Ctrl_WeatherData			weatherForecast;
+	public static	Ctrl_Configuration.Data						eRegConfiguration;
+	public static	Ctrl_Calendars.Data							eRegCalendars;
+	public static	Ctrl_WeatherData							weatherForecast;
 
 	public Global() 
 	{
 	}
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
     public static String displayTemperature(Integer temperature)
 	{
 		int degrees = temperature/1000;
