@@ -40,7 +40,7 @@ public class Panel_3_Calendars_Vocabulary 				extends 					Panel_0_Fragment
         	displayHeader();
         	displayContents();
             setListens();
-       }
+        }
         else // we need to reconnect to the server
         {
         	Global.toaster("Please refresh", true);

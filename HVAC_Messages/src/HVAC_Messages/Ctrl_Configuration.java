@@ -77,7 +77,6 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 	public class Boiler 						extends  					Ctrl_Configuration
 	{
 		private static final long 				serialVersionUID 			= 1L;
-		public Burner 							burner;
 		public String 							thermometer;
 		public Integer							tempNeverExceed;
 		public Integer							tempOverShoot;
@@ -325,12 +324,14 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		boiler.thermometer													= "Boiler";
 		boiler.tempNeverExceed												= 95000;
 		boiler.tempOverShoot												= 18000;
-		boiler.burner														= new Burner();
-		boiler.burner.relay													= "Burner";
 		confUpdate.boiler													= boiler;
+		// Boiler/Burner
+		Burner									burner						= new Burner();
+		burner.relay														= "Burner";
+		burner.fuelConsumption												= 0L;
+		confUpdate.burner													= burner;
 		
 		confUpdate.eMailList.add(new String("andre@bapjg.com"));
 		confUpdate.eMailList.add(new String("brigitte@bapjg.com"));
-		
 	}
 }

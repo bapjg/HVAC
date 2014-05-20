@@ -32,10 +32,11 @@
             android:text="Relay" />
 
         <TextView
-            android:id="@+id/Name"
+            android:id="@+id/name"
             style="@style/AD_Text"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="name" />
 
     </LinearLayout>
@@ -54,7 +55,7 @@
             android:text				= "Fuel Consumption" />
 
         <TextView
-            android:id="@+id/Fuel"
+            android:id="@+id/fuelConsumption"
             style="@style/AD_Text"
             android:layout_width="100dp"
             android:layout_height="wrap_content"

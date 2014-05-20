@@ -44,7 +44,7 @@ public class Boiler
 	{
 		this.thermoBoiler 										= Global.thermometers.fetchThermometer(boilerparams.thermometer);
 		
-		burner													= new Burner(boilerparams.burner);
+		burner													= Global.burner;
 
 		this.tempMax 											= -1;
 		this.tempMin 											= -1;

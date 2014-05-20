@@ -217,9 +217,6 @@ public class Management extends HttpServlet
             dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
             dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
             dbResultSet.updateString	("Calendars", 				dbJsonString);
-//            dbResultSet.updateString	("date", 					"xxx");
-//            dbResultSet.updateString	("time", 					"xxx");
-//            dbResultSet.updateString	("Calendars", 				"xxx");
             dbResultSet.insertRow();
 
             dbStatement.close();
@@ -250,12 +247,20 @@ public class Management extends HttpServlet
             String										dbJsonString		= dbResultSet.getString("configuration");
     		
             dbStatement.close();
-            dbConnection.close();
- 
+            
             Ctrl_Configuration.Data						returnBufferPrep	= new Gson().fromJson(dbJsonString, Ctrl_Configuration.Data.class);
     		returnBufferPrep.dateTime										= dbDateTime;											// Add time stamp to mesage
-    		returnBuffer													= (Ctrl__Abstract) returnBufferPrep;
-        }
+             
+            dbStatement 													= dbConnection.createStatement(1004, 1008);
+            dbResultSet 													= dbStatement.executeQuery("SELECT dateTime, FuelConsumed FROM Fuel ORDER BY dateTime DESC LIMIT 1");
+            dbResultSet.next();
+
+            returnBufferPrep.burner.fuelConsumption							= dbResultSet.getLong("FuelConsumed");
+            
+            dbConnection.close();
+ 
+    		returnBuffer													= (Ctrl_Configuration.Data) returnBufferPrep;
+       }
         catch(Exception e)
         {
             e.printStackTrace();

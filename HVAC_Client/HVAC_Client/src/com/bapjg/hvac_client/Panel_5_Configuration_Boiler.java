@@ -44,7 +44,19 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.panelView																	= inflater.inflate(R.layout.panel_5_configuration_boiler, container, false);
-    	displayContents();
+
+    	if ( (Global.eRegConfiguration 			!= 	null)
+        &&   (Global.eRegConfiguration.boiler 	!= 	null)	)
+        {
+        	displayHeader();
+        	displayContents();
+            setListens();
+        }
+        else // we need to reconnect to the server
+        {
+        	Global.toaster("Please refresh", true);
+        }
+
     	return panelView;
     }
 	public void onClick(View view)
@@ -66,6 +78,7 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	{
 		if (fieldId == R.id.tempNeverExceed)	Global.eRegConfiguration.boiler.tempNeverExceed 	= temperature;
 		if (fieldId == R.id.tempOverShoot)		Global.eRegConfiguration.boiler.tempOverShoot 		= temperature;
+    	displayHeader();
 		displayContents();
         setListens();
 	}

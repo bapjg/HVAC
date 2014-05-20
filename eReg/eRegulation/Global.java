@@ -80,6 +80,7 @@ public class Global
 	public static 	Integer							summerTemp;
 	
 	public static	Boiler							boiler;
+	public static	Burner							burner;
 
 	public static 	LCD								display;	
 	public static 	ADC								burnerVoltages;	
@@ -224,6 +225,7 @@ public class Global
 		Global.relays.configure(configurationData.relayList);
 		Global.pumps.configure(configurationData.pumpList);
 		Global.circuits.configure(configurationData.circuitList);
+		Global.burner									= new Burner(configurationData.burner);
 		Global.boiler									= new Boiler(configurationData.boiler);
 		
 		for (String eMail : configurationData.eMailList)

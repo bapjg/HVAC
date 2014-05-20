@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -33,7 +35,8 @@ import HVAC_Messages.*;
 @SuppressLint("ValidFragment")
 public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment 
 {		
-	public TCP_Task										task;
+	public TCP_Task												task;
+	public View													panelView;
 	
 	public Panel_5_Configuration_Burner()
 	{
@@ -42,18 +45,51 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	View											panelView					= inflater.inflate(R.layout.panel_5_configuration_burner, container, false);
+    	panelView																			= inflater.inflate(R.layout.panel_5_configuration_burner, container, false);
+        if ((Global.eRegConfiguration != null)
+        &&  (Global.eRegConfiguration.boiler != null))
+        {
+        	displayHeader();
+        	displayContents();
+            setListens();
+        }
+        else // we need to reconnect to the server
+        {
+        	Global.toaster("Please refresh", true);
+        }
         return panelView;
     }
 	public void displayHeader()
 	{
 	}
-	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	public void displayContents()
 	{
 		if (getActivity() != null)			// The user has not changed the screen
 		{
-			((TextView) getActivity().findViewById(R.id.Name)).setText			(Global.eRegConfiguration.burner.relay);
-			((TextView) getActivity().findViewById(R.id.Fuel)).setText			(Global.eRegConfiguration.burner.fuelConsumption.toString());
+			Long												fuelLong					= 0L;
+			String												fuelString					= "nought";
+			
+			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
+			
+			Log.v("App", "burner" + burner);
+			Log.v("App", "relay" + burner.relay);
+			Log.v("App", "fuel" + burner.fuelConsumption);
+			
+			((TextView) panelView.findViewById(R.id.name)).setText							(burner.relay);
+			DecimalFormatSymbols 								decimalFormatsymbol			= DecimalFormatSymbols.getInstance();
+			decimalFormatsymbol.setGroupingSeparator(' ');
+			DecimalFormat 										decimalFormat 				= new DecimalFormat("###,###", decimalFormatsymbol);
+			// Present the fuel consumption in minutes
+			if (Global.eRegConfiguration.burner.fuelConsumption != null)
+			{
+				fuelLong																	= burner.fuelConsumption/1000/60;
+				fuelString																	= decimalFormat.format(fuelLong);
+			}
+			else
+			{
+				fuelString																	= "nought received";
+			}
+			((TextView) panelView.findViewById(R.id.fuelConsumption)).setText				(fuelString);
 		}
 	}
 	public void setListens()

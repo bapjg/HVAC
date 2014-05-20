@@ -193,12 +193,8 @@ public class Monitor extends HttpServlet
 	 
 	            dbResultSet.insertRow();
 	        }
-            else
-            {
-            	System.out.println("processMixerMouvement readings.dateTimeStart = zero, infact : " + readings.dateTimeStart);
-            }
 
-            if (readings.dateTimeEnd > 0)
+            if ((readings.dateTimeEnd > 0) && (readings.dateTimeEnd > readings.dateTimeStart))
             {
 	            dbResultSet.moveToInsertRow();
 	            
@@ -208,10 +204,6 @@ public class Monitor extends HttpServlet
 	            dbResultSet.updateInt		("positionTracked", 		readings.positionTrackedEnd);
 	
 	            dbResultSet.insertRow();
-            }
-            else
-            {
-            	System.out.println("processMixerMouvement readings.dateTimeEnd = zero, infact : " + readings.dateTimeEnd);
             }
             dbStatement.close();
         }

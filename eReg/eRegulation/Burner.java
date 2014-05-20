@@ -25,9 +25,6 @@ public class Burner
 		burnerPower.off();
 	}
 	
-	
-	
-	
 	public void powerOn()
 	{
 		LogIt.action("Burner", "On");
