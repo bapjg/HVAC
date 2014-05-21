@@ -1,6 +1,7 @@
 package HVAC_Messages;
 
 import java.util.ArrayList;
+import HVAC_Types.*;
 
 
 @SuppressWarnings("serial")
@@ -85,10 +86,10 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
-		public Integer 							outsideLow;
-		public Integer							outsideHigh;
-		public Integer 							tempLow;
-		public Integer							tempHigh;
+		public Temperature						outsideLow;
+		public Temperature						outsideHigh;
+		public Temperature 						tempLow;
+		public Temperature						tempHigh;
 	}
 	public class PID_Data						extends  					Ctrl_Configuration
 	{
@@ -287,10 +288,10 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		circuit.tempMax														= 90000;
 		circuit.mixer														= null;
 		circuit.tempGradient												= new TempGradient();
-		circuit.tempGradient.outsideLow										= -15000;
-		circuit.tempGradient.tempLow										= 80000;
-		circuit.tempGradient.outsideHigh									= 15000;
-		circuit.tempGradient.tempHigh										= 35000;
+		circuit.tempGradient.outsideLow										= new Temperature(-15000);
+		circuit.tempGradient.tempLow										= new Temperature(80000);
+		circuit.tempGradient.outsideHigh									= new Temperature(15000);
+		circuit.tempGradient.tempHigh										= new Temperature(35000);
 		confUpdate.circuitList.add(circuit);
 		
 		circuit																= new Circuit();
@@ -313,10 +314,10 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		circuit.mixer.pidParams.timeProjection								= 50000;
 		circuit.mixer.pidParams.marginProjection							= 2000;
 		circuit.tempGradient												= new TempGradient();
-		circuit.tempGradient.outsideLow										= -15000;
-		circuit.tempGradient.tempLow										= 45000;
-		circuit.tempGradient.outsideHigh									= 15000;
-		circuit.tempGradient.tempHigh										= 30000;
+		circuit.tempGradient.outsideLow										= new Temperature(-15000);
+		circuit.tempGradient.tempLow										= new Temperature(45000);
+		circuit.tempGradient.outsideHigh									= new Temperature(15000);
+		circuit.tempGradient.tempHigh										= new Temperature(30000);
 		confUpdate.circuitList.add(circuit);
 		
 		// Boiler/Burner

@@ -174,20 +174,20 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     		}
     		displayContents();
     	}
-    	//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
      	else if (clickedView.getId() == R.id.timeStart)
     	{
-    		Dialog_Time		 											df 							= new Dialog_Time(this, R.id.timeStart, itemData.timeStart);
+    		Dialog_Time		 									df 							= new Dialog_Time(this, R.id.timeStart, itemData.timeStart);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
      	else if (clickedView.getId() == R.id.timeEnd)
     	{
-    		Dialog_Time		 											df 							= new Dialog_Time(this, R.id.timeEnd, itemData.timeEnd);
+    		Dialog_Time		 									df 							= new Dialog_Time(this, R.id.timeEnd, itemData.timeEnd);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
      	else if (clickedView.getId() == R.id.tempObjective)
     	{
-    		Dialog_Temperature 											df 							= new Dialog_Temperature(this, R.id.tempObjective, 25, 25, 5, 8);
+    		Dialog_Temperature 									df 							= new Dialog_Temperature(this, R.id.tempObjective, 25, 25, 5, 8);
     		df.show(getFragmentManager(), "Dialog_Temperature");
     	}
      	else if (clickedView.getId() == R.id.stopOnObjective)
@@ -208,7 +208,7 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     {
     	if (fieldId == R.id.tempObjective)
     	{
-    		Integer														tempObjective				= value/1000;
+    		Integer												tempObjective				= value/1000;
     		((TextView) itemView.findViewById(fieldId))			.setText(tempObjective.toString() + " °C");
     	}
     }
@@ -216,7 +216,7 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     {
     	if (fieldId == R.id.days)
     	{
-    		itemData.days																			= value;
+    		itemData.days																	= value;
     		((TextView) itemView.findViewById(fieldId))			.setText(value);
     	}
     }

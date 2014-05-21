@@ -31,6 +31,18 @@ public class Z_Initialise_Configuration
 	{
 		Control 								Me 					= new Control();
 		
+		
+		Integer									milliDegrees;
+		
+		milliDegrees													= (int) (Float.parseFloat("2.5") * 1000F);
+		
+		
+		
+		System.out.println(milliDegrees);
+		
+		
+		
+		
 		//================================================================================================================================
 		//
 		// Create object to be sent

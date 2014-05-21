@@ -1,5 +1,6 @@
 package com.bapjg.hvac_client;
 
+import HVAC_Types.*;
 import HVAC_Messages.*;
 import HVAC_Messages.Ctrl_Calendars.Word;
 import HVAC_Messages.Ctrl_Configuration.Request;
@@ -50,7 +51,6 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
         {
             Global.toaster("Please wait for data to arrive", false);
         }
-        
         return itemView;
     }
 	public void displayHeader()
@@ -61,6 +61,14 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 	{
     	TextView 												pumpName 					= (TextView) itemView.findViewById(R.id.pumpName);
     	TextView 												thermometerName				= (TextView) itemView.findViewById(R.id.thermometerName);
+		TextView 												outsideLow 					= (TextView) itemView.findViewById(R.id.outsideLow);
+    	TextView 												outsideHigh					= (TextView) itemView.findViewById(R.id.outsideHigh);
+   		TextView 												tempLow 					= (TextView) itemView.findViewById(R.id.tempLow);
+    	TextView 												tempHigh					= (TextView) itemView.findViewById(R.id.tempHigh);
+   		TextView 												name 						= (TextView) itemView.findViewById(R.id.name);
+    	TextView 												swingTime					= (TextView) itemView.findViewById(R.id.swingTime);
+   		TextView 												relayUp 					= (TextView) itemView.findViewById(R.id.relayUp);
+    	TextView 												relayDown					= (TextView) itemView.findViewById(R.id.relayDown);
 	
     	pumpName.setText										(itemData.pump);
     	thermometerName.setText									(itemData.thermometer);
@@ -68,16 +76,11 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     	if (itemData.tempGradient != null)
     	{
         	Ctrl_Configuration.TempGradient						tempGradient				= itemData.tempGradient;
-    		
-    		TextView 											outsideLow 					= (TextView) itemView.findViewById(R.id.outsideLow);
-        	TextView 											outsideHigh					= (TextView) itemView.findViewById(R.id.outsideHigh);
-       		TextView 											tempLow 					= (TextView) itemView.findViewById(R.id.tempLow);
-        	TextView 											tempHigh					= (TextView) itemView.findViewById(R.id.tempHigh);
     	
-        	outsideLow.setText									(Global.displayTemperature(tempGradient.outsideLow));
-        	outsideHigh.setText									(Global.displayTemperature(tempGradient.outsideHigh));
-        	tempLow.setText										(Global.displayTemperature(tempGradient.tempLow));
-        	tempHigh.setText									(Global.displayTemperature(tempGradient.tempHigh));
+        	outsideLow.setText									(tempGradient.outsideLow.displayInteger());
+        	outsideHigh.setText									(tempGradient.outsideHigh.displayInteger());
+        	tempLow.setText										(tempGradient.tempLow.displayInteger());
+        	tempHigh.setText									(tempGradient.tempHigh.displayInteger());
     	}
     	else
     	{
@@ -87,12 +90,7 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     	if (itemData.mixer != null)
     	{
         	Ctrl_Configuration.Mixer							mixer						= itemData.mixer;
-    		
-    		TextView 											name 						= (TextView) itemView.findViewById(R.id.name);
-        	TextView 											swingTime					= (TextView) itemView.findViewById(R.id.swingTime);
-       		TextView 											relayUp 					= (TextView) itemView.findViewById(R.id.relayUp);
-        	TextView 											relayDown					= (TextView) itemView.findViewById(R.id.relayDown);
-    	
+     	
         	name.setText										(mixer.name);
         	swingTime.setText									(((Integer) (mixer.swingTime/1000)).toString());
         	relayUp.setText										(mixer.relayUp);
@@ -100,8 +98,8 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     	}
     	else
     	{
-    		ViewGroup											gradientView				= (ViewGroup) itemView.findViewById(R.id.gradient);	
-    		gradientView.setVisibility(View.GONE);
+    		ViewGroup											mixerView				= (ViewGroup) itemView.findViewById(R.id.mixer);	
+    		mixerView.setVisibility(View.GONE);
     	}
    	}
 	public void setListens()
@@ -121,19 +119,24 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     @Override
 	public void onClick(View clickedView) 
 	{
-		switch(clickedView.getId())
+    	Dialog_Temperature_New										dialogTemperation;
+    	switch(clickedView.getId())
 		{
 	     	case R.id.tempLow:
-	      		Global.toaster("Its Ok tempLow", false);
+	     		dialogTemperation 																= new Dialog_Temperature_New(itemData.tempGradient.tempLow,  -20, 50, this);
+	     		dialogTemperation.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.tempHigh:
-	      		Global.toaster("Its Ok tempHigh", false);
+	     		dialogTemperation																= new Dialog_Temperature_New(itemData.tempGradient.tempHigh,  -20, 50, this);
+	     		dialogTemperation.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.outsideHigh:
-	      		Global.toaster("Its Ok outsideHigh", false);
+	     		dialogTemperation																= new Dialog_Temperature_New(itemData.tempGradient.outsideHigh,  -20, 50, this);
+	     		dialogTemperation.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.outsideLow:
-	      		Global.toaster("Its Ok outsideLow", false);
+	     		dialogTemperation 																= new Dialog_Temperature_New(itemData.tempGradient.outsideLow,  -20, 50, this);
+	     		dialogTemperation.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.name:
 	      		Global.toaster("Its Ok name", false);
@@ -149,5 +152,9 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 	      		break;
 		}
  	}
+    public void onDialogReturn()
+    {
+    	displayContents();
+    }
 }
 

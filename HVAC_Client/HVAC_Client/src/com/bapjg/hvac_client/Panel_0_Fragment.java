@@ -75,5 +75,6 @@ public class Panel_0_Fragment 									extends 					Fragment
 	@Override	public void onReturnTime 				(int fieldId, String  response)						{}
 	@Override	public void onReturnTime   				(int fieldId, Long    response)						{}
 	@Override	public void onReturnString 				(int fieldId, String  response)						{}
+	@Override	public void onDialogReturn 				()													{}
 }
 
