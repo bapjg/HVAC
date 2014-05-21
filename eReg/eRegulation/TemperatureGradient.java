@@ -53,10 +53,10 @@ public class TemperatureGradient
 //	}
 	public TemperatureGradient(Ctrl_Configuration.TempGradient 		paramGradient)
 	{
-		this.outsideLow					= paramGradient.outsideLow;
-		this.tempLow					= paramGradient.tempLow;
-		this.outsideHigh				= paramGradient.outsideHigh;
-		this.tempHigh					= paramGradient.tempHigh;
+		this.outsideLow					= paramGradient.outsideLow.milliDegrees;
+		this.tempLow					= paramGradient.tempLow.milliDegrees;
+		this.outsideHigh				= paramGradient.outsideHigh.milliDegrees;
+		this.tempHigh					= paramGradient.tempHigh.milliDegrees;
 		
 		Float gradient					= (this.tempHigh.floatValue() - this.tempLow.floatValue()) / (this.outsideHigh.floatValue() - this.outsideLow.floatValue());
 		

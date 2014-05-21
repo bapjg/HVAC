@@ -37,7 +37,7 @@ public class Activity_Main 										extends 					Activity
         Global.piSocketAddress																= null;
 
         HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
-        HTTP_Send	(new Ctrl_Configuration().new Request());
+     	HTTP_Send	(new Ctrl_Configuration().new Request());
         TCP_Send	(new Ctrl_Weather().new Request());
         
         ActionBar 				actionbar 				= getActionBar();
@@ -126,9 +126,10 @@ public class Activity_Main 										extends 					Activity
 	}		
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
-		if 		(result instanceof Ctrl_Calendars.Data)			Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
-		else if (result instanceof Ctrl_Configuration.Data)		Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
-		else													Global.toaster("ActMain : Data NOTNOTNOT received", true);
+        
+		if 		(result instanceof Ctrl_Calendars.Data) 		{	Global.eRegCalendars 		= (Ctrl_Calendars.Data) result;			}
+		else if (result instanceof Ctrl_Configuration.Data)		{	Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;		}
+		else													{	Global.toaster("ActMain : " + result.getClass().toString(), true);	}
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  

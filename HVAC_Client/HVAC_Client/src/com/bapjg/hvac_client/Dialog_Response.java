@@ -6,5 +6,6 @@ public interface Dialog_Response
 	void onReturnTime			(int fieldId, String 	reponse);
 	void onReturnTime			(int fieldId, Long 		reponse);
 	void onReturnString			(int fieldId, String	reponse);
+	void onDialogReturn			();
 }
 

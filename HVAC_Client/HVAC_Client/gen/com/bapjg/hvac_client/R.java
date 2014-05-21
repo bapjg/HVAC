@@ -56,7 +56,6 @@ public final class R {
         public static final int RadiatorIn=0x7f09003f;
         public static final int RadiatorOut=0x7f09003e;
         public static final int RelativeLayout1=0x7f09000d;
-        public static final int TextView01=0x7f09002d;
         public static final int Time=0x7f090036;
         public static final int activity_container=0x7f090000;
         public static final int address=0x7f090004;
@@ -133,6 +132,7 @@ public final class R {
         public static final int temperature=0x7f090059;
         public static final int temperatureMinMax=0x7f09005a;
         public static final int thermoName=0x7f09004a;
+        public static final int thermometer=0x7f09002d;
         public static final int thermometerName=0x7f090024;
         public static final int time=0x7f090058;
         public static final int timeEnd=0x7f090013;
