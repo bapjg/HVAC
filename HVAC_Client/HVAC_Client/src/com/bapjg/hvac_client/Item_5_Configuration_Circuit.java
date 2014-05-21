@@ -55,14 +55,15 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
+		((TextView) itemView.findViewById(R.id.name)).setText(itemData.name);
 	}
 	public void displayContents()
 	{
-    	TextView 										pumpName 					= (TextView) itemView.findViewById(R.id.pumpName);
-    	TextView 										thermometerName				= (TextView) itemView.findViewById(R.id.thermometerName);
-
-    	pumpName.setText								(itemData.pump);
-    	thermometerName.setText							(itemData.thermometer);
+    	TextView 												pumpName 					= (TextView) itemView.findViewById(R.id.pumpName);
+    	TextView 												thermometerName				= (TextView) itemView.findViewById(R.id.thermometerName);
+	
+    	pumpName.setText										(itemData.pump);
+    	thermometerName.setText									(itemData.thermometer);
    	}
 	public void setListens()
 	{

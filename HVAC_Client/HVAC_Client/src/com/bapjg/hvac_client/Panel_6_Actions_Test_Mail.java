@@ -44,8 +44,8 @@ public class Panel_6_Actions_Test_Mail 							extends 					Panel_0_Fragment
     }
  	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
-		if (result instanceof Ctrl_Actions_Test_Mail.Ack)							Global.toaster("eMail sent", true);
-		else																		Global.toaster("eMail error " + result.getClass().toString(), true);
+		if (result instanceof Ctrl_Actions_Test_Mail.Ack)		Global.toaster("eMail sent", true);
+		else													Global.toaster("eMail error " + result.getClass().toString(), true);
 	}
 }
 

@@ -43,7 +43,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	View											panelView					= inflater.inflate(R.layout.panel_1_temperatures, container, false);
+    	View													panelView					= inflater.inflate(R.layout.panel_1_temperatures, container, false);
     	
     	TCP_Send(new Ctrl_Temperatures().new Request());
         return panelView;

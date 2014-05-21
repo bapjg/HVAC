@@ -134,14 +134,14 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 	{  
 		if (result instanceof Ctrl_Configuration.Data)
 		{
-			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
+			Global.eRegConfiguration			 											= (Ctrl_Configuration.Data) result;
 			displayHeader();
 			displayContents();
 	        setListens();
  		}
 		else
 		{
-			Global.toaster("Data NOTNOTNOT received", true);
+			Global.toaster("P5_Conf PUMP : Data NOTNOTNOT received", true);
 		}
 	}
 }

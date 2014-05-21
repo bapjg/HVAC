@@ -17,7 +17,7 @@ public class Listener_Tabs 										implements 					ActionBar.TabListener
 	
 	public Listener_Tabs(Fragment menu) 
 	{
-		this.menu 		= menu;		//menu object
+		this.menu 																			= menu;		//menu object
 	}
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) 

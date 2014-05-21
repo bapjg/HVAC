@@ -30,13 +30,13 @@ public class Item_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 	public Item_3_Calendars_Vocabulary(Ctrl_Calendars.Word itemData)
 	{
 		super();
-		this.itemData																= itemData;
+		this.itemData																		= itemData;
 	}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        View 											itemView					= inflater.inflate(R.layout.item_3_calendars_word, container, false);
-        this.itemView																= (ViewGroup) itemView;
+        View 													itemView					= inflater.inflate(R.layout.item_3_calendars_word, container, false);
+        this.itemView																		= (ViewGroup) itemView;
 
         displayHeader();
         displayContents();
@@ -52,13 +52,13 @@ public class Item_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 		
 		((EditText) itemView.findViewById(R.id.name)).setText(itemData.name);
 		
-    	TextView 										day_1 						= (TextView) itemView.findViewById(R.id.day_1);
-    	TextView 										day_2 						= (TextView) itemView.findViewById(R.id.day_2);
-    	TextView 										day_3 						= (TextView) itemView.findViewById(R.id.day_3);
-    	TextView 										day_4 						= (TextView) itemView.findViewById(R.id.day_4);
-    	TextView 										day_5 						= (TextView) itemView.findViewById(R.id.day_5);
-    	TextView 										day_6 						= (TextView) itemView.findViewById(R.id.day_6);
-    	TextView 										day_7 						= (TextView) itemView.findViewById(R.id.day_7);
+    	TextView 												day_1 						= (TextView) itemView.findViewById(R.id.day_1);
+    	TextView 												day_2 						= (TextView) itemView.findViewById(R.id.day_2);
+    	TextView 												day_3 						= (TextView) itemView.findViewById(R.id.day_3);
+    	TextView 												day_4 						= (TextView) itemView.findViewById(R.id.day_4);
+    	TextView 												day_5 						= (TextView) itemView.findViewById(R.id.day_5);
+    	TextView 												day_6 						= (TextView) itemView.findViewById(R.id.day_6);
+    	TextView 												day_7 						= (TextView) itemView.findViewById(R.id.day_7);
 
         if ((itemData.days).indexOf("1") > -1)	day_1.setBackgroundColor(Color.RED); else day_1.setBackgroundColor(Color.BLUE);
         if ((itemData.days).indexOf("2") > -1)	day_2.setBackgroundColor(Color.RED); else day_2.setBackgroundColor(Color.BLUE);
@@ -85,7 +85,7 @@ public class Item_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 	{
      	if (clickedView.getId() == R.id.buttonOk)
     	{
-     		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
+     		itemData.name																	= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
       		getFragmentManager().popBackStackImmediate();
     	}
      	else if (clickedView.getId() == R.id.buttonDelete)
@@ -105,13 +105,13 @@ public class Item_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
     		String day = ((TextView) clickedView).getText().toString();
     		if ((itemData.days).indexOf(day) > -1)
     		{
-    			itemData.days = itemData.days.replace(day,"");						// Remove the day from the list
+    			itemData.days = itemData.days.replace(day,"");								// Remove the day from the list
     		}
     		else
     		{
-    			itemData.days = itemData.days + day;								// Add the day from the list
+    			itemData.days = itemData.days + day;										// Add the day from the list
     		}
-    		itemData.name 															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();		//It may have changed
+    		itemData.name 																	= ((EditText) itemView.findViewById(R.id.name)).getText().toString();		//It may have changed
     		displayContents();
     	}
 	}

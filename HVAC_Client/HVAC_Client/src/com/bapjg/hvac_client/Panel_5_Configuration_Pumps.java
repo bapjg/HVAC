@@ -31,15 +31,15 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment 
 {
-//	private Adapter_5_Configuration_Relays		 		adapter;
-//	private LayoutInflater								myInflater;
-//	private Activity									myActivity;
-//	private ViewGroup									myContainer;
-//	private View										myAdapterView;
-//	private FragmentManager								myFragmentManager;
-	
-	private View										panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-	private View										adapterView;			// This corresponds to the inflated list view within the panel view (R.id.List_View)
+//	private Adapter_5_Configuration_Relays		 				adapter;
+//	private LayoutInflater										myInflater;
+//	private Activity											myActivity;
+//	private ViewGroup											myContainer;
+//	private View												myAdapterView;
+//	private FragmentManager										myFragmentManager;
+			
+	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View												adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
 
 	public Panel_5_Configuration_Pumps()
 	{
@@ -49,8 +49,8 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        this.panelView																= inflater.inflate(R.layout.panel_5_configuration_pumps, container, false);
-        this.adapterView															= (AdapterView) panelView.findViewById(R.id.List_View);
+        this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_pumps, container, false);
+        this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.pumpList != null))
@@ -125,24 +125,24 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 	{  
 		if (result instanceof Ctrl_Configuration.Data)
 		{
-			Global.eRegConfiguration												= (Ctrl_Configuration.Data) result;
+			Global.eRegConfiguration														= (Ctrl_Configuration.Data) result;
 			displayHeader();
 			displayContents();
 		}
 		else
 		{
-			Global.toaster("Data NOTNOTNOT received", true);
+			Global.toaster("P5_Conf_Pump : Data NOTNOTNOT received", true);
 		}
 	}
 	public void displayHeader()
 	{
-//		TextView												title				= (TextView) panelView.findViewById(R.id.name);
+//		TextView												title						= (TextView) panelView.findViewById(R.id.name);
 //		title.setText("Pumps");
 	}
 	public void displayContents()
 	{
-	    AdapterView <Adapter_5_Configuration_Pumps>				adapterViewList		= (AdapterView <Adapter_5_Configuration_Pumps>) adapterView;
-        Adapter_5_Configuration_Pumps							arrayAdapter		= new Adapter_5_Configuration_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
+	    AdapterView <Adapter_5_Configuration_Pumps>				adapterViewList				= (AdapterView <Adapter_5_Configuration_Pumps>) adapterView;
+        Adapter_5_Configuration_Pumps							arrayAdapter				= new Adapter_5_Configuration_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
         adapterViewList.setAdapter(arrayAdapter);
 //		adapterViewList.setOnItemClickListener(this);
 	}

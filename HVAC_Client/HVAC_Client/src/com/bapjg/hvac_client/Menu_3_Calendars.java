@@ -24,23 +24,23 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	public Menu_3_Calendars()
 	{
 		super();
-		this.menuLayout																= R.layout.menu_3_calendars;
+		this.menuLayout																		= R.layout.menu_3_calendars;
 	}
 	public void onClick(View myView) // This is the onClick event from the Menu
 	{
 		super.onClick(myView);
 		
-    	String											caption						= ((Button) myView).getText().toString();
-    	FragmentTransaction								fTransaction				= getFragmentManager().beginTransaction();
-    	Fragment 										panelFragment				= null;
+    	String													caption						= ((Button) myView).getText().toString();
+    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
+    	Fragment 												panelFragment				= null;
    	
-    	if      (caption.equalsIgnoreCase("Vocabulary"))panelFragment 				= new Panel_3_Calendars_Vocabulary();
-    	else if (caption.equalsIgnoreCase("Hot Water")) panelFragment 				= new Panel_3_Calendars_Circuits("Hot_Water");
-     	else if (caption.equalsIgnoreCase("Radiator"))	panelFragment 				= new Panel_3_Calendars_Circuits("Radiator");
-    	else if (caption.equalsIgnoreCase("Floor"))		panelFragment 				= new Panel_3_Calendars_Circuits("Floor");
-    	else if (caption.equalsIgnoreCase("Away List"))	panelFragment 				= new Panel_3_Calendars_Away();
-       	else if (caption.equalsIgnoreCase("Refresh"))	doRefresh();
-    	else if (caption.equalsIgnoreCase("Update"))	doUpdate();
+    	if      (caption.equalsIgnoreCase("Vocabulary"))		panelFragment 				= new Panel_3_Calendars_Vocabulary();
+    	else if (caption.equalsIgnoreCase("Hot Water")) 		panelFragment 				= new Panel_3_Calendars_Circuits("Hot_Water");
+     	else if (caption.equalsIgnoreCase("Radiator"))			panelFragment 				= new Panel_3_Calendars_Circuits("Radiator");
+    	else if (caption.equalsIgnoreCase("Floor"))				panelFragment 				= new Panel_3_Calendars_Circuits("Floor");
+    	else if (caption.equalsIgnoreCase("Away List"))			panelFragment 				= new Panel_3_Calendars_Away();
+       	else if (caption.equalsIgnoreCase("Refresh"))			doRefresh();
+    	else if (caption.equalsIgnoreCase("Update"))			doUpdate();
 
     	if 		(panelFragment != null)
     	{
@@ -55,12 +55,12 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	}
 	public void doUpdate()
 	{
-		Ctrl_Calendars.Data									sendData					= Global.eRegCalendars;
-		Ctrl_Calendars.Update								sendUpdate					= new Ctrl_Calendars().new Update();
-		sendUpdate.wordList																= sendData.wordList;
-		sendUpdate.circuitList															= sendData.circuitList;
-		sendUpdate.awayList																= sendData.awayList;
-		sendUpdate.tasksBackGround														= sendData.tasksBackGround;
+		Ctrl_Calendars.Data											sendData				= Global.eRegCalendars;
+		Ctrl_Calendars.Update										sendUpdate				= new Ctrl_Calendars().new Update();
+		sendUpdate.wordList																	= sendData.wordList;
+		sendUpdate.circuitList																= sendData.circuitList;
+		sendUpdate.awayList																	= sendData.awayList;
+		sendUpdate.tasksBackGround															= sendData.tasksBackGround;
 		
 		HTTP_Send	(sendUpdate);
 	}
@@ -69,9 +69,9 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 		if (messageReturn instanceof Ctrl__Abstract.Ack)
 		{
 			Global.toaster("Server updated", false);
-	    	Ctrl_Actions_Stop.Execute 						stopMessage					= new Ctrl_Actions_Stop().new Execute();
+	    	Ctrl_Actions_Stop.Execute 								stopMessage				= new Ctrl_Actions_Stop().new Execute();
 // TODO	    	stopMessage.actionRequest													= Ctrl_Actions_Stop.ACTION_Reload_Calendars;
-	    	stopMessage.actionRequest													= Ctrl_Actions_Stop.ACTION_Restart;
+	    	stopMessage.actionRequest														= Ctrl_Actions_Stop.ACTION_Restart;
 //	    	TCP_Send	(stopMessage);
 		}
 		Global.toaster(messageReturn.getClass().toString(), false);

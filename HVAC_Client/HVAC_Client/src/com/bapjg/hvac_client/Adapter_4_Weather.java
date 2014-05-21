@@ -28,19 +28,19 @@ public class Adapter_4_Weather 									extends 					Adapter_0_Abstract
     	adapterView 																		= inflater.inflate(R.layout.row_4_weather, null);
     	row																					= new RowHolder();
        	row.time																			= (TextView) adapterView.findViewById(R.id.time);
-       	row.temperature											= (TextView) adapterView.findViewById(R.id.temperature);
-    	row.temperatureMinMax									= (TextView) adapterView.findViewById(R.id.temperatureMinMax);
-    	row.precipitationValue									= (TextView) adapterView.findViewById(R.id.precipitationValue);
-    	row.precipitationType									= (TextView) adapterView.findViewById(R.id.precipitationType);
-    	row.windSpeed											= (TextView) adapterView.findViewById(R.id.windSpeed);
-    	row.windName											= (TextView) adapterView.findViewById(R.id.windName);
-    	row.windDirection										= (TextView) adapterView.findViewById(R.id.windDirection);
-    	row.cloudValue											= (TextView) adapterView.findViewById(R.id.cloudValue);
-    	row.cloudAll											= (TextView) adapterView.findViewById(R.id.cloudAll);
+       	row.temperature																		= (TextView) adapterView.findViewById(R.id.temperature);
+    	row.temperatureMinMax																= (TextView) adapterView.findViewById(R.id.temperatureMinMax);
+    	row.precipitationValue																= (TextView) adapterView.findViewById(R.id.precipitationValue);
+    	row.precipitationType																= (TextView) adapterView.findViewById(R.id.precipitationType);
+    	row.windSpeed																		= (TextView) adapterView.findViewById(R.id.windSpeed);
+    	row.windName																		= (TextView) adapterView.findViewById(R.id.windName);
+    	row.windDirection																	= (TextView) adapterView.findViewById(R.id.windDirection);
+    	row.cloudValue																		= (TextView) adapterView.findViewById(R.id.cloudValue);
+    	row.cloudAll																		= (TextView) adapterView.findViewById(R.id.cloudAll);
     	
-    	String 								day					= Global.displayDayOfWeek((listItem.dateTime.from));
-    	String 								time_from			= Global.displayTimeShort(listItem.dateTime.from);
-    	String 								time_to				= Global.displayTimeShort(listItem.dateTime.to);
+    	String 													day							= Global.displayDayOfWeek((listItem.dateTime.from));
+    	String 													time_from					= Global.displayTimeShort(listItem.dateTime.from);
+    	String 													time_to						= Global.displayTimeShort(listItem.dateTime.to);
     	
        	row.time.setText								(day + " " + time_from + " - " + time_to);											
        	row.temperature.setText							(listItem.temperature.value.toString() + " °C");											
@@ -72,15 +72,15 @@ public class Adapter_4_Weather 									extends 					Adapter_0_Abstract
     }
     static class RowHolder 
     {
-    	TextView 							time;
-    	TextView 							temperature;
-    	TextView 							temperatureMinMax;
-    	TextView 							precipitationValue;
-    	TextView 							precipitationType;
-    	TextView 							windSpeed;
-    	TextView 							windName;
-    	TextView 							windDirection;
-    	TextView 							cloudAll;
-    	TextView 							cloudValue;
+    	TextView 												time;
+    	TextView 												temperature;
+    	TextView 												temperatureMinMax;
+    	TextView 												precipitationValue;
+    	TextView 												precipitationType;
+    	TextView 												windSpeed;
+    	TextView 												windName;
+    	TextView 												windDirection;
+    	TextView 												cloudAll;
+    	TextView 												cloudValue;
     }	
 }

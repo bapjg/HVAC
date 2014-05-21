@@ -64,14 +64,14 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	{
 		if (view.getId() == R.id.tempNeverExceed)
 		{
-			Integer											temperature					= Global.eRegConfiguration.boiler.tempNeverExceed;
-			Dialog_Temperature								df 							= new Dialog_Temperature(this, view.getId(), temperature, 85, 1, 20);
+			Integer												temperature					= Global.eRegConfiguration.boiler.tempNeverExceed;
+			Dialog_Temperature									df 							= new Dialog_Temperature(this, view.getId(), temperature, 85, 1, 20);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
 		else if (view.getId() == R.id.tempOverShoot)
 		{
-			Integer											temperature					= Global.eRegConfiguration.boiler.tempOverShoot;
-			Dialog_Temperature 								df 							= new Dialog_Temperature(this, view.getId(), temperature, 10, 1, 15);
+			Integer												temperature					= Global.eRegConfiguration.boiler.tempOverShoot;
+			Dialog_Temperature 									df 							= new Dialog_Temperature(this, view.getId(), temperature, 10, 1, 15);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
 	}

@@ -24,14 +24,14 @@ public class Adapter_5_Configuration_Relays 					extends 					Adapter_0_Abstract
     @Override
      public View getView(int position, View adapterView, ViewGroup parent) 
     {
-    	RowHolder 							row					= new RowHolder();
-    	Ctrl_Configuration.Relay			listItem			= (Ctrl_Configuration.Relay) listData.get(position);
+    	RowHolder 												row							= new RowHolder();
+    	Ctrl_Configuration.Relay								listItem					= (Ctrl_Configuration.Relay) listData.get(position);
  
-    	adapterView 											= inflater.inflate(R.layout.row_5_configuration_relay, null);
-
-    	row.name 												= (TextView) adapterView.findViewById(R.id.name);
-    	row.relayBank 											= (TextView) adapterView.findViewById(R.id.relayBank);
-    	row.relayNumber 										= (TextView) adapterView.findViewById(R.id.relayNumber);
+    	adapterView 																		= inflater.inflate(R.layout.row_5_configuration_relay, null);
+							
+    	row.name 																			= (TextView) adapterView.findViewById(R.id.name);
+    	row.relayBank 																		= (TextView) adapterView.findViewById(R.id.relayBank);
+    	row.relayNumber 																	= (TextView) adapterView.findViewById(R.id.relayNumber);
     	adapterView.setTag(row);
     	
     	row.name.setText					(listItem.name);
@@ -41,14 +41,8 @@ public class Adapter_5_Configuration_Relays 					extends 					Adapter_0_Abstract
     }
     static class RowHolder 
     {
-    	TextView 							name;
-    	TextView 							relayBank;
-    	TextView 							relayNumber;
+    	TextView 												name;
+    	TextView 												relayBank;
+    	TextView 												relayNumber;
     }	
-//    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
-//    {
-//        // Object 		o 								= view.getItemAtPosition(position);
-//        // NewsItem 	newsData 						= (NewsItem) o;
-//		Toast.makeText(myContext, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();
-//    }
 }

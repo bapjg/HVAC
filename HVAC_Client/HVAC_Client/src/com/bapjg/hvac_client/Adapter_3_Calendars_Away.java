@@ -39,10 +39,10 @@ public class Adapter_3_Calendars_Away 							extends 					Adapter_0_Abstract
 //        String x =  Global.displayTime(0L);
 //        String y = Global.displayTime(1000L * 3600);
         
-        String													stringDateStart			= Global.displayDate(dateTimeStart);
-        String													stringTimeStart			= Global.displayTime(dateTimeStart);
-        String													stringDateEnd			= Global.displayDate(dateTimeEnd);
-        String													stringTimeEnd			= Global.displayTime(dateTimeEnd);
+        String													stringDateStart				= Global.displayDate(dateTimeStart);
+        String													stringTimeStart				= Global.displayTime(dateTimeStart);
+        String													stringDateEnd				= Global.displayDate(dateTimeEnd);
+        String													stringTimeEnd				= Global.displayTime(dateTimeEnd);
 
         row.dateStart.setText(stringDateStart);
         row.timeStart.setText(stringTimeStart);

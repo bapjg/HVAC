@@ -36,7 +36,7 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
     	row.tempObjective																	= (TextView) adapterView.findViewById(R.id.tempObjective);
 
     	// Update the entries using standard ArrayAdapter technique
-    	Integer									tempObjective						= listItem.tempObjective/1000;
+    	Integer													tempObjective				= listItem.tempObjective/1000;
       	row.tempObjective.setText				(tempObjective.toString() + " °C");
     	row.days.setText						(listItem.days);
         row.timeStart.setText					(listItem.timeStart);
@@ -48,20 +48,20 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
     	}
         // Now handle the non-standard stuff
      	// Replace word in listItem.days be their corresponding day numbers from Vocabulary
-    	String											days						= listItem.days;
+    	String													days						= listItem.days;
     	
-    	for (Ctrl_Calendars.Word 						word 						: Global.eRegCalendars.wordList)
+    	for (Ctrl_Calendars.Word 		word 	: Global.eRegCalendars.wordList)
     	{
-    		days																	= days.replace(word.name, word.days);
+    		days																			= days.replace(word.name, word.days);
     	}
     	// Get the space reserved for days of week, create and colour the texts view (Red=Used, Blue=Unused
-        ViewGroup 										daySlots					= (ViewGroup) adapterView.findViewById(R.id.daySlots);
-        LayoutParams 									daySlotLayout				= new LayoutParams(40, LayoutParams.MATCH_PARENT);	//Width=40
-        TextView										daySlot;
+        ViewGroup 												daySlots					= (ViewGroup) adapterView.findViewById(R.id.daySlots);
+        LayoutParams 											daySlotLayout				= new LayoutParams(40, LayoutParams.MATCH_PARENT);	//Width=40
+        TextView												daySlot;
     	
     	for (Integer i = 1; i < 8; i++)	//Monday to Sunday
     	{
-            daySlot																	= new TextView(getContext());
+            daySlot																			= new TextView(getContext());
             daySlot.setText								(i.toString());
             daySlot.setTextColor						(Color.YELLOW);
             daySlot.setTextSize							(20);
@@ -80,34 +80,34 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
             // Add seperator between Friday and Saturday
             if (i == 5)  
             {
-                daySlot																= new TextView(getContext());
+                daySlot																		= new TextView(getContext());
                 daySlot.setLayoutParams					(daySlotLayout);
                 daySlots.addView(daySlot);
             }
     	}
        
         // Now get the space reserved for the day plan for a calendar entry (timeStart & timeEnd
-        ViewGroup 										timeSlots					= (ViewGroup) adapterView.findViewById(R.id.timeSlots);
-        LayoutParams 									timeSlotLayout				= new LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
-        
-        Long											QuarterHour					= 15 * 60 * 1000L;
-    	Long											timeStart					= Global.parseTime(listItem.timeStart);
-    	Long											timeEnd;
+        ViewGroup 												timeSlots					= (ViewGroup) adapterView.findViewById(R.id.timeSlots);
+        LayoutParams 											timeSlotLayout				= new LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
+				
+        Long													QuarterHour					= 15 * 60 * 1000L;
+    	Long													timeStart					= Global.parseTime(listItem.timeStart);
+    	Long													timeEnd;
         if (listItem.timeEnd == null)
         {
-        	timeEnd																	= timeStart + QuarterHour + QuarterHour;		//just add 1/2 hour
+        	timeEnd																			= timeStart + QuarterHour + QuarterHour;		//just add 1/2 hour
         }
         else
         {
-        	timeEnd																	= Global.parseTime(listItem.timeEnd);
+        	timeEnd																			= Global.parseTime(listItem.timeEnd);
         }
     	
     	
     	for (int i = 0; i < 96; i++)
         {
-        	Long										slotStart					= i * QuarterHour;
-        	Long										slotEnd						= slotStart + QuarterHour;
-            TextView									timeSlot					= new TextView(getContext());
+        	Long												slotStart					= i * QuarterHour;
+        	Long												slotEnd						= slotStart + QuarterHour;
+            TextView											timeSlot					= new TextView(getContext());
             timeSlot.setText							("");
             timeSlot.setLayoutParams					(timeSlotLayout);
             
@@ -127,9 +127,9 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
     }
     static class RowHolder 
     {
-    	TextView 										days;
-    	TextView 										timeStart;
-    	TextView 										timeEnd;
-    	TextView 										tempObjective;
+    	TextView 												days;
+    	TextView 												timeStart;
+    	TextView 												timeEnd;
+    	TextView 												tempObjective;
     }
 }

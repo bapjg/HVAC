@@ -63,12 +63,12 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
-		TextView												title				= (TextView) panelView.findViewById(R.id.name);
+		TextView												title						= (TextView) panelView.findViewById(R.id.name);
 	}
 	public void displayContents()
 	{
-	    AdapterView <Adapter_3_Calendars_Away>					adapterViewList		= (AdapterView <Adapter_3_Calendars_Away>) adapterView;
-	    Adapter_3_Calendars_Away								arrayAdapter		= new Adapter_3_Calendars_Away(Global.actContext, R.id.List_View, Global.eRegCalendars.awayList);
+	    AdapterView <Adapter_3_Calendars_Away>					adapterViewList				= (AdapterView <Adapter_3_Calendars_Away>) adapterView;
+	    Adapter_3_Calendars_Away								arrayAdapter				= new Adapter_3_Calendars_Away(Global.actContext, R.id.List_View, Global.eRegCalendars.awayList);
 		adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()
@@ -80,24 +80,24 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
 	{  
 		if (result instanceof Ctrl_Calendars.Data)
 		{
-			Global.eRegConfiguration			 									= (Ctrl_Configuration.Data) result;
+			Global.eRegConfiguration			 											= (Ctrl_Configuration.Data) result;
 			displayHeader();
 			displayContents();
 	        setListens();
  		}
 		else
 		{
-			Global.toaster("Data NOTNOTNOT received", true);
+			Global.toaster("P5_Cals_Away : Data NOTNOTNOT received", true);
 		}
 	}
 	public void onClick(View clickedView)
 	{
 		if (clickedView.getId() == R.id.buttonAdd)
 		{
-			Ctrl_Calendars.Away							itemNew						= new Ctrl_Calendars().new Away();
-	
-			itemNew.dateTimeStart													= Global.now();
-			itemNew.dateTimeEnd														= Global.now() + 24 * 60 * 60 * 1000L;
+			Ctrl_Calendars.Away									itemNew						= new Ctrl_Calendars().new Away();
+			
+			itemNew.dateTimeStart															= Global.now();
+			itemNew.dateTimeEnd																= Global.now() + 24 * 60 * 60 * 1000L;
 			
 			Global.eRegCalendars.awayList.add(itemNew);
 			displayContents();
@@ -106,11 +106,11 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
 	}
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-    	Ctrl_Calendars.Away								itemData					= Global.eRegCalendars.awayList.get(position);
-
-    	Item_3_Calendars_Away							itemFragment				= new Item_3_Calendars_Away(itemData);
- 
-    	FragmentTransaction 							fTransaction 				= getActivity().getFragmentManager().beginTransaction();
+    	Ctrl_Calendars.Away										itemData					= Global.eRegCalendars.awayList.get(position);
+		
+    	Item_3_Calendars_Away									itemFragment				= new Item_3_Calendars_Away(itemData);
+		
+    	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();

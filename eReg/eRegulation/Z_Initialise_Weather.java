@@ -37,9 +37,9 @@ public class Z_Initialise_Weather
     }
 	public static Long dateTimeFromUTC(String utc)
 	{
-		SimpleDateFormat 	utcFormat						= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		SimpleDateFormat 	utcFormat													= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		utcFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-		GregorianCalendar 	calendar					= new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+		GregorianCalendar 									calendar					= new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 		try
 		{
 			calendar.setTime(utcFormat.parse(utc));

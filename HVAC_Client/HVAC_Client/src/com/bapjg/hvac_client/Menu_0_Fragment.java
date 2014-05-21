@@ -34,15 +34,15 @@ public class Menu_0_Fragment 									extends 					Fragment
     {
     	View 													thisView 					= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
     	Button													firstButton					= (Button) ((ViewGroup) thisView).getChildAt(0);
-    	this.container																		=container;
+    	this.container																		= container;
     	allButtonsSetup((ViewGroup) thisView);
 		((OnClickListener) this).onClick(firstButton);																		// Execute the onClickListener of the first menu button
     	return thisView;
     }
 	public void onClick(View myView) 																						// This is the onClick event from the Menu
 	{
-    	Button 											myButton 					= (Button) myView;
-		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();									// Set all textColours to white
+    	Button 													myButton 					= (Button) myView;
+		ViewGroup 												viewParent					= (ViewGroup) myView.getParent();									// Set all textColours to white
 //		allButtonsSetup(viewParent);
 		allButtonsSetup(container);
     	myButton.setTextColor(Color.YELLOW);
@@ -51,10 +51,10 @@ public class Menu_0_Fragment 									extends 					Fragment
 	{
 		for (int i = 0; i < thisView.getChildCount(); i++)																	
 		{
-			View											viewChild				= (View) thisView.getChildAt(i);
+			View												viewChild					= (View) thisView.getChildAt(i);
 			if (viewChild instanceof Button)
 			{
-				Button										buttonChild 			= (Button) thisView.getChildAt(i);
+				Button											buttonChild 				= (Button) thisView.getChildAt(i);
 				buttonChild.setOnClickListener((OnClickListener) this);															// Set the OnClickListener to the menuFragment object (ie this)
 				buttonChild.setTextColor(Color.WHITE);																			// Colour white
 			}
@@ -66,40 +66,40 @@ public class Menu_0_Fragment 									extends 					Fragment
 	}
 	public void HTTP_Send(Ctrl__Abstract message)
 	{
-		HTTP_Task										task						= new HTTP_Task();
-	   	task.callBack																= this;					// processFinish
+		HTTP_Task												task						= new HTTP_Task();
+	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);		
 	}		
 	public void TCP_Send(Ctrl__Abstract message)		
 	{		
-		TCP_Task										task						= new TCP_Task();
-	   	task.callBack																= this;					// processFinish
+		TCP_Task												task						= new TCP_Task();
+	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);
 	}
 //	@Override	public void processFinishTCP(Ctrl_Abstract result) 											{}
 //	@Override	public void processFinishHTTP(Ctrl_Abstract result) 										{}
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
-		if 		(result instanceof Ctrl_Calendars.Data)		Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
-		else if (result instanceof Ctrl_Configuration.Data)	Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
-		else if (result instanceof Ctrl__Abstract.Ack)		/* All is Ok */ ;
-		else												Global.toaster("Data NOTNOTNOT received", true);
+		if 		(result instanceof Ctrl_Calendars.Data)			Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
+		else if (result instanceof Ctrl_Configuration.Data)		Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
+		else if (result instanceof Ctrl__Abstract.Ack)			/* All is Ok */ ;
+		else													Global.toaster("M0_Fragment : Data NOTNOTNOT received", true);
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
 //		if (result instanceof Ctrl_Configuration.Data)
 //		{
-//			Global.eRegConfiguration												= (Ctrl_Configuration.Data) result;
+//			Global.eRegConfiguration														= (Ctrl_Configuration.Data) result;
 //		}
 //		else if (result instanceof Ctrl_Weather.Data)
 		if (result instanceof Ctrl_Weather.Data)
 		{
-			Ctrl_Weather.Data							resultWeather				= (Ctrl_Weather.Data) result;
-			Global.weatherForecast				 									= (Ctrl_WeatherData) resultWeather.weatherData;
+			Ctrl_Weather.Data									resultWeather				= (Ctrl_Weather.Data) result;
+			Global.weatherForecast				 											= (Ctrl_WeatherData) resultWeather.weatherData;
 		}
 		else
 		{
-			Global.toaster("Data NOTNOTNOT received", true);
+			Global.toaster("M0_Fragment 2 : Data NOTNOTNOT received", true);
 		}
 	}
 }

@@ -22,12 +22,12 @@ public class Adapter_5_Configuration_Thermometers 				extends 					Adapter_0_Abs
     }
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-    	RowHolder 							row					= new RowHolder();
-    	Ctrl_Configuration.Thermometer		listItem			= (Ctrl_Configuration.Thermometer) listData.get(position);
+    	RowHolder 												row							= new RowHolder();
+    	Ctrl_Configuration.Thermometer							listItem					= (Ctrl_Configuration.Thermometer) listData.get(position);
     	
-        adapterView 											= inflater.inflate(R.layout.row_5_configuration_thermometer, null);
-        row.name 												= (TextView) adapterView.findViewById(R.id.name);
-        row.address 											= (TextView) adapterView.findViewById(R.id.address);
+        adapterView 																		= inflater.inflate(R.layout.row_5_configuration_thermometer, null);
+        row.name 																			= (TextView) adapterView.findViewById(R.id.name);
+        row.address 																		= (TextView) adapterView.findViewById(R.id.address);
         adapterView.setTag(row);
 
         row.name.setText					(listItem.name);
@@ -37,13 +37,7 @@ public class Adapter_5_Configuration_Thermometers 				extends 					Adapter_0_Abs
     }
     static class RowHolder 
     {
-    	TextView 							name;
-    	TextView 							address;
+    	TextView 												name;
+    	TextView 												address;
     }
-//    public void onClick(AdapterView<?> arg0, View view, int position, long arg3)
-//    {
-//        // Object 		o 								= view.getItemAtPosition(position);
-//        // NewsItem 	newsData 						= (NewsItem) o;
-//		Toast.makeText(myContext, "Selected Something, perhaps : " + position, Toast.LENGTH_LONG).show();
-//    }
 }

@@ -122,15 +122,15 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
 	{
      	if (clickedView.getId() == R.id.buttonOk)
     	{
-    		itemData.days																			= daysWord;				// ((EditText) itemView.findViewById(R.id.name)).getText().toString();
-       		itemData.days																			= itemData.days + daysNumbers;
-       		itemData.timeStart																		= ((TextView) itemView.findViewById(R.id.timeStart)).getText().toString();
-       		itemData.timeEnd																		= ((TextView) itemView.findViewById(R.id.timeEnd)).getText().toString();
+    		itemData.days																	= daysWord;				// ((EditText) itemView.findViewById(R.id.name)).getText().toString();
+       		itemData.days																	= itemData.days + daysNumbers;
+       		itemData.timeStart																= ((TextView) itemView.findViewById(R.id.timeStart)).getText().toString();
+       		itemData.timeEnd																= ((TextView) itemView.findViewById(R.id.timeEnd)).getText().toString();
        		
-       		String														tempObjective				= ((TextView) itemView.findViewById(R.id.tempObjective)).getText().toString();
-       		tempObjective																			= tempObjective.replace(" °C", "");
-       		itemData.tempObjective																	= (Integer) (Integer.parseInt(tempObjective) * 1000);
-       		itemData.stopOnObjective																= ((CheckBox) itemView.findViewById(R.id.stopOnObjective)).isChecked();
+       		String												tempObjective				= ((TextView) itemView.findViewById(R.id.tempObjective)).getText().toString();
+       		tempObjective																	= tempObjective.replace(" °C", "");
+       		itemData.tempObjective															= (Integer) (Integer.parseInt(tempObjective) * 1000);
+       		itemData.stopOnObjective														= ((CheckBox) itemView.findViewById(R.id.stopOnObjective)).isChecked();
        	    getFragmentManager().popBackStackImmediate();
     	}
      	else if (clickedView.getId() == R.id.buttonDelete)
@@ -138,18 +138,18 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
      		Global.eRegCalendars.fetchCircuit(circuitName).calendarList.remove(itemData);
      		getFragmentManager().popBackStackImmediate();
     	}
-     	//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
      	else if (clickedView.getId() == R.id.days)
     	{
-    		Dialog_String_List		 									df 							= new Dialog_String_List(this, R.id.days);
+    		Dialog_String_List		 							df 							= new Dialog_String_List(this, R.id.days);
     		df.items.add("");
-    		df.itemSelected																			= "";
+    		df.itemSelected																	= "";
 
     		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
     		{
     			if(word.name.equalsIgnoreCase(daysWord))
     			{
-    				df.itemSelected																	= daysWord;
+    				df.itemSelected															= daysWord;
     			}
     			df.items.add(word.name);
     		}

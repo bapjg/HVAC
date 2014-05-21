@@ -32,13 +32,13 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
     public Panel_4_Weather(String when)
     {
 		super();
-		this.when																	= when;				
+		this.when																			= when;				
     }
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        this.panelView																= inflater.inflate(R.layout.panel_4_weather, container, false);
+        this.panelView																		= inflater.inflate(R.layout.panel_4_weather, container, false);
 
 		if ((Global.weatherForecast != null)
 		&&  (Global.weatherForecast.forecasts != null) 
@@ -81,24 +81,25 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 	{
 	}
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public void displayHeader()
 	{	
 		Ctrl_WeatherData xxx = Global.weatherForecast;
 		
 		
-		TextView 										dateTimeObtained			= (TextView) panelView.findViewById(R.id.dateTimeObtained);
-        dateTimeObtained.setText 													(Global.displayTimeShort(Global.weatherForecast.dateTimeObtained));
+		TextView 												dateTimeObtained			= (TextView) panelView.findViewById(R.id.dateTimeObtained);
+        dateTimeObtained.setText 															(Global.displayTimeShort(Global.weatherForecast.dateTimeObtained));
         
-        TextView 										dateTime					= (TextView) panelView.findViewById(R.id.dateTime);
-		if 		(when.equalsIgnoreCase("Today"))		dateTime.setText 			(Global.displayDateShort(Global.getTimeAtMidnight()));
-		else if (when.equalsIgnoreCase("Tomorrow"))		dateTime.setText 			(Global.displayDateShort(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
-		else if (when.equalsIgnoreCase("Beyond"))		dateTime.setText 			("> " + Global.displayDateShort(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+        TextView 												dateTime					= (TextView) panelView.findViewById(R.id.dateTime);
+		if 		(when.equalsIgnoreCase("Today"))				dateTime.setText 			(Global.displayDateShort(Global.getTimeAtMidnight()));
+		else if (when.equalsIgnoreCase("Tomorrow"))				dateTime.setText 			(Global.displayDateShort(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
+		else if (when.equalsIgnoreCase("Beyond"))				dateTime.setText 			("> " + Global.displayDateShort(Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L));
 	}
 	public void displayContents()
 	{
-        AdapterView <Adapter_4_Weather> 		view						= (AdapterView) panelView.findViewById(R.id.List_View);
+        AdapterView <Adapter_4_Weather> 						view						= (AdapterView) panelView.findViewById(R.id.List_View);
         
-        forecastList														= new ArrayList <Ctrl_WeatherData.Forecast> ();
+        forecastList																		= new ArrayList <Ctrl_WeatherData.Forecast> ();
         if (when.equalsIgnoreCase("Today"))
 		{
 	        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherForecast.forecasts)
@@ -131,7 +132,7 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
 	        	}
 	        }
 		}
-        Adapter_4_Weather						adapter						= new Adapter_4_Weather(Global.actContext, R.id.List_View, forecastList);
+        Adapter_4_Weather										adapter						= new Adapter_4_Weather(Global.actContext, R.id.List_View, forecastList);
         view.setAdapter(adapter);
 	}
 	public void setListens()

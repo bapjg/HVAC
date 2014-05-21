@@ -34,8 +34,8 @@ import android.widget.EditText;
 public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 																implements					AdapterView.OnItemClickListener	
 {
-	private View												panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-	private View												adapterView;			// This corresponds to the inflated list view within the panel view (R.id.List_View)
+	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View												adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
 
 	public Panel_5_Configuration_Circuits()
 	{
@@ -57,9 +57,8 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
         }
         else // we need to reconnect to the server
         {
-            HTTP_Send(new Ctrl_Configuration().new Request());
+        	Global.toaster("Please wait or refresh if necessary", true);
         }
- 
         return panelView;
     }
 	public void displayHeader()
@@ -88,10 +87,10 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 		}
 		else
 		{
-			Global.toaster("Data NOTNOTNOT received", true);
+			Global.toaster("P5_Conf_Circuits : Data NOTNOTNOT received", true);
 		}
 	}
-    public void onClick(View myView)
+    public void onClick(View clickedView)
     {
     }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)

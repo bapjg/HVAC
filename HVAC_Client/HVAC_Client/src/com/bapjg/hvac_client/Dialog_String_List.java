@@ -44,17 +44,17 @@ public class Dialog_String_List 								extends 					DialogFragment
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
     {
-        AlertDialog.Builder 	builder 										= new AlertDialog.Builder(getActivity());
-        LayoutInflater 			inflater 										= getActivity().getLayoutInflater();
-        
-        View					dialogView										= inflater.inflate(R.layout.dialog_string_list, null);
-        AdapterView				adapterView										= (AdapterView) dialogView.findViewById(R.id.List_View);
+        AlertDialog.Builder 									builder 					= new AlertDialog.Builder(getActivity());
+        LayoutInflater 											inflater 					= getActivity().getLayoutInflater();
+										                                                    
+        View													dialogView					= inflater.inflate(R.layout.dialog_string_list, null);
+        AdapterView												adapterView					= (AdapterView) dialogView.findViewById(R.id.List_View);
         
 //        items.add("Henry");
 //        items.add("3ry");
         
-        AdapterView <Adapter_0_String_List>						adapterViewList	= (AdapterView <Adapter_0_String_List>) adapterView;
-        Adapter_0_String_List									arrayAdapter	= new Adapter_0_String_List(Global.actContext, R.id.List_View, items);
+        AdapterView <Adapter_0_String_List>						adapterViewList				= (AdapterView <Adapter_0_String_List>) adapterView;
+        Adapter_0_String_List									arrayAdapter				= new Adapter_0_String_List(Global.actContext, R.id.List_View, items);
        
 //        arrayAdapter.add("Me");
         
@@ -70,7 +70,7 @@ public class Dialog_String_List 								extends 					DialogFragment
     }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-    	itemSelected															= items.get(position);
+    	itemSelected																		= items.get(position);
 	}
     public void buttonOk (DialogInterface dialog, int which)
     {

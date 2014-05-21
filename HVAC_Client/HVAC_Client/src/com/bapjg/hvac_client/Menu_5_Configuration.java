@@ -25,24 +25,24 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	public Menu_5_Configuration()
 	{
 		super();
-		this.menuLayout																= R.layout.menu_5_configuration;
+		this.menuLayout																		= R.layout.menu_5_configuration;
 	}
 	public void onClick(View myView) // This is the onClick event from the Menu
 	{
 		super.onClick(myView);
 		
-    	String											caption						= ((Button) myView).getText().toString();
-    	FragmentTransaction								fTransaction				= getFragmentManager().beginTransaction();
-    	Fragment 										panelFragment				= null;
+    	String													caption						= ((Button) myView).getText().toString();
+    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
+    	Fragment 												panelFragment				= null;
     	
-    	if      (caption.equalsIgnoreCase("Thermometers"))	panelFragment 			= new Panel_5_Configuration_Thermometers();
-    	else if (caption.equalsIgnoreCase("Relays"))	panelFragment 				= new Panel_5_Configuration_Relays();
-    	else if (caption.equalsIgnoreCase("Pumps"))		panelFragment 				= new Panel_5_Configuration_Pumps();
-    	else if (caption.equalsIgnoreCase("Circuits"))	panelFragment 				= new Panel_5_Configuration_Circuits();
-    	else if (caption.equalsIgnoreCase("Burner"))	panelFragment 				= new Panel_5_Configuration_Burner();
-    	else if (caption.equalsIgnoreCase("Boiler"))	panelFragment 				= new Panel_5_Configuration_Boiler();
-    	else if (caption.equalsIgnoreCase("Refresh"))	doRefresh();
-    	else if (caption.equalsIgnoreCase("Update"))	doUpdate();
+    	if      (caption.equalsIgnoreCase("Thermometers"))		panelFragment 				= new Panel_5_Configuration_Thermometers();
+    	else if (caption.equalsIgnoreCase("Relays"))			panelFragment 				= new Panel_5_Configuration_Relays();
+    	else if (caption.equalsIgnoreCase("Pumps"))				panelFragment 				= new Panel_5_Configuration_Pumps();
+    	else if (caption.equalsIgnoreCase("Circuits"))			panelFragment 				= new Panel_5_Configuration_Circuits();
+    	else if (caption.equalsIgnoreCase("Burner"))			panelFragment 				= new Panel_5_Configuration_Burner();
+    	else if (caption.equalsIgnoreCase("Boiler"))			panelFragment 				= new Panel_5_Configuration_Boiler();
+    	else if (caption.equalsIgnoreCase("Refresh"))			doRefresh();
+    	else if (caption.equalsIgnoreCase("Update"))			doUpdate();
 
     	if (panelFragment != null)
     	{

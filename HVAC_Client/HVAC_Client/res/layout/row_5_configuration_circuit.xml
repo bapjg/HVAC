@@ -21,12 +21,16 @@
 	        android:id				= "@+id/gradient"
 	        android:layout_width	= "100dp"
 	        android:layout_height	= "wrap_content"
+	        android:clickable		= "false"
+	        android:focusable		= "false"
 	        android:text			= ""
 	    />
 	    <CheckBox 
 	        android:id				= "@+id/mixer"
 	        android:layout_width	= "100dp"
 	        android:layout_height	= "wrap_content"
+	        android:clickable		= "false"
+	        android:focusable		= "false"
 	        android:text			= ""
 	    />
   	</LinearLayout>  	

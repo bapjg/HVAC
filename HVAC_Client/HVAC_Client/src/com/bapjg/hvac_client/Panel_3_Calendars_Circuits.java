@@ -30,8 +30,8 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 {
 	public String												circuitName;
 
-	private View												panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-	private View												adapterView;			// This corresponds to the inflated list view within the panel view (R.id.List_View)
+	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private View												adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
 	
     public Panel_3_Calendars_Circuits(String circuitName)
     {
@@ -54,7 +54,7 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
         }
         else // we need to reconnect to the server
         {
-        	Global.toaster("Please refresh", true);
+        	Global.toaster("Please wait or refresh if necessary", true);
         }
         return panelView;
     }
@@ -66,9 +66,9 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 	public void displayContents()
 	{
         AdapterView <Adapter_3_Calendars_Circuits>				adapterViewList				= (AdapterView <Adapter_3_Calendars_Circuits>) adapterView;
-        Adapter_3_Calendars_Circuits							arrayAdapter				= null;	
+//        Adapter_3_Calendars_Circuits							arrayAdapter				= null;	
         Ctrl_Calendars.Circuit									circuit						= Global.eRegCalendars.fetchCircuit(this.circuitName);
-        arrayAdapter																= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
+        Adapter_3_Calendars_Circuits							arrayAdapter				= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
         adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()
@@ -76,20 +76,12 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 		((AdapterView<?>) adapterView).setOnItemClickListener(this);
 		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
 	}
-
-//	public void OnItemClick(AdapterView<?> parent, View view, int position, long id) 
-//	{
-//    	FragmentTransaction								fTransaction				= getActivity().getFragmentManager().beginTransaction();
-//    	Fragment 										panelFragment				= new Item_3_Calendars_Circuits();
-//    	fTransaction.replace(R.id.panel_container, panelFragment);
-//    	fTransaction.commit();  
-//	}
 	@Override
     public void onClick(View clickedView)
 	{
 		if (clickedView.getId() == R.id.buttonAdd)
 		{
-			Ctrl_Calendars.Calendar									itemNew					= new Ctrl_Calendars().new Calendar();
+			Ctrl_Calendars.Calendar								itemNew						= new Ctrl_Calendars().new Calendar();
 
 			itemNew.days																	= "";
 			itemNew.timeStart																= "09:00";

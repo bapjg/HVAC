@@ -42,14 +42,14 @@ public class Dialog_Date 										extends 					DialogFragment
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
     {
-        AlertDialog.Builder 	builder 						= new AlertDialog.Builder(getActivity());
-        LayoutInflater 			inflater 						= getActivity().getLayoutInflater();
-        
-        View					dialogView						= inflater.inflate(R.layout.dialog_date, null);
-        builder.setView(dialogView);
-        builder.setTitle("Select date");
-         
-        datePicker 												= (DatePicker) dialogView.findViewById(R.id.dateObjective);
+        AlertDialog.Builder 	builder 													= new AlertDialog.Builder(getActivity());
+        LayoutInflater 			inflater 													= getActivity().getLayoutInflater();
+									
+        View					dialogView													= inflater.inflate(R.layout.dialog_date, null);
+        builder.setView(dialogView);							
+        builder.setTitle("Select date");							
+									
+        datePicker 																			= (DatePicker) dialogView.findViewById(R.id.dateObjective);
         datePicker.init(dateInitialYear, dateInitialMonth, dateInitialDay, null);
 
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
@@ -58,9 +58,9 @@ public class Dialog_Date 										extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	Integer 				day 							= datePicker.getDayOfMonth();
-     	Integer 				month 							= datePicker.getMonth();
-     	Integer 				year 							= datePicker.getYear();
+     	Integer 												day 						= datePicker.getDayOfMonth();
+     	Integer 												month 						= datePicker.getMonth();
+     	Integer 												year 						= datePicker.getYear();
      	writeBack.setText(day.toString() + "/" + ((Integer) (month + 1)).toString() + "/" + year.toString());
     	dialog.dismiss();
     }

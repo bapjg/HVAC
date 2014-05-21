@@ -128,7 +128,7 @@ public class Activity_Main 										extends 					Activity
 	{  
 		if 		(result instanceof Ctrl_Calendars.Data)			Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
 		else if (result instanceof Ctrl_Configuration.Data)		Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
-		else													Global.toaster("Data NOTNOTNOT received", true);
+		else													Global.toaster("ActMain : Data NOTNOTNOT received", true);
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
@@ -145,7 +145,7 @@ public class Activity_Main 										extends 					Activity
 		else
 		{
 			Global.toaster("We are in Activity_Main", true);
-			Global.toaster("Data NOTNOTNOT received", true);
+			Global.toaster("ActMain 2  : Data NOTNOTNOT received", true);
 		}
 	}
 }

@@ -62,15 +62,16 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 //			Global.toaster("Please refresh", true);
 //		}
 //	}
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public void displayHeader()
 	{
-        TextView 										name						= (TextView) panelView.findViewById(R.id.name);
+        TextView 												name						= (TextView) panelView.findViewById(R.id.name);
         name.setText("Vocabulary");		
 	}
 	public void displayContents()
 	{
-    	AdapterView <Adapter_3_Calendars_Words>			adapterViewList				= (AdapterView <Adapter_3_Calendars_Words>) adapterView;
-		Adapter_3_Calendars_Words						arrayAdapter				= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
+    	AdapterView <Adapter_3_Calendars_Words>					adapterViewList				= (AdapterView <Adapter_3_Calendars_Words>) adapterView;
+		Adapter_3_Calendars_Words								arrayAdapter				= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
 		adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()
@@ -83,9 +84,9 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 	{
 		if (clickedView.getId() == R.id.buttonAdd)
 		{
-			Ctrl_Calendars.Word							itemNew						= new Ctrl_Calendars().new Word();
-			itemNew.name															= "new";
-			itemNew.days															= "";
+			Ctrl_Calendars.Word									itemNew						= new Ctrl_Calendars().new Word();
+			itemNew.name																	= "new";
+			itemNew.days																	= "";
 			Global.eRegCalendars.wordList.add(itemNew);
 			displayContents();
 			setListens();
@@ -94,11 +95,11 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 	@Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
-    	Ctrl_Calendars.Word							itemData						= Global.eRegCalendars.wordList.get(position);
-
-    	Item_3_Calendars_Vocabulary					itemFragment					= new Item_3_Calendars_Vocabulary(itemData);
-   	 			
-    	FragmentTransaction 						fTransaction 					= getActivity().getFragmentManager().beginTransaction();
+    	Ctrl_Calendars.Word										itemData					= Global.eRegCalendars.wordList.get(position);
+			                                                                            
+    	Item_3_Calendars_Vocabulary								itemFragment				= new Item_3_Calendars_Vocabulary(itemData);
+							                                                            
+    	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();

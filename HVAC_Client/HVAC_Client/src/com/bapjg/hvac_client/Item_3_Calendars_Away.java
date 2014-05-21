@@ -49,10 +49,10 @@ public class Item_3_Calendars_Away 								extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-    	TextView 										dateStart 					= (TextView) itemView.findViewById(R.id.dateStart);
-    	TextView 										dateEnd						= (TextView) itemView.findViewById(R.id.dateEnd);
-    	TextView 										timeStart					= (TextView) itemView.findViewById(R.id.timeStart);
-    	TextView 										timeEnd						= (TextView) itemView.findViewById(R.id.timeEnd);
+    	TextView 												dateStart 					= (TextView) itemView.findViewById(R.id.dateStart);
+    	TextView 												dateEnd						= (TextView) itemView.findViewById(R.id.dateEnd);
+    	TextView 												timeStart					= (TextView) itemView.findViewById(R.id.timeStart);
+    	TextView 												timeEnd						= (TextView) itemView.findViewById(R.id.timeEnd);
  
     	dateStart.setText(Global.displayDate(itemData.dateTimeStart));
     	timeStart.setText(Global.displayTime(itemData.dateTimeStart));

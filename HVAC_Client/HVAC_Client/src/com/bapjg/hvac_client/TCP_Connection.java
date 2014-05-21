@@ -18,10 +18,10 @@ import HVAC_Messages.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class TCP_Connection
 {
-	public Socket					piSocket;
-	public ObjectOutputStream 		piOutputStream 			= null;
-	public ObjectInputStream 		piInputStream			= null;
-	public Boolean					piConnected				= false;
+	public Socket												piSocket;
+	public ObjectOutputStream 									piOutputStream 				= null;
+	public ObjectInputStream 									piInputStream				= null;
+	public Boolean												piConnected					= false;
 	
 	public TCP_Connection()
 	{
@@ -33,7 +33,7 @@ public class TCP_Connection
 		{
 			try													// Try last known address
 			{
-				piSocket 										= new Socket();
+				piSocket 																	= new Socket();
 				piSocket.connect(Global.piSocketAddress,3000);
 				piSocket.setSoTimeout(3000);
 				return true;									// Exit procedure as we are connected - NormalOperating
@@ -45,8 +45,8 @@ public class TCP_Connection
 																// There has been a problem... so :
 		try														// Try local
 		{
-			Global.piSocketAddress								= new InetSocketAddress("192.168.5.51", 8889);
-			piSocket 											= new Socket();
+			Global.piSocketAddress															= new InetSocketAddress("192.168.5.51", 8889);
+			piSocket 																		= new Socket();
 			piSocket.connect(Global.piSocketAddress, 1000);
 			piSocket.setSoTimeout(3000);
 			
@@ -56,8 +56,8 @@ public class TCP_Connection
 		{
 			try													// It Failed so now try over the internet
 			{
-				Global.piSocketAddress 							= new InetSocketAddress("home.bapjg.com", 8889);
-				piSocket 										= new Socket();
+				Global.piSocketAddress 														= new InetSocketAddress("home.bapjg.com", 8889);
+				piSocket 																	= new Socket();
 				piSocket.connect(Global.piSocketAddress, 3000);
 				piSocket.setSoTimeout(3000);
 
@@ -84,11 +84,11 @@ public class TCP_Connection
 		{
 			try
 			{
-				piOutputStream									= new ObjectOutputStream(piSocket.getOutputStream());
+				piOutputStream																= new ObjectOutputStream(piSocket.getOutputStream());
 				piOutputStream.writeObject(messageSend);
 				piOutputStream.flush();
 				
-				piInputStream									= new ObjectInputStream(piSocket.getInputStream());
+				piInputStream																= new ObjectInputStream(piSocket.getInputStream());
 				
 				return (Ctrl__Abstract) piInputStream.readObject();
 			}

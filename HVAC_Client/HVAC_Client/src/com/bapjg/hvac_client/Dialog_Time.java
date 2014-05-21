@@ -42,26 +42,26 @@ public class Dialog_Time 										extends 					DialogFragment
 	public Dialog_Time(Dialog_Response callBack, int fieldId, String time) 
     {
 		super();
-		this.callBack											= callBack;
-		this.fieldId											= fieldId;
+		this.callBack																		= callBack;
+		this.fieldId																		= fieldId;
 		
-		String[] 				timeInitialParts				= time.split(":");
+		String[] 												timeInitialParts			= time.split(":");
 		
-		this.timeInitialHour									= Integer.parseInt(timeInitialParts[0]);
-		this.timeInitialMinute									= Integer.parseInt(timeInitialParts[1]);
-		this.callBackLong										= false;
+		this.timeInitialHour																= Integer.parseInt(timeInitialParts[0]);
+		this.timeInitialMinute																= Integer.parseInt(timeInitialParts[1]);
+		this.callBackLong																	= false;
     }
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
     {
-        AlertDialog.Builder 	builder 						= new AlertDialog.Builder(getActivity());
-        LayoutInflater 			inflater 						= getActivity().getLayoutInflater();
-        
-        View					dialogView						= inflater.inflate(R.layout.dialog_time, null);
+        AlertDialog.Builder 									builder 					= new AlertDialog.Builder(getActivity());
+        LayoutInflater 											inflater 					= getActivity().getLayoutInflater();
+										                                            
+        View													dialogView					= inflater.inflate(R.layout.dialog_time, null);
         builder.setView(dialogView);
         builder.setTitle("Select time");
          
-		timePicker 												= (TimePicker) dialogView.findViewById(R.id.timeObjective);
+		timePicker 																			= (TimePicker) dialogView.findViewById(R.id.timeObjective);
 		timePicker.setIs24HourView		(true);
 		timePicker.setCurrentHour		(timeInitialHour);
 		timePicker.setCurrentMinute		(timeInitialMinute);
@@ -72,8 +72,8 @@ public class Dialog_Time 										extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	Integer 				hour 							= timePicker.getCurrentHour();
-     	Integer 				minute 							= timePicker.getCurrentMinute();
+     	Integer 												hour 						= timePicker.getCurrentHour();
+     	Integer 												minute 						= timePicker.getCurrentMinute();
      	if (callBackLong)
      	{
     		callBack.onReturnTime(fieldId, hour * 3600 * 1000L + minute * 60 * 1000L);
