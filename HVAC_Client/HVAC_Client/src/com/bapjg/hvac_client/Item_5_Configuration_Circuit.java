@@ -64,49 +64,90 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 	
     	pumpName.setText										(itemData.pump);
     	thermometerName.setText									(itemData.thermometer);
+    	
+    	if (itemData.tempGradient != null)
+    	{
+        	Ctrl_Configuration.TempGradient						tempGradient				= itemData.tempGradient;
+    		
+    		TextView 											outsideLow 					= (TextView) itemView.findViewById(R.id.outsideLow);
+        	TextView 											outsideHigh					= (TextView) itemView.findViewById(R.id.outsideHigh);
+       		TextView 											tempLow 					= (TextView) itemView.findViewById(R.id.tempLow);
+        	TextView 											tempHigh					= (TextView) itemView.findViewById(R.id.tempHigh);
+    	
+        	outsideLow.setText									(Global.displayTemperature(tempGradient.outsideLow));
+        	outsideHigh.setText									(Global.displayTemperature(tempGradient.outsideHigh));
+        	tempLow.setText										(Global.displayTemperature(tempGradient.tempLow));
+        	tempHigh.setText									(Global.displayTemperature(tempGradient.tempHigh));
+    	}
+    	else
+    	{
+    		ViewGroup											gradientView				= (ViewGroup) itemView.findViewById(R.id.gradient);	
+    		gradientView.setVisibility(View.GONE);
+    	}
+    	if (itemData.mixer != null)
+    	{
+        	Ctrl_Configuration.Mixer							mixer						= itemData.mixer;
+    		
+    		TextView 											name 						= (TextView) itemView.findViewById(R.id.name);
+        	TextView 											swingTime					= (TextView) itemView.findViewById(R.id.swingTime);
+       		TextView 											relayUp 					= (TextView) itemView.findViewById(R.id.relayUp);
+        	TextView 											relayDown					= (TextView) itemView.findViewById(R.id.relayDown);
+    	
+        	name.setText										(mixer.name);
+        	swingTime.setText									(((Integer) (mixer.swingTime/1000)).toString());
+        	relayUp.setText										(mixer.relayUp);
+        	relayDown.setText									(mixer.relayDown);
+    	}
+    	else
+    	{
+    		ViewGroup											gradientView				= (ViewGroup) itemView.findViewById(R.id.gradient);	
+    		gradientView.setVisibility(View.GONE);
+    	}
    	}
 	public void setListens()
 	{
-//		itemView.findViewById(R.id.buttonOk).setOnClickListener(this);
-//		itemView.findViewById(R.id.buttonDelete).setOnClickListener(this);
-//	    itemView.findViewById(R.id.dateStart).setOnClickListener(this);
-//	    itemView.findViewById(R.id.dateEnd).setOnClickListener(this);
-//	    itemView.findViewById(R.id.timeStart).setOnClickListener(this);
-//	    itemView.findViewById(R.id.timeEnd).setOnClickListener(this);
+    	if (itemData.tempGradient != null)
+    	{
+			itemView.findViewById(R.id.tempLow).setOnClickListener(this);
+			itemView.findViewById(R.id.tempHigh).setOnClickListener(this);
+			itemView.findViewById(R.id.outsideHigh).setOnClickListener(this);
+			itemView.findViewById(R.id.outsideLow).setOnClickListener(this);
+			itemView.findViewById(R.id.name).setOnClickListener(this);
+			itemView.findViewById(R.id.swingTime).setOnClickListener(this);
+			itemView.findViewById(R.id.relayUp).setOnClickListener(this);
+			itemView.findViewById(R.id.relayDown).setOnClickListener(this);
+    	}
 	}
     @Override
 	public void onClick(View clickedView) 
 	{
-     	if (clickedView.getId() == R.id.buttonOk)
-    	{
-//     		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
-      		getFragmentManager().popBackStackImmediate();
-    	}
-     	else if (clickedView.getId() == R.id.buttonDelete)
-    	{
-     		Global.eRegCalendars.awayList.remove(itemData);
-     		getFragmentManager().popBackStackImmediate();
-    	}
-    	else if (clickedView.getId() == R.id.dateStart)
-    	{
-     		// TODO
-    		getFragmentManager().popBackStackImmediate();
-    	}
-    	else if (clickedView.getId() == R.id.timeStart)
-    	{
-     		// TODO
-      		getFragmentManager().popBackStackImmediate();
-    	}
-    	else if (clickedView.getId() == R.id.dateEnd)
-    	{
-     		// TODO
-     		getFragmentManager().popBackStackImmediate();
-    	}
-    	else if (clickedView.getId() == R.id.timeEnd)
-    	{
-     		// TODO
-     		getFragmentManager().popBackStackImmediate();
-    	}
+		switch(clickedView.getId())
+		{
+	     	case R.id.tempLow:
+	      		Global.toaster("Its Ok tempLow", false);
+	      		break;
+	     	case R.id.tempHigh:
+	      		Global.toaster("Its Ok tempHigh", false);
+	      		break;
+	     	case R.id.outsideHigh:
+	      		Global.toaster("Its Ok outsideHigh", false);
+	      		break;
+	     	case R.id.outsideLow:
+	      		Global.toaster("Its Ok outsideLow", false);
+	      		break;
+	     	case R.id.name:
+	      		Global.toaster("Its Ok name", false);
+	      		break;
+	     	case R.id.swingTime:
+	      		Global.toaster("Its Ok swingTime", false);
+	      		break;
+	     	case R.id.relayUp:
+	      		Global.toaster("Its Ok relayUp", false);
+	      		break;
+	     	case R.id.relayDown:
+	      		Global.toaster("Its Ok relayDown", false);
+	      		break;
+		}
  	}
 }
 
