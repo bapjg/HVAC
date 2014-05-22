@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/HVAC_Client"/>
 	<classpathentry kind="lib" path="D:/HVAC_Repository/git/HVAC/eReg/eRegulation/javax.mail.jar"/>
 	<classpathentry kind="lib" path="D:/HVAC_Repository/git/HVAC/eReg/eRegulation/gson-2.2.4.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/HVAC_Common"/>
