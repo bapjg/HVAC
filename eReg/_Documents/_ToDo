@@ -40,7 +40,30 @@ Thermometers
 ============
 	Create thermal contact
 	Calibrate Trip (heat and see at what temp the pump trips
-	
+
+Code Snippets
+=============
+
+Draw black horizontal line
+	<View
+		 android:layout_width="match_parent"
+		 android:layout_height="1dp"
+		 android:background="@android:color/black" 
+	/>
+
+XML Draw Line
+
+	<?xml version="1.0" encoding="utf-8"?>
+	<shape xmlns:android="http://schemas.android.com/apk/res/android" 
+	    android:shape="line"
+    >
+	    <solid android:color="#00000000" 
+	    />
+	    <stroke
+	        android:width="2dp"
+	        android:color="#808080" 
+	    />
+	</shape>	
 
 ===========================================================================================
 ToTest Items

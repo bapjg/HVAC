@@ -16,5 +16,6 @@
 	<classpathentry kind="src" path="/eReg"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/HVAC_Client"/>
 	<classpathentry kind="lib" path="D:/HVAC_Repository/git/HVAC/HVAC_Server/WebContent/WEB-INF/gson-2.2.4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HVAC_Common"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

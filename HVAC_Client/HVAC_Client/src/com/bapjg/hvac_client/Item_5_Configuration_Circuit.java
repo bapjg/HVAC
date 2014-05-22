@@ -81,7 +81,7 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
         	outsideHigh.setText									(tempGradient.outsideHigh.displayInteger());
         	tempLow.setText										(tempGradient.tempLow.displayInteger());
         	tempHigh.setText									(tempGradient.tempHigh.displayInteger());
-    	}
+     	}
     	else
     	{
     		ViewGroup											gradientView				= (ViewGroup) itemView.findViewById(R.id.gradient);	
