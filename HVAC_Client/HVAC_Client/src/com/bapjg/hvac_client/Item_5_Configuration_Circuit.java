@@ -2,8 +2,6 @@ package com.bapjg.hvac_client;
 
 import HVAC_Types.*;
 import HVAC_Messages.*;
-import HVAC_Messages.Ctrl_Calendars.Word;
-import HVAC_Messages.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;

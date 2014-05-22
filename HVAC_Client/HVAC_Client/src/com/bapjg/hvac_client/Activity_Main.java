@@ -1,7 +1,5 @@
 package com.bapjg.hvac_client;
 
-import java.util.TimeZone;
-
 import HVAC_Messages.*;
 import HVAC_Types.*;
 import android.os.Bundle;
@@ -10,7 +8,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -32,6 +29,10 @@ public class Activity_Main 										extends 					Activity
         Global.activity																		= (Activity) this;
         Global.piSocketAddress																= null;
 
+        Temperature t;
+        t = new Temperature(95000);
+        t.milliDegrees = 95000;
+        
         Ctrl_Calendars 				x 	=   new Ctrl_Calendars();
         Ctrl_Calendars.Request 		y 	= x.new Request();
         

@@ -1,19 +1,17 @@
 package eRegulation;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 import HVAC_Messages.*;
+import HVAC_Types.*;
 
 public class Z_Initialise_Weather
 {
 	public static void main(String[] args)
 	{
-		
-		
 		
 		String utct = "2014-05-04T15:00:00";
 		
