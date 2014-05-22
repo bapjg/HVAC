@@ -47,7 +47,7 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
     		adapterView.findViewById(R.id.row).setBackgroundColor(0x800000ff); //  BLUE =  (0xff0000ff) (first byte = intensity)
     	}
         // Now handle the non-standard stuff
-     	// Replace word in listItem.days be their corresponding day numbers from Vocabulary
+     	// Replace word in listItem.days by corresponding day numbers from Vocabulary
     	String													days						= listItem.days;
     	
     	for (Ctrl_Calendars.Word 		word 	: Global.eRegCalendars.wordList)

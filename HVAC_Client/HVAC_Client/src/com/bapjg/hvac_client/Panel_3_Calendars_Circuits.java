@@ -66,7 +66,6 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 	public void displayContents()
 	{
         AdapterView <Adapter_3_Calendars_Circuits>				adapterViewList				= (AdapterView <Adapter_3_Calendars_Circuits>) adapterView;
-//        Adapter_3_Calendars_Circuits							arrayAdapter				= null;	
         Ctrl_Calendars.Circuit									circuit						= Global.eRegCalendars.fetchCircuit(this.circuitName);
         Adapter_3_Calendars_Circuits							arrayAdapter				= new Adapter_3_Calendars_Circuits(Global.actContext, R.id.List_View, circuit.calendarList);
         adapterViewList.setAdapter(arrayAdapter);

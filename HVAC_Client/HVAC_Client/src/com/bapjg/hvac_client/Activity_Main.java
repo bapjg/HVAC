@@ -2,12 +2,8 @@ package com.bapjg.hvac_client;
 
 import java.util.TimeZone;
 
-import HVAC_Messages.Ctrl__Abstract;
-import HVAC_Messages.Ctrl_Calendars;
-import HVAC_Messages.Ctrl_Configuration;
-import HVAC_Messages.Ctrl_Weather;
-import HVAC_Messages.Ctrl_WeatherData;
-import HVAC_Messages.Ctrl_Calendars.Request;
+import HVAC_Messages.*;
+import HVAC_Types.*;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -36,11 +32,15 @@ public class Activity_Main 										extends 					Activity
         Global.activity																		= (Activity) this;
         Global.piSocketAddress																= null;
 
+        Ctrl_Calendars 				x 	=   new Ctrl_Calendars();
+        Ctrl_Calendars.Request 		y 	= x.new Request();
+        
+        
         HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
      	HTTP_Send	(new Ctrl_Configuration().new Request());
         TCP_Send	(new Ctrl_Weather().new Request());
         
-        ActionBar 				actionbar 				= getActionBar();
+        ActionBar 												actionbar 					= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         
         ActionBar.Tab 											tabTemperatures 			= actionbar.newTab().setText("Temperatures");
