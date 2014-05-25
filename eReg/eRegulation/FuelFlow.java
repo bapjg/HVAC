@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import HVAC_Messages.Ctrl__Abstract;
-import HVAC_Messages.Ctrl_Fuel_Consumption;
-import HVAC_Messages.Ctrl_Fuel_Consumption.Update;
+import HVAC_Common.Ctrl_Fuel_Consumption;
+import HVAC_Common.Ctrl__Abstract;
+import HVAC_Common.Ctrl_Fuel_Consumption.Update;
 
 public class FuelFlow
 {

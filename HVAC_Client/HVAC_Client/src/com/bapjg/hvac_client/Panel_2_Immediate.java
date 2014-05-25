@@ -1,6 +1,6 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Messages.*;
+import HVAC_Common.*;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;

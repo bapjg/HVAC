@@ -1,6 +1,6 @@
 package eRegulation;
 
-import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Common.Ctrl_Configuration;
 
 // Notes
 // =====

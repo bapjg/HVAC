@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class TCP_Task 											extends 					AsyncTask <Ctrl__Abstract, Void, Ctrl__Abstract>

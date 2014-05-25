@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Common.Ctrl_Configuration;
 
 public class Thermometer
 {

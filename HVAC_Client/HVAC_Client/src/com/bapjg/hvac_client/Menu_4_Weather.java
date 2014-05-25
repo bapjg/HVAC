@@ -1,9 +1,9 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Messages.Ctrl_Calendars;
-import HVAC_Messages.Ctrl_Configuration;
-import HVAC_Messages.Ctrl_Weather;
-import HVAC_Messages.Ctrl_Configuration.Request;
+import HVAC_Common.Ctrl_Calendars;
+import HVAC_Common.Ctrl_Configuration;
+import HVAC_Common.Ctrl_Weather;
+import HVAC_Common.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;

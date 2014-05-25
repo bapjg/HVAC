@@ -11,7 +11,7 @@ import java.text.*;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
 
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 public class LogIt
 {

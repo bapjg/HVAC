@@ -8,8 +8,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.*;
 import android.widget.*;
-
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Adapter_5_Configuration_Pumps 						extends 					Adapter_0_Abstract

@@ -3,7 +3,7 @@ package eRegulation;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Common.Ctrl_Configuration;
 
 
 public class Relays

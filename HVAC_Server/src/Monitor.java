@@ -3,19 +3,20 @@ import java.io.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.sql.DataSource;
 
-import HVAC_Messages.Ctrl_Fuel_Consumption;
-import HVAC_Messages.Rpt_Abstract;
-import HVAC_Messages.Rpt_Action;
-import HVAC_Messages.Rpt_MixerMouvement;
-import HVAC_Messages.Rpt_PID;
-import HVAC_Messages.Rpt_Report;
-import HVAC_Messages.Rpt_Temperatures;
+import HVAC_Common.Ctrl_Fuel_Consumption;
+import HVAC_Common.Rpt_Abstract;
+import HVAC_Common.Rpt_Action;
+import HVAC_Common.Rpt_MixerMouvement;
+import HVAC_Common.Rpt_PID;
+import HVAC_Common.Rpt_Report;
+import HVAC_Common.Rpt_Temperatures;
 
 public class Monitor extends HttpServlet
 {

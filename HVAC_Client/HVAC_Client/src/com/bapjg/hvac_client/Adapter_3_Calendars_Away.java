@@ -2,8 +2,8 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-import HVAC_Messages.Ctrl_Calendars;
-import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Common.Ctrl_Calendars;
+import HVAC_Common.Ctrl_Configuration;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;

@@ -1,11 +1,11 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Messages.Ctrl__Abstract;
-import HVAC_Messages.Ctrl_Calendars;
-import HVAC_Messages.Ctrl_Configuration;
-import HVAC_Messages.Ctrl_Temperatures;
-import HVAC_Messages.Ctrl_Calendars.Word;
-import HVAC_Messages.Ctrl_Configuration.Request;
+import HVAC_Common.Ctrl_Calendars;
+import HVAC_Common.Ctrl_Configuration;
+import HVAC_Common.Ctrl_Temperatures;
+import HVAC_Common.Ctrl__Abstract;
+import HVAC_Common.Ctrl_Calendars.Word;
+import HVAC_Common.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;

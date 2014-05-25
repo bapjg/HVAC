@@ -1,7 +1,6 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Types.*;
-import HVAC_Messages.*;
+import HVAC_Common.*;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -24,14 +23,14 @@ public class Dialog_Temperature_New 							extends 					DialogFragment
 {
 	private Dialog_Response										callBack;
 	private NumberPicker 										temperaturePicker;
-	private Temperature											temperature;
+	private Type_Temperature											temperature;
 	private Integer												tempMin;
 	private Integer  											tempMax;
 	
 	public Dialog_Temperature_New() 
     {
     }
-	public Dialog_Temperature_New(Temperature temperature, Integer tempMin, Integer tempMax, Dialog_Response callBack) 
+	public Dialog_Temperature_New(Type_Temperature temperature, Integer tempMin, Integer tempMax, Dialog_Response callBack) 
     {
 		super();
 		this.temperature																	= temperature;

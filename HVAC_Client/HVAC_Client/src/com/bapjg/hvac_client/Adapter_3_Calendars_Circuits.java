@@ -12,8 +12,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.*;
 import android.widget.*;
-
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract

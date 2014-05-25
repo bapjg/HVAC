@@ -5,8 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import HVAC_Messages.*;
+import HVAC_Common.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class HTTP_Task 											extends 					AsyncTask <Ctrl__Abstract, Void, Ctrl__Abstract>
 {

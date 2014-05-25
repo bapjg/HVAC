@@ -12,8 +12,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import android.widget.Toast;
-
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class HTTP_Connection

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.bapjg.hvac_client.Adapter_5_Configuration_Relays.RowHolder;
 
-import HVAC_Messages.Ctrl_Configuration;
+import HVAC_Common.Ctrl_Configuration;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;

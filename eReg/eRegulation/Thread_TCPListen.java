@@ -8,7 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 public class Thread_TCPListen 			implements Runnable
 {

@@ -1,26 +1,18 @@
 package eRegulation;
 
 import java.io.*;
-
-import java.io.FileWriter;
-import java.io.File;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.RandomAccessFile;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.*;
-
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -1,7 +1,7 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Messages.*;
-import HVAC_Messages.Ctrl_Temperatures.Request;
+import HVAC_Common.*;
+import HVAC_Common.Ctrl_Temperatures.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;

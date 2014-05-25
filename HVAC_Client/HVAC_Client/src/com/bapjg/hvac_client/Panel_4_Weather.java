@@ -2,7 +2,7 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-import HVAC_Messages.*;
+import HVAC_Common.*;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;

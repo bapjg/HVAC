@@ -1,7 +1,7 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Messages.*;
-import HVAC_Messages.Ctrl_Actions_Stop.Execute;
+import HVAC_Common.*;
+import HVAC_Common.Ctrl_Actions_Stop.Execute;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;

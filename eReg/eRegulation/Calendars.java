@@ -1,9 +1,10 @@
 package eRegulation;
 
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import java.io.*;
 
 

@@ -5,8 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import HVAC_Messages.*;
-import HVAC_Types.*;
+import HVAC_Common.*;
 
 public class Z_Initialise_Weather
 {

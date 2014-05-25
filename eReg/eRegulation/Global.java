@@ -15,12 +15,12 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
-
 import java.util.*;
+
 import javax.mail.*;
 import javax.mail.internet.*;
 
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 
 public class Global 

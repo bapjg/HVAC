@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuration of the Ant build system to generate a Jar file --> 
+<project 		name		=	"HVAC_Common" 
+    			default		=	"CreateJar"
+>
+  <target 		name		=	"CreateJar" 
+      			description	=	"Create Jar file"
+  >
+        <jar 	jarfile		=	"D:/HVAC_Repository/git/HVAC/HVAC_Client/HVAC_Client/libs/HVAC_Common.jar" 
+            	basedir		=	"bin/" 
+            	includes	=	"**/*.class" 
+       	/>
+  </target>
+</project>

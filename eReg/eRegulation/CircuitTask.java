@@ -1,6 +1,6 @@
 package eRegulation;
 
-import HVAC_Messages.Ctrl_Calendars;
+import HVAC_Common.Ctrl_Calendars;
 
 public class CircuitTask
 {

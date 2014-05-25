@@ -1,6 +1,6 @@
 package eRegulation;
 
-import HVAC_Messages.Ctrl_WeatherData;
+import HVAC_Common.Ctrl_WeatherData;
 
 public class Thread_BackgroundTasks implements Runnable
 {

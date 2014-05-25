@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.xml.sax.SAXException;
 
-import HVAC_Messages.Ctrl_Actions_Stop;
+import HVAC_Common.Ctrl_Actions_Stop;
 
 public class Control
 {

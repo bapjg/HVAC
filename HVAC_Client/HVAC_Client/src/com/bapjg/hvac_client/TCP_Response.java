@@ -1,6 +1,6 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 public interface TCP_Response 
 {

@@ -1,7 +1,6 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Messages.*;
-import HVAC_Types.*;
+import HVAC_Common.*;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -29,8 +28,8 @@ public class Activity_Main 										extends 					Activity
         Global.activity																		= (Activity) this;
         Global.piSocketAddress																= null;
 
-        Temperature t;
-        t = new Temperature(95000);
+        Type_Temperature t;
+        t = new Type_Temperature(95000);
         t.milliDegrees = 95000;
         
         Ctrl_Calendars 				x 	=   new Ctrl_Calendars();

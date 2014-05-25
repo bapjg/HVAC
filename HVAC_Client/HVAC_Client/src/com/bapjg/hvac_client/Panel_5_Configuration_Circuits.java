@@ -2,9 +2,9 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-import HVAC_Messages.*;
-import HVAC_Messages.Ctrl_Calendars.Away;
-import HVAC_Messages.Ctrl_Configuration.Request;
+import HVAC_Common.*;
+import HVAC_Common.Ctrl_Calendars.Away;
+import HVAC_Common.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;

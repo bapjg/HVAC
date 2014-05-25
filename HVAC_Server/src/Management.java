@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import HVAC_Messages.*;
+import HVAC_Common.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
