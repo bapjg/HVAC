@@ -175,13 +175,16 @@ public class Calendars
 		public Long 							pumpCleanTime;
 		public Integer 							pumpCleanDurationSeconds;
 		public Integer							antiFreeze;
+		public Integer							summerTemp;
+		public Integer							sunshineInfluence;
 
 		public TasksBackGround(Ctrl_Calendars.TasksBackGround 		tasksBackGround)
 		{
 			this.pumpCleanTime										= tasksBackGround.pumpCleanTime;
 			this.pumpCleanDurationSeconds							= tasksBackGround.pumpCleanDurationSeconds;
-			this.antiFreeze											= tasksBackGround.antiFreeze;
-			
+			this.antiFreeze											= tasksBackGround.antiFreeze.milliDegrees;
+			this.summerTemp											= tasksBackGround.summerTemp.milliDegrees;
+			this.sunshineInfluence									= tasksBackGround.sunshineInfluence.milliDegrees;
 		}
 	}
 
