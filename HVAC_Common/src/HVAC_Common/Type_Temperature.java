@@ -10,6 +10,10 @@ public class Type_Temperature										implements 					java.io.Serializable
 	{
 		this.milliDegrees																	= milliDegrees;
 	}
+	public Type_Temperature(String degrees)
+	{
+		this.milliDegrees																	= ((Float) (Float.parseFloat(degrees) * 1000F)).intValue();
+	}
 	public String displayInteger()
 	{
 		Integer								degrees											= (milliDegrees/100 + 5)/10;

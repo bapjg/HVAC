@@ -1,3 +1,4 @@
 /FuelConsumed.txt
 !*.java
 !*.class
+!*.jar
