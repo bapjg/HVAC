@@ -324,11 +324,11 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		// TasksBackground
 		//
 
-		calendarUpdate.tasksBackGround.antiFreeze.milliDegrees				= 5000;
+		calendarUpdate.tasksBackGround.antiFreeze							= new Type_Temperature("5");
 		calendarUpdate.tasksBackGround.pumpCleanTime						= 60 * 60 * 1000L; // 1 am
 		calendarUpdate.tasksBackGround.pumpCleanDurationSeconds				= 300;
-		calendarUpdate.tasksBackGround.summerTemp.milliDegrees				= 22000;
-		calendarUpdate.tasksBackGround.sunshineInfluence.milliDegrees		= 5000;
+		calendarUpdate.tasksBackGround.summerTemp							= new Type_Temperature("22");
+		calendarUpdate.tasksBackGround.sunshineInfluence					= new Type_Temperature("5");
 
 		//
 		//=========================================================================================

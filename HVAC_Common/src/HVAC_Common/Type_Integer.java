@@ -1,7 +1,7 @@
 package HVAC_Common;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Type_Integer											implements 					java.io.Serializable
+public class Type_Integer										implements 					java.io.Serializable
 {
 	private static final long 									serialVersionUID 			= 1L;
 	public Integer												value;

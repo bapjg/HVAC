@@ -3,7 +3,7 @@ package HVAC_Common;
 import java.text.SimpleDateFormat;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Type_Time 												implements 					java.io.Serializable
+public class Type_Time 											implements 					java.io.Serializable
 {
 	private static final long 									serialVersionUID 			= 1L;
 	Long	milliSeconds;
