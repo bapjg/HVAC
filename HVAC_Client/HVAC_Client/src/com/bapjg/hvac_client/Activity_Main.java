@@ -28,10 +28,6 @@ public class Activity_Main 										extends 					Activity
         Global.activity																		= (Activity) this;
         Global.piSocketAddress																= null;
 
-        Ctrl_Calendars 				x 	=   new Ctrl_Calendars();
-        Ctrl_Calendars.Request 		y 	= x.new Request();
-        
-        
         HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
      	HTTP_Send	(new Ctrl_Configuration().new Request());
         TCP_Send	(new Ctrl_Weather().new Request());
