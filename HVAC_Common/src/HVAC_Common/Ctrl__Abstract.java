@@ -3,6 +3,9 @@ package HVAC_Common;
 
 //This class was intended as abstract. But to be able to instanciate/reference inner classes
 //abstract has been removed
+
+// TODO
+
 public class Ctrl__Abstract implements java.io.Serializable
 {
 	private static final long 		serialVersionUID 	= 1L;

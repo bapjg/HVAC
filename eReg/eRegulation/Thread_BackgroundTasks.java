@@ -109,6 +109,8 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			//=========================================================================================================================================
 
+			// TODO : A switch keeps going On/off : Probably mixer
+			
 			//=========================================================================================================================================
 			//
 			// Optimise : Particularly hot water in summer and floor in winter
