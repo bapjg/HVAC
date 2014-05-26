@@ -98,7 +98,9 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		private static final long 				serialVersionUID 			= 1L;
 		public Long 							pumpCleanTime;
 		public Integer							pumpCleanDurationSeconds;
-		public Integer							antiFreeze;
+		public Type_Temperature					antiFreeze;
+		public Type_Temperature					summerTemp;
+		public Type_Temperature					sunshineInfluence;
 	}
 	public void initialise()
 	{
@@ -134,6 +136,11 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		word																= new Word();
 		word.name															= "WeekDay";
 		word.days															= "12345";
+		calendarUpdate.wordList.add(word);
+
+		word																= new Word();
+		word.name															= "Never";
+		word.days															= "";
 		calendarUpdate.wordList.add(word);
 
 		//=========================================================================================
@@ -314,12 +321,14 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 
 		//=========================================================================================
 		//
-		// AntiFreeze
+		// TasksBackground
 		//
 
-		calendarUpdate.tasksBackGround.antiFreeze							= 5000;
+		calendarUpdate.tasksBackGround.antiFreeze.milliDegrees				= 5000;
 		calendarUpdate.tasksBackGround.pumpCleanTime						= 60 * 60 * 1000L; // 1 am
 		calendarUpdate.tasksBackGround.pumpCleanDurationSeconds				= 300;
+		calendarUpdate.tasksBackGround.summerTemp.milliDegrees				= 22000;
+		calendarUpdate.tasksBackGround.sunshineInfluence.milliDegrees		= 5000;
 
 		//
 		//=========================================================================================
