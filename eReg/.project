@@ -14,4 +14,16 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Must_Read_Me.txt</name>
+			<type>1</type>
+			<location>//nas/Software/Software_Windows/eclipse/Must_Read_Me.txt</location>
+		</link>
+		<link>
+			<name>_Documents/Eclipse Installation.docx</name>
+			<type>1</type>
+			<location>//nas/Software/Software_Windows/eclipse/Eclipse Installation.docx</location>
+		</link>
+	</linkedResources>
 </projectDescription>
