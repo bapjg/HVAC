@@ -28,10 +28,6 @@ public class Activity_Main 										extends 					Activity
         Global.activity																		= (Activity) this;
         Global.piSocketAddress																= null;
 
-        Type_Temperature t;
-        t = new Type_Temperature(95000);
-        t.milliDegrees = 95000;
-        
         Ctrl_Calendars 				x 	=   new Ctrl_Calendars();
         Ctrl_Calendars.Request 		y 	= x.new Request();
         
