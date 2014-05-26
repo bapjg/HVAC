@@ -26,7 +26,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 		super();
 		this.menuLayout																		= R.layout.menu_3_calendars;
 	}
-	public void onClick(View myView) // This is the onClick event from the Menu
+	public void onClick(View myView)
 	{
 		super.onClick(myView);
 		
@@ -74,8 +74,10 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	    	stopMessage.actionRequest														= Ctrl_Actions_Stop.ACTION_Restart;
 //	    	TCP_Send	(stopMessage);
 		}
-		Global.toaster(messageReturn.getClass().toString(), false);
-		
+		else if (messageReturn instanceof Ctrl_Calendars.Data)
+		{
+			Global.eRegCalendars															= (Ctrl_Calendars.Data) messageReturn;
+		}
 	}
 	public void processFinishTCP(Ctrl__Abstract messageReturn)
 	{
