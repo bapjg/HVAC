@@ -1,0 +1,87 @@
+package com.bapjg.hvac_client;
+
+import HVAC_Common.*;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
+import android.view.*;
+import android.view.View.OnFocusChangeListener;
+import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.TextView;
+
+@SuppressLint("ValidFragment")
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+public class Dialog_Integer 									extends 					DialogFragment
+{
+	private Dialog_Response										callBack;
+	private NumberPicker 										numberPicker;
+	private Type_Integer										number;
+	private Integer												numberMin;
+	private Integer  											numberMax;
+	private String  											message;
+	
+	public Dialog_Integer() 
+    {
+    }
+	public Dialog_Integer(Type_Integer number, Integer numberMin, Integer numberMax, String message, Dialog_Response callBack) 
+    {
+		super();
+		this.number																			= number;
+		this.numberMin																		= numberMin;
+		this.numberMax																		= numberMax;
+		this.callBack																		= callBack;
+		this.message																		= message;
+    }	
+    @Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) 
+    {
+    	AlertDialog.Builder 									builder 					= new AlertDialog.Builder(getActivity());
+        LayoutInflater 											inflater 					= getActivity().getLayoutInflater();
+										                                                    
+        View													dialogView					= inflater.inflate(R.layout.dialog_integer, null);
+        builder.setView(dialogView);
+        builder.setTitle(message);
+         
+		numberPicker 																		= (NumberPicker) dialogView.findViewById(R.id.value);
+	    String[] 												temps 						= new String[numberMax - numberMin + 1];
+	    for (int i = 0; i < numberMax - numberMin + 1; i++)
+	    {
+	    	temps[i] 																		= Integer.toString(i + numberMin);
+	    }
+	    
+	    EditText												tempChild					= (EditText) numberPicker.getChildAt(0);	// Stop keyboard appearing
+	    tempChild.setFocusable(false);
+	    tempChild.setInputType(InputType.TYPE_NULL);
+	    
+	    numberPicker.setMinValue(0);
+	    numberPicker.setMaxValue(numberMax - numberMin + 1);
+	    numberPicker.setWrapSelectorWheel(false);
+	    numberPicker.setDisplayedValues(temps);
+	    
+	    numberPicker.setValue(number.value - numberMin);				// index of current temperature in the list
+       
+        builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
+
+        return builder.create();
+    }
+    public void buttonOk (DialogInterface dialog, int which)
+    {
+     	Integer 												newValue	 				= (numberPicker.getValue() + numberMin);
+     	number.value																		= newValue;
+     	callBack.onDialogReturn();
+    	dialog.dismiss();
+    }
+    public void buttonCancel (DialogInterface dialog, int which)
+    {
+    	dialog.dismiss();
+    }
+}
