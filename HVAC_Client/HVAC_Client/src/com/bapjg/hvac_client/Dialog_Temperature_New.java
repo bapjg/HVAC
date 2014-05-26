@@ -23,7 +23,7 @@ public class Dialog_Temperature_New 							extends 					DialogFragment
 {
 	private Dialog_Response										callBack;
 	private NumberPicker 										temperaturePicker;
-	private Type_Temperature											temperature;
+	private Type_Temperature									temperature;
 	private Integer												tempMin;
 	private Integer  											tempMax;
 	
@@ -38,10 +38,6 @@ public class Dialog_Temperature_New 							extends 					DialogFragment
 		this.tempMax																		= tempMax;
 		this.callBack																		= callBack;
     }	
-//	public interface OnTemperatureSelectedListener 
-//    {
-//        public void onTemperatureSelected(Integer temperature);
-//    }
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
     {

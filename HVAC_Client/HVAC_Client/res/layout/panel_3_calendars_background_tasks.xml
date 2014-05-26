@@ -1,0 +1,146 @@
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<LinearLayout 
+	xmlns:android						= "http://schemas.android.com/apk/res/android"
+	android:layout_width				= "match_parent"
+	android:layout_height				= "match_parent" 
+	android:background					= "@color/background" 
+	android:baselineAligned				= "false" 
+	android:orientation					= "vertical">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@color/background"
+       android:baselineAligned="false"
+       android:gravity="center_vertical"
+       android:orientation="horizontal" >
+
+       <TextView
+           style="@style/AD_Text"
+           android:layout_width="150dp"
+           android:layout_height="wrap_content"
+           android:layout_weight="0.34"
+           android:text="Background Tasks" />
+   </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/background"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/AD_Text"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Pump Clean Time" />
+
+        <TextView
+            android:id="@+id/pumpCleanTime"
+            style="@style/AD_Data"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/background"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/AD_Text"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Pump Clean Duration" />
+
+        <TextView
+            android:id="@+id/pumpCleanDuration"
+            style="@style/AD_Data"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/background"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/AD_Text"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="AntiFreeze" />
+
+        <TextView
+            android:id="@+id/antiFreeze"
+            style="@style/AD_Data"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/background"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/AD_Text"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Summer Temperature" />
+
+        <TextView
+            android:id="@+id/summerTemp"
+            style="@style/AD_Data"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/background"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/AD_Text"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Sunshine Influence" />
+
+        <TextView
+            android:id="@+id/sunshineInfluence"
+            style="@style/AD_Data"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:gravity="right" />
+
+    </LinearLayout>
+    
+</LinearLayout>

@@ -6,10 +6,10 @@ import java.text.SimpleDateFormat;
 public class Type_Time 											implements 					java.io.Serializable
 {
 	private static final long 									serialVersionUID 			= 1L;
-	Long	milliSeconds;
-	Integer hours;
-	Integer minutes;
-	Integer seconds;
+	public  Long												milliSeconds;
+	public  Integer 											hours;
+	public  Integer 											minutes;
+	public  Integer 											seconds;
 	
 	public Type_Time(String time)
 	{
@@ -48,6 +48,29 @@ public class Type_Time 											implements 					java.io.Serializable
 					// We have an error
 				}
 			}
+		}
+		this.milliSeconds																	= (hours * 24 * 3600 + minutes * 60 + seconds) * 1000L;
+	}
+	public void setTime(Integer hours, Integer minutes)
+	{
+		setTime(hours, minutes, 0);
+	}
+	public void setTime(Integer hours, Integer minutes, Integer seconds)
+	{
+		this.hours																			= hours;
+		this.minutes																		= minutes;
+		this.seconds																		= seconds;
+		if (this.hours > 23)
+		{
+			// We have an error
+		}
+		if (this.minutes > 59)
+		{
+			// We have an error
+		}
+		if (this.seconds > 59)
+		{
+			// We have an error
 		}
 		this.milliSeconds																	= (hours * 24 * 3600 + minutes * 60 + seconds) * 1000L;
 	}

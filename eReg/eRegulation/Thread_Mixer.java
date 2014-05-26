@@ -97,6 +97,7 @@ public class Thread_Mixer implements Runnable
 			}
 			else if  (circuit.state == circuit.CIRCUIT_STATE_Off )  //Running Cold
 			{
+				// TODO should we position zero evry cycle. what about optimisation. what about floor temp measurement
 				mixer.positionZero();
 			}
 		}

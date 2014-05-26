@@ -96,8 +96,8 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	public class TasksBackGround				extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
-		public Long 							pumpCleanTime;
-		public Integer							pumpCleanDurationSeconds;
+		public Type_Time						pumpCleanTime;
+		public Type_Integer						pumpCleanDuration;
 		public Type_Temperature					antiFreeze;
 		public Type_Temperature					summerTemp;
 		public Type_Temperature					sunshineInfluence;
@@ -289,7 +289,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
-		calendar.days														= "ZZZZDay";
+		calendar.days														= "Never";
 		calendar.timeStart													= "00:01";
 		calendar.timeEnd													= "23:50";
 		calendar.stopOnObjective											= false;
@@ -325,8 +325,8 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		//
 
 		calendarUpdate.tasksBackGround.antiFreeze							= new Type_Temperature("5");
-		calendarUpdate.tasksBackGround.pumpCleanTime						= 60 * 60 * 1000L; // 1 am
-		calendarUpdate.tasksBackGround.pumpCleanDurationSeconds				= 300;
+		calendarUpdate.tasksBackGround.pumpCleanTime						= new Type_Time("01:00");
+		calendarUpdate.tasksBackGround.pumpCleanDuration					= new Type_Integer(300, "s");		// seconds
 		calendarUpdate.tasksBackGround.summerTemp							= new Type_Temperature("22");
 		calendarUpdate.tasksBackGround.sunshineInfluence					= new Type_Temperature("5");
 

@@ -34,6 +34,7 @@ import HVAC_Common.*;
 public class Panel_1_Temperatures 								extends 					Panel_0_Fragment 
 {		
 	public TCP_Task												task;
+	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 	
 	public Panel_1_Temperatures()
 	{
@@ -42,7 +43,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	View													panelView					= inflater.inflate(R.layout.panel_1_temperatures, container, false);
+    	this.panelView																		= inflater.inflate(R.layout.panel_1_temperatures, container, false);
     	
     	TCP_Send(new Ctrl_Temperatures().new Request());
         return panelView;
@@ -66,19 +67,19 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	{
 		if (getActivity() != null)			// The user has not changed the screen
 		{
-			((TextView) getActivity().findViewById(R.id.Date)).setText			(Global.displayDateShort	(msg_received.dateTime));
-			((TextView) getActivity().findViewById(R.id.Time)).setText			(Global.displayTimeShort	(msg_received.dateTime));
+			((TextView) panelView.findViewById(R.id.Date)).setText				(Global.displayDateShort	(msg_received.dateTime));
+			((TextView) panelView.findViewById(R.id.Time)).setText				(Global.displayTimeShort	(msg_received.dateTime));
 			
-			((TextView) getActivity().findViewById(R.id.Boiler)).setText		(Global.displayTemperature	(msg_received.tempBoiler));
-			((TextView) getActivity().findViewById(R.id.HotWater)).setText		(Global.displayTemperature	(msg_received.tempHotWater));
-			((TextView) getActivity().findViewById(R.id.Outside)).setText		(Global.displayTemperature	(msg_received.tempOutside));
-			((TextView) getActivity().findViewById(R.id.BoilerIn)).setText		(Global.displayTemperature	(msg_received.tempBoilerIn));
-			((TextView) getActivity().findViewById(R.id.BoilerOut)).setText		(Global.displayTemperature	(msg_received.tempBoilerOut));
-			((TextView) getActivity().findViewById(R.id.FloorIn)).setText		(Global.displayTemperature	(msg_received.tempFloorIn));
-			((TextView) getActivity().findViewById(R.id.FloorOut)).setText		(Global.displayTemperature	(msg_received.tempFloorOut));
-			((TextView) getActivity().findViewById(R.id.RadiatorIn)).setText	(Global.displayTemperature	(msg_received.tempRadiatorIn));
-			((TextView) getActivity().findViewById(R.id.RadiatorOut)).setText	(Global.displayTemperature	(msg_received.tempRadiatorOut));
-			((TextView) getActivity().findViewById(R.id.LivingRoom)).setText	(Global.displayTemperature	(msg_received.tempLivingRoom));
+			((TextView) panelView.findViewById(R.id.Boiler)).setText			(Global.displayTemperature	(msg_received.tempBoiler));
+			((TextView) panelView.findViewById(R.id.HotWater)).setText			(Global.displayTemperature	(msg_received.tempHotWater));
+			((TextView) panelView.findViewById(R.id.Outside)).setText			(Global.displayTemperature	(msg_received.tempOutside));
+			((TextView) panelView.findViewById(R.id.BoilerIn)).setText			(Global.displayTemperature	(msg_received.tempBoilerIn));
+			((TextView) panelView.findViewById(R.id.BoilerOut)).setText			(Global.displayTemperature	(msg_received.tempBoilerOut));
+			((TextView) panelView.findViewById(R.id.FloorIn)).setText			(Global.displayTemperature	(msg_received.tempFloorIn));
+			((TextView) panelView.findViewById(R.id.FloorOut)).setText			(Global.displayTemperature	(msg_received.tempFloorOut));
+			((TextView) panelView.findViewById(R.id.RadiatorIn)).setText		(Global.displayTemperature	(msg_received.tempRadiatorIn));
+			((TextView) panelView.findViewById(R.id.RadiatorOut)).setText		(Global.displayTemperature	(msg_received.tempRadiatorOut));
+			((TextView) panelView.findViewById(R.id.LivingRoom)).setText		(Global.displayTemperature	(msg_received.tempLivingRoom));
 		}
 	}
 	public void setListens()

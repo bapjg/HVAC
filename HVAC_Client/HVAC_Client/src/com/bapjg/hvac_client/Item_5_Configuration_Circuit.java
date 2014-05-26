@@ -116,24 +116,24 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     @Override
 	public void onClick(View clickedView) 
 	{
-    	Dialog_Temperature_New										dialogTemperation;
+    	Dialog_Temperature_New										dialogTemperature;
     	switch(clickedView.getId())
 		{
 	     	case R.id.tempLow:
-	     		dialogTemperation 																= new Dialog_Temperature_New(itemData.tempGradient.tempLow,  -20, 50, this);
-	     		dialogTemperation.show(getFragmentManager(), "Dialog_Temperature");
+	     		dialogTemperature 																= new Dialog_Temperature_New(itemData.tempGradient.tempLow,  -20, 50, this);
+	     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.tempHigh:
-	     		dialogTemperation																= new Dialog_Temperature_New(itemData.tempGradient.tempHigh,  -20, 50, this);
-	     		dialogTemperation.show(getFragmentManager(), "Dialog_Temperature");
+	     		dialogTemperature																= new Dialog_Temperature_New(itemData.tempGradient.tempHigh,  -20, 50, this);
+	     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.outsideHigh:
-	     		dialogTemperation																= new Dialog_Temperature_New(itemData.tempGradient.outsideHigh,  -20, 50, this);
-	     		dialogTemperation.show(getFragmentManager(), "Dialog_Temperature");
+	     		dialogTemperature																= new Dialog_Temperature_New(itemData.tempGradient.outsideHigh,  -20, 50, this);
+	     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.outsideLow:
-	     		dialogTemperation 																= new Dialog_Temperature_New(itemData.tempGradient.outsideLow,  -20, 50, this);
-	     		dialogTemperation.show(getFragmentManager(), "Dialog_Temperature");
+	     		dialogTemperature 																= new Dialog_Temperature_New(itemData.tempGradient.outsideLow,  -20, 50, this);
+	     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.name:
 	      		Global.toaster("Its Ok name", false);
