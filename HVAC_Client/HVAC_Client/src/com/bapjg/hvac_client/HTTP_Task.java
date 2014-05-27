@@ -20,7 +20,6 @@ public class HTTP_Task 											extends 					AsyncTask <Ctrl__Abstract, Void, 
 	@Override
 	protected Ctrl__Abstract doInBackground(Ctrl__Abstract... messageOut) 
 	{
-		Log.v("App", "sending message");
 		return serverConnection.serverTransaction(messageOut[0]);
 	}	
 	protected void onProgressUpdate(Void... progress)  { }

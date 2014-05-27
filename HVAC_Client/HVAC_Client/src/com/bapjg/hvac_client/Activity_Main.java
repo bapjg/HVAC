@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -28,9 +29,9 @@ public class Activity_Main 										extends 					Activity
         Global.activity																		= (Activity) this;
         Global.piSocketAddress																= null;
 
-        HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
-     	HTTP_Send	(new Ctrl_Configuration().new Request());
-        TCP_Send	(new Ctrl_Weather().new Request());
+        HTTP_Send	(new Ctrl_Calendars().new 		Request());				// Fire these async actions as soon as possible
+     	HTTP_Send	(new Ctrl_Configuration().new 	Request());
+        TCP_Send	(new Ctrl_Weather().new 		Request());
         
         ActionBar 												actionbar 					= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -118,18 +119,12 @@ public class Activity_Main 										extends 					Activity
 	}		
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
-        
 		if 		(result instanceof Ctrl_Calendars.Data) 		{	Global.eRegCalendars 		= (Ctrl_Calendars.Data) result;			}
 		else if (result instanceof Ctrl_Configuration.Data)		{	Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;		}
-		else													{	Global.toaster("ActMain : " + result.getClass().toString(), true);	}
+		else													{	Global.toaster("Activity_Main : HTTP message received " + result.getClass().toString(), true);	}
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
-//		if (result instanceof Ctrl_Configuration.Data)								// No longer used
-//		{
-//			Global.eRegConfiguration												= (Ctrl_Configuration.Data) result;
-//		}
-//		else if (result instanceof Ctrl_Weather.Data)
 		if (result instanceof Ctrl_Weather.Data)
 		{
 			Ctrl_Weather.Data									resultWeather				= (Ctrl_Weather.Data) result;
@@ -137,8 +132,7 @@ public class Activity_Main 										extends 					Activity
 		}
 		else
 		{
-			Global.toaster("We are in Activity_Main", true);
-			Global.toaster("ActMain 2  : Data NOTNOTNOT received", true);
+			Global.toaster("Activity_Main : TCP Data NOTNOTNOT received", true);
 		}
 	}
 }
