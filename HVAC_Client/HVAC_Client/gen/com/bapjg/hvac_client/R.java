@@ -65,10 +65,10 @@ public final class R {
         public static final int buttonAdd=0x7f090048;
         public static final int buttonDelete=0x7f09000f;
         public static final int buttonOk=0x7f090010;
-        public static final int buttonOkCancel=0x7f090047;
         public static final int buttonReboot=0x7f09005a;
         public static final int buttonRestart=0x7f090059;
         public static final int buttonSendMail=0x7f09005b;
+        public static final int buttonStartStop=0x7f090047;
         public static final int buttonStop=0x7f090058;
         public static final int buttonTemperatures=0x7f090034;
         public static final int cloudAll=0x7f090066;

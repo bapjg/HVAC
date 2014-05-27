@@ -36,15 +36,82 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     {
     	this.panelView																		= inflater.inflate(R.layout.panel_2_immediate, container, false);
 									
-    	Ctrl_Immediate.Request									taskRequest					= new Ctrl_Immediate().new Request();
-    	taskRequest.circuitName																= this.circuitName;
+    	Ctrl_Immediate.Request									taskListRequest					= new Ctrl_Immediate().new Request();
+    	taskListRequest.circuitName																= this.circuitName;
 			
-    	TCP_Send(taskRequest);							// This returns list of what is currently active on each circuit
-
-        setListens();
+    	TCP_Send(taskListRequest);							// This returns list of what is currently active on each circuit
 
        return panelView;
     }
+	public void processFinishTCP(Ctrl__Abstract result) 
+	{  
+		if 		(result instanceof Ctrl_Immediate.Data)
+		{
+			messageReceived																		= (Ctrl_Immediate.Data) result;
+			messageExecute.timeStart 															= Global.getTimeNowSinceMidnight();
+			messageExecute.timeEnd 																= Global.getTimeNowSinceMidnight() + 3600 * 1000L;
+			messageExecute.stopOnObjective 														= true;
+			messageExecute.tempObjective 														= new Type_Temperature(messageReceived.tempObjective.milliDegrees);
+		
+			displayHeader();
+			displayContents();
+			setListens();
+		}
+		else if (result instanceof Ctrl_Immediate.Ack)						Global.toast("Command accepted", false);
+		else if (result instanceof Ctrl__Abstract.Ack)						Global.toast("Command accepted", false);
+		else if (result instanceof Ctrl_Temperatures.NoConnection)			Global.toast("No Connection established yet", false);
+		else																Global.toast("A Nack has been returned", false);
+	}
+	public void displayHeader()
+	{
+	}
+	public void displayContents()
+	{
+		// Top part of the screen : "Planned Calendar Events"
+		if (messageReceived.executionActive)
+		{
+			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("Current");
+			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
+			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(messageReceived.tempObjective.displayInteger());
+			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
+			((Button) 		panelView.findViewById(R.id.buttonStartStop)).setText			("Stop");
+		}
+		else if (messageReceived.executionPlanned)
+		{
+			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			(Global.displayTimeShort(messageReceived.timeStart));
+			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
+			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(messageReceived.tempObjective.displayInteger());
+			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
+			((Button) 		panelView.findViewById(R.id.buttonStartStop)).setText			("Start");
+		}
+		else
+		{
+			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("No Plan");
+			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(" ");
+			((Button) 		panelView.findViewById(R.id.buttonStartStop)).setText			("Start");
+		}
+		// Bottom part of the screen : "Select new parameters"
+		if (messageReceived.executionActive)
+		{
+			((ViewGroup) 	panelView.findViewById(R.id.bottomPart)).setVisibility(View.GONE);
+		}
+		else
+		{
+			((TextView) 		panelView.findViewById(R.id.timeStart)).setText				(Global.displayTimeShort(messageExecute.timeStart));
+			((TextView) 		panelView.findViewById(R.id.timeEnd)).setText				(Global.displayTimeShort(messageExecute.timeEnd));	
+                                                                                            
+			((TextView) 		panelView.findViewById(R.id.tempObjective)).setText			(messageExecute.tempObjective.displayInteger());	
+			((CheckBox) 		panelView.findViewById(R.id.stopOnObjective)).setChecked	(messageExecute.stopOnObjective);
+		}
+	}
+	public void setListens()
+	{
+        panelView.findViewById(R.id.buttonStartStop)		.setOnClickListener(this);
+    	panelView.findViewById(R.id.tempObjective)		.setOnClickListener(this);
+    	panelView.findViewById(R.id.timeStart)			.setOnClickListener(this);
+    	panelView.findViewById(R.id.timeEnd)			.setOnClickListener(this);
+    	panelView.findViewById(R.id.stopOnObjective)	.setOnClickListener(this);
+ 	}
 	public void onClick(View view)
 	{
     	if (view.getId() == R.id.tempObjective)
@@ -67,7 +134,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     		messageExecute.stopOnObjective													= ! messageExecute.stopOnObjective;
     		displayContents();
     	}
-    	else if (view.getId() == R.id.buttonOkCancel)
+    	else if (view.getId() == R.id.buttonStartStop)
     	{
 	    	if (((Button) view).getText().toString().equalsIgnoreCase("Start"))
 	    	{
@@ -99,80 +166,19 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	    	}
     	}
 	}
-	public void processFinishTCP(Ctrl__Abstract result) 
-	{  
-		if 		(result instanceof Ctrl_Immediate.Data)						displayContents((Ctrl_Immediate.Data) result);
-		else if (result instanceof Ctrl_Immediate.Ack)						Global.toast("Command accepted", false);
-		else if (result instanceof Ctrl__Abstract.Ack)						Global.toast("Command accepted", false);
-		else if (result instanceof Ctrl_Temperatures.NoConnection)			Global.toast("No Connection established yet", false);
-		else																Global.toast("A Nack has been returned", false);
-	}
-	public void displayHeader()
-	{
-	}
-	public void displayContents(Ctrl_Immediate.Data msg_received)
-	{
-		messageReceived																		= msg_received;
-		messageExecute.timeStart 															= Global.getTimeNowSinceMidnight();
-		messageExecute.timeEnd 																= Global.getTimeNowSinceMidnight() + 3600 * 1000L;
-		messageExecute.stopOnObjective 														= true;
-		messageExecute.tempObjective 														= new Type_Temperature("25");
-		
-		displayContents();
-	}
-	public void displayContents()
-	{
-		// Top part of the screen : "Planned Calendar Events"
-		if (messageReceived.executionActive)
-		{
-			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("Current");
-			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
-			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(messageReceived.tempObjective.displayInteger());
-			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
-			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Stop");
-		}
-		else if (messageReceived.executionPlanned)
-		{
-			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			(Global.displayTimeShort(messageReceived.timeStart));
-			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
-			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(messageReceived.tempObjective.displayInteger());
-			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
-			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Start");
-		}
-		else
-		{
-			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("No Plan");
-			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(" ");
-			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Start");
-		}
-		// Bottom part of the screen : "Select new parameters"
-		if (messageReceived.executionActive)
-		{
-			((ViewGroup) 	panelView.findViewById(R.id.bottomPart)).setVisibility(View.GONE);
-		}
-		else
-		{
-			((TextView) 		panelView.findViewById(R.id.timeStart)).setText				(Global.displayTimeShort(messageExecute.timeStart));
-			((TextView) 		panelView.findViewById(R.id.timeEnd)).setText				(Global.displayTimeShort(messageExecute.timeEnd));	
-                                                                                            
-			((TextView) 		panelView.findViewById(R.id.tempObjective)).setText			(messageReceived.tempObjective.displayInteger());	
-			((CheckBox) 		panelView.findViewById(R.id.stopOnObjective)).setChecked	(messageExecute.stopOnObjective);
-		}
-	}
-	public void setListens()
-	{
-        panelView.findViewById(R.id.buttonOkCancel)		.setOnClickListener(this);
-    	panelView.findViewById(R.id.tempObjective)		.setOnClickListener(this);
-    	panelView.findViewById(R.id.timeStart)			.setOnClickListener(this);
-    	panelView.findViewById(R.id.timeEnd)			.setOnClickListener(this);
-    	panelView.findViewById(R.id.stopOnObjective)	.setOnClickListener(this);
- 	}
 	@Override
 	public void onReturnTime(int fieldId, Long value)
 	{
 		if 		(fieldId == R.id.timeStart)    		messageExecute.timeStart 				= value;
 		else if	(fieldId == R.id.timeEnd)    		messageExecute.timeEnd 					= value;
     	displayContents();	
+	}
+	@Override
+	public void onDialogReturn()
+	{
+		displayHeader();
+		displayContents();	
+		setListens();	
 	}
 }
 
