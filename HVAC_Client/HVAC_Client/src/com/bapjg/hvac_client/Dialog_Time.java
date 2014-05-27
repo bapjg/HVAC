@@ -16,7 +16,7 @@ import android.widget.TimePicker;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Dialog_Time_New 									extends 					DialogFragment 
+public class Dialog_Time 									extends 					DialogFragment 
 {
 	private Dialog_Response										callBack;
 	private TimePicker 											timePicker;
@@ -24,10 +24,10 @@ public class Dialog_Time_New 									extends 					DialogFragment
 	private Integer  											timeInitialHour;
 	private Integer  											timeInitialMinute;
 	
-	public Dialog_Time_New() 
+	public Dialog_Time() 
     {
     }
-	public Dialog_Time_New(Cmn_Time time, Dialog_Response callBack) 
+	public Dialog_Time(Cmn_Time time, Dialog_Response callBack) 
     {
 		super();
 		this.callBack																		= callBack;

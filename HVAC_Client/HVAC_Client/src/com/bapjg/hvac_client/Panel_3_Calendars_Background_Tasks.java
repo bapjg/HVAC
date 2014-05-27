@@ -101,12 +101,12 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 	{
 		Ctrl_Calendars.TasksBackGround								backgroundTasks				= Global.eRegCalendars.tasksBackGround;
  		Dialog_Temperature											dialogTemperature;
- 		Dialog_Time_New												dialogTime;
+ 		Dialog_Time												dialogTime;
  		Dialog_Integer												dialogInteger;
 	   	switch(clickedView.getId())
 		{
      	case R.id.pumpCleanTime:
-    		dialogTime 																			= new Dialog_Time_New(backgroundTasks.pumpCleanTime, this);
+    		dialogTime 																			= new Dialog_Time(backgroundTasks.pumpCleanTime, this);
     		dialogTime.show(getFragmentManager(), "Dialog_Time");
       		break;
      	case R.id.pumpCleanDuration:

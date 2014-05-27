@@ -142,7 +142,7 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
      	else if (clickedView.getId() == R.id.days)
     	{
 //    		Dialog_String_List		 							df 							= new Dialog_String_List(this, R.id.days);
-    		Dialog_String_List_New		 							df 							= new Dialog_String_List_New(itemData.days, (Object) itemData, null, this);
+    		Dialog_String_List		 							df 							= new Dialog_String_List(itemData.days, (Object) itemData, null, this);
     		df.items.add("Select days");
     		df.itemSelected																	= "";
 
@@ -178,12 +178,12 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
      	else if (clickedView.getId() == R.id.timeStart)
     	{
-     		Dialog_Time_New	 									df 							= new Dialog_Time_New(itemData.timeStart, this);
+     		Dialog_Time	 									df 							= new Dialog_Time(itemData.timeStart, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
      	else if (clickedView.getId() == R.id.timeEnd)
     	{
-     		Dialog_Time_New										df 							= new Dialog_Time_New(itemData.timeEnd, this);
+     		Dialog_Time										df 							= new Dialog_Time(itemData.timeEnd, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
      	else if (clickedView.getId() == R.id.tempObjective)
