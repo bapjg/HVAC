@@ -1,5 +1,7 @@
 package com.bapjg.hvac_client;
 
+import java.lang.reflect.Field;
+
 import HVAC_Common.*;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -19,11 +21,12 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Dialog_Integer 									extends 					DialogFragment
+public class Dialog_Integer 								extends 					DialogFragment
 {
 	private Dialog_Response										callBack;
 	private NumberPicker 										numberPicker;
-	private Type_Integer										number;
+	private Integer												number;
+	private Object												parent;
 	private Integer												numberMin;
 	private Integer  											numberMax;
 	private String  											message;
@@ -31,10 +34,11 @@ public class Dialog_Integer 									extends 					DialogFragment
 	public Dialog_Integer() 
     {
     }
-	public Dialog_Integer(Type_Integer number, Integer numberMin, Integer numberMax, String message, Dialog_Response callBack) 
+	public Dialog_Integer(Integer number, Object parent, Integer numberMin, Integer numberMax, String message, Dialog_Response callBack) 
     {
 		super();
 		this.number																			= number;
+		this.parent																			= parent;
 		this.numberMin																		= numberMin;
 		this.numberMax																		= numberMax;
 		this.callBack																		= callBack;
@@ -51,10 +55,10 @@ public class Dialog_Integer 									extends 					DialogFragment
         builder.setTitle(message);
          
 		numberPicker 																		= (NumberPicker) dialogView.findViewById(R.id.value);
-	    String[] 												temps 						= new String[numberMax - numberMin + 1];
+	    String[] 												numbers						= new String[numberMax - numberMin + 1];
 	    for (int i = 0; i < numberMax - numberMin + 1; i++)
 	    {
-	    	temps[i] 																		= Integer.toString(i + numberMin);
+	    	numbers[i] 																		= Integer.toString(i + numberMin);
 	    }
 	    
 	    EditText												tempChild					= (EditText) numberPicker.getChildAt(0);	// Stop keyboard appearing
@@ -64,9 +68,9 @@ public class Dialog_Integer 									extends 					DialogFragment
 	    numberPicker.setMinValue(0);
 	    numberPicker.setMaxValue(numberMax - numberMin + 1);
 	    numberPicker.setWrapSelectorWheel(false);
-	    numberPicker.setDisplayedValues(temps);
+	    numberPicker.setDisplayedValues(numbers);
 	    
-	    numberPicker.setValue(number.value - numberMin);				// index of current temperature in the list
+	    numberPicker.setValue(number - numberMin);				// index of current temperature in the list
        
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
@@ -76,9 +80,24 @@ public class Dialog_Integer 									extends 					DialogFragment
     public void buttonOk (DialogInterface dialog, int which)
     {
      	Integer 												newValue	 				= (numberPicker.getValue() + numberMin);
-     	number.value																		= newValue;
-     	callBack.onDialogReturn();
-    	dialog.dismiss();
+     	// Identify property within parent to modify
+     	for (Field field : parent.getClass().getDeclaredFields())  
+     	{
+     		try 
+     		{
+				if (number == field.get(parent))
+				{
+					field.set(parent, newValue);
+			     	callBack.onDialogReturn();
+			    	dialog.dismiss();
+				}
+			} 
+     		catch (Exception e)
+     		{
+     			// Do nothing as serialversionUID, this$ etc cause exceptions
+     		} 
+     	}
+     	Global.toaster("Object cannot be identified", false);
     }
     public void buttonCancel (DialogInterface dialog, int which)
     {

@@ -116,23 +116,23 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     @Override
 	public void onClick(View clickedView) 
 	{
-    	Dialog_Temperature_New										dialogTemperature;
+    	Dialog_Temperature										dialogTemperature;
     	switch(clickedView.getId())
 		{
 	     	case R.id.tempLow:
-	     		dialogTemperature 																= new Dialog_Temperature_New(itemData.tempGradient.tempLow,  -20, 50, this);
+	     		dialogTemperature 																= new Dialog_Temperature(itemData.tempGradient.tempLow,  -20, 50, this);
 	     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.tempHigh:
-	     		dialogTemperature																= new Dialog_Temperature_New(itemData.tempGradient.tempHigh,  -20, 50, this);
+	     		dialogTemperature																= new Dialog_Temperature(itemData.tempGradient.tempHigh,  -20, 50, this);
 	     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.outsideHigh:
-	     		dialogTemperature																= new Dialog_Temperature_New(itemData.tempGradient.outsideHigh,  -20, 50, this);
+	     		dialogTemperature																= new Dialog_Temperature(itemData.tempGradient.outsideHigh,  -20, 50, this);
 	     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.outsideLow:
-	     		dialogTemperature 																= new Dialog_Temperature_New(itemData.tempGradient.outsideLow,  -20, 50, this);
+	     		dialogTemperature 																= new Dialog_Temperature(itemData.tempGradient.outsideLow,  -20, 50, this);
 	     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
 	     	case R.id.name:

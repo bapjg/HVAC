@@ -48,8 +48,8 @@ public class Boiler
 
 		this.tempMax 											= -1;
 		this.tempMin 											= -1;
-		this.tempNeverExceed									= boilerparams.tempNeverExceed;
-		this.tempOvershoot										= boilerparams.tempOverShoot;
+		this.tempNeverExceed									= boilerparams.tempNeverExceed.milliDegrees;
+		this.tempOvershoot										= boilerparams.tempOverShoot.milliDegrees;
 		state													= STATE_Off;
 	}
 	public void requestHeat(HeatRequired eR)

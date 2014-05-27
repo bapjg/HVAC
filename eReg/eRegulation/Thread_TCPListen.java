@@ -173,7 +173,7 @@ public class Thread_TCPListen 			implements Runnable
             	message_return.executionPlanned				= true;
             	message_return.timeStart	 				= nextStart;
             	message_return.timeEnd		 				= selectedTask.timeEnd;
-            	message_return.tempObjective 				= selectedTask.tempObjective;
+            	message_return.tempObjective 				= new Type_Temperature(selectedTask.tempObjective);
             	message_return.stopOnObjective				= selectedTask.stopOnObjective;
             }
             else						// Task currently inactive and not even planned
@@ -182,7 +182,7 @@ public class Thread_TCPListen 			implements Runnable
             	message_return.executionPlanned				= false;
             	message_return.timeStart					= 0L;
             	message_return.timeEnd						= 0L;
-            	message_return.tempObjective 				= 0;
+            	message_return.tempObjective				= new Type_Temperature(0);
             	message_return.stopOnObjective				= false;
             }
 		}
@@ -192,7 +192,7 @@ public class Thread_TCPListen 			implements Runnable
 			message_return.executionPlanned					= false;
 			message_return.timeStart						= circuit.taskActive.timeStart;
 			message_return.timeEnd							= circuit.taskActive.timeEnd;
-			message_return.tempObjective					= circuit.taskActive.tempObjective;
+			message_return.tempObjective					= new Type_Temperature(circuit.taskActive.tempObjective);
 			message_return.stopOnObjective					= circuit.taskActive.stopOnObjective;
 		}
          return message_return;
@@ -209,19 +209,19 @@ public class Thread_TCPListen 			implements Runnable
 		{
 			if (circuit.name.equalsIgnoreCase("Hot_Water"))
 			{
-				circuit.taskActive							= new CircuitTask(	now, 								// Time Start
-																	now + 30 * 60 * 1000, 				// TimeEnd
-																	message_in.tempObjective,			// TempObjective in millidesrees
-																	true,								// StopOnObjective
-																	"1, 2, 3, 4, 5, 6, 7");				// Days
+				circuit.taskActive							= new CircuitTask(	now, 						// Time Start
+																	now + 30 * 60 * 1000, 					// TimeEnd
+																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
+																	true,									// StopOnObjective
+																	"1, 2, 3, 4, 5, 6, 7");					// Days
 			}
 			else
 			{
-				circuit.taskActive							= new CircuitTask(	now, 								// Time Start
-																	message_in.timeEnd, 				// TimeEnd
-																	message_in.tempObjective,			// TempObjective in millidesrees
-																	false,								// StopOnObjective
-																	"1, 2, 3, 4, 5, 6, 7");				// Days
+				circuit.taskActive							= new CircuitTask(	now, 						// Time Start
+																	message_in.timeEnd, 					// TimeEnd
+																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
+																	false,									// StopOnObjective
+																	"1, 2, 3, 4, 5, 6, 7");					// Days
 			}
 			circuit.start();
 		}
@@ -282,8 +282,8 @@ public class Thread_TCPListen 			implements Runnable
 			message_return.circuitList.add(paramCircuit);
 		}
 		message_return.burner.relay							= Global.burnerPower.name;
-		message_return.boiler.tempNeverExceed				= Global.boiler.tempNeverExceed;
-		message_return.boiler.tempOverShoot					= Global.boiler.tempOvershoot;
+		message_return.boiler.tempNeverExceed				= new Type_Temperature(Global.boiler.tempNeverExceed);
+		message_return.boiler.tempOverShoot					= new Type_Temperature(Global.boiler.tempOvershoot);
 		
 		
 		return message_return;

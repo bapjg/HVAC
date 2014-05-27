@@ -95,9 +95,7 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
         ((TextView) itemView.findViewById(R.id.timeStart))			.setText(itemData.timeStart);
         ((TextView) itemView.findViewById(R.id.timeEnd))			.setText(itemData.timeEnd);
         
-        Integer tempObjective =itemData.tempObjective/1000;
-        
-        ((TextView) itemView.findViewById(R.id.tempObjective))		.setText(tempObjective.toString() + " °C");
+        ((TextView) itemView.findViewById(R.id.tempObjective))		.setText(itemData.tempObjective.displayInteger() + " °C");
         ((CheckBox) itemView.findViewById(R.id.stopOnObjective))	.setChecked(itemData.stopOnObjective);
  	}
 	public void setListens()
@@ -127,9 +125,11 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
        		itemData.timeStart																= ((TextView) itemView.findViewById(R.id.timeStart)).getText().toString();
        		itemData.timeEnd																= ((TextView) itemView.findViewById(R.id.timeEnd)).getText().toString();
        		
-       		String												tempObjective				= ((TextView) itemView.findViewById(R.id.tempObjective)).getText().toString();
-       		tempObjective																	= tempObjective.replace(" °C", "");
-       		itemData.tempObjective															= (Integer) (Integer.parseInt(tempObjective) * 1000);
+// TODO Check functions ok
+       		
+//       		String												tempObjective				= ((TextView) itemView.findViewById(R.id.tempObjective)).getText().toString();
+//       		tempObjective																	= tempObjective.replace(" °C", "");
+//       		itemData.tempObjective															= (Integer) (Integer.parseInt(tempObjective) * 1000);
        		itemData.stopOnObjective														= ((CheckBox) itemView.findViewById(R.id.stopOnObjective)).isChecked();
        	    getFragmentManager().popBackStackImmediate();
     	}
@@ -187,7 +187,7 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     	}
      	else if (clickedView.getId() == R.id.tempObjective)
     	{
-    		Dialog_Temperature 									df 							= new Dialog_Temperature(this, R.id.tempObjective, 25, 25, 5, 8);
+    		Dialog_Temperature 									df 							= new Dialog_Temperature(itemData.tempObjective, 25, 40, this);
     		df.show(getFragmentManager(), "Dialog_Temperature");
     	}
      	else if (clickedView.getId() == R.id.stopOnObjective)
@@ -202,14 +202,6 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     	||  (fieldId == R.id.timeEnd)    )
     	{
     		((TextView) itemView.findViewById(fieldId))			.setText(value);
-    	}
-    }
-    public void onReturnTemperature(int fieldId, Integer value)
-    {
-    	if (fieldId == R.id.tempObjective)
-    	{
-    		Integer												tempObjective				= value/1000;
-    		((TextView) itemView.findViewById(fieldId))			.setText(tempObjective.toString() + " °C");
     	}
     }
     public void onReturnString(int fieldId, String value)

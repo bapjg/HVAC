@@ -63,21 +63,19 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	{
 		if (view.getId() == R.id.tempNeverExceed)
 		{
-			Integer												temperature					= Global.eRegConfiguration.boiler.tempNeverExceed;
-			Dialog_Temperature									df 							= new Dialog_Temperature(this, view.getId(), temperature, 85, 1, 20);
+			Type_Temperature									temperature					= Global.eRegConfiguration.boiler.tempNeverExceed;
+			Dialog_Temperature									df 							= new Dialog_Temperature(temperature, 85, 100, this);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
 		else if (view.getId() == R.id.tempOverShoot)
 		{
-			Integer												temperature					= Global.eRegConfiguration.boiler.tempOverShoot;
-			Dialog_Temperature 									df 							= new Dialog_Temperature(this, view.getId(), temperature, 10, 1, 15);
+			Type_Temperature									temperature					= Global.eRegConfiguration.boiler.tempOverShoot;
+			Dialog_Temperature									df 							= new Dialog_Temperature(temperature, 10, 25, this);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
 	}
-	public void processFinishDialog(int fieldId, Integer temperature)
+	public void onDialogReturn()
 	{
-		if (fieldId == R.id.tempNeverExceed)	Global.eRegConfiguration.boiler.tempNeverExceed 	= temperature;
-		if (fieldId == R.id.tempOverShoot)		Global.eRegConfiguration.boiler.tempOverShoot 		= temperature;
     	displayHeader();
 		displayContents();
         setListens();
@@ -88,8 +86,8 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	public void displayContents()
 	{
 		((TextView) panelView.findViewById(R.id.thermoName)).setText					(Global.eRegConfiguration.boiler.thermometer);
-		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setText				(Global.displayTemperature(Global.eRegConfiguration.boiler.tempNeverExceed));
-		((TextView) panelView.findViewById(R.id.tempOverShoot)).setText					(Global.displayTemperature(Global.eRegConfiguration.boiler.tempOverShoot));
+		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setText				(Global.eRegConfiguration.boiler.tempNeverExceed.displayInteger());
+		((TextView) panelView.findViewById(R.id.tempOverShoot)).setText					(Global.eRegConfiguration.boiler.tempOverShoot.displayInteger());
 
 	}
 	public void setListens()

@@ -78,17 +78,17 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							thermometer;
-		public Integer							tempNeverExceed;
-		public Integer							tempOverShoot;
+		public Type_Temperature					tempNeverExceed;
+		public Type_Temperature					tempOverShoot;
 	}
 	public class TempGradient 					extends  					Ctrl_Configuration
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
-		public Type_Temperature						outsideLow;
-		public Type_Temperature						outsideHigh;
-		public Type_Temperature 						tempLow;
-		public Type_Temperature						tempHigh;
+		public Type_Temperature					outsideLow;
+		public Type_Temperature					outsideHigh;
+		public Type_Temperature 				tempLow;
+		public Type_Temperature					tempHigh;
 	}
 	public class PID_Data						extends  					Ctrl_Configuration
 	{
@@ -322,8 +322,8 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		// Boiler/Burner
 		Boiler									boiler						= new Boiler();
 		boiler.thermometer													= "Boiler";
-		boiler.tempNeverExceed												= 95000;
-		boiler.tempOverShoot												= 18000;
+		boiler.tempNeverExceed												= new Type_Temperature("95");
+		boiler.tempOverShoot												= new Type_Temperature("18");
 		confUpdate.boiler													= boiler;
 		// Boiler/Burner
 		Burner									burner						= new Burner();

@@ -84,7 +84,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		public String							days;
 		public String							timeStart;
 		public String							timeEnd;
-		public Integer							tempObjective;
+		public Type_Temperature					tempObjective;
 		public Boolean							stopOnObjective;
 	}
 	public class Away							extends 					Ctrl_Calendars
@@ -97,7 +97,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public Type_Time						pumpCleanTime;
-		public Type_Integer						pumpCleanDuration;
+		public Integer							pumpCleanDuration;
 		public Type_Temperature					antiFreeze;
 		public Type_Temperature					summerTemp;
 		public Type_Temperature					sunshineInfluence;
@@ -157,7 +157,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "06:15";
 		calendar.timeEnd													= "07:00";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= 40000;
+		calendar.tempObjective												= new Type_Temperature("40");
 		circuit.calendarList.add(calendar);
 		
 		calendar															= new Calendar();
@@ -165,7 +165,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "21:30";
 		calendar.timeEnd													= "22:00";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= 40000;
+		calendar.tempObjective												= new Type_Temperature("40");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -173,7 +173,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "07:30";
 		calendar.timeEnd													= "08:00";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= 40000;
+		calendar.tempObjective												= new Type_Temperature("40");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -181,7 +181,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "17:30";
 		calendar.timeEnd													= "18:15";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= 40000;
+		calendar.tempObjective												= new Type_Temperature("40");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -189,7 +189,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "22:00";
 		calendar.timeEnd													= "22:60";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= 40000;
+		calendar.tempObjective												= new Type_Temperature("40");
 		circuit.calendarList.add(calendar);
 		
 		//
@@ -209,7 +209,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "07:00";
 		calendar.timeEnd													= "08:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= 50000;
+		calendar.tempObjective												= new Type_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -217,7 +217,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "08:00";
 		calendar.timeEnd													= "09:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= 50000;
+		calendar.tempObjective												= new Type_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -225,7 +225,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "21:30";
 		calendar.timeEnd													= "22:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= 50000;
+		calendar.tempObjective												= new Type_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -233,7 +233,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "17:00";
 		calendar.timeEnd													= "22:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= 50000;
+		calendar.tempObjective												= new Type_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -241,7 +241,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "14:00";
 		calendar.timeEnd													= "22:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= 50000;
+		calendar.tempObjective												= new Type_Temperature("50");
 		circuit.calendarList.add(calendar);
 		
 		//
@@ -261,7 +261,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "05:00";
 		calendar.timeEnd													= "07:30";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= 20000;
+		calendar.tempObjective												= new Type_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -269,7 +269,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "15:00";
 		calendar.timeEnd													= "22:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= 20000;
+		calendar.tempObjective												= new Type_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -277,7 +277,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "06:30";
 		calendar.timeEnd													= "21:30";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= 20000;
+		calendar.tempObjective												= new Type_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -285,7 +285,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "11:45";
 		calendar.timeEnd													= "14:45";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= 20000;
+		calendar.tempObjective												= new Type_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -293,7 +293,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "00:01";
 		calendar.timeEnd													= "23:50";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= 20000;
+		calendar.tempObjective												= new Type_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		
@@ -326,7 +326,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 
 		calendarUpdate.tasksBackGround.antiFreeze							= new Type_Temperature("5");
 		calendarUpdate.tasksBackGround.pumpCleanTime						= new Type_Time("01:00");
-		calendarUpdate.tasksBackGround.pumpCleanDuration					= new Type_Integer(300, "s");		// seconds
+		calendarUpdate.tasksBackGround.pumpCleanDuration					= 300;		// seconds
 		calendarUpdate.tasksBackGround.summerTemp							= new Type_Temperature("22");
 		calendarUpdate.tasksBackGround.sunshineInfluence					= new Type_Temperature("5");
 

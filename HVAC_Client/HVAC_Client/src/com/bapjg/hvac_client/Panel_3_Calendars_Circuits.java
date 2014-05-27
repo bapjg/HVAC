@@ -1,11 +1,6 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Common.Ctrl_Calendars;
-import HVAC_Common.Ctrl_Configuration;
-import HVAC_Common.Ctrl_Temperatures;
-import HVAC_Common.Ctrl__Abstract;
-import HVAC_Common.Ctrl_Calendars.Word;
-import HVAC_Common.Ctrl_Configuration.Request;
+import HVAC_Common.*;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -85,7 +80,7 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 			itemNew.days																	= "";
 			itemNew.timeStart																= "09:00";
 			itemNew.timeEnd																	= "10:00";
-			itemNew.tempObjective															= 30000;
+			itemNew.tempObjective															= new Type_Temperature("30");
 			itemNew.stopOnObjective															= true;
 
 			Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.add(itemNew);

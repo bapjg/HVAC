@@ -33,7 +33,7 @@ public class CircuitTask
 //		this.active												= false;
 		this.timeStart											= Global.parseTime(paramCalendar.timeStart);
 		this.timeStartDisplay									= paramCalendar.timeStart;
-		this.tempObjective										= paramCalendar.tempObjective;
+		this.tempObjective										= paramCalendar.tempObjective.milliDegrees;
 		this.days												= paramCalendar.days;
 		this.dateLastRun										= 0L;
 		

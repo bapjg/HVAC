@@ -49,7 +49,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	{
     	if (view.getId() == R.id.tempObjective)
     	{
-    		Dialog_Temperature 									df 							= new Dialog_Temperature(this, R.id.tempObjective, 25, 25, 5, 8);
+    		Dialog_Temperature 									df 							= new Dialog_Temperature(messageExecute.tempObjective, 25, 45, this);
     		df.show(getFragmentManager(), "Dialog_Temperature");
     	}
     	else if (view.getId() == R.id.timeStart)
@@ -116,7 +116,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		messageExecute.timeStart 															= Global.getTimeNowSinceMidnight();
 		messageExecute.timeEnd 																= Global.getTimeNowSinceMidnight() + 3600 * 1000L;
 		messageExecute.stopOnObjective 														= true;
-		messageExecute.tempObjective 														= 25 * 1000;
+		messageExecute.tempObjective 														= new Type_Temperature("25");
 		
 		displayContents();
 	}
@@ -127,7 +127,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		{
 			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("Current");
 			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
-			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(((Integer) (messageReceived.tempObjective/1000)).toString());
+			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(messageReceived.tempObjective.displayInteger());
 			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
 			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Stop");
 		}
@@ -135,7 +135,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		{
 			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			(Global.displayTimeShort(messageReceived.timeStart));
 			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
-			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(((Integer) (messageReceived.tempObjective/1000)).toString());
+			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(messageReceived.tempObjective.displayInteger());
 			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
 			((Button) 		panelView.findViewById(R.id.buttonOkCancel)).setText			("Start");
 		}
@@ -155,7 +155,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			((TextView) 		panelView.findViewById(R.id.timeStart)).setText				(Global.displayTimeShort(messageExecute.timeStart));
 			((TextView) 		panelView.findViewById(R.id.timeEnd)).setText				(Global.displayTimeShort(messageExecute.timeEnd));	
                                                                                             
-			((TextView) 		panelView.findViewById(R.id.tempObjective)).setText			(((Integer) (messageExecute.tempObjective / 1000)).toString());	
+			((TextView) 		panelView.findViewById(R.id.tempObjective)).setText			(messageReceived.tempObjective.displayInteger());	
 			((CheckBox) 		panelView.findViewById(R.id.stopOnObjective)).setChecked	(messageExecute.stopOnObjective);
 		}
 	}
@@ -173,11 +173,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		if 		(fieldId == R.id.timeStart)    		messageExecute.timeStart 				= value;
 		else if	(fieldId == R.id.timeEnd)    		messageExecute.timeEnd 					= value;
     	displayContents();	
-	}
-	public void onReturnTemperature(int fieldId, Integer value)
-	{
-    	if      (fieldId == R.id.tempObjective)		messageExecute.tempObjective 			= value;
-    	displayContents();
 	}
 }
 

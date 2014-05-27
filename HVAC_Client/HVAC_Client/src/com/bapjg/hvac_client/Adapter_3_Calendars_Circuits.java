@@ -35,8 +35,7 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
     	row.tempObjective																	= (TextView) adapterView.findViewById(R.id.tempObjective);
 
     	// Update the entries using standard ArrayAdapter technique
-    	Integer													tempObjective				= listItem.tempObjective/1000;
-      	row.tempObjective.setText				(tempObjective.toString() + " °C");
+      	row.tempObjective.setText				(listItem.tempObjective.displayInteger() + " °C");
     	row.days.setText						(listItem.days);
         row.timeStart.setText					(listItem.timeStart);
         row.timeEnd.setText						(listItem.timeEnd);
