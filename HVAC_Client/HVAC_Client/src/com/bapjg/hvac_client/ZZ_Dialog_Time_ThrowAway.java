@@ -15,7 +15,7 @@ import android.widget.TimePicker;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Dialog_Time 										extends 					DialogFragment 
+public class ZZ_Dialog_Time_ThrowAway 										extends 					DialogFragment 
 {
 	private Dialog_Response										callBack;
 	private int													fieldId;
@@ -24,10 +24,10 @@ public class Dialog_Time 										extends 					DialogFragment
 	private Integer  											timeInitialHour;
 	private Integer  											timeInitialMinute;
 	
-	public Dialog_Time() 
+	public ZZ_Dialog_Time_ThrowAway() 
     {
     }
-	public Dialog_Time(Dialog_Response callBack, int fieldId, Long time) 
+	public ZZ_Dialog_Time_ThrowAway(Dialog_Response callBack, int fieldId, Long time) 
     {
 		super();
 		this.callBack																		= callBack;
@@ -39,7 +39,7 @@ public class Dialog_Time 										extends 					DialogFragment
 		this.timeInitialMinute																= minutes.intValue();
 		this.callBackLong																	= true;
     }
-	public Dialog_Time(Dialog_Response callBack, int fieldId, String time) 
+	public ZZ_Dialog_Time_ThrowAway(Dialog_Response callBack, int fieldId, String time) 
     {
 		super();
 		this.callBack																		= callBack;

@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_2_Immediate 									extends 					Panel_0_Fragment  
@@ -48,8 +47,8 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		if 		(result instanceof Ctrl_Immediate.Data)
 		{
 			messageReceived																		= (Ctrl_Immediate.Data) result;
-			messageExecute.timeStart 															= Global.getTimeNowSinceMidnight();
-			messageExecute.timeEnd 																= Global.getTimeNowSinceMidnight() + 3600 * 1000L;
+			messageExecute.timeStart 															= new Cmn_Time(Global.displayTimeShort(Global.now()));
+			messageExecute.timeEnd 																= new Cmn_Time(Global.displayTimeShort(Global.now() + 3600 * 1000L));
 			messageExecute.stopOnObjective 														= true;
 			messageExecute.tempObjective 														= new Cmn_Temperature(messageReceived.tempObjective.milliDegrees);
 		
@@ -97,8 +96,8 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		}
 		else
 		{
-			((TextView) 		panelView.findViewById(R.id.timeStart)).setText				(Global.displayTimeShort(messageExecute.timeStart));
-			((TextView) 		panelView.findViewById(R.id.timeEnd)).setText				(Global.displayTimeShort(messageExecute.timeEnd));	
+			((TextView) 		panelView.findViewById(R.id.timeStart)).setText				(messageExecute.timeStart.displayShort());
+			((TextView) 		panelView.findViewById(R.id.timeEnd)).setText				(messageExecute.timeEnd.displayShort());	
                                                                                             
 			((TextView) 		panelView.findViewById(R.id.tempObjective)).setText			(messageExecute.tempObjective.displayInteger());	
 			((CheckBox) 		panelView.findViewById(R.id.stopOnObjective)).setChecked	(messageExecute.stopOnObjective);
@@ -121,12 +120,12 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     	}
     	else if (view.getId() == R.id.timeStart)
     	{
-    		Dialog_Time		 									df 							= new Dialog_Time(this, R.id.timeStart, messageExecute.timeStart);
+    		Dialog_Time_New	 									df 							= new Dialog_Time_New(messageExecute.timeStart, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
     	else if (view.getId() == R.id.timeEnd)
     	{
-    		Dialog_Time		 									df 							= new Dialog_Time(this, R.id.timeEnd, messageExecute.timeEnd);
+    		Dialog_Time_New	 									df 							= new Dialog_Time_New(messageExecute.timeEnd, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
     	else if (view.getId() == R.id.stopOnObjective)
@@ -143,7 +142,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	    		Log.v ("App", "tn " +  Global.getTimeNowSinceMidnight());
 
 	    		
-	    		if 	((messageExecute.timeStart >= messageExecute.timeEnd))
+	    		if 	((messageExecute.timeStart.milliSeconds >= messageExecute.timeEnd.milliSeconds))
 //	    		|| 	 (Global.getTimeNowSinceMidnight() >= messageExecute.timeStart))
 	    		{
 	    			Global.toaster("Time start must be after now and before time end", false);
@@ -165,13 +164,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	        	TCP_Send(messageExecute);
 	    	}
     	}
-	}
-	@Override
-	public void onReturnTime(int fieldId, Long value)
-	{
-		if 		(fieldId == R.id.timeStart)    		messageExecute.timeStart 				= value;
-		else if	(fieldId == R.id.timeEnd)    		messageExecute.timeEnd 					= value;
-    	displayContents();	
 	}
 	@Override
 	public void onDialogReturn()

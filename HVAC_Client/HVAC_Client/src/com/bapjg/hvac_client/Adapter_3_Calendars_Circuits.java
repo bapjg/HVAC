@@ -37,8 +37,8 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
     	// Update the entries using standard ArrayAdapter technique
       	row.tempObjective.setText				(listItem.tempObjective.displayInteger());
     	row.days.setText						(listItem.days);
-        row.timeStart.setText					(listItem.timeStart);
-        row.timeEnd.setText						(listItem.timeEnd);
+        row.timeStart.setText					(listItem.timeStart.displayShort());
+        row.timeEnd.setText						(listItem.timeEnd.displayShort());
 
     	if (position % 2 == 0)
     	{
@@ -89,7 +89,7 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
         LayoutParams 											timeSlotLayout				= new LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
 				
         Long													QuarterHour					= 15 * 60 * 1000L;
-    	Long													timeStart					= Global.parseTime(listItem.timeStart);
+    	Long													timeStart					= listItem.timeStart.milliSeconds;
     	Long													timeEnd;
         if (listItem.timeEnd == null)
         {
@@ -97,7 +97,7 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
         }
         else
         {
-        	timeEnd																			= Global.parseTime(listItem.timeEnd);
+        	timeEnd																			= listItem.timeEnd.milliSeconds;
         }
     	
     	

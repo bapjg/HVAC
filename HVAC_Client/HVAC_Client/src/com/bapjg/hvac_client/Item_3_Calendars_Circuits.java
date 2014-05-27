@@ -92,8 +92,8 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
         if ((daysNumbers).indexOf("6") > -1)		day_6.setBackgroundColor(Color.RED);
         if ((daysNumbers).indexOf("7") > -1)		day_7.setBackgroundColor(Color.RED);      
 
-        ((TextView) itemView.findViewById(R.id.timeStart))			.setText(itemData.timeStart);
-        ((TextView) itemView.findViewById(R.id.timeEnd))			.setText(itemData.timeEnd);
+        ((TextView) itemView.findViewById(R.id.timeStart))			.setText(itemData.timeStart.displayShort());
+        ((TextView) itemView.findViewById(R.id.timeEnd))			.setText(itemData.timeEnd.displayShort());
         
         ((TextView) itemView.findViewById(R.id.tempObjective))		.setText(itemData.tempObjective.displayInteger());
         ((CheckBox) itemView.findViewById(R.id.stopOnObjective))	.setChecked(itemData.stopOnObjective);
@@ -122,8 +122,8 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     	{
     		itemData.days																	= daysWord;				// ((EditText) itemView.findViewById(R.id.name)).getText().toString();
        		itemData.days																	= itemData.days + daysNumbers;
-       		itemData.timeStart																= ((TextView) itemView.findViewById(R.id.timeStart)).getText().toString();
-       		itemData.timeEnd																= ((TextView) itemView.findViewById(R.id.timeEnd)).getText().toString();
+//       		itemData.timeStart																= ((TextView) itemView.findViewById(R.id.timeStart)).getText().toString();
+//       		itemData.timeEnd																= ((TextView) itemView.findViewById(R.id.timeEnd)).getText().toString();
        		
 // TODO Check functions ok
        		
@@ -178,12 +178,12 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
      	else if (clickedView.getId() == R.id.timeStart)
     	{
-    		Dialog_Time		 									df 							= new Dialog_Time(this, R.id.timeStart, itemData.timeStart);
+     		Dialog_Time_New	 									df 							= new Dialog_Time_New(itemData.timeStart, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
      	else if (clickedView.getId() == R.id.timeEnd)
     	{
-    		Dialog_Time		 									df 							= new Dialog_Time(this, R.id.timeEnd, itemData.timeEnd);
+     		Dialog_Time_New										df 							= new Dialog_Time_New(itemData.timeEnd, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
      	else if (clickedView.getId() == R.id.tempObjective)
@@ -197,14 +197,6 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     		displayContents();
     	}
 	}
-    public void onReturnTime(int fieldId, String value)
-    {
-    	if ((fieldId == R.id.timeStart)
-    	||  (fieldId == R.id.timeEnd)    )
-    	{
-    		((TextView) itemView.findViewById(fieldId))			.setText(value);
-    	}
-    }
     public void onReturnString(int fieldId, String value)
     {
     	if (fieldId == R.id.days)

@@ -218,7 +218,7 @@ public class Thread_TCPListen 			implements Runnable
 			else
 			{
 				circuit.taskActive							= new CircuitTask(	now, 						// Time Start
-																	message_in.timeEnd, 					// TimeEnd
+																	message_in.timeEnd.milliSeconds, 		// TimeEnd
 																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
 																	false,									// StopOnObjective
 																	"1, 2, 3, 4, 5, 6, 7");					// Days

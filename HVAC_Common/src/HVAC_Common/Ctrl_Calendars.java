@@ -82,8 +82,8 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String							days;
-		public String							timeStart;
-		public String							timeEnd;
+		public Cmn_Time							timeStart;
+		public Cmn_Time							timeEnd;
 		public Cmn_Temperature					tempObjective;
 		public Boolean							stopOnObjective;
 	}
@@ -155,40 +155,40 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 
 		Ctrl_Calendars.Calendar					calendar					= new Calendar();
 		calendar.days														= "WeekDay";
-		calendar.timeStart													= "06:15";
-		calendar.timeEnd													= "07:00";
+		calendar.timeStart													= new Cmn_Time("06:15");
+		calendar.timeEnd													= new Cmn_Time("07:00");
 		calendar.stopOnObjective											= true;
 		calendar.tempObjective												= new Cmn_Temperature("40");
 		circuit.calendarList.add(calendar);
 		
 		calendar															= new Calendar();
 		calendar.days														= "EveryDay";
-		calendar.timeStart													= "21:30";
-		calendar.timeEnd													= "22:00";
+		calendar.timeStart													= new Cmn_Time("21:30");
+		calendar.timeEnd													= new Cmn_Time("22:00");
 		calendar.stopOnObjective											= true;
 		calendar.tempObjective												= new Cmn_Temperature("40");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "WeekEnd";
-		calendar.timeStart													= "07:30";
-		calendar.timeEnd													= "08:00";
+		calendar.timeStart													= new Cmn_Time("07:30");
+		calendar.timeEnd													= new Cmn_Time("08:00");
 		calendar.stopOnObjective											= true;
 		calendar.tempObjective												= new Cmn_Temperature("40");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "WeekEnd";
-		calendar.timeStart													= "17:30";
-		calendar.timeEnd													= "18:15";
+		calendar.timeStart													= new Cmn_Time("17:30");
+		calendar.timeEnd													= new Cmn_Time("18:15");
 		calendar.stopOnObjective											= true;
 		calendar.tempObjective												= new Cmn_Temperature("40");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "EveryDay";
-		calendar.timeStart													= "22:00";
-		calendar.timeEnd													= "22:60";
+		calendar.timeStart													= new Cmn_Time("22:00");
+		calendar.timeEnd													= new Cmn_Time("22:60");
 		calendar.stopOnObjective											= true;
 		calendar.tempObjective												= new Cmn_Temperature("40");
 		circuit.calendarList.add(calendar);
@@ -207,40 +207,40 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 
 		calendar															= new Calendar();
 		calendar.days														= "WeekDay";
-		calendar.timeStart													= "07:00";
-		calendar.timeEnd													= "08:00";
+		calendar.timeStart													= new Cmn_Time("07:00");
+		calendar.timeEnd													= new Cmn_Time("08:00");
 		calendar.stopOnObjective											= false;
 		calendar.tempObjective												= new Cmn_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "WeekEnd";
-		calendar.timeStart													= "08:00";
-		calendar.timeEnd													= "09:00";
+		calendar.timeStart													= new Cmn_Time("08:00");
+		calendar.timeEnd													= new Cmn_Time("09:00");
 		calendar.stopOnObjective											= false;
 		calendar.tempObjective												= new Cmn_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "EveryDay";
-		calendar.timeStart													= "21:30";
-		calendar.timeEnd													= "22:00";
+		calendar.timeStart													= new Cmn_Time("21:30");
+		calendar.timeEnd													= new Cmn_Time("22:00");
 		calendar.stopOnObjective											= false;
 		calendar.tempObjective												= new Cmn_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "Locataire"	;
-		calendar.timeStart													= "17:00";
-		calendar.timeEnd													= "22:00";
+		calendar.timeStart													= new Cmn_Time("17:00");
+		calendar.timeEnd													= new Cmn_Time("22:00");
 		calendar.stopOnObjective											= false;
 		calendar.tempObjective												= new Cmn_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "HalfDay";
-		calendar.timeStart													= "14:00";
-		calendar.timeEnd													= "22:00";
+		calendar.timeStart													= new Cmn_Time("14:00");
+		calendar.timeEnd													= new Cmn_Time("22:00");
 		calendar.stopOnObjective											= false;
 		calendar.tempObjective												= new Cmn_Temperature("50");
 		circuit.calendarList.add(calendar);
@@ -259,40 +259,40 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 
 		calendar															= new Calendar();
 		calendar.days														= "WeekDay";
-		calendar.timeStart													= "05:00";
-		calendar.timeEnd													= "07:30";
+		calendar.timeStart													= new Cmn_Time("05:00");
+		calendar.timeEnd													= new Cmn_Time("07:30");
 		calendar.stopOnObjective											= true;
 		calendar.tempObjective												= new Cmn_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "WeekDay";
-		calendar.timeStart													= "15:00";
-		calendar.timeEnd													= "22:00";
+		calendar.timeStart													= new Cmn_Time("15:00");
+		calendar.timeEnd													= new Cmn_Time("22:00");
 		calendar.stopOnObjective											= false;
 		calendar.tempObjective												= new Cmn_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "WeekEnd";
-		calendar.timeStart													= "06:30";
-		calendar.timeEnd													= "21:30";
+		calendar.timeStart													= new Cmn_Time("06:30");
+		calendar.timeEnd													= new Cmn_Time("21:30");
 		calendar.stopOnObjective											= false;
 		calendar.tempObjective												= new Cmn_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "HalfDay";
-		calendar.timeStart													= "11:45";
-		calendar.timeEnd													= "14:45";
+		calendar.timeStart													= new Cmn_Time("11:45");
+		calendar.timeEnd													= new Cmn_Time("14:45");
 		calendar.stopOnObjective											= false;
 		calendar.tempObjective												= new Cmn_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
 		calendar.days														= "Never";
-		calendar.timeStart													= "00:01";
-		calendar.timeEnd													= "23:50";
+		calendar.timeStart													= new Cmn_Time("00:01");
+		calendar.timeEnd													= new Cmn_Time("23:50");
 		calendar.stopOnObjective											= false;
 		calendar.tempObjective												= new Cmn_Temperature("20");
 		circuit.calendarList.add(calendar);

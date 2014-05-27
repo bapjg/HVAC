@@ -78,8 +78,8 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 			Ctrl_Calendars.Calendar								itemNew						= new Ctrl_Calendars().new Calendar();
 
 			itemNew.days																	= "";
-			itemNew.timeStart																= "09:00";
-			itemNew.timeEnd																	= "10:00";
+			itemNew.timeStart																= new Cmn_Time("09:00");
+			itemNew.timeEnd																	= new Cmn_Time("10:00");
 			itemNew.tempObjective															= new Cmn_Temperature("30");
 			itemNew.stopOnObjective															= true;
 

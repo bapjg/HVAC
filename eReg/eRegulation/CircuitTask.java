@@ -31,8 +31,8 @@ public class CircuitTask
 	{
 		this.state												= TASK_STATE_WaitingToStart;
 //		this.active												= false;
-		this.timeStart											= Global.parseTime(paramCalendar.timeStart);
-		this.timeStartDisplay									= paramCalendar.timeStart;
+		this.timeStart											= paramCalendar.timeStart.milliSeconds;
+		this.timeStartDisplay									= paramCalendar.timeStart.displayShort();
 		this.tempObjective										= paramCalendar.tempObjective.milliDegrees;
 		this.days												= paramCalendar.days;
 		this.dateLastRun										= 0L;
@@ -48,8 +48,8 @@ public class CircuitTask
 			this.stopOnObjective								= false;			
 		}
 		
-		this.timeEnd											= Global.parseTime(paramCalendar.timeEnd);
-		this.timeEndDisplay										= paramCalendar.timeEnd;
+		this.timeEnd											= paramCalendar.timeEnd.milliSeconds;
+		this.timeEndDisplay										= paramCalendar.timeEnd.displayShort();
 
 	}
 //	public CircuitTask
