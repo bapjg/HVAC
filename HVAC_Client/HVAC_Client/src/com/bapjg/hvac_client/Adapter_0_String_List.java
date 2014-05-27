@@ -15,8 +15,9 @@ import HVAC_Common.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Adapter_0_String_List 								extends 					Adapter_0_Abstract
 {
- 
-    public Adapter_0_String_List(Context context, int resource, ArrayList listData) 
+    public String												selectedItem;
+    
+	public Adapter_0_String_List(Context context, int resource, ArrayList <String> listData) 
     {
         super(context, resource, listData);
     }
@@ -32,11 +33,14 @@ public class Adapter_0_String_List 								extends 					Adapter_0_Abstract
         adapterView.setTag(row);
 
         row.rowItem.setText(listItem);
- 
+        
+        if (listItem.equalsIgnoreCase(selectedItem))			row.rowItem.setTextColor(Color.YELLOW);
+        else 													row.rowItem.setTextColor(Color.BLACK);
+
         return adapterView;
     }
     static class RowHolder 
     {
     	TextView 												rowItem;
-    }	
+    }
 }

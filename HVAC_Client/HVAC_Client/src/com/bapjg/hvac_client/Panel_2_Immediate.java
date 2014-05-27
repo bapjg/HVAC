@@ -51,7 +51,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			messageExecute.timeStart 															= Global.getTimeNowSinceMidnight();
 			messageExecute.timeEnd 																= Global.getTimeNowSinceMidnight() + 3600 * 1000L;
 			messageExecute.stopOnObjective 														= true;
-			messageExecute.tempObjective 														= new Type_Temperature(messageReceived.tempObjective.milliDegrees);
+			messageExecute.tempObjective 														= new Cmn_Temperature(messageReceived.tempObjective.milliDegrees);
 		
 			displayHeader();
 			displayContents();
@@ -106,7 +106,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-        panelView.findViewById(R.id.buttonStartStop)		.setOnClickListener(this);
+        panelView.findViewById(R.id.buttonStartStop)	.setOnClickListener(this);
     	panelView.findViewById(R.id.tempObjective)		.setOnClickListener(this);
     	panelView.findViewById(R.id.timeStart)			.setOnClickListener(this);
     	panelView.findViewById(R.id.timeEnd)			.setOnClickListener(this);

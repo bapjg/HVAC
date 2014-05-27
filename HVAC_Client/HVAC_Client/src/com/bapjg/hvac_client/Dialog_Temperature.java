@@ -23,14 +23,14 @@ public class Dialog_Temperature 							extends 					DialogFragment
 {
 	private Dialog_Response										callBack;
 	private NumberPicker 										temperaturePicker;
-	private Type_Temperature									temperature;
+	private Cmn_Temperature										temperature;
 	private Integer												tempMin;
 	private Integer  											tempMax;
 	
 	public Dialog_Temperature() 
     {
     }
-	public Dialog_Temperature(Type_Temperature temperature, Integer tempMin, Integer tempMax, Dialog_Response callBack) 
+	public Dialog_Temperature(Cmn_Temperature temperature, Integer tempMin, Integer tempMax, Dialog_Response callBack) 
     {
 		super();
 		this.temperature																	= temperature;

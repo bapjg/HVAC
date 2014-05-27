@@ -80,7 +80,7 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 			itemNew.days																	= "";
 			itemNew.timeStart																= "09:00";
 			itemNew.timeEnd																	= "10:00";
-			itemNew.tempObjective															= new Type_Temperature("30");
+			itemNew.tempObjective															= new Cmn_Temperature("30");
 			itemNew.stopOnObjective															= true;
 
 			Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.add(itemNew);

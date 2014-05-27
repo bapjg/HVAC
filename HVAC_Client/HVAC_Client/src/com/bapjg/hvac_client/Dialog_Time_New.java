@@ -20,14 +20,14 @@ public class Dialog_Time_New 									extends 					DialogFragment
 {
 	private Dialog_Response										callBack;
 	private TimePicker 											timePicker;
-	private Type_Time											time;
+	private Cmn_Time											time;
 	private Integer  											timeInitialHour;
 	private Integer  											timeInitialMinute;
 	
 	public Dialog_Time_New() 
     {
     }
-	public Dialog_Time_New(Type_Time time, Dialog_Response callBack) 
+	public Dialog_Time_New(Cmn_Time time, Dialog_Response callBack) 
     {
 		super();
 		this.callBack																		= callBack;
@@ -55,7 +55,10 @@ public class Dialog_Time_New 									extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	time.setTime(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+     	Integer h = timePicker.getCurrentHour();
+     	Integer m = timePicker.getCurrentMinute();
+    	
+    	time.setTime(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
      	callBack.onDialogReturn();
     	dialog.dismiss();
     }

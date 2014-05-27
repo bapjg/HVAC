@@ -3,7 +3,7 @@ package HVAC_Common;
 import java.text.SimpleDateFormat;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Type_Date 											implements 					java.io.Serializable
+public class Cmn_Date 											implements 					java.io.Serializable
 {
 	private static final long 									serialVersionUID 			= 1L;
 	Long	milliSeconds;
@@ -11,7 +11,7 @@ public class Type_Date 											implements 					java.io.Serializable
 	Integer minutes;
 	Integer seconds;
 	
-	public Type_Date(String time)
+	public Cmn_Date(String time)
 	{
 		String[]												timeParts					= time.split(":");
 		

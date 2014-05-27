@@ -38,16 +38,6 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
 		this.daysNumbers																	= itemData.days; //name or days
 		this.daysWordNumbers																= ""; //name or days
 		this.circuitName																	= circuitName;
-		
-		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
-		{
-			if (word.name.indexOf(itemData.days) > -1)
-			{
-				daysWord																	= word.name;
-				daysNumbers																	= "";
-				daysWordNumbers																= word.days;
-			}
-		}
 	}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
@@ -65,6 +55,16 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
+		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
+		{
+			if (word.name.indexOf(itemData.days) > -1)
+			{
+				daysWord																	= word.name;
+				daysNumbers																	= "";
+				daysWordNumbers																= word.days;
+			}
+		}
+
 		TextView												days 						= (TextView) itemView.findViewById(R.id.days);
     	TextView 												day_1 						= (TextView) itemView.findViewById(R.id.day_1);
     	TextView 												day_2 						= (TextView) itemView.findViewById(R.id.day_2);
@@ -95,7 +95,7 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
         ((TextView) itemView.findViewById(R.id.timeStart))			.setText(itemData.timeStart);
         ((TextView) itemView.findViewById(R.id.timeEnd))			.setText(itemData.timeEnd);
         
-        ((TextView) itemView.findViewById(R.id.tempObjective))		.setText(itemData.tempObjective.displayInteger() + " °C");
+        ((TextView) itemView.findViewById(R.id.tempObjective))		.setText(itemData.tempObjective.displayInteger());
         ((CheckBox) itemView.findViewById(R.id.stopOnObjective))	.setChecked(itemData.stopOnObjective);
  	}
 	public void setListens()
@@ -141,8 +141,9 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
      	else if (clickedView.getId() == R.id.days)
     	{
-    		Dialog_String_List		 							df 							= new Dialog_String_List(this, R.id.days);
-    		df.items.add("");
+//    		Dialog_String_List		 							df 							= new Dialog_String_List(this, R.id.days);
+    		Dialog_String_List_New		 							df 							= new Dialog_String_List_New(itemData.days, (Object) itemData, null, this);
+    		df.items.add("Select days");
     		df.itemSelected																	= "";
 
     		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
@@ -211,6 +212,11 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     		itemData.days																	= value;
     		((TextView) itemView.findViewById(fieldId))			.setText(value);
     	}
+    }
+    public void onDialogReturn()
+    {
+        displayHeader();
+        displayContents();
     }
 }
 

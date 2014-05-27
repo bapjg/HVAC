@@ -63,13 +63,13 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	{
 		if (view.getId() == R.id.tempNeverExceed)
 		{
-			Type_Temperature									temperature					= Global.eRegConfiguration.boiler.tempNeverExceed;
+			Cmn_Temperature										temperature					= Global.eRegConfiguration.boiler.tempNeverExceed;
 			Dialog_Temperature									df 							= new Dialog_Temperature(temperature, 85, 100, this);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
 		else if (view.getId() == R.id.tempOverShoot)
 		{
-			Type_Temperature									temperature					= Global.eRegConfiguration.boiler.tempOverShoot;
+			Cmn_Temperature										temperature					= Global.eRegConfiguration.boiler.tempOverShoot;
 			Dialog_Temperature									df 							= new Dialog_Temperature(temperature, 10, 25, this);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}

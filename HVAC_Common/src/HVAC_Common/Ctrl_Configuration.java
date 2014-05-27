@@ -78,17 +78,17 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							thermometer;
-		public Type_Temperature					tempNeverExceed;
-		public Type_Temperature					tempOverShoot;
+		public Cmn_Temperature					tempNeverExceed;
+		public Cmn_Temperature					tempOverShoot;
 	}
 	public class TempGradient 					extends  					Ctrl_Configuration
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
-		public Type_Temperature					outsideLow;
-		public Type_Temperature					outsideHigh;
-		public Type_Temperature 				tempLow;
-		public Type_Temperature					tempHigh;
+		public Cmn_Temperature					outsideLow;
+		public Cmn_Temperature					outsideHigh;
+		public Cmn_Temperature 					tempLow;
+		public Cmn_Temperature					tempHigh;
 	}
 	public class PID_Data						extends  					Ctrl_Configuration
 	{
@@ -287,10 +287,10 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		circuit.tempMax														= 90000;
 		circuit.mixer														= null;
 		circuit.tempGradient												= new TempGradient();
-		circuit.tempGradient.outsideLow										= new Type_Temperature(-15000);
-		circuit.tempGradient.tempLow										= new Type_Temperature(80000);
-		circuit.tempGradient.outsideHigh									= new Type_Temperature(15000);
-		circuit.tempGradient.tempHigh										= new Type_Temperature(35000);
+		circuit.tempGradient.outsideLow										= new Cmn_Temperature(-15000);
+		circuit.tempGradient.tempLow										= new Cmn_Temperature(80000);
+		circuit.tempGradient.outsideHigh									= new Cmn_Temperature(15000);
+		circuit.tempGradient.tempHigh										= new Cmn_Temperature(35000);
 		confUpdate.circuitList.add(circuit);
 		
 		circuit																= new Circuit();
@@ -313,17 +313,17 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		circuit.mixer.pidParams.timeProjection								= 50000;
 		circuit.mixer.pidParams.marginProjection							= 2000;
 		circuit.tempGradient												= new TempGradient();
-		circuit.tempGradient.outsideLow										= new Type_Temperature(-15000);
-		circuit.tempGradient.tempLow										= new Type_Temperature(45000);
-		circuit.tempGradient.outsideHigh									= new Type_Temperature(15000);
-		circuit.tempGradient.tempHigh										= new Type_Temperature(30000);
+		circuit.tempGradient.outsideLow										= new Cmn_Temperature(-15000);
+		circuit.tempGradient.tempLow										= new Cmn_Temperature(45000);
+		circuit.tempGradient.outsideHigh									= new Cmn_Temperature(15000);
+		circuit.tempGradient.tempHigh										= new Cmn_Temperature(30000);
 		confUpdate.circuitList.add(circuit);
 		
 		// Boiler/Burner
 		Boiler									boiler						= new Boiler();
 		boiler.thermometer													= "Boiler";
-		boiler.tempNeverExceed												= new Type_Temperature("95");
-		boiler.tempOverShoot												= new Type_Temperature("18");
+		boiler.tempNeverExceed												= new Cmn_Temperature("95");
+		boiler.tempOverShoot												= new Cmn_Temperature("18");
 		confUpdate.boiler													= boiler;
 		// Boiler/Burner
 		Burner									burner						= new Burner();

@@ -20,7 +20,7 @@ public class Ctrl_Immediate 			extends 					Ctrl__Abstract
 		public String 					circuitName;
 		public Boolean					executionPlanned;
 		public Boolean					executionActive;
-		public Type_Temperature			tempObjective;
+		public Cmn_Temperature			tempObjective;
 		public Long 					timeStart;
 		public Long 					timeEnd;
 		public Boolean 					stopOnObjective;
@@ -31,7 +31,7 @@ public class Ctrl_Immediate 			extends 					Ctrl__Abstract
 		public Integer					action;
 		public Boolean					executionPlanned;
 		public Boolean					executionActive;
-		public Type_Temperature			tempObjective;
+		public Cmn_Temperature			tempObjective;
 		public Long 					timeStart;
 		public Long 					timeEnd;
 		public Boolean 					stopOnObjective;

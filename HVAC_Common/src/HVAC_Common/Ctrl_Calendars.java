@@ -84,7 +84,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		public String							days;
 		public String							timeStart;
 		public String							timeEnd;
-		public Type_Temperature					tempObjective;
+		public Cmn_Temperature					tempObjective;
 		public Boolean							stopOnObjective;
 	}
 	public class Away							extends 					Ctrl_Calendars
@@ -96,12 +96,13 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	public class TasksBackGround				extends 					Ctrl_Calendars
 	{
 		private static final long 				serialVersionUID 			= 1L;
-		public Type_Time						pumpCleanTime;
+		public Cmn_Time							pumpCleanTime;
 		public Integer							pumpCleanDuration;
-		public Type_Temperature					antiFreeze;
-		public Type_Temperature					summerTemp;
-		public Type_Temperature					sunshineInfluence;
+		public Cmn_Temperature					antiFreeze;
+		public Cmn_Temperature					summerTemp;
+		public Cmn_Temperature					sunshineInfluence;
 	}
+
 	public void initialise()
 	{
 		Update									calendarUpdate				= (Update) this;
@@ -157,7 +158,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "06:15";
 		calendar.timeEnd													= "07:00";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= new Type_Temperature("40");
+		calendar.tempObjective												= new Cmn_Temperature("40");
 		circuit.calendarList.add(calendar);
 		
 		calendar															= new Calendar();
@@ -165,7 +166,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "21:30";
 		calendar.timeEnd													= "22:00";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= new Type_Temperature("40");
+		calendar.tempObjective												= new Cmn_Temperature("40");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -173,7 +174,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "07:30";
 		calendar.timeEnd													= "08:00";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= new Type_Temperature("40");
+		calendar.tempObjective												= new Cmn_Temperature("40");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -181,7 +182,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "17:30";
 		calendar.timeEnd													= "18:15";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= new Type_Temperature("40");
+		calendar.tempObjective												= new Cmn_Temperature("40");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -189,7 +190,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "22:00";
 		calendar.timeEnd													= "22:60";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= new Type_Temperature("40");
+		calendar.tempObjective												= new Cmn_Temperature("40");
 		circuit.calendarList.add(calendar);
 		
 		//
@@ -209,7 +210,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "07:00";
 		calendar.timeEnd													= "08:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= new Type_Temperature("50");
+		calendar.tempObjective												= new Cmn_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -217,7 +218,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "08:00";
 		calendar.timeEnd													= "09:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= new Type_Temperature("50");
+		calendar.tempObjective												= new Cmn_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -225,7 +226,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "21:30";
 		calendar.timeEnd													= "22:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= new Type_Temperature("50");
+		calendar.tempObjective												= new Cmn_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -233,7 +234,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "17:00";
 		calendar.timeEnd													= "22:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= new Type_Temperature("50");
+		calendar.tempObjective												= new Cmn_Temperature("50");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -241,7 +242,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "14:00";
 		calendar.timeEnd													= "22:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= new Type_Temperature("50");
+		calendar.tempObjective												= new Cmn_Temperature("50");
 		circuit.calendarList.add(calendar);
 		
 		//
@@ -261,7 +262,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "05:00";
 		calendar.timeEnd													= "07:30";
 		calendar.stopOnObjective											= true;
-		calendar.tempObjective												= new Type_Temperature("20");
+		calendar.tempObjective												= new Cmn_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -269,7 +270,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "15:00";
 		calendar.timeEnd													= "22:00";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= new Type_Temperature("20");
+		calendar.tempObjective												= new Cmn_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -277,7 +278,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "06:30";
 		calendar.timeEnd													= "21:30";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= new Type_Temperature("20");
+		calendar.tempObjective												= new Cmn_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -285,7 +286,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "11:45";
 		calendar.timeEnd													= "14:45";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= new Type_Temperature("20");
+		calendar.tempObjective												= new Cmn_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		calendar															= new Calendar();
@@ -293,7 +294,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendar.timeStart													= "00:01";
 		calendar.timeEnd													= "23:50";
 		calendar.stopOnObjective											= false;
-		calendar.tempObjective												= new Type_Temperature("20");
+		calendar.tempObjective												= new Cmn_Temperature("20");
 		circuit.calendarList.add(calendar);
 
 		
@@ -324,11 +325,11 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		// TasksBackground
 		//
 
-		calendarUpdate.tasksBackGround.antiFreeze							= new Type_Temperature("5");
-		calendarUpdate.tasksBackGround.pumpCleanTime						= new Type_Time("01:00");
+		calendarUpdate.tasksBackGround.antiFreeze							= new Cmn_Temperature("5");
+		calendarUpdate.tasksBackGround.pumpCleanTime						= new Cmn_Time("01:00");
 		calendarUpdate.tasksBackGround.pumpCleanDuration					= 300;		// seconds
-		calendarUpdate.tasksBackGround.summerTemp							= new Type_Temperature("22");
-		calendarUpdate.tasksBackGround.sunshineInfluence					= new Type_Temperature("5");
+		calendarUpdate.tasksBackGround.summerTemp							= new Cmn_Temperature("22");
+		calendarUpdate.tasksBackGround.sunshineInfluence					= new Cmn_Temperature("5");
 
 		//
 		//=========================================================================================
