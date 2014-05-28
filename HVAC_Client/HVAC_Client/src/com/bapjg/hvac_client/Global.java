@@ -36,6 +36,7 @@ public class Global
 	public static	Menu_4_Weather								menuWeather;
 	public static	Menu_5_Configuration 						menuConfiguration;
 	public static	Menu_6_Actions								menuActions;
+	public static	Menu_7_Reset								menuReset;
 	
 	public static	Ctrl_Configuration.Data						eRegConfiguration;
 	public static	Ctrl_Calendars.Data							eRegCalendars;

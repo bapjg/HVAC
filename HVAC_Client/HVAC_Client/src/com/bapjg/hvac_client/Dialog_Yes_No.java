@@ -59,12 +59,11 @@ public class Dialog_Yes_No 										extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-    	callBack.onDialogReturn(true);
+    	callBack.onDialogReturn();
     	dialog.dismiss();
     }
     public void buttonCancel (DialogInterface dialog, int which)
     {
     	dialog.dismiss();
-    	callBack.onDialogReturn(false);
     }
 }

@@ -53,16 +53,15 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	public void doRefresh()
 	{
         HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
-		Global.toaster("doRefresh", false);
 	}
 	public void doUpdate()
 	{
 		Dialog_Yes_No												messageYesNo			= new Dialog_Yes_No("Are you certain ?", this);
 		messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
 	}
-	public void onDialogReturn(boolean yes)
+	public void onDialogReturn()
 	{
-		if (yes)
+		if (Global.eRegCalendars != null)
 		{
 			Ctrl_Calendars.Data										sendData				= Global.eRegCalendars;
 			Ctrl_Calendars.Update									sendUpdate				= new Ctrl_Calendars().new Update();
@@ -72,6 +71,10 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 			sendUpdate.tasksBackGround														= sendData.tasksBackGround;
 			
 			HTTP_Send	(sendUpdate);
+		}
+		else
+		{
+			Global.toaster("No data to send, do a Refresh", false);
 		}
 	}
 	public void processFinishHTTP(Ctrl__Abstract messageReturn)

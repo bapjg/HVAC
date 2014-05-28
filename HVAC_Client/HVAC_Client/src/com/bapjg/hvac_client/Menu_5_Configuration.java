@@ -53,7 +53,6 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	}
 	public void doRefresh()
 	{
-		Global.toaster("doRefresh", false);
         HTTP_Send	(new Ctrl_Configuration().new Request());
 	}
 	public void doUpdate()
@@ -61,12 +60,18 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 		Dialog_Yes_No												messageYesNo			= new Dialog_Yes_No("Are you certain ?", this);
 		messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
 	}
-	public void onDialogReturn(boolean yes)
+	public void onDialogReturn()
 	{
-		if (yes)
+		if (Global.eRegConfiguration != null)
 		{
+//			TODO Must populate the record from Global.eRegConfiguration 
+			
 			HTTP_Send	(new Ctrl_Configuration().new Update());
 			Global.toaster("doUpdate", false);
+		}
+		else
+		{
+			Global.toaster("No data to send, do a Refresh", false);
 		}
 	}
 }

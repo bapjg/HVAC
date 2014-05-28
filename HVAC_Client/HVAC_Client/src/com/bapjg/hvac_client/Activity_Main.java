@@ -42,6 +42,7 @@ public class Activity_Main 										extends 					Activity
         ActionBar.Tab 											tabWeather			 		= actionbar.newTab().setText("Weather");
         ActionBar.Tab 											tabConfiguration 			= actionbar.newTab().setText("Configuration");
         ActionBar.Tab 											tabActions					= actionbar.newTab().setText("Actions");
+        ActionBar.Tab 											tabReset					= actionbar.newTab().setText("Reset");
         
         // Setup the Menu Fragments
         // Menu_Fragment constructor takes 2 arguments : PanelFragment, Layout.id
@@ -53,6 +54,7 @@ public class Activity_Main 										extends 					Activity
         Global.menuWeather																	= new Menu_4_Weather		();
         Global.menuConfiguration															= new Menu_5_Configuration	();
         Global.menuActions																	= new Menu_6_Actions		();
+        Global.menuReset																	= new Menu_7_Reset			();
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu fragment   ,  	panel object
@@ -62,6 +64,7 @@ public class Activity_Main 										extends 					Activity
         tabWeather.setTabListener		(new Listener_Tabs(Global.menuWeather));
         tabConfiguration.setTabListener	(new Listener_Tabs(Global.menuConfiguration));
         tabActions.setTabListener		(new Listener_Tabs(Global.menuActions));
+        tabReset.setTabListener			(new Listener_Tabs(Global.menuReset));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabImmediate);
@@ -69,7 +72,7 @@ public class Activity_Main 										extends 					Activity
         actionbar.addTab(tabWeather);
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
-        
+        actionbar.addTab(tabReset);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
