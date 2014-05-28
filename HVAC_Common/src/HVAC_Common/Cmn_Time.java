@@ -34,6 +34,7 @@ public class Cmn_Time 											implements 					java.io.Serializable
 			case 2:												this.seconds				= Integer.parseInt(timeParts[i]); break;									
 			}
 		}
+		Integer x = 3;
 		this.milliSeconds																	= (hours * 24 * 3600 + minutes * 60 + seconds) * 1000L;
 	}
 	public void setTime(Integer hours, Integer minutes)
