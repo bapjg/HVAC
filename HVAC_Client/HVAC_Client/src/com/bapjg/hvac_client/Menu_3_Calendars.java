@@ -19,7 +19,8 @@ import android.widget.Button;
 public class Menu_3_Calendars 									extends 					Menu_0_Fragment 
 																implements 					View.OnClickListener,
 																							HTTP_Response,
-																							TCP_Response
+																							TCP_Response,
+																							Dialog_Response
 {
 	public Menu_3_Calendars()
 	{
@@ -56,14 +57,22 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	}
 	public void doUpdate()
 	{
-		Ctrl_Calendars.Data											sendData				= Global.eRegCalendars;
-		Ctrl_Calendars.Update										sendUpdate				= new Ctrl_Calendars().new Update();
-		sendUpdate.wordList																	= sendData.wordList;
-		sendUpdate.circuitList																= sendData.circuitList;
-		sendUpdate.awayList																	= sendData.awayList;
-		sendUpdate.tasksBackGround															= sendData.tasksBackGround;
-		
-		HTTP_Send	(sendUpdate);
+		Dialog_Yes_No												messageYesNo			= new Dialog_Yes_No("Are you certain ?", this);
+		messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
+	}
+	public void onDialogReturn(boolean yes)
+	{
+		if (yes)
+		{
+			Ctrl_Calendars.Data										sendData				= Global.eRegCalendars;
+			Ctrl_Calendars.Update									sendUpdate				= new Ctrl_Calendars().new Update();
+			sendUpdate.wordList																= sendData.wordList;
+			sendUpdate.circuitList															= sendData.circuitList;
+			sendUpdate.awayList																= sendData.awayList;
+			sendUpdate.tasksBackGround														= sendData.tasksBackGround;
+			
+			HTTP_Send	(sendUpdate);
+		}
 	}
 	public void processFinishHTTP(Ctrl__Abstract messageReturn)
 	{

@@ -20,7 +20,8 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 
 public class Menu_5_Configuration 								extends 					Menu_0_Fragment 
-																implements 					View.OnClickListener
+																implements 					View.OnClickListener,
+																							Dialog_Response
 {
 	public Menu_5_Configuration()
 	{
@@ -57,7 +58,15 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	}
 	public void doUpdate()
 	{
-        HTTP_Send	(new Ctrl_Configuration().new Update());
-		Global.toaster("doUpdate", false);
+		Dialog_Yes_No												messageYesNo			= new Dialog_Yes_No("Are you certain ?", this);
+		messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
+	}
+	public void onDialogReturn(boolean yes)
+	{
+		if (yes)
+		{
+			HTTP_Send	(new Ctrl_Configuration().new Update());
+			Global.toaster("doUpdate", false);
+		}
 	}
 }
