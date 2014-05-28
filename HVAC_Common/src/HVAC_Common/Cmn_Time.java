@@ -7,9 +7,9 @@ public class Cmn_Time 											implements 					java.io.Serializable
 {
 	private static final long 									serialVersionUID 			= 1L;
 	public  Long												milliSeconds;
-	public  Integer 											hours;
-	public  Integer 											minutes;
-	public  Integer 											seconds;
+	public  Integer 											hours						= 0;
+	public  Integer 											minutes						= 0;
+	public  Integer 											seconds						= 0;
 	
 	public Cmn_Time(String time)
 	{
@@ -29,9 +29,9 @@ public class Cmn_Time 											implements 					java.io.Serializable
 			}
 			switch (i)
 			{
-			case 1:												this.hours					= Integer.parseInt(timeParts[i]);
-			case 2:												this.minutes				= Integer.parseInt(timeParts[i]);									
-			case 3:												this.seconds				= Integer.parseInt(timeParts[i]);									
+			case 0:												this.hours					= Integer.parseInt(timeParts[i]); break;
+			case 1:												this.minutes				= Integer.parseInt(timeParts[i]); break;									
+			case 2:												this.seconds				= Integer.parseInt(timeParts[i]); break;									
 			}
 		}
 		this.milliSeconds																	= (hours * 24 * 3600 + minutes * 60 + seconds) * 1000L;
