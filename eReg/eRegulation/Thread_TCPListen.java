@@ -157,20 +157,11 @@ public class Thread_TCPListen 			implements Runnable
 		{
 			for (CircuitTask aTask : circuit.circuitTaskList)			// Check to ensure there are no active tasks
 			{
-				System.out.println("====================");
-				System.out.println("now : " + now);
-				System.out.println("timeStart : " + aTask.timeStart);
-				System.out.println("nextStart : " + nextStart);
-				System.out.println("====================");
-				
-				
-				
 				if (	(aTask.days.contains(Global.getDayOfWeek(0))) 
 //				&& 		(! aTask.active)
 				&&     	(aTask.timeStart > now )
 				&&     	(aTask.timeStart < nextStart ))
 				{
-					System.out.println("======SELECTED=========");
 					nextStart								= aTask.timeStart;
 					selectedTask							= aTask;
 				}

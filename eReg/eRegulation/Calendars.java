@@ -148,7 +148,6 @@ public class Calendars
 				// TODO Clanedar dayrs are not printed correctly
 				circuit.addCircuitTask(paramCalendar);
 				LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart.displayShort() + "/" + paramCalendar.timeEnd.displayShort() + " Days " + paramCalendar.days);
-				LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart.milliSeconds + "/" + paramCalendar.timeEnd.milliSeconds);
 			}
 		}
 		//		get away calendar
