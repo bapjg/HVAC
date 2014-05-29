@@ -1,5 +1,7 @@
 package com.bapjg.hvac_client;
 
+import com.google.gson.Gson;
+
 import HVAC_Common.*;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -94,14 +96,9 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 		}
 		else if (messageReturn instanceof Ctrl_Json.Data)
 		{
-			Ctrl_Json.Data								JsonData							= (Ctrl_Json.Data) messageReturn;
-			String										JsonString							= JsonData.json;
-			
-			Ctrl_Calendars.Data							returnBufferPrep	= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
-			
-//			Global.eRegCalendars															= (Ctrl_Calendars.Data) messageReturn;
+			String										JsonString							= ((Ctrl_Json.Data) messageReturn).json;
+			Global.eRegCalendars															= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
 		}
-
 	}
 	public void processFinishTCP(Ctrl__Abstract messageReturn)
 	{
