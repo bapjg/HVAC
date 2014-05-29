@@ -55,7 +55,7 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
         }
         else // we need to reconnect to the server
         {
-            HTTP_Send(new Ctrl_Calendars().new Request());
+            Global.toaster("please refresh", false);;
         }
  
         return panelView;

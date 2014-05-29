@@ -13,6 +13,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 
@@ -52,7 +55,7 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	}
 	public void doRefresh()
 	{
-        HTTP_Send	(new Ctrl_Configuration().new Request());
+		HTTP_Send	(new Ctrl_Json().new Request(Ctrl_Json.TYPE_Configuration));				// Fire these async actions as soon as possible
 	}
 	public void doUpdate()
 	{
@@ -63,19 +66,12 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	{
 		if (Global.eRegConfiguration != null)
 		{
-			Ctrl_Configuration.Data x = Global.eRegConfiguration;
-			
-			Ctrl_Configuration.Update								messageSend				= new Ctrl_Configuration().new Update();
-			messageSend.pidList																= Global.eRegConfiguration.pidList;
-			messageSend.thermometerList														= Global.eRegConfiguration.thermometerList;
-			messageSend.relayList															= Global.eRegConfiguration.relayList;
-			messageSend.pumpList															= Global.eRegConfiguration.pumpList;
-			messageSend.circuitList															= Global.eRegConfiguration.circuitList;
-			messageSend.boiler																= Global.eRegConfiguration.boiler;
-			messageSend.burner																= Global.eRegConfiguration.burner;
-			messageSend.eMailList															= Global.eRegConfiguration.eMailList;
-			
-			HTTP_Send	(messageSend);
+            Gson gson 																		= new GsonBuilder().setPrettyPrinting().create();
+			Ctrl_Json.Update										sendUpdate				= new Ctrl_Json().new Update();
+			sendUpdate.type																	= Ctrl_Json.TYPE_Configuration;
+            sendUpdate.json 																= gson.toJson((Ctrl_Configuration.Data) Global.eRegConfiguration);
+
+			HTTP_Send	(sendUpdate);
 		}
 		else
 		{
@@ -88,10 +84,10 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 		{
 			Global.toaster("Update successful", false);
 		}
-		else if (messageReturned instanceof Ctrl_Configuration.Data)
+		else if (messageReturned instanceof Ctrl_Json.Data)
 		{
-			Global.eRegConfiguration														= (Ctrl_Configuration.Data) messageReturned;
-			Global.toaster("Data received", false);
+			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
+			Global.eRegConfiguration														= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
 		}
 	}
 }

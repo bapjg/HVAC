@@ -1,5 +1,7 @@
 package com.bapjg.hvac_client;
 
+import com.google.gson.Gson;
+
 import HVAC_Common.*;
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -29,9 +31,9 @@ public class Activity_Main 										extends 					Activity
         Global.activity																		= (Activity) this;
         Global.piSocketAddress																= null;
 
-        HTTP_Send	(new Ctrl_Calendars().new 		Request());				// Fire these async actions as soon as possible
-     	HTTP_Send	(new Ctrl_Configuration().new 	Request());
-        TCP_Send	(new Ctrl_Weather().new 		Request());
+        HTTP_Send	(new Ctrl_Json().new 		Request(Ctrl_Json.TYPE_Calendar));				// Fire these async actions as soon as possible
+     	HTTP_Send	(new Ctrl_Json().new 		Request(Ctrl_Json.TYPE_Configuration));
+        TCP_Send	(new Ctrl_Weather().new 	Request());
         
         ActionBar 												actionbar 					= getActionBar();
         actionbar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -124,6 +126,25 @@ public class Activity_Main 										extends 					Activity
 	{  
 		if 		(result instanceof Ctrl_Calendars.Data) 		{	Global.eRegCalendars 		= (Ctrl_Calendars.Data) result;			}
 		else if (result instanceof Ctrl_Configuration.Data)		{	Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;		}
+		else if (result instanceof Ctrl_Json.Data)				
+		{	
+			Ctrl_Json.Data											messageReceived			= (Ctrl_Json.Data) result;
+			if (messageReceived.type == Ctrl_Json.TYPE_Calendar)
+			{
+				String												JsonString				= ((Ctrl_Json.Data) result).json;
+				Global.eRegCalendars														= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
+			}
+			else if (messageReceived.type == Ctrl_Json.TYPE_Configuration)
+			{
+				String												JsonString				= ((Ctrl_Json.Data) result).json;
+				Global.eRegConfiguration														= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
+			}
+			else
+			{
+				Global.toaster("Curious HTTP response", false);
+			}
+		}
+		
 		else													{	Global.toaster("Activity_Main : HTTP message received " + result.getClass().toString(), true);	}
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 

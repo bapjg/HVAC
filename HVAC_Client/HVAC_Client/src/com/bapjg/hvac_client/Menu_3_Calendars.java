@@ -1,7 +1,5 @@
 package com.bapjg.hvac_client;
 
-import com.google.gson.Gson;
-
 import HVAC_Common.*;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -14,6 +12,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
@@ -53,9 +55,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	}
 	public void doRefresh()
 	{
-        HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
-
-//        HTTP_Send	(new Ctrl_Json("Calendars").new Request());				// Fire these async actions as soon as possible
+		HTTP_Send	(new Ctrl_Json().new Request(Ctrl_Json.TYPE_Calendar));				// Fire these async actions as soon as possible
 	}
 	public void doUpdate()
 	{
@@ -66,13 +66,11 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	{
 		if (Global.eRegCalendars != null)
 		{
-			Ctrl_Calendars.Data										sendData				= Global.eRegCalendars;
-			Ctrl_Calendars.Update									sendUpdate				= new Ctrl_Calendars().new Update();
-			sendUpdate.wordList																= sendData.wordList;
-			sendUpdate.circuitList															= sendData.circuitList;
-			sendUpdate.awayList																= sendData.awayList;
-			sendUpdate.tasksBackGround														= sendData.tasksBackGround;
-			
+            Gson gson 																		= new GsonBuilder().setPrettyPrinting().create();
+			Ctrl_Json.Update										sendUpdate				= new Ctrl_Json().new Update();
+			sendUpdate.type																	= Ctrl_Json.TYPE_Calendar;
+            sendUpdate.json 																= gson.toJson((Ctrl_Calendars.Data) Global.eRegCalendars);
+
 			HTTP_Send	(sendUpdate);
 		}
 		else
@@ -82,21 +80,18 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	}
 	public void processFinishHTTP(Ctrl__Abstract messageReturn)
 	{
+		Ctrl__Abstract x = messageReturn;
 		if (messageReturn instanceof Ctrl__Abstract.Ack)
 		{
 			Global.toaster("Server updated", false);
 	    	Ctrl_Actions_Stop.Execute 								stopMessage				= new Ctrl_Actions_Stop().new Execute();
-// TODO	    	stopMessage.actionRequest													= Ctrl_Actions_Stop.ACTION_Reload_Calendars;
+	    	// TODO	    	stopMessage.actionRequest													= Ctrl_Actions_Stop.ACTION_Reload_Calendars;
 	    	stopMessage.actionRequest														= Ctrl_Actions_Stop.ACTION_Restart;
-//	    	TCP_Send	(stopMessage);
-		}
-		else if (messageReturn instanceof Ctrl_Calendars.Data)
-		{
-			Global.eRegCalendars															= (Ctrl_Calendars.Data) messageReturn;
+	    	//	    	TCP_Send	(stopMessage);
 		}
 		else if (messageReturn instanceof Ctrl_Json.Data)
 		{
-			String										JsonString							= ((Ctrl_Json.Data) messageReturn).json;
+			String													JsonString				= ((Ctrl_Json.Data) messageReturn).json;
 			Global.eRegCalendars															= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
 		}
 	}
@@ -109,7 +104,10 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 		else
 		{
 			Global.toaster("Controler refused (Nack)", false);
+			// TODO	    	stopMessage.actionRequest	
+	    	Ctrl_Actions_Stop.Execute 								stopMessage				= new Ctrl_Actions_Stop().new Execute();
+	    	stopMessage.actionRequest														= Ctrl_Actions_Stop.ACTION_Restart;
+//	    	TCP_Send	(stopMessage);
 		}
 	}
-
 }

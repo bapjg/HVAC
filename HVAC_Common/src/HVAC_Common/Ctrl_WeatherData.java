@@ -231,7 +231,7 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 			forecast.clouds.all														= Integer.parseInt(attributes.getValue("all"));
 			forecast.clouds.unit													= attributes.getValue("unit");
 		}
-		else if (tagName.equalsIgnoreCase("Rise"))
+		else if (tagName.equalsIgnoreCase("Sun"))
 		{
 			sun																		= new Sun();
 			sun.sunRise																= dateTimeFromUTC(attributes.getValue("rise"));

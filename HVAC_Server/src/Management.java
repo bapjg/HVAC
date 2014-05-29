@@ -85,8 +85,9 @@ public class Management extends HttpServlet
 
         
         if      (message_in == null)         								message_out 	= (new Ctrl__Abstract()).new Nack();
-		else if (message_in instanceof Ctrl_Json.Request)					message_out 	= processJson_Request(message_in);
-		else if (message_in instanceof Ctrl_Json.Update)					message_out 	= processJson_Update(message_in);
+        
+		else if (message_in instanceof Ctrl_Json.Request)					message_out 	= processJson_Request	(message_in);
+		else if (message_in instanceof Ctrl_Json.Update)					message_out 	= processJson_Update	(message_in);
         
 		else if (message_in instanceof Ctrl_Configuration.Request)			message_out 	= processConfiguration_Request();
 		else if (message_in instanceof Ctrl_Configuration.Update)			message_out 	= processConfiguration_Update((Ctrl_Configuration.Update) message_in);
@@ -104,27 +105,24 @@ public class Management extends HttpServlet
     }
 	private Ctrl__Abstract						processJson_Request(Object   message_in)
     {
-    	Ctrl_Json.Request								msgIn				= (Ctrl_Json.Request) message_in;
+		Ctrl_Json.Request								msgIn				= (Ctrl_Json.Request) message_in;
         dbOpen();
-        
         Ctrl__Abstract									returnBuffer 		= new Ctrl__Abstract().new Nack();
         String											sql;
+		Ctrl_Json										msgInn				= (Ctrl_Json) message_in;
         
-        if      (msgIn.type.equalsIgnoreCase("Calendar"))	sql				= "SELECT calendars     as data FROM calendars     ORDER BY dateTime DESC LIMIT 1";
-        else if (msgIn.type.equalsIgnoreCase("Calendar"))	sql				= "SELECT configuration as data FROM configuration ORDER BY dateTime DESC LIMIT 1";
-        else													return		returnBuffer;
-        
+        if      (msgIn.type == Ctrl_Json.TYPE_Calendar)			sql			= "SELECT calendars     as data FROM calendars     ORDER BY dateTime DESC LIMIT 1";
+        else if (msgIn.type == Ctrl_Json.TYPE_Configuration)	sql			= "SELECT configuration as data FROM configuration ORDER BY dateTime DESC LIMIT 1";
+        else													return		returnBuffer;  
+       
         try
         {
             dbStatement 													= dbConnection.createStatement(1004, 1008);
             ResultSet 									dbResultSet 		= dbStatement.executeQuery(sql);
             dbResultSet.next();
-
             String										dbData				= dbResultSet.getString("data");
-    		
-            dbStatement.close();
+             dbStatement.close();
             dbConnection.close();
- 
             Ctrl_Json.Data								returnBufferPrep	= new Ctrl_Json().new Data();
             returnBufferPrep.type 											= msgIn.type;
             returnBufferPrep.json 											= dbData;
@@ -145,8 +143,8 @@ public class Management extends HttpServlet
         Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Ack();
         String											sql;
         
-        if      (msgIn.type.equalsIgnoreCase("Calendars"))		sql			= "SELECT dateTime, Date, Time, Calendars     as Data FROM Calendars     ORDER BY dateTime DESC LIMIT 1";
-        else if (msgIn.type.equalsIgnoreCase("Configuration"))	sql			= "SELECT dateTime, Date, Time, Configuration as Data FROM Configuration ORDER BY dateTime DESC LIMIT 1";
+        if      (msgIn.type == Ctrl_Json.TYPE_Calendar)			sql			= "SELECT dateTime, Date, Time, Calendars     as Data FROM Calendars     ORDER BY dateTime DESC LIMIT 1";
+        else if (msgIn.type == Ctrl_Json.TYPE_Configuration)	sql			= "SELECT dateTime, Date, Time, Configuration as Data FROM Configuration ORDER BY dateTime DESC LIMIT 1";
         else													return		new Ctrl__Abstract().new Nack();
 
         try
@@ -400,5 +398,9 @@ public class Management extends HttpServlet
     private Long now()
     {
     	return System.currentTimeMillis();
+    }
+    public void Logit(String message)
+    {
+    	System.out.println(message);
     }
 }

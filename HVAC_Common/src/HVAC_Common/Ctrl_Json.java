@@ -15,23 +15,35 @@ public class Ctrl_Json 					extends 					Ctrl__Abstract
 {
 	public Long dateTime;
 	private static final long 					serialVersionUID 			= 1L;
-	public  String								type;
+	public static final int 					TYPE_Calendar 				= 1;
+	public static final int 					TYPE_Configuration			= 2;
+	public  int									type;
 	public  String								json;
 	
 	public Ctrl_Json()
 	{
 	}
-	public Ctrl_Json(String type)
+	public Ctrl_Json(int type)
 	{
 		this.type															= type;
 	}
 	public class Data							extends 					Ctrl_Json
 	{
+		private static final long 				serialVersionUID 			= 1L;
 	}
 	public class Update							extends 					Ctrl_Json
 	{
+		private static final long 				serialVersionUID 			= 1L;
 	}
 	public class Request						extends 					Ctrl_Json
 	{
+		private static final long 				serialVersionUID 			= 1L;
+		public Request()
+		{
+		}
+		public Request(int type)
+		{
+			this.type														= type;
+		}
 	}
 }

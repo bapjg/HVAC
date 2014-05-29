@@ -11,7 +11,7 @@
 	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Today"         		/>
 	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Tomorrow"         	/>
 	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Beyond"         		/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "zzz"         		/>
+	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Sunrise Sunset"		/>
 	<LinearLayout 
 		android:layout_width			= "match_parent"
 		android:layout_height			= "match_parent"

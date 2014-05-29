@@ -53,7 +53,7 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
         }
         else // we need to reconnect to the server
         {
-            HTTP_Send(new Ctrl_Configuration().new Request());
+            Global.toaster("please refresh", false);
         }
  
         return panelView;
