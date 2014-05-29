@@ -1,0 +1,85 @@
+<?xml version= "1.0" encoding= "utf-8"?>
+<LinearLayout
+	xmlns:android						= "http://schemas.android.com/apk/res/android"
+	android:layout_width				= "match_parent"
+	android:layout_height				= "match_parent"
+	android:orientation					= "vertical"
+	android:baselineAligned				= "false"
+	android:background					= "@color/background">
+
+    <TextView
+        style							= "@style/AD_Text"
+        android:layout_height			= "wrap_content"
+     	android:layout_width			= "match_parent"
+        android:gravity					= "left"
+        android:text					= "Circuit Configuration" />
+
+    <TextView
+        android:id						= "@+id/name"
+        style							= "@style/AD_Text"
+        android:layout_width			= "match_parent"
+        android:layout_height			= "wrap_content"
+        android:gravity					= "right"
+        android:text					= "" 
+    />
+
+    <LinearLayout
+        android:id						= "@+id/LinearLayout01"
+        android:layout_width			= "wrap_content"
+        android:layout_height			= "wrap_content" 
+    	android:orientation				= "horizontal" >
+        
+        <TextView
+            style="@style/AD_Text"
+            android:layout_width="170dp"
+            android:gravity="left"
+            android:text="PID" />
+
+        <TextView
+            android:id="@+id/pidName"
+            style="@style/AD_Data"
+            android:layout_width="130dp"
+            android:gravity="right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id						= "@+id/LinearLayout02"
+        android:layout_width			= "wrap_content"
+        android:layout_height			= "wrap_content" 
+    	android:orientation				= "horizontal" >
+        
+        <TextView
+            style="@style/AD_Text"
+            android:layout_width="170dp"
+            android:gravity="left"
+            android:text="Depth" />
+
+        <TextView
+            android:id="@+id/depth"
+            style="@style/AD_Data"
+            android:layout_width="150dp"
+            android:gravity="right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            style="@style/AD_Text"
+            android:layout_width="170dp"
+            android:gravity="left"
+            android:text="Sample Increment" />
+
+        <TextView
+            android:id="@+id/sampleIncrement"
+            style="@style/AD_Data"
+            android:layout_width="132dp"
+            android:gravity="right" />
+
+    </LinearLayout>
+
+</LinearLayout>

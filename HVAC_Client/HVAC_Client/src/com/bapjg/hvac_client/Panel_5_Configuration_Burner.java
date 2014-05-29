@@ -71,10 +71,6 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 			
 			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
 			
-			Log.v("App", "burner" + burner);
-			Log.v("App", "relay" + burner.relay);
-			Log.v("App", "fuel" + burner.fuelConsumption);
-			
 			((TextView) panelView.findViewById(R.id.name)).setText							(burner.relay);
 			DecimalFormatSymbols 								decimalFormatsymbol			= DecimalFormatSymbols.getInstance();
 			decimalFormatsymbol.setGroupingSeparator(' ');
@@ -94,6 +90,27 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
+		((TextView) panelView.findViewById(R.id.name)).setOnClickListener(this);			// Relay name
 	}
+	@Override
+	public void onClick(View clickedView) 
+	{
+		if (clickedView.getId() == R.id.name)
+		{
+			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
+
+			Dialog_String_List		 							dialogThermometers			= new Dialog_String_List(burner.relay, (Object) burner, null, this);
+
+			for (Ctrl_Configuration.Relay relay : Global.eRegConfiguration.relayList)
+			{
+				dialogThermometers.items.add(relay.name);
+			}
+			dialogThermometers.show(getFragmentManager(), "Relay_List");
+		}
+	}
+    public void onDialogReturn()
+    {
+    	displayContents();
+    }
 }
 

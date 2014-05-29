@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,9 +44,17 @@ public class Menu_0_Fragment 									extends 					Fragment
 	{
     	Button 													myButton 					= (Button) myView;
 		ViewGroup 												viewParent					= (ViewGroup) myView.getParent();									// Set all textColours to white
-//		allButtonsSetup(viewParent);
-		allButtonsSetup(container);
-    	myButton.setTextColor(Color.YELLOW);
+		
+		if (viewParent.getId() == R.id.bottomFrame)
+		{
+//			TODO Need to splash black screen, identify yellowbutton, and when data returns call its onClick, 
+		}
+		else
+		{
+			allButtonsSetup(viewParent);
+			//		allButtonsSetup(container);
+			myButton.setTextColor(Color.YELLOW);
+		}
 	}
 	public void allButtonsSetup(ViewGroup thisView)
 	{

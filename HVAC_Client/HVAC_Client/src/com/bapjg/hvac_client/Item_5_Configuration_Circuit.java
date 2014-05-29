@@ -23,7 +23,6 @@ import android.widget.TextView;
 public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 {		
 	private Ctrl_Configuration.Circuit	 						itemData;
-	private Ctrl_Configuration.Circuit 							itemDataWork;
 	private ViewGroup											itemView;
 	
 	public Item_5_Configuration_Circuit(Ctrl_Configuration.Circuit itemData)
@@ -62,7 +61,7 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     	TextView 												outsideHigh					= (TextView) itemView.findViewById(R.id.outsideHigh);
    		TextView 												tempLow 					= (TextView) itemView.findViewById(R.id.tempLow);
     	TextView 												tempHigh					= (TextView) itemView.findViewById(R.id.tempHigh);
-   		TextView 												name 						= (TextView) itemView.findViewById(R.id.name);
+   		TextView 												thermometer					= (TextView) itemView.findViewById(R.id.thermometer);
     	TextView 												swingTime					= (TextView) itemView.findViewById(R.id.swingTime);
    		TextView 												relayUp 					= (TextView) itemView.findViewById(R.id.relayUp);
     	TextView 												relayDown					= (TextView) itemView.findViewById(R.id.relayDown);
@@ -88,7 +87,7 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     	{
         	Ctrl_Configuration.Mixer							mixer						= itemData.mixer;
      	
-        	name.setText										(mixer.name);
+        	thermometer.setText									(mixer.name);
         	swingTime.setText									(((Integer) (mixer.swingTime/1000)).toString());
         	relayUp.setText										(mixer.relayUp);
         	relayDown.setText									(mixer.relayDown);
@@ -107,7 +106,7 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 			itemView.findViewById(R.id.tempHigh).setOnClickListener(this);
 			itemView.findViewById(R.id.outsideHigh).setOnClickListener(this);
 			itemView.findViewById(R.id.outsideLow).setOnClickListener(this);
-			itemView.findViewById(R.id.name).setOnClickListener(this);
+			itemView.findViewById(R.id.thermometer).setOnClickListener(this);
 			itemView.findViewById(R.id.swingTime).setOnClickListener(this);
 			itemView.findViewById(R.id.relayUp).setOnClickListener(this);
 			itemView.findViewById(R.id.relayDown).setOnClickListener(this);
@@ -135,8 +134,14 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 	     		dialogTemperature 																= new Dialog_Temperature(itemData.tempGradient.outsideLow,  -20, 50, this);
 	     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
 	      		break;
-	     	case R.id.name:
-	      		Global.toaster("Its Ok name", false);
+	     	case R.id.thermometer:				//ie thermometerName
+	    		Dialog_String_List		 						dialogThermometers				= new Dialog_String_List(itemData.mixer.name, (Object) itemData.mixer, null, this);
+
+	    		for (Ctrl_Configuration.Thermometer thermometer : Global.eRegConfiguration.thermometerList)
+	    		{
+	    			dialogThermometers.items.add(thermometer.name);
+	    		}
+	    		dialogThermometers.show(getFragmentManager(), "Thermometer_List");
 	      		break;
 	     	case R.id.swingTime:
 	      		Global.toaster("Its Ok swingTime", false);

@@ -94,7 +94,6 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-    	Log.v("App", "OnItemClick");
     	Ctrl_Configuration.Circuit								itemData						= Global.eRegConfiguration.circuitList.get(position);
 
     	Item_5_Configuration_Circuit							itemFragment					= new Item_5_Configuration_Circuit(itemData);

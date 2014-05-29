@@ -90,6 +90,7 @@ public class Dialog_Integer 									extends 					DialogFragment
 					field.set(parent, newValue);
 			     	callBack.onDialogReturn();
 			    	dialog.dismiss();
+			    	return;
 				}
 			} 
      		catch (Exception e)

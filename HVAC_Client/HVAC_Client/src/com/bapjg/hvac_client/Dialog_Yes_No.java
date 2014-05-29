@@ -50,7 +50,7 @@ public class Dialog_Yes_No 										extends 					DialogFragment
         TextView												messageView					= (TextView) dialogView.findViewById(R.id.message);
         
         messageView.setText(message);
-        builder.setTitle("Please answer");
+        builder.setTitle(message);
        
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});

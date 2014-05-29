@@ -114,6 +114,7 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
 	    itemView.findViewById(R.id.timeEnd)			.setOnClickListener(this);
 	    itemView.findViewById(R.id.tempObjective)	.setOnClickListener(this);
 	    itemView.findViewById(R.id.stopOnObjective)	.setOnClickListener(this);
+	    itemView.findViewById(R.id.name)			.setOnClickListener(this);
 	}
     @Override
 	public void onClick(View clickedView) 

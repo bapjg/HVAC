@@ -57,7 +57,7 @@ public class Dialog_String_List 								extends 					DialogFragment
         AdapterView												adapterView					= (AdapterView) dialogView.findViewById(R.id.List_View);
         
         AdapterView <Adapter_0_String_List>						adapterViewList				= (AdapterView <Adapter_0_String_List>) adapterView;
-        Adapter_0_String_List									arrayAdapter				= new Adapter_0_String_List(Global.actContext, R.id.List_View, items);
+        Adapter_0_String_List									arrayAdapter				= new Adapter_0_String_List(Global.actContext, R.id.List_View, items, item);
        
         adapterView.setAdapter(arrayAdapter);
         builder.setView(dialogView);
@@ -81,6 +81,7 @@ public class Dialog_String_List 								extends 					DialogFragment
 					field.set(parentObject, itemSelected);
 			    	callBack.onDialogReturn();
 			    	this.dismiss();
+			    	return;
 				}
 			} 
      		catch (Exception e)

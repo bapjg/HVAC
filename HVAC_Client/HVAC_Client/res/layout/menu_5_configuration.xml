@@ -18,6 +18,7 @@
 	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Gradients"      		/>
 	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Summer"      		/>
 	<LinearLayout 
+		android:id						= "@+id/bottomFrame"
 		android:layout_width			= "match_parent"
 		android:layout_height			= "match_parent"
 		android:orientation				= "vertical"

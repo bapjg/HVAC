@@ -1,9 +1,6 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Common.Ctrl_Calendars;
-import HVAC_Common.Ctrl_Configuration;
-import HVAC_Common.Ctrl_Weather;
-import HVAC_Common.Ctrl_Configuration.Request;
+import HVAC_Common.*;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -21,7 +18,8 @@ import android.widget.Button;
 
 public class Menu_5_Configuration 								extends 					Menu_0_Fragment 
 																implements 					View.OnClickListener,
-																							Dialog_Response
+																							Dialog_Response,
+																							HTTP_Response
 {
 	public Menu_5_Configuration()
 	{
@@ -42,6 +40,7 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
     	else if (caption.equalsIgnoreCase("Circuits"))			panelFragment 				= new Panel_5_Configuration_Circuits();
     	else if (caption.equalsIgnoreCase("Burner"))			panelFragment 				= new Panel_5_Configuration_Burner();
     	else if (caption.equalsIgnoreCase("Boiler"))			panelFragment 				= new Panel_5_Configuration_Boiler();
+    	else if (caption.equalsIgnoreCase("PIDs"))				panelFragment 				= new Panel_5_Configuration_PIDs();
     	else if (caption.equalsIgnoreCase("Refresh"))			doRefresh();
     	else if (caption.equalsIgnoreCase("Update"))			doUpdate();
 
@@ -64,14 +63,35 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	{
 		if (Global.eRegConfiguration != null)
 		{
-//			TODO Must populate the record from Global.eRegConfiguration 
+			Ctrl_Configuration.Data x = Global.eRegConfiguration;
 			
-			HTTP_Send	(new Ctrl_Configuration().new Update());
-			Global.toaster("doUpdate", false);
+			Ctrl_Configuration.Update								messageSend				= new Ctrl_Configuration().new Update();
+			messageSend.pidList																= Global.eRegConfiguration.pidList;
+			messageSend.thermometerList														= Global.eRegConfiguration.thermometerList;
+			messageSend.relayList															= Global.eRegConfiguration.relayList;
+			messageSend.pumpList															= Global.eRegConfiguration.pumpList;
+			messageSend.circuitList															= Global.eRegConfiguration.circuitList;
+			messageSend.boiler																= Global.eRegConfiguration.boiler;
+			messageSend.burner																= Global.eRegConfiguration.burner;
+			messageSend.eMailList															= Global.eRegConfiguration.eMailList;
+			
+			HTTP_Send	(messageSend);
 		}
 		else
 		{
 			Global.toaster("No data to send, do a Refresh", false);
+		}
+	}
+	public void processFinishHTTP(Ctrl__Abstract messageReturned)
+	{
+		if (messageReturned instanceof Ctrl_Configuration.Ack)
+		{
+			Global.toaster("Update successful", false);
+		}
+		else if (messageReturned instanceof Ctrl_Configuration.Data)
+		{
+			Global.eRegConfiguration														= (Ctrl_Configuration.Data) messageReturned;
+			Global.toaster("Data received", false);
 		}
 	}
 }
