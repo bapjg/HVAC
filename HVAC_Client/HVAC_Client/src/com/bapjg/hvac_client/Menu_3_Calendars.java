@@ -1,7 +1,6 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Common.*;
-import HVAC_Common.Ctrl_Actions_Stop.Execute;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -53,6 +52,8 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	public void doRefresh()
 	{
         HTTP_Send	(new Ctrl_Calendars().new Request());				// Fire these async actions as soon as possible
+
+//        HTTP_Send	(new Ctrl_Json("Calendars").new Request());				// Fire these async actions as soon as possible
 	}
 	public void doUpdate()
 	{
@@ -91,6 +92,16 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 		{
 			Global.eRegCalendars															= (Ctrl_Calendars.Data) messageReturn;
 		}
+		else if (messageReturn instanceof Ctrl_Json.Data)
+		{
+			Ctrl_Json.Data								JsonData							= (Ctrl_Json.Data) messageReturn;
+			String										JsonString							= JsonData.json;
+			
+			Ctrl_Calendars.Data							returnBufferPrep	= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
+			
+//			Global.eRegCalendars															= (Ctrl_Calendars.Data) messageReturn;
+		}
+
 	}
 	public void processFinishTCP(Ctrl__Abstract messageReturn)
 	{

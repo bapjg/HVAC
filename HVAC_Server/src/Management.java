@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import HVAC_Common.*;
+import HVAC_Common.Ctrl_Json.Update;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -84,12 +85,15 @@ public class Management extends HttpServlet
 
         
         if      (message_in == null)         								message_out 	= (new Ctrl__Abstract()).new Nack();
+		else if (message_in instanceof Ctrl_Json.Request)					message_out 	= processJson_Request(message_in);
+		else if (message_in instanceof Ctrl_Json.Update)					message_out 	= processJson_Update(message_in);
+        
 		else if (message_in instanceof Ctrl_Configuration.Request)			message_out 	= processConfiguration_Request();
 		else if (message_in instanceof Ctrl_Configuration.Update)			message_out 	= processConfiguration_Update((Ctrl_Configuration.Update) message_in);
         
 		else if (message_in instanceof Ctrl_Calendars.Request)				message_out 	= processCalendars_Request();
 		else if (message_in instanceof Ctrl_Calendars.Update)				message_out 	= processCalendars_Update((Ctrl_Calendars.Update) message_in);
-        
+
 		else if (message_in instanceof Ctrl_Fuel_Consumption.Request)		message_out 	= processFuelConsumption_Request();
  		else
         {
@@ -97,78 +101,79 @@ public class Management extends HttpServlet
             message_out 													= (new Ctrl__Abstract()).new Nack();;
         }
        	reply(response, message_out);
-     }
-    public void dbOpen()
+    }
+	private Ctrl__Abstract						processJson_Request(Object   message_in)
     {
+    	Ctrl_Json.Request								msgIn				= (Ctrl_Json.Request) message_in;
+        dbOpen();
+        
+        Ctrl__Abstract									returnBuffer 		= new Ctrl__Abstract().new Nack();
+        String											sql;
+        
+        if      (msgIn.type.equalsIgnoreCase("Calendar"))	sql				= "SELECT calendars     as data FROM calendars     ORDER BY dateTime DESC LIMIT 1";
+        else if (msgIn.type.equalsIgnoreCase("Calendar"))	sql				= "SELECT configuration as data FROM configuration ORDER BY dateTime DESC LIMIT 1";
+        else													return		returnBuffer;
+        
         try
         {
-            Class.forName("com.mysql.jdbc.Driver");
-            dbName 									= "jdbc:mysql://localhost/hvac_database";
-            dbConnection 							= DriverManager.getConnection(dbName, "root", "llenkcarb");
-        }
-        catch(ClassNotFoundException e)
-        {
-            e.printStackTrace();
+            dbStatement 													= dbConnection.createStatement(1004, 1008);
+            ResultSet 									dbResultSet 		= dbStatement.executeQuery(sql);
+            dbResultSet.next();
+
+            String										dbData				= dbResultSet.getString("data");
+    		
+            dbStatement.close();
+            dbConnection.close();
+ 
+            Ctrl_Json.Data								returnBufferPrep	= new Ctrl_Json().new Data();
+            returnBufferPrep.type 											= msgIn.type;
+            returnBufferPrep.json 											= dbData;
+
+     		returnBuffer													= (Ctrl__Abstract) returnBufferPrep;
         }
         catch(SQLException e)
         {
             e.printStackTrace();
         }
+        return returnBuffer;
     }
-//    public Ctrl_Abstract.Data 			processTemperaturesReq()
-//    {
-//        dbOpen();
-//        
-//        Mgmt_Msg_Temperatures.Data 	returnBuffer  	= new Mgmt_Msg_Temperatures().new Data();
-//
-//        try
-//        {
-//            dbStatement 							= dbConnection.createStatement(1004, 1008);
-//            
-//            String				dbSQL				= "";
-//            dbSQL									+= "SELECT     dateTime,        ";	
-//            dbSQL									+= "           date,            ";	
-//            dbSQL									+= "           time,            ";	
-//            dbSQL									+= "           tempHotWater,    ";	
-//            dbSQL									+= "           tempBoiler,      ";	
-//            dbSQL									+= "           tempBoilerIn,    ";
-//            dbSQL									+= "           tempBoilerOut,   ";
-//            dbSQL									+= "           tempFloorIn,     ";
-//            dbSQL									+= "           tempFloorOut,    ";
-//            dbSQL									+= "           tempRadiatorIn,  ";
-//            dbSQL									+= "           tempRadiatorOut, ";
-//            dbSQL									+= "           tempOutside,     ";
-//            dbSQL									+= "           tempLivingRoom	";
-//            dbSQL									+= "FROM       temperatures     ";	
-//            dbSQL									+= "ORDER BY   dateTime DESC    ";	
-//            dbSQL									+= "LIMIT      1                ";	
-//            
-//            ResultSet 			dbResultSet 		= dbStatement.executeQuery(dbSQL);
-//            dbResultSet.next();
-//            returnBuffer.dateTime 					= dbResultSet.getLong("dateTime");
-//            returnBuffer.date 						= dbResultSet.getString("date");
-//            returnBuffer.time 						= dbResultSet.getString("time");
-//            returnBuffer.tempHotWater 				= dbResultSet.getInt("tempHotWater");
-//            returnBuffer.tempBoiler 				= dbResultSet.getInt("tempBoiler");
-//            returnBuffer.tempBoilerIn 				= dbResultSet.getInt("tempBoilerIn");
-//            returnBuffer.tempBoilerOut				= dbResultSet.getInt("tempBoilerOut");
-//            returnBuffer.tempFloorIn 				= dbResultSet.getInt("tempFloorIn");
-//            returnBuffer.tempFloorOut 				= dbResultSet.getInt("tempFloorOut");
-//            returnBuffer.tempRadiatorIn 			= dbResultSet.getInt("tempRadiatorIn");
-//            returnBuffer.tempRadiatorOut 			= dbResultSet.getInt("tempRadiatorOut");
-//            returnBuffer.tempOutside 				= dbResultSet.getInt("tempOutside");
-//            returnBuffer.tempLivingRoom 			= dbResultSet.getInt("tempLivingRoom");
-//            
-//            dbStatement.close();
-//            dbConnection.close();
-//        }
-//        catch(SQLException eSQL)
-//        {
-//            eSQL.printStackTrace();
-//        }
-//        return returnBuffer;
-//    }
-    public Ctrl__Abstract 						processCalendars_Request()
+    private Ctrl__Abstract						processJson_Update(Object   message_in)
+    {
+    	Ctrl_Json.Update								msgIn				= (Ctrl_Json.Update) message_in;
+    	dbOpen();
+        
+        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Ack();
+        String											sql;
+        
+        if      (msgIn.type.equalsIgnoreCase("Calendars"))		sql			= "SELECT dateTime, Date, Time, Calendars     as Data FROM Calendars     ORDER BY dateTime DESC LIMIT 1";
+        else if (msgIn.type.equalsIgnoreCase("Configuration"))	sql			= "SELECT dateTime, Date, Time, Configuration as Data FROM Configuration ORDER BY dateTime DESC LIMIT 1";
+        else													return		new Ctrl__Abstract().new Nack();
+
+        try
+        {
+            dbStatement 													= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 									dbResultSet 		= dbStatement.executeQuery(sql);
+            
+    		Long										dateTime			= System.currentTimeMillis();		// Do not use dateTime supplied in input message
+    		
+    		dbResultSet.moveToInsertRow();		
+            dbResultSet.updateDouble	("dateTime", 				dateTime);
+            dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
+            dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
+            dbResultSet.updateString	("Data", 					msgIn.json);
+            dbResultSet.insertRow();
+
+            dbStatement.close();
+            dbConnection.close();
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+            returnBuffer													= new Ctrl__Abstract().new Nack();
+        }
+        return returnBuffer;
+    }
+    private Ctrl__Abstract 						processCalendars_Request()
     {
         dbOpen();
         
@@ -196,7 +201,7 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Ctrl__Abstract		 				processCalendars_Update(Ctrl_Calendars.Update message_in)
+    private Ctrl__Abstract		 				processCalendars_Update(Ctrl_Calendars.Update message_in)
     {
     	dbOpen();
         
@@ -231,7 +236,7 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Ctrl__Abstract		 				processConfiguration_Request()
+    private Ctrl__Abstract		 				processConfiguration_Request()
     {
         dbOpen();
         
@@ -267,7 +272,7 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Ctrl__Abstract		 				processConfiguration_Update(Ctrl_Configuration.Update message_in)
+    private Ctrl__Abstract		 				processConfiguration_Update(Ctrl_Configuration.Update message_in)
     {
     	dbOpen();
         
@@ -302,7 +307,7 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    public Ctrl__Abstract 						processFuelConsumption_Request()
+    private Ctrl__Abstract 						processFuelConsumption_Request()
     {
         dbOpen();
         
@@ -332,8 +337,24 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-
-    public void reply(HttpServletResponse response, Ctrl__Abstract message_out) throws IOException 
+    private void dbOpen()
+    {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            dbName 									= "jdbc:mysql://localhost/hvac_database";
+            dbConnection 							= DriverManager.getConnection(dbName, "root", "llenkcarb");
+        }
+        catch(ClassNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch(SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    private void reply(HttpServletResponse response, Ctrl__Abstract message_out) throws IOException 
     {
         System.out.println(dateTime2Time(now()) + " ----Class replied " + message_out.getClass().toString());
         response.reset();
@@ -343,7 +364,7 @@ public class Management extends HttpServlet
         output.flush();
         output.close();
     }
-    public String dateTime2String(Long dateTime)
+    private String dateTime2String(Long dateTime)
     {
     	String					dateTimeString		= "";
  
@@ -354,7 +375,7 @@ public class Management extends HttpServlet
     	
     	return dateTimeString;
     }
-    public String dateTime2Date(Long dateTime)
+    private String dateTime2Date(Long dateTime)
     {
     	String					dateTimeString		= "";
  
@@ -365,7 +386,7 @@ public class Management extends HttpServlet
     	
     	return dateTimeString;
     }
-    public String dateTime2Time(Long dateTime)
+    private String dateTime2Time(Long dateTime)
     {
     	String					dateTimeString		= "";
  
@@ -376,7 +397,7 @@ public class Management extends HttpServlet
     	
     	return dateTimeString;
     }
-    public Long now()
+    private Long now()
     {
     	return System.currentTimeMillis();
     }
