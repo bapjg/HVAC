@@ -33,7 +33,7 @@
             style="@style/AD_Text"
             android:layout_width="170dp"
             android:gravity="left"
-            android:text="PID" />
+            android:text="PID Name" />
 
         <TextView
             android:id="@+id/pidName"

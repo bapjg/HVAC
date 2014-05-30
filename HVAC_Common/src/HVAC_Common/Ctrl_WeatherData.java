@@ -160,7 +160,9 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
     {
 		if (tagName.equalsIgnoreCase("Sun"))
 		{
-			// Single Forecast tag. Each forecast is within a Time tag
+			sun																		= new Sun();
+			sun.sunRise																= dateTimeFromUTC(attributes.getValue("rise"));
+			sun.sunSet																= dateTimeFromUTC(attributes.getValue("set"));
 		}
 		else if (tagName.equalsIgnoreCase("Forecast"))
 		{
@@ -230,12 +232,6 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 			forecast.clouds.value													= attributes.getValue("value");
 			forecast.clouds.all														= Integer.parseInt(attributes.getValue("all"));
 			forecast.clouds.unit													= attributes.getValue("unit");
-		}
-		else if (tagName.equalsIgnoreCase("Sun"))
-		{
-			sun																		= new Sun();
-			sun.sunRise																= dateTimeFromUTC(attributes.getValue("rise"));
-			sun.sunSet																= dateTimeFromUTC(attributes.getValue("set"));
 		}
 		else
 		{
