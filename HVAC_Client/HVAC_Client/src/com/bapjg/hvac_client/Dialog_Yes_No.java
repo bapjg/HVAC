@@ -30,6 +30,7 @@ public class Dialog_Yes_No 										extends 					DialogFragment
 	public  ArrayList <String>									items;
 	public  String												itemSelected;
 	private Dialog_Response										callBack;
+	private int													id;
 	
 	public Dialog_Yes_No() 
     {
@@ -39,7 +40,15 @@ public class Dialog_Yes_No 										extends 					DialogFragment
 		super();
 		this.message																		= message;
 		this.callBack																		= callBack;
-    }
+		this.id																				= 0;
+	}
+	public Dialog_Yes_No(String message, Dialog_Response callBack, int id) 
+    {
+		super();
+		this.message																		= message;
+		this.callBack																		= callBack;
+		this.id																				= id;
+	}
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
     {
@@ -59,7 +68,8 @@ public class Dialog_Yes_No 										extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-    	callBack.onDialogReturn();
+    	if (id == 0)    	callBack.onDialogReturn();
+    	else    			callBack.onDialogReturnWithId(id);
     	dialog.dismiss();
     }
     public void buttonCancel (DialogInterface dialog, int which)

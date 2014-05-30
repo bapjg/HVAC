@@ -1,6 +1,7 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Common.*;
+import HVAC_Common.Ctrl_Actions_Stop.Execute;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -78,16 +79,48 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 			Global.toaster("No data to send, do a Refresh", false);
 		}
 	}
+	public void onDialogReturnWithId(int id)
+	{
+		if (id == 1)
+		{
+	    	Ctrl_Actions_Stop.Execute 								stopMessage				= new Ctrl_Actions_Stop().new Execute();
+	    	stopMessage.actionRequest														= Ctrl_Actions_Stop.ACTION_Restart;
+	    	TCP_Send	(stopMessage);
+		}
+	}
 	public void processFinishHTTP(Ctrl__Abstract messageReturned)
 	{
-		if (messageReturned instanceof Ctrl_Configuration.Ack)
-		{
-			Global.toaster("Update successful", false);
-		}
-		else if (messageReturned instanceof Ctrl_Json.Data)
+		if (messageReturned instanceof Ctrl_Json.Data)
 		{
 			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
 			Global.eRegConfiguration														= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
+			Global.toaster("Configuration data received", false);
+		}
+		else if (messageReturned instanceof Ctrl__Abstract.Ack)
+		{
+			Global.toaster("Server updated", false);
+			Dialog_Yes_No											messageYesNo			= new Dialog_Yes_No("Update controller with new configuration now ?", this, 1);	// id = 1
+			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
+		}
+		else 
+		{
+			Global.toaster("Unexpected response : " + messageReturned.getClass().toString(), false);
 		}
 	}
+	public void processFinishTCP(Ctrl__Abstract messageReturn)
+	{
+		if (messageReturn instanceof Ctrl_Actions_Stop.Ack)
+		{
+			Global.toaster("Controler accepted the request", false);
+		}
+		else if (messageReturn instanceof Ctrl_Actions_Stop.Nack)
+		{
+			Global.toaster("Controler refused the request", true);
+		}
+		else
+		{
+			Global.toaster("Unexpected response : " + messageReturn.getClass().toString(), false);
+		}
+	}
+
 }

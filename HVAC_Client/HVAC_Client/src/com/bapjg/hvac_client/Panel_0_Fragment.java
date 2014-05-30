@@ -71,5 +71,6 @@ public class Panel_0_Fragment 									extends 					Fragment
 	@Override	public void processFinishTCP(Ctrl__Abstract result) 										{}
 	@Override	public void processFinishHTTP(Ctrl__Abstract result) 										{}
 	@Override	public void onDialogReturn 				()													{}
+	@Override	public void onDialogReturnWithId(int id)													{}
 }
 

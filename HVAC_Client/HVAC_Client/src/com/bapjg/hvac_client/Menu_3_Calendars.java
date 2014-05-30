@@ -78,21 +78,32 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 			Global.toaster("No data to send, do a Refresh", false);
 		}
 	}
-	public void processFinishHTTP(Ctrl__Abstract messageReturn)
+	public void onDialogReturnWithId(int id)
 	{
-		Ctrl__Abstract x = messageReturn;
-		if (messageReturn instanceof Ctrl__Abstract.Ack)
+		if (id == 1)
+		{
+	    	Ctrl_Actions_Stop.Execute 								stopMessage				= new Ctrl_Actions_Stop().new Execute();
+	    	stopMessage.actionRequest														= Ctrl_Actions_Stop.ACTION_Restart;
+	    	TCP_Send	(stopMessage);
+		}
+	}
+	public void processFinishHTTP(Ctrl__Abstract messageReturned)
+	{
+		if (messageReturned instanceof Ctrl_Json.Data)
+		{
+			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
+			Global.eRegCalendars															= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
+			Global.toaster("Configuration data received", false);
+		}
+		else if (messageReturned instanceof Ctrl__Abstract.Ack)
 		{
 			Global.toaster("Server updated", false);
-	    	Ctrl_Actions_Stop.Execute 								stopMessage				= new Ctrl_Actions_Stop().new Execute();
-	    	// TODO	    	stopMessage.actionRequest													= Ctrl_Actions_Stop.ACTION_Reload_Calendars;
-	    	stopMessage.actionRequest														= Ctrl_Actions_Stop.ACTION_Restart;
-	    	//	    	TCP_Send	(stopMessage);
+			Dialog_Yes_No											messageYesNo			= new Dialog_Yes_No("Update controller with new calendar now ?", this, 1);	// id = 1
+			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
 		}
-		else if (messageReturn instanceof Ctrl_Json.Data)
+		else 
 		{
-			String													JsonString				= ((Ctrl_Json.Data) messageReturn).json;
-			Global.eRegCalendars															= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
+			Global.toaster("Unexpected response : " + messageReturned.getClass().toString(), false);
 		}
 	}
 	public void processFinishTCP(Ctrl__Abstract messageReturn)
@@ -101,13 +112,13 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 		{
 			Global.toaster("Controler accepted the request", false);
 		}
+		else if (messageReturn instanceof Ctrl_Actions_Stop.Nack)
+		{
+			Global.toaster("Controler refused the request", true);
+		}
 		else
 		{
-			Global.toaster("Controler refused (Nack)", false);
-			// TODO	    	stopMessage.actionRequest	
-	    	Ctrl_Actions_Stop.Execute 								stopMessage				= new Ctrl_Actions_Stop().new Execute();
-	    	stopMessage.actionRequest														= Ctrl_Actions_Stop.ACTION_Restart;
-//	    	TCP_Send	(stopMessage);
+			Global.toaster("Unexpected response : " + messageReturn.getClass().toString(), false);
 		}
 	}
 }

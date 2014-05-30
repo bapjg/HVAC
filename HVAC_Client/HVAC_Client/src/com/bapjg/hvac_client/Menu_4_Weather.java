@@ -1,9 +1,6 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Common.Ctrl_Calendars;
-import HVAC_Common.Ctrl_Configuration;
-import HVAC_Common.Ctrl_Weather;
-import HVAC_Common.Ctrl_Configuration.Request;
+import HVAC_Common.*;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -49,6 +46,19 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
 	public void doRefresh()
 	{
         TCP_Send	(new Ctrl_Weather().new Request());
-		Global.toaster("doRefresh", false);
+	}
+	@Override
+	public void processFinishTCP(Ctrl__Abstract result) 
+	{  
+		if (result instanceof Ctrl_Weather.Data)
+		{
+			Ctrl_Weather.Data									resultWeather				= (Ctrl_Weather.Data) result;
+			Global.weatherForecast				 											= (Ctrl_WeatherData) resultWeather.weatherData;
+			Global.toaster("Weather report obtained", false);
+		}
+		else
+		{
+			Global.toaster("Weather report request failed", false);
+		}
 	}
 }

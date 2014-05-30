@@ -83,10 +83,8 @@ public class Menu_0_Fragment 									extends 					Fragment
 	{		
 		TCP_Task												task						= new TCP_Task();
 	   	task.callBack																		= this;					// processFinish
-	   	task.execute(message);
+	   	task.execute(message);									// processFinishHTTP is in the instaciated class
 	}
-//	@Override	public void processFinishTCP(Ctrl_Abstract result) 											{}
-//	@Override	public void processFinishHTTP(Ctrl_Abstract result) 										{}
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
 		if 		(result instanceof Ctrl_Calendars.Data)			Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
@@ -94,22 +92,6 @@ public class Menu_0_Fragment 									extends 					Fragment
 		else if (result instanceof Ctrl__Abstract.Ack)			/* All is Ok */ ;
 		else													Global.toaster("M0_Fragment : Data NOTNOTNOT received", true);
 	}
-	public void processFinishTCP(Ctrl__Abstract result) 
-	{  
-//		if (result instanceof Ctrl_Configuration.Data)
-//		{
-//			Global.eRegConfiguration														= (Ctrl_Configuration.Data) result;
-//		}
-//		else if (result instanceof Ctrl_Weather.Data)
-		if (result instanceof Ctrl_Weather.Data)
-		{
-			Ctrl_Weather.Data									resultWeather				= (Ctrl_Weather.Data) result;
-			Global.weatherForecast				 											= (Ctrl_WeatherData) resultWeather.weatherData;
-		}
-		else
-		{
-			Global.toaster("M0_Fragment 2 : Data NOTNOTNOT received", true);
-		}
-	}
+	public void processFinishTCP(Ctrl__Abstract result) 	{  }
 }
 
