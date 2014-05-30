@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project 		name="AntTestCopyOut" 	basedir="." 			default="archive"> 
+	<property 	name="OUT" 				value="\\NAS\DropZone\" 
+    /> 
+
+	<target 	name="CopyToNAS"> 
+		<copy 	todir="${OUT}" > 
+			<fileset 					file="${basedir}/bin/HVAC_Client.apk"> 
+			</fileset> 
+		</copy> 
+	</target> 
+
+</project>
