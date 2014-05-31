@@ -60,7 +60,7 @@ public class LogIt
 
 		if (logDisplay)
 		{
-			String classMethod											= (className + "/" + methodName + "                                             ").substring(0,30);
+			String classMethod										= (className + "/" + methodName + "                                             ").substring(0,30);
 			System.out.println(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 		}
 	}

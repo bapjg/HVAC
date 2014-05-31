@@ -96,7 +96,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				else
 				{
 					circuitPump.off();
-					this.shutDown();					// shutDown sets state to off. Threadmixer looks at this as signal to stop
+					this.shutDown();					// shutDown sets state to off. Thread_mixer looks at this as signal to stop
 				}
 				break;
 			case CIRCUIT_STATE_Error:

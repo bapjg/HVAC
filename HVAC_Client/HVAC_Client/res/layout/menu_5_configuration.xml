@@ -16,7 +16,11 @@
 	<Button style		= "@style/AD_MenuButton" 	android:text	= "Boiler" 				/>
 	<Button	style		= "@style/AD_MenuButton" 	android:text	= "PIDs"      	        />
 	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Gradients"      		/>
-	<Button	style		= "@style/AD_MenuButton" 	android:text	= "Summer"      		/>
+
+	<Button
+	    style="@style/AD_MenuButton"
+	    android:text="xxx" />
+
 	<LinearLayout 
 		android:id						= "@+id/bottomFrame"
 		android:layout_width			= "match_parent"

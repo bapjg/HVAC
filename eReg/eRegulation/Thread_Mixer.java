@@ -71,7 +71,7 @@ public class Thread_Mixer implements Runnable
 				}
 LogIt.display("Thread_Mixer", "run", "----Calling Sequencer");
 				this.mixer.sequencer(targetTemp);
-				LogIt.display("Thread_Mixer", "run", "----Sequencer called");
+LogIt.display("Thread_Mixer", "run", "----Sequencer called");
 	
 				Integer temperatureProjected					= 0;
 				Integer tempNow;

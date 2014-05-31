@@ -44,6 +44,7 @@ public class Relay
 	}
 	public void on()
 	{
+LogIt.display("Relay", "on", "relay : " + relayNumber);
 		Global.interfaceSemaphore.semaphoreLock("Relay.on");
 		On(relayBank, relayNumber);
 		relayOn						= true;
@@ -51,6 +52,7 @@ public class Relay
 	}
 	public void off()
 	{
+LogIt.display("Relay", "on", "relay : " + relayNumber);
 		// Call takes approx 12 ms (100 call to off = 1225ms)
 		Global.interfaceSemaphore.semaphoreLock("Relay.off");
 		Off(relayBank, relayNumber);
