@@ -67,9 +67,7 @@ public class Thread_Mixer implements Runnable
 				{
 					targetTemp									= circuit.temperatureGradient.getTempToTarget();
 				}
-LogIt.display("Thread_Mixer", "run", "----Calling Sequencer");
 				this.mixer.sequencer(targetTemp);
-LogIt.display("Thread_Mixer", "run", "----Sequencer called");
 	
 				Integer temperatureProjected					= 0;
 				Integer tempNow;
@@ -98,7 +96,12 @@ LogIt.display("Thread_Mixer", "run", "----Sequencer called");
 			else if  (circuit.state == circuit.CIRCUIT_STATE_Off )  //Running Cold
 			{
 				// TODO should we position zero evry cycle. what about optimisation. what about floor temp measurement
-				mixer.positionZero();
+				// circuit.state = circuit.CIRCUIT_STATE_Shutting_down doesn't last long enough to be reliable. use positiontacked
+				// as indication of whether we are stopped or not
+				if (mixer.positionTracked > 0)
+				{
+					mixer.positionZero();
+				}
 			}
 		}
 		circuit.circuitPump.off();
