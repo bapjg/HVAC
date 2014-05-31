@@ -15,15 +15,15 @@ public class Thread_Mixer implements Runnable
 		LogIt.info("Thread_Mixer_" + circuit.name, "Run", "Starting", true);		
 
 		mixer.positionZero();
-//		LogIt.mixerData(Global.now(), 0, Global.now(), mixer.positionTracked);	// Problem with dbInsert if timeStart = timeEnd (primary Index)
-		LogIt.mixerData(Global.now(), 0, 0L, 0);								// If timeEnd = 0, then the second part is not inserted into DataBase
+//		LogIt.mixerData(Global.now(), 0, Global.now(), mixer.positionTracked);					// Problem with dbInsert if timeStart = timeEnd (primary Index)
+		LogIt.mixerData(Global.now(), 0, 0L, 0);												// If timeEnd = 0, then the second part is not inserted into DataBase
 		
 		Integer 				i							= 0; 	// Used for loop waiting 20 s
 		Integer 				targetTemp;
 		Integer 				timeProjectInSeconds		= mixer.timeProjection/1000;		// Time over which to project temperature change : Convert ms -> s
-		Integer 				timeDelayInSeconds			= mixer.timeDelay/1000;			// Time to wait before doing any calculations : Convert ms -> s
+		Integer 				timeDelayInSeconds			= mixer.timeDelay/1000;				// Time to wait before doing any calculations : Convert ms -> s
 		
-		Integer indexProject								= timeProjectInSeconds/5;				// Used during 5sec delay loop
+		Integer indexProject								= timeProjectInSeconds/5;			// Used during 5sec delay loop
 		Integer indexDelay									= timeDelayInSeconds/5;
 		
 		while (!Global.stopNow)
@@ -51,17 +51,17 @@ public class Thread_Mixer implements Runnable
 				if (Global.thermoOutside.reading > 17000)
 				{
 					// Outside temp is high : no need to heat
-					targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
+					targetTemp									= 10 * 1000;					// Dont put at zero to avoid freezing
 					targetTemp									= circuit.temperatureGradient.getTempToTarget();
 				}
 				else if (Global.thermoLivingRoom.reading > this.circuit.taskActive.tempObjective - 1000)
 				{
 					// Must replace by PID
 					// Inside temp is high : no need to heat (within 1 degree
-					targetTemp									= 10 * 1000;		// Dont put at zero to avoid freezing
+					targetTemp									= 10 * 1000;					// Dont put at zero to avoid freezing
 					targetTemp									= circuit.temperatureGradient.getTempToTarget();
 				}
-				else if (circuit.state == circuit.CIRCUIT_STATE_RampingUp) // This is to accelerate rampup
+				else if (circuit.state == circuit.CIRCUIT_STATE_RampingUp) 						// This is to accelerate rampup
 				{
 					targetTemp									= 43000;						// Trip avoidance kicks in at 450
 				}
@@ -69,7 +69,9 @@ public class Thread_Mixer implements Runnable
 				{
 					targetTemp									= circuit.temperatureGradient.getTempToTarget();
 				}
+LogIt.display("Thread_Mixer", "run", "----Calling Sequencer");
 				this.mixer.sequencer(targetTemp);
+				LogIt.display("Thread_Mixer", "run", "----Sequencer called");
 	
 				Integer temperatureProjected					= 0;
 				Integer tempNow;
@@ -79,11 +81,11 @@ public class Thread_Mixer implements Runnable
 				// Thereafter, if projected temperature is out of bound, the loop stops and the PID reactivated for recalculation
 				for (i = 0; (i < indexProject) && (! Global.stopNow); i++)
 				{
-					Global.waitSeconds(5);									// indexWait loops of 5s
-					
+					Global.waitSeconds(5);														// indexWait loops of 5s
+						
 					tempNow										= Global.thermoFloorOut.readUnCached();
 					
-					if (i >= indexDelay)									// We have waited for dTdt to settle a bit
+					if (i >= indexDelay)														// We have waited for dTdt to settle a bit
 					{
 						temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProjectInSeconds)).intValue();
 						
