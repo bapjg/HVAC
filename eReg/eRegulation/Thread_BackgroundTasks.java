@@ -160,7 +160,7 @@ public class Thread_BackgroundTasks implements Runnable
 			            	String 										time_from					= Global.displayTimeShort(forecastItem.dateTime.from);
 			            	String 										time_to						= Global.displayTimeShort(forecastItem.dateTime.to);
 			        		// TODO
-			        		LogIt.info("Thread_Background", "Run", "Weather item:"+time_from+"-"+time_to+" temp:"+ forecastItem.temperature.toString()+" clds: "+forecastItem.clouds.all.toString(), true);
+			        		LogIt.info("Thread_Background", "Run", "Weather item:"+time_from+"-"+time_to+" temp:"+ forecastItem.temperature.value.intValue()+" clds: "+forecastItem.clouds.all.toString(), true);
 			         		LogIt.info("Thread_Background", "Run", "Summer temp:"+ ((Integer) Global.summerTemp/1000), true);
 						    
 			         		Integer efectiveTemp = forecastItem.temperature.value.intValue() + Global.tasksBackGround.sunshineInfluence * forecastItem.clouds.all/100;
