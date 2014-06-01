@@ -93,7 +93,7 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 	public class Clouds 							implements 		java.io.Serializable
 	{
 		public String 								value;			//Tag value
-		public Number 								all;			//Tag all (e.g. 92)
+		public Integer 								all;			//Tag all (e.g. 92)
 		public String 								unit;			//Tag unit "%"
 	}
 	public class Sun 								implements 		java.io.Serializable

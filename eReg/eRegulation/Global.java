@@ -10,6 +10,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
@@ -448,7 +449,32 @@ public class Global
 		String nowFormatted 										= dateFormat.format(milliSeconds);
 		return nowFormatted;
 	}
-    public static Boolean isAway()
+    public static String displayTimeShort(Long dateTime)
+    {
+		//==============================================================
+		// Accepts a TimeSinceMidnight argument if UTC and adjusts for local Timezone
+		// returns supplied dateTime in the form hh:mm
+		//==============================================================
+    	
+    	String 													dateTimeString;
+    	Long													days						= dateTime / 1000 / 3600 / 24;		//millisecs -> secs -> hours -> days
+    	if (days > 0)																		// We need to use the TimeZoned calendar to workout time
+    	{
+          SimpleDateFormat 										sdf 						= new SimpleDateFormat("HH:mm");
+          GregorianCalendar 									calendar 					= new GregorianCalendar();
+          calendar.setTimeInMillis(dateTime);
+          dateTimeString																	= sdf.format(dateTime);
+    	}
+    	else																				// Must calculate manually as time is since local midnight
+    	{
+    		Integer												seconds						= (int) (long) (dateTime / 1000);
+    		Integer												hours						= seconds / 3600;
+    		Integer												minutes						= (seconds - hours * 3600)/60;
+    		dateTimeString																	= String.format("%02d", hours)  + ":" +String.format("%02d", minutes);
+    	}
+    	return dateTimeString;
+   }
+   public static Boolean isAway()
     {
 		for (Calendars.Away awayItem : awayList)
 		{

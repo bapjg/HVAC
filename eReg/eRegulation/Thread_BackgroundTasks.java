@@ -1,6 +1,6 @@
 package eRegulation;
 
-import HVAC_Common.Ctrl_WeatherData;
+import HVAC_Common.*;
 
 public class Thread_BackgroundTasks implements Runnable
 {
@@ -109,13 +109,10 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			//=========================================================================================================================================
 
-			// TODO : A switch keeps going On/off : Probably mixer
-			
 			//=========================================================================================================================================
 			//
 			// Optimise : Particularly hot water in summer and floor in winter
 			//
-			
 			
 			// Must also run floor pump for a certain time to get good reading of concrete/floor temp
 			if (Global.circuits.activeCircuitCount() > 0)
@@ -155,6 +152,22 @@ public class Thread_BackgroundTasks implements Runnable
 				{
 					Global.weatherData							= new Ctrl_WeatherData();
 					LogIt.info("Thread_Background", "Run", "Weather : fetched", true);
+			        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherData.forecasts)
+			        {
+			        	if  ((forecastItem.dateTime.from > Global.getTimeAtMidnight())							// timeStamp > last midnight
+			        	&& 	 (forecastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L))	// timeStamp < next midnight
+			        	{
+			            	String 										time_from					= Global.displayTimeShort(forecastItem.dateTime.from);
+			            	String 										time_to						= Global.displayTimeShort(forecastItem.dateTime.to);
+			        		// TODO
+			        		LogIt.info("Thread_Background", "Run", "Weather item:"+time_from+"-"+time_to+" temp:"+ forecastItem.temperature.toString()+" clds: "+forecastItem.clouds.all.toString(), true);
+			         		LogIt.info("Thread_Background", "Run", "Summer temp:"+ ((Integer) Global.summerTemp/1000), true);
+						    
+			         		Integer efectiveTemp = forecastItem.temperature.value.intValue() + Global.tasksBackGround.sunshineInfluence * forecastItem.clouds.all/100;
+			        		LogIt.info("Thread_Background", "Run", "Effective temp:" + efectiveTemp, true);
+			        	}
+			        }
+
 				}
 				catch (Exception e)
 				{

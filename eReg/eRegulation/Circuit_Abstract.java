@@ -256,7 +256,21 @@ abstract class Circuit_Abstract
 		{
 			if (taskFound != null)
 			{
-				taskActivate(taskFound);
+				if (name.equalsIgnoreCase("Hot Water"))
+				{
+					taskActivate(taskFound);
+				}
+				else
+				{
+					if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)
+					{
+						// TODO do nothing or marked as finished
+					}
+					else
+					{
+						taskActivate(taskFound);
+					}
+				}
 			}
 		}
 	}

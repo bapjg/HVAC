@@ -54,29 +54,6 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
 		}
         return panelView;
     }
-//  @Override
-//	public void onClick(View myView) 
-//	{
-//    	Log.v("App", "We have arrived in onClick again");
-//    	
-//    	Button 											myButton 					= (Button) myView;
-//    	String											myCaption					= myButton.getText().toString();
-//						
-//		// Set all textColours to white				
-//		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
-//		for (int i = 0; i < viewParent.getChildCount(); i++)
-//		{
-//			Button										buttonChild 				= (Button) viewParent.getChildAt(i);
-//			buttonChild.setTextColor(Color.WHITE);
-//		}
-//		
-//		((Button) myView).setTextColor(Color.YELLOW);
-//    	
-//    	if (myCaption.equalsIgnoreCase("Thermometers"))
-//    	{
-//    		// buttonThermometersClick(myView);	
-//    	}
-//	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 	{
