@@ -147,6 +147,9 @@ public class Thread_BackgroundTasks implements Runnable
 			||	 (Global.weatherData.dateTimeObtained == null      )								// dateTimeObtained can be null if previous attempt had http failure
 			||	 (Global.weatherData.dateTimeObtained < Inc_6h_Time)   ) 							// Latest 6 hour interval in day
 			{
+				Integer efectiveTempCorrection = 0;
+				Integer efectiveTempCalculatedMax = 0;
+				
 				LogIt.info("Thread_Background", "Run", "Weather : get It", true);
 				try
 				{
@@ -162,11 +165,15 @@ public class Thread_BackgroundTasks implements Runnable
 			            	String 										time_to						= Global.displayTimeShort(forecastItem.dateTime.to);
 			        		// TODO
 						    
-			         		Integer efectiveTempCorrection = Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) / 100;
-			         		Integer efectiveTemp =  Global.tasksBackGround.summerTemp + efectiveTempCorrection;
+			         		efectiveTempCorrection = Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) / 100;
+			         		Integer efectiveTempCalculated = forecastItem.temperature.value.intValue() * 1000 + efectiveTempCorrection;
+			         		if (efectiveTempCalculated > efectiveTempCalculatedMax)
+			         		{
+			         			efectiveTempCalculatedMax											= efectiveTempCalculated;
+			         		}
 			        	}
 			        }
-
+					LogIt.info("Thread_Background", "Run", "Maximum temperature (corrected) today " + efectiveTempCalculatedMax, true);
 				}
 				catch (Exception e)
 				{
