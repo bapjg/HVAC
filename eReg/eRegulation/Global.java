@@ -78,8 +78,6 @@ public class Global
 	public static 	Pump							pumpFloor;
 	public static 	Pump							pumpRadiator;
 
-	public static 	Integer							summerTemp;
-	
 	public static	Boiler							boiler;
 	public static	Burner							burner;
 
