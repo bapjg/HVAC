@@ -2,9 +2,7 @@ package HVAC_Common;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
+import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,13 +11,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import javax.xml.parsers.ParserConfigurationException;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -180,6 +174,10 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 				forecast.dateTime.from												= dateTimeFromUTC(getAttribute("from", xmlNode));
 				forecast.dateTime.to												= dateTimeFromUTC(getAttribute("to", xmlNode));
 				
+				System.out.println("===============================");
+				System.out.println("time fr " + getAttribute("from", xmlNode));
+				System.out.println("time to " + getAttribute("to", xmlNode));
+				
 				xmlNode																= xmlForecastItemElement.getElementsByTagName("symbol").item(0);
 				forecast.symbol														= new Symbol();
 				forecast.symbol.number												= Integer.parseInt(getAttribute("number", xmlNode));
@@ -212,6 +210,9 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 				forecast.temperature.value											= Float.parseFloat(getAttribute("value", xmlNode));
 				forecast.temperature.min											= Float.parseFloat(getAttribute("min", xmlNode));
 				forecast.temperature.max											= Float.parseFloat(getAttribute("max", xmlNode));
+				System.out.println("temp " + getAttribute("value", xmlNode));
+				System.out.println("min " + getAttribute("min", xmlNode));
+				System.out.println("max " + getAttribute("max", xmlNode));
 
 				xmlNode																= xmlForecastItemElement.getElementsByTagName("pressure").item(0);
 				forecast.pressure													= new Pressure();
