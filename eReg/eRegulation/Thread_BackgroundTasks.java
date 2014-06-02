@@ -165,7 +165,8 @@ public class Thread_BackgroundTasks implements Runnable
 			         		LogIt.info("Thread_Background", "Run", "sunshineInfluence:"+ ((Integer) Global.tasksBackGround.sunshineInfluence/1000), true);
 			         		LogIt.info("Thread_Background", "Run", "cloudInfluence:"+ ((Integer) (100 - forecastItem.clouds.all)), true);
 						    
-			         		Integer efectiveTemp = forecastItem.temperature.value.intValue() * 1000 + Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) * 10;
+//			         		Integer efectiveTemp = forecastItem.temperature.value.intValue() * 1000 + Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) * 10;
+			         		Integer efectiveTemp = Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) * 10;
 			        		LogIt.info("Thread_Background", "Run", "Effective temp in milliDegrees:" + efectiveTemp, true);
 			        	}
 			        }
