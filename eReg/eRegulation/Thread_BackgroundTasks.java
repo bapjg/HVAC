@@ -166,6 +166,7 @@ public class Thread_BackgroundTasks implements Runnable
 			         		LogIt.info("Thread_Background", "Run", "cloudInfluence:"+ ((Integer) (100 - forecastItem.clouds.all)), true);
 						    
 			         		Integer efectiveTempCorrection = Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) / 100;
+			        		LogIt.info("Thread_Background", "Run", "efectiveTempCorrection        :" +  efectiveTempCorrection, true);
 			        		LogIt.info("Thread_Background", "Run", "Effective temp in milliDegrees:" + ((Integer) Global.tasksBackGround.summerTemp + efectiveTempCorrection), true);
 			        	}
 			        }
