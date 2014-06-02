@@ -234,6 +234,7 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 		}
 		catch (Exception e) 
 		{
+			e.printStackTrace();
 			System.out.println("Ctrl_WeatherData/Constructor error parsing the xml");
 			this.dateTimeObtained													= null;
 			this.forecasts															= null;
