@@ -1,16 +1,22 @@
 package HVAC_Common;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
 import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.*;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -106,6 +112,7 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 
 		StringBuffer 								response_msg 					= new StringBuffer();
 		InputStream									response_xml					= null;
+		String										string_xml						= null;
 		//=====================================================================
 		//
 		// Get an xml version of the forecast from the net
@@ -140,14 +147,90 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 		//
 		//=====================================================================
 		
-		try 
+		try
 		{
-			SAXParserFactory 						saxFactory 						= SAXParserFactory.newInstance();
-			SAXParser 								saxParser 						= saxFactory.newSAXParser();
+			DocumentBuilderFactory		docFactory									= DocumentBuilderFactory.newInstance();
+			DocumentBuilder				docBuilder									= docFactory.newDocumentBuilder();
+			Document					xmlDcoument									= docBuilder.parse(new InputSource(new StringReader(string_xml)));
+			xmlDcoument.getDocumentElement().normalize();
 			
-			saxParser.parse(response_xml, this);
-			this.dateTimeObtained													= System.currentTimeMillis();			// dateTimeStamp the forecast.
-		} 
+			Node xmlSun																= xmlDcoument.getElementsByTagName("sun").item(0);
+			String sSunRise															= ((Element) xmlSun).getAttribute("rise");
+			String sSunSet															= ((Element) xmlSun).getAttribute("set");
+
+			sun																		= new Sun();
+			sun.sunRise																= dateTimeFromUTC(getAttribute("rise", xmlSun));
+			sun.sunSet																= dateTimeFromUTC(getAttribute("set", xmlSun));
+			
+			NodeList xmlForecasts 													= xmlDcoument.getElementsByTagName("forecast");
+			NodeList xmlForecastItems 												= xmlDcoument.getElementsByTagName("time");
+			
+			int i = xmlForecastItems.getLength();
+			for (i = 0; i < xmlForecastItems.getLength(); i++)
+			{
+				forecast															= new Forecast();
+
+				Node xmlForecastItemNode											= xmlForecastItems.item(i);
+				Element xmlForecastItemElement										= (Element) xmlForecastItemNode;
+
+				Node xmlNode														= xmlForecastItemElement;
+				forecast.dateTime													= new DateTime();
+				forecast.dateTime.from												= dateTimeFromUTC(getAttribute("from", xmlNode));
+				forecast.dateTime.to												= dateTimeFromUTC(getAttribute("to", xmlNode));
+				
+				xmlNode																= xmlForecastItemElement.getElementsByTagName("symbol").item(0);
+				forecast.symbol														= new Symbol();
+				forecast.symbol.number												= Integer.parseInt(getAttribute("number", xmlNode));
+				forecast.symbol.name												= getAttribute("name", xmlNode);
+				forecast.symbol.var													= getAttribute("var", xmlNode);
+		
+				xmlNode																= xmlForecastItemElement.getElementsByTagName("precipitation").item(0);
+				if  (xmlNode.getAttributes().getLength() > 2)
+				{
+					forecast.precipitation											= new Precipitation();
+					forecast.precipitation.value									= Float.parseFloat(getAttribute("value", xmlNode));
+					forecast.precipitation.unit										= getAttribute("unit", xmlNode);
+					forecast.precipitation.type										= getAttribute("type", xmlNode);
+				}
+
+				xmlNode																= xmlForecastItemElement.getElementsByTagName("windDirection").item(0);
+				forecast.windDirection												= new WindDirection();
+				forecast.windDirection.degrees										= Float.parseFloat(getAttribute("deg", xmlNode));
+				forecast.windDirection.code											= getAttribute("code", xmlNode);
+				forecast.windDirection.name											= getAttribute("name", xmlNode);
+
+				xmlNode																= xmlForecastItemElement.getElementsByTagName("windSpeed").item(0);
+				forecast.windSpeed														= new WindSpeed();
+				forecast.windSpeed.speed												= Float.parseFloat(getAttribute("mps", xmlNode));
+				forecast.windSpeed.name													= getAttribute("name", xmlNode);
+
+				xmlNode																= xmlForecastItemElement.getElementsByTagName("temperature").item(0);
+				forecast.temperature												= new Temperature();
+				forecast.temperature.unit											= getAttribute("unit", xmlNode);
+				forecast.temperature.value											= Float.parseFloat(getAttribute("value", xmlNode));
+				forecast.temperature.min											= Float.parseFloat(getAttribute("min", xmlNode));
+				forecast.temperature.max											= Float.parseFloat(getAttribute("max", xmlNode));
+
+				xmlNode																= xmlForecastItemElement.getElementsByTagName("pressure").item(0);
+				forecast.pressure													= new Pressure();
+				forecast.pressure.unit												= getAttribute("unit", xmlNode);
+				forecast.pressure.value												= Float.parseFloat(getAttribute("value", xmlNode));
+
+				xmlNode																= xmlForecastItemElement.getElementsByTagName("humidity").item(0);
+				forecast.humidity													= new Humidity();
+				forecast.humidity.value												= Integer.parseInt(getAttribute("value", xmlNode));
+				forecast.humidity.unit												= getAttribute("unit", xmlNode);
+				forecast.humidity.var												= getAttribute("var", xmlNode);
+
+				xmlNode																= xmlForecastItemElement.getElementsByTagName("clouds").item(0);
+				forecast.clouds														= new Clouds();
+				forecast.clouds.value												= getAttribute("value", xmlNode);
+				forecast.clouds.all													= Integer.parseInt(getAttribute("all", xmlNode));
+				forecast.clouds.unit												= getAttribute("unit", xmlNode);
+			
+				forecasts.add(forecast);				
+			}
+		}
 		catch (Exception e) 
 		{
 			System.out.println("Ctrl_WeatherData/Constructor error parsing the xml");
@@ -155,8 +238,21 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 			this.forecasts															= null;
 		}
 	}
-	@Override
-	public void startElement(String uri, String localName, String tagName, Attributes attributes) throws SAXException 
+	public String getAttribute(String attribute, Node node)
+	{
+		Element element = (Element) node;
+		String returnString = "";
+		try
+		{
+			returnString = element.getAttribute(attribute);
+		}
+		catch (Exception e)
+		{
+			returnString = "";
+		}
+		return returnString;
+	}
+	public void startElement(String uri, String localName, String tagName, Attributes attributes)
     {
 		if (tagName.equalsIgnoreCase("Sun"))
 		{
@@ -209,6 +305,9 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 		{
 			forecast.temperature													= new Temperature();
 			forecast.temperature.unit												= attributes.getValue("unit");
+			System.out.println("v " + attributes.getValue("value"));
+			System.out.println("i " + attributes.getValue("min"));
+			System.out.println("a " + attributes.getValue("max"));
 			forecast.temperature.value												= Float.parseFloat(attributes.getValue("value"));
 			forecast.temperature.min												= Float.parseFloat(attributes.getValue("min"));
 			forecast.temperature.max												= Float.parseFloat(attributes.getValue("max"));
