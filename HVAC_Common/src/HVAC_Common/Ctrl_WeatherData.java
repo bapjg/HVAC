@@ -152,7 +152,8 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 		{
 			DocumentBuilderFactory		docFactory									= DocumentBuilderFactory.newInstance();
 			DocumentBuilder				docBuilder									= docFactory.newDocumentBuilder();
-			Document					xmlDcoument									= docBuilder.parse(new InputSource(new StringReader(string_xml)));
+//			Document					xmlDcoument									= docBuilder.parse(new InputSource(new StringReader(string_xml)));
+			Document					xmlDcoument									= docBuilder.parse(new InputSource(response_xml));
 			xmlDcoument.getDocumentElement().normalize();
 			
 			Node xmlSun																= xmlDcoument.getElementsByTagName("sun").item(0);
