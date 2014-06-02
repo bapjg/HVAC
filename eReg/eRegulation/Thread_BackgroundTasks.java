@@ -151,6 +151,7 @@ public class Thread_BackgroundTasks implements Runnable
 				try
 				{
 					Global.weatherData							= new Ctrl_WeatherData();
+					Global.weatherData.dateTimeObtained			= Global.now();
 					LogIt.info("Thread_Background", "Run", "Weather : fetched", true);
 			        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherData.forecasts)
 			        {
@@ -160,14 +161,9 @@ public class Thread_BackgroundTasks implements Runnable
 			            	String 										time_from					= Global.displayTimeShort(forecastItem.dateTime.from);
 			            	String 										time_to						= Global.displayTimeShort(forecastItem.dateTime.to);
 			        		// TODO
-			        		LogIt.info("Thread_Background", "Run", "Weather item:"+time_from+"-"+time_to+" temp:"+ forecastItem.temperature.value.intValue()+" clds: "+forecastItem.clouds.all.toString(), true);
-			         		LogIt.info("Thread_Background", "Run", "Summer temp:"+ ((Integer) Global.tasksBackGround.summerTemp/1000), true);
-			         		LogIt.info("Thread_Background", "Run", "sunshineInfluence:"+ ((Integer) Global.tasksBackGround.sunshineInfluence/1000), true);
-			         		LogIt.info("Thread_Background", "Run", "cloudInfluence:"+ ((Integer) (100 - forecastItem.clouds.all)), true);
 						    
 			         		Integer efectiveTempCorrection = Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) / 100;
-			        		LogIt.info("Thread_Background", "Run", "efectiveTempCorrection        :" +  efectiveTempCorrection, true);
-			        		LogIt.info("Thread_Background", "Run", "Effective temp in milliDegrees:" + ((Integer) Global.tasksBackGround.summerTemp + efectiveTempCorrection), true);
+			         		Integer efectiveTemp =  Global.tasksBackGround.summerTemp + efectiveTempCorrection;
 			        	}
 			        }
 

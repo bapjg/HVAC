@@ -182,7 +182,7 @@ public class Calendars
 		public TasksBackGround(Ctrl_Calendars.TasksBackGround 		tasksBackGround)
 		{
 			this.pumpCleanTime										= tasksBackGround.pumpCleanTime.milliSeconds;
-			this.pumpCleanDurationSeconds							= tasksBackGround.pumpCleanDuration;
+			this.pumpCleanDurationSeconds							= tasksBackGround.pumpCleanDurationMinutes * 60;
 			this.antiFreeze											= tasksBackGround.antiFreeze.milliDegrees;
 			this.summerTemp											= tasksBackGround.summerTemp.milliDegrees;
 			this.sunshineInfluence									= tasksBackGround.sunshineInfluence.milliDegrees;

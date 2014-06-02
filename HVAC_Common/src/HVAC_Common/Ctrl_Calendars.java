@@ -97,7 +97,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public Cmn_Time							pumpCleanTime;
-		public Integer							pumpCleanDuration;
+		public Integer							pumpCleanDurationMinutes;
 		public Cmn_Temperature					antiFreeze;
 		public Cmn_Temperature					summerTemp;
 		public Cmn_Temperature					sunshineInfluence;
@@ -327,8 +327,8 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 
 		calendarUpdate.tasksBackGround.antiFreeze							= new Cmn_Temperature("5");
 		calendarUpdate.tasksBackGround.pumpCleanTime						= new Cmn_Time("01:00");
-		calendarUpdate.tasksBackGround.pumpCleanDuration					= 300;		// seconds
-		calendarUpdate.tasksBackGround.summerTemp							= new Cmn_Temperature("22");
+		calendarUpdate.tasksBackGround.pumpCleanDurationMinutes				= 5;		// minutes
+		calendarUpdate.tasksBackGround.summerTemp							= new Cmn_Temperature("17");
 		calendarUpdate.tasksBackGround.sunshineInfluence					= new Cmn_Temperature("5");
 
 		//
