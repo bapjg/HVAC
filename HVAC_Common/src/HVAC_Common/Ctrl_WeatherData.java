@@ -174,10 +174,6 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 				forecast.dateTime.from												= dateTimeFromUTC(getAttribute("from", xmlNode));
 				forecast.dateTime.to												= dateTimeFromUTC(getAttribute("to", xmlNode));
 				
-				System.out.println("===============================");
-				System.out.println("time fr " + getAttribute("from", xmlNode));
-				System.out.println("time to " + getAttribute("to", xmlNode));
-				
 				xmlNode																= xmlForecastItemElement.getElementsByTagName("symbol").item(0);
 				forecast.symbol														= new Symbol();
 				forecast.symbol.number												= Integer.parseInt(getAttribute("number", xmlNode));
@@ -200,9 +196,9 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 				forecast.windDirection.name											= getAttribute("name", xmlNode);
 
 				xmlNode																= xmlForecastItemElement.getElementsByTagName("windSpeed").item(0);
-				forecast.windSpeed														= new WindSpeed();
-				forecast.windSpeed.speed												= Float.parseFloat(getAttribute("mps", xmlNode));
-				forecast.windSpeed.name													= getAttribute("name", xmlNode);
+				forecast.windSpeed													= new WindSpeed();
+				forecast.windSpeed.speed											= Float.parseFloat(getAttribute("mps", xmlNode));
+				forecast.windSpeed.name												= getAttribute("name", xmlNode);
 
 				xmlNode																= xmlForecastItemElement.getElementsByTagName("temperature").item(0);
 				forecast.temperature												= new Temperature();
@@ -210,9 +206,6 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 				forecast.temperature.value											= Float.parseFloat(getAttribute("value", xmlNode));
 				forecast.temperature.min											= Float.parseFloat(getAttribute("min", xmlNode));
 				forecast.temperature.max											= Float.parseFloat(getAttribute("max", xmlNode));
-				System.out.println("temp " + getAttribute("value", xmlNode));
-				System.out.println("min " + getAttribute("min", xmlNode));
-				System.out.println("max " + getAttribute("max", xmlNode));
 
 				xmlNode																= xmlForecastItemElement.getElementsByTagName("pressure").item(0);
 				forecast.pressure													= new Pressure();
