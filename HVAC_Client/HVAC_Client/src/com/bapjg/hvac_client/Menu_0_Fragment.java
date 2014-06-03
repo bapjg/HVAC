@@ -25,6 +25,7 @@ public class Menu_0_Fragment 									extends 					Fragment
 {
 	public 	int													menuLayout;
 	private ViewGroup											container;
+	private View												menuView;
 	
 	public Menu_0_Fragment()
 	{
@@ -33,12 +34,12 @@ public class Menu_0_Fragment 									extends 					Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	View 													thisView 					= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
-    	Button													firstButton					= (Button) ((ViewGroup) thisView).getChildAt(0);
+    	menuView 												= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
+    	Button													firstButton					= (Button) ((ViewGroup) menuView).getChildAt(0);
     	this.container																		= container;
-    	allButtonsSetup((ViewGroup) thisView);
+    	allButtonsSetup((ViewGroup) menuView);
 		((OnClickListener) this).onClick(firstButton);																		// Execute the onClickListener of the first menu button
-    	return thisView;
+    	return menuView;
     }
 	public void onClick(View myView) 																						// This is the onClick event from the Menu
 	{
@@ -70,6 +71,20 @@ public class Menu_0_Fragment 									extends 					Fragment
 			else if (viewChild instanceof ViewGroup)
 			{
 				allButtonsSetup((ViewGroup) viewChild);
+			}
+		}
+	}
+	public void clickActiveButton()
+	{
+		ViewGroup												menuViewGroup				= (ViewGroup) menuView;
+		for (int i = 0; i < menuViewGroup.getChildCount(); i++)																	
+		{
+			View												viewChild					= (View) menuViewGroup.getChildAt(i);
+			if ( (viewChild instanceof Button)
+			&&   (((Button) viewChild).getCurrentTextColor() == Color.YELLOW) )
+			{
+				((OnClickListener) this).onClick(viewChild);
+				return;
 			}
 		}
 	}

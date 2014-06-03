@@ -94,7 +94,15 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 		{
 			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
 			Global.eRegConfiguration														= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
-			Global.toaster("Configuration data received", false);
+			
+			HTTP_Send(new Ctrl_Fuel_Consumption().new Request());
+		}
+		else if (messageReturned instanceof Ctrl_Fuel_Consumption.Data)
+		{
+			Ctrl_Fuel_Consumption.Data								fuel					= ((Ctrl_Fuel_Consumption.Data) messageReturned);
+			Global.eRegConfiguration.burner.fuelConsumption									= fuel.fuelConsumed;
+			Global.toaster("Configuration & Fuel data received", false);
+			clickActiveButton();
 		}
 		else if (messageReturned instanceof Ctrl__Abstract.Ack)
 		{

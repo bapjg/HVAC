@@ -62,7 +62,7 @@ public class Dialog_Yes_No 										extends 					DialogFragment
         builder.setTitle(message);
        
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
+        builder.setNegativeButton("No",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
 
         return builder.create();
     }

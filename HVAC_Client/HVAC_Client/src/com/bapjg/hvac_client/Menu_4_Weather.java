@@ -55,6 +55,7 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
 			Ctrl_Weather.Data									resultWeather				= (Ctrl_Weather.Data) result;
 			Global.weatherForecast				 											= (Ctrl_WeatherData) resultWeather.weatherData;
 			Global.toaster("Weather report obtained", false);
+			clickActiveButton();
 		}
 		else
 		{

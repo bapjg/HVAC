@@ -34,7 +34,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="Relay" />
+            android:text="Depth" />
 
         </LinearLayout>
     

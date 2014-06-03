@@ -68,7 +68,7 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 		{
 			Ctrl_Calendars.TasksBackGround						backgroundTasks				= Global.eRegCalendars.tasksBackGround;
 			((TextView) panelView.findViewById(R.id.pumpCleanTime)).setText		(backgroundTasks.pumpCleanTime.displayShort());
-			((TextView) panelView.findViewById(R.id.pumpCleanDuration)).setText	(backgroundTasks.pumpCleanDurationMinutes.toString() + "s");
+			((TextView) panelView.findViewById(R.id.pumpCleanDuration)).setText	(backgroundTasks.pumpCleanDurationMinutes.toString() + " mn");
 			((TextView) panelView.findViewById(R.id.antiFreeze)).setText		(backgroundTasks.antiFreeze.displayInteger());
 			((TextView) panelView.findViewById(R.id.summerTemp)).setText		(backgroundTasks.summerTemp.displayInteger());
 			((TextView) panelView.findViewById(R.id.sunshineInfluence)).setText	(backgroundTasks.sunshineInfluence.displayInteger());

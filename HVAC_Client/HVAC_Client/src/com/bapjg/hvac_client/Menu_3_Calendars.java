@@ -94,6 +94,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
 			Global.eRegCalendars															= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
 			Global.toaster("Configuration data received", false);
+			clickActiveButton();
 		}
 		else if (messageReturned instanceof Ctrl__Abstract.Ack)
 		{
