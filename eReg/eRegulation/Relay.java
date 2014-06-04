@@ -2,6 +2,7 @@ package eRegulation;
 
 import HVAC_Common.Ctrl_Configuration;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Relay
 {
 	private native void 	On(int Relay_Bank, int Relay_Number);

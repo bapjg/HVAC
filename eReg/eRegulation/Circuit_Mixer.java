@@ -2,6 +2,7 @@ package eRegulation;
 
 import HVAC_Common.Ctrl_Configuration;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Circuit_Mixer extends Circuit_Abstract
 {
 	public Circuit_Mixer(Ctrl_Configuration.Circuit paramCircuit)

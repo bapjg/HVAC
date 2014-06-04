@@ -1,5 +1,6 @@
 package eRegulation;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thread_Thermometers implements Runnable
 {
 	public void run()

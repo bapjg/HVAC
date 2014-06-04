@@ -23,7 +23,7 @@ import javax.mail.internet.*;
 
 import HVAC_Common.*;
 
-
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Global 
 {
 	//===================================================================
@@ -42,68 +42,68 @@ public class Global
 	//
 	//===================================================================
 	
-	public static 	Boolean							stopNow;
-	public static 	int								exitStatus			= 0;	// 0 = stop app, 1 = restart app, 2 = reboot
+	public static 	Boolean										stopNow;
+	public static 	int											exitStatus			= 0;	// 0 = stop app, 1 = restart app, 2 = reboot
 	
-	public static	PIDs							pids;
-	public static 	Thermometers 					thermometers;
+	public static	PIDs										pids;
+	public static 	Thermometers 								thermometers;
 	
-	public static 	Thermometer 					thermoBoiler;
-	public static 	Thermometer 					thermoBoilerOld;
-	public static 	Thermometer 					thermoBoilerOut;
-	public static 	Thermometer 					thermoBoilerIn;
+	public static 	Thermometer 								thermoBoiler;
+	public static 	Thermometer 								thermoBoilerOld;
+	public static 	Thermometer 								thermoBoilerOut;
+	public static 	Thermometer 								thermoBoilerIn;
 	
-	public static 	Thermometer 					thermoFloorOut;
-	public static 	Thermometer 					thermoFloorIn;
+	public static 	Thermometer 								thermoFloorOut;
+	public static 	Thermometer 								thermoFloorIn;
 	
-	public static 	Thermometer 					thermoRadiatorOut;
-	public static 	Thermometer 					thermoRadiatorIn;
+	public static 	Thermometer 								thermoRadiatorOut;
+	public static 	Thermometer 								thermoRadiatorIn;
 	
-	public static 	Thermometer 					thermoOutside;
-	public static 	Thermometer 					thermoLivingRoom;
-	public static 	Thermometer 					thermoHotWater;
+	public static 	Thermometer 								thermoOutside;
+	public static 	Thermometer 								thermoLivingRoom;
+	public static 	Thermometer 								thermoHotWater;
 
-	public static 	Integer							tempHotWaterPrevious;
+	public static 	Integer										tempHotWaterPrevious;
 	
-	public static 	Relays	 						relays;
-	public static 	Relay							burnerPower;
+	public static 	Relays	 									relays;
+	public static 	Relay										burnerPower;
 	
-	public static 	Circuits	 					circuits;
-	public static 	Circuit_HotWater				circuitHotWater;
-	public static 	Circuit_Radiator				circuitGradient;
-	public static 	Circuit_Mixer					circuitFloor;
+	public static 	Circuits	 								circuits;
+	public static 	Circuit_HotWater							circuitHotWater;
+	public static 	Circuit_Radiator							circuitGradient;
+	public static 	Circuit_Mixer								circuitFloor;
 	
-	public static	Pumps							pumps;
-	public static 	Pump							pumpWater;
-	public static 	Pump							pumpFloor;
-	public static 	Pump							pumpRadiator;
+	public static	Pumps										pumps;
+	public static 	Pump										pumpWater;
+	public static 	Pump										pumpFloor;
+	public static 	Pump										pumpRadiator;
 
-	public static	Boiler							boiler;
-	public static	Burner							burner;
+	public static	Boiler										boiler;
+	public static	Burner										burner;
 
-	public static 	LCD								display;	
-	public static 	ADC								burnerVoltages;	
-	public static 	Buttons							buttons;	
+	public static 	LCD											display;	
+	public static 	ADC											burnerVoltages;	
+	public static 	Buttons										buttons;	
 
-	public static 	ArrayList	<String>			eMails;	
+	public static 	ArrayList	<String>						eMails;	
 
-	public static 	String							calendarsDateTime;	// Used to dateTime the Calendar version in use
+	public static 	String										calendarsDateTime;	// Used to dateTime the Calendar version in use
 
-	public static	ArrayList	<Calendars.Away>	awayList;
-	public static	Calendars.TasksBackGround		tasksBackGround;
-	public static	Ctrl_WeatherData				weatherData;
+	public static	ArrayList	<Calendars.Away>				awayList;
+	public static	Calendars.TasksBackGround					tasksBackGround;
+	public static	Ctrl_WeatherData							weatherData;
 	
 	public Global()
 	{
-		Global.display 																= new LCD();
-		Global.buttons 																= new Buttons();	
-		Global.pids																	= new PIDs();
-		Global.thermometers															= new Thermometers();
-		Global.relays																= new Relays();
-		Global.pumps 																= new Pumps(); 
-		Global.circuits 															= new Circuits(); 
-		Global.eMails	 															= new ArrayList<String>(); 
-		Global.awayList	 															= new ArrayList<Calendars.Away>(); 
+		Global.display 																		= new LCD();
+		Global.buttons 																		= new Buttons();	
+		Global.pids																			= new PIDs();
+		Global.thermometers																	= new Thermometers();
+		Global.relays																		= new Relays();
+		Global.pumps 																		= new Pumps(); 
+		Global.circuits 																	= new Circuits(); 
+		Global.eMails	 																	= new ArrayList<String>(); 
+		Global.awayList	 																	= new ArrayList<Calendars.Away>(); 
 
 		display.clear();
 		display.blinkOff();
@@ -120,10 +120,10 @@ public class Global
 			return;
 		}
 
-		HTTP_Request	<Ctrl_Configuration.Request>		httpRequest			= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
+		HTTP_Request	<Ctrl_Configuration.Request>			httpRequest					= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
 		
-		Ctrl_Configuration.Request	 						messageSend 		= new Ctrl_Configuration().new Request();
-		Ctrl__Abstract 										messageReceive 		= httpRequest.sendData(messageSend);
+		Ctrl_Configuration.Request	 							messageSend 				= new Ctrl_Configuration().new Request();
+		Ctrl__Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Ctrl_Configuration.Data))
 		{
@@ -131,16 +131,16 @@ public class Global
 			// There is a problem, so read the last file received
 			try
 			{
-				File						file			= new File("/home/pi/HVAC_Data/eRegulator_Json.txt");
-				FileInputStream  			fileread		= new FileInputStream (file);
-				byte[] 						data 			= new byte[(int) file.length()];
+				File											file						= new File("/home/pi/HVAC_Data/eRegulator_Json.txt");
+				FileInputStream  								fileread					= new FileInputStream (file);
+				byte[] 											data 						= new byte[(int) file.length()];
 				fileread.read(data);
 				fileread.close();
 
-			    String 						dataIn 			= new String(data);
+			    String 											dataIn 						= new String(data);
 				
-			    Ctrl_Configuration.Data		dataInJson 		= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
-				messageReceive								= (Ctrl__Abstract) dataInJson;
+			    Ctrl_Configuration.Data							dataInJson 					= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
+				messageReceive																= (Ctrl__Abstract) dataInJson;
 			}  
 			catch(IOException ex)
 			{
@@ -154,21 +154,21 @@ public class Global
 			// All is Ok, so see if we need to write a copy locally
 			try
 			{
-				File				file					= new File("/home/pi/HVAC_Data/eRegulator_Json.txt");
+				File											file						= new File("/home/pi/HVAC_Data/eRegulator_Json.txt");
 				if (file.exists())
 				{
-					Long timeFile							= file.lastModified();
-					Ctrl_Configuration.Data thisData		= (Ctrl_Configuration.Data) messageReceive;
-					Long timeData							= thisData.dateTime;
+					Long timeFile															= file.lastModified();
+					Ctrl_Configuration.Data thisData										= (Ctrl_Configuration.Data) messageReceive;
+					Long timeData															= thisData.dateTime;
 					
 					if (timeData > timeFile)
 					{
 						LogIt.info("Global", "constructor", "Over writing eRegulator_Json.txt file");
 						try
 						{
-							FileWriter 			filewrite			= new FileWriter("/home/pi/HVAC_Data/eRegulator_Json.txt");
-							Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
-							String 				messageJson 		= gson.toJson((Ctrl_Configuration.Data) messageReceive);
+							FileWriter 							filewrite					= new FileWriter("/home/pi/HVAC_Data/eRegulator_Json.txt");
+							Gson 								gson 						= new GsonBuilder().setPrettyPrinting().create();
+							String 								messageJson 				= gson.toJson((Ctrl_Configuration.Data) messageReceive);
 
 							filewrite.write(messageJson);
 							filewrite.flush();
@@ -189,9 +189,9 @@ public class Global
 					LogIt.info("Global", "constructor", "Creating eRegulator_Json.txt file");
 					try
 					{
-						FileWriter 			filewrite			= new FileWriter("/home/pi/HVAC_Data/eRegulator_Json.txt");
-						Gson 				gson 				= new GsonBuilder().setPrettyPrinting().create();
-						String 				messageJson 		= gson.toJson((Ctrl_Configuration.Data) messageReceive);
+						FileWriter 							filewrite						= new FileWriter("/home/pi/HVAC_Data/eRegulator_Json.txt");
+						Gson 								gson 							= new GsonBuilder().setPrettyPrinting().create();
+						String 								messageJson 					= gson.toJson((Ctrl_Configuration.Data) messageReceive);
 
 						filewrite.write(messageJson);
 						filewrite.flush();
@@ -210,7 +210,7 @@ public class Global
 		}
 		Global.httpSemaphore.semaphoreUnLock();			
 		
-		Ctrl_Configuration.Data								configurationData	= (Ctrl_Configuration.Data) messageReceive;
+		Ctrl_Configuration.Data								configurationData				= (Ctrl_Configuration.Data) messageReceive;
 
 		//
 		//==================================================================================
@@ -224,8 +224,8 @@ public class Global
 		Global.relays.configure(configurationData.relayList);
 		Global.pumps.configure(configurationData.pumpList);
 		Global.circuits.configure(configurationData.circuitList);
-		Global.burner									= new Burner(configurationData.burner);
-		Global.boiler									= new Boiler(configurationData.boiler);
+		Global.burner																		= new Burner(configurationData.burner);
+		Global.boiler																		= new Boiler(configurationData.boiler);
 		
 		for (String eMail : configurationData.eMailList)
 		{
@@ -242,20 +242,20 @@ public class Global
 		//==============================================================
 		// Returns the system time last midnight
 		//==============================================================
-		Calendar now		 				= Calendar.getInstance();
+		Calendar now		 																= Calendar.getInstance();
 		
 		now.set(Calendar.HOUR_OF_DAY, 0);
 		now.set(Calendar.MINUTE, 0);
 		now.set(Calendar.SECOND, 0);
 		now.set(Calendar.MILLISECOND, 0);
-		Long todayMidnight					= now.getTimeInMillis();
+		Long todayMidnight																	= now.getTimeInMillis();
 		
 		return todayMidnight;
 	}
-	public static Long today()							{return getTimeAtMidnight();								}
-	public static Long yesterday()						{return dateOnly(-1);										}
-	public static Long dateOnly(Integer days)			{return getTimeAtMidnight() - 24 * 60 * 60 * 1000L * days;	}
-	public static Long getTimeNowSinceMidnight()
+	public static Long 			today()							{return getTimeAtMidnight();								}
+	public static Long 			yesterday()						{return dateOnly(-1);										}
+	public static Long 			dateOnly(Integer days)			{return getTimeAtMidnight() - 24 * 60 * 60 * 1000L * days;	}
+	public static Long 			getTimeNowSinceMidnight()
 	{
 		//==============================================================
 		// Returns the number of milliseconds since last midnight
@@ -268,15 +268,15 @@ public class Global
 	}
 	public static String getDayOfWeek(Integer extraDays)
 	{
-		Calendar calendar 					= Calendar.getInstance();
-		Integer day 						= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
+		Calendar 												calendar 					= Calendar.getInstance();
+		Integer 												day 						= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
 	
-		day									= day + extraDays;						// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
+		day																					= day + extraDays;						// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
 		day--;																		// Sunday = 0, Monday = 1, Tues = 2 ... Sat = 6
-		day									= day % 7;								// Modulo to take extra days into account
+		day																					= day % 7;								// Modulo to take extra days into account
 		if (day == 0)
 		{
-			day								= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+			day																				= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 		}
 		return day.toString();
 	}
@@ -284,9 +284,9 @@ public class Global
 	{
 		// Returns a supplied time in string form "hh:mm" 
 		// In milliseconds since last midnight
-		String splitCharacters[]			= characters.split(":");
+		String splitCharacters[]															= characters.split(":");
 		
-		Calendar calendar					= Calendar.getInstance();
+		Calendar calendar																	= Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 	Integer.parseInt(splitCharacters[0]));
 		calendar.set(Calendar.MINUTE,  		Integer.parseInt(splitCharacters[1]));
 		calendar.set(Calendar.SECOND, 		0);
@@ -317,36 +317,49 @@ public class Global
 	public static Boolean waitMilliSeconds(Integer milliSeconds)
 	{
 		// Sleeps a supplied number of milliseconds
-		Boolean interrupted 				= false;
+		Boolean interrupted 																= false;
 		try
         {
             Thread.sleep(milliSeconds);
         }
         catch (InterruptedException e)
         {
-        	interrupted 					= true;
+        	interrupted 																	= true;
         }
 		return interrupted;
  	}
 	public static Boolean waitMilliSeconds(Long milliSeconds)
 	{
 		// Sleeps a supplied number of milliseconds
-		Boolean interrupted 				= false;
+		Boolean interrupted 																= false;
 		try
         {
             Thread.sleep(milliSeconds);
         }
         catch (InterruptedException e)
         {
-        	interrupted 					= true;
+        	interrupted 																	= true;
         }
 		return interrupted;
  	}
 	public static Boolean isSummer()
 	{
-		// Determine from outside temperature whether summer or not
+		// TODO Determine from outside temperature whether summer or not
 		return true;
  	}
+	public static Boolean isAway()
+    {
+		for (Calendars.Away 		awayItem : awayList)
+		{
+			Long now												= Global.now();
+			if (	(now > awayItem.dateTimeStart)
+			&& 		(now < awayItem.dateTimeEnd)	)
+			{
+				return true;
+			}
+		}
+		return false;
+    }
 	public static Long now()
 	{
 		return Calendar.getInstance().getTimeInMillis();
@@ -366,10 +379,10 @@ public class Global
 	}
 	public static void semaphoreLock(ReentrantLock semaphore)
 	{
-		Boolean 						lockResult;
+		Boolean 												lockResult;
 		try
 		{
-			lockResult = semaphore.tryLock(2, TimeUnit.SECONDS);
+			lockResult 																		= semaphore.tryLock(2, TimeUnit.SECONDS);
 		}
 		catch (InterruptedException e1)
 		{
@@ -385,16 +398,16 @@ public class Global
 	}
 	public static void eMailMessage(String subject, String messageText)
 	{
-		Properties props 				= new Properties();
+		Properties 												props 						= new Properties();
 		props.setProperty("mail.user", 			"administrateur");
     	props.setProperty("mail.password", 		"llenkcarb");
     	props.setProperty("mail.smtp.host", 	"192.168.5.10");
 
-        Session session 				= Session.getDefaultInstance(props);
+        Session 												session 					= Session.getDefaultInstance(props);
 
         try
         {
-            MimeMessage message 		= new MimeMessage(session);
+            MimeMessage 										message				 		= new MimeMessage(session);
 
             message.setFrom(new InternetAddress("HVAC@bapjg.com"));
             
@@ -413,38 +426,38 @@ public class Global
 	}
 	public static void waitThreadTermination()
 	{
-		Boolean threadsAlive										= true;
+		Boolean 												threadsAlive				= true;
 		
 		while (threadsAlive)
 		{
-			Set <Thread> threadSet = Thread.getAllStackTraces().keySet();
+			Set <Thread> 										threadSet 					= Thread.getAllStackTraces().keySet();
 			
 			Iterator<Thread> i = threadSet.iterator();
 			while(i.hasNext()) 
 			{
-				Thread j 											= i.next();
-				String threadName 									= j.getName();
+				Thread j 																	= i.next();
+				String threadName 															= j.getName();
 				if (threadName.substring(0,7).equals("Thread_"))
 				{
 						Global.waitSeconds(1);
 						break;
 				}
 			}
-			threadsAlive											= false;
+			threadsAlive																	= false;
 		}
 		
 	}
     public static String  dateTimeDisplay()
 	{
-		Date 								now 					= new Date();
-		SimpleDateFormat dateFormat 								= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-		String nowFormatted 										= dateFormat.format(now);
+		Date 													now 						= new Date();
+		SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		String 													nowFormatted 				= dateFormat.format(now);
 		return nowFormatted;
 	}
     public static String  dateTimeDisplay(Long milliSeconds)
 	{
-		SimpleDateFormat dateFormat 								= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-		String nowFormatted 										= dateFormat.format(milliSeconds);
+		SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		String 													nowFormatted 				= dateFormat.format(milliSeconds);
 		return nowFormatted;
 	}
     public static String displayTimeShort(Long dateTime)
@@ -472,16 +485,4 @@ public class Global
     	}
     	return dateTimeString;
    }
-   public static Boolean isAway()
-    {
-		for (Calendars.Away awayItem : awayList)
-		{
-			Long now												= Global.now();
-			if ((now > awayItem.dateTimeStart) && (now < awayItem.dateTimeEnd))
-			{
-				return true;
-			}
-		}
-		return false;
-    }
 }

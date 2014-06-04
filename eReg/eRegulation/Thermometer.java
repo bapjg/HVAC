@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import HVAC_Common.Ctrl_Configuration;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thermometer
 {
 	public String 					name;

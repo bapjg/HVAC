@@ -2,6 +2,7 @@ package eRegulation;
 
 import HVAC_Common.*;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thread_BackgroundTasks implements Runnable
 {
 	public static final int			SUMMER_PUMPS_Waiting			= 0;

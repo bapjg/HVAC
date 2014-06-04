@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import HVAC_Common.Ctrl_Calendars;
 import HVAC_Common.Ctrl_Configuration;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 abstract class Circuit_Abstract
 {
 	public static final int			CIRCUIT_TYPE_HotWater			= 0;
@@ -192,6 +193,8 @@ abstract class Circuit_Abstract
 		Long 					today								= Global.getTimeAtMidnight();
 		CircuitTask				taskFound							= null;
 		
+		// Stop activeTask
+		
 		if (taskActive != null)
 		{
 			if (	(now > taskActive.timeEnd) 							// taskActive : Time up
@@ -204,15 +207,10 @@ abstract class Circuit_Abstract
 			}
 		}
 
-//		System.out.println("Circuit : " + this.name);
-
+		// Go through all task entries for this circuit
+		
 		for (CircuitTask circuitTask : circuitTaskList) 													// Go through all tasks
 		{	
-//			System.out.println("Schedule times : " + circuitTask.timeStartDisplay + " - " + circuitTask.timeEndDisplay);
-//			System.out.println("Schedule days  : " + circuitTask.days);
-//			System.out.println("Schedule tlr   : " + circuitTask.dateLastRun);
-//			System.out.println("Schedule away  : " + Global.isAway());
-			
 			if (	(  circuitTask.days.contains(day)	) 
 //			&& 		(! circuitTask.active				)	   )
 					)

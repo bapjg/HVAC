@@ -2,10 +2,9 @@ package eRegulation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import HVAC_Common.Ctrl_Configuration;
 
-
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Pumps
 {
 	public ArrayList<Pump> pumpList = new ArrayList<Pump>();

@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import HVAC_Common.Ctrl_Configuration;
 
-
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Relays
 {
 	public ArrayList<Relay> relayList = new ArrayList<Relay>();

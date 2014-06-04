@@ -3,6 +3,7 @@ package eRegulation;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Semaphore
 {
 

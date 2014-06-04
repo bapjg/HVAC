@@ -11,7 +11,7 @@ import java.net.*;
 
 import HVAC_Common.Rpt_Abstract.Nack;
 
- 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thread_UserInterface implements Runnable
 {
 	public void run()

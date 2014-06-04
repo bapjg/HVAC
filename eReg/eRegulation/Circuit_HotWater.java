@@ -2,6 +2,7 @@ package eRegulation;
 
 import HVAC_Common.Ctrl_Configuration;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Circuit_HotWater extends Circuit_Abstract
 {
 //	public Circuit_HotWater(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)

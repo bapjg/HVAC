@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 import HVAC_Common.*;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class LogIt
 {
 	public static Boolean 						logDisplay 			= true;

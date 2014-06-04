@@ -2,6 +2,7 @@ package eRegulation;
 
 import HVAC_Common.Ctrl_Configuration;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Pump
 {
 	public String 			name;

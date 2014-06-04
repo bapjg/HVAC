@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import HVAC_Common.Ctrl_Configuration;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thermometers
 {
 	public ArrayList<Thermometer> thermometerList = new ArrayList<Thermometer>();

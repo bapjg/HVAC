@@ -1,13 +1,14 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Common.*;
-import HVAC_Common.Ctrl_Calendars.Word;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

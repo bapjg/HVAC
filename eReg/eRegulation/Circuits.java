@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import HVAC_Common.Ctrl_Configuration;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Circuits
 {
 	// Was serialisable no longer since 23/04/2014
