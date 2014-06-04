@@ -8,10 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import HVAC_Common.Ctrl_Fuel_Consumption;
-import HVAC_Common.Ctrl__Abstract;
-import HVAC_Common.Ctrl_Fuel_Consumption.Update;
+import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class FuelFlow
@@ -38,32 +35,32 @@ public class FuelFlow
 			return;
 		}
 
-		HTTP_Request							httpRequest			= new HTTP_Request <Ctrl_Fuel_Consumption.Request> ("Management");
-		Ctrl_Fuel_Consumption.Request	 		messageSend 		= (new Ctrl_Fuel_Consumption()).new Request();
-		Ctrl__Abstract 							messageReceive	 	= httpRequest.sendData(messageSend);
+		HTTP_Request											httpRequest					= new HTTP_Request <Ctrl_Fuel_Consumption.Request> ("Management");
+		Ctrl_Fuel_Consumption.Request	 						messageSend 				= (new Ctrl_Fuel_Consumption()).new Request();
+		Ctrl__Abstract 											messageReceive	 			= httpRequest.sendData(messageSend);
 			
 		Global.httpSemaphore.semaphoreUnLock();			
 
 		if (messageReceive instanceof Ctrl_Fuel_Consumption.Data)
 		{
 			LogIt.info("Fuelflow", "constructor", "Fuel level recovered from network");
-			consumption												= ((Ctrl_Fuel_Consumption.Data) messageReceive).fuelConsumed;
-	    	timeLastStart											= -1L;		// Is this right
+			consumption																		= ((Ctrl_Fuel_Consumption.Data) messageReceive).fuelConsumed;
+	    	timeLastStart																	= -1L;		// Is this right
 		}
 		else
 		{
 			LogIt.info("Fuelflow", "constructor", "Network failed, recovering from local file");
 			try
 			{
-				InputStream  	file 								= new FileInputStream("/home/pi/HVAC_Data/FuelConsumed.txt");
-				DataInputStream	input  								= new DataInputStream (file);
+				InputStream  									file 						= new FileInputStream("/home/pi/HVAC_Data/FuelConsumed.txt");
+				DataInputStream									input  						= new DataInputStream (file);
 			    try
 			    {
-			    	consumption							= input.readLong();
+			    	consumption																= input.readLong();
 			    }
 			    finally
 			    {
-			    	timeLastStart						= -1L;
+			    	timeLastStart															= -1L;
 			    	input.close();
 			    }
 			}  
@@ -71,7 +68,7 @@ public class FuelFlow
 			{
 				LogIt.info("Fuelflow", "constructor", "FuelConsumed.txt not found : creating it");
 	    
-				consumption								= 0L;
+				consumption																	= 0L;
 				saveFuelFlow();
 			}
 			catch(IOException ex)
@@ -84,15 +81,15 @@ public class FuelFlow
     {
 		try
 		{
-			OutputStream 		file 				= new FileOutputStream("/home/pi/HVAC_Data/FuelConsumed.txt");
-		    DataOutputStream 	output 				= new DataOutputStream(file);
+			OutputStream 										file 						= new FileOutputStream("/home/pi/HVAC_Data/FuelConsumed.txt");
+		    DataOutputStream 									output 						= new DataOutputStream(file);
 		    try
 		    {
 		    	output.writeLong(consumption);
 		    }
 		    finally
 		    {
-		    	timeLastStart						= -1L;		// Is this right
+		    	timeLastStart																= -1L;		// Is this right
 		        output.close();
 		    }
 		}  
@@ -117,7 +114,7 @@ public class FuelFlow
 			// last call here had no fuel flowing
 			if (Global.burnerVoltages.isFuelFlowing())			// Fuel has just started to flow
 			{
-				timeLastStart 						= Global.now();
+				timeLastStart 																= Global.now();
 			}
 		}
 		else
@@ -132,8 +129,8 @@ public class FuelFlow
 			else												// Fuel has just stopped flowing
 			{
 				// There is a case for just logging consumption at end point rather than evry few seconds
-				consumption							= consumption + Global.now() - timeLastStart;
-				timeLastStart						= -1L;
+				consumption																	= consumption + Global.now() - timeLastStart;
+				timeLastStart																= -1L;
 				saveFuelFlow();
 				LogIt.fuelData(consumption);
 			}

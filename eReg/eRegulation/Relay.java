@@ -5,16 +5,16 @@ import HVAC_Common.Ctrl_Configuration;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Relay
 {
-	private native void 	On(int Relay_Bank, int Relay_Number);
-	private native void 	Off(int Relay_Bank, int Relay_Number);
-	private native void 	AllOff(int Relay_Bank);
-	private native boolean 	IsOn(int Relay_Bank, int Relay_Number);
+	private native void 										On(int Relay_Bank, int Relay_Number);
+	private native void 										Off(int Relay_Bank, int Relay_Number);
+	private native void 										AllOff(int Relay_Bank);
+	private native boolean 										IsOn(int Relay_Bank, int Relay_Number);
 
-	public String 			name;
-	public String 			friendlyName;
-	public int 				relayBank;
-	public int 				relayNumber;
-	public Boolean			relayOn;
+	public String 												name;
+	public String 												friendlyName;
+	public int 													relayBank;
+	public int 													relayNumber;
+	public Boolean												relayOn;
 	
 //	public Relay(String name, String address, String friendlyName)
 //	{
@@ -36,18 +36,18 @@ public class Relay
 //	}
 	public Relay(Ctrl_Configuration.Relay 				relayParam)
 	{
-		relayBank 					= 0;
+		relayBank 																			= 0;
 		
-		this.name 		    		= relayParam.name;
-		this.friendlyName   		= "";
-		this.relayNumber			= relayParam.relayNumber;
-		this.relayOn				= false;
+		this.name 		    																= relayParam.name;
+		this.friendlyName   																= "";
+		this.relayNumber																	= relayParam.relayNumber;
+		this.relayOn																		= false;
 	}
 	public void on()
 	{
 		Global.interfaceSemaphore.semaphoreLock("Relay.on");
 		On(relayBank, relayNumber);
-		relayOn						= true;
+		relayOn																				= true;
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
 	public void off()
@@ -55,13 +55,13 @@ public class Relay
 		// Call takes approx 12 ms (100 call to off = 1225ms)
 		Global.interfaceSemaphore.semaphoreLock("Relay.off");
 		Off(relayBank, relayNumber);
-		relayOn						= false;
+		relayOn																				= false;
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
 	public Boolean isOn()
 	{
 		Global.interfaceSemaphore.semaphoreLock("Relay.isOn");
-		Boolean result			= IsOn(relayBank, relayNumber);
+		Boolean result																		= IsOn(relayBank, relayNumber);
 		Global.interfaceSemaphore.semaphoreUnLock();
 		return result;
 	}

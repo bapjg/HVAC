@@ -34,11 +34,11 @@ public class Global
 	// by changing C code to open ic2/spi channel once (and then keeping it open
 	// Current code does open, read/write, close
 	//
-	public static 	Semaphore	 					interfaceSemaphore 	= new Semaphore("Inteface", true);
+	public static 	Semaphore	 								interfaceSemaphore 			= new Semaphore("Inteface", true);
 	//
 	// This ensures that http requests are made ThreadSafe
 	//
-	public static 	Semaphore 						httpSemaphore 		= new Semaphore("http", true);
+	public static 	Semaphore 									httpSemaphore 				= new Semaphore("http", true);
 	//
 	//===================================================================
 	
@@ -345,7 +345,14 @@ public class Global
 	public static Boolean isSummer()
 	{
 		// TODO Determine from outside temperature whether summer or not
-		return true;
+		if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)				return true;
+		else																				return false;
+ 	}
+	public static Boolean isWinter()
+	{
+		// TODO Determine from outside temperature whether summer or not
+		if (Global.thermoOutside.reading < Global.tasksBackGround.winterTemp)				return true;
+		else																				return false;
  	}
 	public static Boolean isAway()
     {

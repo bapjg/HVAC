@@ -100,6 +100,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		public Integer							pumpCleanDurationMinutes;
 		public Cmn_Temperature					antiFreeze;
 		public Cmn_Temperature					summerTemp;
+		public Cmn_Temperature					winterTemp;
 		public Cmn_Temperature					sunshineInfluence;
 	}
 
@@ -329,6 +330,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		calendarUpdate.tasksBackGround.pumpCleanTime						= new Cmn_Time("01:00");
 		calendarUpdate.tasksBackGround.pumpCleanDurationMinutes				= 5;		// minutes
 		calendarUpdate.tasksBackGround.summerTemp							= new Cmn_Temperature("17");
+		calendarUpdate.tasksBackGround.winterTemp							= new Cmn_Temperature("10");
 		calendarUpdate.tasksBackGround.sunshineInfluence					= new Cmn_Temperature("5");
 
 		//

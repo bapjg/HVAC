@@ -1,44 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version		= "1.0" encoding		= "utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/row"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/background"
+    android:baselineAligned="false"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayout1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="60dp"
+        android:background="@color/background"
+        android:gravity="top"
+        android:orientation="vertical" 
+    >
 
-        <Button
-            android:id="@+id/buttonDelete"
-            style="@style/AD_ImageButton"
-            android:layout_width="80dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="left"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/button_delete"
-            android:gravity="center"
-            android:minHeight="40dp"
-            android:minWidth="0dp"
-            android:text="Delete"
-            android:width="20dp" />
+        <TextView
+            style="@style/AD_Text"
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+       		android:gravity="center_horizontal"
+            android:text="Calendar" 
+        />
 
-        <Button
-            android:id="@+id/buttonOk"
-            style="@style/AD_ImageButton"
-            android:layout_width="80dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/button_ok"
-            android:gravity="center"
-            android:text="Ok" />
+        <TextView
+            style="@style/AD_Data"
+             android:id="@+id/subTitle"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+        	android:gravity="center_horizontal"
+            android:text="Vocabulary" 
+        />
+   		<View
+             android:layout_width= "fill_parent"
+             android:layout_height= "5dp"
+             android:background= "@color/background"
+        />
+        <View
+             android:layout_width= "fill_parent"
+             android:layout_height= "2dp"
+             android:background= "#3399FF"
+        />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -133,5 +137,36 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="7" />
     </LinearLayout>
+	<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+     >
+        <Button
+            android:id="@+id/buttonDelete"
+            style="@style/AD_ImageButton"
+            android:layout_width="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="left"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/button_delete"
+            android:gravity="center"
+            android:minHeight="40dp"
+            android:minWidth="0dp"
+            android:text="Delete"
+            android:width="20dp" />
 
+        <Button
+            android:id="@+id/buttonOk"
+            style="@style/AD_ImageButton"
+            android:layout_width="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/button_ok"
+            android:gravity="center"
+            android:text="Ok" />
+
+    </RelativeLayout>
 </LinearLayout>

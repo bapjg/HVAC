@@ -65,8 +65,8 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public void displayHeader()
 	{
-        TextView 												name						= (TextView) panelView.findViewById(R.id.name);
-        name.setText("Vocabulary");		
+        TextView 												subTitle					= (TextView) panelView.findViewById(R.id.subTitle);
+        subTitle.setText("Vocabulary");		
 	}
 	public void displayContents()
 	{

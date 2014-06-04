@@ -2,17 +2,16 @@ package eRegulation;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.xml.sax.SAXException;
-
-import HVAC_Common.Ctrl_Actions_Stop;
+import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Control
 {
-    public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException
+    public static void main(String[] args) 						throws 						IOException, 
+																							SAXException, 
+																							ParserConfigurationException
 	{
     	//============================================================
 		//
@@ -21,7 +20,7 @@ public class Control
 		//
     	
 		@SuppressWarnings("unused")
-		Control 		Me 							= new Control();
+		Control 												Me 							= new Control();
 		Thread.currentThread().setName("Thread_Main");
 		
 		//
@@ -51,8 +50,8 @@ public class Control
 		//
 
 		@SuppressWarnings("unused")
-		Global 			global 						= new Global();
-		Global.stopNow								= false;
+		Global 													global 						= new Global();
+		Global.stopNow																		= false;
 		LogIt.info("Control", "main", "Starting/BootSequence");
 
 		//
@@ -66,10 +65,10 @@ public class Control
 		
 		Global.display.writeAtPosition(2, 0, " Calendar");
 		@SuppressWarnings("unused")
-		Calendars		calendars 					= new Calendars();
+		Calendars												calendars 					= new Calendars();
 		Global.display.writeAtPosition(2, 18, "Ok");
 
-		calendars									= null;				// To avoid memory use in the event of a new calendar later
+		calendars																			= null;				// To avoid memory use in the event of a new calendar later
 		
 		//
 		//============================================================
@@ -80,26 +79,26 @@ public class Control
 		// Initialise Global (This ought to be in constructor) xxxx
 		//
 		
-		Global.thermoBoiler 						= Global.thermometers.fetchThermometer("Boiler");
-		Global.thermoBoilerOld						= Global.thermometers.fetchThermometer("Boiler_Old");
-		Global.thermoBoilerOut						= Global.thermometers.fetchThermometer("Boiler_Out");
-		Global.thermoBoilerIn						= Global.thermometers.fetchThermometer("Boiler_In");
-		
-		Global.thermoFloorOut						= Global.thermometers.fetchThermometer("Floor_Out");
-		Global.thermoFloorIn						= Global.thermometers.fetchThermometer("Floor_In");
-		
-		Global.thermoRadiatorOut					= Global.thermometers.fetchThermometer("Radiator_Out");
-		Global.thermoRadiatorIn						= Global.thermometers.fetchThermometer("Radiator_In");
-		
-		Global.thermoOutside						= Global.thermometers.fetchThermometer("Outside");
-		Global.thermoLivingRoom						= Global.thermometers.fetchThermometer("Living_Room");
-		Global.thermoHotWater						= Global.thermometers.fetchThermometer("Hot_Water");
+		Global.thermoBoiler 																= Global.thermometers.fetchThermometer("Boiler");
+		Global.thermoBoilerOld																= Global.thermometers.fetchThermometer("Boiler_Old");
+		Global.thermoBoilerOut																= Global.thermometers.fetchThermometer("Boiler_Out");
+		Global.thermoBoilerIn																= Global.thermometers.fetchThermometer("Boiler_In");
+												
+		Global.thermoFloorOut																= Global.thermometers.fetchThermometer("Floor_Out");
+		Global.thermoFloorIn																= Global.thermometers.fetchThermometer("Floor_In");
+												
+		Global.thermoRadiatorOut															= Global.thermometers.fetchThermometer("Radiator_Out");
+		Global.thermoRadiatorIn																= Global.thermometers.fetchThermometer("Radiator_In");
+												
+		Global.thermoOutside																= Global.thermometers.fetchThermometer("Outside");
+		Global.thermoLivingRoom																= Global.thermometers.fetchThermometer("Living_Room");
+		Global.thermoHotWater																= Global.thermometers.fetchThermometer("Hot_Water");
 
-		Global.burnerPower	 						= Global.relays.fetchRelay("Burner");
-
-		Global.circuitFloor							= (Circuit_Mixer) 		Global.circuits.fetchcircuit("Floor");
-		Global.circuitGradient						= (Circuit_Radiator) 	Global.circuits.fetchcircuit("Radiator");
-		Global.circuitHotWater						= (Circuit_HotWater) 	Global.circuits.fetchcircuit("Hot_Water");
+		Global.burnerPower	 																= Global.relays.fetchRelay("Burner");
+											
+		Global.circuitFloor																	= (Circuit_Mixer) 		Global.circuits.fetchcircuit("Floor");
+		Global.circuitGradient																= (Circuit_Radiator) 	Global.circuits.fetchcircuit("Radiator");
+		Global.circuitHotWater																= (Circuit_HotWater) 	Global.circuits.fetchcircuit("Hot_Water");
 
 		//
 		//============================================================
@@ -134,7 +133,7 @@ public class Control
 		// Main Code
 		//
 		
-		HeatRequired 	globalHeatRequired						= new HeatRequired();
+		HeatRequired 											globalHeatRequired			= new HeatRequired();
 		
 		while (!Global.stopNow)
 		{
@@ -142,8 +141,8 @@ public class Control
 		
 			Global.boiler.sequencer();
 			
-			globalHeatRequired.tempMaximum 						= -1;
-			globalHeatRequired.tempMinimum 						= -1;
+			globalHeatRequired.tempMaximum 													= -1;
+			globalHeatRequired.tempMinimum 													= -1;
 
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{
@@ -153,12 +152,12 @@ public class Control
 				{
 					if (circuit.heatRequired.tempMinimum > globalHeatRequired.tempMinimum)
 					{
-						globalHeatRequired.tempMinimum			= circuit.heatRequired.tempMinimum;
+						globalHeatRequired.tempMinimum										= circuit.heatRequired.tempMinimum;
 					}
 					
 					if (circuit.heatRequired.tempMaximum > globalHeatRequired.tempMaximum)
 					{
-						globalHeatRequired.tempMaximum			= circuit.heatRequired.tempMaximum;
+						globalHeatRequired.tempMaximum										= circuit.heatRequired.tempMaximum;
 					}
 				}
 			}

@@ -37,6 +37,8 @@ public class Dialog_Temperature 							extends 					DialogFragment
 		this.tempMin																		= tempMin;
 		this.tempMax																		= tempMax;
 		this.callBack																		= callBack;
+		if (temperature.milliDegrees/1000 > tempMax)			this.tempMax 				= temperature.milliDegrees/1000;
+		if (temperature.milliDegrees/1000 < tempMin)			this.tempMin 				= temperature.milliDegrees/1000;
     }	
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
@@ -49,22 +51,15 @@ public class Dialog_Temperature 							extends 					DialogFragment
         builder.setTitle("Select temperature");
          
 		temperaturePicker 																	= (NumberPicker) dialogView.findViewById(R.id.tempObjective);
-	    String[] 												temps 						= new String[tempMax - tempMin + 1];
-	    for (int i = 0; i < tempMax - tempMin + 1; i++)
-	    {
-	    	temps[i] 																		= Integer.toString(i + tempMin);
-	    }
 	    
 	    EditText												tempChild					= (EditText) temperaturePicker.getChildAt(0);	// Stop keyboard appearing
 	    tempChild.setFocusable(false);
 	    tempChild.setInputType(InputType.TYPE_NULL);
-	    
-	    temperaturePicker.setMinValue(0);
-	    temperaturePicker.setMaxValue(tempMax - tempMin + 1);
+
+	    temperaturePicker.setMinValue(tempMin);
+	    temperaturePicker.setMaxValue(tempMax);
+	    temperaturePicker.setValue(temperature.milliDegrees/1000);		
 	    temperaturePicker.setWrapSelectorWheel(false);
-	    temperaturePicker.setDisplayedValues(temps);
-	    
-	    temperaturePicker.setValue(temperature.milliDegrees/1000 - tempMin);				// index of current temperature in the list
        
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
@@ -73,7 +68,7 @@ public class Dialog_Temperature 							extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	Integer 												newTemperature 				= (temperaturePicker.getValue() + tempMin);
+     	Integer 												newTemperature 				= temperaturePicker.getValue();
      	temperature.milliDegrees															= newTemperature * 1000;
      	callBack.onDialogReturn();
     	dialog.dismiss();

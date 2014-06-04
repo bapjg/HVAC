@@ -16,11 +16,11 @@ import HVAC_Common.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class LogIt
 {
-	public static Boolean 						logDisplay 			= true;
+	public static Boolean 										logDisplay 					= true;
 	
 	public LogIt()
 	{
-		logDisplay													= true;
+		logDisplay																			= true;
 	}
 
 	public static void  logMessage(String messageType, String className, String methodName, String message)
@@ -31,16 +31,16 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request	<Rpt_Report>		httpRequest			= new HTTP_Request <Rpt_Report> ("Monitor");
+		HTTP_Request	<Rpt_Report>							httpRequest					= new HTTP_Request <Rpt_Report> ("Monitor");
 		
-		Rpt_Report	 						messageSend 		= new Rpt_Report();
-		messageSend.dateTime 										= System.currentTimeMillis();
-		messageSend.reportType 										= messageType;
-		messageSend.className 										= className;
-		messageSend.methodName 										= methodName;
-		messageSend.reportText 										= message;
+		Rpt_Report	 											messageSend 				= new Rpt_Report();
+		messageSend.dateTime 																= System.currentTimeMillis();
+		messageSend.reportType 																= messageType;
+		messageSend.className 																= className;
+		messageSend.methodName 																= methodName;
+		messageSend.reportText 																= message;
 			
-		Rpt_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Rpt_Abstract.Ack))
 		{
@@ -52,7 +52,7 @@ public class LogIt
 	
 	public static void  display(String className, String methodName, String message)
 	{
-		String classMethod											= (className + "/" + methodName + "                                             ").substring(0,30);
+		String 													classMethod					= (className + "/" + methodName + "                                             ").substring(0,30);
 		System.out.println(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
 	}
 	public static void  info(String className, String methodName, String message)
@@ -61,7 +61,7 @@ public class LogIt
 
 		if (logDisplay)
 		{
-			String classMethod										= (className + "/" + methodName + "                                             ").substring(0,30);
+			String 												classMethod					= (className + "/" + methodName + "                                             ").substring(0,30);
 			System.out.println(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 		}
 	}
@@ -71,7 +71,7 @@ public class LogIt
 
 		if (display)
 		{
-			String classMethod											= (className + "/" + methodName + "                                             ").substring(0,30);
+			String 												classMethod					= (className + "/" + methodName + "                                             ").substring(0,30);
 			System.out.println(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 		}
 	}
@@ -81,7 +81,7 @@ public class LogIt
 
 		if (logDisplay)
 		{
-			String classMethod											= (className + "/" + methodName + "                                             ").substring(0,30);
+			String 												classMethod					= (className + "/" + methodName + "                                             ").substring(0,30);
 			System.out.println(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 		}
 	}
@@ -91,7 +91,7 @@ public class LogIt
 
 		if (display)
 		{
-			String classMethod											= (className + "/" + methodName + "                                             ").substring(0,30);
+			String 												classMethod					= (className + "/" + methodName + "                                             ").substring(0,30);
 			System.out.println(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 		}
 	}
@@ -115,22 +115,22 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request 							httpRequest			= new HTTP_Request <Rpt_PID.Update> ("Monitor");
-		
-		Rpt_PID.Data 						messageSend 		= (new Rpt_PID()).new Update();
-		messageSend.dateTime 										= System.currentTimeMillis();
-		messageSend.target		 									= target; 
-		messageSend.proportional		 							= proportional; 
-		messageSend.differential		 							= differential; 
-		messageSend.integral		 								= integral; 
-		messageSend.kP		 										= kP; 
-		messageSend.kD		 										= kD; 
-		messageSend.kI		 										= kI; 
-		messageSend.result		 									= result; 
-		messageSend.tempOut		 									= tempOut;
-		messageSend.tempBoiler		 								= tempBoiler;
-			
-		Rpt_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		HTTP_Request 											httpRequest					= new HTTP_Request <Rpt_PID.Update> ("Monitor");
+				
+		Rpt_PID.Data 											messageSend 				= (new Rpt_PID()).new Update();
+		messageSend.dateTime 																= System.currentTimeMillis();
+		messageSend.target		 															= target; 
+		messageSend.proportional		 													= proportional; 
+		messageSend.differential		 													= differential; 
+		messageSend.integral		 														= integral; 
+		messageSend.kP		 																= kP; 
+		messageSend.kD		 																= kD; 
+		messageSend.kI		 																= kI; 
+		messageSend.result		 															= result; 
+		messageSend.tempOut		 															= tempOut;
+		messageSend.tempBoiler		 														= tempBoiler;
+					
+		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 		
 		if (!(messageReceive instanceof Rpt_Abstract.Ack))
 		{
@@ -147,33 +147,33 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request <Rpt_Temperatures>		httpRequest			= new HTTP_Request <Rpt_Temperatures> ("Monitor");
+		HTTP_Request <Rpt_Temperatures>							httpRequest					= new HTTP_Request <Rpt_Temperatures> ("Monitor");
 		
-		Rpt_Temperatures 					messageSend 		= new Rpt_Temperatures();
-		messageSend.dateTime 										= System.currentTimeMillis();
+		Rpt_Temperatures 										messageSend 				= new Rpt_Temperatures();
+		messageSend.dateTime 																= System.currentTimeMillis();
+							
+		messageSend.tempBoiler 																= Global.thermoBoiler.reading;
+		messageSend.tempBoilerIn 															= Global.thermoBoilerIn.reading;
+		messageSend.tempBoilerOut															= Global.thermoBoilerOut.reading;
+									
+		messageSend.tempFloorIn 															= Global.thermoFloorIn.reading;
+		messageSend.tempFloorOut 															= Global.thermoFloorOut.reading;
+									
+		messageSend.tempRadiatorIn 															= Global.thermoRadiatorIn.reading;
+		messageSend.tempRadiatorOut 														= Global.thermoRadiatorOut.reading;
+									
+		messageSend.tempHotWater 															= Global.thermoHotWater.reading; 
+		messageSend.tempOutside 															= Global.thermoOutside.reading;
+		messageSend.tempLivingRoom 															= Global.thermoLivingRoom.reading;
+										
+		messageSend.pidMixerTarget															= Global.thermoFloorOut.pidControler.target;
+		messageSend.tempLivingRoomTarget													= 19000;
+									
+		messageSend.pidMixerDifferential													= Global.thermoFloorOut.pidControler.dTdt();
+		messageSend.pidBoilerOutDifferential												= Global.thermoBoilerOut.pidControler.dTdt();
 		
-		messageSend.tempBoiler 										= Global.thermoBoiler.reading;
-		messageSend.tempBoilerIn 									= Global.thermoBoilerIn.reading;
-		messageSend.tempBoilerOut									= Global.thermoBoilerOut.reading;
-		
-		messageSend.tempFloorIn 									= Global.thermoFloorIn.reading;
-		messageSend.tempFloorOut 									= Global.thermoFloorOut.reading;
-		
-		messageSend.tempRadiatorIn 									= Global.thermoRadiatorIn.reading;
-		messageSend.tempRadiatorOut 								= Global.thermoRadiatorOut.reading;
-		
-		messageSend.tempHotWater 									= Global.thermoHotWater.reading; 
-		messageSend.tempOutside 									= Global.thermoOutside.reading;
-		messageSend.tempLivingRoom 									= Global.thermoLivingRoom.reading;
+		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 			
-		messageSend.pidMixerTarget									= Global.thermoFloorOut.pidControler.target;
-		messageSend.tempLivingRoomTarget							= 19000;
-		
-		messageSend.pidMixerDifferential							= Global.thermoFloorOut.pidControler.dTdt();
-		messageSend.pidBoilerOutDifferential						= Global.thermoBoilerOut.pidControler.dTdt();
-
-		Rpt_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
-		
 		if (!(messageReceive instanceof Rpt_Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " Temp data  is : Nack");
@@ -189,15 +189,15 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request <Rpt_MixerMouvement>	httpRequest			= new HTTP_Request <Rpt_MixerMouvement> ("Monitor");
-		
-		Rpt_MixerMouvement 					messageSend 		= new Rpt_MixerMouvement();
-		messageSend.dateTimeStart 									= dateTimeStart;
-		messageSend.positionTrackedStart 							= positionTrackedStart;
-		messageSend.dateTimeEnd 									= dateTimeEnd;
-		messageSend.positionTrackedEnd								= positionTrackedEnd;
-		
-		Rpt_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		HTTP_Request <Rpt_MixerMouvement>						httpRequest					= new HTTP_Request <Rpt_MixerMouvement> ("Monitor");
+				
+		Rpt_MixerMouvement 										messageSend 				= new Rpt_MixerMouvement();
+		messageSend.dateTimeStart 															= dateTimeStart;
+		messageSend.positionTrackedStart 													= positionTrackedStart;
+		messageSend.dateTimeEnd 															= dateTimeEnd;
+		messageSend.positionTrackedEnd														= positionTrackedEnd;
+				
+		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 		
 		if (!(messageReceive instanceof Rpt_Abstract.Ack))
 		{
@@ -214,13 +214,13 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request							httpRequest			= new HTTP_Request <Ctrl_Fuel_Consumption.Update> ("Monitor");
+		HTTP_Request											httpRequest					= new HTTP_Request <Ctrl_Fuel_Consumption.Update> ("Monitor");
 			
-		Ctrl_Fuel_Consumption.Update	 		messageSend 		= (new Ctrl_Fuel_Consumption()).new Update();
-		messageSend.dateTime 										= System.currentTimeMillis();
-		messageSend.fuelConsumed 									= fuelConsumed;
+		Ctrl_Fuel_Consumption.Update	 						messageSend 				= (new Ctrl_Fuel_Consumption()).new Update();
+		messageSend.dateTime 																= System.currentTimeMillis();
+		messageSend.fuelConsumed 															= fuelConsumed;
 			
-		Ctrl__Abstract 							messageReceive	 	= httpRequest.sendData(messageSend);
+		Ctrl__Abstract 											messageReceive	 			= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Ctrl__Abstract.Ack))
 		{
@@ -237,14 +237,14 @@ public class LogIt
 			return;
 		}
 
-		HTTP_Request <Rpt_Action>			httpRequest			= new HTTP_Request <Rpt_Action> ("Monitor");
+		HTTP_Request <Rpt_Action>								httpRequest					= new HTTP_Request <Rpt_Action> ("Monitor");
 
-		Rpt_Action	 						messageSend 		= new Rpt_Action();
-		messageSend.dateTime 										= System.currentTimeMillis();
-		messageSend.device 											= device;
-		messageSend.action 											= action;
+		Rpt_Action	 											messageSend 				= new Rpt_Action();
+		messageSend.dateTime 																= System.currentTimeMillis();
+		messageSend.device 																	= device;
+		messageSend.action 																	= action;
 			
-		Rpt_Abstract 						messageReceive 		= httpRequest.sendData(messageSend);
+		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Rpt_Abstract.Ack))
 		{
@@ -255,16 +255,16 @@ public class LogIt
     }
     public static String  dateTimeStamp()
 	{
-		Date now = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-		String nowFormatted = dateFormat.format(now);
+		Date 													now 						= new Date();
+		SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		String 													nowFormatted 				= dateFormat.format(now);
 		return nowFormatted;
 	}
     public static String  timeStamp()
 	{
-		Date now = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-		String nowFormatted = dateFormat.format(now);
+		Date 													now 						= new Date();
+		SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("HH:mm:ss");
+		String 													nowFormatted 				= dateFormat.format(now);
 		return nowFormatted;
 	}
 }

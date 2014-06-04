@@ -11,26 +11,25 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
-
 import HVAC_Common.*;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Z_Initialise_Calendars
 {
 
 	public static void main(String[] args)
 	{
-		Control 								Me 					= new Control();
+		Control 												Me 							= new Control();
 		
 		//================================================================================================================================
 		//
 		// Create object to be sent
 		//
 		
-		Ctrl_Calendars.Update 					messageSend			= new Ctrl_Calendars().new Update();
-		messageSend.initialise();												// This is what sets up the data
+		Ctrl_Calendars.Update 									messageSend					= new Ctrl_Calendars().new Update();
+		messageSend.initialise();																	// This is what sets up the data
 
 		//
 		//================================================================================================================================
@@ -40,15 +39,12 @@ public class Z_Initialise_Calendars
 		// Setup URL & Connection to server
 		//
 		
-		URL										serverURL;
-		URLConnection							serverConnection;
-
-		serverURL													= null;
-		serverConnection											= null;
+		URL														serverURL					= null;
+		URLConnection											serverConnection			= null;
 		
 		try
 		{
-			serverURL = new URL("http://192.168.5.10:8888/hvac/" + "Management");
+			serverURL 																		= new URL("http://192.168.5.10:8888/hvac/" + "Management");
 		}
 		catch (MalformedURLException e)
 		{
@@ -57,7 +53,7 @@ public class Z_Initialise_Calendars
 
 		try
 		{
-			serverConnection 										= serverURL.openConnection();
+			serverConnection 																= serverURL.openConnection();
 		}
 		catch (IOException e)
 		{
@@ -70,9 +66,9 @@ public class Z_Initialise_Calendars
 		serverConnection.setReadTimeout(1000);
 		serverConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 
-		messageSend.dateTime 										= System.currentTimeMillis();
+		messageSend.dateTime 																= System.currentTimeMillis();
 			
-		Ctrl__Abstract							messageReceive		= null;
+		Ctrl__Abstract											messageReceive				= null;
 
 		//
 		//================================================================================================================================
@@ -84,8 +80,8 @@ public class Z_Initialise_Calendars
 
 		try
 		{
-			ObjectOutputStream 			outputToServlet;
-			outputToServlet 										= new ObjectOutputStream(serverConnection.getOutputStream());
+			ObjectOutputStream 									outputToServlet;
+			outputToServlet 																= new ObjectOutputStream(serverConnection.getOutputStream());
 
 			System.out.println("Sending message " + messageSend.getClass().toString());
 			
@@ -112,8 +108,8 @@ public class Z_Initialise_Calendars
 
 		try
 		{
-			ObjectInputStream 		response 				= new ObjectInputStream(serverConnection.getInputStream());
-			messageReceive 									= (Ctrl__Abstract) response.readObject();
+			ObjectInputStream 									response 					= new ObjectInputStream(serverConnection.getInputStream());
+			messageReceive 																	= (Ctrl__Abstract) response.readObject();
 		}
     	catch (Exception e) 
     	{
@@ -128,13 +124,13 @@ public class Z_Initialise_Calendars
 		// Send second message to Server to receive what was just sent
 		//
 
-		Ctrl_Calendars.Request 				messageSend2			= new Ctrl_Calendars().new Request();
+		Ctrl_Calendars.Request 									messageSend2				= new Ctrl_Calendars().new Request();
 			
-		messageReceive												= null;
+		messageReceive																		= null;
 
 		try
 		{
-			serverConnection 										= serverURL.openConnection();
+			serverConnection 																= serverURL.openConnection();
 		}
 		catch (IOException e)
 		{
@@ -149,8 +145,8 @@ public class Z_Initialise_Calendars
 
 		try
 		{
-			ObjectOutputStream 			outputToServlet;
-			outputToServlet 										= new ObjectOutputStream(serverConnection.getOutputStream());
+			ObjectOutputStream 									outputToServlet;
+			outputToServlet 																= new ObjectOutputStream(serverConnection.getOutputStream());
 			outputToServlet.writeObject(messageSend2);
 			outputToServlet.flush();
 			outputToServlet.close();
@@ -174,8 +170,8 @@ public class Z_Initialise_Calendars
 
 		try
 		{
-			ObjectInputStream 		response 				= new ObjectInputStream(serverConnection.getInputStream());
-			messageReceive 									= (Ctrl__Abstract) response.readObject();
+			ObjectInputStream 									response 					= new ObjectInputStream(serverConnection.getInputStream());
+			messageReceive 																	= (Ctrl__Abstract) response.readObject();
 			System.out.println("Class " + messageReceive.getClass().toString());
 		}
     	catch (Exception e) 
@@ -191,9 +187,9 @@ public class Z_Initialise_Calendars
 		// Convert the response to Json and display
 		//
 		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Gson 													gson 						= new GsonBuilder().setPrettyPrinting().create();
 		
-		String z = gson.toJson((Ctrl_Calendars.Data) messageReceive);
+		String 													z 							= gson.toJson((Ctrl_Calendars.Data) messageReceive);
 		System.out.println(z);
 		
 		//

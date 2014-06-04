@@ -5,22 +5,21 @@ import java.io.FileWriter;
 import java.io.File;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class GPIO
 {
-	String pin;
-	static final String prefix 						= "/sys/class/gpio/";
-	FileWriter exportFile;
-	FileWriter unexportFile;
+	String 														pin;
+	static final String 										prefix 						= "/sys/class/gpio/";
+	FileWriter 													exportFile;
+	FileWriter 													unexportFile;
 	
 	public GPIO(Integer pin)
 	{
-		this.pin									= pin.toString();
-        try
-        {
-        	exportFile 								= new FileWriter(prefix + "export");
-        	unexportFile 							= new FileWriter(prefix + "unexport");
-            File exportFileCheck 					= new File(prefix + "gpio"+ this.pin);
+		this.pin																			= pin.toString();
+        try											
+        {											
+        	exportFile 																		= new FileWriter(prefix + "export");
+        	unexportFile 																	= new FileWriter(prefix + "unexport");
+            File exportFileCheck 															= new File(prefix + "gpio"+ this.pin);
             if (exportFileCheck.exists()) 
             {
                 unexportFile.write(this.pin);
@@ -42,7 +41,7 @@ public class GPIO
 	{
         try
         {
-        	FileWriter directionFile 				= new FileWriter(prefix + "gpio" + this.pin + "/direction");
+        	FileWriter 											directionFile 				= new FileWriter(prefix + "gpio" + this.pin + "/direction");
         	directionFile.write("in");
         	directionFile.flush();
         	directionFile.close();
@@ -56,7 +55,7 @@ public class GPIO
 	{
         try
         {
-        	FileWriter directionFile 				= new FileWriter(prefix + "gpio" + this.pin + "/direction");
+        	FileWriter 											directionFile 				= new FileWriter(prefix + "gpio" + this.pin + "/direction");
         	directionFile.write("out");
         	directionFile.flush();
         	directionFile.close();
@@ -71,7 +70,7 @@ public class GPIO
 		setOutput();
 		try
         {
-            BufferedWriter valueFile 				= new BufferedWriter(new FileWriter(prefix + "gpio" + this.pin + "/value"));
+            BufferedWriter 										valueFile 					= new BufferedWriter(new FileWriter(prefix + "gpio" + this.pin + "/value"));
             valueFile.write("1");
             valueFile.close();
          }
@@ -85,7 +84,7 @@ public class GPIO
 		setOutput();
 		try
         {
-            BufferedWriter valueFile 				= new BufferedWriter(new FileWriter(prefix + "gpio" + this.pin + "/value"));
+            BufferedWriter 										valueFile 					= new BufferedWriter(new FileWriter(prefix + "gpio" + this.pin + "/value"));
             valueFile.write("0");
             valueFile.close();
          }
@@ -98,8 +97,8 @@ public class GPIO
 	{
 		try
         {
-            BufferedReader  valueFile 				= new BufferedReader(new FileReader(prefix + "gpio" + this.pin + "/value"));
-            String			valueReturned			= valueFile.readLine();
+            BufferedReader  									valueFile 					= new BufferedReader(new FileReader(prefix + "gpio" + this.pin + "/value"));
+            String												valueReturned				= valueFile.readLine();
             valueFile.close();
             if (valueReturned.equals("1"))
             {
@@ -121,9 +120,9 @@ public class GPIO
        	System.out.println("Finalising");
         try
         {
-        	exportFile 								= new FileWriter(prefix + "export");
-        	unexportFile 							= new FileWriter(prefix + "unexport");
-            File exportFileCheck 					= new File(prefix + "gpio"+ this.pin);
+        	exportFile 																		= new FileWriter(prefix + "export");
+        	unexportFile 																	= new FileWriter(prefix + "unexport");
+            File 												exportFileCheck 			= new File(prefix + "gpio"+ this.pin);
             if (exportFileCheck.exists()) 
             {
                 unexportFile.write(this.pin);

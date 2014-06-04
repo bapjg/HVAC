@@ -51,7 +51,7 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
-		((TextView) itemView.findViewById(R.id.name)).setText(itemData.name);
+		((TextView) itemView.findViewById(R.id.subTitle)).setText(itemData.name);
 	}
 	public void displayContents()
 	{

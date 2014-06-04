@@ -2,8 +2,7 @@ package eRegulation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import HVAC_Common.Ctrl_Configuration;
+import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class PIDs
@@ -24,7 +23,7 @@ public class PIDs
 	{
 		for (Ctrl_Configuration.PID_Data 		paramPID : paramPIDs)
 		{
-			PID pidItem 				= new PID(paramPID);
+			PID 												pidItem 					= new PID(paramPID);
 			pidList.add(pidItem);
 		}
 	}
@@ -34,7 +33,7 @@ public class PIDs
 		{
 			if (element.name.equalsIgnoreCase(name))
 			{
-					return element;
+				return element;
 			}
 		}
 		return null;

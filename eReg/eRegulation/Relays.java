@@ -27,7 +27,7 @@ public class Relays
 	{
 		for (Ctrl_Configuration.Relay		 	paramRelay : paramRelays)
 		{
-			Relay relayItem 				= new Relay(paramRelay);
+			Relay 												relayItem 					= new Relay(paramRelay);
 			relayList.add(relayItem);
 		}
 	}

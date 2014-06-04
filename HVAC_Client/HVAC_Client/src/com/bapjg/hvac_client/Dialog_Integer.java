@@ -43,6 +43,8 @@ public class Dialog_Integer 									extends 					DialogFragment
 		this.numberMax																		= numberMax;
 		this.callBack																		= callBack;
 		this.message																		= message;
+		if (number > numberMax)									this.numberMax 				= number;
+		if (number < numberMin)									this.numberMin 				= number;
     }	
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
@@ -55,22 +57,15 @@ public class Dialog_Integer 									extends 					DialogFragment
         builder.setTitle(message);
          
 		numberPicker 																		= (NumberPicker) dialogView.findViewById(R.id.value);
-	    String[] 												numbers						= new String[numberMax - numberMin + 1];
-	    for (int i = 0; i < numberMax - numberMin + 1; i++)
-	    {
-	    	numbers[i] 																		= Integer.toString(i + numberMin);
-	    }
 	    
 	    EditText												tempChild					= (EditText) numberPicker.getChildAt(0);	// Stop keyboard appearing
 	    tempChild.setFocusable(false);
 	    tempChild.setInputType(InputType.TYPE_NULL);
 	    
-	    numberPicker.setMinValue(0);
-	    numberPicker.setMaxValue(numberMax - numberMin + 1);
+	    numberPicker.setMinValue(numberMin);
+	    numberPicker.setMaxValue(numberMax);
+	    numberPicker.setValue(number);				
 	    numberPicker.setWrapSelectorWheel(false);
-	    numberPicker.setDisplayedValues(numbers);
-	    
-	    numberPicker.setValue(number - numberMin);				// index of current temperature in the list
        
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
@@ -79,7 +74,8 @@ public class Dialog_Integer 									extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	Integer 												newValue	 				= (numberPicker.getValue() + numberMin);
+//     	Integer 												newValue	 				= (numberPicker.getValue() + numberMin);
+     	Integer 												newValue	 				= numberPicker.getValue();
      	// Identify property within parent to modify
      	for (Field field : parent.getClass().getDeclaredFields())  
      	{

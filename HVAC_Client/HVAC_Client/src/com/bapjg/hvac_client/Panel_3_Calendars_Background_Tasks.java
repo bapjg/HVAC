@@ -71,6 +71,7 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 			((TextView) panelView.findViewById(R.id.pumpCleanDuration)).setText	(backgroundTasks.pumpCleanDurationMinutes.toString() + " mn");
 			((TextView) panelView.findViewById(R.id.antiFreeze)).setText		(backgroundTasks.antiFreeze.displayInteger());
 			((TextView) panelView.findViewById(R.id.summerTemp)).setText		(backgroundTasks.summerTemp.displayInteger());
+			((TextView) panelView.findViewById(R.id.winterTemp)).setText		(backgroundTasks.winterTemp.displayInteger());
 			((TextView) panelView.findViewById(R.id.sunshineInfluence)).setText	(backgroundTasks.sunshineInfluence.displayInteger());
 		}
 	}
@@ -80,6 +81,10 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 		panelView.findViewById(R.id.pumpCleanDuration).setOnClickListener(this);
 		panelView.findViewById(R.id.antiFreeze).setOnClickListener(this);
 		panelView.findViewById(R.id.summerTemp).setOnClickListener(this);
+		
+		TextView x = (TextView) panelView.findViewById(R.id.winterTemp);
+		
+		panelView.findViewById(R.id.winterTemp).setOnClickListener(this);
 		panelView.findViewById(R.id.sunshineInfluence).setOnClickListener(this);
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
@@ -96,33 +101,37 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 			Global.toaster("P5_Cals_Away : Data NOTNOTNOT received", true);
 		}
 	}
-	//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public void onClick(View clickedView)
 	{
-		Ctrl_Calendars.TasksBackGround								backgroundTasks				= Global.eRegCalendars.tasksBackGround;
- 		Dialog_Temperature											dialogTemperature;
+		Ctrl_Calendars.TasksBackGround							backgroundTasks				= Global.eRegCalendars.tasksBackGround;
+ 		Dialog_Temperature										dialogTemperature;
  		Dialog_Time												dialogTime;
- 		Dialog_Integer												dialogInteger;
+ 		Dialog_Integer											dialogInteger;
 	   	switch(clickedView.getId())
 		{
      	case R.id.pumpCleanTime:
-    		dialogTime 																			= new Dialog_Time(backgroundTasks.pumpCleanTime, this);
+    		dialogTime 																		= new Dialog_Time(backgroundTasks.pumpCleanTime, this);
     		dialogTime.show(getFragmentManager(), "Dialog_Time");
       		break;
      	case R.id.pumpCleanDuration:
-     		dialogInteger	 																	= new Dialog_Integer(backgroundTasks.pumpCleanDurationMinutes,  (Object) backgroundTasks, 1, 10, "Select Duration (minutes)", this);
+     		dialogInteger	 																= new Dialog_Integer(backgroundTasks.pumpCleanDurationMinutes,  (Object) backgroundTasks, 1, 10, "Select Duration (minutes)", this);
      		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
       		break;
      	case R.id.antiFreeze:
-     		dialogTemperature 																	= new Dialog_Temperature(backgroundTasks.antiFreeze,  0, 15, this);
+     		dialogTemperature 																= new Dialog_Temperature(backgroundTasks.antiFreeze,  0, 15, this);
      		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
       		break;
      	case R.id.summerTemp:
-     		dialogTemperature 																	= new Dialog_Temperature(backgroundTasks.summerTemp,  15, 25, this);
+     		dialogTemperature 																= new Dialog_Temperature(backgroundTasks.summerTemp,  5, 25, this);
+     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
+      		break;
+    	case R.id.winterTemp:
+     		dialogTemperature 																= new Dialog_Temperature(backgroundTasks.winterTemp,  5, 25, this);
      		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
       		break;
      	case R.id.sunshineInfluence:
-     		dialogTemperature 																	= new Dialog_Temperature(backgroundTasks.sunshineInfluence,  0, 10, this);
+     		dialogTemperature 																= new Dialog_Temperature(backgroundTasks.sunshineInfluence,  0, 10, this);
      		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
       		break;
 		}
