@@ -74,10 +74,6 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
     		TCP_Send(messageSend);
     	}
     }
- 	@Override
-//	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
-//	{
-//	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
 		Activity												activity					= getActivity();		

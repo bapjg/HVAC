@@ -1,5 +1,8 @@
 package com.bapjg.hvac_client;
 
+import java.lang.reflect.Field;
+import java.util.Calendar;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,28 +19,39 @@ import android.widget.TimePicker;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Dialog_Date_Time 										extends 					DialogFragment 
+public class Dialog_Date_Time 									extends 					DialogFragment 
 {
-	public DatePicker 	datePicker;
-	public Integer  	dateInitialDay;
-	public Integer  	dateInitialMonth;
-	public Integer  	dateInitialYear;
-	public TextView		writeBack;
+	public DatePicker 											datePicker;
+	public TimePicker 											timePicker;
+	public Long													dateTime;
+	public Integer  											dateInitialDay;
+	public Integer  											dateInitialMonth;
+	public Integer  											dateInitialYear;
+	public Integer  											timeInitialHour;
+	public Integer  											timeInitialMinute;
+	public Object												parent;
+	public Dialog_Response										callBack;
 	
 	public Dialog_Date_Time() 
     {
     }
-	public Dialog_Date_Time(TextView	writeBack) 
+	public Dialog_Date_Time(Long dateTime, Object parent, Dialog_Response callBack) 
     {
 		super();
-		this.writeBack																		= writeBack;
+		this.callBack																		= callBack;
+		this.parent																			= parent;
+
+		this.dateTime																		= dateTime;
+
+		Calendar 												calendar					= Calendar.getInstance();
+		calendar.setTimeInMillis(dateTime);
+
+		this.dateInitialDay																	= calendar.get(Calendar.DAY_OF_MONTH);
+		this.dateInitialMonth																= calendar.get(Calendar.MONTH) + 1;
+		this.dateInitialYear																= calendar.get(Calendar.YEAR);
+		this.timeInitialHour																= calendar.get(Calendar.HOUR);
+		this.timeInitialMinute																= calendar.get(Calendar.MINUTE);
 		
-		String 													dateInitial					= writeBack.getText().toString();
-		String[] 												dateInitialParts			= dateInitial.split("/");
-		
-		this.dateInitialDay																	= Integer.parseInt(dateInitialParts[0]);
-		this.dateInitialMonth																= Integer.parseInt(dateInitialParts[1]);
-		this.dateInitialYear																= Integer.parseInt(dateInitialParts[2]);
     }
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
@@ -45,12 +59,17 @@ public class Dialog_Date_Time 										extends 					DialogFragment
         AlertDialog.Builder 	builder 													= new AlertDialog.Builder(getActivity());
         LayoutInflater 			inflater 													= getActivity().getLayoutInflater();
 									
-        View					dialogView													= inflater.inflate(R.layout.dialog_date, null);
+        View					dialogView													= inflater.inflate(R.layout.dialog_date_time, null);
         builder.setView(dialogView);							
-        builder.setTitle("Select date");							
+        builder.setTitle("Select date and time");							
 									
         datePicker 																			= (DatePicker) dialogView.findViewById(R.id.dateObjective);
         datePicker.init(dateInitialYear, dateInitialMonth, dateInitialDay, null);
+
+		timePicker 																			= (TimePicker) dialogView.findViewById(R.id.timeObjective);
+		timePicker.setIs24HourView		(true);
+		timePicker.setCurrentHour		(timeInitialHour);
+		timePicker.setCurrentMinute		(timeInitialMinute);
 
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
@@ -58,11 +77,29 @@ public class Dialog_Date_Time 										extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	Integer 												day 						= datePicker.getDayOfMonth();
-     	Integer 												month 						= datePicker.getMonth();
-     	Integer 												year 						= datePicker.getYear();
-     	writeBack.setText(day.toString() + "/" + ((Integer) (month + 1)).toString() + "/" + year.toString());
-    	dialog.dismiss();
+     	for (Field field : parent.getClass().getDeclaredFields())  
+     	{
+     		try 
+     		{
+				if (dateTime == field.get(parent))
+				{
+			    	
+			    	Calendar 									calendar					= Calendar.getInstance();
+			    	calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(), timePicker.getCurrentHour(), timePicker.getCurrentMinute()) ;
+			    	Long newDateTime = calendar.getTimeInMillis();
+
+			    	field.set(parent, newDateTime);
+			    	callBack.onDialogReturn();
+			    	dialog.dismiss();
+			    	return;
+				}
+			} 
+     		catch (Exception e)
+     		{
+     			// Do nothing as serialversionUID, this$ etc cause exceptions
+     		} 
+     	}
+     	Global.toaster("Object cannot be identified", false);
     }
     public void buttonCancel (DialogInterface dialog, int which)
     {

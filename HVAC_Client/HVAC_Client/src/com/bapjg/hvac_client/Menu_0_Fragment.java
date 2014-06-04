@@ -107,6 +107,6 @@ public class Menu_0_Fragment 									extends 					Fragment
 		else if (result instanceof Ctrl__Abstract.Ack)			/* All is Ok */ ;
 		else													Global.toaster("M0_Fragment : Data NOTNOTNOT received", true);
 	}
-	public void processFinishTCP(Ctrl__Abstract result) 	{  }
+	public void processFinishTCP(Ctrl__Abstract result) 	{  }							// Overriddent in subclass
 }
 

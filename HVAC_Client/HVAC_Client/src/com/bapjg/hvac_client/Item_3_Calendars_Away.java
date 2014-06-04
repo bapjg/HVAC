@@ -22,6 +22,7 @@ import android.widget.TextView;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
 public class Item_3_Calendars_Away 								extends 					Panel_0_Fragment
+																implements					Dialog_Response
 {		
 	private Ctrl_Calendars.Away 								itemData;
 	private Ctrl_Calendars.Away 								itemDataWork;
@@ -55,10 +56,10 @@ public class Item_3_Calendars_Away 								extends 					Panel_0_Fragment
     	TextView 												timeEnd						= (TextView) itemView.findViewById(R.id.timeEnd);
  
     	dateStart.setText(Global.displayDate(itemData.dateTimeStart));
-    	timeStart.setText(Global.displayTime(itemData.dateTimeStart));
+    	timeStart.setText(Global.displayTimeShort(itemData.dateTimeStart));
     	
     	dateEnd.setText(Global.displayDate(itemData.dateTimeEnd));
-    	timeEnd.setText(Global.displayTime(itemData.dateTimeEnd));
+    	timeEnd.setText(Global.displayTimeShort(itemData.dateTimeEnd));
    	}
 	public void setListens()
 	{
@@ -75,33 +76,36 @@ public class Item_3_Calendars_Away 								extends 					Panel_0_Fragment
      	if (clickedView.getId() == R.id.buttonOk)
     	{
 //     		itemData.name															= ((EditText) itemView.findViewById(R.id.name)).getText().toString();
-      		getFragmentManager().popBackStackImmediate();
+      		if (itemData.dateTimeEnd > itemData.dateTimeStart)
+      		{
+      			getFragmentManager().popBackStackImmediate();
+      		}
+      		else
+      		{
+      			Global.toaster("End must be after start", true);
+      		}
     	}
      	else if (clickedView.getId() == R.id.buttonDelete)
     	{
      		Global.eRegCalendars.awayList.remove(itemData);
      		getFragmentManager().popBackStackImmediate();
     	}
-    	else if (clickedView.getId() == R.id.dateStart)
+    	else if ((clickedView.getId() == R.id.dateStart) || (clickedView.getId() == R.id.timeStart))
     	{
-     		// TODO
-    		getFragmentManager().popBackStackImmediate();
+     		Dialog_Date_Time	 								dialog 							= new Dialog_Date_Time(itemData.dateTimeStart, itemData, this);
+     		dialog.show(getFragmentManager(), "Dialog_Date_Time");
     	}
-    	else if (clickedView.getId() == R.id.timeStart)
+    	else if ((clickedView.getId() == R.id.dateEnd) || (clickedView.getId() == R.id.timeEnd))
     	{
-     		// TODO
-      		getFragmentManager().popBackStackImmediate();
-    	}
-    	else if (clickedView.getId() == R.id.dateEnd)
-    	{
-     		// TODO
-     		getFragmentManager().popBackStackImmediate();
-    	}
-    	else if (clickedView.getId() == R.id.timeEnd)
-    	{
-     		// TODO
-     		getFragmentManager().popBackStackImmediate();
+     		Dialog_Date_Time	 								dialog 							= new Dialog_Date_Time(itemData.dateTimeEnd, itemData, this);
+     		dialog.show(getFragmentManager(), "Dialog_Date_Time");
     	}
  	}
+    @Override
+	public void onDialogReturn() 
+    {
+    	displayContents();
+    }
+
 }
 
