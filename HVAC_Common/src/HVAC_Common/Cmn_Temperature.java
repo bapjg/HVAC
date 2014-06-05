@@ -1,5 +1,7 @@
 package HVAC_Common;
 
+import java.text.DecimalFormat;
+
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Cmn_Temperature									implements					java.io.Serializable
 {
@@ -16,15 +18,15 @@ public class Cmn_Temperature									implements					java.io.Serializable
 	}
 	public String displayInteger()
 	{
-		Integer													degrees						= (milliDegrees/100 + 5)/10;
-		return degrees.toString() + " °C";
+		return new DecimalFormat("#").format(milliDegrees/1000.0) + " °C";
 	}
 	public String displayDecimal()
 	{
-		Integer													deciDegrees					= (milliDegrees/10 + 5)/10;
-		Integer													units						= deciDegrees/10;
-		Integer													decimal						= deciDegrees - units*10;
-		return units.toString() + "." + decimal + " °C";
+//		Integer													deciDegrees					= (milliDegrees/10 + 5)/10;
+//		Integer													units						= deciDegrees/10;
+//		Integer													decimal						= deciDegrees - units*10;
+//		return units.toString() + "." + decimal + " °C";
+		return new DecimalFormat("#.#").format(milliDegrees/1000.0) + " °C";
 	}
 	public void setMilliDegrees(String decimal)
 	{
