@@ -74,7 +74,6 @@ public class Dialog_Integer 									extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-//     	Integer 												newValue	 				= (numberPicker.getValue() + numberMin);
      	Integer 												newValue	 				= numberPicker.getValue();
      	// Identify property within parent to modify
      	for (Field field : parent.getClass().getDeclaredFields())  

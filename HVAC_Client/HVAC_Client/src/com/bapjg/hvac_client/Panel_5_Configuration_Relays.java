@@ -68,79 +68,25 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 	    AdapterView <Adapter_5_Configuration_Relays>			adapterViewList				= (AdapterView <Adapter_5_Configuration_Relays>) adapterView;
 		Adapter_5_Configuration_Relays							arrayAdapter				= new Adapter_5_Configuration_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
 		adapterViewList.setAdapter(arrayAdapter);
-//		adapterViewList.setOnItemClickListener(this);
 
 	}
 	public void setListens()
 	{
+		((AdapterView<?>) adapterView).setOnItemClickListener(this);
+//		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
 	}
-//    public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
-//	{
-////	        ViewGroup 									viewGroup					= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
-////        	View 										newView 					= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
-//			
-//    	FragmentTransaction 							ft 							= myFragmentManager.beginTransaction();
-//    	Ctrl_Configuration.Thermometer 					dt							= Global.eRegConfiguration.thermometerList.get(position -1);
-//
-// //   	ft.replace(R.id.panel_container, dt);
-//    	ft.commit();
-//   	}
-//    public void onClick(View myView)
-//    {
-//    	// onClick for all buttons in Menu_Pane				
-//    	Button 											myButton 					= (Button) myView;
-//    	String											myCaption					= myButton.getText().toString();
-//						
-//		// Set all textColours to white				
-//		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
-//		for (int i = 0; i < viewParent.getChildCount(); i++)
-//		{
-//			Button										buttonChild					= (Button) viewParent.getChildAt(i);
-//			buttonChild.setTextColor(Color.WHITE);
-//		}
-//		
-//		((Button) myView).setTextColor(Color.YELLOW);
-//    	
-//    	if (myCaption.equalsIgnoreCase("Thermometers"))
-//    	{
-//    		menuButtonThermometersClick(myView);	
-//    	}
-//    }
-//    public void menuButtonThermometersClick(View myView)
-//    {
-//		// Called by onClick when Thermometers button pressed
-//    	// This sets up the code to display the panel and get clicks in order to display an update screen
-//
-//        // First, ensure that correct view is displayed
-//    	ViewGroup										subContainer				= (ViewGroup) myContainer.getChildAt(0);		
-//    	View 											newView 					= myInflater.inflate(R.layout.panel_5_config_header, subContainer, true);
-//				
-//    	FragmentTransaction								ft							= myFragmentManager.beginTransaction();
-//    	//Panel_2_Configuration 						dt 							= new Panel_2_Configuration();
-//    	ft.replace(R.id.panel_subcontainer, this);
-//    	ft.commit();
-//
-//        // Set up the adapter for the data
-//    	//ArrayList  	<Ctrl_Configuration.Thermometer>	data	= Global.configuration.thermometerList;
-//        AdapterView <Adapter_5_Configuration_Thermometers> 	view					= (AdapterView) myActivity.findViewById(R.id.List_View);
-//        
-//        Adapter_5_Configuration_Thermometers 			adapter						= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-//        
-//        view.setAdapter(adapter);
-//        view.setOnItemClickListener((OnItemClickListener) this);	
-//    }
-	public void processFinishTCP(Ctrl__Abstract result) 
-	{  
-		if (result instanceof Ctrl_Configuration.Data)
-		{
-			Global.eRegConfiguration			 											= (Ctrl_Configuration.Data) result;
-			displayHeader();
-			displayContents();
-	        setListens();
- 		}
-		else
-		{
-			Global.toaster("P5_Conf PUMP : Data NOTNOTNOT received", true);
-		}
-	}
+	public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
+	{
+    	Ctrl_Configuration.Relay								itemData					= Global.eRegConfiguration.relayList.get(position);
+
+    	Item_5_Configuration_Relay								itemFragment				= new Item_5_Configuration_Relay(itemData);
+ 
+    	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
+   		fTransaction.replace(R.id.panel_container, itemFragment);
+   		fTransaction.addToBackStack(null);
+   		fTransaction.commit();
+   	}
+    public void onClick(View myView)
+    {
+    }
 }

@@ -141,7 +141,6 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
      	else if (clickedView.getId() == R.id.days)
     	{
-//    		Dialog_String_List		 							df 							= new Dialog_String_List(this, R.id.days);
     		Dialog_String_List		 							df 							= new Dialog_String_List(itemData.days, (Object) itemData, null, this);
     		df.items.add("Select days");
     		df.itemSelected																	= "";

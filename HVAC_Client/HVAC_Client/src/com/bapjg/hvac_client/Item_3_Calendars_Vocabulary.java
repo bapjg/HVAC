@@ -27,6 +27,10 @@ public class Item_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 	private Ctrl_Calendars.Word 								itemDataWork;
 	private ViewGroup											itemView;
 	
+	// TODO
+	// TODO Rework button close
+	// TODO
+	
 	public Item_3_Calendars_Vocabulary(Ctrl_Calendars.Word itemData)
 	{
 		super();

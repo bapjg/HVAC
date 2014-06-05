@@ -21,12 +21,12 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
-public class Item_5_Configuration_PID 						extends 					Panel_0_Fragment
+public class Item_5_Configuration_Thermometer 					extends 					Panel_0_Fragment
 {		
-	private Ctrl_Configuration.PID_Data	 						itemData;
+	private Ctrl_Configuration.Thermometer 						itemData;
 	private ViewGroup											itemView;
 	
-	public Item_5_Configuration_PID(Ctrl_Configuration.PID_Data itemData)
+	public Item_5_Configuration_Thermometer(Ctrl_Configuration.Thermometer itemData)
 	{
 		super();
 		this.itemData																		= itemData;
@@ -34,11 +34,11 @@ public class Item_5_Configuration_PID 						extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        View 													itemView					= inflater.inflate(R.layout.item_5_configuration_pid, container, false);
+        View 													itemView					= inflater.inflate(R.layout.item_5_configuration_thermometer, container, false);
         this.itemView																		= (ViewGroup) itemView;
 
         if ((Global.eRegConfiguration != null)
-        &&  (Global.eRegConfiguration.pidList != null))
+        &&  (Global.eRegConfiguration.thermometerList != null))
         {
         	displayHeader();
         	displayContents();
@@ -56,48 +56,54 @@ public class Item_5_Configuration_PID 						extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-    	TextView 												pidName 					= (TextView) itemView.findViewById(R.id.pidName);
-    	TextView 												depth						= (TextView) itemView.findViewById(R.id.depth);
-		TextView 												sampleIncrement 			= (TextView) itemView.findViewById(R.id.sampleIncrement);
+    	TextView 												thermoName 					= (TextView) itemView.findViewById(R.id.thermoName);
+    	TextView 												address						= (TextView) itemView.findViewById(R.id.address);
+		TextView 												pidName				 			= (TextView) itemView.findViewById(R.id.pidName);
  	
-		pidName.setText											(itemData.name);
-		depth.setText											(itemData.depth.toString());
-		sampleIncrement.setText									(itemData.sampleIncrement.toString());
+		thermoName.setText										(itemData.name);
+		address.setText											(itemData.address);
+		pidName.setText											(itemData.pidName);
    	}
 	public void setListens()
 	{
     	if (itemData != null)
     	{
+			itemView.findViewById(R.id.thermoName).setOnClickListener(this);
+			itemView.findViewById(R.id.address).setOnClickListener(this);
 			itemView.findViewById(R.id.pidName).setOnClickListener(this);
-			itemView.findViewById(R.id.depth).setOnClickListener(this);
-			itemView.findViewById(R.id.sampleIncrement).setOnClickListener(this);
 			itemView.findViewById(R.id.buttonOk).setOnClickListener(this);
 			itemView.findViewById(R.id.buttonDelete).setOnClickListener(this);
-   	}
+    	}
 	}
     @Override
 	public void onClick(View clickedView) 
 	{
-    	Dialog_Text												dialogText;
+       	Dialog_Text												dialogText;
     	Dialog_Integer											dialogInteger;
     	Dialog_String_List										dialogList;
-    	switch(clickedView.getId())
+     	switch(clickedView.getId())
 		{
-			case R.id.pidName:
+			case R.id.thermoName:
 				// TODO Do Text Dialog
-				dialogText 																	= new Dialog_Text(itemData.name, itemData,  "Choose PID Name", this);
-	     		dialogText.show(getFragmentManager(), "Dialog_Temperature");
+				dialogText 																		= new Dialog_Text(itemData.name, itemData, "Enter Thermometer Name", this);
+				dialogText.show(getFragmentManager(), "Dialog_Text");
 	      		break;
-	     	case R.id.depth:
-	     		dialogInteger																= new Dialog_Integer(itemData.depth,  itemData, 1, 100, "Select PID Depth", this);
-	     		dialogInteger.show(getFragmentManager(), "Dialog_Depth");
+	     	case R.id.address:
+	     		dialogText 																		= new Dialog_Text(itemData.address, itemData, "Enter Thermometer Address", this);
+	     		dialogText.show(getFragmentManager(), "Dialog_Text");
 	      		break;
-	     	case R.id.sampleIncrement:
-	     		dialogInteger																= new Dialog_Integer(itemData.sampleIncrement,  itemData, 1, 300, "Select Sample (unit = 10s)", this);
-	     		dialogInteger.show(getFragmentManager(), "Dialog_SampleIncrement");
+	     	case R.id.pidName:
+	     		dialogList 																		= new Dialog_String_List(itemData.pidName, itemData, null, this);
+	     		dialogList.itemSelected															= "";
+	
+	    		for (Ctrl_Configuration.PID_Data pid : Global.eRegConfiguration.pidList)
+	    		{
+	    			dialogList.items.add(pid.name);
+	    		}
+	    		dialogList.show(getFragmentManager(), "Dialog_List");
 	      		break;
 	     	case R.id.buttonDelete:
-	     		Global.eRegConfiguration.pidList.remove(itemData);
+	     		Global.eRegConfiguration.thermometerList.remove(itemData);
 	      		// Just fall through
 	     	case R.id.buttonOk:
 	      		getFragmentManager().popBackStackImmediate();

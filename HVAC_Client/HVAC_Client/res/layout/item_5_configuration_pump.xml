@@ -1,11 +1,10 @@
 <?xml version= "1.0" encoding= "utf-8"?>
-<LinearLayout
-	xmlns:android						= "http://schemas.android.com/apk/res/android"
-	android:layout_width				= "match_parent"
-	android:layout_height				= "match_parent"
-	android:orientation					= "vertical"
-	android:baselineAligned				= "false"
-	android:background					= "@color/background">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:baselineAligned="false"
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,12 +15,13 @@
     >
 
         <TextView
-            android:id="@+id/title"
             style="@style/AD_Text"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:gravity="center_horizontal"
-            android:text="PID Configuration" />
+       		android:gravity="center_horizontal"
+            android:text="Pump Configuration" 
+        />
 
         <TextView
             android:id="@+id/subTitle"
@@ -48,59 +48,38 @@
 	    android:layout_height			= "50dp"
     	android:gravity					= "center_vertical"
 	    android:orientation				= "horizontal"
-    >
+	>        
+        <TextView
+            style="@style/AD_Text"
+            android:layout_width="150dp"
+            android:gravity="left"
+            android:text="Pump Name" />
+
+        <TextView
+            android:id="@+id/pumpName"
+            style="@style/AD_Data"
+            android:layout_width="150dp"
+            android:gravity="right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+ 	    android:layout_width			= "match_parent"
+	    android:layout_height			= "50dp"
+    	android:gravity					= "center_vertical"
+	    android:orientation				= "horizontal"
+	>        
         
         <TextView
             style="@style/AD_Text"
-            android:layout_width="170dp"
+            android:layout_width="150dp"
             android:gravity="left"
-            android:text="PID Name" />
+            android:text="Relay Name" />
 
         <TextView
-            android:id="@+id/pidName"
+            android:id="@+id/relayName"
             style="@style/AD_Data"
-            android:layout_width="130dp"
-            android:gravity="right" />
-
-    </LinearLayout>
-
-    <LinearLayout
- 	    android:layout_width			= "match_parent"
-	    android:layout_height			= "50dp"
-    	android:gravity					= "center_vertical"
-	    android:orientation				= "horizontal"
-    >
-           
-        <TextView
-            style="@style/AD_Text"
-            android:layout_width="170dp"
-            android:gravity="left"
-            android:text="Depth" />
-
-        <TextView
-            android:id="@+id/depth"
-            style="@style/AD_Data"
-            android:layout_width="130dp"
-            android:gravity="right" />
-
-    </LinearLayout>
-
-    <LinearLayout
- 	    android:layout_width			= "match_parent"
-	    android:layout_height			= "50dp"
-    	android:gravity					= "center_vertical"
-	    android:orientation				= "horizontal"
-	>
-        <TextView
-            style="@style/AD_Text"
-            android:layout_width="170dp"
-            android:gravity="left"
-            android:text="Sample Increment" />
-
-        <TextView
-            android:id="@+id/sampleIncrement"
-            style="@style/AD_Data"
-            android:layout_width="132dp"
+            android:layout_width="150dp"
             android:gravity="right" />
 
     </LinearLayout>
@@ -137,7 +116,5 @@
             android:text="Ok" />
 
     </RelativeLayout>
-    
-    
     
 </LinearLayout>

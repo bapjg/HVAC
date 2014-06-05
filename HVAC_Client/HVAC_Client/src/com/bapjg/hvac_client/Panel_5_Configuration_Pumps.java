@@ -67,58 +67,20 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
     }
     public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
 	{
-//	        ViewGroup 									viewGroup					= (ViewGroup) myActivity.findViewById(R.id.Detail_View);
-//        	View 										newView 					= myInflater.inflate(R.layout.detail_thermometer, viewGroup, true);
-//			
-//    	FragmentTransaction 							ft 							= myFragmentManager.beginTransaction();
-//    	Ctrl_Configuration.Thermometer 					dt							= Global.eRegConfiguration.thermometerList.get(position);
-//
-// //   	ft.replace(R.id.panel_container, dt);
-//    	ft.commit();
+    	Ctrl_Configuration.Pump									itemData					= Global.eRegConfiguration.pumpList.get(position);
+
+    	Item_5_Configuration_Pump								itemFragment				= new Item_5_Configuration_Pump(itemData);
+ 
+    	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
+   		fTransaction.replace(R.id.panel_container, itemFragment);
+   		fTransaction.addToBackStack(null);
+   		fTransaction.commit();
    	}
     public void onClick(View myView)
     {
-//    	// onClick for all buttons in Menu_Pane				
-//    	Button 											myButton 					= (Button) myView;
-//    	String											myCaption					= myButton.getText().toString();
-//						
-//		// Set all textColours to white				
-//		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
-//		for (int i = 0; i < viewParent.getChildCount(); i++)
-//		{
-//			Button										buttonChild					= (Button) viewParent.getChildAt(i);
-//			buttonChild.setTextColor(Color.WHITE);
-//		}
-//		
-//		((Button) myView).setTextColor(Color.YELLOW);
-//    	
-//    	if (myCaption.equalsIgnoreCase("Thermometers"))
-//    	{
-//    		menuButtonThermometersClick(myView);	
-//    	}
     }
     public void menuButtonThermometersClick(View myView)
     {
-//		// Called by onClick when Thermometers button pressed
-//    	// This sets up the code to display the panel and get clicks in order to display an update screen
-//
-//        // First, ensure that correct view is displayed
-//    	ViewGroup										subContainer				= (ViewGroup) myContainer.getChildAt(0);		
-//    	View 											newView 					= myInflater.inflate(R.layout.panel_5_config_header, subContainer, true);
-//				
-//    	FragmentTransaction								ft							= myFragmentManager.beginTransaction();
-//    	//Panel_2_Configuration 						dt 							= new Panel_2_Configuration();
-//    	ft.replace(R.id.panel_subcontainer, this);
-//    	ft.commit();
-//
-//        // Set up the adapter for the data
-//    	//ArrayList  	<Ctrl_Configuration.Thermometer>	data	= Global.configuration.thermometerList;
-//        AdapterView <Adapter_5_Configuration_Thermometers>	view					= (AdapterView) myActivity.findViewById(R.id.List_View);
-//        
-//        Adapter_5_Configuration_Thermometers 			adapter						= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-//        
-//        view.setAdapter(adapter);
-//        view.setOnItemClickListener((OnItemClickListener) this);	
     }
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
@@ -143,9 +105,9 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 	    AdapterView <Adapter_5_Configuration_Pumps>				adapterViewList				= (AdapterView <Adapter_5_Configuration_Pumps>) adapterView;
         Adapter_5_Configuration_Pumps							arrayAdapter				= new Adapter_5_Configuration_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
         adapterViewList.setAdapter(arrayAdapter);
-//		adapterViewList.setOnItemClickListener(this);
 	}
 	public void setListens()
 	{
+		((AdapterView<?>) adapterView).setOnItemClickListener(this);
 	}
 }

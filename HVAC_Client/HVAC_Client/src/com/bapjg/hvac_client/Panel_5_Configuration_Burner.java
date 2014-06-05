@@ -69,6 +69,7 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 			Integer												fuelMinutes					= 0;
 			Integer												fuelLitres					= 0;
 			String												fuelMinutesString			= "nought";
+			String												fuelLitresString			= "nought";
 			
 			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
 			
@@ -82,6 +83,7 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 				fuelMinutes																	= (int) (burner.fuelConsumption/1000/60);
 				fuelMinutesString															= decimalFormat.format(fuelMinutes);
 				fuelLitres																	= fuelMinutes/burner.minutesPerLitre;
+				fuelLitresString															= decimalFormat.format(fuelLitres);
 			}
 			else
 			{
@@ -89,7 +91,7 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 			}
 			((TextView) panelView.findViewById(R.id.fuelConsumption)).setText				(fuelMinutesString);
 			((TextView) panelView.findViewById(R.id.minutesPerLitre)).setText				(burner.minutesPerLitre.toString());
-			((TextView) panelView.findViewById(R.id.fuelConsumptionLitres)).setText			(fuelLitres.toString());
+			((TextView) panelView.findViewById(R.id.fuelConsumptionLitres)).setText			(fuelLitresString);
 		}
 	}
 	public void setListens()

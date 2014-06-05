@@ -69,6 +69,25 @@
 		<ListView
 		    android:id					= "@+id/List_View"
 		    android:layout_width		= "match_parent"
-		    android:layout_height		= "500dp" 
+		    android:layout_height		= "460dp" 
 	    />
+		
+	<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+     >
+
+        <Button
+            android:id="@+id/buttonAdd"
+            style="@style/AD_ImageButton"
+            android:layout_width="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/button_add"
+            android:text="Add New" />
+
+    </RelativeLayout>
+		
 </LinearLayout>

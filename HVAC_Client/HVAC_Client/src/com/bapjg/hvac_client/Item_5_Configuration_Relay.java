@@ -21,12 +21,12 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
-public class Item_5_Configuration_PID 						extends 					Panel_0_Fragment
+public class Item_5_Configuration_Relay 						extends 					Panel_0_Fragment
 {		
-	private Ctrl_Configuration.PID_Data	 						itemData;
+	private Ctrl_Configuration.Relay	 						itemData;
 	private ViewGroup											itemView;
 	
-	public Item_5_Configuration_PID(Ctrl_Configuration.PID_Data itemData)
+	public Item_5_Configuration_Relay(Ctrl_Configuration.Relay itemData)
 	{
 		super();
 		this.itemData																		= itemData;
@@ -34,11 +34,11 @@ public class Item_5_Configuration_PID 						extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        View 													itemView					= inflater.inflate(R.layout.item_5_configuration_pid, container, false);
+        View 													itemView					= inflater.inflate(R.layout.item_5_configuration_relay, container, false);
         this.itemView																		= (ViewGroup) itemView;
 
         if ((Global.eRegConfiguration != null)
-        &&  (Global.eRegConfiguration.pidList != null))
+        &&  (Global.eRegConfiguration.relayList != null))
         {
         	displayHeader();
         	displayContents();
@@ -52,28 +52,28 @@ public class Item_5_Configuration_PID 						extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
-// TODO		((TextView) itemView.findViewById(R.id.pidName)).setText(itemData.name);
+		// TODO		((TextView) itemView.findViewById(R.id.pidName)).setText(itemData.name);
 	}
 	public void displayContents()
 	{
-    	TextView 												pidName 					= (TextView) itemView.findViewById(R.id.pidName);
-    	TextView 												depth						= (TextView) itemView.findViewById(R.id.depth);
-		TextView 												sampleIncrement 			= (TextView) itemView.findViewById(R.id.sampleIncrement);
+    	TextView 												relayName 					= (TextView) itemView.findViewById(R.id.relayName);
+    	TextView 												relayBank					= (TextView) itemView.findViewById(R.id.relayBank);
+		TextView 												relayNumber					= (TextView) itemView.findViewById(R.id.relayNumber);
  	
-		pidName.setText											(itemData.name);
-		depth.setText											(itemData.depth.toString());
-		sampleIncrement.setText									(itemData.sampleIncrement.toString());
+		relayName.setText										(itemData.name);
+		relayBank.setText										(itemData.relayBank.toString());
+		relayNumber.setText										(itemData.relayNumber.toString());
    	}
 	public void setListens()
 	{
     	if (itemData != null)
     	{
-			itemView.findViewById(R.id.pidName).setOnClickListener(this);
-			itemView.findViewById(R.id.depth).setOnClickListener(this);
-			itemView.findViewById(R.id.sampleIncrement).setOnClickListener(this);
+			itemView.findViewById(R.id.relayName).setOnClickListener(this);
+			itemView.findViewById(R.id.relayBank).setOnClickListener(this);
+			itemView.findViewById(R.id.relayNumber).setOnClickListener(this);
 			itemView.findViewById(R.id.buttonOk).setOnClickListener(this);
 			itemView.findViewById(R.id.buttonDelete).setOnClickListener(this);
-   	}
+    	}
 	}
     @Override
 	public void onClick(View clickedView) 
@@ -83,21 +83,21 @@ public class Item_5_Configuration_PID 						extends 					Panel_0_Fragment
     	Dialog_String_List										dialogList;
     	switch(clickedView.getId())
 		{
-			case R.id.pidName:
+			case R.id.relayName:
 				// TODO Do Text Dialog
-				dialogText 																	= new Dialog_Text(itemData.name, itemData,  "Choose PID Name", this);
-	     		dialogText.show(getFragmentManager(), "Dialog_Temperature");
+				dialogText 																		= new Dialog_Text(itemData.name, itemData, "Enter Relay Name", this);
+				dialogText.show(getFragmentManager(), "Dialog_Text");
 	      		break;
-	     	case R.id.depth:
-	     		dialogInteger																= new Dialog_Integer(itemData.depth,  itemData, 1, 100, "Select PID Depth", this);
-	     		dialogInteger.show(getFragmentManager(), "Dialog_Depth");
+	     	case R.id.relayBank:
+	     		dialogInteger 																	= new Dialog_Integer(itemData.relayBank, itemData, 0, 4, "Enter Relay Bank", this);
+	     		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
 	      		break;
-	     	case R.id.sampleIncrement:
-	     		dialogInteger																= new Dialog_Integer(itemData.sampleIncrement,  itemData, 1, 300, "Select Sample (unit = 10s)", this);
-	     		dialogInteger.show(getFragmentManager(), "Dialog_SampleIncrement");
+	     	case R.id.relayNumber:
+	     		dialogInteger 																	= new Dialog_Integer(itemData.relayNumber, itemData, 0, 8, "Enter Relay Number", this);
+	     		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
 	      		break;
 	     	case R.id.buttonDelete:
-	     		Global.eRegConfiguration.pidList.remove(itemData);
+	     		Global.eRegConfiguration.relayList.remove(itemData);
 	      		// Just fall through
 	     	case R.id.buttonOk:
 	      		getFragmentManager().popBackStackImmediate();

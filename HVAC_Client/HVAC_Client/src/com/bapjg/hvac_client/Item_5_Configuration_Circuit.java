@@ -65,6 +65,13 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     	TextView 												swingTime					= (TextView) itemView.findViewById(R.id.swingTime);
    		TextView 												relayUp 					= (TextView) itemView.findViewById(R.id.relayUp);
     	TextView 												relayDown					= (TextView) itemView.findViewById(R.id.relayDown);
+    	TextView 												thermometerPID				= (TextView) itemView.findViewById(R.id.thermometer);
+    	TextView 												gainP						= (TextView) itemView.findViewById(R.id.gainP);
+    	TextView 												timeD						= (TextView) itemView.findViewById(R.id.timeD);
+    	TextView 												timeI						= (TextView) itemView.findViewById(R.id.timeI);
+    	TextView 												timeDelay					= (TextView) itemView.findViewById(R.id.timeDelay);
+    	TextView 												timeProjection				= (TextView) itemView.findViewById(R.id.timeProjection);
+    	TextView 												marginProjection			= (TextView) itemView.findViewById(R.id.marginProjection);
 	
     	pumpName.setText										(itemData.pump);
     	thermometerName.setText									(itemData.thermometer);
@@ -91,6 +98,16 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
         	swingTime.setText									(((Integer) (mixer.swingTime/1000)).toString());
         	relayUp.setText										(mixer.relayUp);
         	relayDown.setText									(mixer.relayDown);
+
+        	Ctrl_Configuration.PID_Params						pidParams					= itemData.mixer.pidParams;
+    	
+        	thermometerPID.setText								(pidParams.thermometer);
+        	gainP.setText										(pidParams.gainP.toString());
+        	timeD.setText										(pidParams.timeD.toString() + " ms/°C");
+        	timeI.setText										(milliToString(pidParams.timeI) + " °C/ms");
+        	timeDelay.setText									(milliToString(pidParams.timeDelay) + " s");
+        	timeProjection.setText								(milliToString(pidParams.timeProjection) + " s");
+        	marginProjection.setText							(milliToString(pidParams.marginProjection) + " °C");
     	}
     	else
     	{
@@ -157,6 +174,21 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
     public void onDialogReturn()
     {
     	displayContents();
+    }
+    public String milliToString(Long milli)
+    {
+    	Long		unitsLong = milli/1000;
+    	return ((Integer) unitsLong.intValue()).toString();
+    }
+    public String milliToString(Integer milli)
+    {
+    	Integer		unitsInteger = milli/1000;
+    	return unitsInteger.toString();
+    }
+    public String milliToString(Float milli)
+    {
+    	Float		unitsFloat = milli/1000;
+    	return ((Integer) unitsFloat.intValue()).toString();
     }
 }
 

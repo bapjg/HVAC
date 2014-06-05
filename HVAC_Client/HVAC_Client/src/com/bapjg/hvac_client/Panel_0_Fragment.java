@@ -42,17 +42,6 @@ public class Panel_0_Fragment 									extends 					Fragment
     public Panel_0_Fragment()
     {
     }
-//    public Panel_0_Fragment(int menuLayout)
-//    {
-//		this.menuLayout																		= menuLayout;
-//    	this.activity																		= getActivity();
-//    }
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-//    {
-//    	View thisView = inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
-//		return thisView;
-//    }
 	public void HTTP_Send(Ctrl__Abstract message)
 	{
 		HTTP_Task												task						= new HTTP_Task();
