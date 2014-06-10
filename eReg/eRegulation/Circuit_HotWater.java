@@ -5,14 +5,6 @@ import HVAC_Common.Ctrl_Configuration;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Circuit_HotWater extends Circuit_Abstract
 {
-//	public Circuit_HotWater(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
-//	{	
-//		super(name, friendlyName, circuitType, tempMax, rampUpTime);
-//	}
-//	public Circuit_HotWater(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
-//	{	
-//		super(name, circuitType, pumpName, thermometerName, tempMax);
-//	}
 	public Circuit_HotWater(Ctrl_Configuration.Circuit paramCircuit)
 	{
 		super(paramCircuit);
