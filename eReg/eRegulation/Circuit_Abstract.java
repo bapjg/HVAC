@@ -148,9 +148,9 @@ abstract class Circuit_Abstract
 //		thisTask.active												= true;
 		if (this.taskActive == null)
 		{
-		this.taskActive												= thisTask;
-		this.start();
-		this.taskActive.dateLastRun									= Global.getTimeAtMidnight();
+			this.taskActive											= thisTask;
+			this.start();
+			this.taskActive.dateLastRun								= Global.getTimeAtMidnight();
 		}
 		else
 		{

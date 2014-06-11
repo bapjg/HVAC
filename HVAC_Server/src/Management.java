@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -16,12 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
 import HVAC_Common.*;
-import HVAC_Common.Ctrl_Json.Update;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class Management extends HttpServlet
 {
@@ -89,11 +83,11 @@ public class Management extends HttpServlet
 		else if (message_in instanceof Ctrl_Json.Request)					message_out 	= processJson_Request	(message_in);
 		else if (message_in instanceof Ctrl_Json.Update)					message_out 	= processJson_Update	(message_in);
         
-		else if (message_in instanceof Ctrl_Configuration.Request)			message_out 	= processConfiguration_Request();
-		else if (message_in instanceof Ctrl_Configuration.Update)			message_out 	= processConfiguration_Update((Ctrl_Configuration.Update) message_in);
-        
-		else if (message_in instanceof Ctrl_Calendars.Request)				message_out 	= processCalendars_Request();
-		else if (message_in instanceof Ctrl_Calendars.Update)				message_out 	= processCalendars_Update((Ctrl_Calendars.Update) message_in);
+//		else if (message_in instanceof Ctrl_Configuration.Request)			message_out 	= processConfiguration_Request();
+//		else if (message_in instanceof Ctrl_Configuration.Update)			message_out 	= processConfiguration_Update((Ctrl_Configuration.Update) message_in);
+//        
+//		else if (message_in instanceof Ctrl_Calendars.Request)				message_out 	= processCalendars_Request();
+//		else if (message_in instanceof Ctrl_Calendars.Update)				message_out 	= processCalendars_Update((Ctrl_Calendars.Update) message_in);
 
 		else if (message_in instanceof Ctrl_Fuel_Consumption.Request)		message_out 	= processFuelConsumption_Request();
  		else
@@ -171,140 +165,140 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    private Ctrl__Abstract 						processCalendars_Request()
-    {
-        dbOpen();
-        
-        Ctrl__Abstract									returnBuffer 		= new Ctrl__Abstract().new Nack();
-
-        try
-        {
-            dbStatement 													= dbConnection.createStatement(1004, 1008);
-            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, calendars FROM calendars ORDER BY dateTime DESC LIMIT 1");
-            dbResultSet.next();
-
-            Long										dbDateTime			= dbResultSet.getLong("dateTime");
-            String										dbJsonString		= dbResultSet.getString("calendars");
-    		
-            dbStatement.close();
-            dbConnection.close();
- 
-            Ctrl_Calendars.Data							returnBufferPrep	= new Gson().fromJson(dbJsonString, Ctrl_Calendars.Data.class);
-    		returnBufferPrep.dateTime										= dbDateTime;											// Add time stamp to mesage
-     		returnBuffer													= (Ctrl__Abstract) returnBufferPrep;
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-        }
-        return returnBuffer;
-    }
-    private Ctrl__Abstract		 				processCalendars_Update(Ctrl_Calendars.Update message_in)
-    {
-    	dbOpen();
-        
-        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Ack();
-
-        try
-        {
-            dbStatement 													= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, Date, Time, Calendars FROM Calendars ORDER BY dateTime DESC LIMIT 1");
-
-            Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
-    		String 										dbJsonString 		= gson.toJson((Ctrl_Calendars.Update) message_in);
-
-    		Long										dateTime			= System.currentTimeMillis();		// Do not use dateTime supplied in input message
-    		
-    		dbResultSet.moveToInsertRow();		
-            dbResultSet.updateDouble	("dateTime", 				dateTime);
-            dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
-            dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
-            dbResultSet.updateString	("Calendars", 				dbJsonString);
-            dbResultSet.insertRow();
-
-            dbStatement.close();
-            dbConnection.close();
-
-            returnBuffer													= new Ctrl__Abstract().new Ack();
-        }
-        catch(Exception e)
-        {
-        	e.printStackTrace();
-            returnBuffer													= new Ctrl__Abstract().new Nack();
-        }
-        return returnBuffer;
-    }
-    private Ctrl__Abstract		 				processConfiguration_Request()
-    {
-        dbOpen();
-        
-        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Nack();
-
-        try
-        {
-            dbStatement 													= dbConnection.createStatement(1004, 1008);
-            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, configuration FROM configuration ORDER BY dateTime DESC LIMIT 1");
-            dbResultSet.next();
- 
-            Long										dbDateTime			= dbResultSet.getLong("dateTime");
-            String										dbJsonString		= dbResultSet.getString("configuration");
-    		
-            dbStatement.close();
-            
-            Ctrl_Configuration.Data						returnBufferPrep	= new Gson().fromJson(dbJsonString, Ctrl_Configuration.Data.class);
-    		returnBufferPrep.dateTime										= dbDateTime;											// Add time stamp to mesage
-             
-            dbStatement 													= dbConnection.createStatement(1004, 1008);
-            dbResultSet 													= dbStatement.executeQuery("SELECT dateTime, FuelConsumed FROM Fuel ORDER BY dateTime DESC LIMIT 1");
-            dbResultSet.next();
-
-            returnBufferPrep.burner.fuelConsumption							= dbResultSet.getLong("FuelConsumed");
-            
-            dbConnection.close();
- 
-    		returnBuffer													= (Ctrl_Configuration.Data) returnBufferPrep;
-       }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        return returnBuffer;
-    }
-    private Ctrl__Abstract		 				processConfiguration_Update(Ctrl_Configuration.Update message_in)
-    {
-    	dbOpen();
-        
-        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Ack();
-
-        try
-        {
-            dbStatement 													= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, Date, Time, Configuration FROM configuration ORDER BY dateTime DESC LIMIT 1");
-
-            Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
-    		String 										dbJsonString 		= gson.toJson((Ctrl_Configuration.Data) message_in);
-
-    		Long										dateTime			= System.currentTimeMillis();		// Do not use dateTime supplied in input message
-    		
-    		dbResultSet.moveToInsertRow();
-            dbResultSet.updateDouble	("dateTime", 				dateTime);
-            dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
-            dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
-            dbResultSet.updateString	("Configuration", 			dbJsonString);
-            dbResultSet.insertRow();
-
-            dbStatement.close();
-            dbConnection.close();
-
-            returnBuffer													= new Ctrl__Abstract().new Ack();
-        }
-        catch(Exception e)
-        {
-        	e.printStackTrace();
-            returnBuffer													= new Ctrl__Abstract().new Nack();
-        }
-        return returnBuffer;
-    }
+//    private Ctrl__Abstract 						processCalendars_Request()
+//    {
+//        dbOpen();
+//        
+//        Ctrl__Abstract									returnBuffer 		= new Ctrl__Abstract().new Nack();
+//
+//        try
+//        {
+//            dbStatement 													= dbConnection.createStatement(1004, 1008);
+//            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, calendars FROM calendars ORDER BY dateTime DESC LIMIT 1");
+//            dbResultSet.next();
+//
+//            Long										dbDateTime			= dbResultSet.getLong("dateTime");
+//            String										dbJsonString		= dbResultSet.getString("calendars");
+//    		
+//            dbStatement.close();
+//            dbConnection.close();
+// 
+//            Ctrl_Calendars.Data							returnBufferPrep	= new Gson().fromJson(dbJsonString, Ctrl_Calendars.Data.class);
+//    		returnBufferPrep.dateTime										= dbDateTime;											// Add time stamp to mesage
+//     		returnBuffer													= (Ctrl__Abstract) returnBufferPrep;
+//        }
+//        catch(SQLException e)
+//        {
+//            e.printStackTrace();
+//        }
+//        return returnBuffer;
+//    }
+//    private Ctrl__Abstract		 				processCalendars_Update(Ctrl_Calendars.Update message_in)
+//    {
+//    	dbOpen();
+//        
+//        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Ack();
+//
+//        try
+//        {
+//            dbStatement 													= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+//            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, Date, Time, Calendars FROM Calendars ORDER BY dateTime DESC LIMIT 1");
+//
+//            Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
+//    		String 										dbJsonString 		= gson.toJson((Ctrl_Calendars.Update) message_in);
+//
+//    		Long										dateTime			= System.currentTimeMillis();		// Do not use dateTime supplied in input message
+//    		
+//    		dbResultSet.moveToInsertRow();		
+//            dbResultSet.updateDouble	("dateTime", 				dateTime);
+//            dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
+//            dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
+//            dbResultSet.updateString	("Calendars", 				dbJsonString);
+//            dbResultSet.insertRow();
+//
+//            dbStatement.close();
+//            dbConnection.close();
+//
+//            returnBuffer													= new Ctrl__Abstract().new Ack();
+//        }
+//        catch(Exception e)
+//        {
+//        	e.printStackTrace();
+//            returnBuffer													= new Ctrl__Abstract().new Nack();
+//        }
+//        return returnBuffer;
+//    }
+//    private Ctrl__Abstract		 				processConfiguration_Request()
+//    {
+//        dbOpen();
+//        
+//        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Nack();
+//
+//        try
+//        {
+//            dbStatement 													= dbConnection.createStatement(1004, 1008);
+//            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, configuration FROM configuration ORDER BY dateTime DESC LIMIT 1");
+//            dbResultSet.next();
+// 
+//            Long										dbDateTime			= dbResultSet.getLong("dateTime");
+//            String										dbJsonString		= dbResultSet.getString("configuration");
+//    		
+//            dbStatement.close();
+//            
+//            Ctrl_Configuration.Data						returnBufferPrep	= new Gson().fromJson(dbJsonString, Ctrl_Configuration.Data.class);
+//    		returnBufferPrep.dateTime										= dbDateTime;											// Add time stamp to mesage
+//             
+//            dbStatement 													= dbConnection.createStatement(1004, 1008);
+//            dbResultSet 													= dbStatement.executeQuery("SELECT dateTime, FuelConsumed FROM Fuel ORDER BY dateTime DESC LIMIT 1");
+//            dbResultSet.next();
+//
+//            returnBufferPrep.burner.fuelConsumption							= dbResultSet.getLong("FuelConsumed");
+//            
+//            dbConnection.close();
+// 
+//    		returnBuffer													= (Ctrl_Configuration.Data) returnBufferPrep;
+//       }
+//        catch(Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//        return returnBuffer;
+//    }
+//    private Ctrl__Abstract		 				processConfiguration_Update(Ctrl_Configuration.Update message_in)
+//    {
+//    	dbOpen();
+//        
+//        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Ack();
+//
+//        try
+//        {
+//            dbStatement 													= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+//            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, Date, Time, Configuration FROM configuration ORDER BY dateTime DESC LIMIT 1");
+//
+//            Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
+//    		String 										dbJsonString 		= gson.toJson((Ctrl_Configuration.Data) message_in);
+//
+//    		Long										dateTime			= System.currentTimeMillis();		// Do not use dateTime supplied in input message
+//    		
+//    		dbResultSet.moveToInsertRow();
+//            dbResultSet.updateDouble	("dateTime", 				dateTime);
+//            dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
+//            dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
+//            dbResultSet.updateString	("Configuration", 			dbJsonString);
+//            dbResultSet.insertRow();
+//
+//            dbStatement.close();
+//            dbConnection.close();
+//
+//            returnBuffer													= new Ctrl__Abstract().new Ack();
+//        }
+//        catch(Exception e)
+//        {
+//        	e.printStackTrace();
+//            returnBuffer													= new Ctrl__Abstract().new Nack();
+//        }
+//        return returnBuffer;
+//    }
     private Ctrl__Abstract 						processFuelConsumption_Request()
     {
         dbOpen();

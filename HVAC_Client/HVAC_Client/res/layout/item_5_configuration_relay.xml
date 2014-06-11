@@ -48,7 +48,7 @@
 	    android:layout_height			= "50dp"
     	android:gravity					= "center_vertical"
 	    android:orientation				= "horizontal"
-	>        
+	android:layout_gravity="center_vertical">        
         
         <TextView
             style="@style/AD_Text"
