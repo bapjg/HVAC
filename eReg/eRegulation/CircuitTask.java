@@ -40,47 +40,13 @@ public class CircuitTask
 		
 		// Handle duration/EndTime
 		
-		if (paramCalendar.stopOnObjective)
-		{
-			this.stopOnObjective															= true;
-		}								
-		else								
-		{								
-			this.stopOnObjective															= false;			
-		}								
+		if (paramCalendar.stopOnObjective)						this.stopOnObjective		= true;							
+		else													this.stopOnObjective		= false;			
 										
 		this.timeEnd																		= paramCalendar.timeEnd.milliSeconds;
 		this.timeEndDisplay																	= paramCalendar.timeEnd.displayShort();
 
 	}
-//	public CircuitTask
-//		(
-//			String 				timeStart, 
-//			String 				timeEnd,  
-//			String 				tempObjective, 
-//			String				stopOnObjective,
-//			String				days
-//		)
-//	{
-//		this.state												= TASK_STATE_WaitingToStart;
-//		this.active												= false;
-//		this.timeStart											= Global.parseTime(timeStart);
-//		this.timeStartDisplay									= timeStart;
-//		this.timeEnd											= Global.parseTime(timeEnd);
-//		this.timeEndDisplay										= timeEnd;
-//		this.tempObjective										= Integer.parseInt(tempObjective);
-//		this.days												= days;
-//		this.dateLastRun										= 0L;
-//		
-//		if (stopOnObjective.equalsIgnoreCase("1"))
-//		{
-//			this.stopOnObjective								= true;
-//		}
-//		else
-//		{
-//			this.stopOnObjective								= false;			
-//		}
-//	}
 	public CircuitTask												// Used to create dynamically (ie not on calendars) an immediatetask
 		(
 			Long 												timeStart, 
