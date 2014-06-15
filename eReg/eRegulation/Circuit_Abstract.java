@@ -253,20 +253,16 @@ abstract class Circuit_Abstract
 			{
 				if (type == CIRCUIT_TYPE_HotWater)
 				{
-					System.out.println("Circtuit Abstract/scheduleTask this is HotWater so activate (line 259)");
 					taskActivate(taskFound);
 				}
 				else
 				{
-					System.out.println("Circtuit Abstract/scheduleTask this is not HotWater so look at temperature (line 264)");
 					if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)
 					{
-						System.out.println("Circtuit Abstract/scheduleTask Its summer (line 264)" + name);
 						// TODO do nothing or marked as finished
 					}
 					else
 					{
-						System.out.println("Circtuit Abstract/scheduleTask Its NOT summer (line 272)" + name);
 						taskActivate(taskFound);
 					}
 				}
