@@ -13,6 +13,7 @@ abstract class Circuit_Abstract
 	public static final int			CIRCUIT_TYPE_Mixer				= 2;
 
 	public String 					name;
+	public Integer 					type;
 	public String 					friendlyName;
 	public Integer 					circuitType;
 	public Integer 					tempMax;
@@ -53,19 +54,15 @@ abstract class Circuit_Abstract
 	public Circuit_Abstract(Ctrl_Configuration.Circuit 				paramCircuit)
 	{
 		this.name													= paramCircuit.name;
+		this.type													= paramCircuit.type;
 		this.friendlyName											= "";
 		this.circuitType											= paramCircuit.type;
 		this.tempMax												= paramCircuit.tempMax;
 		this.circuitPump											= Global.pumps.fetchPump(paramCircuit.pump);
 		this.circuitThermo											= Global.thermometers.fetchThermometer(paramCircuit.thermometer);
-		if (this.circuitPump == null)
-		{
-			System.out.println("Circuit.Constructor : " + name + " invalid pump " + paramCircuit.pump);
-		}
-		if (this.circuitThermo == null)
-		{
-			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + paramCircuit.thermometer);
-		}
+
+		if (this.circuitPump == null)			System.out.println("Circuit.Constructor : " + name + " invalid pump " + paramCircuit.pump);
+		if (this.circuitThermo == null)			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + paramCircuit.thermometer);
 		
 		this.state													= CIRCUIT_STATE_Off;
 		this.heatRequired											= null;
@@ -254,7 +251,7 @@ abstract class Circuit_Abstract
 		{
 			if (taskFound != null)
 			{
-				if (name.equalsIgnoreCase("Hot Water"))
+				if (type == CIRCUIT_TYPE_HotWater)
 				{
 					System.out.println("Circtuit Abstract/scheduleTask this is HotWater so activate (line 259)");
 					taskActivate(taskFound);
