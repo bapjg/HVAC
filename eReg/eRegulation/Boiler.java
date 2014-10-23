@@ -19,6 +19,15 @@ public class Boiler
 	// ===========================================================================================
 
 	public Integer	   		burnerState;
+//	public enum				burnerStates 
+//	{
+//		STATE_Off, 
+//		STATE_On_Heating,
+//		STATE_On_Cooling,
+//		STATE_On_CoolingAfterOverheat,
+//		STATE_On_PowerUp,
+//		STATE_Error
+//	};
 	public Integer	   		burnerStateNext;
 	public Integer	   		timeToLive;
 

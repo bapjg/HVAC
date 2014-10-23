@@ -6,10 +6,12 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
+import java.net.NetworkInterface;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Enumeration;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -29,7 +31,21 @@ public class HTTP_Connection
 	{
 		try
 		{
-			server 																		= new URL("http://home.bapjg.com:8888/hvac/Management");
+			String ipAddresses = "";
+			Enumeration <NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
+			while(e.hasMoreElements())
+			{
+			    NetworkInterface n = (NetworkInterface) e.nextElement();
+			    Enumeration <InetAddress> ee = n.getInetAddresses();
+			    while (ee.hasMoreElements())
+			    {
+			        InetAddress i = (InetAddress) ee.nextElement();
+			        ipAddresses += i.getHostAddress() + ", ";
+			    }
+			}
+			if (ipAddresses.indexOf("192.168.5") > -1)									server = new URL("http://192.168.5.10:8888/hvac/Management");
+			else																		server = new URL("http://home.bapjg.com:8888/hvac/Management");
+				
 			serverConnection 															= server.openConnection();
 			serverConnection.setDoOutput(true);
 			serverConnection.setUseCaches(false);

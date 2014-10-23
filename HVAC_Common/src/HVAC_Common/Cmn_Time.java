@@ -45,7 +45,7 @@ public class Cmn_Time 											implements 					java.io.Serializable
 		this.hours																			= hours;
 		this.minutes																		= minutes;
 		this.seconds																		= seconds;
-		this.milliSeconds																	= (hours * 24 * 3600 + minutes * 60 + seconds) * 1000L;
+		this.milliSeconds																	= (hours * 3600 + minutes * 60 + seconds) * 1000L;
 	}
 	public String displayShort()
 	{
