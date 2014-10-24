@@ -87,21 +87,6 @@ public class Activity_Main 										extends 					Activity
 	{
 		switch(item.getItemId()) 
 		{
-			case R.id.menuitem_search:
-				Toast.makeText(Global.appContext, "search", Toast.LENGTH_SHORT).show();
-				return true;
-			case R.id.menuitem_add:
-				Toast.makeText(Global.appContext, "add", Toast.LENGTH_SHORT).show();
-				return true;
-			case R.id.menuitem_share:
-				Toast.makeText(Global.appContext, "share", Toast.LENGTH_SHORT).show();
-				return true;
-			case R.id.menuitem_feedback:
-				Toast.makeText(Global.appContext, "feedback", Toast.LENGTH_SHORT).show();
-				return true;
-			case R.id.menuitem_about:
-				Toast.makeText(Global.appContext, "about", Toast.LENGTH_SHORT).show();
-				return true;
 			case R.id.menuitem_quit:
 				Toast.makeText(Global.appContext, "quit", Toast.LENGTH_SHORT).show();
 				finish();

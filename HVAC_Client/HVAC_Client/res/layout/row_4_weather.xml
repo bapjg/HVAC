@@ -47,15 +47,15 @@
 	>	                              
 		
 		<TextView
-		    style="@style/AD_Text"
-		    android:layout_width="150sp"
-		    android:text="Min/Max" />
+		    style					= "@style/AD_Text"
+		    android:layout_width	= "150sp"
+		    android:text			= "Min/Max" />
 
 		<TextView
-		    android:id="@+id/temperatureMinMax"
+		    android:id				= "@+id/temperatureMinMax"
 			android:gravity			= "left"
-		    style="@style/AD_Data"
-		    android:layout_width="80dp" />
+		    style					= "@style/AD_Data"
+		    android:layout_width	= "80dp" />
 
 	</LinearLayout>
 	
@@ -131,10 +131,10 @@
 		/>
 		
 		<TextView
-		    android:id="@+id/windName"
+		    android:id				= "@+id/windName"
 			android:gravity			= "left"
-		    style="@style/AD_Data"
-		    android:layout_width="match_parent" />
+		    style					= "@style/AD_Data"
+		    android:layout_width	= "match_parent" />
 
 	</LinearLayout>
 
@@ -169,10 +169,10 @@
 		/>
 		
 		<TextView
-		    android:id="@+id/cloudValue"
-		    style="@style/AD_Data"
+		    android:id				= "@+id/cloudValue"
+		    style					= "@style/AD_Data"
 			android:gravity			= "left"
-		    android:layout_width="match_parent" />
+		    android:layout_width	= "match_parent" />
 
 	</LinearLayout>	
 </LinearLayout>

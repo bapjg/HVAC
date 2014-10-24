@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu 
     xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/menuitem_search"
-        android:title="menu_search"
-        android:icon="@android:drawable/ic_menu_search" 
-        android:showAsAction="ifRoom">
-    </item>
-    <item android:id="@+id/menuitem_add"
-        android:title="menu_add"
-        android:icon="@android:drawable/ic_menu_add" 
-        android:showAsAction="ifRoom">
-    </item>
-    <item android:id="@+id/menuitem_share"
-        android:title="menu_share"
-        android:icon="@android:drawable/ic_menu_share" 
-        android:showAsAction="ifRoom"
-        android:actionProviderClass="android.widget.ShareActionProvider">
-    </item>
-    <item android:id="@+id/menuitem_feedback"
-        android:title="menu_feedback"
-        android:icon="@android:drawable/ic_menu_help" >
-    </item>
-    <item android:id="@+id/menuitem_about"
-        android:title="menu_about"
-        android:icon="@android:drawable/ic_menu_info_details" >
-    </item>
     <item android:id="@+id/menuitem_quit"
         android:title="menu_quit"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
