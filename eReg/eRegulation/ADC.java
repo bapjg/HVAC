@@ -24,7 +24,6 @@ public class ADC
 		// Actual data : 74 ms for 100 calls
 		Global.interfaceSemaphore.semaphoreLock("ADC.read");
 		float voltage = Read();
-LogIt.error("ADC", "read", "Voltage is " + voltage);
 		Global.interfaceSemaphore.semaphoreUnLock();
 		return 						 voltage * 5 /1023;  // 1023 = 5V
 	}
@@ -34,7 +33,6 @@ LogIt.error("ADC", "read", "Voltage is " + voltage);
 		// Actual data : 74 ms for 100 calls
 		Global.interfaceSemaphore.semaphoreLock("ADC.readAverage");
 		float voltage = ReadAverage();
-LogIt.error("ADC", "read", "Voltage is " + voltage);
 		Global.interfaceSemaphore.semaphoreUnLock();
 		return 						 voltage * 5 /1023;  // 1023 = 5V
 	}
