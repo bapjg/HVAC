@@ -18,7 +18,7 @@ public class ADC
 		Initialise(ADC_Channels, ADC_Samples, ADC_Bits_To_Shift);
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
-	public float read()
+	private float read()
 	{
 		// Test showed that this call takes less than 1ms/call
 		// Actual data : 74 ms for 100 calls
@@ -27,7 +27,7 @@ public class ADC
 		Global.interfaceSemaphore.semaphoreUnLock();
 		return 						 voltage * 5 /1023;  // 1023 = 5V
 	}
-	public float readAverage()
+	private float readAverage()
 	{
 		// Test showed that this call takes less than 1ms/call
 		// Actual data : 74 ms for 100 calls
@@ -42,7 +42,8 @@ public class ADC
 		
 		if (reading > 4.0)
 		{
-			return true;
+			//return true;
+			return false;
 		}
 		else
 		{
@@ -59,7 +60,8 @@ public class ADC
 		}
 		else
 		{
-			return false;
+			//return false;
+			return true;
 		}
 	}
 }

@@ -99,6 +99,7 @@ public class Burner
 			LogIt.error("Burner", "checkFault", "Over 4 volts indicates trip");
 			Global.eMailMessage("Burner fault", "Burner/checkFault : Over 4 volts indicates trip");
 			return true;
+
 		}
 		else
 		{
