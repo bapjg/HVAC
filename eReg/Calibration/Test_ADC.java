@@ -17,11 +17,10 @@ public class Test_ADC
 		
 		for (i = 0; i < 20; i++)
 		{
-			voltage = adc.read();
-			System.out.println("Iteration : " + i + " voltage  : " + voltage);
-			voltage = adc.readAverage();
-			System.out.println("Iteration : " + i + " volt Avg : " + voltage);
-
+			// voltage = adc.read();
+			// System.out.println("Iteration : " + i + " voltage  : " + voltage);
+			// voltage = adc.readAverage();
+			// System.out.println("Iteration : " + i + " volt Avg : " + voltage);
 			Global.waitSeconds(1);
 		}
 	}
