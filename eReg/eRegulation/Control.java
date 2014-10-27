@@ -57,11 +57,10 @@ public class Control
 		GPIO gpio = new GPIO(4);
 		gpio.setInput();
 		
-		
-		int i;
+				int i;
 		Float voltage;
 		
-		for (i = 0; i < 20; i++)
+		for (i = 0; i < 21; i++)
 		{
 			boolean signal = gpio.isHigh();
 			
