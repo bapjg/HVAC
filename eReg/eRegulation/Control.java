@@ -54,13 +54,13 @@ public class Control
 		
 		System.out.println("Starting test");
 		
-		GPIO gpio = new GPIO(7);
+		GPIO gpio = new GPIO(4);
 		gpio.setInput();
 		
 				int i;
 		Float voltage;
 		
-		for (i = 0; i < 21; i++)
+		for (i = 0; i < 20; i++)
 		{
 			boolean signal = gpio.isHigh();
 			
