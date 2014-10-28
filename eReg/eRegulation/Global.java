@@ -82,6 +82,7 @@ public class Global
 	public static	Burner										burner;
 
 	public static 	LCD											display;	
+// TODO
 	public static 	ADC											burnerVoltages;	
 	public static 	Buttons										buttons;	
 

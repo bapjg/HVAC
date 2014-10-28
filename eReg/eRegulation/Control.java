@@ -54,7 +54,7 @@ public class Control
 		
 		System.out.println("Starting test");
 		
-		GPIO gpio = new GPIO(4);
+		GPIO gpio = new GPIO(17);
 		gpio.setInput();
 		
 		int i;

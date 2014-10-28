@@ -15,6 +15,8 @@ public class FuelFlow
 {
 	public Long			timeLastStart;
 	public Long			consumption;
+// TODO
+	//	public GPIO			fuelFlowing2;
 	
 	// consumption represents the number of milliseconds of fuel flow
 	// fuelFlowing is the programs view of whether fuel is flowing or not
@@ -76,6 +78,8 @@ public class FuelFlow
 				LogIt.info("Fuelflow", "constructor", "I/O error when reading FuelConsumed.txt : " + ex);
 			}			
 		}
+// TODO
+		//		fuelFlowing2																		= new GPIO(4);	// GPIO4 on pin7
 	}
 	public void saveFuelFlow()
     {
@@ -112,6 +116,11 @@ public class FuelFlow
 		if (timeLastStart == -1L)
 		{
 			// last call here had no fuel flowing
+// TODO
+//			if (fuelFlowing2.isHigh())
+//			{
+//				timeLastStart 																= Global.now();
+//			}
 			if (Global.burnerVoltages.isFuelFlowing())			// Fuel has just started to flow
 			{
 				timeLastStart 																= Global.now();
@@ -120,6 +129,11 @@ public class FuelFlow
 		else
 		{
 			// last call here had fuel flowing
+			// TODO
+//			if (fuelFlowing2.isHigh())
+//			{
+//				LogIt.fuelData(consumption + Global.now() - timeLastStart);
+//			}
 			if (Global.burnerVoltages.isFuelFlowing())
 			{
 				// Nothing has changed, fuel is still flowing

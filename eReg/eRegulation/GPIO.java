@@ -115,6 +115,29 @@ public class GPIO
            	return false;
         }
 	}
+	public Boolean isLow()
+	{
+		try
+        {
+            BufferedReader  									valueFile 					= new BufferedReader(new FileReader(prefix + "gpio" + this.pin + "/value"));
+            String												valueReturned				= valueFile.readLine();
+            valueFile.close();
+            if (valueReturned.equals("1"))
+            {
+            	return false;
+            }
+            else
+            {
+            	return true;
+            }
+        }
+        catch (IOException e)
+        {
+           	System.out.println("isLow Exception : " + e);
+           	return false;
+        }
+
+	}
 	public void finalize()
 	{
        	System.out.println("Finalising");
@@ -135,5 +158,4 @@ public class GPIO
         	System.out.println("finalize Exception : " + e);
         }
 	}
-
 }

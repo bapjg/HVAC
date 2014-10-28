@@ -17,11 +17,13 @@ public class Burner
 {
 	public 	Relay	   		burnerPower;
 	public  FuelFlow		fuelflow;
+	public	GPIO			burnerFault;
 	
 	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
 	{
 		burnerPower									= Global.relays.fetchRelay(burnerparams.relay);
 		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
+		// TODO burnerFault									= new GPIO(17);
 		fuelflow									= new FuelFlow();
 		burnerPower.off();
 	}
@@ -94,12 +96,13 @@ public class Burner
 	}
 	public Boolean checkFault()
 	{
+// TODO		return burnerFault.isHigh();
+		
 		if (Global.burnerVoltages.isFault())
 		{
 			LogIt.error("Burner", "checkFault", "Over 4 volts indicates trip");
 			Global.eMailMessage("Burner fault", "Burner/checkFault : Over 4 volts indicates trip");
 			return true;
-
 		}
 		else
 		{
