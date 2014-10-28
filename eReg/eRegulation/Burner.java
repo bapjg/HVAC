@@ -17,13 +17,15 @@ public class Burner
 {
 	public 	Relay	   		burnerPower;
 	public  FuelFlow		fuelflow;
-	public	GPIO			burnerFault;
+	private	GPIO			monitorBurnerFault;
+	private GPIO			monitorFuelFlow;
 	
 	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
 	{
 		burnerPower									= Global.relays.fetchRelay(burnerparams.relay);
 		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
-		// TODO burnerFault									= new GPIO(17);
+		monitorBurnerFault							= new GPIO(4);
+		monitorFuelFlow								= new GPIO(17);
 		fuelflow									= new FuelFlow();
 		burnerPower.off();
 	}
@@ -94,6 +96,24 @@ public class Burner
 
 		// Must also check max temp;
 	}
+	public Boolean isFuelFlowing()
+	{
+		return monitorFuelFlow.isHigh();
+	}
+	public Boolean burnerFault()
+	{
+		if (monitorBurnerFault.isHigh())
+		{
+			LogIt.error("Burner", "checkFault", "Burner has tripped");
+			Global.eMailMessage("Burner fault", "Burner/checkFault : Burner has tripped");
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	public Boolean checkFault()
 	{
 // TODO		return burnerFault.isHigh();

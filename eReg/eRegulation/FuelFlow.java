@@ -15,8 +15,6 @@ public class FuelFlow
 {
 	public Long			timeLastStart;
 	public Long			consumption;
-// TODO
-	//	public GPIO			fuelFlowing2;
 	
 	// consumption represents the number of milliseconds of fuel flow
 	// fuelFlowing is the programs view of whether fuel is flowing or not
@@ -78,8 +76,6 @@ public class FuelFlow
 				LogIt.info("Fuelflow", "constructor", "I/O error when reading FuelConsumed.txt : " + ex);
 			}			
 		}
-// TODO
-		//		fuelFlowing2																		= new GPIO(4);	// GPIO4 on pin7
 	}
 	public void saveFuelFlow()
     {
@@ -102,8 +98,61 @@ public class FuelFlow
 			LogIt.info("Fuelflow", "saveFuelFlow", "I/O error when writing FuelConsumed.txt : " + ex);
 		}
     }
+	public void update(Boolean fuelFlowing)
+	{
+		// We basically need to detected state changes
+		// if timeLastStart = -1 means that on last GPIO.Read, fuel was not flowing
+		// if timeLastStart > -1 means that on last GPIO.Read, fuel was flowing
+		
+		// Note that on powerup, there is an approximate 10s ventilation time
+		// before fuel starts flowing
+		
+		// We also need a convertion milliseconds of FuelFlow to litres of fuel
+		
+		if (timeLastStart == -1L)
+		{
+			// last call here had no fuel flowing
+			if (fuelFlowing)																// Fuel has just started to flow
+			{
+				timeLastStart 																= Global.now();
+			}
+		}
+		else
+		{
+			// last call here had fuel flowing
+
+			if (fuelFlowing)
+			{
+				// TODO Remove, is calculated later anyway
+				// Nothing has changed, fuel is still flowing
+				// Nothing to do until it stops
+				LogIt.fuelData(consumption + Global.now() - timeLastStart);
+			}
+			if (! fuelFlowing)																// Fuel has just stopped flowing
+			{
+				// There is a case for just logging consumption at end point rather than every few seconds
+				consumption																	= consumption + Global.now() - timeLastStart;
+				timeLastStart																= -1L;
+				saveFuelFlow();
+				LogIt.fuelData(consumption);
+			}
+		}
+		
+		if (timeLastStart == -1L)
+		{
+			// System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + 0);
+		}
+		else
+		{
+			// Long unaccounted = Global.now() - timeLastStart;
+			// System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + unaccounted);
+		}
+	}
 	public void update()
 	{
+		// TODO Discard completely
+
+		
 		// We basically need to detected state changes
 		// if timeLastStart = -1 means that on last ADC.Read, fuel was not flowing
 		// if timeLastStart > -1 means that on last ADC.Read, fuel was flowing
@@ -116,11 +165,6 @@ public class FuelFlow
 		if (timeLastStart == -1L)
 		{
 			// last call here had no fuel flowing
-// TODO
-//			if (fuelFlowing2.isHigh())
-//			{
-//				timeLastStart 																= Global.now();
-//			}
 			if (Global.burnerVoltages.isFuelFlowing())			// Fuel has just started to flow
 			{
 				timeLastStart 																= Global.now();
@@ -129,11 +173,6 @@ public class FuelFlow
 		else
 		{
 			// last call here had fuel flowing
-			// TODO
-//			if (fuelFlowing2.isHigh())
-//			{
-//				LogIt.fuelData(consumption + Global.now() - timeLastStart);
-//			}
 			if (Global.burnerVoltages.isFuelFlowing())
 			{
 				// Nothing has changed, fuel is still flowing
