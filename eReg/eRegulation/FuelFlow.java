@@ -148,66 +148,66 @@ public class FuelFlow
 			// System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + unaccounted);
 		}
 	}
-	public void update()
-	{
-		// TODO Discard completely
-
-		
-		// We basically need to detected state changes
-		// if timeLastStart = -1 means that on last ADC.Read, fuel was not flowing
-		// if timeLastStart > -1 means that on last ADC.Read, fuel was flowing
-		
-		// Note that on powerup, there is an approximate 10s ventilation time
-		// before fuel starts flowing
-		
-		// We also need a convertion milliseconds of FuelFlow to litres of fuel
-		
-		if (timeLastStart == -1L)
-		{
-			// last call here had no fuel flowing
-			if (Global.burnerVoltages.isFuelFlowing())			// Fuel has just started to flow
-			{
-				timeLastStart 																= Global.now();
-			}
-		}
-		else
-		{
-			// last call here had fuel flowing
-			if (Global.burnerVoltages.isFuelFlowing())
-			{
-				// Nothing has changed, fuel is still flowing
-				// Nothing to do until it stops
-				LogIt.fuelData(consumption + Global.now() - timeLastStart);
-			}
-			else												// Fuel has just stopped flowing
-			{
-				// There is a case for just logging consumption at end point rather than evry few seconds
-				consumption																	= consumption + Global.now() - timeLastStart;
-				timeLastStart																= -1L;
-				saveFuelFlow();
-				LogIt.fuelData(consumption);
-			}
-		}
-		
-		if (timeLastStart == -1L)
-		{
-			// System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + 0);
-		}
-		else
-		{
-			// Long unaccounted = Global.now() - timeLastStart;
-			// System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + unaccounted);
-		}
-	}
-	public Boolean isFuelFlowing()
-	{
-		if (timeLastStart == -1L)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
+//	public void update()
+//	{
+//		// TODO Discard completely
+//
+//		
+//		// We basically need to detected state changes
+//		// if timeLastStart = -1 means that on last ADC.Read, fuel was not flowing
+//		// if timeLastStart > -1 means that on last ADC.Read, fuel was flowing
+//		
+//		// Note that on powerup, there is an approximate 10s ventilation time
+//		// before fuel starts flowing
+//		
+//		// We also need a convertion milliseconds of FuelFlow to litres of fuel
+//		
+//		if (timeLastStart == -1L)
+//		{
+//			// last call here had no fuel flowing
+//			if (Global.burnerVoltages.isFuelFlowing())			// Fuel has just started to flow
+//			{
+//				timeLastStart 																= Global.now();
+//			}
+//		}
+//		else
+//		{
+//			// last call here had fuel flowing
+//			if (Global.burnerVoltages.isFuelFlowing())
+//			{
+//				// Nothing has changed, fuel is still flowing
+//				// Nothing to do until it stops
+//				LogIt.fuelData(consumption + Global.now() - timeLastStart);
+//			}
+//			else												// Fuel has just stopped flowing
+//			{
+//				// There is a case for just logging consumption at end point rather than evry few seconds
+//				consumption																	= consumption + Global.now() - timeLastStart;
+//				timeLastStart																= -1L;
+//				saveFuelFlow();
+//				LogIt.fuelData(consumption);
+//			}
+//		}
+//		
+//		if (timeLastStart == -1L)
+//		{
+//			// System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + 0);
+//		}
+//		else
+//		{
+//			// Long unaccounted = Global.now() - timeLastStart;
+//			// System.out.println("FuelFlow/update : exit with consumption : " + consumption + " unaccounted : " + unaccounted);
+//		}
+//	}
+//	public Boolean isFuelFlowing()
+//	{
+//		if (timeLastStart == -1L)
+//		{
+//			return false;
+//		}
+//		else
+//		{
+//			return true;
+//		}
+//	}
 }

@@ -114,7 +114,7 @@ public class Boiler
 			state												 = STATE_On_CoolingAfterOverheat;
 			return;
 		}
-		if (burner.checkFault())	//This reads ADC
+		if (burner.burnerFault())	//This reads GPIO
 		{
 			state												 = STATE_Error;
 			burner.powerOff();

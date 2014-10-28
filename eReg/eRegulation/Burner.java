@@ -23,7 +23,7 @@ public class Burner
 	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
 	{
 		burnerPower									= Global.relays.fetchRelay(burnerparams.relay);
-		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
+//		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
 		monitorBurnerFault							= new GPIO(4);
 		monitorFuelFlow								= new GPIO(17);
 		fuelflow									= new FuelFlow();
@@ -36,16 +36,17 @@ public class Burner
 		burnerPower.on();
 		
 		Integer i;
-		
+		fuelflow.update(isFuelFlowing());
 		for (i = 0; i < 30; i++)
 		{
-			fuelflow.update();
-			if (fuelflow.isFuelFlowing())
+//			if (fuelflow.isFuelFlowing())
+			if	(isFuelFlowing())
 			{
 				// System.out.println("Burner/powerOn : fuel flow detected ");
+				
 				return;
 			}
-			else if (checkFault())
+			else if (burnerFault())
 			{
 				LogIt.error("Burner", "powerOn", "checkFault has revealed a problem");
 				Global.eMailMessage("Burner fault", "'checkfault()' has detected a fault");
@@ -70,8 +71,9 @@ public class Burner
 		
 		for (i = 0; i < 30; i++)
 		{
-			fuelflow.update();
-			if (fuelflow.isFuelFlowing())
+			fuelflow.update(isFuelFlowing());
+//			if (fuelflow.isFuelFlowing())
+			if	(isFuelFlowing())
 			{
 				Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
 			}
@@ -85,9 +87,9 @@ public class Burner
 	}
 	public void sequencer()
 	{
-		fuelflow.update();
+		fuelflow.update(isFuelFlowing());
 		
-		if (checkFault())
+		if (burnerFault())
 		{
 			LogIt.error("Burner", "sequencer", "checkFault has detected a problem");
 			Global.eMailMessage("Burner fault", "Burner/sequencer : 'checkFault()' has detected a problem");
@@ -114,19 +116,19 @@ public class Burner
 		}
 	}
 	
-	public Boolean checkFault()
-	{
-// TODO		return burnerFault.isHigh();
-		
-		if (Global.burnerVoltages.isFault())
-		{
-			LogIt.error("Burner", "checkFault", "Over 4 volts indicates trip");
-			Global.eMailMessage("Burner fault", "Burner/checkFault : Over 4 volts indicates trip");
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+//	public Boolean checkFault()
+//	{
+//// TODO		return burnerFault.isHigh();
+//		
+//		if (Global.burnerVoltages.isFault())
+//		{
+//			LogIt.error("Burner", "checkFault", "Over 4 volts indicates trip");
+//			Global.eMailMessage("Burner fault", "Burner/checkFault : Over 4 volts indicates trip");
+//			return true;
+//		}
+//		else
+//		{
+//			return false;
+//		}
+//	}
 }

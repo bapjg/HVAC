@@ -83,7 +83,7 @@ public class Global
 
 	public static 	LCD											display;	
 // TODO
-	public static 	ADC											burnerVoltages;	
+//	public static 	ADC											burnerVoltages;	
 	public static 	Buttons										buttons;	
 
 	public static 	ArrayList	<String>						eMails;	

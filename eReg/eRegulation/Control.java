@@ -52,29 +52,29 @@ public class Control
 		//
 		
 		
-		System.out.println("Starting test");
+//		System.out.println("Starting test");
 		
-		GPIO gpio = new GPIO(17);
-		gpio.setInput();
-		
-		int i;
-		Float voltage;
-		
-		for (i = 0; i < 21; i++)
-		{
-			boolean signal = gpio.isHigh();
-			
-			if (signal)
-			{
-				System.out.println("Iteration : " + i + " signal is high");
-			}
-			else
-			{
-				System.out.println("Iteration : " + i + " signal is low");
-			}
-
-			Global.waitSeconds(5);
-		}
+//		GPIO gpio = new GPIO(17);
+//		gpio.setInput();
+//		
+//		int i;
+//		Float voltage;
+//		
+//		for (i = 0; i < 21; i++)
+//		{
+//			boolean signal = gpio.isHigh();
+//			
+//			if (signal)
+//			{
+//				System.out.println("Iteration : " + i + " signal is high");
+//			}
+//			else
+//			{
+//				System.out.println("Iteration : " + i + " signal is low");
+//			}
+//
+//			Global.waitSeconds(5);
+//		}
 
 		//
 		//============================================================
