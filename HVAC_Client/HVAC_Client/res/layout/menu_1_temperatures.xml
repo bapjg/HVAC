@@ -7,6 +7,10 @@
     android:clickable="true"
     android:orientation="vertical" >
 
-	<Button	style	= "@style/AD_MenuButton" 	android:id	= "@+id/buttonTemperatures"	android:text	= "Temperatures"         		/>
+	<Button	
+	    style	= "@style/AD_MenuButton" 	
+	    android:id	= "@+id/buttonTemperatures"	
+	    android:text	= "Temperatures" 
+	/>
 
 </LinearLayout>
