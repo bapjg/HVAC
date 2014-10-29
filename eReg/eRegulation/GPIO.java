@@ -4,10 +4,31 @@ import java.io.*;
 import java.io.FileWriter;
 import java.io.File;
 
+//===============================================================================================================================================================
+//
+//	GPIO Virtual File Structure
+//	===========================
+//
+//	Directory	: /sys/class/gpio/
+//  File		: 		export				(used to activate a gpio connection)
+//  File		: 		unexport			(used to de-activate a gpio connection)
+//  Directory	: 		gpio4				(if gpio pin 4 has been activated, this directory will be created)
+//  File    	: 			active_low		()
+//  File    	: 			direction		(either write "in" or "out")
+//  File    	: 			edge			()
+//  Directory   :	 		power			(???)
+//  Directory   : 			subsystem		(???)
+//  File    	: 			uevent			()
+//  File    	: 			value			(High = "1", Low = "0", either read or write depending on direction, above)
+
+
+//===============================================================================================================================================================
+
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class GPIO
 {
 	String 														pin;
+	String														pinDirectory;
 	static final String 										prefix 						= "/sys/class/gpio/";
 	FileWriter 													exportFile;
 	FileWriter 													unexportFile;
@@ -15,12 +36,13 @@ public class GPIO
 	public GPIO(Integer pin)
 	{
 		this.pin																			= pin.toString();
+		this.pinDirectory																	= prefix + "gpio" + this.pin;
         try											
         {											
         	exportFile 																		= new FileWriter(prefix + "export");
         	unexportFile 																	= new FileWriter(prefix + "unexport");
-            File exportFileCheck 															= new File(prefix + "gpio"+ this.pin);
-            if (exportFileCheck.exists()) 
+            File gpioPinDirectory 															= new File(pinDirectory);				// if it exists, it is a directory
+            if (gpioPinDirectory.exists()) 
             {
                 unexportFile.write(this.pin);
                 unexportFile.flush();
@@ -41,7 +63,7 @@ public class GPIO
 	{
         try
         {
-        	FileWriter 											directionFile 				= new FileWriter(prefix + "gpio" + this.pin + "/direction");
+        	FileWriter 											directionFile 				= new FileWriter(pinDirectory + "/direction");
         	directionFile.write("in");
         	directionFile.flush();
         	directionFile.close();
@@ -55,7 +77,7 @@ public class GPIO
 	{
         try
         {
-        	FileWriter 											directionFile 				= new FileWriter(prefix + "gpio" + this.pin + "/direction");
+        	FileWriter 											directionFile 				= new FileWriter(pinDirectory + "/direction");
         	directionFile.write("out");
         	directionFile.flush();
         	directionFile.close();
@@ -70,7 +92,7 @@ public class GPIO
 		setOutput();
 		try
         {
-            BufferedWriter 										valueFile 					= new BufferedWriter(new FileWriter(prefix + "gpio" + this.pin + "/value"));
+            BufferedWriter 										valueFile 					= new BufferedWriter(new FileWriter(pinDirectory + "/value"));
             valueFile.write("1");
             valueFile.close();
          }
@@ -84,7 +106,7 @@ public class GPIO
 		setOutput();
 		try
         {
-            BufferedWriter 										valueFile 					= new BufferedWriter(new FileWriter(prefix + "gpio" + this.pin + "/value"));
+            BufferedWriter 										valueFile 					= new BufferedWriter(new FileWriter(pinDirectory + "/value"));
             valueFile.write("0");
             valueFile.close();
          }
@@ -97,7 +119,7 @@ public class GPIO
 	{
 		try
         {
-            BufferedReader  									valueFile 					= new BufferedReader(new FileReader(prefix + "gpio" + this.pin + "/value"));
+            BufferedReader  									valueFile 					= new BufferedReader(new FileReader(pinDirectory + "/value"));
             String												valueReturned				= valueFile.readLine();
             valueFile.close();
             if (valueReturned.equals("1"))
@@ -119,7 +141,7 @@ public class GPIO
 	{
 		try
         {
-            BufferedReader  									valueFile 					= new BufferedReader(new FileReader(prefix + "gpio" + this.pin + "/value"));
+            BufferedReader  									valueFile 					= new BufferedReader(new FileReader(pinDirectory+ "/value"));
             String												valueReturned				= valueFile.readLine();
             valueFile.close();
             if (valueReturned.equals("1"))
@@ -145,8 +167,8 @@ public class GPIO
         {
         	exportFile 																		= new FileWriter(prefix + "export");
         	unexportFile 																	= new FileWriter(prefix + "unexport");
-            File 												exportFileCheck 			= new File(prefix + "gpio"+ this.pin);
-            if (exportFileCheck.exists()) 
+            File gpioPinDirectory 															= new File(pinDirectory);				// if it exists, it is a directory
+            if (gpioPinDirectory.exists()) 
             {
                 unexportFile.write(this.pin);
                 unexportFile.flush();

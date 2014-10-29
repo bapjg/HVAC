@@ -112,7 +112,7 @@ public class Control
 		for (i = 0; i < 21; i++)
 		{
 			System.out.println("Iteration : " + i);
-			System.out.println("monitorBurnerFault : " + Global.burner.monitorBurnerFault.isHigh());
+			System.out.println("monitorFuelFlow : " + Global.burner.monitorFuelFlow.isHigh());
 			//System.out.println("monitorFuelFlow : " + Global.burner.monitorFuelFlow.isHigh());
 			System.out.println("====================================================");
 			
