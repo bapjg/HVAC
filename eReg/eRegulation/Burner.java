@@ -17,8 +17,8 @@ public class Burner
 {
 	public 	Relay	   		burnerPower;
 	public  FuelFlow		fuelflow;
-	private	GPIO			monitorBurnerFault;
-	private GPIO			monitorFuelFlow;
+	public	GPIO			monitorBurnerFault;
+	public 	GPIO			monitorFuelFlow;
 	
 	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
 	{
@@ -106,7 +106,7 @@ public class Burner
 	{
 		if (monitorBurnerFault.isHigh())
 		{
-			LogIt.error("Burner", "checkFault", "Burner has tripped");
+			LogIt.error("Burner", "burnerFault", "Burner has tripped");
 			Global.eMailMessage("Burner fault", "Burner/checkFault : Burner has tripped");
 			return true;
 		}

@@ -8,6 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import HVAC_Common.*;
+import HVAC_Common.Ctrl_Configuration.Relay;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Control
@@ -53,8 +54,6 @@ public class Control
 		
 		
 //		System.out.println("Starting test");
-		
-//		GPIO gpio = new GPIO(17);
 //		gpio.setInput();
 //		
 //		int i;
@@ -92,7 +91,37 @@ public class Control
 
 		//
 		//============================================================
-	
+
+
+		//============================================================
+		//
+		// Any other tests can be done here
+		//
+		
+		
+		System.out.println("Starting test");
+		
+//		GPIO monitorBurnerFault							= new GPIO(4);
+//		GPIO monitorFuelFlow							= new GPIO(17);
+		
+		int i;
+		Float voltage;
+		
+		Global.burner.powerOn();
+		
+		for (i = 0; i < 21; i++)
+		{
+			System.out.println("Iteration : " + i);
+			System.out.println("monitorBurnerFault : " + Global.burner.monitorBurnerFault.isHigh());
+			System.out.println("monitorFuelFlow : " + Global.burner.monitorFuelFlow.isHigh());
+
+			Global.waitSeconds(5);
+		}
+
+		Global.burner.powerOff();
+		//
+		//============================================================
+		
 		
 		//============================================================
 		//
