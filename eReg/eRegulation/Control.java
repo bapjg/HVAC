@@ -107,7 +107,7 @@ public class Control
 		int i;
 		Float voltage;
 		
-		Global.burner.powerOn();
+		Global.burner.burnerPower.on();
 		
 		for (i = 0; i < 21; i++)
 		{
@@ -118,7 +118,10 @@ public class Control
 			Global.waitSeconds(5);
 		}
 
-		Global.burner.powerOff();
+		Global.burner.burnerPower.off();
+		
+		System.out.println("Ending test");
+
 		//
 		//============================================================
 		
