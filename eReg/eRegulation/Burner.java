@@ -24,8 +24,8 @@ public class Burner
 	{
 		burnerPower									= Global.relays.fetchRelay(burnerparams.relay);
 //		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
-		monitorBurnerFault							= new GPIO(4);
-		monitorFuelFlow								= new GPIO(17);
+		monitorBurnerFault							= new GPIO(17);
+		monitorFuelFlow								= new GPIO(4);
 		fuelflow									= new FuelFlow();
 		burnerPower.off();
 	}

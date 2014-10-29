@@ -20,8 +20,16 @@ import java.io.File;
 //  Directory   : 			subsystem		(???)
 //  File    	: 			uevent			()
 //  File    	: 			value			(High = "1", Low = "0", either read or write depending on direction, above)
-
-
+//
+//  Example
+//  =======
+//  To use gpio in 4
+//  write "4" 	to file "/sys/class/gpio/"
+//  write "in" 	to 	file "/sys/class/gpio/gpio4/direction"		for reading, or
+//  write "out" to 	file "/sys/class/gpio/gpio4/direction"		for writing
+//  read  		    file "/sys/class/gpio/gpio4/value"			for reading (returns "0" or "1"), or
+//  write "0"	    file "/sys/class/gpio/gpio4/value"		 	for writing (low = "0" or high = "1")
+//
 //===============================================================================================================================================================
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
