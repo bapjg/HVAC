@@ -13,18 +13,18 @@ import java.io.File;
 //  File		: 		export				(used to activate a gpio connection)
 //  File		: 		unexport			(used to de-activate a gpio connection)
 //  Directory	: 		gpio4				(if gpio pin 4 has been activated, this directory will be created)
-//  File    	: 			active_low		()
+//  File    	: 			active_low		(writing 1 inverts logic : High = 0, Low = 1)
 //  File    	: 			direction		(either write "in" or "out")
-//  File    	: 			edge			()
+//  File    	: 			edge			(used for poll(2) call to generate interupt on signal rising/falling etc)
 //  Directory   :	 		power			(???)
 //  Directory   : 			subsystem		(???)
-//  File    	: 			uevent			()
+//  File    	: 			uevent			(???)
 //  File    	: 			value			(High = "1", Low = "0", either read or write depending on direction, above)
 //
 //  Example
 //  =======
 //  To use gpio in 4
-//  write "4" 	to file "/sys/class/gpio/"
+//  write "4" 	to  file "/sys/class/gpio/"
 //  write "in" 	to 	file "/sys/class/gpio/gpio4/direction"		for reading, or
 //  write "out" to 	file "/sys/class/gpio/gpio4/direction"		for writing
 //  read  		    file "/sys/class/gpio/gpio4/value"			for reading (returns "0" or "1"), or
@@ -47,8 +47,8 @@ public class GPIO
 		this.pinDirectory																	= prefix + "gpio" + this.pin;
         try											
         {											
-        	exportFile 																		= new FileWriter(prefix + "export");
-        	unexportFile 																	= new FileWriter(prefix + "unexport");
+        	exportFile 																		= new FileWriter(prefix + "export");	// to activate GPIO pin
+        	unexportFile 																	= new FileWriter(prefix + "unexport");	// to deactivate GPIO pin
             File gpioPinDirectory 															= new File(pinDirectory);				// if it exists, it is a directory
             if (gpioPinDirectory.exists()) 
             {

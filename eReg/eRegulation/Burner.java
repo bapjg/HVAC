@@ -23,7 +23,6 @@ public class Burner
 	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
 	{
 		burnerPower									= Global.relays.fetchRelay(burnerparams.relay);
-//		Global.burnerVoltages 						= new ADC();						// ADC measure fuel flow and burner fault
 		monitorBurnerFault							= new GPIO(17);
 		monitorFuelFlow								= new GPIO(4);
 		fuelflow									= new FuelFlow();
@@ -34,25 +33,22 @@ public class Burner
 	{
 		LogIt.action("Burner", "On");
 		burnerPower.on();
-		
+		// After power on, ventilation clears fuel out of combustion chamber for 10 seconds
+		// After which fuel is injected and an ignition arc ignited for 20 - 30 seconds
+		// Fuel flow should be detected after about 10 seconds after burnerPower.on() call
 		Integer i;
 		fuelflow.update(isFuelFlowing());
 		for (i = 0; i < 30; i++)
 		{
-//			if (fuelflow.isFuelFlowing())
 			if	(isFuelFlowing())
 			{
 				// System.out.println("Burner/powerOn : fuel flow detected ");
-				
 				return;
 			}
 			else if (burnerFault())
 			{
 				LogIt.error("Burner", "powerOn", "checkFault has revealed a problem");
 				Global.eMailMessage("Burner fault", "'checkfault()' has detected a fault");
-			// When burner starts fuel flow is detected
-				// a message has already been displayed
-				// Don't know what to do here
 			}
 			else
 			{
@@ -72,7 +68,6 @@ public class Burner
 		for (i = 0; i < 30; i++)
 		{
 			fuelflow.update(isFuelFlowing());
-//			if (fuelflow.isFuelFlowing())
 			if	(isFuelFlowing())
 			{
 				Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
@@ -115,20 +110,4 @@ public class Burner
 			return false;
 		}
 	}
-	
-//	public Boolean checkFault()
-//	{
-//// TODO		return burnerFault.isHigh();
-//		
-//		if (Global.burnerVoltages.isFault())
-//		{
-//			LogIt.error("Burner", "checkFault", "Over 4 volts indicates trip");
-//			Global.eMailMessage("Burner fault", "Burner/checkFault : Over 4 volts indicates trip");
-//			return true;
-//		}
-//		else
-//		{
-//			return false;
-//		}
-//	}
 }
