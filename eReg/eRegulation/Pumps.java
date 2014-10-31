@@ -8,7 +8,6 @@ import HVAC_Common.Ctrl_Configuration;
 public class Pumps
 {
 	public ArrayList<Pump> 										pumpList 					= new ArrayList<Pump>();
-	public Long													dateTimeLastClean;
 	
 	public void configure(ArrayList <Ctrl_Configuration.Pump> paramPumps)
 	{
@@ -17,7 +16,6 @@ public class Pumps
 			Pump 												pumpItem 					= new Pump(paramPump);
 			pumpList.add(pumpItem);
 		}
-		dateTimeLastClean																	= Global.now();						// Avoid cleaning just after reboot
 	}
 	public Pump fetchPump(String name)
 	{

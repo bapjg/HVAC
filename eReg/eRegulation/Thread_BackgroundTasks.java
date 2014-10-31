@@ -32,20 +32,18 @@ public class Thread_BackgroundTasks implements Runnable
 			// CleanPumps : particularly in summer
 			//
 
-			if ( (Global.pumps.dateTimeLastClean 	< 	Global.today()											)	 	// last run was yesterday
-			&&   (tasksBackGround.pumpCleanTime		> 	Global.getTimeNowSinceMidnight()						) 		// time to do it has arrived		
-			&&   (tasksBackGround.pumpCleanTime		< 	Global.getTimeNowSinceMidnight() + (30 * 60 * 1000L)	) 	)	// but not too late	(allow 30 mins	
+			if ( (tasksBackGround.pumpCleanTime		> 	Global.getTimeNowSinceMidnight()						) 		// time to do it has arrived		
+			&&   (tasksBackGround.pumpCleanTime		< 	Global.getTimeNowSinceMidnight() + (30 * 60 * 1000L)	) 	)	// & within 30 min window
 			{
 				LogIt.action("Summer Pumps", "On");
 				LogIt.info("Thread_Background", "Run", "Summer Pumps On", true);
-				LogIt.info("Thread_Background", "Run", "dateTimeLastRun " + Global.pumps.dateTimeLastClean.toString(), true);
 				
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
 					Pump		thisPump						= circuit.circuitPump;
 					LogIt.info("Thread_Background", "Run", "Pump " + circuit.circuitPump.name + ", Last used " + thisPump.dateLastOperated.toString(), true);
 					
-					if (thisPump.dateLastOperated <= Global.pumps.dateTimeLastClean)		// pump not used since last clean
+					if (thisPump.dateLastOperated >= Global.now() - 24 * 3600 * 1000L )									// pump not used since 24 h
 					{
 						if (!circuit.circuitPump.isOn())			// Not really possible otherwise
 						{
@@ -56,7 +54,7 @@ public class Thread_BackgroundTasks implements Runnable
 					}
 				}
 
-				Global.pumps.dateTimeLastClean					= Global.now(); // This value will be higher than dateLastOperated, ensuring a run next day even if unused
+//				Global.pumps.dateTimeLastClean					= Global.now(); // This value will be higher than dateLastOperated, ensuring a run next day even if unused
 
 				LogIt.info("Thread_Background", "Run", "Summer Pumps Wait", true);
 				// This is a wait which allows loop exit if stopButton pressed
@@ -65,7 +63,7 @@ public class Thread_BackgroundTasks implements Runnable
 					Global.waitSeconds(1);
 				}
 				
-				// Switch off all pumps but inspect each circuit to see if a task is ow active
+				// Switch off all pumps but inspect each circuit to see if a task is now active
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
 					if (circuit.taskActive == null)	

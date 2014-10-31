@@ -22,7 +22,7 @@ public class Pump
 	{
 		this.name 		    																= paramPump.name;
 		this.relay																			= Global.relays.fetchRelay(paramPump.relay);
-		this.dateLastOperated																= 0L;
+		this.dateLastOperated																= Global.now();
 		if (this.relay == null)
 		{
 			System.out.println("Relay.Constructor Pump : " + this.name + ", invalid relayName : " + paramPump.relay);
