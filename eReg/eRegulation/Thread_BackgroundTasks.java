@@ -38,10 +38,12 @@ public class Thread_BackgroundTasks implements Runnable
 			{
 				LogIt.action("Summer Pumps", "On");
 				LogIt.info("Thread_Background", "Run", "Summer Pumps On", true);
+				LogIt.info("Thread_Background", "Run", "dateTimeLastRun " + Global.pumps.dateTimeLastClean.toString(), true);
 				
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
 					Pump		thisPump						= circuit.circuitPump;
+					LogIt.info("Thread_Background", "Run", "Pump " + circuit.circuitPump.name + ", Last used " + thisPump.dateLastOperated.toString(), true);
 					
 					if (thisPump.dateLastOperated <= Global.pumps.dateTimeLastClean)		// pump not used since last clean
 					{
@@ -54,7 +56,7 @@ public class Thread_BackgroundTasks implements Runnable
 					}
 				}
 
-				Global.pumps.dateTimeLastClean					= Global.now(); // This value will be higher then dateLastOperated, ensuring a run next day even if unused
+				Global.pumps.dateTimeLastClean					= Global.now(); // This value will be higher than dateLastOperated, ensuring a run next day even if unused
 
 				LogIt.info("Thread_Background", "Run", "Summer Pumps Wait", true);
 				// This is a wait which allows loop exit if stopButton pressed

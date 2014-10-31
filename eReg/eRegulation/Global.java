@@ -310,14 +310,12 @@ public class Global
 //		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
 		return -1L;
 	}
-	public static Boolean waitSeconds(Integer seconds)
+	public static Boolean waitSeconds(Integer seconds)										// Sleeps a supplied number of seconds
 	{
-		// Sleeps a supplied number of seconds
 		return waitMilliSeconds(seconds * 1000);
  	}
-	public static Boolean waitMilliSeconds(Integer milliSeconds)
+	public static Boolean waitMilliSeconds(Integer milliSeconds)							// Sleeps a supplied number of milliseconds
 	{
-		// Sleeps a supplied number of milliseconds
 		Boolean interrupted 																= false;
 		try
         {
@@ -329,9 +327,8 @@ public class Global
         }
 		return interrupted;
  	}
-	public static Boolean waitMilliSeconds(Long milliSeconds)
+	public static Boolean waitMilliSeconds(Long milliSeconds)								// Sleeps a supplied number of milliseconds
 	{
-		// Sleeps a supplied number of milliseconds
 		Boolean interrupted 																= false;
 		try
         {
