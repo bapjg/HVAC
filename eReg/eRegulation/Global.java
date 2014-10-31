@@ -220,11 +220,11 @@ public class Global
 		//
 		// Got configuration message from server or locally
 		//
-		Global.pids.configure(configurationData.pidList);
-		Global.thermometers.configure(configurationData.thermometerList);
-		Global.relays.configure(configurationData.relayList);
-		Global.pumps.configure(configurationData.pumpList);
-		Global.circuits.configure(configurationData.circuitList);
+		Global.pids.configure			(configurationData.pidList);
+		Global.thermometers.configure	(configurationData.thermometerList);
+		Global.relays.configure			(configurationData.relayList);
+		Global.pumps.configure			(configurationData.pumpList);
+		Global.circuits.configure		(configurationData.circuitList);
 		Global.burner																		= new Burner(configurationData.burner);
 		Global.boiler																		= new Boiler(configurationData.boiler);
 		
@@ -238,6 +238,9 @@ public class Global
 		display.writeAtPosition(1, 18, "Ok");
 		// Other initialisation messages are displayed by Control.java
 	}
+//	public static class DateTime
+//	{
+
 	public static Long getTimeAtMidnight()
 	{
 		//==============================================================
@@ -253,6 +256,7 @@ public class Global
 		
 		return todayMidnight;
 	}
+//	}
 	public static Long 			today()							{return getTimeAtMidnight();								}
 	public static Long 			yesterday()						{return dateOnly(-1);										}
 	public static Long 			dateOnly(Integer days)			{return getTimeAtMidnight() - 24 * 60 * 60 * 1000L * days;	}

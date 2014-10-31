@@ -35,8 +35,8 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     {
     	this.panelView																		= inflater.inflate(R.layout.panel_2_immediate, container, false);
 									
-    	Ctrl_Immediate.Request									taskListRequest					= new Ctrl_Immediate().new Request();
-    	taskListRequest.circuitName																= this.circuitName;
+    	Ctrl_Immediate.Request									taskListRequest				= new Ctrl_Immediate().new Request();
+    	taskListRequest.circuitName															= this.circuitName;
 			
     	TCP_Send(taskListRequest);							// This returns list of what is currently active on each circuit
 
@@ -46,11 +46,11 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	{  
 		if 		(result instanceof Ctrl_Immediate.Data)
 		{
-			messageReceived																		= (Ctrl_Immediate.Data) result;
-			messageExecute.timeStart 															= new Cmn_Time(Global.displayTimeShort(Global.now()));
-			messageExecute.timeEnd 																= new Cmn_Time(Global.displayTimeShort(Global.now() + 3600 * 1000L));
-			messageExecute.stopOnObjective 														= true;
-			messageExecute.tempObjective 														= new Cmn_Temperature(messageReceived.tempObjective.milliDegrees);
+			messageReceived																	= (Ctrl_Immediate.Data) result;
+			messageExecute.timeStart 														= new Cmn_Time(Global.displayTimeShort(Global.now()));
+			messageExecute.timeEnd 															= new Cmn_Time(Global.displayTimeShort(Global.now() + 3600 * 1000L));
+			messageExecute.stopOnObjective 													= true;
+			messageExecute.tempObjective 													= new Cmn_Temperature(messageReceived.tempObjective.milliDegrees);
 		
 			displayHeader();
 			displayContents();

@@ -44,17 +44,23 @@
 
     </LinearLayout>
 
-	<TableLayout
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content" >
+    <ScrollView 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+    >
+        <TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:stretchColumns="*" >
+
 
         <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Date"												style	= "@style/AD_Text"  />
-            <TextView       android:text	= " "				android:id	= "@+id/Date"			style	= "@style/AD_Data"	/>
+            <TextView       android:text	= ""				android:id	= "@+id/Date"			style	= "@style/AD_Data"	/>
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Time"     		   									style	= "@style/AD_Text"  />
-           	<TextView		android:text	= " "				android:id	="@+id/Time"			style	= "@style/AD_Data"   />
+           	<TextView		android:text	= ""				android:id	="@+id/Time"			style	= "@style/AD_Data"   />
             
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
@@ -63,7 +69,7 @@
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Boiler"     		   									style	= "@style/AD_Text"  />
-            <TextView       android:text	= " "				android:id	= "@+id/Boiler"			style	= "@style/AD_Data"	/>
+            <TextView       android:text	= ""				android:id	= "@+id/Boiler"			style	= "@style/AD_Data"	/>
 		</TableRow>
         <TableRow																					style	= "@style/AD_Row"   >
             <TextView		android:text	= "Hot Water"      										style	= "@style/AD_Text"  />
@@ -118,4 +124,5 @@
             <TextView       android:text	= " "				android:id	= "@+id/BoilerIn"		style	= "@style/AD_Data"	/>
 		</TableRow>
     </TableLayout>
+    </ScrollView>
 </LinearLayout>
