@@ -11,66 +11,53 @@
         android:layout_height="60dp"
         android:background="@color/background"
         android:gravity="top"
-        android:orientation="vertical" 
-    >
+        android:orientation="vertical" >
 
         <TextView
-            style="@style/AD_Text"
             android:id="@+id/title"
+            style="@style/AD_Text"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-       		android:gravity="center_horizontal"
-            android:text="Weather Report" 
-        />
+            android:gravity="center_horizontal"
+            android:text="Weather Report" />
 
         <TextView
-            style="@style/AD_Data"
             android:id="@+id/dateTime"
+            style="@style/AD_Data"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-        	android:gravity="center_horizontal"
-            android:text="Burner" 
-        />
-   		<View
-             android:layout_width= "match_parent"
-             android:layout_height= "5dp"
-             android:background= "@color/background"
-        />
-        <View
-             android:layout_width= "match_parent"
-             android:layout_height= "2dp"
-             android:background= "#3399FF"
-        />
+            android:gravity="center_horizontal"
+            android:text="Burner" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/background" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#3399FF" />
     </LinearLayout>
 
-	<LinearLayout
-	    android:layout_width			= "match_parent"
-        android:layout_height			= "40dp"
-	    android:background				= "@color/background"
-	    android:baselineAligned			= "false"
-        android:gravity					= "center_vertical"
-	    android:orientation				= "horizontal" >
+    <TableLayout style="@style/AD_Table" >
 
-	    <TextView
-	        style						= "@style/AD_Text"
-	        android:layout_width		= "150dp"
-	        android:layout_height		= "wrap_content"
-	        android:text				= "Obtained" />
+        <TableRow style="@style/AD_Row" >
 
-	    <TextView
-	        android:id					= "@+id/dateTimeObtained"
-	        style						= "@style/AD_Text"
-	        android:layout_width		= "100dp"
-	        android:layout_height		= "wrap_content"
-	        android:layout_weight		= "0.50"
-	        android:text				= "" 
-        />
-	</LinearLayout>
+            <TextView
+                style="@style/AD_Text"
+                android:text="Obtained" />
 
-	<ListView
-		android:id						= "@+id/List_View"
-		android:layout_width			= "match_parent"
-		android:layout_height			= "wrap_content" 
-	/>
+            <TextView
+                android:id="@+id/dateTimeObtained"
+                style="@style/AD_Data"
+                android:text="" />
+        </TableRow>
+    </TableLayout>
+
+    <ListView
+        android:id="@+id/List_View"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

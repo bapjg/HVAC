@@ -11,89 +11,75 @@
         android:layout_height="60dp"
         android:background="@color/background"
         android:gravity="top"
-        android:orientation="vertical" 
-    >
+        android:orientation="vertical" >
 
         <TextView
-            style="@style/AD_Text"
             android:id="@+id/title"
+            style="@style/AD_Text"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-       		android:gravity="center_horizontal"
-            android:text="Configuration" 
-        />
+            android:gravity="center_horizontal"
+            android:text="Configuration" />
 
         <TextView
-            style						="@style/AD_Data"
-            android:id					="@+id/subTitle"
-            android:layout_width		="match_parent"
-            android:layout_height		="25dp"
-        	android:gravity				="center_horizontal"
-            android:text				="Thermometers" 
-        />
-   		<View
-             android:layout_width		= "fill_parent"
-             android:layout_height		= "5dp"
-             android:background			= "@color/background"
-        />
-        <View
-             android:layout_width		= "fill_parent"
-             android:layout_height		= "2dp"
-             android:background			= "#3399FF"
-        />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/background"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <TextView
-            style="@style/AD_Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name" />
-
-        <TextView
-            style="@style/AD_Text"
+            android:id="@+id/subTitle"
+            style="@style/AD_Data"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="Address" />
+            android:layout_height="25dp"
+            android:gravity="center_horizontal"
+            android:text="Thermometers" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="@color/background" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="#3399FF" />
     </LinearLayout>
-    
-	<RelativeLayout
+
+    <TableLayout style="@style/AD_Table" >
+
+        <TableRow style="@style/AD_Row" >
+
+            <TextView
+                style="@style/AD_Text"
+                android:text="Name" />
+
+            <TextView
+                style="@style/AD_Data"
+                android:text="Address" />
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
         android:id="@+id/buttonArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-     >
+        android:layout_alignParentBottom="true" >
 
         <Button
             android:id="@+id/buttonAdd"
             style="@style/AD_ImageButton"
             android:layout_width="100dp"
-            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/button_add"
             android:text="Add New" />
-
     </RelativeLayout>
-	
-		<RelativeLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/buttonArea"
-     >
-    	<ListView
-	    	android:id="@+id/List_View"
-	    	android:layout_width="match_parent"
-	    	android:layout_height="match_parent"
-	    />
-	</RelativeLayout>
-	
+        android:layout_above="@id/buttonArea" >
+
+        <ListView
+            android:id="@+id/List_View"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
 </LinearLayout>

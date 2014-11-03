@@ -62,7 +62,6 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
         {
             Global.toaster("Please wait for data to arrive or refresh", true);
         }
-
         return panelView;
     }
 	public void displayHeader()

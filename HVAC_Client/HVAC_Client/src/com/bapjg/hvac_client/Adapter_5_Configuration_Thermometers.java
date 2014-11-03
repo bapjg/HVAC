@@ -20,6 +20,7 @@ public class Adapter_5_Configuration_Thermometers 				extends 					Adapter_0_Abs
     {
         super(context, resource, listData);
     }
+    @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
     	RowHolder 												row							= new RowHolder();
