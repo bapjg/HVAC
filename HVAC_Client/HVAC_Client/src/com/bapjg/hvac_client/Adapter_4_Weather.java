@@ -41,7 +41,8 @@ public class Adapter_4_Weather 									extends 					Adapter_0_Abstract
     	String 													time_from					= Global.displayTimeShort(listItem.dateTime.from);
     	String 													time_to						= Global.displayTimeShort(listItem.dateTime.to);
     	
-       	row.time.setText								(day + " " + time_from + " - " + time_to);											
+//       	row.time.setText								(day + " " + time_from + " - " + time_to);											
+       	row.time.setText								(time_from + " - " + time_to);											
        	row.temperature.setText							(listItem.temperature.value.toString() + " °C");											
     	row.temperatureMinMax.setText					(Math.round(listItem.temperature.min) + "/" + Math.round(listItem.temperature.max));								
     	if (listItem.precipitation != null)

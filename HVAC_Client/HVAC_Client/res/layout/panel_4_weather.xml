@@ -25,19 +25,19 @@
 
         <TextView
             style="@style/AD_Data"
-             android:id="@+id/dateTime"
+            android:id="@+id/dateTime"
             android:layout_width="match_parent"
             android:layout_height="25dp"
         	android:gravity="center_horizontal"
             android:text="Burner" 
         />
    		<View
-             android:layout_width= "fill_parent"
+             android:layout_width= "match_parent"
              android:layout_height= "5dp"
              android:background= "@color/background"
         />
         <View
-             android:layout_width= "fill_parent"
+             android:layout_width= "match_parent"
              android:layout_height= "2dp"
              android:background= "#3399FF"
         />
@@ -71,6 +71,6 @@
 	<ListView
 		android:id						= "@+id/List_View"
 		android:layout_width			= "match_parent"
-		android:layout_height			= "500dp" 
+		android:layout_height			= "wrap_content" 
 	/>
 </LinearLayout>

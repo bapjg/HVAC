@@ -1,178 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id						= "@+id/row"
-    android:layout_width			= "match_parent"
-    android:layout_height			= "300dp"
-    android:gravity					= "center_vertical"
-    android:orientation				= "vertical" >
-	                              
-	<LinearLayout 	                  
-		android:layout_width		= "match_parent"
-		android:layout_height		= "wrap_content"
-		android:orientation			= "horizontal"
-	>	                              
-	   <TextView	                  
-			android:text			= "Forecast"
-			style					= "@style/AD_Text"
-			android:layout_width	= "150sp"
-		/>
-	   <TextView	                  
-			android:id				= "@+id/time"
-			style					= "@style/AD_Text"
-			android:layout_width	= "220sp"
-		/>
+    android:id="@+id/row"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
 
-	</LinearLayout>
-    <LinearLayout 	                  
-		android:layout_width		= "match_parent"
-		android:layout_height		= "wrap_content"
-		android:orientation			= "horizontal"
-	>	                              
-	   <TextView	                  
-			android:text			= "Temperature"
-			style					= "@style/AD_Text"
-			android:layout_width	= "150dp"
-		/>
-		<TextView	                  
-			android:id				= "@+id/temperature"
-			android:gravity			= "left"
-			style					= "@style/AD_Data" 
-			android:layout_width	= "80dp"
-		/>
-	</LinearLayout>
-    <LinearLayout 	                  
-		android:layout_width		= "match_parent"
-		android:layout_height		= "wrap_content"
-		android:orientation			= "horizontal"
-	>	                              
-		
-		<TextView
-		    style					= "@style/AD_Text"
-		    android:layout_width	= "150sp"
-		    android:text			= "Min/Max" />
+    <TableLayout style="@style/AD_Table" >
 
-		<TextView
-		    android:id				= "@+id/temperatureMinMax"
-			android:gravity			= "left"
-		    style					= "@style/AD_Data"
-		    android:layout_width	= "80dp" />
+        <TableRow style="@style/AD_Row" >
 
-	</LinearLayout>
-	
-	<LinearLayout 	                  
-		android:layout_width		= "match_parent"
-		android:layout_height		= "wrap_content"
-		android:orientation			= "horizontal"
-	>	                              
-	   <TextView	                  
-			style					= "@style/AD_Text"
-			android:layout_width	= "150dp"
-			android:text			= "Precipitation"
-		/>
-		<TextView	                  
-			android:id				= "@+id/precipitationValue"
-			android:gravity			= "left"
-			style					= "@style/AD_Data" 
-			android:layout_width	= "80dp"
-		/>
-	</LinearLayout>
-	<LinearLayout 	                  
-		android:layout_width		= "match_parent"
-		android:layout_height		= "wrap_content"
-		android:orientation			= "horizontal"
-	>	                              
-	   <TextView	                  
-			style					= "@style/AD_Text"
-			android:layout_width	= "150dp"
-			android:text			= ""
-		/>
-				<TextView	                  
-			android:id				= "@+id/precipitationType"
-			style					= "@style/AD_Data" 
-			android:gravity			= "left"
-			android:text			= ""
-			android:layout_width	= "150sp"
-		/>
+            <TextView
+                style="@style/AD_Text"
+                android:text="Forecast" />
 
-	</LinearLayout>
+            <TextView
+                android:id="@+id/time"
+                style="@style/AD_Data"
+                android:text="x" />
+        </TableRow>
 
-	<LinearLayout 	                  
-		android:layout_width		= "match_parent"
-		android:layout_height		= "wrap_content"
-		android:orientation			= "horizontal"
-	>	                              
-	   <TextView	                  
-			style					= "@style/AD_Text"
-			android:layout_width	= "150dp"
-			android:text			= "Wind"
-		/>
-		<TextView	                  
-			android:id				= "@+id/windSpeed"
-			style					= "@style/AD_Data" 
-			android:gravity			= "left"
-			android:layout_width	= "80sp"
-		/>
-		<TextView	                  
-			android:id				= "@+id/windDirection"
-			style					= "@style/AD_Data" 
-			android:layout_width	= "50sp"
-		/>
-	</LinearLayout>
+        <TableRow style="@style/AD_Row" >
 
-	<LinearLayout 	                  
-		android:layout_width		= "match_parent"
-		android:layout_height		= "wrap_content"
-		android:orientation			= "horizontal"
-	>	                              
-	   <TextView	                  
-			style					= "@style/AD_Text"
-			android:layout_width	= "150dp"
-			android:text			= ""
-		/>
-		
-		<TextView
-		    android:id				= "@+id/windName"
-			android:gravity			= "left"
-		    style					= "@style/AD_Data"
-		    android:layout_width	= "match_parent" />
+            <TextView
+                style="@style/AD_Text"
+                android:text="Precip" />
 
-	</LinearLayout>
+            <TextView
+                android:id="@+id/precipitationValue"
+                style="@style/AD_Data"
+                android:text="x" />
+        </TableRow>
 
-	<LinearLayout 	                  
-		android:layout_width		= "match_parent"
-		android:layout_height		= "wrap_content"
-		android:orientation			= "horizontal"
-	>	                              
-	   <TextView	                  
-			style					= "@style/AD_Text"
-			android:layout_width	= "150dp"
-			android:text			= "Clouds"
-		/>
-		<TextView	                  
-			android:id				= "@+id/cloudAll"
-			style					= "@style/AD_Data"
-			android:gravity			= "left"
-			android:layout_width	= "80dp"
-		/>
+        <TableRow style="@style/AD_Row" >
 
-	</LinearLayout>
+            <TextView style="@style/AD_Text" />
 
-	<LinearLayout 	                  
-		android:layout_width		= "match_parent"
-		android:layout_height		= "wrap_content"
-		android:orientation			= "horizontal"
-	>	                              
-	   <TextView	                  
-			style					= "@style/AD_Text"
-			android:layout_width	= "150dp"
-			android:text			= ""
-		/>
-		
-		<TextView
-		    android:id				= "@+id/cloudValue"
-		    style					= "@style/AD_Data"
-			android:gravity			= "left"
-		    android:layout_width	= "match_parent" />
+            <TextView
+                android:id="@+id/precipitationType"
+                style="@style/AD_Data"
+                android:text="x" />
+        </TableRow>
 
-	</LinearLayout>	
+        <TableRow style="@style/AD_Row" >
+
+            <TextView
+                style="@style/AD_Text"
+                android:text="Temp" />
+
+            <TextView
+                android:id="@+id/temperature"
+                style="@style/AD_Data"
+                android:text="x" />
+        </TableRow>
+
+        <TableRow style="@style/AD_Row" >
+
+            <TextView
+                style="@style/AD_Text"
+                android:text="Min/Max" />
+
+            <TextView
+                android:id="@+id/temperatureMinMax"
+                style="@style/AD_Data"
+                android:text="x" />
+        </TableRow>
+
+        <TableRow style="@style/AD_Row" >
+
+            <TextView
+                style="@style/AD_Text"
+                android:text="Wind" />
+
+            <TextView
+                android:id="@+id/windSpeed"
+                style="@style/AD_Data"
+                android:text="x" />
+        </TableRow>
+
+        <TableRow style="@style/AD_Row" >
+
+            <TextView style="@style/AD_Text" />
+
+            <TextView
+                android:id="@+id/windDirection"
+                style="@style/AD_Data"
+                android:text="x" />
+        </TableRow>
+
+        <TableRow style="@style/AD_Row" >
+
+            <TextView style="@style/AD_Text" />
+
+            <TextView
+                android:id="@+id/windName"
+                style="@style/AD_Data"
+                android:text="x" />
+        </TableRow>
+
+        <TableRow style="@style/AD_Row" >
+
+            <TextView
+                style="@style/AD_Text"
+                android:text="Clouds" />
+
+            <TextView
+                android:id="@+id/cloudAll"
+                style="@style/AD_Data"
+                android:text="x" />
+        </TableRow>
+
+        <TableRow style="@style/AD_Row" >
+
+            <TextView style="@style/AD_Text" />
+
+            <TextView
+                android:id="@+id/cloudValue"
+                style="@style/AD_Data"
+                android:text="x" />
+        </TableRow>
+    </TableLayout>
+
 </LinearLayout>

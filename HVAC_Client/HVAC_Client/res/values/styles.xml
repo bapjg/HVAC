@@ -1,14 +1,14 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -17,123 +17,72 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-	<style name="AD_Row" parent="@android:style/TextAppearance.Medium"> 
-		<item name="android:layout_width">
-			match_parent		</item> 
-		<item name="android:layout_height">
-			30dp
-		</item> 
-	</style>
-	<style name="AD_Title" parent="@android:style/TextAppearance.Large"> 
-		<item name="android:textSize">
-			25sp
-		</item> 
-		<item name="android:textStyle">
-			bold
-		</item> 
-		<item name="android:textColor">
-			#FFFF00
-		</item> 
-		<item name="android:layout_width">
-			250sp			
-		</item> 
-		<item name="android:layout_height">
-			wrap_content
-		</item> 
-	</style>
-    <style name="AD_Text" parent="@android:style/TextAppearance.Medium"> 
-			<item name="android:textSize">
-				20sp
-			</item> 
-			<item name="android:textColor">
-				#FFFFFF
-			</item> 
-			<item name="android:layout_width">wrap_content</item> 
-			<item name="android:layout_height">wrap_content</item>
-			<item name="android:gravity">left</item>
-			<item name="android:layout_gravity">left</item>
-	</style>
-	    <style name="AD_Data" parent="@android:style/TextAppearance.Medium"> 
-			<item name="android:textSize">
-				20sp
-			</item> 
-			<item name="android:textColor">
-				#FFFF00
-			</item> 
-			<item name="android:gravity">right
-</item> 
-			<item name="android:layout_width">
-			    
-wrap_content		
-			</item> 
-			<item name="android:layout_height">
-				wrap_content
-			</item> 
-			<item name="android:layout_gravity">right</item>
-	</style>
-    <style name="AD_Switch" parent="@android:style/TextAppearance.Medium"> 
-			<item name="android:textSize">
-				25sp
-			</item> 
-			<item name="android:textColor">
-				#FFFF00
-			</item> 
-			<item name="android:gravity">
-			    left
-			</item> 
-			<item name="android:layout_width">
-				120dp			
-			</item> 
-			<item name="android:layout_height">
-				wrap_content
-			</item> 
-	</style>
-    	
+    <style name="AD_Row" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+    </style>
 
+    <style name="AD_Title" parent="@android:style/TextAppearance.Large">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFF00</item>
+        <item name="android:layout_width">250sp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
-    <style name="AD_Button" parent="@android:style/TextAppearance.Medium"> 
-			<item name="android:textSize">
-				15sp
-			</item> 
-			<item name="android:textColor">
-				#FFFFFF
-			</item> 
-			<item name="android:layout_width">
-				match_parent
-			</item> 
-			<item name="android:layout_height">
-				wrap_content
-			</item> 
-	</style>
-    <style name="AD_MenuButton" parent="@android:style/TextAppearance.Medium"> 
-			<item name="android:textSize">
-				15sp
-			</item> 
-			<item name="android:textColor">
-				#FFFFFF
-			</item> 
-			<item name="android:layout_width">
-				match_parent
-			</item> 
-			<item name="android:layout_height">
-				wrap_content
-			</item> 
-	</style>
-    <style name="AD_ImageButton" parent="@android:style/TextAppearance.Medium"> 
-			<item name="android:textSize">
-				15sp
-			</item> 
-			<item name="android:textColor">
-				#ffcccccc
-			</item> 
-			<item name="android:layout_width">
-				wrap_content
-			</item> 
-			<item name="android:layout_height">
-				wrap_content
-			</item> 
-			<item name="android:gravity">
-				center_horizontal
-			</item> 
-				</style>
- </resources>
+    <style name="AD_Text" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_gravity">left</item>
+    </style>
+
+    <style name="AD_Table" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:stretchColumns">*</item>
+    </style>
+
+    <style name="AD_Data" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FFFF00</item>
+        <item name="android:gravity">right</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">right</item>
+        <item name="android:paddingRight">1dp</item>
+    </style>
+
+    <style name="AD_Switch" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#FFFF00</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AD_Button" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AD_MenuButton" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AD_ImageButton" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#ffcccccc</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+</resources>
