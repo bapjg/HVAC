@@ -60,7 +60,7 @@
 			</TableRow>
 	        <TableRow																					style	= "@style/AD_Row"   >
 	            <TextView		android:text	= ""  		      										style	= "@style/AD_Text"  />
-	            <TextView       android:text	= "x"													style	= "@style/AD_Data"	/>
+	            <TextView       android:text	= ""													style	= "@style/AD_Data"	/>
 			</TableRow>
 	        <TableRow																					style	= "@style/AD_Row"   >
 	            <TextView		android:text	= "Boiler"     		   									style	= "@style/AD_Text"  />

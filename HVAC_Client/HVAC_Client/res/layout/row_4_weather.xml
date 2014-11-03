@@ -25,31 +25,8 @@
 
             <TextView
                 style="@style/AD_Text"
-                android:text="Precip" />
-
-            <TextView
-                android:id="@+id/precipitationValue"
-                style="@style/AD_Data"
-                android:text="x" />
-        </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
-            <TextView style="@style/AD_Text" />
-
-            <TextView
-                android:id="@+id/precipitationType"
-                style="@style/AD_Data"
-                android:text="x" />
-        </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
-            <TextView
-                style="@style/AD_Text"
                 android:text="Temp" />
-
-            <TextView
+            <TextView
                 android:id="@+id/temperature"
                 style="@style/AD_Data"
                 android:text="x" />
@@ -65,6 +42,28 @@
                 android:id="@+id/temperatureMinMax"
                 style="@style/AD_Data"
                 android:text="x" />
+        </TableRow>
+
+        <TableRow style="@style/AD_Row" >
+
+            <TextView
+                style="@style/AD_Text"
+                android:text="Precip" />
+
+            <TextView
+                android:id="@+id/precipitationValue"
+                style="@style/AD_Data"
+                android:text="" />
+        </TableRow>
+
+        <TableRow style="@style/AD_Row" >
+
+            <TextView style="@style/AD_Text" />
+
+            <TextView
+                android:id="@+id/precipitationType"
+                style="@style/AD_Data"
+                android:text="" />
         </TableRow>
 
         <TableRow style="@style/AD_Row" >
