@@ -62,8 +62,8 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
-//		TextView												title						= (TextView) panelView.findViewById(R.id.name);
-//		title.setText("Circuits");
+		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Circuits");
 	}
 	public void displayContents()
 	{

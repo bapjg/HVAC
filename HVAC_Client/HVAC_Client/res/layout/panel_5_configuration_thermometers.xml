@@ -6,39 +6,7 @@
     android:baselineAligned="false"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/background"
-        android:gravity="top"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/title"
-            style="@style/AD_Text"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:gravity="center_horizontal"
-            android:text="Configuration" />
-
-        <TextView
-            android:id="@+id/subTitle"
-            style="@style/AD_Data"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:gravity="center_horizontal"
-            android:text="Thermometers" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="5dp"
-            android:background="@color/background" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:background="#3399FF" />
-    </LinearLayout>
+    <include layout="@layout/panel_0_title_section" />
 
     <TableLayout style="@style/AD_Table" >
 
@@ -53,6 +21,11 @@
                 android:text="Address" />
         </TableRow>
     </TableLayout>
+
+    <ListView
+        android:id="@+id/List_View"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:id="@+id/buttonArea"
@@ -69,17 +42,6 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/button_add"
             android:text="Add New" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/buttonArea" >
-
-        <ListView
-            android:id="@+id/List_View"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </RelativeLayout>
 
 </LinearLayout>

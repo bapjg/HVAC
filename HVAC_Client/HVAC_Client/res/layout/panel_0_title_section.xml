@@ -1,0 +1,41 @@
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<LinearLayout 
+    xmlns:android				="http://schemas.android.com/apk/res/android"
+    android:layout_width		="match_parent"
+    android:layout_height		="60dp"
+    android:background			="@color/background"
+    android:gravity				="top"
+    android:orientation			="vertical"
+    android:id					="@+id/title_section">
+
+    <TextView
+        android:id				="@+id/title"
+        android:layout_width	="match_parent"
+        android:layout_height	="25dp"
+        android:textSize		="20sp"
+        android:textStyle		="bold"
+        android:textColor		="#FFFFFF"
+        android:gravity			="center_horizontal"
+        android:text			="Title" />
+
+    <TextView
+        android:id				="@+id/subTitle"
+        android:layout_width	="match_parent"
+        android:layout_height	="25dp"
+        android:textSize		="20sp"
+        android:textStyle		="bold"
+        android:textColor		="#FFFF00"
+        android:gravity			="center_horizontal"
+        android:text			="subtitle" />
+
+    <View
+        android:layout_width	="fill_parent"
+        android:layout_height	="5dp"
+        android:background		="@color/background" />
+
+    <View
+        android:layout_width	="fill_parent"
+        android:layout_height	="2dp"
+        android:background		="#3399FF" />
+
+</LinearLayout>

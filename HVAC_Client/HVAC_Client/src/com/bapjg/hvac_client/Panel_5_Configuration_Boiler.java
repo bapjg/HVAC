@@ -82,6 +82,8 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	}
 	public void displayHeader()
 	{
+		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Boiler");
 	}
 	public void displayContents()
 	{

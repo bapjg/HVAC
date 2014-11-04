@@ -112,8 +112,8 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
 	}
 	public void displayHeader()
 	{
-//		TextView												title						= (TextView) panelView.findViewById(R.id.name);
-//		title.setText("Pumps");
+		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("PIDs");
 	}
 	public void displayContents()
 	{

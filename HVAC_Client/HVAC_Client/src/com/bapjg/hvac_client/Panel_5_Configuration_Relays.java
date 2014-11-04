@@ -61,8 +61,8 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
-//		TextView												title						= (TextView) panelView.findViewById(R.id.name);
-//		title.setText("Relays");
+		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Relays");
 	}
 	public void displayContents()
 	{

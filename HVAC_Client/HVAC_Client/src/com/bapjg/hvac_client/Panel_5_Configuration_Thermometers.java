@@ -66,8 +66,8 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
     }
 	public void displayHeader()
 	{
-//		TextView												title				= (TextView) panelView.findViewById(R.id.name);
-//		title.setText("Circuits");
+		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Thermometres");
 	}
 	public void displayContents()
 	{

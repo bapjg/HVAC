@@ -6,43 +6,7 @@
     android:baselineAligned="false"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/background"
-        android:gravity="top"
-        android:orientation="vertical" 
-    >
-
-        <TextView
-            style="@style/AD_Text"
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-       		android:gravity="center_horizontal"
-            android:text="Configuration" 
-        />
-
-        <TextView
-            style="@style/AD_Data"
-             android:id="@+id/subTitle"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-        	android:gravity="center_horizontal"
-            android:text="Burner" 
-        />
-   		<View
-             android:layout_width= "fill_parent"
-             android:layout_height= "5dp"
-             android:background= "@color/background"
-        />
-        <View
-             android:layout_width= "fill_parent"
-             android:layout_height= "2dp"
-             android:background= "#3399FF"
-        />
-
-    </LinearLayout>
+    <include layout="@layout/panel_0_title_section" />
 
     <LinearLayout
         android:layout_width="match_parent"

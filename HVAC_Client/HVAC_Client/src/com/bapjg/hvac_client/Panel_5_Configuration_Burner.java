@@ -61,6 +61,8 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
+		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Burner");
 	}
 	public void displayContents()
 	{
