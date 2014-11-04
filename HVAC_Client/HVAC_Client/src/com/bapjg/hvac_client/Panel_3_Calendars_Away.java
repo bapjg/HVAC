@@ -62,7 +62,9 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
-		TextView												title						= (TextView) panelView.findViewById(R.id.name);
+		((TextView) panelView.findViewById(R.id.title)).setText		("Calendars");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Away List");
+//		TextView												title						= (TextView) panelView.findViewById(R.id.name);
 	}
 	public void displayContents()
 	{

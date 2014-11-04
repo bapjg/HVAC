@@ -56,6 +56,8 @@ public class Panel_4_Weather_Sun 									extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{	
+		((TextView) panelView.findViewById(R.id.title)).setText		("Weather");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Sunrise/Sunset");
 	}
 	public void displayContents()
 	{
