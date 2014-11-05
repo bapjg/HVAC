@@ -30,7 +30,7 @@
             android:text="name" />
 
     </LinearLayout>
-        <LinearLayout
+    <LinearLayout
         android:layout_width			= "match_parent"
         android:layout_height			= "50dp"
         android:background				= "@color/background"
@@ -51,8 +51,8 @@
             android:gravity="right"
             android:text="Address" />
 
-        </LinearLayout>
-        <LinearLayout
+    </LinearLayout>
+    <LinearLayout
         android:layout_width			= "match_parent"
         android:layout_height			= "50dp"
         android:background				= "@color/background"
@@ -73,5 +73,5 @@
             android:gravity="right"
             android:text="Address" />
 
-        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

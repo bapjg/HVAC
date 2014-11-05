@@ -47,6 +47,8 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
+		((TextView) panelView.findViewById(R.id.title)).setText		("Actions");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Relays");
 	}
 	public void displayContents()
 	{

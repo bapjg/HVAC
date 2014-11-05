@@ -63,7 +63,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	public void displayHeader()
 	{
 		((TextView) panelView.findViewById(R.id.title)).setText		("Temperatures");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("not decided yet");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Readings");
 	}
 	public void displayContents(Ctrl_Temperatures.Data msg_received)
 	{

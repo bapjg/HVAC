@@ -44,6 +44,8 @@ public class Panel_6_Actions_Stop 								extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
+		((TextView) panelView.findViewById(R.id.title)).setText		("Actions");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Stop");
 	}
 	public void displayContents()
 	{

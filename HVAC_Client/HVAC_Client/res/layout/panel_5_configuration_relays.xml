@@ -22,10 +22,7 @@
         </TableRow>
     </TableLayout>
 
-    <ListView
-        android:id="@+id/List_View"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/panel_0_list_section" />
 
     <RelativeLayout
         android:layout_width="match_parent"

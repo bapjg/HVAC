@@ -25,19 +25,34 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 public class Panel_6_Actions_Test_Mail 							extends 					Panel_0_Fragment  
 {
+	private View												panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+
 	public Panel_6_Actions_Test_Mail()
 	{
 		super();
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity																		= getActivity();
-    	View													panelView					= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
- 
-    	panelView.findViewById(R.id.buttonSendMail).setOnClickListener(this);
+     	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
+
+    	displayHeader();
+    	displayContents();
+        setListens();
    	
         return panelView;
     }
+	public void displayHeader()
+	{
+		((TextView) panelView.findViewById(R.id.title)).setText		("Actions");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Test Mail");
+	}
+	public void displayContents()
+	{
+	}
+	public void setListens()
+	{
+		panelView.findViewById(R.id.buttonSendMail).setOnClickListener(this);
+	}
     public void onClick(View view)
     {
     	TCP_Send(new Ctrl_Actions_Test_Mail().new Execute());

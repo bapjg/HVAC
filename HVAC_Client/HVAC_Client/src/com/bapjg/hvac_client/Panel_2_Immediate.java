@@ -64,7 +64,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	public void displayHeader()
 	{
 		((TextView) panelView.findViewById(R.id.title)).setText		("Immediate");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("yyy");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	(this.circuitName);
 	}
 	public void displayContents()
 	{

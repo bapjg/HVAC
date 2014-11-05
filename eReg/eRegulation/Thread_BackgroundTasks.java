@@ -42,8 +42,10 @@ public class Thread_BackgroundTasks implements Runnable
 				{
 					Pump		thisPump						= circuit.circuitPump;
 					LogIt.info("Thread_Background", "Run", "Pump " + circuit.circuitPump.name + ", Last used " + thisPump.dateTimeLastOperated.toString(), true);
+					LogIt.info("Thread_Background", "Run", "Now " + Global.now(), true);
+					LogIt.info("Thread_Background", "Run", "Now - 24h" + (Global.now() - 24 * 3600 * 1000L), true);
 					
-					if (thisPump.dateTimeLastOperated >= Global.now() - 24 * 3600 * 1000L )									// pump not used since 24 h
+					if (thisPump.dateTimeLastOperated >= (Global.now() - 24 * 3600 * 1000L) )									// pump not used since 24 h
 					{
 						if (!circuit.circuitPump.isOn())			// Not really possible otherwise
 						{

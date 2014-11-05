@@ -62,26 +62,13 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
 	public void displayHeader()
 	{	
 		((TextView) panelView.findViewById(R.id.title)).setText		("Weather");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Today");
-
-		Ctrl_WeatherData xxx = Global.weatherForecast;
-		
-		
-		TextView 												dateTimeObtained			= (TextView) panelView.findViewById(R.id.dateTimeObtained);
-        dateTimeObtained.setText 															(Global.displayTimeShort(Global.weatherForecast.dateTimeObtained));
-        
-//        TextView 												dateTime					= (TextView) panelView.findViewById(R.id.dateTime);
-//        Long													today						= Global.getTimeAtMidnight();
-//        Long													tomorrow					= today + 24 * 60 * 60 * 1000L;
-//        Long													beyond						= tomorrow + 24 * 60 * 60 * 1000L;
-//        
-//		if 		(when.equalsIgnoreCase("Today"))				dateTime.setText 			(Global.displayDateShort(today) + " " + Global.displayDayOfWeek(today));
-//		else if (when.equalsIgnoreCase("Tomorrow"))				dateTime.setText 			(Global.displayDateShort(tomorrow) + " " + Global.displayDayOfWeek(tomorrow));
-//		else if (when.equalsIgnoreCase("Beyond"))				dateTime.setText 			(">= " + Global.displayDateShort(beyond) + " " + Global.displayDayOfWeek(beyond));
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	(this.when);
 	}
 	public void displayContents()
 	{
-        AdapterView <Adapter_4_Weather> 						view						= (AdapterView) panelView.findViewById(R.id.List_View);
+		((TextView) panelView.findViewById(R.id.dateTimeObtained)).setText(Global.displayTimeShort(Global.weatherForecast.dateTimeObtained));
+		
+		AdapterView <Adapter_4_Weather> 						view						= (AdapterView) panelView.findViewById(R.id.List_View);
         
         forecastList																		= new ArrayList <Ctrl_WeatherData.Forecast> ();
         if (when.equalsIgnoreCase("Today"))

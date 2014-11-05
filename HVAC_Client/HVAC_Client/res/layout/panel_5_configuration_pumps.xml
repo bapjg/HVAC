@@ -8,34 +8,20 @@
 
     <include layout="@layout/panel_0_title_section" />
     
-    <LinearLayout
-        android:layout_width			= "match_parent"
-        android:layout_height			= "50dp"
-        android:background				= "@color/background"
-        android:baselineAligned			= "false"
-        android:gravity					= "center_vertical"
-        android:orientation				= "horizontal" >
+    <TableLayout style							="@style/AD_Table" >
+        <TableRow style							="@style/AD_Row" >
+            <TextView
+                style							="@style/AD_Text"
+                android:text					="Name" />
+            <TextView
+                style							="@style/AD_Data"
+                android:text					="Relay" />
+        </TableRow>
+    </TableLayout>
 
-        <TextView
-            style						= "@style/AD_Text"
-            android:layout_height		= "wrap_content"
-         	android:layout_width		= "150dp"
-            android:text				= "Name" />
-
-        <TextView
-            style="@style/AD_Text"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="Relay" />
-
-   </LinearLayout>
-    
-	<ListView
-		    android:id					= "@+id/List_View"
-		    android:layout_width		= "match_parent"
-		    android:layout_height		= "460dp" 
-	/>
+    <View style									="@style/AD_ThinLine" />
+  
+    <include layout="@layout/panel_0_list_section" />
 		
     <RelativeLayout
         android:layout_width="match_parent"

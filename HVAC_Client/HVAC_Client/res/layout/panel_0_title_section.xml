@@ -16,7 +16,7 @@
         android:textStyle		="bold"
         android:textColor		="#FFFFFF"
         android:gravity			="center_horizontal"
-        android:text			="Title" />
+        android:text			="" />
 
     <TextView
         android:id				="@+id/subTitle"
@@ -26,7 +26,7 @@
         android:textStyle		="bold"
         android:textColor		="#FFFF00"
         android:gravity			="center_horizontal"
-        android:text			="subtitle" />
+        android:text			="" />
 
     <View
         android:layout_width	="fill_parent"
@@ -35,7 +35,7 @@
 
     <View
         android:layout_width	="fill_parent"
-        android:layout_height	="2dp"
-        android:background		="#3399FF" />
+        android:layout_height	="5dp"
+        android:background		="#FFFFFF" />
 
 </LinearLayout>
