@@ -10,5 +10,4 @@
 >
 	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Reset Configuration" />
 	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Reset Calendars"   	/>
-
 </LinearLayout>
