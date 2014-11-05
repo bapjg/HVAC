@@ -8,19 +8,12 @@
     android:gravity				="center_vertical"
     android:orientation			="vertical" >
 
-    <TableLayout style			="@style/AD_Table" >
-        <TableRow style			="@style/AD_Row" >
-           <TextView
-                android:id		="@+id/name"
-                style			="@style/AD_Text"
-                android:text	="Name" />
-        </TableRow>
-        <TableRow style			="@style/AD_Row" >
-            <TextView
-                android:id		="@+id/address"
-                style			="@style/AD_Data"
-                android:text	="Address" />
-        </TableRow>
-	</TableLayout>
-    <View style="@style/AD_ThinLine" />
+	<TableRow 		style	="@style/AD_Row" >
+         <TextView  style	="@style/AD_Text"       android:text	="X"		android:id	="@+id/name"	 	/>
+         <TextView	style	="@style/AD_Data"		android:text	="X" 		android:gravity="right"								/>
+	</TableRow>
+	<TableRow 		style	="@style/AD_Row" >
+         <TextView  style	="@style/AD_Text"		android:text	="X" 										/>
+         <TextView	style	="@style/AD_Data"		android:text	="X"		android:id	="@+id/address"		/>
+	</TableRow>
 </LinearLayout>

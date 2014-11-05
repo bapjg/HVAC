@@ -17,11 +17,9 @@
                 style							="@style/AD_Data"
                 android:text					="Address" />
         </TableRow>
-    </TableLayout>
+    	<include layout="@layout/panel_0_list_section" />
+	</TableLayout>
 
-    <View style									="@style/AD_ThinLine" />
-    
-    <include layout="@layout/panel_0_list_section" />
 
     <LinearLayout
         android:id="@+id/buttonArea"

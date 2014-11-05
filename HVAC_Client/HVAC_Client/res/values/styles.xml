@@ -43,6 +43,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:stretchColumns">*</item>
+        <item name="android:shrinkColumns">*</item>
     </style>
 
     <style name="AD_Data" parent="@android:style/TextAppearance.Medium">

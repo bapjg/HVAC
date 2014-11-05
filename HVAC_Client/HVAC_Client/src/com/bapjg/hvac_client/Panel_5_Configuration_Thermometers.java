@@ -51,8 +51,8 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
  
         Data x = Global.eRegConfiguration;
         
-        if ((Global.eRegConfiguration != null)
-        &&  (Global.eRegConfiguration.thermometerList != null))
+        if ((Global.eRegConfiguration 					!= null)
+        &&  (Global.eRegConfiguration.thermometerList 	!= null))
         {
         	displayHeader();
         	displayContents();
