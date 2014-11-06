@@ -20,7 +20,6 @@
     	<include layout="@layout/panel_0_list_section" />
 	</TableLayout>
 
-
     <LinearLayout
         android:id="@+id/buttonArea"
         android:layout_below="@+id/List_View"
@@ -37,7 +36,5 @@
             android:background					="@android:color/transparent"
             android:drawableTop					="@drawable/button_add"
             android:text						="Add New" />
-
     </LinearLayout>
-
 </LinearLayout>
