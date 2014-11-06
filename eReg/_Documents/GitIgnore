@@ -1,0 +1,9 @@
+build/
+!*.java
+!*.class
+!*.xml
+HVAC_Client/HVAC_Client/bin/*
+HVAC_Client/HVAC_Client/gen/*
+!HVAC_Client/HVAC_Client/src/*
+!HVAC_Client/HVAC_Client/res/*
+!HVAC_Client/HVAC_Client/libs/*
