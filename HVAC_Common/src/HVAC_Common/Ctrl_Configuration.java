@@ -155,7 +155,7 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		thermometer.address													= "28.3F9A 8504 0000";
 		thermometer.pidName													= null;
 		confUpdate.thermometerList.add(thermometer);
-
+int x = 1;
 		thermometer															= new Thermometer();
 		thermometer.name													= "Boiler_Old";
 		thermometer.address													= "28.1C01 8F04 0000";
