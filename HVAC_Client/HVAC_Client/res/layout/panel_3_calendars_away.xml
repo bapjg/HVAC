@@ -19,14 +19,14 @@
         <TextView
             style						= "@style/AD_Text"
             android:layout_height		= "wrap_content"
-         	android:layout_width		= "150dp"
+ 	    	android:layout_weight		= "1"
             android:text				= "Start" 
             android:gravity				= "center_horizontal"
         />
 
         <TextView 
             style						= "@style/AD_Text" 
-            android:layout_width		= "150dp" 
+ 	    	android:layout_weight		= "1"
             android:layout_height		= "wrap_content" 
             android:text				= "End" 
             android:gravity				= "center_horizontal"
@@ -46,14 +46,14 @@
      >
 	    
         <Button
-            android:id="@+id/buttonAdd"
-            style="@style/AD_ImageButton"
-            android:layout_width="100dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/button_add"
-            android:text="Add New" />
+            android:id							="@+id/buttonAdd"
+            style								="@style/AD_ImageButton"
+            android:layout_width				="100dp"
+            android:layout_alignParentRight		="true"
+            android:layout_alignParentBottom	="true"
+            android:background					="@android:color/transparent"
+            android:drawableTop					="@drawable/button_add"
+            android:text						="Add New" />
 
     </RelativeLayout>
 </LinearLayout>

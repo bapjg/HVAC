@@ -28,48 +28,25 @@ public class TCP_Connection
 
 	public Boolean connect()
 	{
-		if (Global.piSocketAddress != null)
-		{
-			try													// Try last known address
-			{
-				piSocket 																	= new Socket();
-				piSocket.connect(Global.piSocketAddress,3000);
-				piSocket.setSoTimeout(3000);
-				return true;									// Exit procedure as we are connected - NormalOperating
-			}
-			catch(Exception e1)
-			{
-			}
-		}
-																// There has been a problem... so :
-		try														// Try local
-		{
-			Global.piSocketAddress															= new InetSocketAddress("192.168.5.51", 8889);
-			piSocket 																		= new Socket();
-			piSocket.connect(Global.piSocketAddress, 1000);
-			piSocket.setSoTimeout(3000);
-			
-			Global.toaster("TCP_Connection : Connected to Local", true);
-		}
-		catch(Exception e2)
-		{
-			try													// It Failed so now try over the internet
-			{
-				Global.piSocketAddress 														= new InetSocketAddress("home.bapjg.com", 8889);
-				piSocket 																	= new Socket();
-				piSocket.connect(Global.piSocketAddress, 3000);
-				piSocket.setSoTimeout(3000);
+		InetSocketAddress										piSocketAddress;
+		
+		if (Global.isLocalIpAddress())							piSocketAddress 			= new InetSocketAddress("192.168.5.51", 8889);
+		else													piSocketAddress 			= new InetSocketAddress("home.bapjg.com", 8889);
 
-				Global.toaster("TCP_Connection : Connected to Remote", true);
-			}
-			catch(Exception e3)
-			{
-				Global.toaster("TCP_Connection : Failed completely", true);
-				return false;
-			}
+		try
+		{
+			piSocket 																		= new Socket();
+			piSocket.connect(piSocketAddress, 10000);
+			piSocket.setSoTimeout(10000);
+			piConnected																		= true;
+			return true;									// Exit procedure as we are connected - NormalOperating
 		}
-		piConnected												= true;
-		return true;
+		catch(Exception e1)
+		{
+			Global.toaster("TCP_Connection : Failed completely", true);
+			piConnected																		= false;
+			return false;
+		}
 	}
 	public void disconnect()
 	{

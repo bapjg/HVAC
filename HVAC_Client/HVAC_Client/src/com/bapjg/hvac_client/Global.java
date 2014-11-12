@@ -2,8 +2,11 @@ package com.bapjg.hvac_client;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.NetworkInterface;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
@@ -21,7 +24,6 @@ public class Global
 	public static 	Activity 									activity;
 	
 	public static	String										serverURL;
-	public static	InetSocketAddress							piSocketAddress;
 	
 	public static	Panel_1_Temperatures						panelTemperatures;
 	public static	Panel_2_Immediate							panelImmediate;	
@@ -46,7 +48,31 @@ public class Global
 	{
 	}
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-    public static String displayTemperature(Integer temperature)
+    public static Boolean isLocalIpAddress()					// Determines if ipAddress is 192.168.5.xxx
+    {
+		try
+		{
+			String 												ipAddresses 				= "";
+			Enumeration <NetworkInterface> 						netWorkInterfaces			= NetworkInterface.getNetworkInterfaces();
+			
+			while(netWorkInterfaces.hasMoreElements())
+			{
+			    NetworkInterface 								netWorkInterface 			= (NetworkInterface) netWorkInterfaces.nextElement();
+			    Enumeration <InetAddress> 						netWorkAddresses			= netWorkInterface.getInetAddresses();
+			    while (netWorkAddresses.hasMoreElements())
+			    {
+			        InetAddress 								netWorkAddress				= (InetAddress) netWorkAddresses.nextElement();
+			        if (netWorkAddress.getHostAddress().indexOf("192.168.5") > -1)
+			        {
+			        		return true;
+			        }
+			    }
+			}
+		}
+		catch(Exception e1)		{	}	
+    	return false;
+    }
+	public static String displayTemperature(Integer temperature)
 	{
 		int degrees = temperature/1000;
 		int decimal = (temperature - degrees*1000) / 100;

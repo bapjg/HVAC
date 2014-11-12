@@ -13,7 +13,7 @@
 	<Button	style						= "@style/AD_MenuButton" 	android:text	= "Floor"        		/>
 	<Button	style						= "@style/AD_MenuButton" 	android:text	= "Vocabulary"   		/>
 	<Button	style						= "@style/AD_MenuButton" 	android:text	= "Away List"   		/>
-	<Button	style						= "@style/AD_MenuButton" 	android:text	= "Background Tasks"   	/>
+	<Button	style						= "@style/AD_MenuButton" 	android:text	= "Background\nTasks"   />
 
 		<LinearLayout
 		    android:id="@+id/bottomFrame"

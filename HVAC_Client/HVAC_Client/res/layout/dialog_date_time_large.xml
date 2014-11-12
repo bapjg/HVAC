@@ -14,20 +14,17 @@
     	android:orientation		="horizontal"
     >
    	 -->
-
     	<DatePicker
-    	    android:id="@+id/dateObjective"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:layout_gravity="center_horizontal"
-    	    android:spinnersShown="true"
-    	    android:calendarViewShown="false" />
+        	android:id="@+id/dateObjective"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+       	/>
 
  		<TimePicker
  		    android:id="@+id/timeObjective"
  		    android:layout_width="wrap_content"
  		    android:layout_height="wrap_content"
  		    android:layout_gravity="center_horizontal"
-		/>
+ 		/>
 
 </LinearLayout>

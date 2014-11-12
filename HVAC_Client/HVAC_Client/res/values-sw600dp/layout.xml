@@ -1,0 +1,6 @@
+<resources>
+
+	<item name="dialog_date_time" 	type="layout">@layout/dialog_date_time_large</item>
+	<item name="dialog_date" 		type="layout">@layout/dialog_date_large</item>
+	
+</resources>

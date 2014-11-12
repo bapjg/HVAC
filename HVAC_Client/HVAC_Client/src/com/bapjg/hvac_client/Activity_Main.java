@@ -29,7 +29,6 @@ public class Activity_Main 										extends 					Activity
         Global.appContext 																	= getApplicationContext();
         Global.actContext																	= (Context)  this;
         Global.activity																		= (Activity) this;
-        Global.piSocketAddress																= null;
 
         HTTP_Send	(new Ctrl_Json().new 		Request(Ctrl_Json.TYPE_Calendar));				// Fire these async actions as soon as possible
      	HTTP_Send	(new Ctrl_Json().new 		Request(Ctrl_Json.TYPE_Configuration));

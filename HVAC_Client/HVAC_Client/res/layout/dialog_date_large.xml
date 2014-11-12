@@ -10,8 +10,6 @@
     <DatePicker
         android:id="@+id/dateObjective"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-     	android:spinnersShown="true"
-    	android:calendarViewShown="false" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
