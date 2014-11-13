@@ -93,12 +93,12 @@ public class Item_3_Calendars_Away 								extends 					Panel_0_Fragment
     	}
     	else if ((clickedView.getId() == R.id.dateStart) || (clickedView.getId() == R.id.timeStart))
     	{
-     		Dialog_Date_Time	 								dialog 							= new Dialog_Date_Time(itemData.dateTimeStart, itemData, this);
+     		Dialog_DateTime	 								dialog 							= new Dialog_DateTime(itemData.dateTimeStart, itemData, this);
      		dialog.show(getFragmentManager(), "Dialog_Date_Time");
     	}
     	else if ((clickedView.getId() == R.id.dateEnd) || (clickedView.getId() == R.id.timeEnd))
     	{
-     		Dialog_Date_Time	 								dialog 							= new Dialog_Date_Time(itemData.dateTimeEnd, itemData, this);
+     		Dialog_DateTime	 								dialog 							= new Dialog_DateTime(itemData.dateTimeEnd, itemData, this);
      		dialog.show(getFragmentManager(), "Dialog_Date_Time");
     	}
  	}

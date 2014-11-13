@@ -19,7 +19,7 @@ import android.widget.TimePicker;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Dialog_Date_Time 									extends 					DialogFragment 
+public class Dialog_DateTime 									extends 					DialogFragment 
 {
 	public DatePicker 											datePicker;
 	public TimePicker 											timePicker;
@@ -32,10 +32,10 @@ public class Dialog_Date_Time 									extends 					DialogFragment
 	public Object												parent;
 	public Dialog_Response										callBack;
 	
-	public Dialog_Date_Time() 
+	public Dialog_DateTime() 
     {
     }
-	public Dialog_Date_Time(Long dateTime, Object parent, Dialog_Response callBack) 
+	public Dialog_DateTime(Long dateTime, Object parent, Dialog_Response callBack) 
     {
 		super();
 		this.callBack																		= callBack;
@@ -59,7 +59,7 @@ public class Dialog_Date_Time 									extends 					DialogFragment
         AlertDialog.Builder 	builder 													= new AlertDialog.Builder(getActivity());
         LayoutInflater 			inflater 													= getActivity().getLayoutInflater();
 									
-        View					dialogView													= inflater.inflate(R.layout.dialog_date_time, null);
+        View					dialogView													= inflater.inflate(R.layout.dialog_datetime, null);
         builder.setView(dialogView);							
         builder.setTitle("Select date and time");							
 									
