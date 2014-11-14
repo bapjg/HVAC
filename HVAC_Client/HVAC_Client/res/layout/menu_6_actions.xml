@@ -8,8 +8,20 @@
 	android:background					= "@color/background"
 	android:clickable 					= "true"
 >
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Relays"         		/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Test Mail"         	/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Stop"         		/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "zzzzzzz"         	/>
+    <ScrollView
+		android:layout_width			= "match_parent"
+		android:layout_height			= "match_parent"
+	>
+		<LinearLayout
+		    android:layout_width		= "match_parent"
+			android:layout_height		= "match_parent"
+			android:orientation			= "vertical"
+			android:id					= "@+id/buttons_container">
+		>
+			<Button	style				= "@style/AD_MenuButton" 	android:text	= "Relays"         		/>
+			<Button	style				= "@style/AD_MenuButton" 	android:text	= "Test Mail"         	/>
+			<Button	style				= "@style/AD_MenuButton" 	android:text	= "Stop"         		/>
+			<Button	style				= "@style/AD_MenuButton" 	android:text	= "zzzzzzz"         	/>
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>

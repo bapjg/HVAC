@@ -30,13 +30,6 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment 
 {
-//	private Adapter_5_Configuration_Relays		 				adapter;
-//	private LayoutInflater										myInflater;
-//	private Activity											myActivity;
-//	private ViewGroup											myContainer;
-//	private View												myAdapterView;
-//	private FragmentManager										myFragmentManager;
-			
 	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 	private View												adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
 
@@ -86,12 +79,14 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 	{  
 		if (result instanceof Ctrl_Configuration.Data)
 		{
+			Global.setStatusTCP("Ok");
 			Global.eRegConfiguration														= (Ctrl_Configuration.Data) result;
 			displayHeader();
 			displayContents();
 		}
 		else
 		{
+			Global.setStatusTCP("No Data");
 			Global.toaster("P5_Conf_Pump : Data NOTNOTNOT received", true);
 		}
 	}

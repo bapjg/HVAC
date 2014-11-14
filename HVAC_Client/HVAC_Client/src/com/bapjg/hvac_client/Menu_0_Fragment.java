@@ -26,6 +26,7 @@ public class Menu_0_Fragment 									extends 					Fragment
 	public 	int													menuLayout;
 	private ViewGroup											container;
 	private View												menuView;
+	private View												listView;
 	
 	public Menu_0_Fragment()
 	{
@@ -34,8 +35,9 @@ public class Menu_0_Fragment 									extends 					Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	menuView 												= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
-    	Button													firstButton					= (Button) ((ViewGroup) menuView).getChildAt(0);
+    	menuView 																			= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
+    	listView																			= menuView.findViewById(R.id.buttons_container);
+    	Button													firstButton					= (Button) ((ViewGroup) listView).getChildAt(0);
     	this.container																		= container;
     	allButtonsSetup((ViewGroup) menuView);
 		((OnClickListener) this).onClick(firstButton);																		// Execute the onClickListener of the first menu button
@@ -90,22 +92,25 @@ public class Menu_0_Fragment 									extends 					Fragment
 	}
 	public void HTTP_Send(Ctrl__Abstract message)
 	{
+		Global.setStatusHTTP("Waiting");
 		HTTP_Task												task						= new HTTP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);		
 	}		
 	public void TCP_Send(Ctrl__Abstract message)		
 	{		
+		Global.setStatusTCP("Waiting");
 		TCP_Task												task						= new TCP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);									// processFinishHTTP is in the instaciated class
 	}
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
+		Global.setStatusHTTP("Ok");
 		if 		(result instanceof Ctrl_Calendars.Data)			Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
 		else if (result instanceof Ctrl_Configuration.Data)		Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
 		else if (result instanceof Ctrl__Abstract.Ack)			/* All is Ok */ ;
-		else													Global.toaster("M0_Fragment : Data NOTNOTNOT received", true);
+		else													Global.setStatusHTTP("Bad Data");
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 	{  }							// Overriddent in subclass
 }

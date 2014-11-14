@@ -23,6 +23,14 @@ public class Ctrl__Abstract implements java.io.Serializable
 	{
 	}
 	@SuppressWarnings("serial")
+	public class TimeOut extends Ctrl__Abstract
+	{
+	}
+	@SuppressWarnings("serial")
+	public class NoData extends Ctrl__Abstract
+	{
+	}
+	@SuppressWarnings("serial")
 	public class NoConnection extends Ctrl__Abstract
 	{
 	}

@@ -16,7 +16,7 @@ import android.widget.Toast;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Activity_Main 										extends 					Activity 
 																implements					TCP_Response,
-																HTTP_Response
+																							HTTP_Response
 {
 	public static	Global										global;
 
@@ -75,10 +75,6 @@ public class Activity_Main 										extends 					Activity
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
         actionbar.addTab(tabReset);
-        
-        Global.textAdressSpace 																= (TextView) this.findViewById(R.id.address_space);
-        Global.textConnectionTCP 															= (TextView) this.findViewById(R.id.connection_tcp);
-        Global.textConnectionHTTP 															= (TextView) this.findViewById(R.id.connection_http);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -101,20 +97,32 @@ public class Activity_Main 										extends 					Activity
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public void TCP_Send(Ctrl__Abstract message)		
 	{		
+		Global.setStatusTCP("Waiting");
 		TCP_Task												task						= new TCP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);
 	}
 	public void HTTP_Send(Ctrl__Abstract message)
 	{
+		Global.setStatusHTTP("Waiting");
 		HTTP_Task												task						= new HTTP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);		
 	}		
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
-		if 		(result instanceof Ctrl_Calendars.Data) 		{	Global.eRegCalendars 		= (Ctrl_Calendars.Data) result;			}
-		else if (result instanceof Ctrl_Configuration.Data)		{	Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;		}
+		((TextView) this.findViewById(R.id.address_space)).setText((Global.isLocalIpAddress() ? "Local" : "Remote"));
+		
+		if 		(result instanceof Ctrl_Calendars.Data) 		
+		{	
+	        Global.setStatusHTTP("Ok");
+			Global.eRegCalendars 		= (Ctrl_Calendars.Data) result;			
+		}
+		else if (result instanceof Ctrl_Configuration.Data)		
+		{	
+	        Global.setStatusHTTP("Ok");
+			Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;		
+		}
 		else if (result instanceof Ctrl_Json.Data)				
 		{	
 			Ctrl_Json.Data											messageReceived			= (Ctrl_Json.Data) result;
@@ -122,30 +130,38 @@ public class Activity_Main 										extends 					Activity
 			{
 				String												JsonString				= ((Ctrl_Json.Data) result).json;
 				Global.eRegCalendars														= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
+				Global.setStatusHTTP("Ok");
 			}
 			else if (messageReceived.type == Ctrl_Json.TYPE_Configuration)
 			{
 				String												JsonString				= ((Ctrl_Json.Data) result).json;
-				Global.eRegConfiguration														= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
+				Global.eRegConfiguration													= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
+				Global.setStatusHTTP("Ok");
 			}
 			else
 			{
-				Global.toaster("Curious HTTP response", false);
+				Global.setStatusHTTP("Bad JSon Data");
 			}
 		}
-		
-		else													{	Global.toaster("Activity_Main : HTTP message received " + result.getClass().toString(), true);	}
+		else if (result instanceof Ctrl_Configuration.NoConnection)			Global.setStatusHTTP("No Connection");
+		else if (result instanceof Ctrl_Configuration.NoData)				Global.setStatusHTTP("No Data");			
+		else if (result instanceof Ctrl_Configuration.TimeOut)				Global.setStatusHTTP("Time Out");
+		else if (result instanceof Ctrl_Configuration.Nack)					Global.setStatusHTTP("Nack");
+		else																Global.setStatusHTTP("Other Pb");
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
+		((TextView) this.findViewById(R.id.address_space)).setText((Global.isLocalIpAddress() ? "Local" : "Remote"));
+		
 		if (result instanceof Ctrl_Weather.Data)
 		{
 			Ctrl_Weather.Data									resultWeather				= (Ctrl_Weather.Data) result;
 			Global.weatherForecast				 											= (Ctrl_WeatherData) resultWeather.weatherData;
+			((TextView) this.findViewById(R.id.connection_tcp)).setText("Connected");
 		}
 		else
 		{
-			Global.toaster("Activity_Main : TCP Data NOTNOTNOT received", true);
+			((TextView) this.findViewById(R.id.connection_tcp)).setText("Bad Data");
 		}
 	}
 }

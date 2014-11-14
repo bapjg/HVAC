@@ -12,7 +12,6 @@
     <ScrollView 
 	    android:layout_width	= "match_parent"
 	    android:layout_height	= "wrap_content"
-   
 	>
         <TableLayout style	= "@style/AD_Table">
 	        <TableRow																					style	= "@style/AD_Row"  >

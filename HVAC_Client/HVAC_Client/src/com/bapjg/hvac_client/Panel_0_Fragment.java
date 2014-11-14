@@ -44,12 +44,14 @@ public class Panel_0_Fragment 									extends 					Fragment
     }
 	public void HTTP_Send(Ctrl__Abstract message)
 	{
+		Global.setStatusHTTP("Waiting");
 		HTTP_Task												task						= new HTTP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);		
 	}		
 	public void TCP_Send(Ctrl__Abstract message)		
 	{		
+		Global.setStatusTCP("Waiting");
 		TCP_Task												task						= new TCP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);

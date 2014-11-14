@@ -8,15 +8,15 @@
     android:orientation							= "vertical" 
 >
 
-    <include layout	= "@layout/panel_0_title_section" />
+    <include layout								= "@layout/panel_0_title_section" />
     
     <TableLayout style							= "@style/AD_Table" >
         <TableRow style							= "@style/AD_Row" >
-            <TetView
+            <TextView
                 style							= "@style/AD_Text"
                 android:text					= "Name"
             />
-            <TetView
+            <TextView
                 style							= "@style/AD_Data"
                 android:text					= "Relay"
             />

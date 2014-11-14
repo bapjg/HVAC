@@ -65,8 +65,8 @@ public class HTTP_Connection
 				serverReceive.close();
 				return returnMessage;
 			}
-			catch (SocketTimeoutException eTimeOut)			{	return 						new Ctrl__Abstract().new NoConnection();	}
-			catch (Exception e)								{	return 						new Ctrl__Abstract().new NoConnection();	}
+			catch (SocketTimeoutException eTimeOut)			{	return 						new Ctrl__Abstract().new TimeOut();			}
+			catch (Exception e)								{	return 						new Ctrl__Abstract().new NoData();			}
 		}
 		else												{ 	return 						new Ctrl__Abstract().new NoConnection();	}
 	}

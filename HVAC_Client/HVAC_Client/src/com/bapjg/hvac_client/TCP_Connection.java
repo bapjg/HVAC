@@ -41,9 +41,8 @@ public class TCP_Connection
 			piConnected																		= true;
 			return true;									// Exit procedure as we are connected - NormalOperating
 		}
-		catch(Exception e1)
+		catch (Exception e1)
 		{
-			Global.toaster("TCP_Connection : Failed completely", true);
 			piConnected																		= false;
 			return false;
 		}
@@ -68,19 +67,9 @@ public class TCP_Connection
 				
 				return (Ctrl__Abstract) piInputStream.readObject();
 			}
-			catch (SocketTimeoutException eTimeOut)
-			{
-				return new Ctrl__Abstract().new Nack();
-			}
-			catch(Exception e)
-			{
-	        	e.printStackTrace();
-				return new Ctrl__Abstract().new Nack();
-			}
+			catch (SocketTimeoutException eTimeOut)		{	return new Ctrl__Abstract().new TimeOut();		}
+			catch (Exception e)							{	return new Ctrl__Abstract().new NoData();			}
 		}
-		else
-		{
-			return new Ctrl__Abstract().new NoConnection();
-		}
+		else											{	return new Ctrl__Abstract().new NoConnection();	}
 	}
 }

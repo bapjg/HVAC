@@ -6,6 +6,7 @@ import java.net.NetworkInterface;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -45,11 +46,6 @@ public class Global
 	public static	Ctrl_Calendars.Data							eRegCalendars;
 	public static	Ctrl_WeatherData							weatherForecast;
 	
-	public static 	TextView 									textAdressSpace;
-	public static 	TextView 									textConnectionTCP;
-	public static 	TextView 									textConnectionHTTP;
-
-
 	public Global() 
 	{
 	}
@@ -61,22 +57,29 @@ public class Global
 			String 												ipAddresses 				= "";
 			Enumeration <NetworkInterface> 						netWorkInterfaces			= NetworkInterface.getNetworkInterfaces();
 			
-			while(netWorkInterfaces.hasMoreElements())
+			for (NetworkInterface netWorkInterface : Collections.list(netWorkInterfaces))
 			{
-			    NetworkInterface 								netWorkInterface 			= (NetworkInterface) netWorkInterfaces.nextElement();
 			    Enumeration <InetAddress> 						netWorkAddresses			= netWorkInterface.getInetAddresses();
-			    while (netWorkAddresses.hasMoreElements())
+			    for (InetAddress netWorkAddress : Collections.list(netWorkAddresses))
 			    {
-			        InetAddress 								netWorkAddress				= (InetAddress) netWorkAddresses.nextElement();
+			    	String 										xx 							= netWorkAddress.getHostAddress();
 			        if (netWorkAddress.getHostAddress().indexOf("192.168.5") > -1)
 			        {
-			        		return true;
+			        	return true;
 			        }
 			    }
 			}
 		}
-		catch(Exception e1)		{	}	
+		catch(Exception e1)		{}
     	return false;
+    }
+    public static void setStatusTCP(String message)
+    {
+		((TextView) activity.findViewById(R.id.connection_tcp)).setText(message);
+    }
+    public static void setStatusHTTP(String message)
+    {
+    	((TextView) activity.findViewById(R.id.connection_http)).setText(message);
     }
 	public static String displayTemperature(Integer temperature)
 	{
