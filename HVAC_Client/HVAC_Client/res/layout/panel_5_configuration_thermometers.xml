@@ -1,40 +1,25 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
 <LinearLayout 
-    xmlns:android								="http://schemas.android.com/apk/res/android"
-    android:layout_width						="match_parent"
-    android:layout_height						="match_parent"
-    android:background							="@color/background"
-    android:orientation							="vertical" >
+    xmlns:android									= "http://schemas.android.com/apk/res/android"
+    android:layout_width							= "match_parent"
+    android:layout_height							= "match_parent"
+    android:background								= "@color/background"
+    android:orientation								= "vertical" >
 
-    <include layout								="@layout/panel_0_title_section" />
+    <include layout									= "@layout/panel_0_title_section" />
 
-    <TableLayout style							="@style/AD_Table" >
-        <TableRow style							="@style/AD_Row" >
+    <TableLayout style								= "@style/AD_Table" >
+        <TableRow style								= "@style/AD_Row" >
             <TextView
-                style							="@style/AD_Text"
-                android:text					="Name" />
+                style								= "@style/AD_Text"
+                android:text						= "Name" />
             <TextView
-                style							="@style/AD_Data"
-                android:text					="Address" />
+                style								= "@style/AD_Data"
+                android:text						= "Address" />
         </TableRow>
-    	<include layout="@layout/panel_0_list_section" />
+    	<include layout								= "@layout/panel_0_list_section" />
 	</TableLayout>
 
-    <LinearLayout
-        android:id="@+id/buttonArea"
-        android:layout_below="@+id/List_View"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:gravity="bottom"
-        android:orientation							="horizontal" >
+   <include layout								= "@layout/aa_include_panel_buttons_addnew_delete" />
 
-        <Button
-            android:id							="@+id/buttonAdd"
-            style								="@style/AD_ImageButton"
-            android:layout_width				="100dp"
-            android:background					="@android:color/transparent"
-            android:drawableTop					="@drawable/button_add"
-            android:text						="Add New" />
-    </LinearLayout>
 </LinearLayout>

@@ -1,36 +1,19 @@
-<?xml version		= "1.0" encoding		= "utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:baselineAligned="false"
-    android:orientation="vertical" >
-
-   <include layout="@layout/panel_0_title_section" />
-
-    <ListView
-        android:id="@+id/List_View"
-        android:layout_width="match_parent"
-        android:layout_height="510dp" />
-
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-     >
-
-        <Button
-            android:id="@+id/buttonAdd"
-            style="@style/AD_ImageButton"
-            android:layout_width="100dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/button_add"
-            android:text="Add New" />
-
-    </RelativeLayout>
+<?xml version		= "1.0" encoding				= "utf-8"?>
+<LinearLayout xmlns:android							= "http://schemas.android.com/apk/res/android"
+    android:layout_width							= "match_parent"
+    android:layout_height							= "match_parent"
+    android:background								= "@color/background"
+    android:baselineAligned							= "false"
+    android:orientation								= "vertical"
+>                                       		
+                                        		
+	<include layout									= "@layout/panel_0_title_section" />
+                                        		
+    <ListView                           		
+        android:id									= "@+id/List_View"
+        android:layout_width						= "match_parent"
+        android:layout_height						= "510dp"
+	/>                          					
+   <include layout								= "@layout/aa_include_panel_buttons_addnew_delete" />
 
 </LinearLayout>

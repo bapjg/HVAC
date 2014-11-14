@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout 
-    xmlns:android					="http://schemas.android.com/apk/res/android"
-    android:id						= "@+id/row"
-    android:layout_width			= "match_parent"
-    android:layout_height			= "wrap_content"
-    android:gravity					= "center_vertical"
-    android:orientation				= "vertical"
+    xmlns:android						="http://schemas.android.com/apk/res/android"
+    android:id							= "@+id/row"
+    android:layout_width				= "match_parent"
+    android:layout_height				= "wrap_content"
+    android:gravity						= "center_vertical"
+    android:orientation					= "vertical"
 >
     <TableLayout style					="@style/AD_Table" >
         <TableRow style					="@style/AD_Row" >
-
-	    	<TextView
+			<TextView
 	        	android:id				="@+id/name"
 	        	style					="@style/AD_Text"
-	    />
-       </TableRow>
+			/>
+		</TableRow>
         <TableRow style					="@style/AD_Row" >
-	    	<TextView
+			<TextView
 	        	android:id				="@+id/relay"
 	        	style					="@style/AD_Data" 
-	    />
+			/>
         </TableRow>
 	</TableLayout>
     <View style="@style/AD_ThinLine" />

@@ -94,7 +94,8 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		// Bottom part of the screen : "Select new parameters"
 		if (messageReceived.executionActive)
 		{
-			((ViewGroup) 	panelView.findViewById(R.id.bottomPart)).setVisibility(View.GONE);
+// TODO recreate in layout file
+			//			((ViewGroup) 	panelView.findViewById(R.id.bottomPart)).setVisibility(View.GONE);
 		}
 		else
 		{

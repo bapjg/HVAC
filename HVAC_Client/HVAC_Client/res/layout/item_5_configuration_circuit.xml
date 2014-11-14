@@ -1,436 +1,406 @@
-<?xml version		= "1.0" encoding		= "utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:baselineAligned="false"
-    android:orientation="vertical" >
+<?xml version		= "1.0" encoding			= "utf-8"?>
+<LinearLayout xmlns:android						= "http://schemas.android.com/apk/res/android"
+    android:layout_width						= "match_parent"
+    android:layout_height						= "match_parent"
+    android:background							= "@color/background"
+    android:baselineAligned						= "false"
+    android:orientation							= "vertical"
+>
+
+    <include layout								= "@layout/panel_0_title_section" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"
-        android:orientation="vertical" 
-    >
-    
+        android:layout_width					= "match_parent"
+        android:layout_height					= "match_parent"
+        android:background						= "@color/background"
+        android:orientation						= "vertical" 
+	>
+    	<RelativeLayout
+    		android:layout_width				= "fill_parent" 
+    		android:layout_height				= "wrap_content"
+    	>
+	        <TextView
+	            style							= "@style/AD_Text"
+	            android:text					= "Pump"
+	            android:layout_alignParentLeft	= "true" 
+			/>
+	        <TextView
+	            android:id						= "@+id/pumpName"
+	            style							= "@style/AD_Data"
+	            android:layout_alignParentRight	= "true" 
+			/>
+	    </RelativeLayout>
+    	<RelativeLayout
+    		android:layout_width				= "fill_parent" 
+    		android:layout_height				= "wrap_content"
+    	>
+	        <TextView
+	            style							= "@style/AD_Text"
+	            android:text					= "Thermometer"
+	            android:layout_alignParentLeft	= "true" 
+           
+			/>
+	        <TextView
+	            android:id						= "@+id/thermometerName"
+	            style							= "@style/AD_Data"
+	            android:layout_alignParentRight	= "true" 
+			/>
+	    </RelativeLayout>
 	    <LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="60dp"
-	        android:background="@color/background"
-	        android:gravity="top"
-	        android:orientation="vertical" 
-	    >
+	        android:id							= "@+id/gradient"
+	        android:layout_width				= "match_parent"
+	        android:layout_height				= "wrap_content" 
+	    	android:orientation					= "vertical"
+		>
 	
 	        <TextView
-	            style="@style/AD_Text"
-	            android:id="@+id/title"
-	            android:layout_width="match_parent"
-	            android:layout_height="25dp"
-	       		android:gravity="center_horizontal"
-	            android:text="Circuit Configuration" 
-	        />
-	
-	        <TextView
-	            style="@style/AD_Data"
-	             android:id="@+id/subTitle"
-	            android:layout_width="match_parent"
-	            android:layout_height="25dp"
-	        	android:gravity="center_horizontal"
-	            android:text="xxx" 
-	        />
-	   		<View
-	             android:layout_width= "fill_parent"
-	             android:layout_height= "5dp"
-	             android:background= "@color/background"
-	        />
-	        <View
-	             android:layout_width= "fill_parent"
-	             android:layout_height= "2dp"
-	             android:background= "#3399FF"
-	        />
-	
-	    </LinearLayout>
-	
-	    <LinearLayout
-	        android:id						= "@+id/LinearLayout01"
-	        android:layout_width			= "wrap_content"
-	        android:layout_height			= "wrap_content" 
-	    	android:orientation				= "horizontal" >
-	        
-	        <TextView
-	            style						= "@style/AD_Text"
-	            android:layout_width		= "150dp"
-	            android:gravity				= "left"
-	            android:text				= "Pump" />
-	
-	        <TextView
-	            android:id					= "@+id/pumpName"
-	            style						= "@style/AD_Data"
-	            android:layout_width		= "150dp"
-	            android:gravity				= "right"
-	        />
-	    </LinearLayout>
-	
-	    <LinearLayout
-	        android:id						= "@+id/LinearLayout02"
-	        android:layout_width			= "wrap_content"
-	        android:layout_height			= "wrap_content" 
-	    	android:orientation				= "horizontal" >
-	        
-	        <TextView
-	            style						= "@style/AD_Text"
-	            android:layout_width		= "150dp"
-	            android:gravity				= "left"
-	            android:text				= "Thermometer" />
-	
-	        <TextView
-	            android:id					= "@+id/thermometerName"
-	            style						= "@style/AD_Data"
-	            android:layout_width		= "150dp"
-	            android:gravity				= "right"
-	        />
-	    </LinearLayout>
-	    <LinearLayout
-	        android:id						= "@+id/gradient"
-	        android:layout_width			= "match_parent"
-	        android:layout_height			= "wrap_content" 
-	    	android:orientation				= "vertical" >
-	
-	        <TextView
-	            style="@style/AD_Text"
-	            android:layout_width="match_parent"
-	            android:gravity="left"
-	            android:text="Temperature Gradient" />
+	            style							= "@style/AD_Text"
+	            android:layout_width			= "match_parent"
+	            android:gravity					= "left"
+	            android:text					= "Temperature Gradient"
+			/>
 	
 	        <GridLayout
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content" 
-	            android:columnCount="5"
-	            android:rowCount="5"
-	        >
-	
+	            android:layout_width			= "match_parent"
+	            android:layout_height			= "wrap_content" 
+	            android:columnCount				= "5"
+	            android:rowCount				= "5"
+			>
 		        <TextView
-		            android:id="@+id/tempLow"
-		            style="@style/AD_Data"
-		            android:layout_width="80dp"
-		            android:layout_height="32dp"
-		            android:layout_column="0"
-		            android:layout_gravity="left"
-		            android:layout_row="0"
-		            android:gravity="right|center_vertical"
-		            android:text="gt1" >
-		            
-		        </TextView>
+		            android:id					= "@+id/tempLow"
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "80dp"
+		            android:layout_height		= "32dp"
+		            android:layout_column		= "0"
+		            android:layout_gravity		= "left"
+		            android:layout_row			= "0"
+		            android:gravity				= "right|center_vertical"
+		            android:text				= "gt1"
+				/>
+		        <TextView
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "10dp"
+		            android:layout_height		= "32dp"
+		            android:layout_column		= "1"
+		            android:layout_gravity		= "left"
+		            android:layout_row			= "0"
+		            android:gravity				= "right|center_vertical"
+		            android:text				= "g"
+				/>
 				<TextView
-		            style="@style/AD_Data"
-		            android:layout_width="10dp"
-		            android:layout_height="32dp"
-		            android:layout_column="1"
-		            android:layout_gravity="left"
-		            android:layout_row="0"
-		            android:gravity="right|center_vertical"
-		            android:text="g" >
-		            
-		        </TextView>
+				    android:id					= "@+id/outsideLow"
+				    style						= "@style/AD_Data"
+				    android:layout_width		= "80dp"
+				    android:layout_column		= "1"
+				    android:layout_gravity		= "left"
+				    android:layout_row			= "2"
+				    android:gravity				= "left"
+				    android:text				= "gt3"
+				/>
 				<TextView
-				    android:id="@+id/outsideLow"
-				    style="@style/AD_Data"
-				    android:layout_width="80dp"
-				    android:layout_column="1"
-				    android:layout_gravity="left"
-				    android:layout_row="2"
-				    android:gravity="left"
-				    android:text="gt3" />
-	
+				    style						= "@style/AD_Data"
+				    android:layout_width		= "74dp"
+				    android:layout_column		= "2"
+				    android:layout_gravity		= "left"
+				    android:layout_row			= "2"
+				/>
 				<TextView
-				    style="@style/AD_Data"
-				    android:layout_width="74dp"
-				    android:layout_column="2"
-				    android:layout_gravity="left"
-				    android:layout_row="2" />
-	
-				<TextView
-				    android:id="@+id/outsideHigh"
-				    style="@style/AD_Data"
-				    android:layout_width="50dp"
-				    android:layout_column="3"
-				    android:layout_gravity="left"
-				    android:layout_row="2"
-				    android:text="gt5"
-				    android:width="60dp" />
-	
+				    android:id					= "@+id/outsideHigh"
+				    style						= "@style/AD_Data"
+				    android:layout_width		= "50dp"
+				    android:layout_column		= "3"
+				    android:layout_gravity		= "left"
+				    android:layout_row			= "2"
+				    android:text				= "gt5"
+				    android:width				= "60dp"
+				/>
 				<ImageView
-				    android:id="@+id/imageView1"
-				    android:layout_width="180dp"
-				    android:layout_height="110dp"
-				    android:layout_column="1"
-				    android:layout_columnSpan="1"
-				    android:layout_gravity="left"
-				    android:layout_row="0"
-				    android:layout_rowSpan="1"
-				    android:maxWidth="180dp"
-				    android:src="@drawable/gradient" />
-	
+				    android:id					= "@+id/imageView1"
+				    android:layout_width		= "180dp"
+				    android:layout_height		= "110dp"
+				    android:layout_column		= "1"
+				    android:layout_columnSpan	= "1"
+				    android:layout_gravity		= "left"
+				    android:layout_row			= "0"
+				    android:layout_rowSpan		= "1"
+				    android:maxWidth			= "180dp"
+				    android:src					= "@drawable/gradient"
+				/>
 				<TextView
-				    android:id="@+id/tempHigh"
-				    style="@style/AD_Data"
-				    android:layout_width="80dp"
-				    android:layout_height="62dp"
-				    android:layout_column="0"
-				    android:layout_gravity="left|bottom"
-				    android:layout_row="0"
-				    android:gravity="right|center_vertical"
-				    android:text="gt2" />
-			
+				    android:id					= "@+id/tempHigh"
+				    style						= "@style/AD_Data"
+				    android:layout_width		= "80dp"
+				    android:layout_height		= "62dp"
+				    android:layout_column		= "0"
+				    android:layout_gravity		= "left|bottom"
+				    android:layout_row			= "0"
+				    android:gravity				= "right|center_vertical"
+				    android:text				= "gt2"
+				/>
 			</GridLayout>
-	
 	    </LinearLayout>
-	
-	     <LinearLayout
-	        android:id						= "@+id/mixer"
-	        android:layout_width			= "match_parent"
-	        android:layout_height			= "wrap_content" 
-	    	android:orientation				= "vertical" >
+	    <LinearLayout
+	        android:id							= "@+id/mixer"
+	        android:layout_width				= "match_parent"
+	        android:layout_height				= "wrap_content" 
+	    	android:orientation					= "vertical"
+		>
 	
 	         <TextView
-	             style="@style/AD_Text"
-	             android:layout_width="match_parent"
-	             android:gravity="center_horizontal"
-	             android:text="Mixer" />
+	             style							= "@style/AD_Text"
+	             android:layout_width			= "match_parent"
+	             android:gravity				= "center_horizontal"
+	             android:text					= "Mixer"
+			/>
 	
 	         <LinearLayout
-	             android:id="@+id/LinearLayout05"
-	             android:layout_width="wrap_content"
-	             android:layout_height="wrap_content"
-	             android:orientation="horizontal" >
+	             android:id						= "@+id/LinearLayout05"
+	             android:layout_width			= "wrap_content"
+	             android:layout_height			= "wrap_content"
+	             android:orientation			= "horizontal"
+			>
+	
+	            <TextView
+	                 style						= "@style/AD_Text"
+	                 android:layout_width		= "150dp"
+	                 android:gravity			= "left"
+	                 android:text				= "Thermometer"
+				/>
 	
 	             <TextView
-	                 style="@style/AD_Text"
-	                 android:layout_width="150dp"
-	                 android:gravity="left"
-	                 android:text="Thermometer" />
-	
-	             <TextView
-	                 android:id="@+id/thermometer"
-	                 style="@style/AD_Data"
-	                 android:layout_width="150dp"
-	                 android:gravity="right"
-	                 android:text="zz" />
+	                 android:id					= "@+id/thermometer"
+	                 style						= "@style/AD_Data"
+	                 android:layout_width		= "150dp"
+	                 android:gravity			= "right"
+	                 android:text				= "zz"
+				/>
 	         </LinearLayout>
 	
 	         <LinearLayout
-	             android:id="@+id/LinearLayout03"
-	             android:layout_width="wrap_content"
-	             android:layout_height="wrap_content"
-	             android:orientation="horizontal" >
+	             android:id						= "@+id/LinearLayout03"
+	             android:layout_width			= "wrap_content"
+	             android:layout_height			= "wrap_content"
+	             android:orientation			= "horizontal"
+			>
 	
-	             <TextView
-	                 style="@style/AD_Text"
-	                 android:layout_width="150dp"
-	                 android:gravity="left"
-	                 android:text="Swing Time" />
+	            <TextView
+	                 style						= "@style/AD_Text"
+	                 android:layout_width		= "150dp"
+	                 android:gravity			= "left"
+	                 android:text				= "Swing Time"
+				/>
 	
-	             <TextView
-	                 android:id="@+id/swingTime"
-	                 style="@style/AD_Data"
-	                 android:layout_width="150dp"
-	                 android:gravity="right"
-	                 android:text="zz" />
+	            <TextView
+	                 android:id					= "@+id/swingTime"
+	                 style						= "@style/AD_Data"
+	                 android:layout_width		= "150dp"
+	                 android:gravity			= "right"
+	                 android:text				= "zz"
+				/>
 	
 	         </LinearLayout>
 	
 	         <LinearLayout
-	             android:id="@+id/LinearLayout04"
-	             android:layout_width="wrap_content"
-	             android:layout_height="wrap_content"
-	             android:orientation="horizontal" >
+	             android:id						= "@+id/LinearLayout04"
+	             android:layout_width			= "wrap_content"
+	             android:layout_height			= "wrap_content"
+	             android:orientation			= "horizontal"
+			>
 	
 	             <TextView
-	                 style="@style/AD_Text"
-	                 android:layout_width="150dp"
-	                 android:gravity="left"
-	                 android:text="Relay Up" />
+	                 style						= "@style/AD_Text"
+	                 android:layout_width		= "150dp"
+	                 android:gravity			= "left"
+	                 android:text				= "Relay Up"
+				/>
 	
-	             <TextView
-	                 android:id="@+id/relayUp"
-	                 style="@style/AD_Data"
-	                 android:layout_width="150dp"
-	                 android:gravity="right"
-	                 android:text="zz" />
-	         </LinearLayout>
-	
+	            <TextView
+	                 android:id					= "@+id/relayUp"
+	                 style						= "@style/AD_Data"
+	                 android:layout_width		= "150dp"
+	                 android:gravity			= "right"
+	                 android:text				= "zz"
+				/>
+			</LinearLayout>
 			<LinearLayout
-	             android:id="@+id/LinearLayout03"
-	             android:layout_width="wrap_content"
-	             android:layout_height="wrap_content"
-	             android:orientation="horizontal" >
+	             android:layout_width			= "wrap_content"
+	             android:layout_height			= "wrap_content"
+	             android:orientation			= "horizontal"
+			>
 	
 	             <TextView
-	                 style="@style/AD_Text"
-	                 android:layout_width="150dp"
-	                 android:gravity="left"
-	                 android:text="Relay Down" />
+	                 style						= "@style/AD_Text"
+	                 android:layout_width		= "150dp"
+	                 android:gravity			= "left"
+	                 android:text				= "Relay Down"
+				/>
 	
 	             <TextView
-	                 android:id="@+id/relayDown"
-	                 style="@style/AD_Data"
-	                 android:layout_width="150dp"
-	                 android:gravity="right"
-	                 android:text="zz" />
-	
+	                 android:id					= "@+id/relayDown"
+	                 style						= "@style/AD_Data"
+	                 android:layout_width		= "150dp"
+	                 android:gravity			= "right"
+	                 android:text				= "zz"
+				/>
 	         </LinearLayout>
 	    </LinearLayout>
-			<LinearLayout
-		    android:id="@+id/pidMixer"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:orientation="vertical" >
-	
+		<LinearLayout
+		    android:id							= "@+id/pidMixer"
+		    android:layout_width				= "match_parent"
+		    android:layout_height				= "wrap_content"
+		    android:orientation					= "vertical"
+		>
 		    <TextView
-		        style="@style/AD_Text"
-		        android:layout_width="match_parent"
-		        android:gravity="center_horizontal"
-		        android:text="Low Level PID (Mixer)" />
-	
+		        style							= "@style/AD_Text"
+		        android:layout_width			= "match_parent"
+		        android:gravity					= "center_horizontal"
+		        android:text					= "Low Level PID (Mixer)"
+			/>
 		    <LinearLayout
-		        android:id="@+id/LinearLayout07"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:orientation="horizontal" >
-	
+		        android:id						= "@+id/LinearLayout07"
+		        android:layout_width			= "wrap_content"
+		        android:layout_height			= "wrap_content"
+		        android:orientation				= "horizontal"
+			>
 		        <TextView
-		            style="@style/AD_Text"
-		            android:layout_width="200dp"
-		            android:gravity="left"
-		            android:text="Thermometer" />
-	
+		            style						= "@style/AD_Text"
+		            android:layout_width		= "200dp"
+		            android:gravity				= "left"
+		            android:text				= "Thermometer"
+				/>
 		        <TextView
-		            android:id="@+id/thermoName"
-		            style="@style/AD_Data"
-		            android:layout_width="100dp"
-		            android:gravity="right"
-		            android:text="zz" />
+		            android:id					= "@+id/thermoName"
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "100dp"
+		            android:gravity				= "right"
+		            android:text				= "zz"
+				/>
 		    </LinearLayout>
-	
 		    <LinearLayout
-		        android:id="@+id/LinearLayout06"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:orientation="horizontal" >
-	
+		        android:id						= "@+id/LinearLayout06"
+		        android:layout_width			= "wrap_content"
+		        android:layout_height			= "wrap_content"
+		        android:orientation				= "horizontal"
+			>
 		        <TextView
-		            style="@style/AD_Text"
-		            android:layout_width="200dp"
-		            android:gravity="left"
-		            android:text="Proportional Gain" />
-	
+		            style						= "@style/AD_Text"
+		            android:layout_width		= "200dp"
+		            android:gravity				= "left"
+		            android:text				= "Proportional Gain"
+				/>
 		        <TextView
-		            android:id="@+id/gainP"
-		            style="@style/AD_Data"
-		            android:layout_width="100dp"
-		            android:gravity="right"
-		            android:text="zz" />
+		            android:id					= "@+id/gainP"
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "100dp"
+		            android:gravity				= "right"
+		            android:text				= "zz"
+				/>
 		    </LinearLayout>
-	
 		    <LinearLayout
-		        android:id="@+id/LinearLayout09"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:orientation="horizontal" >
+		        android:id						= "@+id/LinearLayout09"
+		        android:layout_width			= "wrap_content"
+		        android:layout_height			= "wrap_content"
+		        android:orientation				= "horizontal"
+			>
 	
 		        <TextView
-		            style="@style/AD_Text"
-		            android:layout_width="220dp"
-		            android:gravity="left"
-		            android:text="Differential Time Const" />
+		            style						= "@style/AD_Text"
+		            android:layout_width		= "220dp"
+		            android:gravity				= "left"
+		            android:text				= "Differential Time Const"
+				/>
 	
 		        <TextView
-		            android:id="@+id/timeD"
-		            style="@style/AD_Data"
-		            android:layout_width="80dp"
-		            android:gravity="right"
-		            android:text="zz" />
+		            android:id					= "@+id/timeD"
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "80dp"
+		            android:gravity				= "right"
+		            android:text				= "zz"
+				/>
 		    </LinearLayout>
-	
 		    <LinearLayout
-		        android:id="@+id/LinearLayout06"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:orientation="horizontal" >
+		        android:layout_width			= "wrap_content"
+		        android:layout_height			= "wrap_content"
+		        android:orientation				= "horizontal"
+			>
+				<TextView
+		            style						= "@style/AD_Text"
+		            android:layout_width		= "220dp"
+		            android:gravity				= "left"
+		            android:text				= "Integration Time Const"
+				/>
 	
 		        <TextView
-		            style="@style/AD_Text"
-		            android:layout_width="220dp"
-		            android:gravity="left"
-		            android:text="Integration Time Const" />
-	
-		        <TextView
-		            android:id="@+id/timeI"
-		            style="@style/AD_Data"
-		            android:layout_width="80dp"
-		            android:gravity="right"
-		            android:text="zz" />
+		            android:id					= "@+id/timeI"
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "80dp"
+		            android:gravity				= "right"
+		            android:text				= "zz"
+				/>
 		    </LinearLayout>
 			<LinearLayout
-		        android:id="@+id/LinearLayout06"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:orientation="horizontal" >
+		        android:layout_width			= "wrap_content"
+		        android:layout_height			= "wrap_content"
+		        android:orientation				= "horizontal"
+			>
 	
 		        <TextView
-		            style="@style/AD_Text"
-		            android:layout_width="250dp"
-		            android:gravity="left"
-		            android:text="Time Delay after decision" />
+		            style						= "@style/AD_Text"
+		            android:layout_width		= "250dp"
+		            android:gravity				= "left"
+		            android:text				= "Time Delay after decision"
+				/>
 	
 		        <TextView
-		            android:id="@+id/timeDelay"
-		            style="@style/AD_Data"
-		            android:layout_width="50dp"
-		            android:gravity="right"
-		            android:text="zz" />
+		            android:id					= "@+id/timeDelay"
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "50dp"
+		            android:gravity				= "right"
+		            android:text				= "zz"
+				/>
 		    </LinearLayout>
 		    <LinearLayout
-		        android:id="@+id/LinearLayout06"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:orientation="horizontal" >
+		        android:layout_width			= "wrap_content"
+		        android:layout_height			= "wrap_content"
+		        android:orientation				= "horizontal"
+			>
 	
 		        <TextView
-		            style="@style/AD_Text"
-		            android:layout_width="250dp"
-		            android:gravity="left"
-		            android:text="Decision Time Projection" />
+		            style						= "@style/AD_Text"
+		            android:layout_width		= "250dp"
+		            android:gravity				= "left"
+		            android:text				= "Decision Time Projection"
+				/>
 	
 		        <TextView
-		            android:id="@+id/timeProjection"
-		            style="@style/AD_Data"
-		            android:layout_width="50dp"
-		            android:gravity="right"
-		            android:text="zz" />
+		            android:id					= "@+id/timeProjection"
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "50dp"
+		            android:gravity				= "right"
+		            android:text				= "zz"
+				/>
 		    </LinearLayout>
 		    <LinearLayout
-		        android:id="@+id/LinearLayout06"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:orientation="horizontal" >
+		        android:layout_width			= "wrap_content"
+		        android:layout_height			= "wrap_content"
+		        android:orientation				= "horizontal"
+			>
 	
 		        <TextView
-		            style="@style/AD_Text"
-		            android:layout_width="250dp"
-		            android:gravity="left"
-		            android:text="Tmperature Error Margin" />
+		            style						= "@style/AD_Text"
+		            android:layout_width		= "250dp"
+		            android:gravity				= "left"
+		            android:text				= "Tmperature Error Margin"
+				/>
 	
 		        <TextView
-		            android:id="@+id/marginProjection"
-		            style="@style/AD_Data"
-		            android:layout_width="50dp"
-		            android:gravity="right"
-		            android:text="zz" />
+		            android:id					= "@+id/marginProjection"
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "50dp"
+		            android:gravity				= "right"
+		            android:text				= "zz"
+				/>
 		    </LinearLayout>
 		</LinearLayout>
-
 	</LinearLayout>
-
-</ScrollView>
+</LinearLayout>

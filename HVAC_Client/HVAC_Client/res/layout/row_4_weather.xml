@@ -1,124 +1,114 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/row"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:gravity="center_vertical"
-    android:orientation="vertical" >
+<?xml version	= "1.0" encoding	= "utf-8"?>
+<LinearLayout xmlns:android	= "http://schemas.android.com/apk/res/android"
+    android:id	= "@+id/row"
+    android:layout_width	= "match_parent"
+    android:layout_height	= "match_parent"
+    android:background	= "@color/background"
+    android:gravity	= "center_vertical"
+    android:orientation	= "vertical" >
 
-    <TableLayout style="@style/AD_Table" >
-
-        <TableRow style="@style/AD_Row" >
-
+    <TableLayout style				= "@style/AD_Table" >
+       <TableRow style				= "@style/AD_Row" >
+           <TextView
+                style				= "@style/AD_Text"
+                android:text		= "Forecast" 
+			/>
             <TextView
-                style="@style/AD_Text"
-                android:text="Forecast" />
-
-            <TextView
-                android:id="@+id/time"
-                style="@style/AD_Data"
-                android:text="x" />
+                android:id			= "@+id/time"
+                style				= "@style/AD_Data"
+                android:text		= "x" 
+			/>
         </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
+        <TableRow style				= "@style/AD_Row" >
             <TextView
-                style="@style/AD_Text"
-                android:text="Temp" />
-            <TextView
-                android:id="@+id/temperature"
-                style="@style/AD_Data"
-                android:text="x" />
+                style				= "@style/AD_Text"
+                android:text		= "Temp" 
+			/>
+            <TextView
+                android:id			= "@+id/temperature"
+                style				= "@style/AD_Data"
+                android:text		= "x"
+			/>
         </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
+        <TableRow style				= "@style/AD_Row" >
             <TextView
-                style="@style/AD_Text"
-                android:text="Min/Max" />
-
+                style				= "@style/AD_Text"
+                android:text		= "Min/Max" 
+			/>
             <TextView
-                android:id="@+id/temperatureMinMax"
-                style="@style/AD_Data"
-                android:text="x" />
+                android:id			= "@+id/temperatureMinMax"
+                style				= "@style/AD_Data"
+                android:text		= "x" 
+			/>
         </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
+        <TableRow style				= "@style/AD_Row" >
             <TextView
-                style="@style/AD_Text"
-                android:text="Precip" />
-
+                style				= "@style/AD_Text"
+                android:text		= "Precip"
+			/>
             <TextView
-                android:id="@+id/precipitationValue"
-                style="@style/AD_Data"
-                android:text="" />
+                android:id			= "@+id/precipitationValue"
+                style				= "@style/AD_Data"
+                android:text		= ""
+			/>
         </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
-            <TextView style="@style/AD_Text" />
-
+        <TableRow style				= "@style/AD_Row" >
+            <TextView style			= "@style/AD_Text"
+			/>
             <TextView
-                android:id="@+id/precipitationType"
-                style="@style/AD_Data"
-                android:text="" />
+                android:id			= "@+id/precipitationType"
+                style				= "@style/AD_Data"
+                android:text		= ""
+			/>
         </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
+        <TableRow style				= "@style/AD_Row" >
             <TextView
-                style="@style/AD_Text"
-                android:text="Wind" />
-
+                style				= "@style/AD_Text"
+                android:text		= "Wind"
+			/>
             <TextView
-                android:id="@+id/windSpeed"
-                style="@style/AD_Data"
-                android:text="x" />
+                android:id			= "@+id/windSpeed"
+                style				= "@style/AD_Data"
+                android:text		= "x"
+			/>
         </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
-            <TextView style="@style/AD_Text" />
-
-            <TextView
-                android:id="@+id/windDirection"
-                style="@style/AD_Data"
-                android:text="x" />
+        <TableRow style				= "@style/AD_Row" >
+            <TextView style			= "@style/AD_Text"
+			/>
+            <TextView		
+                android:id			= "@+id/windDirection"
+                style				= "@style/AD_Data"
+                android:text			= "x"
+			/>
+        </TableRow>		
+        <TableRow style				= "@style/AD_Row" >
+            <TextView style			= "@style/AD_Text"
+			/>
+            <TextView		
+                android:id			= "@+id/windName"
+                style				= "@style/AD_Data"
+                android:text		= "x"
+			/>
         </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
-            <TextView style="@style/AD_Text" />
-
+        <TableRow style				= "@style/AD_Row" >
             <TextView
-                android:id="@+id/windName"
-                style="@style/AD_Data"
-                android:text="x" />
+                style				= "@style/AD_Text"
+                android:text		= "Clouds"
+			/>
+            <TextView		
+                android:id			= "@+id/cloudAll"
+                style				= "@style/AD_Data"
+                android:text		= "x"
+			/>
         </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
+        <TableRow style				= "@style/AD_Row" >
+            <TextView style			= "@style/AD_Text"
+			/>
             <TextView
-                style="@style/AD_Text"
-                android:text="Clouds" />
-
-            <TextView
-                android:id="@+id/cloudAll"
-                style="@style/AD_Data"
-                android:text="x" />
-        </TableRow>
-
-        <TableRow style="@style/AD_Row" >
-
-            <TextView style="@style/AD_Text" />
-
-            <TextView
-                android:id="@+id/cloudValue"
-                style="@style/AD_Data"
-                android:text="x" />
+                android:id			= "@+id/cloudValue"
+                style				= "@style/AD_Data"
+                android:text		= "x"
+			/>
         </TableRow>
     </TableLayout>
-
 </LinearLayout>

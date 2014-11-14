@@ -1,77 +1,80 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:baselineAligned="false"
-    android:orientation="vertical" >
+<LinearLayout xmlns:android					= "http://schemas.android.com/apk/res/android"
+    android:layout_width					= "match_parent"
+    android:layout_height					= "match_parent"
+    android:background						= "@color/background"
+    android:baselineAligned					= "false"
+    android:orientation						= "vertical" >
 
-    <include layout="@layout/panel_0_title_section" />
+    <include layout							= "@layout/panel_0_title_section" />
     
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/background"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
+        android:layout_width				= "match_parent"
+        android:layout_height				= "50dp"
+        android:background					= "@color/background"
+        android:gravity						= "center_vertical"
+        android:orientation					= "horizontal" 
+	>
+                                			
         <TextView
-            style="@style/AD_Text"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Thermometer" />
-
+            style							= "@style/AD_Text"
+            android:layout_width			= "200dp"
+            android:layout_height			= "wrap_content"
+            android:text					= "Thermometer" 
+		/>
         <TextView
-            android:id="@+id/thermoName"
-            style="@style/AD_Data"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="name" />
-
-    </LinearLayout>
+            android:id						= "@+id/thermoName"
+            style							= "@style/AD_Data"
+            android:layout_width			= "100dp"
+            android:layout_height			= "wrap_content"
+            android:gravity					= "right"
+            android:text					= "name" 
+		/>
+	</LinearLayout>
     <LinearLayout
-        android:layout_width			= "match_parent"
-        android:layout_height			= "50dp"
-        android:background				= "@color/background"
-        android:gravity					= "center_vertical"
-        android:orientation				= "horizontal" >
-
+        android:layout_width				= "match_parent"
+        android:layout_height				= "50dp"
+        android:background					= "@color/background"
+        android:gravity						= "center_vertical"
+        android:orientation					= "horizontal" 
+	>
+                                    	
         <TextView
-            style="@style/AD_Text"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Temp Never Exceed" />
-
-        <TextView
-            android:id="@+id/tempNeverExceed"
-            style="@style/AD_Data"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="Address" />
-
-    </LinearLayout>
+            style							= "@style/AD_Text"
+            android:layout_width			= "200dp"
+            android:layout_height			= "wrap_content"
+            android:text					= "Temp Never Exceed" 
+		/>
+                                    		
+        <TextView                   		
+            android:id						= "@+id/tempNeverExceed"
+            style							= "@style/AD_Data"
+            android:layout_width			= "100dp"
+            android:layout_height			= "wrap_content"
+            android:gravity					= "right"
+            android:text					= "Address" 
+		/>                          	
+    </LinearLayout>                 	
     <LinearLayout
-        android:layout_width			= "match_parent"
-        android:layout_height			= "50dp"
-        android:background				= "@color/background"
-        android:gravity					= "center_vertical"
-        android:orientation				= "horizontal" >
-
+        android:layout_width				= "match_parent"
+        android:layout_height				= "50dp"
+        android:background					= "@color/background"
+        android:gravity						= "center_vertical"
+        android:orientation					= "horizontal" 
+	>
         <TextView
-            style						= "@style/AD_Text"
-            android:layout_height		= "wrap_content"
-         	android:layout_width		= "200dp"
-            android:text				= "Temp Overshoot" />
-
-        <TextView
-            android:id="@+id/tempOverShoot"
-            style="@style/AD_Data"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="Address" />
-
-    </LinearLayout>
+            style							= "@style/AD_Text"
+            android:layout_height			= "wrap_content"
+         	android:layout_width			= "200dp"
+            android:text					= "Temp Overshoot"
+		/>
+        <TextView                   	
+            android:id						= "@+id/tempOverShoot"
+            style							= "@style/AD_Data"
+            android:layout_width			= "100dp"
+            android:layout_height			= "wrap_content"
+            android:gravity					= "right"
+            android:text					= "Address"
+		/>
+	</LinearLayout>                 	
 </LinearLayout>

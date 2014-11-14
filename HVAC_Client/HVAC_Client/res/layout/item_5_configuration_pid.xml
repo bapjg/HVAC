@@ -8,83 +8,60 @@
 	android:background					= "@color/background">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/background"
-        android:gravity="top"
-        android:orientation="vertical" 
-    >
-
+        android:layout_width			= "match_parent"
+        android:layout_height			= "60dp"
+        android:background				= "@color/background"
+        android:gravity					= "top"
+        android:orientation				= "vertical" 
+   
+	>
         <TextView
-            android:id="@+id/title"
-            style="@style/AD_Text"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:gravity="center_horizontal"
-            android:text="PID Configuration" />
-
+            android:id					= "@+id/title"
+            style						= "@style/AD_Text"
+            android:layout_width		= "match_parent"
+            android:layout_height		= "25dp"
+            android:gravity				= "center_horizontal"
+            android:text				= "PID Configuration"
+		/>
         <TextView
-            android:id="@+id/subTitle"
-            style="@style/AD_Data"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:gravity="center_horizontal" />
-
-   		<View
-             android:layout_width= "fill_parent"
-             android:layout_height= "5dp"
-             android:background= "@color/background"
-        />
+            android:id					= "@+id/subTitle"
+            style						= "@style/AD_Data"
+            android:layout_width		= "match_parent"
+            android:layout_height		= "25dp"
+            android:gravity				= "center_horizontal"
+		/>
+		<View
+             android:layout_width		= "fill_parent"
+             android:layout_height		= "5dp"
+             android:background			= "@color/background"
+       
+		/>
         <View
-             android:layout_width= "fill_parent"
-             android:layout_height= "2dp"
-             android:background= "#3399FF"
-        />
-
+             android:layout_width		= "fill_parent"
+             android:layout_height		= "2dp"
+             android:background			= "#3399FF"
+       
+		/>
     </LinearLayout>
-
     <LinearLayout
  	    android:layout_width			= "match_parent"
 	    android:layout_height			= "50dp"
     	android:gravity					= "center_vertical"
 	    android:orientation				= "horizontal"
-    >
-        
+>
         <TextView
-            style="@style/AD_Text"
-            android:layout_width="170dp"
-            android:gravity="left"
-            android:text="PID Name" />
-
-        <TextView
-            android:id="@+id/pidName"
-            style="@style/AD_Data"
-            android:layout_width="130dp"
-            android:gravity="right" />
-
+            style						= "@style/AD_Text"
+            android:layout_width		= "170dp"
+            android:gravity				= "left"
+            android:text				= "PID Name"
+		/>
+		<TextView
+            android:id					= "@+id/pidName"
+            style						= "@style/AD_Data"
+            android:layout_width		= "130dp"
+            android:gravity				= "right"
+		/>
     </LinearLayout>
-
-    <LinearLayout
- 	    android:layout_width			= "match_parent"
-	    android:layout_height			= "50dp"
-    	android:gravity					= "center_vertical"
-	    android:orientation				= "horizontal"
-    >
-           
-        <TextView
-            style="@style/AD_Text"
-            android:layout_width="170dp"
-            android:gravity="left"
-            android:text="Depth" />
-
-        <TextView
-            android:id="@+id/depth"
-            style="@style/AD_Data"
-            android:layout_width="130dp"
-            android:gravity="right" />
-
-    </LinearLayout>
-
     <LinearLayout
  	    android:layout_width			= "match_parent"
 	    android:layout_height			= "50dp"
@@ -92,52 +69,37 @@
 	    android:orientation				= "horizontal"
 	>
         <TextView
-            style="@style/AD_Text"
-            android:layout_width="170dp"
-            android:gravity="left"
-            android:text="Sample Increment" />
+            style						= "@style/AD_Text"
+            android:layout_width		= "170dp"
+            android:gravity				= "left"
+            android:text				= "Depth"
+		/>
 
         <TextView
-            android:id="@+id/sampleIncrement"
-            style="@style/AD_Data"
-            android:layout_width="132dp"
-            android:gravity="right" />
-
+            android:id					= "@+id/depth"
+            style						= "@style/AD_Data"
+            android:layout_width		= "130dp"
+            android:gravity				= "right"
+		/>
     </LinearLayout>
-
-	<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-     >
-        <Button
-            android:id="@+id/buttonDelete"
-            style="@style/AD_ImageButton"
-            android:layout_width="80dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="left"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/button_delete"
-            android:gravity="center"
-            android:minHeight="40dp"
-            android:minWidth="0dp"
-            android:text="Delete"
-            android:width="20dp" />
-
-        <Button
-            android:id="@+id/buttonOk"
-            style="@style/AD_ImageButton"
-            android:layout_width="80dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/button_ok"
-            android:gravity="center"
-            android:text="Ok" />
-
-    </RelativeLayout>
-    
-    
-    
+    <LinearLayout
+ 	    android:layout_width			= "match_parent"
+	    android:layout_height			= "50dp"
+    	android:gravity					= "center_vertical"
+	    android:orientation				= "horizontal"
+	>
+        <TextView
+            style						= "@style/AD_Text"
+            android:layout_width		= "170dp"
+            android:gravity				= "left"
+            android:text				= "Sample Increment"
+		/>
+        <TextView
+            android:id					= "@+id/sampleIncrement"
+            style						= "@style/AD_Data"
+            android:layout_width		= "132dp"
+            android:gravity				= "right"
+		/>
+    </LinearLayout>
+	<include layout	= "@layout/aa_include_item_buttons_ok_delete" />
 </LinearLayout>

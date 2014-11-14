@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout 
-    xmlns:android				="http://schemas.android.com/apk/res/android"
-    android:id					="@+id/row"
-    android:layout_width		="match_parent"
-    android:layout_height		="wrap_content"
-    android:background			="@color/background"
-    android:gravity				="center_vertical"
-    android:orientation			="vertical" >
-
-	<TableRow 		style	="@style/AD_Row" >
-         <TextView  style	="@style/AD_Text"       android:text	="X"		android:id	="@+id/name"	 	/>
-         <TextView	style	="@style/AD_Data"		android:text	="X" 		android:gravity="right"								/>
-	</TableRow>
-	<TableRow 		style	="@style/AD_Row" >
-         <TextView  style	="@style/AD_Text"		android:text	="X" 										/>
-         <TextView	style	="@style/AD_Data"		android:text	="X"		android:id	="@+id/address"		/>
+    xmlns:android				= "http://schemas.android.com/apk/res/android"
+    android:id					= "@+id/row"
+    android:layout_width		= "match_parent"
+    android:layout_height		= "wrap_content"
+    android:background			= "@color/background"
+    android:gravity				= "center_vertical"
+    android:orientation			= "vertical" >
+	<TableRow		style		= "@style/AD_Row" >
+		<TextView	              
+			style				= "@style/AD_Text"       
+			android:id			= "@+id/name"	 	
+		/>                        
+		<TextView	              
+			style				= "@style/AD_Data"		
+			android:text		= "X" 		
+			android:gravity		= "right"			
+		/>                        
+	</TableRow>	                  
+	<TableRow		style		= "@style/AD_Row" >
+		<TextView	              
+			style				= "@style/AD_Text"		
+			android:text		= "X"
+		/>                        
+		<TextView	              
+			style				= "@style/AD_Data"		
+			android:id			= "@+id/address"		
+		/>
 	</TableRow>
 </LinearLayout>

@@ -1,32 +1,33 @@
-<?xml version			= "1.0" encoding			= "utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:baselineAligned="false"
-    android:orientation="horizontal"
-    android:textColor="@color/Yellow" >
-
+<?xml version			= "1.0" encoding	= "utf-8"?>
+<LinearLayout 
+	xmlns:android							= "http://schemas.android.com/apk/res/android"
+    android:id								= "@+id/activity_container"
+    android:layout_width					= "match_parent"
+    android:layout_height					= "match_parent"
+    android:background						= "@color/background"
+    android:baselineAligned					= "false"
+    android:orientation						= "horizontal"
+    android:textColor						= "@color/Yellow"
+>                           				
+    <LinearLayout           				
+        android:id							= "@+id/menu_container"
+        android:layout_width				= "wrap_content"
+        android:layout_height				= "match_parent"
+        android:background					= "@color/background"
+        android:baselineAligned				= "false"
+        android:orientation					= "vertical"
+        android:paddingTop					= "0dp"
+        android:text						= "roomForButtons"
+	>                           			
+    </LinearLayout>             			
     <LinearLayout
-        android:id="@+id/menu_container"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="@color/background"
-        android:baselineAligned="false"
-        android:orientation="vertical"
-        android:paddingTop="0dp"
-        android:text="roomForButtons" >
+        android:id							= "@+id/panel_container"
+        android:layout_width				= "match_parent"
+        android:layout_height				= "match_parent"
+        android:background					= "@color/background"
+        android:baselineAligned				= "false"
+        android:orientation					= "vertical"
+        android:text						= "roomForButtons"
+	>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/panel_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"
-        android:baselineAligned="false"
-        android:orientation="vertical"
-        android:text="roomForButtons" >
-    </LinearLayout>
-
 </LinearLayout>

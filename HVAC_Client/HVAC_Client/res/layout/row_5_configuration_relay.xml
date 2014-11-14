@@ -1,24 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/row"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="vertical" >
+<?xml version	= "1.0" encoding	= "utf-8"?>
+<LinearLayout xmlns:android			= "http://schemas.android.com/apk/res/android"
+    android:id						= "@+id/row"
+    android:layout_width			= "match_parent"
+    android:layout_height			= "wrap_content"
+    android:gravity					= "center_vertical"
+    android:orientation				= "vertical" >
 
-    <TableLayout style="@style/AD_Table" >
-
-        <TableRow style="@style/AD_Row" >
-
+    <TableLayout style				= "@style/AD_Table" >
+        <TableRow style				= "@style/AD_Row" >
             <TextView
-                android:id="@+id/name"
-                style="@style/AD_Text" />
-
-
+                android:id			= "@+id/name"
+                style				= "@style/AD_Text" 
+			/>
             <TextView
-                android:id="@+id/relayNumber"
-                style="@style/AD_Data" />
+                android:id			= "@+id/relayNumber"
+                style				= "@style/AD_Data" 
+			/>
         </TableRow>
     </TableLayout>
-
 </LinearLayout>

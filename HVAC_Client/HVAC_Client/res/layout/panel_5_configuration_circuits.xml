@@ -1,30 +1,27 @@
-<?xml version		= "1.0" encoding		= "utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:baselineAligned="false"
-    android:orientation="vertical" >
+<?xml version		= "1.0" encoding			= "utf-8"?>
+<LinearLayout xmlns:android						= "http://schemas.android.com/apk/res/android"
+    android:layout_width						= "match_parent"
+    android:layout_height						= "match_parent"
+    android:background							= "@color/background"
+    android:baselineAligned						= "false"
+    android:orientation							= "vertical" >
 
-    <include layout="@layout/panel_0_title_section" />
+    <include layout								= "@layout/panel_0_title_section" />
     
-    <TableLayout style							="@style/AD_Table" >
-        <TableRow style							="@style/AD_Row" >
+    <TableLayout style							= "@style/AD_Table" >
+        <TableRow style							= "@style/AD_Row" >
             <TextView
-                style							="@style/AD_Text"
-                android:text					="Name" />
+                style							= "@style/AD_Text"
+                android:text					= "Name" />
             <TextView
-                style							="@style/AD_Data"
-                android:text					="Gradient" />
+                style							= "@style/AD_Data"
+                android:text					= "Gradient" />
             <TextView
-                style							="@style/AD_Data"
-                android:text					="Mixer" />
+                style							= "@style/AD_Data"
+                android:text					= "Mixer" />
         </TableRow>
     </TableLayout>
     
-    <View style									="@style/AD_ThinLine" />
-    
-    <include layout="@layout/panel_0_list_section" />
- 
-	/>
+    <View style									= "@style/AD_ThinLine" />
+    <include layout								= "@layout/panel_0_list_section" />
 </LinearLayout>

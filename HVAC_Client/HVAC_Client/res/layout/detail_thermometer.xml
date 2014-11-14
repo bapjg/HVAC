@@ -1,26 +1,26 @@
 <?xml version			= "1.0" encoding			= "utf-8"?>
 <LinearLayout 
-	xmlns:android						= "http://schemas.android.com/apk/res/android"
-	android:layout_width				= "match_parent"
-	android:layout_height				= "match_parent"
-	android:orientation					= "vertical"
-	android:baselineAligned				= "false"
-	android:background					= "@color/background"
+	xmlns:android									= "http://schemas.android.com/apk/res/android"
+	android:layout_width							= "match_parent"
+	android:layout_height							= "match_parent"
+	android:orientation								= "vertical"
+	android:baselineAligned							= "false"
+	android:background								= "@color/background"
 >
 	    <TableLayout
-			android:layout_width			= "match_parent"
-			android:layout_height			= "match_parent"
-			android:layout_weight			= "1"
+			android:layout_width					= "match_parent"
+			android:layout_height					= "match_parent"
+			android:layout_weight					= "1"
 		>
-	        <TableRow																					style	= "@style/AD_Row"   >
- 	            <TextView		android:text	= "Name"			android:width="100dp"				style	= "@style/AD_Text"  />
-	            <EditText       android:text	= "xxxx"			android:id	= "@+id/name"			style	= "@style/AD_Data"	android:gravity="left" android:width="400sp"/>
+	        <TableRow																					style	= "@style/AD_Row"  >
+ 	            <TextView		android:text	= "Name"			android:width	= "100dp"				style	= "@style/AD_Text" />
+	            <EditText       android:text	= "xxxx"			android:id	= "@+id/name"			style	= "@style/AD_Data"	android:gravity	= "left" android:width	= "400sp"/>
 			</TableRow>
-	        <TableRow																					style	= "@style/AD_Row"   >
+	        <TableRow																					style	= "@style/AD_Row"  >
 			</TableRow>
-	        <TableRow																					style	= "@style/AD_Row"   >
-	            <TextView		android:text	= "Thermo ID"  		android:width="100dp"    			style	= "@style/AD_Text"  />
-	            <EditText       android:text	= "xxxx"			android:id	= "@+id/address"		style	= "@style/AD_Data"	android:gravity="left" android:width="400sp"/>
+	        <TableRow																					style	= "@style/AD_Row"  >
+	            <TextView		android:text	= "Thermo ID"  		android:width	= "100dp"    			style	= "@style/AD_Text" />
+	            <EditText       android:text	= "xxxx"			android:id	= "@+id/address"		style	= "@style/AD_Data"	android:gravity	= "left" android:width	= "400sp"/>
 			</TableRow>
 		    </TableLayout>
 </LinearLayout>

@@ -1,25 +1,17 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
 <LinearLayout 
-	xmlns:android						= "http://schemas.android.com/apk/res/android"
-	android:layout_width				= "match_parent"
-	android:layout_height				= "match_parent"
-	android:orientation					= "vertical"
-	android:baselineAligned				= "false"
-	android:background					= "@color/background"
-	android:clickable 					= "true"
->
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Today"         		/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Tomorrow"         	/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Beyond"         		/>
-	<Button	style	= "@style/AD_MenuButton" 	android:text	= "Sunrise\nSunset"	/>
-	<LinearLayout 
-		android:layout_width			= "match_parent"
-		android:layout_height			= "match_parent"
-		android:orientation				= "vertical"
-		android:gravity					= "center|bottom"
-		android:background				= "@color/background"
-		android:clickable 				= "true"
-	>
-		<Button	style	= "@style/AD_MenuButton" 	android:text	= "Refresh"      	/>
-	</LinearLayout>	
+	xmlns:android							= "http://schemas.android.com/apk/res/android"
+	android:layout_width					= "match_parent"
+	android:layout_height					= "match_parent"
+	android:orientation						= "vertical"
+	android:baselineAligned					= "false"
+	android:background						= "@color/background"
+	android:clickable 						= "true"
+>	
+	<Button	style							= "@style/AD_MenuButton" 	android:text	= "Today"         		/>
+	<Button	style							= "@style/AD_MenuButton" 	android:text	= "Tomorrow"         	/>
+	<Button	style							= "@style/AD_MenuButton" 	android:text	= "Beyond"         		/>
+	<Button	style							= "@style/AD_MenuButton" 	android:text	= "Sunrise\nSunset"		/>
+	
+	<include layout							= "@layout/aa_include_menu_buttons_update_refresh" 					/>
 </LinearLayout>

@@ -1,37 +1,38 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:baselineAligned="false"
-    android:orientation="vertical" >
+<LinearLayout 
+	xmlns:android							= "http://schemas.android.com/apk/res/android"
+    android:layout_width					= "match_parent"
+    android:layout_height					= "match_parent"
+    android:background						= "@color/background"
+    android:baselineAligned					= "false"
+    android:orientation						= "vertical" >
 
-   <include layout="@layout/panel_0_title_section" />
+   <include layout							= "@layout/panel_0_title_section" />
 
-    <TableLayout style="@style/AD_Table" >
+    <TableLayout 																		style	= "@style/AD_Table" >
 
-        <TableRow 																		style="@style/AD_Row" 			>
-            <TextView	android:text="Burner"                 							style="@style/AD_Text"		 	/>
-            <Switch 							android:id="@+id/burner"				style="@style/AD_Switch" 		/>
+        <TableRow 																		style	= "@style/AD_Row" 			>
+            <TextView	android:text	= "Burner"                 						style	= "@style/AD_Text"		 	/>
+            <Switch 								android:id	= "@+id/burner"			style	= "@style/AD_Switch" 		/>
         </TableRow>
         
-        <TableRow 																		style="@style/AD_Row" 			>
-            <TextView	android:text=""                 								style="@style/AD_Text"		 	/>
+        <TableRow 																		style	= "@style/AD_Row" 			>
+            <TextView	android:text	= ""                 							style	= "@style/AD_Text"		 	/>
         </TableRow>
         
-        <TableRow 																		style="@style/AD_Row" 			>
-            <TextView	android:text="Hot Water"   										style="@style/AD_Text"  		/>
-  			<Switch								android:id="@+id/hotwater"				style="@style/AD_Switch"		/>
+        <TableRow 																		style	= "@style/AD_Row" 			>
+            <TextView	android:text	= "Hot Water"   								style	= "@style/AD_Text"  		/>
+  			<Switch									android:id	= "@+id/hotwater"		style	= "@style/AD_Switch"		/>
         </TableRow>
         
-        <TableRow 																		style="@style/AD_Row" 			>
-            <TextView	android:text="Floor"     										style="@style/AD_Text"  		/>
- 			<Switch								android:id="@+id/floor"					style="@style/AD_Switch"		/> 
+        <TableRow 																		style	= "@style/AD_Row" 			>
+            <TextView	android:text	= "Floor"     									style	= "@style/AD_Text"  		/>
+ 			<Switch									android:id	= "@+id/floor"			style	= "@style/AD_Switch"		/> 
  		</TableRow>
         
-        <TableRow 																		style="@style/AD_Row" 			>
-            <TextView	android:text="Radiator"    										style="@style/AD_Text"  		/>
- 			<Switch								android:id	= "@+id/radiator"			style="@style/AD_Switch"		/>
+        <TableRow 																		style	= "@style/AD_Row" 			>
+            <TextView	android:text	= "Radiator"    								style	= "@style/AD_Text"  		/>
+ 			<Switch									android:id	= "@+id/radiator"		style	= "@style/AD_Switch"		/>
         </TableRow>
         
     </TableLayout>

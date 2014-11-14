@@ -1,0 +1,39 @@
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<RelativeLayout 
+	xmlns:android							= "http://schemas.android.com/apk/res/android"
+    android:layout_width					= "match_parent"
+    android:layout_height					= "match_parent"
+    android:background						= "@color/background"
+    android:baselineAligned					= "true"
+    android:orientation						= "vertical"
+>
+   <Button
+	   android:id							= "@+id/buttonDelete"
+	   style								= "@style/AD_ImageButton"
+	   android:layout_width					= "80dp"
+	   android:layout_alignParentLeft		= "true"
+	   android:layout_alignParentBottom		= "true"
+	   android:layout_gravity				= "left"
+	   android:background					= "@android:color/transparent"
+	   android:drawableTop					= "@drawable/button_delete"
+	   android:gravity						= "center"
+	   android:minHeight					= "40dp"
+	   android:minWidth						= "0dp"
+	   android:text							= "Delete"
+	   android:width						= "20dp"
+	/>
+   <Button
+	   android:id							= "@+id/buttonOk"
+	   style								= "@style/AD_ImageButton"
+	   android:layout_width					= "80dp"
+	   android:layout_alignParentRight		= "true"
+	   android:layout_alignParentBottom		= "true"
+	   android:background					= "@android:color/transparent"
+	   android:drawableTop					= "@drawable/button_ok"
+	   android:gravity						= "center"
+	   android:minHeight					= "40dp"
+	   android:minWidth						= "0dp"
+	   android:text							= "Ok"
+	   android:width						= "20dp"
+	/>
+</RelativeLayout>

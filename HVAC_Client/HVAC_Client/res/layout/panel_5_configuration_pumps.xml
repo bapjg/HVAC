@@ -1,44 +1,31 @@
-<?xml version		= "1.0" encoding		= "utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:baselineAligned="false"
-    android:orientation="vertical" >
+<?xml version		= "1.0" encoding			= "utf-8"?>
+<LinearLayout 
+    xmlns:android								= "http://schemas.android.com/apk/res/android"
+    android:layout_width						= "match_parent"
+    android:layout_height						= "match_parent"
+    android:background							= "@color/background"
+    android:baselineAligned						= "false"
+    android:orientation							= "vertical" 
+>
 
-    <include layout="@layout/panel_0_title_section" />
+    <include layout	= "@layout/panel_0_title_section" />
     
-    <TableLayout style							="@style/AD_Table" >
-        <TableRow style							="@style/AD_Row" >
-            <TextView
-                style							="@style/AD_Text"
-                android:text					="Name" />
-            <TextView
-                style							="@style/AD_Data"
-                android:text					="Relay" />
+    <TableLayout style							= "@style/AD_Table" >
+        <TableRow style							= "@style/AD_Row" >
+            <TetView
+                style							= "@style/AD_Text"
+                android:text					= "Name"
+            />
+            <TetView
+                style							= "@style/AD_Data"
+                android:text					= "Relay"
+            />
         </TableRow>
     </TableLayout>
 
-    <View style									="@style/AD_ThinLine" />
+    <View style									= "@style/AD_ThinLine" />
   
-    <include layout="@layout/panel_0_list_section" />
-		
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-     >
+    <include layout								= "@layout/panel_0_list_section" />
+    <include layout								= "@layout/aa_include_panel_buttons_addnew_delete" />
 
-        <Button
-            android:id="@+id/buttonAdd"
-            style="@style/AD_ImageButton"
-            android:layout_width="100dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/button_add"
-            android:text="Add New" />
-
-    </RelativeLayout>
-		
 </LinearLayout>

@@ -15,16 +15,5 @@
 	<Button	style						= "@style/AD_MenuButton" 	android:text	= "Away List"   		/>
 	<Button	style						= "@style/AD_MenuButton" 	android:text	= "Background\nTasks"   />
 
-		<LinearLayout
-		    android:id="@+id/bottomFrame"
-		    android:layout_width="match_parent"
-		    android:layout_height="match_parent"
-		    android:background="@color/background"
-		    android:clickable="true"
-		    android:gravity="center|bottom"
-		    android:orientation="vertical" >
-
-		<Button	style					= "@style/AD_MenuButton" 	android:text	= "Refresh"      		/>
-		<Button	style					= "@style/AD_MenuButton" 	android:text	= "Update"       		/>
-	</LinearLayout>	
+	<include layout						= "@layout/aa_include_menu_buttons_update_refresh" 					/>
 </LinearLayout>

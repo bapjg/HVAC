@@ -12,10 +12,11 @@
 		    <TextView
 		        android:id				= "@+id/name"
 		        style					= "@style/AD_Text"
-		    	android:layout_width	= "140dp"/>
+		    	android:layout_width	= "wrap_content"
+			/>
 		    <CheckBox 
 		        android:id				= "@+id/gradient"
-		        android:layout_width	= "100dp"
+		        android:layout_width	= "wrap_content"
 		        android:layout_height	= "wrap_content"
 		        android:clickable		= "false"
 		        android:focusable		= "false"
@@ -23,7 +24,7 @@
 		    />
 		    <CheckBox 
 		        android:id				= "@+id/mixer"
-		        android:layout_width	= "100dp"
+		        android:layout_width	= "wrap_content"
 		        android:layout_height	= "wrap_content"
 		        android:clickable		= "false"
 		        android:focusable		= "false"
