@@ -6,8 +6,10 @@
     android:layout_height		= "wrap_content"
     android:background			= "@color/background"
     android:gravity				= "center_vertical"
-    android:orientation			= "vertical" >
-	<TableRow		style		= "@style/AD_Row" >
+    android:orientation			= "vertical" 
+>
+	<TableRow		
+	    style					= "@style/AD_Row" >
 		<TextView	              
 			style				= "@style/AD_Text"       
 			android:id			= "@+id/name"	 	
@@ -18,7 +20,8 @@
 			android:gravity		= "right"			
 		/>                        
 	</TableRow>	                  
-	<TableRow		style		= "@style/AD_Row" >
+	<TableRow		
+	    style					= "@style/AD_Row" >
 		<TextView	              
 			style				= "@style/AD_Text"		
 			android:text		= "X"
