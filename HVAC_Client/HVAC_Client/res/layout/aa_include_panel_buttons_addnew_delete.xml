@@ -37,5 +37,4 @@
 		android:text						= "Add New"
 		android:width						= "20dp"
 	/>
-
 </RelativeLayout>

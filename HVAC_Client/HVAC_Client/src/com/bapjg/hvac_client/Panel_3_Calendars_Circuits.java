@@ -28,7 +28,7 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 	private View												adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
 
-//	Calendar times are all wrong
+//	TODO Calendar times are all wrong
 	
     public Panel_3_Calendars_Circuits(String circuitName)
     {
@@ -59,8 +59,6 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 	{
 		((TextView) panelView.findViewById(R.id.title)).setText		("Calendars");
 		((TextView) panelView.findViewById(R.id.subTitle)).setText	(this.circuitName);
-//		TextView 												subTitle						= (TextView) panelView.findViewById(R.id.subTitle);
-//        subTitle.setText(this.circuitName);	
 	}
 	public void displayContents()
 	{

@@ -44,7 +44,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.panelView																		= inflater.inflate(R.layout.panel_1_temperatures, container, false);
-    	
+    	displayHeader();
     	TCP_Send(new Ctrl_Temperatures().new Request());
         return panelView;
     }
@@ -52,7 +52,6 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	{             
 		if 	(result instanceof Ctrl_Temperatures.Data)
 		{
-			displayHeader();
 			displayContents		((Ctrl_Temperatures.Data) result);		// TODO BERK BERK BERK
 	        setListens();
 		}

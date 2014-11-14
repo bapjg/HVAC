@@ -34,6 +34,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.panelView																		= inflater.inflate(R.layout.panel_2_immediate, container, false);
+    	displayHeader();
 									
     	Ctrl_Immediate.Request									taskListRequest				= new Ctrl_Immediate().new Request();
     	taskListRequest.circuitName															= this.circuitName;
@@ -52,7 +53,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			messageExecute.stopOnObjective 													= true;
 			messageExecute.tempObjective 													= new Cmn_Temperature(messageReceived.tempObjective.milliDegrees);
 		
-			displayHeader();
 			displayContents();
 			setListens();
 		}

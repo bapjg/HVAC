@@ -7,7 +7,7 @@
     android:baselineAligned					= "true"
     android:orientation						= "vertical"
 >
-   <Button
+	<Button
 	   android:id							= "@+id/buttonDelete"
 	   style								= "@style/AD_ImageButton"
 	   android:layout_width					= "80dp"
@@ -22,7 +22,7 @@
 	   android:text							= "Delete"
 	   android:width						= "20dp"
 	/>
-   <Button
+	<Button
 	   android:id							= "@+id/buttonOk"
 	   style								= "@style/AD_ImageButton"
 	   android:layout_width					= "80dp"
