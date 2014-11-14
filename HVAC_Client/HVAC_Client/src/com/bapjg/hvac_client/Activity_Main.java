@@ -10,6 +10,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -74,6 +75,10 @@ public class Activity_Main 										extends 					Activity
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
         actionbar.addTab(tabReset);
+        
+        Global.textAdressSpace 																= (TextView) this.findViewById(R.id.address_space);
+        Global.textConnectionTCP 															= (TextView) this.findViewById(R.id.connection_tcp);
+        Global.textConnectionHTTP 															= (TextView) this.findViewById(R.id.connection_http);
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 

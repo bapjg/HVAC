@@ -13,6 +13,7 @@ import java.util.TimeZone;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 import HVAC_Common.*;
 
@@ -43,6 +44,11 @@ public class Global
 	public static	Ctrl_Configuration.Data						eRegConfiguration;
 	public static	Ctrl_Calendars.Data							eRegCalendars;
 	public static	Ctrl_WeatherData							weatherForecast;
+	
+	public static 	TextView 									textAdressSpace;
+	public static 	TextView 									textConnectionTCP;
+	public static 	TextView 									textConnectionHTTP;
+
 
 	public Global() 
 	{
