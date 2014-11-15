@@ -90,6 +90,7 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	}
 	public void processFinishHTTP(Ctrl__Abstract messageReturned)
 	{
+		super.processFinishHTTP(messageReturned);
 		if (messageReturned instanceof Ctrl_Json.Data)
 		{
 			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
@@ -117,6 +118,7 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	}
 	public void processFinishTCP(Ctrl__Abstract messageReturn)
 	{
+		super.processFinishTCP(messageReturn);
 		if (messageReturn instanceof Ctrl_Actions_Stop.Ack)
 		{
 			Global.toaster("Controler accepted the request", false);

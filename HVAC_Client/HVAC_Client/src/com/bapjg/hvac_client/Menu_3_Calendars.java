@@ -89,9 +89,11 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	}
 	public void processFinishHTTP(Ctrl__Abstract messageReturned)
 	{
+		super.processFinishHTTP(messageReturned);
+		
 		if (messageReturned instanceof Ctrl_Json.Data)
 		{
-			Global.setStatusHTTP("Ok");
+//			Global.setStatusHTTP("Ok");
 			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
 			Global.eRegCalendars															= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
 			Global.toaster("Configuration data received", false);
@@ -99,32 +101,31 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 		}
 		else if (messageReturned instanceof Ctrl__Abstract.Ack)
 		{
-			Global.setStatusHTTP("Ok");
+//			Global.setStatusHTTP("Ok");
 			Global.toaster("Server updated", false);
 			Dialog_Yes_No											messageYesNo			= new Dialog_Yes_No("Update controller with new calendar now ?", this, 1);	// id = 1
 			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
 		}
 		else 
 		{
-			Global.setStatusHTTP("Bad Response");
+//			Global.setStatusHTTP("Bad Response");
 			Global.toaster("Unexpected response : " + messageReturned.getClass().toString(), false);
 		}
 	}
 	public void processFinishTCP(Ctrl__Abstract messageReturn)
 	{
+		super.processFinishTCP(messageReturn);
+		
 		if (messageReturn instanceof Ctrl_Actions_Stop.Ack)
 		{
-			Global.setStatusTCP("Ok");
 			Global.toaster("Controler accepted the request", false);
 		}
 		else if (messageReturn instanceof Ctrl_Actions_Stop.Nack)
 		{
-			Global.setStatusTCP("Nack");
 			Global.toaster("Controler refused the request", true);
 		}
 		else
 		{
-			Global.setStatusTCP("Bad Data");
 			Global.toaster("Unexpected response : " + messageReturn.getClass().toString(), false);
 		}
 	}

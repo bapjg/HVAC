@@ -49,19 +49,6 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
         
         return panelView;
       }
-//	public void processFinishHTTP(Ctrl_Abstract result) 
-//	{  
-//		if (result instanceof Ctrl_Calendars.Data)
-//		{
-//			Global.eRegCalendars				 									= (Ctrl_Calendars.Data) result;
-//			displayHeader();
-//			displayContents();
-//		}
-//		else
-//		{
-//			Global.toaster("Please refresh", true);
-//		}
-//	}
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public void displayHeader()
 	{

@@ -12,16 +12,23 @@
         <TableRow style							= "@style/AD_Row" >
             <TextView
                 style							= "@style/AD_Text"
-                android:text					= "Name" />
+                android:layout_weight			= "1"
+                android:text					= "Name" 
+            />
             <TextView
                 style							= "@style/AD_Data"
-                android:text					= "Gradient" />
+                android:layout_weight			= "1"
+                android:text					= "Gradient" 
+            />
             <TextView
                 style							= "@style/AD_Data"
-                android:text					= "Mixer" />
+                android:layout_weight			= "1"
+                android:text					= "Mixer"
+            />
         </TableRow>
+    	<include layout							= "@layout/panel_0_list_section" />
     </TableLayout>
     
     <View style									= "@style/AD_ThinLine" />
-    <include layout								= "@layout/panel_0_list_section" />
+
 </LinearLayout>

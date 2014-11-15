@@ -45,6 +45,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     }
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
+		super.processFinishTCP(result);
 		if 		(result instanceof Ctrl_Immediate.Data)
 		{
 			messageReceived																	= (Ctrl_Immediate.Data) result;

@@ -79,6 +79,7 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
+		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Calendars.Data)
 		{
 			Global.eRegConfiguration			 											= (Ctrl_Configuration.Data) result;

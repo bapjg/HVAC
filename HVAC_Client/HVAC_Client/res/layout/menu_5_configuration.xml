@@ -1,33 +1,34 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
 <LinearLayout 
-	xmlns:android						= "http://schemas.android.com/apk/res/android"
-	android:layout_width				= "match_parent"
-	android:layout_height				= "match_parent"
-	android:orientation					= "vertical"
-	android:baselineAligned				= "false"
-	android:background					= "@color/background"
-	android:clickable 					= "true"
+	xmlns:android							= "http://schemas.android.com/apk/res/android"
+	android:layout_width					= "match_parent"
+	android:layout_height					= "match_parent"
+	android:orientation						= "vertical"
+	android:baselineAligned					= "false"
+	android:background						= "@color/background"
+	android:clickable 						= "true"
 >
     <ScrollView
-		android:layout_width			= "match_parent"
-		android:layout_height			= "wrap_content"
+		android:layout_width				= "match_parent"
+		android:layout_height				= "wrap_content"
 	>
 		<LinearLayout
-		    android:layout_width		= "match_parent"
-			android:layout_height		= "wrap_content"
-			android:orientation			= "vertical"
-			android:id					= "@+id/buttons_container">
+		    android:layout_width			= "match_parent"
+			android:layout_height			= "match_parent"
+			android:orientation				= "vertical"
+			android:id						= "@+id/buttons_container"
 		>
-			<Button	style				= "@style/AD_MenuButton" 	android:text	= "Thermometers"      	/>
-			<Button	style				= "@style/AD_MenuButton" 	android:text	= "Relays"         		/>
-			<Button	style				= "@style/AD_MenuButton" 	android:text	= "Pumps"       	  	/>
-			<Button	style				= "@style/AD_MenuButton" 	android:text	= "Circuits"         	/>
-			<Button	style				= "@style/AD_MenuButton" 	android:text	= "Burner"         		/>
-			<Button style				= "@style/AD_MenuButton" 	android:text	= "Boiler" 				/>
-			<Button	style				= "@style/AD_MenuButton" 	android:text	= "PIDs"      	        />
-			<Button	style				= "@style/AD_MenuButton" 	android:text	= "Gradients"      		/>
-			<Button style				= "@style/AD_MenuButton"	android:text	= "xxx"					/>
+			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Thermometers"      	/>
+			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Relays"         		/>
+			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Pumps"       	  	/>
+			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Circuits"         	/>
+			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Burner"         		/>
+			<Button style					= "@style/AD_MenuButton" 	android:text	= "Boiler" 				/>
+			<Button	style					= "@style/AD_MenuButton" 	android:text	= "PIDs"      	        />
+			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Gradients"      		/>
+			<Button style					= "@style/AD_MenuButton"	android:text	= "xxx"					/>
+			<Button style					= "@style/AD_MenuButton"	android:text	= "Update"				/>
+			<Button style					= "@style/AD_MenuButton"	android:text	= "Refresh"				/>
 		</LinearLayout>
 	</ScrollView>
-	<include layout						= "@layout/aa_include_menu_buttons_update_refresh" 					/>
 </LinearLayout>

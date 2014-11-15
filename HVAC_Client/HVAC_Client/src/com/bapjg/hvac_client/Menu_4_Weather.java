@@ -50,6 +50,7 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
 	@Override
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
+		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Weather.Data)
 		{
 			Ctrl_Weather.Data									resultWeather				= (Ctrl_Weather.Data) result;

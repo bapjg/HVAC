@@ -73,13 +73,45 @@ public class Global
 		catch(Exception e1)		{}
     	return false;
     }
+    public static void setAddressSpace()
+    {
+		((TextView) activity.findViewById(R.id.address_space)).setText((Global.isLocalIpAddress() ? "Local" : "Remote"));
+    }
     public static void setStatusTCP(String message)
     {
-		((TextView) activity.findViewById(R.id.connection_tcp)).setText(message);
+    	((TextView) activity.findViewById(R.id.connection_tcp)).setText(message);
+    }
+    public static void setStatusTCP(Ctrl__Abstract result)
+    {
+		String message;
+		if 		(result instanceof Ctrl__Abstract.Ack)			message = "Ok";
+		else if (result instanceof Ctrl__Abstract.Nack)			message = "Nack";
+		else if (result instanceof Ctrl__Abstract.NoConnection)	message = "No Connection";
+		else if (result instanceof Ctrl_Actions_Relays.Data)	message = "Ok";
+		else if (result instanceof Ctrl_Actions_Test_Mail.Ack)	message = "Ok";
+		else if (result instanceof Ctrl_Actions_Stop.Ack)		message = "Ok";
+		else if (result instanceof Ctrl_Temperatures.Data)		message = "Ok";
+		else if (result instanceof Ctrl_Immediate.Data)			message = "Ok";
+		else													message = "Bad Data";		
+    	
+		setStatusTCP(message);
     }
     public static void setStatusHTTP(String message)
     {
-    	((TextView) activity.findViewById(R.id.connection_http)).setText(message);
+		((TextView) activity.findViewById(R.id.connection_http)).setText(message);
+    }
+    public static void setStatusHTTP(Ctrl__Abstract result)
+    {
+		String message;
+		if 		(result instanceof Ctrl_Calendars.Data)			message = "Ok";
+		else if (result instanceof Ctrl_Configuration.Data)		message = "Ok";
+		else if (result instanceof Ctrl__Abstract.Ack)			message = "Ok";
+		else if (result instanceof Ctrl__Abstract.Nack)			message = "Nack";
+		else if (result instanceof Ctrl__Abstract.NoConnection)	message = "No Connection";
+		else if (result instanceof Ctrl_Json.Data)				message = "Ok";
+		else													message = "Bad Data";
+
+		setStatusHTTP(message);
     }
 	public static String displayTemperature(Integer temperature)
 	{

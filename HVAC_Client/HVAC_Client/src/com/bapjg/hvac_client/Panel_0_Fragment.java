@@ -36,9 +36,6 @@ public class Panel_0_Fragment 									extends 					Fragment
 																							HTTP_Response,
 																							Dialog_Response
 {
-//	private 	int												menuLayout;
-    public 		Activity										activity;
-    
     public Panel_0_Fragment()
     {
     }
@@ -59,9 +56,17 @@ public class Panel_0_Fragment 									extends 					Fragment
 
 	@Override	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 			{}
 	@Override	public void onClick(View v) 																{}
-	@Override	public void processFinishTCP(Ctrl__Abstract result) 										{}
-	@Override	public void processFinishHTTP(Ctrl__Abstract result) 										{}
 	@Override	public void onDialogReturn 				()													{}
 	@Override	public void onDialogReturnWithId(int id)													{}
+	public void processFinishHTTP(Ctrl__Abstract result) 										
+	{
+		Global.setAddressSpace();
+		Global.setStatusHTTP(result);
+	}
+	public void processFinishTCP(Ctrl__Abstract result) 										
+	{
+		Global.setAddressSpace();
+		Global.setStatusTCP(result);
+	}
 }
 

@@ -91,6 +91,7 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
+		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Calendars.Data)
 		{
 //			Global.eRegConfiguration			 											= (Ctrl_Configuration.Data) result;

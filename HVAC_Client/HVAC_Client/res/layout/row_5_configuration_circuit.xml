@@ -7,7 +7,6 @@
     android:gravity						= "center_vertical"
     android:orientation					= "vertical"
 >
-    <TableLayout style					="@style/AD_Table" >
         <TableRow style					="@style/AD_Row" >
 		    <TextView
 		        android:id				= "@+id/name"
@@ -24,12 +23,11 @@
 		    />
 		    <CheckBox 
 		        android:id				= "@+id/mixer"
-		        android:layout_width	= "wrap_content"
+ 		        android:layout_width	= "wrap_content"
 		        android:layout_height	= "wrap_content"
 		        android:clickable		= "false"
 		        android:focusable		= "false"
 		        android:text			= ""
 		    />
 		</TableRow>
-	</TableLayout>	
 </LinearLayout>

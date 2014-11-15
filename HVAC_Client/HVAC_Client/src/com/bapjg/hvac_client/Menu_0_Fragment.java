@@ -1,7 +1,11 @@
 package com.bapjg.hvac_client;
 
+import HVAC_Common.Ctrl_Actions_Relays;
+import HVAC_Common.Ctrl_Actions_Stop;
+import HVAC_Common.Ctrl_Actions_Test_Mail;
 import HVAC_Common.Ctrl_Calendars;
 import HVAC_Common.Ctrl_Configuration;
+import HVAC_Common.Ctrl_Temperatures;
 import HVAC_Common.Ctrl_Weather;
 import HVAC_Common.Ctrl_WeatherData;
 import HVAC_Common.Ctrl__Abstract;
@@ -48,16 +52,16 @@ public class Menu_0_Fragment 									extends 					Fragment
     	Button 													myButton 					= (Button) myView;
 		ViewGroup 												viewParent					= (ViewGroup) myView.getParent();									// Set all textColours to white
 		
-		if (viewParent.getId() == R.id.bottomFrame)
-		{
+//		if (viewParent.getId() == R.id.bottomFrame)
+//		{
 //			TODO Need to splash black screen, identify yellowbutton, and when data returns call its onClick, 
-		}
-		else
-		{
+//		}
+//		else
+//		{
 			allButtonsSetup(viewParent);
 			//		allButtonsSetup(container);
 			myButton.setTextColor(Color.YELLOW);
-		}
+//		}
 	}
 	public void allButtonsSetup(ViewGroup thisView)
 	{
@@ -106,12 +110,13 @@ public class Menu_0_Fragment 									extends 					Fragment
 	}
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
-		Global.setStatusHTTP("Ok");
-		if 		(result instanceof Ctrl_Calendars.Data)			Global.eRegCalendars		= (Ctrl_Calendars.Data) result;
-		else if (result instanceof Ctrl_Configuration.Data)		Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
-		else if (result instanceof Ctrl__Abstract.Ack)			/* All is Ok */ ;
-		else													Global.setStatusHTTP("Bad Data");
+		Global.setAddressSpace();
+		Global.setStatusHTTP(result);
 	}
-	public void processFinishTCP(Ctrl__Abstract result) 	{  }							// Overriddent in subclass
+	public void processFinishTCP(Ctrl__Abstract result) 						// Overridden in subclass
+	{  
+		Global.setAddressSpace();
+		Global.setStatusTCP(result);
+	}							
 }
 

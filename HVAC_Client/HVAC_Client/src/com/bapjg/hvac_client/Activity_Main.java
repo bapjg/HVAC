@@ -111,16 +111,15 @@ public class Activity_Main 										extends 					Activity
 	}		
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
-		((TextView) this.findViewById(R.id.address_space)).setText((Global.isLocalIpAddress() ? "Local" : "Remote"));
+		Global.setAddressSpace();
+		Global.setStatusHTTP(result);
 		
 		if 		(result instanceof Ctrl_Calendars.Data) 		
 		{	
-	        Global.setStatusHTTP("Ok");
 			Global.eRegCalendars 		= (Ctrl_Calendars.Data) result;			
 		}
 		else if (result instanceof Ctrl_Configuration.Data)		
 		{	
-	        Global.setStatusHTTP("Ok");
 			Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;		
 		}
 		else if (result instanceof Ctrl_Json.Data)				
@@ -130,38 +129,29 @@ public class Activity_Main 										extends 					Activity
 			{
 				String												JsonString				= ((Ctrl_Json.Data) result).json;
 				Global.eRegCalendars														= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
-				Global.setStatusHTTP("Ok");
 			}
 			else if (messageReceived.type == Ctrl_Json.TYPE_Configuration)
 			{
 				String												JsonString				= ((Ctrl_Json.Data) result).json;
 				Global.eRegConfiguration													= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
-				Global.setStatusHTTP("Ok");
 			}
 			else
 			{
-				Global.setStatusHTTP("Bad JSon Data");
 			}
 		}
-		else if (result instanceof Ctrl_Configuration.NoConnection)			Global.setStatusHTTP("No Connection");
-		else if (result instanceof Ctrl_Configuration.NoData)				Global.setStatusHTTP("No Data");			
-		else if (result instanceof Ctrl_Configuration.TimeOut)				Global.setStatusHTTP("Time Out");
-		else if (result instanceof Ctrl_Configuration.Nack)					Global.setStatusHTTP("Nack");
-		else																Global.setStatusHTTP("Other Pb");
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
-		((TextView) this.findViewById(R.id.address_space)).setText((Global.isLocalIpAddress() ? "Local" : "Remote"));
+		Global.setAddressSpace();
+		Global.setStatusTCP(result);
 		
 		if (result instanceof Ctrl_Weather.Data)
 		{
 			Ctrl_Weather.Data									resultWeather				= (Ctrl_Weather.Data) result;
 			Global.weatherForecast				 											= (Ctrl_WeatherData) resultWeather.weatherData;
-			((TextView) this.findViewById(R.id.connection_tcp)).setText("Connected");
 		}
 		else
 		{
-			((TextView) this.findViewById(R.id.connection_tcp)).setText("Bad Data");
 		}
 	}
 }

@@ -12,8 +12,7 @@ import android.view.Menu;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Listener_Tabs 										implements 					ActionBar.TabListener
 {
-	public Fragment 	menu;
-//	public Fragment 	panel;
+	public Fragment 											menu;
 	
 	public Listener_Tabs(Fragment menu) 
 	{
@@ -27,12 +26,10 @@ public class Listener_Tabs 										implements 					ActionBar.TabListener
 	public void onTabSelected(Tab tab, FragmentTransaction ft) 
 	{
 		ft.replace(R.id.menu_container, menu);
-//		ft.addToBackStack(null);
 	}
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) 
 	{
-		// params for ft.replace : Fragment_Object to be removed
 		ft.remove(menu);
 	}
 }

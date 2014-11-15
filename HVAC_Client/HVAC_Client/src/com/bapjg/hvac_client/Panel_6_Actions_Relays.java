@@ -34,7 +34,7 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.activity																		= getActivity();
+//    	this.activity																		= getActivity();
     	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_relays, container, false);
     	TCP_Send(new Ctrl_Actions_Relays().new Request());
 
@@ -78,6 +78,7 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
     }
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
+		super.processFinishTCP(result);
 		Activity												activity					= getActivity();		
 		
 		if (result instanceof Ctrl_Actions_Relays.Data)		

@@ -50,17 +50,12 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     }
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{             
+		super.processFinishTCP(result);
 		if 	(result instanceof Ctrl_Temperatures.Data)
 		{
-	        Global.setStatusTCP("Ok");
 			displayContents		((Ctrl_Temperatures.Data) result);		// TODO BERK BERK BERK
 	        setListens();
 		}
-		else if (result instanceof Ctrl_Temperatures.NoConnection)			Global.setStatusTCP("No Connection");
-		else if (result instanceof Ctrl_Temperatures.NoData)				Global.setStatusTCP("No Data");
-		else if (result instanceof Ctrl_Temperatures.TimeOut)				Global.setStatusTCP("Time Out");
-		else if (result instanceof Ctrl_Temperatures.Nack)					Global.setStatusTCP("Nack");
-		else																Global.setStatusTCP("Other Pb");
         setListens();
     } 
 	public void displayHeader()

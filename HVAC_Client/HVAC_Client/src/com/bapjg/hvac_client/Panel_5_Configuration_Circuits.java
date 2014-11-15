@@ -77,6 +77,7 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 	}
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
+		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Configuration.Data)
 		{
 			Global.eRegConfiguration			 											= (Ctrl_Configuration.Data) result;

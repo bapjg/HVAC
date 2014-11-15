@@ -9,26 +9,22 @@
     android:orientation			= "vertical" 
 >
 	<TableRow		
-	    style					= "@style/AD_Row" >
+	    style					= "@style/AD_Row" 
+	>
 		<TextView	              
-			style				= "@style/AD_Text"       
+			style				= "@style/AD_Text"  
+			android:layout_width= "match_parent"   
 			android:id			= "@+id/name"	 	
 		/>                        
-		<TextView	              
-			style				= "@style/AD_Data"		
-			android:text		= "X" 		
-			android:gravity		= "right"			
-		/>                        
+                       
 	</TableRow>	                  
 	<TableRow		
-	    style					= "@style/AD_Row" >
-		<TextView	              
-			style				= "@style/AD_Text"		
-			android:text		= "X"
-		/>                        
+	    style					= "@style/AD_Row" 
+	>
 		<TextView	              
 			style				= "@style/AD_Data"		
-			android:id			= "@+id/address"		
+			android:id			= "@+id/address"
+			android:layout_width= "match_parent"			
 		/>
 	</TableRow>
 </LinearLayout>

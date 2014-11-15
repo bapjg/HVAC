@@ -14,6 +14,6 @@
         android:layout_width						= "match_parent"
         android:layout_height						= "510dp"
 	/>                          					
-   <include layout								= "@layout/aa_include_panel_buttons_addnew_delete" />
+   	<include layout								= "@layout/aa_include_panel_buttons_addnew_delete" />
 
 </LinearLayout>
