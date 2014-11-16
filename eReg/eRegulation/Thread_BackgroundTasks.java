@@ -53,8 +53,6 @@ public class Thread_BackgroundTasks implements Runnable
 					}
 				}
 
-//				Global.pumps.dateTimeLastClean					= Global.now(); // This value will be higher than dateLastOperated, ensuring a run next day even if unused
-
 				LogIt.info("Thread_Background", "Run", "Summer Pumps Wait", true);
 				// This is a wait which allows loop exit if stopButton pressed
 				for (i = 0; (i < tasksBackGround.pumpCleanDurationSeconds) && (!Global.stopNow); i++)			
