@@ -133,7 +133,7 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 		} 
 		catch (Exception e) 
 		{
-			System.out.println("Ctrl_WeatherData/Constructor error on contacting the weather server");
+			System.out.println("Ctrl_WeatherData/Constructor error on contacting the weather server" + e.toString());
 			e.printStackTrace();
 			this.dateTimeObtained													= null;
 			this.forecasts															= null;

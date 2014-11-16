@@ -152,26 +152,30 @@ public class Thread_BackgroundTasks implements Runnable
 				try
 				{
 					Global.weatherData							= new Ctrl_WeatherData();
-					Global.weatherData.dateTimeObtained			= Global.now();
-					LogIt.info("Thread_Background", "Run", "Weather : fetched", true);
-			        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherData.forecasts)
-			        {
-			        	if  ((forecastItem.dateTime.from > Global.getTimeAtMidnight())							// timeStamp > last midnight
-			        	&& 	 (forecastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L))	// timeStamp < next midnight
-			        	{
-			            	String 										time_from					= Global.displayTimeShort(forecastItem.dateTime.from);
-			            	String 										time_to						= Global.displayTimeShort(forecastItem.dateTime.to);
-			        		// TODO
-						    
-			         		efectiveTempCorrection = Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) / 100;
-			         		Integer efectiveTempCalculated = forecastItem.temperature.value.intValue() * 1000 + efectiveTempCorrection;
-			         		if (efectiveTempCalculated > efectiveTempCalculatedMax)
-			         		{
-			         			efectiveTempCalculatedMax											= efectiveTempCalculated;
-			         		}
-			        	}
-			        }
-					LogIt.info("Thread_Background", "Run", "Maximum temperature (corrected) today " + efectiveTempCalculatedMax, true);
+					
+					if (Global.weatherData != null)
+					{
+						Global.weatherData.dateTimeObtained			= Global.now();
+						LogIt.info("Thread_Background", "Run", "Weather : fetched", true);
+				        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherData.forecasts)
+				        {
+				        	if  ((forecastItem.dateTime.from > Global.getTimeAtMidnight())							// timeStamp > last midnight
+				        	&& 	 (forecastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L))	// timeStamp < next midnight
+				        	{
+				            	String 									time_from					= Global.displayTimeShort(forecastItem.dateTime.from);
+				            	String 									time_to						= Global.displayTimeShort(forecastItem.dateTime.to);
+				        		// TODO
+							    
+				         		efectiveTempCorrection = Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) / 100;
+				         		Integer efectiveTempCalculated = forecastItem.temperature.value.intValue() * 1000 + efectiveTempCorrection;
+				         		if (efectiveTempCalculated > efectiveTempCalculatedMax)
+				         		{
+				         			efectiveTempCalculatedMax										= efectiveTempCalculated;
+				         		}
+				        	}
+				        }
+						LogIt.info("Thread_Background", "Run", "Maximum temperature (corrected) today " + efectiveTempCalculatedMax, true);
+					}
 				}
 				catch (Exception e)
 				{
