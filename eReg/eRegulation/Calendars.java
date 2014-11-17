@@ -189,7 +189,7 @@ public class Calendars
 			this.winterTemp											= tasksBackGround.winterTemp.milliDegrees;
 			this.sunshineInfluence									= tasksBackGround.sunshineInfluence.milliDegrees;
 			LogIt.info("Calendar.Background", "Tasks", "Pump Clean Time     : " + tasksBackGround.pumpCleanTime.displayShort());
-			LogIt.info("Calendar.Background", "Tasks", "Pump Clean Duration : " + tasksBackGround.pumpCleanDurationMinutes);
+			LogIt.info("Calendar.Background", "Tasks", "Pump Clean Duration : " + tasksBackGround.pumpCleanDurationMinutes + " mins");
 			LogIt.info("Calendar.Background", "Tasks", "Antifreeze          : " + tasksBackGround.antiFreeze.displayInteger());
 			LogIt.info("Calendar.Background", "Tasks", "Summer temperature  : " + tasksBackGround.summerTemp.displayInteger());
 			LogIt.info("Calendar.Background", "Tasks", "Winter temperature  : " + tasksBackGround.winterTemp.displayInteger());
