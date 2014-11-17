@@ -61,7 +61,7 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 	public void displayHeader()
 	{
 		((TextView) panelView.findViewById(R.id.title)).setText		("Calendars");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Background");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Background Tasks");
 //		TextView												title						= (TextView) panelView.findViewById(R.id.name);
 	}
 	public void displayContents()

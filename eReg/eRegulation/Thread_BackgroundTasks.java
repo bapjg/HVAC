@@ -1,6 +1,7 @@
 package eRegulation;
 
 import HVAC_Common.*;
+import HVAC_Common.Ctrl__Abstract.Ack;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thread_BackgroundTasks implements Runnable
@@ -83,26 +84,53 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			// Ensure no freezing : Particulary in winter
 			//
+			Long						now							= Global.getTimeNowSinceMidnight();
+			Circuit_Abstract 			circuit						= null;
+			
 			if (Global.thermoHotWater.reading 		< tasksBackGround.antiFreeze)
 			{
-				// Start HW temp objective antiFreeze + 2000
+				circuit												= Global.circuits.fetchcircuit("Hot_Water");
+				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
+																			now + 30 * 60 * 1000, 					// TimeEnd
+																			10000,									// TempObjective in millidesrees (10]C)
+																			true,									// StopOnObjective
+																			"1, 2, 3, 4, 5, 6, 7");					// Days
+				circuit.start();
 			}
 			if ((Global.thermoBoiler.reading 		< tasksBackGround.antiFreeze)
 			||  (Global.thermoBoilerIn.reading 		< tasksBackGround.antiFreeze)
 			||  (Global.thermoBoilerOut.reading 	< tasksBackGround.antiFreeze)	)
 			{
-				
+				circuit												= Global.circuits.fetchcircuit("Radiator");
+				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
+																			now + 30 * 60 * 1000, 					// 30 mins
+																			30000,									// TempObjective in millidegrees 30°C
+																			false,									// StopOnObjective
+																			"1, 2, 3, 4, 5, 6, 7");					// Days
+				circuit.start();
 			}
 			if ((Global.thermoLivingRoom.reading 	< tasksBackGround.antiFreeze)
 			||  (Global.thermoFloorIn.reading 		< tasksBackGround.antiFreeze)
 			||  (Global.thermoFloorOut.reading 		< tasksBackGround.antiFreeze)	)
 			{
-				// Start Floor temp objective antiFreeze + 2000
+				circuit												= Global.circuits.fetchcircuit("Floor");
+				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
+																			now + 30 * 60 * 1000, 					// 30 mins
+																			10000,									// TempObjective in millidegrees 10°C
+																			false,									// StopOnObjective
+																			"1, 2, 3, 4, 5, 6, 7");					// Days
+				circuit.start();
 			}
 			if ((Global.thermoRadiatorIn.reading 	< tasksBackGround.antiFreeze)
 			||  (Global.thermoRadiatorOut.reading 	< tasksBackGround.antiFreeze)	)
 			{
-				// Start Radiator temp objective antiFreeze + 2000
+				circuit												= Global.circuits.fetchcircuit("Floor");
+				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
+																			now + 30 * 60 * 1000, 					// 30 mins
+																			30000,									// TempObjective in millidegrees 30°C
+																			false,									// StopOnObjective
+																			"1, 2, 3, 4, 5, 6, 7");					// Days
+				circuit.start();
 			}
 			//
 			//=========================================================================================================================================

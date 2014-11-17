@@ -47,11 +47,11 @@ public class Cmn_Time 											implements 					java.io.Serializable
 		this.seconds																		= seconds;
 		this.milliSeconds																	= (hours * 3600 + minutes * 60 + seconds) * 1000L;
 	}
-	public String displayShort()
+	public String displayShort()															// Display hh:mm
 	{
 		return String.format("%02d", hours) + ":" + String.format("%02d", minutes); 
 	}
-	public String displayLong()
+	public String displayLong()																// Display hh:mm:ss
 	{
 		return String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);  
 	}

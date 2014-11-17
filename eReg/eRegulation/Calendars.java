@@ -145,7 +145,7 @@ public class Calendars
 				{
 					paramCalendar.days 											= paramCalendar.days.replace(word.name, word.days);
 				}
-				// TODO Clanedar dayrs are not printed correctly
+				// TODO Clanedar days are not printed correctly
 				circuit.addCircuitTask(paramCalendar);
 				LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart.displayShort() + "/" + paramCalendar.timeEnd.displayShort() + " Days " + paramCalendar.days);
 			}
@@ -188,6 +188,12 @@ public class Calendars
 			this.summerTemp											= tasksBackGround.summerTemp.milliDegrees;
 			this.winterTemp											= tasksBackGround.winterTemp.milliDegrees;
 			this.sunshineInfluence									= tasksBackGround.sunshineInfluence.milliDegrees;
+			LogIt.info("Calendar.Background", "Tasks", "Pump Clean Time     : " + tasksBackGround.pumpCleanTime.displayShort());
+			LogIt.info("Calendar.Background", "Tasks", "Pump Clean Duration : " + tasksBackGround.pumpCleanDurationMinutes);
+			LogIt.info("Calendar.Background", "Tasks", "Antifreeze          : " + tasksBackGround.antiFreeze.displayInteger());
+			LogIt.info("Calendar.Background", "Tasks", "Summer temperature  : " + tasksBackGround.summerTemp.displayInteger());
+			LogIt.info("Calendar.Background", "Tasks", "Winter temperature  : " + tasksBackGround.winterTemp.displayInteger());
+			LogIt.info("Calendar.Background", "Tasks", "Sunshine influence  : " + tasksBackGround.sunshineInfluence.displayInteger());
 		}
 	}
 
