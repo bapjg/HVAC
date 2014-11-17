@@ -7,7 +7,7 @@
     android:orientation								= "vertical"
 >                                       		
                                         		
-	<include layout									= "@layout/panel_0_title_section" />
+	<include layout									= "@layout/aa_include_panel_title_section" />
                                         		
     <ListView                           		
         android:id									= "@+id/List_View"
