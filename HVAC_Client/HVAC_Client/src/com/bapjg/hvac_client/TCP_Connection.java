@@ -38,6 +38,7 @@ public class TCP_Connection
 			piSocket 																		= new Socket();
 			piSocket.connect(piSocketAddress, 10000);
 			piSocket.setSoTimeout(10000);
+			piSocket.setKeepAlive(true);
 			piConnected																		= true;
 			return true;									// Exit procedure as we are connected - NormalOperating
 		}

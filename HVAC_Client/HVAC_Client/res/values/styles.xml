@@ -101,5 +101,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
-
+    <style name="AD_Linear_Top" parent="@android:style/TextAppearance.Medium">
+        <item name="android:background">@color/background</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:baselineAligned">false</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    
 </resources>
