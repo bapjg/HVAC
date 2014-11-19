@@ -25,6 +25,7 @@ public class Thread_BackgroundTasks implements Runnable
 		//   Getting expected weather predictions
 
 		Calendars.TasksBackGround			tasksBackGround			= Global.tasksBackGround;
+		Long								pumpCleanDateLast		= Global.getTimeAtMidnight();
 		
 		while (!Global.stopNow)
 		{
@@ -34,10 +35,13 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 
 			if ( (tasksBackGround.pumpCleanTime		> 	Global.getTimeNowSinceMidnight()						) 		// time to do it has arrived		
-			&&   (tasksBackGround.pumpCleanTime		< 	Global.getTimeNowSinceMidnight() + (30 * 60 * 1000L)	) 	)	// & within 30 min window
+			&&   (tasksBackGround.pumpCleanTime		< 	Global.getTimeNowSinceMidnight() + (30 * 60 * 1000L)	) 		// & within 30 min window
+			&&   (pumpCleanDateLast					< 	Global.getTimeAtMidnight()								) 	)	// Last run was yesterday
 			{
 				LogIt.action("Summer Pumps", "On");
 				LogIt.info("Thread_Background", "Run", "Summer Pumps On", true);
+				LogIt.info("Thread_Background", "Run", "pumpCleanDateLast " 			+ pumpCleanDateLast,		 			true);
+				LogIt.info("Thread_Background", "Run", "Global.getTimeAtMidnight " 		+ Global.getTimeAtMidnight(), 			true);
 				
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
@@ -45,10 +49,10 @@ public class Thread_BackgroundTasks implements Runnable
 					
 					if (thisPump.dateTimeLastOperated < (Global.now() - 23 * 3600 * 1000L) )									// Last pump use was earlier than 11 hours ago
 					{
-						LogIt.info("Thread_Background", "Run", "Clean pump " + circuit.circuitPump.name, true);
-						LogIt.info("Thread_Background", "Run", "dateTimeLastOperated " + thisPump.dateTimeLastOperated, true);
-						LogIt.info("Thread_Background", "Run", "now " + Global.now(), true);
-						LogIt.info("Thread_Background", "Run", "now - 23 hours" +(Global.now() - 23 * 3600 * 1000L), true);
+						LogIt.info("Thread_Background", "Run", "Clean pump " 			+ circuit.circuitPump.name, 			true);
+						LogIt.info("Thread_Background", "Run", "dateTimeLastOperated " 	+ thisPump.dateTimeLastOperated, 		true);
+						LogIt.info("Thread_Background", "Run", "now " 					+ Global.now(), 						true);
+						LogIt.info("Thread_Background", "Run", "now - 23 hours" 		+ (Global.now() - 23 * 3600 * 1000L), 	true);
 						
 						
 						
@@ -77,10 +81,11 @@ public class Thread_BackgroundTasks implements Runnable
 						{
 							LogIt.info("Thread_Background", "Run", "Clean pump off " + circuit.circuitPump.name, true);
 							circuit.circuitPump.off();
-							Global.waitMilliSeconds(500);			// Avoid switch all the relays at the same time
+							Global.waitMilliSeconds(500);			// Avoid switching off all the relays at the same time
 						}
 					}
 				}
+				pumpCleanDateLast															= Global.getTimeAtMidnight();
 				LogIt.action("Summer Pumps", "Off");
 				LogIt.info("Thread_Background", "Run", "Clean pump finished", true);
 			}
@@ -150,6 +155,26 @@ public class Thread_BackgroundTasks implements Runnable
 			// Must also run floor pump for a certain time to get good reading of concrete/floor temp
 			if (Global.circuits.activeCircuitCount() > 0)
 			{
+				// TODO 
+				// if summer
+				//		do something
+				// else if winter
+				//		do something
+				// elseif inbetween
+				//		do something
+				//
+				
+				
+				
+				// TODO
+				// If boilertemp > hwtemp
+				//		do something
+				// elseif boilertemp > radiatortemp 
+				//		do something
+				// elseif boilertemp > floortemp (need to get accurate floor temp before)
+				//		do something
+				// and all this depends on summer/winter/in between
+
 				if (Global.boiler.thermoBoiler.reading > 45000)
 				{
 					// Hotwater
