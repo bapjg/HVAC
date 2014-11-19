@@ -4,20 +4,34 @@
     style									= "@style/AD_Linear_Top"
 >
 
-    <include layout									= "@layout/aa_include_panel_title_section" />
+    <include layout							= "@layout/aa_include_panel_title_section" />
 
-    <TableLayout style								= "@style/AD_Table" >
-        <TableRow style								= "@style/AD_Row" >
+	<LinearLayout              			
+		android:layout_width				= "match_parent"
+		android:layout_height				= "wrap_content"
+		android:orientation					= "vertical"
+	>                               			
+		<LinearLayout              			
+			android:layout_width			= "match_parent"
+			android:layout_height			= "wrap_content"
+			android:orientation				= "horizontal"
+		>                               			
+	    	<TextView
+                style						= "@style/AD_Text"
+                android:layout_weight		= "1"
+                android:text				= "Name" 
+            />
             <TextView
-                style								= "@style/AD_Text"
-                android:text						= "Name" />
-            <TextView
-                style								= "@style/AD_Data"
-                android:text						= "Address" />
-        </TableRow>
-    	<include layout								= "@layout/panel_0_list_section" />
-	</TableLayout>
+                style						= "@style/AD_Data"
+                android:layout_weight		= "1"
+                android:text				= "Address" 
+            />
+		</LinearLayout>
+		
+    	<include layout						= "@layout/panel_0_list_section" />
+    	
+	</LinearLayout>
 
-   <include layout								= "@layout/aa_include_panel_buttons_addnew_delete" />
+   <include layout							= "@layout/aa_include_panel_buttons_addnew_delete" />
 
 </LinearLayout>

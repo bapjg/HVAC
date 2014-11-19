@@ -9,7 +9,7 @@
     <ListView                           		
         android:id									= "@+id/List_View"
         android:layout_width						= "match_parent"
-        android:layout_height						= "510dp"
+        android:layout_height						= "match_parent"
 	/>                          					
    	<include layout								= "@layout/aa_include_panel_buttons_addnew_delete" />
 

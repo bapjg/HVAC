@@ -3,33 +3,30 @@
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     style									= "@style/AD_Linear_Top"
 >
-
    <include layout							= "@layout/aa_include_panel_title_section" />
 
-   <TableLayout style	= "@style/AD_Table">
-    	<TableRow																					style	= "@style/AD_Row"  >
+	<LinearLayout              			
+		android:layout_width			= "match_parent"
+		android:layout_height			= "wrap_content"
+		android:orientation				= "vertical"
+	>                               			
         	<TextView		android:text	= "Pump Clean Time"										style	= "@style/AD_Text" />
         	<TextView       android:text	= "x"				android:id	= "@+id/pumpCleanTime"	style	= "@style/AD_Data"	/>
-		</TableRow>
-    	<TableRow																					style	= "@style/AD_Row"  >
+																					style	= "@style/AD_Row"  >
         	<TextView		android:text	= "Pump Clean Duration"									style	= "@style/AD_Text" />
         	<TextView       android:text	= "x"				android:id	= "@+id/pumpCleanDuration"	style	= "@style/AD_Data"	/>
-		</TableRow>
-    	<TableRow																					style	= "@style/AD_Row"  >
+																				style	= "@style/AD_Row"  >
         	<TextView		android:text	= "AntiFreeze" 											style	= "@style/AD_Text" />
         	<TextView       android:text	= "x"				android:id	= "@+id/antiFreeze"		style	= "@style/AD_Data"	/>
-		</TableRow>
-   		<TableRow																					style	= "@style/AD_Row"  >
+																					style	= "@style/AD_Row"  >
         	<TextView		android:text	= "Summer Temperature" 									style	= "@style/AD_Text" />
         	<TextView       android:text	= "x"				android:id	= "@+id/summerTemp"		style	= "@style/AD_Data"	/>
-		</TableRow>
-   		<TableRow																					style	= "@style/AD_Row"  >
+																					style	= "@style/AD_Row"  >
         	<TextView		android:text	= "Winter Temperature" 									style	= "@style/AD_Text" />
         	<TextView       android:text	= "x"				android:id	= "@+id/winterTemp"		style	= "@style/AD_Data"	/>
-		</TableRow>
-    	<TableRow																					style	= "@style/AD_Row"  >
+																				style	= "@style/AD_Row"  >
         	<TextView		android:text	= "Sunshine Influence"									style	= "@style/AD_Text" />
         	<TextView       android:text	= "x"				android:id	= "@+id/sunshineInfluence"	style	= "@style/AD_Data"	/>
-		</TableRow>
-    </TableLayout>
+
+    </LinearLayout>
 </LinearLayout>
