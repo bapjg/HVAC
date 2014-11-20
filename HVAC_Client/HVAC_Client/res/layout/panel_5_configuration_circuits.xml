@@ -24,7 +24,7 @@
                 android:text					= "Mixer"
             />
         </TableRow>
-    	<include layout							= "@layout/panel_0_list_section" />
+    	<include layout							= "@layout/aa_include_list_section" />
     </TableLayout>
     
     <View style									= "@style/AD_ThinLine" />

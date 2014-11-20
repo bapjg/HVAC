@@ -21,7 +21,7 @@
 
     <View style									= "@style/AD_ThinLine" />
   
-    <include layout								= "@layout/panel_0_list_section" />
+    <include layout								= "@layout/aa_include_list_section" />
     <include layout								= "@layout/aa_include_panel_buttons_addnew_delete" />
 
 </LinearLayout>
