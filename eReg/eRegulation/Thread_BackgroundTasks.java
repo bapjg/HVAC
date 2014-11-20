@@ -42,14 +42,17 @@ public class Thread_BackgroundTasks implements Runnable
 
 			if ( (tasksBackGround.pumpCleanTime		> 	Global.Time.now()						) 		// time to do it has arrived		
 			&&   (tasksBackGround.pumpCleanTime		< 	Global.Time.now() + (30 * 60 * 1000L)	) 		// & within 30 min window
-			&&   (pumpCleanDateLast					< 	Global.Date.now()						) 	)	// Last run was yesterday
+			&&   (pumpCleanDateLast					< 	Global.Date.now()						) 	)	// Last run was yesterday ie < Today.midnight
 			{
-				LogIt.action("Summer Pumps", "On");
-				LogIt.info("Thread_Background", "Run", "Summer Pumps On", true);
-				LogIt.info("Thread_Background", "Run", "pumpCleanDateLast " 			+ pumpCleanDateLast,		 			true);
-				LogIt.info("Thread_Background", "Run", "Global.Date.now " 				+ Global.Date.now(), 					true);
-				LogIt.info("Thread_Background", "Run", "tasksBackGround.pumpCleanTime " + tasksBackGround.pumpCleanTime, 		true);
-				LogIt.info("Thread_Background", "Run", "Global.Time.now() " 			+ Global.Time.now(),					true);
+				LogIt.action("Summer Pumps", "Action being considered");
+				LogIt.info("Thread_Background", "Run", "Action being considered");
+				LogIt.info("Thread_Background", "Run", "=======================");
+				LogIt.info("Thread_Background", "Run", "pumpCleanDateLast (can be last reboot date            " + pumpCleanDateLast,		 			true);
+				LogIt.info("Thread_Background", "Run", "Global.Date.now (ie time at midnight)                 "	+ Global.Date.now(), 					true);
+				LogIt.info("Thread_Background", "Run", "tasksBackGround.pumpCleanTime (ie time since midnght) " + tasksBackGround.pumpCleanTime, 		true);
+				LogIt.info("Thread_Background", "Run", "Global.Time.now()  (ie time since midnght)            " + Global.Time.now(),					true);
+				
+				Boolean mustWait = false;
 				
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
@@ -69,32 +72,40 @@ public class Thread_BackgroundTasks implements Runnable
 							LogIt.info("Thread_Background", "Run", "Clean pump !isOn " + circuit.circuitPump.name, true);
 							circuit.circuitPump.relay.on();			// circuitPump.on() updates timeLastOperated, whereas circuitPump.relay.on() does not.
 							Global.waitMilliSeconds(1000);			// Avoid switch all the relays at the same time
+							mustWait = true;
 						}
+					}
+					else
+					{
+						LogIt.info("Thread_Background", "Run", "Clean pump DISCARDED "	+ circuit.circuitPump.name, 			true);
 					}
 				}
 
-				LogIt.info("Thread_Background", "Run", "Summer Pumps Wait time " + tasksBackGround.pumpCleanDurationSeconds, true);
-				// This is a wait which allows loop exit if stopButton pressed
-				for (i = 0; (i < tasksBackGround.pumpCleanDurationSeconds) && (!Global.stopNow); i++)			
+				if (mustWait)		// i.e. at least one pump has been turned on
 				{
-					Global.waitSeconds(1);
-				}
-				
-				// Switch off all pumps but inspect each circuit to see if a task is now active
-				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
-				{
-					if (circuit.taskActive == null)	
+					LogIt.info("Thread_Background", "Run", "Summer Pumps Wait time " + tasksBackGround.pumpCleanDurationSeconds, true);
+					// This is a wait which allows loop exit if stopButton pressed
+					for (i = 0; (i < tasksBackGround.pumpCleanDurationSeconds) && (!Global.stopNow); i++)			
 					{
-						if (circuit.circuitPump.isOn())
+						Global.waitSeconds(1);
+					}
+
+					// Switch off all pumps but inspect each circuit to see if a task is now active
+					for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
+					{
+						if (circuit.taskActive == null)	
 						{
-							LogIt.info("Thread_Background", "Run", "Clean pump off " + circuit.circuitPump.name, true);
-							circuit.circuitPump.off();
-							Global.waitMilliSeconds(1000);			// Avoid switching off all the relays at the same time
+							if (circuit.circuitPump.isOn())
+							{
+								LogIt.info("Thread_Background", "Run", "Clean pump off " + circuit.circuitPump.name, true);
+								circuit.circuitPump.off();
+								Global.waitMilliSeconds(1000);			// Avoid switching off all the relays at the same time
+							}
 						}
 					}
 				}
 				pumpCleanDateLast															= Global.Time.now();
-				LogIt.action("Summer Pumps", "Off");
+				LogIt.action("Summer Pumps", "Finished");
 				LogIt.info("Thread_Background", "Run", "Clean pump finished", true);
 			}
 			//

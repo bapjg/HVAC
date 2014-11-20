@@ -25,7 +25,7 @@ public class Pump
 		{
 			LogIt.action(this.name, "On");
 			relay.on();
-			this.dateTimeLastOperated															= Global.DateTime.now();				
+			this.dateTimeLastOperated														= Global.DateTime.now();				
 		}
 	}
 	public void off()

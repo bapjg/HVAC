@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -75,6 +77,31 @@ public class Activity_Main 										extends 					Activity
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
         actionbar.addTab(tabReset);
+        
+
+        
+        if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) 
+        {     
+            Toast.makeText(this, "Large screen",Toast.LENGTH_LONG).show();
+        }
+        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) 
+        {     
+            Toast.makeText(this, "Normal sized screen" , Toast.LENGTH_LONG).show();
+        } 
+        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) 
+        {     
+            Toast.makeText(this, "Small sized screen" , Toast.LENGTH_LONG).show();
+        }
+        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) 
+        {     
+            Toast.makeText(this, "Extra Large sized screen" , Toast.LENGTH_LONG).show();
+        }
+        else 
+        {
+            Toast.makeText(this, "Screen size is neither large, normal or small" , Toast.LENGTH_LONG).show();
+        }
+        
+
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 

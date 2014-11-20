@@ -16,24 +16,6 @@ public class Relay
 	public int 													relayNumber;
 	public Boolean												relayOn;
 	
-//	public Relay(String name, String address, String friendlyName)
-//	{
-//		relayBank = 0;
-//		
-//		this.name 		    		= name;
-//		this.friendlyName   		= friendlyName;
-//		this.relayNumber			= Integer.parseInt(address);
-//		this.relayOn				= false;
-//	}
-//	public Relay(String name, Integer relayBank, Integer relayNumber)
-//	{
-//		relayBank 					= relayBank;
-//		
-//		this.name 		    		= name;
-//		this.friendlyName   		= "";
-//		this.relayNumber			= relayNumber;
-//		this.relayOn				= false;
-//	}
 	public Relay(Ctrl_Configuration.Relay 				relayParam)
 	{
 		relayBank 																			= 0;
