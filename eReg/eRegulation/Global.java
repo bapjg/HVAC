@@ -508,6 +508,10 @@ public class Global
 			
 			return todayMidnight;
 		}
+		public static int n1()
+		{
+			return 1;
+		}
 		public static Long 			today()							{return now();												}
 		public static Long 			dateOnly(Integer days)			{return now() - 24 * 60 * 60 * 1000L * days;				}
 		public static Long 			yesterday()						{return dateOnly(-1);										}
@@ -521,6 +525,10 @@ public class Global
 			//==============================================================
 			return Calendar.getInstance().getTimeInMillis() - Global.Date.now();		
 		}
+		public static int n1()
+		{
+			return 1;
+		}
    }
    public static class DateTime
    {
@@ -528,5 +536,9 @@ public class Global
 		{
 			return Calendar.getInstance().getTimeInMillis();
 	 	}
+		public static int n1()
+		{
+			return 1;
+		}
    }
 }
