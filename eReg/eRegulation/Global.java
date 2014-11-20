@@ -311,6 +311,8 @@ public class Global
 //		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
 //		return -1L;
 //	}
+
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public static Boolean waitSeconds(Integer seconds)										// Sleeps a supplied number of seconds
 	{
 		return waitMilliSeconds(seconds * 1000);
@@ -519,15 +521,15 @@ public class Global
 		}
 		public static String getDayOfWeek(Integer extraDays)
 		{
-			Calendar 												calendar 					= Calendar.getInstance();
-			Integer 												day 						= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
+			Calendar 												calendar 				= Calendar.getInstance();
+			Integer 												day 					= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
 		
-			day																					= day + extraDays;						// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
+			day																				= day + extraDays;						// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
 			day--;																														// Sunday = 0, Monday = 1, Tues = 2 ... Sat = 6
-			day																					= day % 7;								// Modulo to take extra days into account
+			day																				= day % 7;								// Modulo to take extra days into account
 			if (day == 0)
 			{
-				day																				= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+				day																			= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
 			}
 			return day.toString();
 		}
@@ -557,20 +559,20 @@ public class Global
 			//==============================================================
 			
 			String 													dateTimeString;
-			Long													days						= dateTime / 1000 / 3600 / 24;		//millisecs -> secs -> hours -> days
+			Long													days					= dateTime / 1000 / 3600 / 24;		//millisecs -> secs -> hours -> days
 			if (days > 0)																		// We need to use the TimeZoned calendar to workout time
 			{
-			     SimpleDateFormat 										sdf 					= new SimpleDateFormat("HH:mm");
-			     GregorianCalendar 									calendar 					= new GregorianCalendar();
+			     SimpleDateFormat 									sdf 					= new SimpleDateFormat("HH:mm");
+			     GregorianCalendar 									calendar 				= new GregorianCalendar();
 			     calendar.setTimeInMillis(dateTime);	
-			     dateTimeString																	= sdf.format(dateTime);
+			     dateTimeString																= sdf.format(dateTime);
 			}
 			else																					// Must calculate manually as time is since local midnight
 			{
-				Integer												seconds						= (int) (long) (dateTime / 1000);
-				Integer												hours						= seconds / 3600;
-				Integer												minutes						= (seconds - hours * 3600)/60;
-				dateTimeString																	= String.format("%02d", hours)  + ":" +String.format("%02d", minutes);
+				Integer												seconds					= (int) (long) (dateTime / 1000);
+				Integer												hours					= seconds / 3600;
+				Integer												minutes					= (seconds - hours * 3600)/60;
+				dateTimeString																= String.format("%02d", hours)  + ":" +String.format("%02d", minutes);
 			}
 			return dateTimeString;
 		}
@@ -578,16 +580,17 @@ public class Global
 		{
 			// Returns a supplied time in string form "hh:mm"
 			// In milliseconds since last midnight
-			String splitCharacters[]															= characters.split(":");
+			String splitCharacters[]														= characters.split(":");
 			
-			Calendar calendar																	= Calendar.getInstance();
+			Calendar calendar																= Calendar.getInstance();
 			calendar.set(Calendar.HOUR_OF_DAY, 	Integer.parseInt(splitCharacters[0]));
 			calendar.set(Calendar.MINUTE,  		Integer.parseInt(splitCharacters[1]));
 			calendar.set(Calendar.SECOND, 		0);
 			calendar.set(Calendar.MILLISECOND, 	0);
 			
-			// return (Integer.parseInt(splitCharacters[0]) * 3600 +Integer.parseInt(splitCharacters[1]) * 60 ) * 1000L
-			return calendar.getTimeInMillis() - Global.Date.now();
+			//return calendar.getTimeInMillis() - Global.Date.now();
+			
+			return (Integer.parseInt(splitCharacters[0]) * 3600 + Integer.parseInt(splitCharacters[1]) * 60 ) * 1000L;
 		}
    }
    //
@@ -599,21 +602,21 @@ public class Global
    //
    public static class DateTime
    {
-		public static Long now()																// Returns DateTime in milliseconds
+		public static Long now()															// Returns DateTime in milliseconds
 		{
 			return Calendar.getInstance().getTimeInMillis();
 	 	}
-		public static String display()															// Returns DateTime in milliseconds
+		public static String display()														// Returns DateTime in milliseconds
 		{
-			Date 													now 						= new Date();
-			SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-			String 													nowFormatted 				= dateFormat.format(now);
+			Date 													now 					= new Date();
+			SimpleDateFormat 										dateFormat 				= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+			String 													nowFormatted 			= dateFormat.format(now);
 			return nowFormatted;
 	 	}
 	    public static String  display(Long milliSeconds)
 		{
-			SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-			String 													nowFormatted 				= dateFormat.format(milliSeconds);
+			SimpleDateFormat 										dateFormat 				= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+			String 													nowFormatted 			= dateFormat.format(milliSeconds);
 			return nowFormatted;
 		}
    }
