@@ -494,4 +494,39 @@ public class Global
     	}
     	return dateTimeString;
    }
+   public static class Date
+   {
+		public static Long now()															// Returns date in milliseconds (ie dateTime at midnight)
+		{
+			Calendar now		 																= Calendar.getInstance();
+			
+			now.set(Calendar.HOUR_OF_DAY, 0);
+			now.set(Calendar.MINUTE, 0);
+			now.set(Calendar.SECOND, 0);
+			now.set(Calendar.MILLISECOND, 0);
+			Long todayMidnight																	= now.getTimeInMillis();
+			
+			return todayMidnight;
+		}
+		public static Long 			today()							{return now();												}
+		public static Long 			dateOnly(Integer days)			{return now() - 24 * 60 * 60 * 1000L * days;				}
+		public static Long 			yesterday()						{return dateOnly(-1);										}
+   }
+   public static class Time
+   {
+		public static Long 			now()													// Returns time part in milliseconds
+		{
+			//==============================================================
+			// Returns the number of milliseconds since last midnight
+			//==============================================================
+			return Calendar.getInstance().getTimeInMillis() - Global.Date.now();		
+		}
+   }
+   public static class DateTime
+   {
+		public static Long now()															// Returns DateTime in milliseconds
+		{
+			return Calendar.getInstance().getTimeInMillis();
+	 	}
+   }
 }

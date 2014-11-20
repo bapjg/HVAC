@@ -25,7 +25,29 @@ public class Thread_BackgroundTasks implements Runnable
 		//   Getting expected weather predictions
 
 		Calendars.TasksBackGround			tasksBackGround			= Global.tasksBackGround;
-		Long								pumpCleanDateLast		= Global.getTimeAtMidnight();
+		Long								pumpCleanDateLast		= Global.getTimeAtMidnight();						// Initialise at midnight
+		
+		Long oldD;
+		Long newD;
+		Long diffD;
+		
+		LogIt.info("Thread_Background", "Testing", "=============================================================", true);
+		oldD = Global.now();
+		newD = Global.DateTime.now();
+		diffD = newD - oldD;
+		LogIt.info("Thread_Background", "Testing", "DateTime difference " + diffD.toString(), true);
+
+		oldD = Global.getTimeAtMidnight();
+		newD = Global.Date.now();
+		diffD = newD - oldD;
+		LogIt.info("Thread_Background", "Testing", "Date only difference " + diffD.toString(), true);
+
+		oldD = Global.getTimeNowSinceMidnight();
+		newD = Global.Time.now();
+		diffD = newD - oldD;
+		LogIt.info("Thread_Background", "Testing", "Time only difference " + diffD.toString(), true);
+		LogIt.info("Thread_Background", "Testing", "=============================================================", true);
+		
 		
 		while (!Global.stopNow)
 		{
@@ -42,6 +64,8 @@ public class Thread_BackgroundTasks implements Runnable
 				LogIt.info("Thread_Background", "Run", "Summer Pumps On", true);
 				LogIt.info("Thread_Background", "Run", "pumpCleanDateLast " 			+ pumpCleanDateLast,		 			true);
 				LogIt.info("Thread_Background", "Run", "Global.getTimeAtMidnight " 		+ Global.getTimeAtMidnight(), 			true);
+				LogIt.info("Thread_Background", "Run", "tasksBackGround.pumpCleanTime " + tasksBackGround.pumpCleanTime, 		true);
+				LogIt.info("Thread_Background", "Run", "Global.getTimeNowSinceMidnight() " 	+ Global.getTimeNowSinceMidnight(),	true);
 				
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
@@ -56,16 +80,16 @@ public class Thread_BackgroundTasks implements Runnable
 						
 						
 						
-						if (!circuit.circuitPump.isOn())			// Not really possible otherwise
+						if (! circuit.circuitPump.isOn())			// Not really possible otherwise
 						{
-							LogIt.info("Thread_Background", "Run", "Clean pump " + circuit.circuitPump.name, true);
+							LogIt.info("Thread_Background", "Run", "Clean pump !isOn " + circuit.circuitPump.name, true);
 							circuit.circuitPump.relay.on();			// circuitPump.on() updates timeLastOperated, whereas circuitPump.relay.on() does not.
-							Global.waitMilliSeconds(500);			// Avoid switch all the relays at the same time
+							Global.waitMilliSeconds(1000);			// Avoid switch all the relays at the same time
 						}
 					}
 				}
 
-				LogIt.info("Thread_Background", "Run", "Summer Pumps Wait", true);
+				LogIt.info("Thread_Background", "Run", "Summer Pumps Wait time " + tasksBackGround.pumpCleanDurationSeconds, true);
 				// This is a wait which allows loop exit if stopButton pressed
 				for (i = 0; (i < tasksBackGround.pumpCleanDurationSeconds) && (!Global.stopNow); i++)			
 				{
@@ -81,11 +105,11 @@ public class Thread_BackgroundTasks implements Runnable
 						{
 							LogIt.info("Thread_Background", "Run", "Clean pump off " + circuit.circuitPump.name, true);
 							circuit.circuitPump.off();
-							Global.waitMilliSeconds(500);			// Avoid switching off all the relays at the same time
+							Global.waitMilliSeconds(1000);			// Avoid switching off all the relays at the same time
 						}
 					}
 				}
-				pumpCleanDateLast															= Global.getTimeAtMidnight();
+				pumpCleanDateLast															= Global.getTimeNowSinceMidnight();
 				LogIt.action("Summer Pumps", "Off");
 				LogIt.info("Thread_Background", "Run", "Clean pump finished", true);
 			}
