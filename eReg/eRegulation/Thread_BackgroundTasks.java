@@ -25,29 +25,13 @@ public class Thread_BackgroundTasks implements Runnable
 		//   Getting expected weather predictions
 
 		Calendars.TasksBackGround			tasksBackGround			= Global.tasksBackGround;
-		Long								pumpCleanDateLast		= Global.getTimeAtMidnight();						// Initialise at midnight
+		Long								pumpCleanDateLast		= Global.Date.now();						// Initialise at midnight
 		
 		Long oldD;
 		Long newD;
 		Long diffD;
 		
-		LogIt.info("Thread_Background", "Testing", "=============================================================", true);
-		oldD = Global.now();
-		newD = Global.DateTime.now();
-		diffD = newD - oldD;
-		LogIt.info("Thread_Background", "Testing", "DateTime difference " + diffD.toString(), true);
-
-		oldD = Global.getTimeAtMidnight();
-		newD = Global.Date.now();
-		diffD = newD - oldD;
-		LogIt.info("Thread_Background", "Testing", "Date only difference " + diffD.toString(), true);
-
-		oldD = Global.getTimeNowSinceMidnight();
-		newD = Global.Time.now();
-		diffD = newD - oldD;
-		LogIt.info("Thread_Background", "Testing", "Time only difference " + diffD.toString(), true);
-		LogIt.info("Thread_Background", "Testing", "=============================================================", true);
-		
+	
 		
 		while (!Global.stopNow)
 		{
@@ -56,27 +40,27 @@ public class Thread_BackgroundTasks implements Runnable
 			// CleanPumps : particularly in summer
 			//
 
-			if ( (tasksBackGround.pumpCleanTime		> 	Global.getTimeNowSinceMidnight()						) 		// time to do it has arrived		
-			&&   (tasksBackGround.pumpCleanTime		< 	Global.getTimeNowSinceMidnight() + (30 * 60 * 1000L)	) 		// & within 30 min window
-			&&   (pumpCleanDateLast					< 	Global.getTimeAtMidnight()								) 	)	// Last run was yesterday
+			if ( (tasksBackGround.pumpCleanTime		> 	Global.Time.now()						) 		// time to do it has arrived		
+			&&   (tasksBackGround.pumpCleanTime		< 	Global.Time.now() + (30 * 60 * 1000L)	) 		// & within 30 min window
+			&&   (pumpCleanDateLast					< 	Global.Date.now()						) 	)	// Last run was yesterday
 			{
 				LogIt.action("Summer Pumps", "On");
 				LogIt.info("Thread_Background", "Run", "Summer Pumps On", true);
 				LogIt.info("Thread_Background", "Run", "pumpCleanDateLast " 			+ pumpCleanDateLast,		 			true);
-				LogIt.info("Thread_Background", "Run", "Global.getTimeAtMidnight " 		+ Global.getTimeAtMidnight(), 			true);
+				LogIt.info("Thread_Background", "Run", "Global.Date.now " 				+ Global.Date.now(), 					true);
 				LogIt.info("Thread_Background", "Run", "tasksBackGround.pumpCleanTime " + tasksBackGround.pumpCleanTime, 		true);
-				LogIt.info("Thread_Background", "Run", "Global.getTimeNowSinceMidnight() " 	+ Global.getTimeNowSinceMidnight(),	true);
+				LogIt.info("Thread_Background", "Run", "Global.Time.now() " 			+ Global.Time.now(),					true);
 				
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
 					Pump		thisPump						= circuit.circuitPump;
 					
-					if (thisPump.dateTimeLastOperated < (Global.now() - 23 * 3600 * 1000L) )									// Last pump use was earlier than 11 hours ago
+					if (thisPump.dateTimeLastOperated < (Global.DateTime.now() - 23 * 3600 * 1000L) )									// Last pump use was earlier than 11 hours ago
 					{
 						LogIt.info("Thread_Background", "Run", "Clean pump " 			+ circuit.circuitPump.name, 			true);
 						LogIt.info("Thread_Background", "Run", "dateTimeLastOperated " 	+ thisPump.dateTimeLastOperated, 		true);
-						LogIt.info("Thread_Background", "Run", "now " 					+ Global.now(), 						true);
-						LogIt.info("Thread_Background", "Run", "now - 23 hours" 		+ (Global.now() - 23 * 3600 * 1000L), 	true);
+						LogIt.info("Thread_Background", "Run", "now " 					+ Global.DateTime.now(), 						true);
+						LogIt.info("Thread_Background", "Run", "now - 23 hours" 		+ (Global.DateTime.now() - 23 * 3600 * 1000L), 	true);
 						
 						
 						
@@ -109,7 +93,7 @@ public class Thread_BackgroundTasks implements Runnable
 						}
 					}
 				}
-				pumpCleanDateLast															= Global.getTimeNowSinceMidnight();
+				pumpCleanDateLast															= Global.Time.now();
 				LogIt.action("Summer Pumps", "Off");
 				LogIt.info("Thread_Background", "Run", "Clean pump finished", true);
 			}
@@ -120,7 +104,7 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			// Ensure no freezing : Particulary in winter
 			//
-			Long						now							= Global.getTimeNowSinceMidnight();
+			Long						now							= Global.Time.now();
 			Circuit_Abstract 			circuit						= null;
 			
 			if (Global.thermoHotWater.reading 		< tasksBackGround.antiFreeze)
@@ -235,8 +219,8 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			// Get the weather forecast after startup (= null) OR last forecast before latest 6hour interval within the day
 			//
-			Long Inc_6h_Number		= Global.getTimeNowSinceMidnight()/SIX_HOURS;					// Number of 6hour increments since last midnight
-			Long Inc_6h_Time		= Global.getTimeAtMidnight() + SIX_HOURS * Inc_6h_Number;		// DateTime of last increment
+			Long Inc_6h_Number		= Global.Time.now()/SIX_HOURS;					// Number of 6hour increments since last midnight
+			Long Inc_6h_Time		= Global.Date.now() + SIX_HOURS * Inc_6h_Number;		// DateTime of last increment
 			
 
 			if ( (Global.weatherData == null                       )
@@ -253,15 +237,15 @@ public class Thread_BackgroundTasks implements Runnable
 					
 					if (Global.weatherData != null)
 					{
-						Global.weatherData.dateTimeObtained			= Global.now();
+						Global.weatherData.dateTimeObtained			= Global.DateTime.now();
 						LogIt.info("Thread_Background", "Run", "Weather : fetched", true);
 				        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherData.forecasts)
 				        {
-				        	if  ((forecastItem.dateTime.from > Global.getTimeAtMidnight())							// timeStamp > last midnight
-				        	&& 	 (forecastItem.dateTime.from < Global.getTimeAtMidnight() + 24 * 60 * 60 * 1000L))	// timeStamp < next midnight
+				        	if  ((forecastItem.dateTime.from > Global.Date.now())							// timeStamp > last midnight
+				        	&& 	 (forecastItem.dateTime.from < Global.Date.now() + 24 * 60 * 60 * 1000L))	// timeStamp < next midnight
 				        	{
-				            	String 									time_from					= Global.displayTimeShort(forecastItem.dateTime.from);
-				            	String 									time_to						= Global.displayTimeShort(forecastItem.dateTime.to);
+				            	String 									time_from					= Global.Time.display(forecastItem.dateTime.from);
+				            	String 									time_to						= Global.Time.display(forecastItem.dateTime.to);
 				        		// TODO
 							    
 				         		efectiveTempCorrection = Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) / 100;

@@ -147,7 +147,7 @@ abstract class Circuit_Abstract
 		{
 			this.taskActive											= thisTask;
 			this.start();
-			this.taskActive.dateLastRun								= Global.getTimeAtMidnight();
+			this.taskActive.dateLastRun								= Global.Date.now();
 		}
 		else
 		{
@@ -166,7 +166,7 @@ abstract class Circuit_Abstract
 //				aTask.active										= false;
 //			}
 //		}
-		this.taskActive.dateLastRun									= Global.getTimeAtMidnight();
+		this.taskActive.dateLastRun									= Global.Date.now();
 		this.taskActive												= null;
 	}
 	public void scheduleTask()
@@ -185,9 +185,9 @@ abstract class Circuit_Abstract
 		 *   - A new, unplanned, task may have been added (through user decision)
 		 *   - Normal running, the nextTask has been scheduled to run, and the next one must be found
 		 */
-		String 					day 								= Global.getDayOfWeek(0);				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
-		Long 					now									= Global.getTimeNowSinceMidnight();
-		Long 					today								= Global.getTimeAtMidnight();
+		String 					day 								= Global.Date.getDayOfWeek(0);				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+		Long 					now									= Global.Time.now();
+		Long 					today								= Global.Date.now();
 		CircuitTask				taskFound							= null;
 		
 		// Stop activeTask

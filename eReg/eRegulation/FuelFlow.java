@@ -90,7 +90,7 @@ public class FuelFlow
 			// last call here had no fuel flowing
 			if (fuelFlowing)																// Fuel has just started to flow
 			{
-				timeLastStart 																= Global.now();
+				timeLastStart 																= Global.DateTime.now();
 			}
 		}
 		else
@@ -105,7 +105,7 @@ public class FuelFlow
 			else																// Fuel has just stopped flowing
 			{
 				// Just log consumption now
-				consumption																	= consumption + Global.now() - timeLastStart;
+				consumption																	= consumption + Global.DateTime.now() - timeLastStart;
 				timeLastStart																= -1L;
 				saveFuelFlow();
 				LogIt.fuelData(consumption);

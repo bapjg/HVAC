@@ -9,20 +9,11 @@ public class Pump
 	public Relay												relay;
 	public Long													dateTimeLastOperated;
 	
-//	public Pump(String name, String relayName)
-//	{
-//		this.name 		    		= name;
-//		this.relay					= Global.relays.fetchRelay(relayName);
-//		if (this.relay == null)
-//		{
-//			System.out.println("Relay.Constructor Pump : " + this.name + ", invalid relayName : " +relayName);
-//		}
-//	}
 	public Pump(Ctrl_Configuration.Data.Pump 						paramPump)
 	{
 		this.name 		    																= paramPump.name;
 		this.relay																			= Global.relays.fetchRelay(paramPump.relay);
-		this.dateTimeLastOperated															= Global.now();
+		this.dateTimeLastOperated															= Global.DateTime.now();
 		if (this.relay == null)
 		{
 			System.out.println("Relay.Constructor Pump : " + this.name + ", invalid relayName : " + paramPump.relay);
@@ -34,7 +25,7 @@ public class Pump
 		{
 			LogIt.action(this.name, "On");
 			relay.on();
-			this.dateTimeLastOperated															= Global.today();				
+			this.dateTimeLastOperated															= Global.DateTime.now();				
 		}
 	}
 	public void off()

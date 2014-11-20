@@ -215,10 +215,10 @@ public class Mixer
 			positionFull();
 			mixerDown.on();
 			timeToWait																		= swingTime - position;
-			timeStart																		= Global.now();
+			timeStart																		= Global.DateTime.now();
 			Global.waitMilliSeconds(timeToWait);
 			mixerDown.off();
-			timeEnd																			= Global.now();
+			timeEnd																			= Global.DateTime.now();
 			positionDiff   																	= timeEnd - timeStart;
 	 		positionTracked																	= swingTime - positionDiff.intValue();		
 		}
@@ -227,10 +227,10 @@ public class Mixer
 			positionZero();
 			mixerUp.on();
 			timeToWait																		= position;
-			timeStart																		= Global.now();
+			timeStart																		= Global.DateTime.now();
 			Global.waitMilliSeconds(timeToWait.intValue());
 			mixerUp.off();
-			timeEnd																			= Global.now();
+			timeEnd																			= Global.DateTime.now();
 			positionDiff   																	= timeEnd - timeStart;
 	 		positionTracked																	= positionDiff.intValue();		
 		}
@@ -249,10 +249,10 @@ public class Mixer
 		MixerMove_Report										report						= new MixerMove_Report();
 		
 		mixerUp.on();
-		report.timeStart																	= Global.now();
+		report.timeStart																	= Global.DateTime.now();
 		Global.waitMilliSeconds(swingTimeRequired);
 		mixerUp.off();
-		report.timeEnd																		= Global.now();
+		report.timeEnd																		= Global.DateTime.now();
 		positionChange																		= report.timeEnd - report.timeStart;		// Positive number as moved up
 		report.swingTimePerformed															= positionChange.intValue();
 		report.positionTracked																= positionTracked + report.swingTimePerformed;
@@ -268,10 +268,10 @@ public class Mixer
 		MixerMove_Report										report						= new MixerMove_Report();
 		
 		mixerDown.on();
-		report.timeStart																	= Global.now();
+		report.timeStart																	= Global.DateTime.now();
 		Global.waitMilliSeconds(-swingTimeRequired);									
 		mixerDown.off();									
-		report.timeEnd																		= Global.now();
+		report.timeEnd																		= Global.DateTime.now();
 		positionChange																		= report.timeStart - report.timeEnd;		// Negative number as moved down
 		report.swingTimePerformed															= positionChange.intValue();
 		report.positionTracked																= positionTracked + report.swingTimePerformed;

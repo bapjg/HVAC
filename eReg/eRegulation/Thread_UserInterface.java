@@ -58,7 +58,7 @@ public class Thread_UserInterface implements Runnable
 	            	userControl.line1Value								= 35;
 	            	userControl.display();
 	            	
-					Long	now											= Global.getTimeNowSinceMidnight();
+					Long	now											= Global.Time.now();
 					
 					Global.circuitHotWater.taskActive					= new CircuitTask(	now, 								// Time Start
 																							now + 30 * 60 * 1000, 				// TimeEnd

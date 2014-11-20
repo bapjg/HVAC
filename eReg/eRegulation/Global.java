@@ -238,69 +238,66 @@ public class Global
 		display.writeAtPosition(1, 18, "Ok");
 		// Other initialisation messages are displayed by Control.java
 	}
-//	public static class DateTime
+//	public static Long getTimeAtMidnight()
 //	{
-
-	public static Long getTimeAtMidnight()
-	{
-		//==============================================================
-		// Returns the system time last midnight
-		//==============================================================
-		Calendar now		 																= Calendar.getInstance();
-		
-		now.set(Calendar.HOUR_OF_DAY, 0);
-		now.set(Calendar.MINUTE, 0);
-		now.set(Calendar.SECOND, 0);
-		now.set(Calendar.MILLISECOND, 0);
-		Long todayMidnight																	= now.getTimeInMillis();
-		
-		return todayMidnight;
-	}
+//		//==============================================================
+//		// Returns the system time last midnight
+//		//==============================================================
+//		Calendar now		 																= Calendar.getInstance();
+//		
+//		now.set(Calendar.HOUR_OF_DAY, 0);
+//		now.set(Calendar.MINUTE, 0);
+//		now.set(Calendar.SECOND, 0);
+//		now.set(Calendar.MILLISECOND, 0);
+//		Long todayMidnight																	= now.getTimeInMillis();
+//		
+//		return todayMidnight;
 //	}
-	public static Long 			today()							{return getTimeAtMidnight();								}
-	public static Long 			yesterday()						{return dateOnly(-1);										}
-	public static Long 			dateOnly(Integer days)			{return getTimeAtMidnight() - 24 * 60 * 60 * 1000L * days;	}
-	public static Long 			getTimeNowSinceMidnight()
-	{
-		//==============================================================
-		// Returns the number of milliseconds since last midnight
-		//==============================================================
-		return Calendar.getInstance().getTimeInMillis() - Global.getTimeAtMidnight();		
-	}
-	public static String getDayOfWeek()
-	{
-		return getDayOfWeek(0);
-	}
-	public static String getDayOfWeek(Integer extraDays)
-	{
-		Calendar 												calendar 					= Calendar.getInstance();
-		Integer 												day 						= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
-	
-		day																					= day + extraDays;						// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
-		day--;																		// Sunday = 0, Monday = 1, Tues = 2 ... Sat = 6
-		day																					= day % 7;								// Modulo to take extra days into account
-		if (day == 0)
-		{
-			day																				= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
-		}
-		return day.toString();
-	}
-	public static Long parseTime(String characters)
-	{
-		// Returns a supplied time in string form "hh:mm" 
-		// In milliseconds since last midnight
-		String splitCharacters[]															= characters.split(":");
-		
-		Calendar calendar																	= Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 	Integer.parseInt(splitCharacters[0]));
-		calendar.set(Calendar.MINUTE,  		Integer.parseInt(splitCharacters[1]));
-		calendar.set(Calendar.SECOND, 		0);
-		calendar.set(Calendar.MILLISECOND, 	0);
-		
-		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
-	}
-	public static Long parseDateTime(String characters)
-	{
+
+//	public static Long 			today()							{return getTimeAtMidnight();								}
+//	public static Long 			yesterday()						{return dateOnly(-1);										}
+//	public static Long 			dateOnly(Integer days)			{return getTimeAtMidnight() - 24 * 60 * 60 * 1000L * days;	}
+//	public static Long 			getTimeNowSinceMidnight()
+//	{
+//		//==============================================================
+//		// Returns the number of milliseconds since last midnight
+//		//==============================================================
+//		return -3L; //Calendar.getInstance().getTimeInMillis() - Global.getTimeAtMidnight();		
+//	}
+//	public static String getDayOfWeek()
+//	{
+//		return getDayOfWeek(0);
+//	}
+//	public static String getDayOfWeek(Integer extraDays)
+//	{
+//		Calendar 												calendar 					= Calendar.getInstance();
+//		Integer 												day 						= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
+//	
+//		day																					= day + extraDays;						// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
+//		day--;																														// Sunday = 0, Monday = 1, Tues = 2 ... Sat = 6
+//		day																					= day % 7;								// Modulo to take extra days into account
+//		if (day == 0)
+//		{
+//			day																				= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+//		}
+//		return day.toString();
+//	}
+//	public static Long parseTime(String characters)
+//	{
+//		// Returns a supplied time in string form "hh:mm" 
+//		// In milliseconds since last midnight
+//		String splitCharacters[]															= characters.split(":");
+//		
+//		Calendar calendar																	= Calendar.getInstance();
+//		calendar.set(Calendar.HOUR_OF_DAY, 	Integer.parseInt(splitCharacters[0]));
+//		calendar.set(Calendar.MINUTE,  		Integer.parseInt(splitCharacters[1]));
+//		calendar.set(Calendar.SECOND, 		0);
+//		calendar.set(Calendar.MILLISECOND, 	0);
+//		
+//		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
+//	}
+//	public static Long parseDateTime(String characters)
+//	{
 		// Returns a supplied time in string form "hh:mm" 
 		// In milliseconds since last midnight
 //		String splitCharacters[]			= characters.split(":");
@@ -312,8 +309,8 @@ public class Global
 //		calendar.set(Calendar.MILLISECOND, 	0);
 //		
 //		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
-		return -1L;
-	}
+//		return -1L;
+//	}
 	public static Boolean waitSeconds(Integer seconds)										// Sleeps a supplied number of seconds
 	{
 		return waitMilliSeconds(seconds * 1000);
@@ -360,7 +357,7 @@ public class Global
     {
 		for (Calendars.Away 		awayItem : awayList)
 		{
-			Long now												= Global.now();
+			Long now												= Global.DateTime.now();
 			if (	(now > awayItem.dateTimeStart)
 			&& 		(now < awayItem.dateTimeEnd)	)
 			{
@@ -369,10 +366,10 @@ public class Global
 		}
 		return false;
     }
-	public static Long now()
-	{
-		return Calendar.getInstance().getTimeInMillis();
- 	}
+//	public static Long now()
+//	{
+//		return Calendar.getInstance().getTimeInMillis();
+// 	}
 	public static void burnerPanic(String reason)
 	{
 		// Need to determine what to bo in burner Panic situations
@@ -456,44 +453,49 @@ public class Global
 		}
 		
 	}
-    public static String  dateTimeDisplay()
-	{
-		Date 													now 						= new Date();
-		SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-		String 													nowFormatted 				= dateFormat.format(now);
-		return nowFormatted;
-	}
-    public static String  dateTimeDisplay(Long milliSeconds)
-	{
-		SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-		String 													nowFormatted 				= dateFormat.format(milliSeconds);
-		return nowFormatted;
-	}
-    public static String displayTimeShort(Long dateTime)
-    {
-		//==============================================================
-		// Accepts a TimeSinceMidnight argument if UTC and adjusts for local Timezone
-		// returns supplied dateTime in the form hh:mm
-		//==============================================================
-    	
-    	String 													dateTimeString;
-    	Long													days						= dateTime / 1000 / 3600 / 24;		//millisecs -> secs -> hours -> days
-    	if (days > 0)																		// We need to use the TimeZoned calendar to workout time
-    	{
-          SimpleDateFormat 										sdf 						= new SimpleDateFormat("HH:mm");
-          GregorianCalendar 									calendar 					= new GregorianCalendar();
-          calendar.setTimeInMillis(dateTime);
-          dateTimeString																	= sdf.format(dateTime);
-    	}
-    	else																				// Must calculate manually as time is since local midnight
-    	{
-    		Integer												seconds						= (int) (long) (dateTime / 1000);
-    		Integer												hours						= seconds / 3600;
-    		Integer												minutes						= (seconds - hours * 3600)/60;
-    		dateTimeString																	= String.format("%02d", hours)  + ":" +String.format("%02d", minutes);
-    	}
-    	return dateTimeString;
-   }
+//    public static String  dateTimeDisplay()
+//	{
+//		Date 													now 						= new Date();
+//		SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+//		String 													nowFormatted 				= dateFormat.format(now);
+//		return nowFormatted;
+//	}
+//    public static String  dateTimeDisplay(Long milliSeconds)
+//	{
+//		SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+//		String 													nowFormatted 				= dateFormat.format(milliSeconds);
+//		return nowFormatted;
+//	}
+//    public static String displayTimeShort(Long dateTime)
+//    {
+//		//==============================================================
+//		// Accepts a TimeSinceMidnight argument if UTC and adjusts for local Timezone
+//		// returns supplied dateTime in the form hh:mm
+//		//==============================================================
+//    	
+//    	String 													dateTimeString;
+//    	Long													days						= dateTime / 1000 / 3600 / 24;		//millisecs -> secs -> hours -> days
+//    	if (days > 0)																		// We need to use the TimeZoned calendar to workout time
+//    	{
+//          SimpleDateFormat 										sdf 						= new SimpleDateFormat("HH:mm");
+//          GregorianCalendar 									calendar 					= new GregorianCalendar();
+//          calendar.setTimeInMillis(dateTime);
+//          dateTimeString																	= sdf.format(dateTime);
+//    	}
+//    	else																				// Must calculate manually as time is since local midnight
+//    	{
+//    		Integer												seconds						= (int) (long) (dateTime / 1000);
+//    		Integer												hours						= seconds / 3600;
+//    		Integer												minutes						= (seconds - hours * 3600)/60;
+//    		dateTimeString																	= String.format("%02d", hours)  + ":" +String.format("%02d", minutes);
+//    	}
+//    	return dateTimeString;
+//   }
+
+   //===========================================================================================================================================
+   //
+   //																DateTime
+   //
    public static class Date
    {
 		public static Long now()															// Returns date in milliseconds (ie dateTime at midnight)
@@ -511,7 +513,32 @@ public class Global
 		public static Long 			today()							{return now();												}
 		public static Long 			dateOnly(Integer days)			{return now() - 24 * 60 * 60 * 1000L * days;				}
 		public static Long 			yesterday()						{return dateOnly(-1);										}
+		public static String getDayOfWeek()
+		{
+			return getDayOfWeek(0);
+		}
+		public static String getDayOfWeek(Integer extraDays)
+		{
+			Calendar 												calendar 					= Calendar.getInstance();
+			Integer 												day 						= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
+		
+			day																					= day + extraDays;						// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
+			day--;																														// Sunday = 0, Monday = 1, Tues = 2 ... Sat = 6
+			day																					= day % 7;								// Modulo to take extra days into account
+			if (day == 0)
+			{
+				day																				= 7;									// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+			}
+			return day.toString();
+		}
    }
+   //
+   //===========================================================================================================================================
+
+   //===========================================================================================================================================
+   //
+   //																DateTime
+   //
    public static class Time
    {
 		public static Long 			now()													// Returns time part in milliseconds
@@ -521,12 +548,75 @@ public class Global
 			//==============================================================
 			return Calendar.getInstance().getTimeInMillis() - Global.Date.now();		
 		}
+
+		public static String display(Long dateTime)
+		{
+			//==============================================================
+			// Accepts a TimeSinceMidnight argument if UTC and adjusts for local Timezone
+			// returns supplied dateTime in the form hh:mm
+			//==============================================================
+			
+			String 													dateTimeString;
+			Long													days						= dateTime / 1000 / 3600 / 24;		//millisecs -> secs -> hours -> days
+			if (days > 0)																		// We need to use the TimeZoned calendar to workout time
+			{
+			     SimpleDateFormat 										sdf 					= new SimpleDateFormat("HH:mm");
+			     GregorianCalendar 									calendar 					= new GregorianCalendar();
+			     calendar.setTimeInMillis(dateTime);	
+			     dateTimeString																	= sdf.format(dateTime);
+			}
+			else																					// Must calculate manually as time is since local midnight
+			{
+				Integer												seconds						= (int) (long) (dateTime / 1000);
+				Integer												hours						= seconds / 3600;
+				Integer												minutes						= (seconds - hours * 3600)/60;
+				dateTimeString																	= String.format("%02d", hours)  + ":" +String.format("%02d", minutes);
+			}
+			return dateTimeString;
+		}
+		public static Long parseTime(String characters)
+		{
+			// Returns a supplied time in string form "hh:mm"
+			// In milliseconds since last midnight
+			String splitCharacters[]															= characters.split(":");
+			
+			Calendar calendar																	= Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, 	Integer.parseInt(splitCharacters[0]));
+			calendar.set(Calendar.MINUTE,  		Integer.parseInt(splitCharacters[1]));
+			calendar.set(Calendar.SECOND, 		0);
+			calendar.set(Calendar.MILLISECOND, 	0);
+			
+			// return (Integer.parseInt(splitCharacters[0]) * 3600 +Integer.parseInt(splitCharacters[1]) * 60 ) * 1000L
+			return calendar.getTimeInMillis() - Global.Date.now();
+		}
    }
+   //
+   //===========================================================================================================================================
+
+   //===========================================================================================================================================
+   //
+   //																DateTime
+   //
    public static class DateTime
    {
-		public static Long now()															// Returns DateTime in milliseconds
+		public static Long now()																// Returns DateTime in milliseconds
 		{
 			return Calendar.getInstance().getTimeInMillis();
 	 	}
+		public static String display()															// Returns DateTime in milliseconds
+		{
+			Date 													now 						= new Date();
+			SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+			String 													nowFormatted 				= dateFormat.format(now);
+			return nowFormatted;
+	 	}
+	    public static String  display(Long milliSeconds)
+		{
+			SimpleDateFormat 										dateFormat 					= new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+			String 													nowFormatted 				= dateFormat.format(milliSeconds);
+			return nowFormatted;
+		}
    }
+   //
+   //===========================================================================================================================================
 }

@@ -146,7 +146,7 @@ public class Thread_TCPListen 			implements Runnable
 		
 		message_return.circuitName								= circuitName;
 
-		Long 					now							= Global.getTimeNowSinceMidnight();
+		Long 					now							= Global.Time.now();
 		Long					midnight					= 24L * 60 * 60 * 1000;
 		Long					nextStart					= midnight;
 		Integer					tempObjective				= 0;
@@ -156,7 +156,7 @@ public class Thread_TCPListen 			implements Runnable
 		{
 			for (CircuitTask aTask : circuit.circuitTaskList)			// Check to ensure there are no active tasks
 			{
-				if (	(aTask.days.contains(Global.getDayOfWeek(0))) 
+				if (	(aTask.days.contains(Global.Date.getDayOfWeek(0))) 
 //				&& 		(! aTask.active)
 				&&     	(aTask.timeStart > now )
 				&&     	(aTask.timeStart < nextStart ))
@@ -198,7 +198,7 @@ public class Thread_TCPListen 			implements Runnable
 	}
 	private Ctrl__Abstract				process_Ctrl_Immediate_Execute			(Ctrl_Immediate.Execute message_in)
 	{
-		Long	now											= Global.getTimeNowSinceMidnight();
+		Long	now											= Global.Time.now();
 		
 		String 					circuitName					= message_in.circuitName;
 		Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
@@ -244,7 +244,7 @@ public class Thread_TCPListen 			implements Runnable
 		
 		// This timestamp needs to be looked at in grater detail
 		
-		message_return.dateTime								= Global.now();
+		message_return.dateTime								= Global.DateTime.now();
 		
 		for (Thermometer 			globalThermometer : Global.thermometers.thermometerList)
 		{
