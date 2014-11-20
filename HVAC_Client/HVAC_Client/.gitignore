@@ -2,5 +2,4 @@ bin/
 gen/
 *.class
 !res/
-!*.xml
-!*.java
+!src/**

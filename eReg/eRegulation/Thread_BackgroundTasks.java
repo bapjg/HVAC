@@ -174,6 +174,20 @@ public class Thread_BackgroundTasks implements Runnable
 			//=========================================================================================================================================
 			//
 			// Optimise : Particularly hot water in summer and floor in winter
+			
+			// evry hour
+			// if floor not on
+			// set mixer cold
+			// run pump 5 mins
+			// take floor temp and put in pid or elsewhere
+			
+			//
+			//
+			//=========================================================================================================================================
+
+			//=========================================================================================================================================
+			//
+			// Optimise : Particularly hot water in summer and floor in winter
 			//
 			
 			// Must also run floor pump for a certain time to get good reading of concrete/floor temp
