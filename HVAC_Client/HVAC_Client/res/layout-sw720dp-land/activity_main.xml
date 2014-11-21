@@ -1,0 +1,150 @@
+<?xml version			= "1.0" encoding		= "utf-8"?>
+<RelativeLayout  
+	xmlns:android								= "http://schemas.android.com/apk/res/android"
+    android:layout_width						= "match_parent"
+    android:layout_height						= "match_parent"
+    android:background							= "@color/background"
+    android:baselineAligned						= "false"
+    android:orientation							= "vertical"
+    android:textColor							= "@color/Yellow"
+>
+	<!-- 
+		Connection Status layout 
+	-->
+	<LinearLayout 
+	    android:id								= "@+id/connection_status"
+	    android:layout_width					= "match_parent"
+	    android:layout_height					= "wrap_content"
+	    android:background						= "@color/Black"
+	    android:baselineAligned					= "true"
+	    android:orientation						= "horizontal"
+	    android:textColor						= "@color/Yellow"
+	    android:layout_alignParentBottom		= "true"
+	    android:textSize 						= "12dp"
+	>                           				
+		<!-- 
+			Local/Remote
+		-->
+		<LinearLayout
+		    android:layout_width				= "wrap_content"
+		    android:layout_height				= "wrap_content"
+		    android:layout_weight				= "2"
+		    android:orientation					= "vertical" >
+                                            
+		    <TextView                       
+		        android:layout_height			= "wrap_content"
+		        android:layout_width			= "match_parent"
+		        android:gravity					= "center_vertical|center_horizontal"
+		        android:text					= "Address"
+		        android:textColor				= "@color/White" 
+	        />                              
+                                            
+		    <TextView                       
+		        android:id						= "@+id/address_space"
+		        android:layout_height			= "wrap_content"
+		        android:layout_width			= "match_parent"
+		        android:gravity					= "center_vertical|center_horizontal"
+		        android:text					= "Waiting"
+		        android:textColor				= "@color/Yellow" 
+	        />
+		</LinearLayout>
+		<!-- 
+			TCP
+		-->
+		<LinearLayout
+		    android:layout_width				= "wrap_content"
+		    android:layout_height				= "wrap_content"
+		    android:layout_weight				= "2"
+		    android:orientation					= "vertical" 
+		>
+                           				
+		    <TextView
+		        android:layout_height			= "wrap_content"
+		        android:layout_width			= "match_parent"
+		        android:gravity					= "center_vertical|center_horizontal"
+		        android:text					= "TCP"
+		        android:textColor				= "@color/White" 
+	        />
+		    <TextView
+		        android:id						= "@+id/connection_tcp"
+		        android:layout_height			= "wrap_content"
+		        android:layout_width			= "match_parent"
+		        android:gravity					= "center_vertical|center_horizontal"
+		        android:text					= "dis-connected"
+		        android:textColor				= "@color/Yellow"
+	
+	        />
+		</LinearLayout>   
+		<!-- 
+			HTTP
+		-->
+		<LinearLayout
+		    android:layout_width				= "wrap_content"
+		    android:layout_height				= "wrap_content"
+		    android:layout_weight				= "2"
+		    android:orientation					= "vertical" 
+		>                                   
+                           				    
+		    <TextView                       
+		        android:layout_height			= "wrap_content"
+		        android:layout_width			= "match_parent"
+		        android:gravity 				= "center_vertical|center_horizontal"
+		        android:text					= "HTTP"
+		        android:textColor				= "@color/White" 
+	        />                              
+		    <TextView                       
+		        android:id						= "@+id/connection_http"
+		        android:layout_height			= "wrap_content"
+		        android:layout_width			= "match_parent"
+		        android:gravity 				= "center_vertical|center_horizontal"
+		        android:text					= "dis-connected"
+		        android:textColor				= "@color/Yellow" 
+	        />
+		</LinearLayout>   
+	</LinearLayout>
+    
+    	<!-- 
+		Menu and Panel layouts 
+	-->
+	<LinearLayout 
+	    android:id								= "@+id/activity_container"
+	    android:layout_width					= "match_parent"
+	    android:layout_height					= "fill_parent"
+	    android:background						= "@color/background"
+	    android:orientation						= "horizontal"
+	    android:textColor						= "@color/Yellow"
+	    android:layout_alignParentTop			= "true"
+	    android:layout_above					= "@id/connection_status"
+	>                           				
+		<!-- 
+			Menu layout 
+		-->
+	    <LinearLayout           				
+	        android:id							= "@+id/menu_container"
+	        android:layout_width				= "wrap_content"
+	        android:layout_height				= "match_parent"
+	        android:background					= "@color/background"
+	        android:baselineAligned				= "false"
+	        android:orientation					= "vertical"
+	        android:paddingTop					= "0dp"
+	        android:text						= "roomForButtons"
+		/>
+             			
+		<!-- 
+			Panel layout 
+		-->
+	    <LinearLayout
+	        android:id							= "@+id/panel_container"
+	        android:layout_width				= "fill_parent"
+	        android:layout_height				= "match_parent"
+	        android:background					= "@color/background"
+	        android:baselineAligned				= "false"
+	        android:orientation					= "vertical"
+	        android:text						= "roomForData"
+	        android:paddingLeft					= "200dp"
+	        android:paddingRight				= "200dp"
+		/>
+	    
+	</LinearLayout>
+
+</RelativeLayout>

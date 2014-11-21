@@ -80,26 +80,26 @@ public class Activity_Main 										extends 					Activity
         
 
         
-        if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) 
-        {     
-            Toast.makeText(this, "Large screen",Toast.LENGTH_LONG).show();
-        }
-        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) 
-        {     
-            Toast.makeText(this, "Normal sized screen" , Toast.LENGTH_LONG).show();
-        } 
-        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) 
-        {     
-            Toast.makeText(this, "Small sized screen" , Toast.LENGTH_LONG).show();
-        }
-        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) 
-        {     
-            Toast.makeText(this, "Extra Large sized screen" , Toast.LENGTH_LONG).show();
-        }
-        else 
-        {
-            Toast.makeText(this, "Screen size is neither large, normal or small" , Toast.LENGTH_LONG).show();
-        }
+//        if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) 
+//        {     
+//            Toast.makeText(this, "Large screen",Toast.LENGTH_LONG).show();
+//        }
+//        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) 
+//        {     
+//            Toast.makeText(this, "Normal sized screen" , Toast.LENGTH_LONG).show();
+//        } 
+//        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) 
+//        {     
+//            Toast.makeText(this, "Small sized screen" , Toast.LENGTH_LONG).show();
+//        }
+//        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) 
+//        {     
+//            Toast.makeText(this, "Extra Large sized screen" , Toast.LENGTH_LONG).show();
+//        }
+//        else 
+//        {
+//            Toast.makeText(this, "Screen size is neither large, normal or small" , Toast.LENGTH_LONG).show();
+//        }
         
 
 	}

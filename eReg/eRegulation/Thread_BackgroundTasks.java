@@ -104,7 +104,7 @@ public class Thread_BackgroundTasks implements Runnable
 						}
 					}
 				}
-				pumpCleanDateLast															= Global.Time.now();
+				pumpCleanDateLast															= Global.Date.now();
 				LogIt.action("Summer Pumps", "Finished");
 				LogIt.info("Thread_Background", "Run", "Clean pump finished", true);
 			}
