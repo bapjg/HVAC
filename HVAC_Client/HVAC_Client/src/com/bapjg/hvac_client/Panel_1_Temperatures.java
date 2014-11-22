@@ -34,7 +34,6 @@ import HVAC_Common.*;
 public class Panel_1_Temperatures 								extends 					Panel_0_Fragment 
 {		
 	public TCP_Task												task;
-	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 	
 	public Panel_1_Temperatures()
 	{
@@ -44,6 +43,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.panelView																		= inflater.inflate(R.layout.panel_1_temperatures, container, false);
+    	this.container																		= container;
     	displayHeader();
     	TCP_Send(new Ctrl_Temperatures().new Request());
         return panelView;

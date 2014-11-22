@@ -87,6 +87,7 @@ public class Global
 		if 		(result instanceof Ctrl__Abstract.Ack)			message = "Ok";
 		else if (result instanceof Ctrl__Abstract.Nack)			message = "Nack";
 		else if (result instanceof Ctrl__Abstract.NoConnection)	message = "No Connection";
+		else if (result instanceof Ctrl__Abstract.TimeOut)		message = "Time Out";
 		else if (result instanceof Ctrl_Actions_Relays.Data)	message = "Ok";
 		else if (result instanceof Ctrl_Actions_Test_Mail.Ack)	message = "Ok";
 		else if (result instanceof Ctrl_Actions_Stop.Ack)		message = "Ok";
@@ -108,6 +109,7 @@ public class Global
 		else if (result instanceof Ctrl__Abstract.Ack)			message = "Ok";
 		else if (result instanceof Ctrl__Abstract.Nack)			message = "Nack";
 		else if (result instanceof Ctrl__Abstract.NoConnection)	message = "No Connection";
+		else if (result instanceof Ctrl__Abstract.TimeOut)		message = "Time Out";
 		else if (result instanceof Ctrl_Json.Data)				message = "Ok";
 		else													message = "Bad Data";
 

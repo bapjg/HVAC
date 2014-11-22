@@ -15,6 +15,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,9 +37,19 @@ public class Panel_0_Fragment 									extends 					Fragment
 																							HTTP_Response,
 																							Dialog_Response
 {
-    public Panel_0_Fragment()
+	public ViewGroup											container;
+	public View													panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+
+	public Panel_0_Fragment()
     {
     }
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+		super.onConfigurationChanged(newConfig);
+	    LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	panelView 																			= inflater.inflate(this.panelView, this.container, false);				// Inflate the menuLayout into container (menu_container)
+	}
+
 	public void HTTP_Send(Ctrl__Abstract message)
 	{
 		Global.setStatusHTTP("Waiting");

@@ -11,6 +11,8 @@ import HVAC_Common.Ctrl_WeatherData;
 import HVAC_Common.Ctrl__Abstract;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,6 +49,12 @@ public class Menu_0_Fragment 									extends 					Fragment
 		((OnClickListener) this).onClick(firstButton);																		// Execute the onClickListener of the first menu button
     	return menuView;
     }
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+		super.onConfigurationChanged(newConfig);
+	    LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	menuView 																			= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
+	}
 	public void onClick(View myView) 																						// This is the onClick event from the Menu
 	{
     	Button 													myButton 					= (Button) myView;
