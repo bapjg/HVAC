@@ -24,11 +24,6 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 																implements					AdapterView.OnItemClickListener	
 {
 	public String												circuitName;
-
-	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-	private View												adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
-
-//	TODO Calendar times are all wrong
 	
     public Panel_3_Calendars_Circuits(String circuitName)
     {
@@ -39,6 +34,8 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
+    	this.panelLayout																	= R.layout.panel_3_calendars;
+    	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_3_calendars, container, false);
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
         

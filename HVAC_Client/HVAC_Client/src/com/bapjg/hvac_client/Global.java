@@ -13,7 +13,10 @@ import java.util.TimeZone;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import HVAC_Common.*;
@@ -45,6 +48,8 @@ public class Global
 	public static	Ctrl_Configuration.Data						eRegConfiguration;
 	public static	Ctrl_Calendars.Data							eRegCalendars;
 	public static	Ctrl_WeatherData							weatherForecast;
+	
+	public static	String										deviceName;
 	
 	public Global() 
 	{
@@ -292,5 +297,25 @@ public class Global
 		calendar.set(Calendar.MILLISECOND, 	0);
 		
 		return calendar.getTimeInMillis() - Global.getTimeAtMidnight();
+	}
+	public static void setOrientationParams()
+	{
+		Boolean landscape;
+	
+		if (Global.activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)	landscape =true;
+		else																						landscape = false;
+	
+		View viewPanelContainer = (View) Global.activity.findViewById(R.id.panel_container);
+		View viewMenuContainer = (View) Global.activity.findViewById(R.id.menu_container);
+
+	
+		float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, Global.activity.getResources().getDisplayMetrics());
+		int pxI = (int) px;
+	
+	if (Global.deviceName == "toshiba")
+	{
+		if (landscape)		viewPanelContainer.setPadding(pxI * 2, 0, pxI * 2, 0);
+		else 				viewPanelContainer.setPadding(pxI * 1, 0, pxI * 1, 0);
+	}
 	}
 }

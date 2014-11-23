@@ -32,8 +32,6 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragment 
 {
-	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-
 	public Panel_3_Calendars_Background_Tasks()
 	{
 		super();
@@ -42,7 +40,9 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        this.panelView 																		= inflater.inflate(R.layout.panel_3_calendars_background_tasks, container, false);
+    	this.panelLayout																	= R.layout.panel_3_calendars_background_tasks;
+    	this.container																		= container;
+    	this.panelView																		= inflater.inflate(R.layout.panel_3_calendars_background_tasks, container, false);
 
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.tasksBackGround != null))

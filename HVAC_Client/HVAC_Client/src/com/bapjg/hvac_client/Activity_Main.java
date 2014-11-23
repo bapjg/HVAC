@@ -10,8 +10,11 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,22 @@ public class Activity_Main 										extends 					Activity
         Global.appContext 																	= getApplicationContext();
         Global.actContext																	= (Context)  this;
         Global.activity																		= (Activity) this;
+        
+		DisplayMetrics 											metrics 					= new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		int 													widthPixels 				= metrics.widthPixels;
+		int  													heightPixels 				= metrics.heightPixels;
+		float 													scaleFactor 				= metrics.density;
+		float 													widthDp 					= widthPixels / scaleFactor;
+		float 													heightDp 					= heightPixels / scaleFactor;
+		float 													smallestWidth 				= Math.min(widthDp, heightDp);
+		
+		if 		(smallestWidth > 750)							Global.deviceName			= "toshiba";
+		else if (smallestWidth > 430)							Global.deviceName			= "iJoy";
+		else													Global.deviceName			= "lgPhone";
+
+		Global.toast(Global.deviceName, true);
+		Global.setOrientationParams();
 
         HTTP_Send	(new Ctrl_Json().new 		Request(Ctrl_Json.TYPE_Calendar));				// Fire these async actions as soon as possible
      	HTTP_Send	(new Ctrl_Json().new 		Request(Ctrl_Json.TYPE_Configuration));
@@ -77,31 +96,11 @@ public class Activity_Main 										extends 					Activity
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
         actionbar.addTab(tabReset);
-        
-
-        
-//        if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) 
-//        {     
-//            Toast.makeText(this, "Large screen",Toast.LENGTH_LONG).show();
-//        }
-//        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) 
-//        {     
-//            Toast.makeText(this, "Normal sized screen" , Toast.LENGTH_LONG).show();
-//        } 
-//        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) 
-//        {     
-//            Toast.makeText(this, "Small sized screen" , Toast.LENGTH_LONG).show();
-//        }
-//        else if ((getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) 
-//        {     
-//            Toast.makeText(this, "Extra Large sized screen" , Toast.LENGTH_LONG).show();
-//        }
-//        else 
-//        {
-//            Toast.makeText(this, "Screen size is neither large, normal or small" , Toast.LENGTH_LONG).show();
-//        }
-        
-
+	}
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+		super.onConfigurationChanged(newConfig);
+		Global.setOrientationParams();
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 

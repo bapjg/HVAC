@@ -25,7 +25,6 @@ public class Panel_4_Weather_Sun 									extends 					Panel_0_Fragment
 {
 	private String												when;
 	private ArrayList <Ctrl_WeatherData.Forecast> 				forecastList;
-	private View												panelView;
 	
 	public Panel_4_Weather_Sun()
 	{
@@ -40,7 +39,9 @@ public class Panel_4_Weather_Sun 									extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        this.panelView																		= inflater.inflate(R.layout.panel_4_weather_sun, container, false);
+    	this.panelLayout																	= R.layout.panel_4_weather_sun;
+    	this.container																		= container;
+    	this.panelView																		= inflater.inflate(R.layout.panel_4_weather_sun, container, false);
 
 		if (Global.weatherForecast != null)
 		{

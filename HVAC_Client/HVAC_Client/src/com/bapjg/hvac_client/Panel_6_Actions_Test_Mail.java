@@ -25,15 +25,15 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 public class Panel_6_Actions_Test_Mail 							extends 					Panel_0_Fragment  
 {
-	private View												panelView;				// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-
 	public Panel_6_Actions_Test_Mail()
 	{
 		super();
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-     	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
+    	this.panelLayout																	= R.layout.panel_6_actions_test_mail;
+    	this.container																		= container;
+    	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
 
     	displayHeader();
     	displayContents();

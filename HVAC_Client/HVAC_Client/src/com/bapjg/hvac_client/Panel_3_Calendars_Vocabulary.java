@@ -21,9 +21,6 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 {		
-	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-	private View												adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
-	
 	public Panel_3_Calendars_Vocabulary()
 	{
 		super();
@@ -32,7 +29,9 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-        this.panelView																		= inflater.inflate(R.layout.panel_3_calendars, container, false);
+    	this.panelLayout																	= R.layout.panel_3_calendars;
+    	this.container																		= container;
+    	this.panelView																		= inflater.inflate(R.layout.panel_3_calendars, container, false);
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
  
         if ((Global.eRegCalendars != null)

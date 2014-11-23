@@ -33,9 +33,6 @@ import android.widget.EditText;
 public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 																implements					AdapterView.OnItemClickListener	
 {
-	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-	private View												adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
-
 	public Panel_5_Configuration_Circuits()
 	{
 		super();
@@ -43,8 +40,9 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        // Inflate the layout for this fragment
-        this.panelView 																		= inflater.inflate(R.layout.panel_5_configuration_circuits, container, false);
+    	this.panelLayout																	= R.layout.panel_5_configuration_circuits;
+    	this.container																		= container;
+    	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_circuits, container, false);
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
 
         if ((Global.eRegConfiguration != null)

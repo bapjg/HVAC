@@ -36,7 +36,6 @@ import HVAC_Common.*;
 public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment 
 {		
 	public TCP_Task												task;
-	public View													panelView;
 	
 	public Panel_5_Configuration_Burner()
 	{
@@ -45,7 +44,10 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	panelView																			= inflater.inflate(R.layout.panel_5_configuration_burner, container, false);
+    	this.panelLayout																	= R.layout.panel_5_configuration_burner;
+    	this.container																		= container;
+    	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_burner, container, false);
+
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.boiler != null))
         {

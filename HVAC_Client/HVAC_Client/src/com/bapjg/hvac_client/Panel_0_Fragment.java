@@ -37,19 +37,29 @@ public class Panel_0_Fragment 									extends 					Fragment
 																							HTTP_Response,
 																							Dialog_Response
 {
+	public int													panelLayout;
 	public ViewGroup											container;
 	public View													panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	public View													adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
 
 	public Panel_0_Fragment()
     {
     }
+	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
 		super.onConfigurationChanged(newConfig);
-	    LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    	panelView 																			= inflater.inflate(this.panelView, this.container, false);				// Inflate the menuLayout into container (menu_container)
+		
+		
+		LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	    panelView 																			= inflater.inflate(this.panelLayout, this.container);				// Inflate the menuLayout into container (menu_container)
+	    displayHeader(); 
+    	displayContents();
+    	setListens();
 	}
-
+	public void displayHeader() 											{}
+	public void displayContents() 											{}
+	public void setListens()												{}
 	public void HTTP_Send(Ctrl__Abstract message)
 	{
 		Global.setStatusHTTP("Waiting");

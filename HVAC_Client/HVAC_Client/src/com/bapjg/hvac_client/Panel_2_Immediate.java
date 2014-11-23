@@ -17,11 +17,10 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 																implements 					TCP_Response
 {			
 	public String												circuitName;
-	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 	private Ctrl_Immediate.Execute								messageExecute				= new Ctrl_Immediate().new Execute();
 	private Ctrl_Immediate.Data									messageReceived;
 	
-   public Panel_2_Immediate()
+	public Panel_2_Immediate()
     {
 		super();
 		this.circuitName																	= "";
@@ -33,6 +32,8 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
+    	this.panelLayout																	= R.layout.panel_2_immediate;
+    	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_2_immediate, container, false);
     	displayHeader();
 									

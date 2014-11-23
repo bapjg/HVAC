@@ -39,10 +39,11 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			// CleanPumps : particularly in summer
 			//
-
-			if ( (tasksBackGround.pumpCleanTime		> 	Global.Time.now()						) 		// time to do it has arrived		
-			&&   (tasksBackGround.pumpCleanTime		< 	Global.Time.now() + (30 * 60 * 1000L)	) 		// & within 30 min window
-			&&   (pumpCleanDateLast					< 	Global.Date.now()						) 	)	// Last run was yesterday ie < Today.midnight
+			Long							timeNow					= Global.Time.now();
+			
+			if ( (timeNow		> 	tasksBackGround.pumpCleanTime						) 		// time to do it has arrived		
+			&&   (timeNow		< 	tasksBackGround.pumpCleanTime + (30 * 60 * 1000L)	) 		// & within 30 min window
+			&&   (timeNow		> 	pumpCleanDateLast									) 	)	// Last run was yesterday ie < Today.midnight
 			{
 				LogIt.action("Summer Pumps", "Action being considered");
 				LogIt.info("Thread_Background", "Run", "Action being considered");

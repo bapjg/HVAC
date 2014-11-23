@@ -34,6 +34,7 @@ import HVAC_Common.*;
 public class Panel_1_Temperatures 								extends 					Panel_0_Fragment 
 {		
 	public TCP_Task												task;
+	private Ctrl_Temperatures.Data								temperatureData;
 	
 	public Panel_1_Temperatures()
 	{
@@ -42,7 +43,8 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelView																		= inflater.inflate(R.layout.panel_1_temperatures, container, false);
+    	this.panelLayout																	= R.layout.panel_1_temperatures;
+		this.panelView																		= inflater.inflate(R.layout.panel_1_temperatures, container, false);
     	this.container																		= container;
     	displayHeader();
     	TCP_Send(new Ctrl_Temperatures().new Request());
@@ -53,8 +55,8 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 		super.processFinishTCP(result);
 		if 	(result instanceof Ctrl_Temperatures.Data)
 		{
-			displayContents		((Ctrl_Temperatures.Data) result);		// TODO BERK BERK BERK
-	        setListens();
+			temperatureData																	= (Ctrl_Temperatures.Data) result;																	
+			displayContents();
 		}
         setListens();
     } 
@@ -63,23 +65,23 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 		((TextView) panelView.findViewById(R.id.title)).setText		("Temperatures");
 		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Readings");
 	}
-	public void displayContents(Ctrl_Temperatures.Data msg_received)
+	public void displayContents()
 	{
 		if (getActivity() != null)			// The user has not changed the screen
 		{
-			((TextView) panelView.findViewById(R.id.Date)).setText				(Global.displayDateShort	(msg_received.dateTime));
-			((TextView) panelView.findViewById(R.id.Time)).setText				(Global.displayTimeShort	(msg_received.dateTime));
+			((TextView) panelView.findViewById(R.id.Date)).setText				(Global.displayDateShort	(temperatureData.dateTime));
+			((TextView) panelView.findViewById(R.id.Time)).setText				(Global.displayTimeShort	(temperatureData.dateTime));
 			
-			((TextView) panelView.findViewById(R.id.Boiler)).setText			(Global.displayTemperature	(msg_received.tempBoiler));
-			((TextView) panelView.findViewById(R.id.HotWater)).setText			(Global.displayTemperature	(msg_received.tempHotWater));
-			((TextView) panelView.findViewById(R.id.Outside)).setText			(Global.displayTemperature	(msg_received.tempOutside));
-			((TextView) panelView.findViewById(R.id.BoilerIn)).setText			(Global.displayTemperature	(msg_received.tempBoilerIn));
-			((TextView) panelView.findViewById(R.id.BoilerOut)).setText			(Global.displayTemperature	(msg_received.tempBoilerOut));
-			((TextView) panelView.findViewById(R.id.FloorIn)).setText			(Global.displayTemperature	(msg_received.tempFloorIn));
-			((TextView) panelView.findViewById(R.id.FloorOut)).setText			(Global.displayTemperature	(msg_received.tempFloorOut));
-			((TextView) panelView.findViewById(R.id.RadiatorIn)).setText		(Global.displayTemperature	(msg_received.tempRadiatorIn));
-			((TextView) panelView.findViewById(R.id.RadiatorOut)).setText		(Global.displayTemperature	(msg_received.tempRadiatorOut));
-			((TextView) panelView.findViewById(R.id.LivingRoom)).setText		(Global.displayTemperature	(msg_received.tempLivingRoom));
+			((TextView) panelView.findViewById(R.id.Boiler)).setText			(Global.displayTemperature	(temperatureData.tempBoiler));
+			((TextView) panelView.findViewById(R.id.HotWater)).setText			(Global.displayTemperature	(temperatureData.tempHotWater));
+			((TextView) panelView.findViewById(R.id.Outside)).setText			(Global.displayTemperature	(temperatureData.tempOutside));
+			((TextView) panelView.findViewById(R.id.BoilerIn)).setText			(Global.displayTemperature	(temperatureData.tempBoilerIn));
+			((TextView) panelView.findViewById(R.id.BoilerOut)).setText			(Global.displayTemperature	(temperatureData.tempBoilerOut));
+			((TextView) panelView.findViewById(R.id.FloorIn)).setText			(Global.displayTemperature	(temperatureData.tempFloorIn));
+			((TextView) panelView.findViewById(R.id.FloorOut)).setText			(Global.displayTemperature	(temperatureData.tempFloorOut));
+			((TextView) panelView.findViewById(R.id.RadiatorIn)).setText		(Global.displayTemperature	(temperatureData.tempRadiatorIn));
+			((TextView) panelView.findViewById(R.id.RadiatorOut)).setText		(Global.displayTemperature	(temperatureData.tempRadiatorOut));
+			((TextView) panelView.findViewById(R.id.LivingRoom)).setText		(Global.displayTemperature	(temperatureData.tempLivingRoom));
 		}
 	}
 	public void setListens()

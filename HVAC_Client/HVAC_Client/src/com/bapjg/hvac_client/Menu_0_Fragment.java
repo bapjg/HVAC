@@ -41,7 +41,7 @@ public class Menu_0_Fragment 									extends 					Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	menuView 																			= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
+		menuView 																			= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
     	listView																			= menuView.findViewById(R.id.buttons_container);
     	Button													firstButton					= (Button) ((ViewGroup) listView).getChildAt(0);
     	this.container																		= container;

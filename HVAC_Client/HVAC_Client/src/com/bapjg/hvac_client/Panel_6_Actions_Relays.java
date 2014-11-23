@@ -26,18 +26,17 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment  
 {
-	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-
 	public Panel_6_Actions_Relays()
 	{
 		super();
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.activity																		= getActivity();
+    	this.panelLayout																	= R.layout.panel_6_actions_relays;
+    	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_relays, container, false);
-    	TCP_Send(new Ctrl_Actions_Relays().new Request());
 
+    	TCP_Send(new Ctrl_Actions_Relays().new Request());
         
     	displayHeader();
     	displayContents();

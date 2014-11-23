@@ -30,16 +30,6 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment 
 {
-//	private Adapter_5_Configuration_Relays		 				adapter;
-//	private LayoutInflater										myInflater;
-//	private Activity											myActivity;
-//	private ViewGroup											myContainer;
-//	private View												myAdapterView;
-//	private FragmentManager										myFragmentManager;
-			
-	private View												panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-	private View												adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
-
 	public Panel_5_Configuration_PIDs()
 	{
 		super();
@@ -47,8 +37,9 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        // Inflate the layout for this fragment
-        this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_pids, container, false);
+    	this.panelLayout																	= R.layout.panel_5_configuration_pids;
+    	this.container																		= container;
+    	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_pids, container, false);
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
 
         if ((Global.eRegConfiguration != null)
