@@ -44,8 +44,8 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.panelLayout																	= R.layout.panel_1_temperatures;
-		this.panelView																		= inflater.inflate(R.layout.panel_1_temperatures, container, false);
     	this.container																		= container;
+		this.panelView																		= inflater.inflate(R.layout.panel_1_temperatures, container, false);
     	displayHeader();
     	TCP_Send(new Ctrl_Temperatures().new Request());
         return panelView;

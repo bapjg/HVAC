@@ -29,7 +29,7 @@ public class Activity_Main 										extends 					Activity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); // Contains activity_container which contains choices_container (left) and panel_container(right)
+        setContentView(R.layout.activity_main); 											// Contains activity_container which contains choices_container (left) and panel_container(right)
 
         global																				= new Global();
         Global.appContext 																	= getApplicationContext();
