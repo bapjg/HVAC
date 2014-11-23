@@ -3,6 +3,7 @@ package HVAC_Common;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -11,8 +12,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -131,6 +134,13 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 				System.out.println ("Error response from http : " + responseCode);
 			}
 		} 
+		catch (SocketTimeoutException eTO) 
+		{
+			System.out.println("Ctrl_WeatherData/Constructor timeout contacting the weather server" + eTO.toString());
+			this.dateTimeObtained													= null;
+			this.forecasts															= null;
+			return;	// Will try again in 5 mins (loop timer)
+		}
 		catch (Exception e) 
 		{
 			System.out.println("Ctrl_WeatherData/Constructor error on contacting the weather server" + e.toString());
