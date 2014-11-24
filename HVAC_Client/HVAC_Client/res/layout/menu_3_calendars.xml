@@ -6,6 +6,8 @@
     <ScrollView
 		android:layout_width				= "match_parent"
 		android:layout_height				= "wrap_content"
+	    android:layout_alignParentTop		= "true"
+	    android:layout_above				= "@id/buttons_refresh"
 	>
 		<LinearLayout
 		    android:layout_width			= "match_parent"
@@ -19,8 +21,18 @@
 			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Vocabulary"   		/>
 			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Away List"   		/>
 			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Background\nTasks"   />
-			<Button style					= "@style/AD_MenuButton"	android:text	= "Update"				/>
-			<Button style					= "@style/AD_MenuButton"	android:text	= "Refresh"				/>		
 		</LinearLayout>
 	</ScrollView>
+	
+	<LinearLayout
+	    android:layout_width				= "match_parent"
+	    android:layout_height				= "wrap_content"
+	    android:layout_alignParentBottom	= "true"
+	    android:orientation					= "vertical"
+	    android:id							= "@+id/buttons_refresh"
+    >
+		<Button style						= "@style/AD_MenuButton"	android:text	= "Update"				/>
+		<Button style						= "@style/AD_MenuButton"	android:text	= "Refresh"				/>
+	</LinearLayout>
+    	
 </RelativeLayout>

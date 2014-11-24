@@ -125,12 +125,12 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     	}
     	else if (view.getId() == R.id.timeStart)
     	{
-    		Dialog_Time	 									df 							= new Dialog_Time(messageExecute.timeStart, this);
+    		Dialog_Time	 										df 							= new Dialog_Time(messageExecute.timeStart, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
     	else if (view.getId() == R.id.timeEnd)
     	{
-    		Dialog_Time	 									df 							= new Dialog_Time(messageExecute.timeEnd, this);
+    		Dialog_Time	 										df 							= new Dialog_Time(messageExecute.timeEnd, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
     	else if (view.getId() == R.id.stopOnObjective)

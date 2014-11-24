@@ -83,9 +83,6 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 		panelView.findViewById(R.id.pumpCleanDuration).setOnClickListener(this);
 		panelView.findViewById(R.id.antiFreeze).setOnClickListener(this);
 		panelView.findViewById(R.id.summerTemp).setOnClickListener(this);
-		
-		TextView x = (TextView) panelView.findViewById(R.id.winterTemp);
-		
 		panelView.findViewById(R.id.winterTemp).setOnClickListener(this);
 		panelView.findViewById(R.id.sunshineInfluence).setOnClickListener(this);
 	}

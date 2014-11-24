@@ -102,5 +102,4 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
 	}
-
 }

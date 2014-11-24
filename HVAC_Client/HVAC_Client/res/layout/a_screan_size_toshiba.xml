@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout 
+	xmlns:android							= "http://schemas.android.com/apk/res/android"
+>
+<!-- 
+
+Model					Screen Size			Density			Density		Smallest Width
+================		===========			=======			=======		==============
+Toshiba A300			xLarge				Medium			  160			752
+LG L90 Phone			Normal Size			High			  240			360
+i-joy Tablette			Normal Size			Medium			  160			432
+
+
+Code to get above
+
+        DisplayMetrics metrics 								= new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int density 										= metrics.densityDpi;
+
+        if (density==DisplayMetrics.DENSITY_HIGH)             Toast.makeText(this, "DENSITY_HIGH... Density is " + String.valueOf(density),  Toast.LENGTH_LONG).show();
+        else if (density==DisplayMetrics.DENSITY_MEDIUM)      Toast.makeText(this, "DENSITY_MEDIUM... Density is " + String.valueOf(density),  Toast.LENGTH_LONG).show();
+        else if (density==DisplayMetrics.DENSITY_LOW)         Toast.makeText(this, "DENSITY_LOW... Density is " + String.valueOf(density),  Toast.LENGTH_LONG).show();
+        else                                                  Toast.makeText(this, "Density is neither HIGH, MEDIUM OR LOW.  Density is " + String.valueOf(density),  Toast.LENGTH_LONG).show();
+
+        int widthPixels 									= metrics.widthPixels;
+        int heightPixels 									= metrics.heightPixels;
+        
+        float scaleFactor 									= metrics.density;
+        
+        float widthDp 										= widthPixels / scaleFactor;
+        float heightDp 										= heightPixels / scaleFactor;
+        
+        float smallestWidth 								= Math.min(widthDp, heightDp);
+        
+        Toast.makeText(this, "swFactor is " + String.valueOf(smallestWidth),  Toast.LENGTH_LONG).show();
+
+ -->
+</RelativeLayout>

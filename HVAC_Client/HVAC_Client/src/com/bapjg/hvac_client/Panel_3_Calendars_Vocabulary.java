@@ -45,7 +45,6 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
         {
         	Global.toaster("Please refresh", true);
         }
-        
         return panelView;
       }
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -53,8 +52,6 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 	{
 		((TextView) panelView.findViewById(R.id.title)).setText		("Calendars");
 		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Words");
-//        TextView 												subTitle					= (TextView) panelView.findViewById(R.id.subTitle);
-//        subTitle.setText("Vocabulary");		
 	}
 	public void displayContents()
 	{

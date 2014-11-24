@@ -56,14 +56,12 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
         {
             Global.toaster("please refresh", false);;
         }
- 
         return panelView;
     }
 	public void displayHeader()
 	{
 		((TextView) panelView.findViewById(R.id.title)).setText		("Calendars");
 		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Away List");
-//		TextView												title						= (TextView) panelView.findViewById(R.id.name);
 	}
 	public void displayContents()
 	{

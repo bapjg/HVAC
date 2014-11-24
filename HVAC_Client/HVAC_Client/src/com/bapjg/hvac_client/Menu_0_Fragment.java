@@ -60,16 +60,16 @@ public class Menu_0_Fragment 									extends 					Fragment
     	Button 													myButton 					= (Button) myView;
 		ViewGroup 												viewParent					= (ViewGroup) myView.getParent();									// Set all textColours to white
 		
-//		if (viewParent.getId() == R.id.bottomFrame)
-//		{
-//			TODO Need to splash black screen, identify yellowbutton, and when data returns call its onClick, 
-//		}
-//		else
-//		{
+		if (viewParent.getId() == R.id.buttons_refresh)
+		{
+			Global.toaster("Communicating with server",  true);
+		}
+		else
+		{
 			allButtonsSetup(viewParent);
 			//		allButtonsSetup(container);
 			myButton.setTextColor(Color.YELLOW);
-//		}
+		}
 	}
 	public void allButtonsSetup(ViewGroup thisView)
 	{

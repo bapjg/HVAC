@@ -67,8 +67,7 @@ public class Panel_4_Weather_Sun 									extends 					Panel_0_Fragment
 			TextView 											sunRiseView					= (TextView) panelView.findViewById(R.id.sunRise);
 			TextView 											sunSetView					= (TextView) panelView.findViewById(R.id.sunSet);
 			
-			Ctrl_WeatherData.Sun 	sun = Global.weatherForecast.sun;
-			
+			Ctrl_WeatherData.Sun 								sun 						= Global.weatherForecast.sun;
 			
 			if ((Global.weatherForecast.sun          == null)
 			||  (Global.weatherForecast.sun.sunRise  == null))
