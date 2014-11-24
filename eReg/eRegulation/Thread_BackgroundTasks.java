@@ -247,7 +247,7 @@ public class Thread_BackgroundTasks implements Runnable
 				{
 					Global.weatherData							= new Ctrl_WeatherData();
 					
-					if (Global.weatherData != null)
+					if (Global.weatherData.forecasts != null)			// TODO need to check
 					{
 						Global.weatherData.dateTimeObtained			= Global.DateTime.now();
 						LogIt.info("Thread_Background", "Run", "Weather : fetched", true);
