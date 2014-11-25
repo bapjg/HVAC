@@ -8,11 +8,52 @@
     android:orientation							= "vertical"
     android:textColor							= "@color/Yellow"
 >
-	<!-- 
+
+    
+    <!-- 
+		Menu and Panel layouts 
+	-->
+	<LinearLayout 
+	    android:id								= "@+id/activity_container"
+	    android:layout_width					= "fill_parent"
+	    android:layout_height					= "fill_parent"
+	    android:background						= "@color/background"
+	    android:orientation						= "horizontal"
+	    android:textColor						= "@color/Yellow"
+	    android:layout_alignParentTop			= "true"
+	    android:layout_above					= "@+id/connection_status"
+	>                           				
+		<!-- 
+			Menu layout 
+		-->
+
+	    <LinearLayout
+	        android:id							="@+id/menu_container"
+	        android:layout_width				="150dp"
+	        android:layout_height				="match_parent"
+	        android:background					="@color/background"
+	        android:orientation					="vertical"
+	        android:text						="roomForButtons" />
+             			
+		<!-- 
+			Panel layout 
+		-->
+	    <LinearLayout
+	        android:id							= "@+id/panel_container"
+	        android:layout_width				= "fill_parent"
+	        android:layout_height				= "fill_parent"
+	        android:background					= "@color/background"
+	        android:orientation					= "vertical"
+	        android:text						= "roomForData"
+		/>
+
+	</LinearLayout>
+	
+		<!-- 
 		Connection Status layout 
 	-->
 	<LinearLayout 
-	    android:id								= "@+id/connection_status"
+	    android:id								= "@id/connection_status"
 	    android:layout_width					= "match_parent"
 	    android:layout_height					= "wrap_content"
 	    android:background						= "@color/Black"
@@ -101,45 +142,6 @@
 		        android:textColor				= "@color/Yellow" 
 	        />
 		</LinearLayout>   
-	</LinearLayout>
-    
-    	<!-- 
-		Menu and Panel layouts 
-	-->
-	<LinearLayout 
-	    android:id								= "@+id/activity_container"
-	    android:layout_width					= "fill_parent"
-	    android:layout_height					= "fill_parent"
-	    android:background						= "@color/background"
-	    android:orientation						= "horizontal"
-	    android:textColor						= "@color/Yellow"
-	    android:layout_alignParentTop			= "true"
-	    android:layout_above					= "@id/connection_status"
-	>                           				
-		<!-- 
-			Menu layout 
-		-->
-
-	    <LinearLayout
-	        android:id							="@+id/menu_container"
-	        android:layout_width				="150dp"
-	        android:layout_height				="match_parent"
-	        android:background					="@color/background"
-	        android:orientation					="vertical"
-	        android:text						="roomForButtons" />
-             			
-		<!-- 
-			Panel layout 
-		-->
-	    <LinearLayout
-	        android:id							= "@+id/panel_container"
-	        android:layout_width				= "fill_parent"
-	        android:layout_height				= "fill_parent"
-	        android:background					= "@color/background"
-	        android:orientation					= "vertical"
-	        android:text						= "roomForData"
-		/>
-
 	</LinearLayout>
 
 </RelativeLayout>
