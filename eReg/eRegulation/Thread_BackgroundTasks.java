@@ -46,12 +46,6 @@ public class Thread_BackgroundTasks implements Runnable
 			&&   (timeNow		> 	pumpCleanDateLast									) 	)	// Last run was yesterday ie < Today.midnight
 			{
 				LogIt.action("Summer Pumps", "Action being considered");
-				LogIt.info("Thread_Background", "Run", "Action being considered");
-				LogIt.info("Thread_Background", "Run", "=======================");
-				LogIt.info("Thread_Background", "Run", "pumpCleanDateLast (can be last reboot date            " + pumpCleanDateLast,		 			true);
-				LogIt.info("Thread_Background", "Run", "Global.Date.now (ie time at midnight)                 "	+ Global.Date.now(), 					true);
-				LogIt.info("Thread_Background", "Run", "tasksBackGround.pumpCleanTime (ie time since midnght) " + tasksBackGround.pumpCleanTime, 		true);
-				LogIt.info("Thread_Background", "Run", "Global.Time.now()  (ie time since midnght)            " + Global.Time.now(),					true);
 				
 				Boolean mustWait = false;
 				
@@ -61,19 +55,12 @@ public class Thread_BackgroundTasks implements Runnable
 					
 					if (thisPump.dateTimeLastOperated < (Global.DateTime.now() - 23 * 3600 * 1000L) )									// Last pump use was earlier than 11 hours ago
 					{
-						LogIt.info("Thread_Background", "Run", "Clean pump " 			+ circuit.circuitPump.name, 			true);
-						LogIt.info("Thread_Background", "Run", "dateTimeLastOperated " 	+ thisPump.dateTimeLastOperated, 		true);
-						LogIt.info("Thread_Background", "Run", "now " 					+ Global.DateTime.now(), 						true);
-						LogIt.info("Thread_Background", "Run", "now - 23 hours" 		+ (Global.DateTime.now() - 23 * 3600 * 1000L), 	true);
-						
-						
-						
 						if (! circuit.circuitPump.isOn())			// Not really possible otherwise
 						{
 							LogIt.info("Thread_Background", "Run", "Clean pump !isOn " + circuit.circuitPump.name, true);
 							circuit.circuitPump.relay.on();			// circuitPump.on() updates timeLastOperated, whereas circuitPump.relay.on() does not.
 							Global.waitMilliSeconds(1000);			// Avoid switch all the relays at the same time
-							mustWait = true;
+							mustWait 							= true;
 						}
 					}
 					else
