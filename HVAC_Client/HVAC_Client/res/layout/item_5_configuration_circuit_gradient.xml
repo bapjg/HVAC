@@ -1,0 +1,10 @@
+<?xml version		= "1.0" encoding			= "utf-8"?>
+<Space xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent" >
+
+    <Stroke android:width="2dp" android:color="#ff207d94" />
+
+</Space>		    
+			    
+
