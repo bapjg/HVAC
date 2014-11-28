@@ -2,4 +2,4 @@ bin/
 gen/
 *.class
 !res/
-!src/**
+!src/
