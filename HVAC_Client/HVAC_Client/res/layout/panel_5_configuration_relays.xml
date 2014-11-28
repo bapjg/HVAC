@@ -1,27 +1,45 @@
-<?xml version		= "1.0" encoding			= "utf-8"?>
-<LinearLayout 
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<RelativeLayout 
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     style									= "@style/AD_Linear_Top"
 >
-	
-    <include layout								= "@layout/aa_include_panel_title_section" />
-	
-    <TableLayout style							= "@style/AD_Table" >
-	
-        <TableRow style							= "@style/AD_Row" >
-	
-            <TextView	
-                style							= "@style/AD_Text"
-                android:text					= "Name"
-			/>	
-            <TextView	
-                style							= "@style/AD_Data"
-                android:text					= "Number" 
-			/>
-        </TableRow>
-    </TableLayout>
+    <include 
+        layout								= "@layout/aa_include_panel_title_section"
+        android:id							= "@+id/title_layout"
+    />
 
-    <include layout								= "@layout/aa_include_list_section" />
-    <include layout								= "@layout/aa_include_panel_buttons_addnew_delete" />
+	<LinearLayout              			
+		android:layout_width				= "match_parent"
+		android:layout_height				= "wrap_content"
+		android:orientation					= "vertical"
+		android:layout_below				= "@id/title_layout"
+		android:layout_above				= "@+id/buttons_layout"
+	>                               			
+		<LinearLayout              			
+			android:layout_width			= "match_parent"
+			android:layout_height			= "@dimen/row_height"
+			android:orientation				= "horizontal"
+		>                               			
+	    	<TextView
+                style						= "@style/AD_Text"
+                android:layout_weight		= "1"
+                android:text				= "Name" 
+            />
+            <TextView
+                style						= "@style/AD_Data"
+                android:layout_weight		= "1"
+                android:text				= "Address" 
+            />
+		</LinearLayout>
+		
+    	<include layout						= "@layout/aa_include_list_section" />
+    	
+	</LinearLayout>
+	
+    <include 
+        layout								= "@layout/aa_include_panel_buttons_addnew"
+        android:id							= "@id/buttons_layout"
+    />
+	
 
-</LinearLayout>
+</RelativeLayout>

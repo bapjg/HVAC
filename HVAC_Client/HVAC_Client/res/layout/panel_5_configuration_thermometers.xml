@@ -37,7 +37,7 @@
 	</LinearLayout>
 	
     <include 
-        layout								= "@layout/aa_include_panel_buttons_addnew_delete"
+        layout								= "@layout/aa_include_panel_buttons_addnew"
         android:id							= "@id/buttons_layout"
     />
 	
