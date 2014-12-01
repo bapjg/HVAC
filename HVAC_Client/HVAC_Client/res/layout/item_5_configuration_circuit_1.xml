@@ -53,80 +53,88 @@
 	        <TextView
 	            style							= "@style/AD_Text"
 	            android:layout_width			= "match_parent"
-	            android:gravity					= "center_horizontal"
+	            android:gravity					= "left"
 	            android:text					= "Temperature Gradient"
 			/>
-
-	        <LinearLayout
-		        android:layout_width			= "match_parent"
-		        android:layout_height			= "wrap_content" 
-		    	android:orientation				= "vertical"
+	
+	        <GridLayout
+	            android:layout_width			= "match_parent"
+	            android:layout_height			= "wrap_content" 
+	            android:columnCount				= "5"
+	            android:rowCount				= "5"
 			>
-	        
+		        <TextView
+		            android:id					= "@+id/tempLow"
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "80dp"
+		            android:layout_height		= "32dp"
+		            android:layout_column		= "0"
+		            android:layout_gravity		= "left"
+		            android:layout_row			= "0"
+		            android:gravity				= "right|center_vertical"
+		            android:text				= "gt1"
+				/>
+		        <TextView
+		            style						= "@style/AD_Data"
+		            android:layout_width		= "10dp"
+		            android:layout_height		= "32dp"
+		            android:layout_column		= "1"
+		            android:layout_gravity		= "left"
+		            android:layout_row			= "0"
+		            android:gravity				= "right|center_vertical"
+		            android:text				= "g"
+				/>
+				<TextView
+				    android:id					= "@+id/outsideLow"
+				    style						= "@style/AD_Data"
+				    android:layout_width		= "80dp"
+				    android:layout_column		= "1"
+				    android:layout_gravity		= "left"
+				    android:layout_row			= "2"
+				    android:gravity				= "left"
+				    android:text				= "gt3"
+				/>
+				<TextView
+				    style						= "@style/AD_Data"
+				    android:layout_width		= "74dp"
+				    android:layout_column		= "2"
+				    android:layout_gravity		= "left"
+				    android:layout_row			= "2"
+				/>
+				<TextView
+				    android:id					= "@+id/outsideHigh"
+				    style						= "@style/AD_Data"
+				    android:layout_width		= "50dp"
+				    android:layout_column		= "3"
+				    android:layout_gravity		= "left"
+				    android:layout_row			= "2"
+				    android:text				= "gt5"
+				    android:width				= "60dp"
+				/>
 				<ImageView
 				    android:id					= "@+id/imageView1"
 				    android:layout_width		= "180dp"
 				    android:layout_height		= "110dp"
-				    android:layout_gravity		= "center"
+				    android:layout_column		= "1"
+				    android:layout_columnSpan	= "1"
+				    android:layout_gravity		= "left"
+				    android:layout_row			= "0"
+				    android:layout_rowSpan		= "1"
 				    android:maxWidth			= "180dp"
 				    android:src					= "@drawable/gradient"
 				/>
-
-				<GridLayout
-		            android:layout_width			= "match_parent"
-		            android:layout_height			= "wrap_content" 
-		            android:columnCount				= "5"
-		            android:rowCount				= "5"
-				>
-			        <!-- Row 0 : Circuit Temperatures -->
-			        <TextView
-			            style						= "@style/AD_Text"
-			            android:layout_row			= "0"
-			            android:layout_columnSpan	= "2"
-			            android:text				= "Circuit T°"
-					/>
-			        <TextView
-			            android:id					= "@+id/tempLow"
-			            style						= "@style/AD_Data"
-			            android:text				= "low"
-					/>
-			        <TextView
-			            style						= "@style/AD_Data"
-			            android:text				= ""
-					/>
-					<TextView
-					    android:id					= "@+id/tempHigh"
-					    style						= "@style/AD_Data"
-					    android:text				= "high"
-					/>
-			        			        			        			        
-			        
-			        
-			        
-			        <!-- Row 1 : Outside Temperatures -->
-			        			        <TextView
-			            style						= "@style/AD_Text"
-			            android:layout_row			= "1"
-			            android:layout_columnSpan	= "2"
-			            android:text				= "Outside T°"
-					/>
-					<TextView
-					    android:id					= "@+id/outsideLow"
-					    style						= "@style/AD_Data"
-					    android:text				= "OS Low"
-					/>
-			        <TextView
-			            style						= "@style/AD_Data"
-			            android:text				= ""
-					/>
-					<TextView
-					    android:id					= "@+id/outsideHigh"
-					    style						= "@style/AD_Data"
-					    android:text				= "OS High"
-					/>
-								        			        
-				</GridLayout>
-			</LinearLayout>
+				<TextView
+				    android:id					= "@+id/tempHigh"
+				    style						= "@style/AD_Data"
+				    android:layout_width		= "80dp"
+				    android:layout_height		= "62dp"
+				    android:layout_column		= "0"
+				    android:layout_gravity		= "left|bottom"
+				    android:layout_row			= "0"
+				    android:gravity				= "right|center_vertical"
+				    android:text				= "gt2"
+				/>
+			</GridLayout>
 	    </LinearLayout>
 	    <LinearLayout
 	        android:id							= "@+id/mixer"
