@@ -3,89 +3,43 @@
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     style									= "@style/AD_Linear_Top"
 >
-   	<include layout							= "@layout/aa_include_panel_title_section" />
+    <include 
+        layout								= "@layout/aa_include_panel_title_section"
+        android:id							= "@+id/title_layout"
+    />
     
-    <LinearLayout
-        android:layout_width				="match_parent"
-        android:layout_height				="wrap_content"
-        android:background					="@color/background"
-        android:gravity						="center_vertical"
-        android:orientation					="horizontal" 
- 	    android:paddingTop					="5dp"
- 	    android:paddingBottom				="5dp"
+    <ScrollView 
+	    style								= "@style/AD_Scroll"
 	>
-                                			
-        <TextView
-            style							= "@style/AD_Text"
-            android:layout_weight			= "1"
-            android:layout_width			= "0dp"
-            android:layout_height			= "wrap_content"
-            android:text					= "Thermometer" 
-		/>
-        <TextView
-            android:id						= "@+id/thermoName"
-            style							= "@style/AD_Data"
-            android:text					= "name" 
-            android:layout_weight			= "1"
-            android:layout_width			= "0dp"
-            android:layout_height			= "wrap_content"
-            android:gravity					= "right"
-		/>
-	</LinearLayout>
-    <LinearLayout
-        android:layout_width				= "match_parent"
-        android:layout_height				= "wrap_content"
-        android:background					= "@color/background"
-        android:gravity						="center_vertical"
-        android:orientation					="horizontal" 
- 	    android:paddingTop					="5dp"
- 	    android:paddingBottom				="5dp"
-	>
-                                    	
-        <TextView
-            style							= "@style/AD_Text"
-            android:layout_weight			= "1"
-            android:layout_width			= "0dp"
-            android:layout_height			= "wrap_content"
-            android:text					= "Temp Never Exceed" 
-		/>
-                                    		
-        <TextView                   		
-            android:id						= "@+id/tempNeverExceed"
-            style							= "@style/AD_Data"
-            android:text					= "Address" 
-            android:layout_weight			= "1"
-            android:layout_width			= "0dp"
-            android:layout_height			= "wrap_content"
-            android:gravity					= "right"
-		/>                          	
-    </LinearLayout>                 	
-    <LinearLayout
-        android:layout_width				= "match_parent"
-        android:layout_height				= "wrap_content"
-        android:background					= "@color/background"
-        android:gravity						="center_vertical"
-        android:orientation					="horizontal" 
- 	    android:paddingTop					="5dp"
- 	    android:paddingBottom				="5dp"
-	>
-        <TextView
-            style							= "@style/AD_Text"
-            android:layout_weight			= "1"
-            android:layout_width			= "0dp"
-            android:layout_height			= "wrap_content"
-            android:text					= "Temp Overshoot" 
-		/>
-                                    		
-        <TextView                   		
-            android:id						= "@+id/tempOverShoot"
-            style							= "@style/AD_Data"
-            android:text					= "Address" 
-            android:layout_weight			= "1"
-            android:layout_width			= "0dp"
-            android:layout_height			= "wrap_content"
-            android:gravity					= "right"
-		/>                          	
-        
-	</LinearLayout>                 	
+        <GridLayout
+	    style								= "@style/AD_Grid"
+	    android:columnCount					= "2"
+        >
+
+            <TextView		
+                android:text				= "Thermometer"
+                style						= "@style/AD_Text" />
+	        <TextView 
+	            android:text				= "x"
+	            android:id					= "@+id/thermoName"
+	            style						= "@style/AD_Data" />
+            			
+            <TextView		
+                android:text				= "Temp Never Exceed"
+                style						= "@style/AD_Text" />
+	        <TextView 
+	            android:text				= "x"
+	            android:id					= "@+id/tempNeverExceed"
+	            style						= "@style/AD_Data" />
+	        
+             <TextView		
+                android:text				= "Temp Overshoot"
+                style						= "@style/AD_Text" />
+	        <TextView 
+	            android:text				= "x"
+	            android:id					= "@+id/tempOverShoot"
+	            style						= "@style/AD_Data" />
+         
+		</GridLayout>
+	</ScrollView>                	
 </LinearLayout>

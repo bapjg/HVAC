@@ -3,112 +3,51 @@
     xmlns:android							="http://schemas.android.com/apk/res/android"
     style									="@style/AD_Linear_Top"
 >
-    <include  layout						="@layout/aa_include_panel_title_section" />
+    <include 
+        layout								= "@layout/aa_include_panel_title_section"
+        android:id							= "@+id/title_layout"
+    />
 
-    <LinearLayout
-        android:layout_width				="match_parent"
-        android:layout_height				="wrap_content"
-        android:background					="@color/background"
-        android:gravity						="center_vertical"
-        android:orientation					="horizontal" 
- 	    android:paddingTop					="5dp"
- 	    android:paddingBottom				="5dp"
-    >
-                                			
-        <TextView
-            style							= "@style/AD_Text"
-            android:layout_weight			= "1"
-            android:layout_width			= "0dp"
-            android:layout_height			= "wrap_content"
-            android:text					= "Relay"
-		/>
-        <TextView                   		
-            android:id						= "@+id/name"
-            style							= "@style/AD_Data"
-            android:layout_weight			= "1"
-            android:layout_width			= "0dp"
-            android:layout_height			= "wrap_content"
-            android:gravity					= "right"
-        />                      		
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width				="match_parent"
-        android:layout_height				="wrap_content"
-        android:background					="@color/background"
-        android:gravity						="center_vertical"
-        android:orientation					="horizontal" 
- 	        android:paddingTop="5dp"
- 	        android:paddingBottom="5dp"
-    >
+    <ScrollView 
+	    style								= "@style/AD_Scroll"
+	>
+        <GridLayout
+	    style								= "@style/AD_Grid"
+	    android:columnCount					= "2"
+        >
 
-	    <TextView
-	        style="@style/AD_Text"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="2"
-	        android:text="Fuel Consumed\n     (min)" />
-	                                  		
-	    <TextView
-	        android:id="@+id/fuelConsumption"
-	        style="@style/AD_Data"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="right|center_vertical"
-	        android:layout_weight="1" />
-
-	</LinearLayout>
-    <LinearLayout
-        android:layout_width				="match_parent"
-        android:layout_height				="wrap_content"
-        android:background					="@color/background"
-        android:gravity						="center_vertical"
-        android:orientation					="horizontal" 
- 	        android:paddingTop="5dp"
- 	        android:paddingBottom="5dp"
- 	           >
-    
-	    <TextView
-	        style="@style/AD_Text"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="2"
-	        android:paddingRight="2dp"
-
-	        android:text="Fuel Consumed\n     (l)" />
-	                                		
-	    <TextView
-	        android:id="@+id/fuelConsumptionLitres"
-	        style="@style/AD_Data"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="right|center_vertical"
-	        android:layout_weight="1" />
-                           		
-	</LinearLayout>
-    <LinearLayout
-        android:layout_width				="match_parent"
-        android:layout_height				="wrap_content"
-        android:background					="@color/background"
-        android:gravity						="center_vertical"
-        android:orientation					="horizontal" 
- 	        android:paddingTop="5dp"
- 	        android:paddingBottom="5dp"
-    >
-    
-	   <TextView
-	       style="@style/AD_Text"
-	       android:layout_width="0dp"
-	       android:layout_height="wrap_content"
-	       android:layout_weight="2"
-	       android:text="Minutes per Litre" />
-
-	   	<TextView                   		
-	       android:id							= "@+id/minutesPerLitre"
-	        style								= "@style/AD_Data"
-            android:layout_weight			= "1"
-            android:layout_width			= "0dp"
-	        android:layout_height				= "wrap_content"
-	        android:layout_gravity				= "right"
-	   	/>                          		
-	</LinearLayout>
+            <TextView		
+                android:text				= "Relay"
+                style						= "@style/AD_Text" />
+	        <TextView 
+	            android:text				= "x"
+	            android:id					= "@+id/name"
+	            style						= "@style/AD_Data" />
+            			
+           <TextView		
+                android:text				= "Fuel Consumed\n     (min)"
+                style						= "@style/AD_Text" />
+	        <TextView 
+	            android:text				= "x"
+	            android:id					= "@+id/fuelConsumption"
+	            style						= "@style/AD_Data" />
+            			
+          	<TextView		
+                android:text				= "Fuel Consumed\n     (l)"
+                style						= "@style/AD_Text" />
+	        <TextView 
+	            android:text				= "x"
+	            android:id					= "@+id/fuelConsumptionLitres"
+	            style						= "@style/AD_Data" />
+            			
+         	<TextView		
+                android:text				= "Minutes per Litre"
+                style						= "@style/AD_Text" />
+	        <TextView 
+	            android:text				= "x"
+	            android:id					= "@+id/minutesPerLitre"
+	            style						= "@style/AD_Data" />
+            			
+		</GridLayout>	        
+	</ScrollView>
 </LinearLayout>
