@@ -1,102 +1,57 @@
-<?xml version= "1.0" encoding= "utf-8"?>
-<LinearLayout 
-    xmlns:android							= "http://schemas.android.com/apk/res/android"
-    style									= "@style/AD_Linear_Top"
->
+<?xml version= "1.0" encoding					= "utf-8"?>
+<RelativeLayout 
+    xmlns:android								= "http://schemas.android.com/apk/res/android"
+    style										= "@style/AD_Linear_Top"
+>                          				
+   <include 
+        layout									= "@layout/aa_include_panel_title_section"
+        android:id								= "@+id/title_layout"
+    />
+    <LinearLayout
+        android:layout_width					= "match_parent"
+        android:layout_height					= "60dp"
+        android:background						= "@color/background"
+        android:gravity							= "top"
+        android:orientation						= "vertical" 
+		android:layout_below					= "@id/title_layout"
+		android:layout_above					= "@+id/buttons_layout"
+	>
 
-    <LinearLayout
-        android:layout_width			= "match_parent"
-        android:layout_height			= "60dp"
-        android:background				= "@color/background"
-        android:gravity					= "top"
-        android:orientation				= "vertical" 
-   
-	>
-        <TextView
-            android:id					= "@+id/title"
-            style						= "@style/AD_Text"
-            android:layout_width		= "match_parent"
-            android:layout_height		= "25dp"
-            android:gravity				= "center_horizontal"
-            android:text				= "PID Configuration"
-		/>
-        <TextView
-            android:id					= "@+id/subTitle"
-            style						= "@style/AD_Data"
-            android:layout_width		= "match_parent"
-            android:layout_height		= "25dp"
-            android:gravity				= "center_horizontal"
-		/>
-		<View
-             android:layout_width		= "fill_parent"
-             android:layout_height		= "5dp"
-             android:background			= "@color/background"
-       
-		/>
-        <View
-             android:layout_width		= "fill_parent"
-             android:layout_height		= "2dp"
-             android:background			= "#3399FF"
-       
-		/>
-    </LinearLayout>
-    <LinearLayout
- 	    android:layout_width			= "match_parent"
-	    android:layout_height			= "50dp"
-    	android:gravity					= "center_vertical"
-	    android:orientation				= "horizontal"
->
-        <TextView
-            style						= "@style/AD_Text"
-            android:layout_width		= "170dp"
-            android:gravity				= "left"
-            android:text				= "PID Name"
-		/>
-		<TextView
-            android:id					= "@+id/pidName"
-            style						= "@style/AD_Data"
-            android:layout_width		= "130dp"
-            android:gravity				= "right"
-		/>
-    </LinearLayout>
-    <LinearLayout
- 	    android:layout_width			= "match_parent"
-	    android:layout_height			= "50dp"
-    	android:gravity					= "center_vertical"
-	    android:orientation				= "horizontal"
-	>
-        <TextView
-            style						= "@style/AD_Text"
-            android:layout_width		= "170dp"
-            android:gravity				= "left"
-            android:text				= "Depth"
-		/>
+	    <GridLayout
+	        style="@style/AD_Grid"
+	        android:columnCount="2" >
 
-        <TextView
-            android:id					= "@+id/depth"
-            style						= "@style/AD_Data"
-            android:layout_width		= "130dp"
-            android:gravity				= "right"
-		/>
-    </LinearLayout>
-    <LinearLayout
- 	    android:layout_width			= "match_parent"
-	    android:layout_height			= "50dp"
-    	android:gravity					= "center_vertical"
-	    android:orientation				= "horizontal"
-	>
-        <TextView
-            style						= "@style/AD_Text"
-            android:layout_width		= "170dp"
-            android:gravity				= "left"
-            android:text				= "Sample Increment"
-		/>
-        <TextView
-            android:id					= "@+id/sampleIncrement"
-            style						= "@style/AD_Data"
-            android:layout_width		= "132dp"
-            android:gravity				= "right"
-		/>
-    </LinearLayout>
-	<include layout	= "@layout/aa_include_item_buttons_ok_delete" />
-</LinearLayout>
+	        <TextView
+	            style							= "@style/AD_Text"
+	            android:text					= "PID Name"
+			/>
+			<TextView
+	            android:id						= "@+id/pidName"
+	            style							= "@style/AD_Data"
+			/>
+
+	        <TextView
+	            style="@style/AD_Text"
+	            android:paddingBottom="10dp"
+	            android:paddingTop="10dp"
+	            android:text="Depth" />
+	
+	        <TextView
+	            android:id					= "@+id/depth"
+	            style						= "@style/AD_Data"
+			/>
+	        <TextView
+	            style						= "@style/AD_Text"
+	            android:text				= "Sample Increment"
+			/>
+	        <TextView
+	            android:id					= "@+id/sampleIncrement"
+	            style						= "@style/AD_Data"
+			/>
+    	</GridLayout>		
+    </LinearLayout>			
+	<include 
+	    layout									= "@layout/aa_include_item_buttons_ok_delete" 
+        android:id								= "@+id/buttons_layout"
+	/>
+</RelativeLayout>

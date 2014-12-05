@@ -1,97 +1,63 @@
 <?xml version= "1.0" 		encoding			= "utf-8"?>
-<LinearLayout 	
+<RelativeLayout 	
     xmlns:android								= "http://schemas.android.com/apk/res/android"
     style										= "@style/AD_Linear_Top"
 >                                      	
+    <include 
+        layout									= "@layout/aa_include_panel_title_section"
+        android:id								= "@+id/title_layout"
+    />
+    
     <LinearLayout
         android:layout_width					= "match_parent"
         android:layout_height					= "60dp"
         android:background						= "@color/background"
         android:gravity							= "top"
         android:orientation						= "vertical" 
+		android:layout_below					= "@id/title_layout"
+		android:layout_above					= "@+id/buttons_layout"
 	>
-        <TextView
-            style								= "@style/AD_Text"
-            android:id							= "@+id/title"
-            android:layout_width				= "match_parent"
-            android:layout_height				= "25dp"
-       		android:gravity						= "center_horizontal"
-            android:text						= "Thermometer Configuration" 
-		/>
-        <TextView
-            android:id							= "@+id/subTitle"
-            style								= "@style/AD_Data"
-            android:layout_width				= "match_parent"
-            android:layout_height				= "25dp"
-            android:gravity						= "center_horizontal"
-		/>
-  		<View
-             android:layout_width				= "fill_parent"
-             android:layout_height				= "5dp"
-             android:background					= "@color/background"
-		/>
-        <View
-             android:layout_width				= "fill_parent"
-             android:layout_height				= "2dp"
-             android:background					= "#3399FF"
-		/>
+
+	    <GridLayout
+	    	style									= "@style/AD_Grid"
+	    	android:columnCount						= "2"
+	    >
+	
+			<TextView		
+	        	android:text						= "Name"
+	            style								= "@style/AD_Text"
+	        />
+	        <TextView 
+	            android:text						= "x"
+	            android:id							= "@+id/thermoName"
+	            style								= "@style/AD_Data"
+	        />
+	
+	        <TextView		
+	        	android:text						= "Address"
+	            style								= "@style/AD_Text"
+	        />
+	        <TextView 
+	            android:text						= "x"
+	            android:id							= "@+id/address"
+	            style								= "@style/AD_Data"
+	        />
+	        			
+	        <TextView		
+	        	android:text						= "PID"
+	            style								= "@style/AD_Text"
+	        />
+	        <TextView 
+	            android:text						= "x"
+	            android:id							= "@+id/pidName"
+	            style								= "@style/AD_Data"
+	        />
+	
+	    </GridLayout>
 	</LinearLayout>
-    <LinearLayout
- 	    android:layout_width					= "match_parent"
-	    android:layout_height					= "50dp"
-    	android:gravity							= "center_vertical"
-	    android:orientation						= "horizontal"
-	>        
-        <TextView
-            style								= "@style/AD_Text"
-            android:layout_width				= "120dp"
-            android:gravity						= "left"
-            android:text						= "Name"
-		/>
-		<TextView
-            android:id							= "@+id/thermoName"
-            style								= "@style/AD_Data"
-            android:layout_width				= "180dp"
-            android:gravity						= "right"
-		/>
-	</LinearLayout>
-     <LinearLayout
- 	    android:layout_width					= "match_parent"
-	    android:layout_height					= "50dp"
-    	android:gravity							= "center_vertical"
-	    android:orientation						= "horizontal"
-	>        
-        <TextView
-            style								= "@style/AD_Text"
-            android:layout_width				= "120dp"
-            android:gravity						= "left"
-            android:text						= "Address"
-		/>
-        <TextView
-            android:id							= "@+id/address"
-            style								= "@style/AD_Data"
-            android:layout_width				= "180dp"
-            android:gravity						= "right"
-		/>
-    </LinearLayout>
-    <LinearLayout
- 	    android:layout_width					= "match_parent"
-	    android:layout_height					= "50dp"
-    	android:gravity							= "center_vertical"
-	    android:orientation						= "horizontal"
-	>        
-        <TextView
-            style								= "@style/AD_Text"
-            android:layout_width				= "120dp"
-            android:gravity						= "left"
-            android:text						= "PID"
-		/>
-        <TextView
-            android:id							= "@+id/pidName"
-            style								= "@style/AD_Data"
-            android:layout_width				= "180dp"
-            android:gravity						= "right"
-		/>
-    </LinearLayout>
-	<include layout	= "@layout/aa_include_item_buttons_ok_delete" />
-</LinearLayout>
+    
+	<include 
+	    layout									= "@layout/aa_include_item_buttons_ok_delete" 
+        android:id								= "@+id/buttons_layout"
+	/>
+</RelativeLayout>

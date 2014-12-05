@@ -36,7 +36,7 @@ public class Item_5_Configuration_Thermometer 					extends 					Panel_0_Fragment
     {
         View 													itemView					= inflater.inflate(R.layout.item_5_configuration_thermometer, container, false);
         this.itemView																		= (ViewGroup) itemView;
-
+ 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.thermometerList != null))
         {
@@ -52,7 +52,8 @@ public class Item_5_Configuration_Thermometer 					extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
-// TODO		((TextView) itemView.findViewById(R.id.pidName)).setText(itemData.name);
+		((TextView) itemView.findViewById(R.id.title)).setText		("Configuration");
+		((TextView) itemView.findViewById(R.id.subTitle)).setText	("Thermometre");
 	}
 	public void displayContents()
 	{

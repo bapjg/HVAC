@@ -59,13 +59,22 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
     	
     	for (Integer i = 1; i < 8; i++)	//Monday to Sunday
     	{
-            daySlot																			= new TextView(getContext());
-            daySlot.setText								(i.toString());
-            daySlot.setTextColor						(Color.YELLOW);
-            daySlot.setTextSize							(20);
-            daySlot.setLayoutParams						(daySlotLayout);
-            daySlot.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+//            daySlot																			= new TextView(getContext());
+//            daySlot.setText								(i.toString());
+//            daySlot.setTextColor						(Color.YELLOW);
+//            daySlot.setTextSize							(20);
+//            daySlot.setLayoutParams						(daySlotLayout);
+//            daySlot.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
             
+    		if (i < 6)
+    		{
+    			daySlot																		= (TextView) daySlots.getChildAt(i - 1);
+    		}
+    		else
+       		{
+    			daySlot																		= (TextView) daySlots.getChildAt(i);
+    		}
+    			
             if (days.contains(i.toString()))
             {
             	daySlot.setBackgroundColor(Color.RED);
@@ -74,20 +83,22 @@ public class Adapter_3_Calendars_Circuits 						extends 					Adapter_0_Abstract
             {
             	daySlot.setBackgroundColor(Color.BLUE);
             }
-            daySlots.addView(daySlot);
+//            daySlots.addView(daySlot);
             // Add seperator between Friday and Saturday
             if (i == 5)  
             {
-                daySlot																		= new TextView(getContext());
-                daySlot.setLayoutParams					(daySlotLayout);
-                daySlots.addView(daySlot);
+//                daySlot																		= new TextView(getContext());
+//                daySlot.setLayoutParams					(daySlotLayout);
+//                daySlots.addView(daySlot);
             }
     	}
        
         // Now get the space reserved for the day plan for a calendar entry (timeStart & timeEnd
         ViewGroup 												timeSlots					= (ViewGroup) adapterView.findViewById(R.id.timeSlots);
-        LayoutParams 											timeSlotLayout				= new LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
-				
+//        LayoutParams 											timeSlotLayout				= new LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
+        LinearLayout.LayoutParams 								timeSlotLayout				= new LinearLayout.LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
+        timeSlotLayout.weight = 1;
+        
         Long													QuarterHour					= 15 * 60 * 1000L;
     	Long													timeStart					= listItem.timeStart.milliSeconds;
     	Long													timeEnd;

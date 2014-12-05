@@ -8,14 +8,12 @@
     android:gravity					= "center_vertical"
     android:orientation				= "vertical" 
 >
-	<LinearLayout              			
-		android:layout_width		= "match_parent"
-		android:layout_height		= "@dimen/row_height"
-		android:orientation			= "vertical"
-	>                               			
+    <GridLayout
+ 		style						= "@style/AD_Grid"
+		android:columnCount			= "@integer/thermo_column_count"
+	>                           			
 		<TextView	              
 			style					= "@style/AD_Text"  
-			android:layout_width	= "match_parent"   
 			android:id				= "@+id/name"	 	
 		/>                        
                        
@@ -23,7 +21,6 @@
 		<TextView	              
 			style					= "@style/AD_Data"		
 			android:id				= "@+id/address"
-			android:layout_width	= "match_parent"			
 		/>
-	</LinearLayout>
+	</GridLayout>
 </LinearLayout>

@@ -3,11 +3,13 @@ package com.bapjg.hvac_client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.NetworkInterface;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -65,8 +67,12 @@ public class HTTP_Connection
 				serverReceive.close();
 				return returnMessage;
 			}
-			catch (SocketTimeoutException eTimeOut)			{	return 						new Ctrl__Abstract().new TimeOut();			}
-			catch (Exception e)								{	return 						new Ctrl__Abstract().new NoData();			}
+			catch (SocketTimeoutException eTimeOut)			
+			{	return 						new Ctrl__Abstract().new TimeOut();			}
+			catch (ConnectException eSE)
+			{	return 						new Ctrl__Abstract().new NoConnection();			}
+			catch (Exception e)								
+			{	return 						new Ctrl__Abstract().new NoData();			}
 		}
 		else												{ 	return 						new Ctrl__Abstract().new NoConnection();	}
 	}

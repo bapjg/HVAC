@@ -1,5 +1,5 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
-<LinearLayout 
+<RelativeLayout 
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     style									= "@style/AD_Linear_Top"
 >
@@ -8,109 +8,105 @@
         android:id							= "@+id/title_layout"
     />
 
-    <LinearLayout
-        android:layout_width				= "match_parent"
-        android:layout_height				= "50dp"
-        android:orientation					= "horizontal"
->
-
-        <EditText
-            android:id						= "@+id/name"
-            style							= "@style/AD_Text"
-            android:layout_width			= "match_parent"
-            android:layout_gravity			= "center_horizontal|center_vertical"
-            android:gravity					= "center_horizontal|center_vertical"
-       
-		/>
-        
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width				= "match_parent"
-        android:layout_height				= "50dp"
-        android:gravity						= "center_horizontal"
-        android:orientation					= "horizontal"
+	<LinearLayout              			
+		style								= "@style/AD_Linear_V"
+		android:layout_below				= "@id/title_layout"
+		android:layout_above				= "@+id/buttons_layout"
 	>
+    
+    
+	    <LinearLayout
+	        android:layout_width			= "match_parent"
+	        android:layout_height			= "50dp"
+	        android:orientation				= "horizontal"
+		>
+	
+	        <EditText
+	            android:id					= "@+id/name"
+	            style						= "@style/AD_Text"
+	            android:layout_width		= "match_parent"
+	            android:layout_gravity		= "center_horizontal|center_vertical"
+	            android:gravity				= "center_horizontal|center_vertical"
+	       
+			/>
+	        
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:layout_width			= "match_parent"
+	        android:layout_height			= "50dp"
+	        android:gravity					= "center_horizontal"
+	        android:orientation				= "horizontal"
+		>
+	
+		   	<TextView
+	        	android:id				 	= "@+id/day_1"
+	        	android:text			 	= "1"
+	        	android:gravity				= "center_horizontal|center_vertical"
+	        	style					 	= "@style/AD_Text"
+	    		android:layout_weight	 	= "2"
+	    		android:layout_height	 	= "match_parent"
+	   		/>                       	  
+	    	<TextView            	  
+	        	android:id			 		= "@+id/day_2"
+	 	      	android:text		 		= "2"
+	        	android:gravity				= "center_horizontal|center_vertical"
+	        	style				 		= "@style/AD_Text"
+	    		android:layout_weight 		= "2"
+	    		android:layout_height 		= "match_parent"
+	   		/>                       	  
+	    	<TextView            	  
+	        	android:id			 		= "@+id/day_3"
+		       	android:text		 		= "3"
+	         	android:gravity				= "center_horizontal|center_vertical"
+	        	style				 		= "@style/AD_Text"
+	    		android:layout_weight 		= "2"
+	    		android:layout_height 		= "match_parent"
+	   		/>
+	    	<TextView
+	        	android:id			 		= "@+id/day_4"
+				android:text		 		= "4"
+	        	android:gravity				= "center_horizontal|center_vertical"
+	        	style				 		= "@style/AD_Text"
+	    		android:layout_weight 		= "2"
+	    		android:layout_height 		= "match_parent"
+	   		/>                       	  
+	    	<TextView                	  
+	        	android:id			 		= "@+id/day_5"
+	 	       	android:text		 		= "5"
+	        	android:gravity				= "center_horizontal|center_vertical"
+				style				 		= "@style/AD_Text"
+	    		android:layout_weight 		= "2"
+	    		android:layout_height 		= "match_parent"
+	   		/>                       	  
+	    	<TextView                	  
+	        	android:id			 		= "@+id/empty"
+	 	       	android:text		 		= ""
+				style				 		= "@style/AD_Text"
+	     		android:layout_weight 		= "1"
+	    		android:layout_height 		= "match_parent"
+	   		/>                         
+	    	<TextView                  
+	        	android:id			 		= "@+id/day_6"
+	 	       	android:text		 		= "6"
+	        	android:gravity				= "center_horizontal|center_vertical"
+				style				 		= "@style/AD_Text"
+	    		android:layout_weight 		= "2"
+	    		android:layout_height 		= "match_parent"
+	   		/>                       	
+	    	<TextView                	
+	        	android:id			 		= "@+id/day_7"
+	  	       	android:text		 		= "7"
+	        	android:gravity				= "center_horizontal|center_vertical"
+				style				 		= "@style/AD_Text"
+	    		android:layout_weight 		= "2"
+	    		android:layout_height 		= "match_parent"
+	   		/>
+	    </LinearLayout>
+	</LinearLayout>
+	<include 	
+	    layout								= "@layout/aa_include_item_buttons_ok_delete"
+	    android:id							= "@id/buttons_layout"
+	/>
 
-        <TextView
-            android:id						= "@+id/day_1"
-            style							= "@style/AD_Text"
-            android:layout_width			= "40dp"
-            android:layout_height			= "match_parent"          
-            android:layout_gravity			= "center_vertical"
-            android:gravity					= "center_horizontal|center_vertical"
-            android:text					= "1"
-		/>
-
-        <TextView
-            android:id						= "@+id/day_2"
-            style							= "@style/AD_Text"
-            android:layout_width			= "40dp"
-            android:layout_height			= "match_parent"          
-            android:layout_gravity			= "center_vertical"
-            android:gravity					= "center_horizontal|center_vertical"
-            android:text					= "2"
-		/>
-
-        <TextView
-            android:id						= "@+id/day_3"
-            style							= "@style/AD_Text"
-            android:layout_width			= "40dp"
-            android:layout_height			= "match_parent"          
-            android:layout_gravity			= "center_vertical"
-            android:gravity					= "center_horizontal|center_vertical"
-            android:text					= "3"
-		/>
-
-        <TextView
-            android:id						= "@+id/day_4"
-            style							= "@style/AD_Text"
-            android:layout_width			= "40dp"
-            android:layout_height			= "match_parent"          
-            android:layout_gravity			= "center_vertical"
-            android:gravity					= "center_horizontal|center_vertical"
-            android:text					= "4"
-		/>
-
-        <TextView
-            android:id						= "@+id/day_5"
-            style							= "@style/AD_Text"
-            android:layout_width			= "40dp"
-            android:layout_height			= "match_parent"          
-            android:layout_gravity			= "center_vertical"
-            android:gravity					= "center_horizontal|center_vertical"
-            android:text					= "5"
-		/>
-
-        <TextView
-            android:id						= "@+id/empty"
-            style							= "@style/AD_Text"
-            android:layout_width			= "20dp"
-            android:layout_height			= "match_parent"          
-            android:layout_gravity			= "center_vertical"
-            android:gravity					= "center_horizontal|center_vertical"
-            android:text					= ""
-		/>
-
-        <TextView
-            android:id						= "@+id/day_6"
-            style							= "@style/AD_Text"
-            android:layout_width			= "40dp"
-            android:layout_height			= "match_parent"          
-            android:layout_gravity			= "center_vertical"
-            android:gravity					= "center_horizontal|center_vertical"
-            android:text					= "6"
-		/>
-
-        <TextView
-            android:id						= "@+id/day_7"
-            style							= "@style/AD_Text"
-            android:layout_width			= "40dp"
-            android:layout_height			= "match_parent"          
-            android:layout_gravity			= "center_vertical"
-            android:gravity					= "center_horizontal|center_vertical"
-            android:text					= "7"
-		/>
-    </LinearLayout>
-	<include layout							= "@layout/aa_include_item_buttons_ok_delete" />
-</LinearLayout>
+</RelativeLayout>

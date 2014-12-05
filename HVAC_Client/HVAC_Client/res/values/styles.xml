@@ -37,7 +37,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">left</item>
         <item name="android:layout_gravity">left</item>
-    </style>
+        <item name="android:paddingBottom">@dimen/row_padding</item>
+        <item name="android:paddingTop">@dimen/row_padding</item>
+        </style>
 
     <style name="AD_Table" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">match_parent</item>
@@ -54,6 +56,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">right</item>
         <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingBottom">@dimen/row_padding</item>
+        <item name="android:paddingTop">@dimen/row_padding</item>
     </style>
     <style name="AD_DataCentered" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">20sp</item>
@@ -110,13 +114,13 @@
     <style name="AD_Linear_V">
         <item name="android:background">@color/background</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
     </style>
     <style name="AD_Linear_H">
         <item name="android:background">@color/background</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>

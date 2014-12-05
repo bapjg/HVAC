@@ -9,16 +9,12 @@
     />
 
 	<LinearLayout              			
-		android:layout_width				= "match_parent"
-		android:layout_height				= "wrap_content"
-		android:orientation					= "vertical"
+		style								= "@style/AD_Linear_V"
 		android:layout_below				= "@id/title_layout"
 		android:layout_above				= "@+id/buttons_layout"
 	>                               			
 		<LinearLayout              			
-			android:layout_width			= "match_parent"
-			android:layout_height			= "@dimen/row_height"
-			android:orientation				= "horizontal"
+			style							= "@style/AD_Linear_H"
 		>                               			
 	    	<TextView
                 style						= "@style/AD_Text"

@@ -52,7 +52,8 @@ public class Item_5_Configuration_Relay 						extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
-		// TODO		((TextView) itemView.findViewById(R.id.pidName)).setText(itemData.name);
+		((TextView) itemView.findViewById(R.id.title)).setText		("Configuration");
+		((TextView) itemView.findViewById(R.id.subTitle)).setText	("Relay");
 	}
 	public void displayContents()
 	{

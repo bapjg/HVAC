@@ -1,5 +1,5 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
-<LinearLayout 
+<RelativeLayout 
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     style									= "@style/AD_Linear_Top"
 >
@@ -8,37 +8,34 @@
         android:id							= "@+id/title_layout"
     />
                                         	
-    <LinearLayout                       	
-        android:layout_width				= "match_parent"
-        android:layout_height				= "50dp"
-        android:background					= "@color/background"
-        android:baselineAligned				= "false"
-        android:gravity						= "center_vertical"
-        android:orientation					= "horizontal"
-	>                                   	
+	<LinearLayout              			
+		style								= "@style/AD_Linear_V"
+		android:layout_below				= "@id/title_layout"
+		android:layout_above				= "@+id/buttons_layout"
+	>                               			
                                         	
-        <TextView                       	
-            style							= "@style/AD_Text"
-            android:layout_height			= "wrap_content"
- 	    	android:layout_weight			= "1"
-            android:text					= "Start" 
-            android:gravity					= "center_horizontal"
-        />                              	
-        <TextView 
-            style							= "@style/AD_Text" 
- 	    	android:layout_weight			= "1"
-            android:layout_height			= "wrap_content" 
-            android:text					= "End" 
-            android:gravity					= "center_horizontal"
-        />                          	
-
-	</LinearLayout>
+		<LinearLayout              			
+			style							= "@style/AD_Linear_H"
+		>                               			
+		    <TextView                       	
+	            style						= "@style/AD_Text"
+	            android:layout_weight		= "1"
+	           	android:text				= "Start" 
+	        />                              	
+	        <TextView 
+	            style						= "@style/AD_Text" 
+	            android:layout_weight		= "1"
+	            android:text				= "End" 
+	        />                          	
+		</LinearLayout>
     
-	<ListView
-		    android:id						= "@+id/List_View"
-		    android:layout_width			= "match_parent"
-		    android:layout_height			= "500dp" 
- 	/>                                  	
-   	<include layout								= "@layout/aa_include_panel_buttons_addnew" />
+    	<include layout						= "@layout/aa_include_list_section" />
+    	
+	</LinearLayout>
+	
+    <include 
+        layout								= "@layout/aa_include_panel_buttons_addnew"
+        android:id							= "@id/buttons_layout"
+    />
 
-</LinearLayout>
+</RelativeLayout>
