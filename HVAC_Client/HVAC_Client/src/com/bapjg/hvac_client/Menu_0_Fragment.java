@@ -55,7 +55,6 @@ public class Menu_0_Fragment 									extends 					Fragment
 	    LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     	menuView 																			= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
     	
-    	//TODO must click Current yellow button
     	clickActiveButton();
 	}
 	public void onClick(View myView) 																						// This is the onClick event from the Menu
