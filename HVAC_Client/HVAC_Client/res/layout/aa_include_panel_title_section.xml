@@ -6,7 +6,7 @@
     android:background			= "@color/background"
     android:gravity				= "top"
     android:orientation			= "vertical"
-    android:id					= "@+id/title_section"
+    android:id					= "@+id/title_layout"
 >
                                   
     <TextView                     

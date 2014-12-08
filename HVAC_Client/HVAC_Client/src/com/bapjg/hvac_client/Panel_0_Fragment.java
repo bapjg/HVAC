@@ -48,14 +48,13 @@ public class Panel_0_Fragment 									extends 					Fragment
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
-		super.onConfigurationChanged(newConfig);
-		
-		
-		LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	    panelView 																			= inflater.inflate(this.panelLayout, this.container);				// Inflate the menuLayout into container (menu_container)
-	    displayHeader(); 
-    	displayContents();
-    	setListens();
+//		super.onConfigurationChanged(newConfig);
+//		
+//		LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//	    panelView 																			= inflater.inflate(this.panelLayout, this.container);				// Inflate the menuLayout into container (menu_container)
+//	    displayHeader(); 
+//    	displayContents();
+//    	setListens();
 	}
 	public void displayHeader() 											{}
 	public void displayContents() 											{}

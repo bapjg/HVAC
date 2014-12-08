@@ -3,18 +3,10 @@
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     style									= "@style/AD_Linear_Top"
 >
-    <include 
-        layout								= "@layout/aa_include_panel_title_section"
-        android:id							= "@+id/title_layout"
-    />
+    <include layout							= "@layout/aa_include_panel_title_section" />
 
-	<LinearLayout              			
-		style								= "@style/AD_Linear_V"
-		android:layout_below				= "@id/title_layout"
-		android:layout_above				= "@+id/buttons_layout"
-	>
-    
-    
+	<LinearLayout style						= "@style/AD_Linear_V_with_Buttons" >  
+   
 	    <LinearLayout
 	        android:layout_width			= "match_parent"
 	        android:layout_height			= "50dp"
@@ -104,9 +96,7 @@
 	   		/>
 	    </LinearLayout>
 	</LinearLayout>
-	<include 	
-	    layout								= "@layout/aa_include_item_buttons_ok_delete"
-	    android:id							= "@id/buttons_layout"
-	/>
+	<include layout							= "@layout/aa_include_item_buttons_ok_delete" />
+
 
 </RelativeLayout>

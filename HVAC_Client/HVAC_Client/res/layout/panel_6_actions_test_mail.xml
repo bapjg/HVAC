@@ -3,10 +3,8 @@
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     style									= "@style/AD_Linear_Top"
 >
-    <include 
-        layout								= "@layout/aa_include_panel_title_section"
-        android:id							= "@+id/title_layout"
-    />
+    <include layout							= "@layout/aa_include_panel_title_section" />
+
    
 	<RelativeLayout
     	android:layout_width				= "match_parent"

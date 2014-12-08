@@ -16,8 +16,7 @@
 			style					= "@style/AD_Text"  
 			android:id				= "@+id/name"	 	
 		/>                        
-                       
-
+ 
 		<TextView	              
 			style					= "@style/AD_Data"		
 			android:id				= "@+id/relayNumber"

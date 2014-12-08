@@ -11,7 +11,7 @@
     
 	    <LinearLayout
 	        android:layout_width					= "match_parent"
-	        android:layout_height					= "wrap_content"
+	        android:layout_height					= "match_parent"
 	        android:background						= "@color/background"
 	        android:orientation						= "vertical" 
 		>
@@ -42,82 +42,94 @@
 		            style							= "@style/AD_Data"
 				/>
 		    </GridLayout>
-			<RelativeLayout
-				android:id							= "@+id/gradient"
-	        	android:layout_width				="fill_parent"
-	        	android:layout_height				="wrap_content" 
-	        >
+		    <LinearLayout
+		        android:id							= "@+id/gradient"
+		        android:layout_width				= "match_parent"
+		        android:layout_height				= "wrap_content" 
+		    	android:orientation					= "vertical"
+			>
+		
 		        <TextView
-		            style							= "@style/AD_Data"
+		            style							= "@style/AD_Text"
 		            android:layout_width			= "match_parent"
 		            android:gravity					= "center_horizontal"
 		            android:text					= "Temperature Gradient"
-		            android:id						= "@+id/gradientTitle"
 				/>
-		    
-		        <ImageView
-		            android:id="@+id/imageView1"
-		            android:layout_width="300dp"
-		            android:layout_height="150dp"
-		            android:layout_below="@id/gradientTitle"
-		            android:layout_centerHorizontal="true"
-android:adjustViewBounds="true"
-android:scaleType="centerCrop"
-		            android:src="@drawable/gradient" />
-
-		        <TextView
-		            android:id="@+id/tempLow"
-		            style="@style/AD_Data"
-		            android:layout_width="80dp"
-		            android:layout_height="wrap_content"
-		            android:layout_alignTop="@id/imageView1"
-		            android:layout_toLeftOf="@id/imageView1"
-		            android:gravity="right|center_vertical"
-		            android:text="gt1" />
+	
+		        <LinearLayout
+			        android:layout_width			= "match_parent"
+			        android:layout_height			= "wrap_content" 
+			    	android:orientation				= "vertical"
+				>
+		        
+					<ImageView
+					    android:id					= "@+id/imageView1"
+					    android:layout_width		= "180dp"
+					    android:layout_height		= "110dp"
+					    android:layout_gravity		= "center"
+					    android:maxWidth			= "180dp"
+					    android:src					= "@drawable/gradient"
+					/>
+	
+					<TableLayout
+					    android:layout_width="match_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal"
+				    >
+				        <!-- Row 0 : Circuit Temperatures -->
+					    <TableRow 
+							android:layout_width="match_parent"
+					    	android:layout_height="wrap_content"
+						>
+					        <TextView
+					            style						= "@style/AD_Text"
+					            android:layout_weight		= "2"
+					            android:text				= "Circuit T°"
+							/>
 		
-		        <TextView
-		            android:id="@+id/tempHigh"
-		            style="@style/AD_Data"
-		            android:layout_width="80dp"
-		            android:layout_height="wrap_content"
-		            android:layout_alignBottom="@id/imageView1"
-		            android:layout_toLeftOf="@id/imageView1"
-		            android:gravity="right|center_vertical"
-		            android:text="gt2" />
+					        <TextView
+					            android:id="@+id/tempLow"
+					            style="@style/AD_Data"
+					            android:layout_weight		= "1"
+					            android:text="low" />
 		
-		        <TextView
-		            android:id="@+id/outsideLow"
-		            style="@style/AD_Data"
-		            android:layout_width="wrap_content"
-		            android:layout_alignLeft="@id/imageView1"
-		            android:layout_below="@id/imageView1"
-		            android:gravity="left"
-		            android:text="gt3" />
-		
-		        <TextView
-		            android:id="@+id/outsideHigh"
-		            style="@style/AD_Data"
-		            android:layout_width="wrap_content"
-		            android:layout_alignRight="@id/imageView1"
-		            android:layout_below="@id/imageView1"
-		            android:text="gt5"
-		            android:width="60dp" />
+							<TextView
+							    android:id="@+id/tempHigh"
+							    style="@style/AD_Data"
+					            android:layout_weight		= "1"
+							    android:text="high"
+						    />
+						</TableRow>
+						<!-- Row 1 : Outside Temperatures -->
+					    <TableRow 
+							android:layout_width="match_parent"
+					    	android:layout_height="wrap_content"
+						>
+					        <TextView
+					            style						= "@style/AD_Text"
+					            android:layout_weight		= "2"
+					            android:text				= "Outside T°"
+							/>
+							<TextView
+							    android:id					= "@+id/outsideLow"
+							    style						= "@style/AD_Data"
+					            android:layout_weight		= "1"
+							    android:text				= "OS Low"
+							/>
+							<TextView
+							    android:id					= "@+id/outsideHigh"
+							    style						= "@style/AD_Data"
+					            android:layout_weight		= "1"
+							    android:text				= "OS High"
+							/>
+						</TableRow>	        			        
+					</TableLayout>
+				</LinearLayout>
+		    </LinearLayout>
 
-		        <TextView
-		            android:id="@+id/TextView01"
-		            style="@style/AD_Data"
-		            android:layout_width="match_parent"
-		            android:layout_alignBaseline="@+id/outsideLow"
-		            android:layout_alignBottom="@+id/outsideLow"
-		            android:layout_alignParentLeft="true"
-		            android:gravity="center_horizontal"
-		            android:text="Outside" />
-
-    		</RelativeLayout>
 	        <GridLayout
 	    		style								= "@style/AD_Grid"
 	    		android:columnCount					= "2"
-	    		android:id						="@+id/mixer"
 	    	>
 		        <TextView
 		            style							= "@style/AD_Grid_Title"

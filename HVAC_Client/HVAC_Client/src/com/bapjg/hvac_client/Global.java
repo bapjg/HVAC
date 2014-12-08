@@ -305,10 +305,10 @@ public class Global
 		Boolean landscape;
 	
 		if (Global.activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)	landscape =true;
-		else																						landscape = false;
+		else																										landscape = false;
 	
-		View viewPanelContainer = (View) Global.activity.findViewById(R.id.panel_container);
-		View viewMenuContainer = (View) Global.activity.findViewById(R.id.menu_container);
+		View viewPanelContainer 															= (View) Global.activity.findViewById(R.id.panel_container);
+		View viewMenuContainer 																= (View) Global.activity.findViewById(R.id.menu_container);
 
 	
 		float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, Global.activity.getResources().getDisplayMetrics());

@@ -47,7 +47,7 @@ public class Adapter_4_Weather 									extends 					Adapter_0_Abstract
     	row.temperatureMinMax.setText					(Math.round(listItem.temperature.min) + "/" + Math.round(listItem.temperature.max));								
     	if (listItem.precipitation != null)
     	{
-    		row.precipitationValue.setText				(listItem.precipitation.value.toString() + " " + listItem.precipitation.unit);									
+    		row.precipitationValue.setText				(listItem.precipitation.value.toString() + " mm"); // + listItem.precipitation.unit);									
     		row.precipitationType.setText				(listItem.precipitation.type);
     	}
     	row.windSpeed.setText							(listItem.windSpeed.speed.toString() + " m/s");													

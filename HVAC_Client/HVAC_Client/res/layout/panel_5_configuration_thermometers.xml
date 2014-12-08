@@ -3,16 +3,10 @@
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     style									= "@style/AD_Linear_Top"
 >
-    <include 
-        layout								= "@layout/aa_include_panel_title_section"
-        android:id							= "@+id/title_layout"
-    />
+    <include layout							= "@layout/aa_include_panel_title_section" />
 
-	<LinearLayout              			
-		style								= "@style/AD_Linear_V"
-		android:layout_below				= "@id/title_layout"
-		android:layout_above				= "@+id/buttons_layout"
-	>                               			
+	<LinearLayout style						= "@style/AD_Linear_V_with_Buttons" >  
+	                                 			
 		<LinearLayout              			
 			style							= "@style/AD_Linear_H"
 		>                               			
@@ -32,10 +26,6 @@
     	
 	</LinearLayout>
 	
-    <include 
-        layout								= "@layout/aa_include_panel_buttons_addnew"
-        android:id							= "@id/buttons_layout"
-    />
-	
+    <include layout							= "@layout/aa_include_panel_buttons_addnew" />
 
 </RelativeLayout>

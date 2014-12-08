@@ -117,22 +117,22 @@
 	    android:layout_above					= "@id/connection_status"
 	>                           				
 		<!-- 
-			Menu layout 
+			Menu layout Linear changed to Frame
 		-->
 
-	    <LinearLayout
-	        android:id							="@+id/menu_container"
-	        android:layout_width				="130dp"
-	        android:layout_height				="match_parent"
-	        android:background					="@color/background"
-	        android:orientation					="vertical"
-	        android:text						="roomForButtons" 
+	    <FrameLayout
+	        android:id							= "@+id/menu_container"
+	        android:layout_width				= "130dp"
+	        android:layout_height				= "match_parent"
+	        android:background					= "@color/background"
+	        android:orientation					= "vertical"
+	        android:text						= "roomForButtons" 
         />
              			
 		<!-- 
-			Panel layout 
+			Panel layout Linear changed to Frame
 		-->
-	    <LinearLayout
+	    <FrameLayout
 	        android:id							= "@+id/panel_container"
 	        android:layout_width				= "fill_parent"
 	        android:layout_height				= "fill_parent"

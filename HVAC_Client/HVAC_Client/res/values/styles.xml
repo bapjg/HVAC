@@ -59,6 +59,16 @@
         <item name="android:paddingBottom">@dimen/row_padding</item>
         <item name="android:paddingTop">@dimen/row_padding</item>
     </style>
+    <style name="AD_Data_C">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FFFF00</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingBottom">@dimen/row_padding</item>
+        <item name="android:paddingTop">@dimen/row_padding</item>
+    </style>
     <style name="AD_DataCentered" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#FFFF00</item>
@@ -105,7 +115,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
-    <style name="AD_Linear_Top" parent="@android:style/TextAppearance.Medium">
+    <style name="AD_Linear_Top">
         <item name="android:background">@color/background</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -116,6 +126,14 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
+    </style>
+    <style name="AD_Linear_V_with_Buttons">
+        <item name="android:background">@color/background</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_below">@id/title_layout</item>
+        <item name="android:layout_above">@id/buttons_layout</item>
     </style>
     <style name="AD_Linear_H">
         <item name="android:background">@color/background</item>
@@ -136,6 +154,16 @@
 		<item name="android:layout_gravity">center</item>
 		<item name="android:orientation">horizontal</item>
 		<item name="android:stretchMode">columnWidth</item>
+    </style>
+    <style name="AD_Grid_Title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_gravity">center</item>
+		<item name="android:layout_columnSpan">2</item>
+		<item name="android:gravity">center_horizontal</item>
+		<item name="android:textColor">#FFFF00</item>
+        <item name="android:textSize">20sp</item>
+		
     </style>
     
 </resources>

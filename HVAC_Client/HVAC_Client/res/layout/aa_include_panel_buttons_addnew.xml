@@ -7,7 +7,7 @@
     android:baselineAligned					= "true"
     android:orientation						= "horizontal"
 	android:layout_alignParentBottom		= "true"
-	android:id								= "@+id/buttonsAddnewDelete"
+	android:id								= "@+id/buttons_layout"
 >
 	<Button
 		android:id							= "@+id/buttonAdd"
