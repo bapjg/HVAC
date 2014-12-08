@@ -47,7 +47,7 @@ public class Panel_0_Fragment 									extends 					Fragment
     }
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
-	{
+	{ int z=44;
 //		super.onConfigurationChanged(newConfig);
 //		
 //		LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
