@@ -22,7 +22,7 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
 	{
 		super();
 		this.menuLayout																		= R.layout.menu_1_temperatures;
-	}
+int y=1;	}
 	public void onClick(View myView) 									// This is the onClick event from the Menu
 	{
 		super.onClick(myView);
