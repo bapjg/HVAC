@@ -56,18 +56,18 @@
 				/>
 		    
 		        <ImageView
-		            android:id="@+id/imageView1"
-		            android:layout_width="300dp"
-		            android:layout_height="150dp"
-		            android:layout_below="@id/gradientTitle"
-		            android:layout_centerHorizontal="true"
-android:adjustViewBounds="true"
-android:scaleType="centerCrop"
-		            android:src="@drawable/gradient" />
+		            android:id						="@+id/imageView1"
+		            android:layout_width			="@dimen/graph_width"
+		            android:layout_height			="@dimen/graph_height"
+		            android:layout_below			="@id/gradientTitle"
+		            android:layout_centerHorizontal	="true"
+					android:adjustViewBounds		="true"
+					android:scaleType				="centerCrop"
+		            android:src						="@drawable/gradient" />
 
 		        <TextView
-		            android:id="@+id/tempLow"
-		            style="@style/AD_Data"
+		            android:id						="@+id/tempLow"
+		            style							="@style/AD_Data"
 		            android:layout_width="80dp"
 		            android:layout_height="wrap_content"
 		            android:layout_alignTop="@id/imageView1"
@@ -76,8 +76,8 @@ android:scaleType="centerCrop"
 		            android:text="gt1" />
 		
 		        <TextView
-		            android:id="@+id/tempHigh"
-		            style="@style/AD_Data"
+		            android:id						="@+id/tempHigh"
+		            style							="@style/AD_Data"
 		            android:layout_width="80dp"
 		            android:layout_height="wrap_content"
 		            android:layout_alignBottom="@id/imageView1"
@@ -86,8 +86,8 @@ android:scaleType="centerCrop"
 		            android:text="gt2" />
 		
 		        <TextView
-		            android:id="@+id/outsideLow"
-		            style="@style/AD_Data"
+		            android:id						="@+id/outsideLow"
+		            style							="@style/AD_Data"
 		            android:layout_width="wrap_content"
 		            android:layout_alignLeft="@id/imageView1"
 		            android:layout_below="@id/imageView1"
@@ -95,8 +95,8 @@ android:scaleType="centerCrop"
 		            android:text="gt3" />
 		
 		        <TextView
-		            android:id="@+id/outsideHigh"
-		            style="@style/AD_Data"
+		            android:id						="@+id/outsideHigh"
+		            style						="@style/AD_Data"
 		            android:layout_width="wrap_content"
 		            android:layout_alignRight="@id/imageView1"
 		            android:layout_below="@id/imageView1"
@@ -104,8 +104,8 @@ android:scaleType="centerCrop"
 		            android:width="60dp" />
 
 		        <TextView
-		            android:id="@+id/TextView01"
-		            style="@style/AD_Data"
+		            android:id						="@+id/TextView01"
+		            style							="@style/AD_Data"
 		            android:layout_width="match_parent"
 		            android:layout_alignBaseline="@+id/outsideLow"
 		            android:layout_alignBottom="@+id/outsideLow"

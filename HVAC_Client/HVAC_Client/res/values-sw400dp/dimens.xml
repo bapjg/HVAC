@@ -1,6 +1,7 @@
 <resources>
 
-    <!-- Default screen margins, per the Android Design guidelines. -->
 	<integer name="thermo_column_count">2</integer>
+	<dimen name="graph_width">300dp</dimen>
+	<dimen name="graph_height">150dp</dimen>	
 	
 </resources>

@@ -13,10 +13,14 @@
 		>                               			
 		    <TextView                       	
 	            style						= "@style/AD_Data"
+	            android:gravity				= "center"
+	            android:layout_weight		= "1"
 	           	android:text				= "Start" 
 	        />                              	
 	        <TextView 
 	            style						= "@style/AD_Data" 
+	            android:gravity				= "center"
+	            android:layout_weight		= "1"
 	            android:text				= "End" 
 	        />                          	
 		</LinearLayout>

@@ -52,6 +52,8 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
+		((TextView) itemView.findViewById(R.id.title)).setText		("Calendar");
+		((TextView) itemView.findViewById(R.id.subTitle)).setText	(circuitName);
 	}
 	public void displayContents()
 	{

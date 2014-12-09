@@ -48,6 +48,8 @@ public class Item_3_Calendars_Away 								extends 					Panel_0_Fragment
     }
 	public void displayHeader()
 	{
+		((TextView) itemView.findViewById(R.id.title)).setText		("Calendar");
+		((TextView) itemView.findViewById(R.id.subTitle)).setText	("Away Item");
 	}
 	public void displayContents()
 	{

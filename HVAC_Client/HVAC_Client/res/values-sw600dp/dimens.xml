@@ -1,11 +1,9 @@
 <resources>
 
-    <!--
-         Customize dimensions originally defined in res/values/dimens.xml (such as
-         screen margins) for sw600dp devices (e.g. 7" tablets) here.
-    -->
 	<dimen name="row_height">40dp</dimen>
 	<dimen name="row_padding">10dp</dimen>
 	<integer name="thermo_column_count">2</integer>
-	
+	<dimen name="graph_width">300dp</dimen>
+	<dimen name="graph_height">150dp</dimen>
+		
 </resources>
