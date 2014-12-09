@@ -25,7 +25,6 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
 	}
 	public void onClick(View myView) 									// This is the onClick event from the Menu
 	{
-		int z=3;
 		super.onClick(myView);
 		
     	String													caption						= ((Button) myView).getText().toString();
