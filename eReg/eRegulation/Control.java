@@ -92,40 +92,6 @@ public class Control
 		//
 		//============================================================
 
-
-		//============================================================
-		//
-		// Any other tests can be done here
-		//
-		
-		
-//		System.out.println("Starting test");
-		
-//		GPIO monitorBurnerFault							= new GPIO(4);
-//		GPIO monitorFuelFlow							= new GPIO(17);
-		
-		int i;
-//		Float voltage;
-//		
-//		Global.burner.burnerPower.on();
-//		
-//		for (i = 0; i < 21; i++)
-//		{
-//			System.out.println("Iteration : " + i);
-//			System.out.println("monitorFuelFlow : " + Global.burner.monitorFuelFlow.isHigh());
-//			//System.out.println("monitorFuelFlow : " + Global.burner.monitorFuelFlow.isHigh());
-//			System.out.println("====================================================");
-//			
-//			Global.waitSeconds(5);
-//		}
-//
-//		Global.burner.burnerPower.off();
-//		
-//		System.out.println("Ending test");
-
-		//
-		//============================================================
-		
 		
 		//============================================================
 		//

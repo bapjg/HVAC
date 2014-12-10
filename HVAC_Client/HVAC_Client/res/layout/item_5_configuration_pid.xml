@@ -39,7 +39,8 @@
 	            style						= "@style/AD_Data"
 			/>
     	</GridLayout>		
-    </LinearLayout>			
-    <include layout							= "@layout/aa_include_panel_buttons_addnew" />
+    </LinearLayout>	
+    		
+    <include layout							= "@layout/aa_include_item_buttons_ok_delete" />
 
 </RelativeLayout>

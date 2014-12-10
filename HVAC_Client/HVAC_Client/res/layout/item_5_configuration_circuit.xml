@@ -34,7 +34,7 @@
 
 		        <TextView
 		            style							= "@style/AD_Text"
-		            android:text					= "Thermometer"
+		            android:text					= "Target Thermometer"
 	           
 				/>
 		        <TextView
@@ -125,7 +125,7 @@
 	            />
 	            <TextView
 	                 style							= "@style/AD_Text"
-	                 android:text					= "Thermometer"
+	                 android:text					= "Mixer Target Thermometer"
 				/>
 	
 	             <TextView
@@ -248,7 +248,7 @@
 	
 		        <TextView
 		            style						= "@style/AD_Text"
-		            android:text				= "Tmperature Error Margin"
+		            android:text				= "Temperature Error Margin"
 				/>
 	
 		        <TextView

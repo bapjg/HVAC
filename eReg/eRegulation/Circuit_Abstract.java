@@ -14,7 +14,7 @@ abstract class Circuit_Abstract
 
 	public String 					name;
 	public Integer 					type;
-	public String 					friendlyName;
+//	public String 					friendlyName;
 	public Integer 					circuitType;
 	public Integer 					tempMax;
 
@@ -55,7 +55,7 @@ abstract class Circuit_Abstract
 	{
 		this.name													= paramCircuit.name;
 		this.type													= paramCircuit.type;
-		this.friendlyName											= "";
+//		this.friendlyName											= "";
 		this.circuitType											= paramCircuit.type;
 		this.tempMax												= paramCircuit.tempMax;
 		this.circuitPump											= Global.pumps.fetchPump(paramCircuit.pump);

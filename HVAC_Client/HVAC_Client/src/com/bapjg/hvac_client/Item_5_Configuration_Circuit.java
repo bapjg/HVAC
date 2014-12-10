@@ -56,16 +56,20 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-    	TextView 												pumpName 					= (TextView) itemView.findViewById(R.id.pumpName);
+    	// General :
+		TextView 												pumpName 					= (TextView) itemView.findViewById(R.id.pumpName);
     	TextView 												thermometerName				= (TextView) itemView.findViewById(R.id.thermometerName);
+    	// Temperature Gradient :
 		TextView 												outsideLow 					= (TextView) itemView.findViewById(R.id.outsideLow);
     	TextView 												outsideHigh					= (TextView) itemView.findViewById(R.id.outsideHigh);
    		TextView 												tempLow 					= (TextView) itemView.findViewById(R.id.tempLow);
     	TextView 												tempHigh					= (TextView) itemView.findViewById(R.id.tempHigh);
-   		TextView 												thermometer					= (TextView) itemView.findViewById(R.id.thermometer);
+    	// Mixer :
+  		TextView 												thermometer					= (TextView) itemView.findViewById(R.id.thermometer);
     	TextView 												swingTime					= (TextView) itemView.findViewById(R.id.swingTime);
    		TextView 												relayUp 					= (TextView) itemView.findViewById(R.id.relayUp);
     	TextView 												relayDown					= (TextView) itemView.findViewById(R.id.relayDown);
+    	// Low Level PID (Mixer) :
     	TextView 												thermometerPID				= (TextView) itemView.findViewById(R.id.thermometer);
     	TextView 												gainP						= (TextView) itemView.findViewById(R.id.gainP);
     	TextView 												timeD						= (TextView) itemView.findViewById(R.id.timeD);
@@ -128,6 +132,14 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 			itemView.findViewById(R.id.swingTime).setOnClickListener(this);
 			itemView.findViewById(R.id.relayUp).setOnClickListener(this);
 			itemView.findViewById(R.id.relayDown).setOnClickListener(this);
+
+			itemView.findViewById(R.id.thermometer).setOnClickListener(this);
+			itemView.findViewById(R.id.gainP).setOnClickListener(this);
+			itemView.findViewById(R.id.timeD).setOnClickListener(this);
+			itemView.findViewById(R.id.timeI).setOnClickListener(this);
+			itemView.findViewById(R.id.timeDelay).setOnClickListener(this);
+			itemView.findViewById(R.id.timeProjection).setOnClickListener(this);
+			itemView.findViewById(R.id.marginProjection).setOnClickListener(this);
     	}
 	}
     @Override
@@ -162,14 +174,51 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 	    		dialogThermometers.show(getFragmentManager(), "Thermometer_List");
 	      		break;
 	     	case R.id.swingTime:
-	      		Global.toaster("Its Ok swingTime", false);
-	      		break;
+	     		Dialog_Integer									dialogSwingTime					= new Dialog_Integer(itemData.mixer.swingTime, (Object) itemData.mixer, 10, 200, "Define Proprtional Gain",	this);
+	     		dialogSwingTime.show(getFragmentManager(), "Mixer Swing Time (ms)");
+	     		break;
 	     	case R.id.relayUp:
 	      		Global.toaster("Its Ok relayUp", false);
 	      		break;
 	     	case R.id.relayDown:
 	      		Global.toaster("Its Ok relayDown", false);
 	      		break;
+//	     	case R.id.thermometer:
+//	      		break;
+	     	case R.id.gainP:
+	     		Dialog_Float									dialogGain 						= new Dialog_Float(		itemData.mixer.pidParams.gainP,
+	     																												(Object) itemData.mixer.pidParams, 
+	     																												"Define Proportional Gain (ms/°C)",
+	     																												this);
+	     		dialogGain.show(getFragmentManager(), "gainP");
+	     		break;
+	     	case R.id.timeD:
+	     		Dialog_Float									dialogTimeD						= new Dialog_Float(		itemData.mixer.pidParams.timeD,
+	     																												(Object) itemData.mixer.pidParams, 
+	     																												"Differential Time Constant (ms/C)",
+	     																												this);
+	     		dialogTimeD.show(getFragmentManager(), "timeD");
+	     		break;
+	     	case R.id.timeI:
+	     		Dialog_Float									dialogTimeIntegration			= new Dialog_Float(		itemData.mixer.pidParams.timeI, 
+	     																												(Object) itemData.mixer.pidParams, 
+	     																												"Time Integration Factor (°C/ms)",	
+	     																												this);
+	     		dialogTimeIntegration.show(getFragmentManager(), "timeI");
+	     		break;
+	     	case R.id.timeDelay:
+	     		Dialog_Integer									dialogTimeDelay					= new Dialog_Integer(itemData.mixer.pidParams.timeDelay, (Object) itemData.mixer.pidParams, 10, 200, "Time Delay (s)",	this);
+	     		dialogTimeDelay.show(getFragmentManager(), "timeDelay");
+	     		break;
+	     	case R.id.timeProjection:
+	     		Dialog_Integer									dialogTimeProjection			= new Dialog_Integer(itemData.mixer.pidParams.timeProjection, (Object) itemData.mixer.pidParams, 0, 100, "Time Extrapolation (s)",	this);
+	     		dialogTimeProjection.show(getFragmentManager(), "timeProjection");
+	     		break;
+	     	case R.id.marginProjection:
+	     		Dialog_Integer									dialogMarginProjection			= new Dialog_Integer(itemData.mixer.pidParams.marginProjection, (Object) itemData.mixer.pidParams, 0, 10, "Define Temperature Margin on Extrapolation (°C)",	this);
+	     		dialogMarginProjection.show(getFragmentManager(), "marginProjection");
+	     		break;
+
 		}
  	}
     public void onDialogReturn()
