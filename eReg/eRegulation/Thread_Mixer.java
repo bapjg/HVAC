@@ -73,7 +73,7 @@ public class Thread_Mixer implements Runnable
 				Integer temperatureProjected					= 0;
 				Integer tempNow;
 	
-				// Idea is to upto temeProject in 5s intervals.
+				// Idea is to upto temeProject (timeProjection) in 5s intervals.
 				// The first intervals upto timeDelay, no decision is made
 				// Thereafter, if projected temperature is out of bound, the loop stops and the PID reactivated for recalculation
 				for (i = 0; (i < indexProject) && (! Global.stopNow); i++)
@@ -85,6 +85,20 @@ public class Thread_Mixer implements Runnable
 					if (i >= indexDelay)														// We have waited for dTdt to settle a bit
 					{
 						temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProjectInSeconds)).intValue();
+						
+						// Perhaps a better idea is to calculate time at which targetTemp will be attained
+						// Are we getting closer or is it moving out, or worse will never happen.
+						
+						Long timeNow = Global.DateTime.now();
+						Float timeProjected =  (targetTemp - tempNow)/Global.thermoFloorOut.pidControler.dTdt();
+						if (timeProjected < 0)
+						{
+							LogIt.display("Thread_Mixer", "sequencer", "---Houston we have a problem--- the gap is widening");
+						}
+						else if (timeProjected > indexProject) //Rubbish
+						{
+							LogIt.display("Thread_Mixer", "sequencer", "---Houston we should have saved the previous value---");
+						}
 						
 						if (Math.abs(temperatureProjected - targetTemp) > mixer.marginProjection)		// More than 2 degrees difference (either over or under)
 						{

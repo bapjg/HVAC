@@ -218,7 +218,6 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
 	     		Dialog_Integer									dialogMarginProjection			= new Dialog_Integer(itemData.mixer.pidParams.marginProjection, (Object) itemData.mixer.pidParams, 0, 10, "Define Temperature Margin on Extrapolation (°C)",	this);
 	     		dialogMarginProjection.show(getFragmentManager(), "marginProjection");
 	     		break;
-
 		}
  	}
     public void onDialogReturn()

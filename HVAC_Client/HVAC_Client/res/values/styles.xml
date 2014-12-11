@@ -39,7 +39,7 @@
         <item name="android:layout_gravity">left</item>
         <item name="android:paddingBottom">@dimen/row_padding</item>
         <item name="android:paddingTop">@dimen/row_padding</item>
-        </style>
+	</style>
 
     <style name="AD_Table" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">match_parent</item>

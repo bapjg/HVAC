@@ -1,0 +1,19 @@
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<LinearLayout  
+    xmlns:android							= "http://schemas.android.com/apk/res/android"
+    style									= "@style/AD_Linear_Top"
+>
+    <include layout							= "@layout/aa_include_panel_title_section" />
+
+
+    <ScrollView 
+	    style								= "@style/AD_Scroll"
+	>
+        <LinearLayout
+	    style								= "@style/AD_Linear_V"
+	    android:id							= "@+id/base_insert_point"
+        >
+
+        </LinearLayout>
+	</ScrollView>
+</LinearLayout>
