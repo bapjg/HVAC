@@ -99,7 +99,7 @@ public class Global
 		else if (result instanceof Ctrl_Actions_Stop.Ack)		message = "Ok";
 		else if (result instanceof Ctrl_Temperatures.Data)		message = "Ok";
 		else if (result instanceof Ctrl_Immediate.Data)			message = "Ok";
-		else if (result instanceof Ctrl_Weather.Data)			message = "Weather Ok";
+		else if (result instanceof Ctrl_Weather.Data)			message = "Ok";
 		else													message = "Bad Data";
     	
 		setStatusTCP(message);

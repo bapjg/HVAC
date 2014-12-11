@@ -11,17 +11,16 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int Black=0x7f040003;
-        public static final int Gray=0x7f040004;
-        public static final int Grey=0x7f040005;
-        public static final int White=0x7f040006;
-        public static final int Yellow=0x7f040002;
+        public static final int Background=0x7f040001;
+        public static final int Black=0x7f040004;
+        public static final int Gray=0x7f040005;
+        public static final int Grey=0x7f040006;
+        public static final int White=0x7f040007;
+        public static final int Yellow=0x7f040003;
         public static final int background=0x7f040000;
-        public static final int textNormal=0x7f040001;
+        public static final int textNormal=0x7f040002;
     }
     public static final class dimen {
-        /**  Default screen margins, per the Android Design guidelines. 
-         */
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
         public static final int graph_height=0x7f050005;
@@ -33,6 +32,7 @@ public final class R {
          */
         public static final int row_height=0x7f050002;
         public static final int row_padding=0x7f050003;
+        public static final int text_normal=0x7f050006;
     }
     public static final class drawable {
         public static final int button_add=0x7f020000;

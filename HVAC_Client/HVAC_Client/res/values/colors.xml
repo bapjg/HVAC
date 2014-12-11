@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#000099</color> 
+    <color name="Background">#000099</color> 
     <color name="textNormal">#FFFF00</color> 
     <color name="Yellow">#FFFF00</color>
     <color name="Black">#000000</color>
-    <color name="Gray">#ffcccccc</color>
+    <color name="Gray">#FFCCCC</color>
     <color name="Grey">#717171</color>    
-    <color name="White">#ffffff</color>    
+    <color name="White">#FFFFFF</color>    
 </resources>

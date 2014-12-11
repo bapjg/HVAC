@@ -58,10 +58,10 @@ public class Panel_1_Test 										extends 					Panel_0_Fragment
     	Panel_0_Base_Linear			line3 = new Panel_0_Base_Linear(getActivity());
     	
     	
-    	insertPoint.addView(line1);
     	insertPoint.addView(line2);
     	insertPoint.addView(line3);
-    	
+    	insertPoint.addView(line1);
+   	
     	((TextView) line1.findViewById(R.id.Left)).setTag("T1");
     	((TextView) line1.findViewById(R.id.Right)).setTag("T2");
     	((TextView) line2.findViewById(R.id.Left)).setTag("T3");

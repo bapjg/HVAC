@@ -13,7 +13,7 @@
 	    style								= "@style/AD_Linear_V"
 	    android:id							= "@+id/base_insert_point"
         >
-
+			<include layout							= "@layout/panel_0_linear_line" />
         </LinearLayout>
 	</ScrollView>
 </LinearLayout>
