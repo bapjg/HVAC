@@ -3,9 +3,9 @@
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     android:paddingTop				 		= "@dimen/row_padding"
     android:paddingBottom					= "@dimen/row_padding"
+    android:paddingRight					= "10dp"
     android:layout_width					= "match_parent"
     android:layout_height					= "wrap_content"
-    android:paddingRight					= "10dp"
     android:background						= "@color/Background"
 	android:orientation						= "horizontal"
 >

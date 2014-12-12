@@ -113,6 +113,7 @@ public class Global
 		String message;
 		if 		(result instanceof Ctrl_Calendars.Data)			message = "Ok";
 		else if (result instanceof Ctrl_Configuration.Data)		message = "Ok";
+		else if (result instanceof Ctrl_Fuel_Consumption.Data)	message = "Ok";
 		else if (result instanceof Ctrl__Abstract.Ack)			message = "Ok";
 		else if (result instanceof Ctrl__Abstract.Nack)			message = "Nack";
 		else if (result instanceof Ctrl__Abstract.NoConnection)	message = "No Connection";

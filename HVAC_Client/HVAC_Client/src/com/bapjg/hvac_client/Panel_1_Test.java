@@ -19,9 +19,11 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -56,12 +58,47 @@ public class Panel_1_Test 										extends 					Panel_0_Fragment
     	LinearLayout  	line1 = (LinearLayout ) inflater.inflate(R.layout.panel_0_linear_line, null, false);
     	LinearLayout  	line2 = (LinearLayout ) inflater.inflate(R.layout.panel_0_linear_line, null, false);
     	Panel_0_Base_Linear			line3 = new Panel_0_Base_Linear(getActivity());
+
+    	LinearLayout	line4 = new LinearLayout(getActivity());
+    	line4.setOrientation(LinearLayout.HORIZONTAL);
+    	line4.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+    	line4.setBackgroundColor(0x00009900);
+    	line4.setPadding(0, 5, 10, 5);    	
+    	
+        TextView textLeft = new TextView(getActivity());
+        LinearLayout.LayoutParams paramsLeft = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1F);
+        textLeft.setLayoutParams(paramsLeft);
+        textLeft.setText("Hallo Welt!");
+        textLeft.setTextSize(20F);
+        textLeft.setTextColor(Color.WHITE);
+        textLeft.setGravity(Gravity.LEFT);
+        
+        
+        
+        
+        
+        line4.addView(textLeft);
+
+        
+        
+        TextView textRight = new TextView(getActivity());
+        LinearLayout.LayoutParams paramsRight = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1F);
+        textRight.setLayoutParams(paramsRight);
+        textRight.setText("Henry");
+        textRight.setTextSize(20F);
+        textRight.setTextColor(Color.YELLOW);
+        textRight.setGravity(Gravity.RIGHT);
+        line4.addView(textRight);
+
+    	
+    	
     	
     	
     	insertPoint.addView(line2);
     	insertPoint.addView(line3);
     	insertPoint.addView(line1);
-   	
+       	insertPoint.addView(line4);
+          	
     	((TextView) line1.findViewById(R.id.Left)).setTag("T1");
     	((TextView) line1.findViewById(R.id.Right)).setTag("T2");
     	((TextView) line2.findViewById(R.id.Left)).setTag("T3");
