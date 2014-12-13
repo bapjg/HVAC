@@ -19,6 +19,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,24 +35,25 @@ import HVAC_Common.Ctrl_Temperatures.Request;
 public class Panel_0_Base_Linear 								extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
-	public View													me;
+	public View mView;
+	public TextView 											textLeft;
+	public TextView 											textRight;
 	
 	public Panel_0_Base_Linear(Context context) 
 	{
 		super(context);
 		this.inflater 																		= LayoutInflater.from(context);
 		inflater.inflate(R.layout.panel_0_linear_line, this, true);
-		
-		TextView 												textLeft 					= (TextView) this.findViewById(R.id.Left);
-		TextView 												textRight 					= (TextView) this.findViewById(R.id.Right);
-		textLeft.setText("Object is");
-		textRight.setText("Panel_0_Base_Linear");
+		textLeft 																			= (TextView) this.findViewById(R.id.Left);
+		textRight 																			= (TextView) this.findViewById(R.id.Right);
 	}
-	@Override
-	protected void onLayout(boolean changed, int l, int t, int r, int b) 
+	public void setTextLeft(String text)
 	{
-		// TODO Auto-generated method stub
-		
+		textLeft.setText(text);
+	}
+	public void setTextRight(String text)
+	{
+		textRight.setText(text);
 	}
 
 }

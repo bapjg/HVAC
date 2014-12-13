@@ -1,15 +1,10 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+            backward-compatibility can go here.        -->
     </style>
 
     <!-- Application theme. -->
@@ -17,12 +12,12 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    <style name="AD_Row" parent="@android:style/TextAppearance.Medium">
+    <style name="AD_Row">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">30dp</item>
     </style>
 
-    <style name="AD_Title" parent="@android:style/TextAppearance.Large">
+    <style name="AD_Title">
         <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#FFFF00</item>
@@ -30,7 +25,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="AD_Text" parent="@android:style/TextAppearance.Medium">
+    <style name="AD_Text">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:layout_width">wrap_content</item>
@@ -41,21 +36,20 @@
         <item name="android:paddingTop">@dimen/row_padding</item>
 	</style>
 
-    <style name="AD_Table" parent="@android:style/TextAppearance.Medium">
+    <style name="AD_Table">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:stretchColumns">*</item>
         <item name="android:shrinkColumns">*</item>
     </style>
 
-    <style name="AD_Data" parent="@android:style/TextAppearance.Medium">
+    <style name="AD_Data">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#FFFF00</item>
         <item name="android:gravity">right</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">right</item>
-        <item name="android:paddingRight">10dp</item>
         <item name="android:paddingBottom">@dimen/row_padding</item>
         <item name="android:paddingTop">@dimen/row_padding</item>
     </style>
@@ -69,7 +63,7 @@
         <item name="android:paddingBottom">@dimen/row_padding</item>
         <item name="android:paddingTop">@dimen/row_padding</item>
     </style>
-    <style name="AD_DataCentered" parent="@android:style/TextAppearance.Medium">
+    <style name="AD_DataCentered">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#FFFF00</item>
         <item name="android:gravity">center</item>
@@ -78,7 +72,7 @@
         <item name="android:layout_gravity">center</item>
     </style>
     
-    <style name="AD_Switch" parent="@android:style/TextAppearance.Medium">
+    <style name="AD_Switch">
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">#FFFF00</item>
         <item name="android:textOn">On</item>
@@ -88,27 +82,27 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="AD_Button" parent="@android:style/TextAppearance.Medium">
+    <style name="AD_Button">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-   <style name="AD_ThinLine" parent="@android:style/TextAppearance.Medium">
+   <style name="AD_ThinLine">
         <item name="android:background">@color/Grey</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
     </style>
     
-    <style name="AD_MenuButton" parent="@android:style/TextAppearance.Medium">
+    <style name="AD_MenuButton">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="AD_ImageButton" parent="@android:style/TextAppearance.Medium">
+    <style name="AD_ImageButton">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">#ffcccccc</item>
         <item name="android:layout_width">wrap_content</item>
@@ -119,6 +113,14 @@
         <item name="android:background">@color/background</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="AD_Panel_Insert">
+        <item name="android:background">@color/background</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
         <item name="android:orientation">vertical</item>
     </style>
     <style name="AD_Linear_V">

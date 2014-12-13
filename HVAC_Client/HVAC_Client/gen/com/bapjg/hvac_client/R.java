@@ -263,35 +263,26 @@ public final class R {
         public static final int AD_Data=0x7f080006;
         public static final int AD_DataCentered=0x7f080008;
         public static final int AD_Data_C=0x7f080007;
-        public static final int AD_Grid=0x7f080013;
-        public static final int AD_Grid_Title=0x7f080014;
+        public static final int AD_Grid=0x7f080014;
+        public static final int AD_Grid_Title=0x7f080015;
         public static final int AD_ImageButton=0x7f08000d;
-        public static final int AD_Linear_H=0x7f080011;
+        public static final int AD_Linear_H=0x7f080012;
         public static final int AD_Linear_Top=0x7f08000e;
-        public static final int AD_Linear_V=0x7f08000f;
-        public static final int AD_Linear_V_with_Buttons=0x7f080010;
+        public static final int AD_Linear_V=0x7f080010;
+        public static final int AD_Linear_V_with_Buttons=0x7f080011;
         public static final int AD_MenuButton=0x7f08000c;
+        public static final int AD_Panel_Insert=0x7f08000f;
         public static final int AD_Row=0x7f080002;
-        public static final int AD_Scroll=0x7f080012;
+        public static final int AD_Scroll=0x7f080013;
         public static final int AD_Switch=0x7f080009;
         public static final int AD_Table=0x7f080005;
         public static final int AD_Text=0x7f080004;
         public static final int AD_ThinLine=0x7f08000b;
         public static final int AD_Title=0x7f080003;
         /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-
-
-
-    
-
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
-
-
-
         
 
         Base application theme for API 11+. This theme completely replaces

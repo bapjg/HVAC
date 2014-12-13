@@ -40,6 +40,10 @@ public class Panel_1_Test 										extends 					Panel_0_Fragment
 	public TCP_Task												task;
 	private Ctrl_Temperatures.Data								temperatureData;
 	
+	private Panel_0_Base_Linear									tempBoiler;
+	private Panel_0_Base_Linear									tempHW;
+	private Panel_0_Base_Linear									tempOutside;
+	
 	public Panel_1_Test()
 	{
 		super();
@@ -51,64 +55,26 @@ public class Panel_1_Test 										extends 					Panel_0_Fragment
     	this.container																		= container;
 		this.panelView																		= inflater.inflate(R.layout.panel_0_base_linear, container, false);
     	displayHeader();
-//    	TCP_Send(new Ctrl_Temperatures().new Request());
     	
     	LinearLayout insertPoint = (LinearLayout) panelView.findViewById(R.id.base_insert_point);
     	
-    	LinearLayout  	line1 = (LinearLayout ) inflater.inflate(R.layout.panel_0_linear_line, null, false);
-    	LinearLayout  	line2 = (LinearLayout ) inflater.inflate(R.layout.panel_0_linear_line, null, false);
-    	Panel_0_Base_Linear			line3 = new Panel_0_Base_Linear(getActivity());
+    	Panel_0_Base_Linear										tempBoiler 					= new Panel_0_Base_Linear(getActivity());
+    	Panel_0_Base_Linear  									tempHW 						= new Panel_0_Base_Linear(getActivity());
+    	Panel_0_Base_Linear  									tempOutside 				= new Panel_0_Base_Linear(getActivity());
 
-    	LinearLayout	line4 = new LinearLayout(getActivity());
-    	line4.setOrientation(LinearLayout.HORIZONTAL);
-    	line4.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-    	line4.setBackgroundColor(0x00009900);
-    	line4.setPadding(0, 5, 10, 5);    	
-    	
-        TextView textLeft = new TextView(getActivity());
-        LinearLayout.LayoutParams paramsLeft = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1F);
-        textLeft.setLayoutParams(paramsLeft);
-        textLeft.setText("Hallo Welt!");
-        textLeft.setTextSize(20F);
-        textLeft.setTextColor(Color.WHITE);
-        textLeft.setGravity(Gravity.LEFT);
-        
-        
-        
-        
-        
-        line4.addView(textLeft);
+    	tempBoiler.setTextLeft("Boiler");
+    	tempBoiler.setTextRight("Line1 R");
 
-        
-        
-        TextView textRight = new TextView(getActivity());
-        LinearLayout.LayoutParams paramsRight = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1F);
-        textRight.setLayoutParams(paramsRight);
-        textRight.setText("Henry");
-        textRight.setTextSize(20F);
-        textRight.setTextColor(Color.YELLOW);
-        textRight.setGravity(Gravity.RIGHT);
-        line4.addView(textRight);
+    	tempHW.setTextLeft("Hot Water");
+    	tempHW.setTextRight("Line2 R");
 
-    	
-    	
-    	
-    	
-    	insertPoint.addView(line2);
-    	insertPoint.addView(line3);
-    	insertPoint.addView(line1);
-       	insertPoint.addView(line4);
+    	tempOutside.setTextLeft("Outside");
+    	tempOutside.setTextRight("Line3 R");
+
+    	insertPoint.addView(tempBoiler);
+    	insertPoint.addView(tempHW);
+    	insertPoint.addView(tempOutside);
           	
-    	((TextView) line1.findViewById(R.id.Left)).setTag("T1");
-    	((TextView) line1.findViewById(R.id.Right)).setTag("T2");
-    	((TextView) line2.findViewById(R.id.Left)).setTag("T3");
-    	((TextView) line2.findViewById(R.id.Right)).setTag("T4");
-
-    	
-    	((TextView) insertPoint.findViewWithTag("T1")).setText("Line1 Left");
-    	((TextView) insertPoint.findViewWithTag("T2")).setText("Line1 Right");
-    	((TextView) insertPoint.findViewWithTag("T3")).setText("Line2 Left");
-    	((TextView) insertPoint.findViewWithTag("T4")).setText("Line2 Right");
         return panelView;
     }
 	public void processFinishTCP(Ctrl__Abstract result) 
@@ -123,8 +89,8 @@ public class Panel_1_Test 										extends 					Panel_0_Fragment
     } 
 	public void displayHeader()
 	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Testing Testing");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Test");
+		((TextView) panelView.findViewById(R.id.title)).setText		("Temperatures");
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Readings");
 	}
 	public void displayContents()
 	{
@@ -133,9 +99,9 @@ public class Panel_1_Test 										extends 					Panel_0_Fragment
 //			((TextView) panelView.findViewById(R.id.Date)).setText				(Global.displayDateShort	(temperatureData.dateTime));
 //			((TextView) panelView.findViewById(R.id.Time)).setText				(Global.displayTimeShort	(temperatureData.dateTime));
 //			
-//			((TextView) panelView.findViewById(R.id.Boiler)).setText			(Global.displayTemperature	(temperatureData.tempBoiler));
-//			((TextView) panelView.findViewById(R.id.HotWater)).setText			(Global.displayTemperature	(temperatureData.tempHotWater));
-//			((TextView) panelView.findViewById(R.id.Outside)).setText			(Global.displayTemperature	(temperatureData.tempOutside));
+			tempBoiler.setTextRight 	(Global.displayTemperature	(temperatureData.tempBoiler));
+			tempHW.setTextRight			(Global.displayTemperature	(temperatureData.tempHotWater));
+			tempOutside.setTextRight	(Global.displayTemperature	(temperatureData.tempOutside));
 //			((TextView) panelView.findViewById(R.id.BoilerIn)).setText			(Global.displayTemperature	(temperatureData.tempBoilerIn));
 //			((TextView) panelView.findViewById(R.id.BoilerOut)).setText			(Global.displayTemperature	(temperatureData.tempBoilerOut));
 //			((TextView) panelView.findViewById(R.id.FloorIn)).setText			(Global.displayTemperature	(temperatureData.tempFloorIn));
