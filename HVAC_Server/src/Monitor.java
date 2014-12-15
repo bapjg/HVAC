@@ -97,7 +97,7 @@ public class Monitor extends HttpServlet
         } 
     	else if (message_in instanceof Rpt_Temperatures)
         {
-    		Rpt_Temperatures 		readings 	= (Rpt_Temperatures) message_in;
+    		Rpt_Temperatures 		readings 		= (Rpt_Temperatures) message_in;
             message_out								= processTemperatures(readings);
          } 
 		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)
@@ -107,22 +107,22 @@ public class Monitor extends HttpServlet
         } 
 		else if (message_in instanceof Rpt_Report)
         {
-            Rpt_Report 				readings 	= (Rpt_Report) message_in;
+            Rpt_Report 				readings 		= (Rpt_Report) message_in;
             message_out								= processReport(readings);
         } 
 		else if (message_in instanceof Rpt_Action)
         {
-            Rpt_Action 				readings 	= (Rpt_Action) message_in;
+            Rpt_Action 				readings 		= (Rpt_Action) message_in;
             message_out								= processAction(readings);
         } 
 		else if (message_in instanceof Rpt_PID.Update)
         {
-            Rpt_PID.Update			readings 	= (Rpt_PID.Update) message_in;
+            Rpt_PID.Update			readings 		= (Rpt_PID.Update) message_in;
             message_out								= processPID(readings);
         } 
 		else if (message_in instanceof Rpt_MixerMouvement)
         {
-			Rpt_MixerMouvement 		readings 	= (Rpt_MixerMouvement) message_in;
+			Rpt_MixerMouvement 		readings 		= (Rpt_MixerMouvement) message_in;
             message_out								= processMixerMouvement(readings);
          } 
 		else

@@ -86,7 +86,7 @@ public class Mixer
 		//
 		allOff();
 		PID 													pidControler				= Global.thermoFloorOut.pidControler;
-		MixerMove_Report report;
+		MixerMove_Report 										report;
 		
 		
 		// Koeff at 250 ok for low boiler temp circa 30
@@ -156,6 +156,7 @@ public class Mixer
 					positionTracked															= report.positionTracked;
 				}
 			}
+			LogIt.pidData(targetTemp, pidControler.T(), pidControler.dTdt(), (Float) 0F, gainP, gainD, gainI, (Float) swingTimeRequired.floatValue(), Global.thermoFloorOut.reading, Global.thermoBoiler.reading);
 		}
 		else
 		{

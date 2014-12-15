@@ -7,124 +7,71 @@ import HVAC_Common.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class PID 
 {
-	public  String		name;
-	public  Integer		sampleIncrement;
-	public  Integer		increment;
-	private Integer 	indexEnqueue;	// Separate index to ensure enqueue happens at the end
-    private Integer 	count;			// Count is the number of entries in the PID Table <= pidDepth
-    public 	Integer 	target;
+	public  String												name;
+	public  Integer												sampleIncrement;
+	public  Integer												increment;
+	private Integer 											indexEnqueue;	// Separate index to ensure enqueue happens at the end
+    private Integer 											count;			// Count is the number of entries in the PID Table <= pidDepth
+    public 	Integer 											target;
 
-    private	Integer		pidDepth;		// Depth is the size of the PID table
-    private PID_Entry[]	entries;
+    private	Integer												pidDepth;		// Depth is the size of the PID table
+    private PID_Entry[]											entries;
     
-//    public PID(String name, String pidDepth, String sampleIncrement) 
-//    {
-//    	this.name		 						= name;
-//    	this.sampleIncrement		 			= Integer.parseInt(sampleIncrement);
-//    	this.increment				 			= 1;
-//    	this.indexEnqueue 						= 0;
-//        this.target 							= 0;
-//        this.count								= 0;
-//        
-//        this.pidDepth							= Integer.parseInt(pidDepth);
-//        this.entries							= new PID_Entry[this.pidDepth];
-//        
-//        int i;
-//        for (i = 0; i < this.pidDepth; i++)
-//        {
-//        	this.entries[i]						= new PID_Entry();
-//        }
-//    }
-//    public PID(String name, Integer pidDepth, Integer sampleIncrement) 
-//    {
-//    	this.name		 						= name;
-//    	this.sampleIncrement		 			= sampleIncrement;
-//    	this.increment				 			= 1;
-//    	this.indexEnqueue 						= 0;
-//        this.target 							= 0;
-//        this.count								= 0;
-//        
-//        this.pidDepth							= pidDepth;
-//        this.entries							= new PID_Entry[this.pidDepth];
-//        
-//        int i;
-//        for (i = 0; i < this.pidDepth; i++)
-//        {
-//        	this.entries[i]						= new PID_Entry();
-//        }
-//    }
-//    public PID(Integer pidDepth) 
-//    {
-//    	this.indexEnqueue 						= 0;
-//        this.target 							= 0;
-//        this.count								= 0;
-//    	this.sampleIncrement		 			= 1;
-//    	this.increment				 			= 1;
-//       
-//        this.pidDepth							= pidDepth;
-//        this.entries							= new PID_Entry[pidDepth];
-//        
-//        int i;
-//        for (i = 0; i < pidDepth; i++)
-//        {
-//        	this.entries[i]						= new PID_Entry();
-//        }
-//    }
     public PID(Ctrl_Configuration.PID_Data 		paramPID) 
     {
-    	this.name		 						= paramPID.name;
-    	this.sampleIncrement		 			= paramPID.sampleIncrement;
-       	this.increment				 			= 1;
-        this.indexEnqueue 						= 0;
-        this.target 							= 0;
-        this.count								= 0;
-    	this.sampleIncrement		 			= 1;
-    	this.increment				 			= 1;
-       
-        this.pidDepth							= paramPID.depth;
-        this.entries							= new PID_Entry[pidDepth];
+    	this.name		 																	= paramPID.name;
+    	this.sampleIncrement		 														= paramPID.sampleIncrement;
+       	this.increment				 														= 1;
+        this.indexEnqueue 																	= 0;
+        this.target 																		= 0;
+        this.count																			= 0;
+        // TODO Is this correct
+    	this.sampleIncrement		 														= 1;
+    	this.increment				 														= 1;
+    	
+        this.pidDepth																		= paramPID.depth;
+        this.entries																		= new PID_Entry[pidDepth];
         
         int i;
         for (i = 0; i < pidDepth; i++)
         {
-        	this.entries[i]						= new PID_Entry();
+        	this.entries[i]																	= new PID_Entry();
         }
     }
     public void setTarget(Integer target)
     {
-        this.target 							= target;
+        this.target 																		= target;
     }
     public void add(Integer newNumber) 
     {
-    	// This is new code
-    	Integer previousIndex					= 0;
-    	entries[indexEnqueue].timeStamp			= Calendar.getInstance().getTimeInMillis();
-    	entries[indexEnqueue].item				= newNumber;
+    	Integer previousIndex																= 0;
+    	entries[indexEnqueue].timeStamp														= Calendar.getInstance().getTimeInMillis();
+    	entries[indexEnqueue].item															= newNumber;
  
     	if (count == 0)
     	{
-    		entries[indexEnqueue].delta			= 0;
-    		entries[indexEnqueue].integral		= 0L;
+    		entries[indexEnqueue].delta														= 0;
+    		entries[indexEnqueue].integral													= 0L;
     	}
     	else
     	{
     		// previous index is enqueueIndex -1 modulo length. We add queue length to avoid negative values 
-    		previousIndex						= (indexEnqueue  - 1 + pidDepth) % pidDepth;
+    		previousIndex																	= (indexEnqueue  - 1 + pidDepth) % pidDepth;
 
     		// Calculate dTemp. Note that it is independant of the target (rate of change)
-    		entries[indexEnqueue].delta 		= newNumber - entries[previousIndex].item;
+    		entries[indexEnqueue].delta 													= newNumber - entries[previousIndex].item;
     		
-    		Long deltaTimeStamps 				= entries[indexEnqueue].timeStamp - entries[previousIndex].timeStamp;
-    		Long millidegreeSeconds				= (newNumber.longValue() - target.longValue()) * deltaTimeStamps/1000L;		// decidegreeSeconds = offTarget x seconds
+    		Long deltaTimeStamps 															= entries[indexEnqueue].timeStamp - entries[previousIndex].timeStamp;
+    		Long millidegreeSeconds															= (newNumber.longValue() - target.longValue()) * deltaTimeStamps/1000L;		// decidegreeSeconds = offTarget x seconds
     		
-    		entries[indexEnqueue].integral 		= millidegreeSeconds + entries[previousIndex].integral;			// This is items x.dt
+    		entries[indexEnqueue].integral 													= millidegreeSeconds + entries[previousIndex].integral;			// This is items x.dt
     	}
     	
-    	indexEnqueue 							= (indexEnqueue + 1) % pidDepth;
+    	indexEnqueue 																		= (indexEnqueue + 1) % pidDepth;
 
     	if (count < pidDepth)
     	{
-    		count++;					// Do later
+    		count++;					// TODO later
     	}
     }
     public int average() 
@@ -133,29 +80,34 @@ public class PID
     	int sum = 0;
     	for (i = 0; i < count; i++)
     	{
-    		sum 								= sum + entries[indexEnqueue].item;
+    		sum 																			= sum + entries[indexEnqueue].item;
     	}
     	return sum/count;
     }
     public Float dTdt() 
     {
-		Float 		differential 				= 0F;								// unit = millidegrees/second 
-		Long 		deltaTimeStamps				= 0L;								// unit = milliseconds
-    	Integer		indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
-    	Integer		indexPrevious				= (indexEnqueue - 2 + pidDepth) % pidDepth;
+		Float 		differential 															= 0F;								// unit = millidegrees/second 
+		Long 		deltaTimeStamps															= 0L;								// unit = milliseconds
+    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
     	
     	if (count <= 1)
     	{
-    		differential 						= 0F;
+    		differential 																	= 0F;
     	}
     	else
     	{
     		//Units of differential are decidegrees/millisecond
-    		deltaTimeStamps 					= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
-    		differential						= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
+    		deltaTimeStamps 																= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
+    		differential																	= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
     	}
 
     	return differential;
+    }
+    public Float T() 
+    {
+    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	return entries[indexCurrent].item.floatValue();
     }
     public Integer getGain(Float kP, Float kD, Float kI) 
     {
@@ -170,13 +122,13 @@ public class PID
     	// Note that Java modulo defines that result carries same sign as numurator
     	// So to get the index of index-1 (or -2) we add the modulo base to ensure a positive outcome
     	
-    	Integer		indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
-    	Integer		indexPrevious				= (indexEnqueue - 2 + pidDepth) % pidDepth;
-    	Integer 	currentError 				= entries[indexCurrent].item - target;
-    	Float 		proportional 				= currentError.floatValue();		// unit = milligrees offtarget
-		Float 		differential 				= 0F;								// unit = milligrees/second 
-		Float 		integral 					= 0F;								// unit = milligrees offtarget x seconds
-		Float 		result 						= 0F;								// retruns number of milliseconds to move 3way valve
+    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
+    	Integer 	currentError 															= entries[indexCurrent].item - target;
+    	Float 		proportional 															= currentError.floatValue();		// unit = milligrees offtarget
+		Float 		differential 															= 0F;								// unit = milligrees/second 
+		Float 		integral 																= 0F;								// unit = milligrees offtarget x seconds
+		Float 		result 																	= 0F;								// retruns number of milliseconds to move 3way valve
 																				// Made negative as is a negative feedback system
 		
     	// Rather than calc de/dt (which can have transients due to square wave targets
@@ -186,27 +138,27 @@ public class PID
 		
     	if (count <= 1)
     	{
-    		differential 						= 0F;
+    		differential 																	= 0F;
     	}
     	else
     	{
     		//Units of differential are decidegrees/millisecond
-    		Long 	deltaTimeStamps 			= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
-    		differential						= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
+    		Long 	deltaTimeStamps 														= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
+    		differential																	= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
     	}
 
-		integral 								= entries[indexCurrent].integral.floatValue();							// in millidegree x seconds
-		result 									= - kP * proportional - kD * differential - kI * integral;
+		integral 																			= entries[indexCurrent].integral.floatValue();							// in millidegree x seconds
+		result 																				= - kP * proportional - kD * differential - kI * integral;
 		
 		return result.intValue();
     }
     public class PID_Entry
     {
-        private Long 		timeStamp;		//                         stored unit = milliseconds
-        private Integer 	item;			// Proportional component, stored unit = millidegrees (we store values, not differences to avoid pbs with 
-        private Integer 	delta;			// Differential component, stored unit = millidegrees  sudden target changes with sudden target changes)
-        private Long 		integral;		// Integral component,     stored unit = millidegree from target x seconds
-        private Integer 	delta2;			// Second order Differential component, stored unit = millidegrees per ????  sudden target changes with sudden target changes)
+        private Long 											timeStamp;		//                         stored unit = milliseconds
+        private Integer 										item;			// Proportional component, stored unit = millidegrees (we store values, not differences to avoid pbs with 
+        private Integer 										delta;			// Differential component, stored unit = millidegrees  sudden target changes with sudden target changes)
+        private Long 											integral;		// Integral component,     stored unit = millidegree from target x seconds
+        private Integer 										delta2;			// Second order Differential component, stored unit = millidegrees per ????  sudden target changes with sudden target changes)
                
         public PID_Entry() 
         {
