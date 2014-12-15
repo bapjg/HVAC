@@ -73,33 +73,33 @@ public class Monitor extends HttpServlet
         }
         catch (ClassNotFoundException eCNF)
         {
-        	System.out.println("Caught CNF");
+        	System.out.println("Monitor : Caught CNF");
         	eCNF.printStackTrace();
             message_out 							= new Rpt_Abstract().new Nack();
         }
         catch (IOException eIO)
         {
-        	System.out.println("Caught IO");
+        	System.out.println("Monitor : Caught IO");
         	System.out.println("An IO Exception occured : " + eIO);
         	message_out 							= new Rpt_Abstract().new Nack();
         }
         catch (Exception e)
         {
-        	System.out.println("Caught another exception");
+        	System.out.println("Monitor : Caught another exception");
         	System.out.println("An Exception occured : " + e);
         	message_out 							= new Rpt_Abstract().new Nack();
         }
 
     	if (message_in == null)
         {
-            System.out.println("Null received from client");
+            System.out.println("Monitor : Null received from client");
             message_out 							= new Rpt_Abstract().new Nack();
         } 
     	else if (message_in instanceof Rpt_Temperatures)
         {
     		Rpt_Temperatures 		readings 		= (Rpt_Temperatures) message_in;
             message_out								= processTemperatures(readings);
-         } 
+        } 
 		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)
         {
             Ctrl_Fuel_Consumption.Update			readings 	= (Ctrl_Fuel_Consumption.Update) message_in;
@@ -127,7 +127,7 @@ public class Monitor extends HttpServlet
          } 
 		else
         {
-            System.out.println("Unsupported message class received from client");
+            System.out.println("Monitor : Unsupported message class received from client");
             message_out 							= new Rpt_Abstract().new Nack();
         }
         reply(response, message_out);
@@ -167,6 +167,11 @@ public class Monitor extends HttpServlet
         catch(SQLException eSQL)
         {
         	eSQL.printStackTrace();
+            return new Rpt_Abstract().new Nack();
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
             return new Rpt_Abstract().new Nack();
         }
         return new Rpt_Abstract().new Ack();

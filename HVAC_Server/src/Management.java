@@ -63,18 +63,18 @@ public class Management extends HttpServlet
         }
         catch (IOException eIO)
         {
-            System.out.println(dateTime2Time(now()) + " An IO Exception occured : " + eIO);
+            System.out.println(dateTime2Time(now()) + "Management : An IO Exception occured : " + eIO);
             message_out 													= (new Ctrl__Abstract()).new Nack();
         }
         catch (Exception e)
         {
-            System.out.println(dateTime2Time(now()) + " An Exception occurred : " + e);
+            System.out.println(dateTime2Time(now()) + "Management : An Exception occurred : " + e);
             message_out 													= (new Ctrl__Abstract()).new Nack();
         }
         
         if (message_in != null)
         {
-            System.out.println(dateTime2Time(now()) + " Class received : " + message_in.getClass().toString());
+            System.out.println(dateTime2Time(now()) + "Management : Class received : " + message_in.getClass().toString());
         } 
 
         
@@ -92,7 +92,7 @@ public class Management extends HttpServlet
 		else if (message_in instanceof Ctrl_Fuel_Consumption.Request)		message_out 	= processFuelConsumption_Request();
  		else
         {
-            System.out.println(dateTime2Time(now()) + " Unsupported message class received from client");
+            System.out.println(dateTime2Time(now()) + "Management : Unsupported message class received from client");
             message_out 													= (new Ctrl__Abstract()).new Nack();;
         }
        	reply(response, message_out);
