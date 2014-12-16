@@ -85,7 +85,8 @@ public class Mixer
 		// Multiply by a coefficient (250ms/decimal degree to start with) and see how it goes
 		//
 		allOff();
-		PID 													pidControler				= Global.thermoFloorOut.pidControler;
+		PID 													pidFloorOut				= Global.thermoFloorOut.pidControler;
+		PID 													pidBurnerOut			= Global.thermoBoilerOut.pidControler;
 		MixerMove_Report 										report;
 		
 		
@@ -102,11 +103,12 @@ public class Mixer
 		// These params gave oscilations
 		// Changed Kd = 0.02
 		
-		pidControler.target																	= targetTemp;		// targetTemp is either tempGradient or some maxTemp for rampup
+		pidFloorOut.target																	= targetTemp;		// targetTemp is either tempGradient or some maxTemp for rampup
 
 		Integer 												tempFloorOut				= Global.thermoFloorOut.readUnCached();
 		
-		swingTimeRequired																	= pidControler.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
+		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
+		swingTimeRequired																	= swingTimeRequired - Math.round(gainP * gainD * pidBurnerOut.dTdt()); // If burner temp goes up, swing must be -ve
 		if (tempFloorOut > 50000)
 		{
 			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
@@ -156,7 +158,7 @@ public class Mixer
 					positionTracked															= report.positionTracked;
 				}
 			}
-			LogIt.pidData(targetTemp, pidControler.T(), pidControler.dTdt(), (Float) 0F, gainP, gainD, gainI, (Float) swingTimeRequired.floatValue(), Global.thermoFloorOut.reading, Global.thermoBoiler.reading);
+			LogIt.pidData(targetTemp, pidFloorOut.T(), pidFloorOut.dTdt(), (Float) 0F, gainP, gainD, gainI, (Float) swingTimeRequired.floatValue(), Global.thermoFloorOut.reading, Global.thermoBoiler.reading);
 		}
 		else
 		{
