@@ -40,7 +40,7 @@ public class Panel_0_Base_Linear_Scratch 								extends 					LinearLayout
 	{
 		super(context);
 		this.inflater 																		= LayoutInflater.from(context);
-		inflater.inflate(R.layout.panel_0_line_standard, this, true);
+		inflater.inflate(R.layout.element_line_standard, this, true);
 		
 		TextView 												textLeft 					= (TextView) this.findViewById(R.id.Left);
 		TextView 												textRight 					= (TextView) this.findViewById(R.id.Right);

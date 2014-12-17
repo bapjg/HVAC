@@ -1,0 +1,22 @@
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<LinearLayout 
+    xmlns:android							= "http://schemas.android.com/apk/res/android"
+    android:paddingTop				 		= "@dimen/row_padding"
+    android:paddingBottom					= "@dimen/row_padding"
+    android:paddingRight					= "10dp"
+    android:layout_width					= "match_parent"
+    android:layout_height					= "wrap_content"
+    android:background						= "@color/Background"
+	android:orientation						= "horizontal"
+>
+	<CheckedTextView		
+	    android:id							= "@+id/CheckBox"		
+        android:layout_width				= "match_parent"
+        android:layout_height				= "wrap_content"
+        android:layout_gravity				= "right"
+        android:textSize				 	= "@dimen/text_normal"
+        android:textColor				 	= "@color/White"
+        android:gravity				 		= "left"
+	    android:text						= "grotto"
+    />				
+</LinearLayout>

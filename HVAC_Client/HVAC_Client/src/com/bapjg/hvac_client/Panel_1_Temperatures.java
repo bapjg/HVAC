@@ -56,7 +56,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     {
     	this.panelLayout																	= R.layout.panel_1_temperatures;
     	this.container																		= container;
-		this.panelView																		= inflater.inflate(R.layout.panel_0_base_linear, container, false);
+		this.panelView																		= inflater.inflate(R.layout.element_panel_standard, container, false);
     	displayHeader();
     	TCP_Send(new Ctrl_Temperatures().new Request());
     	LinearLayout insertPoint = (LinearLayout) panelView.findViewById(R.id.base_insert_point);
