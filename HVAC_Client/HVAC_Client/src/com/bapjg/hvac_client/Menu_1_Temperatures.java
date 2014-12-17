@@ -33,7 +33,6 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
 		
     	if   (caption.equalsIgnoreCase("Temperatures"))			panelFragment 				= new Panel_1_Temperatures();
     	if   (caption.equalsIgnoreCase("Temperatures Large"))	panelFragment 				= new Panel_1_Temperatures();
-    	if   (caption.equalsIgnoreCase("Test"))					panelFragment 				= new Panel_1_Test();
 
     	if (panelFragment != null)
     	{

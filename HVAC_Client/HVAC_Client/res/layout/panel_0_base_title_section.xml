@@ -2,7 +2,7 @@
 <LinearLayout 
     xmlns:android				= "http://schemas.android.com/apk/res/android"
     android:layout_width		= "match_parent"
-    android:layout_height		= "60dp"
+    android:layout_height		= "wrap_content"
     android:background			= "@color/background"
     android:gravity				= "top"
     android:orientation			= "vertical"
@@ -12,23 +12,23 @@
     <TextView                     
         android:id				= "@+id/title"
         android:layout_width	= "match_parent"
-        android:layout_height	= "25dp"
-        android:textSize		= "20sp"
+        android:layout_height	= "wrap_content"
+        android:textSize		= "@dimen/text_title"
         android:textStyle		= "bold"
         android:textColor		= "#FFFFFF"
         android:gravity			= "center_horizontal"
-        android:text			= "" 
+        android:text			= "aaa" 
 	/>                            
                                   
     <TextView                     
         android:id				= "@+id/subTitle"
         android:layout_width	= "match_parent"
-        android:layout_height	= "25dp"
-        android:textSize		= "20sp"
+        android:layout_height	= "wrap_content"
+        android:textSize		= "@dimen/text_title"
         android:textStyle		= "bold"
         android:textColor		= "#FFFF00"
         android:gravity			= "center_horizontal"
-        android:text			= "" 
+        android:text			= "bbb" 
 	/>                            
                                   
     <View                         

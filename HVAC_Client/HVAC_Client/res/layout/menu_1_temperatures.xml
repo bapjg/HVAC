@@ -15,7 +15,6 @@
 			android:id						= "@+id/buttons_container"
 		>
 			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Temperatures"	android:id				= "@+id/buttonTemperatures"	/>
-			<Button	style					= "@style/AD_MenuButton" 	android:text	= "Test"			android:id				= "@+id/buttonTest"	/>
 		</LinearLayout>
 	</ScrollView>
 </RelativeLayout>

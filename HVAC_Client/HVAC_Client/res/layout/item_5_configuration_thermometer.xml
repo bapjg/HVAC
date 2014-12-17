@@ -3,7 +3,7 @@
     xmlns:android								= "http://schemas.android.com/apk/res/android"
     style										= "@style/AD_Linear_Top"
 >                                      	
-    <include layout								= "@layout/aa_include_panel_title_section" />
+    <include layout								= "@layout/panel_0_base_title_section" />
 
     
 	<LinearLayout style						= "@style/AD_Linear_V_with_Buttons" >  
