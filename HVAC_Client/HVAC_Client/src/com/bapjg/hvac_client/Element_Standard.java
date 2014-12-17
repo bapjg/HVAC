@@ -32,18 +32,18 @@ import HVAC_Common.*;
 import HVAC_Common.Ctrl_Temperatures.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_0_Base_Linear 								extends 					LinearLayout
+public class Element_Standard 								extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
 	public View mView;
 	public TextView 											textLeft;
 	public TextView 											textRight;
 	
-	public Panel_0_Base_Linear(Context context, String labelTextLeft) 
+	public Element_Standard(Context context, String labelTextLeft) 
 	{
 		super(context);
 		this.inflater 																		= LayoutInflater.from(context);
-		inflater.inflate(R.layout.element_line_standard, this, true);
+		inflater.inflate(R.layout.element_standard, this, true);
 		textLeft 																			= (TextView) this.findViewById(R.id.Left);
 		textRight 																			= (TextView) this.findViewById(R.id.Right);
 		textLeft.setText(labelTextLeft);

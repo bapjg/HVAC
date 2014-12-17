@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -19,6 +20,15 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	public String												circuitName;
 	private Ctrl_Immediate.Execute								messageExecute				= new Ctrl_Immediate().new Execute();
 	private Ctrl_Immediate.Data									messageReceived;
+	private Element_Standard									plannedTimeStart;
+	private Element_Standard									plannedTimeEnd;
+	private Element_Standard									plannedTargetTemp;
+	private Element_CheckBox									plannedStopOnObjective;
+	private Element_Standard									timeStart;
+	private Element_Standard									timeEnd;
+	private Element_Standard									targetTemp;
+	private Element_CheckBox									stopOnObjective;
+	private Element_Button										buttonStartStop;
 	
 	public Panel_2_Immediate()
     {
@@ -32,17 +42,56 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_2_immediate;
+//    	this.panelLayout																	= R.layout.panel_2_immediate;
+//    	this.container																		= container;
+//    	this.panelView																		= inflater.inflate(R.layout.panel_2_immediate, container, false);
+//    	displayHeader();
+//									
+//    	Ctrl_Immediate.Request									taskListRequest				= new Ctrl_Immediate().new Request();
+//    	taskListRequest.circuitName															= this.circuitName;
+//			
+//    	TCP_Send(taskListRequest);							// This returns list of what is currently active on each circuit
+//
+//       return panelView;
+    	this.panelLayout																	= R.layout.panel_1_temperatures;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_2_immediate, container, false);
+		this.panelView																		= inflater.inflate(R.layout.element_panel_standard, container, false);
     	displayHeader();
-									
+    	
     	Ctrl_Immediate.Request									taskListRequest				= new Ctrl_Immediate().new Request();
     	taskListRequest.circuitName															= this.circuitName;
 			
     	TCP_Send(taskListRequest);							// This returns list of what is currently active on each circuit
+    	
+    	
+    	
+    	LinearLayout insertPoint = (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	plannedTimeStart 																	= new Element_Standard(getActivity(), "Time Start");
+    	plannedTimeEnd																		= new Element_Standard(getActivity(), "Time End");
+    	plannedTargetTemp																	= new Element_Standard(getActivity(), "Temperature");
+    	plannedStopOnObjective 																= new Element_CheckBox(getActivity(), "Stop On Objective");
+    	timeStart																			= new Element_Standard(getActivity(), "Time Start");
+    	timeEnd                 															= new Element_Standard(getActivity(), "Time End");
+    	targetTemp          	   															= new Element_Standard(getActivity(), "Temperature");
+    	stopOnObjective         															= new Element_CheckBox(getActivity(), "Stop On Objective");
+    	buttonStartStop																		= new Element_Button(getActivity(), "");
+    	
 
-       return panelView;
+    	insertPoint.addView(new Element_Heading(getActivity(), "Planned Events"));
+    	insertPoint.addView(plannedTimeStart);
+    	insertPoint.addView(plannedTimeEnd);
+    	insertPoint.addView(plannedTargetTemp);
+    	insertPoint.addView(plannedStopOnObjective);
+    	
+    	insertPoint.addView(new Element_Heading(getActivity(), "Select Parameters"));
+    	insertPoint.addView(timeStart);
+    	insertPoint.addView(timeEnd);
+    	insertPoint.addView(targetTemp);
+    	insertPoint.addView(stopOnObjective);
+
+    	insertPoint.addView(buttonStartStop);
+
+        return panelView;
     }
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
@@ -71,29 +120,68 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	public void displayContents()
 	{
 		// Top part of the screen : "Planned Calendar Events"
+//		if (messageReceived.executionActive)
+//		{
+//			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("Current");
+//			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
+//			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(messageReceived.tempObjective.displayInteger());
+//			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
+//			((Button) 		panelView.findViewById(R.id.buttonStartStop)).setText			("Stop");
+//		}
+//		else if (messageReceived.executionPlanned)
+//		{
+//			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			(Global.displayTimeShort(messageReceived.timeStart));
+//			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
+//			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(messageReceived.tempObjective.displayInteger());
+//			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
+//			((Button) 		panelView.findViewById(R.id.buttonStartStop)).setText			("Start");
+//		}
+//		else
+//		{
+//			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("No Plan");
+//			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(" ");
+//			((Button) 		panelView.findViewById(R.id.buttonStartStop)).setText			("Start");
+//		}
 		if (messageReceived.executionActive)
 		{
-			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("Current");
-			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
-			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(messageReceived.tempObjective.displayInteger());
-			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
-			((Button) 		panelView.findViewById(R.id.buttonStartStop)).setText			("Stop");
+			plannedTimeStart			.setTextRight	("Current");
+			plannedTimeEnd				.setTextRight	(Global.displayTimeShort(messageReceived.timeEnd));
+			plannedTargetTemp			.setTextRight	(messageReceived.tempObjective.displayInteger());
+			plannedStopOnObjective		.setChecked		(messageReceived.stopOnObjective);
+			buttonStartStop				.setText		("Stop");
 		}
 		else if (messageReceived.executionPlanned)
 		{
-			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			(Global.displayTimeShort(messageReceived.timeStart));
-			((TextView) 	panelView.findViewById(R.id.plannedTimeEnd)).setText			(Global.displayTimeShort(messageReceived.timeEnd));
-			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(messageReceived.tempObjective.displayInteger());
-			((CheckBox) 	panelView.findViewById(R.id.plannedStopOnObjective)).setChecked	(messageReceived.stopOnObjective);
-			((Button) 		panelView.findViewById(R.id.buttonStartStop)).setText			("Start");
+			plannedTimeStart			.setTextRight	(Global.displayTimeShort(messageReceived.timeStart));
+			plannedTimeEnd				.setTextRight	(Global.displayTimeShort(messageReceived.timeEnd));
+			plannedTargetTemp			.setTextRight	(messageReceived.tempObjective.displayInteger());
+			plannedStopOnObjective		.setChecked		(messageReceived.stopOnObjective);
+			buttonStartStop				.setText		("Start");
 		}
 		else
 		{
-			((TextView) 	panelView.findViewById(R.id.plannedTimeStart)).setText			("No Plan");
-			((TextView) 	panelView.findViewById(R.id.plannedTargetTemp)).setText			(" ");
-			((Button) 		panelView.findViewById(R.id.buttonStartStop)).setText			("Start");
+			plannedTimeStart			.setTextRight	("No Plan");
+			plannedTimeEnd				.setTextRight	(" ");
+			plannedTargetTemp			.setTextRight	(" ");
+			plannedStopOnObjective		.setChecked		(false);
+			buttonStartStop				.setText		("Start");
 		}
+		
+		
 		// Bottom part of the screen : "Select new parameters"
+//		if (messageReceived.executionActive)
+//		{
+//// TODO recreate in layout file
+//			//			((ViewGroup) 	panelView.findViewById(R.id.bottomPart)).setVisibility(View.GONE);
+//		}
+//		else
+//		{
+//			((TextView) 		panelView.findViewById(R.id.timeStart)).setText				(messageExecute.timeStart.displayShort());
+//			((TextView) 		panelView.findViewById(R.id.timeEnd)).setText				(messageExecute.timeEnd.displayShort());	
+//                                                                                            
+//			((TextView) 		panelView.findViewById(R.id.tempObjective)).setText			(messageExecute.tempObjective.displayInteger());	
+//			((CheckBox) 		panelView.findViewById(R.id.stopOnObjective)).setChecked	(messageExecute.stopOnObjective);
+//		}
 		if (messageReceived.executionActive)
 		{
 // TODO recreate in layout file
@@ -101,46 +189,48 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		}
 		else
 		{
-			((TextView) 		panelView.findViewById(R.id.timeStart)).setText				(messageExecute.timeStart.displayShort());
-			((TextView) 		panelView.findViewById(R.id.timeEnd)).setText				(messageExecute.timeEnd.displayShort());	
+			timeStart				.setTextRight		(messageExecute.timeStart.displayShort());
+			timeEnd					.setTextRight		(messageExecute.timeEnd.displayShort());	
                                                                                             
-			((TextView) 		panelView.findViewById(R.id.tempObjective)).setText			(messageExecute.tempObjective.displayInteger());	
-			((CheckBox) 		panelView.findViewById(R.id.stopOnObjective)).setChecked	(messageExecute.stopOnObjective);
+			targetTemp				.setTextRight		(messageExecute.tempObjective.displayInteger());	
+			stopOnObjective			.setChecked			(messageExecute.stopOnObjective);
 		}
 	}
 	public void setListens()
 	{
-        panelView.findViewById(R.id.buttonStartStop)	.setOnClickListener(this);
-    	panelView.findViewById(R.id.tempObjective)		.setOnClickListener(this);
-    	panelView.findViewById(R.id.timeStart)			.setOnClickListener(this);
-    	panelView.findViewById(R.id.timeEnd)			.setOnClickListener(this);
-    	panelView.findViewById(R.id.stopOnObjective)	.setOnClickListener(this);
+//        panelView.findViewById(R.id.buttonStartStop)	.setOnClickListener(this);
+    	targetTemp			.setOnClickListener(this);
+    	timeStart			.setOnClickListener(this);
+    	timeEnd				.setOnClickListener(this);
+    	stopOnObjective		.setOnClickListener(this);
  	}
 	public void onClick(View view)
 	{
-    	if (view.getId() == R.id.tempObjective)
+
+		// New code
+    	if (view == targetTemp)
     	{
     		Dialog_Temperature 									df 							= new Dialog_Temperature(messageExecute.tempObjective, 25, 45, this);
     		df.show(getFragmentManager(), "Dialog_Temperature");
     	}
-    	else if (view.getId() == R.id.timeStart)
+    	else if (view == timeStart)
     	{
     		Dialog_Time	 										df 							= new Dialog_Time(messageExecute.timeStart, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
-    	else if (view.getId() == R.id.timeEnd)
+    	else if (view == timeEnd)
     	{
     		Dialog_Time	 										df 							= new Dialog_Time(messageExecute.timeEnd, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
-    	else if (view.getId() == R.id.stopOnObjective)
+    	else if (view == stopOnObjective)
     	{
     		messageExecute.stopOnObjective													= ! messageExecute.stopOnObjective;
     		displayContents();
     	}
-    	else if (view.getId() == R.id.buttonStartStop)
+    	else if (view == buttonStartStop)
     	{
-	    	if (((Button) view).getText().toString().equalsIgnoreCase("Start"))
+	    	if (buttonStartStop.getText().equalsIgnoreCase("Start"))
 	    	{
 	    		Log.v ("App", "ts " +  messageExecute.timeStart);
 	    		Log.v ("App", "tes " +  messageExecute.timeEnd);
@@ -169,6 +259,74 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	        	TCP_Send(messageExecute);
 	    	}
     	}
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//Old code
+		
+//		if (view.getId() == R.id.tempObjective)
+//    	{
+//    		Dialog_Temperature 									df 							= new Dialog_Temperature(messageExecute.tempObjective, 25, 45, this);
+//    		df.show(getFragmentManager(), "Dialog_Temperature");
+//    	}
+//    	else if (view.getId() == R.id.timeStart)
+//    	{
+//    		Dialog_Time	 										df 							= new Dialog_Time(messageExecute.timeStart, this);
+//    		df.show(getFragmentManager(), "Dialog_Time");
+//    	}
+//    	else if (view.getId() == R.id.timeEnd)
+//    	{
+//    		Dialog_Time	 										df 							= new Dialog_Time(messageExecute.timeEnd, this);
+//    		df.show(getFragmentManager(), "Dialog_Time");
+//    	}
+//    	else if (view.getId() == R.id.stopOnObjective)
+//    	{
+//    		messageExecute.stopOnObjective													= ! messageExecute.stopOnObjective;
+//    		displayContents();
+//    	}
+//    	else if (view.getId() == R.id.buttonStartStop)
+//    	{
+//	    	if (((Button) view).getText().toString().equalsIgnoreCase("Start"))
+//	    	{
+//	    		Log.v ("App", "ts " +  messageExecute.timeStart);
+//	    		Log.v ("App", "tes " +  messageExecute.timeEnd);
+//	    		Log.v ("App", "tn " +  Global.getTimeNowSinceMidnight());
+//
+//	    		
+//	    		if 	((messageExecute.timeStart.milliSeconds >= messageExecute.timeEnd.milliSeconds))
+////	    		|| 	 (Global.getTimeNowSinceMidnight() >= messageExecute.timeStart))
+//	    		{
+//	    			Global.toaster("Time start must be after now and before time end", false);
+//	    		}
+//	    		else
+//	    		{
+//		    		messageExecute.circuitName												= this.circuitName;
+//			   		messageExecute.action													= messageExecute.ACTION_Start;
+//			   		messageExecute.stopOnObjective											= ((CheckBox) panelView.findViewById(R.id.stopOnObjective)).isChecked();
+//					
+//		        	TCP_Send(messageExecute);
+//	        	}
+//	    	}
+//	    	else if (((Button) view).getText().toString().equalsIgnoreCase("Stop"))
+//	    	{
+//	    		messageExecute.circuitName													= this.circuitName;
+//	    		messageExecute.action														= messageExecute.ACTION_Stop;
+//	
+//	        	TCP_Send(messageExecute);
+//	    	}
+//    	}
 	}
 	@Override
 	public void onDialogReturn()

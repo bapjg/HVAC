@@ -108,7 +108,10 @@ public class Mixer
 		Integer 												tempFloorOut				= Global.thermoFloorOut.readUnCached();
 		
 		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
-		swingTimeRequired																	= swingTimeRequired - Math.round(gainP * gainD * pidBurnerOut.dTdt()); // If burner temp goes up, swing must be -ve
+		
+		// Take into consideration 2nd order changes
+		swingTimeRequired																	= swingTimeRequired - Math.round(gainP * gainD * pidFloorOut.d2Tdt2());
+		
 		if (tempFloorOut > 50000)
 		{
 			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);

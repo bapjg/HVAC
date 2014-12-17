@@ -9,14 +9,18 @@
     android:background						= "@color/Background"
 	android:orientation						= "horizontal"
 >
-	<CheckedTextView		
-	    android:id							= "@+id/CheckBox"		
-        android:layout_width				= "match_parent"
-        android:layout_height				= "wrap_content"
-        android:layout_gravity				= "right"
-        android:textSize				 	= "@dimen/text_normal"
-        android:textColor				 	= "@color/White"
-        android:gravity				 		= "left"
-	    android:text						= "grotto"
-    />				
+
+	<TextView
+	    android:id							= "@+id/Heading"
+	    android:layout_width				= "wrap_content"
+	    android:layout_height				= "wrap_content"
+	    android:layout_gravity				= "left"
+	    android:layout_weight				= "1"
+	    android:gravity						= "left"
+	    android:textColor					= "#FA6900"
+	    android:textSize					= "@dimen/text_heading"
+	    android:textStyle					= "italic"
+	    android:text						= "xxxxx"
+	/>
+
 </LinearLayout>

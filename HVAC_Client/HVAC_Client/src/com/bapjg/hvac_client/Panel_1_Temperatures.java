@@ -36,16 +36,16 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 {		
 	public TCP_Task												task;
 	private Ctrl_Temperatures.Data								temperatureData;
-	private Panel_0_Base_Linear									tempBoiler;
-	private Panel_0_Base_Linear									tempHW;
-	private Panel_0_Base_Linear									tempOutside;
-	private Panel_0_Base_Linear  								tempLivingRoom;
-	private Panel_0_Base_Linear  								tempFloorOut;
-	private Panel_0_Base_Linear  								tempFloorIn;
-	private Panel_0_Base_Linear  								tempBoilerOut;
-	private Panel_0_Base_Linear  								tempRadiatorOut;
-	private Panel_0_Base_Linear  								tempRadiatorIn;
-	private Panel_0_Base_Linear  								tempBoilerIn;
+	private Element_Standard									tempBoiler;
+	private Element_Standard									tempHW;
+	private Element_Standard									tempOutside;
+	private Element_Standard  								tempLivingRoom;
+	private Element_Standard  								tempFloorOut;
+	private Element_Standard  								tempFloorIn;
+	private Element_Standard  								tempBoilerOut;
+	private Element_Standard  								tempRadiatorOut;
+	private Element_Standard  								tempRadiatorIn;
+	private Element_Standard  								tempBoilerIn;
 	
 	public Panel_1_Temperatures()
 	{
@@ -61,30 +61,30 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     	TCP_Send(new Ctrl_Temperatures().new Request());
     	LinearLayout insertPoint = (LinearLayout) panelView.findViewById(R.id.base_insert_point);
     	
-    	tempBoiler 																			= new Panel_0_Base_Linear(getActivity(), "Boiler");
-    	tempHW 																				= new Panel_0_Base_Linear(getActivity(),"Hot Water");
-    	tempOutside 																		= new Panel_0_Base_Linear(getActivity(), "Outside");
-    	tempLivingRoom 																		= new Panel_0_Base_Linear(getActivity(), "Living Room");
-    	tempFloorOut 																		= new Panel_0_Base_Linear(getActivity(), "Floor Out");
-    	tempFloorIn 																		= new Panel_0_Base_Linear(getActivity(), "Floor In");
-    	tempBoilerOut 																		= new Panel_0_Base_Linear(getActivity(), "Boiler Out");
-    	tempRadiatorOut																		= new Panel_0_Base_Linear(getActivity(), "Radiator Out");
-    	tempRadiatorIn																		= new Panel_0_Base_Linear(getActivity(), "Radiator In");
-    	tempBoilerIn 																		= new Panel_0_Base_Linear(getActivity(), "Boiler In");
-    	
+    	tempBoiler 																			= new Element_Standard(getActivity(), "Boiler");
+    	tempHW 																				= new Element_Standard(getActivity(), "Hot Water");
+    	tempOutside 																		= new Element_Standard(getActivity(), "Outside");
+    	tempLivingRoom 																		= new Element_Standard(getActivity(), "Living Room");
+    	tempFloorOut 																		= new Element_Standard(getActivity(), "Floor Out");
+    	tempFloorIn 																		= new Element_Standard(getActivity(), "Floor In");
+    	tempBoilerOut 																		= new Element_Standard(getActivity(), "Boiler Out");
+    	tempRadiatorOut																		= new Element_Standard(getActivity(), "Radiator Out");
+    	tempRadiatorIn																		= new Element_Standard(getActivity(), "Radiator In");
+    	tempBoilerIn 																		= new Element_Standard(getActivity(), "Boiler In");
+
     	insertPoint.addView(tempBoiler);
     	insertPoint.addView(tempHW);
     	insertPoint.addView(tempOutside);
-    	insertPoint.addView(new Panel_0_Base_Filler(getActivity()));
+    	insertPoint.addView(new Element_Filler(getActivity()));
     	insertPoint.addView(tempLivingRoom);
-    	insertPoint.addView(new Panel_0_Base_Filler(getActivity()));
+    	insertPoint.addView(new Element_Filler(getActivity()));
     	insertPoint.addView(tempFloorOut);
     	insertPoint.addView(tempFloorIn);
     	insertPoint.addView(tempBoilerOut);
-    	insertPoint.addView(new Panel_0_Base_Filler(getActivity()));
+    	insertPoint.addView(new Element_Filler(getActivity()));
     	insertPoint.addView(tempRadiatorOut);
     	insertPoint.addView(tempRadiatorIn);
-    	insertPoint.addView(new Panel_0_Base_Filler(getActivity()));
+    	insertPoint.addView(new Element_Filler(getActivity()));
     	insertPoint.addView(tempBoilerIn);
           	
         return panelView;

@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -33,24 +32,23 @@ import HVAC_Common.*;
 import HVAC_Common.Ctrl_Temperatures.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_0_Base_CheckBox 								extends 					LinearLayout
+public class Element_Heading 								extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
 	public View mView;
-	public CheckBox 											checkBox;
-	public TextView 											textRight;
+	public TextView 											textLeft;
 	
-	public Panel_0_Base_CheckBox(Context context, String labelTextLeft) 
+	public Element_Heading(Context context, String labelTextLeft) 
 	{
 		super(context);
 		this.inflater 																		= LayoutInflater.from(context);
-		inflater.inflate(R.layout.element_line_checkbox, this, true);
-		checkBox 																			= (CheckBox) this.findViewById(R.id.CheckBox);
-		checkBox.setText(labelTextLeft);
+		inflater.inflate(R.layout.element_heading, this, true);
+		textLeft 																			= (TextView) this.findViewById(R.id.Heading);
+		textLeft.setText(labelTextLeft);
 	}
 	public void setTextLeft(String text)
 	{
-		checkBox.setText(text);
+		textLeft.setText(text);
 	}
 }
 

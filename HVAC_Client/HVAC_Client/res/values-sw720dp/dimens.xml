@@ -9,7 +9,9 @@
 	<integer name="thermo_column_count">1</integer>
 	<dimen name="graph_width">100dp</dimen>
 	<dimen name="graph_height">50dp</dimen>
+
 	<dimen name="text_normal">20dp</dimen>
+	<dimen name="text_heading">22dp</dimen>
 	<dimen name="text_title">25dp</dimen>
 			
 </resources>
