@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -26,19 +27,37 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment  
 {
+	private Element_Switch										switchBurner;
+	private Element_Switch										switchHotWater;
+	private Element_Switch										switchFloor;
+	private Element_Switch										switchRadiator;
+
 	public Panel_6_Actions_Relays()
 	{
 		super();
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_6_actions_relays;
+    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_relays, container, false);
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
 
+    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+
+    	switchBurner 																		= new Element_Switch(getActivity(), "Burner Relay");
+    	switchHotWater 																		= new Element_Switch(getActivity(), "Hot Water Pump");
+    	switchFloor 																		= new Element_Switch(getActivity(), "Floor Pump");
+    	switchRadiator 																		= new Element_Switch(getActivity(), "Radiator Pump");
+
+    	insertPoint.addView(switchBurner);
+    	insertPoint.addView(new Element_Filler(getActivity()));
+    	insertPoint.addView(switchHotWater);
+    	insertPoint.addView(switchFloor);
+    	insertPoint.addView(switchRadiator);
+    	
     	TCP_Send(new Ctrl_Actions_Relays().new Request());
         
-    	displayHeader();
+    	displayTitles("Actions", "Relays");
     	displayContents();
         setListens();
    	
@@ -54,40 +73,42 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-		panelView.findViewById(R.id.burner).setOnClickListener(this);
-		panelView.findViewById(R.id.hotwater).setOnClickListener(this);
-		panelView.findViewById(R.id.floor).setOnClickListener(this);
-		panelView.findViewById(R.id.radiator).setOnClickListener(this);
+		switchBurner				.setOnClickListener(this);
+		switchHotWater				.setOnClickListener(this);
+		switchFloor					.setOnClickListener(this);
+		switchRadiator				.setOnClickListener(this);
+		switchBurner.onOffSwitch	.setOnClickListener(this);
+		switchHotWater.onOffSwitch	.setOnClickListener(this);
+		switchFloor.onOffSwitch		.setOnClickListener(this);
+		switchRadiator.onOffSwitch	.setOnClickListener(this);
 	}
     public void onClick(View clickedView)
     {
    		Ctrl_Actions_Relays.Execute								messageSend					= new Ctrl_Actions_Relays().new Execute();
-    	if (clickedView instanceof Switch)
-    	{
-			if      (clickedView.getId() == R.id.burner)		messageSend.relayName		= "Burner";
-			else if (clickedView.getId() == R.id.hotwater)		messageSend.relayName		= "HotWater";
-			else if (clickedView.getId() == R.id.floor)			messageSend.relayName		= "Floor";
-			else if (clickedView.getId() == R.id.radiator)		messageSend.relayName		= "Radiator";
-    		
-    		if    (((Switch) clickedView).isChecked())			messageSend.relayAction		= Ctrl_Actions_Relays.RELAY_On;
-    		else												messageSend.relayAction		= Ctrl_Actions_Relays.RELAY_Off;
+   		Element_Switch											switchClicked				= (Element_Switch) clickedView;
+   		
+		if 		(switchClicked == switchBurner)					messageSend.relayName		= "Burner";
+		else if (switchClicked == switchHotWater)				messageSend.relayName		= "HotWater";
+		else if (switchClicked == switchFloor)					messageSend.relayName		= "Floor";
+		else if (switchClicked == switchRadiator)				messageSend.relayName		= "Radiator";
+		
+		if    (switchClicked.isChecked())						messageSend.relayAction		= Ctrl_Actions_Relays.RELAY_Off;
+		else													messageSend.relayAction		= Ctrl_Actions_Relays.RELAY_On;
 
-    		TCP_Send(messageSend);
-    	}
+		TCP_Send(messageSend);
     }
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
 		super.processFinishTCP(result);
-		Activity												activity					= getActivity();		
 		
 		if (result instanceof Ctrl_Actions_Relays.Data)		
 		{		
 			Ctrl_Actions_Relays.Data 							msg_received 				= (Ctrl_Actions_Relays.Data) result;
 
-			((Switch) activity.findViewById(R.id.burner))		.setChecked(msg_received.burner);
-			((Switch) activity.findViewById(R.id.hotwater))		.setChecked(msg_received.pumpHotWater);
-			((Switch) activity.findViewById(R.id.floor))		.setChecked(msg_received.pumpFloor);
-			((Switch) activity.findViewById(R.id.radiator))		.setChecked(msg_received.pumpRadiator);
+			switchBurner		.setChecked(msg_received.burner);
+			switchHotWater		.setChecked(msg_received.pumpHotWater);
+			switchFloor			.setChecked(msg_received.pumpFloor);
+			switchRadiator		.setChecked(msg_received.pumpRadiator);
 		}   
 	}
 }

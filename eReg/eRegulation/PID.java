@@ -86,10 +86,10 @@ public class PID
     }
     public Float dTdt() 
     {
-		Float 		differential 															= 0F;								// unit = millidegrees/second 
-		Long 		deltaTimeStamps															= 0L;								// unit = milliseconds
-    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
-    	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
+		Float 		 											differential				= 0F;								// unit = millidegrees/second 
+		Long 		 											deltaTimeStamps				= 0L;								// unit = milliseconds
+    	Integer		 											indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer		 											indexPrevious				= (indexEnqueue - 2 + pidDepth) % pidDepth;
     	
     	if (count <= 1)
     	{
@@ -106,10 +106,10 @@ public class PID
     }
     public Float d2Tdt2() 
     {
-		Float 		differential 															= 0F;								// unit = millidegrees/second 
-		Long 		deltaTimeStamps															= 0L;								// unit = milliseconds
-    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
-    	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
+		Float 												differential 					= 0F;								// unit = millidegrees/second 
+		Long 												deltaTimeStamps					= 0L;								// unit = milliseconds
+    	Integer												indexCurrent					= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer												indexPrevious					= (indexEnqueue - 2 + pidDepth) % pidDepth;
     	
     	if (count <= 2)
     	{
@@ -126,8 +126,9 @@ public class PID
     }
     public Float T() 
     {
-    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
-    	return entries[indexCurrent].item.floatValue();
+    	Integer												indexCurrent					= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer												currentError					= entries[indexCurrent].item - target;
+    	return currentError.floatValue();
     }
     public Integer getGain(Float kP, Float kD, Float kI) 
     {

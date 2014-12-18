@@ -56,6 +56,11 @@ public class Panel_0_Fragment 									extends 					Fragment
 //    	displayContents();
 //    	setListens();
 	}
+	public void displayTitles(String title, String subTitle)
+	{
+		((TextView) panelView.findViewById(R.id.title)).setText		(title);
+		((TextView) panelView.findViewById(R.id.subTitle)).setText	(subTitle);
+	}
 	public void displayHeader() 											{}
 	public void displayContents() 											{}
 	public void setListens()												{}

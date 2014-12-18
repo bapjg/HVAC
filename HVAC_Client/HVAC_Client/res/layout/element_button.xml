@@ -1,23 +1,21 @@
 <?xml version		= "1.0" encoding		= "utf-8"?>
-<LinearLayout 
+<RelativeLayout 
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     android:paddingTop				 		= "@dimen/row_padding"
     android:paddingBottom					= "@dimen/row_padding"
     android:paddingRight					= "10dp"
-    android:layout_width					= "wrap_content"
+    android:layout_width					= "match_parent"
     android:layout_height					= "wrap_content"
     android:background						= "@color/Background"
 	android:orientation						= "horizontal"
 >
-
 	<Button
 		android:id							= "@+id/Button"
 		android:layout_width				= "wrap_content"
 		android:layout_height				= "wrap_content"
-		android:layout_centerVertical		= "true"
-		android:layout_gravity				= "center_horizontal"
+		android:layout_centerHorizontal		= "true"
+		android:layout_gravity				= "center_horizontal|center_vertical"
 		android:text						= "Ok"
 		android:textColor					= "@color/White"
 	/>
-
-</LinearLayout>
+</RelativeLayout>

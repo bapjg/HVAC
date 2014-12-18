@@ -28,24 +28,26 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Temperatures.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Element_CheckBox 								extends 					LinearLayout
+public class Element_Switch 									extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
-	public CheckBox		 										checkBox;
 	public TextView 											textLeft;
+	public Switch		 										onOffSwitch;
 	
-	public Element_CheckBox(Context context, String labelTextLeft) 
+	public Element_Switch(Context context, String labelTextLeft) 
 	{
 		super(context);
 		this.inflater 																		= LayoutInflater.from(context);
-		inflater.inflate(R.layout.element_checkbox, this, true);
-		checkBox 																			= (CheckBox) this.findViewById(R.id.CheckBox);
+		inflater.inflate(R.layout.element_switch, this, true);
+		onOffSwitch																			= (Switch) this.findViewById(R.id.Switch);
+		onOffSwitch.setEnabled(false);
 		textLeft 																			= (TextView) this.findViewById(R.id.Left);
 		textLeft.setText(labelTextLeft);
 	}
@@ -55,11 +57,11 @@ public class Element_CheckBox 								extends 					LinearLayout
 	}
 	public void setChecked(Boolean value)
 	{
-		checkBox.setChecked(value);
+		onOffSwitch.setChecked(value);
 	}
 	public Boolean isChecked()
 	{
-		return checkBox.isChecked();
+		return onOffSwitch.isChecked();
 	}
 }
 

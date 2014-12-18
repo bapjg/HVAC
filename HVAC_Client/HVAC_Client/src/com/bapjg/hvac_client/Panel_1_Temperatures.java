@@ -39,13 +39,13 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	private Element_Standard									tempBoiler;
 	private Element_Standard									tempHW;
 	private Element_Standard									tempOutside;
-	private Element_Standard  								tempLivingRoom;
-	private Element_Standard  								tempFloorOut;
-	private Element_Standard  								tempFloorIn;
-	private Element_Standard  								tempBoilerOut;
-	private Element_Standard  								tempRadiatorOut;
-	private Element_Standard  								tempRadiatorIn;
-	private Element_Standard  								tempBoilerIn;
+	private Element_Standard  									tempLivingRoom;
+	private Element_Standard  									tempFloorOut;
+	private Element_Standard  									tempFloorIn;
+	private Element_Standard  									tempBoilerOut;
+	private Element_Standard  									tempRadiatorOut;
+	private Element_Standard  									tempRadiatorIn;
+	private Element_Standard  									tempBoilerIn;
 	
 	public Panel_1_Temperatures()
 	{
@@ -54,12 +54,12 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_1_temperatures;
+    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
-		this.panelView																		= inflater.inflate(R.layout.element_panel_standard, container, false);
+		this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
     	displayHeader();
     	TCP_Send(new Ctrl_Temperatures().new Request());
-    	LinearLayout insertPoint = (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
     	
     	tempBoiler 																			= new Element_Standard(getActivity(), "Boiler");
     	tempHW 																				= new Element_Standard(getActivity(), "Hot Water");

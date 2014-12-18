@@ -32,6 +32,14 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragment 
 {
+	private Element_Standard									pumpCleanTime;
+	private Element_Standard									pumpCleanDuration;
+	private Element_Standard									antiFreeze;
+	private Element_Standard									summerTemp;
+	private Element_Standard									winterTemp;
+	private Element_Standard									sunshineInfluence;
+
+	
 	public Panel_3_Calendars_Background_Tasks()
 	{
 		super();
@@ -40,14 +48,30 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-    	this.panelLayout																	= R.layout.panel_3_calendars_background_tasks;
+    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_3_calendars_background_tasks, container, false);
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
+
+    	LinearLayout insertPoint = (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+
+    	pumpCleanTime 																		= new Element_Standard(getActivity(), "Pump Clean Time");
+    	pumpCleanDuration 																	= new Element_Standard(getActivity(), "Pump Clean Duration");
+    	antiFreeze 																			= new Element_Standard(getActivity(), "Anti Freeze");
+    	summerTemp 																			= new Element_Standard(getActivity(), "Summer Temperature");
+    	winterTemp 																			= new Element_Standard(getActivity(), "Winter Temperature");
+    	sunshineInfluence 																	= new Element_Standard(getActivity(), "Sunshine Influence");
+
+    	insertPoint.addView(pumpCleanTime);
+    	insertPoint.addView(pumpCleanDuration);
+    	insertPoint.addView(antiFreeze);
+    	insertPoint.addView(summerTemp);
+    	insertPoint.addView(winterTemp);
+    	insertPoint.addView(sunshineInfluence);
 
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.tasksBackGround != null))
         {
-        	displayHeader();
+        	displayTitles("Calendars", "Background Tasks");
         	displayContents();
         	setListens();
         }
@@ -58,33 +82,27 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
  
         return panelView;
     }
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Calendars");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Background Tasks");
-//		TextView												title						= (TextView) panelView.findViewById(R.id.name);
-	}
 	public void displayContents()
 	{
 		if (getActivity() != null)			// The user has not changed the screen
 		{
 			Ctrl_Calendars.TasksBackGround						backgroundTasks				= Global.eRegCalendars.tasksBackGround;
-			((TextView) panelView.findViewById(R.id.pumpCleanTime)).setText		(backgroundTasks.pumpCleanTime.displayShort());
-			((TextView) panelView.findViewById(R.id.pumpCleanDuration)).setText	(backgroundTasks.pumpCleanDurationMinutes.toString() + " mn");
-			((TextView) panelView.findViewById(R.id.antiFreeze)).setText		(backgroundTasks.antiFreeze.displayInteger());
-			((TextView) panelView.findViewById(R.id.summerTemp)).setText		(backgroundTasks.summerTemp.displayInteger());
-			((TextView) panelView.findViewById(R.id.winterTemp)).setText		(backgroundTasks.winterTemp.displayInteger());
-			((TextView) panelView.findViewById(R.id.sunshineInfluence)).setText	(backgroundTasks.sunshineInfluence.displayInteger());
+			pumpCleanTime		.setTextRight	(backgroundTasks.pumpCleanTime.displayShort());
+			pumpCleanDuration	.setTextRight	(backgroundTasks.pumpCleanDurationMinutes.toString() + " mn");
+			antiFreeze			.setTextRight	(backgroundTasks.antiFreeze.displayInteger());
+			summerTemp			.setTextRight	(backgroundTasks.summerTemp.displayInteger());
+			winterTemp			.setTextRight	(backgroundTasks.winterTemp.displayInteger());
+			sunshineInfluence	.setTextRight	(backgroundTasks.sunshineInfluence.displayInteger());
 		}
 	}
 	public void setListens()
 	{
-		panelView.findViewById(R.id.pumpCleanTime).setOnClickListener(this);
-		panelView.findViewById(R.id.pumpCleanDuration).setOnClickListener(this);
-		panelView.findViewById(R.id.antiFreeze).setOnClickListener(this);
-		panelView.findViewById(R.id.summerTemp).setOnClickListener(this);
-		panelView.findViewById(R.id.winterTemp).setOnClickListener(this);
-		panelView.findViewById(R.id.sunshineInfluence).setOnClickListener(this);
+		pumpCleanTime			.setOnClickListener(this);
+		pumpCleanDuration		.setOnClickListener(this);
+		antiFreeze				.setOnClickListener(this);
+		summerTemp				.setOnClickListener(this);
+		winterTemp				.setOnClickListener(this);
+		sunshineInfluence		.setOnClickListener(this);
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
@@ -108,32 +126,35 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
  		Dialog_Temperature										dialogTemperature;
  		Dialog_Time												dialogTime;
  		Dialog_Integer											dialogInteger;
-	   	switch(clickedView.getId())
-		{
-     	case R.id.pumpCleanTime:
+	   	if (clickedView == pumpCleanTime)
+	   	{
     		dialogTime 																		= new Dialog_Time(backgroundTasks.pumpCleanTime, this);
     		dialogTime.show(getFragmentManager(), "Dialog_Time");
-      		break;
-     	case R.id.pumpCleanDuration:
+	   	}
+	   	else if (clickedView == pumpCleanDuration)
+	   	{
      		dialogInteger	 																= new Dialog_Integer(backgroundTasks.pumpCleanDurationMinutes,  (Object) backgroundTasks, 1, 10, "Select Duration (minutes)", this);
      		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
-      		break;
-     	case R.id.antiFreeze:
-     		dialogTemperature 																= new Dialog_Temperature(backgroundTasks.antiFreeze,  0, 15, this);
-     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
-      		break;
-     	case R.id.summerTemp:
-     		dialogTemperature 																= new Dialog_Temperature(backgroundTasks.summerTemp,  5, 25, this);
-     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
-      		break;
-    	case R.id.winterTemp:
-     		dialogTemperature 																= new Dialog_Temperature(backgroundTasks.winterTemp,  5, 25, this);
-     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
-      		break;
-     	case R.id.sunshineInfluence:
-     		dialogTemperature 																= new Dialog_Temperature(backgroundTasks.sunshineInfluence,  0, 10, this);
-     		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
-      		break;
+	   	}
+      	else if (clickedView == antiFreeze)
+	   	{
+      		dialogTemperature 																= new Dialog_Temperature(backgroundTasks.antiFreeze,  0, 15, this);
+      		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
+	   	}
+      	else if (clickedView == summerTemp)
+	   	{
+      		dialogTemperature 																= new Dialog_Temperature(backgroundTasks.summerTemp,  5, 25, this);
+      		dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
+	   	}
+  		else if (clickedView == winterTemp)
+	   	{
+  			dialogTemperature 																= new Dialog_Temperature(backgroundTasks.winterTemp,  5, 25, this);
+  			dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
+	   	}
+  		else if (clickedView == sunshineInfluence)
+	   	{
+  			dialogTemperature 																= new Dialog_Temperature(backgroundTasks.sunshineInfluence,  0, 10, this);
+  			dialogTemperature.show(getFragmentManager(), "Dialog_Temperature");
 		}
 	}
     public void onDialogReturn()

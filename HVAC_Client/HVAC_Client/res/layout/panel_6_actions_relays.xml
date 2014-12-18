@@ -10,7 +10,7 @@
 
         <TableRow 																		style	= "@style/AD_Row" 			>
             <TextView	android:text	= "Burner"                 						style	= "@style/AD_Text"		 	/>
-            <Switch 								android:id	= "@+id/burner"			style	= "@style/AD_Switch" 		/>
+            <Switch 								android:id	= "@+id/burner"					/>
         </TableRow>
         
         <TableRow 																		style	= "@style/AD_Row" 			>
@@ -19,17 +19,17 @@
         
         <TableRow 																		style	= "@style/AD_Row" 			>
             <TextView	android:text	= "Hot Water"   								style	= "@style/AD_Text"  		/>
-  			<Switch									android:id	= "@+id/hotwater"		style	= "@style/AD_Switch"		/>
+  			<Switch									android:id	= "@+id/hotwater"				/>
         </TableRow>
         
         <TableRow 																		style	= "@style/AD_Row" 			>
             <TextView	android:text	= "Floor"     									style	= "@style/AD_Text"  		/>
- 			<Switch									android:id	= "@+id/floor"			style	= "@style/AD_Switch"		/> 
+ 			<Switch									android:id	= "@+id/floor"				/> 
  		</TableRow>
         
         <TableRow 																		style	= "@style/AD_Row" 			>
             <TextView	android:text	= "Radiator"    								style	= "@style/AD_Text"  		/>
- 			<Switch									android:id	= "@+id/radiator"		style	= "@style/AD_Switch"		/>
+ 			<Switch									android:id	= "@+id/radiator"			/>
         </TableRow>
         
     </TableLayout>
