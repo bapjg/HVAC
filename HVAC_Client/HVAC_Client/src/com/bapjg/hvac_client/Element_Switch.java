@@ -63,5 +63,9 @@ public class Element_Switch 									extends 					LinearLayout
 	{
 		return onOffSwitch.isChecked();
 	}
+//	public void setOnClickListener(View.OnClickListener listener)
+//	{
+//		onOffSwitch.setOnClickListener(listener);
+//	}
 }
 

@@ -165,7 +165,8 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     	timeStart						.setOnClickListener(this);
     	timeEnd							.setOnClickListener(this);
     	stopOnObjective					.setOnClickListener(this);
-    	buttonStartStop					.setOnClickListener(this);
+    	stopOnObjective.checkBox		.setOnClickListener(this);
+    	buttonStartStop.button			.setOnClickListener(this);
  	}
 	public void onClick(View clickedview)
 	{
@@ -186,17 +187,18 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     		Dialog_Time	 										df 							= new Dialog_Time(messageExecute.timeEnd, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
-    	else if (clickedview == stopOnObjective)
-    	{
+    	else if ((clickedview == stopOnObjective)
+        ||       (clickedview == stopOnObjective.checkBox))
+        	{
     		messageExecute.stopOnObjective													= ! messageExecute.stopOnObjective;
     		displayContents();
     	}
-    	else if (clickedview == buttonStartStop)
+    	else if (clickedview == buttonStartStop.button)
     	{
-	    	if (buttonStartStop.getText().equalsIgnoreCase("Start"))
+	    	if (buttonStartStop.button.getText().toString().equalsIgnoreCase("Start"))
 	    	{
-	    		if 	((messageExecute.timeStart.milliSeconds >= messageExecute.timeEnd.milliSeconds))
-//	    		|| 	 (Global.getTimeNowSinceMidnight() >= messageExecute.timeStart))
+	    		if 	((messageExecute.timeStart.milliSeconds >= messageExecute.timeEnd.milliSeconds)
+	    		|| 	 (Global.getTimeNowSinceMidnight() > messageExecute.timeStart.milliSeconds))
 	    		{
 	    			Global.toaster("Time start must be after now and before time end", false);
 	    		}
@@ -204,12 +206,12 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	    		{
 		    		messageExecute.circuitName												= this.circuitName;
 			   		messageExecute.action													= messageExecute.ACTION_Start;
-			   		messageExecute.stopOnObjective											= ((CheckBox) panelView.findViewById(R.id.stopOnObjective)).isChecked();
+			   		messageExecute.stopOnObjective											= stopOnObjective.isChecked();
 					
 		        	TCP_Send(messageExecute);
 	        	}
 	    	}
-	    	else if (((Button) clickedview).getText().toString().equalsIgnoreCase("Stop"))
+	    	else if (buttonStartStop.button.getText().toString().equalsIgnoreCase("Stop"))
 	    	{
 	    		messageExecute.circuitName													= this.circuitName;
 	    		messageExecute.action														= messageExecute.ACTION_Stop;

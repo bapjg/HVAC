@@ -34,7 +34,6 @@ public class Mixer
 	public Relay												mixerUp;
 	public Relay												mixerDown;
 	
-	
 	public Integer									state									= 0;
 	public static final int							MIXER_STATE_Off 						= 0;
 	public static final int							MIXER_STATE_Normal_Operating			= 1;
@@ -119,14 +118,14 @@ public class Mixer
 		else if (tempFloorOut > 45000)
 		{
 			// We need to do trip avoidance
-			if (swingTimeRequired < 0)
-			{
-				swingTimeRequired															= swingTimeRequired * 2;		// i.e. double the gain factor kp
-			}
-			else
-			{
+//			if (swingTimeRequired < 0)
+//			{
+//				swingTimeRequired															= swingTimeRequired * 2;		// i.e. double the gain factor kp
+//			}
+//			else
+//			{
 				LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
-			}
+//			}
 		}
 		
 		if (Math.abs(swingTimeRequired) > 500)												// Less than half a second
@@ -135,12 +134,19 @@ public class Mixer
 
 			if (swingTimeRequired > 0)								// Moving hotter
 			{
-				if (positionProjected > this.swingTime)													// Should never happen as algorith maintains with usable range
+				if (positionProjected > this.swingTime)										//
 		 		{
 		 			swingTimeRequired 														= this.swingTime - positionTracked + 2000;		//No point waiting over maximum add extra 2 seconds to be sure of end point
 					report																	= mixerMoveUp(swingTimeRequired);
 					positionTracked															= this.swingTime;					
 		 		}
+				else if (positionTracked < swingUsableMin)
+				{
+					// We need to get back into the linear range
+					swingTimeRequired														= (swingUsableMin - positionTracked) + swingTimeRequired;
+					report																	= mixerMoveUp(swingTimeRequired);
+					positionTracked															= report.positionTracked;
+				}
 				else																					// Normal operating
 				{
 					report																	= mixerMoveUp(swingTimeRequired);
@@ -155,6 +161,13 @@ public class Mixer
 					report																	= mixerMoveDown(swingTimeRequired);
 					positionTracked															= 0;					
 		 		}
+				else if (positionTracked > swingUsableMax)
+				{
+					// We need to get back into the linear range							           90000  - 95000 (-ve)      + (-ve) = larger (-ve)     	
+					swingTimeRequired														= (swingUsableMax - positionTracked) + swingTimeRequired;
+					report																	= mixerMoveDown(swingTimeRequired);
+					positionTracked															= report.positionTracked;
+				}
 				else																					// Normal operating
 				{
 					report																	= mixerMoveDown(swingTimeRequired);
