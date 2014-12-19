@@ -110,7 +110,7 @@ public class Mixer
 		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
 		
 		// Take into consideration 2nd order changes (dis = s + ut + at²/s)
-		swingTimeRequired																	= swingTimeRequired - Math.round(gainP * gainD * gainD * pidFloorOut.d2Tdt2())/2;
+		// swingTimeRequired																	= swingTimeRequired - Math.round(gainP * gainD * gainD * pidFloorOut.d2Tdt2())/2;
 		
 		if (tempFloorOut > 50000)
 		{
