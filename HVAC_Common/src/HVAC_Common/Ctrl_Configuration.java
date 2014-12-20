@@ -115,6 +115,8 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		private static final long 				serialVersionUID 			= 1L;
 		public String							name;
 		public Integer							swingTime;
+		public Integer							swingProportionMax;
+		public Integer							swingProportionMin;
 		public String							relayUp;
 		public String							relayDown;
 		public PID_Params						pidParams;

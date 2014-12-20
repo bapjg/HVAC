@@ -32,17 +32,29 @@ import HVAC_Common.*;
 import HVAC_Common.Ctrl_Temperatures.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Element_Standard 								extends 					LinearLayout
+public class Element_Standard 									extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
-	public View mView;
+//	public View mView;
 	public TextView 											textLeft;
 	public TextView 											textRight;
+	public String												units;
 	
 	public Element_Standard(Context context, String labelTextLeft) 
 	{
 		super(context);
 		this.inflater 																		= LayoutInflater.from(context);
+		this.units 																			= "";
+		inflater.inflate(R.layout.element_standard, this, true);
+		textLeft 																			= (TextView) this.findViewById(R.id.Left);
+		textRight 																			= (TextView) this.findViewById(R.id.Right);
+		textLeft.setText(labelTextLeft);
+	}
+	public Element_Standard(Context context, String labelTextLeft, String units) 
+	{
+		super(context);
+		this.inflater 																		= LayoutInflater.from(context);
+		this.units 																			= " " + units.trim();
 		inflater.inflate(R.layout.element_standard, this, true);
 		textLeft 																			= (TextView) this.findViewById(R.id.Left);
 		textRight 																			= (TextView) this.findViewById(R.id.Right);
@@ -54,8 +66,13 @@ public class Element_Standard 								extends 					LinearLayout
 	}
 	public void setTextRight(String text)
 	{
-		textRight.setText(text);
+		if (text != null)		textRight.setText(text);
+		else					textRight.setText("");
 	}
-
+	public void setTextRight(Integer number)
+	{
+		if (number != null)		textRight.setText(number + units);
+		else					textRight.setText(0 + units);
+	}
 }
 

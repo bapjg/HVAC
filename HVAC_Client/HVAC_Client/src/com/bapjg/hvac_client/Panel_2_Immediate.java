@@ -44,7 +44,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panal_0_standard;
+//    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
 		this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
     	displayHeader();
