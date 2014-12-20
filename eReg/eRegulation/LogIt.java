@@ -106,7 +106,8 @@ public class LogIt
 				Float 	kI,
 				Float 	result,
 				Integer tempOut,
-				Integer tempBoiler	
+				Integer tempBoiler,	
+				Integer positionTracked
 		)
     {
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.pidData"))
@@ -129,6 +130,7 @@ public class LogIt
 		messageSend.result		 															= result; 
 		messageSend.tempOut		 															= tempOut;
 		messageSend.tempBoiler		 														= tempBoiler;
+		messageSend.positionTracked		 													= positionTracked;
 					
 		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 		

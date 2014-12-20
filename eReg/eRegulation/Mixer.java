@@ -174,7 +174,7 @@ public class Mixer
 					positionTracked															= report.positionTracked;
 				}
 			}
-			LogIt.pidData(targetTemp, pidFloorOut.T(), pidFloorOut.dTdt(), (Float) 0F, gainP, gainD, gainI, (Float) swingTimeRequired.floatValue(), Global.thermoFloorOut.reading, Global.thermoBoiler.reading);
+			LogIt.pidData(targetTemp, pidFloorOut.T(), pidFloorOut.dTdt(), (Float) 0F, gainP, gainD, gainI, (Float) swingTimeRequired.floatValue(), Global.thermoFloorOut.reading, Global.thermoBoiler.reading, positionTracked);
 		}
 		else
 		{

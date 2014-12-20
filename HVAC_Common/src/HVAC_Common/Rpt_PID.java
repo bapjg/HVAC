@@ -22,6 +22,7 @@ public class Rpt_PID extends Rpt_Abstract
 		public Float					result;	
 		public Integer					tempOut;	
 		public Integer					tempBoiler;	
+		public Integer					positionTracked;
 	}
 	public class Request extends Rpt_Abstract
 	{
