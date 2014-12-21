@@ -49,8 +49,8 @@ public class Mixer
     {
 		this.name 																			= paramMixer.name;
 		this.swingTime																		= paramMixer.swingTime;
-		this.swingUsableMax																	= this.swingTime * 80 /100;
-		this.swingUsableMin																	= this.swingTime * 40 /100;
+		this.swingUsableMax																	= this.swingTime * 70 /100;
+		this.swingUsableMin																	= this.swingTime * 35 /100;
 		this.timeDelay																		= paramMixer.pidParams.timeDelay;
 		this.timeProjection																	= paramMixer.pidParams.timeProjection;
 		this.marginProjection																= paramMixer.pidParams.marginProjection;
