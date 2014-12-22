@@ -25,11 +25,16 @@ public class Rpt_PID extends Rpt_Abstract
 		public Integer					tempOut;	
 		public Integer					tempBoiler;	
 		public Integer					positionTracked;
+		public Boolean					beforeMovement;
 	}
 	public class Request extends Rpt_Abstract
 	{
 	}
 	public class Update extends Rpt_PID.Data
 	{
+		public Update()
+		{
+			this.dateTime 																	= System.currentTimeMillis();
+		}
 	}
 }

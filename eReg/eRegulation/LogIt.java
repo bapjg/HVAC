@@ -143,6 +143,25 @@ public class LogIt
 
 		Global.httpSemaphore.semaphoreUnLock();			
     }
+	public static void pidData	(Rpt_PID.Update	messageSend)
+{
+	if (!Global.httpSemaphore.semaphoreLock("LogIt.pidData"))
+	{
+		System.out.println(dateTimeStamp() + " LogIt.pidData Lock timedout, owned by " + Global.httpSemaphore.owner);
+		return;
+	}
+
+	HTTP_Request 											httpRequest					= new HTTP_Request <Rpt_PID.Update> ("Monitor");
+			
+	Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
+	
+	if (!(messageReceive instanceof Rpt_Abstract.Ack))
+	{
+		// System.out.println(dateTimeStamp() + " pid data  is : Nack");
+	}
+
+	Global.httpSemaphore.semaphoreUnLock();			
+}
 	public static void tempData()
     {
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.tempData"))

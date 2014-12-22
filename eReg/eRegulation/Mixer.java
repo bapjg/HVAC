@@ -1,6 +1,8 @@
 package eRegulation;
 
 import HVAC_Common.Ctrl_Configuration;
+import HVAC_Common.Rpt_PID;
+import HVAC_Common.Rpt_PID.Update;
 
 // Notes
 // =====
@@ -123,7 +125,20 @@ public class Mixer
 		if (Math.abs(swingTimeRequired) > 500)												// Less than half a second
 		{
 			Integer 											positionProjected			= positionTracked + swingTimeRequired;
-
+			Rpt_PID.Update										messageBefore				= (new Rpt_PID()).new Update();
+			messageBefore.tempCurrent														= pidFloorOut.tempCurrent();
+			messageBefore.tempCurrentError													= pidFloorOut.tempCurrentError();
+			messageBefore.differential														= pidFloorOut.dTdt();
+			messageBefore.integral															= (Float) 0F;
+			messageBefore.kP																= gainP;
+			messageBefore.kD																= gainD;
+			messageBefore.kI																= gainI;
+			messageBefore.result															= (Float) swingTimeRequired.floatValue();
+			messageBefore.tempOut															= Global.thermoFloorOut.reading;
+			messageBefore.tempBoiler														= Global.thermoBoiler.reading;
+			messageBefore.positionTracked													= positionTracked;
+			messageBefore.beforeMovement													= true;
+			
 			if (swingTimeRequired > 0)	
 			{
 				// Moving hotter
@@ -168,7 +183,22 @@ public class Mixer
 					positionTracked															= report.positionTracked;
 				}
 			}
-			LogIt.pidData(targetTemp, pidFloorOut.tempCurrent(), pidFloorOut.tempCurrentError(), pidFloorOut.dTdt(), (Float) 0F, gainP, gainD, gainI, (Float) swingTimeRequired.floatValue(), Global.thermoFloorOut.reading, Global.thermoBoiler.reading, positionTracked);
+			Rpt_PID.Update										messageAfter				= (new Rpt_PID()).new Update();
+			messageAfter.tempCurrent														= pidFloorOut.tempCurrent();
+			messageAfter.tempCurrentError													= pidFloorOut.tempCurrentError();
+			messageAfter.differential														= pidFloorOut.dTdt();
+			messageAfter.integral															= (Float) 0F;
+			messageAfter.kP																	= gainP;
+			messageAfter.kD																	= gainD;
+			messageAfter.kI																	= gainI;
+			messageAfter.result																= (Float) swingTimeRequired.floatValue();
+			messageAfter.tempOut															= Global.thermoFloorOut.reading;
+			messageAfter.tempBoiler															= Global.thermoBoiler.reading;
+			messageAfter.positionTracked													= positionTracked;
+			messageAfter.beforeMovement														= false;
+			
+			LogIt.pidData(messageBefore);
+			LogIt.pidData(messageAfter);
 		}
 		else
 		{
