@@ -138,7 +138,7 @@ public class Mixer
 			messageBefore.tempCurrentError													= pidFloorOut.tempCurrentError();
 			
 			messageBefore.termProportional													= - pidFloorOut.getGainP(1F);
-			messageBefore.termDifferential													= - pidFloorOut.getGainP(1F);
+			messageBefore.termDifferential													= - pidFloorOut.getGainD(1F);
 			messageBefore.termIntegral														= - pidFloorOut.getGainI(1F);
 
 			messageBefore.gainProportional													= pidFloorOut.getGainP(gainP);
@@ -206,7 +206,7 @@ public class Mixer
 			messageAfter.tempCurrentError													= pidFloorOut.tempCurrentError();
 			
 			messageAfter.termProportional													= - pidFloorOut.getGainP(1F);
-			messageAfter.termDifferential													= - pidFloorOut.getGainP(1F);
+			messageAfter.termDifferential													= - pidFloorOut.getGainD(1F);
 			messageAfter.termIntegral														= - pidFloorOut.getGainI(1F);
 
 			messageAfter.gainProportional													= pidFloorOut.getGainP(gainP);
