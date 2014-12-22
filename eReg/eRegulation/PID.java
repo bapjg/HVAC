@@ -116,6 +116,45 @@ public class PID
     	Integer												currentError					= entries[indexCurrent].item - target;
     	return currentError;
     }
+    public Integer getGainP(Float kP) 
+    {
+    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
+    	Integer 	currentError 															= entries[indexCurrent].item - target;
+       	Float 		proportional 															= currentError.floatValue();		// unit = milligrees offtarget
+       	Float		getGainP																=  - (kP * proportional);
+       	return 		getGainP.intValue();
+    }
+    public Integer getGainD(Float kD) 
+    {
+    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
+    	Integer 	currentError 															= entries[indexCurrent].item - target;
+       	Float 		differential 															= 0F;
+       	
+    	if (count <= 1)
+    	{
+    		differential 																	= 0F;
+    	}
+    	else
+    	{
+    		//Units of differential are decidegrees/millisecond
+    		Long 	deltaTimeStamps 														= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
+    		differential																	= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
+    	}
+       	Float		getGainD																=  - (kD * differential);
+       	return 		getGainD.intValue();
+    }
+    public Integer getGainI(Float kI) 
+    {
+    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
+    	Integer 	currentError 															= entries[indexCurrent].item - target;
+		Float 		integral 																= 0F;								// unit = milligrees offtarget x seconds
+		integral 																			= entries[indexCurrent].integral.floatValue();							// in millidegree x seconds
+       	Float		getGainI																=  - (kI * integral);
+       	return 		getGainI.intValue();
+    }
     public Integer getGain(Float kP, Float kD, Float kI) 
     {
     	// Parameters are
@@ -129,35 +168,36 @@ public class PID
     	// Note that Java modulo defines that result carries same sign as numurator
     	// So to get the index of index-1 (or -2) we add the modulo base to ensure a positive outcome
     	
-    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
-    	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
-    	Integer 	currentError 															= entries[indexCurrent].item - target;
-    	Float 		proportional 															= currentError.floatValue();		// unit = milligrees offtarget
-		Float 		differential 															= 0F;								// unit = milligrees/second 
-		Float 		integral 																= 0F;								// unit = milligrees offtarget x seconds
-		Float 		result 																	= 0F;								// retruns number of milliseconds to move 3way valve
-																				// Made negative as is a negative feedback system
-		
-    	// Rather than calc de/dt (which can have transients due to square wave targets
-    	// we go for dnewNumber/dt which is smoother. All times are saved in ms.
-    	// The integration function gives a value in seconds
-    	// The differential work is done here and so is multiplied by 1000 to go from ms -> s
-		
-    	if (count <= 1)
-    	{
-    		differential 																	= 0F;
-    	}
-    	else
-    	{
-    		//Units of differential are decidegrees/millisecond
-    		Long 	deltaTimeStamps 														= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
-    		differential																	= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
-    	}
-
-		integral 																			= entries[indexCurrent].integral.floatValue();							// in millidegree x seconds
-		result 																				= - kP * proportional - kD * differential - kI * integral;
-		
-		return result.intValue();
+//    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
+//    	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
+//    	Integer 	currentError 															= entries[indexCurrent].item - target;
+//    	Float 		proportional 															= currentError.floatValue();		// unit = milligrees offtarget
+//		Float 		differential 															= 0F;								// unit = milligrees/second 
+//		Float 		integral 																= 0F;								// unit = milligrees offtarget x seconds
+//		Float 		result 																	= 0F;								// retruns number of milliseconds to move 3way valve
+//																				// Made negative as is a negative feedback system
+//		
+//    	// Rather than calc de/dt (which can have transients due to square wave targets
+//    	// we go for dnewNumber/dt which is smoother. All times are saved in ms.
+//    	// The integration function gives a value in seconds
+//    	// The differential work is done here and so is multiplied by 1000 to go from ms -> s
+//		
+//    	if (count <= 1)
+//    	{
+//    		differential 																	= 0F;
+//    	}
+//    	else
+//    	{
+//    		//Units of differential are decidegrees/millisecond
+//    		Long 	deltaTimeStamps 														= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
+//    		differential																	= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
+//    	}
+//
+//		integral 																			= entries[indexCurrent].integral.floatValue();							// in millidegree x seconds
+//		result 																				= - kP * proportional - kD * differential - kI * integral;
+//		
+//		return result.intValue();
+    	return	 getGainP(kP) +  getGainD(kD) +  getGainI(kI);
     }
     public class PID_Entry
     {

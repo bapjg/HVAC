@@ -272,22 +272,22 @@ public class Monitor extends HttpServlet
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM pid LIMIT 1");
             dbResultSet.moveToInsertRow();
 
-            dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
-            dbResultSet.updateString	("date", 			dateTime2Date(readings.dateTime));
-            dbResultSet.updateString	("time", 			dateTime2Time(readings.dateTime));
-            dbResultSet.updateInt		("target", 			readings.target);
-            dbResultSet.updateInt		("tempCurrent", 	readings.tempCurrent);
-            dbResultSet.updateInt		("tempCurrentError",readings.tempCurrentError);
-            dbResultSet.updateFloat		("proportional", 	readings.proportional);
-            dbResultSet.updateFloat		("differential", 	readings.differential);
-            dbResultSet.updateFloat		("integral", 		readings.integral);
-            dbResultSet.updateFloat		("kP", 				readings.kP);
-            dbResultSet.updateFloat		("kD", 				readings.kD);
-            dbResultSet.updateFloat		("kI", 				readings.kI);
-            dbResultSet.updateFloat		("result", 			readings.result);
-            dbResultSet.updateInt		("tempFloorOut",	readings.tempOut);
-            dbResultSet.updateInt		("tempBoiler", 		readings.tempBoiler);
-            dbResultSet.updateInt		("positionTracked",	readings.positionTracked);
+            dbResultSet.updateDouble	("dateTime", 			readings.dateTime);
+            dbResultSet.updateString	("date", 				dateTime2Date(readings.dateTime));
+            dbResultSet.updateString	("time", 				dateTime2Time(readings.dateTime));
+            dbResultSet.updateInt		("target", 				readings.target);
+            dbResultSet.updateInt		("tempCurrent", 		readings.tempCurrent);
+            dbResultSet.updateInt		("tempCurrentError",	readings.tempCurrentError);
+            dbResultSet.updateInt		("gainProportional",	readings.gainProportional);
+            dbResultSet.updateInt		("gainDifferential",	readings.gainDifferential);
+            dbResultSet.updateInt		("gainIntegral", 		readings.gainIntegral);
+            dbResultSet.updateFloat		("kP", 					readings.kP);
+            dbResultSet.updateFloat		("kD", 					readings.kD);
+            dbResultSet.updateFloat		("kI", 					readings.kI);
+            dbResultSet.updateInt		("gainTotal", 			readings.gainTotal);
+            dbResultSet.updateInt		("tempFloorOut",		readings.tempOut);
+            dbResultSet.updateInt		("tempBoiler", 			readings.tempBoiler);
+            dbResultSet.updateInt		("positionTracked",		readings.positionTracked);
             dbResultSet.insertRow();
             
             dbStatement.close();

@@ -45,7 +45,7 @@ public class Mixer
 	public static final int							MIXER_STATE_Moving_OverTemp_Recovery	= 5;
 	public static final int							MIXER_STATE_Moving_Idle					= 6;
 
-	public Long													timeToStop;
+	public Long										timeToStop;
 
  	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
     {
@@ -86,8 +86,8 @@ public class Mixer
 		// Multiply by a coefficient (250ms/decimal degree to start with) and see how it goes
 		//
 		allOff();
-		PID 													pidFloorOut				= Global.thermoFloorOut.pidControler;
-		PID 													pidBurnerOut			= Global.thermoBoilerOut.pidControler;
+		PID 													pidFloorOut					= Global.thermoFloorOut.pidControler;
+		PID 													pidBurnerOut				= Global.thermoBoilerOut.pidControler;
 		MixerMove_Report 										report;
 		
 		
@@ -110,9 +110,6 @@ public class Mixer
 		
 		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
 		
-		// Take into consideration 2nd order changes (dis = s + ut + at²/s)
-		// swingTimeRequired																	= swingTimeRequired - Math.round(gainP * gainD * gainD * pidFloorOut.d2Tdt2())/2;
-		
 		if (tempFloorOut > 50000)
 		{
 			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
@@ -126,16 +123,23 @@ public class Mixer
 		{
 			Integer 											positionProjected			= positionTracked + swingTimeRequired;
 			Rpt_PID.Update										messageBefore				= (new Rpt_PID()).new Update();
+			
+			messageBefore.target															= targetTemp;
 			messageBefore.tempCurrent														= pidFloorOut.tempCurrent();
 			messageBefore.tempCurrentError													= pidFloorOut.tempCurrentError();
-			messageBefore.differential														= pidFloorOut.dTdt();
-			messageBefore.integral															= (Float) 0F;
+			
+			messageBefore.gainProportional													= pidFloorOut.getGainP(gainP);
+			messageBefore.gainDifferential													= pidFloorOut.getGainP(gainD);
+			messageBefore.gainIntegral														= pidFloorOut.getGainI(gainI);
+			
 			messageBefore.kP																= gainP;
 			messageBefore.kD																= gainD;
 			messageBefore.kI																= gainI;
-			messageBefore.result															= (Float) swingTimeRequired.floatValue();
+			
+			messageBefore.gainTotal															= swingTimeRequired;
 			messageBefore.tempOut															= Global.thermoFloorOut.reading;
 			messageBefore.tempBoiler														= Global.thermoBoiler.reading;
+			
 			messageBefore.positionTracked													= positionTracked;
 			messageBefore.beforeMovement													= true;
 			
@@ -184,16 +188,22 @@ public class Mixer
 				}
 			}
 			Rpt_PID.Update										messageAfter				= (new Rpt_PID()).new Update();
+			messageAfter.target																= targetTemp;
 			messageAfter.tempCurrent														= pidFloorOut.tempCurrent();
 			messageAfter.tempCurrentError													= pidFloorOut.tempCurrentError();
-			messageAfter.differential														= pidFloorOut.dTdt();
-			messageAfter.integral															= (Float) 0F;
+			
+			messageAfter.gainProportional													= pidFloorOut.getGainP(gainP);
+			messageAfter.gainDifferential													= pidFloorOut.getGainP(gainD);
+			messageAfter.gainIntegral														= pidFloorOut.getGainI(gainI);
+			
 			messageAfter.kP																	= gainP;
 			messageAfter.kD																	= gainD;
 			messageAfter.kI																	= gainI;
-			messageAfter.result																= (Float) swingTimeRequired.floatValue();
+			
+			messageAfter.gainTotal															= swingTimeRequired;
 			messageAfter.tempOut															= Global.thermoFloorOut.reading;
 			messageAfter.tempBoiler															= Global.thermoBoiler.reading;
+			
 			messageAfter.positionTracked													= positionTracked;
 			messageAfter.beforeMovement														= false;
 			
