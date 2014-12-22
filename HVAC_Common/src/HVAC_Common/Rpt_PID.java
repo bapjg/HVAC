@@ -35,7 +35,7 @@ public class Rpt_PID extends Rpt_Abstract
 		public Integer					tempBoiler;	
 		public Integer					positionTracked;
 		
-		public Boolean					beforeMovement;
+		public Boolean					startMovement;
 	}
 	public class Request extends Rpt_Abstract
 	{

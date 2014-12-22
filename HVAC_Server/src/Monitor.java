@@ -297,7 +297,7 @@ public class Monitor extends HttpServlet
             dbResultSet.updateInt		("tempBoiler", 			readings.tempBoiler);
             dbResultSet.updateInt		("positionTracked",		readings.positionTracked);
             
-            dbResultSet.updateBoolean	("beforeMovement",		readings.beforeMovement);
+            dbResultSet.updateBoolean	("startMovement",		readings.startMovement);
             dbResultSet.insertRow();
             
             dbStatement.close();

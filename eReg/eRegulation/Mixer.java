@@ -145,7 +145,7 @@ public class Mixer
 			messageBefore.tempBoiler														= Global.thermoBoiler.reading;
 			
 			messageBefore.positionTracked													= positionTracked;
-			messageBefore.beforeMovement													= true;
+			messageBefore.startMovement														= true;
 			
 			if (swingTimeRequired > 0)	
 			{
@@ -213,7 +213,7 @@ public class Mixer
 			messageAfter.tempBoiler															= Global.thermoBoiler.reading;
 			
 			messageAfter.positionTracked													= positionTracked;
-			messageAfter.beforeMovement														= false;
+			messageAfter.startMovement														= false;
 			
 			LogIt.pidData(messageBefore);
 			LogIt.pidData(messageAfter);
