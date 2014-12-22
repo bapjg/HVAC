@@ -60,6 +60,15 @@ public class Mixer
 		this.timeD																			= paramMixer.pidParams.timeD;
 		this.gainD																			= this.gainP * this.timeD;
 		this.timeI																			= paramMixer.pidParams.timeI;
+		
+		if (this.timeI == 0)
+		{
+			this.gainI																		= 0F;
+		}
+		else
+		{
+			this.gainI																		= this.gainP / this.timeI / 1000F; // timeI is in seconds
+		}
 		this.gainI																			= paramMixer.pidParams.gainI;
 												
 		this.mixerUp																		= Global.relays.fetchRelay(paramMixer.relayUp);

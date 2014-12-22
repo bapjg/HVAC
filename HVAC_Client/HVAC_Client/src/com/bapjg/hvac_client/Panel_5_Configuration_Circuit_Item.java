@@ -21,7 +21,7 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
-public class Item_5_Configuration_Circuit_New 					extends 					Panel_0_Fragment
+public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragment
 																implements					Panel_0_Interface
 {		
 	private Ctrl_Configuration.Circuit	 						itemData;
@@ -50,7 +50,7 @@ public class Item_5_Configuration_Circuit_New 					extends 					Panel_0_Fragment
 	private Element_Standard 									marginProjection;	
 
 	
-	public Item_5_Configuration_Circuit_New(Ctrl_Configuration.Circuit itemData)
+	public Panel_5_Configuration_Circuit_Item(Ctrl_Configuration.Circuit itemData)
 	{
 		super();
 		this.itemData																		= itemData;
@@ -96,9 +96,9 @@ public class Item_5_Configuration_Circuit_New 					extends 					Panel_0_Fragment
     	
     	headingPID																			= new Element_Heading(getActivity(), "PID Data");
     	pidThermometer																		= new Element_Standard(getActivity(),"PID Thermometer");
-    	gainP																				= new Element_Standard(getActivity(),"Proportional Gain", "ms/m°C");
-    	timeD																				= new Element_Standard(getActivity(),"Differential Time Constant", "ms/°C");
-    	timeI																				= new Element_Standard(getActivity(),"Integration Time Constant", "°C/ms");
+    	gainP																				= new Element_Standard(getActivity(),"Proportional Gain", "s/°C");
+    	timeD																				= new Element_Standard(getActivity(),"Differential Time Constant", "s");
+    	timeI																				= new Element_Standard(getActivity(),"Integration Time Constant", "s");
     	timeDelay																			= new Element_Standard(getActivity(),"Time Delay after Decision", "s");
     	timeProjection																		= new Element_Standard(getActivity(),"Decision Time Projection", "s");
     	marginProjection																	= new Element_Standard(getActivity(),"Temperature Error Margin", "°C");

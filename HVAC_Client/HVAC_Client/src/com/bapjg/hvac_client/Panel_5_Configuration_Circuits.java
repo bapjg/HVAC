@@ -96,7 +96,7 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     	Ctrl_Configuration.Circuit								itemData						= Global.eRegConfiguration.circuitList.get(position);
 
 //    	Item_5_Configuration_Circuit							itemFragment					= new Item_5_Configuration_Circuit(itemData);
-    	Item_5_Configuration_Circuit_New							itemFragment					= new Item_5_Configuration_Circuit_New(itemData);
+    	Panel_5_Configuration_Circuit_Item							itemFragment					= new Panel_5_Configuration_Circuit_Item(itemData);
 
     	FragmentTransaction 									fTransaction 					= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
