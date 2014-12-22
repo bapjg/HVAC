@@ -117,24 +117,17 @@ public class Mixer
 		}
 		else if (tempFloorOut > 45000)
 		{
-			// We need to do trip avoidance
-//			if (swingTimeRequired < 0)
-//			{
-//				swingTimeRequired															= swingTimeRequired * 2;		// i.e. double the gain factor kp
-//			}
-//			else
-//			{
-				LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
-//			}
+			LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
 		}
 		
 		if (Math.abs(swingTimeRequired) > 500)												// Less than half a second
 		{
 			Integer 											positionProjected			= positionTracked + swingTimeRequired;
 
-			if (swingTimeRequired > 0)								// Moving hotter
+			if (swingTimeRequired > 0)	
 			{
-				if (positionProjected > this.swingTime)										//
+				// Moving hotter
+				if (positionProjected > this.swingTime)
 		 		{
 		 			swingTimeRequired 														= this.swingTime - positionTracked + 2000;		//No point waiting over maximum add extra 2 seconds to be sure of end point
 					report																	= mixerMoveUp(swingTimeRequired);
@@ -153,8 +146,9 @@ public class Mixer
 					positionTracked															= report.positionTracked;
 				}
 			}
-			else													// Moving colder
+			else
 			{
+				// Moving colder
 				if (positionProjected < 0)																// Should never happen
 		 		{
 		 			swingTimeRequired 														= - (positionTracked + 2000);					//Add extra 2 seconds to be sure of end point
@@ -174,7 +168,7 @@ public class Mixer
 					positionTracked															= report.positionTracked;
 				}
 			}
-			LogIt.pidData(targetTemp, pidFloorOut.T(), pidFloorOut.dTdt(), (Float) 0F, gainP, gainD, gainI, (Float) swingTimeRequired.floatValue(), Global.thermoFloorOut.reading, Global.thermoBoiler.reading, positionTracked);
+			LogIt.pidData(targetTemp, pidFloorOut.tempCurrent(), pidFloorOut.tempCurrentError(), pidFloorOut.dTdt(), (Float) 0F, gainP, gainD, gainI, (Float) swingTimeRequired.floatValue(), Global.thermoFloorOut.reading, Global.thermoBoiler.reading, positionTracked);
 		}
 		else
 		{

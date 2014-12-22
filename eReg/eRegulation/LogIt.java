@@ -97,8 +97,9 @@ public class LogIt
 	}
 	public static void pidData
 		(
-				Integer target, 
-				Float 	proportional,
+				Integer target,
+				Integer tempCurrent,
+				Integer tempCurrentError,
 				Float 	differential,
 				Float 	integral,
 				Float 	kP,
@@ -121,7 +122,8 @@ public class LogIt
 		Rpt_PID.Data 											messageSend 				= (new Rpt_PID()).new Update();
 		messageSend.dateTime 																= System.currentTimeMillis();
 		messageSend.target		 															= target; 
-		messageSend.proportional		 													= proportional; 
+		messageSend.tempCurrent		 														= tempCurrent; 
+		messageSend.tempCurrentError		 												= tempCurrentError; 
 		messageSend.differential		 													= differential; 
 		messageSend.integral		 														= integral; 
 		messageSend.kP		 																= kP; 

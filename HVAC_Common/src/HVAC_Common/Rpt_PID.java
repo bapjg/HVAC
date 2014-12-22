@@ -13,6 +13,8 @@ public class Rpt_PID extends Rpt_Abstract
 		private static final long 		serialVersionUID 			= 1L;
 		public Long						dateTime;
 		public Integer					target;
+		public Integer 					tempCurrent;
+		public Integer 					tempCurrentError;
 		public Float					proportional;
 		public Float					differential;
 		public Float					integral;

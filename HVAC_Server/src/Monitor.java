@@ -268,7 +268,7 @@ public class Monitor extends HttpServlet
 
         try
         {
-            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+        	dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM pid LIMIT 1");
             dbResultSet.moveToInsertRow();
 
@@ -276,6 +276,8 @@ public class Monitor extends HttpServlet
             dbResultSet.updateString	("date", 			dateTime2Date(readings.dateTime));
             dbResultSet.updateString	("time", 			dateTime2Time(readings.dateTime));
             dbResultSet.updateInt		("target", 			readings.target);
+            dbResultSet.updateInt		("tempCurrent", 	readings.tempCurrent);
+            dbResultSet.updateInt		("tempCurrentError",readings.tempCurrentError);
             dbResultSet.updateFloat		("proportional", 	readings.proportional);
             dbResultSet.updateFloat		("differential", 	readings.differential);
             dbResultSet.updateFloat		("integral", 		readings.integral);

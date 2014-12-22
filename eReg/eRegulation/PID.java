@@ -104,31 +104,17 @@ public class PID
 
     	return differential;
     }
-//    public Float d2Tdt2() 
-//    {
-//		Float 												differential 					= 0F;								// unit = millidegrees/second 
-//		Long 												deltaTimeStamps					= 0L;								// unit = milliseconds
-//    	Integer												indexCurrent					= (indexEnqueue - 1 + pidDepth) % pidDepth;
-//    	Integer												indexPrevious					= (indexEnqueue - 2 + pidDepth) % pidDepth;
-//    	
-//    	if (count <= 2)
-//    	{
-//    		differential 																	= 0F;
-//    	}
-//    	else
-//    	{
-//    		//Units of differential are decidegrees/millisecond
-//    		deltaTimeStamps 																= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
-//    		differential																	= 1000F * ((Integer) (entries[indexCurrent].delta - entries[indexPrevious].delta)).floatValue() / deltaTimeStamps;	// in millidegrees per second
-//    	}
-//
-//    	return differential;
-//    }
-    public Float T() 
+    public Integer tempCurrent() 
+    {
+    	Integer												indexCurrent					= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer												current							= entries[indexCurrent].item;
+    	return current;
+    }
+    public Integer tempCurrentError() 
     {
     	Integer												indexCurrent					= (indexEnqueue - 1 + pidDepth) % pidDepth;
     	Integer												currentError					= entries[indexCurrent].item - target;
-    	return currentError.floatValue();
+    	return currentError;
     }
     public Integer getGain(Float kP, Float kD, Float kI) 
     {
@@ -179,7 +165,6 @@ public class PID
         private Integer 										item;			// Proportional component, stored unit = millidegrees (we store values, not differences to avoid pbs with 
         private Integer 										delta;			// Differential component, stored unit = millidegrees  sudden target changes with sudden target changes)
         private Long 											integral;		// Integral component,     stored unit = millidegree from target x seconds
-        private Integer 										delta2;			// Second order Differential component, stored unit = millidegrees per ????  sudden target changes with sudden target changes)
                
         public PID_Entry() 
         {
