@@ -98,7 +98,7 @@ public class PID
     	else
     	{
     		//Units of differential are decidegrees/millisecond
-    		deltaTimeStamps 																= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
+    		deltaTimeStamps 																= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;	// in ms
     		differential																	= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
     	}
 
@@ -129,7 +129,6 @@ public class PID
     {
     	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
     	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
-    	Integer 	currentError 															= entries[indexCurrent].item - target;
        	Float 		differential 															= 0F;
        	
     	if (count <= 1)
@@ -138,15 +137,18 @@ public class PID
     	}
     	else
     	{
-    		//Units of differential are decidegrees/millisecond
+    		//Units of differential are millidegrees/second
+    		//Units of kD are seconds x milliseconds/milliDegrees
     		Long 	deltaTimeStamps 														= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
     		differential																	= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
     	}
-       	Float		getGainD																=  - (kD * differential);
+       	// units of getGainD are ms
+    	Float		getGainD																=  - (kD * differential);
        	return 		getGainD.intValue();
     }
     public Integer getGainI(Float kI) 
     {
+    	//Units must be checked
     	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
     	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
     	Integer 	currentError 															= entries[indexCurrent].item - target;

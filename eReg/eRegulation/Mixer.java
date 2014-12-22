@@ -142,7 +142,7 @@ public class Mixer
 			messageBefore.termIntegral														= - pidFloorOut.getGainI(1F);
 
 			messageBefore.gainProportional													= pidFloorOut.getGainP(gainP);
-			messageBefore.gainDifferential													= pidFloorOut.getGainP(gainD);
+			messageBefore.gainDifferential													= pidFloorOut.getGainD(gainD);
 			messageBefore.gainIntegral														= pidFloorOut.getGainI(gainI);
 			
 			messageBefore.kP																= gainP;
@@ -210,7 +210,7 @@ public class Mixer
 			messageAfter.termIntegral														= - pidFloorOut.getGainI(1F);
 
 			messageAfter.gainProportional													= pidFloorOut.getGainP(gainP);
-			messageAfter.gainDifferential													= pidFloorOut.getGainP(gainD);
+			messageAfter.gainDifferential													= pidFloorOut.getGainD(gainD);
 			messageAfter.gainIntegral														= pidFloorOut.getGainI(gainI);
 			
 			messageAfter.kP																	= gainP;
