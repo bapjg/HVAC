@@ -197,7 +197,7 @@ public class PID
 //		result 																				= - kP * proportional - kD * differential - kI * integral;
 //		
 //		return result.intValue();
-    	return	 getGainP(kP) +  getGainD(kD) +  getGainI(kI);
+    	return	 	getGainP(kP) +  getGainD(kD) +  getGainI(kI);
     }
     public class PID_Entry
     {

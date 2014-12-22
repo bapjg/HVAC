@@ -17,6 +17,10 @@ public class Rpt_PID extends Rpt_Abstract
 		public Integer 					tempCurrent;
 		public Integer 					tempCurrentError;
 		
+		public Integer					termProportional;
+		public Integer					termDifferential;
+		public Integer					termIntegral;
+
 		public Integer					gainProportional;
 		public Integer					gainDifferential;
 		public Integer					gainIntegral;

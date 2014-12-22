@@ -278,16 +278,26 @@ public class Monitor extends HttpServlet
             dbResultSet.updateInt		("target", 				readings.target);
             dbResultSet.updateInt		("tempCurrent", 		readings.tempCurrent);
             dbResultSet.updateInt		("tempCurrentError",	readings.tempCurrentError);
+            
+            dbResultSet.updateInt		("termProportional",	readings.termProportional);
+            dbResultSet.updateInt		("termDifferential",	readings.termDifferential);
+            dbResultSet.updateInt		("termIntegral", 		readings.termIntegral);
+            
             dbResultSet.updateInt		("gainProportional",	readings.gainProportional);
             dbResultSet.updateInt		("gainDifferential",	readings.gainDifferential);
             dbResultSet.updateInt		("gainIntegral", 		readings.gainIntegral);
+            
             dbResultSet.updateFloat		("kP", 					readings.kP);
             dbResultSet.updateFloat		("kD", 					readings.kD);
             dbResultSet.updateFloat		("kI", 					readings.kI);
+            
             dbResultSet.updateInt		("gainTotal", 			readings.gainTotal);
+            
             dbResultSet.updateInt		("tempFloorOut",		readings.tempOut);
             dbResultSet.updateInt		("tempBoiler", 			readings.tempBoiler);
             dbResultSet.updateInt		("positionTracked",		readings.positionTracked);
+            
+            dbResultSet.updateBoolean	("beforeMovement",		readings.beforeMovement);
             dbResultSet.insertRow();
             
             dbStatement.close();
