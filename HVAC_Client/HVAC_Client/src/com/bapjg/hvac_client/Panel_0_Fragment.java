@@ -35,7 +35,8 @@ public class Panel_0_Fragment 									extends 					Fragment
 																							AdapterView.OnItemClickListener, 
 																							TCP_Response,
 																							HTTP_Response,
-																							Dialog_Response
+																							Dialog_Response,
+																							Panel_0_Interface
 {
 	public int													panelLayout;
 	public ViewGroup											container;
@@ -92,6 +93,12 @@ public class Panel_0_Fragment 									extends 					Fragment
 	{
 		Global.setAddressSpace();
 		Global.setStatusTCP(result);
+	}
+	public void onPanelItemClick(Element_Switch switchClicked) 
+	{
+	}
+	public void onPanelItemClick(Element_Standard textViewClicked) 
+	{
 	}
 }
 

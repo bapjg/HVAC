@@ -22,6 +22,7 @@ import android.widget.TextView;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
 public class Item_5_Configuration_Circuit_New 					extends 					Panel_0_Fragment
+																implements					Panel_0_Interface
 {		
 	private Ctrl_Configuration.Circuit	 						itemData;
 	
@@ -40,6 +41,13 @@ public class Item_5_Configuration_Circuit_New 					extends 					Panel_0_Fragment
 	private Element_Standard									relayDown;
 	
 	private Element_Heading										headingPID;
+	private Element_Standard									pidThermometer;
+	private Element_Standard 									gainP;	
+	private Element_Standard 									timeD;
+	private Element_Standard 									timeI;
+	private Element_Standard 									timeDelay;	
+	private Element_Standard 									timeProjection;	
+	private Element_Standard 									marginProjection;	
 
 	
 	public Item_5_Configuration_Circuit_New(Ctrl_Configuration.Circuit itemData)
@@ -71,7 +79,7 @@ public class Item_5_Configuration_Circuit_New 					extends 					Panel_0_Fragment
     	insertPoint.addView(headingGradient);
     	
     	headingMixer																		= new Element_Heading(getActivity(), "Mixer");
-    	mixerThermometer																	= new Element_Standard(getActivity(),"Thermometer");
+    	mixerThermometer																	= new Element_Standard(getActivity(),"Mixer Target Thermometer");
     	swingTime																			= new Element_Standard(getActivity(),"Swing Time", "s");
     	swingProportionMin																	= new Element_Standard(getActivity(),"Swing Min", "%");
     	swingProportionMax																	= new Element_Standard(getActivity(),"Swing Max", "%");
@@ -86,9 +94,23 @@ public class Item_5_Configuration_Circuit_New 					extends 					Panel_0_Fragment
     	insertPoint.addView(relayUp);
     	insertPoint.addView(relayDown);
     	
-    	headingPID						= new Element_Heading(getActivity(), "PID");
+    	headingPID																			= new Element_Heading(getActivity(), "PID Data");
+    	pidThermometer																		= new Element_Standard(getActivity(),"PID Thermometer");
+    	gainP																				= new Element_Standard(getActivity(),"Proportional Gain", "ms/m°C");
+    	timeD																				= new Element_Standard(getActivity(),"Differential Time Constant", "ms/°C");
+    	timeI																				= new Element_Standard(getActivity(),"Integration Time Constant", "°C/ms");
+    	timeDelay																			= new Element_Standard(getActivity(),"Time Delay after Decision", "s");
+    	timeProjection																		= new Element_Standard(getActivity(),"Decision Time Projection", "s");
+    	marginProjection																	= new Element_Standard(getActivity(),"Temperature Error Margin", "°C");
+    	
     	insertPoint.addView(headingPID);
-
+    	insertPoint.addView(pidThermometer);
+    	insertPoint.addView(gainP);
+    	insertPoint.addView(timeD);
+    	insertPoint.addView(timeI);
+    	insertPoint.addView(timeDelay);
+    	insertPoint.addView(timeProjection);
+    	insertPoint.addView(marginProjection);
         
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.circuitList != null))
@@ -109,87 +131,70 @@ public class Item_5_Configuration_Circuit_New 					extends 					Panel_0_Fragment
 		pump				.setTextRight	(itemData.pump);
 		targetThermometer	.setTextRight	(itemData.thermometer);
 		
-//		TextView 												pumpName 					= (TextView) itemView.findViewById(R.id.pumpName);
-//    	TextView 												thermometerName				= (TextView) itemView.findViewById(R.id.thermometerName);
-//    	// Temperature Gradient :
-//		TextView 												outsideLow 					= (TextView) itemView.findViewById(R.id.outsideLow);
-//    	TextView 												outsideHigh					= (TextView) itemView.findViewById(R.id.outsideHigh);
-//   		TextView 												tempLow 					= (TextView) itemView.findViewById(R.id.tempLow);
-//    	TextView 												tempHigh					= (TextView) itemView.findViewById(R.id.tempHigh);
     	// Mixer :
-    	Ctrl_Configuration.Mixer								mixer						= itemData.mixer;
-		//mixerThermometer	.setTextRight	(mixer.name);
-		mixerThermometer	.setTextRight	(itemData.pump);																	
-    	swingTime			.setTextRight	((Integer) (mixer.swingTime/1000));																			
-    	swingProportionMin	.setTextRight	(mixer.swingProportionMin);															
-    	swingProportionMax	.setTextRight	(mixer.swingProportionMax);															
-    	relayUp				.setTextRight	(mixer.relayUp);																
-    	relayDown			.setTextRight	(mixer.relayDown);														
+    	if (itemData.tempGradient != null)
+    	{
+        	Ctrl_Configuration.TempGradient						tempGradient				= itemData.tempGradient;
 
-		
-		
-		
-		
-		
-		
-		//  		TextView 												thermometer					= (TextView) itemView.findViewById(R.id.thermometer);
-//    	TextView 												swingTime					= (TextView) itemView.findViewById(R.id.swingTime);
-//   		TextView 												relayUp 					= (TextView) itemView.findViewById(R.id.relayUp);
-//    	TextView 												relayDown					= (TextView) itemView.findViewById(R.id.relayDown);
-//    	// Low Level PID (Mixer) :
-//    	TextView 												thermometerPID				= (TextView) itemView.findViewById(R.id.thermometer);
-//    	TextView 												gainP						= (TextView) itemView.findViewById(R.id.gainP);
-//    	TextView 												timeD						= (TextView) itemView.findViewById(R.id.timeD);
-//    	TextView 												timeI						= (TextView) itemView.findViewById(R.id.timeI);
-//    	TextView 												timeDelay					= (TextView) itemView.findViewById(R.id.timeDelay);
-//    	TextView 												timeProjection				= (TextView) itemView.findViewById(R.id.timeProjection);
-//    	TextView 												marginProjection			= (TextView) itemView.findViewById(R.id.marginProjection);
-//	
-//    	pumpName.setText										(itemData.pump);
-//    	thermometerName.setText									(itemData.thermometer);
-    	
-//    	if (itemData.tempGradient != null)
-//    	{
-//        	Ctrl_Configuration.TempGradient						tempGradient				= itemData.tempGradient;
+//        	// Temperature Gradient :
+//    		TextView 												outsideLow 					= (TextView) itemView.findViewById(R.id.outsideLow);
+//        	TextView 												outsideHigh					= (TextView) itemView.findViewById(R.id.outsideHigh);
+//       		TextView 												tempLow 					= (TextView) itemView.findViewById(R.id.tempLow);
+//        	TextView 												tempHigh					= (TextView) itemView.findViewById(R.id.tempHigh);
+
 //    	
 //        	outsideLow.setText									(tempGradient.outsideLow.displayInteger());
 //        	outsideHigh.setText									(tempGradient.outsideHigh.displayInteger());
 //        	tempLow.setText										(tempGradient.tempLow.displayInteger());
 //        	tempHigh.setText									(tempGradient.tempHigh.displayInteger());
-//     	}
-//    	else
-//    	{
+    	}
+    	else
+    	{
 //    		ViewGroup											gradientView				= (ViewGroup) itemView.findViewById(R.id.gradient);	
 //    		gradientView.setVisibility(View.GONE);
-//    	}
-//    	if (itemData.mixer != null)
-//    	{
-//        	Ctrl_Configuration.Mixer							mixer						= itemData.mixer;
+    	}
+
+    	if (itemData.mixer != null)
+    	{
+        	Ctrl_Configuration.Mixer							mixer						= itemData.mixer;
 //     	
+    		//mixerThermometer	.setTextRight	(mixer.name);
 //        	thermometer.setText									(mixer.name);
 //        	swingTime.setText									(((Integer) (mixer.swingTime/1000)).toString());
 //        	relayUp.setText										(mixer.relayUp);
 //        	relayDown.setText									(mixer.relayDown);
-//
-//        	Ctrl_Configuration.PID_Params						pidParams					= itemData.mixer.pidParams;
-//    	
-//        	thermometerPID.setText								(pidParams.thermometer);
-//        	gainP.setText										(pidParams.gainP.toString());
-//        	timeD.setText										(pidParams.timeD.toString() + " ms/°C");
+    		mixerThermometer	.setTextRight	(itemData.pump);																	
+        	swingTime			.setTextRight	((Integer) (mixer.swingTime/1000));																			
+        	swingProportionMin	.setTextRight	(mixer.swingProportionMin);															
+        	swingProportionMax	.setTextRight	(mixer.swingProportionMax);															
+        	relayUp				.setTextRight	(mixer.relayUp);																
+        	relayDown			.setTextRight	(mixer.relayDown);														
+
+           	Ctrl_Configuration.PID_Params						pidParams					= itemData.mixer.pidParams;
+
 //        	timeI.setText										(milliToString(pidParams.timeI) + " °C/ms");
 //        	timeDelay.setText									(milliToString(pidParams.timeDelay) + " s");
 //        	timeProjection.setText								(milliToString(pidParams.timeProjection) + " s");
 //        	marginProjection.setText							(milliToString(pidParams.marginProjection) + " °C");
-//    	}
-//    	else
-//    	{
+    	
+        	pidThermometer		.setTextRight	(pidParams.thermometer);
+        	gainP				.setTextRight	(pidParams.gainP);
+        	timeD				.setTextRight	(pidParams.timeD);																
+        	timeI				.setTextRight	(pidParams.timeI);																
+        	timeDelay			.setTextRight	(pidParams.timeDelay);																
+        	timeProjection		.setTextRight	(pidParams.timeProjection);																
+        	marginProjection	.setTextRight	(pidParams.marginProjection);																
+    	}
+    	else
+    	{
 //    		ViewGroup											mixerView				= (ViewGroup) itemView.findViewById(R.id.mixer);	
 //    		mixerView.setVisibility(View.GONE);
-//    	}
+    	}
    	}
 	public void setListens()
 	{
-    	if (itemData.tempGradient != null)
+		pump.setListener(this);
+		if (itemData.tempGradient != null)
     	{
 //			itemView.findViewById(R.id.tempLow).setOnClickListener(this);
 //			itemView.findViewById(R.id.tempHigh).setOnClickListener(this);
@@ -287,6 +292,11 @@ public class Item_5_Configuration_Circuit_New 					extends 					Panel_0_Fragment
 	     		break;
 		}
  	}
+    @Override
+	public void onPanelItemClick(Element_Switch clickedView)
+	{
+		Global.toaster("A switched has been clicked", true);
+	}
     public void onDialogReturn()
     {
     	displayContents();

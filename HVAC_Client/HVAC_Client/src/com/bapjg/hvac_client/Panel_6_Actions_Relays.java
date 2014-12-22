@@ -73,24 +73,20 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-//		switchBurner				.setOnClickListener(this);
-//		switchHotWater				.setListener(this);
-//		switchFloor					.setOnClickListener(this);
-//		switchRadiator				.setOnClickListener(this);
-		switchBurner.onOffSwitch	.setOnClickListener(this);
-		switchHotWater.onOffSwitch	.setOnClickListener(this);
-		switchFloor.onOffSwitch		.setOnClickListener(this);
-		switchRadiator.onOffSwitch	.setOnClickListener(this);
+		switchBurner				.setListener(this);
+		switchHotWater				.setListener(this);
+		switchFloor					.setListener(this);
+		switchRadiator				.setListener(this);
 	}
-    public void onClick(View clickedView)
+	@Override
+	public void onPanelItemClick(Element_Switch switchClicked) 
     {
    		Ctrl_Actions_Relays.Execute								messageSend					= new Ctrl_Actions_Relays().new Execute();
-  		Switch													switchClicked				= (Switch) clickedView;
    		
-		if 		(switchClicked == switchBurner.onOffSwitch)		messageSend.relayName		= "Burner";
-		else if (switchClicked == switchHotWater.onOffSwitch)	messageSend.relayName		= "HotWater";
-		else if (switchClicked == switchFloor.onOffSwitch)		messageSend.relayName		= "Floor";
-		else if (switchClicked == switchRadiator.onOffSwitch)	messageSend.relayName		= "Radiator";
+		if 		(switchClicked == switchBurner)		messageSend.relayName		= "Burner";
+		else if (switchClicked == switchHotWater)	messageSend.relayName		= "HotWater";
+		else if (switchClicked == switchFloor)		messageSend.relayName		= "Floor";
+		else if (switchClicked == switchRadiator)	messageSend.relayName		= "Radiator";
 		
 		switchClicked.setChecked(! switchClicked.isChecked());
 		

@@ -23,6 +23,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -39,6 +40,7 @@ public class Element_Standard 									extends 					LinearLayout
 	public TextView 											textLeft;
 	public TextView 											textRight;
 	public String												units;
+	public Panel_0_Interface									listener;
 	
 	public Element_Standard(Context context, String labelTextLeft) 
 	{
@@ -74,5 +76,20 @@ public class Element_Standard 									extends 					LinearLayout
 		if (number != null)		textRight.setText(number + units);
 		else					textRight.setText(0 + units);
 	}
+	public void setTextRight(Float number)
+	{
+		if (number != null)		textRight.setText(number + units);
+		else					textRight.setText(0 + units);
+	}
+	public void setListener(OnClickListener listener)
+	{
+		this.listener																		= (Panel_0_Fragment) listener;
+		textRight.setOnClickListener((OnClickListener) this);
+	}
+	public void onClick(View view)
+	{
+		listener.onPanelItemClick(this);
+	}
+
 }
 
