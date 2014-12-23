@@ -1,0 +1,94 @@
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<RelativeLayout 
+    xmlns:android							= "http://schemas.android.com/apk/res/android"
+    android:id 								= "@+id/gradientTop"
+    android:paddingTop				 		= "@dimen/row_padding"
+    android:paddingBottom					= "@dimen/row_padding"
+    android:paddingRight					= "10dp"
+    android:layout_width					= "fill_parent"
+    android:layout_height					= "wrap_content" 
+    android:background						= "@color/Background"
+>
+    <ImageView
+        android:id							= "@+id/imageView1"
+        android:layout_width				= "@dimen/graph_width"
+        android:layout_height				= "@dimen/graph_height"
+        android:layout_alignParentTop		= "true"
+        android:layout_centerHorizontal		= "true"
+		android:adjustViewBounds			= "true"
+		android:scaleType					= "centerCrop"
+        android:src							= "@drawable/gradient"
+    />
+
+	<TextView
+        android:id							= "@+id/tempLow"
+        android:layout_width				= "wrap_content"
+        android:layout_height				= "wrap_content"
+        android:layout_alignTop				= "@id/imageView1"
+        android:layout_toLeftOf				= "@id/imageView1"
+        android:gravity						= "right|center_vertical"
+        android:text						= "gt1" 
+        android:textSize				 	= "@dimen/text_normal"
+        android:textColor				 	= "@color/Yellow"
+    />
+
+    <TextView
+        android:id							= "@+id/tempHigh"
+        android:layout_width				= "wrap_content"
+        android:layout_height				= "wrap_content"
+        android:layout_alignBottom			= "@id/imageView1"
+        android:layout_toLeftOf				= "@id/imageView1"
+        android:gravity						= "right|center_vertical"
+        android:text						= "gt2" 
+        android:textSize				 	= "@dimen/text_normal"
+        android:textColor				 	= "@color/Yellow"
+    />
+    
+    <TextView
+        android:layout_width				= "match_parent"
+        android:layout_height				= "wrap_content"
+        android:layout_toLeftOf				= "@+id/imageView1"
+        android:layout_alignTop				= "@id/tempLow"
+        android:layout_alignBottom			= "@id/tempHigh"
+        android:layout_alignParentLeft		= "true"
+        android:gravity						= "center_horizontal|center_vertical"
+        android:text						= "Mixer Out" 
+        android:textSize				 	= "@dimen/text_normal"
+        android:textColor				 	= "@color/White"
+    />
+    
+    <TextView
+        android:id							= "@+id/outsideLow"
+        android:layout_width				= "wrap_content"
+        android:layout_height				= "wrap_content"
+        android:layout_alignLeft			= "@id/imageView1"
+        android:layout_below				= "@id/imageView1"
+        android:gravity						= "left"
+        android:text						= "gt3"
+        android:textSize				 	= "@dimen/text_normal"
+        android:textColor				 	= "@color/Yellow"
+    />
+
+    <TextView
+        android:id							= "@+id/outsideHigh"
+        android:layout_width				= "wrap_content"
+        android:layout_height				= "wrap_content"
+        android:layout_alignRight			= "@id/imageView1"
+        android:layout_below				= "@id/imageView1"
+        android:text						= "gt5"
+        android:textSize				 	= "@dimen/text_normal"
+        android:textColor				 	= "@color/Yellow"
+    />
+
+    <TextView
+        android:layout_width				= "match_parent"
+        android:layout_height				= "wrap_content"
+        android:layout_below				= "@+id/outsideLow"
+        android:layout_alignParentLeft		= "true"
+        android:gravity						= "center_horizontal"
+        android:text						= "Outside" 
+        android:textSize				 	= "@dimen/text_normal"
+        android:textColor				 	= "@color/White"
+    />
+
+</RelativeLayout>

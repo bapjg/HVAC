@@ -35,7 +35,6 @@ import HVAC_Common.Ctrl_Temperatures.Request;
 public class Element_Heading 								extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
-	public View mView;
 	public TextView 											textLeft;
 	
 	public Element_Heading(Context context, String labelTextLeft) 

@@ -29,6 +29,7 @@ public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragmen
 	private Element_Heading										headingGeneral;
 	private Element_Standard									pump;
 	private Element_Standard									targetThermometer;
+	private Element_Gradient									gradient;
 	
 	private Element_Heading										headingGradient;
 	
@@ -75,8 +76,10 @@ public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragmen
     	insertPoint.addView(targetThermometer);
 
     	headingGradient																		= new Element_Heading(getActivity(), "Gradient");
+    	gradient				 															= new Element_Gradient(getActivity());
     	
     	insertPoint.addView(headingGradient);
+    	insertPoint.addView(gradient);
     	
     	headingMixer																		= new Element_Heading(getActivity(), "Mixer");
     	mixerThermometer																	= new Element_Standard(getActivity(),"Mixer Target Thermometer");

@@ -33,62 +33,52 @@ import HVAC_Common.*;
 import HVAC_Common.Ctrl_Temperatures.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Element_Standard 									extends 					LinearLayout
+public class Element_Gradient 									extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
-	public TextView 											textLeft;
-	public TextView 											textRight;
-	public String												units;
+	public TextView 											tempLow;
+	public TextView 											tempHigh;
+	public TextView 											outsideLow;
+	public TextView 											outsideHigh;
 	public Panel_0_Interface									listener;
 	
-	public Element_Standard(Context context, String labelTextLeft) 
+	public Element_Gradient(Context context) 
 	{
 		super(context);
 		this.inflater 																		= LayoutInflater.from(context);
-		this.units 																			= "";
 		inflater.inflate(R.layout.element_standard, this, true);
-		textLeft 																			= (TextView) this.findViewById(R.id.Left);
-		textRight 																			= (TextView) this.findViewById(R.id.Right);
-		textLeft.setText(labelTextLeft);
-	}
-	public Element_Standard(Context context, String labelTextLeft, String units) 
-	{
-		super(context);
-		this.inflater 																		= LayoutInflater.from(context);
-		this.units 																			= " " + units.trim();
-		inflater.inflate(R.layout.element_standard, this, true);
-		textLeft 																			= (TextView) this.findViewById(R.id.Left);
-		textRight 																			= (TextView) this.findViewById(R.id.Right);
-		textLeft.setText(labelTextLeft);
+		tempLow 																			= (TextView) this.findViewById(R.id.tempLow);
+		tempHigh 																			= (TextView) this.findViewById(R.id.tempHigh);
+		outsideLow 																			= (TextView) this.findViewById(R.id.outsideLow);
+		outsideHigh 																		= (TextView) this.findViewById(R.id.outsideHigh);
 	}
 	public void setTextLeft(String text)
 	{
-		textLeft.setText(text);
+//		textLeft.setText(text);
 	}
 	public void setTextRight(String text)
 	{
-		if (text != null)		textRight.setText(text);
-		else					textRight.setText("");
+//		if (text != null)		textRight.setText(text);
+//		else					textRight.setText("");
 	}
 	public void setTextRight(Integer number)
 	{
-		if (number != null)		textRight.setText(number + units);
-		else					textRight.setText(0 + units);
+//		if (number != null)		textRight.setText(number + units);
+//		else					textRight.setText(0 + units);
 	}
 	public void setTextRight(Float number)
 	{
-		if (number != null)		textRight.setText(number + units);
-		else					textRight.setText(0 + units);
+//		if (number != null)		textRight.setText(number + units);
+//		else					textRight.setText(0 + units);
 	}
 	public void setListener(OnClickListener listener)
 	{
-		this.listener																		= (Panel_0_Fragment) listener;
-		// TODO fix this
+//		this.listener																		= (Panel_0_Fragment) listener;
 //		textRight.setOnClickListener((OnClickListener) this);
 	}
 	public void onClick(View view)
 	{
-		listener.onPanelItemClick(this);
+//		listener.onPanelItemClick(this);
 	}
 
 }

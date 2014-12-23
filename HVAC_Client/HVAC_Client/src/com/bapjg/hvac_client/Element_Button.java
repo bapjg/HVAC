@@ -35,7 +35,6 @@ import HVAC_Common.Ctrl_Temperatures.Request;
 public class Element_Button 								extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
-	public View mView;
 	public Button 												button;
 	
 	public Element_Button(Context context, String labelTextLeft) 
