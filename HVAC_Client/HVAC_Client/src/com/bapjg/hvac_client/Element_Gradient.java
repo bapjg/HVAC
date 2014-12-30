@@ -27,13 +27,14 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Temperatures.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Element_Gradient 									extends 					LinearLayout
+public class Element_Gradient 									extends 					RelativeLayout
 {
 	public LayoutInflater 										inflater;
 	public TextView 											tempLow;
@@ -46,7 +47,7 @@ public class Element_Gradient 									extends 					LinearLayout
 	{
 		super(context);
 		this.inflater 																		= LayoutInflater.from(context);
-		inflater.inflate(R.layout.element_standard, this, true);
+		inflater.inflate(R.layout.element_gradient, this, true);
 		tempLow 																			= (TextView) this.findViewById(R.id.tempLow);
 		tempHigh 																			= (TextView) this.findViewById(R.id.tempHigh);
 		outsideLow 																			= (TextView) this.findViewById(R.id.outsideLow);

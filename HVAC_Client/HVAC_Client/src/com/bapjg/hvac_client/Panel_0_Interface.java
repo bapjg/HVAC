@@ -4,6 +4,6 @@ import HVAC_Common.*;
 
 public interface Panel_0_Interface 
 {
-	void onPanelItemClick(Element_Switch switchClicked);
-	void onPanelItemClick(Element_Standard textViewClicked);
+	void onPanelItemClick(Element_Switch 		switchClicked);
+	void onPanelItemClick(Element_Standard 		textViewClicked);
 }

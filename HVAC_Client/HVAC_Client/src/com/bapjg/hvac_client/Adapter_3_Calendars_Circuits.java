@@ -3,7 +3,7 @@ package com.bapjg.hvac_client;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bapjg.hvac_client.Adapter_5_Configuration_Relays.RowHolder;
+// import com.bapjg.hvac_client.Adapter_5_Configuration_Relays.RowHolder;
 
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;

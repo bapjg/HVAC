@@ -11,8 +11,8 @@
 >
     <ImageView
         android:id							= "@+id/imageView1"
-        android:layout_width				= "@dimen/graph_width"
-        android:layout_height				= "@dimen/graph_height"
+        android:layout_width				= "@dimen/gradient_graph_width"
+        android:layout_height				= "@dimen/gradient_graph_height"
         android:layout_alignParentTop		= "true"
         android:layout_centerHorizontal		= "true"
 		android:adjustViewBounds			= "true"
@@ -30,6 +30,8 @@
         android:text						= "gt1" 
         android:textSize				 	= "@dimen/text_normal"
         android:textColor				 	= "@color/Yellow"
+        android:paddingTop					= "@dimen/gradient_mixer_low_pad_top"
+        android:paddingRight				= "@dimen/gradient_mixer_pad_right"
     />
 
     <TextView
@@ -42,19 +44,22 @@
         android:text						= "gt2" 
         android:textSize				 	= "@dimen/text_normal"
         android:textColor				 	= "@color/Yellow"
+        android:paddingBottom				= "@dimen/gradient_mixer_high_pad_bottom"
+        android:paddingRight				= "@dimen/gradient_mixer_pad_right"
     />
     
     <TextView
         android:layout_width				= "match_parent"
         android:layout_height				= "wrap_content"
         android:layout_toLeftOf				= "@+id/imageView1"
-        android:layout_alignTop				= "@id/tempLow"
-        android:layout_alignBottom			= "@id/tempHigh"
+        android:layout_below				= "@id/tempLow"
+        android:layout_above				= "@id/tempHigh"
         android:layout_alignParentLeft		= "true"
         android:gravity						= "center_horizontal|center_vertical"
         android:text						= "Mixer Out" 
         android:textSize				 	= "@dimen/text_normal"
         android:textColor				 	= "@color/White"
+        android:paddingRight				= "@dimen/gradient_mixer_pad_right"
     />
     
     <TextView
@@ -67,6 +72,7 @@
         android:text						= "gt3"
         android:textSize				 	= "@dimen/text_normal"
         android:textColor				 	= "@color/Yellow"
+        android:paddingLeft					= "@dimen/gradient_outside_low_pad_left"
     />
 
     <TextView
@@ -78,6 +84,7 @@
         android:text						= "gt5"
         android:textSize				 	= "@dimen/text_normal"
         android:textColor				 	= "@color/Yellow"
+        android:paddingRight				= "@dimen/gradient_outside_high_pad_right"
     />
 
     <TextView

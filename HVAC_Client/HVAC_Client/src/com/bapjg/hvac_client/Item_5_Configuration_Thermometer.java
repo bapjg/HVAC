@@ -59,7 +59,7 @@ public class Item_5_Configuration_Thermometer 					extends 					Panel_0_Fragment
 	{
     	TextView 												thermoName 					= (TextView) itemView.findViewById(R.id.thermoName);
     	TextView 												address						= (TextView) itemView.findViewById(R.id.address);
-		TextView 												pidName				 			= (TextView) itemView.findViewById(R.id.pidName);
+		TextView 												pidName				 		= (TextView) itemView.findViewById(R.id.pidName);
  	
 		thermoName.setText										(itemData.name);
 		address.setText											(itemData.address);

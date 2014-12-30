@@ -1,0 +1,21 @@
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<RelativeLayout 	
+    xmlns:android								= "http://schemas.android.com/apk/res/android"
+    style										= "@style/AD_Linear_Top"
+>                                      	
+    <include layout							= "@layout/panel_0_base_title_section" />
+
+
+    <ScrollView 
+	    style								= "@style/AD_Scroll"
+	>
+        <LinearLayout
+	    	style							= "@style/AD_Panel_Insert"
+	    	android:id						= "@+id/base_insert_point"
+        >
+        </LinearLayout>
+	</ScrollView>
+	
+    <include layout							= "@layout/aa_include_item_buttons_ok_delete" />
+    
+</RelativeLayout>

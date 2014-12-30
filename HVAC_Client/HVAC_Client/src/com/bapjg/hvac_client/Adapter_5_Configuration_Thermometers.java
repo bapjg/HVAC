@@ -24,21 +24,51 @@ public class Adapter_5_Configuration_Thermometers 				extends 					Adapter_0_Abs
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
     	RowHolder 												row							= new RowHolder();
-    	Ctrl_Configuration.Thermometer							listItem					= (Ctrl_Configuration.Thermometer) listData.get(position);
-    	
-        adapterView 																		= inflater.inflate(R.layout.row_5_configuration_thermometer, null);
-        row.name 																			= (TextView) adapterView.findViewById(R.id.name);
-        row.address 																		= (TextView) adapterView.findViewById(R.id.address);
+    	Ctrl_Configuration.Thermometer								listItem				= (Ctrl_Configuration.Thermometer) listData.get(position);
+        adapterView 																		= inflater.inflate(R.layout.element_standard, null);
+        
+        row.leftText 																		= (TextView) adapterView.findViewById(R.id.Left);
+        row.rightText 																		= (TextView) adapterView.findViewById(R.id.Right);
         adapterView.setTag(row);
 
-        row.name.setText					(listItem.name);
-        row.address.setText					(listItem.address);
+        row.leftText.setText					(listItem.name);
+        row.rightText.setText					(listItem.address);
 
+        if (Global.deviceName == "lgPhone")
+        {
+        	((LinearLayout) adapterView.findViewById(R.id.element)).setOrientation(LinearLayout.VERTICAL);
+        }
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+//        adapterView 																		= inflater.inflate(R.layout.row_5_configuration_thermometer, null);
+//        row.name 																			= (TextView) adapterView.findViewById(R.id.name);
+//        row.address 																		= (TextView) adapterView.findViewById(R.id.address);
+//        adapterView.setTag(row);
+//
+//        row.name.setText					(listItem.name);
+//        row.address.setText					(listItem.address);
+
+        
+//    	adapterView = new Element_Standard(getContext(), listItem.name);
+//    	((Element_Standard) adapterView).setTextRight(listItem.relayNumber);
+//        
+        
+        
+        
+        
         return adapterView;
     }
     static class RowHolder 
     {
-    	TextView 												name;
-    	TextView 												address;
+    	TextView 												leftText;
+    	TextView 												rightText;
     }
 }

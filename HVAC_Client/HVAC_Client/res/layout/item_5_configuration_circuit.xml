@@ -57,8 +57,8 @@
 		    
 		        <ImageView
 		            android:id						="@+id/imageView1"
-		            android:layout_width			="@dimen/graph_width"
-		            android:layout_height			="@dimen/graph_height"
+		            android:layout_width			="@dimen/gradient_graph_width"
+		            android:layout_height			="@dimen/gradient_graph_height"
 		            android:layout_below			="@id/gradientTitle"
 		            android:layout_centerHorizontal	="true"
 					android:adjustViewBounds		="true"

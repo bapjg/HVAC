@@ -27,6 +27,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
@@ -34,6 +35,7 @@ import HVAC_Common.Ctrl_Temperatures.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Element_Standard 									extends 					LinearLayout
+																implements 					View.OnClickListener
 {
 	public LayoutInflater 										inflater;
 	public TextView 											textLeft;
@@ -83,13 +85,11 @@ public class Element_Standard 									extends 					LinearLayout
 	public void setListener(OnClickListener listener)
 	{
 		this.listener																		= (Panel_0_Fragment) listener;
-		// TODO fix this
-//		textRight.setOnClickListener((OnClickListener) this);
+		textRight.setOnClickListener(this);
 	}
 	public void onClick(View view)
 	{
 		listener.onPanelItemClick(this);
 	}
-
 }
 

@@ -21,22 +21,36 @@ public class Adapter_5_Configuration_PIDs 						extends 					Adapter_0_Abstract
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-    	RowHolder 												row;
+    	RowHolder 												row							= new RowHolder();
     	Ctrl_Configuration.PID_Data								listItem					= (Ctrl_Configuration.PID_Data) listData.get(position);
-
-        adapterView 																		= inflater.inflate(R.layout.row_5_configuration_pid, null);
-        row 																				= new RowHolder();
-        row.name 																			= (TextView) adapterView.findViewById(R.id.name);
-        row.depth 																			= (TextView) adapterView.findViewById(R.id.depth);
+        adapterView 																		= inflater.inflate(R.layout.element_standard, null);
+        
+        row.leftText 																		= (TextView) adapterView.findViewById(R.id.Left);
+        row.rightText 																		= (TextView) adapterView.findViewById(R.id.Right);
         adapterView.setTag(row);
-    	row.name.setText					(listItem.name);
-        row.depth.setText					(listItem.depth.toString());
+
+        row.leftText.setText					(listItem.name);
+        row.rightText.setText					(listItem.depth.toString());
+
+//        adapterView 																		= inflater.inflate(R.layout.row_5_configuration_pid, null);
+//        row 																				= new RowHolder();
+//        row.name 																			= (TextView) adapterView.findViewById(R.id.name);
+//        row.depth 																			= (TextView) adapterView.findViewById(R.id.depth);
+//        adapterView.setTag(row);
+//    	row.name.setText					(listItem.name);
+//        row.depth.setText					(listItem.depth.toString());
+
+
+        
+//    	adapterView = new Element_Standard(getContext(), listItem.name);
+//    	((Element_Standard) adapterView).setTextRight(listItem.relayNumber);
+        
         
         return adapterView;
     }
     static class RowHolder 
     {
-    	TextView 												name;
-    	TextView 												depth;
+    	TextView 												leftText;
+    	TextView 												rightText;
     }	
 }

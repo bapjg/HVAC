@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Toshiba -->
+    
+	<dimen name="gradient_graph_width">200dp</dimen>
+	<dimen name="gradient_graph_height">100dp</dimen>	
+	<dimen name="gradient_outside_low_pad_left">0dp</dimen>
+	<dimen name="gradient_outside_high_pad_right">0dp</dimen>
+	<dimen name="gradient_mixer_low_pad_top">0dp</dimen>
+	<dimen name="gradient_mixer_high_pad_bottom">0dp</dimen>
+	<dimen name="gradient_mixer_pad_right">3dp</dimen>
+				
+</resources>
