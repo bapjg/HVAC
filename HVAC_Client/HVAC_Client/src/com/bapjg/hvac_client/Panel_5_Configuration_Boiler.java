@@ -42,14 +42,14 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_5_configuration_boiler;
+//    	this.panelLayout																	= R.layout.panel_5_configuration_boiler;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_boiler, container, false);
 
     	if ( (Global.eRegConfiguration 			!= 	null)
         &&   (Global.eRegConfiguration.boiler 	!= 	null)	)
         {
-        	displayHeader();
+        	displayTitles("Configuration", "Boiler");
         	displayContents();
             setListens();
         }
@@ -77,14 +77,9 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	}
 	public void onDialogReturn()
 	{
-    	displayHeader();
+//    	displayHeader();
 		displayContents();
         setListens();
-	}
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Boiler");
 	}
 	public void displayContents()
 	{

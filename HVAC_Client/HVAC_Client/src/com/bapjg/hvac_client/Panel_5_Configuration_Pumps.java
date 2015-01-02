@@ -37,15 +37,23 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_5_configuration_pumps;
+//    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_pumps, container, false);
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons, container, false);
+
+    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	
+    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Pump Name", "Relay Name");
+    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	insertPoint.addView(listHeading);
+    	insertPoint.addView(listView);
+
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.pumpList != null))
         {
-        	displayHeader();
+        	displayTitles("Actions", "Pumps");
         	displayContents();
             setListens();
         }
@@ -79,7 +87,6 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 		{
 			Global.setStatusTCP("Ok");
 			Global.eRegConfiguration														= (Ctrl_Configuration.Data) result;
-			displayHeader();
 			displayContents();
 		}
 		else
@@ -87,11 +94,6 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 			Global.setStatusTCP("No Data");
 			Global.toaster("P5_Conf_Pump : Data NOTNOTNOT received", true);
 		}
-	}
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Pumps");
 	}
 	public void displayContents()
 	{

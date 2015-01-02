@@ -48,7 +48,7 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
         // Inflate the layout for this fragment
-    	this.panelLayout																	= R.layout.panal_0_standard;
+//    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
 
@@ -110,7 +110,6 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 		if (result instanceof Ctrl_Calendars.Data)
 		{
 //			Global.eRegConfiguration			 											= (Ctrl_Configuration.Data) result;
-			displayHeader();
 			displayContents();
 	        setListens();
  		}

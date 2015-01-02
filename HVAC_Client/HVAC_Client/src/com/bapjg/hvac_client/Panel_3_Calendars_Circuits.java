@@ -34,7 +34,7 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_3_calendars;
+//    	this.panelLayout																	= R.layout.panel_3_calendars;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_3_calendars, container, false);
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
@@ -42,7 +42,7 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.circuitList != null))
         {
-        	displayHeader();
+        	displayTitles("Calendars", this.circuitName);
         	displayContents();
         	setListens();
         }
@@ -52,11 +52,6 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
         }
         return panelView;
     }
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Calendars");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	(this.circuitName);
-	}
 	public void displayContents()
 	{
         AdapterView <Adapter_3_Calendars_Circuits>				adapterViewList				= (AdapterView <Adapter_3_Calendars_Circuits>) adapterView;

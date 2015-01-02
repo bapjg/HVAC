@@ -38,15 +38,23 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_5_configuration_relays;
+//    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_relays, container, false);
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons, container, false);
+
+    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	
+    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Relay Name", "Address");
+    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	insertPoint.addView(listHeading);
+    	insertPoint.addView(listView);
+
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.relayList != null))
         {
-        	displayHeader();
+        	displayTitles("Configuration", "Relays");
         	displayContents();
             setListens();
         }
@@ -57,11 +65,6 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
  
         return panelView;
     }
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Relays");
-	}
 	public void displayContents()
 	{
 	    AdapterView <Adapter_5_Configuration_Relays>			adapterViewList				= (AdapterView <Adapter_5_Configuration_Relays>) adapterView;

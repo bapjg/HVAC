@@ -39,13 +39,13 @@ public class Panel_4_Weather_Sun 									extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_4_weather_sun;
+//    	this.panelLayout																	= R.layout.panel_4_weather_sun;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_4_weather_sun, container, false);
 
 		if (Global.weatherForecast != null)
 		{
-			displayHeader();
+        	displayTitles("Weather", "Sunrise/Sunset");
 			displayContents();
 	        setListens();
 		}
@@ -55,11 +55,6 @@ public class Panel_4_Weather_Sun 									extends 					Panel_0_Fragment
 		}
         return panelView;
     }
-	public void displayHeader()
-	{	
-		((TextView) panelView.findViewById(R.id.title)).setText		("Weather");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Sunrise/Sunset");
-	}
 	public void displayContents()
 	{
 		if (getActivity() != null)			// The user has not changed the screen

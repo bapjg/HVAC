@@ -23,42 +23,48 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Temperatures.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Element_Heading 									extends 					LinearLayout
+public class Element_ListView 									extends 					LinearLayout
+																implements 					View.OnClickListener
 {
 	public LayoutInflater 										inflater;
-	public TextView 											textLeft;
-	public TextView 											textRight;
+	public Panel_0_Interface									listener;
+	public ListView												listView;
 	
-	public Element_Heading(Context context, String labelTextLeft) 
+	public Element_ListView(Context context, String labelTextLeft) 
 	{
 		super(context);
 		this.inflater 																		= LayoutInflater.from(context);
-		inflater.inflate(R.layout.element_heading, this, true);
-		textLeft 																			= (TextView) this.findViewById(R.id.HeadingLeft);
-		textLeft.setText(labelTextLeft);
-		textRight 																			= (TextView) this.findViewById(R.id.HeadingRight);
-		textRight.setText("");
-	}
-	public Element_Heading(Context context, String labelTextLeft, String labelTextRight) 
-	{
-		this(context, labelTextLeft);
-		textRight.setText(labelTextRight);
+		inflater.inflate(R.layout.aa_include_list_section, this, true);
 	}
 	public void setTextLeft(String text)
 	{
-		textLeft.setText(text);
 	}
 	public void setTextRight(String text)
 	{
-		textRight.setText(text);
+	}
+	public void setTextRight(Integer number)
+	{
+	}
+	public void setTextRight(Float number)
+	{
+	}
+	public void setListener(OnClickListener listener)
+	{
+	}
+	public void onClick(View view)
+	{
 	}
 }
+

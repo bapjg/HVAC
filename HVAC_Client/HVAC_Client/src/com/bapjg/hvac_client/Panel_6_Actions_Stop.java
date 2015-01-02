@@ -32,21 +32,16 @@ public class Panel_6_Actions_Stop 								extends 					Panel_0_Fragment
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_6_actions_stop;
+//    	this.panelLayout																	= R.layout.panel_6_actions_stop;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
 
-    	displayHeader();
+    	displayTitles("Actions", "Stop");
     	displayContents();
         setListens();
    	
         return panelView;
     }
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Actions");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Stop");
-	}
 	public void displayContents()
 	{
 	}

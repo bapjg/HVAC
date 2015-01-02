@@ -42,17 +42,23 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_5_configuration_thermometers;
+//    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_thermometers, container, false);
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons, container, false);
+
+    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	
+    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Thermometre", "Address");
+    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	insertPoint.addView(listHeading);
+    	insertPoint.addView(listView);
+
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
  
-        Data x = Global.eRegConfiguration;
-        
         if ((Global.eRegConfiguration 					!= null)
         &&  (Global.eRegConfiguration.thermometerList 	!= null))
         {
-        	displayHeader();
+        	displayTitles("Configuration", "Thermometres");
         	displayContents();
             setListens();
                     }
@@ -62,11 +68,6 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
         }
         return panelView;
     }
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Thermometres");
-	}
 	public void displayContents()
 	{
 	    AdapterView <Adapter_5_Configuration_Thermometers>		adapterViewList		= (AdapterView <Adapter_5_Configuration_Thermometers>) adapterView;

@@ -38,7 +38,7 @@ public class Panel_0_Fragment 									extends 					Fragment
 																							Dialog_Response,
 																							Panel_0_Interface
 {
-	public int													panelLayout;
+//	public int													panelLayout;
 	public ViewGroup											container;
 	public View													panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 	public View													adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
@@ -62,7 +62,6 @@ public class Panel_0_Fragment 									extends 					Fragment
 		((TextView) panelView.findViewById(R.id.title)).setText		(title);
 		((TextView) panelView.findViewById(R.id.subTitle)).setText	(subTitle);
 	}
-	public void displayHeader() 											{}
 	public void displayContents() 											{}
 	public void setListens()												{}
 	public void HTTP_Send(Ctrl__Abstract message)

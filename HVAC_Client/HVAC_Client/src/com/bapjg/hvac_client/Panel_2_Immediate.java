@@ -47,7 +47,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 //    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
 		this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
-    	displayHeader();
+    	displayTitles("Immediate", this.circuitName);
     	
     	Ctrl_Immediate.Request									taskListRequest				= new Ctrl_Immediate().new Request();
     	taskListRequest.circuitName															= this.circuitName;
@@ -102,11 +102,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		else if (result instanceof Ctrl__Abstract.Ack)						Global.toast("Command accepted", false);
 		else if (result instanceof Ctrl_Temperatures.NoConnection)			Global.toast("No Connection established yet", false);
 		else																Global.toast("A Nack has been returned", false);
-	}
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Immediate");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	(this.circuitName);
 	}
 	public void displayContents()
 	{
@@ -291,7 +286,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	@Override
 	public void onDialogReturn()
 	{
-		displayHeader();
 		displayContents();	
 		setListens();	
 	}

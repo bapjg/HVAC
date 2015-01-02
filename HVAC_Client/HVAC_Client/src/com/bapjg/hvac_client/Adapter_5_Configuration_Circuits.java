@@ -15,7 +15,6 @@ import HVAC_Common.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Adapter_5_Configuration_Circuits 					extends 					Adapter_0_Abstract
 {
- 
     public Adapter_5_Configuration_Circuits(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);

@@ -40,15 +40,23 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_5_configuration_circuits;
+//    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_circuits, container, false);
-        this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons, container, false);
+
+    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	
+    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Circuit Name");
+    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	insertPoint.addView(listHeading);
+    	insertPoint.addView(listView);
+
+    	this.adapterView																	= listView.findViewById(R.id.List_View);
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.circuitList != null))
         {
-        	displayHeader();
+        	displayTitles("Configuration", "Circuits");
         	displayContents();
             setListens();
         }
@@ -58,11 +66,6 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
         }
         return panelView;
     }
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Circuits");
-	}
 	public void displayContents()
 	{
 		AdapterView <Adapter_5_Configuration_Circuits>			adapterViewList				= (AdapterView <Adapter_5_Configuration_Circuits>) adapterView;
@@ -79,7 +82,6 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 		if (result instanceof Ctrl_Configuration.Data)
 		{
 			Global.eRegConfiguration			 											= (Ctrl_Configuration.Data) result;
-			displayHeader();
 			displayContents();
 			setListens();
 		}
@@ -96,7 +98,7 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     	Ctrl_Configuration.Circuit								itemData						= Global.eRegConfiguration.circuitList.get(position);
 
 //    	Item_5_Configuration_Circuit							itemFragment					= new Item_5_Configuration_Circuit(itemData);
-    	Panel_5_Configuration_Circuit_Item							itemFragment					= new Panel_5_Configuration_Circuit_Item(itemData);
+    	Panel_5_Configuration_Circuit_Item						itemFragment					= new Panel_5_Configuration_Circuit_Item(itemData);
 
     	FragmentTransaction 									fTransaction 					= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);

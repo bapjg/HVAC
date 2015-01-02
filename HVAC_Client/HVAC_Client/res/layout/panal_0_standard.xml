@@ -5,13 +5,17 @@
 >
     <include layout							= "@layout/panel_0_base_title_section" />
 
-
     <ScrollView 
 	    style								= "@style/AD_Scroll"
 	>
         <LinearLayout
-	    	style							= "@style/AD_Panel_Insert"
 	    	android:id						= "@+id/base_insert_point"
+        	android:background				= "@color/background"
+        	android:layout_width			= "match_parent"
+        	android:layout_height			= "wrap_content"
+        	android:paddingRight			= "10dp"
+       		android:paddingLeft				= "10dp"
+       		android:orientation				= "vertical"
         >
         </LinearLayout>
 	</ScrollView>

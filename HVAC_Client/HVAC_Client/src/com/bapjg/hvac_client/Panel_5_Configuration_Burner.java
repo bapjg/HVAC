@@ -44,14 +44,14 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_5_configuration_burner;
+//    	this.panelLayout																	= R.layout.panel_5_configuration_burner;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_burner, container, false);
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.boiler != null))
         {
-        	displayHeader();
+        	displayTitles("Configuration", "Burner");
         	displayContents();
             setListens();
         }
@@ -61,11 +61,6 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
         }
         return panelView;
     }
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Configuration");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Burner");
-	}
 	public void displayContents()
 	{
 		if (getActivity() != null)			// The user has not changed the screen

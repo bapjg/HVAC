@@ -37,7 +37,7 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panel_4_weather;
+//    	this.panelLayout																	= R.layout.panel_4_weather;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_4_weather, container, false);
 
@@ -45,7 +45,7 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
 		&&  (Global.weatherForecast.forecasts != null) 
 		&&  (Global.weatherForecast.forecasts.size() != 0) )
 		{
-			displayHeader();
+        	displayTitles("Weather", "this.when");
 			displayContents();
 	        setListens();
 		}
@@ -60,11 +60,6 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
 	{
 	}
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-	public void displayHeader()
-	{	
-		((TextView) panelView.findViewById(R.id.title)).setText		("Weather");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	(this.when);
-	}
 	public void displayContents()
 	{
 		((TextView) panelView.findViewById(R.id.dateTimeObtained)).setText(Global.displayTimeShort(Global.weatherForecast.dateTimeObtained));

@@ -54,10 +54,10 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.panelLayout																	= R.layout.panal_0_standard;
+//    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
 		this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
-    	displayHeader();
+    	displayTitles("Temperatures", "Readings");
     	TCP_Send(new Ctrl_Temperatures().new Request());
     	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
     	
@@ -72,6 +72,9 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     	tempRadiatorIn																		= new Element_Standard(getActivity(), "Radiator In");
     	tempBoilerIn 																		= new Element_Standard(getActivity(), "Boiler In");
 
+       	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Thermometer", "Temperature");
+
+    	insertPoint.addView(listHeading);
     	insertPoint.addView(tempBoiler);
     	insertPoint.addView(tempHW);
     	insertPoint.addView(tempOutside);
@@ -99,11 +102,6 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 		}
         setListens();
     } 
-	public void displayHeader()
-	{
-		((TextView) panelView.findViewById(R.id.title)).setText		("Temperatures");
-		((TextView) panelView.findViewById(R.id.subTitle)).setText	("Readings");
-	}
 	public void displayContents()
 	{
 		if (getActivity() != null)			// The user has not changed the screen
