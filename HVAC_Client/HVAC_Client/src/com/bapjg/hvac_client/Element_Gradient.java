@@ -53,29 +53,33 @@ public class Element_Gradient 									extends 					RelativeLayout
 		outsideLow 																			= (TextView) this.findViewById(R.id.outsideLow);
 		outsideHigh 																		= (TextView) this.findViewById(R.id.outsideHigh);
 	}
-	public void setTextLeft(String text)
+	public void setTempLow(Cmn_Temperature temperature)
 	{
-//		textLeft.setText(text);
+		if (temperature != null)		tempLow.setText(temperature.displayInteger());
+		else							tempLow.setText("");
 	}
-	public void setTextRight(String text)
+	public void setTempHigh(Cmn_Temperature temperature)
 	{
-//		if (text != null)		textRight.setText(text);
-//		else					textRight.setText("");
+		if (temperature != null)		tempHigh.setText(temperature.displayInteger());
+		else							tempHigh.setText("");
 	}
-	public void setTextRight(Integer number)
+	public void setOutsideLow(Cmn_Temperature temperature)
 	{
-//		if (number != null)		textRight.setText(number + units);
-//		else					textRight.setText(0 + units);
+		if (temperature != null)		outsideLow.setText(temperature.displayInteger());
+		else							outsideLow.setText("");
 	}
-	public void setTextRight(Float number)
+	public void setOutsideHigh(Cmn_Temperature temperature)
 	{
-//		if (number != null)		textRight.setText(number + units);
-//		else					textRight.setText(0 + units);
+		if (temperature != null)		outsideHigh.setText(temperature.displayInteger());
+		else							outsideHigh.setText("");
 	}
 	public void setListener(OnClickListener listener)
 	{
-//		this.listener																		= (Panel_0_Fragment) listener;
-//		textRight.setOnClickListener((OnClickListener) this);
+		this.listener																		= (Panel_0_Fragment) listener;
+		tempLow							.setOnClickListener(listener);
+		tempHigh						.setOnClickListener(listener);
+		outsideLow						.setOnClickListener(listener);
+		outsideHigh						.setOnClickListener(listener);
 	}
 	public void onClick(View view)
 	{

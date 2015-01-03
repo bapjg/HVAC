@@ -42,7 +42,7 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     {
 //    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons, container, false);
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons_addnew, container, false);
 
     	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
     	

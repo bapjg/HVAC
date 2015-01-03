@@ -54,7 +54,6 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
 		this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
     	displayTitles("Temperatures", "Readings");

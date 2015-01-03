@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -34,6 +35,9 @@ import HVAC_Common.*;
 public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 {		
 	public TCP_Task												task;
+	private Element_Standard									thermoName;
+	private Element_Standard									tempNeverExceed;
+	private Element_Standard									tempOverShoot;
 	
 	public Panel_5_Configuration_Boiler()
 	{
@@ -42,14 +46,23 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.panelLayout																	= R.layout.panel_5_configuration_boiler;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_boiler, container, false);
-
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
+    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	displayTitles("Configuration", "Boiler");
+    	
+    	thermoName																			= new Element_Standard(getActivity(), "Thermometer");
+    	tempNeverExceed																		= new Element_Standard(getActivity(), "Temp Never Exceed", "°C");
+    	tempOverShoot																		= new Element_Standard(getActivity(), "Temp Overshoot", "°C");
+    	
+    	insertPoint.addView(new Element_Heading(getActivity(), "Parameters"));
+    	insertPoint.addView(thermoName);
+    	insertPoint.addView(tempNeverExceed);
+    	insertPoint.addView(tempOverShoot);
+    	
     	if ( (Global.eRegConfiguration 			!= 	null)
         &&   (Global.eRegConfiguration.boiler 	!= 	null)	)
         {
-        	displayTitles("Configuration", "Boiler");
         	displayContents();
             setListens();
         }
@@ -62,13 +75,24 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
     }
 	public void onClick(View view)
 	{
-		if (view.getId() == R.id.tempNeverExceed)
+		if (view == thermoName)
+		{
+			Dialog_String_List dialogList 													= new Dialog_String_List(Global.eRegConfiguration.boiler.thermometer, Global.eRegConfiguration.boiler, null, this);
+     		dialogList.itemSelected															= Global.eRegConfiguration.boiler.thermometer;
+
+    		for (Ctrl_Configuration.Thermometer thermometer : Global.eRegConfiguration.thermometerList)
+    		{
+    			dialogList.items.add(thermometer.name);
+    		}
+    		dialogList.show(getFragmentManager(), "Dialog_List");
+		}
+		else if (view == tempNeverExceed)
 		{
 			Cmn_Temperature										temperature					= Global.eRegConfiguration.boiler.tempNeverExceed;
 			Dialog_Temperature									df 							= new Dialog_Temperature(temperature, 85, 100, this);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
-		else if (view.getId() == R.id.tempOverShoot)
+		else if (view == tempOverShoot)
 		{
 			Cmn_Temperature										temperature					= Global.eRegConfiguration.boiler.tempOverShoot;
 			Dialog_Temperature									df 							= new Dialog_Temperature(temperature, 10, 25, this);
@@ -77,21 +101,20 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	}
 	public void onDialogReturn()
 	{
-//    	displayHeader();
 		displayContents();
         setListens();
 	}
 	public void displayContents()
 	{
-		((TextView) panelView.findViewById(R.id.thermoName)).setText					(Global.eRegConfiguration.boiler.thermometer);
-		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setText				(Global.eRegConfiguration.boiler.tempNeverExceed.displayInteger());
-		((TextView) panelView.findViewById(R.id.tempOverShoot)).setText					(Global.eRegConfiguration.boiler.tempOverShoot.displayInteger());
-
+		thermoName			.setTextRight(Global.eRegConfiguration.boiler.thermometer);
+		tempNeverExceed		.setTextRight(Global.eRegConfiguration.boiler.tempNeverExceed.displayInteger());
+		tempOverShoot		.setTextRight(Global.eRegConfiguration.boiler.tempOverShoot.displayInteger());
 	}
 	public void setListens()
 	{
-		((TextView) panelView.findViewById(R.id.tempNeverExceed)).setOnClickListener	(this);
-		((TextView) panelView.findViewById(R.id.tempOverShoot)).setOnClickListener		(this);
+		thermoName			.setOnClickListener	(this);
+		tempNeverExceed		.setOnClickListener	(this);
+		tempOverShoot		.setOnClickListener	(this);
 	}
 }
 

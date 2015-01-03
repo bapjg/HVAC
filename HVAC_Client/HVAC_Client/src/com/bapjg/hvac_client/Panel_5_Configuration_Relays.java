@@ -38,9 +38,8 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons, container, false);
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons_addnew, container, false);
 
     	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
     	
@@ -81,7 +80,7 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 	{
     	Ctrl_Configuration.Relay								itemData					= Global.eRegConfiguration.relayList.get(position);
 
-    	Item_5_Configuration_Relay								itemFragment				= new Item_5_Configuration_Relay(itemData);
+    	Panel_5_Configuration_Relay_Item								itemFragment				= new Panel_5_Configuration_Relay_Item(itemData);
  
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);

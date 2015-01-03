@@ -39,8 +39,6 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        // Inflate the layout for this fragment
-//    	this.panelLayout																	= R.layout.panel_3_calendars_away;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_3_calendars_away, container, false);
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);

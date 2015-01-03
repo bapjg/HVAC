@@ -38,7 +38,6 @@ public class Panel_0_Fragment 									extends 					Fragment
 																							Dialog_Response,
 																							Panel_0_Interface
 {
-//	public int													panelLayout;
 	public ViewGroup											container;
 	public View													panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
 	public View													adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)

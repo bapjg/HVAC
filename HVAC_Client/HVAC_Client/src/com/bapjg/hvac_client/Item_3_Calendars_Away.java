@@ -40,17 +40,12 @@ public class Item_3_Calendars_Away 								extends 					Panel_0_Fragment
         View 													itemView					= inflater.inflate(R.layout.item_3_calendars_away, container, false);
         this.itemView																		= (ViewGroup) itemView;
 
-        displayHeader();
+    	displayTitles("Calendar", "Away Item");
         displayContents();
         setListens();
         
         return itemView;
     }
-	public void displayHeader()
-	{
-		((TextView) itemView.findViewById(R.id.title)).setText		("Calendar");
-		((TextView) itemView.findViewById(R.id.subTitle)).setText	("Away Item");
-	}
 	public void displayContents()
 	{
     	TextView 												dateStart 					= (TextView) itemView.findViewById(R.id.dateStart);

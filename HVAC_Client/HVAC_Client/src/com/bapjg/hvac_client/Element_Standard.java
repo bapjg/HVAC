@@ -77,6 +77,11 @@ public class Element_Standard 									extends 					LinearLayout
 		if (number != null)		textRight.setText(number + units);
 		else					textRight.setText(0 + units);
 	}
+	public void setTextRight(Long number)
+	{
+		if (number != null)		textRight.setText(number + units);
+		else					textRight.setText(0 + units);
+	}
 	public void setTextRight(Float number)
 	{
 		if (number != null)		textRight.setText(number + units);

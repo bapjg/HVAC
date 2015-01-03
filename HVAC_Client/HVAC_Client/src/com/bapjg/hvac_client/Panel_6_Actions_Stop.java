@@ -32,7 +32,6 @@ public class Panel_6_Actions_Stop 								extends 					Panel_0_Fragment
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.panelLayout																	= R.layout.panel_6_actions_stop;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
 

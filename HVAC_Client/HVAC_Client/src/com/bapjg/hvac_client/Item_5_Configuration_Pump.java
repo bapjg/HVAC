@@ -40,7 +40,7 @@ public class Item_5_Configuration_Pump 							extends 					Panel_0_Fragment
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.pumpList != null))
         {
-        	displayHeader();
+        	displayTitles("Configuration", "Pump");
         	displayContents();
             setListens();
         }
@@ -50,11 +50,6 @@ public class Item_5_Configuration_Pump 							extends 					Panel_0_Fragment
         }
         return itemView;
     }
-	public void displayHeader()
-	{
-		((TextView) itemView.findViewById(R.id.title)).setText		("Configuration");
-		((TextView) itemView.findViewById(R.id.subTitle)).setText	("Pump");
-	}
 	public void displayContents()
 	{
     	TextView 												pumpName 					= (TextView) itemView.findViewById(R.id.pumpName);

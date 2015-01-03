@@ -39,7 +39,7 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.circuitList != null))
         {
-        	displayHeader();
+        	displayTitles("Circuit Configuration", itemData.name);
         	displayContents();
             setListens();
         }
@@ -49,11 +49,6 @@ public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
         }
         return itemView;
     }
-	public void displayHeader()
-	{
-		((TextView) itemView.findViewById(R.id.title)).setText("Circuit Configuration");
-		((TextView) itemView.findViewById(R.id.subTitle)).setText(itemData.name);
-	}
 	public void displayContents()
 	{
     	// General :

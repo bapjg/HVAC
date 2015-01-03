@@ -38,7 +38,6 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//   	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
 
@@ -49,7 +48,7 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
     	switchFloor 																		= new Element_Switch(getActivity(), "Floor Pump");
     	switchRadiator 																		= new Element_Switch(getActivity(), "Radiator Pump");
 
-    	insertPoint.addView(new Element_Heading("", ""));
+    	insertPoint.addView(new Element_Heading(getActivity(), "Relay Name", "Position"));
     	insertPoint.addView(switchBurner);
     	insertPoint.addView(new Element_Filler(getActivity()));
     	insertPoint.addView(switchHotWater);

@@ -37,10 +37,10 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.panelLayout																	= R.layout.panal_0_standard;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons, container, false);
-
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons_addnew, container, false);
+    	displayTitles("Actions", "Pumps");
+    	
     	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
     	
     	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Pump Name", "Relay Name");
@@ -53,7 +53,6 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.pumpList != null))
         {
-        	displayTitles("Actions", "Pumps");
         	displayContents();
             setListens();
         }

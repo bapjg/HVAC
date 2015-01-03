@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -36,7 +37,11 @@ import HVAC_Common.*;
 public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment 
 {		
 	public TCP_Task												task;
-	
+	private Element_Standard									relayName;
+	private Element_Standard									fuelConsumption;
+	private Element_Standard									minutesPerLitre;
+	private Element_Standard									fuelConsumptionLitres;
+
 	public Panel_5_Configuration_Burner()
 	{
 		super();
@@ -44,14 +49,25 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.panelLayout																	= R.layout.panel_5_configuration_burner;
     	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_5_configuration_burner, container, false);
+    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
+    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	displayTitles("Configuration", "Burner");
+    	
+    	relayName																			= new Element_Standard(getActivity(), "Relay Name");
+    	fuelConsumption																		= new Element_Standard(getActivity(), "Fuel Consumed", "min");
+    	minutesPerLitre																		= new Element_Standard(getActivity(), "Minutes per Litre");
+    	fuelConsumptionLitres																= new Element_Standard(getActivity(), "Fuel Consumed", "l");
+
+    	insertPoint.addView(new Element_Heading(getActivity(), "Parameters"));
+    	insertPoint.addView(relayName);
+    	insertPoint.addView(fuelConsumption);
+    	insertPoint.addView(minutesPerLitre);
+    	insertPoint.addView(fuelConsumptionLitres);
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.boiler != null))
         {
-        	displayTitles("Configuration", "Burner");
         	displayContents();
             setListens();
         }
@@ -63,45 +79,68 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		if (getActivity() != null)			// The user has not changed the screen
+		Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
+
+		relayName				.setTextRight(burner.relay);
+		fuelConsumption			.setTextRight(burner.fuelConsumption/1000/60);
+		minutesPerLitre			.setTextRight(burner.minutesPerLitre);
+		
+		
+		if ((burner.minutesPerLitre != null) && (burner.minutesPerLitre != 0))
 		{
-			Integer												fuelMinutes					= 0;
-			Integer												fuelLitres					= 0;
-			String												fuelMinutesString			= "nought";
-			String												fuelLitresString			= "nought";
-			
-			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
-			
-			((TextView) panelView.findViewById(R.id.name)).setText							(burner.relay);
-			DecimalFormatSymbols 								decimalFormatsymbol			= DecimalFormatSymbols.getInstance();
-			decimalFormatsymbol.setGroupingSeparator(' ');
-			DecimalFormat 										decimalFormat 				= new DecimalFormat("###,###", decimalFormatsymbol);
-			// Present the fuel consumption in minutes
-			if (burner.fuelConsumption != null)
-			{
-				fuelMinutes																	= (int) (burner.fuelConsumption/1000/60);
-				fuelMinutesString															= decimalFormat.format(fuelMinutes);
-				fuelLitres																	= fuelMinutes/burner.minutesPerLitre;
-				fuelLitresString															= decimalFormat.format(fuelLitres);
-			}
-			else
-			{
-				fuelMinutesString															= "nought received";
-			}
-			((TextView) panelView.findViewById(R.id.fuelConsumption)).setText				(fuelMinutesString);
-			((TextView) panelView.findViewById(R.id.minutesPerLitre)).setText				(burner.minutesPerLitre.toString());
-			((TextView) panelView.findViewById(R.id.fuelConsumptionLitres)).setText			(fuelLitresString);
+			Long 												litresConsumed 				= burner.fuelConsumption/burner.minutesPerLitre;
+			fuelConsumptionLitres	.setTextRight(litresConsumed/1000/60);
 		}
+		else
+		{
+			fuelConsumptionLitres	.setTextRight(0);
+		}
+//
+//		
+//		
+//		
+//		
+//		
+//		
+//		if (getActivity() != null)			// The user has not changed the screen
+//		{
+//			Integer												fuelMinutes					= 0;
+//			Integer												fuelLitres					= 0;
+//			String												fuelMinutesString			= "nought";
+//			String												fuelLitresString			= "nought";
+//			
+//			
+//			((TextView) panelView.findViewById(R.id.name)).setText							(burner.relay);
+//			DecimalFormatSymbols 								decimalFormatsymbol			= DecimalFormatSymbols.getInstance();
+//			decimalFormatsymbol.setGroupingSeparator(' ');
+//			DecimalFormat 										decimalFormat 				= new DecimalFormat("###,###", decimalFormatsymbol);
+//			// Present the fuel consumption in minutes
+//			if (burner.fuelConsumption != null)
+//			{
+//				fuelMinutes																	= (int) (burner.fuelConsumption/1000/60);
+//				fuelMinutesString															= decimalFormat.format(fuelMinutes);
+//				fuelLitres																	= fuelMinutes/burner.minutesPerLitre;
+//				fuelLitresString															= decimalFormat.format(fuelLitres);
+//			}
+//			else
+//			{
+//				fuelMinutesString															= "nought received";
+//			}
+//			((TextView) panelView.findViewById(R.id.fuelConsumption)).setText				(fuelMinutesString);
+//			((TextView) panelView.findViewById(R.id.minutesPerLitre)).setText				(burner.minutesPerLitre.toString());
+//			((TextView) panelView.findViewById(R.id.fuelConsumptionLitres)).setText			(fuelLitresString);
+//		}
 	}
 	public void setListens()
 	{
-		((TextView) panelView.findViewById(R.id.name)).setOnClickListener(this);			// Relay name
-		((TextView) panelView.findViewById(R.id.minutesPerLitre)).setOnClickListener(this);	
+		relayName				.setOnClickListener(this);
+		fuelConsumption			.setOnClickListener(this);
+		minutesPerLitre			.setOnClickListener(this);
 	}
 	@Override
 	public void onClick(View clickedView) 
 	{
-		if (clickedView.getId() == R.id.name)
+		if (clickedView == relayName)
 		{
 			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
 
@@ -113,7 +152,7 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 			}
 			dialog.show(getFragmentManager(), "Relay_List");
 		}
-		else if (clickedView.getId() == R.id.minutesPerLitre)
+		else if (clickedView == minutesPerLitre)
 		{
 			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
 
@@ -121,9 +160,25 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 
 			dialog.show(getFragmentManager(), "Minutes_Per_Litre");
 		}
+		else if (clickedView == fuelConsumption)
+		{
+			Dialog_Yes_No												messageYesNo		= new Dialog_Yes_No("Reset Fuel Consumption to 0 ?", this, 99);		// Id = 99
+			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
+		}
+		else if (clickedView == fuelConsumptionLitres)
+		{
+		}
 	}
     public void onDialogReturn()
     {
+    	displayContents();
+    }
+    public void onDialogReturnWithId(int id)
+    {
+    	if (id == 99)
+    	{
+    		Global.eRegConfiguration.burner.fuelConsumption									= 0L;
+    	}
     	displayContents();
     }
 }

@@ -36,11 +36,11 @@ public class Item_5_Configuration_Thermometer 					extends 					Panel_0_Fragment
     {
         View 													itemView					= inflater.inflate(R.layout.item_5_configuration_thermometer, container, false);
         this.itemView																		= (ViewGroup) itemView;
+    	displayTitles("Configuration", "Thermometer");
  
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.thermometerList != null))
         {
-        	displayHeader();
         	displayContents();
             setListens();
         }
@@ -50,11 +50,6 @@ public class Item_5_Configuration_Thermometer 					extends 					Panel_0_Fragment
         }
         return itemView;
     }
-	public void displayHeader()
-	{
-		((TextView) itemView.findViewById(R.id.title)).setText		("Configuration");
-		((TextView) itemView.findViewById(R.id.subTitle)).setText	("Thermometre");
-	}
 	public void displayContents()
 	{
     	TextView 												thermoName 					= (TextView) itemView.findViewById(R.id.thermoName);

@@ -36,6 +36,8 @@ public class Dialog_String_List 								extends 					DialogFragment
 	public Dialog_String_List() 
     {
     }
+	// String Item is the initial value of the Item
+	// Object parentObject is the object of which item is a property
 	public Dialog_String_List(String item, Object parentObject, ArrayList <String> items, Dialog_Response callBack) 
     {
 		super();
@@ -64,7 +66,7 @@ public class Dialog_String_List 								extends 					DialogFragment
         builder.setTitle("Select an item");
         ((AdapterView<?>) adapterViewList).setOnItemClickListener((OnItemClickListener) this);        
        
-//        builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
+        builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
 
         return builder.create();
@@ -92,26 +94,26 @@ public class Dialog_String_List 								extends 					DialogFragment
     	
     	// TODO color the selected text
   	}
-//    public void buttonOk (DialogInterface dialog, int which)
-//    {
-//     	// Identify property within parent to modify
-//     	for (Field field : parent.getClass().getDeclaredFields())  
-//     	{
-//     		try 
-//     		{
-//				if (item == field.get(parent))
-//				{
-//					field.set(parent, itemSelected);
-//			    	callBack.onDialogReturn();
-//			    	dialog.dismiss();
-//				}
-//			} 
-//     		catch (Exception e)
-//     		{
-//     			// Do nothing as serialversionUID, this$ etc cause exceptions
-//     		} 
-//     	}
-//    }
+    public void buttonOk (DialogInterface dialog, int which)
+    {
+     	// Identify property within parent to modify
+     	for (Field field : parentObject.getClass().getDeclaredFields())  
+     	{
+     		try 
+     		{
+				if (item == field.get(parentObject))
+				{
+					field.set(parentObject, itemSelected);
+			    	callBack.onDialogReturn();
+			    	dialog.dismiss();
+				}
+			} 
+     		catch (Exception e)
+     		{
+     			// Do nothing as serialversionUID, this$ etc cause exceptions
+     		} 
+     	}
+    }
     public void buttonCancel (DialogInterface dialog, int which)
     {
     	dialog.dismiss();

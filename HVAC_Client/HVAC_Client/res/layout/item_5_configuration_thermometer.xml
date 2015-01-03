@@ -47,6 +47,6 @@
 	    </GridLayout>
 	</LinearLayout>
     
-    <include layout							= "@layout/aa_include_item_buttons_ok_delete" />
+    <include layout							= "@layout/aa_include_buttons_ok_delete" />
 
 </RelativeLayout>

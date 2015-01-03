@@ -44,17 +44,12 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     {
         this.itemView																		= inflater.inflate(R.layout.item_3_calendars_circuit, container, false);
 
-        displayHeader();
+    	displayTitles("Calendar", circuitName);
         displayContents();
         setListens();
         
         return itemView;
     }
-	public void displayHeader()
-	{
-		((TextView) itemView.findViewById(R.id.title)).setText		("Calendar");
-		((TextView) itemView.findViewById(R.id.subTitle)).setText	(circuitName);
-	}
 	public void displayContents()
 	{
 		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
@@ -208,7 +203,6 @@ public class Item_3_Calendars_Circuits 							extends 					Panel_0_Fragment
     }
     public void onDialogReturn()
     {
-        displayHeader();
         displayContents();
     }
 }

@@ -11,6 +11,6 @@
     	
     </LinearLayout>
                             					
-    <include layout									= "@layout/aa_include_panel_buttons_addnew" />
+    <include layout									= "@layout/aa_include_buttons_addnew" />
 
 </RelativeLayout>
