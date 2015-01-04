@@ -36,33 +36,33 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     	displayTitles("Temperatures", "Readings");
     	TCP_Send(new Ctrl_Temperatures().new Request());
     	
-    	tempBoiler 																			= new Element_Standard(getActivity(), "Boiler");
-    	tempHW 																				= new Element_Standard(getActivity(), "Hot Water");
-    	tempOutside 																		= new Element_Standard(getActivity(), "Outside");
-    	tempLivingRoom 																		= new Element_Standard(getActivity(), "Living Room");
-    	tempFloorOut 																		= new Element_Standard(getActivity(), "Floor Out");
-    	tempFloorIn 																		= new Element_Standard(getActivity(), "Floor In");
-    	tempBoilerOut 																		= new Element_Standard(getActivity(), "Boiler Out");
-    	tempRadiatorOut																		= new Element_Standard(getActivity(), "Radiator Out");
-    	tempRadiatorIn																		= new Element_Standard(getActivity(), "Radiator In");
-    	tempBoilerIn 																		= new Element_Standard(getActivity(), "Boiler In");
+    	tempBoiler 																			= new Element_Standard("Boiler");
+    	tempHW 																				= new Element_Standard("Hot Water");
+    	tempOutside 																		= new Element_Standard("Outside");
+    	tempLivingRoom 																		= new Element_Standard("Living Room");
+    	tempFloorOut 																		= new Element_Standard("Floor Out");
+    	tempFloorIn 																		= new Element_Standard("Floor In");
+    	tempBoilerOut 																		= new Element_Standard("Boiler Out");
+    	tempRadiatorOut																		= new Element_Standard("Radiator Out");
+    	tempRadiatorIn																		= new Element_Standard("Radiator In");
+    	tempBoilerIn 																		= new Element_Standard("Boiler In");
 
-       	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Thermometer", "Temperature");
+       	Element_Heading											listHeading					= new Element_Heading("Thermometer", "Temperature");
 
        	panelInsertPoint.addView(listHeading);
        	panelInsertPoint.addView(tempBoiler);
        	panelInsertPoint.addView(tempHW);
        	panelInsertPoint.addView(tempOutside);
-       	panelInsertPoint.addView(new Element_Filler(getActivity()));
+       	panelInsertPoint.addView(new Element_Filler());
        	panelInsertPoint.addView(tempLivingRoom);
-       	panelInsertPoint.addView(new Element_Filler(getActivity()));
+       	panelInsertPoint.addView(new Element_Filler());
        	panelInsertPoint.addView(tempFloorOut);
        	panelInsertPoint.addView(tempFloorIn);
        	panelInsertPoint.addView(tempBoilerOut);
-       	panelInsertPoint.addView(new Element_Filler(getActivity()));
+       	panelInsertPoint.addView(new Element_Filler());
        	panelInsertPoint.addView(tempRadiatorOut);
        	panelInsertPoint.addView(tempRadiatorIn);
-       	panelInsertPoint.addView(new Element_Filler(getActivity()));
+       	panelInsertPoint.addView(new Element_Filler());
        	panelInsertPoint.addView(tempBoilerIn);
           	
         return panelView;
@@ -84,20 +84,20 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 //			((TextView) panelView.findViewById(R.id.Date)).setText				(Global.displayDateShort	(temperatureData.dateTime));
 //			((TextView) panelView.findViewById(R.id.Time)).setText				(Global.displayTimeShort	(temperatureData.dateTime));
 //			
-			tempBoiler.setTextRight 	(Global.displayTemperature	(temperatureData.tempBoiler));
-			tempHW.setTextRight			(Global.displayTemperature	(temperatureData.tempHotWater));
-			tempOutside.setTextRight	(Global.displayTemperature	(temperatureData.tempOutside));
+			tempBoiler			.setTextRight 	(Global.displayTemperature	(temperatureData.tempBoiler));
+			tempHW				.setTextRight	(Global.displayTemperature	(temperatureData.tempHotWater));
+			tempOutside			.setTextRight	(Global.displayTemperature	(temperatureData.tempOutside));
 
-	    	tempLivingRoom.setTextRight(Global.displayTemperature	(temperatureData.tempLivingRoom));
+	    	tempLivingRoom		.setTextRight	(Global.displayTemperature	(temperatureData.tempLivingRoom));
 	    	
-	    	tempFloorOut.setTextRight(Global.displayTemperature		(temperatureData.tempFloorOut));
-	    	tempFloorIn.setTextRight(Global.displayTemperature		(temperatureData.tempFloorIn));
-	    	tempBoilerOut.setTextRight(Global.displayTemperature	(temperatureData.tempBoilerOut));
+	    	tempFloorOut		.setTextRight	(Global.displayTemperature	(temperatureData.tempFloorOut));
+	    	tempFloorIn			.setTextRight	(Global.displayTemperature	(temperatureData.tempFloorIn));
+	    	tempBoilerOut		.setTextRight	(Global.displayTemperature	(temperatureData.tempBoilerOut));
 	    	
-	    	tempRadiatorOut.setTextRight(Global.displayTemperature	(temperatureData.tempRadiatorOut));
-	    	tempRadiatorIn.setTextRight(Global.displayTemperature	(temperatureData.tempRadiatorIn));
+	    	tempRadiatorOut		.setTextRight	(Global.displayTemperature	(temperatureData.tempRadiatorOut));
+	    	tempRadiatorIn		.setTextRight	(Global.displayTemperature	(temperatureData.tempRadiatorIn));
 	    	
-	    	tempBoilerIn.setTextRight(Global.displayTemperature		(temperatureData.tempBoilerIn));
+	    	tempBoilerIn		.setTextRight	(Global.displayTemperature	(temperatureData.tempBoilerIn));
 		}
 	}
 	public void setListens()

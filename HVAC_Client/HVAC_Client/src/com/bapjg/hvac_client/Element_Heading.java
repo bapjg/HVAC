@@ -38,21 +38,40 @@ public class Element_Heading 									extends 					LinearLayout
 	public TextView 											textLeft;
 	public TextView 											textRight;
 	
-	public Element_Heading(Context context, String labelTextLeft) 
+	public Element_Heading(String labelTextLeft) 
 	{
-		super(context);
-		this.inflater 																		= LayoutInflater.from(context);
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_heading, this, true);
 		textLeft 																			= (TextView) this.findViewById(R.id.HeadingLeft);
 		textLeft.setText(labelTextLeft);
 		textRight 																			= (TextView) this.findViewById(R.id.HeadingRight);
 		textRight.setText("");
 	}
-	public Element_Heading(Context context, String labelTextLeft, String labelTextRight) 
+	public Element_Heading(String labelTextLeft, String labelTextRight) 
 	{
-		this(context, labelTextLeft);
+		this(labelTextLeft);
 		textRight.setText(labelTextRight);
 	}
+
+	
+	
+	
+//	public Element_Heading(Context context, String labelTextLeft) 
+//	{
+//		super(context);
+//		this.inflater 																		= LayoutInflater.from(context);
+//		inflater.inflate(R.layout.element_heading, this, true);
+//		textLeft 																			= (TextView) this.findViewById(R.id.HeadingLeft);
+//		textLeft.setText(labelTextLeft);
+//		textRight 																			= (TextView) this.findViewById(R.id.HeadingRight);
+//		textRight.setText("");
+//	}
+//	public Element_Heading(Context context, String labelTextLeft, String labelTextRight) 
+//	{
+//		this(context, labelTextLeft);
+//		textRight.setText(labelTextRight);
+//	}
 	public void setTextLeft(String text)
 	{
 		textLeft.setText(text);

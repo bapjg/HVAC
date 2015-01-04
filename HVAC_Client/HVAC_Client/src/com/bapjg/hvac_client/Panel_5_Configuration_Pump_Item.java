@@ -21,7 +21,7 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
-public class Panel_5_Configuration_Pump_Item 							extends 					Panel_0_Fragment
+public class Panel_5_Configuration_Pump_Item 					extends 					Panel_0_Fragment
 {		
 	private Ctrl_Configuration.Pump	 							itemData;
 
@@ -39,18 +39,19 @@ public class Panel_5_Configuration_Pump_Item 							extends 					Panel_0_Fragmen
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
     	
-    	headingGeneral			 															= new Element_Heading(getActivity(), "Parameters");
-    	pumpName																			= new Element_Standard(getActivity(), "Pump Name");
-    	relayName																			= new Element_Standard(getActivity(), "Relay number");
+    	headingGeneral			 															= new Element_Heading("Parameters");
+    	pumpName																			= new Element_Standard("Pump Name");
+    	relayName																			= new Element_Standard("Relay number");
     	
     	panelInsertPoint.addView(headingGeneral);
     	panelInsertPoint.addView(pumpName);
     	panelInsertPoint.addView(relayName);
 
+    	displayTitles("Configuration", "Pump");
+    	
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.pumpList != null))
         {
-        	displayTitles("Configuration", "Pump");
         	displayContents();
             setListens();
         }
@@ -71,7 +72,7 @@ public class Panel_5_Configuration_Pump_Item 							extends 					Panel_0_Fragmen
     	{
     		pumpName						.setListener(this);
     		relayName						.setListener(this);
-   	}
+    	}
 	}
     @Override
 	public void onElementClick(View clickedView) 

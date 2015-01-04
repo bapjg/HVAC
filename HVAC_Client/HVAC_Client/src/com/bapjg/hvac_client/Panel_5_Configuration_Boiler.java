@@ -48,11 +48,11 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
     {
     	displayTitles("Configuration", "Boiler");
     	
-    	thermoName																			= new Element_Standard(getActivity(), "Thermometer");
-    	tempNeverExceed																		= new Element_Standard(getActivity(), "Temp Never Exceed", "°C");
-    	tempOverShoot																		= new Element_Standard(getActivity(), "Temp Overshoot", "°C");
+    	thermoName																			= new Element_Standard("Thermometer");
+    	tempNeverExceed																		= new Element_Standard("Temp Never Exceed", "°C");
+    	tempOverShoot																		= new Element_Standard("Temp Overshoot", "°C");
     	
-    	panelInsertPoint.addView(new Element_Heading(getActivity(), "Parameters"));
+    	panelInsertPoint.addView(new Element_Heading( "Parameters"));
     	panelInsertPoint.addView(thermoName);
     	panelInsertPoint.addView(tempNeverExceed);
     	panelInsertPoint.addView(tempOverShoot);
@@ -70,7 +70,7 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 
     	return panelView;
     }
-	public void onClick(View view)
+	public void onElementClick(View view)
 	{
 		if (view == thermoName)
 		{
@@ -109,9 +109,9 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-		thermoName			.setOnClickListener	(this);
-		tempNeverExceed		.setOnClickListener	(this);
-		tempOverShoot		.setOnClickListener	(this);
+		thermoName			.setListener	(this);
+		tempNeverExceed		.setListener	(this);
+		tempOverShoot		.setListener	(this);
 	}
 }
 

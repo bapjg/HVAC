@@ -43,10 +43,10 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
 
-    	headingGeneral			 															= new Element_Heading(getActivity(), "Parameters");
-    	relayName																			= new Element_Standard(getActivity(), "Relay Name");
-    	relayBank																			= new Element_Standard(getActivity(), "Bank number");
-    	relayNumber																			= new Element_Standard(getActivity(), "Address");
+    	headingGeneral			 															= new Element_Heading("Parameters");
+    	relayName																			= new Element_Standard("Relay Name");
+    	relayBank																			= new Element_Standard("Bank number");
+    	relayNumber																			= new Element_Standard("Address");
     	
     	panelInsertPoint.addView(headingGeneral);
     	panelInsertPoint.addView(relayName);

@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -19,10 +18,12 @@ public class Element_Switch 									extends 					LinearLayout
 	public Switch		 										onOffSwitch;
 	public Panel_0_Interface									listener;
 	
-	public Element_Switch(Context context, String labelTextLeft) 
+//	public Element_Switch(Context context, String labelTextLeft) 
+//	{
+	public Element_Switch(String labelTextLeft) 
 	{
-		super(context);
-		this.inflater 																		= LayoutInflater.from(context);
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_switch, this, true);
 		onOffSwitch																			= (Switch) this.findViewById(R.id.Switch);
 		textLeft 																			= (TextView) this.findViewById(R.id.Left);

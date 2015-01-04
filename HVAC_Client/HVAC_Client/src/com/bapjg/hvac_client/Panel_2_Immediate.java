@@ -55,17 +55,17 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     	
     	LinearLayout insertPoint = (LinearLayout) panelView.findViewById(R.id.base_insert_point);
 
-    	plannedTimeStart 																	= new Element_Standard(getActivity(), "Time Start");
-    	plannedTimeEnd																		= new Element_Standard(getActivity(), "Time End");
-    	plannedTargetTemp																	= new Element_Standard(getActivity(), "Temperature");
-    	plannedStopOnObjective 																= new Element_CheckBox(getActivity(), "Stop On Objective");
-    	timeStart																			= new Element_Standard(getActivity(), "Time Start");
-    	timeEnd                 															= new Element_Standard(getActivity(), "Time End");
-    	targetTemp          	   															= new Element_Standard(getActivity(), "Temperature");
-    	stopOnObjective         															= new Element_CheckBox(getActivity(), "Stop On Objective");
-    	buttonStartStop																		= new Element_Button(getActivity(), "");
-    	plannedHeading																		= new Element_Heading(getActivity(), "Planned Events");
-    	actionHeading																		= new Element_Heading(getActivity(), "Select Parameters");
+    	plannedTimeStart 																	= new Element_Standard("Time Start");
+    	plannedTimeEnd																		= new Element_Standard("Time End");
+    	plannedTargetTemp																	= new Element_Standard("Temperature");
+    	plannedStopOnObjective 																= new Element_CheckBox("Stop On Objective");
+    	timeStart																			= new Element_Standard("Time Start");
+    	timeEnd                 															= new Element_Standard("Time End");
+    	targetTemp          	   															= new Element_Standard("Temperature");
+    	stopOnObjective         															= new Element_CheckBox("Stop On Objective");
+    	buttonStartStop																		= new Element_Button("");
+    	plannedHeading																		= new Element_Heading("Planned Events");
+    	actionHeading																		= new Element_Heading("Select Parameters");
 
     	insertPoint.addView(plannedHeading);
     	insertPoint.addView(plannedTimeStart);

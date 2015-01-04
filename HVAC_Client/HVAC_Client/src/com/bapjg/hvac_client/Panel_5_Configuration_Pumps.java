@@ -40,14 +40,14 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
 
-    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Pump Name", "Relay Name");
-    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	Element_Heading											listHeading					= new Element_Heading("Pump Name", "Relay Name");
+    	Element_ListView										listView 					= new Element_ListView("Henry");
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);
 
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
-    	displayTitles("Actions", "Pumps");
     	
+        displayTitles("Actions", "Pumps");
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.pumpList != null))

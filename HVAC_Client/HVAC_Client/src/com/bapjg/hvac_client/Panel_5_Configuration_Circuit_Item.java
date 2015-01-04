@@ -61,28 +61,28 @@ public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragmen
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
     	
-    	headingGeneral			 															= new Element_Heading(getActivity(), "General");
-    	pump			 																	= new Element_Standard(getActivity(), "Pump");
-    	targetThermometer																	= new Element_Standard(getActivity(), "Target Thermometer");
-    	circuitType																			= new Element_Standard(getActivity(), "Circuit Type");
+    	headingGeneral			 															= new Element_Heading("General");
+    	pump			 																	= new Element_Standard("Pump");
+    	targetThermometer																	= new Element_Standard("Target Thermometer");
+    	circuitType																			= new Element_Standard("Circuit Type");
     	panelInsertPoint.addView(headingGeneral);
     	panelInsertPoint.addView(pump);
     	panelInsertPoint.addView(targetThermometer);
     	panelInsertPoint.addView(circuitType);
 
-    	headingGradient																		= new Element_Heading(getActivity(), "Gradient");
-    	gradient				 															= new Element_Gradient(getActivity());
+    	headingGradient																		= new Element_Heading("Gradient");
+    	gradient				 															= new Element_Gradient();
     	
     	panelInsertPoint.addView(headingGradient);
     	panelInsertPoint.addView(gradient);
     	
-    	headingMixer																		= new Element_Heading(getActivity(), "Mixer");
-    	mixerThermometer																	= new Element_Standard(getActivity(),"Mixer Target Thermometer");
-    	swingTime																			= new Element_Standard(getActivity(),"Swing Time", "s");
-    	swingProportionMin																	= new Element_Standard(getActivity(),"Swing Min", "%");
-    	swingProportionMax																	= new Element_Standard(getActivity(),"Swing Max", "%");
-    	relayUp																				= new Element_Standard(getActivity(),"Relay Up");
-    	relayDown																			= new Element_Standard(getActivity(),"Relay Down");
+    	headingMixer																		= new Element_Heading("Mixer");
+    	mixerThermometer																	= new Element_Standard("Mixer Target Thermometer");
+    	swingTime																			= new Element_Standard("Swing Time", "s");
+    	swingProportionMin																	= new Element_Standard("Swing Min", "%");
+    	swingProportionMax																	= new Element_Standard("Swing Max", "%");
+    	relayUp																				= new Element_Standard("Relay Up");
+    	relayDown																			= new Element_Standard("Relay Down");
     	
     	panelInsertPoint.addView(headingMixer);
     	panelInsertPoint.addView(mixerThermometer);
@@ -92,14 +92,14 @@ public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragmen
     	panelInsertPoint.addView(relayUp);
     	panelInsertPoint.addView(relayDown);
     	
-    	headingPID																			= new Element_Heading(getActivity(), "PID Data");
-    	pidThermometer																		= new Element_Standard(getActivity(),"PID Thermometer");
-    	gainP																				= new Element_Standard(getActivity(),"Proportional Gain", "s/°C");
-    	timeD																				= new Element_Standard(getActivity(),"Differential Time Constant", "s");
-    	timeI																				= new Element_Standard(getActivity(),"Integration Time Constant", "s");
-    	timeDelay																			= new Element_Standard(getActivity(),"Time Delay after Decision", "s");
-    	timeProjection																		= new Element_Standard(getActivity(),"Decision Time Projection", "s");
-    	marginProjection																	= new Element_Standard(getActivity(),"Temperature Error Margin", "°C");
+    	headingPID																			= new Element_Heading("PID Data");
+    	pidThermometer																		= new Element_Standard("PID Thermometer");
+    	gainP																				= new Element_Standard("Proportional Gain", "s/°C");
+    	timeD																				= new Element_Standard("Differential Time Constant", "s");
+    	timeI																				= new Element_Standard("Integration Time Constant", "s");
+    	timeDelay																			= new Element_Standard("Time Delay after Decision", "s");
+    	timeProjection																		= new Element_Standard("Decision Time Projection", "s");
+    	marginProjection																	= new Element_Standard("Temperature Error Margin", "°C");
     	
     	panelInsertPoint.addView(headingPID);
     	panelInsertPoint.addView(pidThermometer);
@@ -218,7 +218,7 @@ public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragmen
     	}
 	}
     @Override
-	public void onClick(View clickedView) 
+	public void onElementClick(View clickedView) 
 	{
     	Dialog_Temperature										dialogTemperature;
     	if (clickedView == pump)

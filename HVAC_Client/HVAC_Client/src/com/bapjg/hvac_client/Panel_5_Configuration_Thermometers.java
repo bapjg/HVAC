@@ -45,17 +45,18 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
     	
-    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Thermometre", "Address");
-    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	Element_Heading											listHeading					= new Element_Heading("Thermometre", "Address");
+    	Element_ListView										listView 					= new Element_ListView("Henry");
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);
 
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
- 
+
+    	displayTitles("Configuration", "Thermometres");
+    	
         if ((Global.eRegConfiguration 					!= null)
         &&  (Global.eRegConfiguration.thermometerList 	!= null))
         {
-        	displayTitles("Configuration", "Thermometres");
         	displayContents();
             setListens();
         }

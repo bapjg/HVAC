@@ -41,8 +41,8 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
 
-    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Start", "End");
-    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	Element_Heading											listHeading					= new Element_Heading("Start", "End");
+    	Element_ListView										listView 					= new Element_ListView("Henry");
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);
 

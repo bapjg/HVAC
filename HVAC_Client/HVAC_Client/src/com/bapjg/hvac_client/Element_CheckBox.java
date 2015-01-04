@@ -20,10 +20,12 @@ public class Element_CheckBox 									extends 					LinearLayout
 	public TextView 											textLeft;
 	public Panel_0_Interface									listener;
 	
-	public Element_CheckBox(Context context, String labelTextLeft) 
+//	public Element_CheckBox(Context context, String labelTextLeft) 
+//	{
+	public Element_CheckBox(String labelTextLeft) 
 	{
-		super(context);
-		this.inflater 																		= LayoutInflater.from(context);
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_checkbox, this, true);
 		checkBox 																			= (CheckBox) this.findViewById(R.id.CheckBox);
 		textLeft 																			= (TextView) this.findViewById(R.id.Left);

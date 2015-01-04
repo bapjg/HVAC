@@ -42,15 +42,16 @@ public class Panel_5_Configuration_PID_Item 					extends 					Panel_0_Fragment
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
     	
-    	headingGeneral			 															= new Element_Heading(getActivity(), "Parameters");
-    	pidName																				= new Element_Standard(getActivity(), "PID Name");
-    	depth																				= new Element_Standard(getActivity(), "Depth");
-    	sampleIncrement																		= new Element_Standard(getActivity(), "Sample Increment", "s");
+    	headingGeneral			 															= new Element_Heading("Parameters");
+    	pidName																				= new Element_Standard("PID Name");
+    	depth																				= new Element_Standard("Depth");
+    	sampleIncrement																		= new Element_Standard("Sample Increment", "s");
     	
     	panelInsertPoint.addView(headingGeneral);
     	panelInsertPoint.addView(pidName);
     	panelInsertPoint.addView(depth);
     	panelInsertPoint.addView(sampleIncrement);
+    	
     	displayTitles("Configuration", "PID");
     	
     	if ((Global.eRegConfiguration != null)
@@ -75,15 +76,14 @@ public class Panel_5_Configuration_PID_Item 					extends 					Panel_0_Fragment
 	{
     	if (itemData != null)
     	{
-    		pidName				.setOnClickListener(this);
-    		depth				.setOnClickListener(this);
-    		sampleIncrement		.setOnClickListener(this);
+    		pidName				.setListener(this);
+    		depth				.setListener(this);
+    		sampleIncrement		.setListener(this);
     	}
 	}
     @Override
-	public void onClick(View clickedView) 
+	public void onElementClick(View clickedView) 
 	{
-    	super.onClick(clickedView);
     	Dialog_Text												dialogText;
     	Dialog_Integer											dialogInteger;
     	Dialog_String_List										dialogList;
@@ -120,7 +120,6 @@ public class Panel_5_Configuration_PID_Item 					extends 					Panel_0_Fragment
     	Global.eRegConfiguration.pidList.remove(itemData);
     	getFragmentManager().popBackStackImmediate();
     }
-
     public void onDialogReturn()
     {
     	displayContents();

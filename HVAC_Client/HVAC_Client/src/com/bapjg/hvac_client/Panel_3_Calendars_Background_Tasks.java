@@ -54,12 +54,12 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 
     	LinearLayout insertPoint = (LinearLayout) panelView.findViewById(R.id.base_insert_point);
 
-    	pumpCleanTime 																		= new Element_Standard(getActivity(), "Pump Clean Time");
-    	pumpCleanDuration 																	= new Element_Standard(getActivity(), "Pump Clean Duration");
-    	antiFreeze 																			= new Element_Standard(getActivity(), "Anti Freeze");
-    	summerTemp 																			= new Element_Standard(getActivity(), "Summer Temperature");
-    	winterTemp 																			= new Element_Standard(getActivity(), "Winter Temperature");
-    	sunshineInfluence 																	= new Element_Standard(getActivity(), "Sunshine Influence");
+    	pumpCleanTime 																		= new Element_Standard("Pump Clean Time");
+    	pumpCleanDuration 																	= new Element_Standard("Pump Clean Duration");
+    	antiFreeze 																			= new Element_Standard("Anti Freeze");
+    	summerTemp 																			= new Element_Standard("Summer Temperature");
+    	winterTemp 																			= new Element_Standard("Winter Temperature");
+    	sunshineInfluence 																	= new Element_Standard("Sunshine Influence");
 
     	insertPoint.addView(pumpCleanTime);
     	insertPoint.addView(pumpCleanDuration);

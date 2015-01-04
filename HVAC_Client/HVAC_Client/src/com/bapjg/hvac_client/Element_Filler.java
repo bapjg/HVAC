@@ -32,15 +32,24 @@ import HVAC_Common.*;
 import HVAC_Common.Ctrl_Temperatures.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Element_Filler 								extends 					LinearLayout
+public class Element_Filler 									extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
 	
-	public Element_Filler(Context context) 
+	public Element_Filler() 
 	{
-		super(context);
-		this.inflater 																		= LayoutInflater.from(context);
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_filler, this, true);
 	}
+
+	
+	
+//	public Element_Filler(Context context) 
+//	{
+//		super(Global.actContext);
+//		this.inflater 																		= LayoutInflater.from(Global.actContext);
+//		inflater.inflate(R.layout.element_filler, this, true);
+//	}
 }
 

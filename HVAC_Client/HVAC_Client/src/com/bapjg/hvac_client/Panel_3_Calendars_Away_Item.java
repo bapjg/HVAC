@@ -44,11 +44,11 @@ public class Panel_3_Calendars_Away_Item 						extends 					Panel_0_Fragment
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
 
-    	headingGeneral			 															= new Element_Heading(getActivity(), "Parameters");
-    	dateStart																			= new Element_Standard(getActivity(), "Thermometer Name");
-    	dateEnd																			= new Element_Standard(getActivity(), "Thermometer Name");
-    	timeStart																			= new Element_Standard(getActivity(), "Thermometer Name");
-    	timeEnd																			= new Element_Standard(getActivity(), "Thermometer Name");
+    	headingGeneral			 															= new Element_Heading("Parameters");
+    	dateStart																			= new Element_Standard("Thermometer Name");
+    	dateEnd																				= new Element_Standard("Thermometer Name");
+    	timeStart																			= new Element_Standard("Thermometer Name");
+    	timeEnd																				= new Element_Standard("Thermometer Name");
 
     	panelInsertPoint.addView(headingGeneral);
     	panelInsertPoint.addView(dateStart);

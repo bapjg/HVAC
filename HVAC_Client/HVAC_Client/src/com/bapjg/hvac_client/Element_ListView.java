@@ -42,10 +42,12 @@ public class Element_ListView 									extends 					LinearLayout
 	public Panel_0_Interface									listener;
 	public ListView												listView;
 	
-	public Element_ListView(Context context, String labelTextLeft) 
+//	public Element_ListView(Context context, String labelTextLeft) 
+//	{
+	public Element_ListView(String labelTextLeft) 
 	{
-		super(context);
-		this.inflater 																		= LayoutInflater.from(context);
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.aa_include_list_section, this, true);
 	}
 	public void setTextLeft(String text)

@@ -52,12 +52,12 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
     	super.panelInitialise(inflater, container, savedInstanceState);
     	displayTitles("Configuration", "Burner");
     	
-    	relayName																			= new Element_Standard(getActivity(), "Relay Name");
-    	fuelConsumption																		= new Element_Standard(getActivity(), "Fuel Consumed", "min");
-    	minutesPerLitre																		= new Element_Standard(getActivity(), "Minutes per Litre");
-    	fuelConsumptionLitres																= new Element_Standard(getActivity(), "Fuel Consumed", "l");
+    	relayName																			= new Element_Standard("Relay Name");
+    	fuelConsumption																		= new Element_Standard("Fuel Consumed", "min");
+    	minutesPerLitre																		= new Element_Standard("Minutes per Litre");
+    	fuelConsumptionLitres																= new Element_Standard("Fuel Consumed", "l");
 
-    	panelInsertPoint.addView(new Element_Heading(getActivity(), "Parameters"));
+    	panelInsertPoint.addView(new Element_Heading( "Parameters"));
     	panelInsertPoint.addView(relayName);
     	panelInsertPoint.addView(fuelConsumption);
     	panelInsertPoint.addView(minutesPerLitre);
@@ -82,7 +82,6 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 		relayName				.setTextRight(burner.relay);
 		fuelConsumption			.setTextRight(burner.fuelConsumption/1000/60);
 		minutesPerLitre			.setTextRight(burner.minutesPerLitre);
-		
 		
 		if ((burner.minutesPerLitre != null) && (burner.minutesPerLitre != 0))
 		{
@@ -131,12 +130,12 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-		relayName				.setOnClickListener(this);
-		fuelConsumption			.setOnClickListener(this);
-		minutesPerLitre			.setOnClickListener(this);
+		relayName				.setListener(this);
+		fuelConsumption			.setListener(this);
+		minutesPerLitre			.setListener(this);
 	}
 	@Override
-	public void onClick(View clickedView) 
+	public void onElementClick(View clickedView) 
 	{
 		if (clickedView == relayName)
 		{

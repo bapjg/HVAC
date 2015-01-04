@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -21,10 +20,12 @@ public class Element_Gradient 									extends 					RelativeLayout
 	public TextView 											outsideHigh;
 	public Panel_0_Interface									listener;
 	
-	public Element_Gradient(Context context) 
+//	public Element_Gradient(Context context) 
+//	{
+	public Element_Gradient() 
 	{
-		super(context);
-		this.inflater 																		= LayoutInflater.from(context);
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_gradient, this, true);
 		tempLow 																			= (TextView) this.findViewById(R.id.tempLow);
 		tempHigh 																			= (TextView) this.findViewById(R.id.tempHigh);
@@ -33,23 +34,23 @@ public class Element_Gradient 									extends 					RelativeLayout
 	}
 	public void setTempLow(Cmn_Temperature temperature)
 	{
-		if (temperature != null)		tempLow.setText(temperature.displayInteger());
-		else							tempLow.setText("");
+		if (temperature != null)								tempLow.setText(temperature.displayInteger());
+		else													tempLow.setText("");
 	}
 	public void setTempHigh(Cmn_Temperature temperature)
 	{
-		if (temperature != null)		tempHigh.setText(temperature.displayInteger());
-		else							tempHigh.setText("");
+		if (temperature != null)								tempHigh.setText(temperature.displayInteger());
+		else													tempHigh.setText("");
 	}
 	public void setOutsideLow(Cmn_Temperature temperature)
 	{
-		if (temperature != null)		outsideLow.setText(temperature.displayInteger());
-		else							outsideLow.setText("");
+		if (temperature != null)								outsideLow.setText(temperature.displayInteger());
+		else													outsideLow.setText("");
 	}
 	public void setOutsideHigh(Cmn_Temperature temperature)
 	{
-		if (temperature != null)		outsideHigh.setText(temperature.displayInteger());
-		else							outsideHigh.setText("");
+		if (temperature != null)								outsideHigh.setText(temperature.displayInteger());
+		else													outsideHigh.setText("");
 	}
 	public void setListener(OnClickListener listener)
 	{

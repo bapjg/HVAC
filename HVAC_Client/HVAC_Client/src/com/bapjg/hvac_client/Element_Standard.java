@@ -30,26 +30,36 @@ public class Element_Standard 									extends 					LinearLayout
 		textRight 																			= (TextView) this.findViewById(R.id.Right);
 		textLeft.setText(labelTextLeft);
 	}
-	public Element_Standard(Context context, String labelTextLeft) 
+	public Element_Standard(String labelTextLeft, String units) 
 	{
-		super(context);
-		this.inflater 																		= LayoutInflater.from(context);
-		this.units 																			= "";
-		inflater.inflate(R.layout.element_standard, this, true);
-		textLeft 																			= (TextView) this.findViewById(R.id.Left);
-		textRight 																			= (TextView) this.findViewById(R.id.Right);
-		textLeft.setText(labelTextLeft);
-	}
-	public Element_Standard(Context context, String labelTextLeft, String units) 
-	{
-		super(context);
-		this.inflater 																		= LayoutInflater.from(context);
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		this.units 																			= " " + units.trim();
 		inflater.inflate(R.layout.element_standard, this, true);
 		textLeft 																			= (TextView) this.findViewById(R.id.Left);
 		textRight 																			= (TextView) this.findViewById(R.id.Right);
 		textLeft.setText(labelTextLeft);
 	}
+//	public Element_Standard(Context context, String labelTextLeft) 
+//	{
+//		super(context);
+//		this.inflater 																		= LayoutInflater.from(context);
+//		this.units 																			= "";
+//		inflater.inflate(R.layout.element_standard, this, true);
+//		textLeft 																			= (TextView) this.findViewById(R.id.Left);
+//		textRight 																			= (TextView) this.findViewById(R.id.Right);
+//		textLeft.setText(labelTextLeft);
+//	}
+//	public Element_Standard(Context context, String labelTextLeft, String units) 
+//	{
+//		super(context);
+//		this.inflater 																		= LayoutInflater.from(context);
+//		this.units 																			= " " + units.trim();
+//		inflater.inflate(R.layout.element_standard, this, true);
+//		textLeft 																			= (TextView) this.findViewById(R.id.Left);
+//		textRight 																			= (TextView) this.findViewById(R.id.Right);
+//		textLeft.setText(labelTextLeft);
+//	}
 	public void setTextLeft(String text)
 	{
 		textLeft.setText(text);

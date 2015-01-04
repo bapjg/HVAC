@@ -44,17 +44,18 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 
     	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
     	
-    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Relay Name", "Address");
-    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	Element_Heading											listHeading					= new Element_Heading("Relay Name", "Address");
+    	Element_ListView										listView 					= new Element_ListView("Henry");
     	insertPoint.addView(listHeading);
     	insertPoint.addView(listView);
 
+    	displayTitles("Configuration", "Relays");
+    	
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.relayList != null))
         {
-        	displayTitles("Configuration", "Relays");
         	displayContents();
             setListens();
         }

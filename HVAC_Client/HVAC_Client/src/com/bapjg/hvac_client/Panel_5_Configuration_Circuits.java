@@ -43,8 +43,8 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
     	
-    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Circuit Name");
-    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	Element_Heading											listHeading					= new Element_Heading("Circuit Name");
+    	Element_ListView										listView 					= new Element_ListView("Henry");
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);
 
@@ -91,7 +91,6 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     {
     	Ctrl_Configuration.Circuit								itemData						= Global.eRegConfiguration.circuitList.get(position);
 
-//    	Item_5_Configuration_Circuit							itemFragment					= new Item_5_Configuration_Circuit(itemData);
     	Panel_5_Configuration_Circuit_Item						itemFragment					= new Panel_5_Configuration_Circuit_Item(itemData);
 
     	FragmentTransaction 									fTransaction 					= getActivity().getFragmentManager().beginTransaction();

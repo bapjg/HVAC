@@ -43,14 +43,14 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
 
     	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
 
-    	switchBurner 																		= new Element_Switch(getActivity(), "Burner Relay");
-    	switchHotWater 																		= new Element_Switch(getActivity(), "Hot Water Pump");
-    	switchFloor 																		= new Element_Switch(getActivity(), "Floor Pump");
-    	switchRadiator 																		= new Element_Switch(getActivity(), "Radiator Pump");
+    	switchBurner 																		= new Element_Switch("Burner Relay");
+    	switchHotWater 																		= new Element_Switch("Hot Water Pump");
+    	switchFloor 																		= new Element_Switch("Floor Pump");
+    	switchRadiator 																		= new Element_Switch("Radiator Pump");
 
-    	insertPoint.addView(new Element_Heading(getActivity(), "Relay Name", "Position"));
+    	insertPoint.addView(new Element_Heading("Relay Name", "Position"));
     	insertPoint.addView(switchBurner);
-    	insertPoint.addView(new Element_Filler(getActivity()));
+    	insertPoint.addView(new Element_Filler());
     	insertPoint.addView(switchHotWater);
     	insertPoint.addView(switchFloor);
     	insertPoint.addView(switchRadiator);

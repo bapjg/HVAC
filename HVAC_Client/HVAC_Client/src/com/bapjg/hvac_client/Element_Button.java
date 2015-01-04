@@ -20,10 +20,12 @@ public class Element_Button 									extends 					LinearLayout
 	public Button 												button;
 	public Panel_0_Interface									listener;
 	
-	public Element_Button(Context context, String caption) 
+//	public Element_Button(Context context, String caption) 
+//	{
+	public Element_Button(String caption) 
 	{
-		super(context);
-		this.inflater 																		= LayoutInflater.from(context);
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_button, this, true);
 		button 																				= (Button) this.findViewById(R.id.Button);
 		button.setText(caption);

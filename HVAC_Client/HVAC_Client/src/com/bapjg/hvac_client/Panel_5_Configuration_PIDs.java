@@ -40,17 +40,18 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
     	
-    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "PID Name", "Depth");
-    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	Element_Heading											listHeading					= new Element_Heading("PID Name", "Depth");
+    	Element_ListView										listView 					= new Element_ListView("Henry");
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);
 
     	this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
 
+    	displayTitles("Configuration", "PIDs");
+
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.pidList != null))
         {
-        	displayTitles("Configuration", "PIDs");
         	displayContents();
             setListens();
         }

@@ -44,10 +44,10 @@ public class Panel_5_Configuration_Thermometer_Item 			extends 					Panel_0_Frag
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
 
-    	headingGeneral			 															= new Element_Heading(getActivity(), "Parameters");
-    	thermoName																			= new Element_Standard(getActivity(), "Thermometer Name");
-    	address																				= new Element_Standard(getActivity(), "Address");
-    	pidName																				= new Element_Standard(getActivity(), "PID Name");
+    	headingGeneral			 															= new Element_Heading("Parameters");
+    	thermoName																			= new Element_Standard("Thermometer Name");
+    	address																				= new Element_Standard("Address");
+    	pidName																				= new Element_Standard("PID Name");
     	
     	panelInsertPoint.addView(headingGeneral);
     	panelInsertPoint.addView(thermoName);
@@ -86,7 +86,6 @@ public class Panel_5_Configuration_Thermometer_Item 			extends 					Panel_0_Frag
     @Override
 	public void onElementClick(View clickedView) 
 	{
-    	super.onClick(clickedView);
        	Dialog_Text												dialogText;
     	Dialog_Integer											dialogInteger;
     	Dialog_String_List										dialogList;
