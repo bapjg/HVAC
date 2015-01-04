@@ -1,0 +1,29 @@
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<LinearLayout  
+    xmlns:android							= "http://schemas.android.com/apk/res/android"
+    style									= "@style/AD_Linear_Top"
+>
+    <include layout							= "@layout/panel_0_base_title_section" />
+
+    <LinearLayout
+ 		android:id							= "@+id/base_insert_point"
+    	android:background					= "@color/background"
+    	android:layout_width				= "match_parent"
+    	android:layout_height				= "wrap_content"
+    	android:paddingRight				= "10dp"
+   		android:paddingLeft					= "10dp"
+   		android:orientation					= "vertical"
+    >
+
+    	<TextView
+    	    android:text="Ok"
+    	    android:textColor="@color/Yellow"
+    	    android:textSize="12dp" 
+    	        	android:layout_width				= "match_parent"
+    	android:layout_height				= "wrap_content"
+    	    >
+
+    	</TextView>
+    </LinearLayout>
+
+</LinearLayout>

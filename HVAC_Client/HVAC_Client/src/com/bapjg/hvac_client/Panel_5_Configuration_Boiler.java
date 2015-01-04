@@ -46,6 +46,7 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
+    	super.panelInitialise(inflater, container, savedInstanceState);
     	displayTitles("Configuration", "Boiler");
     	
     	thermoName																			= new Element_Standard("Thermometer");

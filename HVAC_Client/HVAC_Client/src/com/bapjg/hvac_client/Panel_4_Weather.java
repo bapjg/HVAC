@@ -45,7 +45,7 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
 		&&  (Global.weatherForecast.forecasts != null) 
 		&&  (Global.weatherForecast.forecasts.size() != 0) )
 		{
-        	displayTitles("Weather", "this.when");
+        	displayTitles("Weather", this.when);
 			displayContents();
 	        setListens();
 		}

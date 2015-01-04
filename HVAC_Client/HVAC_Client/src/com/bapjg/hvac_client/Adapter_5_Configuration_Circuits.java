@@ -33,30 +33,7 @@ public class Adapter_5_Configuration_Circuits 					extends 					Adapter_0_Abstra
         row.leftText.setText					(listItem.name);
         row.rightText.setText					("");
         
-//      row.address 																		= (TextView) adapterView.findViewById(R.id.Right);
-//        adapterView 																		= inflater.inflate(R.layout.row_5_configuration_circuit, null);
-//							
-//        row.name 																			= (TextView) adapterView.findViewById(R.id.name);
-//        row.gradient 																		= (CheckBox) adapterView.findViewById(R.id.gradient);
-//        row.mixer	 																		= (CheckBox) adapterView.findViewById(R.id.mixer);
-//        adapterView.setTag(row);
-//
-//        row.name.setText					(listItem.name);
-//       	row.gradient.setChecked				( ! (listItem.tempGradient 	== null));
-//       	row.mixer.setChecked				( ! (listItem.mixer 		== null));
-
-       	
-       	
-//        row.address.setText					(listItem.address);
-
-       	
-//    	adapterView = new Element_Standard(getContext(), listItem.name);
-//    	((Element_Standard) adapterView).setTextRight(listItem.relayNumber);
-       	
-       	
-       	
-       	
-        return adapterView;
+       return adapterView;
     }
     static class RowHolder 
     {

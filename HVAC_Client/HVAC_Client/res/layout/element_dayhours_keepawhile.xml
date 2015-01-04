@@ -1,0 +1,83 @@
+<?xml version		= "1.0" encoding		= "utf-8"?>
+<RelativeLayout 
+    xmlns:android							= "http://schemas.android.com/apk/res/android"
+    style									= "@style/AD_Linear_Top"
+>
+    <include layout							= "@layout/panel_0_base_title_section"/>
+
+	<LinearLayout style						= "@style/AD_Linear_V_with_Buttons" >  
+     
+	    <TextView
+	        android:id							= "@+id/days"
+	        style								= "@style/AD_Text"
+	        android:layout_width				= "match_parent"
+	        android:layout_height				= "50dp"
+	        android:gravity						= "center_horizontal"
+	        android:layout_gravity				= "center_horizontal"
+		/>                          			
+	    <LinearLayout
+	        android:id							= "@+id/daySlots"
+			style								= "@style/AD_Linear_H"
+		>                           			
+		    <TextView android:id				= "@+id/day_1" android:text	= "1" android:gravity	= "center_horizontal|center_vertical" style	= "@style/AD_Text" android:layout_weight	= "2" android:layout_height	= "match_parent"/>
+		    <TextView android:id				= "@+id/day_2" android:text	= "2" android:gravity	= "center_horizontal|center_vertical" style	= "@style/AD_Text" android:layout_weight	= "2" android:layout_height	= "match_parent"/>
+		    <TextView android:id				= "@+id/day_3" android:text	= "3" android:gravity	= "center_horizontal|center_vertical" style	= "@style/AD_Text" android:layout_weight	= "2" android:layout_height	= "match_parent"/>
+		    <TextView android:id				= "@+id/day_4" android:text	= "4" android:gravity	= "center_horizontal|center_vertical" style	= "@style/AD_Text" android:layout_weight	= "2" android:layout_height	= "match_parent"/>
+		    <TextView android:id				= "@+id/day_5" android:text	= "5" android:gravity	= "center_horizontal|center_vertical" style	= "@style/AD_Text" android:layout_weight	= "2" android:layout_height	= "match_parent"/>
+		    <TextView android:id				= "@+id/empty" android:text	= "" 														  style	= "@style/AD_Text" android:layout_weight	= "1" />
+		    <TextView android:id				= "@+id/day_6" android:text	= "6" android:gravity	= "center_horizontal|center_vertical" style	= "@style/AD_Text" android:layout_weight	= "2" android:layout_height	= "match_parent"/>
+		    <TextView android:id				= "@+id/day_7" android:text	= "7" android:gravity	= "center_horizontal|center_vertical" style	= "@style/AD_Text" android:layout_weight	= "2" android:layout_height	= "match_parent"/>
+	    </LinearLayout> 
+                			
+	    <GridLayout
+	        android:id							= "@+id/LinearLayout01"
+			style								= "@style/AD_Grid"
+			android:columnCount					= "2"
+		>                           			
+	        <TextView
+	            style							= "@style/AD_Text"
+	            android:text					= "Time Start"
+			/>                          		
+	        <TextView
+	            android:id						= "@+id/timeStart"
+	            style							= "@style/AD_Data"
+	            android:text					= "Start"
+			/>
+	 
+	        <TextView
+	            style							= "@style/AD_Text"
+	            android:text					= "Time End"
+			/>                          		
+	
+	        <TextView
+	            android:id						= "@+id/timeEnd"
+	            style							= "@style/AD_Data"
+	            android:text					= "End"
+			/>
+	
+	        <TextView
+	            style							= "@style/AD_Text"
+	            android:text					= "Temp Objective"
+			/>                          		
+	
+	        <TextView
+	            android:id						= "@+id/tempObjective"
+	            style							= "@style/AD_Data"
+	            android:text					= "Temp"
+			/>
+	        <TextView
+	            style							= "@style/AD_Text"
+	            android:text					= "Stop On Objective"
+			/>                      		
+	
+	        <CheckBox
+	            android:id						= "@+id/stopOnObjective"
+	            style							= "@style/AD_Data"
+			/>
+	
+	    </GridLayout>
+    </LinearLayout>
+	<include layout								= "@layout/aa_include_buttons_ok_delete" />
+
+
+</RelativeLayout>

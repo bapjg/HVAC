@@ -32,20 +32,6 @@ public class Adapter_5_Configuration_PIDs 						extends 					Adapter_0_Abstract
         row.leftText.setText					(listItem.name);
         row.rightText.setText					(listItem.depth.toString());
 
-//        adapterView 																		= inflater.inflate(R.layout.row_5_configuration_pid, null);
-//        row 																				= new RowHolder();
-//        row.name 																			= (TextView) adapterView.findViewById(R.id.name);
-//        row.depth 																			= (TextView) adapterView.findViewById(R.id.depth);
-//        adapterView.setTag(row);
-//    	row.name.setText					(listItem.name);
-//        row.depth.setText					(listItem.depth.toString());
-
-
-        
-//    	adapterView = new Element_Standard(getContext(), listItem.name);
-//    	((Element_Standard) adapterView).setTextRight(listItem.relayNumber);
-        
-        
         return adapterView;
     }
     static class RowHolder 

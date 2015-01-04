@@ -34,26 +34,23 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
 
 	public Panel_6_Actions_Relays()
 	{
-		super();
+		super("Standard");
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
-
-    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	super.panelInitialise(inflater, container, savedInstanceState);
 
     	switchBurner 																		= new Element_Switch("Burner Relay");
     	switchHotWater 																		= new Element_Switch("Hot Water Pump");
     	switchFloor 																		= new Element_Switch("Floor Pump");
     	switchRadiator 																		= new Element_Switch("Radiator Pump");
 
-    	insertPoint.addView(new Element_Heading("Relay Name", "Position"));
-    	insertPoint.addView(switchBurner);
-    	insertPoint.addView(new Element_Filler());
-    	insertPoint.addView(switchHotWater);
-    	insertPoint.addView(switchFloor);
-    	insertPoint.addView(switchRadiator);
+    	panelInsertPoint.addView(new Element_Heading("Relay Name", "Swtich"));
+    	panelInsertPoint.addView(switchBurner);
+    	panelInsertPoint.addView(new Element_Filler());
+    	panelInsertPoint.addView(switchHotWater);
+    	panelInsertPoint.addView(switchFloor);
+    	panelInsertPoint.addView(switchRadiator);
     	
     	TCP_Send(new Ctrl_Actions_Relays().new Request());
         
