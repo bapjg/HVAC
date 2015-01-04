@@ -1,9 +1,10 @@
 package com.bapjg.hvac_client;
 
-import HVAC_Common.*;
+import android.view.View;
 
 public interface Panel_0_Interface 
 {
-	void onPanelItemClick(Element_Switch 		switchClicked);
-	void onPanelItemClick(Element_Standard 		textViewClicked);
+//	void onElementClick(Element_Switch 		switchClicked);
+//	void onElementClick(Element_Standard 	textViewClicked);
+	void onElementClick(View 				textViewClicked);
 }

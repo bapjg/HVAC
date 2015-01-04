@@ -41,24 +41,21 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	
 	public Panel_5_Configuration_Boiler()
 	{
-		super();
+		super("Standard");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
-    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
     	displayTitles("Configuration", "Boiler");
     	
     	thermoName																			= new Element_Standard(getActivity(), "Thermometer");
     	tempNeverExceed																		= new Element_Standard(getActivity(), "Temp Never Exceed", "°C");
     	tempOverShoot																		= new Element_Standard(getActivity(), "Temp Overshoot", "°C");
     	
-    	insertPoint.addView(new Element_Heading(getActivity(), "Parameters"));
-    	insertPoint.addView(thermoName);
-    	insertPoint.addView(tempNeverExceed);
-    	insertPoint.addView(tempOverShoot);
+    	panelInsertPoint.addView(new Element_Heading(getActivity(), "Parameters"));
+    	panelInsertPoint.addView(thermoName);
+    	panelInsertPoint.addView(tempNeverExceed);
+    	panelInsertPoint.addView(tempOverShoot);
     	
     	if ( (Global.eRegConfiguration 			!= 	null)
         &&   (Global.eRegConfiguration.boiler 	!= 	null)	)

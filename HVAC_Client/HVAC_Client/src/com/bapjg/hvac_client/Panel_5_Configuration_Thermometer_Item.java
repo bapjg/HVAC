@@ -1,6 +1,7 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Common.*;
+import HVAC_Common.Ctrl_Configuration.Thermometer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -21,19 +22,19 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
+public class Panel_5_Configuration_Thermometer_Item 			extends 					Panel_0_Fragment
 {		
-	private Ctrl_Configuration.Relay	 						itemData;
-	
+	private Ctrl_Configuration.Thermometer 						itemData;
+
 	private Element_Heading										headingGeneral;
-	private Element_Standard									relayName;
-	private Element_Standard									relayBank;
-	private Element_Standard									relayNumber;
+	private Element_Standard									thermoName;
+	private Element_Standard									address;
+	private Element_Standard									pidName;
 
 	private View												buttonOk;
 	private View												buttonDelete;
-	
-	public Panel_5_Configuration_Relay_Item(Ctrl_Configuration.Relay itemData)
+
+	public Panel_5_Configuration_Thermometer_Item(Ctrl_Configuration.Thermometer itemData)
 	{
 		super("Ok_Delete");
 		this.itemData																		= itemData;
@@ -44,19 +45,19 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     	super.panelInitialise(inflater, container, savedInstanceState);
 
     	headingGeneral			 															= new Element_Heading(getActivity(), "Parameters");
-    	relayName																			= new Element_Standard(getActivity(), "Relay Name");
-    	relayBank																			= new Element_Standard(getActivity(), "Bank number");
-    	relayNumber																			= new Element_Standard(getActivity(), "Address");
+    	thermoName																			= new Element_Standard(getActivity(), "Thermometer Name");
+    	address																				= new Element_Standard(getActivity(), "Address");
+    	pidName																				= new Element_Standard(getActivity(), "PID Name");
     	
     	panelInsertPoint.addView(headingGeneral);
-    	panelInsertPoint.addView(relayName);
-    	panelInsertPoint.addView(relayBank);
-    	panelInsertPoint.addView(relayNumber);
+    	panelInsertPoint.addView(thermoName);
+    	panelInsertPoint.addView(address);
+    	panelInsertPoint.addView(pidName);
         
-    	displayTitles("Configuration", "Relay");      
-        
+    	displayTitles("Configuration", "Thermometer");      
+    	
         if ((Global.eRegConfiguration != null)
-        &&  (Global.eRegConfiguration.relayList != null))
+        &&  (Global.eRegConfiguration.thermometerList != null))
         {
         	displayContents();
             setListens();
@@ -69,44 +70,49 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		relayName							.setTextRight	(itemData.name);
-		relayBank							.setTextRight	(itemData.relayBank);
-		relayNumber							.setTextRight	(itemData.relayNumber);
+		thermoName						.setTextRight		(itemData.name);
+		address							.setTextRight		(itemData.address);
+		pidName							.setTextRight		(itemData.pidName);
    	}
 	public void setListens()
 	{
     	if (itemData != null)
     	{
-    		relayName						.setListener(this);
-			relayBank						.setListener(this);
-			relayNumber						.setListener(this);
+    		thermoName					.setListener(this);
+    		address						.setListener(this);
+    		pidName						.setListener(this);
     	}
 	}
     @Override
 	public void onElementClick(View clickedView) 
 	{
-    	Dialog_Text												dialogText;
+    	super.onClick(clickedView);
+       	Dialog_Text												dialogText;
     	Dialog_Integer											dialogInteger;
     	Dialog_String_List										dialogList;
-
-    	if (clickedView == relayName)
-    	{
-			dialogText 																		= new Dialog_Text(itemData.name, itemData, "Enter Relay Name", this);
+     	if (clickedView == thermoName)
+     	{
+			// TODO Do Text Dialog
+			dialogText 																		= new Dialog_Text(itemData.name, itemData, "Enter Thermometer Name", this);
 			dialogText.show(getFragmentManager(), "Dialog_Text");
-    	}
-    	else if (clickedView == relayBank)
-    	{
-     		dialogInteger 																	= new Dialog_Integer(itemData.relayBank, itemData, 0, 4, "Enter Relay Bank", this);
-     		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
-    	}
-    	else if (clickedView == relayNumber)
-    	{
-     		dialogInteger 																	= new Dialog_Integer(itemData.relayNumber, itemData, 0, 8, "Enter Relay Number", this);
-     		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
-    	}
-    	
-    	
-	}
+     	}
+     	else if (clickedView == address)
+     	{
+     		dialogText 																		= new Dialog_Text(itemData.address, itemData, "Enter Thermometer Address", this);
+     		dialogText.show(getFragmentManager(), "Dialog_Text");
+     	}
+     	else if (clickedView == pidName)
+     	{
+     		dialogList 																		= new Dialog_String_List(itemData.pidName, itemData, null, this);
+     		dialogList.itemSelected															= "";
+
+    		for (Ctrl_Configuration.PID_Data pid : Global.eRegConfiguration.pidList)
+    		{
+    			dialogList.items.add(pid.name);
+    		}
+    		dialogList.show(getFragmentManager(), "Dialog_List");
+     	}
+ 	}
     @Override
  	public void onPanelButtonOk()
     {
@@ -121,9 +127,10 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     @Override
  	public void onPanelButtonDelete()
     {
-    	Global.eRegConfiguration.relayList.remove(itemData);
+    	Global.eRegConfiguration.thermometerList.remove(itemData);
     	getFragmentManager().popBackStackImmediate();
     }
+    @Override
     public void onDialogReturn()
     {
     	displayContents();

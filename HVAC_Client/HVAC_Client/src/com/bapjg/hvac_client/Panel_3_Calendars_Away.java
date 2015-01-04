@@ -34,19 +34,25 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
 {
 	public Panel_3_Calendars_Away()
 	{
-		super();
+		super("Add");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_3_calendars_away, container, false);
+    	super.panelInitialise(inflater, container, savedInstanceState);
+
+    	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Start", "End");
+    	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
+    	panelInsertPoint.addView(listHeading);
+    	panelInsertPoint.addView(listView);
+
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
 
+    	displayTitles("Calendars", "Away List");
+    	
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.awayList != null))
         {
-        	displayTitles("Calendars", "Away List");
         	displayContents();
         	setListens();
         }
@@ -81,29 +87,26 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
 			Global.toaster("P5_Cals_Away : Data NOTNOTNOT received", true);
 		}
 	}
-	public void onClick(View clickedView)
-	{
-		if (clickedView.getId() == R.id.buttonAdd)
-		{
-			Ctrl_Calendars.Away									itemNew						= new Ctrl_Calendars().new Away();
-			
-			itemNew.dateTimeStart															= Global.now();
-			itemNew.dateTimeEnd																= Global.now() + 24 * 60 * 60 * 1000L;
-			
-			Global.eRegCalendars.awayList.add(itemNew);
-			displayContents();
-			setListens();
-		}
-	}
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
     	Ctrl_Calendars.Away										itemData					= Global.eRegCalendars.awayList.get(position);
 		
-    	Item_3_Calendars_Away									itemFragment				= new Item_3_Calendars_Away(itemData);
+    	Panel_3_Calendars_Away_Item									itemFragment				= new Panel_3_Calendars_Away_Item(itemData);
 		
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
+	}
+	public void onPanelButtonAdd()
+    {
+		Ctrl_Calendars.Away									itemNew						= new Ctrl_Calendars().new Away();
+		
+		itemNew.dateTimeStart															= Global.now();
+		itemNew.dateTimeEnd																= Global.now() + 24 * 60 * 60 * 1000L;
+		
+		Global.eRegCalendars.awayList.add(itemNew);
+		displayContents();
+		setListens();
 	}
 }

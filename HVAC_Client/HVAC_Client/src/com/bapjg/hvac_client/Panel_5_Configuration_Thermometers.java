@@ -6,6 +6,7 @@ import HVAC_Common.Ctrl_Actions_Relays;
 import HVAC_Common.Ctrl_Calendars;
 import HVAC_Common.Ctrl_Configuration;
 import HVAC_Common.Ctrl__Abstract;
+import HVAC_Common.Ctrl_Calendars.Word;
 import HVAC_Common.Ctrl_Configuration.Data;
 import HVAC_Common.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
@@ -37,20 +38,17 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
 {
 	public Panel_5_Configuration_Thermometers()
 	{
-		super();
+		super("Add");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons_addnew, container, false);
-
-    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	super.panelInitialise(inflater, container, savedInstanceState);
     	
     	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Thermometre", "Address");
     	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
-    	insertPoint.addView(listHeading);
-    	insertPoint.addView(listView);
+    	panelInsertPoint.addView(listHeading);
+    	panelInsertPoint.addView(listView);
 
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
  
@@ -60,7 +58,7 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
         	displayTitles("Configuration", "Thermometres");
         	displayContents();
             setListens();
-                    }
+        }
         else // we need to reconnect to the server
         {
             Global.toaster("Please wait for data to arrive or refresh", true);
@@ -69,8 +67,8 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
     }
 	public void displayContents()
 	{
-	    AdapterView <Adapter_5_Configuration_Thermometers>		adapterViewList		= (AdapterView <Adapter_5_Configuration_Thermometers>) adapterView;
-		Adapter_5_Configuration_Thermometers 					arrayAdapter		= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+	    AdapterView <Adapter_5_Configuration_Thermometers>		adapterViewList				= (AdapterView <Adapter_5_Configuration_Thermometers>) adapterView;
+		Adapter_5_Configuration_Thermometers 					arrayAdapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
 		adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()
@@ -82,14 +80,22 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
 	{
     	Ctrl_Configuration.Thermometer							itemData					= Global.eRegConfiguration.thermometerList.get(position);
 
-    	Item_5_Configuration_Thermometer						itemFragment				= new Item_5_Configuration_Thermometer(itemData);
+    	Panel_5_Configuration_Thermometer_Item					itemFragment				= new Panel_5_Configuration_Thermometer_Item(itemData);
  
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
    	}
-    public void onClick(View myView)
+    @Override
+	public void onPanelButtonAdd()
     {
+    	Ctrl_Configuration.Thermometer							itemNew						= new Ctrl_Configuration().new Thermometer();
+		itemNew.name																		= "new";
+		itemNew.address																		= "28.";
+		itemNew.pidName																		= "";
+		Global.eRegConfiguration.thermometerList.add(itemNew);
+		displayContents();
+		setListens();
     }
 }

@@ -1,33 +1,11 @@
 package com.bapjg.hvac_client;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.Context;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -49,16 +27,14 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	
 	public Panel_1_Temperatures()
 	{
-		super();
+		super("Standard");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-		this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
+    	super.panelInitialise(inflater, container, savedInstanceState);
     	displayTitles("Temperatures", "Readings");
     	TCP_Send(new Ctrl_Temperatures().new Request());
-    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
     	
     	tempBoiler 																			= new Element_Standard(getActivity(), "Boiler");
     	tempHW 																				= new Element_Standard(getActivity(), "Hot Water");
@@ -73,21 +49,21 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 
        	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Thermometer", "Temperature");
 
-    	insertPoint.addView(listHeading);
-    	insertPoint.addView(tempBoiler);
-    	insertPoint.addView(tempHW);
-    	insertPoint.addView(tempOutside);
-    	insertPoint.addView(new Element_Filler(getActivity()));
-    	insertPoint.addView(tempLivingRoom);
-    	insertPoint.addView(new Element_Filler(getActivity()));
-    	insertPoint.addView(tempFloorOut);
-    	insertPoint.addView(tempFloorIn);
-    	insertPoint.addView(tempBoilerOut);
-    	insertPoint.addView(new Element_Filler(getActivity()));
-    	insertPoint.addView(tempRadiatorOut);
-    	insertPoint.addView(tempRadiatorIn);
-    	insertPoint.addView(new Element_Filler(getActivity()));
-    	insertPoint.addView(tempBoilerIn);
+       	panelInsertPoint.addView(listHeading);
+       	panelInsertPoint.addView(tempBoiler);
+       	panelInsertPoint.addView(tempHW);
+       	panelInsertPoint.addView(tempOutside);
+       	panelInsertPoint.addView(new Element_Filler(getActivity()));
+       	panelInsertPoint.addView(tempLivingRoom);
+       	panelInsertPoint.addView(new Element_Filler(getActivity()));
+       	panelInsertPoint.addView(tempFloorOut);
+       	panelInsertPoint.addView(tempFloorIn);
+       	panelInsertPoint.addView(tempBoilerOut);
+       	panelInsertPoint.addView(new Element_Filler(getActivity()));
+       	panelInsertPoint.addView(tempRadiatorOut);
+       	panelInsertPoint.addView(tempRadiatorIn);
+       	panelInsertPoint.addView(new Element_Filler(getActivity()));
+       	panelInsertPoint.addView(tempBoilerIn);
           	
         return panelView;
     }

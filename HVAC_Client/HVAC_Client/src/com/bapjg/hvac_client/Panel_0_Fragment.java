@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
@@ -38,13 +39,52 @@ public class Panel_0_Fragment 									extends 					Fragment
 																							Dialog_Response,
 																							Panel_0_Interface
 {
-	public ViewGroup											container;
-	public View													panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
-	public View													adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
+	public 		ViewGroup										container;
+	public 		View											panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)
+	private 	String											panelType;					// Can be "Standard", ...
+	protected 	LinearLayout									panelInsertPoint;
+	public		View											panelButtonOk;
+	public		View											panelButtonDelete;
+	public		View											panelButtonAdd;
+	public 		View											adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
 
+	
 	public Panel_0_Fragment()
     {
     }
+	public Panel_0_Fragment(String panelType)
+    {
+		this.panelType																		= panelType;
+    }
+	public void panelInitialise(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+	{
+		this.container																		= container;
+		if (panelType.equalsIgnoreCase("Standard"))
+		{
+			this.panelView																	= inflater.inflate(R.layout.panal_0_standard, container, false);
+	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+		}
+		else if (panelType.equalsIgnoreCase("Add"))
+		{
+			this.panelView																	= inflater.inflate(R.layout.panal_0_standard_with_buttons_addnew, container, false);
+	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+			this.panelButtonAdd																= this.panelView.findViewById(R.id.buttonAdd);
+			this.panelButtonAdd			.setOnClickListener(this);
+		}
+		else if (panelType.equalsIgnoreCase("Ok_Delete"))
+		{
+			this.panelView																	= inflater.inflate(R.layout.panal_0_standard_with_buttons_ok_delete, container, false);
+	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+			this.panelButtonOk																= this.panelView.findViewById(R.id.buttonOk);
+			this.panelButtonDelete															= this.panelView.findViewById(R.id.buttonDelete);
+			this.panelButtonOk			.setOnClickListener(this);
+			this.panelButtonDelete		.setOnClickListener(this);
+		}
+		else
+		{
+			Global.toaster("Unsupported panelType : " + this.panelType, true);
+		}
+	}
 	@Override
 	public void onConfigurationChanged(Configuration newConfig)
 	{
@@ -52,9 +92,7 @@ public class Panel_0_Fragment 									extends 					Fragment
 //		
 //		LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //	    panelView 																			= inflater.inflate(this.panelLayout, this.container);				// Inflate the menuLayout into container (menu_container)
-//	    displayHeader(); 
-//    	displayContents();
-//    	setListens();
+//	    displayHeader(); displayContents(); setListens();
 	}
 	public void displayTitles(String title, String subTitle)
 	{
@@ -78,10 +116,29 @@ public class Panel_0_Fragment 									extends 					Fragment
 	   	task.execute(message);
 	}
 
-	@Override	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 			{}
-	@Override	public void onClick(View v) 																{}
-	@Override	public void onDialogReturn 				()													{}
-	@Override	public void onDialogReturnWithId(int id)													{}
+	@Override	public void onItemClick					(AdapterView<?> parent, View view, int position, long id) 	{}
+				public void onPanelButtonOk				()															{}
+				public void onPanelButtonAdd			()															{}
+				public void onPanelButtonDelete			()															{}
+	@Override
+	public void onClick (View clickedView) 													
+	{
+     	switch(clickedView.getId())
+		{
+	     	case R.id.buttonDelete:
+	     		onPanelButtonDelete();
+	     		break;
+	     	case R.id.buttonOk:
+	     		onPanelButtonOk();
+	      		break;
+	     	case R.id.buttonAdd:
+	     		onPanelButtonAdd();
+	      		break;		
+  		}
+	}
+	@Override	public void onDialogReturn 				()															{}
+	@Override	public void onDialogReturnWithId		(int id)													{}
+	@Override	public void onElementClick				(View view)													{}
 	public void processFinishHTTP(Ctrl__Abstract result) 										
 	{
 		Global.setAddressSpace();
@@ -91,12 +148,6 @@ public class Panel_0_Fragment 									extends 					Fragment
 	{
 		Global.setAddressSpace();
 		Global.setStatusTCP(result);
-	}
-	public void onPanelItemClick(Element_Switch switchClicked) 
-	{
-	}
-	public void onPanelItemClick(Element_Standard textViewClicked) 
-	{
 	}
 }
 

@@ -16,24 +16,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
-{		
-	private Ctrl_Configuration.Relay	 						itemData;
-	
-	private Element_Heading										headingGeneral;
-	private Element_Standard									relayName;
-	private Element_Standard									relayBank;
-	private Element_Standard									relayNumber;
 
-	private View												buttonOk;
-	private View												buttonDelete;
-	
-	public Panel_5_Configuration_Relay_Item(Ctrl_Configuration.Relay itemData)
+public class Panel_5_Configuration_Pump_Item 							extends 					Panel_0_Fragment
+{		
+	private Ctrl_Configuration.Pump	 							itemData;
+
+	private Element_Heading										headingGeneral;
+	private Element_Standard									pumpName;
+	private Element_Standard									relayName;
+
+	public Panel_5_Configuration_Pump_Item(Ctrl_Configuration.Pump itemData)
 	{
 		super("Ok_Delete");
 		this.itemData																		= itemData;
@@ -42,22 +38,19 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
-
+    	
     	headingGeneral			 															= new Element_Heading(getActivity(), "Parameters");
-    	relayName																			= new Element_Standard(getActivity(), "Relay Name");
-    	relayBank																			= new Element_Standard(getActivity(), "Bank number");
-    	relayNumber																			= new Element_Standard(getActivity(), "Address");
+    	pumpName																			= new Element_Standard(getActivity(), "Pump Name");
+    	relayName																			= new Element_Standard(getActivity(), "Relay number");
     	
     	panelInsertPoint.addView(headingGeneral);
+    	panelInsertPoint.addView(pumpName);
     	panelInsertPoint.addView(relayName);
-    	panelInsertPoint.addView(relayBank);
-    	panelInsertPoint.addView(relayNumber);
-        
-    	displayTitles("Configuration", "Relay");      
-        
+
         if ((Global.eRegConfiguration != null)
-        &&  (Global.eRegConfiguration.relayList != null))
+        &&  (Global.eRegConfiguration.pumpList != null))
         {
+        	displayTitles("Configuration", "Pump");
         	displayContents();
             setListens();
         }
@@ -69,18 +62,16 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		relayName							.setTextRight	(itemData.name);
-		relayBank							.setTextRight	(itemData.relayBank);
-		relayNumber							.setTextRight	(itemData.relayNumber);
+    	pumpName							.setTextRight	(itemData.name);
+    	relayName							.setTextRight	(itemData.relay);
    	}
 	public void setListens()
 	{
     	if (itemData != null)
     	{
+    		pumpName						.setListener(this);
     		relayName						.setListener(this);
-			relayBank						.setListener(this);
-			relayNumber						.setListener(this);
-    	}
+   	}
 	}
     @Override
 	public void onElementClick(View clickedView) 
@@ -88,25 +79,24 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     	Dialog_Text												dialogText;
     	Dialog_Integer											dialogInteger;
     	Dialog_String_List										dialogList;
-
-    	if (clickedView == relayName)
+    	if (clickedView == pumpName)
     	{
-			dialogText 																		= new Dialog_Text(itemData.name, itemData, "Enter Relay Name", this);
+			// TODO Do Text Dialog
+			dialogText 																		= new Dialog_Text(itemData.name, itemData, "Enter Pump Name", this);
 			dialogText.show(getFragmentManager(), "Dialog_Text");
     	}
-    	else if (clickedView == relayBank)
+    	else if (clickedView == relayName)
     	{
-     		dialogInteger 																	= new Dialog_Integer(itemData.relayBank, itemData, 0, 4, "Enter Relay Bank", this);
-     		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
-    	}
-    	else if (clickedView == relayNumber)
-    	{
-     		dialogInteger 																	= new Dialog_Integer(itemData.relayNumber, itemData, 0, 8, "Enter Relay Number", this);
-     		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
-    	}
-    	
-    	
-	}
+     		dialogList 																		= new Dialog_String_List(itemData.relay, itemData, null, this);
+     		dialogList.itemSelected															= "";
+
+    		for (Ctrl_Configuration.Relay relay : Global.eRegConfiguration.relayList)
+    		{
+    			dialogList.items.add(relay.name);
+    		}
+    		dialogList.show(getFragmentManager(), "Dialog_List");
+		}
+ 	}
     @Override
  	public void onPanelButtonOk()
     {

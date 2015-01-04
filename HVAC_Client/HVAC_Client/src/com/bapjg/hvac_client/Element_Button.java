@@ -1,57 +1,49 @@
 package com.bapjg.hvac_client;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.graphics.Color;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
-import HVAC_Common.Ctrl_Temperatures.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Element_Button 								extends 					LinearLayout
+public class Element_Button 									extends 					LinearLayout
+																implements					View.OnClickListener
 {
 	public LayoutInflater 										inflater;
 	public Button 												button;
+	public Panel_0_Interface									listener;
 	
-	public Element_Button(Context context, String labelTextLeft) 
+	public Element_Button(Context context, String caption) 
 	{
 		super(context);
 		this.inflater 																		= LayoutInflater.from(context);
 		inflater.inflate(R.layout.element_button, this, true);
 		button 																				= (Button) this.findViewById(R.id.Button);
-		button.setText(labelTextLeft);
+		button.setText(caption);
 	}
-	public void setText(String text)
+	public void setText(String caption)
 	{
-		button.setText(text);
+		button.setText(caption);
 	}
 	public String getText()
 	{
 		return button.getText().toString();
+	}
+	public void setListener(OnClickListener listener)
+	{
+		this.listener																		= (Panel_0_Fragment) listener;
+		button						.setOnClickListener(this);
+	}
+	public void onClick(View view)
+	{
+		listener.onElementClick((View) this);
 	}
 }
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Configuration.Request;
+import HVAC_Common.Ctrl_Configuration.Thermometer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -32,23 +33,21 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 {
 	public Panel_5_Configuration_Pumps()
 	{
-		super();
+		super("Add");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons_addnew, container, false);
-    	displayTitles("Actions", "Pumps");
-    	
-    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
-    	
+    	super.panelInitialise(inflater, container, savedInstanceState);
+
     	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Pump Name", "Relay Name");
     	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
-    	insertPoint.addView(listHeading);
-    	insertPoint.addView(listView);
+    	panelInsertPoint.addView(listHeading);
+    	panelInsertPoint.addView(listView);
 
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
+    	displayTitles("Actions", "Pumps");
+    	
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.pumpList != null))
@@ -67,19 +66,13 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 	{
     	Ctrl_Configuration.Pump									itemData					= Global.eRegConfiguration.pumpList.get(position);
 
-    	Item_5_Configuration_Pump								itemFragment				= new Item_5_Configuration_Pump(itemData);
+    	Panel_5_Configuration_Pump_Item								itemFragment				= new Panel_5_Configuration_Pump_Item(itemData);
  
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
    	}
-    public void onClick(View myView)
-    {
-    }
-    public void menuButtonThermometersClick(View myView)
-    {
-    }
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
 		if (result instanceof Ctrl_Configuration.Data)
@@ -104,4 +97,13 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 	{
 		((AdapterView<?>) adapterView).setOnItemClickListener(this);
 	}
+	public void onPanelButtonAdd()
+    {
+    	Ctrl_Configuration.Pump									itemNew						= new Ctrl_Configuration().new Pump();
+		itemNew.name																		= "new";
+		itemNew.relay																		= "";
+		Global.eRegConfiguration.pumpList.add(itemNew);
+		displayContents();
+		setListens();
+    }
 }

@@ -86,7 +86,7 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
     {
     	Ctrl_Calendars.Calendar									itemData					= Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.get(position);
 
-    	Item_3_Calendars_Circuits								itemFragment				= new Item_3_Calendars_Circuits(itemData, this.circuitName);
+    	Panel_3_Calendars_Circuits_Item_New								itemFragment				= new Panel_3_Calendars_Circuits_Item_New(itemData, this.circuitName);
  
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);

@@ -74,9 +74,10 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
 		switchRadiator				.setListener(this);
 	}
 	@Override
-	public void onPanelItemClick(Element_Switch switchClicked) 
+	public void onElementClick(View viewClicked) 
     {
-   		Ctrl_Actions_Relays.Execute								messageSend					= new Ctrl_Actions_Relays().new Execute();
+		Element_Switch 											switchClicked 				= (Element_Switch) viewClicked;
+		Ctrl_Actions_Relays.Execute								messageSend					= new Ctrl_Actions_Relays().new Execute();
    		
 		if 		(switchClicked == switchBurner)		messageSend.relayName		= "Burner";
 		else if (switchClicked == switchHotWater)	messageSend.relayName		= "HotWater";

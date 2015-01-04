@@ -21,8 +21,7 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-
-public class Panel_5_Configuration_PID_Item 						extends 					Panel_0_Fragment
+public class Panel_5_Configuration_PID_Item 					extends 					Panel_0_Fragment
 {		
 	private Ctrl_Configuration.PID_Data	 						itemData;
 	
@@ -35,28 +34,23 @@ public class Panel_5_Configuration_PID_Item 						extends 					Panel_0_Fragment
 	
 	public Panel_5_Configuration_PID_Item(Ctrl_Configuration.PID_Data itemData)
 	{
-		super();
+		super("Ok_Delete");
 		this.itemData																		= itemData;
 	}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-		this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons_ok_delete, container, false);
-		this.buttonOk																		= this.panelView.findViewById(R.id.buttonOk);
-		this.buttonDelete																	= this.panelView.findViewById(R.id.buttonDelete);
-
-    	LinearLayout insertPoint 															= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	super.panelInitialise(inflater, container, savedInstanceState);
     	
     	headingGeneral			 															= new Element_Heading(getActivity(), "Parameters");
     	pidName																				= new Element_Standard(getActivity(), "PID Name");
     	depth																				= new Element_Standard(getActivity(), "Depth");
     	sampleIncrement																		= new Element_Standard(getActivity(), "Sample Increment", "s");
     	
-    	insertPoint.addView(headingGeneral);
-    	insertPoint.addView(pidName);
-    	insertPoint.addView(depth);
-    	insertPoint.addView(sampleIncrement);
+    	panelInsertPoint.addView(headingGeneral);
+    	panelInsertPoint.addView(pidName);
+    	panelInsertPoint.addView(depth);
+    	panelInsertPoint.addView(sampleIncrement);
     	displayTitles("Configuration", "PID");
     	
     	if ((Global.eRegConfiguration != null)
@@ -84,13 +78,12 @@ public class Panel_5_Configuration_PID_Item 						extends 					Panel_0_Fragment
     		pidName				.setOnClickListener(this);
     		depth				.setOnClickListener(this);
     		sampleIncrement		.setOnClickListener(this);
-    		buttonOk			.setOnClickListener(this);
-    		buttonDelete		.setOnClickListener(this);
     	}
 	}
     @Override
 	public void onClick(View clickedView) 
 	{
+    	super.onClick(clickedView);
     	Dialog_Text												dialogText;
     	Dialog_Integer											dialogInteger;
     	Dialog_String_List										dialogList;
@@ -110,16 +103,24 @@ public class Panel_5_Configuration_PID_Item 						extends 					Panel_0_Fragment
 	     	dialogInteger																= new Dialog_Integer(itemData.sampleIncrement,  itemData, 1, 300, "Select Sample (unit = 10s)", this);
 	     	dialogInteger.show(getFragmentManager(), "Dialog_SampleIncrement");
 		}
-    	else if (clickedView == buttonDelete)
-    	{
-	     	Global.eRegConfiguration.pidList.remove(itemData);
-	     	getFragmentManager().popBackStackImmediate();
-		}
-    	else if (clickedView == buttonOk)
-    	{
-	      	getFragmentManager().popBackStackImmediate();
-		}
  	}
+ 	public void onPanelButtonOk()
+    {
+    	getFragmentManager().popBackStackImmediate();
+    }
+    @Override
+ 	public void onPanelButtonAdd()
+    {
+     	Global.toaster("Invalid button in this situation", true);
+     	getFragmentManager().popBackStackImmediate();
+    }
+    @Override
+ 	public void onPanelButtonDelete()
+    {
+    	Global.eRegConfiguration.pidList.remove(itemData);
+    	getFragmentManager().popBackStackImmediate();
+    }
+
     public void onDialogReturn()
     {
     	displayContents();

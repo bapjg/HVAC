@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Calendars.Away;
 import HVAC_Common.Ctrl_Configuration.Request;
+import HVAC_Common.Ctrl_Configuration.Thermometer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -35,21 +36,17 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 {
 	public Panel_5_Configuration_Circuits()
 	{
-		super();
+		super("Standard");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.panelLayout																	= R.layout.panal_0_standard;
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons_addnew, container, false);
-
-    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	super.panelInitialise(inflater, container, savedInstanceState);
     	
     	Element_Heading											listHeading					= new Element_Heading(getActivity(), "Circuit Name");
     	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
-    	insertPoint.addView(listHeading);
-    	insertPoint.addView(listView);
+    	panelInsertPoint.addView(listHeading);
+    	panelInsertPoint.addView(listView);
 
     	this.adapterView																	= listView.findViewById(R.id.List_View);
 
@@ -90,9 +87,6 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 			Global.toaster("P5_Conf_Circuits : Data NOTNOTNOT received", true);
 		}
 	}
-    public void onClick(View clickedView)
-    {
-    }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
     	Ctrl_Configuration.Circuit								itemData						= Global.eRegConfiguration.circuitList.get(position);

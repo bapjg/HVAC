@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Configuration.Request;
+import HVAC_Common.Ctrl_Configuration.Thermometer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -87,7 +88,14 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
    	}
-    public void onClick(View myView)
+	public void onPanelButtonAdd()
     {
+    	Ctrl_Configuration.Relay								itemNew						= new Ctrl_Configuration().new Relay();
+		itemNew.name																		= "new";
+		itemNew.relayBank																	= 0;
+		itemNew.relayNumber																	= 0;
+		Global.eRegConfiguration.relayList.add(itemNew);
+		displayContents();
+		setListens();
     }
 }

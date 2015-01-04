@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Configuration.Request;
+import HVAC_Common.Ctrl_Configuration.Thermometer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -32,19 +33,17 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
 {
 	public Panel_5_Configuration_PIDs()
 	{
-		super();
+		super("Add");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons_addnew, container, false);
-    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	super.panelInitialise(inflater, container, savedInstanceState);
     	
     	Element_Heading											listHeading					= new Element_Heading(getActivity(), "PID Name", "Depth");
     	Element_ListView										listView 					= new Element_ListView(getActivity(), "Henry");
-    	insertPoint.addView(listHeading);
-    	insertPoint.addView(listView);
+    	panelInsertPoint.addView(listHeading);
+    	panelInsertPoint.addView(listView);
 
     	this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
 
@@ -73,32 +72,11 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
    	}
-    public void onClick(View myView)
-    {
-//    	// onClick for all buttons in Menu_Pane				
-//    	Button 											myButton 					= (Button) myView;
-//    	String											myCaption					= myButton.getText().toString();
-//						
-//		// Set all textColours to white				
-//		ViewGroup 										viewParent					= (ViewGroup) myView.getParent();
-//		for (int i = 0; i < viewParent.getChildCount(); i++)
-//		{
-//			Button										buttonChild					= (Button) viewParent.getChildAt(i);
-//			buttonChild.setTextColor(Color.WHITE);
-//		}
-//		
-//		((Button) myView).setTextColor(Color.YELLOW);
-//    	
-//    	if (myCaption.equalsIgnoreCase("Thermometers"))
-//    	{
-//    		menuButtonThermometersClick(myView);	
-//    	}
-    }
 	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
 		if (result instanceof Ctrl_Configuration.Data)
 		{
-			Global.eRegConfiguration														= (Ctrl_Configuration.Data) result;
+			Global.eRegConfiguration															= (Ctrl_Configuration.Data) result;
 			displayContents();
 		}
 		else
@@ -108,12 +86,22 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-	    AdapterView <Adapter_5_Configuration_PIDs>				adapterViewList				= (AdapterView <Adapter_5_Configuration_PIDs>) adapterView;
-        Adapter_5_Configuration_PIDs							arrayAdapter				= new Adapter_5_Configuration_PIDs(Global.actContext, R.id.List_View, Global.eRegConfiguration.pidList);
+	    AdapterView <Adapter_5_Configuration_PIDs>				adapterViewList					= (AdapterView <Adapter_5_Configuration_PIDs>) adapterView;
+        Adapter_5_Configuration_PIDs							arrayAdapter					= new Adapter_5_Configuration_PIDs(Global.actContext, R.id.List_View, Global.eRegConfiguration.pidList);
         adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()
 	{
 		((AdapterView <?>) adapterView).setOnItemClickListener(this);
 	}
+	public void onPanelButtonAdd()
+    {
+    	Ctrl_Configuration.PID_Data								itemNew							= new Ctrl_Configuration().new PID_Data();
+		itemNew.name																			= "New";
+		itemNew.depth																			= 10;
+		itemNew.sampleIncrement																	= 1;
+		Global.eRegConfiguration.pidList.add(itemNew);
+		displayContents();
+		setListens();
+    }
 }

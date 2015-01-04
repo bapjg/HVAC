@@ -44,14 +44,12 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 
 	public Panel_5_Configuration_Burner()
 	{
-		super();
+		super("Standard");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
-    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	super.panelInitialise(inflater, container, savedInstanceState);
     	displayTitles("Configuration", "Burner");
     	
     	relayName																			= new Element_Standard(getActivity(), "Relay Name");
@@ -59,11 +57,11 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
     	minutesPerLitre																		= new Element_Standard(getActivity(), "Minutes per Litre");
     	fuelConsumptionLitres																= new Element_Standard(getActivity(), "Fuel Consumed", "l");
 
-    	insertPoint.addView(new Element_Heading(getActivity(), "Parameters"));
-    	insertPoint.addView(relayName);
-    	insertPoint.addView(fuelConsumption);
-    	insertPoint.addView(minutesPerLitre);
-    	insertPoint.addView(fuelConsumptionLitres);
+    	panelInsertPoint.addView(new Element_Heading(getActivity(), "Parameters"));
+    	panelInsertPoint.addView(relayName);
+    	panelInsertPoint.addView(fuelConsumption);
+    	panelInsertPoint.addView(minutesPerLitre);
+    	panelInsertPoint.addView(fuelConsumptionLitres);
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.boiler != null))

@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-
 public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragment
 																implements					Panel_0_Interface
 {		
@@ -54,32 +53,28 @@ public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragmen
 	
 	public Panel_5_Configuration_Circuit_Item(Ctrl_Configuration.Circuit itemData)
 	{
-		super();
+		super("Standard");
 		this.itemData																		= itemData;
 	}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-		this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
-
-    	LinearLayout insertPoint 															= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
-
+    	super.panelInitialise(inflater, container, savedInstanceState);
     	
     	headingGeneral			 															= new Element_Heading(getActivity(), "General");
     	pump			 																	= new Element_Standard(getActivity(), "Pump");
     	targetThermometer																	= new Element_Standard(getActivity(), "Target Thermometer");
     	circuitType																			= new Element_Standard(getActivity(), "Circuit Type");
-    	insertPoint.addView(headingGeneral);
-    	insertPoint.addView(pump);
-    	insertPoint.addView(targetThermometer);
-    	insertPoint.addView(circuitType);
+    	panelInsertPoint.addView(headingGeneral);
+    	panelInsertPoint.addView(pump);
+    	panelInsertPoint.addView(targetThermometer);
+    	panelInsertPoint.addView(circuitType);
 
     	headingGradient																		= new Element_Heading(getActivity(), "Gradient");
     	gradient				 															= new Element_Gradient(getActivity());
     	
-    	insertPoint.addView(headingGradient);
-    	insertPoint.addView(gradient);
+    	panelInsertPoint.addView(headingGradient);
+    	panelInsertPoint.addView(gradient);
     	
     	headingMixer																		= new Element_Heading(getActivity(), "Mixer");
     	mixerThermometer																	= new Element_Standard(getActivity(),"Mixer Target Thermometer");
@@ -89,13 +84,13 @@ public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragmen
     	relayUp																				= new Element_Standard(getActivity(),"Relay Up");
     	relayDown																			= new Element_Standard(getActivity(),"Relay Down");
     	
-    	insertPoint.addView(headingMixer);
-    	insertPoint.addView(mixerThermometer);
-    	insertPoint.addView(swingTime);
-    	insertPoint.addView(swingProportionMin);
-    	insertPoint.addView(swingProportionMax);
-    	insertPoint.addView(relayUp);
-    	insertPoint.addView(relayDown);
+    	panelInsertPoint.addView(headingMixer);
+    	panelInsertPoint.addView(mixerThermometer);
+    	panelInsertPoint.addView(swingTime);
+    	panelInsertPoint.addView(swingProportionMin);
+    	panelInsertPoint.addView(swingProportionMax);
+    	panelInsertPoint.addView(relayUp);
+    	panelInsertPoint.addView(relayDown);
     	
     	headingPID																			= new Element_Heading(getActivity(), "PID Data");
     	pidThermometer																		= new Element_Standard(getActivity(),"PID Thermometer");
@@ -106,14 +101,14 @@ public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragmen
     	timeProjection																		= new Element_Standard(getActivity(),"Decision Time Projection", "s");
     	marginProjection																	= new Element_Standard(getActivity(),"Temperature Error Margin", "°C");
     	
-    	insertPoint.addView(headingPID);
-    	insertPoint.addView(pidThermometer);
-    	insertPoint.addView(gainP);
-    	insertPoint.addView(timeD);
-    	insertPoint.addView(timeI);
-    	insertPoint.addView(timeDelay);
-    	insertPoint.addView(timeProjection);
-    	insertPoint.addView(marginProjection);
+    	panelInsertPoint.addView(headingPID);
+    	panelInsertPoint.addView(pidThermometer);
+    	panelInsertPoint.addView(gainP);
+    	panelInsertPoint.addView(timeD);
+    	panelInsertPoint.addView(timeI);
+    	panelInsertPoint.addView(timeDelay);
+    	panelInsertPoint.addView(timeProjection);
+    	panelInsertPoint.addView(marginProjection);
         
     	displayTitles("Circuit Configuration", itemData.name);
 
@@ -395,8 +390,8 @@ public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragmen
 //	     		break;
 //		}
  	}
-    @Override
-	public void onPanelItemClick(Element_Switch clickedView)
+//    @Override
+	public void onElementClick(Element_Switch clickedView)
 	{
 		Global.toaster("A switched has been clicked", true);
 	}

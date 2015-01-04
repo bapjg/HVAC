@@ -77,7 +77,7 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 	{
     	Ctrl_Calendars.Word										itemData					= Global.eRegCalendars.wordList.get(position);
 			                                                                            
-    	Item_3_Calendars_Vocabulary								itemFragment				= new Item_3_Calendars_Vocabulary(itemData);
+    	Panel_3_Calendars_Vocabulary_Item_New								itemFragment				= new Panel_3_Calendars_Vocabulary_Item_New(itemData);
 							                                                            
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);

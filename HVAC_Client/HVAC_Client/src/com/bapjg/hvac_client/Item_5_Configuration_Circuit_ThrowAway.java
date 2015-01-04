@@ -20,12 +20,12 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
-public class Item_5_Configuration_Circuit 						extends 					Panel_0_Fragment
+public class Item_5_Configuration_Circuit_ThrowAway 						extends 					Panel_0_Fragment
 {		
 	private Ctrl_Configuration.Circuit	 						itemData;
 	private ViewGroup											itemView;
 	
-	public Item_5_Configuration_Circuit(Ctrl_Configuration.Circuit itemData)
+	public Item_5_Configuration_Circuit_ThrowAway(Ctrl_Configuration.Circuit itemData)
 	{
 		super();
 		this.itemData																		= itemData;
