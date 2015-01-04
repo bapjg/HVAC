@@ -66,7 +66,7 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
 	{
     	Ctrl_Configuration.PID_Data								itemData						= Global.eRegConfiguration.pidList.get(position);
 
-    	Panel_5_Configuration_PID_Item							itemFragment					= new Panel_5_Configuration_PID_Item(itemData);
+    	Panel_5_Configuration_PIDs_Item							itemFragment					= new Panel_5_Configuration_PIDs_Item(itemData);
 
     	FragmentTransaction 									fTransaction 					= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
@@ -87,8 +87,8 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-	    AdapterView <Adapter_5_Configuration_PIDs>				adapterViewList					= (AdapterView <Adapter_5_Configuration_PIDs>) adapterView;
-        Adapter_5_Configuration_PIDs							arrayAdapter					= new Adapter_5_Configuration_PIDs(Global.actContext, R.id.List_View, Global.eRegConfiguration.pidList);
+	    AdapterView <Panel_5_Configuration_PIDs_Adapter>				adapterViewList					= (AdapterView <Panel_5_Configuration_PIDs_Adapter>) adapterView;
+        Panel_5_Configuration_PIDs_Adapter							arrayAdapter					= new Panel_5_Configuration_PIDs_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.pidList);
         adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()

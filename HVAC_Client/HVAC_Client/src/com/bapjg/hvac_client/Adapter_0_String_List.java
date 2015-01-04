@@ -2,8 +2,6 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-import com.bapjg.hvac_client.Adapter_5_Configuration_Thermometers.RowHolder;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;

@@ -34,20 +34,18 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 {
 	public Panel_5_Configuration_Relays()
 	{
-		super();
+		super("Add");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard_with_buttons_addnew, container, false);
-
-    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	super.panelInitialise(inflater, container, savedInstanceState);
     	
     	Element_Heading											listHeading					= new Element_Heading("Relay Name", "Address");
     	Element_ListView										listView 					= new Element_ListView("Henry");
-    	insertPoint.addView(listHeading);
-    	insertPoint.addView(listView);
+
+    	panelInsertPoint.addView(listHeading);
+    	panelInsertPoint.addView(listView);
 
     	displayTitles("Configuration", "Relays");
     	
@@ -68,8 +66,8 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-	    AdapterView <Adapter_5_Configuration_Relays>			adapterViewList				= (AdapterView <Adapter_5_Configuration_Relays>) adapterView;
-		Adapter_5_Configuration_Relays							arrayAdapter				= new Adapter_5_Configuration_Relays(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
+	    AdapterView <Panel_5_Configuration_Relays_Adapter>			adapterViewList				= (AdapterView <Panel_5_Configuration_Relays_Adapter>) adapterView;
+		Panel_5_Configuration_Relays_Adapter							arrayAdapter				= new Panel_5_Configuration_Relays_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
 		adapterViewList.setAdapter(arrayAdapter);
 
 	}
@@ -82,7 +80,7 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 	{
     	Ctrl_Configuration.Relay								itemData					= Global.eRegConfiguration.relayList.get(position);
 
-    	Panel_5_Configuration_Relay_Item								itemFragment				= new Panel_5_Configuration_Relay_Item(itemData);
+    	Panel_5_Configuration_Relays_Item						itemFragment				= new Panel_5_Configuration_Relays_Item(itemData);
  
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);

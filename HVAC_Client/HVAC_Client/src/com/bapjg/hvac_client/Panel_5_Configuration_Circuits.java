@@ -36,14 +36,14 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 {
 	public Panel_5_Configuration_Circuits()
 	{
-		super("Standard");
+		super("Add");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
     	
-    	Element_Heading											listHeading					= new Element_Heading("Circuit Name");
+    	Element_Heading											listHeading					= new Element_Heading("Circuit Name", "Type");
     	Element_ListView										listView 					= new Element_ListView("Henry");
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);
@@ -65,8 +65,8 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		AdapterView <Adapter_5_Configuration_Circuits>			adapterViewList				= (AdapterView <Adapter_5_Configuration_Circuits>) adapterView;
-		Adapter_5_Configuration_Circuits						arrayAdapter				= new Adapter_5_Configuration_Circuits(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
+		AdapterView <Panel_5_Configuration_Circuits_Adapter>			adapterViewList				= (AdapterView <Panel_5_Configuration_Circuits_Adapter>) adapterView;
+		Panel_5_Configuration_Circuits_Adapter						arrayAdapter				= new Panel_5_Configuration_Circuits_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
 		adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()
@@ -91,7 +91,7 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     {
     	Ctrl_Configuration.Circuit								itemData						= Global.eRegConfiguration.circuitList.get(position);
 
-    	Panel_5_Configuration_Circuit_Item						itemFragment					= new Panel_5_Configuration_Circuit_Item(itemData);
+    	Panel_5_Configuration_Circuits_Item						itemFragment					= new Panel_5_Configuration_Circuits_Item(itemData);
 
     	FragmentTransaction 									fTransaction 					= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);

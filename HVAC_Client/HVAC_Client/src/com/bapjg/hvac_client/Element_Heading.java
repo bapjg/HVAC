@@ -20,6 +20,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,25 +54,6 @@ public class Element_Heading 									extends 					LinearLayout
 		this(labelTextLeft);
 		textRight.setText(labelTextRight);
 	}
-
-	
-	
-	
-//	public Element_Heading(Context context, String labelTextLeft) 
-//	{
-//		super(context);
-//		this.inflater 																		= LayoutInflater.from(context);
-//		inflater.inflate(R.layout.element_heading, this, true);
-//		textLeft 																			= (TextView) this.findViewById(R.id.HeadingLeft);
-//		textLeft.setText(labelTextLeft);
-//		textRight 																			= (TextView) this.findViewById(R.id.HeadingRight);
-//		textRight.setText("");
-//	}
-//	public Element_Heading(Context context, String labelTextLeft, String labelTextRight) 
-//	{
-//		this(context, labelTextLeft);
-//		textRight.setText(labelTextRight);
-//	}
 	public void setTextLeft(String text)
 	{
 		textLeft.setText(text);
@@ -79,5 +61,10 @@ public class Element_Heading 									extends 					LinearLayout
 	public void setTextRight(String text)
 	{
 		textRight.setText(text);
+	}
+	public void centerColumns()
+	{
+		textLeft.setGravity(Gravity.CENTER);
+		textRight.setGravity(Gravity.CENTER);
 	}
 }

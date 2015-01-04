@@ -28,11 +28,13 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        // Inflate the layout for this fragment
-//    	this.panelLayout																	= R.layout.panel_3_calendars;
     	this.container																		= container;
     	this.panelView																		= inflater.inflate(R.layout.panel_3_calendars, container, false);
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
+        
+        
+        
+        
  
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.wordList != null))
@@ -50,8 +52,8 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public void displayContents()
 	{
-    	AdapterView <Adapter_3_Calendars_Words>					adapterViewList				= (AdapterView <Adapter_3_Calendars_Words>) adapterView;
-		Adapter_3_Calendars_Words								arrayAdapter				= new Adapter_3_Calendars_Words(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
+    	AdapterView <Panel_3_Calendars_Words_Adapter>					adapterViewList				= (AdapterView <Panel_3_Calendars_Words_Adapter>) adapterView;
+		Panel_3_Calendars_Words_Adapter								arrayAdapter				= new Panel_3_Calendars_Words_Adapter(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
 		adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()

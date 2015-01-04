@@ -21,19 +21,18 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
+public class Panel_5_Configuration_PIDs_Item 					extends 					Panel_0_Fragment
 {		
-	private Ctrl_Configuration.Relay	 						itemData;
+	private Ctrl_Configuration.PID_Data	 						itemData;
 	
 	private Element_Heading										headingGeneral;
-	private Element_Standard									relayName;
-	private Element_Standard									relayBank;
-	private Element_Standard									relayNumber;
-
+	private Element_Standard									pidName;
+	private Element_Standard									depth;
+	private Element_Standard									sampleIncrement;
 	private View												buttonOk;
 	private View												buttonDelete;
 	
-	public Panel_5_Configuration_Relay_Item(Ctrl_Configuration.Relay itemData)
+	public Panel_5_Configuration_PIDs_Item(Ctrl_Configuration.PID_Data itemData)
 	{
 		super("Ok_Delete");
 		this.itemData																		= itemData;
@@ -42,21 +41,21 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
-
+    	
     	headingGeneral			 															= new Element_Heading("Parameters");
-    	relayName																			= new Element_Standard("Relay Name");
-    	relayBank																			= new Element_Standard("Bank number");
-    	relayNumber																			= new Element_Standard("Address");
+    	pidName																				= new Element_Standard("PID Name");
+    	depth																				= new Element_Standard("Depth");
+    	sampleIncrement																		= new Element_Standard("Sample Increment", "s");
     	
     	panelInsertPoint.addView(headingGeneral);
-    	panelInsertPoint.addView(relayName);
-    	panelInsertPoint.addView(relayBank);
-    	panelInsertPoint.addView(relayNumber);
-        
-    	displayTitles("Configuration", "Relay");      
-        
-        if ((Global.eRegConfiguration != null)
-        &&  (Global.eRegConfiguration.relayList != null))
+    	panelInsertPoint.addView(pidName);
+    	panelInsertPoint.addView(depth);
+    	panelInsertPoint.addView(sampleIncrement);
+    	
+    	displayTitles("Configuration", "PID");
+    	
+    	if ((Global.eRegConfiguration != null)
+        &&  (Global.eRegConfiguration.pidList != null))
         {
         	displayContents();
             setListens();
@@ -69,17 +68,17 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		relayName							.setTextRight	(itemData.name);
-		relayBank							.setTextRight	(itemData.relayBank);
-		relayNumber							.setTextRight	(itemData.relayNumber);
+		pidName					.setTextRight	(itemData.name);
+		depth					.setTextRight	(itemData.depth);
+		sampleIncrement			.setTextRight	(itemData.sampleIncrement);
    	}
 	public void setListens()
 	{
     	if (itemData != null)
     	{
-    		relayName						.setListener(this);
-			relayBank						.setListener(this);
-			relayNumber						.setListener(this);
+    		pidName				.setListener(this);
+    		depth				.setListener(this);
+    		sampleIncrement		.setListener(this);
     	}
 	}
     @Override
@@ -88,26 +87,23 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     	Dialog_Text												dialogText;
     	Dialog_Integer											dialogInteger;
     	Dialog_String_List										dialogList;
-
-    	if (clickedView == relayName)
-    	{
-			dialogText 																		= new Dialog_Text(itemData.name, itemData, "Enter Relay Name", this);
-			dialogText.show(getFragmentManager(), "Dialog_Text");
-    	}
-    	else if (clickedView == relayBank)
-    	{
-     		dialogInteger 																	= new Dialog_Integer(itemData.relayBank, itemData, 0, 4, "Enter Relay Bank", this);
-     		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
-    	}
-    	else if (clickedView == relayNumber)
-    	{
-     		dialogInteger 																	= new Dialog_Integer(itemData.relayNumber, itemData, 0, 8, "Enter Relay Number", this);
-     		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
-    	}
     	
-    	
-	}
-    @Override
+    	if (clickedView == pidName)
+		{
+			dialogText 																	= new Dialog_Text(itemData.name, itemData,  "Choose PID Name", this);
+	     	dialogText.show(getFragmentManager(), "Dialog_Temperature");
+		}
+    	else if (clickedView == depth)
+    	{
+	     	dialogInteger																= new Dialog_Integer(itemData.depth,  itemData, 1, 100, "Select PID Depth", this);
+	     	dialogInteger.show(getFragmentManager(), "Dialog_Depth");
+		}
+    	else if (clickedView == sampleIncrement)
+    	{
+	     	dialogInteger																= new Dialog_Integer(itemData.sampleIncrement,  itemData, 1, 300, "Select Sample (unit = 10s)", this);
+	     	dialogInteger.show(getFragmentManager(), "Dialog_SampleIncrement");
+		}
+ 	}
  	public void onPanelButtonOk()
     {
     	getFragmentManager().popBackStackImmediate();
@@ -121,7 +117,7 @@ public class Panel_5_Configuration_Relay_Item 					extends 					Panel_0_Fragment
     @Override
  	public void onPanelButtonDelete()
     {
-    	Global.eRegConfiguration.relayList.remove(itemData);
+    	Global.eRegConfiguration.pidList.remove(itemData);
     	getFragmentManager().popBackStackImmediate();
     }
     public void onDialogReturn()

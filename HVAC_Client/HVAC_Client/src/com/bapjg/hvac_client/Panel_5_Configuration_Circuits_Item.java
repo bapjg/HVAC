@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragment
+public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragment
 																implements					Panel_0_Interface
 {		
 	private Ctrl_Configuration.Circuit	 						itemData;
@@ -51,7 +51,7 @@ public class Panel_5_Configuration_Circuit_Item 				extends 					Panel_0_Fragmen
 	private Element_Standard 									marginProjection;	
 
 	
-	public Panel_5_Configuration_Circuit_Item(Ctrl_Configuration.Circuit itemData)
+	public Panel_5_Configuration_Circuits_Item(Ctrl_Configuration.Circuit itemData)
 	{
 		super("Standard");
 		this.itemData																		= itemData;

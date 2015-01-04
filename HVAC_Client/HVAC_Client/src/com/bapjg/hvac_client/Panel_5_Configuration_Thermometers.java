@@ -68,8 +68,8 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
     }
 	public void displayContents()
 	{
-	    AdapterView <Adapter_5_Configuration_Thermometers>		adapterViewList				= (AdapterView <Adapter_5_Configuration_Thermometers>) adapterView;
-		Adapter_5_Configuration_Thermometers 					arrayAdapter				= new Adapter_5_Configuration_Thermometers(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
+	    AdapterView <Panel_5_Configuration_Thermometers_Adapter>		adapterViewList				= (AdapterView <Panel_5_Configuration_Thermometers_Adapter>) adapterView;
+		Panel_5_Configuration_Thermometers_Adapter 					arrayAdapter				= new Panel_5_Configuration_Thermometers_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
 		adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()
@@ -81,7 +81,7 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
 	{
     	Ctrl_Configuration.Thermometer							itemData					= Global.eRegConfiguration.thermometerList.get(position);
 
-    	Panel_5_Configuration_Thermometer_Item					itemFragment				= new Panel_5_Configuration_Thermometer_Item(itemData);
+    	Panel_5_Configuration_Thermometers_Item					itemFragment				= new Panel_5_Configuration_Thermometers_Item(itemData);
  
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);

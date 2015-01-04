@@ -1,7 +1,6 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Common.*;
-import HVAC_Common.Ctrl_Configuration.Thermometer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,24 +16,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_5_Configuration_Thermometer_Item 			extends 					Panel_0_Fragment
+
+public class Panel_5_Configuration_Pumps_Item 					extends 					Panel_0_Fragment
 {		
-	private Ctrl_Configuration.Thermometer 						itemData;
+	private Ctrl_Configuration.Pump	 							itemData;
 
 	private Element_Heading										headingGeneral;
-	private Element_Standard									thermoName;
-	private Element_Standard									address;
-	private Element_Standard									pidName;
+	private Element_Standard									pumpName;
+	private Element_Standard									relayName;
 
-	private View												buttonOk;
-	private View												buttonDelete;
-
-	public Panel_5_Configuration_Thermometer_Item(Ctrl_Configuration.Thermometer itemData)
+	public Panel_5_Configuration_Pumps_Item(Ctrl_Configuration.Pump itemData)
 	{
 		super("Ok_Delete");
 		this.itemData																		= itemData;
@@ -43,21 +38,19 @@ public class Panel_5_Configuration_Thermometer_Item 			extends 					Panel_0_Frag
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
-
+    	
     	headingGeneral			 															= new Element_Heading("Parameters");
-    	thermoName																			= new Element_Standard("Thermometer Name");
-    	address																				= new Element_Standard("Address");
-    	pidName																				= new Element_Standard("PID Name");
+    	pumpName																			= new Element_Standard("Pump Name");
+    	relayName																			= new Element_Standard("Relay number");
     	
     	panelInsertPoint.addView(headingGeneral);
-    	panelInsertPoint.addView(thermoName);
-    	panelInsertPoint.addView(address);
-    	panelInsertPoint.addView(pidName);
-        
-    	displayTitles("Configuration", "Thermometer");      
+    	panelInsertPoint.addView(pumpName);
+    	panelInsertPoint.addView(relayName);
+
+    	displayTitles("Configuration", "Pump");
     	
         if ((Global.eRegConfiguration != null)
-        &&  (Global.eRegConfiguration.thermometerList != null))
+        &&  (Global.eRegConfiguration.pumpList != null))
         {
         	displayContents();
             setListens();
@@ -70,47 +63,40 @@ public class Panel_5_Configuration_Thermometer_Item 			extends 					Panel_0_Frag
     }
 	public void displayContents()
 	{
-		thermoName						.setTextRight		(itemData.name);
-		address							.setTextRight		(itemData.address);
-		pidName							.setTextRight		(itemData.pidName);
+    	pumpName							.setTextRight	(itemData.name);
+    	relayName							.setTextRight	(itemData.relay);
    	}
 	public void setListens()
 	{
     	if (itemData != null)
     	{
-    		thermoName					.setListener(this);
-    		address						.setListener(this);
-    		pidName						.setListener(this);
+    		pumpName						.setListener(this);
+    		relayName						.setListener(this);
     	}
 	}
     @Override
 	public void onElementClick(View clickedView) 
 	{
-       	Dialog_Text												dialogText;
+    	Dialog_Text												dialogText;
     	Dialog_Integer											dialogInteger;
     	Dialog_String_List										dialogList;
-     	if (clickedView == thermoName)
-     	{
+    	if (clickedView == pumpName)
+    	{
 			// TODO Do Text Dialog
-			dialogText 																		= new Dialog_Text(itemData.name, itemData, "Enter Thermometer Name", this);
+			dialogText 																		= new Dialog_Text(itemData.name, itemData, "Enter Pump Name", this);
 			dialogText.show(getFragmentManager(), "Dialog_Text");
-     	}
-     	else if (clickedView == address)
-     	{
-     		dialogText 																		= new Dialog_Text(itemData.address, itemData, "Enter Thermometer Address", this);
-     		dialogText.show(getFragmentManager(), "Dialog_Text");
-     	}
-     	else if (clickedView == pidName)
-     	{
-     		dialogList 																		= new Dialog_String_List(itemData.pidName, itemData, null, this);
+    	}
+    	else if (clickedView == relayName)
+    	{
+     		dialogList 																		= new Dialog_String_List(itemData.relay, itemData, null, this);
      		dialogList.itemSelected															= "";
 
-    		for (Ctrl_Configuration.PID_Data pid : Global.eRegConfiguration.pidList)
+    		for (Ctrl_Configuration.Relay relay : Global.eRegConfiguration.relayList)
     		{
-    			dialogList.items.add(pid.name);
+    			dialogList.items.add(relay.name);
     		}
     		dialogList.show(getFragmentManager(), "Dialog_List");
-     	}
+		}
  	}
     @Override
  	public void onPanelButtonOk()
@@ -126,10 +112,9 @@ public class Panel_5_Configuration_Thermometer_Item 			extends 					Panel_0_Frag
     @Override
  	public void onPanelButtonDelete()
     {
-    	Global.eRegConfiguration.thermometerList.remove(itemData);
+    	Global.eRegConfiguration.relayList.remove(itemData);
     	getFragmentManager().popBackStackImmediate();
     }
-    @Override
     public void onDialogReturn()
     {
     	displayContents();

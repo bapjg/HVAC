@@ -66,7 +66,7 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 	{
     	Ctrl_Configuration.Pump									itemData					= Global.eRegConfiguration.pumpList.get(position);
 
-    	Panel_5_Configuration_Pump_Item								itemFragment				= new Panel_5_Configuration_Pump_Item(itemData);
+    	Panel_5_Configuration_Pumps_Item								itemFragment				= new Panel_5_Configuration_Pumps_Item(itemData);
  
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
@@ -89,8 +89,8 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 	}
 	public void displayContents()
 	{
-	    AdapterView <Adapter_5_Configuration_Pumps>				adapterViewList				= (AdapterView <Adapter_5_Configuration_Pumps>) adapterView;
-        Adapter_5_Configuration_Pumps							arrayAdapter				= new Adapter_5_Configuration_Pumps(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
+	    AdapterView <Panel_5_Configuration_Pumps_Adapter>				adapterViewList				= (AdapterView <Panel_5_Configuration_Pumps_Adapter>) adapterView;
+        Panel_5_Configuration_Pumps_Adapter							arrayAdapter				= new Panel_5_Configuration_Pumps_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
         adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()

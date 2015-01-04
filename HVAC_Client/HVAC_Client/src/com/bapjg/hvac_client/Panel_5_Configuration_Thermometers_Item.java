@@ -1,6 +1,7 @@
 package com.bapjg.hvac_client;
 
 import HVAC_Common.*;
+import HVAC_Common.Ctrl_Configuration.Thermometer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -21,18 +22,19 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_5_Configuration_PID_Item 					extends 					Panel_0_Fragment
+public class Panel_5_Configuration_Thermometers_Item 			extends 					Panel_0_Fragment
 {		
-	private Ctrl_Configuration.PID_Data	 						itemData;
-	
+	private Ctrl_Configuration.Thermometer 						itemData;
+
 	private Element_Heading										headingGeneral;
+	private Element_Standard									thermoName;
+	private Element_Standard									address;
 	private Element_Standard									pidName;
-	private Element_Standard									depth;
-	private Element_Standard									sampleIncrement;
+
 	private View												buttonOk;
 	private View												buttonDelete;
-	
-	public Panel_5_Configuration_PID_Item(Ctrl_Configuration.PID_Data itemData)
+
+	public Panel_5_Configuration_Thermometers_Item(Ctrl_Configuration.Thermometer itemData)
 	{
 		super("Ok_Delete");
 		this.itemData																		= itemData;
@@ -41,21 +43,21 @@ public class Panel_5_Configuration_PID_Item 					extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
-    	
+
     	headingGeneral			 															= new Element_Heading("Parameters");
+    	thermoName																			= new Element_Standard("Thermometer Name");
+    	address																				= new Element_Standard("Address");
     	pidName																				= new Element_Standard("PID Name");
-    	depth																				= new Element_Standard("Depth");
-    	sampleIncrement																		= new Element_Standard("Sample Increment", "s");
     	
     	panelInsertPoint.addView(headingGeneral);
+    	panelInsertPoint.addView(thermoName);
+    	panelInsertPoint.addView(address);
     	panelInsertPoint.addView(pidName);
-    	panelInsertPoint.addView(depth);
-    	panelInsertPoint.addView(sampleIncrement);
+        
+    	displayTitles("Configuration", "Thermometer");      
     	
-    	displayTitles("Configuration", "PID");
-    	
-    	if ((Global.eRegConfiguration != null)
-        &&  (Global.eRegConfiguration.pidList != null))
+        if ((Global.eRegConfiguration != null)
+        &&  (Global.eRegConfiguration.thermometerList != null))
         {
         	displayContents();
             setListens();
@@ -68,42 +70,49 @@ public class Panel_5_Configuration_PID_Item 					extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		pidName					.setTextRight	(itemData.name);
-		depth					.setTextRight	(itemData.depth);
-		sampleIncrement			.setTextRight	(itemData.sampleIncrement);
+		thermoName						.setTextRight		(itemData.name);
+		address							.setTextRight		(itemData.address);
+		pidName							.setTextRight		(itemData.pidName);
    	}
 	public void setListens()
 	{
     	if (itemData != null)
     	{
-    		pidName				.setListener(this);
-    		depth				.setListener(this);
-    		sampleIncrement		.setListener(this);
+    		thermoName					.setListener(this);
+    		address						.setListener(this);
+    		pidName						.setListener(this);
     	}
 	}
     @Override
 	public void onElementClick(View clickedView) 
 	{
-    	Dialog_Text												dialogText;
+       	Dialog_Text												dialogText;
     	Dialog_Integer											dialogInteger;
     	Dialog_String_List										dialogList;
-    	
-    	if (clickedView == pidName)
-		{
-			dialogText 																	= new Dialog_Text(itemData.name, itemData,  "Choose PID Name", this);
-	     	dialogText.show(getFragmentManager(), "Dialog_Temperature");
-		}
-    	else if (clickedView == depth)
-    	{
-	     	dialogInteger																= new Dialog_Integer(itemData.depth,  itemData, 1, 100, "Select PID Depth", this);
-	     	dialogInteger.show(getFragmentManager(), "Dialog_Depth");
-		}
-    	else if (clickedView == sampleIncrement)
-    	{
-	     	dialogInteger																= new Dialog_Integer(itemData.sampleIncrement,  itemData, 1, 300, "Select Sample (unit = 10s)", this);
-	     	dialogInteger.show(getFragmentManager(), "Dialog_SampleIncrement");
-		}
+     	if (clickedView == thermoName)
+     	{
+			// TODO Do Text Dialog
+			dialogText 																		= new Dialog_Text(itemData.name, itemData, "Enter Thermometer Name", this);
+			dialogText.show(getFragmentManager(), "Dialog_Text");
+     	}
+     	else if (clickedView == address)
+     	{
+     		dialogText 																		= new Dialog_Text(itemData.address, itemData, "Enter Thermometer Address", this);
+     		dialogText.show(getFragmentManager(), "Dialog_Text");
+     	}
+     	else if (clickedView == pidName)
+     	{
+     		dialogList 																		= new Dialog_String_List(itemData.pidName, itemData, null, this);
+     		dialogList.itemSelected															= "";
+
+    		for (Ctrl_Configuration.PID_Data pid : Global.eRegConfiguration.pidList)
+    		{
+    			dialogList.items.add(pid.name);
+    		}
+    		dialogList.show(getFragmentManager(), "Dialog_List");
+     	}
  	}
+    @Override
  	public void onPanelButtonOk()
     {
     	getFragmentManager().popBackStackImmediate();
@@ -117,9 +126,10 @@ public class Panel_5_Configuration_PID_Item 					extends 					Panel_0_Fragment
     @Override
  	public void onPanelButtonDelete()
     {
-    	Global.eRegConfiguration.pidList.remove(itemData);
+    	Global.eRegConfiguration.thermometerList.remove(itemData);
     	getFragmentManager().popBackStackImmediate();
     }
+    @Override
     public void onDialogReturn()
     {
     	displayContents();

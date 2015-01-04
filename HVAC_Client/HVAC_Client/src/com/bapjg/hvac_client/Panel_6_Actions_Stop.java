@@ -26,15 +26,51 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 public class Panel_6_Actions_Stop 								extends 					Panel_0_Fragment  
 {
+	private	Element_Button										buttonStop;
+	private	Element_Button										buttonRestart;
+	private	Element_Button										buttonReboot;
+
 	public Panel_6_Actions_Stop()
 	{
-		super();
+		super("Centered");
+/*
+ * 	TODO TODO TODO
+		<RelativeLayout
+    	android:layout_width					= "match_parent"
+   	 	android:layout_height					= "match_parent"
+    	android:layout_gravity					= "center_vertical|center_horizontal"
+    	android:background						= "@color/background"
+    	android:baselineAligned					= "false"
+    	android:orientation						= "vertical" 
+	>
+
+
+	    <Button
+	        android:id							= "@+id/buttonStop"
+	        android:layout_width				= "wrap_content"
+	        android:layout_height				= "wrap_content"
+	        android:layout_alignParentTop		= "true"
+	        android:layout_centerHorizontal		= "true"
+	        android:layout_marginTop			= "30dp"
+	        android:text						= "Stop HVAC System\n(Go to Bash)"
+	        android:textColor					= "#FFFFFF" 
+		/>
+*/
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
-
+//    	this.container																		= container;
+//    	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_stop, container, false);
+    	super.panelInitialise(inflater, container, savedInstanceState);
+    	
+    	buttonStop																			= new Element_Button("Stop HVAC System\n(Go to Bash)");
+    	buttonRestart																		= new Element_Button("Restart HVAC Application");
+    	buttonReboot																		= new Element_Button("Reboot HVAC Controler Completely");
+    	
+    	panelInsertPoint.addView(buttonStop);
+    	panelInsertPoint.addView(buttonRestart);
+    	panelInsertPoint.addView(buttonReboot);
+    	
     	displayTitles("Actions", "Stop");
     	displayContents();
         setListens();
@@ -46,20 +82,17 @@ public class Panel_6_Actions_Stop 								extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-		panelView.findViewById(R.id.buttonStop).setOnClickListener(this);
-		panelView.findViewById(R.id.buttonRestart).setOnClickListener(this);
-		panelView.findViewById(R.id.buttonReboot).setOnClickListener(this);
+		buttonStop		.setListener(this);
+		buttonRestart	.setListener(this);
+		buttonReboot	.setListener(this);
 	}
-	public void onClick(View clickedView)
+	public void onElementClick(View clickedView)
     {
     	Ctrl_Actions_Stop.Execute 								stopMessage					= new Ctrl_Actions_Stop().new Execute();
-    	if (clickedView instanceof Button)
-    	{
-    		if      (clickedView.getId()==R.id.buttonStop)		stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Stop;
-    		else if (clickedView.getId()==R.id.buttonRestart)	stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Restart;
-    		else if (clickedView.getId()==R.id.buttonReboot)	stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Reboot;
-        	TCP_Send(stopMessage);
-    	}
+		if      (clickedView == buttonStop)		stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Stop;
+		else if (clickedView == buttonRestart)	stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Restart;
+		else if (clickedView == buttonReboot)	stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Reboot;
+    	TCP_Send(stopMessage);
     }
     @Override
 	public void processFinishTCP(Ctrl__Abstract result) 

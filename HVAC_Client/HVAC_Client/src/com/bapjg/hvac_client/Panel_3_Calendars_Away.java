@@ -42,6 +42,8 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
     	super.panelInitialise(inflater, container, savedInstanceState);
 
     	Element_Heading											listHeading					= new Element_Heading("Start", "End");
+    	listHeading.centerColumns();
+    	
     	Element_ListView										listView 					= new Element_ListView("Henry");
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);

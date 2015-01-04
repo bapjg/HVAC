@@ -25,15 +25,22 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 public class Panel_6_Actions_Test_Mail 							extends 					Panel_0_Fragment  
 {
+	private	Element_Button										buttonSendMail;
+	
 	public Panel_6_Actions_Test_Mail()
 	{
-		super();
+		super("Centered");
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
-
+//    	this.container																		= container;
+//    	this.panelView																		= inflater.inflate(R.layout.panel_6_actions_test_mail, container, false);
+    	super.panelInitialise(inflater, container, savedInstanceState);
+    	
+    	buttonSendMail																		= new Element_Button("Send a test mail");
+    	
+    	panelInsertPoint.addView(buttonSendMail);
+    	
     	displayTitles("Actions", "Test Mail");
     	displayContents();
         setListens();
@@ -45,11 +52,14 @@ public class Panel_6_Actions_Test_Mail 							extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-		panelView.findViewById(R.id.buttonSendMail).setOnClickListener(this);
+		buttonSendMail.setListener(this);
 	}
-    public void onClick(View view)
+    public void onElementClick(View clickedView)
     {
-    	TCP_Send(new Ctrl_Actions_Test_Mail().new Execute());
+    	if (clickedView == buttonSendMail)
+    	{
+    		TCP_Send(new Ctrl_Actions_Test_Mail().new Execute());
+    	}
     }
  	public void processFinishTCP(Ctrl__Abstract result) 
 	{  
