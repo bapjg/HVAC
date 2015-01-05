@@ -1,6 +1,6 @@
 package com.bapjg.hvac_client;
 
-import java.util.ArrayList;
+import java.util.ArrayList;					// Used for displaying Lists e.g.Words, Pumps, Relays etc
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.widget.*;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Adapter_0_String_List 								extends 					Adapter_0_Abstract
+public class Adapter_0_String_List 								extends 					Panel_0_Adapter_Work
 {
     public String												selectedItem;
     public String												item;

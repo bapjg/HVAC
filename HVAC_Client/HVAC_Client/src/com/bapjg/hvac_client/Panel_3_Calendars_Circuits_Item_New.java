@@ -21,7 +21,7 @@ import android.widget.TextView;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
 @SuppressLint("ValidFragment")
-public class Panel_3_Calendars_Circuits_Item_New 							extends 					Panel_0_Fragment
+public class Panel_3_Calendars_Circuits_Item_New 				extends 					Panel_0_Fragment
 {		
 	private Ctrl_Calendars.Calendar 							itemData;
 	private	String												daysWord;

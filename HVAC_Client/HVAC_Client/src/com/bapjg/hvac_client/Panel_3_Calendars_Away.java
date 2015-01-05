@@ -66,13 +66,13 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-	    AdapterView <Adapter_3_Calendars_Away>					adapterViewList				= (AdapterView <Adapter_3_Calendars_Away>) adapterView;
-	    Adapter_3_Calendars_Away								arrayAdapter				= new Adapter_3_Calendars_Away(Global.actContext, R.id.List_View, Global.eRegCalendars.awayList);
+	    AdapterView <Panel_3_Calendars_Away_Adapter_Work>					adapterViewList				= (AdapterView <Panel_3_Calendars_Away_Adapter_Work>) adapterView;
+	    Panel_3_Calendars_Away_Adapter_Work								arrayAdapter				= new Panel_3_Calendars_Away_Adapter_Work(Global.actContext, R.id.List_View, Global.eRegCalendars.awayList);
 		adapterViewList.setAdapter(arrayAdapter);
 	}
 	public void setListens()
 	{
-		((AdapterView <Adapter_3_Calendars_Away>) adapterView).setOnItemClickListener(this);
+		((AdapterView <Panel_3_Calendars_Away_Adapter_Work>) adapterView).setOnItemClickListener(this);
 		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
 	}
 	public void processFinishTCP(Ctrl__Abstract result) 

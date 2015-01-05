@@ -64,7 +64,7 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
 	{
 		((TextView) panelView.findViewById(R.id.dateTimeObtained)).setText(Global.displayTimeShort(Global.weatherForecast.dateTimeObtained));
 		
-		AdapterView <Adapter_4_Weather> 						view						= (AdapterView) panelView.findViewById(R.id.List_View);
+		AdapterView <Panel_4_Weather_Adapter_Work> 						view						= (AdapterView) panelView.findViewById(R.id.List_View);
         
         forecastList																		= new ArrayList <Ctrl_WeatherData.Forecast> ();
         if (when.equalsIgnoreCase("Today"))
@@ -99,7 +99,7 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
 	        	}
 	        }
 		}
-        Adapter_4_Weather										adapter						= new Adapter_4_Weather(Global.actContext, R.id.List_View, forecastList);
+        Panel_4_Weather_Adapter_Work										adapter						= new Panel_4_Weather_Adapter_Work(Global.actContext, R.id.List_View, forecastList);
         view.setAdapter(adapter);
 	}
 	public void setListens()

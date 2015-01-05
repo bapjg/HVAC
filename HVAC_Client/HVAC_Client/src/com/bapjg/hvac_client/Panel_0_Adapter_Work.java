@@ -13,12 +13,12 @@ import android.widget.*;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Adapter_0_Abstract 								extends 					ArrayAdapter
+public class Panel_0_Adapter_Work 								extends 					ArrayAdapter
 {
     public ArrayList											listData;
     public LayoutInflater 										inflater;
  
-    public Adapter_0_Abstract(Context context, int resource, ArrayList listData) 
+    public Panel_0_Adapter_Work(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
         

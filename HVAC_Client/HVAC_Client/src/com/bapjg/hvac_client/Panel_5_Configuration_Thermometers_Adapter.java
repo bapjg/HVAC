@@ -11,7 +11,7 @@ import android.view.*;
 import android.widget.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_5_Configuration_Thermometers_Adapter 				extends 					Adapter_0_Abstract
+public class Panel_5_Configuration_Thermometers_Adapter 		extends 					Panel_0_Adapter_Work
 {
  
     public Panel_5_Configuration_Thermometers_Adapter(Context context, int resource, ArrayList listData) 
@@ -22,7 +22,6 @@ public class Panel_5_Configuration_Thermometers_Adapter 				extends 					Adapter
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
     	Ctrl_Configuration.Thermometer								listItem				= (Ctrl_Configuration.Thermometer) listData.get(position);
-//        adapterView 																		= inflater.inflate(R.layout.element_standard, null);
         
     	Element_Standard											adapterElement 			= new Element_Standard(listItem.name);
     	adapterElement.setTextRight(listItem.address);

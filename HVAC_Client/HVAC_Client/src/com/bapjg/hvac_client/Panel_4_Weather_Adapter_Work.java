@@ -11,10 +11,10 @@ import android.widget.*;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Adapter_4_Weather 									extends 					Adapter_0_Abstract
+public class Panel_4_Weather_Adapter_Work 									extends 					Panel_0_Adapter_Work
 {
  
-    public Adapter_4_Weather(Context context, int resource, ArrayList listData) 
+    public Panel_4_Weather_Adapter_Work(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
     }
