@@ -100,7 +100,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_horizontal</item>
     </style>
-    <style name="AD_Linear_Top">
+    <style name="AD_Linear_Top_Throw_Away">
         <item name="android:background">@color/background</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>

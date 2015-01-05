@@ -48,7 +48,7 @@ public class Element_ListView 									extends 					LinearLayout
 	{
 		super(Global.actContext);
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
-		inflater.inflate(R.layout.aa_include_list_section, this, true);
+		inflater.inflate(R.layout.panel_0_include_list_section, this, true);
 	}
 	public void setTextLeft(String text)
 	{

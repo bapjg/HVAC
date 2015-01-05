@@ -1,7 +1,9 @@
 <?xml version= "1.0" 		encoding			= "utf-8"?>
 <RelativeLayout 	
     xmlns:android								= "http://schemas.android.com/apk/res/android"
-    style										= "@style/AD_Linear_Top"
+    android:layout_width							= "match_parent"
+    android:layout_height							= "match_parent"
+    android:background								= "@color/background"
 >                                      	
     <include layout								= "@layout/panel_0_base_title_section" />
 
@@ -47,6 +49,6 @@
 	    </GridLayout>
 	</LinearLayout>
     
-    <include layout							= "@layout/aa_include_buttons_ok_delete" />
+    <include layout							= "@layout/panel_0_include_buttons_ok_delete" />
 
 </RelativeLayout>

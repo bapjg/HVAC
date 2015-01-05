@@ -66,19 +66,19 @@ public class Panel_0_Fragment 									extends 					Fragment
 		}
 		else if (panelType.equalsIgnoreCase("Centered"))
 		{
-			this.panelView																	= inflater.inflate(R.layout.panal_0_standard_centered, container, false);
+			this.panelView																	= inflater.inflate(R.layout.panel_0_standard_centered, container, false);
 	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
 		}
 		else if (panelType.equalsIgnoreCase("Add"))
 		{
-			this.panelView																	= inflater.inflate(R.layout.panal_0_standard_with_buttons_addnew, container, false);
+			this.panelView																	= inflater.inflate(R.layout.panel_0_standard_with_buttons_addnew, container, false);
 	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
 			this.panelButtonAdd																= this.panelView.findViewById(R.id.buttonAdd);
 			this.panelButtonAdd			.setOnClickListener(this);
 		}
 		else if (panelType.equalsIgnoreCase("Ok_Delete"))
 		{
-			this.panelView																	= inflater.inflate(R.layout.panal_0_standard_with_buttons_ok_delete, container, false);
+			this.panelView																	= inflater.inflate(R.layout.panel_0_standard_with_buttons_ok_delete, container, false);
 	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
 			this.panelButtonOk																= this.panelView.findViewById(R.id.buttonOk);
 			this.panelButtonDelete															= this.panelView.findViewById(R.id.buttonDelete);
