@@ -67,15 +67,24 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 	public void displayContents()
 	{
 	    AdapterView <Panel_5_Configuration_Relays_Adapter>			adapterViewList				= (AdapterView <Panel_5_Configuration_Relays_Adapter>) adapterView;
-		Panel_5_Configuration_Relays_Adapter							arrayAdapter				= new Panel_5_Configuration_Relays_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
-		adapterViewList.setAdapter(arrayAdapter);
-
+		Panel_5_Configuration_Relays_Adapter						arrayAdapter				= new Panel_5_Configuration_Relays_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
+//		adapterViewList.setAdapter(arrayAdapter);
+		((AdapterView <Panel_5_Configuration_Relays_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()
 	{
-		((AdapterView<?>) adapterView).setOnItemClickListener(this);
-//		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
+		((AdapterView <Panel_5_Configuration_Relays_Adapter>) adapterView).setOnItemClickListener(this);
 	}
+	public void onPanelButtonAdd()
+    {
+    	Ctrl_Configuration.Relay								itemNew						= new Ctrl_Configuration().new Relay();
+		itemNew.name																		= "new";
+		itemNew.relayBank																	= 0;
+		itemNew.relayNumber																	= 0;
+		Global.eRegConfiguration.relayList.add(itemNew);
+		displayContents();
+		setListens();
+    }
 	public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
 	{
     	Ctrl_Configuration.Relay								itemData					= Global.eRegConfiguration.relayList.get(position);
@@ -87,14 +96,4 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
    	}
-	public void onPanelButtonAdd()
-    {
-    	Ctrl_Configuration.Relay								itemNew						= new Ctrl_Configuration().new Relay();
-		itemNew.name																		= "new";
-		itemNew.relayBank																	= 0;
-		itemNew.relayNumber																	= 0;
-		Global.eRegConfiguration.relayList.add(itemNew);
-		displayContents();
-		setListens();
-    }
 }

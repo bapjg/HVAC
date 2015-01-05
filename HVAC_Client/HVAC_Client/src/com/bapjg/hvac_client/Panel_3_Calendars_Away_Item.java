@@ -111,7 +111,4 @@ public class Panel_3_Calendars_Away_Item 						extends 					Panel_0_Fragment
     {
     	displayContents();
     }
-
-
 }
-

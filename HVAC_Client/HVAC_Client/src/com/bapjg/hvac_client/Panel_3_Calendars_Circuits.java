@@ -57,7 +57,8 @@ public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
         AdapterView <Panel_3_Calendars_Circuits_Adapter_Work>				adapterViewList				= (AdapterView <Panel_3_Calendars_Circuits_Adapter_Work>) adapterView;
         Ctrl_Calendars.Circuit									circuit						= Global.eRegCalendars.fetchCircuit(this.circuitName);
         Panel_3_Calendars_Circuits_Adapter_Work							arrayAdapter				= new Panel_3_Calendars_Circuits_Adapter_Work(Global.actContext, R.id.List_View, circuit.calendarList);
-        adapterViewList.setAdapter(arrayAdapter);
+//        adapterViewList.setAdapter(arrayAdapter);
+		((AdapterView <Panel_3_Calendars_Circuits_Adapter_Work>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()
 	{

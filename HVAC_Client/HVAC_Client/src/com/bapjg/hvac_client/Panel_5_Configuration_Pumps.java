@@ -62,6 +62,26 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
         
         return panelView;
     }
+	public void displayContents()
+	{
+	    AdapterView <Panel_5_Configuration_Pumps_Adapter>			adapterViewList				= (AdapterView <Panel_5_Configuration_Pumps_Adapter>) adapterView;
+        Panel_5_Configuration_Pumps_Adapter							arrayAdapter				= new Panel_5_Configuration_Pumps_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
+//        adapterViewList.setAdapter(arrayAdapter);
+		((AdapterView <Panel_5_Configuration_Pumps_Adapter>) adapterView).setAdapter(arrayAdapter);
+	}
+	public void setListens()
+	{
+		((AdapterView <Panel_5_Configuration_Pumps_Adapter>) adapterView).setOnItemClickListener(this);
+	}
+	public void onPanelButtonAdd()
+    {
+    	Ctrl_Configuration.Pump									itemNew						= new Ctrl_Configuration().new Pump();
+		itemNew.name																		= "new";
+		itemNew.relay																		= "";
+		Global.eRegConfiguration.pumpList.add(itemNew);
+		displayContents();
+		setListens();
+    }
     public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
 	{
     	Ctrl_Configuration.Pump									itemData					= Global.eRegConfiguration.pumpList.get(position);
@@ -87,23 +107,5 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
 			Global.toaster("P5_Conf_Pump : Data NOTNOTNOT received", true);
 		}
 	}
-	public void displayContents()
-	{
-	    AdapterView <Panel_5_Configuration_Pumps_Adapter>				adapterViewList				= (AdapterView <Panel_5_Configuration_Pumps_Adapter>) adapterView;
-        Panel_5_Configuration_Pumps_Adapter							arrayAdapter				= new Panel_5_Configuration_Pumps_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
-        adapterViewList.setAdapter(arrayAdapter);
-	}
-	public void setListens()
-	{
-		((AdapterView<?>) adapterView).setOnItemClickListener(this);
-	}
-	public void onPanelButtonAdd()
-    {
-    	Ctrl_Configuration.Pump									itemNew						= new Ctrl_Configuration().new Pump();
-		itemNew.name																		= "new";
-		itemNew.relay																		= "";
-		Global.eRegConfiguration.pumpList.add(itemNew);
-		displayContents();
-		setListens();
-    }
+
 }

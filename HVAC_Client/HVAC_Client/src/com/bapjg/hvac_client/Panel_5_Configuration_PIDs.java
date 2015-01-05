@@ -62,6 +62,17 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
         
         return panelView;
     }
+	public void displayContents()
+	{
+	    AdapterView <Panel_5_Configuration_PIDs_Adapter>			adapterViewList					= (AdapterView <Panel_5_Configuration_PIDs_Adapter>) adapterView;
+        Panel_5_Configuration_PIDs_Adapter							arrayAdapter					= new Panel_5_Configuration_PIDs_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.pidList);
+//        adapterViewList.setAdapter(arrayAdapter);
+		((AdapterView <Panel_5_Configuration_PIDs_Adapter>) adapterView).setAdapter(arrayAdapter);
+	}
+	public void setListens()
+	{
+		((AdapterView <Panel_5_Configuration_PIDs_Adapter>) adapterView).setOnItemClickListener(this);
+	}
     public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
 	{
     	Ctrl_Configuration.PID_Data								itemData						= Global.eRegConfiguration.pidList.get(position);
@@ -73,28 +84,6 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
    	}
-	public void processFinishTCP(Ctrl__Abstract result) 
-	{  
-		if (result instanceof Ctrl_Configuration.Data)
-		{
-			Global.eRegConfiguration															= (Ctrl_Configuration.Data) result;
-			displayContents();
-		}
-		else
-		{
-			Global.toaster("P5_Conf_PID : Data NOTNOTNOT received", true);
-		}
-	}
-	public void displayContents()
-	{
-	    AdapterView <Panel_5_Configuration_PIDs_Adapter>				adapterViewList					= (AdapterView <Panel_5_Configuration_PIDs_Adapter>) adapterView;
-        Panel_5_Configuration_PIDs_Adapter							arrayAdapter					= new Panel_5_Configuration_PIDs_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.pidList);
-        adapterViewList.setAdapter(arrayAdapter);
-	}
-	public void setListens()
-	{
-		((AdapterView <?>) adapterView).setOnItemClickListener(this);
-	}
 	public void onPanelButtonAdd()
     {
     	Ctrl_Configuration.PID_Data								itemNew							= new Ctrl_Configuration().new PID_Data();

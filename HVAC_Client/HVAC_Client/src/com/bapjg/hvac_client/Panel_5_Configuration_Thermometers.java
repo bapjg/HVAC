@@ -68,15 +68,16 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
     }
 	public void displayContents()
 	{
-	    AdapterView <Panel_5_Configuration_Thermometers_Adapter>		adapterViewList				= (AdapterView <Panel_5_Configuration_Thermometers_Adapter>) adapterView;
+	    AdapterView <Panel_5_Configuration_Thermometers_Adapter>	adapterViewList				= (AdapterView <Panel_5_Configuration_Thermometers_Adapter>) adapterView;
 		Panel_5_Configuration_Thermometers_Adapter 					arrayAdapter				= new Panel_5_Configuration_Thermometers_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
-		adapterViewList.setAdapter(arrayAdapter);
+//		adapterViewList.setAdapter(arrayAdapter);
+		((AdapterView <Panel_5_Configuration_Thermometers_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()
 	{
-		((AdapterView<?>) adapterView).setOnItemClickListener(this);
-//		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
+		((AdapterView <Panel_5_Configuration_Thermometers_Adapter>) adapterView).setOnItemClickListener(this);
 	}    
+    @Override
 	public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
 	{
     	Ctrl_Configuration.Thermometer							itemData					= Global.eRegConfiguration.thermometerList.get(position);
@@ -88,7 +89,6 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
    	}
-    @Override
 	public void onPanelButtonAdd()
     {
     	Ctrl_Configuration.Thermometer							itemNew						= new Ctrl_Configuration().new Thermometer();

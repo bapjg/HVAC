@@ -67,13 +67,25 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 	{
 		AdapterView <Panel_5_Configuration_Circuits_Adapter>			adapterViewList				= (AdapterView <Panel_5_Configuration_Circuits_Adapter>) adapterView;
 		Panel_5_Configuration_Circuits_Adapter						arrayAdapter				= new Panel_5_Configuration_Circuits_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
-		adapterViewList.setAdapter(arrayAdapter);
+//		adapterViewList.setAdapter(arrayAdapter);
+		((AdapterView <Panel_5_Configuration_Circuits_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()
 	{
 		((AdapterView <?>) adapterView).setOnItemClickListener(this);
 	}
-	public void processFinishHTTP(Ctrl__Abstract result) 
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+    	Ctrl_Configuration.Circuit								itemData						= Global.eRegConfiguration.circuitList.get(position);
+
+    	Panel_5_Configuration_Circuits_Item						itemFragment					= new Panel_5_Configuration_Circuits_Item(itemData);
+
+    	FragmentTransaction 									fTransaction 					= getActivity().getFragmentManager().beginTransaction();
+   		fTransaction.replace(R.id.panel_container, itemFragment);
+   		fTransaction.addToBackStack(null);
+   		fTransaction.commit();
+	}
+    public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
 		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Configuration.Data)
@@ -87,15 +99,5 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 			Global.toaster("P5_Conf_Circuits : Data NOTNOTNOT received", true);
 		}
 	}
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-    	Ctrl_Configuration.Circuit								itemData						= Global.eRegConfiguration.circuitList.get(position);
 
-    	Panel_5_Configuration_Circuits_Item						itemFragment					= new Panel_5_Configuration_Circuits_Item(itemData);
-
-    	FragmentTransaction 									fTransaction 					= getActivity().getFragmentManager().beginTransaction();
-   		fTransaction.replace(R.id.panel_container, itemFragment);
-   		fTransaction.addToBackStack(null);
-   		fTransaction.commit();
-	}
 }

@@ -71,6 +71,18 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 
     	return panelView;
     }
+	public void displayContents()
+	{
+		thermoName			.setTextRight(Global.eRegConfiguration.boiler.thermometer);
+		tempNeverExceed		.setTextRight(Global.eRegConfiguration.boiler.tempNeverExceed.displayInteger());
+		tempOverShoot		.setTextRight(Global.eRegConfiguration.boiler.tempOverShoot.displayInteger());
+	}
+	public void setListens()
+	{
+		thermoName			.setListener	(this);
+		tempNeverExceed		.setListener	(this);
+		tempOverShoot		.setListener	(this);
+	}
 	public void onElementClick(View view)
 	{
 		if (view == thermoName)
@@ -101,18 +113,6 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	{
 		displayContents();
         setListens();
-	}
-	public void displayContents()
-	{
-		thermoName			.setTextRight(Global.eRegConfiguration.boiler.thermometer);
-		tempNeverExceed		.setTextRight(Global.eRegConfiguration.boiler.tempNeverExceed.displayInteger());
-		tempOverShoot		.setTextRight(Global.eRegConfiguration.boiler.tempOverShoot.displayInteger());
-	}
-	public void setListens()
-	{
-		thermoName			.setListener	(this);
-		tempNeverExceed		.setListener	(this);
-		tempOverShoot		.setListener	(this);
 	}
 }
 

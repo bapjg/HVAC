@@ -92,41 +92,6 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 		{
 			fuelConsumptionLitres	.setTextRight(0);
 		}
-//
-//		
-//		
-//		
-//		
-//		
-//		
-//		if (getActivity() != null)			// The user has not changed the screen
-//		{
-//			Integer												fuelMinutes					= 0;
-//			Integer												fuelLitres					= 0;
-//			String												fuelMinutesString			= "nought";
-//			String												fuelLitresString			= "nought";
-//			
-//			
-//			((TextView) panelView.findViewById(R.id.name)).setText							(burner.relay);
-//			DecimalFormatSymbols 								decimalFormatsymbol			= DecimalFormatSymbols.getInstance();
-//			decimalFormatsymbol.setGroupingSeparator(' ');
-//			DecimalFormat 										decimalFormat 				= new DecimalFormat("###,###", decimalFormatsymbol);
-//			// Present the fuel consumption in minutes
-//			if (burner.fuelConsumption != null)
-//			{
-//				fuelMinutes																	= (int) (burner.fuelConsumption/1000/60);
-//				fuelMinutesString															= decimalFormat.format(fuelMinutes);
-//				fuelLitres																	= fuelMinutes/burner.minutesPerLitre;
-//				fuelLitresString															= decimalFormat.format(fuelLitres);
-//			}
-//			else
-//			{
-//				fuelMinutesString															= "nought received";
-//			}
-//			((TextView) panelView.findViewById(R.id.fuelConsumption)).setText				(fuelMinutesString);
-//			((TextView) panelView.findViewById(R.id.minutesPerLitre)).setText				(burner.minutesPerLitre.toString());
-//			((TextView) panelView.findViewById(R.id.fuelConsumptionLitres)).setText			(fuelLitresString);
-//		}
 	}
 	public void setListens()
 	{
