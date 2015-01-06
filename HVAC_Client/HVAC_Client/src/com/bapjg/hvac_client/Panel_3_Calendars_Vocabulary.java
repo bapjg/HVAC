@@ -52,7 +52,7 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public void displayContents()
 	{
-    	AdapterView <Panel_3_Calendars_Vocabulary_Adapter>					adapterViewList				= (AdapterView <Panel_3_Calendars_Vocabulary_Adapter>) adapterView;
+//    	AdapterView <Panel_3_Calendars_Vocabulary_Adapter>					adapterViewList				= (AdapterView <Panel_3_Calendars_Vocabulary_Adapter>) adapterView;
 		Panel_3_Calendars_Vocabulary_Adapter								arrayAdapter				= new Panel_3_Calendars_Vocabulary_Adapter(Global.actContext, R.id.List_View, Global.eRegCalendars.wordList);
 //		adapterViewList.setAdapter(arrayAdapter);
 		((AdapterView <Panel_3_Calendars_Vocabulary_Adapter>) adapterView).setAdapter(arrayAdapter);

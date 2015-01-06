@@ -65,7 +65,7 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		AdapterView <Panel_5_Configuration_Circuits_Adapter>			adapterViewList				= (AdapterView <Panel_5_Configuration_Circuits_Adapter>) adapterView;
+//		AdapterView <Panel_5_Configuration_Circuits_Adapter>			adapterViewList				= (AdapterView <Panel_5_Configuration_Circuits_Adapter>) adapterView;
 		Panel_5_Configuration_Circuits_Adapter						arrayAdapter				= new Panel_5_Configuration_Circuits_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
 //		adapterViewList.setAdapter(arrayAdapter);
 		((AdapterView <Panel_5_Configuration_Circuits_Adapter>) adapterView).setAdapter(arrayAdapter);

@@ -68,7 +68,7 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
     }
 	public void displayContents()
 	{
-	    AdapterView <Panel_5_Configuration_Thermometers_Adapter>	adapterViewList				= (AdapterView <Panel_5_Configuration_Thermometers_Adapter>) adapterView;
+//	    AdapterView <Panel_5_Configuration_Thermometers_Adapter>	adapterViewList				= (AdapterView <Panel_5_Configuration_Thermometers_Adapter>) adapterView;
 		Panel_5_Configuration_Thermometers_Adapter 					arrayAdapter				= new Panel_5_Configuration_Thermometers_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.thermometerList);
 //		adapterViewList.setAdapter(arrayAdapter);
 		((AdapterView <Panel_5_Configuration_Thermometers_Adapter>) adapterView).setAdapter(arrayAdapter);

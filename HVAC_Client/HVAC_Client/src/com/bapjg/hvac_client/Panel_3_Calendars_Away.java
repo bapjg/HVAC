@@ -66,7 +66,7 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-	    AdapterView <Panel_3_Calendars_Away_Adapter_Work>				adapterViewList				= (AdapterView <Panel_3_Calendars_Away_Adapter_Work>) adapterView;
+//	    AdapterView <Panel_3_Calendars_Away_Adapter_Work>				adapterViewList				= (AdapterView <Panel_3_Calendars_Away_Adapter_Work>) adapterView;
 	    Panel_3_Calendars_Away_Adapter_Work								arrayAdapter				= new Panel_3_Calendars_Away_Adapter_Work(Global.actContext, R.id.List_View, Global.eRegCalendars.awayList);
 //		adapterViewList.setAdapter(arrayAdapter);
 	    ((AdapterView <Panel_3_Calendars_Away_Adapter_Work>) adapterView).setAdapter(arrayAdapter);
@@ -74,27 +74,12 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
 	public void setListens()
 	{
 		((AdapterView <Panel_3_Calendars_Away_Adapter_Work>) adapterView).setOnItemClickListener(this);
-//		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
 	}
-//	public void processFinishTCP(Ctrl__Abstract result) 
-//	{  
-//		super.processFinishTCP(result);
-//		if (result instanceof Ctrl_Calendars.Data)
-//		{
-//			Global.eRegConfiguration			 											= (Ctrl_Configuration.Data) result;
-//			displayContents();
-//	        setListens();
-// 		}
-//		else
-//		{
-//			Global.toaster("P5_Cals_Away : Data NOTNOTNOT received", true);
-//		}
-//	}
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
     	Ctrl_Calendars.Away										itemData					= Global.eRegCalendars.awayList.get(position);
 		
-    	Panel_3_Calendars_Away_Item									itemFragment				= new Panel_3_Calendars_Away_Item(itemData);
+    	Panel_3_Calendars_Away_Item								itemFragment				= new Panel_3_Calendars_Away_Item(itemData);
 		
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);

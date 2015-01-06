@@ -36,7 +36,7 @@ public class Panel_3_Calendars_Away_Item 						extends 					Panel_0_Fragment
 
 	public Panel_3_Calendars_Away_Item(Ctrl_Calendars.Away itemData)
 	{
-		super("Ok-Delete");
+		super("Ok_Delete");
 		this.itemData																		= itemData;
 	}
     @Override
@@ -45,15 +45,15 @@ public class Panel_3_Calendars_Away_Item 						extends 					Panel_0_Fragment
     	super.panelInitialise(inflater, container, savedInstanceState);
 
     	headingGeneral			 															= new Element_Heading("Parameters");
-    	dateStart																			= new Element_Standard("Thermometer Name");
-    	dateEnd																				= new Element_Standard("Thermometer Name");
-    	timeStart																			= new Element_Standard("Thermometer Name");
-    	timeEnd																				= new Element_Standard("Thermometer Name");
+    	dateStart																			= new Element_Standard("Date Start");
+    	timeStart																			= new Element_Standard("Time Start");
+    	dateEnd																				= new Element_Standard("Date End");
+    	timeEnd																				= new Element_Standard("Time End");
 
     	panelInsertPoint.addView(headingGeneral);
     	panelInsertPoint.addView(dateStart);
-    	panelInsertPoint.addView(dateEnd);
     	panelInsertPoint.addView(timeStart);
+    	panelInsertPoint.addView(dateEnd);
     	panelInsertPoint.addView(timeEnd);
 
     	displayTitles("Calendar", "Away Item");
@@ -65,15 +65,15 @@ public class Panel_3_Calendars_Away_Item 						extends 					Panel_0_Fragment
 	public void displayContents()
 	{
 		dateStart						.setTextRight		(Global.displayDate(itemData.dateTimeStart));
-		dateEnd							.setTextRight		(Global.displayTimeShort(itemData.dateTimeStart));
-		timeStart						.setTextRight		(Global.displayDate(itemData.dateTimeEnd));
+		timeStart						.setTextRight		(Global.displayTimeShort(itemData.dateTimeStart));
+		dateEnd							.setTextRight		(Global.displayDate(itemData.dateTimeEnd));
 		timeEnd							.setTextRight		(Global.displayTimeShort(itemData.dateTimeEnd));
    	}
 	public void setListens()
 	{
 		dateStart						.setListener(this);
-		dateEnd							.setListener(this);
 		timeStart						.setListener(this);
+		dateEnd							.setListener(this);
 		timeEnd							.setListener(this);
 	}
     @Override

@@ -12,7 +12,7 @@ import android.view.*;
 import android.widget.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_3_Calendars_Away_Adapter_Work 							extends 					Panel_0_Adapter_Work
+public class Panel_3_Calendars_Away_Adapter_Work 					extends 					Panel_0_Adapter
 {
  
     public Panel_3_Calendars_Away_Adapter_Work(Context context, int resource, ArrayList listData) 

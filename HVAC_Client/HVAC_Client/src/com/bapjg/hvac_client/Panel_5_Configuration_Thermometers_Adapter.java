@@ -11,7 +11,7 @@ import android.view.*;
 import android.widget.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_5_Configuration_Thermometers_Adapter 		extends 					Panel_0_Adapter_Work
+public class Panel_5_Configuration_Thermometers_Adapter 		extends 					Panel_0_Adapter
 {
  
     public Panel_5_Configuration_Thermometers_Adapter(Context context, int resource, ArrayList listData) 

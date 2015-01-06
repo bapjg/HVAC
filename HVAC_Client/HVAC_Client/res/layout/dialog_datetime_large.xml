@@ -1,20 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
-    xmlns:android				= "http://schemas.android.com/apk/res/android"
-    android:layout_width		= "wrap_content" 
-    android:layout_height		= "wrap_content"
-    android:layout_gravity		= "center" 
-    android:orientation			= "vertical"
-    android:padding				= "5dip" >
-	<DatePicker	                  
-		android:id				= "@+id/dateObjective"
-		android:layout_width	= "wrap_content"
-		android:layout_height	= "wrap_content"
-	/>                            
-	<TimePicker                   
-		android:id				= "@+id/timeObjective"
-		android:layout_width	= "wrap_content"
-		android:layout_height	= "wrap_content"
-		android:layout_gravity	= "center_horizontal"
-	/>
-</LinearLayout>
+<?xml version	= "1.0" encoding	= "utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:padding="5dip" >
+
+    <DatePicker
+        android:id="@+id/dateObjective"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:calendarViewShown="true"
+        android:spinnersShown="false" />
+
+    <TimePicker
+        android:id="@+id/timeObjective"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateObjective" />
+
+    <Button
+        android:id="@+id/button00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/timeObjective"
+        android:layout_toRightOf="@id/timeObjective"
+        android:text="00" />
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button00"
+        android:layout_toRightOf="@id/timeObjective"
+        android:text="15" />
+
+    <Button
+        android:id="@+id/button30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button15"
+        android:layout_toRightOf="@id/timeObjective"
+        android:text="30" />
+
+    <Button
+        android:id="@+id/button45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button30"
+        android:layout_toRightOf="@+id/timeObjective"
+        android:text="45" />
+
+</RelativeLayout>

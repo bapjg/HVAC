@@ -64,7 +64,7 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-	    AdapterView <Panel_5_Configuration_Pumps_Adapter>			adapterViewList				= (AdapterView <Panel_5_Configuration_Pumps_Adapter>) adapterView;
+//	    AdapterView <Panel_5_Configuration_Pumps_Adapter>			adapterViewList				= (AdapterView <Panel_5_Configuration_Pumps_Adapter>) adapterView;
         Panel_5_Configuration_Pumps_Adapter							arrayAdapter				= new Panel_5_Configuration_Pumps_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.pumpList);
 //        adapterViewList.setAdapter(arrayAdapter);
 		((AdapterView <Panel_5_Configuration_Pumps_Adapter>) adapterView).setAdapter(arrayAdapter);

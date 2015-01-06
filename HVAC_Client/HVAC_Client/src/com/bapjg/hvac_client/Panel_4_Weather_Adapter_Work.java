@@ -11,7 +11,7 @@ import android.widget.*;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_4_Weather_Adapter_Work 									extends 					Panel_0_Adapter_Work
+public class Panel_4_Weather_Adapter_Work 							extends 					Panel_0_Adapter
 {
  
     public Panel_4_Weather_Adapter_Work(Context context, int resource, ArrayList listData) 
