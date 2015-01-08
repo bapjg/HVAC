@@ -27,11 +27,22 @@ public class Element_WeekDays 									extends 					LinearLayout
 	
 	public Panel_0_Interface									listener;
 	
+	public Element_WeekDays()
+	{
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
+		inflater.inflate(R.layout.element_weekdays, this, true);
+	}
 	public Element_WeekDays(String nameText, String days) 
 	{
 		super(Global.actContext);
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_weekdays, this, true);
+
+		setData(nameText, days);
+	}
+	public void setData(String nameText, String days)
+	{
 		textName 																			= (TextView) this.findViewById(R.id.Name);
 		textName.setText(nameText);
 
@@ -54,11 +65,18 @@ public class Element_WeekDays 									extends 					LinearLayout
 	public void setListener(Panel_0_Interface listener)
 	{
 		this.listener																		= listener;
-//		textRight.setOnClickListener(this);
+		textName	.setOnClickListener(this);
+		day_1		.setOnClickListener(this);
+		day_2		.setOnClickListener(this); 	
+		day_3		.setOnClickListener(this);
+		day_4		.setOnClickListener(this);
+		day_5		.setOnClickListener(this);
+		day_6		.setOnClickListener(this);
+		day_7		.setOnClickListener(this);
 	}
 	public void onClick(View view)
 	{
-		listener.onElementClick((View) this);
+		listener.onElementClick((View) view);	// Return the actual view which was clicked
 	}
 }
 

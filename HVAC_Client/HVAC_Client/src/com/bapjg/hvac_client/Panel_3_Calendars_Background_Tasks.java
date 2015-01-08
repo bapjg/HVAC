@@ -42,17 +42,13 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 	
 	public Panel_3_Calendars_Background_Tasks()
 	{
-		super();
+		super("Standard");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-        // Inflate the layout for this fragment
-//    	this.panelLayout																	= R.layout.panal_0_standard;
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
-
-    	LinearLayout insertPoint = (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+    	super.panelInitialise(inflater, container, savedInstanceState);
+    	displayTitles("Calendars", "Background Tasks");
 
     	pumpCleanTime 																		= new Element_Standard("Pump Clean Time");
     	pumpCleanDuration 																	= new Element_Standard("Pump Clean Duration");
@@ -61,17 +57,17 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
     	winterTemp 																			= new Element_Standard("Winter Temperature");
     	sunshineInfluence 																	= new Element_Standard("Sunshine Influence");
 
-    	insertPoint.addView(pumpCleanTime);
-    	insertPoint.addView(pumpCleanDuration);
-    	insertPoint.addView(antiFreeze);
-    	insertPoint.addView(summerTemp);
-    	insertPoint.addView(winterTemp);
-    	insertPoint.addView(sunshineInfluence);
+    	panelInsertPoint.addView(new Element_Heading( "Parameters"));
+    	panelInsertPoint.addView(pumpCleanTime);
+    	panelInsertPoint.addView(pumpCleanDuration);
+    	panelInsertPoint.addView(antiFreeze);
+    	panelInsertPoint.addView(summerTemp);
+    	panelInsertPoint.addView(winterTemp);
+    	panelInsertPoint.addView(sunshineInfluence);
 
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.tasksBackGround != null))
         {
-        	displayTitles("Calendars", "Background Tasks");
         	displayContents();
         	setListens();
         }

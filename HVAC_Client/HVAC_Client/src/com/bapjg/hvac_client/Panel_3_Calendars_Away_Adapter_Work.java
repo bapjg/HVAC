@@ -19,40 +19,18 @@ public class Panel_3_Calendars_Away_Adapter_Work 					extends 					Panel_0_Adapt
     {
         super(context, resource, listData);
     }
+    @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-    	RowHolder 												row;
         Ctrl_Calendars.Away 									listItem					= (Ctrl_Calendars.Away) listData.get(position);
     	
-    	adapterView 																		= inflater.inflate(R.layout.row_3_calendars_away, null);
-    	row 																				= new RowHolder();
-    	row.dateStart 																		= (TextView) adapterView.findViewById(R.id.dateStart);
-    	row.timeStart 																		= (TextView) adapterView.findViewById(R.id.timeStart);
-    	row.dateEnd																			= (TextView) adapterView.findViewById(R.id.dateEnd);
-    	row.timeEnd																			= (TextView) adapterView.findViewById(R.id.timeEnd);
+    	Element_Centered_x_4									adapterElement 				= new Element_Centered_x_4();
 
-        adapterView.setTag(row);
-        
-        Long													dateTimeStart				= listItem.dateTimeStart;
-        Long													dateTimeEnd					= listItem.dateTimeEnd;
-        
-        String													stringDateStart				= Global.displayDate(dateTimeStart);
-        String													stringTimeStart				= Global.displayTime(dateTimeStart);
-        String													stringDateEnd				= Global.displayDate(dateTimeEnd);
-        String													stringTimeEnd				= Global.displayTime(dateTimeEnd);
+    	adapterElement.setTextTopLeft		(Global.displayDate(listItem.dateTimeStart));
+    	adapterElement.setTextBottomLeft	(Global.displayTime(listItem.dateTimeStart));
+    	adapterElement.setTextTopRight		(Global.displayDate(listItem.dateTimeEnd));
+    	adapterElement.setTextBottomRight	(Global.displayTime(listItem.dateTimeEnd));
 
-        row.dateStart.setText(stringDateStart);
-        row.timeStart.setText(stringTimeStart);
-        row.dateEnd.setText(stringDateEnd);
-        row.timeEnd.setText(stringTimeEnd);
-       
-         return adapterView;
-    }
-    static class RowHolder 
-    {
-    	TextView 												dateStart;
-       	TextView 												timeStart;
-    	TextView 												dateEnd;
-    	TextView 												timeEnd;
+        return adapterElement;
     }
 }

@@ -21,25 +21,27 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 {		
+
 	public Panel_3_Calendars_Vocabulary()
 	{
-		super();
+		super("Add");
 	}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_3_calendars, container, false);
-        this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
+    	super.panelInitialise(inflater, container, savedInstanceState);
+
+    	Element_ListView										listView 					= new Element_ListView("Henry");
         
-        
-        
-        
+    	panelInsertPoint.addView(listView);
+
+    	this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
+
+    	displayTitles("Calendars", "Words");
  
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.wordList != null))
         {
-        	displayTitles("Calendars", "Words");
         	displayContents();
             setListens();
         }
@@ -80,7 +82,7 @@ public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 	{
     	Ctrl_Calendars.Word										itemData					= Global.eRegCalendars.wordList.get(position);
 			                                                                            
-    	Panel_3_Calendars_Vocabulary_Item_New								itemFragment				= new Panel_3_Calendars_Vocabulary_Item_New(itemData);
+    	Panel_3_Calendars_Vocabulary_Item_New					itemFragment				= new Panel_3_Calendars_Vocabulary_Item_New(itemData);
 							                                                            
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
