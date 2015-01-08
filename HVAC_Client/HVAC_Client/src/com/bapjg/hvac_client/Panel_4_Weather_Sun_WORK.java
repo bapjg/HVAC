@@ -21,16 +21,16 @@ import android.util.Log;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Panel_4_Weather_Sun 									extends 					Panel_0_Fragment
+public class Panel_4_Weather_Sun_WORK 									extends 					Panel_0_Fragment
 {
 	private String												when;
 	private ArrayList <Ctrl_WeatherData.Forecast> 				forecastList;
 	
-	public Panel_4_Weather_Sun()
+	public Panel_4_Weather_Sun_WORK()
 	{
 		super();
 	}
-    public Panel_4_Weather_Sun(String when)
+    public Panel_4_Weather_Sun_WORK(String when)
     {
 		super();
 		this.when																			= when;				

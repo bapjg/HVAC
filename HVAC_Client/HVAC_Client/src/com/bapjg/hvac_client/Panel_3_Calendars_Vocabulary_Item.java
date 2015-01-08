@@ -21,7 +21,7 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
-public class Panel_3_Calendars_Vocabulary_Item_New 				extends 					Panel_0_Fragment
+public class Panel_3_Calendars_Vocabulary_Item 				extends 					Panel_0_Fragment
 {		
 	private Ctrl_Calendars.Word 								itemData;
 	private	Element_WeekDays									days;
@@ -31,7 +31,7 @@ public class Panel_3_Calendars_Vocabulary_Item_New 				extends 					Panel_0_Frag
 	// TODO Rework button close
 	// TODO
 	
-	public Panel_3_Calendars_Vocabulary_Item_New(Ctrl_Calendars.Word itemData)
+	public Panel_3_Calendars_Vocabulary_Item(Ctrl_Calendars.Word itemData)
 	{
 		super("Ok_Delete");
 		this.itemData																		= itemData;
