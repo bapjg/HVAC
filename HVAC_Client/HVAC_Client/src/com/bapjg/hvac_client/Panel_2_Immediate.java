@@ -107,25 +107,25 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		// Top part of the screen : "Planned Calendar Events"
 		if (messageReceived.executionActive)
 		{
-			plannedTimeStart			.setTextRight	("Current");
-			plannedTimeEnd				.setTextRight	(Global.displayTimeShort(messageReceived.timeEnd));
-			plannedTargetTemp			.setTextRight	(messageReceived.tempObjective.displayInteger());
+			plannedTimeStart			.setValue	("Current");
+			plannedTimeEnd				.setValue	(Global.displayTimeShort(messageReceived.timeEnd));
+			plannedTargetTemp			.setValue	(messageReceived.tempObjective.displayInteger());
 			plannedStopOnObjective		.setChecked		(messageReceived.stopOnObjective);
 			buttonStartStop				.setText		("Stop");
 		}
 		else if (messageReceived.executionPlanned)
 		{
-			plannedTimeStart			.setTextRight	(Global.displayTimeShort(messageReceived.timeStart));
-			plannedTimeEnd				.setTextRight	(Global.displayTimeShort(messageReceived.timeEnd));
-			plannedTargetTemp			.setTextRight	(messageReceived.tempObjective.displayInteger());
+			plannedTimeStart			.setValue	(Global.displayTimeShort(messageReceived.timeStart));
+			plannedTimeEnd				.setValue	(Global.displayTimeShort(messageReceived.timeEnd));
+			plannedTargetTemp			.setValue	(messageReceived.tempObjective.displayInteger());
 			plannedStopOnObjective		.setChecked		(messageReceived.stopOnObjective);
 			buttonStartStop				.setText		("Start");
 		}
 		else
 		{
-			plannedTimeStart			.setTextRight	("No Plan");
-			plannedTimeEnd				.setTextRight	(" ");
-			plannedTargetTemp			.setTextRight	(" ");
+			plannedTimeStart			.setValue	("No Plan");
+			plannedTimeEnd				.setValue	(" ");
+			plannedTargetTemp			.setValue	(" ");
 			plannedStopOnObjective		.setChecked		(false);
 			buttonStartStop				.setText		("Start");
 		}
@@ -147,9 +147,9 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	    	targetTemp					.setVisibility	(View.VISIBLE);
 	    	stopOnObjective				.setVisibility	(View.VISIBLE);
 
-	    	timeStart					.setTextRight	(messageExecute.timeStart.displayShort());
-			timeEnd						.setTextRight	(messageExecute.timeEnd.displayShort());	
-			targetTemp					.setTextRight	(messageExecute.tempObjective.displayInteger());	
+	    	timeStart					.setValue	(messageExecute.timeStart.displayShort());
+			timeEnd						.setValue	(messageExecute.timeEnd.displayShort());	
+			targetTemp					.setValue	(messageExecute.tempObjective.displayInteger());	
 			stopOnObjective				.setChecked		(messageExecute.stopOnObjective);
 		}
 	}

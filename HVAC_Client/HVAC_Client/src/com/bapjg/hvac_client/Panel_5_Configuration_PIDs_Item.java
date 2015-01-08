@@ -68,9 +68,9 @@ public class Panel_5_Configuration_PIDs_Item 					extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		pidName					.setTextRight	(itemData.name);
-		depth					.setTextRight	(itemData.depth);
-		sampleIncrement			.setTextRight	(itemData.sampleIncrement);
+		pidName					.setValue	(itemData.name);
+		depth					.setValue	(itemData.depth);
+		sampleIncrement			.setValue	(itemData.sampleIncrement);
    	}
 	public void setListens()
 	{

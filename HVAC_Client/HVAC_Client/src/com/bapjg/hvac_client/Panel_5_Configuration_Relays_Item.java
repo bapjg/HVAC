@@ -69,9 +69,9 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
     }
 	public void displayContents()
 	{
-		relayName							.setTextRight	(itemData.name);
-		relayBank							.setTextRight	(itemData.relayBank);
-		relayNumber							.setTextRight	(itemData.relayNumber);
+		relayName							.setValue	(itemData.name);
+		relayBank							.setValue	(itemData.relayBank);
+		relayNumber							.setValue	(itemData.relayNumber);
    	}
 	public void setListens()
 	{

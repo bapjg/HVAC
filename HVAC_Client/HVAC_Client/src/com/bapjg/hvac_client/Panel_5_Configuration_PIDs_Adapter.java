@@ -24,7 +24,7 @@ public class Panel_5_Configuration_PIDs_Adapter 				extends 					Panel_0_Adapter
     	Ctrl_Configuration.PID_Data								listItem					= (Ctrl_Configuration.PID_Data) listData.get(position);
         
     	Element_Standard										adapterElement 				= new Element_Standard(listItem.name);
-    	adapterElement.setTextRight(listItem.depth);
+    	adapterElement.setValue(listItem.depth);
     
         return adapterElement;
     }

@@ -49,7 +49,7 @@ public class Panel_3_Calendars_Vocabulary_Adapter 				extends 					Panel_0_Adapt
 //        return adapterView;
     	Ctrl_Calendars.Word										listItem					= (Ctrl_Calendars.Word) listData.get(position);
    	
-    	Element_WeekDays										adapterElement 				= new Element_WeekDays(listItem.name, listItem.days);
+    	Element_Slots_WeekDays										adapterElement 				= new Element_Slots_WeekDays(listItem.name, listItem.days);
         return adapterElement;    	
     }
 //    static class RowHolder 

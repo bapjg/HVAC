@@ -130,9 +130,9 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
 		// CIRCUIT_TYPE_Gradient = 1
 		// CIRCUIT_TYPE_Mixer = 2
 		
-		pump						.setTextRight	(itemData.pump);
-		targetThermometer			.setTextRight	(itemData.thermometer);
-		circuitType					.setTextRight	(itemData.thermometer);
+		pump						.setValue	(itemData.pump);
+		targetThermometer			.setValue	(itemData.thermometer);
+		circuitType					.setValue	(itemData.thermometer);
 		
     	if (itemData.type >= 1)		// Gradient or Mixer
     	{
@@ -153,22 +153,22 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
     	{
         	Ctrl_Configuration.Mixer							mixer						= itemData.mixer;
 
-    		mixerThermometer		.setTextRight	(mixer.name);																	
-        	swingTime				.setTextRight	((Integer) (mixer.swingTime/1000));																			
-        	swingProportionMin		.setTextRight	(mixer.swingProportionMin);															
-        	swingProportionMax		.setTextRight	(mixer.swingProportionMax);															
-        	relayUp					.setTextRight	(mixer.relayUp);																
-        	relayDown				.setTextRight	(mixer.relayDown);														
+    		mixerThermometer		.setValue	(mixer.name);																	
+        	swingTime				.setValue	((Integer) (mixer.swingTime/1000));																			
+        	swingProportionMin		.setValue	(mixer.swingProportionMin);															
+        	swingProportionMax		.setValue	(mixer.swingProportionMax);															
+        	relayUp					.setValue	(mixer.relayUp);																
+        	relayDown				.setValue	(mixer.relayDown);														
 
            	Ctrl_Configuration.PID_Params						pidParams					= itemData.mixer.pidParams;
 
-        	pidThermometer			.setTextRight	(pidParams.thermometer);
-        	gainP					.setTextRight	(pidParams.gainP);
-        	timeD					.setTextRight	(pidParams.timeD);																
-        	timeI					.setTextRight	(pidParams.timeI);																
-        	timeDelay				.setTextRight	(pidParams.timeDelay);																
-        	timeProjection			.setTextRight	(pidParams.timeProjection);																
-        	marginProjection		.setTextRight	(pidParams.marginProjection);																
+        	pidThermometer			.setValue	(pidParams.thermometer);
+        	gainP					.setValue	(pidParams.gainP);
+        	timeD					.setValue	(pidParams.timeD);																
+        	timeI					.setValue	(pidParams.timeI);																
+        	timeDelay				.setValue	(pidParams.timeDelay);																
+        	timeProjection			.setValue	(pidParams.timeProjection);																
+        	marginProjection		.setValue	(pidParams.marginProjection);																
     	}
     	else
     	{

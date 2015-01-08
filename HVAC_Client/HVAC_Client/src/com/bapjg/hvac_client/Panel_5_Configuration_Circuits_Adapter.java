@@ -23,7 +23,7 @@ public class Panel_5_Configuration_Circuits_Adapter 			extends 					Panel_0_Adap
     	Ctrl_Configuration.Circuit								listItem					= (Ctrl_Configuration.Circuit) listData.get(position);
         
     	Element_Standard										adapterElement 				= new Element_Standard(listItem.name);
-    	adapterElement.setTextRight(listItem.type);
+    	adapterElement.setValue(listItem.type);
     
         return adapterElement;
     }

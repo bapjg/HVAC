@@ -84,20 +84,20 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 //			((TextView) panelView.findViewById(R.id.Date)).setText				(Global.displayDateShort	(temperatureData.dateTime));
 //			((TextView) panelView.findViewById(R.id.Time)).setText				(Global.displayTimeShort	(temperatureData.dateTime));
 //			
-			tempBoiler			.setTextRight 	(Global.displayTemperature	(temperatureData.tempBoiler));
-			tempHW				.setTextRight	(Global.displayTemperature	(temperatureData.tempHotWater));
-			tempOutside			.setTextRight	(Global.displayTemperature	(temperatureData.tempOutside));
+			tempBoiler			.setValue 	(Global.displayTemperature	(temperatureData.tempBoiler));
+			tempHW				.setValue	(Global.displayTemperature	(temperatureData.tempHotWater));
+			tempOutside			.setValue	(Global.displayTemperature	(temperatureData.tempOutside));
 
-	    	tempLivingRoom		.setTextRight	(Global.displayTemperature	(temperatureData.tempLivingRoom));
+	    	tempLivingRoom		.setValue	(Global.displayTemperature	(temperatureData.tempLivingRoom));
 	    	
-	    	tempFloorOut		.setTextRight	(Global.displayTemperature	(temperatureData.tempFloorOut));
-	    	tempFloorIn			.setTextRight	(Global.displayTemperature	(temperatureData.tempFloorIn));
-	    	tempBoilerOut		.setTextRight	(Global.displayTemperature	(temperatureData.tempBoilerOut));
+	    	tempFloorOut		.setValue	(Global.displayTemperature	(temperatureData.tempFloorOut));
+	    	tempFloorIn			.setValue	(Global.displayTemperature	(temperatureData.tempFloorIn));
+	    	tempBoilerOut		.setValue	(Global.displayTemperature	(temperatureData.tempBoilerOut));
 	    	
-	    	tempRadiatorOut		.setTextRight	(Global.displayTemperature	(temperatureData.tempRadiatorOut));
-	    	tempRadiatorIn		.setTextRight	(Global.displayTemperature	(temperatureData.tempRadiatorIn));
+	    	tempRadiatorOut		.setValue	(Global.displayTemperature	(temperatureData.tempRadiatorOut));
+	    	tempRadiatorIn		.setValue	(Global.displayTemperature	(temperatureData.tempRadiatorIn));
 	    	
-	    	tempBoilerIn		.setTextRight	(Global.displayTemperature	(temperatureData.tempBoilerIn));
+	    	tempBoilerIn		.setValue	(Global.displayTemperature	(temperatureData.tempBoilerIn));
 		}
 	}
 	public void setListens()

@@ -83,12 +83,12 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 		if (getActivity() != null)			// The user has not changed the screen
 		{
 			Ctrl_Calendars.TasksBackGround						backgroundTasks				= Global.eRegCalendars.tasksBackGround;
-			pumpCleanTime		.setTextRight	(backgroundTasks.pumpCleanTime.displayShort());
-			pumpCleanDuration	.setTextRight	(backgroundTasks.pumpCleanDurationMinutes.toString() + " mn");
-			antiFreeze			.setTextRight	(backgroundTasks.antiFreeze.displayInteger());
-			summerTemp			.setTextRight	(backgroundTasks.summerTemp.displayInteger());
-			winterTemp			.setTextRight	(backgroundTasks.winterTemp.displayInteger());
-			sunshineInfluence	.setTextRight	(backgroundTasks.sunshineInfluence.displayInteger());
+			pumpCleanTime		.setValue	(backgroundTasks.pumpCleanTime.displayShort());
+			pumpCleanDuration	.setValue	(backgroundTasks.pumpCleanDurationMinutes.toString() + " mn");
+			antiFreeze			.setValue	(backgroundTasks.antiFreeze.displayInteger());
+			summerTemp			.setValue	(backgroundTasks.summerTemp.displayInteger());
+			winterTemp			.setValue	(backgroundTasks.winterTemp.displayInteger());
+			sunshineInfluence	.setValue	(backgroundTasks.sunshineInfluence.displayInteger());
 		}
 	}
 	public void setListens()

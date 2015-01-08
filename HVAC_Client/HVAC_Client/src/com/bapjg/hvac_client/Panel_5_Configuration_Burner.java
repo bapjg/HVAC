@@ -79,18 +79,18 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 	{
 		Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
 
-		relayName				.setTextRight(burner.relay);
-		fuelConsumption			.setTextRight(burner.fuelConsumption/1000/60);
-		minutesPerLitre			.setTextRight(burner.minutesPerLitre);
+		relayName				.setValue(burner.relay);
+		fuelConsumption			.setValue(burner.fuelConsumption/1000/60);
+		minutesPerLitre			.setValue(burner.minutesPerLitre);
 		
 		if ((burner.minutesPerLitre != null) && (burner.minutesPerLitre != 0))
 		{
 			Long 												litresConsumed 				= burner.fuelConsumption/burner.minutesPerLitre;
-			fuelConsumptionLitres	.setTextRight(litresConsumed/1000/60);
+			fuelConsumptionLitres	.setValue(litresConsumed/1000/60);
 		}
 		else
 		{
-			fuelConsumptionLitres	.setTextRight(0);
+			fuelConsumptionLitres	.setValue(0);
 		}
 	}
 	public void setListens()

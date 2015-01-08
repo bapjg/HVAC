@@ -24,7 +24,7 @@ public class Panel_5_Configuration_Thermometers_Adapter 		extends 					Panel_0_A
     	Ctrl_Configuration.Thermometer								listItem				= (Ctrl_Configuration.Thermometer) listData.get(position);
         
     	Element_Standard											adapterElement 			= new Element_Standard(listItem.name);
-    	adapterElement.setTextRight(listItem.address);
+    	adapterElement.setValue(listItem.address);
     
 
 

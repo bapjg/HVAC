@@ -24,7 +24,7 @@ public class Panel_5_Configuration_Relays_Adapter 				extends 					Panel_0_Adapt
     	Ctrl_Configuration.Relay								listItem					= (Ctrl_Configuration.Relay) listData.get(position);
     
     	Element_Standard										adapterElement 				= new Element_Standard(listItem.name);
-    	adapterElement.setTextRight(listItem.relayNumber);
+    	adapterElement.setValue(listItem.relayNumber);
     
         return adapterElement;
     }

@@ -106,30 +106,8 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">vertical</item>
     </style>
-    <style name="AD_Panel_Insert">
-    </style>
-    <style name="AD_Linear_V">
-        <item name="android:background">@color/background</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-    <style name="AD_Linear_V_with_Buttons">
-        <item name="android:background">@color/background</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_below">@id/title_layout</item>
-        <item name="android:layout_above">@id/buttons_layout</item>
-    </style>
-    <style name="AD_Linear_H">
-        <item name="android:background">@color/background</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
-    </style>
+
+
     <style name="AD_Scroll">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

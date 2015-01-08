@@ -10,7 +10,7 @@
 >
 
 	<LinearLayout
-	    style						= "@style/AD_Linear_H"
+	    android:orientation				= "horizontal"
     >
 
 	    <TextView
@@ -29,7 +29,7 @@
 
   	</LinearLayout>  	
 	<LinearLayout
-	    style						= "@style/AD_Linear_H"
+	    android:orientation				= "horizontal"
     >
 
 	    <TextView

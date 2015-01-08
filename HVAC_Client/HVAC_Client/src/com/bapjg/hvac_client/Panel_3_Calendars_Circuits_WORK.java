@@ -62,7 +62,7 @@ public class Panel_3_Calendars_Circuits_WORK 						extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-		((AdapterView<?>) adapterView).setOnItemClickListener(this);
+		((AdapterView <?>) adapterView).setOnItemClickListener(this);
 		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
 	}
 	@Override

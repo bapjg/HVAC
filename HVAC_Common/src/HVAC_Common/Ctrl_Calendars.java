@@ -38,6 +38,17 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	        }
 	        return null;
 		}
+		public String fetchDays(String name)
+		{
+	        for (Word	 						word 					: wordList)
+	        {
+	        	if (word.name.equalsIgnoreCase(name))
+	        	{
+	        		return word.days;
+	        	}
+	        }
+	        return null;
+		}
 	}
 	public class Update							extends 					Ctrl_Calendars
 	{

@@ -15,8 +15,8 @@ public class Element_Standard 									extends 					LinearLayout
 																implements 					View.OnClickListener
 {
 	public LayoutInflater 										inflater;
-	public TextView 											textLeft;
-	public TextView 											textRight;
+	public TextView 											textTopic;
+	public TextView 											textValue;
 	public String												units;
 	public Panel_0_Interface									listener;
 	
@@ -26,9 +26,9 @@ public class Element_Standard 									extends 					LinearLayout
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		this.units 																			= "";
 		inflater.inflate(R.layout.element_standard, this, true);
-		textLeft 																			= (TextView) this.findViewById(R.id.Left);
-		textRight 																			= (TextView) this.findViewById(R.id.Right);
-		textLeft.setText(labelTextLeft);
+		textTopic 																			= (TextView) this.findViewById(R.id.textTopic);
+		textValue 																			= (TextView) this.findViewById(R.id.textValue);
+		textTopic.setText(labelTextLeft);
 	}
 	public Element_Standard(String labelTextLeft, String units) 
 	{
@@ -36,62 +36,63 @@ public class Element_Standard 									extends 					LinearLayout
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		this.units 																			= " " + units.trim();
 		inflater.inflate(R.layout.element_standard, this, true);
-		textLeft 																			= (TextView) this.findViewById(R.id.Left);
-		textRight 																			= (TextView) this.findViewById(R.id.Right);
-		textLeft.setText(labelTextLeft);
+		textTopic 																			= (TextView) this.findViewById(R.id.textTopic);
+		textValue 																			= (TextView) this.findViewById(R.id.textValue);
+		textTopic.setText(labelTextLeft);
 	}
-//	public Element_Standard(Context context, String labelTextLeft) 
-//	{
-//		super(context);
-//		this.inflater 																		= LayoutInflater.from(context);
-//		this.units 																			= "";
-//		inflater.inflate(R.layout.element_standard, this, true);
-//		textLeft 																			= (TextView) this.findViewById(R.id.Left);
-//		textRight 																			= (TextView) this.findViewById(R.id.Right);
-//		textLeft.setText(labelTextLeft);
-//	}
-//	public Element_Standard(Context context, String labelTextLeft, String units) 
-//	{
-//		super(context);
-//		this.inflater 																		= LayoutInflater.from(context);
-//		this.units 																			= " " + units.trim();
-//		inflater.inflate(R.layout.element_standard, this, true);
-//		textLeft 																			= (TextView) this.findViewById(R.id.Left);
-//		textRight 																			= (TextView) this.findViewById(R.id.Right);
-//		textLeft.setText(labelTextLeft);
-//	}
-	public void setTextLeft(String text)
+	public void setTopic(String text)
 	{
-		textLeft.setText(text);
+		textTopic.setText(text);
 	}
-	public void setTextRight(String text)
+	public void setValue(String text)
 	{
-		if (text != null)		textRight.setText(text);
-		else					textRight.setText("");
+		if (text != null)		textValue.setText(text);
+		else					textValue.setText("");
 	}
-	public void setTextRight(Integer number)
+	public void setValue(Integer number)
 	{
-		if (number != null)		textRight.setText(number + units);
-		else					textRight.setText(0 + units);
+		if (number != null)		textValue.setText(number + units);
+		else					textValue.setText(0 + units);
 	}
-	public void setTextRight(Long number)
+	public void setValue(Long number)
 	{
-		if (number != null)		textRight.setText(number + units);
-		else					textRight.setText(0 + units);
+		if (number != null)		textValue.setText(number + units);
+		else					textValue.setText(0 + units);
 	}
-	public void setTextRight(Float number)
+	public void setValue(Float number)
 	{
-		if (number != null)		textRight.setText(number + units);
-		else					textRight.setText(0 + units);
+		if (number != null)		textValue.setText(number + units);
+		else					textValue.setText(0 + units);
+	}
+	public void setValue(Cmn_Time time)
+	{
+		if (time != null)		textValue.setText(time.displayShort());
+		else					textValue.setText("");
+	}
+	public void setValue(Cmn_Temperature temperature)
+	{
+		if (temperature != null)	textValue.setText(temperature.displayDecimal() + units);
+		else						textValue.setText("0" + units);
 	}
 	public void setListener(Panel_0_Interface listener)
 	{
 		this.listener																		= listener;
-		textRight.setOnClickListener(this);
+		textValue.setOnClickListener(this);
 	}
 	public void onClick(View view)
 	{
 		listener.onElementClick((View) this);
 	}
+//	ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
+//	if (viewTreeObserver.isAlive()) {
+//	  viewTreeObserver.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+//	    @Override
+//	    public void onGlobalLayout() {
+//	      view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//	      viewWidth = view.getWidth();
+//	      viewHeight = view.getHeight();
+//	    }
+//	  });
+//	}
 }
 

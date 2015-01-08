@@ -63,8 +63,8 @@ public class Panel_5_Configuration_Pumps_Item 					extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-    	pumpName							.setTextRight	(itemData.name);
-    	relayName							.setTextRight	(itemData.relay);
+    	pumpName							.setValue	(itemData.name);
+    	relayName							.setValue	(itemData.relay);
    	}
 	public void setListens()
 	{

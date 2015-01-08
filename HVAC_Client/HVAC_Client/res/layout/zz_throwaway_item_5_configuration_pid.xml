@@ -7,7 +7,7 @@
 >                          				
     <include layout								= "@layout/panel_0_base_title_section" />
 
-	<LinearLayout style						= "@style/AD_Linear_V_with_Buttons" >  
+	<LinearLayout  android:orientation				= "vertical" >  
 
 	    <GridLayout
 	        style="@style/AD_Grid"

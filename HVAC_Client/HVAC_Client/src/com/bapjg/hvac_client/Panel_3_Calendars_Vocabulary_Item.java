@@ -24,7 +24,7 @@ import android.widget.TextView;
 public class Panel_3_Calendars_Vocabulary_Item 				extends 					Panel_0_Fragment
 {		
 	private Ctrl_Calendars.Word 								itemData;
-	private	Element_WeekDays									days;
+	private	Element_Slots_WeekDays									days;
 	//	private ViewGroup											itemView;
 	
 	// TODO
@@ -43,7 +43,7 @@ public class Panel_3_Calendars_Vocabulary_Item 				extends 					Panel_0_Fragment
 
     	displayTitles("Calendar", "Word");
 
-    	days	= new Element_WeekDays();
+    	days	= new Element_Slots_WeekDays();
     	
     	panelInsertPoint.addView(days);
     	

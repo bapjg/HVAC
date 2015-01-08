@@ -70,9 +70,9 @@ public class Panel_5_Configuration_Thermometers_Item 			extends 					Panel_0_Fra
     }
 	public void displayContents()
 	{
-		thermoName						.setTextRight		(itemData.name);
-		address							.setTextRight		(itemData.address);
-		pidName							.setTextRight		(itemData.pidName);
+		thermoName						.setValue		(itemData.name);
+		address							.setValue		(itemData.address);
+		pidName							.setValue		(itemData.pidName);
    	}
 	public void setListens()
 	{

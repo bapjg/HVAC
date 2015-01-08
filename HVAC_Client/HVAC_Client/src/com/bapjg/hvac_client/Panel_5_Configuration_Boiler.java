@@ -73,9 +73,9 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		thermoName			.setTextRight(Global.eRegConfiguration.boiler.thermometer);
-		tempNeverExceed		.setTextRight(Global.eRegConfiguration.boiler.tempNeverExceed.displayInteger());
-		tempOverShoot		.setTextRight(Global.eRegConfiguration.boiler.tempOverShoot.displayInteger());
+		thermoName			.setValue(Global.eRegConfiguration.boiler.thermometer);
+		tempNeverExceed		.setValue(Global.eRegConfiguration.boiler.tempNeverExceed.displayInteger());
+		tempOverShoot		.setValue(Global.eRegConfiguration.boiler.tempOverShoot.displayInteger());
 	}
 	public void setListens()
 	{

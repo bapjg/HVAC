@@ -23,7 +23,7 @@ public class Panel_5_Configuration_Pumps_Adapter 				extends 					Panel_0_Adapte
     	Ctrl_Configuration.Pump									listItem					= (Ctrl_Configuration.Pump) listData.get(position);
         
     	Element_Standard										adapterElement 				= new Element_Standard(listItem.name);
-    	adapterElement.setTextRight(listItem.relay);
+    	adapterElement.setValue(listItem.relay);
     
         return adapterElement;
     }

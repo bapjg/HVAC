@@ -64,10 +64,10 @@ public class Panel_3_Calendars_Away_Item 						extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		dateStart						.setTextRight		(Global.displayDate(itemData.dateTimeStart));
-		timeStart						.setTextRight		(Global.displayTimeShort(itemData.dateTimeStart));
-		dateEnd							.setTextRight		(Global.displayDate(itemData.dateTimeEnd));
-		timeEnd							.setTextRight		(Global.displayTimeShort(itemData.dateTimeEnd));
+		dateStart						.setValue		(Global.displayDate(itemData.dateTimeStart));
+		timeStart						.setValue		(Global.displayTimeShort(itemData.dateTimeStart));
+		dateEnd							.setValue		(Global.displayDate(itemData.dateTimeEnd));
+		timeEnd							.setValue		(Global.displayTimeShort(itemData.dateTimeEnd));
    	}
 	public void setListens()
 	{
