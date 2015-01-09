@@ -79,81 +79,23 @@ public class Panel_3_Calendars_Circuits_Item_WORK 				extends 					Panel_0_Fragm
 		tempObjective					.setValue		(itemData.tempObjective);
 		stopOnObjective					.setChecked		(itemData.stopOnObjective);
 		
-//		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
-//		{
-//			if (word.name.indexOf(itemData.days) > -1)
-//			{
-//				daysWord																	= word.name;
-//				daysNumbers																	= "";
-//				daysWordNumbers																= word.days;
-//			}
-//		}
-//
-//		TextView												days 						= (TextView) panelView.findViewById(R.id.days);
-//    	TextView 												day_1 						= (TextView) panelView.findViewById(R.id.day_1);
-//    	TextView 												day_2 						= (TextView) panelView.findViewById(R.id.day_2);
-//    	TextView 												day_3 						= (TextView) panelView.findViewById(R.id.day_3);
-//    	TextView 												day_4 						= (TextView) panelView.findViewById(R.id.day_4);
-//    	TextView 												day_5 						= (TextView) panelView.findViewById(R.id.day_5);
-//    	TextView 												day_6 						= (TextView) panelView.findViewById(R.id.day_6);
-//    	TextView 												day_7 						= (TextView) panelView.findViewById(R.id.day_7);
-//
-//        ((TextView) panelView.findViewById(R.id.days))			.setText(daysWord);
-//
-//    	if ((daysWordNumbers).indexOf("1") > -1)	day_1.setBackgroundColor(Color.RED); else day_1.setBackgroundColor(Color.BLUE);
-//        if ((daysWordNumbers).indexOf("2") > -1)	day_2.setBackgroundColor(Color.RED); else day_2.setBackgroundColor(Color.BLUE);
-//        if ((daysWordNumbers).indexOf("3") > -1)	day_3.setBackgroundColor(Color.RED); else day_3.setBackgroundColor(Color.BLUE);
-//        if ((daysWordNumbers).indexOf("4") > -1)	day_4.setBackgroundColor(Color.RED); else day_4.setBackgroundColor(Color.BLUE);
-//        if ((daysWordNumbers).indexOf("5") > -1)	day_5.setBackgroundColor(Color.RED); else day_5.setBackgroundColor(Color.BLUE);
-//        if ((daysWordNumbers).indexOf("6") > -1)	day_6.setBackgroundColor(Color.RED); else day_6.setBackgroundColor(Color.BLUE);
-//        if ((daysWordNumbers).indexOf("7") > -1)	day_7.setBackgroundColor(Color.RED); else day_7.setBackgroundColor(Color.BLUE);       
-//
-//    	if ((daysNumbers).indexOf("1") > -1)		day_1.setBackgroundColor(Color.RED);
-//        if ((daysNumbers).indexOf("2") > -1)		day_2.setBackgroundColor(Color.RED);
-//        if ((daysNumbers).indexOf("3") > -1)		day_3.setBackgroundColor(Color.RED);
-//        if ((daysNumbers).indexOf("4") > -1)		day_4.setBackgroundColor(Color.RED);
-//        if ((daysNumbers).indexOf("5") > -1)		day_5.setBackgroundColor(Color.RED);
-//        if ((daysNumbers).indexOf("6") > -1)		day_6.setBackgroundColor(Color.RED);
-//        if ((daysNumbers).indexOf("7") > -1)		day_7.setBackgroundColor(Color.RED);      
-//
-//        ((TextView) panelView.findViewById(R.id.timeStart))			.setText(itemData.timeStart.displayShort());
-//        ((TextView) panelView.findViewById(R.id.timeEnd))			.setText(itemData.timeEnd.displayShort());
-//        
-//        ((TextView) panelView.findViewById(R.id.tempObjective))		.setText(itemData.tempObjective.displayInteger());
-//        ((CheckBox) panelView.findViewById(R.id.stopOnObjective))	.setChecked(itemData.stopOnObjective);
  	}
 	public void setListens()
 	{
 //		panelView.findViewById(R.id.buttonOk)		.setOnClickListener(this);
 //		panelView.findViewById(R.id.buttonDelete)	.setOnClickListener(this);
 //		panelView.findViewById(R.id.days)			.setOnClickListener(this);
-//		panelView.findViewById(R.id.day_1)			.setOnClickListener(this);
-//		panelView.findViewById(R.id.day_2)			.setOnClickListener(this);
-//		panelView.findViewById(R.id.day_3)			.setOnClickListener(this);
-//		panelView.findViewById(R.id.day_4)			.setOnClickListener(this);
-//		panelView.findViewById(R.id.day_5)			.setOnClickListener(this);
-//		panelView.findViewById(R.id.day_6)			.setOnClickListener(this);
-//		panelView.findViewById(R.id.day_7)			.setOnClickListener(this);
-//		panelView.findViewById(R.id.timeStart)		.setOnClickListener(this);
-//		panelView.findViewById(R.id.timeEnd)			.setOnClickListener(this);
-//		panelView.findViewById(R.id.tempObjective)	.setOnClickListener(this);
-//		panelView.findViewById(R.id.stopOnObjective)	.setOnClickListener(this);
 	}
     @Override
 	public void onClick(View clickedView) 
 	{
-     	if (clickedView.getId() == R.id.buttonOk)
+     	//TODO Cleanup
+    	
+    	
+    	if (clickedView.getId() == R.id.buttonOk)
     	{
     		itemData.days																	= daysWord;				// ((EditText) itemView.findViewById(R.id.name)).getText().toString();
        		itemData.days																	= itemData.days + daysNumbers;
-//       		itemData.timeStart																= ((TextView) itemView.findViewById(R.id.timeStart)).getText().toString();
-//       		itemData.timeEnd																= ((TextView) itemView.findViewById(R.id.timeEnd)).getText().toString();
-       		
-// TODO Check functions ok
-       		
-//       		String												tempObjective				= ((TextView) itemView.findViewById(R.id.tempObjective)).getText().toString();
-//       		tempObjective																	= tempObjective.replace(" °C", "");
-//       		itemData.tempObjective															= (Integer) (Integer.parseInt(tempObjective) * 1000);
        		itemData.stopOnObjective														= ((CheckBox) panelView.findViewById(R.id.stopOnObjective)).isChecked();
        	    getFragmentManager().popBackStackImmediate();
     	}
@@ -162,7 +104,6 @@ public class Panel_3_Calendars_Circuits_Item_WORK 				extends 					Panel_0_Fragm
      		Global.eRegCalendars.fetchCircuit(circuitName).calendarList.remove(itemData);
      		getFragmentManager().popBackStackImmediate();
     	}
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
      	else if (clickedView.getId() == R.id.days)
     	{
     		Dialog_String_List		 							df 							= new Dialog_String_List(itemData.days, (Object) itemData, null, this);

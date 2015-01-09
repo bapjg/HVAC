@@ -67,13 +67,13 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
 	public void displayContents()
 	{
 //	    AdapterView <Panel_3_Calendars_Away_Adapter_Work>				adapterViewList				= (AdapterView <Panel_3_Calendars_Away_Adapter_Work>) adapterView;
-	    Panel_3_Calendars_Away_Adapter_Work								arrayAdapter				= new Panel_3_Calendars_Away_Adapter_Work(Global.actContext, R.id.List_View, Global.eRegCalendars.awayList);
+	    Panel_3_Calendars_Away_Adapter								arrayAdapter				= new Panel_3_Calendars_Away_Adapter(Global.actContext, R.id.List_View, Global.eRegCalendars.awayList);
 //		adapterViewList.setAdapter(arrayAdapter);
-	    ((AdapterView <Panel_3_Calendars_Away_Adapter_Work>) adapterView).setAdapter(arrayAdapter);
+	    ((AdapterView <Panel_3_Calendars_Away_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()
 	{
-		((AdapterView <Panel_3_Calendars_Away_Adapter_Work>) adapterView).setOnItemClickListener(this);
+		((AdapterView <Panel_3_Calendars_Away_Adapter>) adapterView).setOnItemClickListener(this);
 	}
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {

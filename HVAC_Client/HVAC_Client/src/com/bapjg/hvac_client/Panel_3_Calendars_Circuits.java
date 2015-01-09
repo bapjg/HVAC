@@ -20,29 +20,32 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_3_Calendars_Circuits_WORK 						extends 					Panel_0_Fragment
+public class Panel_3_Calendars_Circuits 					extends 					Panel_0_Fragment
 																implements					AdapterView.OnItemClickListener	
 {
 	public String												circuitName;
 	
-    public Panel_3_Calendars_Circuits_WORK(String circuitName)
+    public Panel_3_Calendars_Circuits(String circuitName)
     {
-		super();
+		super("Add");
 		this.circuitName																	= circuitName;
    }
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.panelLayout																	= R.layout.panel_3_calendars;
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_3_calendars, container, false);
+    	super.panelInitialise(inflater, container, savedInstanceState);
+
+    	Element_ListView										listView 					= new Element_ListView("Henry");
+    	panelInsertPoint.addView(listView);
+
+    	displayTitles("Calendars", this.circuitName);
+
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
         
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.circuitList != null))
         {
-        	displayTitles("Calendars", this.circuitName);
         	displayContents();
         	setListens();
         }
@@ -54,11 +57,9 @@ public class Panel_3_Calendars_Circuits_WORK 						extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-//        AdapterView <Panel_3_Calendars_Circuits_Adapter_Work>				adapterViewList				= (AdapterView <Panel_3_Calendars_Circuits_Adapter_Work>) adapterView;
         Ctrl_Calendars.Circuit									circuit						= Global.eRegCalendars.fetchCircuit(this.circuitName);
-        Panel_3_Calendars_Circuits_Adapter_WORK							arrayAdapter				= new Panel_3_Calendars_Circuits_Adapter_WORK(Global.actContext, R.id.List_View, circuit.calendarList);
-//        adapterViewList.setAdapter(arrayAdapter);
-		((AdapterView <Panel_3_Calendars_Circuits_Adapter_WORK>) adapterView).setAdapter(arrayAdapter);
+        Panel_3_Calendars_Circuits_Adapter							arrayAdapter				= new Panel_3_Calendars_Circuits_Adapter(Global.actContext, R.id.List_View, circuit.calendarList);
+		((AdapterView <Panel_3_Calendars_Circuits_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()
 	{

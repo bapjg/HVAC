@@ -12,21 +12,16 @@ import android.widget.TextView;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Element_Slots_DayTimes 									extends 					LinearLayout
+public class Element_Slots_DayTimes 							extends 					LinearLayout
 																implements 					View.OnClickListener
 {
 	public LayoutInflater 										inflater;
-	public TextView 											textName;
-	
-	public TextView 											day_1;
-	public TextView 											day_2;
-	public TextView 											day_3;
-	public TextView 											day_4;
-	public TextView 											day_5;
-	public TextView 											day_6;
-	public TextView 											day_7;
-	
 	public Panel_0_Interface									listener;
+	
+	private	ViewGroup 											timeSlots;
+	private	TextView 											timeStart;
+	private	TextView 											timeEnd;
+	private	TextView 											tempObjective;
 	
 	public Element_Slots_DayTimes()
 	{
@@ -35,10 +30,10 @@ public class Element_Slots_DayTimes 									extends 					LinearLayout
 		inflater.inflate(R.layout.element_slots_daytimes, this, true);
 		
       // Now get the space reserved for the day plan for a calendar entry (timeStart & timeEnd
-		ViewGroup 												timeSlots					= (ViewGroup) findViewById(R.id.timeSlots);
+		this.timeSlots																		= (ViewGroup) findViewById(R.id.timeSlots);
 //		LayoutParams 											timeSlotLayout				= new LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
-      LinearLayout.LayoutParams 								timeSlotLayout				= new LinearLayout.LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
-      timeSlotLayout.weight = 1;
+		LinearLayout.LayoutParams 								timeSlotLayout				= new LinearLayout.LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
+		timeSlotLayout.weight = 1;
 //      
 		Long													quarterHour					= 15 * 60 * 1000L;
 	
@@ -52,34 +47,23 @@ public class Element_Slots_DayTimes 									extends 					LinearLayout
 
 			timeSlots.addView(timeSlot);
 		}
-	}
-	public Element_Slots_DayTimes(Ctrl_Calendars.Calendar calendarItem) 
-	{
-		super(Global.actContext);
-		this.inflater 																		= LayoutInflater.from(Global.actContext);
-		inflater.inflate(R.layout.element_slots_weekdays, this, true);
-
-		setData(calendarItem);
+	  	timeStart 																			= (TextView) findViewById(R.id.timeStart);
+	  	timeEnd  																			= (TextView) findViewById(R.id.timeEnd);
+	  	tempObjective  																		= (TextView) findViewById(R.id.tempObjective);
 	}
 	public void setData(Ctrl_Calendars.Calendar calendarItem)
 	{
-////    LayoutParams 											timeSlotLayout				= new LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
-//    LinearLayout.LayoutParams 								timeSlotLayout				= new LinearLayout.LayoutParams(3, LayoutParams.MATCH_PARENT);	//Width=3
-//    timeSlotLayout.weight = 1;
-//    
         Long													quarterHour					= 15 * 60 * 1000L;
-        Long													timeStart					= calendarItem.timeStart.milliSeconds;
-        Long													timeEnd;
+        Long													calendarTimeStart			= calendarItem.timeStart.milliSeconds;
+        Long													calendarTimeEnd;
 	    if (calendarItem.timeEnd == null)
 	    {
-	    	timeEnd																			= timeStart + quarterHour + quarterHour;		//just add 1/2 hour
+	    	calendarTimeEnd																	= calendarTimeStart + quarterHour + quarterHour;		//just add 1/2 hour
 	    }
 	    else
 	    {
-	    	timeEnd																			= calendarItem.timeEnd.milliSeconds;
+	    	calendarTimeEnd																	= calendarItem.timeEnd.milliSeconds;
 	    }
-	
-		ViewGroup 												timeSlots					= (ViewGroup) findViewById(R.id.timeSlots);
 	
 	    for (int i = 0; i < 96; i++)
 	    {
@@ -87,8 +71,8 @@ public class Element_Slots_DayTimes 									extends 					LinearLayout
 	    	Long												slotEnd						= slotStart + quarterHour;
 	        TextView											timeSlot					= (TextView) timeSlots.getChildAt(i);
 	        
-	        if ((timeEnd 	> slotStart )
-	        && 	(timeStart 	< slotEnd ) )
+	        if ((calendarTimeEnd 	> slotStart )
+	        && 	(calendarTimeStart 	< slotEnd ) )
 	        {
 	        	timeSlot.setBackgroundColor(Color.RED);
 	        }
@@ -97,18 +81,19 @@ public class Element_Slots_DayTimes 									extends 					LinearLayout
 	        	timeSlot.setBackgroundColor(Color.BLUE);
 	        }
 	    }
+	    String x =calendarItem.timeStart.displayShort();
+	    String y =calendarItem.timeEnd.displayShort();
+	    
+	    timeStart				.setText(calendarItem.timeStart.displayShort());
+	    timeEnd					.setText(calendarItem.timeEnd.displayShort());
+	    tempObjective			.setText(calendarItem.tempObjective.displayDecimal());
 	}
 	public void setListener(Panel_0_Interface listener)
 	{
 		this.listener																		= listener;
-		textName	.setOnClickListener(this);
-		day_1		.setOnClickListener(this);
-		day_2		.setOnClickListener(this); 	
-		day_3		.setOnClickListener(this);
-		day_4		.setOnClickListener(this);
-		day_5		.setOnClickListener(this);
-		day_6		.setOnClickListener(this);
-		day_7		.setOnClickListener(this);
+//		textName	.setOnClickListener(this);
+//		day_1		.setOnClickListener(this);
+
 	}
 	public void onClick(View view)
 	{

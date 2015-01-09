@@ -32,7 +32,7 @@ public class Global
 	
 	public static	Panel_1_Temperatures						panelTemperatures;
 	public static	Panel_2_Immediate							panelImmediate;	
-	public static	Panel_3_Calendars_Circuits_WORK					panelCalendars;
+	public static	Panel_3_Calendars_Circuits					panelCalendars;
 	public static	Panel_4_Weather_WORK								panelWeather;
 	public static	Panel_5_Configuration_Thermometers			panelConfiguration;
 	public static	Panel_6_Actions_Relays						panelActions;	

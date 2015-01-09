@@ -39,9 +39,9 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
     	Fragment 												panelFragment				= null;
    	
     	if      (caption.equalsIgnoreCase("Vocabulary"))		panelFragment 				= new Panel_3_Calendars_Vocabulary();
-    	else if (caption.equalsIgnoreCase("Hot Water")) 		panelFragment 				= new Panel_3_Calendars_Circuits_WORK("Hot_Water");
-     	else if (caption.equalsIgnoreCase("Radiator"))			panelFragment 				= new Panel_3_Calendars_Circuits_WORK("Radiator");
-    	else if (caption.equalsIgnoreCase("Floor"))				panelFragment 				= new Panel_3_Calendars_Circuits_WORK("Floor");
+    	else if (caption.equalsIgnoreCase("Hot Water")) 		panelFragment 				= new Panel_3_Calendars_Circuits("Hot_Water");
+     	else if (caption.equalsIgnoreCase("Radiator"))			panelFragment 				= new Panel_3_Calendars_Circuits("Radiator");
+    	else if (caption.equalsIgnoreCase("Floor"))				panelFragment 				= new Panel_3_Calendars_Circuits("Floor");
     	else if (caption.equalsIgnoreCase("Away List"))			panelFragment 				= new Panel_3_Calendars_Away();
     	else if (caption.equalsIgnoreCase("Background\nTasks"))	panelFragment 				= new Panel_3_Calendars_Background_Tasks();
        	else if (caption.equalsIgnoreCase("Refresh"))			doRefresh();
