@@ -18,26 +18,55 @@ import android.widget.Button;
 public class Menu_1_Temperatures 								extends 					Menu_0_Fragment 
 																implements 					View.OnClickListener
 {
+	Element_MenuButton											buttonTemperatures;
+
 	public Menu_1_Temperatures()
 	{
-		super();
-		this.menuLayout																		= R.layout.menu_1_temperatures;
+		super(false);
+//		this.menuLayout																		= R.layout.menu_1_temperatures;
 	}
-	public void onClick(View myView) 									// This is the onClick event from the Menu
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+    {
+    	super.onCreateView(inflater, container, savedInstanceState);
+    	
+    	buttonTemperatures																	= new Element_MenuButton("Temperatures");
+    	menuInsertPoint.addView(buttonTemperatures);
+    	buttonTemperatures			.setListener((Menu_0_Fragment) this);
+    	return menuView;
+    }
+    public void onMenuElementClick(View clickedView)
 	{
-		super.onClick(myView);
+		super.onMenuElementClick(clickedView);
 		
-    	String													caption						= ((Button) myView).getText().toString();
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;
-		
-    	if   (caption.equalsIgnoreCase("Temperatures"))			panelFragment 				= new Panel_1_Temperatures();
-    	if   (caption.equalsIgnoreCase("Temperatures Large"))	panelFragment 				= new Panel_1_Temperatures();
+   	
+    	if      (clickedView == buttonTemperatures)				panelFragment 				= new Panel_1_Temperatures();
 
-    	if (panelFragment != null)
+    	if 		(panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);
     	}
-		fTransaction.commit();
+    	fTransaction.commit();  
 	}
+
+    
+    
+//    public void onClick(View myView) 									// This is the onClick event from the Menu
+//	{
+//		super.onClick(myView);
+//		
+//    	String													caption						= ((Button) myView).getText().toString();
+//    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
+//    	Fragment 												panelFragment				= null;
+//		
+//    	if   (caption.equalsIgnoreCase("Temperatures"))			panelFragment 				= new Panel_1_Temperatures();
+//    	if   (caption.equalsIgnoreCase("Temperatures Large"))	panelFragment 				= new Panel_1_Temperatures();
+//
+//    	if (panelFragment != null)
+//    	{
+//    		fTransaction.replace(R.id.panel_container, panelFragment);
+//    	}
+//		fTransaction.commit();
+//	}
 }

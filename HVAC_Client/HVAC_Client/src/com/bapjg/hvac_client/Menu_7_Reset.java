@@ -16,28 +16,63 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 public class Menu_7_Reset 										extends Menu_0_Fragment 	implements View.OnClickListener
 {
+	Element_MenuButton											buttonResetConfig;
+	Element_MenuButton											buttonResetCalendars;
+
 	public Menu_7_Reset()
 	{
-		super();
-		this.menuLayout																		= R.layout.menu_7_reset;
+		super(false);
+//		this.menuLayout																		= R.layout.menu_7_reset;
 	}
-	public void onClick(View myView) 
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+    {
+    	super.onCreateView(inflater, container, savedInstanceState);
+    	
+    	buttonResetConfig																	= new Element_MenuButton("Hot Water");
+    	buttonResetCalendars																= new Element_MenuButton("Radiator");
+
+    	menuInsertPoint.addView(buttonResetConfig);
+    	menuInsertPoint.addView(buttonResetCalendars);
+    	
+    	buttonResetConfig		.setListener((Menu_0_Fragment) this);
+    	buttonResetCalendars	.setListener((Menu_0_Fragment) this);
+
+    	return menuView;
+    }	
+    public void onMenuElementClick(View clickedView)
 	{
-		super.onClick(myView);
+		super.onMenuElementClick(clickedView);
 		
-    	String													caption						= ((Button) myView).getText().toString();
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;
-    	
-//    	TODO This must be done
-    	
-    	if      (caption.equalsIgnoreCase("Reset Configuration"))	panelFragment 			= new Panel_6_Actions_Relays();
-    	else if (caption.equalsIgnoreCase("Reset Calendars"))		panelFragment 			= new Panel_6_Actions_Test_Mail();
+   	
+    	if      (clickedView == buttonResetConfig)				panelFragment 				= new Panel_6_Actions_Relays();
+    	else if (clickedView == buttonResetCalendars) 			panelFragment 				= new Panel_6_Actions_Test_Mail();
 
-    	if (panelFragment != null)
+    	if 		(panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);
     	}
-		fTransaction.commit();
+    	fTransaction.commit();  
 	}
+	
+//	public void onClick(View myView) 
+//	{
+//		super.onClick(myView);
+//		
+//    	String													caption						= ((Button) myView).getText().toString();
+//    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
+//    	Fragment 												panelFragment				= null;
+//    	
+////    	TODO This must be done
+//    	
+//    	if      (caption.equalsIgnoreCase("Reset Configuration"))	panelFragment 			= new Panel_6_Actions_Relays();
+//    	else if (caption.equalsIgnoreCase("Reset Calendars"))		panelFragment 			= new Panel_6_Actions_Test_Mail();
+//
+//    	if (panelFragment != null)
+//    	{
+//    		fTransaction.replace(R.id.panel_container, panelFragment);
+//    	}
+//		fTransaction.commit();
+//	}
 }

@@ -19,65 +19,33 @@ import com.google.gson.GsonBuilder;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Menu_3_Calendars 									extends 					Menu_0_Fragment 
-																implements 					
+public class ThrowAway_Menu_3_Calendars 									extends 					Menu_0_Fragment 
+																implements 					View.OnClickListener,
 																							HTTP_Response,
 																							TCP_Response,
 																							Dialog_Response
 {
-	Element_MenuButton											buttonHotWater;
-	Element_MenuButton											buttonRadiator;
-	Element_MenuButton											buttonFloor;
-	Element_MenuButton											buttonVocabulary;
-	Element_MenuButton											buttonAwayList;
-	Element_MenuButton											buttonBackgroudTasks;
-	
-	
-	public Menu_3_Calendars()
+	public ThrowAway_Menu_3_Calendars()
 	{
-		super(true);		// true means we want to keep the buttons visble at bottom
+		super();
+		this.menuLayout																		= R.layout.zz_throwaway_menu_3_calendars;
 	}
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-    {
-    	super.onCreateView(inflater, container, savedInstanceState);
-    	
-    	buttonHotWater																		= new Element_MenuButton("Hot Water");
-    	buttonRadiator																		= new Element_MenuButton("Radiator");
-    	buttonFloor																			= new Element_MenuButton("Floor");
-    	buttonVocabulary																	= new Element_MenuButton("Vocabulary");
-    	buttonAwayList																		= new Element_MenuButton("Away List");
-    	buttonBackgroudTasks																= new Element_MenuButton("Backgroud Tasks");
-
-    	menuInsertPoint.addView(buttonHotWater);
-    	menuInsertPoint.addView(buttonRadiator);
-    	menuInsertPoint.addView(buttonFloor);
-    	menuInsertPoint.addView(buttonVocabulary);
-    	menuInsertPoint.addView(buttonAwayList);
-    	menuInsertPoint.addView(buttonBackgroudTasks);
-    	
-    	buttonHotWater			.setListener((Menu_0_Fragment) this);
-    	buttonRadiator			.setListener((Menu_0_Fragment) this);
-    	buttonFloor				.setListener((Menu_0_Fragment) this);
-    	buttonVocabulary		.setListener((Menu_0_Fragment) this);
-    	buttonAwayList			.setListener((Menu_0_Fragment) this);
-    	buttonBackgroudTasks	.setListener((Menu_0_Fragment) this);
-
-    	return menuView;
-    }	
-    @Override
-    public void onMenuElementClick(View clickedView)
+	public void onClick(View myView)
 	{
-		super.onMenuElementClick(clickedView);
+		super.onClick(myView);
 		
+    	String													caption						= ((Button) myView).getText().toString();
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;
    	
-    	if      (clickedView == buttonVocabulary)				panelFragment 				= new Panel_3_Calendars_Vocabulary();
-    	else if (clickedView == buttonHotWater) 				panelFragment 				= new Panel_3_Calendars_Circuits("Hot_Water");
-     	else if (clickedView == buttonRadiator)					panelFragment 				= new Panel_3_Calendars_Circuits("Radiator");
-    	else if (clickedView == buttonFloor)					panelFragment 				= new Panel_3_Calendars_Circuits("Floor");
-    	else if (clickedView == buttonAwayList)					panelFragment 				= new Panel_3_Calendars_Away();
-    	else if (clickedView == buttonBackgroudTasks)			panelFragment 				= new Panel_3_Calendars_Background_Tasks();
+    	if      (caption.equalsIgnoreCase("Vocabulary"))		panelFragment 				= new Panel_3_Calendars_Vocabulary();
+    	else if (caption.equalsIgnoreCase("Hot Water")) 		panelFragment 				= new Panel_3_Calendars_Circuits("Hot_Water");
+     	else if (caption.equalsIgnoreCase("Radiator"))			panelFragment 				= new Panel_3_Calendars_Circuits("Radiator");
+    	else if (caption.equalsIgnoreCase("Floor"))				panelFragment 				= new Panel_3_Calendars_Circuits("Floor");
+    	else if (caption.equalsIgnoreCase("Away List"))			panelFragment 				= new Panel_3_Calendars_Away();
+    	else if (caption.equalsIgnoreCase("Background\nTasks"))	panelFragment 				= new Panel_3_Calendars_Background_Tasks();
+       	else if (caption.equalsIgnoreCase("Refresh"))			doRefresh();
+    	else if (caption.equalsIgnoreCase("Update"))			doUpdate();
 
     	if 		(panelFragment != null)
     	{
@@ -85,12 +53,10 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
     	}
     	fTransaction.commit();  
 	}
-    @Override
 	public void doRefresh()
 	{
 		HTTP_Send	(new Ctrl_Json().new Request(Ctrl_Json.TYPE_Calendar));				// Fire these async actions as soon as possible
 	}
-    @Override
 	public void doUpdate()
 	{
 		Dialog_Yes_No												messageYesNo			= new Dialog_Yes_No("Are you certain ?", this);
@@ -127,6 +93,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 		
 		if (messageReturned instanceof Ctrl_Json.Data)
 		{
+//			Global.setStatusHTTP("Ok");
 			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
 			Global.eRegCalendars															= new Gson().fromJson(JsonString, Ctrl_Calendars.Data.class);
 			Global.toaster("Configuration data received", false);
@@ -134,12 +101,14 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 		}
 		else if (messageReturned instanceof Ctrl__Abstract.Ack)
 		{
+//			Global.setStatusHTTP("Ok");
 			Global.toaster("Server updated", false);
 			Dialog_Yes_No											messageYesNo			= new Dialog_Yes_No("Update controller with new calendar now ?", this, 1);	// id = 1
 			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
 		}
 		else 
 		{
+//			Global.setStatusHTTP("Bad Response");
 			Global.toaster("Unexpected response : " + messageReturned.getClass().toString(), false);
 		}
 	}

@@ -18,27 +18,67 @@ import android.widget.Button;
 public class Menu_2_Immediate 									extends 					Menu_0_Fragment 
 																implements 					View.OnClickListener
 {
+	Element_MenuButton											buttonHotWater;
+	Element_MenuButton											buttonRadiator;
+	Element_MenuButton											buttonFloor;
+
 	public Menu_2_Immediate()
 	{
-		super();
-		this.menuLayout																		= R.layout.menu_2_immediate;
+		super(false);
+//		this.menuLayout																		= R.layout.menu_2_immediate;
 	}
-	public void onClick(View myView) 
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+    {
+    	super.onCreateView(inflater, container, savedInstanceState);
+    	
+    	buttonHotWater																		= new Element_MenuButton("Hot Water");
+    	buttonRadiator																		= new Element_MenuButton("Radiator");
+    	buttonFloor																			= new Element_MenuButton("Floor");
+
+    	menuInsertPoint.addView(buttonHotWater);
+    	menuInsertPoint.addView(buttonRadiator);
+    	menuInsertPoint.addView(buttonFloor);
+     	
+    	buttonHotWater			.setListener((Menu_0_Fragment) this);
+    	buttonRadiator			.setListener((Menu_0_Fragment) this);
+    	buttonFloor				.setListener((Menu_0_Fragment) this);
+
+    	return menuView;
+    }	
+    @Override
+    public void onMenuElementClick(View clickedView)
 	{
-		super.onClick(myView);
+		super.onMenuElementClick(clickedView);
 		
-    	String													caption						= ((Button) myView).getText().toString();
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;
-    	
-    	if      (caption.equalsIgnoreCase("Hot Water"))			panelFragment 				= new Panel_2_Immediate("Hot_Water");
-		else if (caption.equalsIgnoreCase("Radiator"))			panelFragment 				= new Panel_2_Immediate("Radiator");
-		else if (caption.equalsIgnoreCase("Floor"))				panelFragment 				= new Panel_2_Immediate("Floor");
+   	
+    	if 		(clickedView == buttonHotWater) 				panelFragment 				= new Panel_2_Immediate("Hot_Water");
+     	else if (clickedView == buttonRadiator)					panelFragment 				= new Panel_2_Immediate("Radiator");
+    	else if (clickedView == buttonFloor)					panelFragment 				= new Panel_2_Immediate("Floor");
 
-    	if (panelFragment != null)
+    	if 		(panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);
     	}
-    	fTransaction.commit();   	 	
+    	fTransaction.commit();  
 	}
+//    public void onClick(View myView) 
+//	{
+//		super.onClick(myView);
+//		
+//    	String													caption						= ((Button) myView).getText().toString();
+//    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
+//    	Fragment 												panelFragment				= null;
+//    	
+//    	if      (caption.equalsIgnoreCase("Hot Water"))			panelFragment 				= new Panel_2_Immediate("Hot_Water");
+//		else if (caption.equalsIgnoreCase("Radiator"))			panelFragment 				= new Panel_2_Immediate("Radiator");
+//		else if (caption.equalsIgnoreCase("Floor"))				panelFragment 				= new Panel_2_Immediate("Floor");
+//
+//    	if (panelFragment != null)
+//    	{
+//    		fTransaction.replace(R.id.panel_container, panelFragment);
+//    	}
+//    	fTransaction.commit();   	 	
+//	}
 }

@@ -25,35 +25,94 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 																							Dialog_Response,
 																							HTTP_Response
 {
+	Element_MenuButton											buttonThermometers;
+	Element_MenuButton											buttonRelays;
+	Element_MenuButton											buttonPumps;
+	Element_MenuButton											buttonCircuits;
+	Element_MenuButton											buttonBurner;
+	Element_MenuButton											buttonBoiler;
+	Element_MenuButton											buttonPIDs;
+	
 	public Menu_5_Configuration()
 	{
-		super();
-		this.menuLayout																		= R.layout.menu_5_configuration;
+		super(true);
+//		this.menuLayout																		= R.layout.menu_5_configuration;
 	}
-	public void onClick(View myView) // This is the onClick event from the Menu
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+    {
+    	super.onCreateView(inflater, container, savedInstanceState);
+    	
+    	buttonThermometers																	= new Element_MenuButton("Thermometers");
+    	buttonRelays																		= new Element_MenuButton("Relays");
+    	buttonPumps																			= new Element_MenuButton("Pumps");
+    	buttonCircuits																		= new Element_MenuButton("Circuits");
+    	buttonBurner																		= new Element_MenuButton("Burner");
+    	buttonBoiler																		= new Element_MenuButton("Boiler");
+    	buttonPIDs																			= new Element_MenuButton("PIDs");
+
+    	menuInsertPoint.addView(buttonThermometers);
+    	menuInsertPoint.addView(buttonRelays);
+    	menuInsertPoint.addView(buttonPumps);
+    	menuInsertPoint.addView(buttonCircuits);
+    	menuInsertPoint.addView(buttonBurner);
+    	menuInsertPoint.addView(buttonBoiler);
+    	menuInsertPoint.addView(buttonPIDs);
+    	
+    	buttonThermometers		.setListener((Menu_0_Fragment) this);
+    	buttonRelays			.setListener((Menu_0_Fragment) this);
+    	buttonPumps				.setListener((Menu_0_Fragment) this);
+    	buttonCircuits			.setListener((Menu_0_Fragment) this);
+    	buttonBurner			.setListener((Menu_0_Fragment) this);
+    	buttonBoiler			.setListener((Menu_0_Fragment) this);
+    	buttonPIDs				.setListener((Menu_0_Fragment) this);
+
+    	return menuView;
+    }
+    public void onMenuElementClick(View clickedView)
 	{
-		super.onClick(myView);
+		super.onMenuElementClick(clickedView);
 		
-    	String													caption						= ((Button) myView).getText().toString();
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;
-    	
-    	if      (caption.equalsIgnoreCase("Thermometers"))		panelFragment 				= new Panel_5_Configuration_Thermometers();
-    	else if (caption.equalsIgnoreCase("Relays"))			panelFragment 				= new Panel_5_Configuration_Relays();
-    	else if (caption.equalsIgnoreCase("Pumps"))				panelFragment 				= new Panel_5_Configuration_Pumps();
-    	else if (caption.equalsIgnoreCase("Circuits"))			panelFragment 				= new Panel_5_Configuration_Circuits();
-    	else if (caption.equalsIgnoreCase("Burner"))			panelFragment 				= new Panel_5_Configuration_Burner();
-    	else if (caption.equalsIgnoreCase("Boiler"))			panelFragment 				= new Panel_5_Configuration_Boiler();
-    	else if (caption.equalsIgnoreCase("PIDs"))				panelFragment 				= new Panel_5_Configuration_PIDs();
-    	else if (caption.equalsIgnoreCase("Refresh"))			doRefresh();
-    	else if (caption.equalsIgnoreCase("Update"))			doUpdate();
+   	
+    	if      (clickedView == buttonThermometers)				panelFragment 				= new Panel_5_Configuration_Thermometers();
+    	else if (clickedView == buttonRelays) 					panelFragment 				= new Panel_5_Configuration_Relays();
+     	else if (clickedView == buttonPumps)					panelFragment 				= new Panel_5_Configuration_Pumps();
+    	else if (clickedView == buttonCircuits)					panelFragment 				= new Panel_5_Configuration_Circuits();
+    	else if (clickedView == buttonBurner)					panelFragment 				= new Panel_5_Configuration_Burner();
+    	else if (clickedView == buttonBoiler)					panelFragment 				= new Panel_5_Configuration_Boiler();
+    	else if (clickedView == buttonPIDs)						panelFragment 				= new Panel_5_Configuration_PIDs();
 
-    	if (panelFragment != null)
+    	if 		(panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);
     	}
-		fTransaction.commit();
-	}
+    	fTransaction.commit();  
+	}	
+//	public void onClick(View myView) // This is the onClick event from the Menu
+//	{
+//		super.onClick(myView);
+//		
+//    	String													caption						= ((Button) myView).getText().toString();
+//    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
+//    	Fragment 												panelFragment				= null;
+//    	
+//    	if      (caption.equalsIgnoreCase("Thermometers"))		panelFragment 				= new Panel_5_Configuration_Thermometers();
+//    	else if (caption.equalsIgnoreCase("Relays"))			panelFragment 				= new Panel_5_Configuration_Relays();
+//    	else if (caption.equalsIgnoreCase("Pumps"))				panelFragment 				= new Panel_5_Configuration_Pumps();
+//    	else if (caption.equalsIgnoreCase("Circuits"))			panelFragment 				= new Panel_5_Configuration_Circuits();
+//    	else if (caption.equalsIgnoreCase("Burner"))			panelFragment 				= new Panel_5_Configuration_Burner();
+//    	else if (caption.equalsIgnoreCase("Boiler"))			panelFragment 				= new Panel_5_Configuration_Boiler();
+//    	else if (caption.equalsIgnoreCase("PIDs"))				panelFragment 				= new Panel_5_Configuration_PIDs();
+//    	else if (caption.equalsIgnoreCase("Refresh"))			doRefresh();
+//    	else if (caption.equalsIgnoreCase("Update"))			doUpdate();
+//
+//    	if (panelFragment != null)
+//    	{
+//    		fTransaction.replace(R.id.panel_container, panelFragment);
+//    	}
+//		fTransaction.commit();
+//	}
 	public void doRefresh()
 	{
 		HTTP_Send	(new Ctrl_Json().new Request(Ctrl_Json.TYPE_Configuration));				// Fire these async actions as soon as possible

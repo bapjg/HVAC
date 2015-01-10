@@ -81,13 +81,13 @@ public class Activity_Main 										extends 					Activity
  
         // Setup the listener to change the 2 pages to be displayed on each "tab" click
         //                                                 menu fragment   ,  	panel object
-        tabTemperatures.setTabListener	(new Listener_Tabs(Global.menuTemperatures));
-        tabImmediate.setTabListener		(new Listener_Tabs(Global.menuImmediate));
-        tabCalendars.setTabListener		(new Listener_Tabs(Global.menuCalendars));
-        tabWeather.setTabListener		(new Listener_Tabs(Global.menuWeather));
-        tabConfiguration.setTabListener	(new Listener_Tabs(Global.menuConfiguration));
-        tabActions.setTabListener		(new Listener_Tabs(Global.menuActions));
-        tabReset.setTabListener			(new Listener_Tabs(Global.menuReset));
+        tabTemperatures	.setTabListener		(new Listener_Tabs(Global.menuTemperatures));
+        tabImmediate	.setTabListener		(new Listener_Tabs(Global.menuImmediate));
+        tabCalendars	.setTabListener		(new Listener_Tabs(Global.menuCalendars));
+        tabWeather		.setTabListener		(new Listener_Tabs(Global.menuWeather));
+        tabConfiguration.setTabListener		(new Listener_Tabs(Global.menuConfiguration));
+        tabActions		.setTabListener		(new Listener_Tabs(Global.menuActions));
+        tabReset		.setTabListener		(new Listener_Tabs(Global.menuReset));
         
         actionbar.addTab(tabTemperatures);
         actionbar.addTab(tabImmediate);

@@ -21,47 +21,113 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
 public class Menu_0_Fragment 									extends 					Fragment 
 																implements					TCP_Response,
-																							HTTP_Response
+																							HTTP_Response,
+																							Menu_0_Interface
 {
-	public 	int													menuLayout;
-	private ViewGroup											container;
-	private View												menuView;
-	private View												listView;
+	protected	Boolean											buttonsRefreshUpdate;
+	protected 	ViewGroup										container;
+	protected 	View											menuView;
+	protected 	LinearLayout									menuInsertPoint;
+	protected	Element_MenuButton								buttonRefresh;
+	protected	Element_MenuButton								buttonUpdate;
 	
-	public Menu_0_Fragment()
+
+	
+	//OLD OR NEW
+	protected 	View											listView;
+	
+	//OLD
+	protected 	View											myView;
+	public	int			menuLayout;
+	
+	public Menu_0_Fragment()		//OLD
 	{
 		super();
+	}
+	public Menu_0_Fragment(Boolean buttonsRefreshUpdate)
+	{
+		super();
+		this.buttonsRefreshUpdate															= buttonsRefreshUpdate;
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-		menuView 																			= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
-    	listView																			= menuView.findViewById(R.id.buttons_container);
-    	Button													firstButton					= (Button) ((ViewGroup) listView).getChildAt(0);
     	this.container																		= container;
-    	allButtonsSetup((ViewGroup) menuView);
-		((OnClickListener) this).onClick(firstButton);																		// Execute the onClickListener of the first menu button
-    	return menuView;
-    }
-	public void onConfigurationChanged(Configuration newConfig)
-	{
-		super.onConfigurationChanged(newConfig);
-	    LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    	menuView 																			= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
+    	this.menuView																		= inflater.inflate(R.layout.menu_0_base, container, false);				// Inflate the menuLayout into container (menu_container)
+    	this.menuInsertPoint																= (LinearLayout) menuView.findViewById(R.id.menuInsertPoint);
     	
-    	clickActiveButton();
+    	if (buttonsRefreshUpdate == null)
+    	{
+    		//TODO OLD
+    	}
+    	else
+    	{
+    		LinearLayout buttonsRefreshView															= (LinearLayout) menuView.findViewById(R.id.buttonsRefresh);
+
+    		if (! buttonsRefreshUpdate)
+	    	{
+	    		buttonsRefreshView.setVisibility(View.GONE);
+	    	}
+    		else
+    		{
+    			buttonRefresh 	= new Element_MenuButton("Refresh");
+    			buttonUpdate 	= new Element_MenuButton("Update");
+    			
+    			buttonsRefreshView.addView(buttonRefresh);
+    			buttonsRefreshView.addView(buttonUpdate);
+    			
+    	    	buttonRefresh	.setListener((Menu_0_Fragment) this); 
+    	    	buttonUpdate	.setListener((Menu_0_Fragment) this); 
+    		}
+    	}    	
+    	
+    	//OLD
+    	if (menuLayout != 0)
+    	{
+    		menuView = inflater.inflate(menuLayout, container, false);
+    		listView = menuView.findViewById(R.id.buttons_container);
+    		myView = menuView;
+
+    		Button													firstButton					= (Button) ((ViewGroup) listView).getChildAt(0);
+    		allButtonsSetup((ViewGroup) menuView);
+    		((OnClickListener) this).onClick(firstButton);																		// Execute the onClickListener of the first menu button
+    	}
+		return menuView;
+    }
+	public void onMenuElementClick(View clickedView)
+	{
+		if ((buttonsRefreshUpdate != null) && (buttonsRefreshUpdate))
+		{
+	       	if 		(clickedView == buttonRefresh)					doRefresh();
+	    	else if (clickedView == buttonUpdate)					doUpdate();
+		}
+	}
+	public void doRefresh() {}
+	public void doUpdate() {}
+	//	public void onConfigurationChanged(Configuration newConfig)
+//	{
+//		super.onConfigurationChanged(newConfig);
+//	    LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//    	menuView 																			= inflater.inflate(this.menuLayout, container, false);				// Inflate the menuLayout into container (menu_container)
+//    	
+//    	clickActiveButton();
+//	}
+	public void menuInitialise(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+	{
+		//menuView.findViewById(id)
 	}
 	public void onClick(View myView) 																						// This is the onClick event from the Menu
 	{
     	Button 													myButton 					= (Button) myView;
 		ViewGroup 												viewParent					= (ViewGroup) myView.getParent();									// Set all textColours to white
-		
+		Button													clickedButton				= myButton;
 		if (viewParent.getId() == R.id.buttons_refresh)
 		{
 			Global.toaster("Communicating with server",  true);
@@ -127,6 +193,6 @@ public class Menu_0_Fragment 									extends 					Fragment
 	{  
 		Global.setAddressSpace();
 		Global.setStatusTCP(result);
-	}							
+	}	
 }
 
