@@ -22,7 +22,6 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
 	public Menu_1_Temperatures()
 	{
 		super(false);
-//		this.menuLayout																		= R.layout.menu_1_temperatures;
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -49,24 +48,4 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
     	}
     	fTransaction.commit();  
 	}
-
-    
-    
-//    public void onClick(View myView) 									// This is the onClick event from the Menu
-//	{
-//		super.onClick(myView);
-//		
-//    	String													caption						= ((Button) myView).getText().toString();
-//    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
-//    	Fragment 												panelFragment				= null;
-//		
-//    	if   (caption.equalsIgnoreCase("Temperatures"))			panelFragment 				= new Panel_1_Temperatures();
-//    	if   (caption.equalsIgnoreCase("Temperatures Large"))	panelFragment 				= new Panel_1_Temperatures();
-//
-//    	if (panelFragment != null)
-//    	{
-//    		fTransaction.replace(R.id.panel_container, panelFragment);
-//    	}
-//		fTransaction.commit();
-//	}
 }

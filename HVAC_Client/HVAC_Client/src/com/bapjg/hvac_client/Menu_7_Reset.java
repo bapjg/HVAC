@@ -22,7 +22,6 @@ public class Menu_7_Reset 										extends 					Menu_0_Fragment
 	public Menu_7_Reset()
 	{
 		super(false);
-//		this.menuLayout																		= R.layout.menu_7_reset;
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -31,8 +30,8 @@ public class Menu_7_Reset 										extends 					Menu_0_Fragment
     	buttonResetConfig																	= new Element_MenuButton("Hot Water");
     	buttonResetCalendars																= new Element_MenuButton("Radiator");
 
-    	menuInsertPoint.addView(buttonResetConfig);
-    	menuInsertPoint.addView(buttonResetCalendars);
+    	menuInsertPoint			.addView(buttonResetConfig);
+    	menuInsertPoint			.addView(buttonResetCalendars);
     	
     	buttonResetConfig		.setListener((Menu_0_Fragment) this);
     	buttonResetCalendars	.setListener((Menu_0_Fragment) this);
@@ -57,24 +56,4 @@ public class Menu_7_Reset 										extends 					Menu_0_Fragment
     	}
     	fTransaction.commit();  
 	}
-	
-//	public void onClick(View myView) 
-//	{
-//		super.onClick(myView);
-//		
-//    	String													caption						= ((Button) myView).getText().toString();
-//    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
-//    	Fragment 												panelFragment				= null;
-//    	
-////    	TODO This must be done
-//    	
-//    	if      (caption.equalsIgnoreCase("Reset Configuration"))	panelFragment 			= new Panel_6_Actions_Relays();
-//    	else if (caption.equalsIgnoreCase("Reset Calendars"))		panelFragment 			= new Panel_6_Actions_Test_Mail();
-//
-//    	if (panelFragment != null)
-//    	{
-//    		fTransaction.replace(R.id.panel_container, panelFragment);
-//    	}
-//		fTransaction.commit();
-//	}
 }

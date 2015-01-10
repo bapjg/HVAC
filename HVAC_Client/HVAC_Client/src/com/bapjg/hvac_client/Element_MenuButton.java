@@ -21,6 +21,7 @@ public class Element_MenuButton 								extends 					LinearLayout
 	public LayoutInflater 										inflater;
 	public Button 												button;
 	public Element_Interface									listener;
+	public Boolean												isYellow;
 	
 	public Element_MenuButton(String caption) 
 	{
@@ -30,6 +31,7 @@ public class Element_MenuButton 								extends 					LinearLayout
 		inflater.inflate(R.layout.element_menu_button, this, true);
 		button 																				= (Button) this.findViewById(R.id.Button);
 		button.setText(caption);
+		isYellow																			= false;
 	}
 	public void setListener(Element_Interface listener)
 	{
@@ -43,10 +45,12 @@ public class Element_MenuButton 								extends 					LinearLayout
 	public void setYellow()
 	{
 		button.setTextColor(getResources().getColor(R.color.Yellow));
+		isYellow																			= true;
 	}
 	public void setWhite()
 	{
-		button.setTextColor(getResources().getColor(R.color.White));		
+		button.setTextColor(getResources().getColor(R.color.White));	
+		isYellow																			= false;
 	}
 }
 

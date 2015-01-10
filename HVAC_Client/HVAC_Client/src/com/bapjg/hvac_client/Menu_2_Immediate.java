@@ -24,7 +24,6 @@ public class Menu_2_Immediate 									extends 					Menu_0_Fragment
 	public Menu_2_Immediate()
 	{
 		super(false);
-//		this.menuLayout																		= R.layout.menu_2_immediate;
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -34,9 +33,9 @@ public class Menu_2_Immediate 									extends 					Menu_0_Fragment
     	buttonRadiator																		= new Element_MenuButton("Radiator");
     	buttonFloor																			= new Element_MenuButton("Floor");
 
-    	menuInsertPoint.addView(buttonHotWater);
-    	menuInsertPoint.addView(buttonRadiator);
-    	menuInsertPoint.addView(buttonFloor);
+    	menuInsertPoint			.addView(buttonHotWater);
+    	menuInsertPoint			.addView(buttonRadiator);
+    	menuInsertPoint			.addView(buttonFloor);
      	
     	buttonHotWater			.setListener(this);
     	buttonRadiator			.setListener(this);
@@ -64,22 +63,4 @@ public class Menu_2_Immediate 									extends 					Menu_0_Fragment
     	}
     	fTransaction.commit();  
 	}
-//    public void onClick(View myView) 
-//	{
-//		super.onClick(myView);
-//		
-//    	String													caption						= ((Button) myView).getText().toString();
-//    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
-//    	Fragment 												panelFragment				= null;
-//    	
-//    	if      (caption.equalsIgnoreCase("Hot Water"))			panelFragment 				= new Panel_2_Immediate("Hot_Water");
-//		else if (caption.equalsIgnoreCase("Radiator"))			panelFragment 				= new Panel_2_Immediate("Radiator");
-//		else if (caption.equalsIgnoreCase("Floor"))				panelFragment 				= new Panel_2_Immediate("Floor");
-//
-//    	if (panelFragment != null)
-//    	{
-//    		fTransaction.replace(R.id.panel_container, panelFragment);
-//    	}
-//    	fTransaction.commit();   	 	
-//	}
 }

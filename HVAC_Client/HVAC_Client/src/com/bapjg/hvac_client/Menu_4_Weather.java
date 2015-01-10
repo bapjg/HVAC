@@ -25,7 +25,6 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
 	public Menu_4_Weather()
 	{
 		super(false);
-//		this.menuLayout																		= R.layout.menu_4_weather;
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -36,10 +35,10 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
     	buttonBeyond																		= new Element_MenuButton("Beyond");
     	buttonSunriseSunset																	= new Element_MenuButton("Sunrise Sunset");
 
-    	menuInsertPoint.addView(buttonToday);
-    	menuInsertPoint.addView(buttonTomorrow);
-    	menuInsertPoint.addView(buttonBeyond);
-    	menuInsertPoint.addView(buttonSunriseSunset);
+    	menuInsertPoint			.addView(buttonToday);
+    	menuInsertPoint			.addView(buttonTomorrow);
+    	menuInsertPoint			.addView(buttonBeyond);
+    	menuInsertPoint			.addView(buttonSunriseSunset);
     	
     	buttonToday				.setListener(this);
     	buttonTomorrow			.setListener(this);

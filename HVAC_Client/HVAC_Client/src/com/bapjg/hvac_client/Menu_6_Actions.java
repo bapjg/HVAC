@@ -23,7 +23,6 @@ public class Menu_6_Actions 									extends 					Menu_0_Fragment
 	public Menu_6_Actions()
 	{
 		super(false);
-//		this.menuLayout																		= R.layout.menu_6_actions;
 	}
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{
@@ -33,9 +32,9 @@ public class Menu_6_Actions 									extends 					Menu_0_Fragment
 		buttonTestMail																		= new Element_MenuButton("Test Mail");
 		buttonStop																			= new Element_MenuButton("Stop");
 
-    	menuInsertPoint.addView(buttonRelays);
-    	menuInsertPoint.addView(buttonTestMail);
-    	menuInsertPoint.addView(buttonStop);
+    	menuInsertPoint			.addView(buttonRelays);
+    	menuInsertPoint			.addView(buttonTestMail);
+    	menuInsertPoint			.addView(buttonStop);
     	
     	buttonRelays			.setListener((Menu_0_Fragment) this);
     	buttonTestMail			.setListener((Menu_0_Fragment) this);
@@ -62,24 +61,4 @@ public class Menu_6_Actions 									extends 					Menu_0_Fragment
     	}
     	fTransaction.commit();  
 	}
-	
-	
-//	public void onClick(View myView) 
-//	{
-//		super.onClick(myView);
-//		
-//    	String													caption						= ((Button) myView).getText().toString();
-//    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
-//    	Fragment 												panelFragment				= null;
-//    	
-//    	if      (caption.equalsIgnoreCase("Relays"))			panelFragment 				= new Panel_6_Actions_Relays();
-//    	else if (caption.equalsIgnoreCase("Test Mail"))			panelFragment 				= new Panel_6_Actions_Test_Mail();
-//    	else if (caption.equalsIgnoreCase("Stop"))				panelFragment 				= new Panel_6_Actions_Stop();
-//
-//    	if (panelFragment != null)
-//    	{
-//    		fTransaction.replace(R.id.panel_container, panelFragment);
-//    	}
-//		fTransaction.commit();
-//	}
 }

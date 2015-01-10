@@ -35,22 +35,10 @@ public class Menu_0_Fragment 									extends 					Fragment
 	protected 	ViewGroup										container;
 	protected 	View											menuView;
 	protected 	LinearLayout									menuInsertPoint;
+	protected 	LinearLayout									refreshInsertPoint;
 	protected	Element_MenuButton								buttonRefresh;
 	protected	Element_MenuButton								buttonUpdate;
 	
-
-	
-	//OLD OR NEW
-//	protected 	View											listView;
-	
-	//OLD
-//	protected 	View											myView;
-//	public	int			menuLayout;
-	
-//	public Menu_0_Fragment()		//OLD
-//	{
-//		super();
-//	}
 	public Menu_0_Fragment(Boolean buttonsRefreshUpdate)
 	{
 		super();
@@ -63,64 +51,44 @@ public class Menu_0_Fragment 									extends 					Fragment
     	this.menuView																		= inflater.inflate(R.layout.menu_0_base, container, false);				// Inflate the menuLayout into container (menu_container)
     	this.menuInsertPoint																= (LinearLayout) menuView.findViewById(R.id.menuInsertPoint);
     	
-//    	if (buttonsRefreshUpdate == null)
-//    	{
-//    		//TODO OLD
-//    	}
-//    	else
-//    	{
-    		LinearLayout buttonsRefreshView															= (LinearLayout) menuView.findViewById(R.id.buttonsRefresh);
+    	refreshInsertPoint																	= (LinearLayout) menuView.findViewById(R.id.buttonsRefresh);
 
-    		if (! buttonsRefreshUpdate)
-	    	{
-	    		buttonsRefreshView.setVisibility(View.GONE);
-	    	}
-    		else
-    		{
-    			buttonRefresh 	= new Element_MenuButton("Refresh");
-    			buttonUpdate 	= new Element_MenuButton("Update");
-    			
-    			buttonsRefreshView.addView(buttonRefresh);
-    			buttonsRefreshView.addView(buttonUpdate);
-    			
-    	    	buttonRefresh	.setListener(this); 
-    	    	buttonUpdate	.setListener(this); 
-    		}
-//    	}    	
-    	
-    	//OLD
-//    	if (menuLayout != 0)
-//    	{
-//    		menuView = inflater.inflate(menuLayout, container, false);
-//    		listView = menuView.findViewById(R.id.buttons_container);
-//    		myView = menuView;
-//
-//    		Button													firstButton					= (Button) ((ViewGroup) listView).getChildAt(0);
-//    		allButtonsSetup((ViewGroup) menuView);
-//    		((OnClickListener) this).onClick(firstButton);																		// Execute the onClickListener of the first menu button
-//    	}
+		if (! buttonsRefreshUpdate)
+    	{
+			refreshInsertPoint.setVisibility(View.GONE);
+    	}
+		else
+		{
+			buttonRefresh 	= new Element_MenuButton("Refresh");
+			buttonUpdate 	= new Element_MenuButton("Update");
+			
+			refreshInsertPoint.addView(buttonRefresh);
+			refreshInsertPoint.addView(buttonUpdate);
+			
+	    	buttonRefresh	.setListener(this); 
+	    	buttonUpdate	.setListener(this); 
+		}
+
 		return menuView;
     }
 	public void onElementClick(View clickedView)
 	{
-		if ((buttonsRefreshUpdate != null) && (buttonsRefreshUpdate))
-		{
-	       	if 		(clickedView == buttonRefresh)					doRefresh();
-	    	else if (clickedView == buttonUpdate)					doUpdate();
-		}
-		else
-		{
-			for (int i = 0; i <  menuInsertPoint.getChildCount() - 1;  i++)
+       	if 		(clickedView == buttonRefresh)					doRefresh();				// Handle refresh buttons if present
+    	else if (clickedView == buttonUpdate)					doUpdate();					// Handle refresh buttons if present
+    	else																				// Handle menu buttons
+    	{
+			for (int i = 0; i <  menuInsertPoint.getChildCount();  i++)
 			{
 				Element_MenuButton menuButton =  (Element_MenuButton) menuInsertPoint.getChildAt(i);
-				menuButton.setWhite();
+				
+				if (menuButton == clickedView)							menuButton.setYellow();
+				else													menuButton.setWhite();
 			}
-			((Element_MenuButton) clickedView).setYellow();
-		}
+    	}
 	}
 	public void doRefresh() {}
 	public void doUpdate() {}
-	//	public void onConfigurationChanged(Configuration newConfig)
+//	public void onConfigurationChanged(Configuration newConfig)
 //	{
 //		super.onConfigurationChanged(newConfig);
 //	    LayoutInflater inflater 															= (LayoutInflater) Global.actContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -128,53 +96,14 @@ public class Menu_0_Fragment 									extends 					Fragment
 //    	
 //    	clickActiveButton();
 //	}
-	public void menuInitialise(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-	{
-		//menuView.findViewById(id)
-	}
-	public void onClick(View myView) 																						// This is the onClick event from the Menu
-	{
-//    	Button 													myButton 					= (Button) myView;
-//		ViewGroup 												viewParent					= (ViewGroup) myView.getParent();									// Set all textColours to white
-//		Button													clickedButton				= myButton;
-//		if (viewParent.getId() == R.id.buttons_refresh)
-//		{
-//			Global.toaster("Communicating with server",  true);
-//		}
-//		else
-//		{
-//			allButtonsSetup(viewParent);
-//			//		allButtonsSetup(container);
-//			myButton.setTextColor(Color.YELLOW);
-//		}
-	}
-	public void allButtonsSetup(ViewGroup thisView)
-	{
-		for (int i = 0; i < thisView.getChildCount(); i++)																	
-		{
-			View												viewChild					= (View) thisView.getChildAt(i);
-			if (viewChild instanceof Button)
-			{
-				Button											buttonChild 				= (Button) thisView.getChildAt(i);
-				buttonChild.setOnClickListener((OnClickListener) this);															// Set the OnClickListener to the menuFragment object (ie this)
-				buttonChild.setTextColor(Color.WHITE);																			// Colour white
-			}
-			else if (viewChild instanceof ViewGroup)
-			{
-				allButtonsSetup((ViewGroup) viewChild);
-			}
-		}
-	}
 	public void clickActiveButton()
 	{
-		ViewGroup												menuViewGroup				= (ViewGroup) menuView;
-		for (int i = 0; i < menuViewGroup.getChildCount(); i++)																	
+		for (int i = 0; i < menuInsertPoint.getChildCount(); i++)																	
 		{
-			View												viewChild					= (View) menuViewGroup.getChildAt(i);
-			if ( (viewChild instanceof Button)
-			&&   (((Button) viewChild).getCurrentTextColor() == Color.YELLOW) )
+			Element_MenuButton									buttonChild					= (Element_MenuButton) menuInsertPoint.getChildAt(i);
+			if (buttonChild.isYellow)
 			{
-				((OnClickListener) this).onClick(viewChild);
+				buttonChild.onClick(buttonChild);
 				return;
 			}
 		}
