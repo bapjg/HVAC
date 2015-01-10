@@ -38,7 +38,7 @@ import HVAC_Common.Ctrl_Temperatures.Request;
 public class Element_Linear_Vertical 							extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
-	public Panel_0_Interface									listener;
+	public Element_Interface									listener;
 	public LinearLayout											insertPoint;
 	
 	public Element_Linear_Vertical() 

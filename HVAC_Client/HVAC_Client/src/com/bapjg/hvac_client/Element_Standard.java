@@ -18,7 +18,7 @@ public class Element_Standard 									extends 					LinearLayout
 	public TextView 											textTopic;
 	public TextView 											textValue;
 	public String												units;
-	public Panel_0_Interface									listener;
+	public Element_Interface									listener;
 	
 	public Element_Standard(String labelTextLeft) 
 	{
@@ -74,7 +74,7 @@ public class Element_Standard 									extends 					LinearLayout
 		if (temperature != null)	textValue.setText(temperature.displayDecimal() + units);
 		else						textValue.setText("0" + units);
 	}
-	public void setListener(Panel_0_Interface listener)
+	public void setListener(Element_Interface listener)
 	{
 		this.listener																		= listener;
 		textValue.setOnClickListener(this);

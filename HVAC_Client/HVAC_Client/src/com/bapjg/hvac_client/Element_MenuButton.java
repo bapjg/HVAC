@@ -1,5 +1,7 @@
 package com.bapjg.hvac_client;
 
+import com.bapjg.hvac_client.R.color;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +20,7 @@ public class Element_MenuButton 								extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
 	public Button 												button;
-	public Menu_0_Fragment										listener;
+	public Element_Interface									listener;
 	
 	public Element_MenuButton(String caption) 
 	{
@@ -29,14 +31,22 @@ public class Element_MenuButton 								extends 					LinearLayout
 		button 																				= (Button) this.findViewById(R.id.Button);
 		button.setText(caption);
 	}
-	public void setListener(Menu_0_Fragment listener)
+	public void setListener(Element_Interface listener)
 	{
-		this.listener																		= (Menu_0_Fragment) listener;
+		this.listener																		= listener;
 		button						.setOnClickListener(this);
 	}
 	public void onClick(View view)
 	{
-		listener.onMenuElementClick((View) this);
+		listener.onElementClick((View) this);
+	}
+	public void setYellow()
+	{
+		button.setTextColor(getResources().getColor(R.color.Yellow));
+	}
+	public void setWhite()
+	{
+		button.setTextColor(getResources().getColor(R.color.White));		
 	}
 }
 

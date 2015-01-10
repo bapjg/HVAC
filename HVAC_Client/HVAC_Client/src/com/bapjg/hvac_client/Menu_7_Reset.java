@@ -14,7 +14,7 @@ import android.widget.Button;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Menu_7_Reset 										extends Menu_0_Fragment 	implements View.OnClickListener
+public class Menu_7_Reset 										extends 					Menu_0_Fragment
 {
 	Element_MenuButton											buttonResetConfig;
 	Element_MenuButton											buttonResetCalendars;
@@ -36,12 +36,14 @@ public class Menu_7_Reset 										extends Menu_0_Fragment 	implements View.OnC
     	
     	buttonResetConfig		.setListener((Menu_0_Fragment) this);
     	buttonResetCalendars	.setListener((Menu_0_Fragment) this);
+    	
+    	onElementClick(buttonResetConfig);
 
     	return menuView;
     }	
-    public void onMenuElementClick(View clickedView)
+    public void onElementClick(View clickedView)
 	{
-		super.onMenuElementClick(clickedView);
+		super.onElementClick(clickedView);
 		
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;

@@ -39,7 +39,7 @@ public class Element_ListView 									extends 					LinearLayout
 																implements 					View.OnClickListener
 {
 	public LayoutInflater 										inflater;
-	public Panel_0_Interface									listener;
+	public Element_Interface									listener;
 	public ListView												listView;
 	
 //	public Element_ListView(Context context, String labelTextLeft) 

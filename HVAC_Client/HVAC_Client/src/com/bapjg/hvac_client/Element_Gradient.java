@@ -18,7 +18,7 @@ public class Element_Gradient 									extends 					RelativeLayout
 	public TextView 											tempHigh;
 	public TextView 											outsideLow;
 	public TextView 											outsideHigh;
-	public Panel_0_Interface									listener;
+	public Element_Interface									listener;
 	
 //	public Element_Gradient(Context context) 
 //	{
@@ -52,9 +52,9 @@ public class Element_Gradient 									extends 					RelativeLayout
 		if (temperature != null)								outsideHigh.setText(temperature.displayInteger());
 		else													outsideHigh.setText("");
 	}
-	public void setListener(OnClickListener listener)
+	public void setListener(Element_Interface listener)
 	{
-		this.listener																		= (Panel_0_Fragment) listener;
+		this.listener																		= listener;
 		tempLow							.setOnClickListener(this);
 		tempHigh						.setOnClickListener(this);
 		outsideLow						.setOnClickListener(this);

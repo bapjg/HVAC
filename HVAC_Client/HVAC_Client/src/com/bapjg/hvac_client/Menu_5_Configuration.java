@@ -21,9 +21,7 @@ import com.google.gson.GsonBuilder;
 @SuppressLint("ValidFragment")
 
 public class Menu_5_Configuration 								extends 					Menu_0_Fragment 
-																implements 					View.OnClickListener,
-																							Dialog_Response,
-																							HTTP_Response
+																implements 					Dialog_Response
 {
 	Element_MenuButton											buttonThermometers;
 	Element_MenuButton											buttonRelays;
@@ -58,19 +56,21 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
     	menuInsertPoint.addView(buttonBoiler);
     	menuInsertPoint.addView(buttonPIDs);
     	
-    	buttonThermometers		.setListener((Menu_0_Fragment) this);
-    	buttonRelays			.setListener((Menu_0_Fragment) this);
-    	buttonPumps				.setListener((Menu_0_Fragment) this);
-    	buttonCircuits			.setListener((Menu_0_Fragment) this);
-    	buttonBurner			.setListener((Menu_0_Fragment) this);
-    	buttonBoiler			.setListener((Menu_0_Fragment) this);
-    	buttonPIDs				.setListener((Menu_0_Fragment) this);
+    	buttonThermometers		.setListener(this);
+    	buttonRelays			.setListener(this);
+    	buttonPumps				.setListener(this);
+    	buttonCircuits			.setListener(this);
+    	buttonBurner			.setListener(this);
+    	buttonBoiler			.setListener(this);
+    	buttonPIDs				.setListener(this);
 
+    	onElementClick(buttonThermometers);
+    	
     	return menuView;
     }
-    public void onMenuElementClick(View clickedView)
+    public void onElementClick(View clickedView)
 	{
-		super.onMenuElementClick(clickedView);
+		super.onElementClick(clickedView);
 		
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;

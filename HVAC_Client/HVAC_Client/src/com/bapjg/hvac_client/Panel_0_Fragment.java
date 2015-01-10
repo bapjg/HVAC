@@ -37,7 +37,7 @@ public class Panel_0_Fragment 									extends 					Fragment
 																							TCP_Response,
 																							HTTP_Response,
 																							Dialog_Response,
-																							Panel_0_Interface
+																							Element_Interface
 {
 	public 		ViewGroup										container;
 	public 		View											panelView;					// This corresponds to the inflated panel (R.layout.panel_n_xxxxxx)

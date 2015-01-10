@@ -16,7 +16,6 @@ import android.widget.Button;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Menu_4_Weather 									extends 					Menu_0_Fragment 
-																implements 					View.OnClickListener
 {
 	Element_MenuButton											buttonToday;
 	Element_MenuButton											buttonTomorrow;
@@ -42,17 +41,19 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
     	menuInsertPoint.addView(buttonBeyond);
     	menuInsertPoint.addView(buttonSunriseSunset);
     	
-    	buttonToday				.setListener((Menu_0_Fragment) this);
-    	buttonTomorrow			.setListener((Menu_0_Fragment) this);
-    	buttonBeyond			.setListener((Menu_0_Fragment) this);
-    	buttonSunriseSunset		.setListener((Menu_0_Fragment) this);
+    	buttonToday				.setListener(this);
+    	buttonTomorrow			.setListener(this);
+    	buttonBeyond			.setListener(this);
+    	buttonSunriseSunset		.setListener(this);
 
+    	onElementClick(buttonToday);
+    	
     	return menuView;
     }
     @Override
-    public void onMenuElementClick(View clickedView)
+    public void onElementClick(View clickedView)
 	{
-		super.onMenuElementClick(clickedView);
+		super.onElementClick(clickedView);
 		
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;

@@ -21,7 +21,6 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragment
-																implements					Panel_0_Interface
 {		
 	private Ctrl_Configuration.Circuit	 						itemData;
 	

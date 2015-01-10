@@ -20,10 +20,7 @@ import com.google.gson.GsonBuilder;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Menu_3_Calendars 									extends 					Menu_0_Fragment 
-																implements 					
-																							HTTP_Response,
-																							TCP_Response,
-																							Dialog_Response
+																implements 					Dialog_Response
 {
 	Element_MenuButton											buttonHotWater;
 	Element_MenuButton											buttonRadiator;
@@ -55,19 +52,21 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
     	menuInsertPoint.addView(buttonAwayList);
     	menuInsertPoint.addView(buttonBackgroudTasks);
     	
-    	buttonHotWater			.setListener((Menu_0_Fragment) this);
-    	buttonRadiator			.setListener((Menu_0_Fragment) this);
-    	buttonFloor				.setListener((Menu_0_Fragment) this);
-    	buttonVocabulary		.setListener((Menu_0_Fragment) this);
-    	buttonAwayList			.setListener((Menu_0_Fragment) this);
-    	buttonBackgroudTasks	.setListener((Menu_0_Fragment) this);
+    	buttonHotWater			.setListener(this);
+    	buttonRadiator			.setListener(this);
+    	buttonFloor				.setListener(this);
+    	buttonVocabulary		.setListener(this);
+    	buttonAwayList			.setListener(this);
+    	buttonBackgroudTasks	.setListener(this);
 
+    	onElementClick(buttonHotWater);
+    	
     	return menuView;
     }	
     @Override
-    public void onMenuElementClick(View clickedView)
+    public void onElementClick(View clickedView)
 	{
-		super.onMenuElementClick(clickedView);
+		super.onElementClick(clickedView);
 		
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;
@@ -79,7 +78,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
     	else if (clickedView == buttonAwayList)					panelFragment 				= new Panel_3_Calendars_Away();
     	else if (clickedView == buttonBackgroudTasks)			panelFragment 				= new Panel_3_Calendars_Background_Tasks();
 
-    	if 		(panelFragment != null)
+    	if (panelFragment != null)
     	{
     		fTransaction.replace(R.id.panel_container, panelFragment);
     	}

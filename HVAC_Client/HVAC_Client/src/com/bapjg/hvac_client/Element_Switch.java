@@ -16,7 +16,7 @@ public class Element_Switch 									extends 					LinearLayout
 	public LayoutInflater 										inflater;
 	public TextView 											textLeft;
 	public Switch		 										onOffSwitch;
-	public Panel_0_Interface									listener;
+	public Element_Interface									listener;
 	
 //	public Element_Switch(Context context, String labelTextLeft) 
 //	{
@@ -43,7 +43,7 @@ public class Element_Switch 									extends 					LinearLayout
 	}
 	public void setListener(OnClickListener listener)
 	{
-		this.listener																		= (Panel_0_Fragment) listener;
+		this.listener																		= (Element_Interface) listener;
 		onOffSwitch.setOnClickListener(this);
 	}
 	public void onClick(View view)

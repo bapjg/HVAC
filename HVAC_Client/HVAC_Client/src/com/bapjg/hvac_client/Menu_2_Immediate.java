@@ -16,7 +16,6 @@ import android.widget.Button;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
 public class Menu_2_Immediate 									extends 					Menu_0_Fragment 
-																implements 					View.OnClickListener
 {
 	Element_MenuButton											buttonHotWater;
 	Element_MenuButton											buttonRadiator;
@@ -39,16 +38,18 @@ public class Menu_2_Immediate 									extends 					Menu_0_Fragment
     	menuInsertPoint.addView(buttonRadiator);
     	menuInsertPoint.addView(buttonFloor);
      	
-    	buttonHotWater			.setListener((Menu_0_Fragment) this);
-    	buttonRadiator			.setListener((Menu_0_Fragment) this);
-    	buttonFloor				.setListener((Menu_0_Fragment) this);
+    	buttonHotWater			.setListener(this);
+    	buttonRadiator			.setListener(this);
+    	buttonFloor				.setListener(this);
 
+    	onElementClick(buttonHotWater);
+    	
     	return menuView;
     }	
     @Override
-    public void onMenuElementClick(View clickedView)
+    public void onElementClick(View clickedView)
 	{
-		super.onMenuElementClick(clickedView);
+		super.onElementClick(clickedView);
 		
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;

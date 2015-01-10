@@ -25,7 +25,7 @@ public class Element_Slots_WeekDays 									extends 					LinearLayout
 	public TextView 											day_6;
 	public TextView 											day_7;
 	
-	public Panel_0_Interface									listener;
+	public Element_Interface									listener;
 	
 	public Element_Slots_WeekDays()
 	{
@@ -62,7 +62,7 @@ public class Element_Slots_WeekDays 									extends 					LinearLayout
         if ((days).indexOf("6") > -1)	day_6.setBackgroundColor(Color.RED); else day_6.setBackgroundColor(Color.BLUE);
         if ((days).indexOf("7") > -1)	day_7.setBackgroundColor(Color.RED); else day_7.setBackgroundColor(Color.BLUE);
 	}
-	public void setListener(Panel_0_Interface listener)
+	public void setListener(Element_Interface listener)
 	{
 		this.listener																		= listener;
 		textName	.setOnClickListener(this);

@@ -18,7 +18,7 @@ public class Element_CheckBox 									extends 					LinearLayout
 	public LayoutInflater 										inflater;
 	public CheckBox		 										checkBox;
 	public TextView 											textLeft;
-	public Panel_0_Interface									listener;
+	public Element_Interface									listener;
 	
 //	public Element_CheckBox(Context context, String labelTextLeft) 
 //	{
@@ -43,9 +43,9 @@ public class Element_CheckBox 									extends 					LinearLayout
 	{
 		return checkBox.isChecked();
 	}
-	public void setListener(OnClickListener listener)
+	public void setListener(Element_Interface listener)
 	{
-		this.listener																		= (Panel_0_Fragment) listener;
+		this.listener																		= listener;
 		checkBox						.setOnClickListener(this);
 	}
 	public void onClick(View view)

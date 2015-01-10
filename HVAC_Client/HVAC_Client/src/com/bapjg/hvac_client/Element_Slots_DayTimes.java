@@ -16,7 +16,7 @@ public class Element_Slots_DayTimes 							extends 					LinearLayout
 																implements 					View.OnClickListener
 {
 	public LayoutInflater 										inflater;
-	public Panel_0_Interface									listener;
+	public Element_Interface									listener;
 	
 	private	ViewGroup 											timeSlots;
 	private	TextView 											timeStart;
@@ -88,7 +88,7 @@ public class Element_Slots_DayTimes 							extends 					LinearLayout
 	    timeEnd					.setText(calendarItem.timeEnd.displayShort());
 	    tempObjective			.setText(calendarItem.tempObjective.displayDecimal());
 	}
-	public void setListener(Panel_0_Interface listener)
+	public void setListener(Element_Interface listener)
 	{
 		this.listener																		= listener;
 //		textName	.setOnClickListener(this);

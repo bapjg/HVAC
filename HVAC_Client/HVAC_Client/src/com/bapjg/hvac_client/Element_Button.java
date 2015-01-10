@@ -18,7 +18,7 @@ public class Element_Button 									extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;
 	public Button 												button;
-	public Panel_0_Interface									listener;
+	public Element_Interface									listener;
 	
 //	public Element_Button(Context context, String caption) 
 //	{
@@ -38,9 +38,9 @@ public class Element_Button 									extends 					LinearLayout
 	{
 		return button.getText().toString();
 	}
-	public void setListener(OnClickListener listener)
+	public void setListener(Element_Interface listener)
 	{
-		this.listener																		= (Panel_0_Fragment) listener;
+		this.listener																		= listener;
 		button						.setOnClickListener(this);
 	}
 	public void onClick(View view)

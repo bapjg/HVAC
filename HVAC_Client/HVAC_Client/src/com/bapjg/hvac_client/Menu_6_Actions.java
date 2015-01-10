@@ -14,7 +14,7 @@ import android.widget.Button;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Menu_6_Actions 									extends Menu_0_Fragment 	implements View.OnClickListener
+public class Menu_6_Actions 									extends 					Menu_0_Fragment
 {
 	Element_MenuButton											buttonRelays;
 	Element_MenuButton											buttonTestMail;
@@ -40,12 +40,14 @@ public class Menu_6_Actions 									extends Menu_0_Fragment 	implements View.On
     	buttonRelays			.setListener((Menu_0_Fragment) this);
     	buttonTestMail			.setListener((Menu_0_Fragment) this);
     	buttonStop				.setListener((Menu_0_Fragment) this);
+    	
+    	onElementClick(buttonRelays);
 
     	return menuView;
 	}
-    public void onMenuElementClick(View clickedView)
+    public void onElementClick(View clickedView)
 	{
-		super.onMenuElementClick(clickedView);
+		super.onElementClick(clickedView);
 		
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;

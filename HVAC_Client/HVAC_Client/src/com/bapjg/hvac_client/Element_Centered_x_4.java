@@ -19,7 +19,7 @@ public class Element_Centered_x_4 									extends 					LinearLayout
 	public TextView 											textTopRight;
 	public TextView 											textBottomLeft;
 	public TextView 											textBottomRight;
-	public Panel_0_Interface									listener;
+	public Element_Interface									listener;
 	
 	public Element_Centered_x_4() 
 	{
@@ -47,7 +47,7 @@ public class Element_Centered_x_4 									extends 					LinearLayout
 	{
 		textBottomRight.setText(text);
 	}
-	public void setListener(Panel_0_Interface listener)
+	public void setListener(Element_Interface listener)
 	{
 		this.listener																		= listener;
 //		textTopLeft		.setOnClickListener(this);

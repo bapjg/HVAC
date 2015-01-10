@@ -16,7 +16,6 @@ import android.widget.Button;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
 public class Menu_1_Temperatures 								extends 					Menu_0_Fragment 
-																implements 					View.OnClickListener
 {
 	Element_MenuButton											buttonTemperatures;
 
@@ -31,12 +30,13 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
     	
     	buttonTemperatures																	= new Element_MenuButton("Temperatures");
     	menuInsertPoint.addView(buttonTemperatures);
-    	buttonTemperatures			.setListener((Menu_0_Fragment) this);
+    	buttonTemperatures			.setListener(this);
+    	onElementClick(buttonTemperatures);
     	return menuView;
     }
-    public void onMenuElementClick(View clickedView)
+    public void onElementClick(View clickedView)
 	{
-		super.onMenuElementClick(clickedView);
+		super.onElementClick(clickedView);
 		
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;
