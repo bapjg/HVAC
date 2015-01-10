@@ -61,7 +61,7 @@ public class Panel_0_Fragment 									extends 					Fragment
 		this.container																		= container;
 		if (panelType.equalsIgnoreCase("Standard"))
 		{
-			this.panelView																	= inflater.inflate(R.layout.panal_0_standard, container, false);
+			this.panelView																	= inflater.inflate(R.layout.panel_0_standard, container, false);
 	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
 		}
 		else if (panelType.equalsIgnoreCase("Centered"))

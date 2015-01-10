@@ -3,7 +3,7 @@
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     android:layout_width							= "match_parent"
     android:layout_height							= "match_parent"
-    android:background								= "@color/background"
+    android:background								= "@color/Background"
 >
 
     <include
@@ -42,7 +42,7 @@
                 			
 	    <GridLayout
 	        android:id							= "@+id/LinearLayout01"
-			style								= "@style/AD_Grid"
+
 			android:columnCount					= "2"
 		>                           			
 	        <TextView

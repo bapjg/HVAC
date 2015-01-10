@@ -3,7 +3,7 @@
     android:id	= "@+id/row"
     android:layout_width	= "match_parent"
     android:layout_height	= "match_parent"
-    android:background	= "@color/background"
+    android:background	= "@color/Background"
     android:gravity	= "center_vertical"
     android:orientation	= "vertical" >
 

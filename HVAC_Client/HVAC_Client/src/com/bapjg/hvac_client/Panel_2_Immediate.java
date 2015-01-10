@@ -45,7 +45,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	this.container																		= container;
-		this.panelView																		= inflater.inflate(R.layout.panal_0_standard, container, false);
+		this.panelView																		= inflater.inflate(R.layout.panel_0_standard, container, false);
     	displayTitles("Immediate", this.circuitName);
     	
     	Ctrl_Immediate.Request									taskListRequest				= new Ctrl_Immediate().new Request();
