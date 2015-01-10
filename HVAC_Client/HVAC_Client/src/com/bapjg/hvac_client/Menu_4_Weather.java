@@ -60,7 +60,7 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
     	if      (clickedView == buttonToday)					panelFragment 				= new Panel_4_Weather_WORK("Today");
     	else if (clickedView == buttonTomorrow) 				panelFragment 				= new Panel_4_Weather_WORK("Tomorrow");
      	else if (clickedView == buttonBeyond)					panelFragment 				= new Panel_4_Weather_WORK("Beyond");
-    	else if (clickedView == buttonSunriseSunset)			panelFragment 				= new Panel_4_Weather_WORK("Sunrise Sunset");
+    	else if (clickedView == buttonSunriseSunset)			panelFragment 				= new Panel_4_Weather_Sun();
 
     	if 		(panelFragment != null)
     	{

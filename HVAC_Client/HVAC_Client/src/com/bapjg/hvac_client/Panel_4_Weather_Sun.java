@@ -21,16 +21,20 @@ import android.util.Log;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Panel_4_Weather_Sun_WORK 									extends 					Panel_0_Fragment
+public class Panel_4_Weather_Sun 								extends 					Panel_0_Fragment
 {
 	private String												when;
 	private ArrayList <Ctrl_WeatherData.Forecast> 				forecastList;
 	
-	public Panel_4_Weather_Sun_WORK()
+	private Element_Heading										heading;
+	private Element_Centered_x_4								times;
+	
+	
+	public Panel_4_Weather_Sun()
 	{
-		super();
+		super("Standard");
 	}
-    public Panel_4_Weather_Sun_WORK(String when)
+    public Panel_4_Weather_Sun(String when)
     {
 		super();
 		this.when																			= when;				
@@ -39,13 +43,19 @@ public class Panel_4_Weather_Sun_WORK 									extends 					Panel_0_Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
-//    	this.panelLayout																	= R.layout.panel_4_weather_sun;
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_4_weather_sun, container, false);
+    	super.panelInitialise(inflater, container, savedInstanceState);
 
-		if (Global.weatherForecast != null)
+    	heading																				= new Element_Heading("Sunrise", "Sunset");
+    	heading.centerColumns();
+    	times																				= new Element_Centered_x_4();
+    	
+    	panelInsertPoint.addView(heading);
+    	panelInsertPoint.addView(times);
+
+    	displayTitles("Weather", "Sunrise/Sunset");
+    	
+    	if (Global.weatherForecast != null)
 		{
-        	displayTitles("Weather", "Sunrise/Sunset");
 			displayContents();
 	        setListens();
 		}
@@ -59,21 +69,17 @@ public class Panel_4_Weather_Sun_WORK 									extends 					Panel_0_Fragment
 	{
 		if (getActivity() != null)			// The user has not changed the screen
 		{
-			TextView 											sunRiseView					= (TextView) panelView.findViewById(R.id.sunRise);
-			TextView 											sunSetView					= (TextView) panelView.findViewById(R.id.sunSet);
-			
-			Ctrl_WeatherData.Sun 								sun 						= Global.weatherForecast.sun;
 			
 			if ((Global.weatherForecast.sun          == null)
 			||  (Global.weatherForecast.sun.sunRise  == null))
 			{
-				sunRiseView.setText("Unavailable");
-				sunSetView.setText("Unavailable");
 			}
 			else
 			{
-				sunRiseView.setText(Global.displayTime(Global.weatherForecast.sun.sunRise));
-				sunSetView.setText(Global.displayTime(Global.weatherForecast.sun.sunSet));
+				times.setTextTopLeft(Global.displayTime(Global.weatherForecast.sun.sunRise));
+				times.setTextTopRight(Global.displayTime(Global.weatherForecast.sun.sunSet));
+				times.setTextBottomLeft("");
+				times.setTextBottomRight("");
 			}
 		}
 	}

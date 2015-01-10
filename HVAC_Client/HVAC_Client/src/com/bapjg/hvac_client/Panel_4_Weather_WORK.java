@@ -26,11 +26,11 @@ public class Panel_4_Weather_WORK 									extends 					Panel_0_Fragment
 	
 	public Panel_4_Weather_WORK()
 	{
-		super();
+		super("Standard");
 	}
     public Panel_4_Weather_WORK(String when)
     {
-		super();
+		super("Standard");
 		this.when																			= when;				
     }
     
@@ -38,14 +38,23 @@ public class Panel_4_Weather_WORK 									extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
 //    	this.panelLayout																	= R.layout.panel_4_weather;
-    	this.container																		= container;
-    	this.panelView																		= inflater.inflate(R.layout.panel_4_weather, container, false);
+//    	this.container																		= container;
+//    	this.panelView																		= inflater.inflate(R.layout.panel_4_weather, container, false);
 
+    	super.panelInitialise(inflater, container, savedInstanceState);
+
+    	Element_ListView										listView 					= new Element_ListView("Henry");
+    	panelInsertPoint.addView(listView);
+
+    	this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
+
+    	displayTitles("Weather", this.when);
+    	
 		if ((Global.weatherForecast != null)
 		&&  (Global.weatherForecast.forecasts != null) 
 		&&  (Global.weatherForecast.forecasts.size() != 0) )
 		{
-        	displayTitles("Weather", this.when);
+
 			displayContents();
 	        setListens();
 		}
@@ -62,7 +71,7 @@ public class Panel_4_Weather_WORK 									extends 					Panel_0_Fragment
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public void displayContents()
 	{
-		((TextView) panelView.findViewById(R.id.dateTimeObtained)).setText(Global.displayTimeShort(Global.weatherForecast.dateTimeObtained));
+//		((TextView) panelView.findViewById(R.id.dateTimeObtained)).setText(Global.displayTimeShort(Global.weatherForecast.dateTimeObtained));
 		
 		AdapterView <Panel_4_Weather_Adapter_WORK> 				view						= (AdapterView) panelView.findViewById(R.id.List_View);
         

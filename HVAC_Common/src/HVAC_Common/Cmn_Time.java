@@ -36,9 +36,24 @@ public class Cmn_Time 											implements 					java.io.Serializable
 		}
 		this.milliSeconds																	= (hours * 3600 + minutes * 60 + seconds) * 1000L;
 	}
+	public Cmn_Time(Long longTime)
+	{
+		setTime(longTime);
+	}
 	public void setTime(Integer hours, Integer minutes)
 	{
 		setTime(hours, minutes, 0);
+	}
+	public void setTime(Long milliSeconds)
+	{
+		Long													seconds						= milliSeconds/1000L;
+		Long													hoursLong					= seconds/3600L;
+		this.hours																			= hoursLong.intValue();
+		Long													secondsRemaining			= seconds + this.hours*3600L;
+		Long													minutesLong					= secondsRemaining/60L;
+		this.minutes																		= minutesLong.intValue();
+		this.seconds																		= 0;
+		this.milliSeconds																	= (this.hours * 3600 +this. minutes * 60 + this.seconds) * 1000L;
 	}
 	public void setTime(Integer hours, Integer minutes, Integer seconds)
 	{

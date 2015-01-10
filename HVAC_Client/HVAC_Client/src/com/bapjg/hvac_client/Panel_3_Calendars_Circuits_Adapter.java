@@ -28,7 +28,6 @@ public class Panel_3_Calendars_Circuits_Adapter 				extends 					Panel_0_Adapter
     {
     	Ctrl_Calendars.Calendar									listItem					= (Ctrl_Calendars.Calendar) listData.get(position);
 
-
     	Element_Linear_Vertical									adapterElement 				= new Element_Linear_Vertical();
     	Element_Slots_WeekDays									slotsweekDays				= new Element_Slots_WeekDays();
     	Element_Slots_DayTimes									slotsDayTimes 				= new Element_Slots_DayTimes();

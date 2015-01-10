@@ -201,19 +201,11 @@ public final class R {
         public static final int title_activity_configuration=0x7f060003;
     }
     public static final class style {
-        public static final int AD_Button=0x7f070009;
-        public static final int AD_Data=0x7f070006;
-        public static final int AD_DataCentered=0x7f070008;
-        public static final int AD_Data_C=0x7f070007;
-        public static final int AD_Grid=0x7f07000d;
-        public static final int AD_Grid_Title=0x7f07000e;
-        public static final int AD_ImageButton=0x7f07000c;
-        public static final int AD_MenuButton=0x7f07000b;
+        public static final int AD_Data=0x7f070005;
+        public static final int AD_DataCentered=0x7f070006;
         public static final int AD_Row=0x7f070002;
-        public static final int AD_Table=0x7f070005;
-        public static final int AD_Text=0x7f070004;
-        public static final int AD_ThinLine=0x7f07000a;
-        public static final int AD_Title=0x7f070003;
+        public static final int AD_Table=0x7f070004;
+        public static final int AD_Text=0x7f070003;
         /** 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to

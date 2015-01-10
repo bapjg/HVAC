@@ -1,13 +1,13 @@
 package com.bapjg.hvac_client;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
-
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -73,6 +73,11 @@ public class Element_Standard 									extends 					LinearLayout
 	{
 		if (temperature != null)	textValue.setText(temperature.displayDecimal() + units);
 		else						textValue.setText("0" + units);
+	}
+	public void centerColumns()
+	{
+		textTopic.setGravity(Gravity.CENTER);
+		textValue.setGravity(Gravity.CENTER);
 	}
 	public void setListener(Element_Interface listener)
 	{
