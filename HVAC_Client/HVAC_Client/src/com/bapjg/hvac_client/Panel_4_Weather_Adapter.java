@@ -21,7 +21,6 @@ public class Panel_4_Weather_Adapter 							extends 					Panel_0_Adapter
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-//     	RowHolder 												row;
     	Ctrl_WeatherData.Forecast								listItem					= (Ctrl_WeatherData.Forecast) listData.get(position);
 
     	Element_Linear_Vertical									adapterElement 				= new Element_Linear_Vertical();
@@ -65,36 +64,6 @@ public class Panel_4_Weather_Adapter 							extends 					Panel_0_Adapter
     	cloudAll				.setValue(listItem.clouds.all);
     	cloudValue				.setValue(listItem.clouds.value);
     	
-//       	row.time																			= (TextView) adapterView.findViewById(R.id.time);
-//       	row.temperature																		= (TextView) adapterView.findViewById(R.id.temperature);
-//    	row.temperatureMinMax																= (TextView) adapterView.findViewById(R.id.temperatureMinMax);
-//    	row.precipitationValue																= (TextView) adapterView.findViewById(R.id.precipitationValue);
-//    	row.precipitationType																= (TextView) adapterView.findViewById(R.id.precipitationType);
-//    	row.windSpeed																		= (TextView) adapterView.findViewById(R.id.windSpeed);
-//    	row.windName																		= (TextView) adapterView.findViewById(R.id.windName);
-//    	row.windDirection																	= (TextView) adapterView.findViewById(R.id.windDirection);
-//    	row.cloudValue																		= (TextView) adapterView.findViewById(R.id.cloudValue);
-//    	row.cloudAll																		= (TextView) adapterView.findViewById(R.id.cloudAll);
-//    	
-//    	String 													day							= Global.displayDayOfWeek((listItem.dateTime.from));
-//    	String 													time_from					= Global.displayTimeShort(listItem.dateTime.from);
-//    	String 													time_to						= Global.displayTimeShort(listItem.dateTime.to);
-//    	
-////       	row.time.setText								(day + " " + time_from + " - " + time_to);											
-//       	row.time.setText								(time_from + " - " + time_to);											
-//       	row.temperature.setText							(listItem.temperature.value.toString() + " °C");											
-//    	row.temperatureMinMax.setText					(Math.round(listItem.temperature.min) + "/" + Math.round(listItem.temperature.max));								
-//    	if (listItem.precipitation != null)
-//    	{
-//    		row.precipitationValue.setText				(listItem.precipitation.value.toString() + " mm"); // + listItem.precipitation.unit);									
-//    		row.precipitationType.setText				(listItem.precipitation.type);
-//    	}
-//    	row.windSpeed.setText							(listItem.windSpeed.speed.toString() + " m/s");													
-//    	row.windName.setText							(listItem.windSpeed.name);													
-//    	row.windDirection.setText						(listItem.windDirection.code);											
-//    	row.cloudAll.setText							(listItem.clouds.all.toString() + " %");	
-//    	row.cloudValue.setText							(listItem.clouds.value);
-    	
     	if (position % 2 == 0)
     	{
     		adapterElement.setBackground(0x800000ff); //  BLUE =  (0xff0000ff) (first byte = intensity)
@@ -108,17 +77,4 @@ public class Panel_4_Weather_Adapter 							extends 					Panel_0_Adapter
     	
     	return adapterElement;
     }
-//    static class RowHolder 
-//    {
-//    	TextView 												time;
-//    	TextView 												temperature;
-//    	TextView 												temperatureMinMax;
-//    	TextView 												precipitationValue;
-//    	TextView 												precipitationType;
-//    	TextView 												windSpeed;
-//    	TextView 												windName;
-//    	TextView 												windDirection;
-//    	TextView 												cloudAll;
-//    	TextView 												cloudValue;
-//    }	
 }

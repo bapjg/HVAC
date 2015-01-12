@@ -11,7 +11,7 @@ import android.widget.TextView;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Element_Centered_x_4 									extends 					LinearLayout
+public class Element_Centered_x_4 								extends 					LinearLayout
 																implements 					View.OnClickListener
 {
 	public LayoutInflater 										inflater;

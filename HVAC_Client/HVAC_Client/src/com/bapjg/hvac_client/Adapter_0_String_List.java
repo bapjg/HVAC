@@ -30,6 +30,17 @@ public class Adapter_0_String_List 								extends 					Panel_0_Adapter
 
         row.rowItem 																		= (TextView) adapterView.findViewById(R.id.rowItem);
 
+//    	String													listItem					= (String) listData.get(position);
+//    	Element_Centered_x_1									adapterElement 				= new Element_Centered_x_1();
+
+//    	adapterElement.setText				(listItem);
+//        if (listItem.equalsIgnoreCase(item))					adapterElement.setTextColor(Color.YELLOW);
+//        else 													adapterElement.setTextColor(Color.BLACK);
+//        return adapterElement;
+
+        
+        
+        
         adapterView.setTag(row);
 
         row.rowItem.setText(listItem);

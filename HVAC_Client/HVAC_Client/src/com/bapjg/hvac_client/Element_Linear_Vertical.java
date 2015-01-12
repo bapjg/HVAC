@@ -50,22 +50,7 @@ public class Element_Linear_Vertical 							extends 					LinearLayout
 	}
 	public void setBackground(Integer color)
 	{
-		setBackground((View) this, color);
-	}
-	public void setBackground(View view, Integer color)
-	{
-		view.setBackgroundColor(color);
-		if (view instanceof TextView)
-		{
-			return;
-		}
-		int 													kids 						= ((LinearLayout) view).getChildCount();
-		int 													i 							= 0;
-		for (i = 0; i < kids; i++)
-		{
-			View 												subView 					= ((LinearLayout) view).getChildAt(i);
-			setBackground(subView, color);
-		}
+		insertPoint.setBackgroundColor(color);
 	}
 }
 
