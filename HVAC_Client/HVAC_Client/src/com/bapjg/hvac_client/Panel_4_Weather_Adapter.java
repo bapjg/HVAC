@@ -11,10 +11,10 @@ import android.widget.*;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_4_Weather_Adapter_WORK 							extends 					Panel_0_Adapter
+public class Panel_4_Weather_Adapter 							extends 					Panel_0_Adapter
 {
  
-    public Panel_4_Weather_Adapter_WORK(Context context, int resource, ArrayList listData) 
+    public Panel_4_Weather_Adapter(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
     }
@@ -33,8 +33,8 @@ public class Panel_4_Weather_Adapter_WORK 							extends 					Panel_0_Adapter
     	Element_Standard										windSpeed		 			= new Element_Standard("Wind", "m/s");
     	Element_Standard										windName		 			= new Element_Standard("");
     	Element_Standard										windDirection		 		= new Element_Standard("");
-    	Element_Standard										cloudValue		 			= new Element_Standard("Clouds", "%");
-    	Element_Standard										cloudAll		 			= new Element_Standard("");
+    	Element_Standard										cloudAll		 			= new Element_Standard("Clouds", "%");
+    	Element_Standard										cloudValue		 			= new Element_Standard("");
 
     	adapterElement.insertPoint.addView(time);
     	adapterElement.insertPoint.addView(temperature);
@@ -44,8 +44,8 @@ public class Panel_4_Weather_Adapter_WORK 							extends 					Panel_0_Adapter
     	adapterElement.insertPoint.addView(windSpeed);
     	adapterElement.insertPoint.addView(windName);
     	adapterElement.insertPoint.addView(windDirection);
-    	adapterElement.insertPoint.addView(cloudValue);
     	adapterElement.insertPoint.addView(cloudAll);
+    	adapterElement.insertPoint.addView(cloudValue);
 
     	String 													day							= Global.displayDayOfWeek((listItem.dateTime.from));
     	String 													time_from					= Global.displayTimeShort(listItem.dateTime.from);
@@ -56,15 +56,14 @@ public class Panel_4_Weather_Adapter_WORK 							extends 					Panel_0_Adapter
     	temperatureMinMax		.setValue(Math.round(listItem.temperature.min) + "/" + Math.round(listItem.temperature.max));
     	if (listItem.precipitation != null)
     	{
-    		precipitationValue	.setValue(listItem.precipitation.value.toString()); // + listItem.precipitation.unit);									
+    		precipitationValue	.setValue(listItem.precipitation.value); // + listItem.precipitation.unit);									
     		precipitationType	.setValue(listItem.precipitation.type);
     	}
-    	windSpeed				.setValue(listItem.windSpeed.speed.toString());
+    	windSpeed				.setValue(listItem.windSpeed.speed);
     	windName				.setValue(listItem.windSpeed.name);
     	windDirection			.setValue(listItem.windDirection.code);
+    	cloudAll				.setValue(listItem.clouds.all);
     	cloudValue				.setValue(listItem.clouds.value);
-    	cloudAll				.setValue(listItem.clouds.all.toString());
-
     	
 //       	row.time																			= (TextView) adapterView.findViewById(R.id.time);
 //       	row.temperature																		= (TextView) adapterView.findViewById(R.id.temperature);
@@ -98,16 +97,16 @@ public class Panel_4_Weather_Adapter_WORK 							extends 					Panel_0_Adapter
     	
     	if (position % 2 == 0)
     	{
-    		adapterElement.insertPoint.setBackgroundColor(0x800000ff); //  BLUE =  (0xff0000ff) (first byte = intensity)
+    		adapterElement.setBackground(0x800000ff); //  BLUE =  (0xff0000ff) (first byte = intensity)
     	}
     	
     	if ( (listItem.dateTime.from 	< Global.now())
 		&&   (listItem.dateTime.to 		> Global.now()) )
     	{
-    		adapterElement.insertPoint.setBackgroundColor(Color.BLACK);
+    		adapterElement.setBackground(Color.BLACK);
     	}
     	
-    	return adapterView;
+    	return adapterElement;
     }
 //    static class RowHolder 
 //    {

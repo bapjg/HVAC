@@ -6,9 +6,8 @@
     android:background			= "@color/Background"
     android:gravity				= "top"
     android:orientation			= "vertical"
-    android:id					= "@+id/title_layout"
+    android:id					= "@+id/titleLayout"
 >
-                                  
     <TextView                     
         android:id				= "@+id/title"
         android:layout_width	= "match_parent"

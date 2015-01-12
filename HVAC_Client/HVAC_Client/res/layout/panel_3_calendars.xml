@@ -8,14 +8,16 @@
 >                                      		
 
     <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/panel_0_base_title_section" />
+        android:layout_width						= "match_parent"
+        android:layout_height						= "wrap_content"
+        layout										= "@layout/panel_0_base_title_section" 
+	/>
     
 	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical" >
+	    android:layout_width						="match_parent"
+	    android:layout_height						="wrap_content"
+	    android:orientation							="vertical" 
+	>
     		
     	<include layout								= "@layout/panel_0_include_list_section" />
     	

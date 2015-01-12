@@ -6,15 +6,14 @@
     android:background						= "@color/Background"
     android:orientation						= "vertical"
 >
-
     <include layout							= "@layout/panel_0_base_title_section" />
 
     <LinearLayout
-        android:id							= "@+id/base_insert_point"
+        android:id							= "@+id/baseInsertPoint"
     	android:background					= "@color/Background"
     	android:layout_width				= "match_parent"
     	android:layout_height				= "wrap_content"
-    	android:layout_below				= "@+id/title_layout"
+    	android:layout_below				= "@+id/titleLayout"
     	android:paddingRight				= "10dp"
    		android:paddingLeft					= "10dp"
    		android:orientation					= "vertical"

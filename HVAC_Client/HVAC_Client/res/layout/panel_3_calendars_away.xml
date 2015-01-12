@@ -8,7 +8,7 @@
 >
     <include layout							= "@layout/panel_0_base_title_section" />
                                         	
-	<LinearLayout android:orientation				= "vertical" >  
+	<LinearLayout android:orientation		= "vertical" >  
                                         	
 		<LinearLayout              			
 			android:orientation				= "horizontal"
@@ -32,6 +32,5 @@
 	</LinearLayout>
 	
     <include layout							= "@layout/panel_0_include_buttons_add" />
-
 
 </RelativeLayout>

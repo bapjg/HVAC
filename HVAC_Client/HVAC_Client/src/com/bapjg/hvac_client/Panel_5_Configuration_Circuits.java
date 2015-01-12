@@ -48,7 +48,7 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);
 
-    	this.adapterView																	= listView.findViewById(R.id.List_View);
+    	this.adapterView																	= listView.findViewById(R.id.listView);
 
     	displayTitles("Configuration", "Circuits");
 
@@ -66,7 +66,7 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		Panel_5_Configuration_Circuits_Adapter						arrayAdapter				= new Panel_5_Configuration_Circuits_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.circuitList);
+		Panel_5_Configuration_Circuits_Adapter						arrayAdapter				= new Panel_5_Configuration_Circuits_Adapter(Global.actContext, R.id.listView, Global.eRegConfiguration.circuitList);
 		((AdapterView <Panel_5_Configuration_Circuits_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()

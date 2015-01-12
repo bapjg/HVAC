@@ -25,8 +25,8 @@ public class Element_Switch 									extends 					LinearLayout
 		super(Global.actContext);
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_switch, this, true);
-		onOffSwitch																			= (Switch) this.findViewById(R.id.Switch);
-		textLeft 																			= (TextView) this.findViewById(R.id.Left);
+		onOffSwitch																			= (Switch) this.findViewById(R.id.switchOnOff);
+		textLeft 																			= (TextView) this.findViewById(R.id.left);
 		textLeft.setText(labelTextLeft);
 	}
 	public void setTextLeft(String text)

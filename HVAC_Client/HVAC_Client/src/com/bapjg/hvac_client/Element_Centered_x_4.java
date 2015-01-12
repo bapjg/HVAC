@@ -26,10 +26,10 @@ public class Element_Centered_x_4 									extends 					LinearLayout
 		super(Global.actContext);
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_centered_x_4, this, true);
-		textTopLeft 																		= (TextView) this.findViewById(R.id.TopLeft);
-		textTopRight 																		= (TextView) this.findViewById(R.id.TopRight);
-		textBottomLeft 																		= (TextView) this.findViewById(R.id.BottomLeft);
-		textBottomRight 																	= (TextView) this.findViewById(R.id.BottomRight);
+		textTopLeft 																		= (TextView) this.findViewById(R.id.topLeft);
+		textTopRight 																		= (TextView) this.findViewById(R.id.topRight);
+		textBottomLeft 																		= (TextView) this.findViewById(R.id.bottomLeft);
+		textBottomRight 																	= (TextView) this.findViewById(R.id.bottomRight);
 	}
 	public void setTextTopLeft(String text)
 	{

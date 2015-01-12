@@ -11,7 +11,7 @@ import android.widget.TextView;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Element_Slots_WeekDays 									extends 					LinearLayout
+public class Element_Slots_WeekDays 							extends 					LinearLayout
 																implements 					View.OnClickListener
 {
 	public LayoutInflater 										inflater;
@@ -43,7 +43,7 @@ public class Element_Slots_WeekDays 									extends 					LinearLayout
 	}
 	public void setData(String nameText, String days)
 	{
-		textName 																			= (TextView) this.findViewById(R.id.Name);
+		textName 																			= (TextView) this.findViewById(R.id.name);
 		textName.setText(nameText);
 
 		this.day_1 																			= (TextView) this.findViewById(R.id.day_1);

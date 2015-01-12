@@ -45,7 +45,7 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);
 
-    	this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
+    	this.adapterView																	= (AdapterView) panelView.findViewById(R.id.listView);
 
     	displayTitles("Configuration", "PIDs");
 
@@ -64,9 +64,7 @@ public class Panel_5_Configuration_PIDs 						extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-//	    AdapterView <Panel_5_Configuration_PIDs_Adapter>			adapterViewList					= (AdapterView <Panel_5_Configuration_PIDs_Adapter>) adapterView;
-        Panel_5_Configuration_PIDs_Adapter							arrayAdapter					= new Panel_5_Configuration_PIDs_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.pidList);
-//        adapterViewList.setAdapter(arrayAdapter);
+        Panel_5_Configuration_PIDs_Adapter							arrayAdapter					= new Panel_5_Configuration_PIDs_Adapter(Global.actContext, R.id.listView, Global.eRegConfiguration.pidList);
 		((AdapterView <Panel_5_Configuration_PIDs_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()

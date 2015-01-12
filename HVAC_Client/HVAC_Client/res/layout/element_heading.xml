@@ -9,9 +9,8 @@
     android:background						= "@color/Background"
 	android:orientation						= "horizontal"
 >
-
 	<TextView
-	    android:id							= "@+id/HeadingLeft"
+	    android:id							= "@+id/headingLeft"
 	    android:layout_width				= "wrap_content"
 	    android:layout_height				= "wrap_content"
 	    android:layout_gravity				= "left"
@@ -24,7 +23,7 @@
 	/>
 
 	<TextView
-	    android:id							= "@+id/HeadingRight"
+	    android:id							= "@+id/headingRight"
 	    android:layout_width				= "wrap_content"
 	    android:layout_height				= "wrap_content"
 	    android:layout_gravity				= "right"

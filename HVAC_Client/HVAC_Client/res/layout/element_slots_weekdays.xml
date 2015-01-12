@@ -9,13 +9,14 @@
     android:background						= "@color/Background"
 	android:orientation						= "vertical"
 >   
+
     <LinearLayout
         android:layout_width				= "match_parent"
         android:layout_height				= "50dp"
         android:orientation					= "horizontal"
 	>
         <TextView
-            android:id						= "@+id/Name"
+            android:id						= "@+id/name"
         	android:layout_width			= "match_parent"
         	android:layout_height			= "wrap_content"
         	android:layout_gravity			= "center_horizontal|center_vertical"

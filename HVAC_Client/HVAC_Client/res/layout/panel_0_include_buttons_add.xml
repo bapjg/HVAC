@@ -7,7 +7,7 @@
     android:baselineAligned					= "true"
     android:orientation						= "horizontal"
 	android:layout_alignParentBottom		= "true"
-	android:id								= "@+id/buttons_layout"
+	android:id								= "@+id/buttonsLayout"
 >
 	<Button
 		android:id							= "@+id/buttonAdd"
@@ -26,4 +26,3 @@
 		android:width						= "20dp"
 	/>
 </RelativeLayout>
-

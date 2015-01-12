@@ -8,6 +8,7 @@
     android:orientation						= "horizontal"
 	android:id								= "@+id/buttonsOkDelete"
 >
+
 	<Button
 	   android:id							= "@+id/buttonDelete"
 		android:layout_width				= "80dp"

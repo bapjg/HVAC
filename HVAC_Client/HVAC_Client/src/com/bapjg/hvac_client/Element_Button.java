@@ -27,7 +27,7 @@ public class Element_Button 									extends 					LinearLayout
 		super(Global.actContext);
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_button, this, true);
-		button 																				= (Button) this.findViewById(R.id.Button);
+		button 																				= (Button) this.findViewById(R.id.button);
 		button.setText(caption);
 	}
 	public void setText(String caption)

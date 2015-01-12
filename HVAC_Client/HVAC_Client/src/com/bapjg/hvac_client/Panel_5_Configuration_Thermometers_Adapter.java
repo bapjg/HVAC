@@ -25,8 +25,6 @@ public class Panel_5_Configuration_Thermometers_Adapter 		extends 					Panel_0_A
         
     	Element_Standard											adapterElement 			= new Element_Standard(listItem.name);
     	adapterElement.setValue(listItem.address);
-    
-
 
         if (Global.deviceName == "lgPhone")
         {

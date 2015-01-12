@@ -48,7 +48,7 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);
 
-        this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
+        this.adapterView																	= (AdapterView) panelView.findViewById(R.id.listView);
 
     	displayTitles("Calendars", "Away List");
     	
@@ -67,7 +67,7 @@ public class Panel_3_Calendars_Away 							extends 					Panel_0_Fragment
 	public void displayContents()
 	{
 //	    AdapterView <Panel_3_Calendars_Away_Adapter_Work>				adapterViewList				= (AdapterView <Panel_3_Calendars_Away_Adapter_Work>) adapterView;
-	    Panel_3_Calendars_Away_Adapter								arrayAdapter				= new Panel_3_Calendars_Away_Adapter(Global.actContext, R.id.List_View, Global.eRegCalendars.awayList);
+	    Panel_3_Calendars_Away_Adapter								arrayAdapter				= new Panel_3_Calendars_Away_Adapter(Global.actContext, R.id.listView, Global.eRegCalendars.awayList);
 //		adapterViewList.setAdapter(arrayAdapter);
 	    ((AdapterView <Panel_3_Calendars_Away_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}

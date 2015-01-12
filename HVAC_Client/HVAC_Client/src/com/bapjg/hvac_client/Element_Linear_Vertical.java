@@ -48,5 +48,24 @@ public class Element_Linear_Vertical 							extends 					LinearLayout
 		inflater.inflate(R.layout.element_linear_vertical, this, true);
 		insertPoint																			= (LinearLayout) this.findViewById(R.id.insertPoint);
 	}
+	public void setBackground(Integer color)
+	{
+		setBackground((View) this, color);
+	}
+	public void setBackground(View view, Integer color)
+	{
+		view.setBackgroundColor(color);
+		if (view instanceof TextView)
+		{
+			return;
+		}
+		int 													kids 						= ((LinearLayout) view).getChildCount();
+		int 													i 							= 0;
+		for (i = 0; i < kids; i++)
+		{
+			View 												subView 					= ((LinearLayout) view).getChildAt(i);
+			setBackground(subView, color);
+		}
+	}
 }
 

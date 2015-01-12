@@ -29,7 +29,7 @@ public class Element_MenuButton 								extends 					LinearLayout
 		
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_menu_button, this, true);
-		button 																				= (Button) this.findViewById(R.id.Button);
+		button 																				= (Button) this.findViewById(R.id.button);
 		button.setText(caption);
 		isYellow																			= false;
 	}

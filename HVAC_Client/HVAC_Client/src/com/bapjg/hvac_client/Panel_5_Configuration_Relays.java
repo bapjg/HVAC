@@ -49,7 +49,7 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 
     	displayTitles("Configuration", "Relays");
     	
-        this.adapterView																	= (AdapterView) panelView.findViewById(R.id.List_View);
+        this.adapterView																	= (AdapterView) panelView.findViewById(R.id.listView);
 
         if ((Global.eRegConfiguration != null)
         &&  (Global.eRegConfiguration.relayList != null))
@@ -67,7 +67,7 @@ public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment
 	public void displayContents()
 	{
 //	    AdapterView <Panel_5_Configuration_Relays_Adapter>			adapterViewList				= (AdapterView <Panel_5_Configuration_Relays_Adapter>) adapterView;
-		Panel_5_Configuration_Relays_Adapter						arrayAdapter				= new Panel_5_Configuration_Relays_Adapter(Global.actContext, R.id.List_View, Global.eRegConfiguration.relayList);
+		Panel_5_Configuration_Relays_Adapter						arrayAdapter				= new Panel_5_Configuration_Relays_Adapter(Global.actContext, R.id.listView, Global.eRegConfiguration.relayList);
 //		adapterViewList.setAdapter(arrayAdapter);
 		((AdapterView <Panel_5_Configuration_Relays_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}

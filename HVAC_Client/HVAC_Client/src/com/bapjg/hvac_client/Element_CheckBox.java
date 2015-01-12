@@ -27,8 +27,8 @@ public class Element_CheckBox 									extends 					LinearLayout
 		super(Global.actContext);
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_checkbox, this, true);
-		checkBox 																			= (CheckBox) this.findViewById(R.id.CheckBox);
-		textLeft 																			= (TextView) this.findViewById(R.id.Left);
+		checkBox 																			= (CheckBox) this.findViewById(R.id.checkBox);
+		textLeft 																			= (TextView) this.findViewById(R.id.left);
 		textLeft.setText(labelTextLeft);
 	}
 	public void setTextLeft(String text)

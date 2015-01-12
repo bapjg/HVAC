@@ -44,9 +44,9 @@ public class Element_Heading 									extends 					LinearLayout
 		super(Global.actContext);
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_heading, this, true);
-		textLeft 																			= (TextView) this.findViewById(R.id.HeadingLeft);
+		textLeft 																			= (TextView) this.findViewById(R.id.headingLeft);
 		textLeft.setText(labelTextLeft);
-		textRight 																			= (TextView) this.findViewById(R.id.HeadingRight);
+		textRight 																			= (TextView) this.findViewById(R.id.headingRight);
 		textRight.setText("");
 	}
 	public Element_Heading(String labelTextLeft, String labelTextRight) 

@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
@@ -46,7 +47,7 @@ public class Panel_0_Fragment 									extends 					Fragment
 	public		View											panelButtonOk;
 	public		View											panelButtonDelete;
 	public		View											panelButtonAdd;
-	public 		View											adapterView;				// This corresponds to the inflated list view within the panel view (R.id.List_View)
+	public 		View											adapterView;				// This corresponds to the inflated list view within the panel view (R.id.listView)
 
 	
 	public Panel_0_Fragment()
@@ -62,24 +63,31 @@ public class Panel_0_Fragment 									extends 					Fragment
 		if (panelType.equalsIgnoreCase("Standard"))
 		{
 			this.panelView																	= inflater.inflate(R.layout.panel_0_standard, container, false);
-	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
 		}
 		else if (panelType.equalsIgnoreCase("Centered"))
 		{
 			this.panelView																	= inflater.inflate(R.layout.panel_0_standard_centered, container, false);
-	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
 		}
 		else if (panelType.equalsIgnoreCase("Add"))
 		{
 			this.panelView																	= inflater.inflate(R.layout.panel_0_standard_with_buttons_addnew, container, false);
-	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
 			this.panelButtonAdd																= this.panelView.findViewById(R.id.buttonAdd);
 			this.panelButtonAdd			.setOnClickListener(this);
+		}
+		else if (panelType.equalsIgnoreCase("None"))	// For listViews (adapter) but no buttons
+		{
+			this.panelView																	= inflater.inflate(R.layout.panel_0_standard_with_buttons_addnew, container, false);
+	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
+			RelativeLayout panelButtonsArea													= (RelativeLayout) this.panelView.findViewById(R.id.buttonsLayout);
+			panelButtonsArea.setVisibility(View.GONE);
 		}
 		else if (panelType.equalsIgnoreCase("Ok_Delete"))
 		{
 			this.panelView																	= inflater.inflate(R.layout.panel_0_standard_with_buttons_ok_delete, container, false);
-	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.base_insert_point);
+	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
 			this.panelButtonOk																= this.panelView.findViewById(R.id.buttonOk);
 			this.panelButtonDelete															= this.panelView.findViewById(R.id.buttonDelete);
 			this.panelButtonOk			.setOnClickListener(this);
