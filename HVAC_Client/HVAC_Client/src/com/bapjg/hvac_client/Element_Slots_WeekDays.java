@@ -32,19 +32,8 @@ public class Element_Slots_WeekDays 							extends 					LinearLayout
 		super(Global.actContext);
 		this.inflater 																		= LayoutInflater.from(Global.actContext);
 		inflater.inflate(R.layout.element_slots_weekdays, this, true);
-	}
-	public Element_Slots_WeekDays(String nameText, String days) 
-	{
-		super(Global.actContext);
-		this.inflater 																		= LayoutInflater.from(Global.actContext);
-		inflater.inflate(R.layout.element_slots_weekdays, this, true);
-
-		setData(nameText, days);
-	}
-	public void setData(String nameText, String days)
-	{
-		textName 																			= (TextView) this.findViewById(R.id.name);
-		textName.setText(nameText);
+		
+		this.textName 																		= (TextView) this.findViewById(R.id.name);
 
 		this.day_1 																			= (TextView) this.findViewById(R.id.day_1);
 		this.day_2 																			= (TextView) this.findViewById(R.id.day_2);
@@ -53,6 +42,28 @@ public class Element_Slots_WeekDays 							extends 					LinearLayout
 		this.day_5 																			= (TextView) this.findViewById(R.id.day_5);
 		this.day_6 																			= (TextView) this.findViewById(R.id.day_6);
 		this.day_7 																			= (TextView) this.findViewById(R.id.day_7);
+	}
+	public Element_Slots_WeekDays(String nameText, String days) 
+	{
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
+		inflater.inflate(R.layout.element_slots_weekdays, this, true);
+
+		this.textName 																		= (TextView) this.findViewById(R.id.name);
+
+		this.day_1 																			= (TextView) this.findViewById(R.id.day_1);
+		this.day_2 																			= (TextView) this.findViewById(R.id.day_2);
+		this.day_3 																			= (TextView) this.findViewById(R.id.day_3);
+		this.day_4 																			= (TextView) this.findViewById(R.id.day_4);
+		this.day_5 																			= (TextView) this.findViewById(R.id.day_5);
+		this.day_6 																			= (TextView) this.findViewById(R.id.day_6);
+		this.day_7 																			= (TextView) this.findViewById(R.id.day_7);
+
+		setData(nameText, days);
+	}
+	public void setData(String nameText, String days)
+	{
+		textName.setText(nameText);
         
         if ((days).indexOf("1") > -1)	day_1.setBackgroundColor(Color.RED); else day_1.setBackgroundColor(Color.BLUE);
         if ((days).indexOf("2") > -1)	day_2.setBackgroundColor(Color.RED); else day_2.setBackgroundColor(Color.BLUE);

@@ -43,6 +43,6 @@ public class Panel_3_Calendars_Circuits_Adapter 				extends 					Panel_0_Adapter
     		adapterElement.setBackgroundColor(0x800000ff); //  BLUE =  (0xff0000ff) (first byte = intensity)
 //    		adapterElement.findViewById(R.id.row).setBackgroundColor(0x800000ff); //  BLUE =  (0xff0000ff) (first byte = intensity)
     	}
-         return adapterElement;
+        return adapterElement;
     }
 }

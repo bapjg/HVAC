@@ -21,11 +21,10 @@ import android.widget.TextView;
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 
-public class Panel_3_Calendars_Vocabulary_Item 				extends 					Panel_0_Fragment
+public class Panel_3_Calendars_Vocabulary_Item 					extends 					Panel_0_Fragment
 {		
 	private Ctrl_Calendars.Word 								itemData;
-	private	Element_Slots_WeekDays									days;
-	//	private ViewGroup											itemView;
+	private	Element_Slots_WeekDays								days;
 	
 	// TODO
 	// TODO Rework button close

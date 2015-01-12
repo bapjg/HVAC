@@ -11,12 +11,12 @@ import android.widget.*;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Adapter_0_String_List 								extends 					Panel_0_Adapter
+public class Dialog_String_List_Adapter 								extends 					Panel_0_Adapter
 {
     public String												selectedItem;
     public String												item;
     
-	public Adapter_0_String_List(Context context, int resource, ArrayList <String> listData, String item) 
+	public Dialog_String_List_Adapter(Context context, int resource, ArrayList <String> listData, String item) 
     {
         super(context, resource, listData);
         this.item																			= item;

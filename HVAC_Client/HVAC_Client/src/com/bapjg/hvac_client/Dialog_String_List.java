@@ -58,8 +58,8 @@ public class Dialog_String_List 								extends 					DialogFragment
         View													dialogView					= inflater.inflate(R.layout.dialog_string_list, null);
         AdapterView												adapterView					= (AdapterView) dialogView.findViewById(R.id.listView);
         
-        AdapterView <Adapter_0_String_List>						adapterViewList				= (AdapterView <Adapter_0_String_List>) adapterView;
-        Adapter_0_String_List									arrayAdapter				= new Adapter_0_String_List(Global.actContext, R.id.listView, items, item);
+        AdapterView <Dialog_String_List_Adapter>						adapterViewList				= (AdapterView <Dialog_String_List_Adapter>) adapterView;
+        Dialog_String_List_Adapter									arrayAdapter				= new Dialog_String_List_Adapter(Global.actContext, R.id.listView, items, item);
        
         adapterView.setAdapter(arrayAdapter);
         builder.setView(dialogView);

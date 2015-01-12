@@ -64,36 +64,46 @@ public class Panel_3_Calendars_Circuits 					extends 					Panel_0_Fragment
 	public void setListens()
 	{
 		((AdapterView <?>) adapterView).setOnItemClickListener(this);
-		panelView.findViewById(R.id.buttonAdd).setOnClickListener(this);
 	}
 	@Override
     public void onClick(View clickedView)
 	{
-		if (clickedView.getId() == R.id.buttonAdd)
-		{
-			Ctrl_Calendars.Calendar								itemNew						= new Ctrl_Calendars().new Calendar();
-
-			itemNew.days																	= "";
-			itemNew.timeStart																= new Cmn_Time("09:00");
-			itemNew.timeEnd																	= new Cmn_Time("10:00");
-			itemNew.tempObjective															= new Cmn_Temperature("30");
-			itemNew.stopOnObjective															= true;
-
-			Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.add(itemNew);
-			displayContents();
-			setListens();
-		}
+		super.onClick(clickedView);
 	}
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
     	Ctrl_Calendars.Calendar									itemData					= Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.get(position);
 
-    	Panel_3_Calendars_Circuits_Item_WORK								itemFragment				= new Panel_3_Calendars_Circuits_Item_WORK(itemData, this.circuitName);
+    	Panel_3_Calendars_Circuits_Item					itemFragment				= new Panel_3_Calendars_Circuits_Item(itemData, this.circuitName);
  
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
 	}
+    @Override 
+    public void onPanelButtonAdd()
+    {
+		Ctrl_Calendars.Calendar								itemNew						= new Ctrl_Calendars().new Calendar();
+
+		itemNew.days																	= "";
+		itemNew.timeStart																= new Cmn_Time("09:00");
+		itemNew.timeEnd																	= new Cmn_Time("10:00");
+		itemNew.tempObjective															= new Cmn_Temperature("30");
+		itemNew.stopOnObjective															= true;
+
+		Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.add(itemNew);
+		displayContents();
+		setListens();
+    }
+    public void onPanelButtonDelete()
+    {
+    	
+    }
+    public void onPanelButtonOk()
+    {
+    	
+    }
+
 }
 
