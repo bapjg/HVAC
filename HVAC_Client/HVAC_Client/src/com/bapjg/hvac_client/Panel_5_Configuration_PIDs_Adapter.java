@@ -13,7 +13,6 @@ import HVAC_Common.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Panel_5_Configuration_PIDs_Adapter 				extends 					Panel_0_Adapter
 {
-  
     public Panel_5_Configuration_PIDs_Adapter(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);

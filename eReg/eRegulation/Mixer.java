@@ -51,8 +51,8 @@ public class Mixer
     {
 		this.name 																			= paramMixer.name;
 		this.swingTime																		= paramMixer.swingTime;
-		this.swingUsableMax																	= this.swingTime * 80 /100;
-		this.swingUsableMin																	= this.swingTime * 35 /100;
+		this.swingUsableMin																	= paramMixer.swingProportionMin * this.swingTime / 100;
+		this.swingUsableMax																	= paramMixer.swingProportionMax * this.swingTime / 100;
 		this.timeDelay																		= paramMixer.pidParams.timeDelay;
 		this.timeProjection																	= paramMixer.pidParams.timeProjection;
 		this.marginProjection																= paramMixer.pidParams.marginProjection;
@@ -79,6 +79,9 @@ public class Mixer
 			System.out.println("Mixer.Contructor : Unknown mixer relay");
 		}
 		this.state																			= MIXER_STATE_Off;
+		
+		LogIt.display("Global Mixer", "Constructor", "swingUsableMin : " + this.swingUsableMin);
+		LogIt.display("Global Mixer", "Constructor", "swingUsableMax : " + this.swingUsableMax);
 	}
 	public void sequencer(Integer targetTemp)
 	{

@@ -35,15 +35,10 @@ public class Panel_3_Calendars_Circuits_Item 				extends 					Panel_0_Fragment
 	private	Element_Standard									tempObjective;
 	private	Element_CheckBox									stopOnObjective;
 	
-	
 	public Panel_3_Calendars_Circuits_Item(Ctrl_Calendars.Calendar itemData, String circuitName)
 	{
 		super("Ok_Delete");
 		this.itemData																		= itemData;
-
-//		this.daysWord																		= "";
-//		this.daysNumbers																	= itemData.days; //name or days
-//		this.daysWordNumbers																= ""; //name or days
 		this.circuitName																	= circuitName;
 	}
     @Override
@@ -77,11 +72,11 @@ public class Panel_3_Calendars_Circuits_Item 				extends 					Panel_0_Fragment
 		
 		if (days == null)																	// itemData.days contains eg "123"
 		{
-			weekDays						.setData		("Selected Days", itemData.days);			
+			weekDays					.setData		("Selected Days", itemData.days);			
 		}
 		else
 		{
-			weekDays						.setData		(itemData.days, Global.eRegCalendars.fetchDays(itemData.days));			
+			weekDays					.setData		(itemData.days, Global.eRegCalendars.fetchDays(itemData.days));			
 		}
 
 		timeStart						.setValue		(itemData.timeStart);
@@ -103,26 +98,11 @@ public class Panel_3_Calendars_Circuits_Item 				extends 					Panel_0_Fragment
 	{
      	super.onClick(clickedView);
      	
-    	//TODO Cleanup
-    	
-    	
-//    	if (clickedView.getId() == R.id.buttonOk)
-//    	{
-//    		itemData.days																	= daysWord;				// ((EditText) itemView.findViewById(R.id.name)).getText().toString();
-//       		itemData.days																	= itemData.days + daysNumbers;
-//       		itemData.stopOnObjective														= ((CheckBox) panelView.findViewById(R.id.stopOnObjective)).isChecked();
-//       	    getFragmentManager().popBackStackImmediate();
-//    	}
-//     	else if (clickedView.getId() == R.id.buttonDelete)
-//    	{
-//     		Global.eRegCalendars.fetchCircuit(circuitName).calendarList.remove(itemData);
-//     		getFragmentManager().popBackStackImmediate();
-//    	}
      	if (clickedView == weekDays.textName)
     	{
      		Dialog_String_List		 							df 							= new Dialog_String_List(itemData.days, (Object) itemData, null, this);
-    		df.items.add("Select days");
-    		df.itemSelected																	= "";
+    		df.items.add("Selected days");
+    		df.itemSelected																	= "Selected days";
 
     		for (Ctrl_Calendars.Word word : Global.eRegCalendars.wordList)
     		{
@@ -179,14 +159,6 @@ public class Panel_3_Calendars_Circuits_Item 				extends 					Panel_0_Fragment
     		displayContents();
     	}
 	}
-    public void onReturnString(int fieldId, String value)
-    {
-    	if (fieldId == R.id.days)
-    	{
-    		itemData.days																	= value;
-    		((TextView) panelView.findViewById(fieldId))			.setText(value);
-    	}
-    }
     public void onDialogReturn()
     {
         displayContents();
@@ -207,6 +179,5 @@ public class Panel_3_Calendars_Circuits_Item 				extends 					Panel_0_Fragment
     	Global.eRegCalendars.fetchCircuit(circuitName).calendarList.remove(itemData);
     	getFragmentManager().popBackStackImmediate();
     }
-
 }
 

@@ -13,7 +13,9 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -58,8 +60,8 @@ public class Dialog_String_List 								extends 					DialogFragment
         View													dialogView					= inflater.inflate(R.layout.dialog_string_list, null);
         AdapterView												adapterView					= (AdapterView) dialogView.findViewById(R.id.listView);
         
-        AdapterView <Dialog_String_List_Adapter>						adapterViewList				= (AdapterView <Dialog_String_List_Adapter>) adapterView;
-        Dialog_String_List_Adapter									arrayAdapter				= new Dialog_String_List_Adapter(Global.actContext, R.id.listView, items, item);
+        AdapterView <Dialog_String_List_Adapter>				adapterViewList				= (AdapterView <Dialog_String_List_Adapter>) adapterView;
+        Dialog_String_List_Adapter								arrayAdapter				= new Dialog_String_List_Adapter(Global.actContext, R.id.listView, items, item);
        
         adapterView.setAdapter(arrayAdapter);
         builder.setView(dialogView);
@@ -74,15 +76,30 @@ public class Dialog_String_List 								extends 					DialogFragment
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
     	itemSelected																		= items.get(position);
-     	for (Field field : parentObject.getClass().getDeclaredFields())  
+     	
+    	for (int i = 0; i < parent.getChildCount(); i++)
+    	{
+    		View itemView = parent.getChildAt(i);
+    		
+    		if (itemView instanceof Element_Centered_x_1)
+    		{
+    			((Element_Centered_x_1) itemView).setTextColor(Color.BLACK);
+    		}
+    	}
+		if (parent.getChildAt(position) instanceof Element_Centered_x_1)
+		{
+			((Element_Centered_x_1) parent.getChildAt(position)).setTextColor(Color.YELLOW);
+		}
+    	
+    	for (Field field : parentObject.getClass().getDeclaredFields())  
      	{
      		try 
      		{
 				if (item == field.get(parentObject))
 				{
 					field.set(parentObject, itemSelected);
-			    	callBack.onDialogReturn();
-			    	this.dismiss();
+			    	//callBack.onDialogReturn();
+			    	//this.dismiss();
 			    	return;
 				}
 			} 
@@ -96,23 +113,25 @@ public class Dialog_String_List 								extends 					DialogFragment
   	}
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	// Identify property within parent to modify
-     	for (Field field : parentObject.getClass().getDeclaredFields())  
-     	{
-     		try 
-     		{
-				if (item == field.get(parentObject))
-				{
-					field.set(parentObject, itemSelected);
-			    	callBack.onDialogReturn();
-			    	dialog.dismiss();
-				}
-			} 
-     		catch (Exception e)
-     		{
-     			// Do nothing as serialversionUID, this$ etc cause exceptions
-     		} 
-     	}
+     	callBack.onDialogReturn();
+     	dialog.dismiss();
+    	// Identify property within parent to modify
+//     	for (Field field : parentObject.getClass().getDeclaredFields())  
+//     	{
+//     		try 
+//     		{
+//				if (item == field.get(parentObject))
+//				{
+//					field.set(parentObject, itemSelected);
+//			    	callBack.onDialogReturn();
+//			    	dialog.dismiss();
+//				}
+//			} 
+//     		catch (Exception e)
+//     		{
+//     			// Do nothing as serialversionUID, this$ etc cause exceptions
+//     		} 
+//     	}
     }
     public void buttonCancel (DialogInterface dialog, int which)
     {

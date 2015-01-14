@@ -13,7 +13,6 @@ import android.widget.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Panel_5_Configuration_Thermometers_Adapter 		extends 					Panel_0_Adapter
 {
- 
     public Panel_5_Configuration_Thermometers_Adapter(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);
@@ -30,7 +29,6 @@ public class Panel_5_Configuration_Thermometers_Adapter 		extends 					Panel_0_A
         {
         	((LinearLayout) adapterElement.findViewById(R.id.element)).setOrientation(LinearLayout.VERTICAL);
         }
-    	
         return adapterElement;
     }
 }

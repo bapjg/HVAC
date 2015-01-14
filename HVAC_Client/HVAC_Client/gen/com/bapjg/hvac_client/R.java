@@ -58,7 +58,7 @@ public final class R {
         public static final int ic_launcher=0x7f020005;
     }
     public static final class id {
-        public static final int LinearLayout01=0x7f090053;
+        public static final int LinearLayout01=0x7f090048;
         public static final int activity_container=0x7f090004;
         public static final int address_space=0x7f090001;
         public static final int baseInsertPoint=0x7f090042;
@@ -76,14 +76,14 @@ public final class R {
         public static final int buttonsOkDelete=0x7f09003f;
         public static final int buttonsRefresh=0x7f090038;
         public static final int checkBox=0x7f09001d;
-        public static final int cloudAll=0x7f09004f;
-        public static final int cloudValue=0x7f090050;
+        public static final int cloudAll=0x7f090053;
+        public static final int cloudValue=0x7f090054;
         public static final int connection_http=0x7f090003;
         public static final int connection_status=0x7f090000;
         public static final int connection_tcp=0x7f090002;
         public static final int dateObjective=0x7f090007;
         public static final int dateTimeObtained=0x7f090043;
-        public static final int daySlots=0x7f090052;
+        public static final int daySlots=0x7f090047;
         public static final int day_1=0x7f09002d;
         public static final int day_2=0x7f09002e;
         public static final int day_3=0x7f09002f;
@@ -91,7 +91,7 @@ public final class R {
         public static final int day_5=0x7f090031;
         public static final int day_6=0x7f090033;
         public static final int day_7=0x7f090034;
-        public static final int days=0x7f090051;
+        public static final int days=0x7f090046;
         public static final int element=0x7f090014;
         public static final int elementBottom=0x7f090019;
         public static final int elementTop=0x7f090016;
@@ -111,11 +111,11 @@ public final class R {
         public static final int outsideHigh=0x7f090024;
         public static final int outsideLow=0x7f090023;
         public static final int panel_container=0x7f090006;
-        public static final int precipitationType=0x7f09004b;
-        public static final int precipitationValue=0x7f09004a;
+        public static final int precipitationType=0x7f09004f;
+        public static final int precipitationValue=0x7f09004e;
         public static final int row=0x7f090028;
-        public static final int rowItem=0x7f090046;
-        public static final int stopOnObjective=0x7f090054;
+        public static final int rowItem=0x7f09004a;
+        public static final int stopOnObjective=0x7f090049;
         public static final int subTitle=0x7f09003c;
         public static final int sunRise=0x7f090044;
         public static final int sunSet=0x7f090045;
@@ -123,13 +123,13 @@ public final class R {
         public static final int tempHigh=0x7f090022;
         public static final int tempLow=0x7f090021;
         public static final int tempObjective=0x7f090010;
-        public static final int temperature=0x7f090048;
-        public static final int temperatureMinMax=0x7f090049;
+        public static final int temperature=0x7f09004c;
+        public static final int temperatureMinMax=0x7f09004d;
         public static final int text=0x7f090011;
         public static final int textCenter=0x7f090015;
         public static final int textTopic=0x7f090035;
         public static final int textValue=0x7f090036;
-        public static final int time=0x7f090047;
+        public static final int time=0x7f09004b;
         public static final int timeEnd=0x7f09002b;
         public static final int timeObjective=0x7f090009;
         public static final int timePicker=0x7f090008;
@@ -141,9 +141,9 @@ public final class R {
         public static final int topLeft=0x7f090017;
         public static final int topRight=0x7f090018;
         public static final int value=0x7f09000e;
-        public static final int windDirection=0x7f09004d;
-        public static final int windName=0x7f09004e;
-        public static final int windSpeed=0x7f09004c;
+        public static final int windDirection=0x7f090051;
+        public static final int windName=0x7f090052;
+        public static final int windSpeed=0x7f090050;
     }
     public static final class layout {
         public static final int a_screan_size_toshiba=0x7f030000;
@@ -187,11 +187,11 @@ public final class R {
         public static final int panel_3_calendars_away=0x7f030026;
         public static final int panel_4_weather=0x7f030027;
         public static final int panel_4_weather_sun=0x7f030028;
-        public static final int row_0_string_list=0x7f030029;
-        public static final int row_4_weather=0x7f03002a;
-        public static final int zz_throwaway_item_3_calendars_circuit=0x7f03002b;
-        public static final int zz_throwaway_item_3_calendars_word=0x7f03002c;
-        public static final int zz_throwaway_row_3_calendars_circuit=0x7f03002d;
+        public static final int zz_throwaway_item_3_calendars_circuit=0x7f030029;
+        public static final int zz_throwaway_item_3_calendars_word=0x7f03002a;
+        public static final int zz_throwaway_row_0_string_list=0x7f03002b;
+        public static final int zz_throwaway_row_3_calendars_circuit=0x7f03002c;
+        public static final int zz_throwaway_row_4_weather=0x7f03002d;
     }
     public static final class menu {
         public static final int main=0x7f080000;

@@ -14,7 +14,6 @@ import android.widget.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Panel_3_Calendars_Away_Adapter 					extends 					Panel_0_Adapter
 {
- 
     public Panel_3_Calendars_Away_Adapter(Context context, int resource, ArrayList listData) 
     {
         super(context, resource, listData);

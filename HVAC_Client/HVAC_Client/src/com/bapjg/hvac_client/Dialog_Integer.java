@@ -43,8 +43,16 @@ public class Dialog_Integer 									extends 					DialogFragment
 		this.numberMax																		= numberMax;
 		this.callBack																		= callBack;
 		this.message																		= message;
-		if (number > numberMax)									this.numberMax 				= number;
-		if (number < numberMin)									this.numberMin 				= number;
+		if (number == null    )
+		{
+			this.number																		= (numberMin + numberMax)/2;
+		}
+		else
+		{
+			if (number > numberMax)								this.numberMax 				= number;
+			if (number < numberMin)								this.numberMin 				= number;
+		}
+		
     }	
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 

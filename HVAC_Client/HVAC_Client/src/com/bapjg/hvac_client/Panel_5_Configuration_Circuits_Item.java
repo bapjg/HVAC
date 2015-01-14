@@ -152,7 +152,14 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
     	{
         	Ctrl_Configuration.Mixer							mixer						= itemData.mixer;
 
-    		mixerThermometer		.setValue	(mixer.name);																	
+    		if (mixer.swingProportionMin == null)				mixer.swingProportionMin	= 0;
+    		if (mixer.swingProportionMax == null)				mixer.swingProportionMax	= 100;
+        	
+        	
+        	
+        	
+        	
+        	mixerThermometer		.setValue	(mixer.name);																	
         	swingTime				.setValue	((Integer) (mixer.swingTime/1000));																			
         	swingProportionMin		.setValue	(mixer.swingProportionMin);															
         	swingProportionMax		.setValue	(mixer.swingProportionMax);															
@@ -261,20 +268,44 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
 		}
     	else if (clickedView == swingProportionMin)
 		{
-      		Global.toaster("Its Swing Prop", false);
+    		Dialog_Integer									dialogSwingTime					= new Dialog_Integer(itemData.mixer.swingProportionMin, (Object) itemData.mixer, 0, 100, "Define Proprtional Gain",	this);
+     		dialogSwingTime.show(getFragmentManager(), "Mixer Swing Time (ms)");
 		}
     	else if (clickedView == swingProportionMax)
 		{
-      		Global.toaster("Its Swing Prop", false);
+    		Dialog_Integer									dialogSwingTime					= new Dialog_Integer(itemData.mixer.swingProportionMax, (Object) itemData.mixer, 0, 100, "Define Proprtional Gain",	this);
+     		dialogSwingTime.show(getFragmentManager(), "Mixer Swing Time (ms)");
 		}
     	else if (clickedView == relayUp)
 		{
-      		Global.toaster("Its Ok relayUp", false);
+      		Dialog_String_List								dialogList 						= new Dialog_String_List(itemData.mixer.relayUp, itemData.mixer, null, this);
+     		dialogList.itemSelected															= "";
+    		for (Ctrl_Configuration.Relay relay : Global.eRegConfiguration.relayList)
+    		{
+    			dialogList.items.add(relay.name);
+    		}
+    		dialogList.show(getFragmentManager(), "Dialog_List");
 		}
     	else if (clickedView == relayDown)
 		{
-      		Global.toaster("Its Ok relayDown", false);
+      		Dialog_String_List								dialogList 						= new Dialog_String_List(itemData.mixer.relayDown, itemData.mixer, null, this);
+     		dialogList.itemSelected															= "";
+    		for (Ctrl_Configuration.Relay relay : Global.eRegConfiguration.relayList)
+    		{
+    			dialogList.items.add(relay.name);
+    		}
+    		dialogList.show(getFragmentManager(), "Dialog_List");
 		}
+       	else if (clickedView == pidThermometer)
+    		{
+          		Dialog_String_List								dialogList 						= new Dialog_String_List(itemData.mixer.pidParams.thermometer, itemData.mixer.pidParams, null, this);
+         		dialogList.itemSelected															= "";
+        		for (Ctrl_Configuration.PID_Data pid : Global.eRegConfiguration.pidList)
+        		{
+        			dialogList.items.add(pid.name);
+        		}
+        		dialogList.show(getFragmentManager(), "Dialog_List");
+    		}
     	else if (clickedView == gainP)
 		{
      		Dialog_Float									dialogGain 						= new Dialog_Float(		itemData.mixer.pidParams.gainP,
@@ -286,18 +317,18 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
     	else if (clickedView == timeD)
 		{
      		Dialog_Float									dialogTimeD						= new Dialog_Float(		itemData.mixer.pidParams.timeD,
-						(Object) itemData.mixer.pidParams, 
-						"Differential Time Constant (ms/C)",
-						this);
+																												(Object) itemData.mixer.pidParams, 
+																												"Differential Time Constant (ms/C)",
+																												this);
      		dialogTimeD.show(getFragmentManager(), "timeD");
 		}
     	else if (clickedView == timeI)
 		{
      		Dialog_Float									dialogTimeIntegration			= new Dialog_Float(		itemData.mixer.pidParams.timeI, 
-						(Object) itemData.mixer.pidParams, 
-						"Time Integration Factor (°C/ms)",	
-						this);
-     					dialogTimeIntegration.show(getFragmentManager(), "timeI");
+																												(Object) itemData.mixer.pidParams, 
+																												"Time Integration Factor (°C/ms)",	
+																												this);
+     		dialogTimeIntegration.show(getFragmentManager(), "timeI");
 		}
     	else if (clickedView == timeDelay)
 		{
@@ -413,5 +444,22 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
     	Float		unitsFloat = milli/1000;
     	return ((Integer) unitsFloat.intValue()).toString();
     }
+ 	public void onPanelButtonOk()
+    {
+    	getFragmentManager().popBackStackImmediate();
+    }
+    @Override
+ 	public void onPanelButtonAdd()
+    {
+     	Global.toaster("Invalid button in this situation", true);
+     	getFragmentManager().popBackStackImmediate();
+    }
+    @Override
+ 	public void onPanelButtonDelete()
+    {
+     	Global.toaster("Invalid button in this situation", true);
+    	getFragmentManager().popBackStackImmediate();
+    }
+
 }
 

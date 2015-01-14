@@ -11,7 +11,7 @@ import android.widget.*;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Dialog_String_List_Adapter 								extends 					Panel_0_Adapter
+public class Dialog_String_List_Adapter 						extends 					Panel_0_Adapter
 {
     public String												selectedItem;
     public String												item;
@@ -24,34 +24,15 @@ public class Dialog_String_List_Adapter 								extends 					Panel_0_Adapter
     @Override
     public View getView(int position, View adapterView, ViewGroup parent) 
     {
-    	RowHolder 												row							= new RowHolder();
     	String													listItem					= (String) listData.get(position);
-        adapterView 																		= inflater.inflate(R.layout.row_0_string_list, null);
 
-        row.rowItem 																		= (TextView) adapterView.findViewById(R.id.rowItem);
+    	Element_Centered_x_1									adapterElement 				= new Element_Centered_x_1();
 
-//    	String													listItem					= (String) listData.get(position);
-//    	Element_Centered_x_1									adapterElement 				= new Element_Centered_x_1();
-
-//    	adapterElement.setText				(listItem);
-//        if (listItem.equalsIgnoreCase(item))					adapterElement.setTextColor(Color.YELLOW);
-//        else 													adapterElement.setTextColor(Color.BLACK);
-//        return adapterElement;
-
+    	adapterElement.setTextCenter(listItem);
         
-        
-        
-        adapterView.setTag(row);
+        if (listItem.equalsIgnoreCase(item))					adapterElement.setTextColor(Color.YELLOW);
+        else 													adapterElement.setTextColor(Color.BLACK);
 
-        row.rowItem.setText(listItem);
-        
-        if (listItem.equalsIgnoreCase(item))					row.rowItem.setTextColor(Color.YELLOW);
-        else 													row.rowItem.setTextColor(Color.BLACK);
-
-        return adapterView;
-    }
-    static class RowHolder 
-    {
-    	TextView 												rowItem;
+        return adapterElement;
     }
 }

@@ -74,7 +74,6 @@ public class Panel_4_Weather_Adapter 							extends 					Panel_0_Adapter
     	{
     		adapterElement.setBackground(Color.BLACK);
     	}
-    	
     	return adapterElement;
     }
 }

@@ -29,6 +29,10 @@ public class Element_Centered_x_1 								extends 					LinearLayout
 	{
 		textCenter.setText(text);
 	}
+	public void setTextColor(Integer colour)
+	{
+		textCenter.setTextColor(colour);;
+	}
 	public void setListener(Element_Interface listener)
 	{
 		this.listener																		= listener;
