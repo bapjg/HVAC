@@ -2,9 +2,9 @@
 <LinearLayout 
     xmlns:android								= "http://schemas.android.com/apk/res/android"
 	android:id									= "@+id/element"
-	android:paddingTop				 			= "@dimen/row_padding"
-    android:paddingBottom						= "@dimen/row_padding"
-    android:paddingRight						= "10dp"
+	android:paddingTop				 			= "@dimen/row_padding_vertical"
+    android:paddingBottom						= "@dimen/row_padding_vertical"
+    android:paddingRight						= "@dimen/row_padding_horizontal"
     android:layout_width						= "match_parent"
     android:layout_height						= "wrap_content"
     android:background							= "@color/Background"
@@ -12,8 +12,8 @@
 >
 	<LinearLayout 
 		android:id								= "@+id/elementTop"
-		android:paddingTop				 		= "@dimen/row_padding"
-	    android:paddingBottom					= "@dimen/row_padding"
+		android:paddingTop				 		= "@dimen/row_padding_vertical"
+	    android:paddingBottom					= "@dimen/row_padding_vertical"
 	    android:layout_width					= "match_parent"
 	    android:layout_height					= "wrap_content"
 	    android:background						= "@color/Background"
@@ -44,8 +44,8 @@
 	</LinearLayout>
 		<LinearLayout 
 		android:id								= "@+id/elementBottom"
-		android:paddingTop				 		= "@dimen/row_padding"
-	    android:paddingBottom					= "@dimen/row_padding"
+		android:paddingTop				 		= "@dimen/row_padding_vertical"
+	    android:paddingBottom					= "@dimen/row_padding_vertical"
 	    android:layout_width					= "match_parent"
 	    android:layout_height					= "wrap_content"
 	    android:background						= "@color/Background"

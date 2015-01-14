@@ -32,13 +32,13 @@
                                   
     <View                         
         android:layout_width	= "fill_parent"
-        android:layout_height	= "5dp"
+        android:layout_height	= "@dimen/title_filler_line_height"
         android:background		= "@color/Background" 
 	/>                            
                                   
     <View                         
         android:layout_width	= "fill_parent"
-        android:layout_height	= "5dp"
+        android:layout_height	= "@dimen/title_filler_line_height"
         android:background		= "#FFFFFF" 
 	/>
 

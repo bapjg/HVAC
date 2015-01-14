@@ -5,7 +5,7 @@
     android:layout_height			= "wrap_content"
     android:layout_gravity			= "center" 
     android:orientation				= "vertical"
-    android:padding					= "5dip"
+    android:padding					= "@dimen/dialog_padding"
 >
 	<EditText
 	    android:id					="@+id/value"
@@ -15,6 +15,7 @@
 	    android:gravity				="center"
 	    android:inputType			="number"
 	    android:maxLength			="10"
-	    android:textSize			="20dp" />
+	    android:textSize			="@dimen/text_normal"
+	/>
 
 </LinearLayout>

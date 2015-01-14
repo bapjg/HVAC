@@ -25,8 +25,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">left</item>
         <item name="android:layout_gravity">left</item>
-        <item name="android:paddingBottom">@dimen/row_padding</item>
-        <item name="android:paddingTop">@dimen/row_padding</item>
+        <item name="android:paddingBottom">@dimen/row_padding_vertical</item>
+        <item name="android:paddingTop">@dimen/row_padding_vertical</item>
 	</style>
 
     <style name="AD_Table">
@@ -43,8 +43,8 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">right</item>
-        <item name="android:paddingBottom">@dimen/row_padding</item>
-        <item name="android:paddingTop">@dimen/row_padding</item>
+        <item name="android:paddingBottom">@dimen/row_padding_vertical</item>
+        <item name="android:paddingTop">@dimen/row_padding_vertical</item>
     </style>
 
     <style name="AD_DataCentered">

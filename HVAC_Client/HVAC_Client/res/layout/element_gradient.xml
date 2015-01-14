@@ -2,9 +2,9 @@
 <RelativeLayout 
     xmlns:android							= "http://schemas.android.com/apk/res/android"
     android:id 								= "@+id/gradientTop"
-    android:paddingTop				 		= "@dimen/row_padding"
-    android:paddingBottom					= "@dimen/row_padding"
-    android:paddingRight					= "10dp"
+    android:paddingTop				 		= "@dimen/row_padding_vertical"
+    android:paddingBottom					= "@dimen/row_padding_vertical"
+    android:paddingRight					= "@dimen/row_padding_horizontal"
     android:layout_width					= "fill_parent"
     android:layout_height					= "wrap_content" 
     android:background						= "@color/Background"

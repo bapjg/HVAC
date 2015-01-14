@@ -6,7 +6,7 @@
     android:background						= "@color/Background"
 >
 	<ScrollView
-		android:layout_width				= "wrap_content"
+		android:layout_width				= "match_parent"
 		android:layout_height				= "wrap_content"
 	    android:layout_alignParentTop		= "true"
 	    android:layout_above				= "@+id/buttonsRefresh"

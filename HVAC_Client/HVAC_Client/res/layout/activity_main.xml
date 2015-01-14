@@ -20,7 +20,7 @@
 	    android:orientation						= "horizontal"
 	    android:textColor						= "@color/Yellow"
 	    android:layout_alignParentBottom		= "true"
-	    android:textSize 						= "12dp"
+	    android:textSize 						= "@dimen/text_small"
 	>                           				
 		<!-- 
 			Local/Remote
@@ -122,7 +122,7 @@
 
 	    <FrameLayout
 	        android:id							= "@+id/menu_container"
-	        android:layout_width				= "wrap_content"
+	        android:layout_width				= "@dimen/menu_frame_width"
 	        android:layout_height				= "match_parent"
 	        android:background					= "@color/Background"
 	        android:orientation					= "vertical"

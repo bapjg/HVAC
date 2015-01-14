@@ -21,33 +21,37 @@ public final class R {
         public static final int Yellow=0x7f040002;
     }
     public static final class dimen {
-        /**  LG Phone 
- iJoy 
+        public static final int button_text_size=0x7f05000c;
+        public static final int dialog_padding=0x7f050007;
+        public static final int dialog_width=0x7f050015;
+        public static final int gradient_graph_height=0x7f05000f;
+        public static final int gradient_graph_width=0x7f05000e;
+        public static final int gradient_mixer_high_pad_bottom=0x7f050013;
+        public static final int gradient_mixer_low_pad_top=0x7f050012;
+        public static final int gradient_mixer_pad_right=0x7f050014;
+        public static final int gradient_outside_high_pad_right=0x7f050011;
+        public static final int gradient_outside_low_pad_left=0x7f050010;
+        public static final int menu_button_text_size=0x7f050004;
+        /**  iJoy 
+ LG Phone 
  Toshiba 
          */
-        public static final int activity_horizontal_margin=0x7f050000;
-        public static final int activity_vertical_margin=0x7f050001;
-        public static final int gradient_graph_height=0x7f050008;
-        /**  Toshiba 
- Toshiba 
- Toshiba 
-         */
-        public static final int gradient_graph_width=0x7f050007;
-        public static final int gradient_mixer_high_pad_bottom=0x7f05000c;
-        public static final int gradient_mixer_low_pad_top=0x7f05000b;
-        public static final int gradient_mixer_pad_right=0x7f05000d;
-        public static final int gradient_outside_high_pad_right=0x7f05000a;
-        public static final int gradient_outside_low_pad_left=0x7f050009;
+        public static final int menu_frame_width=0x7f050001;
+        public static final int menu_padding_horizontal=0x7f050002;
+        public static final int menu_padding_vertical=0x7f050003;
         /** 
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int row_height=0x7f050002;
-        public static final int row_padding=0x7f050003;
-        public static final int text_heading=0x7f050005;
-        public static final int text_normal=0x7f050004;
-        public static final int text_title=0x7f050006;
+        public static final int row_height=0x7f050000;
+        public static final int row_padding_horizontal=0x7f050006;
+        public static final int row_padding_vertical=0x7f050005;
+        public static final int text_heading=0x7f050009;
+        public static final int text_normal=0x7f05000a;
+        public static final int text_small=0x7f05000b;
+        public static final int text_title=0x7f050008;
+        public static final int title_filler_line_height=0x7f05000d;
     }
     public static final class drawable {
         public static final int button_add=0x7f020000;
@@ -150,48 +154,49 @@ public final class R {
         public static final int a_screen_size_ijoy=0x7f030001;
         public static final int a_screen_size_lg_phone=0x7f030002;
         public static final int activity_main=0x7f030003;
-        public static final int dialog_date=0x7f030004;
-        public static final int dialog_date_large=0x7f030005;
-        public static final int dialog_datetime=0x7f030006;
-        public static final int dialog_datetime_large=0x7f030007;
-        public static final int dialog_float=0x7f030008;
-        public static final int dialog_integer=0x7f030009;
-        public static final int dialog_string_list=0x7f03000a;
-        public static final int dialog_temperature=0x7f03000b;
-        public static final int dialog_text=0x7f03000c;
-        public static final int dialog_time=0x7f03000d;
-        public static final int dialog_yes_no=0x7f03000e;
-        public static final int element_button=0x7f03000f;
-        public static final int element_centered_x_1=0x7f030010;
-        public static final int element_centered_x_4=0x7f030011;
-        public static final int element_checkbox=0x7f030012;
-        public static final int element_filler=0x7f030013;
-        public static final int element_gradient=0x7f030014;
-        public static final int element_heading=0x7f030015;
-        public static final int element_linear_vertical=0x7f030016;
-        public static final int element_menu_button=0x7f030017;
-        public static final int element_slots_daytimes=0x7f030018;
-        public static final int element_slots_weekdays=0x7f030019;
-        public static final int element_standard=0x7f03001a;
-        public static final int element_switch=0x7f03001b;
-        public static final int menu_0_base=0x7f03001c;
-        public static final int panel_0_base_title_section=0x7f03001d;
-        public static final int panel_0_include_buttons_add=0x7f03001e;
-        public static final int panel_0_include_buttons_ok_delete=0x7f03001f;
-        public static final int panel_0_include_list_section=0x7f030020;
-        public static final int panel_0_standard=0x7f030021;
-        public static final int panel_0_standard_centered=0x7f030022;
-        public static final int panel_0_standard_with_buttons_addnew=0x7f030023;
-        public static final int panel_0_standard_with_buttons_ok_delete=0x7f030024;
-        public static final int panel_3_calendars=0x7f030025;
-        public static final int panel_3_calendars_away=0x7f030026;
-        public static final int panel_4_weather=0x7f030027;
-        public static final int panel_4_weather_sun=0x7f030028;
-        public static final int zz_throwaway_item_3_calendars_circuit=0x7f030029;
-        public static final int zz_throwaway_item_3_calendars_word=0x7f03002a;
-        public static final int zz_throwaway_row_0_string_list=0x7f03002b;
-        public static final int zz_throwaway_row_3_calendars_circuit=0x7f03002c;
-        public static final int zz_throwaway_row_4_weather=0x7f03002d;
+        public static final int activity_main_old=0x7f030004;
+        public static final int dialog_date=0x7f030005;
+        public static final int dialog_date_large=0x7f030006;
+        public static final int dialog_datetime=0x7f030007;
+        public static final int dialog_datetime_large=0x7f030008;
+        public static final int dialog_float=0x7f030009;
+        public static final int dialog_integer=0x7f03000a;
+        public static final int dialog_string_list=0x7f03000b;
+        public static final int dialog_temperature=0x7f03000c;
+        public static final int dialog_text=0x7f03000d;
+        public static final int dialog_time=0x7f03000e;
+        public static final int dialog_yes_no=0x7f03000f;
+        public static final int element_button=0x7f030010;
+        public static final int element_centered_x_1=0x7f030011;
+        public static final int element_centered_x_4=0x7f030012;
+        public static final int element_checkbox=0x7f030013;
+        public static final int element_filler=0x7f030014;
+        public static final int element_gradient=0x7f030015;
+        public static final int element_heading=0x7f030016;
+        public static final int element_linear_vertical=0x7f030017;
+        public static final int element_menu_button=0x7f030018;
+        public static final int element_slots_daytimes=0x7f030019;
+        public static final int element_slots_weekdays=0x7f03001a;
+        public static final int element_standard=0x7f03001b;
+        public static final int element_switch=0x7f03001c;
+        public static final int menu_0_base=0x7f03001d;
+        public static final int panel_0_base_title_section=0x7f03001e;
+        public static final int panel_0_include_buttons_add=0x7f03001f;
+        public static final int panel_0_include_buttons_ok_delete=0x7f030020;
+        public static final int panel_0_include_list_section=0x7f030021;
+        public static final int panel_0_standard=0x7f030022;
+        public static final int panel_0_standard_centered=0x7f030023;
+        public static final int panel_0_standard_with_buttons_addnew=0x7f030024;
+        public static final int panel_0_standard_with_buttons_ok_delete=0x7f030025;
+        public static final int panel_3_calendars=0x7f030026;
+        public static final int panel_3_calendars_away=0x7f030027;
+        public static final int panel_4_weather=0x7f030028;
+        public static final int panel_4_weather_sun=0x7f030029;
+        public static final int zz_throwaway_item_3_calendars_circuit=0x7f03002a;
+        public static final int zz_throwaway_item_3_calendars_word=0x7f03002b;
+        public static final int zz_throwaway_row_0_string_list=0x7f03002c;
+        public static final int zz_throwaway_row_3_calendars_circuit=0x7f03002d;
+        public static final int zz_throwaway_row_4_weather=0x7f03002e;
     }
     public static final class menu {
         public static final int main=0x7f080000;

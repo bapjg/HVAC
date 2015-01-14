@@ -15,7 +15,8 @@
         android:background					= "@color/Background"
         android:baselineAligned				= "false"
         android:gravity						= "center_vertical"
-        android:orientation					= "horizontal" >
+        android:orientation					= "horizontal" 
+	>
 
         <TextView
             style							= "@style/AD_Text"

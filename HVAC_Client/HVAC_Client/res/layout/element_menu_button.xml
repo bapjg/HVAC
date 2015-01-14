@@ -13,8 +13,12 @@
 		android:layout_height						= "wrap_content"
 		android:layout_centerHorizontal				= "true"
 		android:layout_gravity						= "center_horizontal|center_vertical"
+		android:paddingTop							= "@dimen/row_padding_vertical"
+		android:paddingBottom						= "@dimen/row_padding_vertical"
+		android:paddingLeft							= "@dimen/row_padding_horizontal"
+		android:paddingRight						= "@dimen/row_padding_horizontal"
 		android:textColor							= "@color/White"
-		android:textSize							= "15dp"
+		android:textSize							= "@dimen/menu_button_text_size"
 		android:clickable							= "true"
 		android:text								= "Ok"
 	/>
