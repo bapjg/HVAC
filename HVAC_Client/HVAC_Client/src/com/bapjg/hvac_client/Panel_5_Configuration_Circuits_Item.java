@@ -159,22 +159,26 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
         	
         	
         	
-        	mixerThermometer		.setValue	(mixer.name);																	
-        	swingTime				.setValue	((Integer) (mixer.swingTime/1000));																			
-        	swingProportionMin		.setValue	(mixer.swingProportionMin);															
-        	swingProportionMax		.setValue	(mixer.swingProportionMax);															
-        	relayUp					.setValue	(mixer.relayUp);																
-        	relayDown				.setValue	(mixer.relayDown);														
+        	mixerThermometer		.setValue		(mixer.name);																	
+        	swingTime				.setValue		((Integer) (mixer.swingTime/1000));																			
+        	swingProportionMin		.setValue		(mixer.swingProportionMin);															
+        	swingProportionMax		.setValue		(mixer.swingProportionMax);															
+        	relayUp					.setValue		(mixer.relayUp);																
+        	relayDown				.setValue		(mixer.relayDown);														
 
            	Ctrl_Configuration.PID_Params						pidParams					= itemData.mixer.pidParams;
+           	
+           	pidParams.timeDelay = 30;
+           	pidParams.timeProjection = 50;
+           	pidParams.marginProjection = 2;
 
-        	pidThermometer			.setValue	(pidParams.thermometer);
-        	gainP					.setValue	(pidParams.gainP);
-        	timeD					.setValue	(pidParams.timeD);																
-        	timeI					.setValue	(pidParams.timeI);																
-        	timeDelay				.setValue	(pidParams.timeDelay);																
-        	timeProjection			.setValue	(pidParams.timeProjection);																
-        	marginProjection		.setValue	(pidParams.marginProjection);																
+        	pidThermometer			.setValue		(pidParams.thermometer);
+        	gainP					.setValue		(pidParams.gainP);
+        	timeD					.setValue		(pidParams.timeD);																
+        	timeI					.setValue		(pidParams.timeI);																
+        	timeDelay				.setValue		(pidParams.timeDelay);																
+        	timeProjection			.setValue		(pidParams.timeProjection);																
+        	marginProjection		.setValue		(pidParams.marginProjection);																
     	}
     	else
     	{
@@ -198,29 +202,29 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
    	}
 	public void setListens()
 	{
-		pump						.setListener(this);
-		targetThermometer			.setListener(this);
+		pump						.setListener	(this);
+		targetThermometer			.setListener	(this);
 		
 		if (itemData.type >= 1)
     	{
-			gradient				.setListener(this);
+			gradient				.setListener	(this);
     	}
 		if (itemData.type == 2)
     	{
-    		mixerThermometer		.setListener(this);																	
-        	swingTime				.setListener(this);																	
-        	swingProportionMin		.setListener(this);															
-        	swingProportionMax		.setListener(this);														
-        	relayUp					.setListener(this);															
-        	relayDown				.setListener(this);
+    		mixerThermometer		.setListener	(this);																	
+        	swingTime				.setListener	(this);																	
+        	swingProportionMin		.setListener	(this);															
+        	swingProportionMax		.setListener	(this);														
+        	relayUp					.setListener	(this);															
+        	relayDown				.setListener	(this);
 
-			pidThermometer			.setListener(this);																	
-			gainP					.setListener(this);																	
-			timeD					.setListener(this);															
-			timeI					.setListener(this);														
-			timeDelay				.setListener(this);															
-			timeProjection			.setListener(this);													
-			marginProjection		.setListener(this);													
+			pidThermometer			.setListener	(this);																	
+			gainP					.setListener	(this);																	
+			timeD					.setListener	(this);															
+			timeI					.setListener	(this);														
+			timeDelay				.setListener	(this);															
+			timeProjection			.setListener	(this);													
+			marginProjection		.setListener	(this);													
     	}
 	}
     @Override

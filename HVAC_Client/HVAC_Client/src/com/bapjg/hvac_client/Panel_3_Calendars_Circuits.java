@@ -98,11 +98,9 @@ public class Panel_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     }
     public void onPanelButtonDelete()
     {
-    	
     }
     public void onPanelButtonOk()
     {
-    	
     }
 
 }

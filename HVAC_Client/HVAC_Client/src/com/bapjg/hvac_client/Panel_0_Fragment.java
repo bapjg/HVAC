@@ -48,7 +48,6 @@ public class Panel_0_Fragment 									extends 					Fragment
 	public		View											panelButtonDelete;
 	public		View											panelButtonAdd;
 	public 		View											adapterView;				// This corresponds to the inflated list view within the panel view (R.id.listView)
-
 	
 	public Panel_0_Fragment()
     {

@@ -16,7 +16,7 @@
 		android:layout_height				= "wrap_content"
 		android:layout_centerHorizontal		= "true"
 		android:layout_gravity				= "center_horizontal|center_vertical"
-		android:textSize					= "@dimen/button_text_size"
+		android:textSize					= "@dimen/panel_buttons_button_text_size"
 		android:text						= "Ok"
 		android:textColor					= "@color/White"
 	/>

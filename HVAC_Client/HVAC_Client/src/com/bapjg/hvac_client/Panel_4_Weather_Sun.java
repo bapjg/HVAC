@@ -49,10 +49,11 @@ public class Panel_4_Weather_Sun 								extends 					Panel_0_Fragment
     	heading.centerColumns();
     	times																				= new Element_Centered_x_4();
     	
+    	displayTitles("Weather", "Sunrise/Sunset");
+    	
     	panelInsertPoint.addView(heading);
     	panelInsertPoint.addView(times);
 
-    	displayTitles("Weather", "Sunrise/Sunset");
     	
     	if (Global.weatherForecast != null)
 		{

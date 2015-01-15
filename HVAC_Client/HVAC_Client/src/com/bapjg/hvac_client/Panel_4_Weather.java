@@ -42,15 +42,14 @@ public class Panel_4_Weather 									extends 					Panel_0_Fragment
     	Element_ListView										listView 					= new Element_ListView("Henry");
     	panelInsertPoint.addView(listView);
 
+    	displayTitles("Weather", this.when);
+
     	this.adapterView																	= (AdapterView) panelView.findViewById(R.id.listView);
 
-    	displayTitles("Weather", this.when);
-    	
 		if ((Global.weatherForecast != null)
 		&&  (Global.weatherForecast.forecasts != null) 
 		&&  (Global.weatherForecast.forecasts.size() != 0) )
 		{
-
 			displayContents();
 	        setListens();
 		}

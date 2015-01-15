@@ -96,6 +96,11 @@ public class Activity_Main 										extends 					Activity
         actionbar.addTab(tabConfiguration);
         actionbar.addTab(tabActions);
         actionbar.addTab(tabReset);
+        
+        int	x = 30;
+        Dialog_Number dialogInteger	 	= new Dialog_Number();
+ 		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
+        
 	}
 	public void onConfigurationChanged(Configuration newConfig)
 	{
