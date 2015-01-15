@@ -2,7 +2,7 @@
 <RelativeLayout 
 	xmlns:android							= "http://schemas.android.com/apk/res/android"
     android:layout_width					= "match_parent"
-    android:layout_height					= "70dp"
+    android:layout_height					= "@dimen/panel_buttons_layout_height"
     android:background						= "@color/Background"
     android:baselineAligned					= "true"
     android:orientation						= "horizontal"
@@ -11,18 +11,18 @@
 >
 	<Button
 		android:id							= "@+id/buttonAdd"
-		android:layout_width				= "100dp"
+		android:layout_width				= "@dimen/panel_buttons_button_width_min"
 		android:layout_height				= "wrap_content"
 		android:layout_alignParentRight		= "true"
 		android:layout_alignParentTop		= "true"
 		android:background					= "@android:color/transparent"
 		android:drawableTop					= "@drawable/button_add"
 		android:gravity						= "center_horizontal"
-		android:minHeight					= "40dp"
-		android:minWidth					= "0dp"
+		android:minHeight					= "@dimen/panel_buttons_button_height_min"
+		android:minWidth					= "@dimen/panel_buttons_button_width_min"
 		android:textSize					= "@dimen/text_small"
 		android:textColor					= "@color/Yellow"
 		android:text						= "Add New"
-		android:width						= "20dp"
+		android:width						= "@dimen/panel_buttons_button_width"
 	/>
 </RelativeLayout>

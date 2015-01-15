@@ -14,6 +14,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 {		
 	public TCP_Task												task;
 	private Ctrl_Temperatures.Data								temperatureData;
+	private Element_Heading										listHeading;
 	private Element_Standard									tempBoiler;
 	private Element_Standard									tempHW;
 	private Element_Standard									tempOutside;
@@ -47,7 +48,8 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     	tempRadiatorIn																		= new Element_Standard("Radiator In");
     	tempBoilerIn 																		= new Element_Standard("Boiler In");
 
-       	Element_Heading											listHeading					= new Element_Heading("Thermometer", "Temperature");
+       	if (Global.deviceName == "lgPhone")						listHeading					= new Element_Heading("Thermometer", "Temp");
+       	else													listHeading					= new Element_Heading("Thermometer", "Temperature");
 
        	panelInsertPoint.addView(listHeading);
        	panelInsertPoint.addView(tempBoiler);

@@ -9,12 +9,13 @@
 
     <DatePicker
         android:id="@+id/dateObjective"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="@dimen/dialog_date_time_picker_width"
+        android:layout_height="@dimen/dialog_date_time_picker_height"
         android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
         android:calendarViewShown="true"
-        android:spinnersShown="false" />
+        android:spinnersShown="false" 
+	/>
 
     
     <RelativeLayout
@@ -25,9 +26,9 @@
         <TimePicker
             android:id="@+id/timeObjective"
 
-            android:layout_width="200dp"
+            android:layout_width="@dimen/dialog_date_time_picker_width"
    
-            android:layout_height="200dp" />
+            android:layout_height="@dimen/dialog_date_time_picker_height" />
 
         <Button
             android:id="@+id/button00"
@@ -35,8 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/timeObjective"
             android:layout_toRightOf="@id/timeObjective"
-            android:minHeight="10dp"
-            android:minWidth="5dp"
+            android:minHeight="@dimen/dialog_date_button_height_min"
+            android:minWidth="@dimen/dialog_date_button_width_min"
             android:text="00" />
 
         <Button
@@ -45,8 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/button00"
             android:layout_toRightOf="@id/timeObjective"
-            android:minHeight="10dp"
-            android:minWidth="5dp"
+            android:minHeight="@dimen/dialog_date_button_height_min"
+            android:minWidth="@dimen/dialog_date_button_width_min"
             android:text="15" />
 
         <Button
@@ -55,8 +56,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/button15"
             android:layout_toRightOf="@id/timeObjective"
-            android:minHeight="10dp"
-            android:minWidth="5dp"
+             android:minHeight="@dimen/dialog_date_button_height_min"
+            android:minWidth="@dimen/dialog_date_button_width_min"
             android:text="30" />
 
         <Button
@@ -65,9 +66,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/button30"
             android:layout_toRightOf="@+id/timeObjective"
-            android:minHeight="10dp"
-            android:minWidth="5dp"
-            android:text="45" />
+             android:minHeight="@dimen/dialog_date_button_height_min"
+            android:minWidth="@dimen/dialog_date_button_width_min"
+           android:text="45" />
     </RelativeLayout>
 
 </LinearLayout>
