@@ -25,9 +25,7 @@
 
         <TimePicker
             android:id="@+id/timeObjective"
-
             android:layout_width="@dimen/dialog_date_time_picker_width"
-   
             android:layout_height="@dimen/dialog_date_time_picker_height" />
 
         <Button
@@ -40,35 +38,37 @@
             android:minWidth="@dimen/dialog_date_button_width_min"
             android:text="00" />
 
-        <Button
+       <Button
             android:id="@+id/button15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/button00"
-            android:layout_toRightOf="@id/timeObjective"
+            android:layout_alignTop="@id/timeObjective"
+            android:layout_toRightOf="@id/button00"
             android:minHeight="@dimen/dialog_date_button_height_min"
             android:minWidth="@dimen/dialog_date_button_width_min"
             android:text="15" />
-
+        
         <Button
             android:id="@+id/button30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/button15"
             android:layout_toRightOf="@id/timeObjective"
-             android:minHeight="@dimen/dialog_date_button_height_min"
+            android:minHeight="@dimen/dialog_date_button_height_min"
             android:minWidth="@dimen/dialog_date_button_width_min"
             android:text="30" />
 
+ 
         <Button
             android:id="@+id/button45"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/button30"
-            android:layout_toRightOf="@+id/timeObjective"
-             android:minHeight="@dimen/dialog_date_button_height_min"
+            android:layout_below="@id/button15"
+            android:layout_toRightOf="@id/button30"
+            android:minHeight="@dimen/dialog_date_button_height_min"
             android:minWidth="@dimen/dialog_date_button_width_min"
-           android:text="45" />
+            android:text="45" />
+
     </RelativeLayout>
 
 </LinearLayout>

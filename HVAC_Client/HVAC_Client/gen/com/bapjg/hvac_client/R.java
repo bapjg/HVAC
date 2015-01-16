@@ -23,21 +23,21 @@ public final class R {
     public static final class dimen {
         public static final int dayslots_name_height=0x7f050010;
         public static final int dayslots_slot_height=0x7f050011;
-        public static final int dialog_date_button_height_min=0x7f05001d;
-        public static final int dialog_date_button_width_min=0x7f05001c;
-        public static final int dialog_date_time_picker_height=0x7f05001b;
-        public static final int dialog_date_time_picker_width=0x7f05001a;
+        public static final int dialog_date_button_height_min=0x7f050024;
+        public static final int dialog_date_button_width_min=0x7f050023;
+        public static final int dialog_date_time_picker_height=0x7f050022;
+        public static final int dialog_date_time_picker_width=0x7f050021;
         public static final int dialog_padding=0x7f050007;
         public static final int dialog_width=0x7f050008;
         public static final int element_filler_bar_height=0x7f05000f;
         public static final int element_filler_seperator_height=0x7f05000e;
-        public static final int gradient_graph_height=0x7f05001f;
-        public static final int gradient_graph_width=0x7f05001e;
-        public static final int gradient_mixer_high_pad_bottom=0x7f050023;
-        public static final int gradient_mixer_low_pad_top=0x7f050022;
-        public static final int gradient_mixer_pad_right=0x7f050024;
-        public static final int gradient_outside_high_pad_right=0x7f050021;
-        public static final int gradient_outside_low_pad_left=0x7f050020;
+        public static final int gradient_graph_height=0x7f050026;
+        public static final int gradient_graph_width=0x7f050025;
+        public static final int gradient_mixer_high_pad_bottom=0x7f05002a;
+        public static final int gradient_mixer_low_pad_top=0x7f050029;
+        public static final int gradient_mixer_pad_right=0x7f05002b;
+        public static final int gradient_outside_high_pad_right=0x7f050028;
+        public static final int gradient_outside_low_pad_left=0x7f050027;
         public static final int menu_button_text_size=0x7f050004;
         /**  iJoy 
  LG Phone 
@@ -46,6 +46,14 @@ public final class R {
         public static final int menu_frame_width=0x7f050001;
         public static final int menu_padding_horizontal=0x7f050002;
         public static final int menu_padding_vertical=0x7f050003;
+        public static final int panel_bottom_buttons_butoon_layout_width=0x7f05002c;
+        public static final int panel_bottom_buttons_button_height=0x7f05001b;
+        public static final int panel_bottom_buttons_button_height_min=0x7f05001c;
+        public static final int panel_bottom_buttons_button_layout_width=0x7f05001a;
+        public static final int panel_bottom_buttons_button_text_size=0x7f05001f;
+        public static final int panel_bottom_buttons_button_width=0x7f05001d;
+        public static final int panel_bottom_buttons_button_width_min=0x7f05001e;
+        public static final int panel_bottom_buttons_layout_height=0x7f050019;
         public static final int panel_buttons_butoon_layout_width=0x7f050013;
         public static final int panel_buttons_button_height=0x7f050014;
         public static final int panel_buttons_button_height_min=0x7f050015;
@@ -53,7 +61,7 @@ public final class R {
         public static final int panel_buttons_button_width=0x7f050016;
         public static final int panel_buttons_button_width_min=0x7f050017;
         public static final int panel_buttons_layout_height=0x7f050012;
-        public static final int panel_divider_height=0x7f050019;
+        public static final int panel_divider_height=0x7f050020;
         /** 
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.

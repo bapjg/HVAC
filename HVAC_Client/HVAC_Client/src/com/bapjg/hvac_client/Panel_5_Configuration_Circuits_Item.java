@@ -155,12 +155,8 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
     		if (mixer.swingProportionMin == null)				mixer.swingProportionMin	= 0;
     		if (mixer.swingProportionMax == null)				mixer.swingProportionMax	= 100;
         	
-        	
-        	
-        	
-        	
         	mixerThermometer		.setValue		(mixer.name);																	
-        	swingTime				.setValue		((Integer) (mixer.swingTime/1000));																			
+        	swingTime				.setValue		(mixer.swingTime);																			
         	swingProportionMin		.setValue		(mixer.swingProportionMin);															
         	swingProportionMax		.setValue		(mixer.swingProportionMax);															
         	relayUp					.setValue		(mixer.relayUp);																

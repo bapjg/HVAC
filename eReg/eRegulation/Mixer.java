@@ -50,7 +50,7 @@ public class Mixer
  	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
     {
 		this.name 																			= paramMixer.name;
-		this.swingTime																		= paramMixer.swingTime;
+		this.swingTime																		= paramMixer.swingTime					* 1000;
 		this.swingUsableMin																	= paramMixer.swingProportionMin * this.swingTime / 100;
 		this.swingUsableMax																	= paramMixer.swingProportionMax * this.swingTime / 100;
 		this.timeDelay																		= paramMixer.pidParams.timeDelay        * 1000;			// Convert to milliSeconds

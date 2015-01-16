@@ -13,9 +13,9 @@
 	<dimen name="dialog_padding">10dp</dimen>
 	<dimen name="dialog_width">150dp</dimen>
 		
-	<dimen name="text_title">25dp</dimen>
-	<dimen name="text_heading">22dp</dimen>
-	<dimen name="text_normal">20dp</dimen>
+	<dimen name="text_title">28dp</dimen>
+	<dimen name="text_heading">24dp</dimen>
+	<dimen name="text_normal">22dp</dimen>
 	<dimen name="text_small">16dp</dimen>
 
 	<dimen name="title_filler_line_height">3dp</dimen>
@@ -32,7 +32,15 @@
 	<dimen name="panel_buttons_button_height_min">40dp</dimen>
 	<dimen name="panel_buttons_button_width">80dp</dimen>
 	<dimen name="panel_buttons_button_width_min">0dp</dimen>
-	<dimen name="panel_buttons_button_text_size">20dp</dimen>
+	<dimen name="panel_buttons_button_text_size">22dp</dimen>
+						
+	<dimen name="panel_bottom_buttons_layout_height">80dp</dimen>
+	<dimen name="panel_bottom_buttons_butoon_layout_width">70dp</dimen>
+	<dimen name="panel_bottom_buttons_button_height">40dp</dimen>
+	<dimen name="panel_bottom_buttons_button_height_min">40dp</dimen>
+	<dimen name="panel_bottom_buttons_button_width">80dp</dimen>
+	<dimen name="panel_bottom_buttons_button_width_min">0dp</dimen>
+	<dimen name="panel_bottom_buttons_button_text_size">20dp</dimen>
 						
 	<dimen name="panel_divider_height">1dp</dimen>
 

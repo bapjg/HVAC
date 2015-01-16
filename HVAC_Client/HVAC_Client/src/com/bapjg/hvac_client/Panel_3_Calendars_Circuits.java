@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Panel_3_Calendars_Circuits 					extends 					Panel_0_Fragment
+public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 																implements					AdapterView.OnItemClickListener	
 {
 	public String												circuitName;
@@ -58,7 +58,7 @@ public class Panel_3_Calendars_Circuits 					extends 					Panel_0_Fragment
 	public void displayContents()
 	{
         Ctrl_Calendars.Circuit									circuit						= Global.eRegCalendars.fetchCircuit(this.circuitName);
-        Panel_3_Calendars_Circuits_Adapter							arrayAdapter				= new Panel_3_Calendars_Circuits_Adapter(Global.actContext, R.id.listView, circuit.calendarList);
+        Panel_3_Calendars_Circuits_Adapter						arrayAdapter				= new Panel_3_Calendars_Circuits_Adapter(Global.actContext, R.id.listView, circuit.calendarList);
 		((AdapterView <Panel_3_Calendars_Circuits_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()
@@ -74,7 +74,7 @@ public class Panel_3_Calendars_Circuits 					extends 					Panel_0_Fragment
     {
     	Ctrl_Calendars.Calendar									itemData					= Global.eRegCalendars.fetchCircuit(this.circuitName).calendarList.get(position);
 
-    	Panel_3_Calendars_Circuits_Item					itemFragment				= new Panel_3_Calendars_Circuits_Item(itemData, this.circuitName);
+    	Panel_3_Calendars_Circuits_Item							itemFragment				= new Panel_3_Calendars_Circuits_Item(itemData, this.circuitName);
  
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
