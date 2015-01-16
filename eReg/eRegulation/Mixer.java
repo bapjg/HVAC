@@ -61,6 +61,8 @@ public class Mixer
 		this.gainD																			= this.gainP * this.timeD;
 		this.timeI																			= paramMixer.pidParams.timeI;
 		
+		System.out.println("swingtime : " + this.swingTime);
+		
 		if (this.timeI == 0)
 		{
 			this.gainI																		= 0F;
