@@ -61,8 +61,6 @@ public class Mixer
 		this.gainD																			= this.gainP * this.timeD;
 		this.timeI																			= paramMixer.pidParams.timeI;
 		
-		System.out.println("swingtime : " + this.swingTime);
-		
 		if (this.timeI == 0)
 		{
 			this.gainI																		= 0F;
@@ -81,9 +79,6 @@ public class Mixer
 			System.out.println("Mixer.Contructor : Unknown mixer relay");
 		}
 		this.state																			= MIXER_STATE_Off;
-		
-		LogIt.display("Global Mixer", "Constructor", "swingUsableMin : " + this.swingUsableMin);
-		LogIt.display("Global Mixer", "Constructor", "swingUsableMax : " + this.swingUsableMax);
 	}
 	public void sequencer(Integer targetTemp)
 	{
