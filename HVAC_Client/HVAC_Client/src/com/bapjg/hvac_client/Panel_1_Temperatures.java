@@ -1,9 +1,11 @@
 package com.bapjg.hvac_client;
 
 import android.annotation.SuppressLint;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import HVAC_Common.*;
@@ -47,9 +49,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     	tempRadiatorOut																		= new Element_Standard("Radiator Out");
     	tempRadiatorIn																		= new Element_Standard("Radiator In");
     	tempBoilerIn 																		= new Element_Standard("Boiler In");
-
-       	if (Global.deviceName == "lgPhone")						listHeading					= new Element_Heading("Thermometer", "Temp");
-       	else													listHeading					= new Element_Heading("Thermometer", "Temperature");
+    	listHeading																			= new Element_Heading("Thermometer ", "Temperature ");
 
        	panelInsertPoint.addView(listHeading);
        	panelInsertPoint.addView(tempBoiler);

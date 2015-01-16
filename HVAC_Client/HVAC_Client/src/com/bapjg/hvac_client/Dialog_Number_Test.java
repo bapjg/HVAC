@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Dialog_Number 									extends 					DialogFragment
+public class Dialog_Number_Test 									extends 					DialogFragment
 {
 	private Dialog_Response										callBack;
 	private NumberPicker 										numberPicker;
@@ -33,7 +33,7 @@ public class Dialog_Number 									extends 					DialogFragment
 	private Integer  											numberMax;
 	private String  											message;
 	
-	public Dialog_Number() 
+	public Dialog_Number_Test() 
     {
 		super();
 		this.number																			= 51;
@@ -41,7 +41,7 @@ public class Dialog_Number 									extends 					DialogFragment
 		this.numberMax																		= 66;
 		this.message																		= "henry";
     }
-	public Dialog_Number(Integer number, Object parent, Integer numberMin, Integer numberMax, String message, Dialog_Response callBack) 
+	public Dialog_Number_Test(Integer number, Object parent, Integer numberMin, Integer numberMax, String message, Dialog_Response callBack) 
     {
 		super();
 		this.number																			= number;
@@ -67,7 +67,7 @@ public class Dialog_Number 									extends 					DialogFragment
     	AlertDialog.Builder 									builder 					= new AlertDialog.Builder(getActivity());
         LayoutInflater 											inflater 					= getActivity().getLayoutInflater();
 										                                                    
-        View													dialogView					= inflater.inflate(R.layout.dialog_number, null);
+        View													dialogView					= inflater.inflate(R.layout.dialog_number_test, null);
         
         NumberPicker np1 = new NumberPicker(getActivity());
         np1.setMinValue(0);

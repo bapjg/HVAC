@@ -24,6 +24,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.MeasureSpec;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -53,6 +54,7 @@ public class Element_Heading 									extends 					LinearLayout
 	{
 		this(labelTextLeft);
 		textRight.setText(labelTextRight);
+		checkWidth();
 	}
 	public void setTextLeft(String text)
 	{
@@ -61,10 +63,28 @@ public class Element_Heading 									extends 					LinearLayout
 	public void setTextRight(String text)
 	{
 		textRight.setText(text);
+		checkWidth();
 	}
 	public void centerColumns()
 	{
 		textLeft.setGravity(Gravity.CENTER);
 		textRight.setGravity(Gravity.CENTER);
+	}
+	public void checkWidth()
+	{
+       	textLeft.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+       	textRight.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
+       	int 													width 						= textLeft.getMeasuredWidth() + textRight.getMeasuredWidth();
+    	if (width > 300) 
+    	{
+        	if (Global.deviceName.equalsIgnoreCase("lgPhone"))
+        	{
+//        		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)         		setVertical();
+        	}
+    	}
+	}
+	public void setVertical()
+	{
+		((LinearLayout) this.getChildAt(0)).setOrientation(LinearLayout.VERTICAL);
 	}
 }

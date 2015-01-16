@@ -176,7 +176,7 @@ public final class R {
         public static final int dialog_datetime_large=0x7f030008;
         public static final int dialog_float=0x7f030009;
         public static final int dialog_integer=0x7f03000a;
-        public static final int dialog_number=0x7f03000b;
+        public static final int dialog_number_test=0x7f03000b;
         public static final int dialog_string_list=0x7f03000c;
         public static final int dialog_temperature=0x7f03000d;
         public static final int dialog_text=0x7f03000e;

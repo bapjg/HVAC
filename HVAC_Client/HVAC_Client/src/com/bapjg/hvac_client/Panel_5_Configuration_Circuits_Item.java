@@ -168,10 +168,6 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
 
            	Ctrl_Configuration.PID_Params						pidParams					= itemData.mixer.pidParams;
            	
-           	pidParams.timeDelay = 30;
-           	pidParams.timeProjection = 50;
-           	pidParams.marginProjection = 2;
-
         	pidThermometer			.setValue		(pidParams.thermometer);
         	gainP					.setValue		(pidParams.gainP);
         	timeD					.setValue		(pidParams.timeD);																
