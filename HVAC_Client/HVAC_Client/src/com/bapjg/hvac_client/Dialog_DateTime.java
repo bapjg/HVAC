@@ -49,9 +49,9 @@ public class Dialog_DateTime 									extends 					DialogFragment
 		calendar.setTimeInMillis(dateTime);
 
 		this.dateInitialDay																	= calendar.get(Calendar.DAY_OF_MONTH);
-		this.dateInitialMonth																= calendar.get(Calendar.MONTH) + 1;
+		this.dateInitialMonth																= calendar.get(Calendar.MONTH);
 		this.dateInitialYear																= calendar.get(Calendar.YEAR);
-		this.timeInitialHour																= calendar.get(Calendar.HOUR);
+		this.timeInitialHour																= calendar.get(Calendar.HOUR_OF_DAY);
 		this.timeInitialMinute																= calendar.get(Calendar.MINUTE);
 		
     }
