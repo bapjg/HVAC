@@ -93,7 +93,24 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			messageExecute.timeEnd 															= new Cmn_Time(Global.displayTimeShort(Global.now() + 3600 * 1000L));
 			messageExecute.stopOnObjective 													= true;
 			messageExecute.tempObjective 													= new Cmn_Temperature(messageReceived.tempObjective.milliDegrees);
-		
+
+	    	if ((this.circuitName.equalsIgnoreCase("Hot_Water")) && (messageExecute.tempObjective.milliDegrees == 0))
+	    	{
+	    		messageExecute.tempObjective.milliDegrees									= 35000;
+	    		messageExecute.stopOnObjective												= true;
+	    	}
+	    	else if (this.circuitName.equalsIgnoreCase("Radiator"))
+	    	{
+	    		messageExecute.tempObjective.milliDegrees									= 70000;
+	    		messageExecute.stopOnObjective												= false;
+	    	}
+	    	else if (this.circuitName.equalsIgnoreCase("Floor"))
+	    	{
+	    		messageExecute.tempObjective.milliDegrees									= 20000;
+	    		messageExecute.stopOnObjective												= false;
+	    	}
+	    	
+
 			displayContents();
 			setListens();
 		}
@@ -107,25 +124,25 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		// Top part of the screen : "Planned Calendar Events"
 		if (messageReceived.executionActive)
 		{
-			plannedTimeStart			.setValue	("Current");
-			plannedTimeEnd				.setValue	(Global.displayTimeShort(messageReceived.timeEnd));
-			plannedTargetTemp			.setValue	(messageReceived.tempObjective.displayInteger());
+			plannedTimeStart			.setValue		("Current");
+			plannedTimeEnd				.setValue		(Global.displayTimeShort(messageReceived.timeEnd));
+			plannedTargetTemp			.setValue		(messageReceived.tempObjective.displayInteger());
 			plannedStopOnObjective		.setChecked		(messageReceived.stopOnObjective);
 			buttonStartStop				.setText		("Stop");
 		}
 		else if (messageReceived.executionPlanned)
 		{
-			plannedTimeStart			.setValue	(Global.displayTimeShort(messageReceived.timeStart));
-			plannedTimeEnd				.setValue	(Global.displayTimeShort(messageReceived.timeEnd));
-			plannedTargetTemp			.setValue	(messageReceived.tempObjective.displayInteger());
+			plannedTimeStart			.setValue		(Global.displayTimeShort(messageReceived.timeStart));
+			plannedTimeEnd				.setValue		(Global.displayTimeShort(messageReceived.timeEnd));
+			plannedTargetTemp			.setValue		(messageReceived.tempObjective.displayInteger());
 			plannedStopOnObjective		.setChecked		(messageReceived.stopOnObjective);
 			buttonStartStop				.setText		("Start");
 		}
 		else
 		{
-			plannedTimeStart			.setValue	("No Plan");
-			plannedTimeEnd				.setValue	(" ");
-			plannedTargetTemp			.setValue	(" ");
+			plannedTimeStart			.setValue		("No Plan");
+			plannedTimeEnd				.setValue		(" ");
+			plannedTargetTemp			.setValue		(" ");
 			plannedStopOnObjective		.setChecked		(false);
 			buttonStartStop				.setText		("Start");
 		}
@@ -147,9 +164,9 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	    	targetTemp					.setVisibility	(View.VISIBLE);
 	    	stopOnObjective				.setVisibility	(View.VISIBLE);
 
-	    	timeStart					.setValue	(messageExecute.timeStart.displayShort());
-			timeEnd						.setValue	(messageExecute.timeEnd.displayShort());	
-			targetTemp					.setValue	(messageExecute.tempObjective.displayInteger());	
+	    	timeStart					.setValue		(messageExecute.timeStart.displayShort());
+			timeEnd						.setValue		(messageExecute.timeEnd.displayShort());	
+			targetTemp					.setValue		(messageExecute.tempObjective.displayInteger());	
 			stopOnObjective				.setChecked		(messageExecute.stopOnObjective);
 		}
 	}
@@ -192,9 +209,9 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	    	if (buttonStartStop.button.getText().toString().equalsIgnoreCase("Start"))
 	    	{
 	    		if 	((messageExecute.timeStart.milliSeconds >= messageExecute.timeEnd.milliSeconds)
-	    		|| 	 (Global.getTimeNowSinceMidnight() > messageExecute.timeStart.milliSeconds))
+	    		|| 	 (Global.getTimeNowSinceMidnight() > messageExecute.timeEnd.milliSeconds))
 	    		{
-	    			Global.toaster("Time start must be after now and before time end", false);
+	    			Global.toaster("Time end must be after now and before time end", false);		// Timestart can be a few minutes ago, time end must in in the future
 	    		}
 	    		else
 	    		{

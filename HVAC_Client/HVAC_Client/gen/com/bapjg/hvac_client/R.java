@@ -190,10 +190,7 @@ public final class R {
         public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
-        public static final int hello_world=0x7f060002;
-        public static final int title_activity_configuration=0x7f060003;
     }
     public static final class style {
         /** 
@@ -201,23 +198,14 @@ public final class R {
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         
-
-        Base application theme for API 14+. This theme completely replaces
-        AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v11/styles.xml on API 14+ devices.
-        
-        
-        Added by AD from internet
-        
-        <style name="CustomText" parent="@android:style/TextAppearance.Medium"> 
-			<item name="android:textSize">40sp
-			</item> 
-			<item name="android:textColor">#008
-			</item> 
-		</style>
-		referenced by " @style/CustomText"
-    
  API 14 theme customizations can go here. 
+        
+        DO NOT DELETE THIS SECTION OR THIS FILE
+        
+        Otherwise the Application Worn Work
+        
+        
+        
          */
         public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 

@@ -140,22 +140,34 @@ public class Panel_3_Calendars_Circuits_Item 				extends 					Panel_0_Fragment
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
      	else if (clickedView == timeStart)
     	{
-     		Dialog_Time	 									df 							= new Dialog_Time(itemData.timeStart, this);
+     		Dialog_Time	 										df 							= new Dialog_Time(itemData.timeStart, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
      	else if (clickedView == timeEnd)
     	{
-     		Dialog_Time										df 							= new Dialog_Time(itemData.timeEnd, this);
+     		Dialog_Time											df 							= new Dialog_Time(itemData.timeEnd, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
      	else if (clickedView == tempObjective)
     	{
-    		Dialog_Temperature 									df 							= new Dialog_Temperature(itemData.tempObjective, 25, 40, this);
+     		Dialog_Temperature 									df;
+     		if (this.circuitName.equalsIgnoreCase("Floor"))
+    		{
+     			df 																			= new Dialog_Temperature(itemData.tempObjective, 15, 25, this);
+    		}
+     		else if (this.circuitName.equalsIgnoreCase("Hot_Water"))
+    		{
+     			df 																			= new Dialog_Temperature(itemData.tempObjective, 35, 50, this);
+    		}
+     		else
+     		{
+     			df 																			= new Dialog_Temperature(itemData.tempObjective, 20, 20, this);
+     		}
     		df.show(getFragmentManager(), "Dialog_Temperature");
     	}
      	else if (clickedView == stopOnObjective)
     	{
-     		stopOnObjective.setChecked(! stopOnObjective.isChecked());
+     		itemData.stopOnObjective														= (! itemData.stopOnObjective);
     		displayContents();
     	}
 	}
