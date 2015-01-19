@@ -49,7 +49,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     	tempRadiatorOut																		= new Element_Standard("Radiator Out");
     	tempRadiatorIn																		= new Element_Standard("Radiator In");
     	tempBoilerIn 																		= new Element_Standard("Boiler In");
-    	listHeading																			= new Element_Heading("Thermometer ", "Temperature ");
+    	listHeading																			= new Element_Heading("Thermometer ", "Temperature");
 
        	panelInsertPoint.addView(listHeading);
        	panelInsertPoint.addView(tempBoiler);

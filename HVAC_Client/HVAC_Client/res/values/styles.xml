@@ -4,58 +4,14 @@
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.        -->
+            backward-compatibility can go here.
+        -->
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-
-    <style name="AD_Row">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">30dp</item>
-    </style>
-
-
-    <style name="AD_Text">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">left</item>
-        <item name="android:layout_gravity">left</item>
-        <item name="android:paddingBottom">@dimen/row_padding_vertical</item>
-        <item name="android:paddingTop">@dimen/row_padding_vertical</item>
-	</style>
-
-    <style name="AD_Table">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:stretchColumns">*</item>
-        <item name="android:shrinkColumns">*</item>
-    </style>
-
-    <style name="AD_Data">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">#FFFF00</item>
-        <item name="android:gravity">right</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">right</item>
-        <item name="android:paddingBottom">@dimen/row_padding_vertical</item>
-        <item name="android:paddingTop">@dimen/row_padding_vertical</item>
-    </style>
-
-    <style name="AD_DataCentered">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">#FFFF00</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-    </style>
-    
 
     
 </resources>

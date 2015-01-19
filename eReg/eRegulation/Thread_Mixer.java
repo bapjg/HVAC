@@ -93,16 +93,21 @@ public class Thread_Mixer implements Runnable
 						Float timeProjected =  (targetTemp - tempNow)/Global.thermoFloorOut.pidControler.dTdt();
 						if (timeProjected < 0)
 						{
-							LogIt.display("Thread_Mixer", "sequencer", "---Houston we have a problem--- the gap is widening");
+							// LogIt.display("Thread_Mixer", "sequencer", "---Houston we have a problem--- the gap is widening");
 						}
 						else if (timeProjected > indexProject) //Rubbish
 						{
-							LogIt.display("Thread_Mixer", "sequencer", "---Houston we should have saved the previous value---");
+							// LogIt.display("Thread_Mixer", "sequencer", "---Houston we should have saved the previous value---");
 						}
 						
 						if (Math.abs(temperatureProjected - targetTemp) > mixer.marginProjection)		// More than 2 degrees difference (either over or under)
 						{
-//							LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProjectInSeconds + "s wait after " + (i * 5) +"s, temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
+							// This is wrong, if going up, exceed upperbound gives error
+							// if going down, only lowerbound is wrong
+							
+							
+							
+							//							LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProjectInSeconds + "s wait after " + (i * 5) +"s, temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
 							break;
 						}
 					}

@@ -53,7 +53,8 @@ public class Element_Heading 									extends 					LinearLayout
 	public Element_Heading(String labelTextLeft, String labelTextRight) 
 	{
 		this(labelTextLeft);
-		textRight.setText(labelTextRight);
+		if (labelTextRight.substring(labelTextRight.length() - 1).equalsIgnoreCase(" "))	textRight.setText(labelTextRight);
+		else																				textRight.setText(labelTextRight + " ");
 		checkWidth();
 	}
 	public void setTextLeft(String text)

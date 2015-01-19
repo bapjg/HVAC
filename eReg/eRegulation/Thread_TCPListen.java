@@ -196,7 +196,7 @@ public class Thread_TCPListen 			implements Runnable
 		}
          return message_return;
 	}
-	private Ctrl__Abstract				process_Ctrl_Immediate_Execute			(Ctrl_Immediate.Execute message_in)
+	private Ctrl__Abstract				process_Ctrl_Immediate_Execute			(Ctrl_Immediate.Execute message_in)		// Process an immediate action to start
 	{
 		Long	now											= Global.Time.now();
 		
@@ -206,6 +206,8 @@ public class Thread_TCPListen 			implements Runnable
 		
 		if (message_in.action == Ctrl_Immediate.ACTION_Start)
 		{
+			// This seems to ignore start/end times in message
+			
 			if (circuit.name.equalsIgnoreCase("Hot_Water"))
 			{
 				circuit.taskActive							= new CircuitTask(	now, 						// Time Start
