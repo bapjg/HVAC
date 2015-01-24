@@ -149,7 +149,7 @@ alias flooron='sudo   	bw_tool -a 9c -w 25:1'
 alias flooroff='sudo  	bw_tool -a 9c -w 25:0'
 
 
-alias tempboiler='echo       -ne boiler;      sudo   cat /mnt/1wire/uncached/28.3F9A85040000/temperature10;echo'
+alias tempboiler='echo       -ne boiler;      sudo   cat /mnt/1wire/uncached/28.B49185040000/temperature10;echo'
 alias tempboiler_old='echo   -ne boiler_old;  sudo   cat /mnt/1wire/uncached/28.1C018F040000/temperature10;echo'
 alias temphw='echo           -ne hotwater;    sudo   cat /mnt/1wire/uncached/28.09e185040000/temperature10;echo'
 alias tempboiler_out='echo   -ne boiler_out;  sudo   cat /mnt/1wire/uncached/28.69da8e040000/temperature10;echo'
@@ -161,8 +161,7 @@ alias tempradiator_in='echo  -ne radiator_in; sudo   cat /mnt/1wire/uncached/28.
 alias templivingroom='echo   -ne living_room; sudo   cat /mnt/1wire/uncached/28.90DB8E040000/temperature10;echo'
 alias tempoutside='echo      -ne outside;     sudo   cat /mnt/1wire/uncached/28.41DB8E040000/temperature10;echo'
 
-
-alias tempall='echo -ne "boiler   ";    sudo   cat /mnt/1wire/uncached/28.1c018f040000/temperature10;echo;echo -ne "hotwater ";sudo cat /mnt/1wire/uncached/28.09e185040000/temperature10;echo;echo -ne mixer_out;sudo   cat /mnt/1wire/uncached/28.44928e040000/temperature10;echo'
+alias tempall='tempboiler;tempboiler_old;temphw;tempboiler_out;tempboiler_in;tempfloor_out;tempfloor_in;tempradiator_out;tempradiator_in;templivingroom;tempoutside;'
 
 alias thw='cat     /sys/bus/w1/devices/28-00000485e109/w1_slave'
 alias tboiler='cat /sys/bus/w1/devices/28-0000048f011c/w1_slave'
