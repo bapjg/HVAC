@@ -87,7 +87,7 @@ public class Panel_1_FloorStats 								extends 					Panel_0_Fragment
 			listHeading			.setTextRight	(Global.displayTimeShort	(temperatureData.dateTime));
 			
 			Integer												dQFloorValue				= temperatureData.tempFloorOut   - temperatureData.tempFloorIn;
-			Integer												dQRoomPlusValue				= temperatureData.tempLivingRoom - temperatureData.tempFloorIn;
+			Integer												dQRoomPlusValue				= temperatureData.tempFloorIn    - temperatureData.tempLivingRoom;
 			Integer												dQRoomMinusValue			= temperatureData.tempLivingRoom - temperatureData.tempOutside;
 
 			dQFloor				.setValue 		(Global.displayTemperature	(dQFloorValue));

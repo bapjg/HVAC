@@ -19,6 +19,7 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
 {
 	Element_MenuButton											buttonTemperatures;
 	Element_MenuButton											buttonFloorStats;
+	Element_MenuButton											buttonLeakingBaths;
 
 	public Menu_1_Temperatures()
 	{
@@ -30,12 +31,15 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
     	
     	buttonTemperatures																	= new Element_MenuButton("Temperatures");
     	buttonFloorStats																	= new Element_MenuButton("Floor Stats");
+    	buttonLeakingBaths																	= new Element_MenuButton("Leaking Baths");
     	
     	menuInsertPoint.addView(buttonTemperatures);
     	menuInsertPoint.addView(buttonFloorStats);
+    	menuInsertPoint.addView(buttonLeakingBaths);
     	
     	buttonTemperatures			.setListener(this);
     	buttonFloorStats			.setListener(this);
+    	buttonLeakingBaths			.setListener(this);
     	
     	onElementClick(buttonTemperatures);													// Force execution of panel
     	return menuView;
@@ -49,6 +53,7 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
    	
     	if      (clickedView == buttonTemperatures)				panelFragment 				= new Panel_1_Temperatures();
     	else if (clickedView == buttonFloorStats)				panelFragment 				= new Panel_1_FloorStats();
+    	else if (clickedView == buttonLeakingBaths)				panelFragment 				= new Panel_1_LeakingBaths();
 
     	if 		(panelFragment != null)
     	{
