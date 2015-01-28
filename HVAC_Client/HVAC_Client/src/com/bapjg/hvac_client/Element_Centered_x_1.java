@@ -25,6 +25,14 @@ public class Element_Centered_x_1 								extends 					LinearLayout
 		inflater.inflate(R.layout.element_centered_x_1, this, true);
 		textCenter 																			= (TextView) this.findViewById(R.id.textCenter);
 	}
+	public Element_Centered_x_1(String text) 
+	{
+		super(Global.actContext);
+		this.inflater 																		= LayoutInflater.from(Global.actContext);
+		inflater.inflate(R.layout.element_centered_x_1, this, true);
+		textCenter 																			= (TextView) this.findViewById(R.id.textCenter);
+		textCenter.setText(text);
+	}
 	public void setTextCenter(String text)
 	{
 		textCenter.setText(text);

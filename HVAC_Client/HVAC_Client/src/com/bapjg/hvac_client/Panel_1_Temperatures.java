@@ -1,5 +1,8 @@
 package com.bapjg.hvac_client;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -14,7 +17,7 @@ import HVAC_Common.*;
 @SuppressLint("ValidFragment")
 public class Panel_1_Temperatures 								extends 					Panel_0_Fragment 
 {		
-	public TCP_Task												task;
+//	public TCP_Task												task;
 	private Ctrl_Temperatures.Data								temperatureData;
 	private Element_Heading										listHeading;
 	private Element_Standard									tempBoiler;
@@ -37,7 +40,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
     	displayTitles("Temperatures", "Readings");
-    	TCP_Send(new Ctrl_Temperatures().new Request());
+    	super.TCP_Send(new Ctrl_Temperatures().new Request());
     	
     	tempBoiler 																			= new Element_Standard("Boiler");
     	tempHW 																				= new Element_Standard("Hot Water");
@@ -49,7 +52,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     	tempRadiatorOut																		= new Element_Standard("Radiator Out");
     	tempRadiatorIn																		= new Element_Standard("Radiator In");
     	tempBoilerIn 																		= new Element_Standard("Boiler In");
-    	listHeading																			= new Element_Heading("Thermometer ", "Temperature");
+    	listHeading																			= new Element_Heading("Obtained at");
 
        	panelInsertPoint.addView(listHeading);
        	panelInsertPoint.addView(tempBoiler);
@@ -76,30 +79,29 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 		{
 			temperatureData																	= (Ctrl_Temperatures.Data) result;																	
 			displayContents();
+			setListens();
 		}
-        setListens();
     } 
 	public void displayContents()
 	{
 		if (getActivity() != null)			// The user has not changed the screen
 		{
-//			((TextView) panelView.findViewById(R.id.Date)).setText				(Global.displayDateShort	(temperatureData.dateTime));
-//			((TextView) panelView.findViewById(R.id.Time)).setText				(Global.displayTimeShort	(temperatureData.dateTime));
-//			
-			tempBoiler			.setValue 	(Global.displayTemperature	(temperatureData.tempBoiler));
-			tempHW				.setValue	(Global.displayTemperature	(temperatureData.tempHotWater));
-			tempOutside			.setValue	(Global.displayTemperature	(temperatureData.tempOutside));
+			listHeading			.setTextRight	(Global.displayTimeShort	(temperatureData.dateTime));
+			
+			tempBoiler			.setValue 		(Global.displayTemperature	(temperatureData.tempBoiler));
+			tempHW				.setValue		(Global.displayTemperature	(temperatureData.tempHotWater));
+			tempOutside			.setValue		(Global.displayTemperature	(temperatureData.tempOutside));
 
-	    	tempLivingRoom		.setValue	(Global.displayTemperature	(temperatureData.tempLivingRoom));
+	    	tempLivingRoom		.setValue		(Global.displayTemperature	(temperatureData.tempLivingRoom));
 	    	
-	    	tempFloorOut		.setValue	(Global.displayTemperature	(temperatureData.tempFloorOut));
-	    	tempFloorIn			.setValue	(Global.displayTemperature	(temperatureData.tempFloorIn));
-	    	tempBoilerOut		.setValue	(Global.displayTemperature	(temperatureData.tempBoilerOut));
+	    	tempFloorOut		.setValue		(Global.displayTemperature	(temperatureData.tempFloorOut));
+	    	tempFloorIn			.setValue		(Global.displayTemperature	(temperatureData.tempFloorIn));
+	    	tempBoilerOut		.setValue		(Global.displayTemperature	(temperatureData.tempBoilerOut));
 	    	
-	    	tempRadiatorOut		.setValue	(Global.displayTemperature	(temperatureData.tempRadiatorOut));
-	    	tempRadiatorIn		.setValue	(Global.displayTemperature	(temperatureData.tempRadiatorIn));
+	    	tempRadiatorOut		.setValue		(Global.displayTemperature	(temperatureData.tempRadiatorOut));
+	    	tempRadiatorIn		.setValue		(Global.displayTemperature	(temperatureData.tempRadiatorIn));
 	    	
-	    	tempBoilerIn		.setValue	(Global.displayTemperature	(temperatureData.tempBoilerIn));
+	    	tempBoilerIn		.setValue		(Global.displayTemperature	(temperatureData.tempBoilerIn));
 		}
 	}
 	public void setListens()

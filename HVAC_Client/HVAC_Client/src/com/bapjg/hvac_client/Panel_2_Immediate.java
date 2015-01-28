@@ -53,7 +53,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			
     	TCP_Send(taskListRequest);							// This returns list of what is currently active on each circuit
     	
-    	LinearLayout insertPoint = (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
+    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
 
     	plannedTimeStart 																	= new Element_Standard("Time Start");
     	plannedTimeEnd																		= new Element_Standard("Time End");

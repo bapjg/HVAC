@@ -126,9 +126,15 @@ public class Global
     }
 	public static String displayTemperature(Integer temperature)
 	{
-		int degrees = temperature/1000;
-		int decimal = (temperature - degrees*1000) / 100;
-		return degrees + "." + decimal;
+		String		sign 		= "";
+		if (temperature < 0)
+		{
+			sign				= "-";
+			temperature			= - temperature;
+		}
+		int 		degrees 	= temperature/1000;
+		int 		decimal 	= (temperature - degrees*1000) / 100;
+		return sign + degrees + "." + decimal;
 	}
     public static void toast(String message, Boolean longish)
     {
@@ -318,8 +324,8 @@ public class Global
 	
 		if (Global.deviceName == "toshiba")
 		{
-			if (landscape)		viewPanelContainer.setPadding(pxI * 2, 0, pxI * 2, 0);
-			else 				viewPanelContainer.setPadding(pxI * 1, 0, pxI * 1, 0);
+			if (landscape)		viewPanelContainer.setPadding(pxI * 2, 0, pxI * 2, 0);			// 200 pixels Left & Right
+			else 				viewPanelContainer.setPadding(pxI * 1, 0, pxI * 1, 0);			// 100 pixels Left & Right
 		}
 	}
 }

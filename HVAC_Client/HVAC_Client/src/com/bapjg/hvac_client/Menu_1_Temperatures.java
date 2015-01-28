@@ -18,6 +18,7 @@ import android.widget.Button;
 public class Menu_1_Temperatures 								extends 					Menu_0_Fragment 
 {
 	Element_MenuButton											buttonTemperatures;
+	Element_MenuButton											buttonFloorStats;
 
 	public Menu_1_Temperatures()
 	{
@@ -28,9 +29,15 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
     	super.onCreateView(inflater, container, savedInstanceState);
     	
     	buttonTemperatures																	= new Element_MenuButton("Temperatures");
+    	buttonFloorStats																	= new Element_MenuButton("Floor Stats");
+    	
     	menuInsertPoint.addView(buttonTemperatures);
+    	menuInsertPoint.addView(buttonFloorStats);
+    	
     	buttonTemperatures			.setListener(this);
-    	onElementClick(buttonTemperatures);
+    	buttonFloorStats			.setListener(this);
+    	
+    	onElementClick(buttonTemperatures);													// Force execution of panel
     	return menuView;
     }
     public void onElementClick(View clickedView)
@@ -41,6 +48,7 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
     	Fragment 												panelFragment				= null;
    	
     	if      (clickedView == buttonTemperatures)				panelFragment 				= new Panel_1_Temperatures();
+    	else if (clickedView == buttonFloorStats)				panelFragment 				= new Panel_1_FloorStats();
 
     	if 		(panelFragment != null)
     	{
