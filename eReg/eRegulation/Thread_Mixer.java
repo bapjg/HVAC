@@ -8,8 +8,8 @@ public class Thread_Mixer implements Runnable
 	
 	public Thread_Mixer(Circuit_Mixer 						circuit)
 	{
-		this.circuit 							= circuit; 				// circuit for which this thread operates
-		this.mixer 								= circuit.mixer;		// mixer on this circuit to be controlled
+		this.circuit 																		= circuit; 				// circuit for which this thread operates
+		this.mixer 																			= circuit.mixer;		// mixer on this circuit to be controlled
 	}
 	public void run()
 	{
@@ -19,13 +19,13 @@ public class Thread_Mixer implements Runnable
 //		LogIt.mixerData(Global.now(), 0, Global.now(), mixer.positionTracked);					// Problem with dbInsert if timeStart = timeEnd (primary Index)
 		LogIt.mixerData(Global.DateTime.now(), 0, 0L, 0);												// If timeEnd = 0, then the second part is not inserted into DataBase
 		
-		Integer 				i							= 0; 	// Used for loop waiting 20 s
-		Integer 				targetTemp;
-		Integer 				timeProjectInSeconds		= mixer.timeProjection/1000;		// Time over which to project temperature change : Convert ms -> s
-		Integer 				timeDelayInSeconds			= mixer.timeDelay/1000;				// Time to wait before doing any calculations : Convert ms -> s
+		Integer 												i							= 0; 	// Used for loop waiting 20 s
+		Integer 												targetTemp;
+		Integer 												timeProjectInSeconds		= mixer.timeProjection/1000;		// Time over which to project temperature change : Convert ms -> s
+		Integer 												timeDelayInSeconds			= mixer.timeDelay/1000;				// Time to wait before doing any calculations : Convert ms -> s
 		
-		Integer indexProject								= timeProjectInSeconds/5;			// Used during 5sec delay loop
-		Integer indexDelay									= timeDelayInSeconds/5;
+		Integer indexProject																= timeProjectInSeconds/5;			// Used during 5sec delay loop
+		Integer indexDelay																	= timeDelayInSeconds/5;
 		
 		while (!Global.stopNow)
 //		while ((!Global.stopNow) && (circuitMixer.state != circuitMixer.CIRCUIT_STATE_Off))
@@ -52,21 +52,27 @@ public class Thread_Mixer implements Runnable
 				if (Global.thermoOutside.reading > 17000)			// > summerTemp
 				{
 					// Outside temp is high : no need to heat
-					targetTemp									= 10 * 1000;					// Dont put at zero to avoid freezing
+					targetTemp																	= 10 * 1000;					// Dont put at zero to avoid freezing
 				}
 				else if (Global.thermoLivingRoom.reading > this.circuit.taskActive.tempObjective - 1000)
 				{
 					// Must replace by PID
 					// Inside temp is high : no need to heat (within 1 degree
-					targetTemp									= circuit.temperatureGradient.getTempToTarget();
+					targetTemp																	= circuit.temperatureGradient.getTempToTarget();
+					
+					float 										targetTempFloat					= ((float) Global.thermoLivingRoom.reading - Global.thermoOutside.reading)/0.55F;
+					
+					targetTemp																	= (int) targetTempFloat;
+					Integer										targetFloorIn					= (int) ( targetTempFloat * (1 - 0.17F));
+					// If tempFloorIn > targetFloorIn => We are probably going to overtemp.
 				}
 				else if (circuit.state == circuit.CIRCUIT_STATE_RampingUp) 						// This is to accelerate rampup
 				{
-					targetTemp									= 43000;						// Trip avoidance kicks in at 450
+					targetTemp																	= 43000;						// Trip avoidance kicks in at 450
 				}
 				else
 				{
-					targetTemp									= circuit.temperatureGradient.getTempToTarget();
+					targetTemp																	= circuit.temperatureGradient.getTempToTarget();
 				}
 				this.mixer.sequencer(targetTemp);
 	
