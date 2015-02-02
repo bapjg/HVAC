@@ -6,19 +6,22 @@
     android:background						= "@color/Background"
     android:orientation						= "vertical"
 >
-    <include layout							= "@layout/panel_0_base_title_section" />
+    <include layout							= "@layout/panel_0_include_title_section" 
+    />
     <LinearLayout
         android:id							= "@+id/baseInsertPoint"
     	android:background					= "@color/Background"
     	android:layout_width				= "match_parent"
     	android:layout_height				= "wrap_content"
     	android:layout_below				= "@+id/titleLayout"
+    	android:layout_above				= "@+id/foot"
     	android:paddingRight				= "@dimen/row_padding_horizontal"
    		android:paddingLeft					= "@dimen/row_padding_horizontal"
    		android:orientation					= "vertical"
     >
     </LinearLayout>
 
-    <include layout							= "@layout/panel_0_include_buttons_ok_delete" />
+    <include layout							= "@layout/panel_0_include_buttons_ok_delete" 
+        android:id							= "@id/foot"/>
 
 </RelativeLayout>

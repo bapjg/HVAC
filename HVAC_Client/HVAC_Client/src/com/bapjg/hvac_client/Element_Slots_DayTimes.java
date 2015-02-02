@@ -81,9 +81,6 @@ public class Element_Slots_DayTimes 							extends 					LinearLayout
 	        	timeSlot.setBackgroundColor(Color.BLUE);
 	        }
 	    }
-	    String x =calendarItem.timeStart.displayShort();
-	    String y =calendarItem.timeEnd.displayShort();
-	    
 	    timeStart				.setText(calendarItem.timeStart.displayShort());
 	    timeEnd					.setText(calendarItem.timeEnd.displayShort());
 	    tempObjective			.setText(calendarItem.tempObjective.displayDecimal());
@@ -91,9 +88,6 @@ public class Element_Slots_DayTimes 							extends 					LinearLayout
 	public void setListener(Element_Interface listener)
 	{
 		this.listener																		= listener;
-//		textName	.setOnClickListener(this);
-//		day_1		.setOnClickListener(this);
-
 	}
 	public void onClick(View view)
 	{

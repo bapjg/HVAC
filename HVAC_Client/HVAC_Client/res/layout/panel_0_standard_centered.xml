@@ -6,7 +6,7 @@
     android:background						= "@color/Background"
     android:orientation						= "vertical"
 >
-    <include layout							= "@layout/panel_0_base_title_section" />
+    <include layout							= "@layout/panel_0_include_title_section" />
 
     <LinearLayout
  		android:id							= "@+id/baseInsertPoint"
