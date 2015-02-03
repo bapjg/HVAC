@@ -65,6 +65,7 @@ public class Thread_Mixer implements Runnable
 					targetTemp																	= (int) targetTempFloat;
 					Integer										targetFloorIn					= (int) ( targetTempFloat * (1 - 0.17F));
 					// If tempFloorIn > targetFloorIn => We are probably going to overtemp.
+					// This uses Leaking baths method to get correct temperature in LivingRoom
 				}
 				else if (circuit.state == circuit.CIRCUIT_STATE_RampingUp) 						// This is to accelerate rampup
 				{
@@ -74,6 +75,7 @@ public class Thread_Mixer implements Runnable
 				{
 					targetTemp																	= circuit.temperatureGradient.getTempToTarget();
 				}
+				
 				this.mixer.sequencer(targetTemp);
 	
 				Integer temperatureProjected					= 0;

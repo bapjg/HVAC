@@ -126,6 +126,10 @@ public class Mixer
 		else if (tempFloorOut > 45000)
 		{
 			LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
+			if (swingTimeRequired > 0)
+			{
+				swingTimeRequired															= 0;
+			}
 		}
 		
 		if (Math.abs(swingTimeRequired) > 500)												// Less than half a second
