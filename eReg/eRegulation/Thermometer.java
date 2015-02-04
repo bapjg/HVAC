@@ -38,6 +38,9 @@ public class Thermometer
 		
 		if (paramThermometer.pidName != null)
 		{
+			//TODO Remove line
+			System.out.println("Adding PID : " + paramThermometer.pidName);
+			
 			PID thisPID											= Global.pids.fetchPID(paramThermometer.pidName);
 			pidControler										= thisPID;
 		}
