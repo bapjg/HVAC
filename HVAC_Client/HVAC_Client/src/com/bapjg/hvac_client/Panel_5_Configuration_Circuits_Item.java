@@ -80,8 +80,8 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
     	swingTime																			= new Element_Standard("Swing Time", "s");
     	swingProportionMin																	= new Element_Standard("Swing Min", "%");
     	swingProportionMax																	= new Element_Standard("Swing Max", "%");
-    	relayUp																				= new Element_Standard("Relay Up");
-    	relayDown																			= new Element_Standard("Relay Down");
+    	relayUp																				= new Element_Standard("Relay Hotter");
+    	relayDown																			= new Element_Standard("Relay Cooler");
     	
     	panelInsertPoint.addView(headingMixer);
     	panelInsertPoint.addView(mixerThermometer);
