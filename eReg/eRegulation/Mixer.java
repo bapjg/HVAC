@@ -117,7 +117,7 @@ public class Mixer
 
 		Integer 												tempFloorOut				= Global.thermoFloorOut.readUnCached();
 		
-		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI); 					// returns a swingTime in milliseconds
+		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD/2);					// returns a swingTime in milliseconds
 		
 		if (tempFloorOut > 50000)
 		{
