@@ -80,7 +80,8 @@ public class Panel_0_Fragment 									extends 					Fragment
 		{
 			this.panelView																	= inflater.inflate(R.layout.panel_0_standard_with_buttons_addnew, container, false);
 	    	panelInsertPoint 																= (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
-			RelativeLayout panelButtonsArea													= (RelativeLayout) this.panelView.findViewById(R.id.buttonsLayout);
+//			RelativeLayout 										panelButtonsArea			= (RelativeLayout) this.panelView.findViewById(R.id.buttonsLayout);
+			RelativeLayout 										panelButtonsArea			= (RelativeLayout) this.panelView.findViewById(R.id.foot);
 			panelButtonsArea.setVisibility(View.GONE);
 		}
 		else if (panelType.equalsIgnoreCase("Ok_Delete"))

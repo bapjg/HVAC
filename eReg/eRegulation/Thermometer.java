@@ -128,7 +128,7 @@ public class Thermometer
     public String toDisplay()
     {
     	// Converts temperature in millidegrees into displayable format							// Either keep true or throw it out from display
-    	DecimalFormat temperatureFormat 					= new DecimalFormat("#.0");
+    	DecimalFormat temperatureFormat 					= new DecimalFormat("0.0");
     	return  temperatureFormat.format((float) (this.reading)/1000F);
     }
 }

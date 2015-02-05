@@ -20,6 +20,9 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	public String												circuitName;
 	private Ctrl_Immediate.Execute								messageExecute				= new Ctrl_Immediate().new Execute();
 	private Ctrl_Immediate.Data									messageReceived;
+
+	private LinearLayout										insertPoint;
+	
 	private Element_Standard									plannedTimeStart;
 	private Element_Standard									plannedTimeEnd;
 	private Element_Standard									plannedTargetTemp;
@@ -53,7 +56,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			
     	TCP_Send(taskListRequest);							// This returns list of what is currently active on each circuit
     	
-    	LinearLayout 											insertPoint 				= (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
+    	insertPoint 																		= (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
 
     	plannedTimeStart 																	= new Element_Standard("Time Start");
     	plannedTimeEnd																		= new Element_Standard("Time End");
@@ -72,14 +75,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     	insertPoint.addView(plannedTimeEnd);
     	insertPoint.addView(plannedTargetTemp);
     	insertPoint.addView(plannedStopOnObjective);
-    	
-    	insertPoint.addView(actionHeading);
-    	insertPoint.addView(timeStart);
-    	insertPoint.addView(timeEnd);
-    	insertPoint.addView(targetTemp);
-    	insertPoint.addView(stopOnObjective);
-
-    	insertPoint.addView(buttonStartStop);
 
         return panelView;
     }
@@ -128,6 +123,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			plannedTimeEnd				.setValue		(Global.displayTimeShort(messageReceived.timeEnd));
 			plannedTargetTemp			.setValue		(messageReceived.tempObjective.displayInteger());
 			plannedStopOnObjective		.setChecked		(messageReceived.stopOnObjective);
+	    	insertPoint					.addView		(stopOnObjective);
 			buttonStartStop				.setText		("Stop");
 		}
 		else if (messageReceived.executionPlanned)
@@ -136,7 +132,15 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			plannedTimeEnd				.setValue		(Global.displayTimeShort(messageReceived.timeEnd));
 			plannedTargetTemp			.setValue		(messageReceived.tempObjective.displayInteger());
 			plannedStopOnObjective		.setChecked		(messageReceived.stopOnObjective);
-			buttonStartStop				.setText		("Start");
+
+	    	insertPoint					.addView		(actionHeading);
+	    	insertPoint					.addView		(timeStart);
+	    	insertPoint					.addView		(timeEnd);
+	    	insertPoint					.addView		(targetTemp);
+	    	insertPoint					.addView		(stopOnObjective);
+
+	    	insertPoint					.addView		(buttonStartStop);
+	    	buttonStartStop				.setText		("Start");
 		}
 		else
 		{
@@ -144,25 +148,34 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			plannedTimeEnd				.setValue		(" ");
 			plannedTargetTemp			.setValue		(" ");
 			plannedStopOnObjective		.setChecked		(false);
+			
+	    	insertPoint					.addView		(actionHeading);
+	    	insertPoint					.addView		(timeStart);
+	    	insertPoint					.addView		(timeEnd);
+	    	insertPoint					.addView		(targetTemp);
+	    	insertPoint					.addView		(stopOnObjective);
+
+	    	insertPoint					.addView		(buttonStartStop);
+
 			buttonStartStop				.setText		("Start");
 		}
 		
 		// Bottom part of the screen : "Select new parameters"
 		if (messageReceived.executionActive)
 		{
-			actionHeading				.setVisibility	(View.GONE);
-		   	timeStart					.setVisibility	(View.GONE);
-	    	timeEnd						.setVisibility	(View.GONE);
-	    	targetTemp					.setVisibility	(View.GONE);
-	    	stopOnObjective				.setVisibility	(View.GONE);
+//			actionHeading				.setVisibility	(View.GONE);
+//		   	timeStart					.setVisibility	(View.GONE);
+//	    	timeEnd						.setVisibility	(View.GONE);
+//	    	targetTemp					.setVisibility	(View.GONE);
+//	    	stopOnObjective				.setVisibility	(View.GONE);
 		}
 		else
 		{
-			actionHeading				.setVisibility	(View.VISIBLE);
-		   	timeStart					.setVisibility	(View.VISIBLE);
-	    	timeEnd						.setVisibility	(View.VISIBLE);
-	    	targetTemp					.setVisibility	(View.VISIBLE);
-	    	stopOnObjective				.setVisibility	(View.VISIBLE);
+//			actionHeading				.setVisibility	(View.VISIBLE);
+//		   	timeStart					.setVisibility	(View.VISIBLE);
+//	    	timeEnd						.setVisibility	(View.VISIBLE);
+//	    	targetTemp					.setVisibility	(View.VISIBLE);
+//	    	stopOnObjective				.setVisibility	(View.VISIBLE);
 
 	    	timeStart					.setValue		(messageExecute.timeStart.displayShort());
 			timeEnd						.setValue		(messageExecute.timeEnd.displayShort());	
