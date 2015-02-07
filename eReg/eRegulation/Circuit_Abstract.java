@@ -14,7 +14,6 @@ abstract class Circuit_Abstract
 
 	public String 					name;
 	public Integer 					type;
-//	public String 					friendlyName;
 	public Integer 					circuitType;
 	public Integer 					tempMax;
 
@@ -72,9 +71,9 @@ abstract class Circuit_Abstract
 		CircuitTask 	circuitTaskItem 							= new CircuitTask(paramCalendar);
 		circuitTaskList.add(circuitTaskItem);
 	}
-	public Long getRampUpTime() 			{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
-	public Long calculatePerformance()		{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
-	public void sequencer()					{  /* OverRidden in Circuit_XXX classes */	}
+	public Long getRampUpTime(Integer tempObjective) 				{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
+	public Long calculatePerformance()								{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
+	public void sequencer()											{  /* OverRidden in Circuit_XXX classes */	}
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
@@ -206,6 +205,8 @@ abstract class Circuit_Abstract
 
 		// Go through all task entries for this circuit
 		
+		
+		
 		for (CircuitTask circuitTask : circuitTaskList) 													// Go through all tasks
 		{	
 			if (	(  circuitTask.days.contains(day)	) 
@@ -219,15 +220,16 @@ abstract class Circuit_Abstract
 				// - It can be running (Not possible in this branch of code)
 				// - It can be yet to run
 				
-				if (		(  circuitTask.timeStart - this.getRampUpTime() > now	)						// This task has yet to be performed (timeStart future
-				&& 			(  circuitTask.timeEnd > now)        					)						// Or time End future
+				
+				if (		(  circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective) > now	)						// This task has yet to be performed (timeStart future
+				&& 			(  circuitTask.timeEnd > now)        											)						// Or time End future
 				{
 					// This task has yet to run : both start and end are in the future
 					// Nothing todo
 				}
-				else if (	(  circuitTask.timeStart - this.getRampUpTime() < now	)						// This task has yet to be performed (timeStart is past
-				&& 			(  circuitTask.timeEnd > now							)   					// and time End is future
-				&&			(! circuitTask.dateLastRun.equals(today)				)		)				// and the last run wasn't today					
+				else if (	(  circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective) < now	)						// This task has yet to be performed (timeStart is past
+				&& 			(  circuitTask.timeEnd > now													)   					// and time End is future
+				&&			(! circuitTask.dateLastRun.equals(today)										)		)				// and the last run wasn't today					
 				{
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
