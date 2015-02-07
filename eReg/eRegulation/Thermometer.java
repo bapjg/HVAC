@@ -15,38 +15,35 @@ import HVAC_Common.Ctrl_Configuration;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thermometer
 {
-	public String 					name;
-	public String 					friendlyName;
-	public String 					address;
-	public String 					thermoFile_Normal;
-	public String 					thermoFile_UnCached;
- 	public Integer 					reading;
-	public PID						pidControler;
+	public String 												name;
+	public String 												friendlyName;
+	public String 												address;
+	public String 												thermoFile_Normal;
+	public String 												thermoFile_UnCached;
+ 	public Integer 												reading;
+	public PID													pidControler;
 	
 	public Thermometer(Ctrl_Configuration.Thermometer 			paramThermometer)
 	{
-		this.name 		    									= paramThermometer.name;
-		this.friendlyName  										= "";
-		this.address  											= paramThermometer.address;
-		this.pidControler										= null;
+		this.name 		    																= paramThermometer.name;
+		this.friendlyName  																	= "";
+		this.address  																		= paramThermometer.address;
+		this.pidControler																	= null;
 		
-		String prefix											= "/mnt/1wire/";
-		String suffix											= "/";
+		String prefix																		= "/mnt/1wire/";
+		String suffix																		= "/";
 
-		this.thermoFile_Normal									= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
-		this.thermoFile_UnCached								= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		this.thermoFile_Normal																= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+		this.thermoFile_UnCached															= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 		
 		if (paramThermometer.pidName != null)
 		{
-			//TODO Remove line
-			System.out.println("Adding PID : " + paramThermometer.pidName);
-			
-			PID thisPID											= Global.pids.fetchPID(paramThermometer.pidName);
-			pidControler										= thisPID;
+			PID 												thisPID						= Global.pids.fetchPID(paramThermometer.pidName);
+			pidControler																	= thisPID;
 		}
 		else
 		{
-			pidControler										= null;
+			pidControler																	= null;
 		}
 	}
 //	public void readAll()
@@ -94,26 +91,26 @@ public class Thermometer
     	
     	try
 		{
-    		FileInputStream 	ThermoFile_InputStream 		= null;
+    		FileInputStream 								ThermoFile_InputStream 		= null;
     		if (unCached)
     		{
-        		ThermoFile_InputStream 						= new FileInputStream(thermoFile_UnCached + "temperature" + resolution.toString());
+        		ThermoFile_InputStream 													= new FileInputStream(thermoFile_UnCached + "temperature" + resolution.toString());
     		}
     		else
     		{
-        		ThermoFile_InputStream 						= new FileInputStream(thermoFile_Normal   + "temperature" + resolution.toString());
+        		ThermoFile_InputStream 													= new FileInputStream(thermoFile_Normal   + "temperature" + resolution.toString());
     		}
-			DataInputStream 	ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
-			BufferedReader 		ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
-			String 				ThermoFile_InputLine 		= ThermoFile_InputBuffer.readLine();
+			DataInputStream 								ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
+			BufferedReader 									ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
+			String 											ThermoFile_InputLine 		= ThermoFile_InputBuffer.readLine();
 
 			ThermoFile_InputBuffer.close();
 			ThermoFile_InputData.close();
 			ThermoFile_InputStream.close();
 
-			tempString	 									= ThermoFile_InputLine.replace(" ", "");
-			tempFloat	 									= Float.parseFloat(tempString);
-			this.reading									= Math.round(tempFloat * 1000); // Round to milli-degree
+			tempString	 																= ThermoFile_InputLine.replace(" ", "");
+			tempFloat	 																= Float.parseFloat(tempString);
+			this.reading																= Math.round(tempFloat * 1000); // Round to milli-degree
 		}
 		catch (Exception err)
 		{
@@ -121,14 +118,14 @@ public class Thermometer
 			{
 				System.out.println("Thermometer read Error on " + this.name + " message was : " + err.getMessage());
 			}
-			this.reading									= -273000; // Round to milli-degree
+			this.reading																= -273000; // Round to milli-degree
 		}		
 		return this.reading; //Last known good reading;
 	}
     public String toDisplay()
     {
     	// Converts temperature in millidegrees into displayable format							// Either keep true or throw it out from display
-    	DecimalFormat temperatureFormat 					= new DecimalFormat("0.0");
+    	DecimalFormat 										temperatureFormat 			= new DecimalFormat("0.0");
     	return  temperatureFormat.format((float) (this.reading)/1000F);
     }
 }
