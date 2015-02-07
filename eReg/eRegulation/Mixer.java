@@ -117,10 +117,16 @@ public class Mixer
 
 		Integer 												tempFloorOut				= Global.thermoFloorOut.readUnCached();
 		
-//		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD *0.5F);	// 05/02/2015				// returns a swingTime in milliseconds
-//		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD *0.6F);	// 06/02/2015				// returns a swingTime in milliseconds
-//		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD *0.7F);	// 07/02/2015				// returns a swingTime in milliseconds
-		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD *0.6F);	// 06/02/2015				// returns a swingTime in milliseconds
+//		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.5F);	// 05/02/2015				// returns a swingTime in milliseconds
+//		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.6F);	// 06/02/2015				// returns a swingTime in milliseconds
+//		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.7F);	// 07/02/2015				// returns a swingTime in milliseconds
+		
+		Integer													swingTimeBurner				= pidBurnerOut.getGainD(gainD);
+		
+		if (swingTimeBurner > 0)								swingTimeBurner				= pidBurnerOut.getGainD(gainD * 0.6F);	// else * 1.0F	
+		else													swingTimeBurner				= pidBurnerOut.getGainD(gainD * 1.2F);	
+		
+		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.6F);	// 06/02/2015				// returns a swingTime in milliseconds
 		
 		if (tempFloorOut > 50000)
 		{
