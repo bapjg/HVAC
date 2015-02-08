@@ -126,7 +126,7 @@ public class Mixer
 		if (swingTimeBurner > 0)								swingTimeBurner				= pidBurnerOut.getGainD(gainD * 0.6F);	// else * 1.0F	
 		else													swingTimeBurner				= pidBurnerOut.getGainD(gainD * 1.2F);	
 		
-		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.6F);	// 06/02/2015				// returns a swingTime in milliseconds
+		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
 		
 		if (tempFloorOut > 50000)
 		{
