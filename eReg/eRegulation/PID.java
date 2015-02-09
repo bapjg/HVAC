@@ -146,6 +146,26 @@ public class PID
     	Float		getGainD																=  - (kD * differential);
        	return 		getGainD.intValue();
     }
+    public Float getdTdt(Integer previous)
+    {
+    	Integer		indexCurrent															= (indexEnqueue - 1 + previous + pidDepth) % pidDepth;
+    	Integer		indexPrevious															= (indexEnqueue - 2 + previous + pidDepth) % pidDepth;
+       	Float 		differential 															= 0F;
+       	
+    	if (count <= 2)
+    	{
+    		differential 																	= 0F;
+    	}
+    	else
+    	{
+    		//Units of differential are millidegrees/second
+    		//Units of kD are seconds x milliseconds/milliDegrees
+    		Long 	deltaTimeStamps 														= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
+    		differential																	= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
+    	}
+       	// units of getGainD are ms
+    	return differential;
+    }
     public Integer getGainI(Float kI) 
     {
     	//Units must be checked

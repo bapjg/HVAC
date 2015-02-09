@@ -121,13 +121,16 @@ public class Mixer
 //		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.6F);	// 06/02/2015				// returns a swingTime in milliseconds
 //		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.7F);	// 07/02/2015				// returns a swingTime in milliseconds
 		
-		Integer													swingTimeBurner				= pidBurnerOut.getGainD(gainD);
-		
-		if (swingTimeBurner > 0)								swingTimeBurner				= pidBurnerOut.getGainD(gainD * 0.6F);	// else * 1.0F	
-		else													swingTimeBurner				= pidBurnerOut.getGainD(gainD * 1.2F);	
-		
-		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
-		
+		if (	(pidBurnerOut.getdTdt(-1) <= 0)												// Boiler was cooling
+		&&		(pidBurnerOut.getdTdt(0)  >  0)	)											// Boiler is heating
+		{
+			swingTimeRequired																= - Math.abs(positionTracked - swingUsableMin);	// Position at useable min
+		}
+		else
+		{
+			Integer												swingTimeBurner				= pidBurnerOut.getGainD(gainD * 0.6F);
+			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
+		}
 		if (tempFloorOut > 50000)
 		{
 			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
