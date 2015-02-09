@@ -104,7 +104,36 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	    		messageExecute.tempObjective.milliDegrees									= 20000;
 	    		messageExecute.stopOnObjective												= false;
 	    	}
-	    	
+//
+	    	//
+			if (messageReceived.executionActive)
+			{
+		    	insertPoint					.addView		(stopOnObjective);
+				buttonStartStop				.setText		("Stop");
+			}
+			else if (messageReceived.executionPlanned)
+			{
+		    	insertPoint					.addView		(actionHeading);
+		    	insertPoint					.addView		(timeStart);
+		    	insertPoint					.addView		(timeEnd);
+		    	insertPoint					.addView		(targetTemp);
+		    	insertPoint					.addView		(stopOnObjective);
+
+		    	insertPoint					.addView		(buttonStartStop);
+		    	buttonStartStop				.setText		("Start");
+			}
+			else
+			{
+		    	insertPoint					.addView		(actionHeading);
+		    	insertPoint					.addView		(timeStart);
+		    	insertPoint					.addView		(timeEnd);
+		    	insertPoint					.addView		(targetTemp);
+		    	insertPoint					.addView		(stopOnObjective);
+
+		    	insertPoint					.addView		(buttonStartStop);
+
+				buttonStartStop				.setText		("Start");
+			}
 
 			displayContents();
 			setListens();
@@ -123,7 +152,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			plannedTimeEnd				.setValue		(Global.displayTimeShort(messageReceived.timeEnd));
 			plannedTargetTemp			.setValue		(messageReceived.tempObjective.displayInteger());
 			plannedStopOnObjective		.setChecked		(messageReceived.stopOnObjective);
-	    	insertPoint					.addView		(stopOnObjective);
 			buttonStartStop				.setText		("Stop");
 		}
 		else if (messageReceived.executionPlanned)
@@ -132,14 +160,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			plannedTimeEnd				.setValue		(Global.displayTimeShort(messageReceived.timeEnd));
 			plannedTargetTemp			.setValue		(messageReceived.tempObjective.displayInteger());
 			plannedStopOnObjective		.setChecked		(messageReceived.stopOnObjective);
-
-	    	insertPoint					.addView		(actionHeading);
-	    	insertPoint					.addView		(timeStart);
-	    	insertPoint					.addView		(timeEnd);
-	    	insertPoint					.addView		(targetTemp);
-	    	insertPoint					.addView		(stopOnObjective);
-
-	    	insertPoint					.addView		(buttonStartStop);
 	    	buttonStartStop				.setText		("Start");
 		}
 		else
@@ -148,15 +168,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			plannedTimeEnd				.setValue		(" ");
 			plannedTargetTemp			.setValue		(" ");
 			plannedStopOnObjective		.setChecked		(false);
-			
-	    	insertPoint					.addView		(actionHeading);
-	    	insertPoint					.addView		(timeStart);
-	    	insertPoint					.addView		(timeEnd);
-	    	insertPoint					.addView		(targetTemp);
-	    	insertPoint					.addView		(stopOnObjective);
-
-	    	insertPoint					.addView		(buttonStartStop);
-
 			buttonStartStop				.setText		("Start");
 		}
 		
