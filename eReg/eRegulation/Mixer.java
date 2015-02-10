@@ -197,7 +197,12 @@ public class Mixer
 			else
 			{
 				// Moving colder
-				if (positionProjected < 0)																// Should never happen
+				if (positionTracked == 0)
+				{
+					// Do nothing as already at minimum
+					swingTimeRequired														= 0;
+				}
+				else if (positionProjected < 0)																// Should never happen
 		 		{
 		 			swingTimeRequired 														= - (positionTracked + 2000);					//Add extra 2 seconds to be sure of end point
 					report																	= mixerMoveDown(swingTimeRequired);
