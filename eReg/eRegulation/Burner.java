@@ -19,6 +19,8 @@ public class Burner
 	public  FuelFlow		fuelflow;
 	public	GPIO			monitorBurnerFault;
 	public 	GPIO			monitorFuelFlow;
+	public	Long			lastSwitchedOn;
+	public	Long			lastSwitchedOff;
 	
 	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
 	{
@@ -33,6 +35,8 @@ public class Burner
 	{
 		LogIt.action("Burner", "On");
 		burnerPower.on();
+		lastSwitchedOn								= Global.DateTime.now();
+		
 		// After power on, ventilation clears fuel out of combustion chamber for 10 seconds
 		// After which fuel is injected and an ignition arc ignited for 20 - 30 seconds
 		// Fuel flow should be detected after about 10 seconds after burnerPower.on() call
@@ -62,6 +66,7 @@ public class Burner
 	{
 		LogIt.action("Burner", "powerOff");
 		burnerPower.off();
+		lastSwitchedOff								= Global.DateTime.now();
 
 		Integer i;
 		

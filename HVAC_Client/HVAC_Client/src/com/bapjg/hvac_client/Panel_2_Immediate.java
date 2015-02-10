@@ -109,6 +109,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			if (messageReceived.executionActive)
 			{
 		    	insertPoint					.addView		(stopOnObjective);
+		    	insertPoint					.addView		(buttonStartStop);
 				buttonStartStop				.setText		("Stop");
 			}
 			else if (messageReceived.executionPlanned)

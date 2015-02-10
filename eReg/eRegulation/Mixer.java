@@ -121,19 +121,80 @@ public class Mixer
 //		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.6F);	// 06/02/2015				// returns a swingTime in milliseconds
 //		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.7F);	// 07/02/2015				// returns a swingTime in milliseconds
 		
-		if (	(pidBurnerOut.getdTdt(-1) <= 0)												// Boiler was cooling
-		&&		(pidBurnerOut.getdTdt(0)  >  0)	)											// Boiler is heating
+//		if (	(pidBurnerOut.getdTdt(-1) <= 0)												// Boiler was cooling
+//		&&		(pidBurnerOut.getdTdt(0)  >  0)	)											// Boiler is heating
+//		{
+//			swingTimeRequired																= - Math.abs(positionTracked - swingUsableMin);	// Position at useable min
+//		}
+		
+		if (Global.burner.lastSwitchedOn + 15000L > Global.DateTime.now())
 		{
-			swingTimeRequired																= - Math.abs(positionTracked - swingUsableMin);	// Position at useable min
+			// burner has been switched on in the last 15 seconds
+			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
+			
+			burnerPower.target																= targetTemp;
+			burnerPower.tempCurrent															= pidFloorOut.tempCurrent();
+			burnerPower.tempCurrentError													= pidFloorOut.tempCurrentError();
+			
+			burnerPower.termProportional													= - pidFloorOut.getGainP(1F);
+			burnerPower.termDifferential													= - pidFloorOut.getGainD(1F);
+			burnerPower.termIntegral														= - pidFloorOut.getGainI(1F);
+
+			burnerPower.gainProportional													= pidFloorOut.getGainP(gainP);
+			burnerPower.gainDifferential													= pidFloorOut.getGainD(gainD);
+			burnerPower.gainIntegral														= pidFloorOut.getGainI(gainI);
+			
+			burnerPower.kP																	= 111F;
+			burnerPower.kD																	= 111F;
+			burnerPower.kI																	= 111F;
+			
+			burnerPower.gainTotal															= 0;
+			burnerPower.tempOut																= Global.thermoFloorOut.reading;
+			burnerPower.tempBoiler															= Global.thermoBoiler.reading;
+			
+			burnerPower.positionTracked														= positionTracked;
+			burnerPower.startMovement														= false;
+			LogIt.pidData(burnerPower);
 		}
-		else
+		if (Global.burner.lastSwitchedOff + 15000L > Global.DateTime.now())
+		{
+			// burner has been switched off in the last 15 seconds
+			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
+			
+			burnerPower.target																= targetTemp;
+			burnerPower.tempCurrent															= pidFloorOut.tempCurrent();
+			burnerPower.tempCurrentError													= pidFloorOut.tempCurrentError();
+			
+			burnerPower.termProportional													= - pidFloorOut.getGainP(1F);
+			burnerPower.termDifferential													= - pidFloorOut.getGainD(1F);
+			burnerPower.termIntegral														= - pidFloorOut.getGainI(1F);
+
+			burnerPower.gainProportional													= pidFloorOut.getGainP(gainP);
+			burnerPower.gainDifferential													= pidFloorOut.getGainD(gainD);
+			burnerPower.gainIntegral														= pidFloorOut.getGainI(gainI);
+			
+			burnerPower.kP																	= -111F;
+			burnerPower.kD																	= -111F;
+			burnerPower.kI																	= -111F;
+			
+			burnerPower.gainTotal															= 0;
+			burnerPower.tempOut																= Global.thermoFloorOut.reading;
+			burnerPower.tempBoiler															= Global.thermoBoiler.reading;
+			
+			burnerPower.positionTracked														= positionTracked;
+			burnerPower.startMovement														= false;
+			LogIt.pidData(burnerPower);
+		}
+		
+		if (true)
 		{
 			Integer												swingTimeBurner				= pidBurnerOut.getGainD(gainD * 0.6F);
-			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
+//			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
+			swingTimeRequired																= pidFloorOut.getGain(gainP, 0F, 0F) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
 		}
 		if (tempFloorOut > 50000)
 		{
-			LogIt.display("Mixer", "sequencer", "Have definately tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
+			LogIt.display("Mixer", "sequencer", "Have definitely tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
 		}
 		else if (tempFloorOut > 45000)
 		{
@@ -294,39 +355,23 @@ public class Mixer
 			positionTracked																	= 0;
 		}
 	}
-	public void positionAbsolute(Integer position)
+	public MixerMove_Report positionAbsolute(Integer position)
 	{
 		Long 													positionDiff;
 		Integer													timeToWait;
 		Long													timeStart;
 		Long													timeEnd;
-		if (positionTracked == null)
+		if (position > positionTracked)
 		{
-			positionZero();
-		}
-		if (position > swingTime / 2)
-		{
-			positionFull();
-			mixerDown.on();
-			timeToWait																		= swingTime - position;
-			timeStart																		= Global.DateTime.now();
-			Global.waitMilliSeconds(timeToWait);
-			mixerDown.off();
-			timeEnd																			= Global.DateTime.now();
-			positionDiff   																	= timeEnd - timeStart;
-	 		positionTracked																	= swingTime - positionDiff.intValue();		
+			// Must move up
+			Integer 											swingTime					= position - positionTracked;
+			return 	mixerMoveUp(swingTime);
 		}
 		else
 		{
-			positionZero();
-			mixerUp.on();
-			timeToWait																		= position;
-			timeStart																		= Global.DateTime.now();
-			Global.waitMilliSeconds(timeToWait.intValue());
-			mixerUp.off();
-			timeEnd																			= Global.DateTime.now();
-			positionDiff   																	= timeEnd - timeStart;
-	 		positionTracked																	= positionDiff.intValue();		
+			// Must move down
+			Integer 											swingTime					= positionTracked - position;
+			return 	mixerMoveUp(swingTime);
 		}
 	}
 	public void allOff()
