@@ -172,10 +172,14 @@ public class Mixer
 			messageBefore.positionTracked													= positionTracked;
 			messageBefore.startMovement														= true;
 			
-			if (swingTimeRequired > 0)	
+			if (swingTimeRequired > 0)		// Moving hotter
 			{
-				// Moving hotter
-				if (positionProjected > this.swingTime)
+				if (positionTracked == this.swingTime)
+				{
+					// Do nothing as already at minimum
+					swingTimeRequired														= 0;
+				}
+				else if (positionProjected > this.swingTime)
 		 		{
 		 			swingTimeRequired 														= this.swingTime - positionTracked + 2000;		//No point waiting over maximum add extra 2 seconds to be sure of end point
 					report																	= mixerMoveUp(swingTimeRequired);
@@ -194,9 +198,8 @@ public class Mixer
 					positionTracked															= report.positionTracked;
 				}
 			}
-			else
+			else	// Moving colder
 			{
-				// Moving colder
 				if (positionTracked == 0)
 				{
 					// Do nothing as already at minimum
