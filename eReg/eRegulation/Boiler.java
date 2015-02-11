@@ -89,7 +89,6 @@ public class Boiler
 	}
 	public Boolean checkOverHeat()
 	{
-		System.out.println("checkOverheat : " + Global.thermoBoiler.readUnCached() + ", tNE " + tempNeverExceed + "OS " + tempOvershoot);
 		if (Global.thermoBoiler.readUnCached() > tempNeverExceed)
 		{
 			return true;
