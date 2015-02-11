@@ -18,8 +18,8 @@ public class Boiler
 	// Note FaultDetected overides every thing
 	// ===========================================================================================
 
-	public Integer	   		burnerState;
-//	public enum				burnerStates 
+	public Integer	   											burnerState;
+//	public enum													burnerStates 
 //	{
 //		STATE_Off, 
 //		STATE_On_Heating,
@@ -28,47 +28,47 @@ public class Boiler
 //		STATE_On_PowerUp,
 //		STATE_Error
 //	};
-	public Integer	   		burnerStateNext;
-	public Integer	   		timeToLive;
+	public Integer	   											burnerStateNext;
+	public Integer	   											timeToLive;
 
-	public Thermometers 	thermometers;
-	public Thermometer 		thermoBoiler;
-	public Burner			burner;
+	public Thermometers 										thermometers;
+	public Thermometer 											thermoBoiler;
+	public Burner												burner;
 	
-	public Integer	   		tempMax;
-	public Integer	   		tempMin;
-	public Integer			tempNeverExceed						= 95000;
-	public Integer			tempOvershoot						= 18000;
-	public Integer			state;
-	public PID				pidControler;
+	public Integer	   											tempMax;
+	public Integer	   											tempMin;
+	public Integer												tempNeverExceed				= 95000;
+	public Integer												tempOvershoot				= 18000;
+	public Integer												state;
+	public PID													pidControler;
 	
-	public final int 		STATE_Off 							= 0;
-	public final int 		STATE_On_Heating 					= 1;
-	public final int 		STATE_On_Cooling 					= 2;
-	public final int 		STATE_On_CoolingAfterOverheat 		= 3;
-	public final int 		STATE_On_PowerUp 					= 4;
-	public final int 		STATE_Error	 						= -1;
+	public final int 											STATE_Off 						= 0;
+	public final int 											STATE_On_Heating 				= 1;
+	public final int 											STATE_On_Cooling 				= 2;
+	public final int 											STATE_On_CoolingAfterOverheat 	= 3;
+	public final int 											STATE_On_PowerUp 				= 4;
+	public final int 											STATE_Error	 					= -1;
 	
 
 	public Boiler(Ctrl_Configuration.Data.Boiler boilerparams)
 	{
-		this.thermoBoiler 										= Global.thermometers.fetchThermometer(boilerparams.thermometer);
+		this.thermoBoiler 																	= Global.thermometers.fetchThermometer(boilerparams.thermometer);
 		
-		burner													= Global.burner;
+		burner																				= Global.burner;
 
-		this.tempMax 											= -1;
-		this.tempMin 											= -1;
-		this.tempNeverExceed									= boilerparams.tempNeverExceed.milliDegrees;
-		this.tempOvershoot										= boilerparams.tempOverShoot.milliDegrees;
-		state													= STATE_Off;
+		this.tempMax 																		= -1;
+		this.tempMin 																		= -1;
+		this.tempNeverExceed																= boilerparams.tempNeverExceed.milliDegrees;
+		this.tempOvershoot																	= boilerparams.tempOverShoot.milliDegrees;
+		state																				= STATE_Off;
 	}
 	public void requestHeat(HeatRequired eR)
 	{
-		tempMax 												= eR.tempMaximum;
-		tempMin 												= eR.tempMinimum;
+		tempMax 																			= eR.tempMaximum;
+		tempMin 																			= eR.tempMinimum;
 		if (tempMax > tempNeverExceed - tempOvershoot)
 		{
-			tempMax 											= tempNeverExceed - tempOvershoot;
+			tempMax 																		= tempNeverExceed - tempOvershoot;
 		}
 		//LogIt.display("Boiler", "requestHeat", "tempMin/tempMax are " + tempMin + "/" + tempMax);
 		
@@ -77,15 +77,15 @@ public class Boiler
 		// The sequencer will do the rest
 		if (state == STATE_Off)
 		{
-			state												= STATE_On_PowerUp;
+			state																			= STATE_On_PowerUp;
 		}
 	}
 	public void requestIdle()
 	{
 		burner.powerOff();
-		tempMax 												= -1000;
-		tempMin 												= -1000;
-		state 													= STATE_Off;
+		tempMax 																			= -1000;
+		tempMin 																			= -1000;
+		state 																				= STATE_Off;
 	}
 	public Boolean checkOverHeat()
 	{
@@ -111,12 +111,12 @@ public class Boiler
 			{
 				LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + " , state set to STATE_OnCoolingAfterOverheat", false);
 			}
-			state												 = STATE_On_CoolingAfterOverheat;
+			state																			 = STATE_On_CoolingAfterOverheat;
 			return;
 		}
 		if (burner.burnerFault())	//This reads GPIO
 		{
-			state												 = STATE_Error;
+			state																			 = STATE_Error;
 			burner.powerOff();
 			LogIt.error("Boiler", "sequencer", "burner has tripped");
 			return;
@@ -136,7 +136,7 @@ public class Boiler
 			if (Global.thermoBoiler.reading > tempMax)
 			{
 				burner.powerOff();
-				state											 = STATE_On_Cooling;
+				state																		 = STATE_On_Cooling;
 				return;
 			}
 			break;
@@ -145,7 +145,7 @@ public class Boiler
 			if (!checkOverHeat())
 			{
 				LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling", false);
-				state											 = STATE_On_Cooling; 		//Normal operating temp has returned
+				state																		 = STATE_On_Cooling; 		//Normal operating temp has returned
 				return;
 			}
 			break;
@@ -153,7 +153,7 @@ public class Boiler
 			if (Global.thermoBoiler.reading < tempMin)
 			{
 				burner.powerOn();
-				state 											= STATE_On_Heating;
+				state 																		= STATE_On_Heating;
 				return;
 			}
 			break;
@@ -161,7 +161,7 @@ public class Boiler
 			if (Global.thermoBoiler.reading < tempMax)
 			{
 				burner.powerOn();
-				state 											= STATE_On_Heating;
+				state 																		= STATE_On_Heating;
 				return;
 			}
 			break;

@@ -132,6 +132,9 @@ public class Mixer
 		if 		(Global.burner.lastSwitchedOn + 15000L > Global.DateTime.now())	
 		{
 			// burner has been switched on in the last 15 seconds
+			System.out.println("timeLastSwitchedON : " + (Global.burner.lastSwitchedOn));
+			
+			
 			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
 			
 			burnerPower.target																= targetTemp;
@@ -161,6 +164,8 @@ public class Mixer
 		if (Global.burner.lastSwitchedOff + 15000L > Global.DateTime.now())
 		{
 			// burner has been switched off in the last 15 seconds
+			System.out.println("timeLastSwitchedOFF : " + (Global.burner.lastSwitchedOff));
+			
 			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
 			
 			burnerPower.target																= targetTemp;
@@ -192,7 +197,7 @@ public class Mixer
 		{
 			Integer												swingTimeBurner				= pidBurnerOut.getGainD(gainD * 0.6F);
 //			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
-			swingTimeRequired																= pidFloorOut.getGain(gainP, 0F, 0F) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
+			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
 		}
 		if (tempFloorOut > 50000)
 		{

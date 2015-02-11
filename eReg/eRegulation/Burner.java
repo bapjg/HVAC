@@ -24,10 +24,10 @@ public class Burner
 	
 	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
 	{
-		burnerPower									= Global.relays.fetchRelay(burnerparams.relay);
-		monitorBurnerFault							= new GPIO(17);
-		monitorFuelFlow								= new GPIO(4);
-		fuelflow									= new FuelFlow();
+		burnerPower																			= Global.relays.fetchRelay(burnerparams.relay);
+		monitorBurnerFault																	= new GPIO(17);
+		monitorFuelFlow																		= new GPIO(4);
+		fuelflow																			= new FuelFlow();
 		burnerPower.off();
 	}
 	
@@ -35,7 +35,7 @@ public class Burner
 	{
 		LogIt.action("Burner", "On");
 		burnerPower.on();
-		lastSwitchedOn								= Global.DateTime.now();
+		lastSwitchedOn																		= Global.DateTime.now();
 		
 		// After power on, ventilation clears fuel out of combustion chamber for 10 seconds
 		// After which fuel is injected and an ignition arc ignited for 20 - 30 seconds
@@ -66,7 +66,7 @@ public class Burner
 	{
 		LogIt.action("Burner", "powerOff");
 		burnerPower.off();
-		lastSwitchedOff								= Global.DateTime.now();
+		lastSwitchedOff																		= Global.DateTime.now();
 
 		Integer i;
 		
