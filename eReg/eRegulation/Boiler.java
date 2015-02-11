@@ -104,7 +104,6 @@ public class Boiler
 		// Take unCached temperature. The value is then cached
 		
 		Integer	tempNow =  Global.thermoBoiler.readUnCached();
-		System.out.println("State : " + state);
 		
 		if (checkOverHeat())		// This is just a temperature check
 		{

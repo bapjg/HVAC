@@ -36,7 +36,7 @@ public class Burner
 		LogIt.action("Burner", "On");
 		burnerPower.on();
 		lastSwitchedOn																		= Global.DateTime.now();
-		System.out.println("timeLastSwitchedOFF : " + (Global.burner.lastSwitchedOn));
+//		System.out.println("timeLastSwitchedOFF : " + (Global.burner.lastSwitchedOn));
 		
 		// After power on, ventilation clears fuel out of combustion chamber for 10 seconds
 		// After which fuel is injected and an ignition arc ignited for 20 - 30 seconds
@@ -68,7 +68,7 @@ public class Burner
 		LogIt.action("Burner", "powerOff");
 		burnerPower.off();
 		lastSwitchedOff																		= Global.DateTime.now();
-		System.out.println("timeLastSwitchedOFF : " + (Global.burner.lastSwitchedOff));
+//		System.out.println("timeLastSwitchedOFF : " + (Global.burner.lastSwitchedOff));
 
 		Integer i;
 		
