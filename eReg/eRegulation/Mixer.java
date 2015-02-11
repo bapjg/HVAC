@@ -164,7 +164,6 @@ public class Mixer
 		if (Global.burner.lastSwitchedOff + 15000L > Global.DateTime.now())
 		{
 			// burner has been switched off in the last 15 seconds
-			System.out.println("timeLastSwitchedOFF : " + (Global.burner.lastSwitchedOff));
 			
 			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
 			
