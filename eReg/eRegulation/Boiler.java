@@ -90,7 +90,7 @@ public class Boiler
 	public Boolean checkOverHeat()
 	{
 		System.out.println("checkOverheat : " + Global.thermoBoiler.readUnCached() + ", tNE " + tempNeverExceed + "OS " + tempOvershoot);
-		if (Global.thermoBoiler.readUnCached() > (tempNeverExceed - tempOvershoot))
+		if (Global.thermoBoiler.readUnCached() > tempNeverExceed)
 		{
 			return true;
 		}
@@ -108,12 +108,13 @@ public class Boiler
 		
 		if (checkOverHeat())		// This is just a temperature check
 		{
-			burner.powerOff();
+			
 			if (state != STATE_On_CoolingAfterOverheat)
 			{
+				burner.powerOff();
 				LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + " , state set to STATE_OnCoolingAfterOverheat", false);
+				state																		 = STATE_On_CoolingAfterOverheat;
 			}
-			state																			 = STATE_On_CoolingAfterOverheat;
 			return;
 		}
 		if (burner.burnerFault())	//This reads GPIO
@@ -143,7 +144,6 @@ public class Boiler
 			}
 			break;
 		case STATE_On_CoolingAfterOverheat:
-			burner.powerOff();													//Ensure burner is powered off (normally, already done
 			if (!checkOverHeat())
 			{
 				LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling", false);
