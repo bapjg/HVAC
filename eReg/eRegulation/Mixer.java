@@ -127,8 +127,9 @@ public class Mixer
 //			swingTimeRequired																= - Math.abs(positionTracked - swingUsableMin);	// Position at useable min
 //		}
 		
-		if (	(Global.burner.lastSwitchedOn != null) 
-		&& 		(Global.burner.lastSwitchedOn + 15000L > Global.DateTime.now())	)
+//		if (	(Global.burner.lastSwitchedOn != null) 
+//		&& 		(Global.burner.lastSwitchedOn + 15000L > Global.DateTime.now())	)
+		if 		(Global.burner.lastSwitchedOn + 15000L > Global.DateTime.now())	
 		{
 			// burner has been switched on in the last 15 seconds
 			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();

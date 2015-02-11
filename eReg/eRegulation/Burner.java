@@ -15,12 +15,12 @@ import HVAC_Common.Ctrl_Configuration;
 
 public class Burner
 {
-	public 	Relay	   		burnerPower;
-	public  FuelFlow		fuelflow;
-	public	GPIO			monitorBurnerFault;
-	public 	GPIO			monitorFuelFlow;
-	public	Long			lastSwitchedOn;
-	public	Long			lastSwitchedOff;
+	public 	Relay	   											burnerPower;
+	public  FuelFlow											fuelflow;
+	public	GPIO												monitorBurnerFault;
+	public 	GPIO												monitorFuelFlow;
+	public	Long												lastSwitchedOn				= 0L;
+	public	Long												lastSwitchedOff				= 0L;
 	
 	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
 	{
