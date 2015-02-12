@@ -5,15 +5,6 @@ import HVAC_Common.Ctrl_Configuration;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Circuit_Radiator extends Circuit_Abstract
 {
-
-//	public Circuit_Radiator(String name, String friendlyName, Integer circuitType, String tempMax, String rampUpTime)
-//	{	
-//		super(name, friendlyName, circuitType, tempMax, rampUpTime);
-//	}
-//	public Circuit_Radiator(String name, Integer circuitType, String pumpName, String thermometerName, Integer tempMax)			// New
-//	{	
-//		super(name, circuitType, pumpName, thermometerName, tempMax);
-//	}
 	public Circuit_Radiator(Ctrl_Configuration.Circuit				paramCircuit)			// New
 	{	
 		super(paramCircuit);
@@ -22,7 +13,8 @@ public class Circuit_Radiator extends Circuit_Abstract
 	}
 	public Long getRampUpTime()
 	{
-		return 0L;
+		Long 													rampUpMilliSeconds			= 30 * 60 * 1000L;		// 30 mins
+		return rampUpMilliSeconds;
 	}
 	@Override
 	public Long calculatePerformance()
