@@ -19,6 +19,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 	@Override
 	public Long calculatePerformance()
 	{
+		// TODO Is this required
 		return 10000L;
 	}
 	@Override
@@ -37,7 +38,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 				break;
 			case CIRCUIT_STATE_Start_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
-				state												= CIRCUIT_STATE_Starting;
+				state																		= CIRCUIT_STATE_Starting;
 				//Now fall through
 			case CIRCUIT_STATE_Starting:
 				if (temperatureGradient == null)
@@ -47,10 +48,10 @@ public class Circuit_Radiator extends Circuit_Abstract
 				}
 				else
 				{
-					Integer temp							= temperatureGradient.getTempToTarget();
-					this.heatRequired.tempMinimum			= temp - 7500;
-					this.heatRequired.tempMaximum			= temp + 7500;
-					state									= CIRCUIT_STATE_AwaitingHeat;
+					Integer 									temp						= temperatureGradient.getTempToTarget();
+					this.heatRequired.tempMinimum											= temp - 7500;
+					this.heatRequired.tempMaximum											= temp + 7500;
+					state																	= CIRCUIT_STATE_AwaitingHeat;
 				}
 				break;
 			case CIRCUIT_STATE_AwaitingHeat:
@@ -58,13 +59,13 @@ public class Circuit_Radiator extends Circuit_Abstract
 				{
 					LogIt.action("PumpRadiator", "On");
 					circuitPump.on();
-					state										= CIRCUIT_STATE_Running;
+					state																	= CIRCUIT_STATE_Running;
 				}
 				break;
 			case CIRCUIT_STATE_Running:
-				Integer temp							= temperatureGradient.getTempToTarget();
-				this.heatRequired.tempMinimum			= temp - 7500;
-				this.heatRequired.tempMaximum			= temp + 7500;
+				Integer 										temp						= temperatureGradient.getTempToTarget();
+				this.heatRequired.tempMinimum												= temp - 7500;
+				this.heatRequired.tempMaximum												= temp + 7500;
 				break;
 			case CIRCUIT_STATE_Stop_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
