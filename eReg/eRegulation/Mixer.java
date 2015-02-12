@@ -37,6 +37,7 @@ public class Mixer
 	public Relay												mixerDown;
 	
 	public Long													lastBurnerAction			= 0L;
+	public Integer												awaitFlatBurnerTemp			= 0;
 	
 	public Integer									state									= 0;
 	public static final int							MIXER_STATE_Off 						= 0;
@@ -136,6 +137,7 @@ public class Mixer
 			// burner has been switched on since last Sequence
 			
 			lastBurnerAction																= Global.burner.lastSwitchedOn;
+			awaitFlatBurnerTemp																= 1;
 			System.out.println("timeLastSwitchedON : " + (Global.burner.lastSwitchedOn));
 			
 			
@@ -170,6 +172,7 @@ public class Mixer
 			// burner has been switched on since last Sequence
 			
 			lastBurnerAction																= Global.burner.lastSwitchedOff;
+			awaitFlatBurnerTemp																= -1;
 			
 			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
 			
@@ -198,12 +201,29 @@ public class Mixer
 			LogIt.pidData(burnerPower);
 		}
 		
-		if (true)
+		int														awaitFlat					= awaitFlatBurnerTemp;
+		
+		if 		(	(awaitFlat == 1				)											// Starting to heat
+		&&			(pidBurnerOut.dTdt() > 0	)	)										// so positionTracked is high
+		{																					// swingTimeRequired is -ve
+			awaitFlatBurnerTemp																= 0;
+			float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
+			swingTimeRequired																= ((int) swingTimeFloat) - positionTracked;
+		}
+		else if (	(awaitFlat == -1			)											// Starting to cool
+		&&			(pidBurnerOut.dTdt() < 0	)	)										// so positionTracked is low
+		{																					// swingTimeRequired is +ve
+			awaitFlatBurnerTemp																= 0;
+			float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
+			swingTimeRequired																= ((int) swingTimeFloat) - positionTracked;
+		}
+		else
 		{
 			Integer												swingTimeBurner				= pidBurnerOut.getGainD(gainD * 0.6F);
 //			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
-			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
+			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI);						// 08/02/2015				// returns a swingTime in milliseconds
 		}
+
 		if (tempFloorOut > 50000)
 		{
 			LogIt.display("Mixer", "sequencer", "Have definitely tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
@@ -258,13 +278,13 @@ public class Mixer
 					report																	= mixerMoveUp(swingTimeRequired);
 					positionTracked															= this.swingTime;					
 		 		}
-				else if (positionTracked < swingUsableMin)
-				{
-					// We need to get back into the linear range
-					swingTimeRequired														= (swingUsableMin - positionTracked) + swingTimeRequired;
-					report																	= mixerMoveUp(swingTimeRequired);
-					positionTracked															= report.positionTracked;
-				}
+//				else if (positionTracked < swingUsableMin)		doesnt work when low temp required
+//				{
+//					// We need to get back into the linear range
+//					swingTimeRequired														= (swingUsableMin - positionTracked) + swingTimeRequired;
+//					report																	= mixerMoveUp(swingTimeRequired);
+//					positionTracked															= report.positionTracked;
+//				}
 				else																					// Normal operating
 				{
 					report																	= mixerMoveUp(swingTimeRequired);
@@ -284,13 +304,13 @@ public class Mixer
 					report																	= mixerMoveDown(swingTimeRequired);
 					positionTracked															= 0;					
 		 		}
-				else if (positionTracked > swingUsableMax)
-				{
-					// We need to get back into the linear range							           90000  - 95000 (-ve)      + (-ve) = larger (-ve)     	
-					swingTimeRequired														= (swingUsableMax - positionTracked) + swingTimeRequired;
-					report																	= mixerMoveDown(swingTimeRequired);
-					positionTracked															= report.positionTracked;
-				}
+//				else if (positionTracked > swingUsableMax)			// Try without this
+//				{
+//					// We need to get back into the linear range							           90000  - 95000 (-ve)      + (-ve) = larger (-ve)     	
+//					swingTimeRequired														= (swingUsableMax - positionTracked) + swingTimeRequired;
+//					report																	= mixerMoveDown(swingTimeRequired);
+//					positionTracked															= report.positionTracked;
+//				}
 				else																					// Normal operating
 				{
 					report																	= mixerMoveDown(swingTimeRequired);
