@@ -173,6 +173,7 @@ public class Mixer
 			
 			lastBurnerAction																= Global.burner.lastSwitchedOff;
 			awaitFlatBurnerTemp																= -1;
+			System.out.println("timeLastSwitchedOff : " + (Global.burner.lastSwitchedOn));
 			
 			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
 			
@@ -206,16 +207,18 @@ public class Mixer
 		if 		(	(awaitFlat == 1				)											// Starting to heat
 		&&			(pidBurnerOut.dTdt() > 0	)	)										// so positionTracked is high
 		{																					// swingTimeRequired is -ve
+			LogIt.display("Mixer", "sequencer", "Boiler temp on the RISE ");
 			awaitFlatBurnerTemp																= 0;
-			float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
-			swingTimeRequired																= ((int) swingTimeFloat) - positionTracked;
+			Float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
+			if (swingTimeFloat.intValue() < positionTracked)	swingTimeRequired			= swingTimeFloat.intValue() - positionTracked;
 		}
 		else if (	(awaitFlat == -1			)											// Starting to cool
 		&&			(pidBurnerOut.dTdt() < 0	)	)										// so positionTracked is low
 		{																					// swingTimeRequired is +ve
+			LogIt.display("Mixer", "sequencer", "Boiler temp on the FALL ");
 			awaitFlatBurnerTemp																= 0;
-			float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
-			swingTimeRequired																= ((int) swingTimeFloat) - positionTracked;
+			Float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
+			if (swingTimeFloat.intValue() > positionTracked)	swingTimeRequired			= swingTimeFloat.intValue() - positionTracked;
 		}
 		else
 		{

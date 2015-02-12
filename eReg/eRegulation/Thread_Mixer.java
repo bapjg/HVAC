@@ -97,8 +97,8 @@ public class Thread_Mixer implements Runnable
 				
 				this.mixer.sequencer(targetTemp);
 	
-				Integer temperatureProjected					= 0;
-				Integer tempNow;
+				Integer 										temperatureProjected		= 0;
+				Integer 										tempNow;
 	
 				// Idea is to upto temeProject (timeProjection) in 5s intervals.
 				// The first intervals upto timeDelay, no decision is made
@@ -107,17 +107,17 @@ public class Thread_Mixer implements Runnable
 				{
 					Global.waitSeconds(5);														// indexWait loops of 5s
 						
-					tempNow										= Global.thermoFloorOut.readUnCached();
+					tempNow																	= Global.thermoFloorOut.readUnCached();
 					
 					if (i >= indexDelay)														// We have waited for dTdt to settle a bit
 					{
-						temperatureProjected					= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProjectInSeconds)).intValue();
+						temperatureProjected												= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProjectInSeconds)).intValue();
 						
 						// Perhaps a better idea is to calculate time at which targetTemp will be attained
 						// Are we getting closer or is it moving out, or worse will never happen.
 						
-						Long timeNow = Global.DateTime.now();
-						Float timeProjected =  (targetTemp - tempNow)/Global.thermoFloorOut.pidControler.dTdt();
+						Long 									timeNow 					= Global.DateTime.now();
+						Float 									timeProjected 				=  (targetTemp - tempNow)/Global.thermoFloorOut.pidControler.dTdt();
 						if (timeProjected < 0)
 						{
 							// LogIt.display("Thread_Mixer", "sequencer", "---Houston we have a problem--- the gap is widening");
@@ -129,12 +129,7 @@ public class Thread_Mixer implements Runnable
 						
 						if (Math.abs(temperatureProjected - targetTemp) > mixer.marginProjection)		// More than 2 degrees difference (either over or under)
 						{
-							// This is wrong, if going up, exceed upperbound gives error
-							// if going down, only lowerbound is wrong
-							
-							
-							
-							//							LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProjectInSeconds + "s wait after " + (i * 5) +"s, temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
+							LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProjectInSeconds + "s wait after " + (i * 5) +"s, temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
 							break;
 						}
 					}
