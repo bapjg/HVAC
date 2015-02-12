@@ -36,6 +36,8 @@ public class Mixer
 	public Relay												mixerUp;
 	public Relay												mixerDown;
 	
+	public Long													lastBurnerAction			= 0L;
+	
 	public Integer									state									= 0;
 	public static final int							MIXER_STATE_Off 						= 0;
 	public static final int							MIXER_STATE_Normal_Operating			= 1;
@@ -129,9 +131,11 @@ public class Mixer
 		
 //		if (	(Global.burner.lastSwitchedOn != null) 
 //		&& 		(Global.burner.lastSwitchedOn + 15000L > Global.DateTime.now())	)
-		if 		(Global.burner.lastSwitchedOn + 15000L > Global.DateTime.now())	
+		if 		(Global.burner.lastSwitchedOn > lastBurnerAction)	
 		{
-			// burner has been switched on in the last 15 seconds
+			// burner has been switched on since last Sequence
+			
+			lastBurnerAction																= Global.burner.lastSwitchedOn;
 			System.out.println("timeLastSwitchedON : " + (Global.burner.lastSwitchedOn));
 			
 			
@@ -161,9 +165,11 @@ public class Mixer
 			burnerPower.startMovement														= false;
 			LogIt.pidData(burnerPower);
 		}
-		if (Global.burner.lastSwitchedOff + 15000L > Global.DateTime.now())
+		if (Global.burner.lastSwitchedOff > lastBurnerAction)
 		{
-			// burner has been switched off in the last 15 seconds
+			// burner has been switched on since last Sequence
+			
+			lastBurnerAction																= Global.burner.lastSwitchedOff;
 			
 			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
 			
