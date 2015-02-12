@@ -133,15 +133,7 @@ abstract class Circuit_Abstract
 	public void taskActivate(CircuitTask 							thisTask)
 	{
 		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated ");
-//		for (CircuitTask aTask : this.circuitTaskList)			// Check to ensure there are no active tasks
-//		{
-//			if (aTask.active)
-//			{
-//				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
-//				aTask.active										= false;
-//			}
-//		}
-//		thisTask.active												= true;
+
 		if (this.taskActive == null)
 		{
 			this.taskActive											= thisTask;
@@ -150,7 +142,14 @@ abstract class Circuit_Abstract
 		}
 		else
 		{
-			LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
+			if (taskActive == thisTask)
+			{
+				LogIt.error("Circuit_Abstract", "taskActivate", "WOULD HAVE SAID : A task is active when it shouldn't be");
+			}
+			else
+			{
+				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
+			}
 		}
 	}
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
@@ -222,7 +221,7 @@ abstract class Circuit_Abstract
 				
 				
 				if (		(  circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective) > now	)						// This task has yet to be performed (timeStart future
-				&& 			(  circuitTask.timeEnd > now)        											)						// Or time End future
+				&& 			(  circuitTask.timeEnd > now													)  		)						// Or time End future
 				{
 					// This task has yet to run : both start and end are in the future
 					// Nothing todo
