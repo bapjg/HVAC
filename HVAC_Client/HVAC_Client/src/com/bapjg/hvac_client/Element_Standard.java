@@ -88,16 +88,5 @@ public class Element_Standard 									extends 					LinearLayout
 	{
 		listener.onElementClick((View) this);
 	}
-//	ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
-//	if (viewTreeObserver.isAlive()) {
-//	  viewTreeObserver.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-//	    @Override
-//	    public void onGlobalLayout() {
-//	      view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-//	      viewWidth = view.getWidth();
-//	      viewHeight = view.getHeight();
-//	    }
-//	  });
-//	}
 }
 

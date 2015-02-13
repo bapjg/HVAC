@@ -32,7 +32,7 @@
 	    android:textColor					= "@color/HeadingRed"
 	    android:textSize					= "@dimen/text_heading"
 	    android:textStyle					= "italic"
-	    android:text						= "xxxxx"
+	    android:text						= ""
 	/>
 	
 </LinearLayout>

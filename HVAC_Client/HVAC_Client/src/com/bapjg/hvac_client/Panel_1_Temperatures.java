@@ -42,6 +42,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     	displayTitles("Temperatures", "Readings");
     	super.TCP_Send(new Ctrl_Temperatures().new Request());
     	
+    	listHeading																			= new Element_Heading("Obtained at");
     	tempBoiler 																			= new Element_Standard("Boiler");
     	tempHW 																				= new Element_Standard("Hot Water");
     	tempOutside 																		= new Element_Standard("Outside");
@@ -52,7 +53,6 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
     	tempRadiatorOut																		= new Element_Standard("Radiator Out");
     	tempRadiatorIn																		= new Element_Standard("Radiator In");
     	tempBoilerIn 																		= new Element_Standard("Boiler In");
-    	listHeading																			= new Element_Heading("Obtained at");
 
        	panelInsertPoint.addView(listHeading);
        	panelInsertPoint.addView(tempBoiler);
