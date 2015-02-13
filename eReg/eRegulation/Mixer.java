@@ -204,22 +204,23 @@ public class Mixer
 		
 		int														awaitFlat					= awaitFlatBurnerTemp;
 		
-		if 		(	(awaitFlat == 1				)											// Starting to heat
-		&&			(pidBurnerOut.dTdt() > 0	)	)										// so positionTracked is high
-		{																					// swingTimeRequired is -ve
-			LogIt.display("Mixer", "sequencer", "Boiler temp on the RISE ");
-			awaitFlatBurnerTemp																= 0;
-			Float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
-			if (swingTimeFloat.intValue() < positionTracked)	swingTimeRequired			= swingTimeFloat.intValue() - positionTracked;
-		}
-		else if (	(awaitFlat == -1			)											// Starting to cool
-		&&			(pidBurnerOut.dTdt() < 0	)	)										// so positionTracked is low
-		{																					// swingTimeRequired is +ve
-			LogIt.display("Mixer", "sequencer", "Boiler temp on the FALL ");
-			awaitFlatBurnerTemp																= 0;
-			Float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
-			if (swingTimeFloat.intValue() > positionTracked)	swingTimeRequired			= swingTimeFloat.intValue() - positionTracked;
-		}
+//		if 		(	(awaitFlat == 1				)											// Starting to heat
+//		&&			(pidBurnerOut.dTdt() > 0	)	)										// so positionTracked is high
+//		{																					// swingTimeRequired is -ve
+//			LogIt.display("Mixer", "sequencer", "Boiler temp on the RISE ");
+//			awaitFlatBurnerTemp																= 0;
+//			Float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
+//			if (swingTimeFloat.intValue() < positionTracked)	swingTimeRequired			= swingTimeFloat.intValue() - positionTracked;
+//		}
+//		else if (	(awaitFlat == -1			)											// Starting to cool
+//		&&			(pidBurnerOut.dTdt() < 0	)	)										// so positionTracked is low
+//		{																					// swingTimeRequired is +ve
+//			LogIt.display("Mixer", "sequencer", "Boiler temp on the FALL ");
+//			awaitFlatBurnerTemp																= 0;
+//			Float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
+//			if (swingTimeFloat.intValue() > positionTracked)	swingTimeRequired			= swingTimeFloat.intValue() - positionTracked;
+//		}
+		if (false) {}
 		else
 		{
 			Integer												swingTimeBurner				= pidBurnerOut.getGainD(gainD * 0.6F);
