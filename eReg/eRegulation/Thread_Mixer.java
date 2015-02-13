@@ -60,30 +60,29 @@ public class Thread_Mixer implements Runnable
 					// Inside temp is high : no need to heat (within 1 degree
 					targetTemp																	= circuit.temperatureGradient.getTempToTarget();
 					
-					float 										targetTempFloat					= ((float) this.circuit.taskActive.tempObjective - Global.thermoOutside.reading)/0.55F;
+					Integer										insideTempSpan					= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
+					Float										totalTempSpan					= insideTempSpan.floatValue()/0.55F;
 					
-					targetTemp																	= (int) targetTempFloat;
-					Integer										targetFloorIn					= (int) ( targetTempFloat * (1 - 0.17F));
+					targetTemp																	= Global.thermoOutside.reading + totalTempSpan.intValue();
+					
+					Integer										targetFloorIn					= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
+					
 					// If tempFloorIn > targetFloorIn => We are probably going to overtemp.
 					// This uses Leaking baths method to get correct temperature in LivingRoom
 					
-					//-----^------FloorOut-----^--
+					//-----^------FloorOut-----^---------   = targetTemp
 					//     |                   |
 					//    17%                  | 
 					//	   |                   |
-					//---^-v------FloorIn      |
+					//---^-v------FloorIn -----|---------   = targetFloorIn
 					//	 |                     |
-					//  27%                   100%
+					//  27%                   100%   = totalTempSpan
 					//   |                     |
 					//---v-^------LivingRoom   |
 					//     |                   |
-					//    55%                  |
+					//    55%                  |     = insideTempSpan
 					//     |                   |
 					//-----v------Outside------v--
-					
-					
-					
-					
 					
 				}
 				else if (circuit.state == circuit.CIRCUIT_STATE_RampingUp) 						// This is to accelerate rampup
