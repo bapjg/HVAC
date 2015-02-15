@@ -6,10 +6,10 @@ import HVAC_Common.Ctrl__Abstract.Ack;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thread_BackgroundTasks implements Runnable
 {
-	public static final int			SUMMER_PUMPS_Waiting			= 0;
-	public static final int			SUMMER_PUMPS_Running			= 1;
-	public static final int			SUMMER_PUMPS_FinishedToDay		= 2;
-	public static final Long		SIX_HOURS						= 6 * 60 * 60 * 1000L;
+	public static final int										SUMMER_PUMPS_Waiting		= 0;
+	public static final int										SUMMER_PUMPS_Running		= 1;
+	public static final int										SUMMER_PUMPS_FinishedToDay	= 2;
+	public static final Long									SIX_HOURS					= 6 * 60 * 60 * 1000L;
 
 	
 	public Thread_BackgroundTasks()
@@ -24,12 +24,12 @@ public class Thread_BackgroundTasks implements Runnable
 		//   Optimisation
 		//   Getting expected weather predictions
 
-		Calendars.TasksBackGround			tasksBackGround			= Global.tasksBackGround;
-		Long								pumpCleanDateLast		= Global.Date.now();						// Initialise at midnight
+		Calendars.TasksBackGround								tasksBackGround				= Global.tasksBackGround;
+		Long													pumpCleanDateLast			= Global.Date.now();						// Initialise at midnight
 		
-		Long oldD;
-		Long newD;
-		Long diffD;
+		Long 													oldD;
+		Long 													newD;
+		Long 													diffD;
 		
 	
 		

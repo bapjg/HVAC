@@ -8,67 +8,67 @@ import HVAC_Common.Ctrl_Configuration;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 abstract class Circuit_Abstract
 {
-	public static final int			CIRCUIT_TYPE_HotWater			= 0;
-	public static final int			CIRCUIT_TYPE_Gradient			= 1;
-	public static final int			CIRCUIT_TYPE_Mixer				= 2;
+	public static final int										CIRCUIT_TYPE_HotWater		= 0;
+	public static final int										CIRCUIT_TYPE_Gradient		= 1;
+	public static final int										CIRCUIT_TYPE_Mixer			= 2;
 
-	public String 					name;
-	public Integer 					type;
-	public Integer 					circuitType;
-	public Integer 					tempMax;
+	public String 												name;
+	public Integer 												type;
+	public Integer 												circuitType;
+	public Integer 												tempMax;
 
-	public Long 					rampUpTime						= 0L;
-	public Integer					tempToTrack;						// Used to recalculate ax+b;
-	public Thermometer				thermoToMonitor;					//Used with above
-	public Pump						circuitPump;
-	public Thermometer				circuitThermo;
-	
-	public Integer					state;
-	
-	public static final int			CIRCUIT_STATE_Off 				= 0;
-	public static final int			CIRCUIT_STATE_Starting 			= 1;
-	public static final int			CIRCUIT_STATE_RampingUp			= 2;
-	public static final int			CIRCUIT_STATE_Running 			= 3;
-	public static final int			CIRCUIT_STATE_Stopping	 		= 4;
-	public static final int			CIRCUIT_STATE_Optimising 		= 5;
-	public static final int			CIRCUIT_STATE_Error	 			= -1;
+	public Long 												rampUpTime					= 0L;
+	public Integer												tempToTrack;					// Used to recalculate ax+b;
+	public Thermometer											thermoToMonitor;				//Used with above
+	public Pump													circuitPump;
+	public Thermometer											circuitThermo;
+								
+	public Integer												state;
+								
+	public static final int										CIRCUIT_STATE_Off 			= 0;
+	public static final int										CIRCUIT_STATE_Starting 		= 1;
+	public static final int										CIRCUIT_STATE_RampingUp		= 2;
+	public static final int										CIRCUIT_STATE_Running 		= 3;
+	public static final int										CIRCUIT_STATE_Stopping	 	= 4;
+	public static final int										CIRCUIT_STATE_Optimising 	= 5;
+	public static final int										CIRCUIT_STATE_Error	 		= -1;
+							
+	public static final int										CIRCUIT_STATE_Suspended		= 5;
+	public static final int										CIRCUIT_STATE_Resuming 		= 6;
+	public static final int										CIRCUIT_STATE_AwaitingHeat	= 7;
+							
+	public static final int										CIRCUIT_STATE_Start_Requested	= 10;
+	public static final int										CIRCUIT_STATE_Stop_Requested	= 11;
 
-	public static final int			CIRCUIT_STATE_Suspended			= 5;
-	public static final int			CIRCUIT_STATE_Resuming 			= 6;
-	public static final int			CIRCUIT_STATE_AwaitingHeat		= 7;
+	public Mixer												mixer						= null;
+	public TemperatureGradient 									temperatureGradient			= null;				//This will be overridden
+								
+	public CircuitTask											taskActive					= null;
+								
+	public ArrayList <CircuitTask> 								circuitTaskList 			= new ArrayList <CircuitTask>();
+	public HeatRequired											heatRequired				= null;
+								
+	public Boolean												willBeSingleCircuit			= false;
 
-	public static final int			CIRCUIT_STATE_Start_Requested	= 10;
-	public static final int			CIRCUIT_STATE_Stop_Requested	= 11;
-
-	public Mixer					mixer							= null;
-	public TemperatureGradient 		temperatureGradient				= null;				//This will be overridden
-	
-	public CircuitTask				taskActive						= null;
-	
-	public ArrayList <CircuitTask> 	circuitTaskList 				= new ArrayList <CircuitTask>();
-	public HeatRequired				heatRequired					= null;
-	
-	public Boolean					willBeSingleCircuit				= false;
-
-	public Circuit_Abstract(Ctrl_Configuration.Circuit 				paramCircuit)
+	public Circuit_Abstract(Ctrl_Configuration.Circuit 			paramCircuit)
 	{
-		this.name													= paramCircuit.name;
-		this.type													= paramCircuit.type;
-//		this.friendlyName											= "";
-		this.circuitType											= paramCircuit.type;
-		this.tempMax												= paramCircuit.tempMax;
-		this.circuitPump											= Global.pumps.fetchPump(paramCircuit.pump);
-		this.circuitThermo											= Global.thermometers.fetchThermometer(paramCircuit.thermometer);
+		this.name																			= paramCircuit.name;
+		this.type																			= paramCircuit.type;
+//		this.friendlyName																	= "";
+		this.circuitType																	= paramCircuit.type;
+		this.tempMax																		= paramCircuit.tempMax;
+		this.circuitPump																	= Global.pumps.fetchPump(paramCircuit.pump);
+		this.circuitThermo																	= Global.thermometers.fetchThermometer(paramCircuit.thermometer);
 
 		if (this.circuitPump == null)			System.out.println("Circuit.Constructor : " + name + " invalid pump " + paramCircuit.pump);
 		if (this.circuitThermo == null)			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + paramCircuit.thermometer);
 		
-		this.state													= CIRCUIT_STATE_Off;
-		this.heatRequired											= null;
+		this.state																			= CIRCUIT_STATE_Off;
+		this.heatRequired																	= null;
 	}
 	public void addCircuitTask(Ctrl_Calendars.Calendar 				paramCalendar)
 	{
-		CircuitTask 	circuitTaskItem 							= new CircuitTask(paramCalendar);
+		CircuitTask 	circuitTaskItem 													= new CircuitTask(paramCalendar);
 		circuitTaskList.add(circuitTaskItem);
 	}
 	public Long getRampUpTime(Integer tempObjective) 				{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
@@ -77,15 +77,15 @@ abstract class Circuit_Abstract
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
-		this.state													= CIRCUIT_STATE_Start_Requested;
-		this.heatRequired											= new HeatRequired();
+		this.state																			= CIRCUIT_STATE_Start_Requested;
+		this.heatRequired																	= new HeatRequired();
 	}
 	public void start(CircuitTask 									thisTask)
 	{
 		LogIt.action(this.name, "Start called with circuitTask");
-		this.taskActive												= thisTask;
-		this.state													= CIRCUIT_STATE_Start_Requested;
-		this.heatRequired											= new HeatRequired();
+		this.taskActive																		= thisTask;
+		this.state																			= CIRCUIT_STATE_Start_Requested;
+		this.heatRequired																	= new HeatRequired();
 	}
 	public void stop()
 	{
@@ -93,8 +93,8 @@ abstract class Circuit_Abstract
 		//   1. Time is up : 					Detected/Called by Circuit_Abstract.scheduleTask
 		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
 		LogIt.action(this.name, "Stop called");
-		this.state													= CIRCUIT_STATE_Stop_Requested;
-		this.heatRequired											= null;
+		this.state																			= CIRCUIT_STATE_Stop_Requested;
+		this.heatRequired																	= null;
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 	}
 //	public void optimise()
@@ -107,28 +107,28 @@ abstract class Circuit_Abstract
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
-		this.state													= CIRCUIT_STATE_Off;
-		this.heatRequired											= null;
-//		this.taskActive.active										= false; // What happens if the task has been switched to a new one
+		this.state																			= CIRCUIT_STATE_Off;
+		this.heatRequired																	= null;
+//		this.taskActive.active																= false; // What happens if the task has been switched to a new one
 		taskDeactivate(this.taskActive);
 	}
 	public void interupt()
 	{
 //		LogIt.action(this.name, "closing down");
-//		this.state													= CIRCUIT_STATE_Off;
-//		this.heatRequired											= null;
-//		this.taskActive.state										= this.taskActive.TASK_STATE_Completed; // What happens if the task has been switched to a new one
-//		this.taskActive												= null;
+//		this.state																			= CIRCUIT_STATE_Off;
+//		this.heatRequired																	= null;
+//		this.taskActive.state																= this.taskActive.TASK_STATE_Completed; // What happens if the task has been switched to a new one
+//		this.taskActive																		= null;
 	}
 	public void suspend()
 	{
 		LogIt.action(this.name, "Suspend called");
-		this.state													= CIRCUIT_STATE_Suspended;
-	}
-	public void resume()
-	{
-		LogIt.action(this.name, "Resume called");
-		this.state													= CIRCUIT_STATE_Resuming;
+		this.state																			= CIRCUIT_STATE_Suspended;
+	}						
+	public void resume()						
+	{						
+		LogIt.action(this.name, "Resume called");						
+		this.state																			= CIRCUIT_STATE_Resuming;
 	}
 	public void taskActivate(CircuitTask 							thisTask)
 	{
@@ -136,36 +136,32 @@ abstract class Circuit_Abstract
 
 		if (this.taskActive == null)
 		{
-			this.taskActive											= thisTask;
+			this.taskActive																	= thisTask;
 			this.start();
-			this.taskActive.dateLastRun								= Global.Date.now();
+			this.taskActive.dateLastRun														= Global.Date.now();
 		}
 		else
 		{
 			if (taskActive == thisTask)
 			{
 				LogIt.error("Circuit_Abstract", "taskActivate", "WOULD HAVE SAID : A task is active when it shouldn't be");
+				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
 			}
 			else
 			{
 				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
+				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is occupied... Replaced");
 			}
+			this.taskActive																	= thisTask;
+			this.start();						
+			this.taskActive.dateLastRun														= Global.Date.now();
 		}
 	}
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
 		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated ");
-//		thisTask.active												= false;
-//		for (CircuitTask aTask : this.circuitTaskList)
-//		{
-//			if (aTask.active)
-//			{
-//				LogIt.error("Circuit_Abstract", "taskDeactivate", "A task is active when it shouldn't be");
-//				aTask.active										= false;
-//			}
-//		}
-		this.taskActive.dateLastRun									= Global.Date.now();
-		this.taskActive												= null;
+		this.taskActive.dateLastRun															= Global.Date.now();
+		this.taskActive																		= null;
 	}
 	public void scheduleTask()
 	{
@@ -183,10 +179,10 @@ abstract class Circuit_Abstract
 		 *   - A new, unplanned, task may have been added (through user decision)
 		 *   - Normal running, the nextTask has been scheduled to run, and the next one must be found
 		 */
-		String 					day 								= Global.Date.getDayOfWeek(0);				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
-		Long 					now									= Global.Time.now();
-		Long 					today								= Global.Date.now();
-		CircuitTask				taskFound							= null;
+		String 												day 							= Global.Date.getDayOfWeek(0);				// day = 1 Monday ... day = 7 Sunday// Sunday = 7, Monday = 1, Tues = 2 ... Sat = 6
+		Long 												now								= Global.Time.now();
+		Long 												today							= Global.Date.now();
+		CircuitTask											taskFound						= null;
 		
 		// Stop activeTask
 		
@@ -234,7 +230,7 @@ abstract class Circuit_Abstract
 					// We can swap this task in
 					if (taskFound == null)
 					{
-						taskFound								= circuitTask;
+						taskFound															= circuitTask;
 					}
 					else if (circuitTask.timeStart > taskFound.timeStart)
 					{
@@ -242,7 +238,7 @@ abstract class Circuit_Abstract
 						// circuitTask should start later
 						// This can happen either by error (overlapping calendars)
 						// or due to rampUp : circuitTask planned to run later but we will start now to ramp up
-						taskFound								= circuitTask;
+						taskFound															= circuitTask;
 					}
 				}
 			}
