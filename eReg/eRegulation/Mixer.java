@@ -49,6 +49,8 @@ public class Mixer
 	public static final int							MIXER_STATE_Moving_Idle					= 6;
 
 	public Long										timeToStop;
+	
+	public float									lastBoilerDTdt							= 0;
 
  	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
     {
@@ -201,9 +203,23 @@ public class Mixer
 			burnerPower.startMovement														= false;
 			LogIt.pidData(burnerPower);
 		}
+
 		
-		int														awaitFlat					= awaitFlatBurnerTemp;
+		float													thisBoilerDTdt				= Global.thermoBoilerOut.pidControler.dTdt();
 		
+		if ((lastBoilerDTdt < 0) && (thisBoilerDTdt > 0))									// boiler was cooling, now heating
+		{
+			Float												swingTimeRequiredFloat		= - positionTracked.floatValue() * 0.5F;
+			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
+		}
+		else
+		{
+			swingTimeRequired																= 0;
+		}
+		lastBoilerDTdt																		= thisBoilerDTdt;
+		
+//		int														awaitFlat					= awaitFlatBurnerTemp;
+//		
 //		if 		(	(awaitFlat == 1				)											// Starting to heat
 //		&&			(pidBurnerOut.dTdt() > 0	)	)										// so positionTracked is high
 //		{																					// swingTimeRequired is -ve
@@ -220,8 +236,12 @@ public class Mixer
 //			Float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
 //			if (swingTimeFloat.intValue() > positionTracked)	swingTimeRequired			= swingTimeFloat.intValue() - positionTracked;
 //		}
-		if (false) {}
-		else
+
+		
+		
+		
+		
+		if (swingTimeRequired == 0)
 		{
 			Integer												swingTimeBurner				= pidBurnerOut.getGainD(gainD * 0.6F);
 //			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
