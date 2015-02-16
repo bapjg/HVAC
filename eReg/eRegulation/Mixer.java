@@ -209,7 +209,7 @@ public class Mixer
 		
 		if ((lastBoilerDTdt < 0) && (thisBoilerDTdt > 0))									// boiler was cooling, now heating
 		{
-			Float												swingTimeRequiredFloat		= - positionTracked.floatValue() * 0.5F;
+			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.5F;
 			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
 		}
 		else
