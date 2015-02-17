@@ -211,7 +211,7 @@ public class Mixer
 		{
 			// 50% : Too much as it takes the rest of the cycle to catch up and often overshoots
 			// 10% : Try it
-			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.1F;
+			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.25F;
 			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
 		}
 		else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))									// boiler was heating, now cooling
@@ -222,7 +222,8 @@ public class Mixer
 		{
 			swingTimeRequired																= 0;
 		}
-		lastBoilerDTdt																		= thisBoilerDTdt;
+		if (thisBoilerDTdt != 0)
+			lastBoilerDTdt																	= thisBoilerDTdt;
 		
 //		int														awaitFlat					= awaitFlatBurnerTemp;
 //		
