@@ -2,6 +2,7 @@ package eRegulation;
 
 import java.util.ArrayList;
 
+import HVAC_Common.CIRCUIT;
 import HVAC_Common.Ctrl_Calendars;
 import HVAC_Common.Ctrl_Configuration;
 
@@ -24,6 +25,7 @@ abstract class Circuit_Abstract
 	public Thermometer											circuitThermo;
 								
 	public Integer												state;
+	public CIRCUIT.STATE										stateNew;
 								
 	public static final int										CIRCUIT_STATE_Off 			= 0;
 	public static final int										CIRCUIT_STATE_Starting 		= 1;
@@ -54,7 +56,6 @@ abstract class Circuit_Abstract
 	{
 		this.name																			= paramCircuit.name;
 		this.type																			= paramCircuit.type;
-//		this.friendlyName																	= "";
 		this.circuitType																	= paramCircuit.type;
 		this.tempMax																		= paramCircuit.tempMax;
 		this.circuitPump																	= Global.pumps.fetchPump(paramCircuit.pump);
@@ -134,7 +135,7 @@ abstract class Circuit_Abstract
 	{
 		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated ");
 
-		if (this.taskActive == null)
+		if (this.taskActive == null)														// Normal operation
 		{
 			this.taskActive																	= thisTask;
 			this.start();
@@ -142,12 +143,12 @@ abstract class Circuit_Abstract
 		}
 		else
 		{
-			if (taskActive == thisTask)
+			if (taskActive == thisTask)														// Could arise (???) during rampUp
 			{
 				LogIt.error("Circuit_Abstract", "taskActivate", "WOULD HAVE SAID : A task is active when it shouldn't be");
 				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
 			}
-			else
+			else																			// Dont know how
 			{
 				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
 				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is occupied... Replaced");
@@ -199,8 +200,6 @@ abstract class Circuit_Abstract
 		}
 
 		// Go through all task entries for this circuit
-		
-		
 		
 		for (CircuitTask circuitTask : circuitTaskList) 													// Go through all tasks
 		{	

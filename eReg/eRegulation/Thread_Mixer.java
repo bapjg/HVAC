@@ -58,7 +58,7 @@ public class Thread_Mixer implements Runnable
 				{
 					// Must replace by PID
 					// Inside temp is high : no need to heat (within 1 degree
-					targetTemp																	= circuit.temperatureGradient.getTempToTarget();
+//					targetTemp																	= circuit.temperatureGradient.getTempToTarget();
 					
 					Integer										insideTempSpan					= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
 					Float										totalTempSpan					= insideTempSpan.floatValue()/0.55F;
@@ -104,11 +104,11 @@ public class Thread_Mixer implements Runnable
 				// Thereafter, if projected temperature is out of bound, the loop stops and the PID reactivated for recalculation
 				for (i = 0; (i < indexProject) && (! Global.stopNow); i++)
 				{
-					Global.waitSeconds(5);														// indexWait loops of 5s
+					Global.waitSeconds(5);													// indexWait loops of 5s
 						
 					tempNow																	= Global.thermoFloorOut.readUnCached();
 					
-					if (i >= indexDelay)														// We have waited for dTdt to settle a bit
+					if (i >= indexDelay)													// We have waited for dTdt to settle a bit
 					{
 						temperatureProjected												= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProjectInSeconds)).intValue();
 						
@@ -117,14 +117,6 @@ public class Thread_Mixer implements Runnable
 						
 						Long 									timeNow 					= Global.DateTime.now();
 						Float 									timeProjected 				=  (targetTemp - tempNow)/Global.thermoFloorOut.pidControler.dTdt();
-						if (timeProjected < 0)
-						{
-							// LogIt.display("Thread_Mixer", "sequencer", "---Houston we have a problem--- the gap is widening");
-						}
-						else if (timeProjected > indexProject) //Rubbish
-						{
-							// LogIt.display("Thread_Mixer", "sequencer", "---Houston we should have saved the previous value---");
-						}
 						
 						if (Math.abs(temperatureProjected - targetTemp) > mixer.marginProjection)		// More than 2 degrees difference (either over or under)
 						{

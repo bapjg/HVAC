@@ -181,7 +181,7 @@ public class Control
 
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{
-				circuit.scheduleTask();
+				circuit.scheduleTask();					// In Circuit_Abstract
 				circuit.sequencer();
 				if (circuit.heatRequired != null)
 				{

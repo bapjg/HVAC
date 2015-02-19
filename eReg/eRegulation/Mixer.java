@@ -101,7 +101,7 @@ public class Mixer
 		//
 		allOff();
 		PID 													pidFloorOut					= Global.thermoFloorOut.pidControler;
-		PID 													pidBurnerOut				= Global.thermoBoilerOut.pidControler;
+		PID 													pidBurner					= Global.thermoBoiler.pidControler;
 		MixerMove_Report 										report;
 		
 		
@@ -205,7 +205,7 @@ public class Mixer
 		}
 
 		
-		float													thisBoilerDTdt				= Global.thermoBoilerOut.pidControler.dTdt();
+		float													thisBoilerDTdt				= pidBurner.dTdt();
 		
 		if ((lastBoilerDTdt < 0) && (thisBoilerDTdt > 0))									// boiler was cooling, now heating
 		{
@@ -222,35 +222,11 @@ public class Mixer
 		{
 			swingTimeRequired																= 0;
 		}
-		if (thisBoilerDTdt != 0)
-			lastBoilerDTdt																	= thisBoilerDTdt;
-		
-//		int														awaitFlat					= awaitFlatBurnerTemp;
-//		
-//		if 		(	(awaitFlat == 1				)											// Starting to heat
-//		&&			(pidBurnerOut.dTdt() > 0	)	)										// so positionTracked is high
-//		{																					// swingTimeRequired is -ve
-//			LogIt.display("Mixer", "sequencer", "Boiler temp on the RISE ");
-//			awaitFlatBurnerTemp																= 0;
-//			Float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
-//			if (swingTimeFloat.intValue() < positionTracked)	swingTimeRequired			= swingTimeFloat.intValue() - positionTracked;
-//		}
-//		else if (	(awaitFlat == -1			)											// Starting to cool
-//		&&			(pidBurnerOut.dTdt() < 0	)	)										// so positionTracked is low
-//		{																					// swingTimeRequired is +ve
-//			LogIt.display("Mixer", "sequencer", "Boiler temp on the FALL ");
-//			awaitFlatBurnerTemp																= 0;
-//			Float												swingTimeFloat				= swingTime.floatValue() * 0.5F;
-//			if (swingTimeFloat.intValue() > positionTracked)	swingTimeRequired			= swingTimeFloat.intValue() - positionTracked;
-//		}
-
-		
-		
-		
+		if (thisBoilerDTdt != 0)								lastBoilerDTdt				= thisBoilerDTdt;
 		
 		if (swingTimeRequired == 0)
 		{
-			Integer												swingTimeBurner				= pidBurnerOut.getGainD(gainD * 0.6F);
+//			Integer												swingTimeBurner				= pidBurner.getGainD(gainD * 0.6F);
 //			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
 			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI);						// 08/02/2015				// returns a swingTime in milliseconds
 		}
