@@ -285,13 +285,6 @@ public class Mixer
 					report																	= mixerMoveUp(swingTimeRequired);
 					positionTracked															= this.swingTime;					
 		 		}
-//				else if (positionTracked < swingUsableMin)		doesnt work when low temp required
-//				{
-//					// We need to get back into the linear range
-//					swingTimeRequired														= (swingUsableMin - positionTracked) + swingTimeRequired;
-//					report																	= mixerMoveUp(swingTimeRequired);
-//					positionTracked															= report.positionTracked;
-//				}
 				else																					// Normal operating
 				{
 					report																	= mixerMoveUp(swingTimeRequired);
@@ -311,13 +304,6 @@ public class Mixer
 					report																	= mixerMoveDown(swingTimeRequired);
 					positionTracked															= 0;					
 		 		}
-//				else if (positionTracked > swingUsableMax)			// Try without this
-//				{
-//					// We need to get back into the linear range							           90000  - 95000 (-ve)      + (-ve) = larger (-ve)     	
-//					swingTimeRequired														= (swingUsableMax - positionTracked) + swingTimeRequired;
-//					report																	= mixerMoveDown(swingTimeRequired);
-//					positionTracked															= report.positionTracked;
-//				}
 				else																					// Normal operating
 				{
 					report																	= mixerMoveDown(swingTimeRequired);
