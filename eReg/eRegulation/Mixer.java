@@ -190,7 +190,7 @@ public class Mixer
 			burnerPower.gainProportional													= pidFloorOut.getGainP(gainP);
 			burnerPower.gainDifferential													= pidFloorOut.getGainD(gainD);
 			burnerPower.gainIntegral														= pidFloorOut.getGainI(gainI);
-			
+
 			burnerPower.kP																	= -111F;
 			burnerPower.kD																	= -111F;
 			burnerPower.kI																	= -111F;
