@@ -140,7 +140,7 @@ public class Mixer
 			
 			lastBurnerAction																= Global.burner.lastSwitchedOn;
 			awaitFlatBurnerTemp																= 1;
-			System.out.println("timeLastSwitchedON : " + (Global.burner.lastSwitchedOn));
+//			System.out.println("timeLastSwitchedON : " + (Global.burner.lastSwitchedOn));
 			
 			
 			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
@@ -175,7 +175,7 @@ public class Mixer
 			
 			lastBurnerAction																= Global.burner.lastSwitchedOff;
 			awaitFlatBurnerTemp																= -1;
-			System.out.println("timeLastSwitchedOff : " + (Global.burner.lastSwitchedOn));
+//			System.out.println("timeLastSwitchedOff : " + (Global.burner.lastSwitchedOff));
 			
 			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
 			
@@ -211,7 +211,7 @@ public class Mixer
 		{
 			// 50% : Too much as it takes the rest of the cycle to catch up and often overshoots
 			// 10% : Try it
-			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.25F;
+			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.30F;
 			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
 		}
 		else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))									// boiler was heating, now cooling
