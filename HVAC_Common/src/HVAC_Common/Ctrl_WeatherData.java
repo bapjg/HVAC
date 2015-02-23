@@ -131,19 +131,22 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 			}
 			else
 			{
-				System.out.println ("Error response from http : " + responseCode);
+				// System.out.println ("Error response from http : " + responseCode); Do nothing, just try later
+				this.dateTimeObtained													= null;
+				this.forecasts															= null;
+				return;	// Will try again in 5 mins (loop timer)
 			}
 		} 
 		catch (SocketTimeoutException eTO) 
 		{
-			System.out.println("Ctrl_WeatherData/Constructor timeout contacting the weather server, will try later");
+//			System.out.println("Ctrl_WeatherData/Constructor timeout contacting the weather server, will try later");
 			this.dateTimeObtained													= null;
 			this.forecasts															= null;
 			return;	// Will try again in 5 mins (loop timer)
 		}
 		catch (Exception e) 
 		{
-			System.out.println("Ctrl_WeatherData/Constructor error on contacting the weather server" + e.toString());
+//			System.out.println("Ctrl_WeatherData/Constructor error on contacting the weather server" + e.toString());
 			e.printStackTrace();
 			this.dateTimeObtained													= null;
 			this.forecasts															= null;
