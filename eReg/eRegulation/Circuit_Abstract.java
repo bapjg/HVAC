@@ -203,9 +203,7 @@ abstract class Circuit_Abstract
 		
 		for (CircuitTask circuitTask : circuitTaskList) 													// Go through all tasks
 		{	
-			if (	(  circuitTask.days.contains(day)	) 
-//			&& 		(! circuitTask.active				)	   )
-					)
+			if (circuitTask.days.contains(day)) 
 			{
 				// This circuitTask must run today and is not active
 				// - It can already have run and finished
@@ -225,6 +223,9 @@ abstract class Circuit_Abstract
 				&& 			(  circuitTask.timeEnd > now													)   					// and time End is future
 				&&			(! circuitTask.dateLastRun.equals(today)										)		)				// and the last run wasn't today					
 				{
+					LogIt.display("Circuit_Abstract", "scheduleTask", this.name + " has been found and is candidate for activation " + taskFound.timeStartDisplay);
+					LogIt.display("Circuit_Abstract", "scheduleTask", " and rampupTime is " + this.getRampUpTime(circuitTask.tempObjective));
+
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
 					if (taskFound == null)
