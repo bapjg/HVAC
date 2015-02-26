@@ -239,6 +239,10 @@ abstract class Circuit_Abstract
 						// or due to rampUp : circuitTask planned to run later but we will start now to ramp up
 						taskFound															= circuitTask;
 					}
+					else
+					{
+						LogIt.display("Circuit_Abstract", "scheduleTask", this.name + " Task should activate " + taskFound.timeStartDisplay);
+					}
 				}
 			}
 		}
