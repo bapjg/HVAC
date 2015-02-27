@@ -223,7 +223,7 @@ abstract class Circuit_Abstract
 				&& 			(  circuitTask.timeEnd > now													)   					// and time End is future
 				&&			(! circuitTask.dateLastRun.equals(today)										)		)				// and the last run wasn't today					
 				{
-					LogIt.display("Circuit_Abstract", "scheduleTask", this.name + " has been found and is candidate for activation " + taskFound.timeStartDisplay);
+					LogIt.display("Circuit_Abstract", "scheduleTask", this.name + " has been found and is candidate for activation " + circuitTask.timeStartDisplay);
 					LogIt.display("Circuit_Abstract", "scheduleTask", " and rampupTime is " + this.getRampUpTime(circuitTask.tempObjective));
 
 					// This task should be run : start is past and end is the future
