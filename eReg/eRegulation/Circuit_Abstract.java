@@ -230,6 +230,9 @@ abstract class Circuit_Abstract
 				{
 					LogIt.display("Circuit_Abstract", "scheduleTask", this.name + " has been found and is candidate for activation " + circuitTask.timeStartDisplay);
 					LogIt.display("Circuit_Abstract", "scheduleTask", " and rampupTime is " + this.getRampUpTime(circuitTask.tempObjective));
+					LogIt.display("Circuit_Abstract", "scheduleTask", " now                                           : " + now);
+					LogIt.display("Circuit_Abstract", "scheduleTask", " circuitTask.timeStart                         : " + circuitTask.timeStart);
+					LogIt.display("Circuit_Abstract", "scheduleTask", " this.getRampUpTime(circuitTask.tempObjective) : " + this.getRampUpTime(circuitTask.tempObjective));
 
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
