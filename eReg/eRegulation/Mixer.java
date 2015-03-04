@@ -229,6 +229,17 @@ public class Mixer
 //			Integer												swingTimeBurner				= pidBurner.getGainD(gainD * 0.6F);
 //			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
 			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI);						// 08/02/2015				// returns a swingTime in milliseconds
+
+			if (pidFloorOut.getGain(gainP, gainD, gainI) != pidFloorOut.getGainP(gainP) + pidFloorOut.getGainD(gainD))
+			{
+				LogIt.display("Mixer", "sequencer", "Gain Calculations different, Standard : " + pidFloorOut.getGain(gainP, gainD, gainI) + "Detailed : " + pidFloorOut.getGainP(gainP) + pidFloorOut.getGainD(gainD));
+			}
+			
+			Integer												swingTimeMixerP				= pidFloorOut.getGainP(gainP);
+			Integer												swingTimeMixerD				= pidFloorOut.getGainD(gainD * 0.0F);
+			Integer												swingTimeBurnerD			= pidFloorOut.getGainD(gainD * 1.0F);
+		
+			swingTimeRequired																= swingTimeMixerP + swingTimeMixerD + swingTimeBurnerD;
 		}
 
 		if (tempFloorOut > 50000)
