@@ -211,7 +211,9 @@ public class Mixer
 		{
 			// 50% : Too much as it takes the rest of the cycle to catch up and often overshoots
 			// 10% : Try it
-			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.30F;
+			// 30% : Still overshoot with use of burnerPid unadjusted for position.
+			// Try 50% again with position adjusted burnerPid
+			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.50F;
 			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
 		}
 		else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))									// boiler was heating, now cooling
@@ -235,9 +237,11 @@ public class Mixer
 				LogIt.display("Mixer", "sequencer", "Gain Calculations different, Standard : " + pidFloorOut.getGain(gainP, gainD, gainI) + "Detailed : " + pidFloorOut.getGainP(gainP) + pidFloorOut.getGainD(gainD));
 			}
 			
+			Float												swingProportion				= positionTracked.floatValue()/swingTime.floatValue();
+			
 			Integer												swingTimeMixerP				= pidFloorOut.getGainP(gainP);
 			Integer												swingTimeMixerD				= pidFloorOut.getGainD(gainD * 0.0F);
-			Integer												swingTimeBurnerD			= pidFloorOut.getGainD(gainD * 1.0F);
+			Integer												swingTimeBurnerD			= pidFloorOut.getGainD(gainD * 1.0F * swingProportion);
 		
 			swingTimeRequired																= swingTimeMixerP + swingTimeMixerD + swingTimeBurnerD;
 		}
