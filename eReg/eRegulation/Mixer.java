@@ -36,9 +36,6 @@ public class Mixer
 	public Relay												mixerUp;
 	public Relay												mixerDown;
 	
-	public Long													lastBurnerAction			= 0L;
-	public Integer												awaitFlatBurnerTemp			= 0;
-	
 	public Integer									state									= 0;
 	public static final int							MIXER_STATE_Off 						= 0;
 	public static final int							MIXER_STATE_Normal_Operating			= 1;
@@ -51,6 +48,8 @@ public class Mixer
 	public Long										timeToStop;
 	
 	public float									lastBoilerDTdt							= 0;
+	public enum										BOILER_State							{normalOperating, maxReached, minReached};
+	public BOILER_State								boilerState								= BOILER_State.normalOperating;
 
  	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
     {
@@ -134,91 +133,26 @@ public class Mixer
 		
 //		if (	(Global.burner.lastSwitchedOn != null) 
 //		&& 		(Global.burner.lastSwitchedOn + 15000L > Global.DateTime.now())	)
-		if 		(Global.burner.lastSwitchedOn > lastBurnerAction)	
-		{
-			// burner has been switched on since last Sequence
-			
-			lastBurnerAction																= Global.burner.lastSwitchedOn;
-			awaitFlatBurnerTemp																= 1;
-//			System.out.println("timeLastSwitchedON : " + (Global.burner.lastSwitchedOn));
-			
-			
-			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
-			
-			burnerPower.target																= targetTemp;
-			burnerPower.tempCurrent															= pidFloorOut.tempCurrent();
-			burnerPower.tempCurrentError													= pidFloorOut.tempCurrentError();
-			
-			burnerPower.termProportional													= - pidFloorOut.getGainP(1F);
-			burnerPower.termDifferential													= - pidFloorOut.getGainD(1F);
-			burnerPower.termIntegral														= - pidFloorOut.getGainI(1F);
-
-			burnerPower.gainProportional													= pidFloorOut.getGainP(gainP);
-			burnerPower.gainDifferential													= pidFloorOut.getGainD(gainD);
-			burnerPower.gainIntegral														= pidFloorOut.getGainI(gainI);
-			
-			burnerPower.kP																	= 111F;
-			burnerPower.kD																	= 111F;
-			burnerPower.kI																	= 111F;
-			
-			burnerPower.gainTotal															= 0;
-			burnerPower.tempOut																= Global.thermoFloorOut.reading;
-			burnerPower.tempBoiler															= Global.thermoBoiler.reading;
-			
-			burnerPower.positionTracked														= positionTracked;
-			burnerPower.startMovement														= false;
-			LogIt.pidData(burnerPower);
-		}
-		if (Global.burner.lastSwitchedOff > lastBurnerAction)
-		{
-			// burner has been switched on since last Sequence
-			
-			lastBurnerAction																= Global.burner.lastSwitchedOff;
-			awaitFlatBurnerTemp																= -1;
-//			System.out.println("timeLastSwitchedOff : " + (Global.burner.lastSwitchedOff));
-			
-			Rpt_PID.Update										burnerPower					= (new Rpt_PID()).new Update();
-			
-			burnerPower.target																= targetTemp;
-			burnerPower.tempCurrent															= pidFloorOut.tempCurrent();
-			burnerPower.tempCurrentError													= pidFloorOut.tempCurrentError();
-			
-			burnerPower.termProportional													= - pidFloorOut.getGainP(1F);
-			burnerPower.termDifferential													= - pidFloorOut.getGainD(1F);
-			burnerPower.termIntegral														= - pidFloorOut.getGainI(1F);
-
-			burnerPower.gainProportional													= pidFloorOut.getGainP(gainP);
-			burnerPower.gainDifferential													= pidFloorOut.getGainD(gainD);
-			burnerPower.gainIntegral														= pidFloorOut.getGainI(gainI);
-
-			burnerPower.kP																	= -111F;
-			burnerPower.kD																	= -111F;
-			burnerPower.kI																	= -111F;
-			
-			burnerPower.gainTotal															= 0;
-			burnerPower.tempOut																= Global.thermoFloorOut.reading;
-			burnerPower.tempBoiler															= Global.thermoBoiler.reading;
-			
-			burnerPower.positionTracked														= positionTracked;
-			burnerPower.startMovement														= false;
-			LogIt.pidData(burnerPower);
-		}
-
 		
 		float													thisBoilerDTdt				= pidBurner.dTdt();
 		
 		if ((lastBoilerDTdt < 0) && (thisBoilerDTdt > 0))									// boiler was cooling, now heating
 		{
+			// Have reached minimum, boilerTemp will now increase
+			
 			// 50% : Too much as it takes the rest of the cycle to catch up and often overshoots
 			// 10% : Try it
 			// 30% : Still overshoot with use of burnerPid unadjusted for position.
 			// Try 50% again with position adjusted burnerPid
-			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.50F;
+			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.30F;
 			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
+			
+			boilerState																		= BOILER_State.minReached;
 		}
 		else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))									// boiler was heating, now cooling
 		{
 			swingTimeRequired																= 0;
+			boilerState																		= BOILER_State.maxReached;
 		}
 		else
 		{
@@ -281,6 +215,21 @@ public class Mixer
 			
 			messageBefore.positionTracked													= positionTracked;
 			messageBefore.startMovement														= true;
+			
+			if (swingTimeRequired > 0)		// Moving hotter
+			{
+				switch (boilerState)
+				{
+				case minReached:															// This is to inhibit mixer moving hotter until warmer boiler water has filtered through
+					if (pidFloorOut.dTdt() > 0F)				boilerState 				= BOILER_State.normalOperating;		// BoilerWarming has reached floorOut which is now warming
+					else										swingTimeRequired			= 0;								// FloorOut is still cooling, hold back
+					break;
+				case maxReached:
+				case normalOperating:
+				default:
+					break;
+				}
+			}
 			
 			if (swingTimeRequired > 0)		// Moving hotter
 			{
