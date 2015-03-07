@@ -110,6 +110,7 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 		StringBuffer 								response_msg 					= new StringBuffer();
 		InputStream									response_xml					= null;
 		String										string_xml						= null;
+		
 		//=====================================================================
 		//
 		// Get an xml version of the forecast from the net
@@ -131,24 +132,22 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 			}
 			else
 			{
-				// System.out.println ("Error response from http : " + responseCode); Do nothing, just try later
-				this.dateTimeObtained													= null;
-				this.forecasts															= null;
-				return;	// Will try again in 5 mins (loop timer)
+				this.dateTimeObtained												= null;
+				this.forecasts														= null;
+				return;																// Will try again in 5 mins (loop timer)
 			}
 		} 
 		catch (SocketTimeoutException eTO) 
 		{
 			this.dateTimeObtained													= null;
 			this.forecasts															= null;
-			return;	// Will try again in 5 mins (loop timer)
+			return;																	// Will try again in 5 mins (loop timer)
 		}
-		catch (Exception e) 
+		catch (Exception e) 														//	This can happen for a variety of reasons, just try again in 5 mins
 		{
-//			This can happen for a variety of reasons, just try again in 5 mins
 			this.dateTimeObtained													= null;
 			this.forecasts															= null;
-			return;	// Will try again in 5 mins (loop timer)
+			return;																	// Will try again in 5 mins (loop timer)
 		}
 		//
 		//=====================================================================
