@@ -48,8 +48,7 @@ public class Mixer
 	public Long										timeToStop;
 	
 	public float									lastBoilerDTdt							= 0;
-	public enum										BOILER_State							{normalOperating, maxReached, minReached};
-	public BOILER_State								boilerState								= BOILER_State.normalOperating;
+	public STATES.boiler							boilerState								= STATES.boiler.normalOperating;
 
  	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
     {
@@ -147,12 +146,12 @@ public class Mixer
 			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.30F;
 			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
 			
-			boilerState																		= BOILER_State.minReached;
+			boilerState																		= STATES.boiler.minReached;
 		}
 		else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))									// boiler was heating, now cooling
 		{
 			swingTimeRequired																= 0;
-			boilerState																		= BOILER_State.maxReached;
+			boilerState																		= STATES.boiler.maxReached;
 		}
 		else
 		{
@@ -221,7 +220,7 @@ public class Mixer
 				switch (boilerState)
 				{
 				case minReached:															// This is to inhibit mixer moving hotter until warmer boiler water has filtered through
-					if (pidFloorOut.dTdt() > 0F)				boilerState 				= BOILER_State.normalOperating;		// BoilerWarming has reached floorOut which is now warming
+					if (pidFloorOut.dTdt() > 0F)				boilerState 				= STATES.boiler.normalOperating;		// BoilerWarming has reached floorOut which is now warming
 					else										swingTimeRequired			= 0;								// FloorOut is still cooling, hold back
 					break;
 				case maxReached:
