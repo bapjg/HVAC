@@ -139,15 +139,13 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 		} 
 		catch (SocketTimeoutException eTO) 
 		{
-//			System.out.println("Ctrl_WeatherData/Constructor timeout contacting the weather server, will try later");
 			this.dateTimeObtained													= null;
 			this.forecasts															= null;
 			return;	// Will try again in 5 mins (loop timer)
 		}
 		catch (Exception e) 
 		{
-//			System.out.println("Ctrl_WeatherData/Constructor error on contacting the weather server" + e.toString());
-			e.printStackTrace();
+//			This can happen for a variety of reasons, just try again in 5 mins
 			this.dateTimeObtained													= null;
 			this.forecasts															= null;
 			return;	// Will try again in 5 mins (loop timer)
