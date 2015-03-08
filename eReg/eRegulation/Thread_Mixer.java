@@ -87,11 +87,11 @@ public class Thread_Mixer implements Runnable
 				}
 				else if (circuit.state == circuit.CIRCUIT_STATE_RampingUp) 						// This is to accelerate rampup
 				{
-					targetTemp																	= 43000;						// Trip avoidance kicks in at 450
+					targetTemp																	= 41000;						// Trip avoidance kicks in at 450
 				}
 				else
 				{
-					targetTemp																	= circuit.temperatureGradient.getTempToTarget();
+					targetTemp																	= circuit.temperatureGradient.getTempToTarget();  //Loi d'eau
 				}
 				
 				this.mixer.sequencer(targetTemp);
