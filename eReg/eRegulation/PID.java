@@ -106,14 +106,14 @@ public class PID
     }
     public Integer tempCurrent() 
     {
-    	Integer												indexCurrent					= (indexEnqueue - 1 + pidDepth) % pidDepth;
-    	Integer												current							= entries[indexCurrent].item;
+    	Integer													indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer													current						= entries[indexCurrent].item;
     	return current;
     }
     public Integer tempCurrentError() 
     {
-    	Integer												indexCurrent					= (indexEnqueue - 1 + pidDepth) % pidDepth;
-    	Integer												currentError					= entries[indexCurrent].item - target;
+    	Integer													indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
+    	Integer													currentError				= entries[indexCurrent].item - target;
     	return currentError;
     }
     public Integer getGainP(Float kP) 
@@ -127,9 +127,7 @@ public class PID
     }
     public Integer getGainD(Float kD) 
     {
-    	Integer		indexCurrent															= (indexEnqueue - 1 + pidDepth) % pidDepth;
-    	Integer		indexPrevious															= (indexEnqueue - 2 + pidDepth) % pidDepth;
-       	Float 		differential 															= 0F;
+       	Float 													differential 				= 0F;
        	
     	if (count <= 1)
     	{
@@ -139,7 +137,30 @@ public class PID
     	{
     		//Units of differential are millidegrees/second
     		//Units of kD are seconds x milliseconds/milliDegrees
-    		Long 	deltaTimeStamps 														= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
+        	Integer												indexCurrent				= (indexEnqueue - 1 + pidDepth) % pidDepth;
+        	Integer												indexPrevious				= (indexEnqueue - 2 + pidDepth) % pidDepth;
+    		Long 												deltaTimeStamps 			= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
+    		differential																	= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
+    	}
+       	// units of getGainD are ms
+    	Float		getGainD																=  - (kD * differential);
+       	return 		getGainD.intValue();
+    }
+    public Integer getGainD(Float kD, int depth) 
+    {
+       	Float 		differential 															= 0F;
+       	
+    	if (count <= depth + 1)
+    	{
+    		differential 																	= 0F;
+    	}
+    	else
+    	{
+    		//Units of differential are millidegrees/second
+    		//Units of kD are seconds x milliseconds/milliDegrees
+        	Integer												indexCurrent				= (indexEnqueue - 1         + pidDepth) % pidDepth;
+        	Integer												indexPrevious				= (indexEnqueue - depth - 1 + pidDepth) % pidDepth;
+    		Long 												deltaTimeStamps 			= entries[indexCurrent].timeStamp - entries[indexPrevious].timeStamp;
     		differential																	= 1000F * entries[indexCurrent].delta.floatValue() / deltaTimeStamps;	// in millidegrees per second
     	}
        	// units of getGainD are ms

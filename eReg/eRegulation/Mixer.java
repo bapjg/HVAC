@@ -169,7 +169,7 @@ public class Mixer
 			
 			Integer												swingTimeMixerP				= pidFloorOut.getGainP(gainP);
 			Integer												swingTimeMixerD				= pidFloorOut.getGainD(gainD * 0.0F);
-			Integer												swingTimeBurnerD			= pidFloorOut.getGainD(gainD * 1.0F * swingProportion);
+			Integer												swingTimeBurnerD			= pidFloorOut.getGainD(gainD * 1.0F * swingProportion, 2);		// Uses average over 4 readings rather than 2
 		
 			swingTimeRequired																= swingTimeMixerP + swingTimeMixerD + swingTimeBurnerD;
 		}
