@@ -62,15 +62,9 @@ public class Circuits
 			{
 				count++;
 			}
-		}		
-		if (count == 1)
-		{
-			return true;
 		}
-		else
-		{
-			return false;
-		}
+		if (count == 1)			return true;
+		else					return false;
 	}
 	public Circuit_Abstract fetchcircuit(String name)
 	{

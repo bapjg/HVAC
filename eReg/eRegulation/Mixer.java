@@ -143,10 +143,18 @@ public class Mixer
 			// 10% : Try it
 			// 30% : Still overshoot with use of burnerPid unadjusted for position.
 			// Try 50% again with position adjusted burnerPid
-			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.30F;
-			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
+//			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.30F;
+//			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
 			
+			
+			if (Global.circuits.isSingleActiveCircuit())		swingTimeRequired			= 26000 - positionTracked;				// Gives negative number
+			else												swingTimeRequired			= 40000 - positionTracked;				// Gives negative number
 			boilerState																		= STATES.boiler.minReached;
+			if (swingTimeRequired > 0)
+			{
+				System.out.println("++++++++++++++++++Moving up when down required");
+				swingTimeRequired															= 0;
+			}
 		}
 		else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))									// boiler was heating, now cooling
 		{
