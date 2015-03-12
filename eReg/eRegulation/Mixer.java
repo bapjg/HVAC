@@ -26,7 +26,9 @@ public class Mixer
 	public Integer 												tempDontMove				= 20;
 	public Integer 												positionTracked				= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
 	public Integer												swingTimeRequired			= 0;
-	                                                                                           
+	public Integer												safeSingleCircuitPosition	= 26 * 1000;
+	public Integer												safeDoubleCircuitPosition	= 40 * 1000;	
+	
 	public Float												gainP						= 0F;
 	public Float												gainD						= 0F;
 	public Float												gainI						= 0F;
@@ -147,8 +149,8 @@ public class Mixer
 //			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
 			
 			
-			if (Global.circuits.isSingleActiveCircuit())		swingTimeRequired			= 26000 - positionTracked;				// Gives negative number
-			else												swingTimeRequired			= 40000 - positionTracked;				// Gives negative number
+			if (Global.circuits.isSingleActiveCircuit())		swingTimeRequired			= safeSingleCircuitPosition - positionTracked;				// Gives negative number
+			else												swingTimeRequired			= safeDoubleCircuitPosition - positionTracked;				// Gives negative number
 			boilerState																		= STATES.boiler.minReached;
 			if (swingTimeRequired > 0)
 			{
@@ -223,19 +225,34 @@ public class Mixer
 			messageBefore.positionTracked													= positionTracked;
 			messageBefore.startMovement														= true;
 			
-			if (swingTimeRequired > 0)		// Moving hotter
+			switch (boilerState)
 			{
-				switch (boilerState)
+			case minReached:																// This is to inhibit mixer moving hotter until warmer boiler water has filtered through
+				if (pidFloorOut.dTdt() > 0F)												// BoilerWarming has reached floorOut which is now warming
 				{
-				case minReached:															// This is to inhibit mixer moving hotter until warmer boiler water has filtered through
-					if (pidFloorOut.dTdt() > 0F)				boilerState 				= STATES.boiler.normalOperating;		// BoilerWarming has reached floorOut which is now warming
-					else										swingTimeRequired			= 0;								// FloorOut is still cooling, hold back
-					break;
-				case maxReached:
-				case normalOperating:
-				default:
-					break;
+					boilerState 				= STATES.boiler.normalOperating;		
 				}
+				else																		// FloorOut is still cooling, hold back
+				{
+					if (	Global.circuits.isSingleActiveCircuit() 						// A circuit may have been switched off since
+					&& 		positionTracked > safeSingleCircuitPosition	)
+					{
+						swingTimeRequired													= safeSingleCircuitPosition - positionTracked;				// Backdown
+					}
+					else if (swingTimeRequired > 0)
+					{
+						swingTimeRequired													= 0;
+					}
+					else
+					{
+						// swingTimeRequired is negative, so must be handled
+					}
+				}
+				break;
+			case maxReached:
+			case normalOperating:
+			default:
+				break;
 			}
 			
 			if (swingTimeRequired > 0)		// Moving hotter
