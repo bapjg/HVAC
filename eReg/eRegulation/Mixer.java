@@ -26,7 +26,7 @@ public class Mixer
 	public Integer 												tempDontMove				= 20;
 	public Integer 												positionTracked				= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
 	public Integer												swingTimeRequired			= 0;
-	public Integer												safeSingleCircuitPosition	= 23 * 1000;
+	public Integer												safeSingleCircuitPosition	= 23 * 1000;	// Was 26 * 1000
 	public Integer												safeDoubleCircuitPosition	= 40 * 1000;	
 	
 	public Float												gainP						= 0F;
@@ -152,14 +152,12 @@ public class Mixer
 			if (Global.circuits.isSingleActiveCircuit())		swingTimeRequired			= safeSingleCircuitPosition - positionTracked;				// Gives negative number
 			else												swingTimeRequired			= safeDoubleCircuitPosition - positionTracked;				// Gives negative number
 			boilerState																		= STATES.boiler.minReached;
-			if (swingTimeRequired > 0)
+			if (swingTimeRequired > 0)			// This can happen at startup, or if positionTracked is slightly below safeCircuitPosition
 			{
-				if (Global.circuits.isSingleActiveCircuit())	System.out.println("++++++++++++++++++safeSingleCircuitPosition : " + safeSingleCircuitPosition);
-				else 											System.out.println("++++++++++++++++++safeDoubleCircuitPosition : " + safeDoubleCircuitPosition);
-				System.out.println("++++++++++++++++++positionTracked           : " + positionTracked);
-				System.out.println("++++++++++++++++++swingTimeRequired         : " + swingTimeRequired);
-				
-				swingTimeRequired															= 0;
+				if (positionTracked != 0)
+				{	
+					swingTimeRequired														= 0;
+				}
 			}
 		}
 		else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))									// boiler was heating, now cooling
