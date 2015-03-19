@@ -85,7 +85,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				// Now fall through State will be changed below
 			case CIRCUIT_STATE_Optimising:
 				if 	(	(Global.circuits.isSingleActiveCircuit())
-				&& 		(Global.thermoBoiler.reading > Global.thermoFloorIn.reading + 3000)   )	// Solution : Continue while more than 3 degrees than return temp
+				&& 		(Global.thermoBoiler.reading > Global.thermoFloorIn.reading + 3000)   )	// Solution : Continue while boilerTemp more than 3 degrees than return temp
 				{
 					if (state != CIRCUIT_STATE_Optimising)
 					{
