@@ -1,6 +1,5 @@
 package eRegulation;
 
-import HVAC_Common.CIRCUIT;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thread_Mixer implements Runnable

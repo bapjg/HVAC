@@ -1,4 +1,4 @@
-package HVAC_Common;
+package eRegulation;
 
 public class CIRCUIT
 {
