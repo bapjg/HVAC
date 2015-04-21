@@ -1,5 +1,6 @@
 package eRegulation;
 
+import HVAC_Common.CIRCUIT;
 import HVAC_Common.Ctrl_Configuration;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -20,27 +21,27 @@ public class Circuit_HotWater extends Circuit_Abstract
 		{
 			switch (state)
 			{
-			case CIRCUIT_STATE_Off:
+			case Off:
 				//Nothing to do
 				break;
-			case CIRCUIT_STATE_Start_Requested:
+			case Start_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
-				state												= CIRCUIT_STATE_Starting;
+				state												= CIRCUIT.STATE.Starting;
 				//Now fall through
-			case CIRCUIT_STATE_Starting:
+			case Starting:
 				this.heatRequired.tempMinimum						= this.taskActive.tempObjective + 10000;
 				this.heatRequired.tempMaximum						= this.tempMax;
-				state												= CIRCUIT_STATE_AwaitingHeat;
+				state												= CIRCUIT.STATE.AwaitingHeat;
 				break;
-			case CIRCUIT_STATE_AwaitingHeat:
+			case AwaitingHeat:
 				if (Global.thermoBoiler.reading > Global.thermoHotWater.reading)
 				{
 					LogIt.action("PumpHotWater", "On");
 					circuitPump.on();
-					state											= CIRCUIT_STATE_Running;
+					state											= CIRCUIT.STATE.Running;
 				}
 				break;
-			case CIRCUIT_STATE_Running:
+			case Running:
 				
 				// This needs to be reapraised while running and if only circuit we can optimise based on statistics
 				
@@ -57,11 +58,11 @@ public class Circuit_HotWater extends Circuit_Abstract
 					this.heatRequired.tempMaximum						= this.tempMax;
 				}
 				break;
-			case CIRCUIT_STATE_Stop_Requested:
+			case Stop_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
-				state												= CIRCUIT_STATE_Stopping;
+				state													= CIRCUIT.STATE.Stopping;
 				//Now fall through
-			case CIRCUIT_STATE_Stopping:
+			case Stopping:
 				if 	(	(Global.circuits.isSingleActiveCircuit())
 				&& 		(Global.thermoBoiler.reading > Global.thermoHotWater.reading + 3000) ) 	
 				{
@@ -76,7 +77,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 					this.shutDown();					// shutDown sets state to off. Threadmixer looks at this as signal to stop
 				}
 				break;
-			case CIRCUIT_STATE_Error:
+			case Error:
 				break;
 			default:
 				LogIt.error("Circuit_" + this.name, "sequencer", "unknown state detected : " + state);	

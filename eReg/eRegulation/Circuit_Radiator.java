@@ -1,5 +1,6 @@
 package eRegulation;
 
+import HVAC_Common.CIRCUIT;
 import HVAC_Common.Ctrl_Configuration;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -33,45 +34,45 @@ public class Circuit_Radiator extends Circuit_Abstract
 		{
 			switch (state)
 			{
-			case CIRCUIT_STATE_Off:
+			case Off:
 				//Nothing to do
 				break;
-			case CIRCUIT_STATE_Start_Requested:
+			case Start_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
-				state																		= CIRCUIT_STATE_Starting;
+				state																		= CIRCUIT.STATE.Starting;
 				//Now fall through
-			case CIRCUIT_STATE_Starting:
+			case Starting:
 				if (temperatureGradient == null)
 				{
 					LogIt.error("Circuit_" + this.name, "sequencer", "temperatureGradient is null");
-					state										= CIRCUIT_STATE_Error;
+					state																	= CIRCUIT.STATE.Error;
 				}
 				else
 				{
 					Integer 									temp						= temperatureGradient.getTempToTarget();
 					this.heatRequired.tempMinimum											= temp - 7500;
 					this.heatRequired.tempMaximum											= temp + 7500;
-					state																	= CIRCUIT_STATE_AwaitingHeat;
+					state																	= CIRCUIT.STATE.AwaitingHeat;
 				}
 				break;
-			case CIRCUIT_STATE_AwaitingHeat:
+			case AwaitingHeat:
 				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
 				{
 					LogIt.action("PumpRadiator", "On");
 					circuitPump.on();
-					state																	= CIRCUIT_STATE_Running;
+					state																	= CIRCUIT.STATE.Running;
 				}
 				break;
-			case CIRCUIT_STATE_Running:
+			case Running:
 				Integer 										temp						= temperatureGradient.getTempToTarget();
 				this.heatRequired.tempMinimum												= temp - 7500;
 				this.heatRequired.tempMaximum												= temp + 7500;
 				break;
-			case CIRCUIT_STATE_Stop_Requested:
+			case Stop_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
-				state												= CIRCUIT_STATE_Stopping;
+				state																		= CIRCUIT.STATE.Stopping;
 				//Now fall through
-			case CIRCUIT_STATE_Stopping:
+			case Stopping:
 				if 	(	(Global.circuits.isSingleActiveCircuit())
 				&& 		(Global.thermoBoiler.reading > 40000) ) //Might as well get as much heat out of it as possible
 				{
@@ -85,7 +86,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 					this.shutDown();
 				}
 				break;
-			case CIRCUIT_STATE_Error:
+			case Error:
 				break;
 			default:
 				LogIt.error("Circuit_" + this.name, "sequencer", "unknown state detected : " + state);	

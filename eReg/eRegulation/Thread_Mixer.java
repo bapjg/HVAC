@@ -1,5 +1,7 @@
 package eRegulation;
 
+import HVAC_Common.CIRCUIT;
+
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thread_Mixer implements Runnable
 {
@@ -38,7 +40,7 @@ public class Thread_Mixer implements Runnable
 //			if running cold just carry on at cold position (do we need to call sequencer ?)
 //			if running/starting do below	
 			
-			if  (circuit.state != circuit.CIRCUIT_STATE_Off)
+			if  (circuit.state != CIRCUIT.STATE.Off)
 			{
 				// Note that Mixer calls go to sleep when positionning the mixer.
 				
@@ -85,7 +87,7 @@ public class Thread_Mixer implements Runnable
 					//-----v------Outside------v--
 					
 				}
-				else if (circuit.state == circuit.CIRCUIT_STATE_RampingUp) 						// This is to accelerate rampup
+				else if (circuit.state == CIRCUIT.STATE.RampingUp) 						// This is to accelerate rampup
 				{
 					targetTemp																	= 41000;						// Trip avoidance kicks in at 450
 				}
@@ -126,7 +128,7 @@ public class Thread_Mixer implements Runnable
 					}
 				}
 			}
-			else if  (circuit.state == circuit.CIRCUIT_STATE_Off )  //Running Cold
+			else if  (circuit.state == CIRCUIT.STATE.Off )  //Running Cold
 			{
 				// TODO should we position zero evry cycle. what about optimisation. what about floor temp measurement
 				// circuit.state = circuit.CIRCUIT_STATE_Shutting_down doesn't last long enough to be reliable. use positiontacked

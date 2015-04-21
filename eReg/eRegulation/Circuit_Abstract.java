@@ -24,23 +24,24 @@ abstract class Circuit_Abstract
 	public Pump													circuitPump;
 	public Thermometer											circuitThermo;
 								
-	public Integer												state;
-	public CIRCUIT.STATE										stateNew;
+	public CIRCUIT.STATE										state;
+//	public CIRCUIT.STATE										stateNew;
 								
-	public static final int										CIRCUIT_STATE_Off 			= 0;
-	public static final int										CIRCUIT_STATE_Starting 		= 1;
-	public static final int										CIRCUIT_STATE_RampingUp		= 2;
-	public static final int										CIRCUIT_STATE_Running 		= 3;
-	public static final int										CIRCUIT_STATE_Stopping	 	= 4;
-	public static final int										CIRCUIT_STATE_Optimising 	= 5;
-	public static final int										CIRCUIT_STATE_Error	 		= -1;
-							
-	public static final int										CIRCUIT_STATE_Suspended		= 5;
-	public static final int										CIRCUIT_STATE_Resuming 		= 6;
-	public static final int										CIRCUIT_STATE_AwaitingHeat	= 7;
-							
-	public static final int										CIRCUIT_STATE_Start_Requested	= 10;
-	public static final int										CIRCUIT_STATE_Stop_Requested	= 11;
+//	public static final int										CIRCUIT_STATE_Off 			= 0;
+//	public static final int										CIRCUIT_STATE_Starting 		= 1;
+//	public static final int										CIRCUIT_STATE_Idle	 		= 1;
+//	public static final int										CIRCUIT_STATE_RampingUp		= 2;
+//	public static final int										CIRCUIT_STATE_Running 		= 3;
+//	public static final int										CIRCUIT_STATE_Stopping	 	= 4;
+//	public static final int										CIRCUIT_STATE_Optimising 	= 5;
+//	public static final int										CIRCUIT_STATE_Error	 		= -1;
+//							
+//	public static final int										CIRCUIT_STATE_Suspended		= 5;
+//	public static final int										CIRCUIT_STATE_Resuming 		= 6;
+//	public static final int										CIRCUIT_STATE_AwaitingHeat	= 7;
+//							
+//	public static final int										CIRCUIT_STATE_Start_Requested	= 10;
+//	public static final int										CIRCUIT_STATE_Stop_Requested	= 11;
 
 	public Mixer												mixer						= null;
 	public TemperatureGradient 									temperatureGradient			= null;				//This will be overridden
@@ -64,7 +65,7 @@ abstract class Circuit_Abstract
 		if (this.circuitPump == null)			System.out.println("Circuit.Constructor : " + name + " invalid pump " + paramCircuit.pump);
 		if (this.circuitThermo == null)			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + paramCircuit.thermometer);
 		
-		this.state																			= CIRCUIT_STATE_Off;
+		this.state																			= CIRCUIT.STATE.Off;
 		this.heatRequired																	= null;
 	}
 	public void addCircuitTask(Ctrl_Calendars.Calendar 				paramCalendar)
@@ -78,14 +79,14 @@ abstract class Circuit_Abstract
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
-		this.state																			= CIRCUIT_STATE_Start_Requested;
+		this.state																			= CIRCUIT.STATE.Start_Requested;
 		this.heatRequired																	= new HeatRequired();
 	}
 	public void start(CircuitTask 									thisTask)
 	{
 		LogIt.action(this.name, "Start called with circuitTask");
 		this.taskActive																		= thisTask;
-		this.state																			= CIRCUIT_STATE_Start_Requested;
+		this.state																			= CIRCUIT.STATE.Start_Requested;
 		this.heatRequired																	= new HeatRequired();
 	}
 	public void stop()
@@ -94,7 +95,7 @@ abstract class Circuit_Abstract
 		//   1. Time is up : 					Detected/Called by Circuit_Abstract.scheduleTask
 		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
 		LogIt.action(this.name, "Stop called");
-		this.state																			= CIRCUIT_STATE_Stop_Requested;
+		this.state																			= CIRCUIT.STATE.Stop_Requested;
 		this.heatRequired																	= null;
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 	}
@@ -108,7 +109,7 @@ abstract class Circuit_Abstract
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
-		this.state																			= CIRCUIT_STATE_Off;
+		this.state																			= CIRCUIT.STATE.Off;
 		this.heatRequired																	= null;
 //		this.taskActive.active																= false; // What happens if the task has been switched to a new one
 		taskDeactivate(this.taskActive);
@@ -124,12 +125,12 @@ abstract class Circuit_Abstract
 	public void suspend()
 	{
 		LogIt.action(this.name, "Suspend called");
-		this.state																			= CIRCUIT_STATE_Suspended;
+		this.state																			= CIRCUIT.STATE.Suspended;
 	}						
 	public void resume()						
 	{						
 		LogIt.action(this.name, "Resume called");						
-		this.state																			= CIRCUIT_STATE_Resuming;
+		this.state																			= CIRCUIT.STATE.Resuming;
 	}
 	public void taskActivate(CircuitTask 							thisTask)
 	{
@@ -195,9 +196,9 @@ abstract class Circuit_Abstract
 		if (taskActive != null)
 		{
 			if (	(now > taskActive.timeEnd) 							// taskActive : Time up
-			&& 		(this.state != CIRCUIT_STATE_Stop_Requested) 
-			&&		(this.state != CIRCUIT_STATE_Stopping)   
-			&&		(this.state != CIRCUIT_STATE_Optimising)   )
+			&& 		(this.state != CIRCUIT.STATE.Stop_Requested	) 
+			&&		(this.state != CIRCUIT.STATE.Stopping		)   
+			&&		(this.state != CIRCUIT.STATE.Optimising		)   )
 			{
 				// Time is up for this task and it hasn't yet been asked to stop
 				this.stop();

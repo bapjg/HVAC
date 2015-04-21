@@ -5,6 +5,7 @@ public class CIRCUIT
 	public enum STATE
 	{
 		Off,
+		Idle,
 		Starting,
 		RampingUp,
 		Running,
