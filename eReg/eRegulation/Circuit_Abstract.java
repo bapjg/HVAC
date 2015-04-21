@@ -2,6 +2,7 @@ package eRegulation;
 
 import java.util.ArrayList;
 
+import HVAC_Common.CIRCUIT;
 import HVAC_Common.Ctrl_Calendars;
 import HVAC_Common.Ctrl_Configuration;
 
