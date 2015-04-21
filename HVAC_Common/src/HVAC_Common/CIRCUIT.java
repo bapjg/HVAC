@@ -18,7 +18,9 @@ public class CIRCUIT
 		AwaitingHeat,
 								
 		Start_Requested,
-		Stop_Requested
+		Stop_Requested,
+		
+		NothingToDo
 	}
 	public enum TYPE
 	{
