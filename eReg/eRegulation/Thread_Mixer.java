@@ -35,13 +35,14 @@ public class Thread_Mixer implements Runnable
 		{
 //			Mixer states can be 
 //				- starting/running
+//				- Idle (i.e. room already at targetTemperature)
 //				- stoping/off
 //				- running cold
 //			if stopping/off do nothing
 //			if running cold just carry on at cold position (do we need to call sequencer ?)
 //			if running/starting do below	
 			
-			if  (circuit.state != CIRCUIT.STATE.Off)
+			if  ((circuit.state != CIRCUIT.STATE.Off) && (circuit.state != CIRCUIT.STATE.Idle))
 			{
 				// Note that Mixer calls go to sleep when positionning the mixer.
 				
@@ -129,9 +130,9 @@ public class Thread_Mixer implements Runnable
 					}
 				}
 			}
-			else if  (circuit.state == CIRCUIT.STATE.Off )  //Running Cold
+			else if  ((circuit.state == CIRCUIT.STATE.Off ) || (circuit.state == CIRCUIT.STATE.Idle)) //Running Cold
 			{
-				// TODO should we position zero evry cycle. what about optimisation. what about floor temp measurement
+				// TODO should we position zero every cycle. what about optimisation. what about floor temp measurement
 				// circuit.state = circuit.CIRCUIT_STATE_Shutting_down doesn't last long enough to be reliable. use positiontacked
 				// as indication of whether we are stopped or not
 				if (mixer.positionTracked > 0)
