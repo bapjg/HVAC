@@ -2,6 +2,7 @@ package eRegulation;
 
 import java.util.ArrayList;
 
+import HVAC_Common.CIRCUIT;
 import HVAC_Common.Ctrl_Configuration;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
@@ -60,7 +61,10 @@ public class Circuits
 		{
 			if (circuit.taskActive != null)
 			{
-				count++;
+				if (circuit.state != CIRCUIT.STATE.Idle)	// ie not heat request generated
+				{
+					count++;
+				}
 			}
 		}
 		if (count == 1)			return true;
