@@ -197,41 +197,6 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-//    private Ctrl__Abstract		 				processCalendars_Update(Ctrl_Calendars.Update message_in)
-//    {
-//    	dbOpen();
-//        
-//        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Ack();
-//
-//        try
-//        {
-//            dbStatement 													= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-//            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, Date, Time, Calendars FROM Calendars ORDER BY dateTime DESC LIMIT 1");
-//
-//            Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
-//    		String 										dbJsonString 		= gson.toJson((Ctrl_Calendars.Update) message_in);
-//
-//    		Long										dateTime			= System.currentTimeMillis();		// Do not use dateTime supplied in input message
-//    		
-//    		dbResultSet.moveToInsertRow();		
-//            dbResultSet.updateDouble	("dateTime", 				dateTime);
-//            dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
-//            dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
-//            dbResultSet.updateString	("Calendars", 				dbJsonString);
-//            dbResultSet.insertRow();
-//
-//            dbStatement.close();
-//            dbConnection.close();
-//
-//            returnBuffer													= new Ctrl__Abstract().new Ack();
-//        }
-//        catch(Exception e)
-//        {
-//        	e.printStackTrace();
-//            returnBuffer													= new Ctrl__Abstract().new Nack();
-//        }
-//        return returnBuffer;
-//    }
     private Ctrl__Abstract		 				processConfiguration_Request()		// eReg still uses this interface
     {
         dbOpen();
@@ -268,41 +233,6 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-//    private Ctrl__Abstract		 				processConfiguration_Update(Ctrl_Configuration.Update message_in)
-//    {
-//    	dbOpen();
-//        
-//        Ctrl__Abstract 									returnBuffer		= new Ctrl__Abstract().new Ack();
-//
-//        try
-//        {
-//            dbStatement 													= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-//            ResultSet 									dbResultSet 		= dbStatement.executeQuery("SELECT dateTime, Date, Time, Configuration FROM configuration ORDER BY dateTime DESC LIMIT 1");
-//
-//            Gson gson 														= new GsonBuilder().setPrettyPrinting().create();
-//    		String 										dbJsonString 		= gson.toJson((Ctrl_Configuration.Data) message_in);
-//
-//    		Long										dateTime			= System.currentTimeMillis();		// Do not use dateTime supplied in input message
-//    		
-//    		dbResultSet.moveToInsertRow();
-//            dbResultSet.updateDouble	("dateTime", 				dateTime);
-//            dbResultSet.updateString	("date", 					dateTime2Date(dateTime));
-//            dbResultSet.updateString	("time", 					dateTime2Time(dateTime));
-//            dbResultSet.updateString	("Configuration", 			dbJsonString);
-//            dbResultSet.insertRow();
-//
-//            dbStatement.close();
-//            dbConnection.close();
-//
-//            returnBuffer													= new Ctrl__Abstract().new Ack();
-//        }
-//        catch(Exception e)
-//        {
-//        	e.printStackTrace();
-//            returnBuffer													= new Ctrl__Abstract().new Nack();
-//        }
-//        return returnBuffer;
-//    }
     private Ctrl__Abstract 						processFuelConsumption_Request()
     {
         dbOpen();
