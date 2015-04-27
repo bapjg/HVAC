@@ -17,7 +17,7 @@ public class FuelFlow
 	public Long			consumption;
 	
 	// consumption represents the number of milliseconds of fuel flow
-	// fuelFlowing is the programs view of whether fuel is flowing or not
+	// fuelFlowing is the program's view of whether fuel is flowing or not
 	// whether fuel is flowing or not can only be determined by reading the ADC
 	//
 	// One should avoid writing fuelflow data to disk too often as SD disks age quickly

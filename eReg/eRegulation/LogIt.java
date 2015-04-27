@@ -238,7 +238,7 @@ public class LogIt
 		HTTP_Request											httpRequest					= new HTTP_Request <Ctrl_Fuel_Consumption.Update> ("Monitor");
 			
 		Ctrl_Fuel_Consumption.Update	 						messageSend 				= (new Ctrl_Fuel_Consumption()).new Update();
-		messageSend.dateTime 																= System.currentTimeMillis();
+		messageSend.dateTime 																= Global.DateTime.now();
 		messageSend.fuelConsumed 															= fuelConsumed;
 			
 		Ctrl__Abstract 											messageReceive	 			= httpRequest.sendData(messageSend);

@@ -68,7 +68,6 @@ public class Burner
 		LogIt.action("Burner", "powerOff");
 		burnerPower.off();
 		lastSwitchedOff																		= Global.DateTime.now();
-//		System.out.println("timeLastSwitchedOFF : " + (Global.burner.lastSwitchedOff));
 
 		Integer i;
 		
