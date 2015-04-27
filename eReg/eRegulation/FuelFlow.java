@@ -24,8 +24,8 @@ public class FuelFlow
 	// when the same block is over-written many times
 	//
 	// We need 2 variables :
-	//			- consumtion which has been written to disk
-	//			- consumption which has not yet been accounted for
+	//			- consumption which has been written to disk
+	//			- consumption which has not yet been accounted for (ie time since timeLastStart)
 	
 	public  FuelFlow()
 	{
@@ -89,7 +89,7 @@ public class FuelFlow
 		{
 			if (timeLastStart == -1L)
 			{
-				timeLastStart 															= Global.DateTime.now();
+				timeLastStart 																= Global.DateTime.now();
 			}
 			else
 			{
@@ -104,8 +104,8 @@ public class FuelFlow
 			}
 			else
 			{
-				consumption																= consumption + Global.DateTime.now() - timeLastStart;
-				timeLastStart															= -1L;
+				consumption																	= consumption + Global.DateTime.now() - timeLastStart;
+				timeLastStart																= -1L;
 				saveFuelFlow();
 				LogIt.fuelData(consumption);
 				System.out.println("----------------Fuelflow : " + consumption.toString());
