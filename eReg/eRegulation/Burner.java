@@ -42,12 +42,13 @@ public class Burner
 		// After which fuel is injected and an ignition arc ignited for 20 - 30 seconds
 		// Fuel flow should be detected after about 10 seconds after burnerPower.on() call
 		Integer i;
-		fuelflow.update(isFuelFlowing());
+		
 		for (i = 0; i < 30; i++)
 		{
 			if	(isFuelFlowing())
 			{
 				// System.out.println("Burner/powerOn : fuel flow detected ");
+				fuelflow.update(true);
 				return;
 			}
 			else if (burnerFault())
@@ -80,16 +81,16 @@ public class Burner
 			}
 			else
 			{
+				fuelflow.update(false);
 				return;														// All is well
 			}
 		}
 		LogIt.error("Burner", "powerOff", "fuel flow still detected after 300 ms: burner has tripped");
 		Global.eMailMessage("Burner fault", "Burner/powerOff : fuel flow still detected after 300 ms: burner has tripped");
+		fuelflow.update(false);
 	}
 	public void sequencer()
 	{
-		fuelflow.update(isFuelFlowing());
-		
 		if (burnerFault())
 		{
 			LogIt.error("Burner", "sequencer", "checkFault has detected a problem");

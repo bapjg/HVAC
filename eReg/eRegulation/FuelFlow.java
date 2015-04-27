@@ -45,7 +45,7 @@ public class FuelFlow
 		{
 			LogIt.info("Fuelflow", "constructor", "Fuel level recovered from network");
 			consumption																		= ((Ctrl_Fuel_Consumption.Data) messageReceive).fuelConsumed;
-	    	timeLastStart																	= -1L;		// Is this right
+	    	timeLastStart																	= -1L;
 		}
 		else
 		{
@@ -80,36 +80,35 @@ public class FuelFlow
 	public void update(Boolean fuelFlowing)
 	{
 		// We basically need to detected state changes
-		// if timeLastStart = -1 means that on last Update call, fuel was not flowing
-		// if timeLastStart > -1 means that on last Update call, fuel was flowing
+		// if     fuelFlowing & timeLastStart  = -1 means that we have just powered On
+		// if Not(fuelFlowing) & timeLastStart > -1 means that we have just powered Off
 		
-		// We also need a convertion milliseconds of FuelFlow to litres of fuel
+		// TODO We also need a conversion milliseconds of FuelFlow to litres of fuel
 		
-		if (timeLastStart == -1L)
+		if (fuelFlowing)				// Fuel has just started to flow (called from burner.powerOn
 		{
-			// last call here had no fuel flowing
-			if (fuelFlowing)																// Fuel has just started to flow
+			if (timeLastStart == -1L)
 			{
-				timeLastStart 																= Global.DateTime.now();
+				timeLastStart 															= Global.DateTime.now();
+			}
+			else
+			{
+				LogIt.error("FluelFlow", "update", "timeLastLast is alreay set when it shouldn't be (powerOn)");
 			}
 		}
-		else
+		else							// Fuel has stopped flowing (called from burner.powerOff
 		{
-			// last call here had fuel flowing
-
-			if (fuelFlowing)
+			if (timeLastStart == -1L)
 			{
-				// Nothing has changed, fuel is still flowing
-				// Nothing to do until it stops
+				LogIt.error("FluelFlow", "update", "timeLastLast is not set when it should be (powerOff)");
 			}
-			else																// Fuel has just stopped flowing
+			else
 			{
-				// Just log consumption now
-				consumption																	= consumption + Global.DateTime.now() - timeLastStart;
-				timeLastStart																= -1L;
+				consumption																= consumption + Global.DateTime.now() - timeLastStart;
+				timeLastStart															= -1L;
 				saveFuelFlow();
 				LogIt.fuelData(consumption);
-				System.out.println("Fuelflow : " + consumption.toString());
+				System.out.println("----------------Fuelflow : " + consumption.toString());
 			}
 		}
 	}
