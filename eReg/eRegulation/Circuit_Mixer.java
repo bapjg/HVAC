@@ -97,7 +97,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 				{
 					this.heatRequired														= null;
-					circuitPump.off();
+//					circuitPump.off();
 					state																	= CIRCUIT.STATE.Idle;
 				}
 				else
@@ -110,8 +110,9 @@ public class Circuit_Mixer extends Circuit_Abstract
 				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested : Now Optimise");
 				// Now fall through State will be changed below
 			case Optimising:
-				if 	(	(Global.circuits.isSingleActiveCircuit())
-				&& 		(Global.thermoBoiler.reading > Global.thermoFloorIn.reading + 3000)   )	// Solution : Continue while boilerTemp more than 3 degrees than return temp
+				if 	(	(Global.circuits.isSingleActiveCircuit()							)
+				&& 		(Global.thermoBoiler.reading > Global.thermoFloorIn.reading + 3000	)   	//  Continue while boilerTemp more than 3 degrees than return temp
+				&& 		(mixer.positionTracked > 0											)   )	//  If no warm water is flowing, no point continuing
 				{
 					if (state != CIRCUIT.STATE.Optimising)
 					{
