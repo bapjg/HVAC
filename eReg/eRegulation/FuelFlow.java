@@ -77,13 +77,9 @@ public class FuelFlow
 			}			
 		}
 	}
-	public void update(Boolean fuelFlowing)
+	public void update_OLD(boolean fuelFlowing)
 	{
-		// We basically need to detected state changes
-		// if     fuelFlowing & timeLastStart  = -1 means that we have just powered On
-		// if Not(fuelFlowing) & timeLastStart > -1 means that we have just powered Off
-		
-		// TODO We also need a conversion milliseconds of FuelFlow to litres of fuel
+		// TODO To be deleted
 		
 		if (fuelFlowing)				// Fuel has just started to flow (called from burner.powerOn
 		{
@@ -110,6 +106,44 @@ public class FuelFlow
 				LogIt.fuelData(consumption);
 				System.out.println("----------------Fuelflow : " + consumption.toString());
 			}
+		}
+	}
+	public void switchedOn()
+	{
+		// We basically need to detected state changes
+		// if     fuelFlowing & timeLastStart  = -1 means that we have just powered On
+		// if Not(fuelFlowing) & timeLastStart > -1 means that we have just powered Off
+		
+		// TODO We also need a conversion milliseconds of FuelFlow to litres of fuel
+		
+		if (timeLastStart == -1L)
+		{
+			timeLastStart 																= Global.DateTime.now();
+		}
+		else
+		{
+			LogIt.error("FluelFlow", "update", "timeLastLast is alreay set when it shouldn't be (powerOn)");
+		}
+	}
+	public void switchedOff()
+	{
+		// We basically need to detected state changes
+		// if     fuelFlowing & timeLastStart  = -1 means that we have just powered On
+		// if Not(fuelFlowing) & timeLastStart > -1 means that we have just powered Off
+		
+		// TODO We also need a conversion milliseconds of FuelFlow to litres of fuel
+		
+		if (timeLastStart == -1L)
+		{
+			LogIt.error("FluelFlow", "update", "timeLastLast is not set when it should be (powerOff)");
+		}
+		else
+		{
+			consumption																	= consumption + Global.DateTime.now() - timeLastStart;
+			timeLastStart																= -1L;
+			saveFuelFlow();
+			LogIt.fuelData(consumption);
+			LogIt.error("FluelFlow", "update", "----------------Fuelflow : " + consumption.toString());
 		}
 	}
 	public void saveFuelFlow()

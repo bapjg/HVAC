@@ -36,7 +36,6 @@ public class Burner
 		LogIt.action("Burner", "On");
 		burnerPower.on();
 		lastSwitchedOn																		= Global.DateTime.now();
-//		System.out.println("timeLastSwitchedOFF : " + (Global.burner.lastSwitchedOn));
 		
 		// After power on, ventilation clears fuel out of combustion chamber for 10 seconds
 		// After which fuel is injected and an ignition arc ignited for 20 - 30 seconds
@@ -48,7 +47,7 @@ public class Burner
 			if	(isFuelFlowing())
 			{
 				// System.out.println("Burner/powerOn : fuel flow detected ");
-				fuelflow.update(true);
+				fuelflow.switchedOn();
 				return;
 			}
 			else if (burnerFault())
@@ -74,20 +73,19 @@ public class Burner
 		
 		for (i = 0; i < 30; i++)
 		{
-			fuelflow.update(isFuelFlowing());
 			if	(isFuelFlowing())
 			{
 				Global.waitMilliSeconds(10);								// Need to wait a bit for relays to work and ADC to get a proper average (without voltage spikes)
 			}
 			else
 			{
-				fuelflow.update(false);
+				fuelflow.switchedOff();
 				return;														// All is well
 			}
 		}
 		LogIt.error("Burner", "powerOff", "fuel flow still detected after 300 ms: burner has tripped");
 		Global.eMailMessage("Burner fault", "Burner/powerOff : fuel flow still detected after 300 ms: burner has tripped");
-		fuelflow.update(false);
+		fuelflow.switchedOff();
 	}
 	public void sequencer()
 	{
@@ -98,7 +96,7 @@ public class Burner
 			powerOff();
 		}
 
-		// Must also check max temp;
+		// TODO Must also check max temp;
 	}
 	public Boolean isFuelFlowing()
 	{
