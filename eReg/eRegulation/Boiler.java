@@ -19,15 +19,7 @@ public class Boiler
 	// ===========================================================================================
 
 	public Integer	   											burnerState;
-//	public enum													burnerStates 
-//	{
-//		STATE_Off, 
-//		STATE_On_Heating,
-//		STATE_On_Cooling,
-//		STATE_On_CoolingAfterOverheat,
-//		STATE_On_PowerUp,
-//		STATE_Error
-//	};
+
 	public Integer	   											burnerStateNext;
 	public Integer	   											timeToLive;
 
@@ -53,9 +45,7 @@ public class Boiler
 	public Boiler(Ctrl_Configuration.Data.Boiler boilerparams)
 	{
 		this.thermoBoiler 																	= Global.thermometers.fetchThermometer(boilerparams.thermometer);
-		
-		burner																				= Global.burner;
-
+		this.burner																			= Global.burner;
 		this.tempMax 																		= -1;
 		this.tempMin 																		= -1;
 		this.tempNeverExceed																= boilerparams.tempNeverExceed.milliDegrees;
@@ -89,7 +79,8 @@ public class Boiler
 	}
 	public Boolean checkOverHeat()
 	{
-		if (Global.thermoBoiler.readUnCached() > tempNeverExceed)
+//		if (Global.thermoBoiler.readUnCached() > tempNeverExceed)
+		if (getBurnerTemp() > tempNeverExceed)
 		{
 			return true;
 		}
@@ -97,12 +88,23 @@ public class Boiler
 		{
 			return false;
 		}
-	}	
+	}
+	public Integer getBurnerTemp()
+	{
+		Integer													tempNow						= Global.thermoBoiler.readUnCached();
+		if (tempNow == -273000)
+		{
+			LogIt.error("Boiler", "getBurnerTemp", "main thermometer failed, using backup", false);
+			return	Global.thermometers.fetchThermometer("Boiler_Old").readUnCached();
+		}
+		return tempNow;
+	}
 	public void sequencer()
 	{
 		// Take unCached temperature. The value is then cached
 		
-		Integer	tempNow =  Global.thermoBoiler.readUnCached();
+//		Integer													tempNow 					= Global.thermoBoiler.readUnCached();
+		Integer													tempNow 					= getBurnerTemp();
 		
 		if (checkOverHeat())		// This is just a temperature check
 		{

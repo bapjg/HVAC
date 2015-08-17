@@ -46,22 +46,6 @@ public class Thermometer
 			pidControler																	= null;
 		}
 	}
-//	public void readAll()
-//	{
-//		try
-//		{
-//			FileOutputStream 	ThermoFile_OutputStream = new FileOutputStream("/mnt/1wire/simultaneous/temperature");
-//			DataOutputStream 	ThermoFile_OutputData 	= new DataOutputStream(ThermoFile_OutputStream);
-//			int x = 1;
-//			ThermoFile_OutputStream.write(x);
-//			ThermoFile_OutputData.close();
-//			ThermoFile_OutputStream.close();
-//		}
-//		catch (Exception e)
-//		{
-//			System.out.println("Simu write Error message was : " + e.getMessage());
-//		}		
-//	}
     public Integer read()
 	{
      	// Returns temperature in millidegrees

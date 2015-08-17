@@ -48,6 +48,8 @@ public class Activity_Main 										extends 					Activity
 		if 		(smallestWidth > 750)							Global.deviceName			= "toshiba";
 		else if (smallestWidth > 430)							Global.deviceName			= "iJoy";
 		else													Global.deviceName			= "lgPhone";
+		
+		Global.toast("width : " + widthPixels + ", height : " + heightPixels + ", for V700", true);
 
 		Global.toast(Global.deviceName, true);
 		Global.setOrientationParams();

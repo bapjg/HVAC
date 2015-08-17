@@ -7,7 +7,7 @@ import HVAC_Common.Ctrl_Configuration;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thermometers
 {
-	public ArrayList<Thermometer> thermometerList = new ArrayList<Thermometer>();
+	public ArrayList<Thermometer> 								thermometerList 			= new ArrayList<Thermometer>();
 	
 	public Thermometers()
 	{ 
@@ -16,7 +16,7 @@ public class Thermometers
 	{
 		for (Ctrl_Configuration.Thermometer 	paramThermometer : paramThermometers)
 		{
-			Thermometer thermometerItem 	= new Thermometer(paramThermometer);
+			Thermometer 										thermometerItem 			= new Thermometer(paramThermometer);
 			thermometerList.add(thermometerItem);
 		}
 	}
