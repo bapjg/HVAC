@@ -40,8 +40,9 @@ public final class R {
         public static final int gradient_outside_low_pad_left=0x7f050026;
         public static final int menu_button_text_size=0x7f050003;
         /**  iJoy 
+ LG Tablette 
  LG Phone 
- Toshiba 
+ Toshiba Tablette 
          */
         public static final int menu_frame_width=0x7f050000;
         public static final int menu_padding_horizontal=0x7f050001;

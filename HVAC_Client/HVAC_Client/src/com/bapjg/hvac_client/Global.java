@@ -322,7 +322,7 @@ public class Global
 		float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, Global.activity.getResources().getDisplayMetrics());
 		int pxI = (int) px;
 	
-		if (Global.deviceName == "toshiba")
+		if ((Global.deviceName == "toshibaTablette") || (Global.deviceName == "lgTablette"))
 		{
 			if (landscape)		viewPanelContainer.setPadding(pxI * 2, 0, pxI * 2, 0);			// 200 pixels Left & Right
 			else 				viewPanelContainer.setPadding(pxI * 1, 0, pxI * 1, 0);			// 100 pixels Left & Right
