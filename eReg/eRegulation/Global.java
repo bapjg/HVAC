@@ -82,8 +82,6 @@ public class Global
 	public static	Burner										burner;
 
 	public static 	LCD											display;	
-// TODO
-//	public static 	ADC											burnerVoltages;	
 	public static 	Buttons										buttons;	
 
 	public static 	ArrayList	<String>						eMails;	
@@ -96,7 +94,6 @@ public class Global
 	
 	public Global()
 	{
-		System.out.println("xxx");
 		Global.display 																		= new LCD();
 		Global.buttons 																		= new Buttons();	
 		Global.pids																			= new PIDs();
