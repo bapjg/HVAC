@@ -96,6 +96,7 @@ public class Global
 	
 	public Global()
 	{
+		System.out.println("xxx");
 		Global.display 																		= new LCD();
 		Global.buttons 																		= new Buttons();	
 		Global.pids																			= new PIDs();

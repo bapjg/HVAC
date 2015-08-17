@@ -83,7 +83,7 @@ public class Control
 		// Initialising : Note that "Initialising" message on LCD is handled
 		// in the Global constructor when the LCD display has been created
 		//
-		System.out.println("xxx");
+
 		@SuppressWarnings("unused")
 		Global 													global 						= new Global();
 		Global.stopNow																		= false;
