@@ -113,6 +113,8 @@ public class Thermometer
 //		}		
 //		return this.reading; //Last known good reading;
 		
+    	Boolean printIt = (this.name == "Boiler");
+    	
 		Integer												readings					= 0;
 		Integer												count						= 0;
 		for (Probe probe : probes)
@@ -120,11 +122,13 @@ public class Thermometer
 			Integer											aReading					= probe.read(resolution, unCached);
 			if (aReading != null)
 			{
+				if (printIt) System.out.println("Boiler/" + this.address + " : " + aReading);
 				readings																+= aReading;
 				count++;
 			}
 		}
 		this.reading																	= readings / count;
+		if (printIt) System.out.println("Boiler/Average" + this.reading);
 		return this.reading;
 	}
     public String toDisplay()
