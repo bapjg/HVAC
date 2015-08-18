@@ -14,11 +14,24 @@ public class Thermometers
 	}
 	public void configure(ArrayList <Ctrl_Configuration.Thermometer> paramThermometers)
 	{
-		for (Ctrl_Configuration.Thermometer 	paramThermometer : paramThermometers)
+		for (Ctrl_Configuration.Thermometer paramThermometer : paramThermometers)
 		{
-			Thermometer 										thermometerItem 			= new Thermometer(paramThermometer);
-			thermometerList.add(thermometerItem);
+			Thermometer 										thermometerItem				= fetchThermometer(paramThermometer.name);				
+			if (thermometerItem == null)
+			{
+				thermometerItem 															= new Thermometer(paramThermometer);
+				thermometerList.add(thermometerItem);
+			}
+			else
+			{
+				thermometerItem.addProbe(paramThermometer);
+			}
 		}
+//		for (Ctrl_Configuration.Thermometer paramThermometer : paramThermometers)
+//		{
+//			Thermometer 										thermometerItem 			= new Thermometer(paramThermometer);
+//			thermometerList.add(thermometerItem);
+//		}
 	}
 	public Thermometer fetchThermometer(String name)
 	{

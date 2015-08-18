@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import HVAC_Common.Ctrl_Configuration;
 
@@ -22,6 +23,7 @@ public class Thermometer
 	public String 												thermoFile_UnCached;
  	public Integer 												reading;
 	public PID													pidControler;
+	public ArrayList <Probe>									probes						= new ArrayList <Probe> ();
 	
 	public Thermometer(Ctrl_Configuration.Thermometer 			paramThermometer)
 	{
@@ -45,6 +47,11 @@ public class Thermometer
 		{
 			pidControler																	= null;
 		}
+		addProbe(paramThermometer);
+	}
+	public void addProbe(Ctrl_Configuration.Thermometer 		paramThermometer)
+	{
+		probes.add(new Probe(paramThermometer));
 	}
     public Integer read()
 	{
@@ -111,5 +118,14 @@ public class Thermometer
     	// Converts temperature in millidegrees into displayable format							// Either keep true or throw it out from display
     	DecimalFormat 										temperatureFormat 			= new DecimalFormat("0.0");
     	return  temperatureFormat.format((float) (this.reading)/1000F);
+    }
+    public class Probe
+    {
+    	public String 										address;
+    	
+    	public Probe(Ctrl_Configuration.Thermometer 		paramThermometer)
+    	{
+    		this.address																= paramThermometer.address;
+    	}
     }
 }
