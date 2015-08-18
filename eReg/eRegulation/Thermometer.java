@@ -18,7 +18,7 @@ public class Thermometer
 {
 	public String 												name;
 //	public String 												friendlyName;
-	public String 												address;
+//	public String 												address;
 	public String 												thermoFile_Normal;
 	public String 												thermoFile_UnCached;
  	public Integer 												reading;
@@ -29,14 +29,14 @@ public class Thermometer
 	{
 		this.name 		    																= paramThermometer.name;
 //		this.friendlyName  																	= "";
-		this.address  																		= paramThermometer.address;
+//		this.address  																		= paramThermometer.address;
 		this.pidControler																	= null;
 		
 		String prefix																		= "/mnt/1wire/";
 		String suffix																		= "/";
 
-		this.thermoFile_Normal																= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
-		this.thermoFile_UnCached															= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+//		this.thermoFile_Normal																= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+//		this.thermoFile_UnCached															= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
 		
 		if (paramThermometer.pidName != null)
 		{
@@ -121,7 +121,7 @@ public class Thermometer
 			Integer											aReading					= probe.read(resolution, unCached);
 			if (aReading != null)
 			{
-				if (printIt) System.out.println("Boiler/" + this.address + " : " + aReading);
+				if (printIt) System.out.println("Boiler/" + probe.address + " : " + aReading);
 				readings																+= aReading;
 				count++;
 			}

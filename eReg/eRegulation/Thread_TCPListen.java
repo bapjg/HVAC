@@ -252,7 +252,8 @@ public class Thread_TCPListen 			implements Runnable
 		{
 			Ctrl_Configuration.Thermometer paramThermometer	= new Ctrl_Configuration().new Thermometer();
 			paramThermometer.name							= globalThermometer.name;
-			paramThermometer.address						= globalThermometer.address;
+// TODO what is this for
+//			paramThermometer.address						= globalThermometer.address;
 			message_return.thermometerList.add(paramThermometer);
 		}
 
