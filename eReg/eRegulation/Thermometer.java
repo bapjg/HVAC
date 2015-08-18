@@ -114,7 +114,7 @@ public class Thermometer
 //		return this.reading; //Last known good reading;
 		
     	Boolean printIt = (this.name == "Boiler");
-    	
+    	System.out.println("Boiler/Name" + this.name + " printit : " + printIt);
 		Integer												readings					= 0;
 		Integer												count						= 0;
 		for (Probe probe : probes)
