@@ -15,11 +15,13 @@ public class Thread_Thermometers implements Runnable
 				{
 					if (thisThermometer.pidControler.sampleIncrement == 1)
 					{
+						// TODO Check reading != null
 						thisThermometer.readUnCached();
 						thisThermometer.pidControler.add(thisThermometer.reading);
 					}
 					else
 					{
+						// TODO Check reading != null
 						thisThermometer.read();
 						thisThermometer.pidControler.increment = ++thisThermometer.pidControler.increment % thisThermometer.pidControler.sampleIncrement;
 
@@ -31,6 +33,7 @@ public class Thread_Thermometers implements Runnable
 				}
 				else
 				{
+					// TODO Check reading != null
 					thisThermometer.readUnCached();
 				}
 			}

@@ -118,6 +118,8 @@ public class Thread_Mixer implements Runnable
 						
 					tempNow																	= Global.thermoFloorOut.readUnCached();
 					
+					// TODO check that tempNow != null
+					
 					if (i >= indexDelay)													// We have waited for dTdt to settle a bit
 					{
 						temperatureProjected												= tempNow + ((Float) (Global.thermoFloorOut.pidControler.dTdt() * timeProjectInSeconds)).intValue();
