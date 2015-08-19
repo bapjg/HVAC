@@ -113,7 +113,6 @@ public class Thermometer
 //		}		
 //		return this.reading; //Last known good reading;
 		
-    	Boolean printIt = (this.name.equalsIgnoreCase("Boiler"));
 		Integer												readings					= 0;
 		Integer												count						= 0;
 		for (Probe probe : probes)
@@ -121,13 +120,12 @@ public class Thermometer
 			Integer											aReading					= probe.read(resolution, unCached);
 			if (aReading != null)
 			{
-				if (printIt) System.out.println("Boiler/" + probe.address + " : " + aReading);
 				readings																+= aReading;
 				count++;
 			}
 		}
+		// TODO If single thermometer has a misread, then count = 0 and we get zero devide exception.
 		this.reading																	= readings / count;
-		if (printIt) System.out.println("Boiler/Average" + this.reading);
 		return this.reading;
 	}
     public String toDisplay()

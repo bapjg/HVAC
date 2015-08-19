@@ -45,7 +45,7 @@ public class Panel_5_Configuration_Thermometers 				extends 					Panel_0_Fragmen
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
     	
-    	Element_Heading											listHeading					= new Element_Heading("Thermometre", "Address");
+    	Element_Heading											listHeading					= new Element_Heading("Thermometer", "Address");
     	Element_ListView										listView 					= new Element_ListView("Henry");
     	panelInsertPoint.addView(listHeading);
     	panelInsertPoint.addView(listView);
