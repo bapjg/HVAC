@@ -1,7 +1,7 @@
 package eRegulation;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Thread_Thermometers implements Runnable
+public class Thread_Thermometers 								implements 					Runnable
 {
 	public void run()
 	{
@@ -22,11 +22,11 @@ public class Thread_Thermometers implements Runnable
 					else
 					{
 						// TODO Check reading != null
-						thisThermometer.read();
 						thisThermometer.pidControler.increment = ++thisThermometer.pidControler.increment % thisThermometer.pidControler.sampleIncrement;
 
 						if (thisThermometer.pidControler.increment == 0)
 						{
+							thisThermometer.read();
 							thisThermometer.pidControler.add(thisThermometer.reading);
 						}
 					}
