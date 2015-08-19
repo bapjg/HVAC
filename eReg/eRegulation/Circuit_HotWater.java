@@ -19,6 +19,15 @@ public class Circuit_HotWater extends Circuit_Abstract
 		}
 		else
 		{
+			if (	(Global.thermoBoiler.reading 	== null) 
+			||		(Global.thermoHotWater.reading 	== null)	)
+			{
+				shutDown();											// This bypasses stopRequested
+				circuitPump.off();
+				state												= CIRCUIT.STATE.Error;
+				Global.eMailMessage("Circuit_HotWater/sequencer", "A Thermometer cannont be read");
+			}
+			
 			switch (state)
 			{
 			case Off:
@@ -34,7 +43,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				state												= CIRCUIT.STATE.AwaitingHeat;
 				break;
 			case AwaitingHeat:
-				if (Global.thermoBoiler.reading > Global.thermoHotWater.reading)
+				if 		(Global.thermoBoiler.reading 	> Global.thermoHotWater.reading)
 				{
 					LogIt.action("PumpHotWater", "On");
 					circuitPump.on();

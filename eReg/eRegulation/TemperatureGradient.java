@@ -39,6 +39,11 @@ public class TemperatureGradient
 	public Integer getTempToTarget()
 	{
 		Integer outsideTemp				= Global.thermoOutside.reading;
+		if (outsideTemp == null)
+		{
+			Global.eMailMessage("Thermometer/Read", "Unable to read Thermometer  " + Global.thermoOutside.name);
+			return 0;
+		}
 		Float	tempToTarget			= this.a * (float) outsideTemp + this.b;
 
 		return (Integer) Math.round(tempToTarget);

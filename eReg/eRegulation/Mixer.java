@@ -1,5 +1,6 @@
 package eRegulation;
 
+import HVAC_Common.CIRCUIT;
 import HVAC_Common.Ctrl_Configuration;
 import HVAC_Common.Rpt_PID;
 import HVAC_Common.Rpt_PID.Update;
@@ -121,22 +122,14 @@ public class Mixer
 		pidFloorOut.target																	= targetTemp;		// targetTemp is either tempGradient or some maxTemp for rampup
 
 		Integer 												tempFloorOut				= Global.thermoFloorOut.readUnCached();
-		
-//		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.5F);	// 05/02/2015				// returns a swingTime in milliseconds
-//		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.6F);	// 06/02/2015				// returns a swingTime in milliseconds
-//		swingTimeRequired																	= pidFloorOut.getGain(gainP, gainD, gainI) + pidBurnerOut.getGainD(gainD * 0.7F);	// 07/02/2015				// returns a swingTime in milliseconds
-		
-//		if (	(pidBurnerOut.getdTdt(-1) <= 0)												// Boiler was cooling
-//		&&		(pidBurnerOut.getdTdt(0)  >  0)	)											// Boiler is heating
-//		{
-//			swingTimeRequired																= - Math.abs(positionTracked - swingUsableMin);	// Position at useable min
-//		}
-		
-//		if (	(Global.burner.lastSwitchedOn != null) 
-//		&& 		(Global.burner.lastSwitchedOn + 15000L > Global.DateTime.now())	)
-		
 		float													thisBoilerDTdt				= pidBurner.dTdt();
 		
+		if (tempFloorOut == null)
+		{
+			positionZero();											// This bypasses stopRequested
+			Global.eMailMessage("Mixer/sequencer", "Thermometer " + Global.thermoFloorOut.name + " cannont be read");
+			return;
+		}
 		if ((lastBoilerDTdt < 0) && (thisBoilerDTdt > 0))									// boiler was cooling, now heating
 		{
 			// Have reached minimum, boilerTemp will now increase
@@ -173,10 +166,6 @@ public class Mixer
 		
 		if (swingTimeRequired == 0)
 		{
-//			Integer												swingTimeBurner				= pidBurner.getGainD(gainD * 0.6F);
-//			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI) + swingTimeBurner;						// 08/02/2015				// returns a swingTime in milliseconds
-//			swingTimeRequired																= pidFloorOut.getGain(gainP, gainD, gainI);						// 08/02/2015				// returns a swingTime in milliseconds
-
 			Float												swingProportion				= positionTracked.floatValue()/swingTime.floatValue();
 			
 			Integer												swingTimeMixerP				= pidFloorOut.getGainP(gainP);
@@ -367,10 +356,10 @@ public class Mixer
 	}
 	public MixerMove_Report positionAbsolute(Integer position)
 	{
-		Long 													positionDiff;
-		Integer													timeToWait;
-		Long													timeStart;
-		Long													timeEnd;
+//		Long 													positionDiff;
+//		Integer													timeToWait;
+//		Long													timeStart;
+//		Long													timeEnd;
 		if (position > positionTracked)
 		{
 			// Must move up

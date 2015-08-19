@@ -270,12 +270,14 @@ public class Global
 	public static Boolean isSummer()
 	{
 		// TODO Determine from outside temperature whether summer or not
+		if (Global.thermoOutside.reading == null)											return true; // Let's play it safe																	// force summer to keep things safe
 		if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)				return true;
 		else																				return false;
  	}
 	public static Boolean isWinter()
 	{
 		// TODO Determine from outside temperature whether summer or not
+		if (Global.thermoOutside.reading == null)											return false; // Let's play it safe																	// force summer to keep things safe
 		if (Global.thermoOutside.reading < Global.tasksBackGround.winterTemp)				return true;
 		else																				return false;
  	}

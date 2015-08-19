@@ -261,6 +261,7 @@ abstract class Circuit_Abstract
 				}
 				else
 				{
+					if (Global.thermoOutside.reading == null)							return;
 					if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)
 					{
 						// TODO do nothing or marked as finished

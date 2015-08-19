@@ -17,10 +17,6 @@ import HVAC_Common.Ctrl_Configuration;
 public class Thermometer
 {
 	public String 												name;
-//	public String 												friendlyName;
-//	public String 												address;
-	public String 												thermoFile_Normal;
-	public String 												thermoFile_UnCached;
  	public Integer 												reading;
 	public PID													pidControler;
 	public ArrayList <Probe>									probes						= new ArrayList <Probe> ();
@@ -28,16 +24,11 @@ public class Thermometer
 	public Thermometer(Ctrl_Configuration.Thermometer 			paramThermometer)
 	{
 		this.name 		    																= paramThermometer.name;
-//		this.friendlyName  																	= "";
-//		this.address  																		= paramThermometer.address;
 		this.pidControler																	= null;
 		
 		String prefix																		= "/mnt/1wire/";
 		String suffix																		= "/";
 
-//		this.thermoFile_Normal																= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
-//		this.thermoFile_UnCached															= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
-		
 		if (paramThermometer.pidName != null)
 		{
 			PID 												thisPID						= Global.pids.fetchPID(paramThermometer.pidName);
@@ -77,54 +68,31 @@ public class Thermometer
      	 *  	A change of resolution (either up or down) seems to be uncached
      	 */
     	
-//		String	 		tempString;
-//		float	 		tempFloat;
-//    	
-//    	try
-//		{
-//    		FileInputStream 								ThermoFile_InputStream 		= null;
-//    		if (unCached)
-//    		{
-//        		ThermoFile_InputStream 													= new FileInputStream(thermoFile_UnCached + "temperature" + resolution.toString());
-//    		}
-//    		else
-//    		{
-//        		ThermoFile_InputStream 													= new FileInputStream(thermoFile_Normal   + "temperature" + resolution.toString());
-//    		}
-//			DataInputStream 								ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
-//			BufferedReader 									ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
-//			String 											ThermoFile_InputLine 		= ThermoFile_InputBuffer.readLine();
-//
-//			ThermoFile_InputBuffer.close();
-//			ThermoFile_InputData.close();
-//			ThermoFile_InputStream.close();
-//
-//			tempString	 																= ThermoFile_InputLine.replace(" ", "");
-//			tempFloat	 																= Float.parseFloat(tempString);
-//			this.reading																= Math.round(tempFloat * 1000); // Round to milli-degree
-//		}
-//		catch (Exception err)
-//		{
-//			if (!this.name.equalsIgnoreCase("Boiler_In"))
-//			{
-//				System.out.println("Thermometer read Error on " + this.name + " message was : " + err.getMessage());
-//			}
-//			this.reading																= -273000; // Round to milli-degree
-//		}		
-//		return this.reading; //Last known good reading;
-		
 		Integer												readings					= 0;
 		Integer												count						= 0;
+		Integer 											firstReading				= -99;
 		for (Probe probe : probes)
 		{
 			Integer											aReading					= probe.read(resolution, unCached);
+			if (firstReading == -99)						firstReading				= aReading;
 			if (aReading != null)
 			{
+				if (Math.abs(aReading - firstReading) > 2000)							// difference > 2 degrees
+				{
+					Global.eMailMessage("Thermometer/Read", "Temperature difference > 2 degrees on thermometer " + this.name);
+					this.reading														= null;
+					return null;
+				}
 				readings																+= aReading;
 				count++;
 			}
 		}
-		// TODO If single thermometer has a misread, then count = 0 and we get zero devide exception.
+		if (count == 0)
+		{
+			Global.eMailMessage("Thermometer/Read", "Unable to read Temperature on thermometer " + this.name);
+			this.reading																= null;
+			return null;
+		}
 		this.reading																	= readings / count;
 		return this.reading;
 	}

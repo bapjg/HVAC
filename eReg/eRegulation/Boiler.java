@@ -79,32 +79,26 @@ public class Boiler
 	}
 	public Boolean checkOverHeat()
 	{
-//		if (Global.thermoBoiler.readUnCached() > tempNeverExceed)
-		if (getBurnerTemp() > tempNeverExceed)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	public Integer getBurnerTemp()
-	{
 		Integer													tempNow						= Global.thermoBoiler.readUnCached();
-		if (tempNow == -273000)
+		if (tempNow == null)
 		{
-			LogIt.error("Boiler", "getBurnerTemp", "main thermometer failed, using backup", false);
-			return	Global.thermometers.fetchThermometer("Boiler_Old").readUnCached();
+			Global.eMailMessage("Boiler/checkOverHeat", "Error on Read Boiler Thermometer");
+			return	true;
 		}
-		return tempNow;
+		
+		if (tempNow > tempNeverExceed)							return true;
+		else													return false;
 	}
 	public void sequencer()
 	{
-		// Take unCached temperature. The value is then cached
-		
-//		Integer													tempNow 					= Global.thermoBoiler.readUnCached();
-		Integer													tempNow 					= getBurnerTemp();
+		Integer													tempNow						= Global.thermoBoiler.readUnCached();
+		if (tempNow == null)
+		{
+			burner.powerOff();
+			Global.eMailMessage("Boiler/sequencer", "Error on Read Boiler Thermometer");
+			state																			 = STATE_Error;
+			return;
+		}
 		
 		if (checkOverHeat())		// This is just a temperature check
 		{

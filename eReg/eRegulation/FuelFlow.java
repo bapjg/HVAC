@@ -104,7 +104,6 @@ public class FuelFlow
 				timeLastStart																= -1L;
 				saveFuelFlow();
 				LogIt.fuelData(consumption);
-				System.out.println("----------------Fuelflow : " + consumption.toString());
 			}
 		}
 	}

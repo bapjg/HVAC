@@ -32,6 +32,15 @@ public class Circuit_Radiator extends Circuit_Abstract
 		}
 		else
 		{
+			if 	(Global.thermoBoiler.reading 		== null) 
+			{
+				shutDown();											// This bypasses stopRequested
+				circuitPump.off();
+				state												= CIRCUIT.STATE.Error;
+				Global.eMailMessage("Circuit_Radiator/sequencer", "A Thermometer cannont be read");
+			}
+
+			
 			switch (state)
 			{
 			case Off:

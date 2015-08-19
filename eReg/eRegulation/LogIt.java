@@ -95,54 +95,6 @@ public class LogIt
 			System.out.println(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 		}
 	}
-//	public static void pidData
-//		(
-//				Integer target,
-//				Integer tempCurrent,
-//				Integer tempCurrentError,
-//				Float 	differential,
-//				Float 	integral,
-//				Float 	kP,
-//				Float 	kD,
-//				Float 	kI,
-//				Float 	result,
-//				Integer tempOut,
-//				Integer tempBoiler,	
-//				Integer positionTracked
-//		)
-//    {
-//		if (!Global.httpSemaphore.semaphoreLock("LogIt.pidData"))
-//		{
-//			System.out.println(dateTimeStamp() + " LogIt.pidData Lock timedout, owned by " + Global.httpSemaphore.owner);
-//			return;
-//		}
-//
-//		HTTP_Request 											httpRequest					= new HTTP_Request <Rpt_PID.Update> ("Monitor");
-//				
-//		Rpt_PID.Data 											messageSend 				= (new Rpt_PID()).new Update();
-//		messageSend.dateTime 																= System.currentTimeMillis();
-//		messageSend.target		 															= target; 
-//		messageSend.tempCurrent		 														= tempCurrent; 
-//		messageSend.tempCurrentError		 												= tempCurrentError; 
-//		messageSend.differential		 													= differential; 
-//		messageSend.integral		 														= integral; 
-//		messageSend.kP		 																= kP; 
-//		messageSend.kD		 																= kD; 
-//		messageSend.kI		 																= kI; 
-//		messageSend.result		 															= result; 
-//		messageSend.tempOut		 															= tempOut;
-//		messageSend.tempBoiler		 														= tempBoiler;
-//		messageSend.positionTracked		 													= positionTracked;
-//					
-//		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
-//		
-//		if (!(messageReceive instanceof Rpt_Abstract.Ack))
-//		{
-//			// System.out.println(dateTimeStamp() + " pid data  is : Nack");
-//		}
-//
-//		Global.httpSemaphore.semaphoreUnLock();			
-//    }
 	public static void pidData	(Rpt_PID.Update	messageSend)
 	{
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.pidData"))
@@ -172,7 +124,10 @@ public class LogIt
 		
 		Rpt_Temperatures 										messageSend 				= new Rpt_Temperatures();
 		messageSend.dateTime 																= System.currentTimeMillis();
-							
+		
+		
+		// TODO should we not check for null values
+		
 		messageSend.tempBoiler 																= Global.thermoBoiler.reading;
 		messageSend.tempBoilerIn 															= Global.thermoBoilerIn.reading;
 		messageSend.tempBoilerOut															= Global.thermoBoilerOut.reading;

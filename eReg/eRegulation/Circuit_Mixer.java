@@ -44,6 +44,16 @@ public class Circuit_Mixer extends Circuit_Abstract
 		}
 		else
 		{
+			if (	(Global.thermoBoiler.reading 		== null) 
+			||		(Global.thermoLivingRoom.reading 	== null)	)
+			{
+				shutDown();											// This bypasses stopRequested
+				// TODO Should we not close the mixer
+				circuitPump.off();
+				state												= CIRCUIT.STATE.Error;
+				Global.eMailMessage("Circuit_Mixer/sequencer", "A Thermometer cannont be read");
+			}
+
 			switch (state)
 			{
 			case Off:

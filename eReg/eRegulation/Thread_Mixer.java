@@ -31,7 +31,6 @@ public class Thread_Mixer implements Runnable
 		Integer indexDelay																	= timeDelayInSeconds/5;
 		
 		while (!Global.stopNow)
-//		while ((!Global.stopNow) && (circuitMixer.state != circuitMixer.CIRCUIT_STATE_Off))
 		{
 //			Mixer states can be 
 //				- starting/running
@@ -41,6 +40,13 @@ public class Thread_Mixer implements Runnable
 //			if stopping/off do nothing
 //			if running cold just carry on at cold position (do we need to call sequencer ?)
 //			if running/starting do below	
+			
+			if (	(Global.thermoOutside.reading 		== null)
+			||		(Global.thermoLivingRoom.reading 	== null)	)
+			{
+				Global.eMailMessage("Thread_Mixer/run", "Unable to read a Thermometer");
+				circuit.shutDown();
+			}
 			
 			if  ((circuit.state != CIRCUIT.STATE.Off) && (circuit.state != CIRCUIT.STATE.Idle))
 			{
@@ -140,7 +146,7 @@ public class Thread_Mixer implements Runnable
 					mixer.positionZero();
 				}
 			}
-		}
+		}		// End while
 		circuit.circuitPump.off();
 		LogIt.info("Thread_Mixer", "Run", "Stopping", true);	
 	}

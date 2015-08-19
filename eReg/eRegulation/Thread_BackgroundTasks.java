@@ -101,7 +101,8 @@ public class Thread_BackgroundTasks implements Runnable
 
 			//=========================================================================================================================================
 			//
-			// Ensure no freezing : Particulary in winter
+			// Ensure no freezing : Particularly in winter
+			// TODO what about Thermo Read errors
 			//
 			Long						now							= Global.Time.now();
 			Circuit_Abstract 			circuit						= null;
