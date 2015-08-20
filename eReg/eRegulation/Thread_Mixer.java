@@ -19,7 +19,6 @@ public class Thread_Mixer implements Runnable
 		LogIt.info("Thread_Mixer_" + circuit.name, "Run", "Starting", true);		
 
 		mixer.positionZero();
-//		LogIt.mixerData(Global.now(), 0, Global.now(), mixer.positionTracked);					// Problem with dbInsert if timeStart = timeEnd (primary Index)
 		LogIt.mixerData(Global.DateTime.now(), 0, 0L, 0);												// If timeEnd = 0, then the second part is not inserted into DataBase
 		
 		Integer 												i							= 0; 	// Used for loop waiting 20 s
@@ -48,7 +47,7 @@ public class Thread_Mixer implements Runnable
 				circuit.shutDown();
 			}
 			
-			if  ((circuit.state != CIRCUIT.STATE.Off) && (circuit.state != CIRCUIT.STATE.Idle))
+			if  ((circuit.state != CIRCUIT.STATE.Off) && (circuit.state != CIRCUIT.STATE.Idle)  && (circuit.state != CIRCUIT.STATE.Error))
 			{
 				// Note that Mixer calls go to sleep when positionning the mixer.
 				
@@ -116,7 +115,17 @@ public class Thread_Mixer implements Runnable
 				{
 					Global.waitSeconds(5);													// indexWait loops of 5s
 						
-					tempNow																	= Global.thermoFloorOut.readUnCached();
+					try
+					{
+						tempNow																= Global.thermoFloorOut.readUnCached();
+					}
+					catch (Exception ex)					// Panic : a read error has occured on thermometer
+					{
+						circuit.shutDown();
+						circuit.state														= CIRCUIT.STATE.Error;
+						circuit.mixer.positionZero();
+						break;
+					}
 					
 					// TODO check that tempNow != null
 					
@@ -132,7 +141,6 @@ public class Thread_Mixer implements Runnable
 						
 						if (Math.abs(temperatureProjected - targetTemp) > mixer.marginProjection)		// More than 2 degrees difference (either over or under)
 						{
-//							LogIt.display("Thread_Mixer", "mainLoop", "Interrupting the " + timeProjectInSeconds + "s wait after " + (i * 5) +"s, temperatureProjected : " + temperatureProjected + ", tempTarget : " + targetTemp); //in millidegreese
 							break;
 						}
 					}

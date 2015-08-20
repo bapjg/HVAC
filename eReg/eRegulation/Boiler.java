@@ -79,90 +79,95 @@ public class Boiler
 	}
 	public Boolean checkOverHeat()
 	{
-		Integer													tempNow						= Global.thermoBoiler.readUnCached();
-		if (tempNow == null)
+		try
+		{
+			Integer												tempNow						= Global.thermoBoiler.readUnCached();
+			if (tempNow > tempNeverExceed)						return true;
+			else												return false;
+		}
+		catch (Exception ex)
 		{
 			Global.eMailMessage("Boiler/checkOverHeat", "Error on Read Boiler Thermometer");
 			return	true;
 		}
-		
-		if (tempNow > tempNeverExceed)							return true;
-		else													return false;
 	}
 	public void sequencer()
 	{
-		Integer													tempNow						= Global.thermoBoiler.readUnCached();
-		if (tempNow == null)
+		try
+		{
+			Integer												tempNow						= Global.thermoBoiler.readUnCached();
+			
+			if (checkOverHeat())		// This is just a temperature check
+			{
+				
+				if (state != STATE_On_CoolingAfterOverheat)
+				{
+					burner.powerOff();
+					LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + " , state set to STATE_OnCoolingAfterOverheat", false);
+					state																	= STATE_On_CoolingAfterOverheat;
+				}
+				return;
+			}
+			if (burner.burnerFault())	//This reads GPIO
+			{
+				state																		= STATE_Error;
+				burner.powerOff();
+				LogIt.error("Boiler", "sequencer", "burner has tripped");
+				return;
+			}
+
+			switch (state)
+			{
+			case STATE_Error:
+				// do nothing
+				// Dont close other relays because we must evacuate the heat
+				break;
+			case STATE_Off:
+				// do nothing
+				// Should we not close down all relays
+				break;
+			case STATE_On_Heating:
+				if (Global.thermoBoiler.reading > tempMax)
+				{
+					burner.powerOff();
+					state																	= STATE_On_Cooling;
+					return;
+				}
+				break;
+			case STATE_On_CoolingAfterOverheat:
+				if (!checkOverHeat())
+				{
+					LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling", false);
+					state																	= STATE_On_Cooling; 		//Normal operating temp has returned
+					return;
+				}
+				break;
+			case STATE_On_Cooling:
+				if (Global.thermoBoiler.reading < tempMin)
+				{
+					burner.powerOn();
+					state 																	= STATE_On_Heating;
+					return;
+				}
+				break;
+			case STATE_On_PowerUp:
+				if (Global.thermoBoiler.reading < tempMax)
+				{
+					burner.powerOn();
+					state 																	= STATE_On_Heating;
+					return;
+				}
+				break;
+			default:
+				LogIt.error("Boiler", "sequencer", "unknown state detected : " + state);	
+			}
+		}
+		catch (Exception ex)
 		{
 			burner.powerOff();
 			Global.eMailMessage("Boiler/sequencer", "Error on Read Boiler Thermometer");
 			state																			 = STATE_Error;
 			return;
-		}
-		
-		if (checkOverHeat())		// This is just a temperature check
-		{
-			
-			if (state != STATE_On_CoolingAfterOverheat)
-			{
-				burner.powerOff();
-				LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + " , state set to STATE_OnCoolingAfterOverheat", false);
-				state																		 = STATE_On_CoolingAfterOverheat;
-			}
-			return;
-		}
-		if (burner.burnerFault())	//This reads GPIO
-		{
-			state																			 = STATE_Error;
-			burner.powerOff();
-			LogIt.error("Boiler", "sequencer", "burner has tripped");
-			return;
-		}
-
-		switch (state)
-		{
-		case STATE_Error:
-			// do nothing
-			// Dont close other relays because we must evacuate the heat
-			break;
-		case STATE_Off:
-			// do nothing
-			// Should we not close down all relays
-			break;
-		case STATE_On_Heating:
-			if (Global.thermoBoiler.reading > tempMax)
-			{
-				burner.powerOff();
-				state																		 = STATE_On_Cooling;
-				return;
-			}
-			break;
-		case STATE_On_CoolingAfterOverheat:
-			if (!checkOverHeat())
-			{
-				LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling", false);
-				state																		 = STATE_On_Cooling; 		//Normal operating temp has returned
-				return;
-			}
-			break;
-		case STATE_On_Cooling:
-			if (Global.thermoBoiler.reading < tempMin)
-			{
-				burner.powerOn();
-				state 																		= STATE_On_Heating;
-				return;
-			}
-			break;
-		case STATE_On_PowerUp:
-			if (Global.thermoBoiler.reading < tempMax)
-			{
-				burner.powerOn();
-				state 																		= STATE_On_Heating;
-				return;
-			}
-			break;
-		default:
-			LogIt.error("Boiler", "sequencer", "unknown state detected : " + state);	
 		}
 	}
 }

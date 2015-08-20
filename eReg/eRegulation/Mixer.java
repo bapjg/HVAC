@@ -100,220 +100,224 @@ public class Mixer
 		// Simply measure the difference between wanted temperature and mixerOut
 		// Multiply by a coefficient (250ms/decimal degree to start with) and see how it goes
 		//
-		allOff();
-		PID 													pidFloorOut					= Global.thermoFloorOut.pidControler;
-		PID 													pidBurner					= Global.thermoBoiler.pidControler;
-		MixerMove_Report 										report;
-		
-		
-		// Koeff at 250 ok for low boiler temp circa 30
-		// when over 45, had a lot of overshoot
-		// Koeff at 200 still lots of overshoot
-		// Integer Koeff								= 100;									// ms per decimal degree
-		
-		// An intial workout of K, Kd & Ki gave following results :
-		// K	= 6.2 for a tempchange of 50 degrees = 62 decidegrees
-		// Kd   = 1.2 degrees/min                    = 0.2 decidegrees/s
-		// Ki   = 0
-		// PID controler give the result in seconds
-		// These params gave oscilations
-		// Changed Kd = 0.02
-		
-		pidFloorOut.target																	= targetTemp;		// targetTemp is either tempGradient or some maxTemp for rampup
 
-		Integer 												tempFloorOut				= Global.thermoFloorOut.readUnCached();
-		float													thisBoilerDTdt				= pidBurner.dTdt();
-		
-		if (tempFloorOut == null)
+		try
 		{
-			positionZero();											// This bypasses stopRequested
-			Global.eMailMessage("Mixer/sequencer", "Thermometer " + Global.thermoFloorOut.name + " cannont be read");
-			return;
-		}
-		if ((lastBoilerDTdt < 0) && (thisBoilerDTdt > 0))									// boiler was cooling, now heating
-		{
-			// Have reached minimum, boilerTemp will now increase
+			allOff();
+			PID 												pidFloorOut					= Global.thermoFloorOut.pidControler;
+			PID 												pidBurner					= Global.thermoBoiler.pidControler;
+			MixerMove_Report 									report;
 			
-			// 50% : Too much as it takes the rest of the cycle to catch up and often overshoots
-			// 10% : Try it
-			// 30% : Still overshoot with use of burnerPid unadjusted for position.
-			// Try 50% again with position adjusted burnerPid
+			
+			// Koeff at 250 ok for low boiler temp circa 30
+			// when over 45, had a lot of overshoot
+			// Koeff at 200 still lots of overshoot
+			// Integer Koeff								= 100;							// ms per decimal degree
+			
+			// An intial workout of K, Kd & Ki gave following results :
+			// K	= 6.2 for a tempchange of 50 degrees = 62 decidegrees
+			// Kd   = 1.2 degrees/min                    = 0.2 decidegrees/s
+			// Ki   = 0
+			// PID controler give the result in seconds
+			// These params gave oscilations
+			// Changed Kd = 0.02
+			
+			pidFloorOut.target																= targetTemp;		// targetTemp is either tempGradient or some maxTemp for rampup
+	
+			Integer 											tempFloorOut				= Global.thermoFloorOut.readUnCached();
+			float												thisBoilerDTdt				= pidBurner.dTdt();
+		
+			if ((lastBoilerDTdt < 0) && (thisBoilerDTdt > 0))								// boiler was cooling, now heating
+			{
+				// Have reached minimum, boilerTemp will now increase
+				
+				// 50% : Too much as it takes the rest of the cycle to catch up and often overshoots
+				// 10% : Try it
+				// 30% : Still overshoot with use of burnerPid unadjusted for position.
+				// Try 50% again with position adjusted burnerPid
 //			Float												swingTimeRequiredFloat		= positionTracked.floatValue() * 0.30F;
 //			swingTimeRequired																= - swingTimeRequiredFloat.intValue();
 			
 			
-			if (Global.circuits.isSingleActiveCircuit())		swingTimeRequired			= safeSingleCircuitPosition - positionTracked;				// Gives negative number
-			else												swingTimeRequired			= safeDoubleCircuitPosition - positionTracked;				// Gives negative number
-			boilerState																		= STATES.boiler.minReached;
-			if (swingTimeRequired > 0)			// This can happen at startup, or if positionTracked is slightly below safeCircuitPosition
-			{
-				if (positionTracked != 0)
-				{	
-					swingTimeRequired														= 0;
+				if (Global.circuits.isSingleActiveCircuit())	swingTimeRequired			= safeSingleCircuitPosition - positionTracked;				// Gives negative number
+				else											swingTimeRequired			= safeDoubleCircuitPosition - positionTracked;				// Gives negative number
+				boilerState																	= STATES.boiler.minReached;
+				if (swingTimeRequired > 0)			// This can happen at startup, or if positionTracked is slightly below safeCircuitPosition
+				{
+					if (positionTracked != 0)
+					{	
+						swingTimeRequired													= 0;
+					}
 				}
 			}
-		}
-		else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))									// boiler was heating, now cooling
-		{
-			swingTimeRequired																= 0;
-			boilerState																		= STATES.boiler.maxReached;
-		}
-		else
-		{
-			swingTimeRequired																= 0;
-		}
-		if (thisBoilerDTdt != 0)								lastBoilerDTdt				= thisBoilerDTdt;
-		
-		if (swingTimeRequired == 0)
-		{
-			Float												swingProportion				= positionTracked.floatValue()/swingTime.floatValue();
-			
-			Integer												swingTimeMixerP				= pidFloorOut.getGainP(gainP);
-			Integer												swingTimeMixerD				= pidFloorOut.getGainD(gainD * 0.0F);
-			Integer												swingTimeBurnerD			= pidFloorOut.getGainD(gainD * 1.0F * swingProportion, 2);		// Uses average over 4 readings rather than 2
-		
-			swingTimeRequired																= swingTimeMixerP + swingTimeMixerD + swingTimeBurnerD + 500;	// Add 500ms
-		}
-
-		if (tempFloorOut > 50000)
-		{
-//			LogIt.display("Mixer", "sequencer", "Have definitely tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
-		}
-		else if (tempFloorOut > 45000)
-		{
-//			LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
-			if (swingTimeRequired > 0)
+			else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))							// boiler was heating, now cooling
+			{
+				swingTimeRequired															= 0;
+				boilerState																	= STATES.boiler.maxReached;
+			}
+			else
 			{
 				swingTimeRequired															= 0;
 			}
-		}
-		
-		if (Math.abs(swingTimeRequired) > 500)												// Less than half a second
-		{
-			Integer 											positionProjected			= positionTracked + swingTimeRequired;
-			Rpt_PID.Update										messageBefore				= (new Rpt_PID()).new Update();
+			if (thisBoilerDTdt != 0)							lastBoilerDTdt				= thisBoilerDTdt;
 			
-			messageBefore.target															= targetTemp;
-			messageBefore.tempCurrent														= pidFloorOut.tempCurrent();
-			messageBefore.tempCurrentError													= pidFloorOut.tempCurrentError();
-			
-			messageBefore.termProportional													= - pidFloorOut.getGainP(1F);
-			messageBefore.termDifferential													= - pidFloorOut.getGainD(1F);
-			messageBefore.termIntegral														= - pidFloorOut.getGainI(1F);
-
-			messageBefore.gainProportional													= pidFloorOut.getGainP(gainP);
-			messageBefore.gainDifferential													= pidFloorOut.getGainD(gainD);
-			messageBefore.gainIntegral														= pidFloorOut.getGainI(gainI);
-			
-			messageBefore.kP																= gainP;
-			messageBefore.kD																= gainD;
-			messageBefore.kI																= gainI;
-			
-			messageBefore.gainTotal															= swingTimeRequired;
-			messageBefore.tempOut															= Global.thermoFloorOut.reading;
-			messageBefore.tempBoiler														= Global.thermoBoiler.reading;
-			
-			messageBefore.positionTracked													= positionTracked;
-			messageBefore.startMovement														= true;
-			
-			switch (boilerState)
+			if (swingTimeRequired == 0)
 			{
-			case minReached:																// This is to inhibit mixer moving hotter until warmer boiler water has filtered through
-				if (pidFloorOut.dTdt() > 0F)												// BoilerWarming has reached floorOut which is now warming
+				Float											swingProportion				= positionTracked.floatValue()/swingTime.floatValue();
+				
+				Integer											swingTimeMixerP				= pidFloorOut.getGainP(gainP);
+				Integer											swingTimeMixerD				= pidFloorOut.getGainD(gainD * 0.0F);
+				Integer											swingTimeBurnerD			= pidFloorOut.getGainD(gainD * 1.0F * swingProportion, 2);		// Uses average over 4 readings rather than 2
+			
+				swingTimeRequired															= swingTimeMixerP + swingTimeMixerD + swingTimeBurnerD + 500;	// Add 500ms
+			}
+
+			if (tempFloorOut > 50000)
+			{
+	//			LogIt.display("Mixer", "sequencer", "Have definitely tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
+			}
+			else if (tempFloorOut > 45000)
+			{
+	//			LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
+				if (swingTimeRequired > 0)
 				{
-					boilerState 				= STATES.boiler.normalOperating;		
+					swingTimeRequired															= 0;
 				}
-				else																		// FloorOut is still cooling, hold back
+			}
+		
+			if (Math.abs(swingTimeRequired) > 500)											// Less than half a second
+			{
+				Integer 										positionProjected			= positionTracked + swingTimeRequired;
+				Rpt_PID.Update									messageBefore				= (new Rpt_PID()).new Update();
+				
+				messageBefore.target														= targetTemp;
+				messageBefore.tempCurrent													= pidFloorOut.tempCurrent();
+				messageBefore.tempCurrentError												= pidFloorOut.tempCurrentError();
+				
+				messageBefore.termProportional												= - pidFloorOut.getGainP(1F);
+				messageBefore.termDifferential												= - pidFloorOut.getGainD(1F);
+				messageBefore.termIntegral													= - pidFloorOut.getGainI(1F);
+	
+				messageBefore.gainProportional												= pidFloorOut.getGainP(gainP);
+				messageBefore.gainDifferential												= pidFloorOut.getGainD(gainD);
+				messageBefore.gainIntegral													= pidFloorOut.getGainI(gainI);
+				
+				messageBefore.kP															= gainP;
+				messageBefore.kD															= gainD;
+				messageBefore.kI															= gainI;
+				
+				messageBefore.gainTotal														= swingTimeRequired;
+				messageBefore.tempOut														= Global.thermoFloorOut.reading;
+				messageBefore.tempBoiler													= Global.thermoBoiler.reading;
+				
+				messageBefore.positionTracked												= positionTracked;
+				messageBefore.startMovement													= true;
+			
+				switch (boilerState)
 				{
-					if (	Global.circuits.isSingleActiveCircuit() 						// A circuit may have been switched off since
-					&& 		positionTracked > safeSingleCircuitPosition	)
+				case minReached:															// This is to inhibit mixer moving hotter until warmer boiler water has filtered through
+					if (pidFloorOut.dTdt() > 0F)											// BoilerWarming has reached floorOut which is now warming
 					{
-						swingTimeRequired													= safeSingleCircuitPosition - positionTracked;				// Backdown
+						boilerState 				= STATES.boiler.normalOperating;		
 					}
-					else if (swingTimeRequired > 0)
+					else																	// FloorOut is still cooling, hold back
 					{
+						if (	Global.circuits.isSingleActiveCircuit() 					// A circuit may have been switched off since
+						&& 		positionTracked > safeSingleCircuitPosition	)
+						{
+							swingTimeRequired												= safeSingleCircuitPosition - positionTracked;				// Backdown
+						}
+						else if (swingTimeRequired > 0)
+						{
+							swingTimeRequired												= 0;
+						}
+						else
+						{
+							// swingTimeRequired is negative, so must be handled
+						}
+					}
+					break;
+				case maxReached:
+				case normalOperating:
+				default:
+					break;
+				}
+			
+				if (swingTimeRequired > 0)		// Moving hotter
+				{
+					if (positionTracked == this.swingTime)
+					{
+						// Do nothing as already at minimum
 						swingTimeRequired													= 0;
 					}
-					else
+					else if (positionProjected > this.swingTime)
+			 		{
+			 			swingTimeRequired 													= this.swingTime - positionTracked + 2000;		//No point waiting over maximum add extra 2 seconds to be sure of end point
+						report																= mixerMoveUp(swingTimeRequired);
+						positionTracked														= this.swingTime;					
+			 		}
+					else																	// Normal operating
 					{
-						// swingTimeRequired is negative, so must be handled
+						report																= mixerMoveUp(swingTimeRequired);
+						positionTracked														= report.positionTracked;
 					}
 				}
-				break;
-			case maxReached:
-			case normalOperating:
-			default:
-				break;
+				else	// Moving colder
+				{
+					if (positionTracked == 0)
+					{
+						// Do nothing as already at minimum
+						swingTimeRequired													= 0;
+					}
+					else if (positionProjected < 0)																// Should never happen
+			 		{
+			 			swingTimeRequired 													= - (positionTracked + 2000);					//Add extra 2 seconds to be sure of end point
+						report																= mixerMoveDown(swingTimeRequired);
+						positionTracked														= 0;					
+			 		}
+					else																					// Normal operating
+					{
+						report																= mixerMoveDown(swingTimeRequired);
+						positionTracked														= report.positionTracked;
+					}
+				}
+				Rpt_PID.Update									messageAfter				= (new Rpt_PID()).new Update();
+				messageAfter.target															= targetTemp;
+				messageAfter.tempCurrent													= pidFloorOut.tempCurrent();
+				messageAfter.tempCurrentError												= pidFloorOut.tempCurrentError();
+				
+				messageAfter.termProportional												= - pidFloorOut.getGainP(1F);
+				messageAfter.termDifferential												= - pidFloorOut.getGainD(1F);
+				messageAfter.termIntegral													= - pidFloorOut.getGainI(1F);
+	
+				messageAfter.gainProportional												= pidFloorOut.getGainP(gainP);
+				messageAfter.gainDifferential												= pidFloorOut.getGainD(gainD);
+				messageAfter.gainIntegral													= pidFloorOut.getGainI(gainI);
+				
+				messageAfter.kP																= gainP;
+				messageAfter.kD																= gainD;
+				messageAfter.kI																= gainI;
+				
+				messageAfter.gainTotal														= swingTimeRequired;
+				messageAfter.tempOut														= Global.thermoFloorOut.reading;
+				messageAfter.tempBoiler														= Global.thermoBoiler.reading;
+				
+				messageAfter.positionTracked												= positionTracked;
+				messageAfter.startMovement													= false;
+				
+				LogIt.pidData(messageBefore);
+				LogIt.pidData(messageAfter);
 			}
-			
-			if (swingTimeRequired > 0)		// Moving hotter
+			else
 			{
-				if (positionTracked == this.swingTime)
-				{
-					// Do nothing as already at minimum
-					swingTimeRequired														= 0;
-				}
-				else if (positionProjected > this.swingTime)
-		 		{
-		 			swingTimeRequired 														= this.swingTime - positionTracked + 2000;		//No point waiting over maximum add extra 2 seconds to be sure of end point
-					report																	= mixerMoveUp(swingTimeRequired);
-					positionTracked															= this.swingTime;					
-		 		}
-				else																					// Normal operating
-				{
-					report																	= mixerMoveUp(swingTimeRequired);
-					positionTracked															= report.positionTracked;
-				}
+				// Less that 500 ms. Do nought
 			}
-			else	// Moving colder
-			{
-				if (positionTracked == 0)
-				{
-					// Do nothing as already at minimum
-					swingTimeRequired														= 0;
-				}
-				else if (positionProjected < 0)																// Should never happen
-		 		{
-		 			swingTimeRequired 														= - (positionTracked + 2000);					//Add extra 2 seconds to be sure of end point
-					report																	= mixerMoveDown(swingTimeRequired);
-					positionTracked															= 0;					
-		 		}
-				else																					// Normal operating
-				{
-					report																	= mixerMoveDown(swingTimeRequired);
-					positionTracked															= report.positionTracked;
-				}
-			}
-			Rpt_PID.Update										messageAfter				= (new Rpt_PID()).new Update();
-			messageAfter.target																= targetTemp;
-			messageAfter.tempCurrent														= pidFloorOut.tempCurrent();
-			messageAfter.tempCurrentError													= pidFloorOut.tempCurrentError();
-			
-			messageAfter.termProportional													= - pidFloorOut.getGainP(1F);
-			messageAfter.termDifferential													= - pidFloorOut.getGainD(1F);
-			messageAfter.termIntegral														= - pidFloorOut.getGainI(1F);
-
-			messageAfter.gainProportional													= pidFloorOut.getGainP(gainP);
-			messageAfter.gainDifferential													= pidFloorOut.getGainD(gainD);
-			messageAfter.gainIntegral														= pidFloorOut.getGainI(gainI);
-			
-			messageAfter.kP																	= gainP;
-			messageAfter.kD																	= gainD;
-			messageAfter.kI																	= gainI;
-			
-			messageAfter.gainTotal															= swingTimeRequired;
-			messageAfter.tempOut															= Global.thermoFloorOut.reading;
-			messageAfter.tempBoiler															= Global.thermoBoiler.reading;
-			
-			messageAfter.positionTracked													= positionTracked;
-			messageAfter.startMovement														= false;
-			
-			LogIt.pidData(messageBefore);
-			LogIt.pidData(messageAfter);
 		}
-		else
+		catch (Exception ex)
 		{
-			// Less that 500 ms. Do nought
+			positionZero();											// This bypasses stopRequested
+			Global.eMailMessage("Mixer/sequencer", "Thermometer " + Global.thermoFloorOut.name + " cannont be read");
+			return;
 		}
 	}
 	public void positionZero()

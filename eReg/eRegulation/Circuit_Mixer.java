@@ -15,20 +15,28 @@ public class Circuit_Mixer extends Circuit_Abstract
 	}
 	public Long getRampUpTime(Integer tempObjective)
 	{
-		Integer													tempNow						= Global.thermoLivingRoom.read();
-		Integer													tempDifference				= tempObjective - tempNow;
-
-		// Work on basis of 		:	6               hours   per degree
-		// or						:   6 x 60 x 60     seconds per degree
-		// or                       :   6 x 3600 x 1000 milliSeconds per degree
-		// or                       :   6 x 3600        milliSeconds per milliDegree
-		
-		if (tempDifference > 0)
+		Integer													tempNow						= Global.thermoLivingRoom.reading;
+		if (tempNow != null)
 		{
-			Long												rampUpMilliSeconds			= 6L * 3600 * tempDifference;		// 6 hours per degree
-			return rampUpMilliSeconds;
+			Integer													tempDifference			= tempObjective - tempNow;
+	
+			// Work on basis of 		:	6               hours   per degree
+			// or						:   6 x 60 x 60     seconds per degree
+			// or                       :   6 x 3600 x 1000 milliSeconds per degree
+			// or                       :   6 x 3600        milliSeconds per milliDegree
+			
+			if (tempDifference > 0)
+			{
+				Long												rampUpMilliSeconds		= 6L * 3600 * tempDifference;		// 6 hours per degree
+				return rampUpMilliSeconds;
+			}
+			return 0L;
 		}
-		return 0L;
+		else
+		{
+			this.state 																		= CIRCUIT.STATE.Error;
+			return 0L;
+		}
 	}
 	@Override
 	public Long calculatePerformance()

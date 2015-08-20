@@ -44,17 +44,17 @@ public class Thermometer
 	{
 		probes.add(new Probe(paramThermometer));
 	}
-    public Integer read()
+    public Integer read()																	throws Thermometer_ReadException, Thermometer_SpreadException
 	{
      	// Returns temperature in millidegrees
     	return read(10, false);
 	}
-    public Integer readUnCached()
+    public Integer readUnCached()															throws Thermometer_ReadException, Thermometer_SpreadException
  	{
      	// Returns temperature in millidegrees
     	return read(10, true);
  	}
-    public Integer read(Integer resolution, Boolean unCached)
+    public Integer read(Integer resolution, Boolean unCached)								throws Thermometer_ReadException, Thermometer_SpreadException
 	{
      	// Returns temperature in millidegrees
      	/*
@@ -81,7 +81,7 @@ public class Thermometer
 				{
 					Global.eMailMessage("Thermometer/Read", "Temperature difference > 2 degrees on thermometer " + this.name);
 					this.reading														= null;
-					return null;
+					throw new Thermometer_ReadException(this.name);
 				}
 				readings																+= aReading;
 				count++;
@@ -100,7 +100,8 @@ public class Thermometer
     {
     	// Converts temperature in millidegrees into displayable format							// Either keep true or throw it out from display
     	DecimalFormat 										temperatureFormat 			= new DecimalFormat("0.0");
-    	return  temperatureFormat.format((float) (this.reading)/1000F);
+    	if (this.reading == null)							return "-273";
+    	else 												return  temperatureFormat.format((float) (this.reading)/1000F);
     }
     public class Probe
     {
@@ -121,7 +122,7 @@ public class Thermometer
     		this.thermoFile_Normal														= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
     		this.thermoFile_UnCached													= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
     	}
- 	    public Integer read(Integer resolution, Boolean unCached)
+ 	    public Integer read(Integer resolution, Boolean unCached)						throws Thermometer_ReadException, Thermometer_SpreadException
 		{
 	     	// Returns temperature in millidegrees
 	     	/*
@@ -162,7 +163,7 @@ public class Thermometer
 			{
 				if (probeOk)									LogIt.display("Probe", "read", "Thermometer read Error on " + this.name + "-" + this.address + " message was : " + err.getMessage());
 				probeOk																		= false;
-				return null;
+				throw new Thermometer_ReadException(this.name);
 			}		
 		}
     }
