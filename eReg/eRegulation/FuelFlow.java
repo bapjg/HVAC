@@ -77,36 +77,36 @@ public class FuelFlow
 			}			
 		}
 	}
-	public void update_OLD(boolean fuelFlowing)
-	{
-		// TODO To be deleted
-		
-		if (fuelFlowing)				// Fuel has just started to flow (called from burner.powerOn
-		{
-			if (timeLastStart == -1L)
-			{
-				timeLastStart 																= Global.DateTime.now();
-			}
-			else
-			{
-				LogIt.error("FluelFlow", "update", "timeLastLast is alreay set when it shouldn't be (powerOn)");
-			}
-		}
-		else							// Fuel has stopped flowing (called from burner.powerOff
-		{
-			if (timeLastStart == -1L)
-			{
-				LogIt.error("FluelFlow", "update", "timeLastLast is not set when it should be (powerOff)");
-			}
-			else
-			{
-				consumption																	= consumption + Global.DateTime.now() - timeLastStart;
-				timeLastStart																= -1L;
-				saveFuelFlow();
-				LogIt.fuelData(consumption);
-			}
-		}
-	}
+//	public void update_OLD(boolean fuelFlowing)
+//	{
+//		// TODO To be deleted
+//		
+//		if (fuelFlowing)				// Fuel has just started to flow (called from burner.powerOn
+//		{
+//			if (timeLastStart == -1L)
+//			{
+//				timeLastStart 																= Global.DateTime.now();
+//			}
+//			else
+//			{
+//				LogIt.error("FluelFlow", "update", "timeLastLast is alreay set when it shouldn't be (powerOn)");
+//			}
+//		}
+//		else							// Fuel has stopped flowing (called from burner.powerOff
+//		{
+//			if (timeLastStart == -1L)
+//			{
+//				LogIt.error("FluelFlow", "update", "timeLastLast is not set when it should be (powerOff)");
+//			}
+//			else
+//			{
+//				consumption																	= consumption + Global.DateTime.now() - timeLastStart;
+//				timeLastStart																= -1L;
+//				saveFuelFlow();
+//				LogIt.fuelData(consumption);
+//			}
+//		}
+//	}
 	public void switchedOn()
 	{
 		// We basically need to detected state changes
@@ -121,7 +121,7 @@ public class FuelFlow
 		}
 		else
 		{
-			LogIt.error("FluelFlow", "update", "timeLastLast is alreay set when it shouldn't be (powerOn)");
+			LogIt.error("FuelFlow", "switchedOn", "timeLastLast is alreay set when it shouldn't be (powerOn)");
 		}
 	}
 	public void switchedOff()
@@ -134,15 +134,19 @@ public class FuelFlow
 		
 		if (timeLastStart == -1L)
 		{
-			LogIt.error("FluelFlow", "update", "timeLastLast is not set when it should be (powerOff)");
+			LogIt.error("FuelFlow", "switchedOff", "This can happen when controler stops, as called to ensure burner is not running");
+			LogIt.error("FuelFlow", "switchedOff", "timeLastLast is not set when it should be (powerOff)");
 		}
 		else
 		{
-			consumption																	= consumption + Global.DateTime.now() - timeLastStart;
+			Long 										consumptionThisBurn				= Global.DateTime.now() - timeLastStart;
+			LogIt.error("FuelFlow", "switchedOff", "----------------Fuelflow consumption         : " + consumption.toString());
+			LogIt.error("FuelFlow", "switchedOff", "----------------Fuelflow consumptionThisBurn : " + consumptionThisBurn.toString());
+			consumption																	= consumption + consumptionThisBurn;
 			timeLastStart																= -1L;
 			saveFuelFlow();
 			LogIt.fuelData(consumption);
-			LogIt.error("FluelFlow", "update", "----------------Fuelflow : " + consumption.toString());
+			LogIt.error("FuelFlow", "switchedOff", "----------------Fuelflow consumption New     : " + consumption.toString());
 		}
 	}
 	public void saveFuelFlow()
