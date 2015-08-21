@@ -100,8 +100,8 @@ abstract class Circuit_Abstract
 	public void suspend()
 	{
 		LogIt.action(this.name, "Suspend called");
-		this.heatRequired.tempMinimum														= 10;
-		this.heatRequired.tempMaximum														= 10;
+		this.heatRequired.tempMinimum														= 0;
+		this.heatRequired.tempMaximum														= 0;
 		this.state																			= CIRCUIT.STATE.Suspended;
 	}						
 	public void resume()						

@@ -26,7 +26,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 				circuitPump.off();
 				state																		= CIRCUIT.STATE.Error;
 				Global.eMailMessage("Circuit_HotWater/sequencer", "A Thermometer cannont be read");
-				Global.eMailMessage("Circuit_HotWater/sequencer", "This may be very bad");
 			}
 			
 			switch (state)
