@@ -45,9 +45,15 @@ public class Thermometer
 	{
 		probes.add(new Probe(paramThermometer));
 	}
-    public Integer read()																	throws Thermometer_ReadException, Thermometer_SpreadException
+    /**
+     * May force readUncached if last read was over 10s ago
+     * @return temperature in milliDegrees
+     * @throws Thermometer_ReadException
+     * @throws Thermometer_SpreadException
+     */
+	public Integer read()	     															// Returns temperature in millidegrees																
+    													throws 								Thermometer_ReadException, Thermometer_SpreadException
 	{
-     	// Returns temperature in millidegrees
     	return read(10, false);
 	}
     public Integer readUnCached()															throws Thermometer_ReadException, Thermometer_SpreadException
