@@ -107,7 +107,8 @@ public class Thread_BackgroundTasks implements Runnable
 			Long						now							= Global.Time.now();
 			Circuit_Abstract 			circuit						= null;
 			
-			if (Global.thermoHotWater.reading 		< tasksBackGround.antiFreeze)
+			if (	(Global.thermoHotWater.reading 		!= null)
+			&& 		(Global.thermoHotWater.reading 		< tasksBackGround.antiFreeze)	)
 			{
 				circuit												= Global.circuits.fetchcircuit("Hot_Water");
 				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
@@ -117,9 +118,9 @@ public class Thread_BackgroundTasks implements Runnable
 																			"1, 2, 3, 4, 5, 6, 7");					// Days
 				circuit.start();
 			}
-			if ((Global.thermoBoiler.reading 		< tasksBackGround.antiFreeze)
-			||  (Global.thermoBoilerIn.reading 		< tasksBackGround.antiFreeze)
-			||  (Global.thermoBoilerOut.reading 	< tasksBackGround.antiFreeze)	)
+			if (((Global.thermoBoiler.reading    != null) && (Global.thermoBoiler.reading 		< tasksBackGround.antiFreeze))
+			||  ((Global.thermoBoilerIn.reading  != null) && (Global.thermoBoilerIn.reading 	< tasksBackGround.antiFreeze))
+			||  ((Global.thermoBoilerOut.reading != null) && (Global.thermoBoilerOut.reading 	< tasksBackGround.antiFreeze))	)
 			{
 				circuit												= Global.circuits.fetchcircuit("Radiator");
 				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
@@ -129,9 +130,9 @@ public class Thread_BackgroundTasks implements Runnable
 																			"1, 2, 3, 4, 5, 6, 7");					// Days
 				circuit.start();
 			}
-			if ((Global.thermoLivingRoom.reading 	< tasksBackGround.antiFreeze)
-			||  (Global.thermoFloorIn.reading 		< tasksBackGround.antiFreeze)
-			||  (Global.thermoFloorOut.reading 		< tasksBackGround.antiFreeze)	)
+			if (((Global.thermoLivingRoom.reading   != null) && (Global.thermoLivingRoom.reading 	< tasksBackGround.antiFreeze))
+			||  ((Global.thermoFloorIn.reading  	!= null) && (Global.thermoFloorIn.reading 		< tasksBackGround.antiFreeze))
+			||  ((Global.thermoFloorOut.reading 	!= null) && (Global.thermoFloorOut.reading 		< tasksBackGround.antiFreeze))	)
 			{
 				circuit												= Global.circuits.fetchcircuit("Floor");
 				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
@@ -141,8 +142,8 @@ public class Thread_BackgroundTasks implements Runnable
 																			"1, 2, 3, 4, 5, 6, 7");					// Days
 				circuit.start();
 			}
-			if ((Global.thermoRadiatorIn.reading 	< tasksBackGround.antiFreeze)
-			||  (Global.thermoRadiatorOut.reading 	< tasksBackGround.antiFreeze)	)
+			if (((Global.thermoRadiatorIn.reading   != null) && (Global.thermoRadiatorIn.reading 	< tasksBackGround.antiFreeze))
+			||  ((Global.thermoRadiatorOut.reading  != null) && (Global.thermoRadiatorOut.reading 	< tasksBackGround.antiFreeze)) )
 			{
 				circuit												= Global.circuits.fetchcircuit("Floor");
 				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
