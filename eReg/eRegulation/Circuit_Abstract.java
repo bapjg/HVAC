@@ -25,23 +25,6 @@ abstract class Circuit_Abstract
 	public Thermometer											circuitThermo;
 								
 	public CIRCUIT.STATE										state;
-//	public CIRCUIT.STATE										stateNew;
-								
-//	public static final int										CIRCUIT_STATE_Off 			= 0;
-//	public static final int										CIRCUIT_STATE_Starting 		= 1;
-//	public static final int										CIRCUIT_STATE_Idle	 		= 1;
-//	public static final int										CIRCUIT_STATE_RampingUp		= 2;
-//	public static final int										CIRCUIT_STATE_Running 		= 3;
-//	public static final int										CIRCUIT_STATE_Stopping	 	= 4;
-//	public static final int										CIRCUIT_STATE_Optimising 	= 5;
-//	public static final int										CIRCUIT_STATE_Error	 		= -1;
-//							
-//	public static final int										CIRCUIT_STATE_Suspended		= 5;
-//	public static final int										CIRCUIT_STATE_Resuming 		= 6;
-//	public static final int										CIRCUIT_STATE_AwaitingHeat	= 7;
-//							
-//	public static final int										CIRCUIT_STATE_Start_Requested	= 10;
-//	public static final int										CIRCUIT_STATE_Stop_Requested	= 11;
 
 	public Mixer												mixer						= null;
 	public TemperatureGradient 									temperatureGradient			= null;				//This will be overridden
@@ -99,19 +82,11 @@ abstract class Circuit_Abstract
 		this.heatRequired																	= null;
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 	}
-//	public void optimise()
-//	{
-//		LogIt.action(this.name, "Optimising");
-//		this.state													= CIRCUIT_STATE_Optimising;
-//		this.heatRequired											= null;
-//		this.taskActive.state										= this.taskActive.TASK_STATE_Optimising;
-//	}
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
 		this.state																			= CIRCUIT.STATE.Off;
 		this.heatRequired																	= null;
-//		this.taskActive.active																= false; // What happens if the task has been switched to a new one
 		taskDeactivate(this.taskActive);
 	}
 	public void interupt()
@@ -125,12 +100,21 @@ abstract class Circuit_Abstract
 	public void suspend()
 	{
 		LogIt.action(this.name, "Suspend called");
+		this.heatRequired.tempMinimum														= 0;
+		this.heatRequired.tempMaximum														= 0;
 		this.state																			= CIRCUIT.STATE.Suspended;
 	}						
 	public void resume()						
 	{						
 		LogIt.action(this.name, "Resume called");						
 		this.state																			= CIRCUIT.STATE.Resuming;
+	}
+	public void optimise()						
+	{						
+		LogIt.action(this.name, "Optimising called");						
+		this.heatRequired.tempMinimum														= 0;
+		this.heatRequired.tempMaximum														= 0;
+		this.state																			= CIRCUIT.STATE.Optimising;
 	}
 	public void taskActivate(CircuitTask 							thisTask)
 	{

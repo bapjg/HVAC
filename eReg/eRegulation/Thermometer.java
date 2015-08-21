@@ -20,6 +20,7 @@ public class Thermometer
  	public Integer 												reading;
 	public PID													pidControler;
 	public ArrayList <Probe>									probes						= new ArrayList <Probe> ();
+	public Long													timeLastRead;
 	
 	public Thermometer(Ctrl_Configuration.Thermometer 			paramThermometer)
 	{
@@ -52,6 +53,7 @@ public class Thermometer
     public Integer readUnCached()															throws Thermometer_ReadException, Thermometer_SpreadException
  	{
      	// Returns temperature in millidegrees
+    	timeLastRead																		= Global.DateTime.now();
     	return read(10, true);
  	}
     public Integer read(Integer resolution, Boolean unCached)								throws Thermometer_ReadException, Thermometer_SpreadException

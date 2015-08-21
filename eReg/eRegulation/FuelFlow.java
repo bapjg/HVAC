@@ -139,14 +139,14 @@ public class FuelFlow
 		}
 		else
 		{
-			Long 										consumptionThisBurn				= Global.DateTime.now() - timeLastStart;
-			LogIt.error("FuelFlow", "switchedOff", "----------------Fuelflow consumption         : " + consumption.toString());
-			LogIt.error("FuelFlow", "switchedOff", "----------------Fuelflow consumptionThisBurn : " + consumptionThisBurn.toString());
-			consumption																	= consumption + consumptionThisBurn;
+			Long 										thisBurn						= Global.DateTime.now() - timeLastStart;
+			LogIt.error("FuelFlow", "switchedOff", "----------------Fuelflow consumption     : " + consumption.toString());
+			LogIt.error("FuelFlow", "switchedOff", "----------------Fuelflow thisBurn        : " + thisBurn.toString());
+			consumption																	= consumption + thisBurn;
 			timeLastStart																= -1L;
 			saveFuelFlow();
 			LogIt.fuelData(consumption);
-			LogIt.error("FuelFlow", "switchedOff", "----------------Fuelflow consumption New     : " + consumption.toString());
+			LogIt.error("FuelFlow", "switchedOff", "----------------Fuelflow consumption New : " + consumption.toString());
 		}
 	}
 	public void saveFuelFlow()
