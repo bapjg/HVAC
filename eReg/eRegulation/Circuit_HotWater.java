@@ -60,6 +60,15 @@ public class Circuit_HotWater extends Circuit_Abstract
 				
 			case Running:
 				
+				//	singleCircuit		stopOnObjective
+				//		Yes					Yes					deltaRatio > deltaMinimum => optimise()   deltaHotWater < 0 => optimise()
+				//		Yes					No			*		deltaRatio > deltaMinimum => optimise()   deltaHotWater < 0 => optimise()
+				//		No					Yes					deltaHotWater < 0 => stop()
+				//		No					No			*		deltaHotWater < 0 => suspend()
+				
+				
+				
+				
 				if (this.taskActive.stopOnObjective)										// Stop On Objective
 				{
 					if (Global.circuits.isSingleActiveCircuit())							// Use optimisation
@@ -89,7 +98,13 @@ public class Circuit_HotWater extends Circuit_Abstract
 				break;
 				
 			case Optimising:
-
+				
+				//	singleCircuit		stopOnObjective
+				//		Yes					Yes					deltaRatio > deltaMinimum => optimise()   deltaHotWater < 0 => optimise()
+				//		Yes					No			*		deltaRatio > deltaMinimum => optimise()   deltaHotWater < 0 => optimise()
+				//		No					Yes					deltaHotWater < 0 => stop()
+				//		No					No			*		deltaHotWater < 0 => suspend()
+				
 				if (Global.circuits.isSingleActiveCircuit())								// Use optimisation
 				{
 					if (Global.thermoBoiler.reading > Global.thermoHotWater.reading + 3000)
@@ -115,22 +130,19 @@ public class Circuit_HotWater extends Circuit_Abstract
 					}
 				}
 				break;
-			case Suspended:
-				// In this state the circuitPump has been switched off
-		
+			case Suspended:																	// In this state the circuitPump has been switched off
 				if (Global.thermoBoiler.reading < this.taskActive.tempObjective - 5000) // If 5 degrees less than objective	
 				{
 					resume();
 				}
 				break;
-			case Resuming:
+			case Resuming:																	// Setting state to starting will setup heat required etc.
 				LogIt.info("Circuit_" + this.name, "sequencer", "Resuming");
-				// Setting state to starting will setup heat required etc.
 				state																		= CIRCUIT.STATE.Starting;
 				break;
 			case Stop_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
-				state													= CIRCUIT.STATE.Stopping;
+				state																		= CIRCUIT.STATE.Stopping;
 				//Now fall through
 			case Stopping:
 				LogIt.action("PumpHotWater", "Off");
