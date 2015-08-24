@@ -91,7 +91,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 
 	    	if ((this.circuitName.equalsIgnoreCase("Hot_Water")) && (messageExecute.tempObjective.milliDegrees == 0))
 	    	{
-	    		messageExecute.tempObjective.milliDegrees									= 35000;
+	    		messageExecute.tempObjective.milliDegrees									= 40000;
 	    		messageExecute.stopOnObjective												= true;
 	    	}
 	    	else if (this.circuitName.equalsIgnoreCase("Radiator"))

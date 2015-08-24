@@ -27,6 +27,13 @@ public class Circuit_HotWater extends Circuit_Abstract
 				state																		= CIRCUIT.STATE.Error;
 				Global.eMailMessage("Circuit_HotWater/sequencer", "A Thermometer cannont be read");
 			}
+
+			// DeltaHotWater > 0 means not yet at target
+			// DeltaBoiler   > 0 means Boiler is over target temp
+			Integer										deltaBoiler							= Global.thermoBoiler.reading - this.taskActive.tempObjective;
+			Integer										deltaHotWater						= this.taskActive.tempObjective - Global.thermoHotWater.reading;
+			Float										deltaRatio							= deltaBoiler.floatValue() / deltaHotWater.floatValue();
+			Float 										deltaMinimum						= 10000F/7000F;
 			
 			switch (state)
 			{
@@ -50,68 +57,57 @@ public class Circuit_HotWater extends Circuit_Abstract
 					state																	= CIRCUIT.STATE.Running;
 				}
 				break;
+				
 			case Running:
-				if (this.taskActive.stopOnObjective)
+				
+				if (this.taskActive.stopOnObjective)										// Stop On Objective
 				{
-					if (Global.circuits.isSingleActiveCircuit())		// Use optimisation
+					if (Global.circuits.isSingleActiveCircuit())							// Use optimisation
 					{
-						if (Global.thermoHotWater.reading > this.taskActive.tempObjective - 7000)
-						{
-							stop();	// stop sets heatRequired to null	// Will then go into optimisation mode
-						}
+						if 		(deltaHotWater  < 0           )		optimise();				// Over target
+						else if (deltaRatio 	> deltaMinimum)		optimise();				// Enough energy left
+						// Otherwise								keep running
 					}
-					else												// No optimisation
+					else																	// No optimisation
 					{
-						if (Global.thermoHotWater.reading > this.taskActive.tempObjective)
-						{
-							stop();	// stop sets heatRequired to null // Will then go stop
-						}
+						if 		(deltaHotWater < 0)					stop();
 					}
 				}
-				else
+				else																		// Task must continue until time up
 				{
-					if (Global.circuits.isSingleActiveCircuit())		// Use optimisation
+					if (Global.circuits.isSingleActiveCircuit())							// Use optimisation
 					{
-						if (Global.thermoHotWater.reading > this.taskActive.tempObjective - 7000)
-						{
-							LogIt.info("Circuit_" + this.name, "sequencer", "Optimising");
-							optimise();	// Sets heatRequired to zero (not null) Will then go into optimisation mode
-						}
+						if 		(deltaHotWater  < 0			  )		optimise();				// Over target
+						else if (deltaRatio 	> deltaMinimum)		optimise();				// Enough energy left
+						// Otherwise								keep running
 					}
-					else												// No optimisation
+					else																	// Other circuits active
 					{
-						if (Global.thermoHotWater.reading > this.taskActive.tempObjective)
-						{
-							LogIt.info("Circuit_" + this.name, "sequencer", "Suspending");
-							circuitPump.off();
-							suspend();	// Sets heatRequired to zero (not null)
-						}
+						if 		(deltaHotWater < 0)					suspend();
 					}
 				}
 				break;
+				
 			case Optimising:
-				if (Global.circuits.isSingleActiveCircuit())		// Use optimisation
+
+				if (Global.circuits.isSingleActiveCircuit())								// Use optimisation
 				{
 					if (Global.thermoBoiler.reading > Global.thermoHotWater.reading + 3000)
 					{
 						// Stay in optimisation mode
 					}
-					else
+					else																	// No useful energy left
 					{
-						LogIt.info("Circuit_" + this.name, "sequencer", "Suspending");
-						LogIt.action("PumpHotWater", "Off");
-						circuitPump.off();
-						suspend();									// Sets heatRequired to zero (not null)
+						if (this.taskActive.stopOnObjective)		stop();
+						else 										suspend();				// Sets heatRequired to zero (not null)
 					}
 				}
-				else												// A new circuit has been scheduled we are no longer in singleCircuit mode
+				else																		// Several circuits running
 				{
-					if (Global.thermoHotWater.reading > this.taskActive.tempObjective)
+					if (deltaHotWater < 0)													// Target reached
 					{
-						LogIt.info("Circuit_" + this.name, "sequencer", "Suspending");
-						LogIt.action("PumpHotWater", "Off");
-						circuitPump.off();
-						suspend();									// Sets heatRequired to zero (not null)
+						if (this.taskActive.stopOnObjective)		stop();
+						else 										suspend();				// Sets heatRequired to zero (not null)
 					}
 					else
 					{
@@ -120,7 +116,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				}
 				break;
 			case Suspended:
-				// In this state the circuitPump is switched off
+				// In this state the circuitPump has been switched off
 		
 				if (Global.thermoBoiler.reading < this.taskActive.tempObjective - 5000) // If 5 degrees less than objective	
 				{
@@ -137,19 +133,9 @@ public class Circuit_HotWater extends Circuit_Abstract
 				state													= CIRCUIT.STATE.Stopping;
 				//Now fall through
 			case Stopping:
-				if 	(	(Global.circuits.isSingleActiveCircuit())
-				&& 		(Global.thermoBoiler.reading > Global.thermoHotWater.reading + 3000) ) 	
-				{
-					// Require at least 3 degrees difference otherwise it takes ages
-					// We are alone, so as long as there is heat to get out of the system
-					// carry on
-				}
-				else
-				{
-					LogIt.action("PumpHotWater", "Off");
-					circuitPump.off();
-					this.shutDown();					// shutDown sets state to off. Threadmixer looks at this as signal to stop
-				}
+				LogIt.action("PumpHotWater", "Off");
+				circuitPump.off();
+				this.shutDown();					// shutDown sets state to off. Threadmixer looks at this as signal to stop
 				break;
 			case Error:
 				break;

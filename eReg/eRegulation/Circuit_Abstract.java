@@ -72,6 +72,11 @@ abstract class Circuit_Abstract
 		this.state																			= CIRCUIT.STATE.Start_Requested;
 		this.heatRequired																	= new HeatRequired();
 	}
+/**
+ * Stops the circuit :
+ * State set to Stop_Requested
+ * heatRequired set to null
+ */	
 	public void stop()
 	{
 		// Called on one of the following conditions
@@ -82,6 +87,12 @@ abstract class Circuit_Abstract
 		this.heatRequired																	= null;
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 	}
+/**
+ * Shuts down the circuit :
+ * State set to off
+ * heatRequired set to null
+ * task deactivated
+ */
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
@@ -97,18 +108,40 @@ abstract class Circuit_Abstract
 //		this.taskActive.state																= this.taskActive.TASK_STATE_Completed; // What happens if the task has been switched to a new one
 //		this.taskActive																		= null;
 	}
+/**
+ * Suspends the circuit :
+ * This is used for Hot_Water, if target temperature is reached, the circuitPump is switched off
+ * If the temperature falls below target - 5 degrees, resume will be called to trun it onn again
+ * State set to Suspended
+ * switches OFF circuitPump
+ * heatRequired.max/min set to 0
+ */	
 	public void suspend()
 	{
 		LogIt.action(this.name, "Suspend called");
 		this.heatRequired.tempMinimum														= 0;
 		this.heatRequired.tempMaximum														= 0;
+		this.circuitPump.off();
 		this.state																			= CIRCUIT.STATE.Suspended;
 	}						
+/**
+ * Resumes the circuit :
+ * State set to Resumed
+ * Called to allow circuitPump to be switched on again (after suspend)
+ * switches ON circuitPump
+ * heatRequired.max/min must be set by caller
+ */	
 	public void resume()						
 	{						
 		LogIt.action(this.name, "Resume called");						
+		this.circuitPump.on();
 		this.state																			= CIRCUIT.STATE.Resuming;
 	}
+/**
+ * Optimises the circuit :
+ * State set to Optimising
+ * heatRequired.max/min set to 0
+ */	
 	public void optimise()						
 	{						
 		LogIt.action(this.name, "Optimising called");						
@@ -116,6 +149,10 @@ abstract class Circuit_Abstract
 		this.heatRequired.tempMaximum														= 0;
 		this.state																			= CIRCUIT.STATE.Optimising;
 	}
+/**
+ * Activates task supplied in parameter :
+ * task.start() called
+ */	
 	public void taskActivate(CircuitTask 							thisTask)
 	{
 		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated ");
@@ -148,12 +185,24 @@ abstract class Circuit_Abstract
 			this.taskActive.dateLastRun														= Global.Date.now();
 		}
 	}
+/**
+ * Deactivates current task :
+ * taskActive set to null
+ */	
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
 		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated ");
 		this.taskActive.dateLastRun															= Global.Date.now();
 		this.taskActive																		= null;
 	}
+/**
+ * Searches tasks to be scheduled :
+ * if a task is found
+ * - taskActive.stop() called
+ * - activateTask called with taskFound unless
+ *   . We are in summer
+ *   . We are away
+ */	
 	public void scheduleTask()
 	{
 		/* ============= Must adjust these comments
