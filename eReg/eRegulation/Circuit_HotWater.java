@@ -156,7 +156,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 			}
 		}
 	}
-	public Long getRampUpTime()
+	@Override
+	public Long getRampUpTime(Integer tempObjective)
 	{
 		// TODO calculate time function of HW temp and previous performance
 		Long 													rampUpMilliSeconds			= 15 * 60 * 1000L;		// 15 mins
