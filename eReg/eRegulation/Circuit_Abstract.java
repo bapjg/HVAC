@@ -65,7 +65,12 @@ abstract class Circuit_Abstract
 		this.state																			= CIRCUIT.STATE.Start_Requested;
 		this.heatRequired																	= new HeatRequired();
 	}
-	public void start(CircuitTask 									thisTask)
+/**
+ * Starts the circuit :
+ * Supplied circuitTask becomes taskActive
+ * State set to Start_Requested
+ * heatRequired set to zero valued object
+ */		public void start(CircuitTask 									thisTask)
 	{
 		LogIt.action(this.name, "Start called with circuitTask");
 		this.taskActive																		= thisTask;
@@ -100,6 +105,9 @@ abstract class Circuit_Abstract
 		this.heatRequired																	= null;
 		taskDeactivate(this.taskActive);
 	}
+/**
+ * Not implemented
+ */
 	public void interupt()
 	{
 //		LogIt.action(this.name, "closing down");
@@ -196,9 +204,8 @@ abstract class Circuit_Abstract
 		this.taskActive																		= null;
 	}
 /**
- * Searches tasks to be scheduled :
- * if a task is found
- * - taskActive.stop() called
+ * - taskActive.stop() called for current task is time up
+ * - Searches tasks to be scheduled and if one found
  * - activateTask called with taskFound unless
  *   . We are in summer
  *   . We are away
@@ -252,6 +259,19 @@ abstract class Circuit_Abstract
 				// - It can be yet to run
 				
 				
+				// Debug
+				if (type == CIRCUIT_TYPE_HotWater)
+				{
+					System.out.println("<<<<<<<<<<");
+					System.out.println("Scheduler/HotWaterTask Detected. timeStart             : " + circuitTask.timeStart);
+					System.out.println("Scheduler/HotWaterTask Detected. rampUp                : " + ((long) circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective)));
+					System.out.println("Scheduler/HotWaterTask Detected. timeStart with rampUp : " + circuitTask.timeStart);
+					System.out.println("Scheduler/HotWaterTask Detected. timeNow               : " + now);
+					System.out.println("Scheduler/HotWaterTask Detected. timeEnd               : " + circuitTask.timeEnd);
+					System.out.println(">>>>>>>>>>");
+				}
+				
+				
 				if (		(  circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective) > now	)						// This task has yet to be performed (timeStart future
 				&& 			(  circuitTask.timeEnd > now													)  		)						// Or time End future
 				{
@@ -264,6 +284,10 @@ abstract class Circuit_Abstract
 				{
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
+
+					
+					
+					
 					if (taskFound == null)
 					{
 						taskFound															= circuitTask;
@@ -278,13 +302,13 @@ abstract class Circuit_Abstract
 					}
 					else
 					{
-						// taskFound s already the correct task to run
+						// taskFound is already the correct task to run
 					}
 				}
 			}
 		}
 		
-		if (! Global.isAway())				// We are at home so get going
+		if (! Global.isAway())				// We are not away so get going
 		{
 			if (taskFound != null)
 			{
