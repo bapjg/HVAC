@@ -70,9 +70,9 @@ public class Circuit_Mixer extends Circuit_Abstract
 			case Start_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
 				
-				circuitPump.on();															// CircuitPump must be on in order to obtain correct temperature readings
 				if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective)
 				{
+					circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
 					state																	= CIRCUIT.STATE.Starting;
 				}
 				else
@@ -84,6 +84,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			case Idle:
 				if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective)
 				{
+					circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
 					LogIt.info("Circuit_" + this.name, "sequencer", "Idle ended");
 					state																	= CIRCUIT.STATE.Starting;
 				}

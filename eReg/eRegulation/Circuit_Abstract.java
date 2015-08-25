@@ -258,20 +258,6 @@ abstract class Circuit_Abstract
 				// - It can be running (Not possible in this branch of code)
 				// - It can be yet to run
 				
-				
-				// Debug
-				if (type == CIRCUIT_TYPE_HotWater)
-				{
-					System.out.println("<<<<<<<<<<");
-					System.out.println("Scheduler/HotWaterTask Detected. timeStart             : " + circuitTask.timeStart);
-					System.out.println("Scheduler/HotWaterTask Detected. rampUp                : " + this.getRampUpTime(circuitTask.tempObjective));
-					System.out.println("Scheduler/HotWaterTask Detected. timeStart with rampUp : " + ((long) circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective)));
-					System.out.println("Scheduler/HotWaterTask Detected. timeNow               : " + now);
-					System.out.println("Scheduler/HotWaterTask Detected. timeEnd               : " + circuitTask.timeEnd);
-					System.out.println(">>>>>>>>>>");
-				}
-				
-				
 				if (		(  circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective) > now	)						// This task has yet to be performed (timeStart future
 				&& 			(  circuitTask.timeEnd > now													)  		)						// Or time End future
 				{
@@ -284,10 +270,6 @@ abstract class Circuit_Abstract
 				{
 					// This task should be run : start is past and end is the future
 					// We can swap this task in
-
-					
-					
-					
 					if (taskFound == null)
 					{
 						taskFound															= circuitTask;
