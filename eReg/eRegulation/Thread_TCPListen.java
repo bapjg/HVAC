@@ -62,6 +62,9 @@ public class Thread_TCPListen 			implements Runnable
 			    		else if (message_in instanceof Ctrl_Actions_Test_Mail.Execute)	message_out	= process_Ctrl_Actions_Test_Mail_Execute();
 			    		
 			    		else if (message_in instanceof Ctrl_Actions_Stop.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
+
+			    		// TODO
+			    		//else if (message_in instanceof Ctrl_Actions_Fuel_Rest.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
 			        } 
 			        
 			        ObjectOutputStream 		output							= null;
@@ -444,5 +447,17 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		return new Ctrl_Actions_Stop().new Nack();
     } 
+// TODO : create function to reset fueld
+//	private Ctrl_Actions_Stop		process_Ctrl_Actions_Reset_Fuel_Execute		(Ctrl_Actions_Stop.Execute message_in)
+//	{
+		// try
+		// FuelFlow.save
+		// FuelFlow = 0
+		// FuelFlow.save_local
+		// FuelFlow.save_remote
+		// Display fuel consumed in hh:mm:ss.sss + mmm.m (minutes decimal in order to calibrate minutes to litres ratio)
+		// return Ok
+		// catch return Nack
+//	}
 }
  
