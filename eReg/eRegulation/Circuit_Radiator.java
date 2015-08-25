@@ -17,12 +17,12 @@ public class Circuit_Radiator extends Circuit_Abstract
 		Long 													rampUpMilliSeconds			= 30 * 60 * 1000L;		// 30 mins
 		return rampUpMilliSeconds;
 	}
-	@Override
-	public Long calculatePerformance()
-	{
-		// TODO Is this required
-		return 10000L;
-	}
+//	@Override
+//	public Long calculatePerformance()
+//	{
+//		// TODO Is this required
+//		return 10000L;
+//	}
 	@Override
 	public void sequencer()
 	{

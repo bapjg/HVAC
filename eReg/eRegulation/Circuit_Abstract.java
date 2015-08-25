@@ -57,7 +57,7 @@ abstract class Circuit_Abstract
 		circuitTaskList.add(circuitTaskItem);
 	}
 	public Long getRampUpTime(Integer tempObjective) 				{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
-	public Long calculatePerformance()								{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
+//	public Long calculatePerformance()								{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
 	public void sequencer()											{  /* OverRidden in Circuit_XXX classes */	}
 	public void start()
 	{
