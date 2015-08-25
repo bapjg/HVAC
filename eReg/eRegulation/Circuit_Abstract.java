@@ -264,8 +264,8 @@ abstract class Circuit_Abstract
 				{
 					System.out.println("<<<<<<<<<<");
 					System.out.println("Scheduler/HotWaterTask Detected. timeStart             : " + circuitTask.timeStart);
-					System.out.println("Scheduler/HotWaterTask Detected. rampUp                : " + ((long) circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective)));
-					System.out.println("Scheduler/HotWaterTask Detected. timeStart with rampUp : " + circuitTask.timeStart);
+					System.out.println("Scheduler/HotWaterTask Detected. rampUp                : " + this.getRampUpTime(circuitTask.tempObjective));
+					System.out.println("Scheduler/HotWaterTask Detected. timeStart with rampUp : " + ((long) circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective)));
 					System.out.println("Scheduler/HotWaterTask Detected. timeNow               : " + now);
 					System.out.println("Scheduler/HotWaterTask Detected. timeEnd               : " + circuitTask.timeEnd);
 					System.out.println(">>>>>>>>>>");
