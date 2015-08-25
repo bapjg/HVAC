@@ -12,7 +12,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 
 		this.temperatureGradient				= new TemperatureGradient(paramCircuit.tempGradient);
 	}
-	public Long getRampUpTime()
+	public Long getRampUpTime(Integer tempObjective)
 	{
 		Long 													rampUpMilliSeconds			= 30 * 60 * 1000L;		// 30 mins
 		return rampUpMilliSeconds;
