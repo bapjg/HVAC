@@ -63,8 +63,7 @@ public class Thread_TCPListen 			implements Runnable
 			    		
 			    		else if (message_in instanceof Ctrl_Actions_Stop.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
 
-			    		// TODO
-			    		//else if (message_in instanceof Ctrl_Actions_Fuel_Rest.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
+			    		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)	message_out	= process_Ctrl_Fuel_Consumption_Update	((Ctrl_Fuel_Consumption.Update) message_in);
 			        } 
 			        
 			        ObjectOutputStream 		output							= null;
@@ -447,17 +446,32 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		return new Ctrl_Actions_Stop().new Nack();
     } 
-// TODO : create function to reset fueld
-//	private Ctrl_Actions_Stop		process_Ctrl_Actions_Reset_Fuel_Execute		(Ctrl_Actions_Stop.Execute message_in)
-//	{
-		// try
-		// FuelFlow.save
-		// FuelFlow = 0
-		// FuelFlow.save_local
-		// FuelFlow.save_remote
-		// Display fuel consumed in hh:mm:ss.sss + mmm.m (minutes decimal in order to calibrate minutes to litres ratio)
-		// return Ok
-		// catch return Nack
-//	}
+	private Ctrl_Fuel_Consumption	process_Ctrl_Fuel_Consumption_Update		(Ctrl_Fuel_Consumption.Update message_in)
+	{
+		
+		if (Global.burner.isFuelFlowing())
+		{
+			return	new Ctrl_Fuel_Consumption().new Nack("Fuel is currently Flowing"); 
+		}
+		
+		Long											fuelConsumed							= Global.burner.fuelflow.consumption;
+		
+		try
+		{
+			LogIt.fuelData(Global.burner.fuelflow.consumption);
+			Global.burner.fuelflow.consumption				= message_in.fuelConsumed;		// Set the value (usually zero)
+			Global.burner.fuelflow.saveFuelFlow();						// Saves the current entry
+			LogIt.fuelData(Global.burner.fuelflow.consumption);
+		}
+		catch (Exception ex)
+		{
+			// Something went wrong set thing back the they were
+			Global.burner.fuelflow.consumption													= fuelConsumed;
+			LogIt.fuelData(Global.burner.fuelflow.consumption);
+			Global.burner.fuelflow.saveFuelFlow();						// Saves the current entry
+			return	new Ctrl_Fuel_Consumption().new Nack("A file or network error ocurred, command cancelled"); 
+		}
+		return	new Ctrl_Fuel_Consumption().new Ack();		// All Ok so Ack
+	}
 }
  

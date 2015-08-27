@@ -19,4 +19,17 @@ public class Ctrl_Fuel_Consumption 						extends 					Ctrl__Abstract
 	public class Update 								extends 					Ctrl_Fuel_Consumption.Data
 	{
 	}
+	public class Ack 									extends 					Ctrl_Fuel_Consumption
+	{
+		private static final long 						serialVersionUID 			= 1L;
+	}
+	public class Nack 									extends 					Ctrl_Fuel_Consumption
+	{
+		private static final long 						serialVersionUID 			= 1L;
+		private String									errorMessage;
+		public Nack (String errorMessage)
+		{
+			this.errorMessage														= errorMessage;
+		}
+	}
 }
