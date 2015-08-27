@@ -14,7 +14,7 @@ import HVAC_Common.*;
 public class FuelFlow
 {
 	public Long			timeLastStart;
-	public Long			consumption;
+	public Long			consumption = 3L;
 	
 	// consumption represents the number of milliseconds of fuel flow
 	// fuelFlowing is the program's view of whether fuel is flowing or not
