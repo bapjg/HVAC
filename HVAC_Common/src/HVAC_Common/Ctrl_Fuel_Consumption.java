@@ -21,11 +21,11 @@ public class Ctrl_Fuel_Consumption 						extends 					Ctrl__Abstract
 	}
 	public class Ack 									extends 					Ctrl_Fuel_Consumption
 	{
-		private static final long 						serialVersionUID 			= 1L;
+		private static final long 						serialVersionUID 			= 10L;
 	}
 	public class Nack 									extends 					Ctrl_Fuel_Consumption
 	{
-		private static final long 						serialVersionUID 			= 1L;
+		private static final long 						serialVersionUID 			= 10L;
 		private String									errorMessage;
 		public Nack (String errorMessage)
 		{
