@@ -4,8 +4,7 @@ package HVAC_Common;
 //abstract has been removed
 public class Rpt_Abstract implements java.io.Serializable
 {
-	private static final long 		serialVersionUID 	= 1L;
-//	private static final long 		temporary 			= 1L;
+	private static final long 		serialVersionUID 	= 10L;
 	
 	@SuppressWarnings("serial")
 	public class Ack extends Rpt_Abstract

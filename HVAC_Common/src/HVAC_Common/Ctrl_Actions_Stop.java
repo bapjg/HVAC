@@ -3,7 +3,7 @@ package HVAC_Common;
 @SuppressWarnings("serial")
 public class Ctrl_Actions_Stop 			extends 					Ctrl__Abstract
 {
-	private static final long 			serialVersionUID 			= 1L;
+	private static final long 			serialVersionUID 			= 10L;
 	public 	static final int			ACTION_Stop					= 0;
 	public 	static final int			ACTION_Restart				= 1;
 	public 	static final int			ACTION_Reboot				= 2;
@@ -15,16 +15,16 @@ public class Ctrl_Actions_Stop 			extends 					Ctrl__Abstract
 	}	
 	public class Execute 				extends 					Ctrl_Actions_Stop
 	{
-		private static final long 		serialVersionUID 			= 1L;
+		private static final long 		serialVersionUID 			= 10L;
 		public  int						actionRequest				= 0;
 	}
 	public class Ack 					extends 					Ctrl_Actions_Stop
 	{
-		private static final long 		serialVersionUID 			= 1L;
+		private static final long 		serialVersionUID 			= 10L;
 	}
 	public class Nack 					extends 					Ctrl_Actions_Stop
 	{
-		private static final long 		serialVersionUID 			= 1L;
+		private static final long 		serialVersionUID 			= 10L;
 	}
 
 }

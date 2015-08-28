@@ -3,14 +3,14 @@ package HVAC_Common;
 
 public class Rpt_PID extends Rpt_Abstract
 {
-	private static final long 		serialVersionUID 			= 1L;
+	private static final long 		serialVersionUID 			= 10L;
 	
 	public Rpt_PID()
 	{
 	}
 	public class Data extends Rpt_Abstract
 	{
-		private static final long 		serialVersionUID 			= 1L;
+		private static final long 		serialVersionUID 		= 10L;
 		public Long						dateTime;
 		
 		public Integer					target;

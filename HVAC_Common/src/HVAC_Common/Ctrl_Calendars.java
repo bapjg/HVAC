@@ -14,7 +14,7 @@ import HVAC_Common.Ctrl_Configuration.Update;
 public class Ctrl_Calendars 					extends 					Ctrl__Abstract 
 {
 	public Long dateTime;
-	private static final long 					serialVersionUID 			= 1L;
+	private static final long 					serialVersionUID 			= 10L;
 	
 	public Ctrl_Calendars()
 	{
@@ -60,12 +60,12 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	}
 	public class Request						extends 					Ctrl_Calendars
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 				serialVersionUID 			= 10L;
 	}
 	public class Word							extends 					Ctrl_Calendars
 												implements					Cloneable
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 				serialVersionUID 			= 10L;
 		public String 							name;
 		public String							days;
 		
@@ -85,13 +85,13 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	}
 	public class Circuit						extends 					Ctrl_Calendars
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 				serialVersionUID 			= 10L;
 		public String 							name;
 		public ArrayList<Calendar>				calendarList 				= new ArrayList<Calendar>();
 	}
 	public class Calendar						extends 					Ctrl_Calendars
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 				serialVersionUID 			= 10L;
 		public String							days;
 		public Cmn_Time							timeStart;
 		public Cmn_Time							timeEnd;
@@ -100,13 +100,13 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	}
 	public class Away							extends 					Ctrl_Calendars
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 				serialVersionUID 			= 10L;
 		public Long 							dateTimeStart;
 		public Long 							dateTimeEnd;
 	}
 	public class TasksBackGround				extends 					Ctrl_Calendars
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 				serialVersionUID 			= 10L;
 		public Cmn_Time							pumpCleanTime;
 		public Integer							pumpCleanDurationMinutes;
 		public Cmn_Temperature					antiFreeze;

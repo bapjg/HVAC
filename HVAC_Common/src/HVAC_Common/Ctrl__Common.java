@@ -4,7 +4,7 @@ package HVAC_Common;
 
 public class Ctrl__Common  						extends 					Ctrl__Abstract 
 {
-	private static final long 					serialVersionUID 			= 1L;
+	private static final long 					serialVersionUID 			= 10L;
 	
 	@SuppressWarnings("serial")
 	public class Ack 							extends 					Ctrl__Common

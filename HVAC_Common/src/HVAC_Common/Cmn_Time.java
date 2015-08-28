@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Cmn_Time 											implements 					java.io.Serializable
 {
-	private static final long 									serialVersionUID 			= 1L;
+	private static final long 									serialVersionUID 			= 10L;
 	public  Long												milliSeconds;
 	public  Integer 											hours						= 0;
 	public  Integer 											minutes						= 0;

@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Cmn_Temperature									implements					java.io.Serializable
 {
-	private static final long 									serialVersionUID 			= 1L;
+	private static final long 									serialVersionUID 			= 10L;
 	public Integer												milliDegrees;
 	
 	public Cmn_Temperature(Integer milliDegrees)

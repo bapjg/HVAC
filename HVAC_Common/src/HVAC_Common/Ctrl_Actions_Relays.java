@@ -3,7 +3,7 @@ package HVAC_Common;
 @SuppressWarnings("serial")
 public class Ctrl_Actions_Relays 		extends 					Ctrl__Abstract
 {
-	private static final long 			serialVersionUID 			= 1L;
+	private static final long 			serialVersionUID 			= 10L;
 	public 	static final int			RELAY_Unchanged				= 0;
 	public 	static final int			RELAY_On 					= 1;
 	public 	static final int			RELAY_Off 					= 2;
@@ -16,7 +16,7 @@ public class Ctrl_Actions_Relays 		extends 					Ctrl__Abstract
 	}
 	public class Data 					extends 					Ctrl_Actions_Relays
 	{
-		private static final long 		serialVersionUID 			= 1L;
+		private static final long 		serialVersionUID 			= 10L;
 		public Boolean					burner;
 		public Boolean					pumpHotWater;
 		public Boolean 					pumpFloor;
@@ -29,6 +29,6 @@ public class Ctrl_Actions_Relays 		extends 					Ctrl__Abstract
 	}
 	public class Ack 					extends 					Ctrl_Actions_Relays
 	{
-		private static final long 		serialVersionUID 			= 1L;
+		private static final long 		serialVersionUID 			= 10L;
 	}
 }
