@@ -67,7 +67,7 @@ public class Global
 			    Enumeration <InetAddress> 						netWorkAddresses			= netWorkInterface.getInetAddresses();
 			    for (InetAddress netWorkAddress : Collections.list(netWorkAddresses))
 			    {
-			    	String 										xx 							= netWorkAddress.getHostAddress();
+//			    	String 										xx 							= netWorkAddress.getHostAddress();
 			        if (netWorkAddress.getHostAddress().indexOf("192.168.5") > -1)
 			        {
 			        	return true;

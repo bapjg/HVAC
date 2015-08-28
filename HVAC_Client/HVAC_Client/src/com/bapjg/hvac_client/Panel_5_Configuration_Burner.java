@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
+import HVAC_Common.Ctrl_Actions_Relays.Execute;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
@@ -63,8 +64,8 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
     	panelInsertPoint.addView(minutesPerLitre);
     	panelInsertPoint.addView(fuelConsumptionLitres);
 
-        if ((Global.eRegConfiguration != null)
-        &&  (Global.eRegConfiguration.boiler != null))
+        if (	(Global.eRegConfiguration 			!= null)
+        &&  	(Global.eRegConfiguration.boiler 	!= null)	)
         {
         	displayContents();
             setListens();
@@ -124,7 +125,7 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 		}
 		else if (clickedView == fuelConsumption)
 		{
-			Dialog_Yes_No												messageYesNo		= new Dialog_Yes_No("Reset Fuel Consumption to 0 ?", this, 99);		// Id = 99
+			Dialog_Yes_No										messageYesNo				= new Dialog_Yes_No("Reset Fuel Consumption to 0 ?", this, 99);		// Id = 99
 			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
 		}
 		else if (clickedView == fuelConsumptionLitres)
@@ -140,8 +141,31 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
     	if (id == 99)
     	{
     		Global.eRegConfiguration.burner.fuelConsumption									= 0L;
+    		Ctrl_Fuel_Consumption.Update				messageSend							= new Ctrl_Fuel_Consumption().new Update();
+    		messageSend.dateTime															= Global.now();
+    		messageSend.fuelConsumed														= 0L;
+
+    		TCP_Send(messageSend);
     	}
     	displayContents();
     }
+	public void processFinishTCP(Ctrl__Abstract result) 
+	{  
+		super.processFinishTCP(result);
+		
+		if (result instanceof Ctrl_Fuel_Consumption.Ack)		
+		{		
+			Global.toaster("Update successful", true);
+		}
+		else if (result instanceof Ctrl_Fuel_Consumption.Nack)		
+		{		
+    		Ctrl_Fuel_Consumption.Nack					messageNack							= (Ctrl_Fuel_Consumption.Nack) result;
+			Global.toaster(messageNack.errorMessage, true);
+		}
+		else
+		{
+			Global.toaster("Unexpected response", true);
+		}
+	}
 }
 

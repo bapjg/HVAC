@@ -3,6 +3,7 @@ package com.bapjg.hvac_client;
 import com.google.gson.Gson;
 
 import HVAC_Common.*;
+import HVAC_Common.Ctrl_Fuel_Consumption.Request;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -151,7 +152,13 @@ public class Activity_Main 										extends 					Activity
 		}
 		else if (result instanceof Ctrl_Configuration.Data)		
 		{	
-			Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;		
+			Global.eRegConfiguration	= (Ctrl_Configuration.Data) result;
+		}
+		else if (result instanceof Ctrl_Fuel_Consumption.Data)
+		{
+			Ctrl_Fuel_Consumption.Data								fuel					= ((Ctrl_Fuel_Consumption.Data) result);
+			Global.eRegConfiguration.burner.fuelConsumption									= fuel.fuelConsumed;
+			Global.toaster("Configuration & Fuel data received", false);
 		}
 		else if (result instanceof Ctrl_Json.Data)				
 		{	
@@ -165,6 +172,8 @@ public class Activity_Main 										extends 					Activity
 			{
 				String												JsonString				= ((Ctrl_Json.Data) result).json;
 				Global.eRegConfiguration													= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
+
+				HTTP_Send(new Ctrl_Fuel_Consumption().new Request());
 			}
 			else
 			{
