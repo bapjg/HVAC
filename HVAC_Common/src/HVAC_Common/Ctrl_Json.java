@@ -14,7 +14,7 @@ import HVAC_Common.Ctrl_Configuration.Update;
 public class Ctrl_Json 					extends 					Ctrl__Abstract 
 {
 	public Long dateTime;
-	private static final long 					serialVersionUID 			= 10L;
+	private static final long 					serialVersionUID 			= 1L;
 	public static final int 					TYPE_Calendar 				= 1;
 	public static final int 					TYPE_Configuration			= 2;
 	public  int									type;
@@ -29,15 +29,15 @@ public class Ctrl_Json 					extends 					Ctrl__Abstract
 	}
 	public class Data							extends 					Ctrl_Json
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 	}
 	public class Update							extends 					Ctrl_Json
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 	}
 	public class Request						extends 					Ctrl_Json
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public Request()
 		{
 		}

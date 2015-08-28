@@ -3,7 +3,7 @@ package HVAC_Common;
 @SuppressWarnings("serial")
 public class Ctrl_Temperatures extends Ctrl__Abstract
 {
-	private static final long 			serialVersionUID 			= 10L;
+	private static final long 			serialVersionUID 			= 1L;
 
 	public Ctrl_Temperatures()
 	{
@@ -14,7 +14,7 @@ public class Ctrl_Temperatures extends Ctrl__Abstract
 	}
 	public class Data extends Ctrl_Temperatures
 	{
-		private static final long 		serialVersionUID 			= 10L;
+		private static final long 		serialVersionUID 			= 1L;
 		public Long						dateTime;
 		
 		public Integer 					tempBoiler;

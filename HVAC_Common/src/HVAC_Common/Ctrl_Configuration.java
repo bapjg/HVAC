@@ -6,7 +6,7 @@ import HVAC_Common.*;
 @SuppressWarnings("serial")
 public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 {
-	private static final long 					serialVersionUID 			= 10L;
+	private static final long 					serialVersionUID 			= 1L;
 	public final transient Integer				CIRCUIT_TYPE_HotWater		= 0;
 	public final transient Integer				CIRCUIT_TYPE_Gradient		= 1;
 	public final transient Integer				CIRCUIT_TYPE_Mixer			= 2;
@@ -35,31 +35,31 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 	}
 	public class Update 						extends 					Ctrl_Configuration.Data
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 	}
 	public class Thermometer 					extends  					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
 		public String 							address;
 		public String 							pidName;
 	}
 	public class Relay 							extends  					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
 		public Integer 							relayBank;
 		public Integer 							relayNumber;
 	}
 	public class Pump 							extends  					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
 		public String 							relay;
 	}
 	public class Circuit 						extends  					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
 		public String 							pump;
 		public String 							thermometer;
@@ -70,21 +70,21 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 	}
 	public class Burner 						extends  					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public String 							relay;
 		public Long 							fuelConsumption;
 		public Integer 							minutesPerLitre;
 	}
 	public class Boiler 						extends  					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public String 							thermometer;
 		public Cmn_Temperature					tempNeverExceed;
 		public Cmn_Temperature					tempOverShoot;
 	}
 	public class TempGradient 					extends  					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
 		public Cmn_Temperature					outsideLow;
 		public Cmn_Temperature					outsideHigh;
@@ -93,14 +93,14 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 	}
 	public class PID_Data						extends  					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public String							name;
 		public Integer							depth;
 		public Integer							sampleIncrement;
 	}
 	public class PID_Params						extends  					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public String							thermometer;
 		public Float							gainP;
 		public Float							timeD;
@@ -112,7 +112,7 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 	}
 	public class Mixer							extends  					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 10L;
+		private static final long 				serialVersionUID 			= 1L;
 		public String							name;
 		public Integer							swingTime;
 		public Integer							swingProportionMax;

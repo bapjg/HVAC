@@ -3,7 +3,7 @@ package HVAC_Common;
 @SuppressWarnings("serial")
 public class Rpt_Temperatures extends Rpt_Abstract
 {
-	private static final long 		serialVersionUID 			= 10L;
+	private static final long 		serialVersionUID 			= 1L;
 	public Long						dateTime;
 	
 	public Integer 					tempBoiler;

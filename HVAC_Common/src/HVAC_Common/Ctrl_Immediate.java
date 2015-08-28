@@ -3,7 +3,7 @@ package HVAC_Common;
 @SuppressWarnings("serial")
 public class Ctrl_Immediate 			extends 					Ctrl__Abstract
 {
-	private static final long 			serialVersionUID 			= 10L;
+	private static final long 			serialVersionUID 			= 1L;
 	public 	static final int			ACTION_Start 				= 1;
 	public 	static final int			ACTION_Stop 				= 2;
 
@@ -38,6 +38,6 @@ public class Ctrl_Immediate 			extends 					Ctrl__Abstract
 	}
 	public class Ack 					extends 					Ctrl_Immediate
 	{
-		private static final long 		serialVersionUID 			= 10L;
+		private static final long 		serialVersionUID 			= 1L;
 	}
 }

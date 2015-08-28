@@ -8,8 +8,7 @@ package HVAC_Common;
 
 public class Ctrl__Abstract implements java.io.Serializable
 {
-	private int x = 3;
-	private static final long 		serialVersionUID 	= 10L;
+	private static final long 		serialVersionUID 	= 1L;
 	
 	@SuppressWarnings("serial")
 	public class Ack extends Ctrl__Abstract
