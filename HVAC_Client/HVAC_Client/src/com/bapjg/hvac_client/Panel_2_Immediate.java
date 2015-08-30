@@ -27,7 +27,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	private Element_Standard									plannedTimeEnd;
 	private Element_Standard									plannedTargetTemp;
 	private Element_CheckBox									plannedStopOnObjective;
-	private Element_Standard									timeStart;
 	private Element_Standard									timeEnd;
 	private Element_Standard									targetTemp;
 	private Element_CheckBox									stopOnObjective;
@@ -62,7 +61,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     	plannedTimeEnd																		= new Element_Standard("Time End");
     	plannedTargetTemp																	= new Element_Standard("Temperature");
     	plannedStopOnObjective 																= new Element_CheckBox("Stop On Objective");
-    	timeStart																			= new Element_Standard("Time Start");
     	timeEnd                 															= new Element_Standard("Time End");
     	targetTemp          	   															= new Element_Standard("Temperature");
     	stopOnObjective         															= new Element_CheckBox("Stop On Objective");
@@ -84,28 +82,28 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		if 		(result instanceof Ctrl_Immediate.Data)
 		{
 			messageReceived																	= (Ctrl_Immediate.Data) result;
-			messageExecute.timeStart 														= new Cmn_Time(Global.displayTimeShort(Global.now()));
-			messageExecute.timeEnd 															= new Cmn_Time(Global.displayTimeShort(Global.now() + 3600 * 1000L));
 			messageExecute.stopOnObjective 													= true;
 			messageExecute.tempObjective 													= new Cmn_Temperature(messageReceived.tempObjective.milliDegrees);
 
 	    	if ((this.circuitName.equalsIgnoreCase("Hot_Water")) && (messageExecute.tempObjective.milliDegrees == 0))
 	    	{
 	    		messageExecute.tempObjective.milliDegrees									= 40000;
+				messageExecute.timeEnd 														= new Cmn_Time(Global.displayTimeShort(Global.now() + 15 * 60 * 1000L));		// 15 mins
 	    		messageExecute.stopOnObjective												= true;
 	    	}
 	    	else if (this.circuitName.equalsIgnoreCase("Radiator"))
 	    	{
 	    		messageExecute.tempObjective.milliDegrees									= 70000;
+				messageExecute.timeEnd 														= new Cmn_Time(Global.displayTimeShort(Global.now() + 60 * 60 * 1000L));		// 1 hr
 	    		messageExecute.stopOnObjective												= false;
 	    	}
 	    	else if (this.circuitName.equalsIgnoreCase("Floor"))
 	    	{
 	    		messageExecute.tempObjective.milliDegrees									= 20000;
+				messageExecute.timeEnd 														= new Cmn_Time(Global.displayTimeShort(Global.now() + 60 * 60 * 1000L));		// 1 hr
 	    		messageExecute.stopOnObjective												= false;
 	    	}
-//
-	    	//
+
 			if (messageReceived.executionActive)
 			{
 		    	insertPoint					.addView		(stopOnObjective);
@@ -115,7 +113,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			else if (messageReceived.executionPlanned)
 			{
 		    	insertPoint					.addView		(actionHeading);
-		    	insertPoint					.addView		(timeStart);
 		    	insertPoint					.addView		(timeEnd);
 		    	insertPoint					.addView		(targetTemp);
 		    	insertPoint					.addView		(stopOnObjective);
@@ -126,7 +123,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			else
 			{
 		    	insertPoint					.addView		(actionHeading);
-		    	insertPoint					.addView		(timeStart);
 		    	insertPoint					.addView		(timeEnd);
 		    	insertPoint					.addView		(targetTemp);
 		    	insertPoint					.addView		(stopOnObjective);
@@ -189,7 +185,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 //	    	targetTemp					.setVisibility	(View.VISIBLE);
 //	    	stopOnObjective				.setVisibility	(View.VISIBLE);
 
-	    	timeStart					.setValue		(messageExecute.timeStart.displayShort());
 			timeEnd						.setValue		(messageExecute.timeEnd.displayShort());	
 			targetTemp					.setValue		(messageExecute.tempObjective.displayInteger());	
 			stopOnObjective				.setChecked		(messageExecute.stopOnObjective);
@@ -198,7 +193,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	public void setListens()
 	{
     	targetTemp						.setOnClickListener(this);
-    	timeStart						.setOnClickListener(this);
     	timeEnd							.setOnClickListener(this);
     	stopOnObjective					.setOnClickListener(this);
     	stopOnObjective.checkBox		.setOnClickListener(this);
@@ -212,11 +206,6 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     	{
     		Dialog_Temperature 									df 							= new Dialog_Temperature(messageExecute.tempObjective, 25, 45, this);
     		df.show(getFragmentManager(), "Dialog_Temperature");
-    	}
-    	else if (clickedview == timeStart)
-    	{
-    		Dialog_Time	 										df 							= new Dialog_Time(messageExecute.timeStart, this);
-    		df.show(getFragmentManager(), "Dialog_Time");
     	}
     	else if (clickedview == timeEnd)
     	{
@@ -233,19 +222,11 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     	{
 	    	if (buttonStartStop.button.getText().toString().equalsIgnoreCase("Start"))
 	    	{
-	    		if 	((messageExecute.timeStart.milliSeconds >= messageExecute.timeEnd.milliSeconds)
-	    		|| 	 (Global.getTimeNowSinceMidnight() > messageExecute.timeEnd.milliSeconds))
-	    		{
-	    			Global.toaster("Time end must be after now and before time end", false);		// Timestart can be a few minutes ago, time end must in in the future
-	    		}
-	    		else
-	    		{
-		    		messageExecute.circuitName												= this.circuitName;
-			   		messageExecute.action													= messageExecute.ACTION_Start;
-			   		messageExecute.stopOnObjective											= stopOnObjective.isChecked();
-					
-		        	TCP_Send(messageExecute);
-	        	}
+	    		messageExecute.circuitName													= this.circuitName;
+		   		messageExecute.action														= messageExecute.ACTION_Start;
+		   		messageExecute.stopOnObjective												= stopOnObjective.isChecked();
+				
+	        	TCP_Send(messageExecute);
 	    	}
 	    	else if (buttonStartStop.button.getText().toString().equalsIgnoreCase("Stop"))
 	    	{

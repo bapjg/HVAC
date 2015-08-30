@@ -32,7 +32,6 @@ public class Ctrl_Immediate 			extends 					Ctrl__Abstract
 		public Boolean					executionPlanned;
 		public Boolean					executionActive;
 		public Cmn_Temperature			tempObjective;
-		public Cmn_Time 				timeStart;
 		public Cmn_Time 				timeEnd;
 		public Boolean 					stopOnObjective;
 	}
