@@ -57,7 +57,6 @@ abstract class Circuit_Abstract
 		circuitTaskList.add(circuitTaskItem);
 	}
 	public Long getRampUpTime(Integer tempObjective) 				{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
-//	public Long calculatePerformance()								{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
 	public void sequencer()											{  /* OverRidden in Circuit_XXX classes */	}
 	public void start()
 	{
@@ -307,6 +306,43 @@ abstract class Circuit_Abstract
 					}
 					else
 					{
+						/*
+						 * am = means before maxTempPredicted (around 14h00)
+						 * pm = means after maxTempPredicted (around 14h00)
+						 * 
+						 * if startTime = am and endTime = am
+						 * 		if currentTemp > summer dropIt for today
+						 * 		if maxPredicted > summer dropit for today
+						 * 		if maxPredicted > winter schedule for idle (idle must survey infoor temp to see if heat required) 
+						 * 
+						 * elseif startTime = pm and endTime = pm
+						 * 		if currentTemp > summer dropIt for today
+						 * 		if currentTemp > winter schedule for idle (idle must survey infoor temp to see if heat required) 
+						 * 		if currentTemp < winter schedule for start 
+						 * 
+						 * 
+						 * 
+						 * elseif startTime = am and endTime = pm
+						 * 		if currentTemp > summer dropIt for today
+						 * 		if maxPredicted > summer dropit for today
+						 * 
+						 * 
+						 * 
+						 * 
+						 * else
+						 * 		Is this an error
+						 * fi
+						 * 
+						 * 
+						 * 
+						 * 
+						 */
+						
+						
+						
+						
+						
+						
 						taskActivate(taskFound);
 					}
 				}
