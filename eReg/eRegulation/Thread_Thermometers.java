@@ -6,6 +6,14 @@ public class Thread_Thermometers 								implements 					Runnable
 	public void run()
 	{
 		LogIt.info("Thread_Thermometers", "Run", "Starting", true);		
+		
+// Must be an uncached read to set resolution
+// Same resolution will be used below
+//		FileOutputStream ThermoFile_OutputStream = new FileOutputStream("/mnt/1wire/simultaneous/temperature");
+//		DataOutputStream ThermoFile_OutputData = new DataOutputStream(ThermoFile_OutputStream);
+//		String x = "1";
+//		ThermoFile_OutputStream.write(x);
+
 
 		while (!Global.stopNow)										// Read each thermometer and add to PID if appropriate
 		{
