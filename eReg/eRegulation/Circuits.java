@@ -32,11 +32,11 @@ public class Circuits
 			}
 		}
 	}
+/**
+ * Returns the count of active circuits.
+ */	
 	public Integer activeCircuitCount()
 	{
-	/*
-	 * Returns the count of active circuits.
-	 */
 		Integer count = 0;
 	
 		for (Circuit_Abstract circuit : circuitList) 
@@ -48,13 +48,14 @@ public class Circuits
 		}
 		return count;
 	}
+/**
+ * Returns the count of active circuits.
+ * If only one active circuit, returns true
+ * if more, returns false
+ */	
 	public Boolean isSingleActiveCircuit()
 	{
-		/*
-		 * Returns the count of active circuits.
-		 * If only one active circuit, returns true
-		 * if more, returns false
-		 */
+
 		int count = 0;
 
 		for (Circuit_Abstract circuit : circuitList) 

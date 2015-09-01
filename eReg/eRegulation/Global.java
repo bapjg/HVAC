@@ -91,6 +91,7 @@ public class Global
 	public static	ArrayList	<Calendars.Away>				awayList;
 	public static	Calendars.TasksBackGround					tasksBackGround;
 	public static	Ctrl_WeatherData							weatherData;
+	public static	Integer										temperatureMaxTodayPredicted;
 	
 	public Global()
 	{
@@ -103,6 +104,8 @@ public class Global
 		Global.circuits 																	= new Circuits(); 
 		Global.eMails	 																	= new ArrayList<String>(); 
 		Global.awayList	 																	= new ArrayList<Calendars.Away>(); 
+		Global.temperatureMaxTodayPredicted													= null;
+
 
 		display.clear();
 		display.blinkOff();

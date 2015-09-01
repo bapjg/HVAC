@@ -220,25 +220,25 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			// Get the weather forecast after startup (= null) OR last forecast before latest 6hour interval within the day
 			//
-			Long Inc_6h_Number		= Global.Time.now()/SIX_HOURS;					// Number of 6hour increments since last midnight
-			Long Inc_6h_Time		= Global.Date.now() + SIX_HOURS * Inc_6h_Number;		// DateTime of last increment
+			Long Inc_6h_Number		= Global.Time.now()/SIX_HOURS;									// Number of 6hour increments since last midnight
+			Long Inc_6h_Time		= Global.Date.now() + SIX_HOURS * Inc_6h_Number;				// DateTime of last increment
 			
 
 			if ( (Global.weatherData == null                       )
 			||	 (Global.weatherData.dateTimeObtained == null      )								// dateTimeObtained can be null if previous attempt had http failure
 			||	 (Global.weatherData.dateTimeObtained < Inc_6h_Time)   ) 							// Latest 6 hour interval in day
 			{
-				Integer efectiveTempCorrection = 0;
-				Integer efectiveTempCalculatedMax = 0;
+				Integer 												efectiveTempCorrection 		= -100;
+				Integer 												efectiveTempCalculatedMax 	= -100;
 				
 				LogIt.info("Thread_Background", "Run", "Weather : get It", true);
 				try
 				{
-					Global.weatherData							= new Ctrl_WeatherData();
+					Global.weatherData																= new Ctrl_WeatherData();
 					
 					if (Global.weatherData.forecasts != null)			// TODO need to check
 					{
-						Global.weatherData.dateTimeObtained			= Global.DateTime.now();
+						Global.weatherData.dateTimeObtained											= Global.DateTime.now();
 						LogIt.info("Thread_Background", "Run", "Weather : fetched", true);
 				        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherData.forecasts)
 				        {
@@ -248,14 +248,15 @@ public class Thread_BackgroundTasks implements Runnable
 				            	String 									time_from					= Global.Time.display(forecastItem.dateTime.from);
 				            	String 									time_to						= Global.Time.display(forecastItem.dateTime.to);
 				        		// TODO
-							    
-				         		efectiveTempCorrection = Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) / 100;
-				         		Integer efectiveTempCalculated = forecastItem.temperature.value.intValue() * 1000 + efectiveTempCorrection;
+				            	
+				         		efectiveTempCorrection 												= Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) / 100;
+				         		Integer 								efectiveTempCalculated 		= forecastItem.temperature.value.intValue() * 1000 + efectiveTempCorrection;
 				         		if (efectiveTempCalculated > efectiveTempCalculatedMax)
 				         		{
 				         			efectiveTempCalculatedMax										= efectiveTempCalculated;
 				         		}
 				        	}
+				        	Global.temperatureMaxTodayPredicted										= efectiveTempCalculatedMax;
 				        }
 						LogIt.info("Thread_Background", "Run", "Maximum temperature (corrected) today " + efectiveTempCalculatedMax, true);
 					}
@@ -263,14 +264,15 @@ public class Thread_BackgroundTasks implements Runnable
 				catch (Exception e)
 				{
 					LogIt.info("Thread_Background", "Run", "Weather : getIt returned error " + e, true);
-					Global.weatherData							= null;
+					Global.weatherData																= null;
+					// If there's a problem getting weatherData, leave Global.temperatureMaxTodayPredicted as it is
+					// there is high probability that today's max temp will be the same as yesterday's
 				}
 			}
 			//
 			//=========================================================================================================================================
 
 			Global.waitSeconds(300);							// Wait 5 mins
-
 		}
 		LogIt.info("Thread_Background", "Run", "Stopping", true);		
 	}

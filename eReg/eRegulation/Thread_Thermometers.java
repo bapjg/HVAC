@@ -13,6 +13,7 @@ public class Thread_Thermometers 								implements 					Runnable
 //		DataOutputStream ThermoFile_OutputData = new DataOutputStream(ThermoFile_OutputStream);
 //		String x = "1";
 //		ThermoFile_OutputStream.write(x);
+		// To read a temperature read ("/mnt/1wire/28.09xxxxxxxx/temperature");	// uses last read resolution
 
 
 		while (!Global.stopNow)										// Read each thermometer and add to PID if appropriate
