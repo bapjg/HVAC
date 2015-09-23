@@ -24,6 +24,7 @@ public class Ctrl_Actions_Relays 		extends 					Ctrl__Abstract
 	}
 	public class Execute 				extends 					Ctrl_Actions_Relays
 	{
+		private static final long 		serialVersionUID 			= 1L;
 		public String					relayName;
 		public Integer					relayAction;
 	}

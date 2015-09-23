@@ -12,6 +12,7 @@ public class Ctrl_Immediate 			extends 					Ctrl__Abstract
 	}	
 	public class Request 				extends 					Ctrl_Immediate
 	{
+		private static final long 		serialVersionUID 			= 1L;
 		public String 					circuitName;
 	}
 	public class Data 					extends 					Ctrl_Immediate
@@ -27,6 +28,7 @@ public class Ctrl_Immediate 			extends 					Ctrl__Abstract
 	}
 	public class Execute 				extends 					Ctrl_Immediate
 	{
+		private static final long 			serialVersionUID 			= 1L;
 		public String 					circuitName;
 		public Integer					action;
 		public Boolean					executionPlanned;

@@ -15,9 +15,11 @@ public class Ctrl_Fuel_Consumption 						extends 					Ctrl__Abstract
 	}
 	public class Request 								extends 					Ctrl_Fuel_Consumption
 	{
+		private static final long 						serialVersionUID 			= 1L;
 	}
 	public class Update 								extends 					Ctrl_Fuel_Consumption.Data
 	{
+		private static final long 						serialVersionUID 			= 1L;
 	}
 	public class Ack 									extends 					Ctrl_Fuel_Consumption
 	{

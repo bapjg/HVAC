@@ -338,11 +338,6 @@ abstract class Circuit_Abstract
 						 * 
 						 */
 						
-						
-						
-						
-						
-						
 						taskActivate(taskFound);
 					}
 				}
