@@ -52,7 +52,10 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     	
     	Ctrl_Immediate.Request									taskListRequest				= new Ctrl_Immediate().new Request();
     	taskListRequest.circuitName															= this.circuitName;
-			
+    	taskListRequest.force															= 99;
+		
+    	Global.toaster("serial = " + taskListRequest.serialVersionUID, true);
+    	
     	TCP_Send(taskListRequest);							// This returns list of what is currently active on each circuit
     	
     	insertPoint 																		= (LinearLayout) panelView.findViewById(R.id.baseInsertPoint);
