@@ -36,6 +36,26 @@ public class Thread_TCPListen 			implements Runnable
 					
 			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
 			        // This previous line results in an EOFException
+
+//			        class HackedObjectInputStream extends ObjectInputStream 
+//			        {
+//
+//			            public HackedObjectInputStream(InputStream in) throws IOException 
+//			            {
+//			                super(in);
+//			            }
+//
+//			            @Override
+//			            protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException 
+//			            {
+//			                ObjectStreamClass resultClassDescriptor = super.readClassDescriptor();
+//
+//			                if (resultClassDescriptor.getName().equals("oldpackage.Clazz"))
+//			                    resultClassDescriptor = ObjectStreamClass.lookup(newpackage.Clazz.class);
+//
+//			                return resultClassDescriptor;
+//			            }
+//			        }
 			        
 			        message_in 												= (Ctrl__Abstract) input.readObject();
 
