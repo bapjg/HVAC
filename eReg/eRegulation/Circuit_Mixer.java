@@ -38,11 +38,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 			return 0L;
 		}
 	}
-//	@Override
-//	public Long calculatePerformance()
-//	{
-//		return 10000L;
-//	}
 	@Override
 	public void sequencer()
 	{

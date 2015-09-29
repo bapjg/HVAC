@@ -92,6 +92,7 @@ public class Global
 	public static	Calendars.TasksBackGround					tasksBackGround;
 	public static	Ctrl_WeatherData							weatherData;
 	public static	Integer										temperatureMaxTodayPredicted;
+	public static	Long										temperatureMaxTodayTime;
 	
 	public Global()
 	{

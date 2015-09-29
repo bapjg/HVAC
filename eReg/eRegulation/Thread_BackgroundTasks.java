@@ -230,6 +230,7 @@ public class Thread_BackgroundTasks implements Runnable
 			{
 				Integer 												efectiveTempCorrection 		= -100;
 				Integer 												efectiveTempCalculatedMax 	= -100;
+				Long 													efectiveTempCalculatedTime 	= -1L;
 				
 				LogIt.info("Thread_Background", "Run", "Weather : get It", true);
 				try
@@ -254,11 +255,13 @@ public class Thread_BackgroundTasks implements Runnable
 				         		if (efectiveTempCalculated > efectiveTempCalculatedMax)
 				         		{
 				         			efectiveTempCalculatedMax										= efectiveTempCalculated;
+				         			efectiveTempCalculatedTime										= (forecastItem.dateTime.from + forecastItem.dateTime.to) / 2;
 				         		}
 				        	}
 				        	Global.temperatureMaxTodayPredicted										= efectiveTempCalculatedMax;
+				        	Global.temperatureMaxTodayTime											= efectiveTempCalculatedTime;
 				        }
-						LogIt.info("Thread_Background", "Run", "Maximum temperature (corrected) today " + efectiveTempCalculatedMax, true);
+						LogIt.info("Thread_Background", "Run", "Maximum temperature (corrected) today " + efectiveTempCalculatedMax + ", at " + Global.Time.display(efectiveTempCalculatedTime), true);
 					}
 				}
 				catch (Exception e)

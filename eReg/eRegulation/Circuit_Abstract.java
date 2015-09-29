@@ -69,7 +69,8 @@ abstract class Circuit_Abstract
  * Supplied circuitTask becomes taskActive
  * State set to Start_Requested
  * heatRequired set to zero valued object
- */		public void start(CircuitTask 									thisTask)
+ */
+	public void start(CircuitTask 									thisTask)
 	{
 		LogIt.action(this.name, "Start called with circuitTask");
 		this.taskActive																		= thisTask;
@@ -334,6 +335,11 @@ abstract class Circuit_Abstract
 						 * fi
 						 * 
 						 * 
+						 * 
+						 * 
+						 * Task may start/Stop before maxTempPredicted		Dont need to start
+						 * Task may start/Stop after maxTempPredicted		Need to start
+						 * Task may start      before and end after maxTempPredicted		Need to start (perhaps)
 						 * 
 						 * 
 						 */
