@@ -343,7 +343,8 @@ abstract class Circuit_Abstract
 						 * 
 						 * 
 						 */
-						
+						// TODO Remove line
+						System.out.println("Activating task " + this.name);
 						taskActivate(taskFound);
 					}
 				}

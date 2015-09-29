@@ -145,7 +145,7 @@ public class Calendars
 				{
 					paramCalendar.days 											= paramCalendar.days.replace(word.name, word.days);
 				}
-				// TODO Clanedar days are not printed correctly
+				// TODO Calendar days are not printed correctly
 				circuit.addCircuitTask(paramCalendar);
 				LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart.displayShort() + "/" + paramCalendar.timeEnd.displayShort() + " Days " + paramCalendar.days);
 			}
