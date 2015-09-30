@@ -67,14 +67,14 @@ public class Thread_Mixer implements Runnable
 				{
 					// Must replace by PID
 					// Inside temp is high : no need to heat (within 1 degree
-//					targetTemp																	= circuit.temperatureGradient.getTempToTarget();
+//					targetTemp																= circuit.temperatureGradient.getTempToTarget();
 					
-					Integer										insideTempSpan					= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
-					Float										totalTempSpan					= insideTempSpan.floatValue()/0.55F;
+					Integer										insideTempSpan				= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
+					Float										totalTempSpan				= insideTempSpan.floatValue()/0.55F;
 					
-					targetTemp																	= Global.thermoOutside.reading + totalTempSpan.intValue();
+					targetTemp																= Global.thermoOutside.reading + totalTempSpan.intValue();
 					
-					Integer										targetFloorIn					= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
+					Integer										targetFloorIn				= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
 					
 					// If tempFloorIn > targetFloorIn => We are probably going to overtemp.
 					// This uses Leaking baths method to get correct temperature in LivingRoom
@@ -96,11 +96,11 @@ public class Thread_Mixer implements Runnable
 				}
 				else if (circuit.state == CIRCUIT.STATE.RampingUp) 						// This is to accelerate rampup
 				{
-					targetTemp																	= 41000;						// Trip avoidance kicks in at 450
+					targetTemp																= 41000;						// Trip avoidance kicks in at 450
 				}
 				else
 				{
-					targetTemp																	= circuit.temperatureGradient.getTempToTarget();  //Loi d'eau
+					targetTemp																= circuit.temperatureGradient.getTempToTarget();  //Loi d'eau
 				}
 				
 				this.mixer.sequencer(targetTemp);
