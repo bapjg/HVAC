@@ -151,4 +151,26 @@ public class Circuit_Mixer extends Circuit_Abstract
 			}
 		}
 	}
+/**
+ * Starts the circuit in optimisation mode:
+ * Supplied circuitTask becomes taskActive
+ * State set to Start_Requested
+ * heatRequired set to zero valued object
+ */
+	public void optimiseFloor()
+	{
+		LogIt.action(this.name, "optimiseFloor called");
+		Long											now									= Global.Time.now();
+		CircuitTask										task								= new CircuitTask(	
+																												now, 	// Time Start
+																												now, 	// TimeEnd
+																												20000,	// TempObjective in millidesrees
+																												false,	// StopOnObjective
+																												"1, 2, 3, 4, 5, 6, 7"					// Days
+																											  );
+		this.taskActive																		= task;
+		this.circuitPump.on();
+		this.state																			= CIRCUIT.STATE.Optimising;
+		this.heatRequired																	= null;
+	}
 }

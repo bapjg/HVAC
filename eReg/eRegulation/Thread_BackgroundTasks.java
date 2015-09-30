@@ -212,6 +212,7 @@ public class Thread_BackgroundTasks implements Runnable
 			else
 			{
 				// Are there any circuit that we were optimising and are left on
+				Global.circuitFloor.optimiseFloor();
 			}
 			//
 			//=========================================================================================================================================

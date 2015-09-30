@@ -152,7 +152,7 @@ abstract class Circuit_Abstract
  */	
 	public void optimise()						
 	{						
-		LogIt.action(this.name, "Optimising called");						
+		LogIt.action(this.name, "Optimising called");
 		this.heatRequired.tempMinimum														= 0;
 		this.heatRequired.tempMaximum														= 0;
 		this.state																			= CIRCUIT.STATE.Optimising;
@@ -343,8 +343,7 @@ abstract class Circuit_Abstract
 						 * 
 						 * 
 						 */
-						// TODO Remove line
-						System.out.println("Activating task " + this.name);
+//						System.out.println("Activating task " + this.name);
 						taskActivate(taskFound);
 					}
 				}
