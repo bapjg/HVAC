@@ -111,7 +111,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 				{
 					this.heatRequired														= null;
-//					circuitPump.off();
 					state																	= CIRCUIT.STATE.Idle;
 				}
 				else

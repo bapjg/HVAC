@@ -81,12 +81,12 @@ public class Panel_3_Calendars_Away_Item 						extends 					Panel_0_Fragment
 	{
     	if ((clickedView == dateStart) || (clickedView == timeStart))
     	{
-     		Dialog_DateTime	 								dialog 							= new Dialog_DateTime(itemData.dateTimeStart, itemData, this);
+     		Dialog_DateTime	 								dialog 							= new Dialog_DateTime(itemData.dateTimeStart, itemData, this, 1);
      		dialog.show(getFragmentManager(), "Dialog_Date_Time");
     	}
     	else if ((clickedView == dateEnd) || (clickedView == timeEnd))
     	{
-     		Dialog_DateTime	 								dialog 							= new Dialog_DateTime(itemData.dateTimeEnd, itemData, this);
+     		Dialog_DateTime	 								dialog 							= new Dialog_DateTime(itemData.dateTimeEnd, itemData, this, 2);
      		dialog.show(getFragmentManager(), "Dialog_Date_Time");
     	}
  	}
@@ -107,8 +107,23 @@ public class Panel_3_Calendars_Away_Item 						extends 					Panel_0_Fragment
     	getFragmentManager().popBackStackImmediate();
     }
     @Override
-    public void onDialogReturn()
+    public void onDialogReturnWithId(int id)
+//    public void onDialogReturn()
     {
+    	if (id == 1)																		// dateTimeStart has just been modified
+    	{
+    		if (itemData.dateTimeStart > itemData.dateTimeEnd)								// Start is after end, end = start + 24 hours
+    		{
+    			itemData.dateTimeEnd														= itemData.dateTimeStart + 24L * 60L * 60L * 1000L;
+    		}
+    	}
+    	else																				// dateTimeEnd has just been modified
+    	{
+    		if (itemData.dateTimeStart > itemData.dateTimeEnd)								// Start is after end, end = start + 24 hours
+    		{
+    			itemData.dateTimeStart														= itemData.dateTimeEnd - 24L * 60L * 60L * 1000L;
+    		}
+    	}
     	displayContents();
     }
 }

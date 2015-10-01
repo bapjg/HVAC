@@ -33,11 +33,16 @@ public class Dialog_DateTime 									extends 					DialogFragment
 	public Integer  											timeInitialMinute;
 	public Object												parent;
 	public Dialog_Response										callBack;
+	private int													id;
 	
 	public Dialog_DateTime() 
     {
     }
 	public Dialog_DateTime(Long dateTime, Object parent, Dialog_Response callBack) 
+    {
+		this(dateTime, parent, callBack, 0);
+    }
+	public Dialog_DateTime(Long dateTime, Object parent, Dialog_Response callBack, int id) 
     {
 		super();
 		this.callBack																		= callBack;
@@ -53,7 +58,7 @@ public class Dialog_DateTime 									extends 					DialogFragment
 		this.dateInitialYear																= calendar.get(Calendar.YEAR);
 		this.timeInitialHour																= calendar.get(Calendar.HOUR_OF_DAY);
 		this.timeInitialMinute																= calendar.get(Calendar.MINUTE);
-		
+		this.id																				= id;
     }
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
@@ -116,7 +121,8 @@ public class Dialog_DateTime 									extends 					DialogFragment
 			    	Long newDateTime = calendar.getTimeInMillis();
 
 			    	field.set(parent, newDateTime);
-			    	callBack.onDialogReturn();
+			    	if (id == 0)    	callBack.onDialogReturn();
+			    	else    			callBack.onDialogReturnWithId(id);
 			    	dialog.dismiss();
 			    	return;
 				}

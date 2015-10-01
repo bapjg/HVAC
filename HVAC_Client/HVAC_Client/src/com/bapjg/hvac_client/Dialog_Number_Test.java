@@ -87,25 +87,9 @@ public class Dialog_Number_Test 									extends 					DialogFragment
         builder.setView(dialogView);
         builder.setTitle(message);
          
-//		numberPicker 																		= (NumberPicker) dialogView.findViewById(R.id.value);
-	    
 	    EditText												tempChild					= (EditText) np1.getChildAt(0);	// Stop keyboard appearing
 	    tempChild.setFocusable(false);
 	    tempChild.setInputType(InputType.TYPE_NULL);
-
-	    
-	    
-	    
-//	    numberPicker.setMinValue(numberMin);
-//	    numberPicker.setMaxValue(numberMax);
-//	    numberPicker.setValue(number);				
-//	    numberPicker.setMinValue(0);
-//	    numberPicker.setMaxValue(9);
-//	    numberPicker.setValue(3);				
-//	    numberPicker.setWrapSelectorWheel(false);
-       
-//        builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
-//        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
 
         return builder.create();
     }
