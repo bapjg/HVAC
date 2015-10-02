@@ -40,23 +40,26 @@ public class FuelFlow
 		Ctrl__Abstract 											messageReceive	 			= httpRequest.sendData(messageSend);
 			
 		Global.httpSemaphore.semaphoreUnLock();			
-
+		
+		Long 													consumptionRemote			= -1L;
+		Long 													consumptionLocal			= -1L;
+		
 		if (messageReceive instanceof Ctrl_Fuel_Consumption.Data)
 		{
 			LogIt.info("Fuelflow", "constructor", "Fuel level recovered from network");
-			consumption																		= ((Ctrl_Fuel_Consumption.Data) messageReceive).fuelConsumed;
+			consumptionRemote																= ((Ctrl_Fuel_Consumption.Data) messageReceive).fuelConsumed;
 	    	timeLastStart																	= -1L;
 		}
-		else
-		{
-			LogIt.info("Fuelflow", "constructor", "Network failed, recovering from local file");
+//		else	Changed 03/10/2015
+//		{
+			LogIt.info("Fuelflow", "constructor", "Recovering from local file");
 			try
 			{
 				InputStream  									file 						= new FileInputStream("/home/pi/HVAC_Data/FuelConsumed.txt");
 				DataInputStream									input  						= new DataInputStream (file);
 			    try
 			    {
-			    	consumption																= input.readLong();
+			    	consumptionLocal														= input.readLong();
 			    }
 			    finally
 			    {
@@ -75,6 +78,31 @@ public class FuelFlow
 			{
 				LogIt.info("Fuelflow", "constructor", "I/O error when reading FuelConsumed.txt : " + ex);
 			}			
+//		}
+		if ((consumptionRemote == -1) && (consumptionLocal == -1))
+		{
+			LogIt.info("Fuelflow", "constructor", "FuelConsumed failed from Network and local copy");
+			consumption																		= 0L;
+		}
+		else if ((consumptionRemote == -1) && (consumptionLocal > -1))
+		{
+			LogIt.info("Fuelflow", "constructor", "FuelConsumed failed from Network but available locally");
+			consumption																		= consumptionLocal;
+		}
+		else if ((consumptionRemote > -1) && (consumptionLocal == -1))
+		{
+			LogIt.info("Fuelflow", "constructor", "FuelConsumed failed locally but available from Network");
+			consumption																		= consumptionRemote;
+		}
+		else if (consumptionRemote < consumptionLocal)
+		{
+			LogIt.info("Fuelflow", "constructor", "FuelConsumed locally is higher than from Network, using Local");
+			consumption																		= consumptionLocal;
+		}
+		else // Network is higher or both are equal
+		{
+			LogIt.info("Fuelflow", "constructor", "FuelConsumed locally and network coherent");
+			consumption																		= consumptionRemote;
 		}
 	}
 	public void switchedOn()
