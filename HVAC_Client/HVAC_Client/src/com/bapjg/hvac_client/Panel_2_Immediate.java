@@ -107,7 +107,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 
 			if (messageReceived.executionActive)
 			{
-		    	insertPoint					.addView		(stopOnObjective);
+//		    	insertPoint					.addView		(stopOnObjective);
 		    	insertPoint					.addView		(buttonStartStop);
 				buttonStartStop				.setText		("Stop");
 			}
@@ -121,7 +121,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 		    	insertPoint					.addView		(buttonStartStop);
 		    	buttonStartStop				.setText		("Start");
 			}
-			else
+			else	// Nothing planned
 			{
 		    	insertPoint					.addView		(actionHeading);
 		    	insertPoint					.addView		(timeEnd);
@@ -200,27 +200,27 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
     	stopOnObjective.checkBox		.setOnClickListener(this);
     	buttonStartStop.button			.setOnClickListener(this);
  	}
-	public void onClick(View clickedview)
+	public void onClick(View clickedView)
 	{
 
 		// New code
-    	if (clickedview == targetTemp)
+    	if (clickedView == targetTemp)
     	{
     		Dialog_Temperature 									df 							= new Dialog_Temperature(messageExecute.tempObjective, 25, 45, this);
     		df.show(getFragmentManager(), "Dialog_Temperature");
     	}
-    	else if (clickedview == timeEnd)
+    	else if (clickedView == timeEnd)
     	{
     		Dialog_Time	 										df 							= new Dialog_Time(messageExecute.timeEnd, this);
     		df.show(getFragmentManager(), "Dialog_Time");
     	}
-    	else if ((clickedview == stopOnObjective)
-        ||       (clickedview == stopOnObjective.checkBox))
+    	else if ((clickedView == stopOnObjective)
+        ||       (clickedView == stopOnObjective.checkBox))
         	{
     		messageExecute.stopOnObjective													= ! messageExecute.stopOnObjective;
     		displayContents();
     	}
-    	else if (clickedview == buttonStartStop.button)
+    	else if (clickedView == buttonStartStop.button)
     	{
 	    	if (buttonStartStop.button.getText().toString().equalsIgnoreCase("Start"))
 	    	{
@@ -239,18 +239,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	    	}
     	}
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		
 		//Old code

@@ -153,8 +153,10 @@ abstract class Circuit_Abstract
 	public void optimise()						
 	{						
 		LogIt.action(this.name, "Optimising called");
-		this.heatRequired.tempMinimum														= 0;
-		this.heatRequired.tempMaximum														= 0;
+		// Modified to be the same as this.stop() which may call optimise()
+//		this.heatRequired.tempMinimum														= 0;
+//		this.heatRequired.tempMaximum														= 0;
+		this.heatRequired																	= null;
 		this.state																			= CIRCUIT.STATE.Optimising;
 	}
 /**
@@ -298,9 +300,10 @@ abstract class Circuit_Abstract
 				{
 					taskActivate(taskFound);
 				}
-				else
+				else		// Floor or Radiator
 				{
 					if (Global.thermoOutside.reading == null)							return;
+					
 					if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)
 					{
 						// TODO do nothing or marked as finished

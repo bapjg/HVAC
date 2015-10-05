@@ -162,7 +162,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		Long											now									= Global.Time.now();
 		CircuitTask										task								= new CircuitTask(	
 																												now, 	// Time Start
-																												now, 	// TimeEnd
+																												now + 5L * 60L * 1000L, 	// TimeEnd in 5 mins
 																												20000,	// TempObjective in millidesrees
 																												false,	// StopOnObjective
 																												"1, 2, 3, 4, 5, 6, 7"					// Days
