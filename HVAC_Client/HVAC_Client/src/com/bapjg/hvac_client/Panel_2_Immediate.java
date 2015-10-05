@@ -85,7 +85,8 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			messageExecute.stopOnObjective 													= true;
 			messageExecute.tempObjective 													= new Cmn_Temperature(messageReceived.tempObjective.milliDegrees);
 
-	    	if ((this.circuitName.equalsIgnoreCase("Hot_Water")) && (messageExecute.tempObjective.milliDegrees == 0))
+//	    	if ((this.circuitName.equalsIgnoreCase("Hot_Water")) && (messageExecute.tempObjective.milliDegrees == 0)) why the && milliDegress == 0 ?????
+		    if 		(this.circuitName.equalsIgnoreCase("Hot_Water"))
 	    	{
 	    		messageExecute.tempObjective.milliDegrees									= 40000;
 				messageExecute.timeEnd 														= new Cmn_Time(Global.displayTimeShort(Global.now() + 15 * 60 * 1000L));		// 15 mins
@@ -185,6 +186,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 //	    	targetTemp					.setVisibility	(View.VISIBLE);
 //	    	stopOnObjective				.setVisibility	(View.VISIBLE);
 
+			// TODO HERE IT BREAKS
 			timeEnd						.setValue		(messageExecute.timeEnd.displayShort());	
 			targetTemp					.setValue		(messageExecute.tempObjective.displayInteger());	
 			stopOnObjective				.setChecked		(messageExecute.stopOnObjective);
