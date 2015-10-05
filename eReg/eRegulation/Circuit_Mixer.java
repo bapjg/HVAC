@@ -158,7 +158,7 @@ public class Circuit_Mixer extends Circuit_Abstract
  */
 	public void optimiseFloor()
 	{
-		LogIt.action(this.name, "optimiseFloor called");
+		LogIt.action(this.name, "----------------------------------optimiseFloor called");
 		Long											now									= Global.Time.now();
 		Integer											targetTemperature					= Global.thermoLivingRoom.reading + 2000;	// Go for 2 degrees above current temperature
 		CircuitTask										task								= new CircuitTask(	
