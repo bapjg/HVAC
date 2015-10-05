@@ -259,6 +259,11 @@ public class Thread_BackgroundTasks implements Runnable
 				         			efectiveTempCalculatedTime										= (forecastItem.dateTime.from + forecastItem.dateTime.to) / 2;
 				         		}
 				        	}
+				        }
+				        // The maximum temperature of the day may be behind us
+				        if (Global.temperatureMaxTodayTime > Global.DateTime.now())					// Use the newer prediction
+				        {
+							LogIt.info("Thread_Background", "Run", "Maximum temperature today corrected");
 				        	Global.temperatureMaxTodayPredicted										= efectiveTempCalculatedMax;
 				        	Global.temperatureMaxTodayTime											= efectiveTempCalculatedTime;
 				        }
