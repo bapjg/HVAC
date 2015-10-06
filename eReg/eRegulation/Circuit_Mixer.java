@@ -123,7 +123,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested : Now Optimise");
 				// Now fall through State will be changed below
 			case Optimising:
-				
+				// TODO Mixer position is at zero
 				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "isSingleActiveCircuit : " + Global.circuits.isSingleActiveCircuit());
 				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "thermoBoiler : " + Global.thermoBoiler.reading);
 				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "thermoFloorIn : " + Global.thermoFloorIn.reading);
