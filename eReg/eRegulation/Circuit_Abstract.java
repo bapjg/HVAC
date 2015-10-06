@@ -206,19 +206,16 @@ abstract class Circuit_Abstract
 		this.taskActive																		= null;
 		StackTraceElement[] 									stackTraceElements 			= Thread.currentThread().getStackTrace();
 		int i;
-		for (i = 0; i < 4; i++)
+		for (i = 1; i < 5; i++)
 		{
 			StackTraceElement 									stackTraceElement			= stackTraceElements[i];
-			String												message						= "";
-			message		+= ", index		: " + i;
-			message		+= ", ClassName 	: " + stackTraceElement.getClassName();
-			message		+= ", FileName 		: " + stackTraceElement.getFileName();
-			LogIt.display("Circuit_Abstract", "taskDeactivate", message);
-			message		= "";
-			message		+= ", Line number 	: " + stackTraceElement.getLineNumber();
-			message		+= ", MethodName 	: " + stackTraceElement.getMethodName();
-			LogIt.display("Circuit_Abstract", "taskDeactivate", message);
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "index		: " + i);
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "ClassName 	: " + stackTraceElement.getClassName());
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "FileName 	: " + stackTraceElement.getFileName());
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "Line number 	: " + stackTraceElement.getLineNumber());
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "----------------------------------------------");
 		}
+		LogIt.display("Circuit_Abstract", "taskDeactivate", "==============================================================");
 	}
 /**
  * - taskActive.stop() called for current task is time up
