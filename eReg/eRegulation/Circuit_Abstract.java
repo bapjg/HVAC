@@ -210,11 +210,12 @@ abstract class Circuit_Abstract
 		{
 			StackTraceElement 									stackTraceElement			= stackTraceElements[i];
 			String												message						= "";
-			message		+= "++++++taskDeactivate. ";
 			message		+= ", index		: " + i;
 			message		+= ", ClassName 	: " + stackTraceElement.getClassName();
-			message		+= ", FileName 	: " + stackTraceElement.getFileName();
-			message		+= ", Line number : " + stackTraceElement.getLineNumber();
+			message		+= ", FileName 		: " + stackTraceElement.getFileName();
+			LogIt.display("Circuit_Abstract", "taskDeactivate", message);
+			message		= "";
+			message		+= ", Line number 	: " + stackTraceElement.getLineNumber();
 			message		+= ", MethodName 	: " + stackTraceElement.getMethodName();
 			LogIt.display("Circuit_Abstract", "taskDeactivate", message);
 		}
