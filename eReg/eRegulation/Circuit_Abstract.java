@@ -216,7 +216,7 @@ abstract class Circuit_Abstract
 			message		+= ", FileName 	: " + stackTraceElement.getFileName();
 			message		+= ", Line number : " + stackTraceElement.getLineNumber();
 			message		+= ", MethodName 	: " + stackTraceElement.getMethodName();
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "message");
+			LogIt.display("Circuit_Abstract", "taskDeactivate", message);
 		}
 	}
 /**
