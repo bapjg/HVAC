@@ -250,7 +250,7 @@ public class Thread_BackgroundTasks implements Runnable
 				            	String 									time_from					= Global.Time.display(forecastItem.dateTime.from);
 				            	String 									time_to						= Global.Time.display(forecastItem.dateTime.to);
 				        		// TODO
-				            	
+				            	LogIt.display("Thread_Background", "Run", "Now calc sunshine correction");
 				         		efectiveTempCorrection 												= Global.tasksBackGround.sunshineInfluence * (100 - forecastItem.clouds.all) / 100;
 				         		Integer 								efectiveTempCalculated 		= forecastItem.temperature.value.intValue() * 1000 + efectiveTempCorrection;
 				         		if (efectiveTempCalculated > efectiveTempCalculatedMax)
