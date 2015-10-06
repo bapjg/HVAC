@@ -260,24 +260,16 @@ public class Thread_BackgroundTasks implements Runnable
 				        	}
 				        }
 				        // TODO
-		            	LogIt.display("Thread_Background", "Run", "GOT HERE");
 				        // The maximum temperature of the day may be behind us
-		            	LogIt.display("Thread_Background", "Run", "GOT HERE A");
-		            	LogIt.display("Thread_Background", "Run", "GOT HERE B" + Global.DateTime.now());
 		            	LogIt.display("Thread_Background", "Run", "GOT HERE C" + Global.temperatureMaxTodayTime);
-				        if (Global.temperatureMaxTodayTime > Global.DateTime.now())					// Use the newer prediction
+				        if 	(	(Global.temperatureMaxTodayTime == null)							// Use the newer prediction
+				        ||		(Global.temperatureMaxTodayTime > Global.DateTime.now())	)
 				        {
-			            	LogIt.display("Thread_Background", "Run", "GOT HERE 1");
 							LogIt.info("Thread_Background", "Run", "Maximum temperature today corrected");
-			            	LogIt.display("Thread_Background", "Run", "GOT HERE 2");
 				        	Global.temperatureMaxTodayPredicted										= efectiveTempCalculatedMax;
-			            	LogIt.display("Thread_Background", "Run", "GOT HERE 3");
 				        	Global.temperatureMaxTodayTime											= efectiveTempCalculatedTime;
-			            	LogIt.display("Thread_Background", "Run", "GOT HERE 4");
 				        }
-		            	LogIt.display("Thread_Background", "Run", "GOT HERE 5");
 						LogIt.info("Thread_Background", "Run", "Maximum temperature (corrected) today " + efectiveTempCalculatedMax + ", at " + Global.Time.display(efectiveTempCalculatedTime), true);
-		            	LogIt.display("Thread_Background", "Run", "GOT HERE 6");
 					}
 				}
 				catch (Exception e)
