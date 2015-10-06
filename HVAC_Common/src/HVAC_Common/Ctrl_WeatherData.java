@@ -23,7 +23,7 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 
-//http://api.openweathermap.org/data/2.5/forecast/city?q=chambery,fr&mode=xml&units=metric&type=accurate
+// http://api.openweathermap.org/data/2.5/forecast/city?q=chambery,fr&mode=xml&units=metric&type=accurate
 
 
 public class Ctrl_WeatherData 						extends 		DefaultHandler
