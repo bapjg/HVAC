@@ -272,7 +272,9 @@ public class Thread_BackgroundTasks implements Runnable
 				        	Global.temperatureMaxTodayTime											= efectiveTempCalculatedTime;
 			            	LogIt.display("Thread_Background", "Run", "GOT HERE 4");
 				        }
+		            	LogIt.display("Thread_Background", "Run", "GOT HERE 5");
 						LogIt.info("Thread_Background", "Run", "Maximum temperature (corrected) today " + efectiveTempCalculatedMax + ", at " + Global.Time.display(efectiveTempCalculatedTime), true);
+		            	LogIt.display("Thread_Background", "Run", "GOT HERE 6");
 					}
 				}
 				catch (Exception e)
