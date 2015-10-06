@@ -206,11 +206,13 @@ abstract class Circuit_Abstract
 		this.taskActive																		= null;
 		StackTraceElement[] 									stackTraceElements 			= Thread.currentThread().getStackTrace();
 		int i;
-		for (i = 1; i < 5; i++)
+		int max = stackTraceElements.length > 7 ? 7 : stackTraceElements.length - 1;
+		for (i = 1; i < max; i++)
 		{
 			StackTraceElement 									stackTraceElement			= stackTraceElements[i];
 			LogIt.display("Circuit_Abstract", "taskDeactivate", "index		: " + i);
 			LogIt.display("Circuit_Abstract", "taskDeactivate", "ClassName 	: " + stackTraceElement.getClassName());
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "MethodName	: " + stackTraceElement.getMethodName());
 			LogIt.display("Circuit_Abstract", "taskDeactivate", "FileName 	: " + stackTraceElement.getFileName());
 			LogIt.display("Circuit_Abstract", "taskDeactivate", "Line number 	: " + stackTraceElement.getLineNumber());
 			LogIt.display("Circuit_Abstract", "taskDeactivate", "----------------------------------------------");
