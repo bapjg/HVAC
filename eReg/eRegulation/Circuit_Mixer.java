@@ -124,10 +124,10 @@ public class Circuit_Mixer extends Circuit_Abstract
 				// Now fall through State will be changed below
 			case Optimising:
 				// TODO Mixer position is at zero
-				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "isSingleActiveCircuit : " + Global.circuits.isSingleActiveCircuit());
-				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "thermoBoiler : " + Global.thermoBoiler.reading);
-				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "thermoFloorIn : " + Global.thermoFloorIn.reading);
-				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "mixer.positionTracked : " + mixer.positionTracked);
+				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "isSingleActiveCircuit : " 	+ Global.circuits.isSingleActiveCircuit());
+				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "thermoBoiler : " 			+ Global.thermoBoiler.reading);
+				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "thermoFloorIn : " 			+ Global.thermoFloorIn.reading);
+				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "mixer.positionTracked : " 	+ mixer.positionTracked);
 				if 	(	(Global.circuits.isSingleActiveCircuit()							)
 				&& 		(Global.thermoBoiler.reading > Global.thermoFloorIn.reading + 3000	)   	//  Continue while boilerTemp more than 3 degrees than return temp
 					)
