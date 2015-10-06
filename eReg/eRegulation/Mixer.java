@@ -174,11 +174,9 @@ public class Mixer
 
 			if (tempFloorOut > 50000)
 			{
-	//			LogIt.display("Mixer", "sequencer", "Have definitely tripped. Temp MixerOut : " + Global.thermoFloorOut.reading);
 			}
 			else if (tempFloorOut > 45000)
 			{
-	//			LogIt.display("Mixer", "sequencer", "Trip situation detected. Calculated swingTimeRequired : " + swingTimeRequired);
 				if (swingTimeRequired > 0)
 				{
 					swingTimeRequired															= 0;

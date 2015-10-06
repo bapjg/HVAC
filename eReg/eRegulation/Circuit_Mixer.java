@@ -130,7 +130,9 @@ public class Circuit_Mixer extends Circuit_Abstract
 				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "mixer.positionTracked : " + mixer.positionTracked);
 				if 	(	(Global.circuits.isSingleActiveCircuit()							)
 				&& 		(Global.thermoBoiler.reading > Global.thermoFloorIn.reading + 3000	)   	//  Continue while boilerTemp more than 3 degrees than return temp
-				&& 		(mixer.positionTracked > 0											)   )	//  If no warm water is flowing, no point continuing
+					)
+// Changed 06/10/2015. Mixer gets stuck in the off position				
+//				&& 		(mixer.positionTracked > 0											)   )	//  If no warm water is flowing, no point continuing
 				{
 					if (state != CIRCUIT.STATE.Optimising)
 					{
