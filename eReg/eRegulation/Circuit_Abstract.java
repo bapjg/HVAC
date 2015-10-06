@@ -207,6 +207,7 @@ abstract class Circuit_Abstract
 		StackTraceElement[] 									stackTraceElements 			= Thread.currentThread().getStackTrace();
 		int i;
 		int max = stackTraceElements.length > 7 ? 7 : stackTraceElements.length - 1;
+		LogIt.display("Circuit_Abstract", "taskDeactivate", "max		: " + stackTraceElements.length);
 		for (i = 1; i < max; i++)
 		{
 			StackTraceElement 									stackTraceElement			= stackTraceElements[i];
