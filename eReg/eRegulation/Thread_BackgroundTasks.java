@@ -263,6 +263,8 @@ public class Thread_BackgroundTasks implements Runnable
 		            	LogIt.display("Thread_Background", "Run", "GOT HERE");
 				        // The maximum temperature of the day may be behind us
 		            	LogIt.display("Thread_Background", "Run", "GOT HERE A");
+		            	LogIt.display("Thread_Background", "Run", "GOT HERE B" + Global.DateTime.now());
+		            	LogIt.display("Thread_Background", "Run", "GOT HERE C" + Global.temperatureMaxTodayTime);
 				        if (Global.temperatureMaxTodayTime > Global.DateTime.now())					// Use the newer prediction
 				        {
 			            	LogIt.display("Thread_Background", "Run", "GOT HERE 1");
