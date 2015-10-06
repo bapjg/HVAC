@@ -204,6 +204,20 @@ abstract class Circuit_Abstract
 		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated ");
 		this.taskActive.dateLastRun															= Global.Date.now();
 		this.taskActive																		= null;
+		StackTraceElement[] 									stackTraceElements 			= Thread.currentThread().getStackTrace();
+		int i;
+		for (i = 0; i < 4; i++)
+		{
+			StackTraceElement 									stackTraceElement			= stackTraceElements[i];
+			String												message						= "";
+			message		+= "++++++taskDeactivate. ";
+			message		+= ", index		: " + i;
+			message		+= ", ClassName 	: " + stackTraceElement.getClassName();
+			message		+= ", FileName 	: " + stackTraceElement.getFileName();
+			message		+= ", Line number : " + stackTraceElement.getLineNumber();
+			message		+= ", MethodName 	: " + stackTraceElement.getMethodName();
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "message");
+		}
 	}
 /**
  * - taskActive.stop() called for current task is time up
