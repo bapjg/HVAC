@@ -62,7 +62,7 @@ public class Circuits
 		{
 			if (circuit.taskActive != null)
 			{
-				if (circuit.state != CIRCUIT.STATE.Idle)	// ie not heat request generated
+				if (circuit.state != STATES.Circuit.Idle)	// ie not heat request generated
 				{
 					count++;
 				}

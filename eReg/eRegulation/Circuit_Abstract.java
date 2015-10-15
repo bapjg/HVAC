@@ -24,7 +24,7 @@ abstract class Circuit_Abstract
 	public Pump													circuitPump;
 	public Thermometer											circuitThermo;
 								
-	public CIRCUIT.STATE										state;
+	public STATES.Circuit										state;
 
 	public Mixer												mixer						= null;
 	public TemperatureGradient 									temperatureGradient			= null;				//This will be overridden
@@ -48,7 +48,7 @@ abstract class Circuit_Abstract
 		if (this.circuitPump == null)			System.out.println("Circuit.Constructor : " + name + " invalid pump " + paramCircuit.pump);
 		if (this.circuitThermo == null)			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + paramCircuit.thermometer);
 		
-		this.state																			= CIRCUIT.STATE.Off;
+		this.state																			= STATES.Circuit.Off;
 		this.heatRequired																	= null;
 	}
 	public void addCircuitTask(Ctrl_Calendars.Calendar 				paramCalendar)
@@ -61,7 +61,7 @@ abstract class Circuit_Abstract
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
-		this.state																			= CIRCUIT.STATE.Start_Requested;
+		this.state																			= STATES.Circuit.Start_Requested;
 		this.heatRequired																	= new HeatRequired();
 	}
 /**
@@ -74,7 +74,7 @@ abstract class Circuit_Abstract
 	{
 		LogIt.action(this.name, "Start called with circuitTask");
 		this.taskActive																		= thisTask;
-		this.state																			= CIRCUIT.STATE.Start_Requested;
+		this.state																			= STATES.Circuit.Start_Requested;
 		this.heatRequired																	= new HeatRequired();
 	}
 /**
@@ -88,7 +88,7 @@ abstract class Circuit_Abstract
 		//   1. Time is up : 					Detected/Called by Circuit_Abstract.scheduleTask
 		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
 		LogIt.action(this.name, "Stop called");
-		this.state																			= CIRCUIT.STATE.Stop_Requested;
+		this.state																			= STATES.Circuit.Stop_Requested;
 		this.heatRequired																	= null;
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 	}
@@ -101,7 +101,7 @@ abstract class Circuit_Abstract
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
-		this.state																			= CIRCUIT.STATE.Off;
+		this.state																			= STATES.Circuit.Off;
 		this.heatRequired																	= null;
 		taskDeactivate(this.taskActive);
 	}
@@ -130,7 +130,7 @@ abstract class Circuit_Abstract
 		this.heatRequired.tempMinimum														= 0;
 		this.heatRequired.tempMaximum														= 0;
 		this.circuitPump.off();
-		this.state																			= CIRCUIT.STATE.Suspended;
+		this.state																			= STATES.Circuit.Suspended;
 	}						
 /**
  * Resumes the circuit :
@@ -143,7 +143,7 @@ abstract class Circuit_Abstract
 	{						
 		LogIt.action(this.name, "Resume called");						
 		this.circuitPump.on();
-		this.state																			= CIRCUIT.STATE.Resuming;
+		this.state																			= STATES.Circuit.Resuming;
 	}
 /**
  * Optimises the circuit :
@@ -157,7 +157,7 @@ abstract class Circuit_Abstract
 //		this.heatRequired.tempMinimum														= 0;
 //		this.heatRequired.tempMaximum														= 0;
 		this.heatRequired																	= null;
-		this.state																			= CIRCUIT.STATE.Optimising;
+		this.state																			= STATES.Circuit.Optimising;
 	}
 /**
  * Activates task supplied in parameter :
@@ -251,9 +251,9 @@ abstract class Circuit_Abstract
 		if (taskActive != null)
 		{
 			if (	(now > taskActive.timeEnd) 							// taskActive : Time up
-			&& 		(this.state != CIRCUIT.STATE.Stop_Requested	) 
-			&&		(this.state != CIRCUIT.STATE.Stopping		)   
-			&&		(this.state != CIRCUIT.STATE.Optimising		)   )
+			&& 		(this.state != STATES.Circuit.Stop_Requested	) 
+			&&		(this.state != STATES.Circuit.Stopping		)   
+			&&		(this.state != STATES.Circuit.Optimising		)   )
 			{
 				// Time is up for this task and it hasn't yet been asked to stop
 				this.stop();

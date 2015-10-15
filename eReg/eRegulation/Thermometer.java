@@ -87,9 +87,9 @@ public class Thermometer
 			{
 				if (Math.abs(aReading - firstReading) > 10000)							// difference > 2 degrees
 				{
-					Global.eMailMessage("Thermometer/Read", "Temperature difference > 2 degrees on thermometer " + this.name);
-					this.reading														= null;
-					throw new Thermometer_ReadException(this.name);
+					Global.eMailMessage("Thermometer/Read", "Temperature difference > 2 degrees on thermometer " + this.name + aReading + ", " + firstReading);
+					this.reading														= aReading > firstReading ? aReading : firstReading; // Return higher reading
+					throw new Thermometer_SpreadException(this.name);
 				}
 				readings																+= aReading;
 				count++;

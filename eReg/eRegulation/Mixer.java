@@ -39,19 +39,21 @@ public class Mixer
 	public Relay												mixerUp;
 	public Relay												mixerDown;
 	
-	public Integer									state									= 0;
-	public static final int							MIXER_STATE_Off 						= 0;
-	public static final int							MIXER_STATE_Normal_Operating			= 1;
-	public static final int							MIXER_STATE_Moving_Up					= 2;
-	public static final int							MIXER_STATE_Moving_Down					= 3;
-	public static final int							MIXER_STATE_Moving_Waint				= 4;
-	public static final int							MIXER_STATE_Moving_OverTemp_Recovery	= 5;
-	public static final int							MIXER_STATE_Moving_Idle					= 6;
+// Is this required
+//	public STATES.Mixer											state						= STATES.Mixer.Off;
+	
+//	public static final int							MIXER_STATE_Off 						= 0;
+//	public static final int							MIXER_STATE_Normal_Operating			= 1;
+//	public static final int							MIXER_STATE_Moving_Up					= 2;
+//	public static final int							MIXER_STATE_Moving_Down					= 3;
+//	public static final int							MIXER_STATE_Moving_Waint				= 4;
+//	public static final int							MIXER_STATE_Moving_OverTemp_Recovery	= 5;
+//	public static final int							MIXER_STATE_Moving_Idle					= 6;
 
 	public Long										timeToStop;
 	
 	public float									lastBoilerDTdt							= 0;
-	public STATES.boiler							boilerState								= STATES.boiler.normalOperating;
+	public STATES.BoilerTemperatureVariation		boilerTemperatureVariation				= STATES.BoilerTemperatureVariation.NormalOperating;
 
  	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
     {
@@ -84,7 +86,7 @@ public class Mixer
 		{
 			System.out.println("Mixer.Contructor : Unknown mixer relay");
 		}
-		this.state																			= MIXER_STATE_Off;
+//		this.state																			= STATES.Mixer.Off;
 	}
 	public void sequencer(Integer targetTemp)
 	{
@@ -141,7 +143,7 @@ public class Mixer
 			
 				if (Global.circuits.isSingleActiveCircuit())	swingTimeRequired			= safeSingleCircuitPosition - positionTracked;				// Gives negative number
 				else											swingTimeRequired			= safeDoubleCircuitPosition - positionTracked;				// Gives negative number
-				boilerState																	= STATES.boiler.minReached;
+				boilerTemperatureVariation													= STATES.BoilerTemperatureVariation.MinReached;
 				if (swingTimeRequired > 0)			// This can happen at startup, or if positionTracked is slightly below safeCircuitPosition
 				{
 					if (positionTracked != 0)
@@ -153,7 +155,7 @@ public class Mixer
 			else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))							// boiler was heating, now cooling
 			{
 				swingTimeRequired															= 0;
-				boilerState																	= STATES.boiler.maxReached;
+				boilerTemperatureVariation													= STATES.BoilerTemperatureVariation.MaxReached;
 			}
 			else
 			{
@@ -211,12 +213,12 @@ public class Mixer
 				messageBefore.positionTracked												= positionTracked;
 				messageBefore.startMovement													= true;
 			
-				switch (boilerState)
+				switch (boilerTemperatureVariation)
 				{
-				case minReached:															// This is to inhibit mixer moving hotter until warmer boiler water has filtered through
+				case MinReached:															// This is to inhibit mixer moving hotter until warmer boiler water has filtered through
 					if (pidFloorOut.dTdt() > 0F)											// BoilerWarming has reached floorOut which is now warming
 					{
-						boilerState 				= STATES.boiler.normalOperating;		
+						boilerTemperatureVariation 				= STATES.BoilerTemperatureVariation.NormalOperating;		
 					}
 					else																	// FloorOut is still cooling, hold back
 					{
@@ -235,8 +237,8 @@ public class Mixer
 						}
 					}
 					break;
-				case maxReached:
-				case normalOperating:
+				case MaxReached:
+				case NormalOperating:
 				default:
 					break;
 				}

@@ -47,7 +47,7 @@ public class Thread_Mixer implements Runnable
 				circuit.shutDown();
 			}
 			
-			if  ((circuit.state != CIRCUIT.STATE.Off) && (circuit.state != CIRCUIT.STATE.Idle)  && (circuit.state != CIRCUIT.STATE.Error))
+			if  ((circuit.state != STATES.Circuit.Off) && (circuit.state != STATES.Circuit.Idle)  && (circuit.state != STATES.Circuit.Error))
 			{
 				// Note that Mixer calls go to sleep when positionning the mixer.
 				
@@ -94,7 +94,7 @@ public class Thread_Mixer implements Runnable
 					//-----v------Outside------v--
 					
 				}
-				else if (circuit.state == CIRCUIT.STATE.RampingUp) 						// This is to accelerate rampup
+				else if (circuit.state == STATES.Circuit.RampingUp) 						// This is to accelerate rampup
 				{
 					targetTemp																= 41000;						// Trip avoidance kicks in at 450
 				}
@@ -122,7 +122,7 @@ public class Thread_Mixer implements Runnable
 					catch (Exception ex)					// Panic : a read error has occured on thermometer
 					{
 						circuit.shutDown();
-						circuit.state														= CIRCUIT.STATE.Error;
+						circuit.state														= STATES.Circuit.Error;
 						circuit.mixer.positionZero();
 						break;
 					}
@@ -146,7 +146,7 @@ public class Thread_Mixer implements Runnable
 					}
 				}
 			}
-			else if  ((circuit.state == CIRCUIT.STATE.Off ) || (circuit.state == CIRCUIT.STATE.Idle)) //Running Cold
+			else if  ((circuit.state == STATES.Circuit.Off ) || (circuit.state == STATES.Circuit.Idle)) //Running Cold
 			{
 				// TODO should we position zero every cycle. what about optimisation. what about floor temp measurement
 				// circuit.state = circuit.CIRCUIT_STATE_Shutting_down doesn't last long enough to be reliable. use positiontacked

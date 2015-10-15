@@ -34,7 +34,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		}
 		else
 		{
-			this.state 																		= CIRCUIT.STATE.Error;
+			this.state 																		= STATES.Circuit.Error;
 			return 0L;
 		}
 	}
@@ -53,7 +53,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				shutDown();											// This bypasses stopRequested
 				// TODO Should we not close the mixer
 				circuitPump.off();
-				state												= CIRCUIT.STATE.Error;
+				state												= STATES.Circuit.Error;
 				Global.eMailMessage("Circuit_Mixer/sequencer", "A Thermometer cannont be read");
 			}
 
@@ -68,12 +68,12 @@ public class Circuit_Mixer extends Circuit_Abstract
 				if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective)
 				{
 					circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
-					state																	= CIRCUIT.STATE.Starting;
+					state																	= STATES.Circuit.Starting;
 				}
 				else
 				{
 					LogIt.info("Circuit_" + this.name, "sequencer", "Already at temperature. Just idle");
-					state																	= CIRCUIT.STATE.Idle;
+					state																	= STATES.Circuit.Idle;
 				}
 				break;
 			case Idle:
@@ -81,26 +81,26 @@ public class Circuit_Mixer extends Circuit_Abstract
 				{
 					circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
 					LogIt.info("Circuit_" + this.name, "sequencer", "Idle ended");
-					state																	= CIRCUIT.STATE.Starting;
+					state																	= STATES.Circuit.Starting;
 				}
 				break;
 			case Starting:
 				if (temperatureGradient == null)
 				{
 					LogIt.error("Circuit_" + this.name, "sequencer", "temperatureGradient is null");
-					state																	= CIRCUIT.STATE.Error;
+					state																	= STATES.Circuit.Error;
 				}
 				else
 				{
 					this.heatRequired.tempMinimum											= 60000;
 					this.heatRequired.tempMaximum											= 80000;
-					state																	= CIRCUIT.STATE.AwaitingHeat;
+					state																	= STATES.Circuit.AwaitingHeat;
 				}
 				break;
 			case AwaitingHeat:
 				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
 				{
-					state																	= CIRCUIT.STATE.RampingUp;
+					state																	= STATES.Circuit.RampingUp;
 				}
 				break;
 			case RampingUp:
@@ -111,7 +111,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 				{
 					this.heatRequired														= null;
-					state																	= CIRCUIT.STATE.Idle;
+					state																	= STATES.Circuit.Idle;
 				}
 				else
 				{
@@ -134,16 +134,16 @@ public class Circuit_Mixer extends Circuit_Abstract
 // Changed 06/10/2015. Mixer gets stuck in the off position				
 //				&& 		(mixer.positionTracked > 0											)   )	//  If no warm water is flowing, no point continuing
 				{
-					if (state != CIRCUIT.STATE.Optimising)
+					if (state != STATES.Circuit.Optimising)
 					{
 						LogIt.info("Circuit_" + this.name, "sequencer", "Optimising");			// Done this way to get only one message (no repeats)
 						this.heatRequired													= null;
-						state																= CIRCUIT.STATE.Optimising;
+						state																= STATES.Circuit.Optimising;
 					}
 				}
 				else
 				{
-					state																	= CIRCUIT.STATE.Stopping;
+					state																	= STATES.Circuit.Stopping;
 				}
 				break;
 			case Stopping:
@@ -177,7 +177,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 																											  );
 		this.taskActive																		= task;
 		this.circuitPump.on();
-		this.state																			= CIRCUIT.STATE.Optimising;
+		this.state																			= STATES.Circuit.Optimising;
 		this.heatRequired																	= null;
 	}
 }

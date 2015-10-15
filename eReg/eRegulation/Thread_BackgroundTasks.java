@@ -6,11 +6,16 @@ import HVAC_Common.Ctrl__Abstract.Ack;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thread_BackgroundTasks implements Runnable
 {
-	public static final int										SUMMER_PUMPS_Waiting		= 0;
-	public static final int										SUMMER_PUMPS_Running		= 1;
-	public static final int										SUMMER_PUMPS_FinishedToDay	= 2;
+//	public enum SUMMER_PUMPS
+//	{
+//		Waiting,
+//		Running,
+//		FinishedToDay
+//	}
+//	public static final int										SUMMER_PUMPS_Waiting		= 0;
+//	public static final int										SUMMER_PUMPS_Running		= 1;
+//	public static final int										SUMMER_PUMPS_FinishedToDay	= 2;
 	public static final Long									SIX_HOURS					= 6 * 60 * 60 * 1000L;
-
 	
 	public Thread_BackgroundTasks()
 	{
