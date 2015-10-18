@@ -168,24 +168,15 @@ public class Thread_BackgroundTasks implements Runnable
 			//=========================================================================================================================================
 			//
 			// Optimise : Particularly hot water in summer and floor in winter
-			
+			//
 			// evry hour
 			// if floor not on
 			// set mixer cold
 			// run pump 5 mins
 			// take floor temp and put in pid or elsewhere
 			
-			//
-			//
-			//=========================================================================================================================================
-
-			//=========================================================================================================================================
-			//
-			// Optimise : Particularly hot water in summer and floor in winter
-			//
-			
 			// Must also run floor pump for a certain time to get good reading of concrete/floor temp
-			if (Global.circuits.activeCircuitCount() > 0)
+			if (Global.circuits.activeCircuitCount() == 0)
 			{
 				// TODO 
 				// if summer
@@ -270,7 +261,6 @@ public class Thread_BackgroundTasks implements Runnable
 				        }
 				        // TODO
 				        // The maximum temperature of the day may be behind us
-		            	LogIt.display("Thread_Background", "Run", "GOT HERE C" + Global.temperatureMaxTodayTime);
 				        if 	(	(Global.temperatureMaxTodayTime == null)							// Use the newer prediction
 				        ||		(Global.temperatureMaxTodayTime > Global.DateTime.now())	)
 				        {

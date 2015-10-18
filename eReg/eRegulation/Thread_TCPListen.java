@@ -308,12 +308,9 @@ public class Thread_TCPListen 			implements Runnable
 		Ctrl_Weather.Data 						message_return					= new Ctrl_Weather().new Data();			
 		if (Global.weatherData == null)
 		{
-			System.out.println("weatherdata is null");
 			try			// Getting new data
 			{
-				System.out.println("weatherdata trying to get new copy");
 				Global.weatherData												= new Ctrl_WeatherData();
-				System.out.println("weatherdata new copy retruned");
 			}
 			catch (Exception e)
 			{
@@ -322,18 +319,14 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		if (Global.weatherData == null)		// still no data
 		{
-			System.out.println("Stil no data");
 			message_return														= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
 			message_return.weatherData											= null;
 		}
 		else
 		{
-			System.out.println("data found");
 			message_return														= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
 			message_return.weatherData											= Global.weatherData;
 		}
-		
-		System.out.println("weatherdata supplied : " + (message_return.weatherData != null));
 		return message_return;
 	}
 	private Ctrl_Actions_Relays.Data	process_Ctrl_Actions_Relays_Request		()

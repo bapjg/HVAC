@@ -46,8 +46,35 @@ public class Thread_Mixer implements Runnable
 				Global.eMailMessage("Thread_Mixer/run", "Unable to read a Thermometer");
 				circuit.shutDown();
 			}
-			
-			if  ((circuit.state != HVAC_STATES.Circuit.Off) && (circuit.state != HVAC_STATES.Circuit.Idle)  && (circuit.state != HVAC_STATES.Circuit.Error))
+			// TODO CHeck this
+
+			switch(circuit.state)
+			{
+			case Off :
+				if (mixer.positionTracked > 0)
+				{
+					mixer.positionZero();
+				}
+				break;
+			case Start_Requested :					// Just fall through to AwaitingHeat
+			case Starting :							// Just fall through to AwaitingHeat
+			case AwaitingHeat :
+				mixer.positionPercentage(0.20F);
+				break;
+			case RampingUp :
+			case Running :
+			                        
+			case Suspended :
+			case Resuming :
+			                        
+			case Optimising :
+			case Stop_Requested :
+			case Stopping :
+			                        
+			case Error :
+				break;
+			}
+			if  ((circuit.state != HVAC_STATES.Circuit.Off) && (circuit.state != HVAC_STATES.Circuit.Suspended)  && (circuit.state != HVAC_STATES.Circuit.Error))
 			{
 				// Note that Mixer calls go to sleep when positionning the mixer.
 				
@@ -141,12 +168,13 @@ public class Thread_Mixer implements Runnable
 						
 						if (Math.abs(temperatureProjected - targetTemp) > mixer.marginProjection)		// More than 2 degrees difference (either over or under)
 						{
-							break;
+							break;	// Stops the loop to reanalyse the situation, i.e.GoTo "for (i = 0; (i < indexProject) && (! Global.stopNow); i++)"
 						}
 					}
 				}
 			}
-			else if  ((circuit.state == HVAC_STATES.Circuit.Off ) || (circuit.state == HVAC_STATES.Circuit.Idle)) //Running Cold
+			// TODO CHeck this
+			else if  ((circuit.state == HVAC_STATES.Circuit.Off ) || (circuit.state == HVAC_STATES.Circuit.Suspended)) //Running Cold
 			{
 				// TODO should we position zero every cycle. what about optimisation. what about floor temp measurement
 				// circuit.state = circuit.CIRCUIT_STATE_Shutting_down doesn't last long enough to be reliable. use positiontacked

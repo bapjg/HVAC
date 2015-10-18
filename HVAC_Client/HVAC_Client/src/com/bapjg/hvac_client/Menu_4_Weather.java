@@ -34,13 +34,13 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
     	buttonTomorrow																		= new Element_MenuButton("Tomorrow");
     	buttonBeyond																		= new Element_MenuButton("Beyond");
     	buttonSunriseSunset																	= new Element_MenuButton("Sunrise Sunset");
-    	buttonRefresh																		= new Element_MenuButton("Refresh");
+//    	buttonRefresh																		= new Element_MenuButton("Refresh");
 
     	menuInsertPoint			.addView(buttonToday);
     	menuInsertPoint			.addView(buttonTomorrow);
     	menuInsertPoint			.addView(buttonBeyond);
     	menuInsertPoint			.addView(buttonSunriseSunset);
-    	menuInsertPoint			.addView(buttonRefresh);
+//    	menuInsertPoint			.addView(buttonRefresh);
     	
     	buttonToday				.setListener(this);
     	buttonTomorrow			.setListener(this);

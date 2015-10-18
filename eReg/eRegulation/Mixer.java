@@ -339,6 +339,12 @@ public class Mixer
 			positionTracked																	= 0;
 		}
 	}
+	public void positionPercentage(float percentage)
+	{
+		positionZero();
+		allOff();
+		positionTracked																		= positionAbsolute((int) (swingTime.floatValue() * percentage)).positionTracked;
+	}
 	public void positionFull()
 	{
 		if ((positionTracked != null) && (positionTracked != swingTime))

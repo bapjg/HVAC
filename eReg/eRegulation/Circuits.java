@@ -62,10 +62,10 @@ public class Circuits
 		{
 			if (circuit.taskActive != null)
 			{
-				if (circuit.state != HVAC_STATES.Circuit.Idle)	// ie not heat request generated
-				{
+//				if (circuit.state != HVAC_STATES.Circuit.Idle)	// ie not heat request generated
+//				{
 					count++;
-				}
+//				}
 			}
 		}
 		if (count == 1)			return true;

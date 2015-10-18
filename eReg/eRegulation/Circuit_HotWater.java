@@ -60,14 +60,13 @@ public class Circuit_HotWater extends Circuit_Abstract
 				
 			case Running:
 				
+				// This is inline optimisation. For other tasks, this one is active.
+				
 				//	singleCircuit		stopOnObjective
 				//		Yes					Yes					deltaRatio > deltaMinimum => optimise()   deltaHotWater < 0 => optimise()
 				//		Yes					No			*		deltaRatio > deltaMinimum => optimise()   deltaHotWater < 0 => optimise()
 				//		No					Yes					deltaHotWater < 0 => stop()
 				//		No					No			*		deltaHotWater < 0 => suspend()
-				
-				
-				
 				
 				if (this.taskActive.stopOnObjective)										// Stop On Objective
 				{

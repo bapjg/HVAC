@@ -72,16 +72,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 				}
 				else
 				{
-					LogIt.info("Circuit_" + this.name, "sequencer", "Already at temperature. Just idle");
-					state																	= HVAC_STATES.Circuit.Idle;
-				}
-				break;
-			case Idle:
-				if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective)
-				{
-					circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
-					LogIt.info("Circuit_" + this.name, "sequencer", "Idle ended");
-					state																	= HVAC_STATES.Circuit.Starting;
+					LogIt.info("Circuit_" + this.name, "sequencer", "Already at temperature. Just Suspend");
+					state																	= HVAC_STATES.Circuit.Suspended;
 				}
 				break;
 			case Starting:
@@ -111,7 +103,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 				{
 					this.heatRequired														= null;
-					state																	= HVAC_STATES.Circuit.Idle;
+					state																	= HVAC_STATES.Circuit.Suspended;
 				}
 				else
 				{
@@ -119,9 +111,14 @@ public class Circuit_Mixer extends Circuit_Abstract
 					this.heatRequired.tempMaximum											= 80000;
 				}
 				break;
-			case Stop_Requested:
-				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested : Now Optimise");
-				// Now fall through State will be changed below
+//			case Idle:
+//				if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective)
+//				{
+//					circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
+//					LogIt.info("Circuit_" + this.name, "sequencer", "Idle ended");
+//					state																	= HVAC_STATES.Circuit.Starting;
+//				}
+//				break;
 			case Optimising:
 				// TODO Mixer position is at zero
 //				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "isSingleActiveCircuit : " 	+ Global.circuits.isSingleActiveCircuit());
@@ -146,14 +143,18 @@ public class Circuit_Mixer extends Circuit_Abstract
 					state																	= HVAC_STATES.Circuit.Stopping;
 				}
 				break;
+			case Stop_Requested:
+				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested : Now Optimise");
+				state																		= HVAC_STATES.Circuit.Stopping;
 			case Stopping:
 				circuitPump.off();
 				this.shutDown();					// shutDown sets state to off. Thread_mixer looks at this as signal to stop
 				break;
 			case Error:
+				LogIt.error("Circuit_" + this.name, "sequencer", "Error detected : ");	
 				break;
 			default:
-				LogIt.error("Circuit_" + this.name, "sequencer", "unknown state detected : " + state);	
+				LogIt.error("Circuit_" + this.name, "sequencer", "unknown state detected : " + state.toString());	
 			}
 		}
 	}
