@@ -36,7 +36,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 			{
 				shutDown();											// This bypasses stopRequested
 				circuitPump.off();
-				state												= STATES.Circuit.Error;
+				state												= HVAC_STATES.Circuit.Error;
 				Global.eMailMessage("Circuit_Radiator/sequencer", "A Thermometer cannont be read");
 			}
 
@@ -48,20 +48,20 @@ public class Circuit_Radiator extends Circuit_Abstract
 				break;
 			case Start_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
-				state																		= STATES.Circuit.Starting;
+				state																		= HVAC_STATES.Circuit.Starting;
 				//Now fall through
 			case Starting:
 				if (temperatureGradient == null)
 				{
 					LogIt.error("Circuit_" + this.name, "sequencer", "temperatureGradient is null");
-					state																	= STATES.Circuit.Error;
+					state																	= HVAC_STATES.Circuit.Error;
 				}
 				else
 				{
 					Integer 									temp						= temperatureGradient.getTempToTarget();
 					this.heatRequired.tempMinimum											= temp - 7500;
 					this.heatRequired.tempMaximum											= temp + 7500;
-					state																	= STATES.Circuit.AwaitingHeat;
+					state																	= HVAC_STATES.Circuit.AwaitingHeat;
 				}
 				break;
 			case AwaitingHeat:
@@ -69,7 +69,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 				{
 					LogIt.action("PumpRadiator", "On");
 					circuitPump.on();
-					state																	= STATES.Circuit.Running;
+					state																	= HVAC_STATES.Circuit.Running;
 				}
 				break;
 			case Running:
@@ -79,7 +79,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 				break;
 			case Stop_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
-				state																		= STATES.Circuit.Stopping;
+				state																		= HVAC_STATES.Circuit.Stopping;
 				//Now fall through
 			case Stopping:
 				if 	(	(Global.circuits.isSingleActiveCircuit())

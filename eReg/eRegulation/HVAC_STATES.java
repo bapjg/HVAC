@@ -1,7 +1,7 @@
 package eRegulation;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class STATES
+public class HVAC_STATES
 {
 	public enum BoilerTemperatureVariation
 	{

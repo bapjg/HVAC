@@ -120,7 +120,8 @@ public class Thread_BackgroundTasks implements Runnable
 																			now + 30 * 60 * 1000, 					// TimeEnd
 																			10000,									// TempObjective in millidesrees (10]C)
 																			true,									// StopOnObjective
-																			"1, 2, 3, 4, 5, 6, 7");					// Days
+																			"1, 2, 3, 4, 5, 6, 7",					// Days
+																			HVAC_TYPES.CircuitTask.BackGround);
 				circuit.start();
 			}
 			if (((Global.thermoBoiler.reading    != null) && (Global.thermoBoiler.reading 		< tasksBackGround.antiFreeze))
@@ -132,7 +133,8 @@ public class Thread_BackgroundTasks implements Runnable
 																			now + 30 * 60 * 1000, 					// 30 mins
 																			30000,									// TempObjective in millidegrees 30°C
 																			false,									// StopOnObjective
-																			"1, 2, 3, 4, 5, 6, 7");					// Days
+																			"1, 2, 3, 4, 5, 6, 7",					// Days
+																			HVAC_TYPES.CircuitTask.BackGround);
 				circuit.start();
 			}
 			if (((Global.thermoLivingRoom.reading   != null) && (Global.thermoLivingRoom.reading 	< tasksBackGround.antiFreeze))
@@ -144,7 +146,8 @@ public class Thread_BackgroundTasks implements Runnable
 																			now + 30 * 60 * 1000, 					// 30 mins
 																			10000,									// TempObjective in millidegrees 10°C
 																			false,									// StopOnObjective
-																			"1, 2, 3, 4, 5, 6, 7");					// Days
+																			"1, 2, 3, 4, 5, 6, 7",					// Days
+																			HVAC_TYPES.CircuitTask.BackGround);
 				circuit.start();
 			}
 			if (((Global.thermoRadiatorIn.reading   != null) && (Global.thermoRadiatorIn.reading 	< tasksBackGround.antiFreeze))
@@ -155,7 +158,8 @@ public class Thread_BackgroundTasks implements Runnable
 																			now + 30 * 60 * 1000, 					// 30 mins
 																			30000,									// TempObjective in millidegrees 30°C
 																			false,									// StopOnObjective
-																			"1, 2, 3, 4, 5, 6, 7");					// Days
+																			"1, 2, 3, 4, 5, 6, 7",					// Days
+																			HVAC_TYPES.CircuitTask.BackGround);
 				circuit.start();
 			}
 			//

@@ -24,7 +24,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 			{
 				shutDown();											// This bypasses stopRequested
 				circuitPump.off();
-				state																		= STATES.Circuit.Error;
+				state																		= HVAC_STATES.Circuit.Error;
 				Global.eMailMessage("Circuit_HotWater/sequencer", "A Thermometer cannont be read");
 			}
 
@@ -42,19 +42,19 @@ public class Circuit_HotWater extends Circuit_Abstract
 				break;
 			case Start_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
-				state																		= STATES.Circuit.Starting;
+				state																		= HVAC_STATES.Circuit.Starting;
 				//Now fall through
 			case Starting:
 				this.heatRequired.tempMinimum												= this.taskActive.tempObjective + 10000;
 				this.heatRequired.tempMaximum												= this.tempMax;
-				state																		= STATES.Circuit.AwaitingHeat;
+				state																		= HVAC_STATES.Circuit.AwaitingHeat;
 				break;
 			case AwaitingHeat:
 				if 		(Global.thermoBoiler.reading 	> Global.thermoHotWater.reading)
 				{
 					LogIt.action("PumpHotWater", "On");
 					circuitPump.on();
-					state																	= STATES.Circuit.Running;
+					state																	= HVAC_STATES.Circuit.Running;
 				}
 				break;
 				
@@ -138,11 +138,11 @@ public class Circuit_HotWater extends Circuit_Abstract
 				break;
 			case Resuming:																	// Setting state to starting will setup heat required etc.
 				LogIt.info("Circuit_" + this.name, "sequencer", "Resuming");
-				state																		= STATES.Circuit.Starting;
+				state																		= HVAC_STATES.Circuit.Starting;
 				break;
 			case Stop_Requested:
 				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
-				state																		= STATES.Circuit.Stopping;
+				state																		= HVAC_STATES.Circuit.Stopping;
 				//Now fall through
 			case Stopping:
 				LogIt.action("PumpHotWater", "Off");

@@ -53,7 +53,7 @@ public class Mixer
 	public Long										timeToStop;
 	
 	public float									lastBoilerDTdt							= 0;
-	public STATES.BoilerTemperatureVariation		boilerTemperatureVariation				= STATES.BoilerTemperatureVariation.NormalOperating;
+	public HVAC_STATES.BoilerTemperatureVariation		boilerTemperatureVariation				= HVAC_STATES.BoilerTemperatureVariation.NormalOperating;
 
  	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
     {
@@ -143,7 +143,7 @@ public class Mixer
 			
 				if (Global.circuits.isSingleActiveCircuit())	swingTimeRequired			= safeSingleCircuitPosition - positionTracked;				// Gives negative number
 				else											swingTimeRequired			= safeDoubleCircuitPosition - positionTracked;				// Gives negative number
-				boilerTemperatureVariation													= STATES.BoilerTemperatureVariation.MinReached;
+				boilerTemperatureVariation													= HVAC_STATES.BoilerTemperatureVariation.MinReached;
 				if (swingTimeRequired > 0)			// This can happen at startup, or if positionTracked is slightly below safeCircuitPosition
 				{
 					if (positionTracked != 0)
@@ -155,7 +155,7 @@ public class Mixer
 			else if ((lastBoilerDTdt > 0) && (thisBoilerDTdt < 0))							// boiler was heating, now cooling
 			{
 				swingTimeRequired															= 0;
-				boilerTemperatureVariation													= STATES.BoilerTemperatureVariation.MaxReached;
+				boilerTemperatureVariation													= HVAC_STATES.BoilerTemperatureVariation.MaxReached;
 			}
 			else
 			{
@@ -218,7 +218,7 @@ public class Mixer
 				case MinReached:															// This is to inhibit mixer moving hotter until warmer boiler water has filtered through
 					if (pidFloorOut.dTdt() > 0F)											// BoilerWarming has reached floorOut which is now warming
 					{
-						boilerTemperatureVariation 				= STATES.BoilerTemperatureVariation.NormalOperating;		
+						boilerTemperatureVariation 				= HVAC_STATES.BoilerTemperatureVariation.NormalOperating;		
 					}
 					else																	// FloorOut is still cooling, hold back
 					{

@@ -31,7 +31,7 @@ public class Boiler
 	public Integer	   											tempMin;
 	public Integer												tempNeverExceed				= 95000;
 	public Integer												tempOvershoot				= 18000;
-	public STATES.Boiler										state;
+	public HVAC_STATES.Boiler										state;
 	public PID													pidControler;
 	
 //	public final int 											STATE_Off 						= 0;
@@ -50,7 +50,7 @@ public class Boiler
 		this.tempMin 																		= -1;
 		this.tempNeverExceed																= boilerparams.tempNeverExceed.milliDegrees;
 		this.tempOvershoot																	= boilerparams.tempOverShoot.milliDegrees;
-		state																				= STATES.Boiler.Off;
+		state																				= HVAC_STATES.Boiler.Off;
 	}
 	public void requestHeat(HeatRequired eR)
 	{
@@ -65,9 +65,9 @@ public class Boiler
 		// Only change the state if it is STATE_Off
 		// There could be an error (STATE_Error)
 		// The sequencer will do the rest
-		if (state == STATES.Boiler.Off)
+		if (state == HVAC_STATES.Boiler.Off)
 		{
-			state																			= STATES.Boiler.PowerUp;
+			state																			= HVAC_STATES.Boiler.PowerUp;
 		}
 	}
 	public void requestIdle()
@@ -75,7 +75,7 @@ public class Boiler
 		burner.powerOff();
 		tempMax 																			= -1000;
 		tempMin 																			= -1000;
-		state 																				= STATES.Boiler.Off;
+		state 																				= HVAC_STATES.Boiler.Off;
 	}
 	public Boolean checkOverHeat()
 	{
@@ -99,17 +99,17 @@ public class Boiler
 			
 			if (checkOverHeat())		// This is just a temperature check
 			{
-				if (state != STATES.Boiler.On_CoolingAfterOverheat)
+				if (state != HVAC_STATES.Boiler.On_CoolingAfterOverheat)
 				{
 					burner.powerOff();
 					LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + " , state set to STATE_OnCoolingAfterOverheat", false);
-					state																	= STATES.Boiler.On_CoolingAfterOverheat;
+					state																	= HVAC_STATES.Boiler.On_CoolingAfterOverheat;
 				}
 				return;
 			}
 			if (burner.burnerFault())	//This reads GPIO
 			{
-				state																		= STATES.Boiler.Error;
+				state																		= HVAC_STATES.Boiler.Error;
 				burner.powerOff();
 				LogIt.error("Boiler", "sequencer", "burner has tripped");
 				return;
@@ -129,7 +129,7 @@ public class Boiler
 				if (Global.thermoBoiler.reading > tempMax)
 				{
 					burner.powerOff();
-					state																	= STATES.Boiler.On_Cooling;
+					state																	= HVAC_STATES.Boiler.On_Cooling;
 					return;
 				}
 				break;
@@ -137,7 +137,7 @@ public class Boiler
 				if (!checkOverHeat())
 				{
 					LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling", false);
-					state																	= STATES.Boiler.On_Cooling; 		//Normal operating temp has returned
+					state																	= HVAC_STATES.Boiler.On_Cooling; 		//Normal operating temp has returned
 					return;
 				}
 				break;
@@ -145,7 +145,7 @@ public class Boiler
 				if (Global.thermoBoiler.reading < tempMin)
 				{
 					burner.powerOn();
-					state 																	= STATES.Boiler.On_Heating;
+					state 																	= HVAC_STATES.Boiler.On_Heating;
 					return;
 				}
 				break;
@@ -153,7 +153,7 @@ public class Boiler
 				if (Global.thermoBoiler.reading < tempMax)
 				{
 					burner.powerOn();
-					state 																	= STATES.Boiler.On_Heating;
+					state 																	= HVAC_STATES.Boiler.On_Heating;
 					return;
 				}
 				break;
@@ -165,7 +165,7 @@ public class Boiler
 		{
 			burner.powerOff();
 			Global.eMailMessage("Boiler/sequencer", "Thermometer_ReadException on Read Boiler Thermometer");
-			state																			 = STATES.Boiler.Error;
+			state																			 = HVAC_STATES.Boiler.Error;
 			return;
 		}
 		catch (Thermometer_SpreadException exTS)
@@ -178,7 +178,7 @@ public class Boiler
 		{
 			burner.powerOff();
 			Global.eMailMessage("Boiler/sequencer", "An Error on Read Boiler Thermometer");
-			state																			 = STATES.Boiler.Error;
+			state																			 = HVAC_STATES.Boiler.Error;
 			return;
 		}
 	}

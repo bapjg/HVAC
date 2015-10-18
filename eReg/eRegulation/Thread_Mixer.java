@@ -47,7 +47,7 @@ public class Thread_Mixer implements Runnable
 				circuit.shutDown();
 			}
 			
-			if  ((circuit.state != STATES.Circuit.Off) && (circuit.state != STATES.Circuit.Idle)  && (circuit.state != STATES.Circuit.Error))
+			if  ((circuit.state != HVAC_STATES.Circuit.Off) && (circuit.state != HVAC_STATES.Circuit.Idle)  && (circuit.state != HVAC_STATES.Circuit.Error))
 			{
 				// Note that Mixer calls go to sleep when positionning the mixer.
 				
@@ -94,7 +94,7 @@ public class Thread_Mixer implements Runnable
 					//-----v------Outside------v--
 					
 				}
-				else if (circuit.state == STATES.Circuit.RampingUp) 						// This is to accelerate rampup
+				else if (circuit.state == HVAC_STATES.Circuit.RampingUp) 						// This is to accelerate rampup
 				{
 					targetTemp																= 41000;						// Trip avoidance kicks in at 450
 				}
@@ -122,7 +122,7 @@ public class Thread_Mixer implements Runnable
 					catch (Exception ex)					// Panic : a read error has occured on thermometer
 					{
 						circuit.shutDown();
-						circuit.state														= STATES.Circuit.Error;
+						circuit.state														= HVAC_STATES.Circuit.Error;
 						circuit.mixer.positionZero();
 						break;
 					}
@@ -146,7 +146,7 @@ public class Thread_Mixer implements Runnable
 					}
 				}
 			}
-			else if  ((circuit.state == STATES.Circuit.Off ) || (circuit.state == STATES.Circuit.Idle)) //Running Cold
+			else if  ((circuit.state == HVAC_STATES.Circuit.Off ) || (circuit.state == HVAC_STATES.Circuit.Idle)) //Running Cold
 			{
 				// TODO should we position zero every cycle. what about optimisation. what about floor temp measurement
 				// circuit.state = circuit.CIRCUIT_STATE_Shutting_down doesn't last long enough to be reliable. use positiontacked
