@@ -117,7 +117,7 @@ public class Ctrl_WeatherData 						extends 		DefaultHandler
 		
 		try 
 		{
-			URL 									serverURL 						= new URL("http://api.openweathermap.org/data/2.5/forecast/city?q=chambery,fr&mode=xml&units=metric&type=accurate");
+			URL 									serverURL 						= new URL("http://api.openweathermap.org/data/2.5/forecast/city?q=chambery,fr&mode=xml&units=metric&type=accurate&appid=41515f9a266234d303e26f056173c60b");
 			HttpURLConnection  						serverConnection 				= (HttpURLConnection) serverURL.openConnection();
 			serverConnection.setRequestMethod("GET");
 			serverConnection.setConnectTimeout(5000);
