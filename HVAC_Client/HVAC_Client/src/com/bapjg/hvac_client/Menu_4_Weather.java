@@ -24,7 +24,7 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
 
 	public Menu_4_Weather()
 	{
-		super(false);
+		super(true, false);
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -34,16 +34,19 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
     	buttonTomorrow																		= new Element_MenuButton("Tomorrow");
     	buttonBeyond																		= new Element_MenuButton("Beyond");
     	buttonSunriseSunset																	= new Element_MenuButton("Sunrise Sunset");
+    	buttonRefresh																		= new Element_MenuButton("Refresh");
 
     	menuInsertPoint			.addView(buttonToday);
     	menuInsertPoint			.addView(buttonTomorrow);
     	menuInsertPoint			.addView(buttonBeyond);
     	menuInsertPoint			.addView(buttonSunriseSunset);
+    	menuInsertPoint			.addView(buttonRefresh);
     	
     	buttonToday				.setListener(this);
     	buttonTomorrow			.setListener(this);
     	buttonBeyond			.setListener(this);
     	buttonSunriseSunset		.setListener(this);
+    	buttonRefresh			.setListener(this);
 
     	onElementClick(buttonToday);
     	
@@ -61,6 +64,7 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
     	else if (clickedView == buttonTomorrow) 				panelFragment 				= new Panel_4_Weather("Tomorrow");
      	else if (clickedView == buttonBeyond)					panelFragment 				= new Panel_4_Weather("Beyond");
     	else if (clickedView == buttonSunriseSunset)			panelFragment 				= new Panel_4_Weather_Sun();
+    	else if (clickedView == buttonRefresh)					doRefresh();
 
     	if 		(panelFragment != null)
     	{
@@ -68,28 +72,6 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
     	}
     	fTransaction.commit();  
 	}
-    
-    
-//	public void onClick(View myView) // This is the onClick event from the Menu
-//	{
-//		super.onClick(myView);
-//		
-//    	String													caption						= ((Button) myView).getText().toString();
-//    	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
-//    	Fragment 												panelFragment				= null;
-//				
-//    	if      (caption.equalsIgnoreCase("Today")) 			panelFragment 				= new Panel_4_Weather_WORK("Today");
-//    	else if (caption.equalsIgnoreCase("Tomorrow"))  		panelFragment 				= new Panel_4_Weather_WORK("Tomorrow");
-//     	else if (caption.equalsIgnoreCase("Beyond"))			panelFragment 				= new Panel_4_Weather_WORK("Beyond");
-//     	else if (caption.equalsIgnoreCase("Sunrise\nSunset"))	panelFragment 				= new Panel_4_Weather_Sun_WORK();
-//    	else if (caption.equalsIgnoreCase("Refresh"))			doRefresh();
-//
-//    	if 		(panelFragment != null)
-//    	{
-//    		fTransaction.replace(R.id.panel_container, panelFragment);
-//    	}
-//    	fTransaction.commit();  
-//	}
 	public void doRefresh()
 	{
         TCP_Send	(new Ctrl_Weather().new Request());

@@ -22,7 +22,7 @@ public class Menu_6_Actions 									extends 					Menu_0_Fragment
 
 	public Menu_6_Actions()
 	{
-		super(false);
+		super(false, false);
 	}
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	{

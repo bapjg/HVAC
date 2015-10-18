@@ -32,7 +32,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	
 	public Menu_3_Calendars()
 	{
-		super(true);		// true means we want to keep the buttons visble at bottom
+		super(true, true);		// true means we want to keep the buttons visble at bottom
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {

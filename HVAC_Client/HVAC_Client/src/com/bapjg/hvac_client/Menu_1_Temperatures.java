@@ -23,7 +23,7 @@ public class Menu_1_Temperatures 								extends 					Menu_0_Fragment
 
 	public Menu_1_Temperatures()
 	{
-		super(false);
+		super(false, false);
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {

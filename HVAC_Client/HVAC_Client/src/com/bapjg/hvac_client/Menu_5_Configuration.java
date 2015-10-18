@@ -33,7 +33,7 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	
 	public Menu_5_Configuration()
 	{
-		super(true);
+		super(true, true);
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {

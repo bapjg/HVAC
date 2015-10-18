@@ -21,7 +21,7 @@ public class Menu_7_Reset 										extends 					Menu_0_Fragment
 
 	public Menu_7_Reset()
 	{
-		super(false);
+		super(false, false);
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {

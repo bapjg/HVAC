@@ -31,7 +31,8 @@ public class Menu_0_Fragment 									extends 					Fragment
 																							HTTP_Response,
 																							Element_Interface
 {
-	protected	Boolean											buttonsRefreshUpdate;
+	protected	Boolean											hasButtonRefresh;
+	protected	Boolean											hasButtonUpdate;
 	protected 	ViewGroup										container;
 	protected 	View											menuView;
 	protected 	LinearLayout									menuInsertPoint;
@@ -39,10 +40,11 @@ public class Menu_0_Fragment 									extends 					Fragment
 	protected	Element_MenuButton								buttonRefresh;
 	protected	Element_MenuButton								buttonUpdate;
 	
-	public Menu_0_Fragment(Boolean buttonsRefreshUpdate)
+	public Menu_0_Fragment(Boolean hasButtonRefresh, Boolean hasButtonUpdate)
 	{
 		super();
-		this.buttonsRefreshUpdate															= buttonsRefreshUpdate;
+		this.hasButtonRefresh																= hasButtonRefresh;
+		this.hasButtonUpdate																= hasButtonUpdate;
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
@@ -53,18 +55,22 @@ public class Menu_0_Fragment 									extends 					Fragment
     	
     	refreshInsertPoint																	= (LinearLayout) menuView.findViewById(R.id.buttonsRefresh);
 
-		if (! buttonsRefreshUpdate)
+    	if ((! hasButtonRefresh) && (! hasButtonUpdate))
     	{
 			refreshInsertPoint.setVisibility(View.GONE);
     	}
 		else
 		{
-			buttonRefresh 	= new Element_MenuButton("Refresh");
-			buttonUpdate 	= new Element_MenuButton("Update");
-			
-			refreshInsertPoint.addView(buttonRefresh);
-			refreshInsertPoint.addView(buttonUpdate);
-			
+			if (hasButtonRefresh)
+			{
+				buttonRefresh 																= new Element_MenuButton("Refresh");
+				refreshInsertPoint.addView(buttonRefresh);
+			}
+			if (hasButtonUpdate)								buttonUpdate 				= new Element_MenuButton("Update");
+			{
+				buttonUpdate 																= new Element_MenuButton("Update");
+				refreshInsertPoint.addView(buttonUpdate);
+			}
 	    	buttonRefresh	.setListener(this); 
 	    	buttonUpdate	.setListener(this); 
 		}

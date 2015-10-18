@@ -23,7 +23,7 @@ public class Menu_2_Immediate 									extends 					Menu_0_Fragment
 
 	public Menu_2_Immediate()
 	{
-		super(false);
+		super(false, false);
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
