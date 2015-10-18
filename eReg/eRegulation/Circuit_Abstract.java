@@ -187,7 +187,7 @@ abstract class Circuit_Abstract
 				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
 				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is occupied... Replaced");
 				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
-				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + System.identityHashCode(taskActive));
+				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + taskActive.days + " +++ " + taskActive.timeStartDisplay);
 				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + System.identityHashCode(thisTask));
 			}
 			this.taskActive																	= thisTask;
