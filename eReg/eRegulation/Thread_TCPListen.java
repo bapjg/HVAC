@@ -36,26 +36,6 @@ public class Thread_TCPListen 			implements Runnable
 					
 			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
 			        // This previous line results in an EOFException
-
-//			        class HackedObjectInputStream extends ObjectInputStream 
-//			        {
-//
-//			            public HackedObjectInputStream(InputStream in) throws IOException 
-//			            {
-//			                super(in);
-//			            }
-//
-//			            @Override
-//			            protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException 
-//			            {
-//			                ObjectStreamClass resultClassDescriptor = super.readClassDescriptor();
-//
-//			                if (resultClassDescriptor.getName().equals("oldpackage.Clazz"))
-//			                    resultClassDescriptor = ObjectStreamClass.lookup(newpackage.Clazz.class);
-//
-//			                return resultClassDescriptor;
-//			            }
-//			        }
 			        
 			        message_in 												= (Ctrl__Abstract) input.readObject();
 
@@ -326,24 +306,32 @@ public class Thread_TCPListen 			implements Runnable
 		Ctrl_Weather.Data 						message_return					= new Ctrl_Weather().new Data();			
 		if (Global.weatherData == null)
 		{
+			System.out.println("weatherdata is null");
 			try			// Getting new data
 			{
+				System.out.println("weatherdata trying to get new copy");
 				Global.weatherData												= new Ctrl_WeatherData();
+				System.out.println("weatherdata new copy retruned");
 			}
 			catch (Exception e)
 			{
+				System.out.println("exception in trying to get new : " + e.toString());
 			}
 		}
 		if (Global.weatherData == null)		// still no data
 		{
+			System.out.println("Stil no data");
 			message_return														= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
 			message_return.weatherData											= null;
 		}
 		else
 		{
+			System.out.println("data found");
 			message_return														= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
 			message_return.weatherData											= Global.weatherData;
 		}
+		
+		System.out.println("weatherdata supplied : " + (message_return.weatherData != null));
 		return message_return;
 	}
 	private Ctrl_Actions_Relays.Data	process_Ctrl_Actions_Relays_Request		()
