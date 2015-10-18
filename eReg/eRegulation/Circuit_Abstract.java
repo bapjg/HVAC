@@ -188,7 +188,7 @@ abstract class Circuit_Abstract
 				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is occupied... Replaced");
 				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
 				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + taskActive.days + " +++ " + taskActive.timeStartDisplay);
-				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + System.identityHashCode(thisTask));
+				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + thisTask.days + " +++ " + thisTask.timeStartDisplay);
 			}
 			this.taskActive																	= thisTask;
 			this.start();						
