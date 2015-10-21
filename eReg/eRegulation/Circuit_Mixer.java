@@ -39,7 +39,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		}
 		else
 		{
-			this.state 																		= HVAC_STATES.Circuit.Error;
+			this.state = HVAC_STATES.Circuit.Error;
 			return 0L;
 		}
 	}
@@ -77,7 +77,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			shutDown();											// This bypasses stopRequested
 			// TODO Should we not close the mixer
 			circuitPump.off();
-			state												= HVAC_STATES.Circuit.Error;
+			state = HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_Mixer/sequencer", "A Thermometer cannont be read");
 		}
 
@@ -96,42 +96,49 @@ public class Circuit_Mixer extends Circuit_Abstract
 			else
 			{
 				LogIt.info("Circuit_" + this.name, "sequencer", "Already at temperature. Just Suspend");
-//					state																	= HVAC_STATES.Circuit.Suspended;
+				suspend();
 			}
 
 			this.heatRequired.tempMinimum												= 55000;		// Avoid condensation
 			this.heatRequired.tempMaximum												= 80000;
-//				state																		= HVAC_STATES.Circuit.AwaitingHeat;
 
 			if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
 			{
-				state																	= HVAC_STATES.Circuit.RampingUp;
+				state 																	= HVAC_STATES.Circuit.RampingUp;
 			}
 			break;
 		case RampingUp:
-			this.heatRequired.tempMinimum												= 60000;
-			this.heatRequired.tempMaximum												= 80000;
+			if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective - 1000)
+			{
+				// Stay in rampUp mode
+			}
+			else
+			{
+				LogIt.info("Circuit_" + this.name, "sequencer", "Now near temperature. Go to normalRunning");
+				nowRunning();
+			}
 			break;
 		case Running:
 			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 			{
-				this.heatRequired.setZero();
-				state																	= HVAC_STATES.Circuit.Suspended;
+				suspend();
 			}
 			else
 			{
-				this.heatRequired.tempMinimum											= 60000;
+				this.heatRequired.tempMinimum											= 55000;
 				this.heatRequired.tempMaximum											= 80000;
 			}
 			break;
-//			case Idle:
-//				if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective)
-//				{
-//					circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
-//					LogIt.info("Circuit_" + this.name, "sequencer", "Idle ended");
-//					state																	= HVAC_STATES.Circuit.Starting;
-//				}
-//				break;
+		case Suspended:
+			if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective)
+			{
+				LogIt.info("Circuit_" + this.name, "sequencer", "Idle ended");
+				resume();		// starting will switch on pump
+			}
+			break;
+		case Resuming:
+			start();
+			break;
 		case Optimising:
 			// TODO Mixer position is at zero
 //				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "isSingleActiveCircuit : " 	+ Global.circuits.isSingleActiveCircuit());
@@ -148,12 +155,12 @@ public class Circuit_Mixer extends Circuit_Abstract
 				{
 					LogIt.info("Circuit_" + this.name, "sequencer", "Optimising");			// Done this way to get only one message (no repeats)
 					this.heatRequired.setZero();
-					state																= HVAC_STATES.Circuit.Optimising;
+					optimise();
 				}
 			}
 			else
 			{
-				state																	= HVAC_STATES.Circuit.Stopping;
+				stop();
 			}
 			break;
 		case Stopping:
@@ -161,7 +168,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			LogIt.action("PumpRadiator", "Off");
 			circuitPump.off();
 			this.heatRequired.setZero();
-			this.state																	= HVAC_STATES.Circuit.Off;
+			this.state 																		= HVAC_STATES.Circuit.Off;
 			break;
 		case Error:
 			LogIt.error("Circuit_" + this.name, "sequencer", "Error detected : ");	
@@ -199,7 +206,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				);
 		this.taskActive																		= task;
 		this.circuitPump.on();
-		this.state																			= HVAC_STATES.Circuit.Optimising;
+		this.state = HVAC_STATES.Circuit.Optimising;
 		this.heatRequired.setZero();
 	}
 	//

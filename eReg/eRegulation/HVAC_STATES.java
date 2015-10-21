@@ -33,6 +33,7 @@ public class HVAC_STATES
 
 		Idle,				// State for pump on but no heatRequired. Used for for floor circuit inlineOptimise
 		Suspended,			// Hot_Water : if not stop on objective, suspends all activity but surveys hwTemp
+							// resume is called to set the state to Resuming
 
 		Error				// Some sort of error has occured
 								

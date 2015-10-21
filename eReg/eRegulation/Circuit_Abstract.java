@@ -24,9 +24,8 @@ abstract class Circuit_Abstract
 	public Pump													circuitPump;
 	public Thermometer											circuitThermo;
 								
-	public HVAC_STATES.Circuit									statePrevious;
 	public HVAC_STATES.Circuit									state;
-
+	
 	public Mixer												mixer						= null;
 	public TemperatureGradient 									temperatureGradient			= null;				//This will be overridden
 								
@@ -50,7 +49,6 @@ abstract class Circuit_Abstract
 		if (this.circuitThermo == null)			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + paramCircuit.thermometer);
 		
 		this.state																			= HVAC_STATES.Circuit.Off;
-		this.statePrevious																	= HVAC_STATES.Circuit.Off;
 		this.heatRequired																	= new Heat_Required();
 	}
 	public void addCircuitTask(Ctrl_Calendars.Calendar 				paramCalendar)
@@ -70,19 +68,10 @@ abstract class Circuit_Abstract
 	//
 	// Activity/State Change methods
 	//
-	public void stateChange(HVAC_STATES.Circuit newState)
-	{
-		this.statePrevious																	= this.state;
-		this.state																			= newState;
-	}
-	public Boolean stateHasChanged()
-	{
-		return (this.statePrevious == this.state);
-	}
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
-		stateChange(HVAC_STATES.Circuit.Starting);
+		state																				= HVAC_STATES.Circuit.Starting;
 	}
 	public void stop()
 	{
@@ -91,8 +80,17 @@ abstract class Circuit_Abstract
 		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 		LogIt.action(this.name, "Stop called");
-		this.heatRequired.setZero();
-		stateChange(HVAC_STATES.Circuit.Stopping);
+		state = HVAC_STATES.Circuit.Stopping;
+	}
+	public void nowRunning()
+	{
+		LogIt.action(this.name, "NowRunning called");
+		state = HVAC_STATES.Circuit.Running;
+	}
+	public void idle()
+	{
+		LogIt.action(this.name, "Idle called");
+		state = HVAC_STATES.Circuit.Idle;
 	}
 /**
  * Shuts down the circuit :
@@ -103,7 +101,7 @@ abstract class Circuit_Abstract
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
-		stateChange(HVAC_STATES.Circuit.Off);
+		state 																				= HVAC_STATES.Circuit.Off;
 		this.heatRequired.setZero();
 		taskDeactivate(this.taskActive);
 	}
@@ -118,7 +116,6 @@ abstract class Circuit_Abstract
 //		this.taskActive.state																= this.taskActive.TASK_STATE_Completed; // What happens if the task has been switched to a new one
 //		this.taskActive																		= null;
 	}
-	Heat_Required 												heatRequiredSaved;
 /**
  * Suspends the circuit :
  * This is used for Hot_Water, if target temperature is reached, the circuitPump is switched off
@@ -130,10 +127,9 @@ abstract class Circuit_Abstract
 	public void suspend()
 	{
 		LogIt.action(this.name, "Suspend called");
-		this.heatRequiredSaved																= this.heatRequired;
-		this.heatRequired																	= new Heat_Required();
+		this.heatRequired.setZero();
 		this.circuitPump.off();
-		stateChange(HVAC_STATES.Circuit.Suspended);
+		state 																				= HVAC_STATES.Circuit.Suspended;
 	}						
 /**
  * Resumes the circuit :
@@ -145,9 +141,7 @@ abstract class Circuit_Abstract
 	public void resume()						
 	{						
 		LogIt.action(this.name, "Resume called");						
-		this.heatRequired																	= this.heatRequiredSaved;
-		this.circuitPump.on();
-		stateChange(HVAC_STATES.Circuit.Resuming);
+		state 																				= HVAC_STATES.Circuit.Resuming;
 	}
 /**
  * Optimises the circuit :
@@ -161,7 +155,7 @@ abstract class Circuit_Abstract
 //			this.heatRequired.tempMinimum														= 0;
 //			this.heatRequired.tempMaximum														= 0;
 		this.heatRequired.setZero();
-		stateChange(HVAC_STATES.Circuit.Optimising);
+		state = HVAC_STATES.Circuit.Optimising;
 	}	//
 	//===========================================================================================================================================================
 

@@ -55,7 +55,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 		{
 			shutDown();																		// This bypasses stopRequested
 			circuitPump.off();
-			state												= HVAC_STATES.Circuit.Error;
+			state = HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_Radiator/sequencer", "A Thermometer cannont be read");
 		}
 
@@ -71,7 +71,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 			{
 				LogIt.action("PumpRadiator", "On");
 				circuitPump.on();
-				state																		= HVAC_STATES.Circuit.Running;
+				state = HVAC_STATES.Circuit.Running;
 			}
 			break;
 		case Running:
@@ -92,7 +92,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 				LogIt.action("PumpRadiator", "Off");
 				circuitPump.off();
 				this.heatRequired.setZero();
-				this.state																	= HVAC_STATES.Circuit.Off;
+				this.state = HVAC_STATES.Circuit.Off;
 				break;
 			}
 			break;

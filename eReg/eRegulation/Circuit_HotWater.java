@@ -29,12 +29,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 	//
 	// Activity/State Change methods
 	//
-	@Override
-	public void start()
-	{
-		super.start();
-		this.heatRequired.set(this.taskActive.tempObjective + 10000, this.tempMax);
-	}
+
 	//
 	//===========================================================================================================================================================
 
@@ -54,13 +49,13 @@ public class Circuit_HotWater extends Circuit_Abstract
 		{
 			shutDown();											// This bypasses stopRequested
 			circuitPump.off();
-			state																			= HVAC_STATES.Circuit.Error;
+			state = HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_HotWater/sequencer", "A Thermometer cannont be read");
 		}
 
 		// Do normal activity
 		// DeltaHotWater > 0 means not yet at target
-		// DeltaBoiler   > 0 means Boiler is over target temp
+		// DeltaBoiler   > 0 means Boiler is over targetTemp
 		Integer										deltaBoiler								= Global.thermoBoiler.reading - this.taskActive.tempObjective;
 		Integer										deltaHotWater							= this.taskActive.tempObjective - Global.thermoHotWater.reading;	// -ve if overTempTarget
 		Float										deltaRatio								= deltaBoiler.floatValue() / deltaHotWater.floatValue();
@@ -72,11 +67,13 @@ public class Circuit_HotWater extends Circuit_Abstract
 			//Nothing to do
 			break;
 		case Starting:
+			this.heatRequired.set(this.taskActive.tempObjective + 10000, this.tempMax);
+			
 			if 		(Global.thermoBoiler.reading 	> Global.thermoHotWater.reading)
 			{
 				LogIt.action("PumpHotWater", "On");
 				circuitPump.on();
-				stateChange(HVAC_STATES.Circuit.Running);
+				nowRunning();
 			}
 			break;
 		case Running:
@@ -93,13 +90,13 @@ public class Circuit_HotWater extends Circuit_Abstract
 			{
 				if (Global.circuits.isSingleActiveCircuit())								// Use optimisation
 				{
-					if 		(deltaHotWater  < 0           )			this.state 				= HVAC_STATES.Circuit.Idle;			// Over target
-					else if (deltaRatio 	> deltaMinimum)			this.state 				= HVAC_STATES.Circuit.Idle;			// Enough energy left
+					if 		(deltaHotWater  < 0           )			optimise();				// Over target
+					else if (deltaRatio 	> deltaMinimum)			optimise();				// Enough energy left
 					// Otherwise									keep running
 				}
-				else																		// No optimisation
+				else																		// No optimisation ass multiple circuits
 				{
-					if 		(deltaHotWater < 0)						this.state 				= HVAC_STATES.Circuit.Stopping;
+					if 		(deltaHotWater < 0)						stop();
 				}
 			}
 			else																			// Task must continue until time up
@@ -112,20 +109,20 @@ public class Circuit_HotWater extends Circuit_Abstract
 				}
 				else																		// Other circuits active
 				{
-					if 		(deltaHotWater < 0)						suspend();
+					if 		(deltaHotWater < 0)						suspend();				// We are over target, but there are otheer tasks
 				}
 			}
 			break;
 			
-		case Idle:
-			// Pump is kept on
+		case Idle:			// We only idle if stopOnObjective AND SingleActiveCircuit
+			// We should never be here
 		case Optimising:
 			
-			//	singleCircuit		stopOnObjective
-			//		Yes					Yes					deltaRatio > deltaMinimum => optimise()   deltaHotWater < 0 => optimise()
-			//		Yes					No			*		deltaRatio > deltaMinimum => optimise()   deltaHotWater < 0 => optimise()
-			//		No					Yes					deltaHotWater < 0 => stop()
-			//		No					No			*		deltaHotWater < 0 => suspend()
+			//	singleCircuit		stopOnObjective			deltaRatio > deltaMinimum		deltaHotWater < 0 (ie over temp)
+			//		Yes					Yes					       optimise()    						optimise()
+			//		Yes					No			*		       optimise()   					    optimise()
+			//		No					Yes																stop()
+			//		No					No			*													suspend()
 			
 			if (Global.circuits.isSingleActiveCircuit())									// Use optimisation
 			{
@@ -135,7 +132,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				}
 				else																		// No useful energy left
 				{
-					if (this.taskActive.stopOnObjective)			stop();
+					if 		(this.taskActive.stopOnObjective)		stop();
 					else 											suspend();				// Sets heatRequired to zero (not null)
 				}
 			}
@@ -158,16 +155,15 @@ public class Circuit_HotWater extends Circuit_Abstract
 				resume();
 			}
 			break;
-		case Resuming:																		// Setting state to starting will setup heat required etc.
-			LogIt.info("Circuit_" + this.name, "sequencer", "Resuming");
-			state																			= HVAC_STATES.Circuit.Starting;
+		case Resuming:																		// Setting state to starting will setup heat required etc, and turn on pump at the right time.
+			start();
 			break;
 		case Stopping:
 			LogIt.action(this.name, "Closing down completely");
 			LogIt.action("PumpHotWater", "Off");
 			circuitPump.off();
 			this.heatRequired.setZero();
-			this.state																		= HVAC_STATES.Circuit.Off;
+			this.state 																		= HVAC_STATES.Circuit.Off;
 			break;
 		case Error:
 			break;
