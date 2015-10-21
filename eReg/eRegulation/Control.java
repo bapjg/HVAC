@@ -176,24 +176,20 @@ public class Control
 		
 			Global.boiler.sequencer();
 			
-			globalHeatRequired.tempMaximum 													= -1;
-			globalHeatRequired.tempMinimum 													= -1;
+			globalHeatRequired.setZero();
 
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{
 				circuit.taskScheduler();					// In Circuit_Abstract
 				circuit.sequencer();
-				if (circuit.heatRequired != null)
+				if (circuit.heatRequired.tempMinimum > globalHeatRequired.tempMinimum)
 				{
-					if (circuit.heatRequired.tempMinimum > globalHeatRequired.tempMinimum)
-					{
-						globalHeatRequired.tempMinimum										= circuit.heatRequired.tempMinimum;
-					}
-					
-					if (circuit.heatRequired.tempMaximum > globalHeatRequired.tempMaximum)
-					{
-						globalHeatRequired.tempMaximum										= circuit.heatRequired.tempMaximum;
-					}
+					globalHeatRequired.tempMinimum											= circuit.heatRequired.tempMinimum;
+				}
+				
+				if (circuit.heatRequired.tempMaximum > globalHeatRequired.tempMaximum)
+				{
+					globalHeatRequired.tempMaximum											= circuit.heatRequired.tempMaximum;
 				}
 			}
 			Global.boiler.requestHeat(globalHeatRequired);

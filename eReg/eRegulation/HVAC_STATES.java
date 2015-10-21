@@ -25,6 +25,7 @@ public class HVAC_STATES
 	{
 		Off,				// Inactive circuit. taskActive should be null
 		Starting,			// Setup up heatRequired and sets state to AwaitingHeat		
+		Resuming,			// Hot_Water : hwTemp is below minimum, so reactivates heatRequired
 		RampingUp,			// Floor : FloorOut is at max temp to shorten rampUp Time. When close to target normal tempControl used.
 		Running,			// Kepps on running until some sort of event occurs
 		Optimising,			// Unclear : is this an inTask initiative or a Background task initiative
@@ -32,7 +33,6 @@ public class HVAC_STATES
 
 		Idle,				// State for pump on but no heatRequired. Used for for floor circuit inlineOptimise
 		Suspended,			// Hot_Water : if not stop on objective, suspends all activity but surveys hwTemp
-		Resuming,			// Hot_Water : hwTemp is below minimum, so reactivates heatRequired
 
 		Error				// Some sort of error has occured
 								

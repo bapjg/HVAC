@@ -24,6 +24,7 @@ abstract class Circuit_Abstract
 	public Pump													circuitPump;
 	public Thermometer											circuitThermo;
 								
+	public HVAC_STATES.Circuit									statePrevious;
 	public HVAC_STATES.Circuit									state;
 
 	public Mixer												mixer						= null;
@@ -32,7 +33,7 @@ abstract class Circuit_Abstract
 	public CircuitTask											taskActive					= null;
 								
 	public ArrayList <CircuitTask> 								circuitTaskList 			= new ArrayList <CircuitTask>();
-	public Heat_Required											heatRequired				= null;
+	public Heat_Required										heatRequired;
 								
 	public Boolean												willBeSingleCircuit			= false;
 
@@ -49,7 +50,8 @@ abstract class Circuit_Abstract
 		if (this.circuitThermo == null)			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + paramCircuit.thermometer);
 		
 		this.state																			= HVAC_STATES.Circuit.Off;
-		this.heatRequired																	= null;
+		this.statePrevious																	= HVAC_STATES.Circuit.Off;
+		this.heatRequired																	= new Heat_Required();
 	}
 	public void addCircuitTask(Ctrl_Calendars.Calendar 				paramCalendar)
 	{
@@ -68,11 +70,19 @@ abstract class Circuit_Abstract
 	//
 	// Activity/State Change methods
 	//
+	public void stateChange(HVAC_STATES.Circuit newState)
+	{
+		this.statePrevious																	= this.state;
+		this.state																			= newState;
+	}
+	public Boolean stateHasChanged()
+	{
+		return (this.statePrevious == this.state);
+	}
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
-		this.heatRequired																	= new Heat_Required();
-		this.state																			= HVAC_STATES.Circuit.Starting;
+		stateChange(HVAC_STATES.Circuit.Starting);
 	}
 	public void stop()
 	{
@@ -81,35 +91,20 @@ abstract class Circuit_Abstract
 		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 		LogIt.action(this.name, "Stop called");
-		this.heatRequired																	= null;
-		this.state																			= HVAC_STATES.Circuit.Stopping;
+		this.heatRequired.setZero();
+		stateChange(HVAC_STATES.Circuit.Stopping);
 	}
-	//
-	//===========================================================================================================================================================
-
-	//===========================================================================================================================================================
-	//
-	// Sequencer
-	//
-	public void sequencer()											{  /* OverRidden in Circuit_XXX classes */	}
 /**
  * Shuts down the circuit :
  * State set to off
  * heatRequired set to null
  * task deactivated
  */
-	//
-	//===========================================================================================================================================================
-
-	//===========================================================================================================================================================
-	//
-	// Other
-	//
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
-		this.state																			= HVAC_STATES.Circuit.Off;
-		this.heatRequired																	= null;
+		stateChange(HVAC_STATES.Circuit.Off);
+		this.heatRequired.setZero();
 		taskDeactivate(this.taskActive);
 	}
 /**
@@ -123,6 +118,7 @@ abstract class Circuit_Abstract
 //		this.taskActive.state																= this.taskActive.TASK_STATE_Completed; // What happens if the task has been switched to a new one
 //		this.taskActive																		= null;
 	}
+	Heat_Required 												heatRequiredSaved;
 /**
  * Suspends the circuit :
  * This is used for Hot_Water, if target temperature is reached, the circuitPump is switched off
@@ -131,14 +127,13 @@ abstract class Circuit_Abstract
  * switches OFF circuitPump
  * heatRequired.max/min set to 0
  */	
-	Heat_Required 												heatRequiredSaved;
 	public void suspend()
 	{
 		LogIt.action(this.name, "Suspend called");
 		this.heatRequiredSaved																= this.heatRequired;
 		this.heatRequired																	= new Heat_Required();
 		this.circuitPump.off();
-		this.state																			= HVAC_STATES.Circuit.Suspended;
+		stateChange(HVAC_STATES.Circuit.Suspended);
 	}						
 /**
  * Resumes the circuit :
@@ -152,7 +147,7 @@ abstract class Circuit_Abstract
 		LogIt.action(this.name, "Resume called");						
 		this.heatRequired																	= this.heatRequiredSaved;
 		this.circuitPump.on();
-		this.state																			= HVAC_STATES.Circuit.Resuming;
+		stateChange(HVAC_STATES.Circuit.Resuming);
 	}
 /**
  * Optimises the circuit :
@@ -163,11 +158,26 @@ abstract class Circuit_Abstract
 	{						
 		LogIt.action(this.name, "Optimising called");
 		// Modified to be the same as this.stop() which may call optimise()
-//		this.heatRequired.tempMinimum														= 0;
-//		this.heatRequired.tempMaximum														= 0;
-		this.heatRequired																	= null;
-		this.state																			= HVAC_STATES.Circuit.Optimising;
-	}
+//			this.heatRequired.tempMinimum														= 0;
+//			this.heatRequired.tempMaximum														= 0;
+		this.heatRequired.setZero();
+		stateChange(HVAC_STATES.Circuit.Optimising);
+	}	//
+	//===========================================================================================================================================================
+
+	//===========================================================================================================================================================
+	//
+	// Sequencer
+	//
+	public void sequencer()											{  /* OverRidden in Circuit_XXX classes */	}
+	//
+	//===========================================================================================================================================================
+
+	//===========================================================================================================================================================
+	//
+	// Scheduling
+	//
+
 
 /**
  * - taskActive.stop() called for current task is time up
@@ -383,4 +393,6 @@ abstract class Circuit_Abstract
 		this.stop();
 		LogIt.display("Circuit_Abstract", "taskDeactivate", "==============================================================");
 	}	// taskDeactivate
+	//
+	//===========================================================================================================================================================
 }

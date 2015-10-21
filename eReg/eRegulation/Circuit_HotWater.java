@@ -33,8 +33,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 	public void start()
 	{
 		super.start();
-		this.heatRequired.tempMinimum														= this.taskActive.tempObjective + 10000;
-		this.heatRequired.tempMaximum														= this.tempMax;
+		this.heatRequired.set(this.taskActive.tempObjective + 10000, this.tempMax);
 	}
 	//
 	//===========================================================================================================================================================
@@ -77,13 +76,12 @@ public class Circuit_HotWater extends Circuit_Abstract
 			{
 				LogIt.action("PumpHotWater", "On");
 				circuitPump.on();
-				state																		= HVAC_STATES.Circuit.Running;
+				stateChange(HVAC_STATES.Circuit.Running);
 			}
 			break;
-			
 		case Running:
 			
-			// This is inline optimisation. For other tasks, this one is active.
+			// This is inline optimisation. 
 			
 			//	singleCircuit		stopOnObjective
 			//		Yes					Yes					deltaRatio > deltaMinimum => optimise()   deltaHotWater < 0 => optimise()
@@ -168,7 +166,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 			LogIt.action(this.name, "Closing down completely");
 			LogIt.action("PumpHotWater", "Off");
 			circuitPump.off();
-			this.heatRequired																= null;
+			this.heatRequired.setZero();
 			this.state																		= HVAC_STATES.Circuit.Off;
 			break;
 		case Error:

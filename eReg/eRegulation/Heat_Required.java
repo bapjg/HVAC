@@ -8,7 +8,16 @@ public class Heat_Required
 	
 	public Heat_Required()
 	{
+		this.setZero();
+	}
+	public void setZero()
+	{
 		this.tempMinimum 																	= 0;
 		this.tempMaximum 																	= 0;
+	}
+	public void set(Integer tempMinimum, Integer tempMaximum)
+	{
+		this.tempMinimum 																	= tempMinimum;
+		this.tempMaximum 																	= tempMaximum;
 	}
 }

@@ -54,8 +54,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 	public void start()
 	{
 		super.start();
-		this.heatRequired.tempMinimum														= 55000;		// this.taskActive.tempObjective + 10000;
-		this.heatRequired.tempMaximum														= 80000;		// this.tempMax;
+		this.heatRequired.set(55000, 80000);																// this.taskActive.tempObjective + 10000;
+		// this.heatRequired.tempMaximum														= 80000;		// this.tempMax;
 	}
 	//
 	//===========================================================================================================================================================
@@ -115,7 +115,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		case Running:
 			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 			{
-				this.heatRequired														= null;
+				this.heatRequired.setZero();
 				state																	= HVAC_STATES.Circuit.Suspended;
 			}
 			else
@@ -147,7 +147,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				if (state != HVAC_STATES.Circuit.Optimising)
 				{
 					LogIt.info("Circuit_" + this.name, "sequencer", "Optimising");			// Done this way to get only one message (no repeats)
-					this.heatRequired													= null;
+					this.heatRequired.setZero();
 					state																= HVAC_STATES.Circuit.Optimising;
 				}
 			}
@@ -160,7 +160,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			LogIt.action(this.name, "Closing down completely");
 			LogIt.action("PumpRadiator", "Off");
 			circuitPump.off();
-			this.heatRequired															= null;
+			this.heatRequired.setZero();
 			this.state																	= HVAC_STATES.Circuit.Off;
 			break;
 		case Error:
@@ -200,7 +200,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		this.taskActive																		= task;
 		this.circuitPump.on();
 		this.state																			= HVAC_STATES.Circuit.Optimising;
-		this.heatRequired																	= null;
+		this.heatRequired.setZero();
 	}
 	//
 	//===========================================================================================================================================================

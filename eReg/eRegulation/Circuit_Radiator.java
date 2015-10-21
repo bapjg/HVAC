@@ -35,8 +35,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 	{
 		super.start();
 		Integer 									temp									= temperatureGradient.getTempToTarget();
-		this.heatRequired.tempMinimum														= temp - 7500;
-		this.heatRequired.tempMaximum														= temp + 7500;
+		this.heatRequired.set(temp - 7500, temp + 7500);
 	}
 	//
 	//===========================================================================================================================================================
@@ -92,7 +91,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 				LogIt.action(this.name, "Closing down completely");
 				LogIt.action("PumpRadiator", "Off");
 				circuitPump.off();
-				this.heatRequired															= null;
+				this.heatRequired.setZero();
 				this.state																	= HVAC_STATES.Circuit.Off;
 				break;
 			}
