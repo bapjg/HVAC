@@ -1,14 +1,14 @@
 package eRegulation;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class HeatRequired
+public class Heat_Required
 {
 	Integer														tempMinimum;
 	Integer														tempMaximum;
 	
-	public HeatRequired()
+	public Heat_Required()
 	{
-		this.tempMinimum 																	= -1000;
-		this.tempMaximum 																	= -1000;
+		this.tempMinimum 																	= 0;
+		this.tempMaximum 																	= 0;
 	}
 }

@@ -24,7 +24,7 @@ abstract class Circuit_Abstract
 	public Pump													circuitPump;
 	public Thermometer											circuitThermo;
 								
-	public HVAC_STATES.Circuit										state;
+	public HVAC_STATES.Circuit									state;
 
 	public Mixer												mixer						= null;
 	public TemperatureGradient 									temperatureGradient			= null;				//This will be overridden
@@ -32,7 +32,7 @@ abstract class Circuit_Abstract
 	public CircuitTask											taskActive					= null;
 								
 	public ArrayList <CircuitTask> 								circuitTaskList 			= new ArrayList <CircuitTask>();
-	public HeatRequired											heatRequired				= null;
+	public Heat_Required											heatRequired				= null;
 								
 	public Boolean												willBeSingleCircuit			= false;
 
@@ -56,48 +56,55 @@ abstract class Circuit_Abstract
 		CircuitTask 	circuitTaskItem 													= new CircuitTask(paramCalendar);
 		circuitTaskList.add(circuitTaskItem);
 	}
+	//===========================================================================================================================================================
+	//
+	// Performance methods
+	//
 	public Long getRampUpTime(Integer tempObjective) 				{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
-	public void sequencer()											{  /* OverRidden in Circuit_XXX classes */	}
+	//
+	//===========================================================================================================================================================
+
+	//===========================================================================================================================================================
+	//
+	// Activity/State Change methods
+	//
 	public void start()
 	{
 		LogIt.action(this.name, "Start called");
-		this.state																			= HVAC_STATES.Circuit.Start_Requested;
-		this.heatRequired																	= new HeatRequired();
+		this.heatRequired																	= new Heat_Required();
+		this.state																			= HVAC_STATES.Circuit.Starting;
 	}
-/**
- * Starts the circuit :
- * Supplied circuitTask becomes taskActive
- * State set to Start_Requested
- * heatRequired set to zero valued object
- */
-	public void start(CircuitTask 									thisTask)
-	{
-		LogIt.action(this.name, "Start called with circuitTask");
-		this.taskActive																		= thisTask;
-		this.state																			= HVAC_STATES.Circuit.Start_Requested;
-		this.heatRequired																	= new HeatRequired();
-	}
-/**
- * Stops the circuit :
- * State set to Stop_Requested
- * heatRequired set to null
- */	
 	public void stop()
 	{
 		// Called on one of the following conditions
 		//   1. Time is up : 					Detected/Called by Circuit_Abstract.scheduleTask
 		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
-		LogIt.action(this.name, "Stop called");
-		this.state																			= HVAC_STATES.Circuit.Stop_Requested;
-		this.heatRequired																	= null;
 		// Depending on the situation, the circuit will either optimise or stopdown completely
+		LogIt.action(this.name, "Stop called");
+		this.heatRequired																	= null;
+		this.state																			= HVAC_STATES.Circuit.Stopping;
 	}
+	//
+	//===========================================================================================================================================================
+
+	//===========================================================================================================================================================
+	//
+	// Sequencer
+	//
+	public void sequencer()											{  /* OverRidden in Circuit_XXX classes */	}
 /**
  * Shuts down the circuit :
  * State set to off
  * heatRequired set to null
  * task deactivated
  */
+	//
+	//===========================================================================================================================================================
+
+	//===========================================================================================================================================================
+	//
+	// Other
+	//
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
@@ -124,11 +131,12 @@ abstract class Circuit_Abstract
  * switches OFF circuitPump
  * heatRequired.max/min set to 0
  */	
+	Heat_Required 												heatRequiredSaved;
 	public void suspend()
 	{
 		LogIt.action(this.name, "Suspend called");
-		this.heatRequired.tempMinimum														= 0;
-		this.heatRequired.tempMaximum														= 0;
+		this.heatRequiredSaved																= this.heatRequired;
+		this.heatRequired																	= new Heat_Required();
 		this.circuitPump.off();
 		this.state																			= HVAC_STATES.Circuit.Suspended;
 	}						
@@ -142,6 +150,7 @@ abstract class Circuit_Abstract
 	public void resume()						
 	{						
 		LogIt.action(this.name, "Resume called");						
+		this.heatRequired																	= this.heatRequiredSaved;
 		this.circuitPump.on();
 		this.state																			= HVAC_STATES.Circuit.Resuming;
 	}
@@ -159,65 +168,7 @@ abstract class Circuit_Abstract
 		this.heatRequired																	= null;
 		this.state																			= HVAC_STATES.Circuit.Optimising;
 	}
-/**
- * Activates task supplied in parameter :
- * task.start() called
- */	
-	public void taskActivate(CircuitTask 							thisTask)
-	{
-		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated ");
 
-		if (this.taskActive == null)														// Normal operation
-		{
-			this.taskActive																	= thisTask;
-			this.start();
-			this.taskActive.dateLastRun														= Global.Date.now();
-		}
-		else
-		{
-			if (taskActive == thisTask)														// Could arise (???) during rampUp
-			{
-				LogIt.error("Circuit_Abstract", "taskActivate", "WOULD HAVE SAID : A task is active when it shouldn't be");
-				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
-				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + System.identityHashCode(taskActive));
-				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + System.identityHashCode(thisTask));
-			}
-			else																			// Dont know how
-			{
-				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
-				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is occupied... Replaced");
-				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
-				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + taskActive.days + " +++ " + taskActive.taskType);
-				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + thisTask.days + " +++ " + thisTask.taskType);
-			}
-			this.taskActive																	= thisTask;
-			this.start();						
-			this.taskActive.dateLastRun														= Global.Date.now();
-		}
-	}
-/**
- * Deactivates current task :
- * taskActive set to null
- */	
-	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
-	{
-		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated ");
-		this.taskActive.dateLastRun															= Global.Date.now();
-		this.taskActive																		= null;
-		StackTraceElement[] 									stackTraceElements 			= Thread.currentThread().getStackTrace();
-		int i;
-		for (i = 1; i < stackTraceElements.length - 1; i++)
-		{
-			StackTraceElement 									stackTraceElement			= stackTraceElements[i];
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "index		: " + i);
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "ClassName 	: " + stackTraceElement.getClassName());
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "MethodName	: " + stackTraceElement.getMethodName());
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "FileName 	: " + stackTraceElement.getFileName());
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "Line number 	: " + stackTraceElement.getLineNumber());
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "----------------------------------------------");
-		}
-		LogIt.display("Circuit_Abstract", "taskDeactivate", "==============================================================");
-	}
 /**
  * - taskActive.stop() called for current task is time up
  * - Searches tasks to be scheduled and if one found
@@ -225,7 +176,7 @@ abstract class Circuit_Abstract
  *   . We are in summer
  *   . We are away
  */	
-	public void scheduleTask()
+	public void taskScheduler()
 	{
 		/* ============= Must adjust these comments
 		 * 	Objective : Determine which task should run next : this.taskNext
@@ -246,22 +197,24 @@ abstract class Circuit_Abstract
 		Long 												today							= Global.Date.now();
 		CircuitTask											taskFound						= null;
 		
-		// Stop activeTask
-		
+		// Deschedule activeTask if time is up
 		if (taskActive != null)
 		{
-			if (	(now > taskActive.timeEnd) 							// taskActive : Time up
-			&& 		(this.state != HVAC_STATES.Circuit.Stop_Requested	) 
+			if (	(now > taskActive.timeEnd						) 							// taskActive : Time up
 			&&		(this.state != HVAC_STATES.Circuit.Stopping		)   
-			&&		(this.state != HVAC_STATES.Circuit.Optimising		)   )
+			&&		(this.state != HVAC_STATES.Circuit.Optimising	)   )
 			{
 				// Time is up for this task and it hasn't yet been asked to stop
-				this.stop();
+				taskDeactivate(taskActive);
+			}
+			if (	(taskActive.stopOnObjective								)
+			&&		(taskActive.tempObjective > this.thermoToMonitor.reading)	)
+			{
+				taskDeactivate(taskActive);
 			}
 		}
 
 		// Go through all task entries for this circuit
-		
 		for (CircuitTask circuitTask : circuitTaskList) 													// Go through all tasks
 		{	
 			if (circuitTask.days.contains(day)) 
@@ -365,5 +318,69 @@ abstract class Circuit_Abstract
 				}
 			}
 		}
-	}
+	}	// taskScheduler
+/**
+ * Activates task supplied in parameter :
+ * task.start() called
+ */	
+	public void taskActivate(CircuitTask 							thisTask)
+	{
+		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated ");
+
+		if (this.taskActive == null)														// Normal operation
+		{
+			this.taskActive																	= thisTask;
+			this.start();
+			this.taskActive.dateLastRun														= Global.Date.now();
+		}
+		else
+		{
+			if (taskActive == thisTask)														// Could arise (???) during rampUp
+			{
+				LogIt.error("Circuit_Abstract", "taskActivate", "WOULD HAVE SAID : A task is active when it shouldn't be");
+				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
+				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + System.identityHashCode(taskActive));
+				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + System.identityHashCode(thisTask));
+			}
+			else																			// Dont know how
+			{
+				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
+				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is occupied... Replaced");
+				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
+				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + taskActive.days + " +++ " + taskActive.taskType);
+				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + thisTask.days + " +++ " + thisTask.taskType);
+			}
+			this.taskActive																	= thisTask;
+			this.start();						
+			this.taskActive.dateLastRun														= Global.Date.now();
+		}
+	}	// taskActivate
+/**
+ * Deactivates current task :
+ * taskActive set to null
+ */	
+	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
+	{
+		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated ");
+		if (thisTask != this.taskActive)
+		{
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "something has gone wrong, deActivated Task isn't the running task");
+		}
+		this.taskActive.dateLastRun															= Global.Date.now();
+		this.taskActive																		= null;
+		StackTraceElement[] 									stackTraceElements 			= Thread.currentThread().getStackTrace();
+		int i;
+		for (i = 1; i < stackTraceElements.length - 1; i++)
+		{
+			StackTraceElement 									stackTraceElement			= stackTraceElements[i];
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "index		: " + i);
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "ClassName 	: " + stackTraceElement.getClassName());
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "MethodName	: " + stackTraceElement.getMethodName());
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "FileName 	: " + stackTraceElement.getFileName());
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "Line number 	: " + stackTraceElement.getLineNumber());
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "----------------------------------------------");
+		}
+		this.stop();
+		LogIt.display("Circuit_Abstract", "taskDeactivate", "==============================================================");
+	}	// taskDeactivate
 }

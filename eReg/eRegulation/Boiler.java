@@ -52,7 +52,7 @@ public class Boiler
 		this.tempOvershoot																	= boilerparams.tempOverShoot.milliDegrees;
 		state																				= HVAC_STATES.Boiler.Off;
 	}
-	public void requestHeat(HeatRequired eR)
+	public void requestHeat(Heat_Required eR)
 	{
 		tempMax 																			= eR.tempMaximum;
 		tempMin 																			= eR.tempMinimum;

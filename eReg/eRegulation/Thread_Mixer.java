@@ -56,9 +56,7 @@ public class Thread_Mixer implements Runnable
 					mixer.positionZero();
 				}
 				break;
-			case Start_Requested :					// Just fall through to AwaitingHeat
 			case Starting :							// Just fall through to AwaitingHeat
-			case AwaitingHeat :
 				mixer.positionPercentage(0.20F);
 				break;
 			case RampingUp :
@@ -68,7 +66,6 @@ public class Thread_Mixer implements Runnable
 			case Resuming :
 			                        
 			case Optimising :
-			case Stop_Requested :
 			case Stopping :
 			                        
 			case Error :

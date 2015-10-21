@@ -10,96 +10,99 @@ public class Circuit_Radiator extends Circuit_Abstract
 	{	
 		super(paramCircuit);
 
-		this.temperatureGradient				= new TemperatureGradient(paramCircuit.tempGradient);
+		this.temperatureGradient															= new TemperatureGradient(paramCircuit.tempGradient);
 	}
+	
+	//===========================================================================================================================================================
+	//
+	// Performance methods
+	//
+	@Override 
 	public Long getRampUpTime(Integer tempObjective)
 	{
 		Long 													rampUpMilliSeconds			= 30 * 60 * 1000L;		// 30 mins
 		return rampUpMilliSeconds;
 	}
-//	@Override
-//	public Long calculatePerformance()
-//	{
-//		// TODO Is this required
-//		return 10000L;
-//	}
+	//
+	//===========================================================================================================================================================
+
+	//===========================================================================================================================================================
+	//
+	// Activity/State Change methods
+	//
+	@Override 
+	public void start()
+	{
+		super.start();
+		Integer 									temp									= temperatureGradient.getTempToTarget();
+		this.heatRequired.tempMinimum														= temp - 7500;
+		this.heatRequired.tempMaximum														= temp + 7500;
+	}
+	//
+	//===========================================================================================================================================================
+
+	//===========================================================================================================================================================
+	//
+	// Sequencer
+	//
 	@Override
 	public void sequencer()
 	{
-		if (taskActive == null)
-		{
-			//Nothing to do
-		}
-		else
-		{
-			if 	(Global.thermoBoiler.reading 		== null) 
-			{
-				shutDown();											// This bypasses stopRequested
-				circuitPump.off();
-				state												= HVAC_STATES.Circuit.Error;
-				Global.eMailMessage("Circuit_Radiator/sequencer", "A Thermometer cannont be read");
-			}
+		// Check for work
+		if (taskActive == null)									return;						//Nothing to do				
 
-			
-			switch (state)
-			{
-			case Off:
-				//Nothing to do
-				break;
-			case Start_Requested:
-				LogIt.info("Circuit_" + this.name, "sequencer", "Start Requested");
-				state																		= HVAC_STATES.Circuit.Starting;
-				//Now fall through
-			case Starting:
-				if (temperatureGradient == null)
-				{
-					LogIt.error("Circuit_" + this.name, "sequencer", "temperatureGradient is null");
-					state																	= HVAC_STATES.Circuit.Error;
-				}
-				else
-				{
-					Integer 									temp						= temperatureGradient.getTempToTarget();
-					this.heatRequired.tempMinimum											= temp - 7500;
-					this.heatRequired.tempMaximum											= temp + 7500;
-					state																	= HVAC_STATES.Circuit.AwaitingHeat;
-				}
-				break;
-			case AwaitingHeat:
-				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
-				{
-					LogIt.action("PumpRadiator", "On");
-					circuitPump.on();
-					state																	= HVAC_STATES.Circuit.Running;
-				}
-				break;
-			case Running:
-				Integer 										temp						= temperatureGradient.getTempToTarget();
-				this.heatRequired.tempMinimum												= temp - 7500;
-				this.heatRequired.tempMaximum												= temp + 7500;
-				break;
-			case Stop_Requested:
-				LogIt.info("Circuit_" + this.name, "sequencer", "Stop Requested");
-				state																		= HVAC_STATES.Circuit.Stopping;
-				//Now fall through
-			case Stopping:
-				if 	(	(Global.circuits.isSingleActiveCircuit())
-				&& 		(Global.thermoBoiler.reading > 40000) ) //Might as well get as much heat out of it as possible
-				{
-					// We are alone, so as long as there is heat to get out of the system
-					// carry on
-				}
-				else
-				{
-					LogIt.action("PumpRadiator", "Off");
-					circuitPump.off();
-					this.shutDown();
-				}
-				break;
-			case Error:
-				break;
-			default:
-				LogIt.error("Circuit_" + this.name, "sequencer", "unknown state detected : " + state);	
-			}
+		// Check for security / errors
+		if 	(Global.thermoBoiler.reading 		== null) 
+		{
+			shutDown();																		// This bypasses stopRequested
+			circuitPump.off();
+			state												= HVAC_STATES.Circuit.Error;
+			Global.eMailMessage("Circuit_Radiator/sequencer", "A Thermometer cannont be read");
 		}
-	}
+
+		// Do normal activity
+	
+		switch (state)
+		{
+		case Off:
+			//Nothing to do
+			break;
+		case Starting:
+			if (Global.thermoBoiler.reading > Global.thermoHotWater.reading) 				// We can start pumping heat (was : > this.heatRequired.tempMinimum)
+			{
+				LogIt.action("PumpRadiator", "On");
+				circuitPump.on();
+				state																		= HVAC_STATES.Circuit.Running;
+			}
+			break;
+		case Running:
+			Integer 											temp						= temperatureGradient.getTempToTarget();	// Outside temp may change
+			this.heatRequired.tempMinimum													= temp - 7500;
+			this.heatRequired.tempMaximum													= temp + 7500;
+			break;
+		case Stopping:
+			if 	(	(Global.circuits.isSingleActiveCircuit())
+			&& 		(Global.thermoBoiler.reading > Global.thermoHotWater.reading + 3000) ) 	//Might as well get as much heat out of it as possible
+			{
+				// We are alone, so as long as there is heat to get out of the system
+				// carry on
+			}
+			else
+			{
+				LogIt.action(this.name, "Closing down completely");
+				LogIt.action("PumpRadiator", "Off");
+				circuitPump.off();
+				this.heatRequired															= null;
+				this.state																	= HVAC_STATES.Circuit.Off;
+				break;
+			}
+			break;
+		case Error:
+			break;
+		default:
+			LogIt.error("Circuit_" + this.name, "sequencer", "unknown state detected : " + state);	
+		}
+	}	// sequencer
+	//
+	//===========================================================================================================================================================
 }

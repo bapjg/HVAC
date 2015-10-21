@@ -168,7 +168,7 @@ public class Control
 		// Main Code
 		//
 		
-		HeatRequired 											globalHeatRequired			= new HeatRequired();
+		Heat_Required 											globalHeatRequired			= new Heat_Required();
 		
 		while (!Global.stopNow)
 		{
@@ -181,7 +181,7 @@ public class Control
 
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{
-				circuit.scheduleTask();					// In Circuit_Abstract
+				circuit.taskScheduler();					// In Circuit_Abstract
 				circuit.sequencer();
 				if (circuit.heatRequired != null)
 				{
