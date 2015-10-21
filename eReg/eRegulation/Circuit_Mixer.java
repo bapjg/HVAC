@@ -77,7 +77,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			shutDown();											// This bypasses stopRequested
 			// TODO Should we not close the mixer
 			circuitPump.off();
-			state = HVAC_STATES.Circuit.Error;
+			state 																			= HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_Mixer/sequencer", "A Thermometer cannont be read");
 		}
 
@@ -88,53 +88,41 @@ public class Circuit_Mixer extends Circuit_Abstract
 			//Nothing to do
 			break;
 		case Starting:
-			
-			if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective)
-			{
-				circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
-			}
-			else
-			{
-				LogIt.info("Circuit_" + this.name, "sequencer", "Already at temperature. Just Suspend");
-				suspend();
-			}
 
 			this.heatRequired.tempMinimum												= 55000;		// Avoid condensation
 			this.heatRequired.tempMaximum												= 80000;
 
+			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
+			{
+				circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
+				idle();
+			}
 			if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
 			{
+				circuitPump.on();														// Switch on circuit pump now
 				state 																	= HVAC_STATES.Circuit.RampingUp;
 			}
 			break;
 		case RampingUp:
-			if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective - 1000)
+			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective - 1000)	// Otherwise Stay in rampUp mode
 			{
-				// Stay in rampUp mode
-			}
-			else
-			{
-				LogIt.info("Circuit_" + this.name, "sequencer", "Now near temperature. Go to normalRunning");
 				nowRunning();
 			}
 			break;
 		case Running:
 			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 			{
-				suspend();
+				idle();			// This keeps the floor pump going
 			}
-			else
+			break;
+		case Idle:
+			if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective) // OR Floor return temp too cold
 			{
-				this.heatRequired.tempMinimum											= 55000;
-				this.heatRequired.tempMaximum											= 80000;
+				resume();			// This keeps the floor pump going
 			}
 			break;
 		case Suspended:
-			if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective)
-			{
-				LogIt.info("Circuit_" + this.name, "sequencer", "Idle ended");
-				resume();		// starting will switch on pump
-			}
+			// Shouldn't be here
 			break;
 		case Resuming:
 			start();
@@ -145,37 +133,31 @@ public class Circuit_Mixer extends Circuit_Abstract
 //				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "thermoBoiler : " 			+ Global.thermoBoiler.reading);
 //				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "thermoFloorIn : " 			+ Global.thermoFloorIn.reading);
 //				LogIt.display("Circuit_Mixer", "sequencer/Optimising", "mixer.positionTracked : " 	+ mixer.positionTracked);
+
+			if 		(! Global.circuits.isSingleActiveCircuit())								stop();
+			else if	(Global.thermoBoiler.reading < Global.thermoFloorIn.reading + 3000	)   stop();//  Continue while boilerTemp more than 3 degrees than return temp
+			break;
+		case Stopping:
 			if 	(	(Global.circuits.isSingleActiveCircuit()							)
 			&& 		(Global.thermoBoiler.reading > Global.thermoFloorIn.reading + 3000	)   	//  Continue while boilerTemp more than 3 degrees than return temp
 				)
-// Changed 06/10/2015. Mixer gets stuck in the off position				
-//				&& 		(mixer.positionTracked > 0											)   )	//  If no warm water is flowing, no point continuing
 			{
-				if (state != HVAC_STATES.Circuit.Optimising)
-				{
-					LogIt.info("Circuit_" + this.name, "sequencer", "Optimising");			// Done this way to get only one message (no repeats)
-					this.heatRequired.setZero();
-					optimise();
-				}
+				optimise();
 			}
 			else
 			{
-				stop();
+				LogIt.action(this.name, "Closing down completely");
+				LogIt.action("PumpFloor", "Off");
+				circuitPump.off();
+				this.heatRequired.setZero();
+				this.state 																		= HVAC_STATES.Circuit.Off;
 			}
-			break;
-		case Stopping:
-			LogIt.action(this.name, "Closing down completely");
-			LogIt.action("PumpRadiator", "Off");
-			circuitPump.off();
-			this.heatRequired.setZero();
-			this.state 																		= HVAC_STATES.Circuit.Off;
 			break;
 		case Error:
 			LogIt.error("Circuit_" + this.name, "sequencer", "Error detected : ");	
 			break;
 		default:
 			LogIt.error("Circuit_" + this.name, "sequencer", "unknown state detected : " + state.toString());	
-
 		}
 	}	// sequencer
 	//

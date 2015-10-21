@@ -80,17 +80,25 @@ abstract class Circuit_Abstract
 		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 		LogIt.action(this.name, "Stop called");
-		state = HVAC_STATES.Circuit.Stopping;
+		state 																				= HVAC_STATES.Circuit.Stopping;
 	}
 	public void nowRunning()
 	{
 		LogIt.action(this.name, "NowRunning called");
 		state = HVAC_STATES.Circuit.Running;
 	}
+/**
+ * Idles the circuit :
+ * This is used for Floor, circuitPump is left switched on
+ * State set to Idle
+ * leaves circuitPump ON
+ * heatRequired.max/min set to 0
+ */	
 	public void idle()
 	{
 		LogIt.action(this.name, "Idle called");
-		state = HVAC_STATES.Circuit.Idle;
+		this.heatRequired.setZero();
+		state 																				= HVAC_STATES.Circuit.Idle;
 	}
 /**
  * Shuts down the circuit :
@@ -151,11 +159,8 @@ abstract class Circuit_Abstract
 	public void optimise()						
 	{						
 		LogIt.action(this.name, "Optimising called");
-		// Modified to be the same as this.stop() which may call optimise()
-//			this.heatRequired.tempMinimum														= 0;
-//			this.heatRequired.tempMaximum														= 0;
 		this.heatRequired.setZero();
-		state = HVAC_STATES.Circuit.Optimising;
+		state 																				= HVAC_STATES.Circuit.Optimising;
 	}	//
 	//===========================================================================================================================================================
 
