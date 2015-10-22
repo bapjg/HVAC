@@ -82,10 +82,7 @@ public class Thread_Mixer implements Runnable
 				// MixCold > 25 degrees indicates trip, could try sitching on radiators to induce water flow, but would need to put Mix to Hot for the duration
 				// perhaps not that feasible
 				
-				Integer x = Global.thermoLivingRoom.reading;
-				Integer y = Global.tasksBackGround.summerTemp;
-				Integer z = 3;
-				
+				System.out.println ("taskactive" + this.circuit.taskActive.timeStartDisplay);
 				if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)			// > summerTemp
 				{
 					// Outside temp is high : no need to heat
