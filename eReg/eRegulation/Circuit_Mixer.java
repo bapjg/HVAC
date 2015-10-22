@@ -88,7 +88,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			//Nothing to do
 			break;
 		case Starting:
-
+			if (Global.isSummer())					suspend();
 			this.heatRequired.tempMinimum												= 55000;		// Avoid condensation
 			this.heatRequired.tempMaximum												= 80000;
 
@@ -110,6 +110,11 @@ public class Circuit_Mixer extends Circuit_Abstract
 			}
 			break;
 		case Running:
+			//TODO if(temp > summerTemp)
+//		{
+//			suspend();
+//			break;
+//		}
 			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 			{
 				idle();			// This keeps the floor pump going

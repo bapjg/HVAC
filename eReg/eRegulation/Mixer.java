@@ -86,7 +86,7 @@ public class Mixer
 		{
 			System.out.println("Mixer.Contructor : Unknown mixer relay");
 		}
-//		this.state																			= STATES.Mixer.Off;
+//		this.state set to Off in Thread_Mixer initialisation																			= STATES.Mixer.Off;
 	}
 	public void sequencer(Integer targetTemp)
 	{
@@ -218,7 +218,7 @@ public class Mixer
 				case MinReached:															// This is to inhibit mixer moving hotter until warmer boiler water has filtered through
 					if (pidFloorOut.dTdt() > 0F)											// BoilerWarming has reached floorOut which is now warming
 					{
-						boilerTemperatureVariation 				= HVAC_STATES.BoilerTemperatureVariation.NormalOperating;		
+						boilerTemperatureVariation 											= HVAC_STATES.BoilerTemperatureVariation.NormalOperating;		
 					}
 					else																	// FloorOut is still cooling, hold back
 					{
@@ -319,10 +319,18 @@ public class Mixer
 			Global.eMailMessage("Mixer/sequencer", "Thermometer " + Global.thermoFloorOut.name + " cannont be read");
 			return;
 		}
-	}
+	}	// End of sequencer
 	public void positionZero()
 	{
-		if ((positionTracked != null) && (positionTracked != 0))
+		if (positionTracked == null)
+		{
+			allOff();
+			mixerDown.on();
+			Global.waitMilliSeconds(swingTime + 2000);
+			mixerDown.off();
+			positionTracked																	= 0;
+		}
+		else if (positionTracked > 0)
 		{
 			allOff();
 			mixerDown.on();
@@ -330,13 +338,9 @@ public class Mixer
 			mixerDown.off();
 			positionTracked																	= 0;
 		}
-		else
+		else if (positionTracked == 0)
 		{
-			allOff();
-			mixerDown.on();
-			Global.waitMilliSeconds(swingTime + 2000);
-			mixerDown.off();
-			positionTracked																	= 0;
+			// Do nothing
 		}
 	}
 	public void positionPercentage(float percentage)

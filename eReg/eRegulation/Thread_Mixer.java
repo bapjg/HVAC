@@ -22,7 +22,8 @@ public class Thread_Mixer implements Runnable
 		LogIt.mixerData(Global.DateTime.now(), 0, 0L, 0);									// If timeEnd = 0, then the second part is not inserted into DataBase
 		
 		Integer 												i							= 0; 	// Used for loop waiting 20 s
-		Integer 												targetTemp;
+		Integer 												targetTemp					= 10 * 1000;						// Dont put at zero to avoid freezing
+		Integer													targetFloorIn;													// Could be useful
 		Integer 												timeProjectInSeconds		= mixer.timeProjection/1000;		// Time over which to project temperature change : Convert ms -> s
 		Integer 												timeDelayInSeconds			= mixer.timeDelay/1000;				// Time to wait before doing any calculations : Convert ms -> s
 		
@@ -46,60 +47,38 @@ public class Thread_Mixer implements Runnable
 				Global.eMailMessage("Thread_Mixer/run", "Unable to read a Thermometer");
 				circuit.shutDown();
 			}
-			// TODO CHeck this
+			
+			// Note that Mixer calls go to sleep when positionning the mixer.
+			// Notes
+			// Try introducing PID (especially Differential
+			// If dT/dt is of wrong sign then we are overshooting
+			// We could try Koeff = K/tempMixHot (higher Koeff for lower temps)
+			// MixCold > 25 degrees indicates trip, could try sitching on radiators to induce water flow, but would need to put Mix to Hot for the duration
+			// perhaps not that feasible
 
 			switch(circuit.state)
 			{
+			case Stopping :					// Note Circuit.Sequencer goes to optimising if any heat left in the system
 			case Off :
-			case Suspended :
-				if (mixer.positionTracked > 0)
-				{
-					mixer.positionZero();
-				}
+			case Suspended :				// Floor pump is off
+				mixer.positionZero();		// Mixer wont move if already at zero
 				break;
-			case Starting :							// Just fall through to AwaitingHeat
+			case Starting :
 				mixer.positionPercentage(0.20F);
 				break;
 			case RampingUp :
+				targetTemp																		= 41000;						// Trip avoidance kicks in at 450
+				break;
 			case Running :
 			case Resuming :
 			case Idle:
 			case Optimising :
-			case Stopping :
-			case Error :
-				break;
-			}
-			System.out.println("state ----------------: " + circuit.state.toString());
-			
-			if  ((circuit.state != HVAC_STATES.Circuit.Off) && (circuit.state != HVAC_STATES.Circuit.Suspended)  && (circuit.state != HVAC_STATES.Circuit.Error))
-			{
-				// Note that Mixer calls go to sleep when positionning the mixer.
-				
-				// Notes
-				// Try introducing PID (especially Differential
-				// If dT/dt is of wrong sign then we are overshooting
-				// We could try Koeff = K/tempMixHot (higher Koeff for lower temps)
-				// MixCold > 25 degrees indicates trip, could try sitching on radiators to induce water flow, but would need to put Mix to Hot for the duration
-				// perhaps not that feasible
-				
-				if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)			// > summerTemp
-				{
-					// Outside temp is high : no need to heat
-					targetTemp																	= 10 * 1000;					// Dont put at zero to avoid freezing
-				}
-				else if (Global.thermoLivingRoom.reading > this.circuit.taskActive.tempObjective - 1000)
-				{
-					// Must replace by PID
-					// Inside temp is high : no need to heat (within 1 degree
-//					targetTemp																= circuit.temperatureGradient.getTempToTarget();
-					
-					Integer										insideTempSpan				= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
-					Float										totalTempSpan				= insideTempSpan.floatValue()/0.55F;
-					
-					targetTemp																= Global.thermoOutside.reading + totalTempSpan.intValue();
-					
-					Integer										targetFloorIn				= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
-					
+//				if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)			// > summerTemp // Outside temp is high : no need to heat
+//				{
+//					targetTemp																	= 10 * 1000;					// Dont put at zero to avoid freezing
+//				}
+//				else if (Global.thermoLivingRoom.reading > this.circuit.taskActive.tempObjective - 1000)						// Not ramping up
+//				{
 					// If tempFloorIn > targetFloorIn => We are probably going to overtemp.
 					// This uses Leaking baths method to get correct temperature in LivingRoom
 					
@@ -117,21 +96,38 @@ public class Thread_Mixer implements Runnable
 					//     |                   |
 					//-----v------Outside------v--
 					
-				}
-				else if (circuit.state == HVAC_STATES.Circuit.RampingUp) 						// This is to accelerate rampup
-				{
-					targetTemp																= 41000;						// Trip avoidance kicks in at 450
-				}
-				else
-				{
-					targetTemp																= circuit.temperatureGradient.getTempToTarget();  //Loi d'eau
-				}
+					Integer										insideTempSpan				= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
+					Float										totalTempSpan				= insideTempSpan.floatValue()/0.55F;
+					targetTemp																= Global.thermoOutside.reading + totalTempSpan.intValue();
+					targetFloorIn															= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
+//				}
+				break;
+			case Error :
+				break;
+			}
+			
+			//TODO
+			System.out.println("ThreadMixer/Sequencer state ----------------: " + circuit.state.toString());
+
+			switch(circuit.state)
+			{
+			case Stopping :			// All these, the Floor pump is off : Mixer has nothing to do, Just Sleep 10 s
+			case Off :
+			case Suspended :		
+				Global.waitSeconds(10);
+				break;
+			case Starting :			// All these induce mixer movement
+			case RampingUp :
+			case Running :
+			case Resuming :
+			case Idle:
+			case Optimising :		// Note mixer has trip avoidance by surveying boiler temp variation. 
+									// When it passes minimum, sequencer brings down mixer to safe position and waits
+				this.mixer.sequencer(targetTemp);											// Get the mixer moving, then survey the results	
 				
-				this.mixer.sequencer(targetTemp);
-	
 				Integer 										temperatureProjected		= 0;
 				Integer 										tempNow;
-	
+
 				// Idea is to upto temeProject (timeProjection) in 5s intervals.
 				// The first intervals upto timeDelay, no decision is made
 				// Thereafter, if projected temperature is out of bound, the loop stops and the PID reactivated for recalculation
@@ -168,7 +164,11 @@ public class Thread_Mixer implements Runnable
 							break;	// Stops the loop to reanalyse the situation, i.e.GoTo "for (i = 0; (i < indexProject) && (! Global.stopNow); i++)"
 						}
 					}
-				}
+
+				}				
+				break;
+			case Error :
+				break;
 			}
 		}		// End while
 		circuit.circuitPump.off();
