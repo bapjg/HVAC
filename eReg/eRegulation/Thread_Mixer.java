@@ -60,71 +60,49 @@ public class Thread_Mixer implements Runnable
 			{
 			case Stopping :					// Note Circuit.Sequencer goes to optimising if any heat left in the system
 			case Off :
-			case Suspended :				// Floor pump is off
-				mixer.positionZero();		// Mixer wont move if already at zero
-				break;
 			case Starting :
-				mixer.positionPercentage(0.20F);
+			case Suspended :				// Floor pump is off
+				if (circuit.state == HVAC_STATES.Circuit.Suspended) 	mixer.positionZero();		// Mixer wont move if already at zero
+				if (circuit.state == HVAC_STATES.Circuit.Starting) 		mixer.positionPercentage(0.20F);		// Mixer wont move if already at zero
+				Global.waitSeconds(10);
 				break;
 			case RampingUp :
-				targetTemp																		= 41000;						// Trip avoidance kicks in at 450
-				break;
 			case Running :
 			case Resuming :
 			case Idle:
 			case Optimising :
-//				if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)			// > summerTemp // Outside temp is high : no need to heat
-//				{
-//					targetTemp																	= 10 * 1000;					// Dont put at zero to avoid freezing
-//				}
-//				else if (Global.thermoLivingRoom.reading > this.circuit.taskActive.tempObjective - 1000)						// Not ramping up
-//				{
-					// If tempFloorIn > targetFloorIn => We are probably going to overtemp.
-					// This uses Leaking baths method to get correct temperature in LivingRoom
-					
-					//-----^------FloorOut-----^---------   = targetTemp
-					//     |                   |
-					//    17%                  | 
-					//	   |                   |
-					//---^-v------FloorIn -----|---------   = targetFloorIn
-					//	 |                     |
-					//  27%                   100%   = totalTempSpan
-					//   |                     |
-					//---v-^------LivingRoom   |
-					//     |                   |
-					//    55%                  |     = insideTempSpan
-					//     |                   |
-					//-----v------Outside------v--
-					
-					Integer										insideTempSpan				= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
-					Float										totalTempSpan				= insideTempSpan.floatValue()/0.55F;
-					targetTemp																= Global.thermoOutside.reading + totalTempSpan.intValue();
-					targetFloorIn															= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
-//				}
-				break;
-			case Error :
-				break;
-			}
-			
-			//TODO
-			System.out.println("ThreadMixer/Sequencer state ----------------: " + circuit.state.toString());
-
-			switch(circuit.state)
-			{
-			case Stopping :			// All these, the Floor pump is off : Mixer has nothing to do, Just Sleep 10 s
-			case Off :
-			case Suspended :		
-				Global.waitSeconds(10);
-				break;
-			case Starting :			// All these induce mixer movement
-			case RampingUp :
-			case Running :
-			case Resuming :
-			case Idle:
-			case Optimising :		// Note mixer has trip avoidance by surveying boiler temp variation. 
-									// When it passes minimum, sequencer brings down mixer to safe position and waits
-				this.mixer.sequencer(targetTemp);											// Get the mixer moving, then survey the results	
+				if (circuit.state == HVAC_STATES.Circuit.RampingUp)
+				{
+					targetTemp																= 41000;						// Trip avoidance kicks in at 450
+				}
+				else
+				{
 				
+					// If tempFloorIn > targetFloorIn => We are probably going to overtemp.
+						// This uses Leaking baths method to get correct temperature in LivingRoom
+						
+						//-----^------FloorOut-----^---------   = targetTemp
+						//     |                   |
+						//    17%                  | 
+						//	   |                   |
+						//---^-v------FloorIn -----|---------   = targetFloorIn
+						//	 |                     |
+						//  27%                   100%   = totalTempSpan
+						//   |                     |
+						//---v-^------LivingRoom   |
+						//     |                   |
+						//    55%                  |     = insideTempSpan
+						//     |                   |
+						//-----v------Outside------v--
+						
+						Integer									insideTempSpan				= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
+						Float									totalTempSpan				= insideTempSpan.floatValue()/0.55F;
+						targetTemp															= Global.thermoOutside.reading + totalTempSpan.intValue();
+						targetFloorIn														= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
+				}
+				
+				this.mixer.sequencer(targetTemp);											// Get the mixer moving, then survey the results	
+
 				Integer 										temperatureProjected		= 0;
 				Integer 										tempNow;
 
@@ -164,8 +142,7 @@ public class Thread_Mixer implements Runnable
 							break;	// Stops the loop to reanalyse the situation, i.e.GoTo "for (i = 0; (i < indexProject) && (! Global.stopNow); i++)"
 						}
 					}
-
-				}				
+				}		
 				break;
 			case Error :
 				break;

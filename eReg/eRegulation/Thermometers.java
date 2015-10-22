@@ -27,11 +27,6 @@ public class Thermometers
 				thermometerItem.addProbe(paramThermometer);
 			}
 		}
-//		for (Ctrl_Configuration.Thermometer paramThermometer : paramThermometers)
-//		{
-//			Thermometer 										thermometerItem 			= new Thermometer(paramThermometer);
-//			thermometerList.add(thermometerItem);
-//		}
 	}
 	public Thermometer fetchThermometer(String name)
 	{
@@ -44,4 +39,25 @@ public class Thermometers
 		}
 		return null;
 	}
+	
+	
+//	public Thermometer get(String name) 
+//	{ 
+//		for (Thermometer element : thermometerList) 
+//		{
+//			if (element.name.equalsIgnoreCase(name))
+//			{
+//					return element;
+//			}
+//		}
+//		return null;
+//	}
+//	public Thermometer set(int index, Thermometer element) 
+//	{
+//		return null;
+//	}
+//    public int size() 
+//    {
+//        return thermometerList.size();
+//    }
 }
