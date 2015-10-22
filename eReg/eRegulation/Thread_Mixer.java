@@ -84,6 +84,7 @@ public class Thread_Mixer implements Runnable
 				
 				Integer x = Global.thermoLivingRoom.reading;
 				Integer y = Global.tasksBackGround.summerTemp;
+				Integer z = 3;
 				
 				if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)			// > summerTemp
 				{
