@@ -126,7 +126,10 @@ public class Control
 		Global.thermoRadiatorIn																= Global.thermometers.fetchThermometer("Radiator_In");
 												
 		Global.thermoOutside																= Global.thermometers.fetchThermometer("Outside");
+		System.out.println("Before");
 		Global.thermoLivingRoom																= Global.thermometers.fetchThermometer("Living_Room");
+		System.out.println("After");
+		System.out.println("After It  " + Global.thermoLivingRoom.reading);
 		Global.thermoHotWater																= Global.thermometers.fetchThermometer("Hot_Water");
 
 		Global.burnerPower	 																= Global.relays.fetchRelay("Burner");

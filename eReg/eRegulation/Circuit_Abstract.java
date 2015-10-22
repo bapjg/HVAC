@@ -218,11 +218,6 @@ abstract class Circuit_Abstract
 				taskDeactivate(taskActive);
 			}
 			
-			// TODO
-			Integer z = 1;
-			Integer x = taskActive.tempObjective;
-			Integer y = this.circuitThermo.reading;
-			
 			if (	(taskActive.stopOnObjective								)
 			&&		(taskActive.tempObjective > this.circuitThermo.reading)	)
 			{
