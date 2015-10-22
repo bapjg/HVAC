@@ -216,6 +216,11 @@ abstract class Circuit_Abstract
 				// Time is up for this task and it hasn't yet been asked to stop
 				taskDeactivate(taskActive);
 			}
+			
+			// TODO
+			Integer x = taskActive.tempObjective;
+			Integer y = this.thermoToMonitor.reading;
+			
 			if (	(taskActive.stopOnObjective								)
 			&&		(taskActive.tempObjective > this.thermoToMonitor.reading)	)
 			{
