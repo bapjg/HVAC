@@ -71,6 +71,8 @@ public class Thread_Mixer implements Runnable
 			case Error :
 				break;
 			}
+			System.out.println("state ----------------: " + circuit.state.toString());
+			
 			if  ((circuit.state != HVAC_STATES.Circuit.Off) && (circuit.state != HVAC_STATES.Circuit.Suspended)  && (circuit.state != HVAC_STATES.Circuit.Error))
 			{
 				// Note that Mixer calls go to sleep when positionning the mixer.
@@ -82,7 +84,6 @@ public class Thread_Mixer implements Runnable
 				// MixCold > 25 degrees indicates trip, could try sitching on radiators to induce water flow, but would need to put Mix to Hot for the duration
 				// perhaps not that feasible
 				
-				System.out.println ("taskactive" + this.circuit.taskActive.timeStartDisplay);
 				if (Global.thermoOutside.reading > Global.tasksBackGround.summerTemp)			// > summerTemp
 				{
 					// Outside temp is high : no need to heat
