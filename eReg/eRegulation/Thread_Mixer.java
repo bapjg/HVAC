@@ -170,17 +170,6 @@ public class Thread_Mixer implements Runnable
 					}
 				}
 			}
-			// TODO CHeck this
-			else if  ((circuit.state == HVAC_STATES.Circuit.Off ) || (circuit.state == HVAC_STATES.Circuit.Suspended)) //Running Cold
-			{
-				// TODO should we position zero every cycle. what about optimisation. what about floor temp measurement
-				// circuit.state = circuit.CIRCUIT_STATE_Shutting_down doesn't last long enough to be reliable. use positiontacked
-				// as indication of whether we are stopped or not
-				if (mixer.positionTracked > 0)
-				{
-					mixer.positionZero();
-				}
-			}
 		}		// End while
 		circuit.circuitPump.off();
 		LogIt.info("Thread_Mixer", "Run", "Stopping", true);	
