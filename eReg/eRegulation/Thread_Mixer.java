@@ -17,7 +17,7 @@ public class Thread_Mixer implements Runnable
 	public void run()
 	{
 		LogIt.info("Thread_Mixer_" + circuit.name, "Run", "Starting", true);		
-		Global.waitMilliSeconds(3000);														// Wait 3s before switching on the mixer, in case a pump has been turned on
+		Global.waitSeconds(3);																// Wait 3s before switching on the mixer, in case a pump has been turned on
 		mixer.positionZero();
 		LogIt.mixerData(Global.DateTime.now(), 0, 0L, 0);									// If timeEnd = 0, then the second part is not inserted into DataBase
 		
