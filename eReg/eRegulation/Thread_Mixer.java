@@ -51,6 +51,7 @@ public class Thread_Mixer implements Runnable
 			switch(circuit.state)
 			{
 			case Off :
+			case Suspended :
 				if (mixer.positionTracked > 0)
 				{
 					mixer.positionZero();
@@ -61,13 +62,10 @@ public class Thread_Mixer implements Runnable
 				break;
 			case RampingUp :
 			case Running :
-			                        
-			case Suspended :
 			case Resuming :
-			                        
+			case Idle:
 			case Optimising :
 			case Stopping :
-			                        
 			case Error :
 				break;
 			}

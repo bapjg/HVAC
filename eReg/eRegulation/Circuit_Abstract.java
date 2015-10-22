@@ -378,7 +378,6 @@ abstract class Circuit_Abstract
 			LogIt.display("Circuit_Abstract", "taskDeactivate", "something has gone wrong, deActivated Task isn't the running task");
 		}
 		this.taskActive.dateLastRun															= Global.Date.now();
-		this.taskActive																		= null;
 		StackTraceElement[] 									stackTraceElements 			= Thread.currentThread().getStackTrace();
 		int i;
 		for (i = 1; i < stackTraceElements.length - 1; i++)
@@ -391,6 +390,8 @@ abstract class Circuit_Abstract
 			LogIt.display("Circuit_Abstract", "taskDeactivate", "Line number 	: " + stackTraceElement.getLineNumber());
 			LogIt.display("Circuit_Abstract", "taskDeactivate", "----------------------------------------------");
 		}
+		// taskActive is not set to null so that Circuit_Mixer & Thread_Mixer keeps a handle onto the task
+		// It will be set to null by the sequencer once it has really stopped
 		this.stop();
 		LogIt.display("Circuit_Abstract", "taskDeactivate", "==============================================================");
 	}	// taskDeactivate

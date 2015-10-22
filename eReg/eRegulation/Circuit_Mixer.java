@@ -150,6 +150,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				LogIt.action("PumpFloor", "Off");
 				circuitPump.off();
 				this.heatRequired.setZero();
+				this.taskActive																	= null;
 				this.state 																		= HVAC_STATES.Circuit.Off;
 			}
 			break;

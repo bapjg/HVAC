@@ -92,7 +92,8 @@ public class Circuit_Radiator extends Circuit_Abstract
 				LogIt.action("PumpRadiator", "Off");
 				circuitPump.off();
 				this.heatRequired.setZero();
-				this.state = HVAC_STATES.Circuit.Off;
+				this.taskActive																	= null;
+				this.state 																		= HVAC_STATES.Circuit.Off;
 				break;
 			}
 			break;

@@ -163,6 +163,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 			LogIt.action("PumpHotWater", "Off");
 			circuitPump.off();
 			this.heatRequired.setZero();
+			this.taskActive																	= null;
 			this.state 																		= HVAC_STATES.Circuit.Off;
 			break;
 		case Error:
