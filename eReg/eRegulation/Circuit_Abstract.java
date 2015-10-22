@@ -218,6 +218,7 @@ abstract class Circuit_Abstract
 			}
 			
 			// TODO
+			Integer z = 1;
 			Integer x = taskActive.tempObjective;
 			Integer y = this.thermoToMonitor.reading;
 			

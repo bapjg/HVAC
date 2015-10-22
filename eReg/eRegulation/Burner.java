@@ -62,6 +62,7 @@ public class Burner
 		}
 		LogIt.error("Burner", "powerOn", "no fuel flow detected : burner has tripped");
 		Global.eMailMessage("Burner fault", "Burner/powerOn : no fuel flow detected, burner has tripped");
+		powerOff();
 	}
 	public void powerOff()
 	{
