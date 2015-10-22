@@ -220,7 +220,7 @@ abstract class Circuit_Abstract
 			LogIt.debug("thermo reading" + this.circuitThermo.reading);
 			
 			if (	(taskActive.stopOnObjective								)
-			&&		(taskActive.tempObjective > this.circuitThermo.reading)	)
+			&&		(this.circuitThermo.reading > taskActive.tempObjective  )	)
 			{
 				taskDeactivate(taskActive);
 			}
