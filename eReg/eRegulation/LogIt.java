@@ -22,7 +22,10 @@ public class LogIt
 	{
 		logDisplay																			= true;
 	}
-
+	public static void debug(String message)
+	{
+		System.out.println(dateTimeStamp() + "LogIt.debug " + message);
+	}
 	public static void  logMessage(String messageType, String className, String methodName, String message)
 	{
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.logMessage"))

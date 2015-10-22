@@ -215,7 +215,10 @@ abstract class Circuit_Abstract
 				// Time is up for this task and it hasn't yet been asked to stop
 				taskDeactivate(taskActive);
 			}
-			System.out.print("thermo " + this.circuitThermo.name);
+			LogIt.debug("thermo " + this.circuitThermo.name);
+			LogIt.debug("obj " + taskActive.tempObjective);
+			LogIt.debug("thermo reading" + this.circuitThermo.reading);
+			
 			if (	(taskActive.stopOnObjective								)
 			&&		(taskActive.tempObjective > this.circuitThermo.reading)	)
 			{
