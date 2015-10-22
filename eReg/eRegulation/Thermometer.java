@@ -26,6 +26,7 @@ public class Thermometer
 	{
 		this.name 		    																= paramThermometer.name;
 		this.pidControler																	= null;
+		this.reading																		= 0;
 		
 		String prefix																		= "/mnt/1wire/";
 		String suffix																		= "/";
