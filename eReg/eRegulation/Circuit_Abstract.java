@@ -45,6 +45,8 @@ abstract class Circuit_Abstract
 		this.circuitPump																	= Global.pumps.fetchPump(paramCircuit.pump);
 		this.circuitThermo																	= Global.thermometers.fetchThermometer(paramCircuit.thermometer);
 
+		System.out.println("Circuit.Constructor : " + name + " thermometer " + paramCircuit.thermometer);
+		
 		if (this.circuitPump == null)			System.out.println("Circuit.Constructor : " + name + " invalid pump " + paramCircuit.pump);
 		if (this.circuitThermo == null)			System.out.println("Circuit.Constructor : " + name + " invalid thermometer " + paramCircuit.thermometer);
 		
