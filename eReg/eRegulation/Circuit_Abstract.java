@@ -20,7 +20,6 @@ abstract class Circuit_Abstract
 
 	public Long 												rampUpTime					= 0L;
 	public Integer												tempToTrack;					// Used to recalculate ax+b;
-	public Thermometer											thermoToMonitor;				//Used with above
 	public Pump													circuitPump;
 	public Thermometer											circuitThermo;
 								
@@ -222,10 +221,10 @@ abstract class Circuit_Abstract
 			// TODO
 			Integer z = 1;
 			Integer x = taskActive.tempObjective;
-			Integer y = this.thermoToMonitor.reading;
+			Integer y = this.circuitThermo.reading;
 			
 			if (	(taskActive.stopOnObjective								)
-			&&		(taskActive.tempObjective > this.thermoToMonitor.reading)	)
+			&&		(taskActive.tempObjective > this.circuitThermo.reading)	)
 			{
 				taskDeactivate(taskActive);
 			}
