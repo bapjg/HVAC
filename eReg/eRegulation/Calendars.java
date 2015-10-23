@@ -137,7 +137,7 @@ public class Calendars
 		//		get circuit tasks
 		for (Ctrl_Calendars.Circuit 						paramCircuit 		: calendarData.circuitList)
 		{
-			Circuit_Abstract								circuit				= Global.circuits.fetchcircuit(paramCircuit.name);
+			Circuit_Abstract								circuit				= Global.circuits.fetchCircuit(paramCircuit.name);
 		
 			for (Ctrl_Calendars.Calendar 					paramCalendar 		: paramCircuit.calendarList)
 			{

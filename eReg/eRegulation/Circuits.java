@@ -55,23 +55,9 @@ public class Circuits
  */	
 	public Boolean isSingleActiveCircuit()
 	{
-
-		int count = 0;
-
-		for (Circuit_Abstract circuit : circuitList) 
-		{
-			if (circuit.taskActive != null)
-			{
-//				if (circuit.state != HVAC_STATES.Circuit.Idle)	// ie not heat request generated
-//				{
-					count++;
-//				}
-			}
-		}
-		if (count == 1)			return true;
-		else					return false;
+		return (activeCircuitCount() == 1);
 	}
-	public Circuit_Abstract fetchcircuit(String name)
+	public Circuit_Abstract fetchCircuit(String name)
 	{
 		for (Circuit_Abstract circuit : Global.circuits.circuitList) 
 		{

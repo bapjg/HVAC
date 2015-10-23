@@ -67,11 +67,23 @@ abstract class Circuit_Abstract
 	//
 	// Activity/State Change methods
 	//
-	public void start()
+/**
+ * Starts the circuit :
+ * State set to Starting
+ * leaves circuitPump UNCHANGED
+ * heatRequired.max/min UNCHANGED, The Starting State should/will set it
+ */	
+	public  void start()
 	{
 		LogIt.action(this.name, "Start called");
 		state																				= HVAC_STATES.Circuit.Starting;
 	}
+/**
+ * Initiates stopping of the circuit :
+ * State set to Stopping
+ * leaves circuitPump UNCHANGED
+ * heatRequired.max/min set to 0
+ */	
 	public void stop()
 	{
 		// Called on one of the following conditions
@@ -79,8 +91,15 @@ abstract class Circuit_Abstract
 		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 		LogIt.action(this.name, "Stop called");
+		this.heatRequired.setZero();
 		state 																				= HVAC_STATES.Circuit.Stopping;
 	}
+/**
+ * Sets the circuit to normal operating :
+ * State set to Running
+ * leaves circuitPump UNCHANGED
+ * heatRequired.max/min set to UNCHANGED
+ */	
 	public void nowRunning()
 	{
 		LogIt.action(this.name, "NowRunning called");
@@ -88,7 +107,6 @@ abstract class Circuit_Abstract
 	}
 /**
  * Idles the circuit :
- * This is used for Floor, circuitPump is left switched on
  * State set to Idle
  * leaves circuitPump ON
  * heatRequired.max/min set to 0
@@ -108,9 +126,10 @@ abstract class Circuit_Abstract
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
-		state 																				= HVAC_STATES.Circuit.Off;
+		circuitPump.off();
 		this.heatRequired.setZero();
 		taskDeactivate(this.taskActive);
+		state 																				= HVAC_STATES.Circuit.Off;
 	}
 /**
  * Not implemented
@@ -125,8 +144,6 @@ abstract class Circuit_Abstract
 	}
 /**
  * Suspends the circuit :
- * This is used for Hot_Water, if target temperature is reached, the circuitPump is switched off
- * If the temperature falls below target - 5 degrees, resume will be called to trun it onn again
  * State set to Suspended
  * switches OFF circuitPump
  * heatRequired.max/min set to 0
@@ -140,9 +157,7 @@ abstract class Circuit_Abstract
 	}						
 /**
  * Resumes the circuit :
- * State set to Resumed
- * Called to allow circuitPump to be switched on again (after suspend)
- * switches ON circuitPump
+ * State set to Resuming
  * heatRequired.max/min must be set by caller
  */	
 	public void resume()						
@@ -157,17 +172,25 @@ abstract class Circuit_Abstract
  */	
 	public void optimise()						
 	{						
+		LogIt.debug(this.name + "Optimising called");
 		LogIt.action(this.name, "Optimising called");
 		this.heatRequired.setZero();
+		this.circuitPump.on();																// This checks to see if on to avoid uneccessary relay activity	
 		state 																				= HVAC_STATES.Circuit.Optimising;
-	}	//
+	}
+	public Boolean isOptimising()
+	{
+		return (this.state == HVAC_STATES.Circuit.Optimising);
+	}
+	//
 	//===========================================================================================================================================================
 
 	//===========================================================================================================================================================
 	//
 	// Sequencer
 	//
-	public void sequencer()											{  /* OverRidden in Circuit_XXX classes */	}
+	public abstract void sequencer();
+	public abstract Boolean canOptimise();
 	//
 	//===========================================================================================================================================================
 
@@ -334,7 +357,7 @@ abstract class Circuit_Abstract
  */	
 	public void taskActivate(CircuitTask 							thisTask)
 	{
-		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated ");
+		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated " + thisTask.days + " " + thisTask.timeStartDisplay + "-" + thisTask.timeEndDisplay);
 
 		if (this.taskActive == null)														// Normal operation
 		{
@@ -370,7 +393,7 @@ abstract class Circuit_Abstract
  */	
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
-		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated ");
+		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated " + thisTask.days + " " + thisTask.timeStartDisplay + "-" + thisTask.timeEndDisplay);
 		if (thisTask != this.taskActive)
 		{
 			LogIt.display("Circuit_Abstract", "taskDeactivate", "something has gone wrong, deActivated Task isn't the running task");

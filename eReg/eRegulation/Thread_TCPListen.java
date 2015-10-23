@@ -144,7 +144,7 @@ public class Thread_TCPListen 			implements Runnable
 		
 		String 					circuitName					= message_in.circuitName;
 		
-		Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
+		Circuit_Abstract 		circuit						= Global.circuits.fetchCircuit(circuitName);
 		
 		message_return.circuitName								= circuitName;
 
@@ -203,7 +203,7 @@ public class Thread_TCPListen 			implements Runnable
 		Long	now											= Global.Time.now();
 		
 		String 					circuitName					= message_in.circuitName;
-		Circuit_Abstract 		circuit						= Global.circuits.fetchcircuit(circuitName);
+		Circuit_Abstract 		circuit						= Global.circuits.fetchCircuit(circuitName);
 		Ctrl__Abstract 			message_return				= new Ctrl__Abstract().new Ack();;
 		
 		if (message_in.action == Ctrl_Immediate.ACTION_Start)

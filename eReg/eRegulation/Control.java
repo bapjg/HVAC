@@ -131,9 +131,9 @@ public class Control
 
 		Global.burnerPower	 																= Global.relays.fetchRelay("Burner");
 											
-		Global.circuitFloor																	= (Circuit_Mixer) 		Global.circuits.fetchcircuit("Floor");
-		Global.circuitGradient																= (Circuit_Radiator) 	Global.circuits.fetchcircuit("Radiator");
-		Global.circuitHotWater																= (Circuit_HotWater) 	Global.circuits.fetchcircuit("Hot_Water");
+		Global.circuitFloor																	= (Circuit_Mixer) 		Global.circuits.fetchCircuit("Floor");
+		Global.circuitGradient																= (Circuit_Radiator) 	Global.circuits.fetchCircuit("Radiator");
+		Global.circuitHotWater																= (Circuit_HotWater) 	Global.circuits.fetchCircuit("Hot_Water");
 
 		//
 		//============================================================

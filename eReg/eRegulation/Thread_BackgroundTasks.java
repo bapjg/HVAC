@@ -115,7 +115,7 @@ public class Thread_BackgroundTasks implements Runnable
 			if (	(Global.thermoHotWater.reading 		!= null)
 			&& 		(Global.thermoHotWater.reading 		< tasksBackGround.antiFreeze)	)
 			{
-				circuit												= Global.circuits.fetchcircuit("Hot_Water");
+				circuit												= Global.circuits.fetchCircuit("Hot_Water");
 				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
 																			now + 30 * 60 * 1000, 					// TimeEnd
 																			10000,									// TempObjective in millidesrees (10]C)
@@ -128,7 +128,7 @@ public class Thread_BackgroundTasks implements Runnable
 			||  ((Global.thermoBoilerIn.reading  != null) && (Global.thermoBoilerIn.reading 	< tasksBackGround.antiFreeze))
 			||  ((Global.thermoBoilerOut.reading != null) && (Global.thermoBoilerOut.reading 	< tasksBackGround.antiFreeze))	)
 			{
-				circuit												= Global.circuits.fetchcircuit("Radiator");
+				circuit												= Global.circuits.fetchCircuit("Radiator");
 				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
 																			now + 30 * 60 * 1000, 					// 30 mins
 																			30000,									// TempObjective in millidegrees 30°C
@@ -141,7 +141,7 @@ public class Thread_BackgroundTasks implements Runnable
 			||  ((Global.thermoFloorIn.reading  	!= null) && (Global.thermoFloorIn.reading 		< tasksBackGround.antiFreeze))
 			||  ((Global.thermoFloorOut.reading 	!= null) && (Global.thermoFloorOut.reading 		< tasksBackGround.antiFreeze))	)
 			{
-				circuit												= Global.circuits.fetchcircuit("Floor");
+				circuit												= Global.circuits.fetchCircuit("Floor");
 				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
 																			now + 30 * 60 * 1000, 					// 30 mins
 																			10000,									// TempObjective in millidegrees 10°C
@@ -153,7 +153,7 @@ public class Thread_BackgroundTasks implements Runnable
 			if (((Global.thermoRadiatorIn.reading   != null) && (Global.thermoRadiatorIn.reading 	< tasksBackGround.antiFreeze))
 			||  ((Global.thermoRadiatorOut.reading  != null) && (Global.thermoRadiatorOut.reading 	< tasksBackGround.antiFreeze)) )
 			{
-				circuit												= Global.circuits.fetchcircuit("Floor");
+				circuit												= Global.circuits.fetchCircuit("Floor");
 				circuit.taskActive									= new CircuitTask(	now, 						// Time Start
 																			now + 30 * 60 * 1000, 					// 30 mins
 																			30000,									// TempObjective in millidegrees 30°C
