@@ -69,9 +69,9 @@ abstract class Circuit_Abstract
 	//
 /**
  * Starts the circuit :
- * State set to Starting
- * leaves circuitPump UNCHANGED
- * heatRequired.max/min UNCHANGED, The Starting State should/will set it
+ * State = Starting
+ * circuitPump = UNCHANGED
+ * heatRequired.max/min = UNCHANGED, The Starting State should/will set it
  */	
 	public  void start()
 	{
@@ -80,9 +80,10 @@ abstract class Circuit_Abstract
 	}
 /**
  * Initiates stopping of the circuit :
- * State set to Stopping
- * leaves circuitPump UNCHANGED
- * heatRequired.max/min set to 0
+ * State = Stopping.
+ * circuitPump = UNCHANGED.
+ * heatRequired.max/min = ZERO.
+ * NB : State Stopping can lean on to Optimising. To end the task with certainty, use shutDown
  */	
 	public void stop()
 	{
@@ -96,20 +97,20 @@ abstract class Circuit_Abstract
 	}
 /**
  * Sets the circuit to normal operating :
- * State set to Running
- * leaves circuitPump UNCHANGED
- * heatRequired.max/min set to UNCHANGED
+ * State set to Running.
+ * circuitPump = UNCHANGED.
+ * heatRequired.max/min = UNCHANGED, The Running State should/will set it.
  */	
 	public void nowRunning()
 	{
 		LogIt.action(this.name, "NowRunning called");
-		state = HVAC_STATES.Circuit.Running;
+		state 																				= HVAC_STATES.Circuit.Running;
 	}
 /**
  * Idles the circuit :
- * State set to Idle
- * leaves circuitPump ON
- * heatRequired.max/min set to 0
+ * State = Idle.
+ * circuitPump = UNCHANGED.
+ * heatRequired.max/min = 0.
  */	
 	public void idle()
 	{
@@ -119,16 +120,16 @@ abstract class Circuit_Abstract
 	}
 /**
  * Shuts down the circuit :
- * State set to off
- * heatRequired set to null
- * task deactivated
+ * State = Off.
+ * circuitPump = OFF.
+ * heatRequired.max/min = ZERO.
+ * task will be deactivated by scheduler.
  */
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
 		circuitPump.off();
 		this.heatRequired.setZero();
-		taskDeactivate(this.taskActive);
 		state 																				= HVAC_STATES.Circuit.Off;
 	}
 /**
@@ -144,9 +145,9 @@ abstract class Circuit_Abstract
 	}
 /**
  * Suspends the circuit :
- * State set to Suspended
- * switches OFF circuitPump
- * heatRequired.max/min set to 0
+ * State = Suspended.
+ * circuitPump = OFF.
+ * heatRequired.max/min = ZERO.
  */	
 	public void suspend()
 	{
@@ -157,8 +158,9 @@ abstract class Circuit_Abstract
 	}						
 /**
  * Resumes the circuit :
- * State set to Resuming
- * heatRequired.max/min must be set by caller
+ * State = Resuming.
+ * circuitPump = UNCHANGED.
+ * heatRequired.max/min = UNCHANGED, The Resuming State should/will set it.
  */	
 	public void resume()						
 	{						
@@ -167,9 +169,10 @@ abstract class Circuit_Abstract
 	}
 /**
  * Optimises the circuit :
- * State set to Optimising
- * circuitPump turned ON
- * heatRequired.max/min set to 0
+ * State = Optimising.
+ * circuitPump = UNCHANGED.
+ * heatRequired.max/min = ZERO.
+ * circuitPump = ON.
  */	
 	public void optimise()						
 	{						
@@ -229,6 +232,11 @@ abstract class Circuit_Abstract
 		Long 												today							= Global.Date.now();
 		CircuitTask											taskFound						= null;
 		
+		if ((taskActive != null) && (this.state == HVAC_STATES.Circuit.Off))
+		{
+			taskActive 																		= null;		// Task has recently been deactivated
+		}
+		
 		// Deschedule activeTask if time is up
 		if (taskActive != null)
 		{
@@ -237,13 +245,13 @@ abstract class Circuit_Abstract
 			&&		(this.state != HVAC_STATES.Circuit.Optimising	)   )
 			{
 				// Time is up for this task and it hasn't yet been asked to stop
-				taskDeactivate(taskActive);
+				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
 			}
 			
 			if (	(taskActive.stopOnObjective								)
 			&&		(this.circuitThermo.reading > taskActive.tempObjective  )	)
 			{
-				taskDeactivate(taskActive);
+				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
 			}
 		}
 
@@ -260,7 +268,7 @@ abstract class Circuit_Abstract
 				// - It can be yet to run
 				
 				if (		(  circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective) > now	)						// This task has yet to be performed (timeStart future
-				&& 			(  circuitTask.timeEnd > now													)  		)						// Or time End future
+				&& 			(  circuitTask.timeEnd > now													)  		)				// Or time End future
 				{
 					// This task has yet to run : both start and end are in the future
 					// Nothing todo
@@ -358,7 +366,7 @@ abstract class Circuit_Abstract
  */	
 	public void taskActivate(CircuitTask 							thisTask)
 	{
-		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated " + thisTask.days + " " + thisTask.timeStartDisplay + "-" + thisTask.timeEndDisplay);
+		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay);
 
 		if (this.taskActive == null)														// Normal operation
 		{
@@ -368,6 +376,12 @@ abstract class Circuit_Abstract
 		}
 		else
 		{
+			if (this.state == HVAC_STATES.Circuit.Stopping)									// Its just been set, hasn't had time to move to optimising or Off
+			{
+				LogIt.debug("taskActive is stopping          = " + taskActive.days + " +++ " + taskActive.taskType.toString());
+				return;
+			}
+			
 			if (taskActive == thisTask)														// Could arise (???) during rampUp
 			{
 				LogIt.error("Circuit_Abstract", "taskActivate", "WOULD HAVE SAID : A task is active when it shouldn't be");
@@ -394,7 +408,7 @@ abstract class Circuit_Abstract
  */	
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
-		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated " + thisTask.days + " " + thisTask.timeStartDisplay + "-" + thisTask.timeEndDisplay);
+		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay);
 		if (thisTask != this.taskActive)
 		{
 			LogIt.display("Circuit_Abstract", "taskDeactivate", "something has gone wrong, deActivated Task isn't the running task");

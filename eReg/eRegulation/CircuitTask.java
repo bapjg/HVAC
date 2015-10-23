@@ -47,7 +47,7 @@ public class CircuitTask
 			Integer												tempObjective, 
 			Boolean												stopOnObjective,
 			String												days,
-			HVAC_TYPES.CircuitTask									taskType
+			HVAC_TYPES.CircuitTask								taskType
 		)
 	{
 		this.timeStart																		= timeStart;

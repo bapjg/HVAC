@@ -236,7 +236,36 @@ public class Global
 		}
 		//
 		//==================================================================================
+
+		//============================================================
+		//
+		// Initialise Global
+		//
 		
+		thermoBoiler 																	= Global.thermometers.fetchThermometer("Boiler");
+		thermoBoilerOld																	= Global.thermometers.fetchThermometer("Boiler_Old");
+		thermoBoilerOut																	= Global.thermometers.fetchThermometer("Boiler_Out");
+		thermoBoilerIn																	= Global.thermometers.fetchThermometer("Boiler_In");
+												
+		thermoFloorOut																	= Global.thermometers.fetchThermometer("Floor_Out");
+		thermoFloorIn																	= Global.thermometers.fetchThermometer("Floor_In");
+												
+		thermoRadiatorOut																= Global.thermometers.fetchThermometer("Radiator_Out");
+		thermoRadiatorIn																= Global.thermometers.fetchThermometer("Radiator_In");
+												
+		thermoOutside																	= Global.thermometers.fetchThermometer("Outside");
+		thermoLivingRoom																= Global.thermometers.fetchThermometer("Living_Room");
+		thermoHotWater																	= Global.thermometers.fetchThermometer("Hot_Water");
+
+		burnerPower	 																	= Global.relays.fetchRelay("Burner");
+											
+		circuitFloor																	= (Circuit_Mixer) 		Global.circuits.fetchCircuit("Floor");
+		circuitGradient																	= (Circuit_Radiator) 	Global.circuits.fetchCircuit("Radiator");
+		circuitHotWater																	= (Circuit_HotWater) 	Global.circuits.fetchCircuit("Hot_Water");
+
+		//
+		//============================================================
+
 		display.writeAtPosition(1, 18, "Ok");
 		// Other initialisation messages are displayed by Control.java
 	}

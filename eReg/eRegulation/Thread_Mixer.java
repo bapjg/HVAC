@@ -101,7 +101,13 @@ public class Thread_Mixer implements Runnable
 						targetFloorIn														= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
 				}
 				
+				//=====================================================================
+				//
+				// mixer.sequencer call
+				//
 				this.mixer.sequencer(targetTemp);											// Get the mixer moving, then survey the results	
+				//
+				//=====================================================================
 
 				Integer 										temperatureProjected		= 0;
 				Integer 										tempNow;

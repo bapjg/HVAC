@@ -60,15 +60,30 @@ public class Circuit_Mixer extends Circuit_Abstract
 	public void start()
 	{
 		super.start();
-		this.heatRequired.set(55000, 80000);																// this.taskActive.tempObjective + 10000;
-		// this.heatRequired.tempMaximum														= 80000;		// this.tempMax;
+		this.heatRequired.set(55000, 80000);
 	}
+/**
+ * Shuts down the circuit :
+ * State = Off.
+ * circuitPump = OFF.
+ * heatRequired.max/min = ZERO.
+ * task will be deactivated by scheduler.
+ * Floor specific : positionMixer = ZERO
+*/
 	@Override
 	public void shutDown()
 	{
 		this.mixer.positionZero();
 		super.shutDown();
 	}
+/**
+ * Optimises the circuit :
+ * State = Optimising.
+ * circuitPump = UNCHANGED.
+ * heatRequired.max/min = ZERO.
+ * circuitPump = ON.
+ * Floor specific : positionMixer = 20%
+ */	
 	@Override
 	public void optimise()
 	{
@@ -147,8 +162,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			break;
 		case Starting:
 			if (Global.isSummer())					suspend();
-			this.heatRequired.tempMinimum												= 55000;		// Avoid condensation
-			this.heatRequired.tempMaximum												= 80000;
+			this.heatRequired.set(55000, 80000);		// Avoid condensation
 
 			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 			{
@@ -235,7 +249,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 																												targetTemperature,	// TempObjective in millidesrees
 																												false,	// StopOnObjective
 																												"1, 2, 3, 4, 5, 6, 7",					// Days
-																												HVAC_TYPES.CircuitTask.DontKnow
+																												HVAC_TYPES.CircuitTask.Optimisation
 				);
 		this.taskActive																		= task;
 		this.circuitPump.on();

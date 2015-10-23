@@ -8,6 +8,6 @@ public class HVAC_TYPES
 		Calendar, 
 		Immediate, 
 		BackGround,
-		DontKnow
+		Optimisation
 	}
 }
