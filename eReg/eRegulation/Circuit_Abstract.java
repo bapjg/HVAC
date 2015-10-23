@@ -295,7 +295,7 @@ abstract class Circuit_Abstract
 		{
 			if (taskFound != null)
 			{
-				if	(! taskFound.dateLastRun.equals(today))									return;	// Task has already run or is already running
+				if	(taskFound.dateLastRun.equals(today))									return;	// Task has already run or is already running
 				if (type == CIRCUIT_TYPE_HotWater)
 				{
 					taskActivate(taskFound);
