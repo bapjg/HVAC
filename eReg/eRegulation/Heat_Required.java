@@ -20,4 +20,8 @@ public class Heat_Required
 		this.tempMinimum 																	= tempMinimum;
 		this.tempMaximum 																	= tempMaximum;
 	}
+	public void set(Integer tempMaximum)
+	{
+		this.tempMaximum 																	= tempMaximum;
+	}
 }

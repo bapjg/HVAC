@@ -240,6 +240,14 @@ abstract class Circuit_Abstract
 		// Deschedule activeTask if time is up
 		if (taskActive != null)
 		{
+			// Avoid midnight perturbations
+			if (Global.Time.now() > Global.Time.parseTime("23:58"))
+			{
+				if (this.state == HVAC_STATES.Circuit.Optimising)					this.shutDown();
+				else 																taskDeactivate(taskActive);
+				return; 															// Go no further
+			}
+			// Carry on with the real work
 			if (	(now > taskActive.timeEnd						) 							// taskActive : Time up
 			&&		(this.state != HVAC_STATES.Circuit.Stopping		)   
 			&&		(this.state != HVAC_STATES.Circuit.Optimising	)   )
@@ -291,6 +299,8 @@ abstract class Circuit_Abstract
 				}
 			}
 		}
+		if (Global.Time.now() > Global.Time.parseTime("23:55"))								return;			// Avoid scheduling tasks just before midnight
+		
 		if (! Global.isAway())				// We are not away so get going
 		{
 			if (taskFound != null)
