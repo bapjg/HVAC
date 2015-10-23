@@ -246,12 +246,16 @@ abstract class Circuit_Abstract
 			{
 				// Time is up for this task and it hasn't yet been asked to stop
 				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
+				// TODO Let it move to optimising or Off
+				return;
 			}
 			
 			if (	(taskActive.stopOnObjective								)
 			&&		(this.circuitThermo.reading > taskActive.tempObjective  )	)
 			{
 				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
+				// TODO Let it move to optimising or Off
+				return;
 			}
 		}
 
@@ -289,6 +293,7 @@ abstract class Circuit_Abstract
 						// circuitTask should start later
 						// This can happen either by error (overlapping calendars)
 						// or due to rampUp : circuitTask planned to run later but we will start now to ramp up
+						// WE CHOOSE THE LATEEST OF THE ELLIGIBLE TASKS
 						taskFound															= circuitTask;
 					}
 					else
