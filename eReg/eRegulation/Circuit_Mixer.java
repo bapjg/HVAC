@@ -69,6 +69,12 @@ public class Circuit_Mixer extends Circuit_Abstract
 		this.mixer.positionZero();
 		super.shutDown();
 	}
+	@Override
+	public void optimise()
+	{
+		this.mixer.positionPercentage(0.20F);
+		super.optimise();
+	}
 	//
 	//===========================================================================================================================================================
 

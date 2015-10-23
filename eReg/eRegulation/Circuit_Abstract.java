@@ -168,6 +168,7 @@ abstract class Circuit_Abstract
 /**
  * Optimises the circuit :
  * State set to Optimising
+ * circuitPump turned ON
  * heatRequired.max/min set to 0
  */	
 	public void optimise()						
