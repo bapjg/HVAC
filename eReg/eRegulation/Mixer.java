@@ -59,6 +59,7 @@ public class Mixer
     {
 		this.name 																			= paramMixer.name;
 		this.swingTime																		= paramMixer.swingTime					* 1000;
+		this.positionTracked 																= paramMixer.swingTime					* 1000;
 		this.swingUsableMin																	= paramMixer.swingProportionMin * this.swingTime / 100;
 		this.swingUsableMax																	= paramMixer.swingProportionMax * this.swingTime / 100;
 		this.timeDelay																		= paramMixer.pidParams.timeDelay        * 1000;			// Convert to milliSeconds
@@ -68,7 +69,7 @@ public class Mixer
 		this.timeD																			= paramMixer.pidParams.timeD;
 		this.gainD																			= this.gainP * this.timeD;
 		this.timeI																			= paramMixer.pidParams.timeI;
-		
+		this.positionTracked 																= paramMixer.swingTime					* 1000;
 		if (this.timeI == 0)
 		{
 			this.gainI																		= 0F;
