@@ -281,10 +281,12 @@ abstract class Circuit_Abstract
 				&& 			(  circuitTask.timeEnd > now													)   					// and time End is future
 				&&			(! circuitTask.dateLastRun.equals(today)										)		)				// and the last run wasn't today					
 				{
-					// This task should be run : start is past and end is the future
+					// This task should be run : start is past and end is the future and has not yet run
 					// We can swap this task in
+					LogIt.debug("TaskFound 0 " + circuitTask.days + "start/end " + circuitTask.timeStartDisplay + "/" + circuitTask.timeEndDisplay);
 					if (taskFound == null)
 					{
+						LogIt.debug("TaskFound 1" + circuitTask.days + "start/end " + circuitTask.timeStartDisplay + "/" + circuitTask.timeEndDisplay);
 						taskFound															= circuitTask;
 					}
 					else if (circuitTask.timeStart > taskFound.timeStart)
@@ -294,6 +296,7 @@ abstract class Circuit_Abstract
 						// This can happen either by error (overlapping calendars)
 						// or due to rampUp : circuitTask planned to run later but we will start now to ramp up
 						// WE CHOOSE THE LATEEST OF THE ELLIGIBLE TASKS
+						LogIt.debug("TaskFound 2" + circuitTask.days + "start/end " + circuitTask.timeStartDisplay + "/" + circuitTask.timeEndDisplay);
 						taskFound															= circuitTask;
 					}
 					else
