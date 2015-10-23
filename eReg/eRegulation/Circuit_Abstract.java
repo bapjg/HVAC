@@ -270,6 +270,7 @@ abstract class Circuit_Abstract
 				// - It can be in the state "should have started, and not yet finished" but we have just booted the RaspPi
 				// - It can be running (Not possible in this branch of code)
 				// - It can be yet to run
+				// Find the latest task elligible to run
 				
 				if (		(  circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective) > now	)						// This task has yet to be performed (timeStart future
 				&& 			(  circuitTask.timeEnd > now													)  		)				// Or time End future
@@ -278,39 +279,23 @@ abstract class Circuit_Abstract
 					// Nothing todo
 				}
 				else if (	(  circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective) < now	)						// This task has yet to be performed (timeStart is past
-				&& 			(  circuitTask.timeEnd > now													)   					// and time End is future
-				&&			(! circuitTask.dateLastRun.equals(today)										)		)				// and the last run wasn't today					
+				&& 			(  circuitTask.timeEnd > now													)		)				// and time End is future
 				{
 					// This task should be run : start is past and end is the future and has not yet run
 					// We can swap this task in
-					LogIt.debug("TaskFound 0 " + circuitTask.days + "start/end " + circuitTask.timeStartDisplay + "/" + circuitTask.timeEndDisplay);
-					if (taskFound == null)
+					if 	(	(taskFound == null								)														// circuitTask is first candidate
+					||		(circuitTask.timeStart > taskFound.timeStart	)		)												// circuitTask is later candidate
 					{
-						LogIt.debug("TaskFound 1" + circuitTask.days + "start/end " + circuitTask.timeStartDisplay + "/" + circuitTask.timeEndDisplay);
 						taskFound															= circuitTask;
-					}
-					else if (circuitTask.timeStart > taskFound.timeStart)
-					{
-						// taskFound contains a task which should start
-						// circuitTask should start later
-						// This can happen either by error (overlapping calendars)
-						// or due to rampUp : circuitTask planned to run later but we will start now to ramp up
-						// WE CHOOSE THE LATEEST OF THE ELLIGIBLE TASKS
-						LogIt.debug("TaskFound 2" + circuitTask.days + "start/end " + circuitTask.timeStartDisplay + "/" + circuitTask.timeEndDisplay);
-						taskFound															= circuitTask;
-					}
-					else
-					{
-						// taskFound is already the correct task to run
 					}
 				}
 			}
 		}
-		
 		if (! Global.isAway())				// We are not away so get going
 		{
 			if (taskFound != null)
 			{
+				if	(! taskFound.dateLastRun.equals(today))								return;	// Task has already run or is already running
 				if (type == CIRCUIT_TYPE_HotWater)
 				{
 					taskActivate(taskFound);
