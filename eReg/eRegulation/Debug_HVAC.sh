@@ -11,10 +11,22 @@ git pull
 	
 /home/pi/HVAC/eReg/_Documents/update.sh
 
+#sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" \
+#-Dcom.sun.management.jmxremote                                          \
+#-Dcom.sun.management.jmxremote.port=5005                                \
+#-Dcom.sun.management.jmxremote.authenticate=false                       \
+#-Dcom.sun.management.jmxremote.ssl=false                                \
+#-Djava.rmi.server.hostname=raspberrypi                                  \
+#-Djava.library.path=./            eRegulation.Control
+
 sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" \
+-Xdebug                                                                 \
+-Xrunjdwp:transport=dt_socket                                           \
+-server=y                                                               \
+-suspend=y                                                              \
 -Dcom.sun.management.jmxremote                                          \
 -Dcom.sun.management.jmxremote.port=5005                                \
 -Dcom.sun.management.jmxremote.authenticate=false                       \
 -Dcom.sun.management.jmxremote.ssl=false                                \
--Djava.rmi.server.hostname=raspberrypi                                  \
+-Djava.rmi.server.hostname=pi                                           \
 -Djava.library.path=./            eRegulation.Control
