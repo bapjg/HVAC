@@ -41,7 +41,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		}
 		else
 		{
-			this.state = HVAC_STATES.Circuit.Error;
+			this.state 																		= HVAC_STATES.Circuit.Error;
 			return 0L;
 		}
 	}
