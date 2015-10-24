@@ -240,13 +240,13 @@ public class Circuit_Mixer extends Circuit_Abstract
 	{
 		LogIt.action(this.name, "----------------------------------optimiseFloor called");
 		Long											now									= Global.Time.now();
-		Integer											targetTemperature					= Global.thermoLivingRoom.reading + 2000;	// Go for 2 degrees above current temperature
+		Integer											targetTemperature					= Global.thermoLivingRoom.reading + 2000;				// Go for 2 degrees above current temperature
 		CircuitTask										task								= new CircuitTask(	
-																												now, 	// Time Start
-																												now + 5L * 60L * 1000L, 	// TimeEnd in 5 mins
-																												targetTemperature,	// TempObjective in millidesrees
-																												false,	// StopOnObjective
-																												"1, 2, 3, 4, 5, 6, 7",					// Days
+																												now, 								// Time Start
+																												now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
+																												targetTemperature,					// TempObjective in millidesrees
+																												false,								// StopOnObjective
+																												"1234567",							// Days
 																												HVAC_TYPES.CircuitTask.Optimisation
 				);
 		this.taskActive																		= task;

@@ -33,9 +33,9 @@ public class Circuits
 		}
 	}
 /**
- * Returns the count of active circuits.
+ * Returns the count of active circuits. TODO : A bit over simplified
  */	
-	public Integer activeCircuitCount()
+	public Integer getActiveCircuitCount()
 	{
 		Integer count = 0;
 	
@@ -55,7 +55,7 @@ public class Circuits
  */	
 	public Boolean isSingleActiveCircuit()
 	{
-		return (activeCircuitCount() == 1);
+		return (getActiveCircuitCount() == 1);
 	}
 	public Circuit_Abstract fetchCircuit(String name)
 	{

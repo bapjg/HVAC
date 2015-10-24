@@ -167,8 +167,9 @@ alias thw='cat     /sys/bus/w1/devices/28-00000485e109/w1_slave'
 alias tboiler='cat /sys/bus/w1/devices/28-0000048f011c/w1_slave'
 alias tmixo='cat   /sys/bus/w1/devices/28-0000048e9244/w1_slave'
 
-#alias go='cd /home/pi/HVAC/eReg/eRegulation/;git stash save; git stash drop;update;make ex'
-alias go='cd /home/pi/HVAC/eReg/eRegulation/;./Run_HVAC.sh'
+alias go='           cd /home/pi/HVAC/eReg/eRegulation/;./Run_HVAC.sh'
+alias Run_HVAC='     cd /home/pi/HVAC/eReg/eRegulation/;./Run_HVAC.sh'
+alias Debug_HVAC='   cd /home/pi/HVAC/eReg/eRegulation/;./Debug_HVAC.sh'
 
 echo ============================================
 echo Adjusting contrast to 4 and brightness to 08
