@@ -197,20 +197,19 @@ public class Thread_BackgroundTasks implements Runnable
 				// elseif boilertemp > floortemp (need to get accurate floor temp before)
 				//		do something
 				// and all this depends on summer/winter/in between
-
-				if (Global.boiler.thermoBoiler.reading > 45000)
+				if (Global.circuitHotWater.canOptimise())
 				{
 					// Hotwater
 				}
-				else if (Global.boiler.thermoBoiler.reading > 18000)
+				else if (Global.circuitGradient.canOptimise())
 				{
 					// Floor
 					// ensure mixer is in the correct position
 				}
-				else
+				else if (Global.circuitFloor.canOptimise())
 				{
 					// Are there any circuit that we were optimising and are left on
-					Global.circuitFloor.optimiseFloor();
+					Global.circuitFloor.startOptimisation();
 				}
 			}
 			//

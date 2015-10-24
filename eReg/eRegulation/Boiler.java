@@ -31,16 +31,9 @@ public class Boiler
 	public Integer	   											tempMin;
 	public Integer												tempNeverExceed				= 95000;
 	public Integer												tempOvershoot				= 18000;
-	public HVAC_STATES.Boiler										state;
+	public Integer												tempCondensationAvoidance	= 55000;
+	public HVAC_STATES.Boiler									state;
 	public PID													pidControler;
-	
-//	public final int 											STATE_Off 						= 0;
-//	public final int 											STATE_On_Heating 				= 1;
-//	public final int 											STATE_On_Cooling 				= 2;
-//	public final int 											STATE_On_CoolingAfterOverheat 	= 3;
-//	public final int 											STATE_On_PowerUp 				= 4;
-//	public final int 											STATE_Error	 					= -1;
-	
 
 	public Boiler(Ctrl_Configuration.Data.Boiler boilerparams)
 	{
@@ -50,25 +43,15 @@ public class Boiler
 		this.tempMin 																		= -1;
 		this.tempNeverExceed																= boilerparams.tempNeverExceed.milliDegrees;
 		this.tempOvershoot																	= boilerparams.tempOverShoot.milliDegrees;
+		this.tempCondensationAvoidance														= boilerparams.tempCondensationAvoidance.milliDegrees;
 		state																				= HVAC_STATES.Boiler.Off;
 	}
 	public void requestHeat(Heat_Required eR)
 	{
 		tempMax 																			= eR.tempMaximum;
 		tempMin 																			= eR.tempMinimum;
-		if (tempMax > tempNeverExceed - tempOvershoot)
-		{
-			tempMax 																		= tempNeverExceed - tempOvershoot;
-		}
-		//LogIt.display("Boiler", "requestHeat", "tempMin/tempMax are " + tempMin + "/" + tempMax);
-		
-		// Only change the state if it is STATE_Off
-		// There could be an error (STATE_Error)
-		// The sequencer will do the rest
-		if (state == HVAC_STATES.Boiler.Off)
-		{
-			state																			= HVAC_STATES.Boiler.PowerUp;
-		}
+		if (tempMax > tempNeverExceed - tempOvershoot)			tempMax 					= tempNeverExceed - tempOvershoot;
+		if (state == HVAC_STATES.Boiler.Off)					state						= HVAC_STATES.Boiler.PowerUp;
 	}
 	public void requestIdle()
 	{

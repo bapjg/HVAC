@@ -81,6 +81,7 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		public String 							thermometer;
 		public Cmn_Temperature					tempNeverExceed;
 		public Cmn_Temperature					tempOverShoot;
+		public Cmn_Temperature					tempCondensationAvoidance;
 	}
 	public class TempGradient 					extends  					Ctrl_Configuration
 	{
@@ -327,6 +328,7 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		boiler.thermometer													= "Boiler";
 		boiler.tempNeverExceed												= new Cmn_Temperature("95");
 		boiler.tempOverShoot												= new Cmn_Temperature("18");
+		boiler.tempCondensationAvoidance									= new Cmn_Temperature("55");
 		confUpdate.boiler													= boiler;
 		// Boiler/Burner
 		Burner									burner						= new Burner();

@@ -24,8 +24,18 @@ public class Circuit_HotWater extends Circuit_Abstract
 	}
 	public Boolean canOptimise()
 	{
-		return (Global.thermoBoiler.reading > Global.thermoHotWater.reading + 3000);
+		return (Global.thermoBoiler.reading > this.circuitThermo.reading + 3000);
 	}	
+/**
+ * Starts the circuit in optimisation mode:
+ * Supplied circuitTask becomes taskActive
+ * State set to Start_Requested
+ * heatRequired set to zero valued object
+ */
+	public void startOptimisation()
+	{
+		super.startOptimisation();
+	}
 	//
 	//===========================================================================================================================================================
 
@@ -188,6 +198,14 @@ public class Circuit_HotWater extends Circuit_Abstract
 		//===========================================================================================================================================================
 	}
 	// end of Sequencer
+	//
+	//===========================================================================================================================================================
+
+	//===========================================================================================================================================================
+	//
+	// Other methods
+	//
+
 	//
 	//===========================================================================================================================================================
 }

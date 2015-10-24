@@ -28,6 +28,13 @@ public class Circuit_Radiator extends Circuit_Abstract
 	{
 		return false;
 	}
+/**
+ * Does nothing... Cannot be optimised
+ */
+	public void startOptimisation()
+	{
+		return;
+	}
 	//
 	//===========================================================================================================================================================
 

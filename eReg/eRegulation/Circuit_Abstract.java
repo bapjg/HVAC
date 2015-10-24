@@ -60,6 +60,31 @@ abstract class Circuit_Abstract
 	// Performance methods
 	//
 	public Long getRampUpTime(Integer tempObjective) 				{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
+/**
+ * Starts the circuit in optimisation mode:
+ * Supplied circuitTask becomes taskActive
+ * State = Optimising
+ * CircuitPump = ON
+ * heatRequired = ZERO
+ */
+	public void startOptimisation()
+	{
+		LogIt.action(this.name, "----------------------------------startOptimisation called");
+		Long											now									= Global.Time.now();
+		Integer											targetTemperature					= this.circuitThermo.reading  + 2000;				// Go for 2 degrees above current temperature
+		CircuitTask										task								= new CircuitTask(	
+																												now, 								// Time Start
+																												now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
+																												targetTemperature,					// TempObjective in millidesrees
+																												false,								// StopOnObjective
+																												"1234567",							// Days
+																												HVAC_TYPES.CircuitTask.Optimisation
+				);
+		this.taskActive																		= task;
+		this.circuitPump.on();
+		this.state 																			= HVAC_STATES.Circuit.Optimising;
+		this.heatRequired.setZero();
+	}
 	//
 	//===========================================================================================================================================================
 
@@ -170,9 +195,8 @@ abstract class Circuit_Abstract
 /**
  * Optimises the circuit :
  * State = Optimising.
- * circuitPump = UNCHANGED.
- * heatRequired.max/min = ZERO.
  * circuitPump = ON.
+ * heatRequired.max/min = ZERO.
  */	
 	public void optimise()						
 	{						
@@ -181,10 +205,6 @@ abstract class Circuit_Abstract
 		this.heatRequired.setZero();
 		this.circuitPump.on();																// This checks to see if on to avoid uneccessary relay activity	
 		state 																				= HVAC_STATES.Circuit.Optimising;
-	}
-	public Boolean isOptimising()
-	{
-		return (this.state == HVAC_STATES.Circuit.Optimising);
 	}
 	//
 	//===========================================================================================================================================================

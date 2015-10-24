@@ -49,6 +49,17 @@ public class Circuit_Mixer extends Circuit_Abstract
 	{
 		return (Global.thermoBoiler.reading > lastAccurateFloorInTemp + 3000);
 	}	
+/**
+ * Starts the circuit in optimisation mode:
+ * Supplied circuitTask becomes taskActive
+ * State set to Start_Requested
+ * heatRequired set to zero valued object
+ */
+	@Override
+	public void startOptimisation()
+	{
+		super.startOptimisation();
+	}
 	//
 	//===========================================================================================================================================================
 
@@ -223,37 +234,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 		//===========================================================================================================================================================
 	}
 	// end of Sequencer
-	//
-	//===========================================================================================================================================================
-
-	//===========================================================================================================================================================
-	//
-	// Other methods
-	//
-/**
- * Starts the circuit in optimisation mode:
- * Supplied circuitTask becomes taskActive
- * State set to Start_Requested
- * heatRequired set to zero valued object
- */
-	public void optimiseFloor()
-	{
-		LogIt.action(this.name, "----------------------------------optimiseFloor called");
-		Long											now									= Global.Time.now();
-		Integer											targetTemperature					= Global.thermoLivingRoom.reading + 2000;				// Go for 2 degrees above current temperature
-		CircuitTask										task								= new CircuitTask(	
-																												now, 								// Time Start
-																												now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
-																												targetTemperature,					// TempObjective in millidesrees
-																												false,								// StopOnObjective
-																												"1234567",							// Days
-																												HVAC_TYPES.CircuitTask.Optimisation
-				);
-		this.taskActive																		= task;
-		this.circuitPump.on();
-		this.state = HVAC_STATES.Circuit.Optimising;
-		this.heatRequired.setZero();
-	}
 	//
 	//===========================================================================================================================================================
 }

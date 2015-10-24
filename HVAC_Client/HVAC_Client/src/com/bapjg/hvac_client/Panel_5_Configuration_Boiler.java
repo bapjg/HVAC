@@ -38,6 +38,7 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 	private Element_Standard									thermoName;
 	private Element_Standard									tempNeverExceed;
 	private Element_Standard									tempOverShoot;
+	private Element_Standard									tempCondensationAvoidance;
 	
 	public Panel_5_Configuration_Boiler()
 	{
@@ -52,11 +53,13 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
     	thermoName																			= new Element_Standard("Thermometer");
     	tempNeverExceed																		= new Element_Standard("Temp Never Exceed", "°C");
     	tempOverShoot																		= new Element_Standard("Temp Overshoot", "°C");
+    	tempCondensationAvoidance															= new Element_Standard("Temp Condensation", "°C");
     	
     	panelInsertPoint.addView(new Element_Heading( "Parameters"));
     	panelInsertPoint.addView(thermoName);
     	panelInsertPoint.addView(tempNeverExceed);
     	panelInsertPoint.addView(tempOverShoot);
+    	panelInsertPoint.addView(tempCondensationAvoidance);
     	
     	if ( (Global.eRegConfiguration 			!= 	null)
         &&   (Global.eRegConfiguration.boiler 	!= 	null)	)
@@ -73,15 +76,17 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		thermoName			.setValue(Global.eRegConfiguration.boiler.thermometer);
-		tempNeverExceed		.setValue(Global.eRegConfiguration.boiler.tempNeverExceed.displayInteger());
-		tempOverShoot		.setValue(Global.eRegConfiguration.boiler.tempOverShoot.displayInteger());
+		thermoName					.setValue(Global.eRegConfiguration.boiler.thermometer);
+		tempNeverExceed				.setValue(Global.eRegConfiguration.boiler.tempNeverExceed.displayInteger());
+		tempOverShoot				.setValue(Global.eRegConfiguration.boiler.tempOverShoot.displayInteger());
+		tempCondensationAvoidance	.setValue(Global.eRegConfiguration.boiler.tempCondensationAvoidance.displayInteger());
 	}
 	public void setListens()
 	{
-		thermoName			.setListener	(this);
-		tempNeverExceed		.setListener	(this);
-		tempOverShoot		.setListener	(this);
+		thermoName					.setListener	(this);
+		tempNeverExceed				.setListener	(this);
+		tempOverShoot				.setListener	(this);
+		tempCondensationAvoidance	.setListener	(this);
 	}
 	public void onElementClick(View view)
 	{
@@ -106,6 +111,12 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 		{
 			Cmn_Temperature										temperature					= Global.eRegConfiguration.boiler.tempOverShoot;
 			Dialog_Temperature									df 							= new Dialog_Temperature(temperature, 10, 25, this);
+			df.show(getFragmentManager(), "Dialog_Temperature");
+		}
+		else if (view == tempCondensationAvoidance)
+		{
+			Cmn_Temperature										temperature					= Global.eRegConfiguration.boiler.tempCondensationAvoidance;
+			Dialog_Temperature									df 							= new Dialog_Temperature(temperature, 50, 70, this);
 			df.show(getFragmentManager(), "Dialog_Temperature");
 		}
 	}
