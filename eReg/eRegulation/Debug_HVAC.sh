@@ -23,7 +23,7 @@ sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" \
 -Xdebug                                                                 \
 -Xrunjdwp:transport=dt_socket                                           \
                                                               \
--suspend=y                                                              \
+                                                              \
 -Dcom.sun.management.jmxremote                                          \
 -Dcom.sun.management.jmxremote.port=5005                                \
 -Dcom.sun.management.jmxremote.authenticate=false                       \
