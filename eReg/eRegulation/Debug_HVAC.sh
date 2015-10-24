@@ -22,7 +22,7 @@ git pull
 sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" \
 -Xdebug \
 -Xnoagent \
--Xrunjdwp:transport=dt_socket,server=n,suspend=y,address=5005 \
+-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005 \
 -Djava.library.path=./            eRegulation.Control
 
 
