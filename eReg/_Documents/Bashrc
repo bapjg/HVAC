@@ -182,3 +182,4 @@ sudo cat /mnt/DZ/test
 echo ============================================
 
 cd /home/pi/HVAC/eReg/eRegulation
+chmod 777 *.sh
