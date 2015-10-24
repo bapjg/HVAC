@@ -1,8 +1,5 @@
 cd /home/pi/HVAC/eReg/eRegulation/
 
-echo nano
-
-
 sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 12:04
 sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
 
