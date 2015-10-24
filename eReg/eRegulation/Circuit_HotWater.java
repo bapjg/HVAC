@@ -62,9 +62,8 @@ public class Circuit_HotWater extends Circuit_Abstract
 		if (	(Global.thermoBoiler.reading 	== null) 
 		||		(Global.thermoHotWater.reading 	== null)	)
 		{
-			shutDown();											// This bypasses stopRequested
-			circuitPump.off();
-			state = HVAC_STATES.Circuit.Error;
+			super.shutDown();											// This bypasses stopRequested
+			state 																			= HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_HotWater/sequencer", "A Thermometer cannont be read");
 		}
 		// end of Check for security / errors

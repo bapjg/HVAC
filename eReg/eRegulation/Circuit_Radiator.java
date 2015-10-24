@@ -69,9 +69,8 @@ public class Circuit_Radiator extends Circuit_Abstract
 		//
 		if 	(Global.thermoBoiler.reading 		== null) 
 		{
-			shutDown();																		// This bypasses stopRequested
-			circuitPump.off();
-			state = HVAC_STATES.Circuit.Error;
+			super.shutDown();																		// This bypasses stopRequested
+			state 																			= HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_Radiator/sequencer", "A Thermometer cannont be read");
 		}
 		// end of Check for security / errors
