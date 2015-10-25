@@ -27,7 +27,7 @@ public class Heat_Required
 	}
 	public void setMax()
 	{
-		this.tempMaximum 																	= 100000;	// Boiler will determine max temp
-		this.tempMaximum 																	= 0;
+		tempMaximum 																		= 100000;	// Boiler will determine max temp
+		tempMaximum 																		= 0;
 	}
 }
