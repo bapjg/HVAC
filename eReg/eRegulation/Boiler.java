@@ -47,7 +47,7 @@ public class Boiler
 		this.tempMin 																		= -1;
 		this.tempNeverExceed																= boilerparams.tempNeverExceed.milliDegrees;
 		this.tempOvershoot																	= boilerparams.tempOverShoot.milliDegrees;
-		this.tempCondensationAvoidance														= boilerparams.tempCondensationAvoidance.milliDegrees;
+//		this.tempCondensationAvoidance														= boilerparams.tempCondensationAvoidance.milliDegrees;
 		state																				= HVAC_STATES.Boiler.Off;
 	}
 	public void requestHeat(Heat_Required eR)
