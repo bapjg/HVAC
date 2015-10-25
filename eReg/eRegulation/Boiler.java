@@ -41,16 +41,16 @@ public class Boiler
 // Remember to restart TomCat with new version of software
 // Android sends/receives data in JSON format, but eReg only gets it in Fava Object Format
 
-		if (boilerparams.tempCondensationAvoidance == null)	this.tempCondensationAvoidance	= 55000;
-		else this.tempCondensationAvoidance													= boilerparams.tempCondensationAvoidance.milliDegrees;
-		
+//		if (boilerparams.tempCondensationAvoidance == null)	this.tempCondensationAvoidance	= 55000;
+//		else this.tempCondensationAvoidance													= boilerparams.tempCondensationAvoidance.milliDegrees;
+//		
 		this.thermoBoiler 																	= Global.thermometers.fetchThermometer(boilerparams.thermometer);
 		this.burner																			= Global.burner;
 		this.tempMax 																		= -1;
 		this.tempMin 																		= -1;
 		this.tempNeverExceed																= boilerparams.tempNeverExceed.milliDegrees;
 		this.tempOvershoot																	= boilerparams.tempOverShoot.milliDegrees;
-//		this.tempCondensationAvoidance														= boilerparams.tempCondensationAvoidance.milliDegrees;
+		this.tempCondensationAvoidance														= boilerparams.tempCondensationAvoidance.milliDegrees;
 		state																				= HVAC_STATES.Boiler.Off;
 	}
 	public void requestHeat(Heat_Required eR)
