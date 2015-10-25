@@ -80,10 +80,10 @@ abstract class Circuit_Abstract
 																												"1234567",							// Days
 																												HVAC_TYPES.CircuitTask.Optimisation
 				);
-		this.taskActive																		= task;
 		this.circuitPump.on();
 		this.state 																			= HVAC_STATES.Circuit.Optimising;
 		this.heatRequired.setZero();
+		this.taskActivate(task);
 	}
 	//
 	//===========================================================================================================================================================
@@ -412,6 +412,11 @@ abstract class Circuit_Abstract
 				this.taskActive																	= thisTask;
 				this.start();
 				this.taskActive.dateLastRun														= Global.Date.now();
+			}
+			else if (thisTask.taskType == HVAC_TYPES.CircuitTask.Optimisation)
+			{
+				// taskActive is not Optimisation but thisTask is. taskActive is more important
+				LogIt.display("Circuit_Abstract", "taskActivate", "Called task ignored as it is for optimisation while currentTask is doing real work");
 			}
 			else
 			{
