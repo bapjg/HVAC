@@ -84,14 +84,12 @@ public class Management extends HttpServlet
         
         if      (message_in == null)         								message_out 	= (new Ctrl__Abstract()).new Nack();
         
-		else if (message_in instanceof Ctrl_Json.Request)					message_out 	= processJson_Request	(message_in);
-		else if (message_in instanceof Ctrl_Json.Update)					message_out 	= processJson_Update	(message_in);
+		// Configuration and Calendars are now in JSON format
+        else if (message_in instanceof Ctrl_Json.Request)					message_out 	= processJson_Request	(message_in);	// For Android
+		else if (message_in instanceof Ctrl_Json.Update)					message_out 	= processJson_Update	(message_in);	// For Android
         
-		else if (message_in instanceof Ctrl_Configuration.Request)			message_out 	= processConfiguration_Request();
-//		else if (message_in instanceof Ctrl_Configuration.Update)			message_out 	= processConfiguration_Update((Ctrl_Configuration.Update) message_in);
-        
-		else if (message_in instanceof Ctrl_Calendars.Request)				message_out 	= processCalendars_Request();
-//		else if (message_in instanceof Ctrl_Calendars.Update)				message_out 	= processCalendars_Update((Ctrl_Calendars.Update) message_in);
+		else if (message_in instanceof Ctrl_Configuration.Request)			message_out 	= processConfiguration_Request();		// For eReg
+		else if (message_in instanceof Ctrl_Calendars.Request)				message_out 	= processCalendars_Request();			// For eReg
 
 		else if (message_in instanceof Ctrl_Fuel_Consumption.Request)		message_out 	= processFuelConsumption_Request();
  		else
