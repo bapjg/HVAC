@@ -199,7 +199,7 @@ public class Thread_BackgroundTasks implements Runnable
 				// and all this depends on summer/winter/in between
 				if (Global.circuitHotWater.canOptimise())
 				{
-					// Hotwater
+					Global.circuitHotWater.startOptimisation();
 				}
 				else if (Global.circuitGradient.canOptimise())
 				{

@@ -60,6 +60,7 @@ public class Boiler
 		tempMin 																			= eR.tempMinimum;
 		if (tempMax > tempNeverExceed - tempOvershoot)			tempMax 					= tempNeverExceed - tempOvershoot;
 		if (tempMin < tempCondensationAvoidance)				tempMin 					= tempCondensationAvoidance;
+		if (thermoBoiler.reading > tempMin)						return;						// No need to heat
 		if (state == HVAC_STATES.Boiler.Off)					state						= HVAC_STATES.Boiler.PowerUp;
 	}
 	public void requestIdle()
