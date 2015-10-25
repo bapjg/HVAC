@@ -23,11 +23,11 @@ public class Heat_Required
 	public void set(Integer tempMaximum)
 	{
 		this.tempMaximum 																	= tempMaximum;
-		this.tempMaximum 																	= 0;
+		this.tempMinimum 																	= 0;
 	}
 	public void setMax()
 	{
-		tempMaximum 																		= 100000;	// Boiler will determine max temp
-		tempMaximum 																		= 0;
+		this.tempMaximum 																	= 100000;	// Boiler will determine max temp
+		this.tempMinimum 																	= 0;
 	}
 }
