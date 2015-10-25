@@ -397,22 +397,21 @@ abstract class Circuit_Abstract
 			this.start();
 			this.taskActive.dateLastRun														= Global.Date.now();
 		}
-		else
+		else if (this.state == HVAC_STATES.Circuit.Stopping)									// Its just been set, hasn't had time to move to optimising or Off
 		{
-			if (this.state == HVAC_STATES.Circuit.Stopping)									// Its just been set, hasn't had time to move to optimising or Off
+			LogIt.debug("taskActive is stopping          = " + taskActive.days + " +++ " + taskActive.taskType.toString());
+			return;
+		}
+		else if (taskActive != thisTask)														// Could arise (???) during rampUp
+		{
+			if (taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
 			{
-				LogIt.debug("taskActive is stopping          = " + taskActive.days + " +++ " + taskActive.taskType.toString());
-				return;
+				// This can happen. Just switch it in
+				this.taskActive																	= thisTask;
+				this.start();
+				this.taskActive.dateLastRun														= Global.Date.now();
 			}
-			
-			if (taskActive == thisTask)														// Could arise (???) during rampUp
-			{
-				LogIt.error("Circuit_Abstract", "taskActivate", "WOULD HAVE SAID : A task is active when it shouldn't be");
-				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
-				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + System.identityHashCode(taskActive));
-				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + System.identityHashCode(thisTask));
-			}
-			else																			// Dont know how
+			else
 			{
 				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
 				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is occupied... Replaced");
@@ -420,10 +419,18 @@ abstract class Circuit_Abstract
 				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + taskActive.days + " +++ " + taskActive.taskType);
 				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + thisTask.days + " +++ " + thisTask.taskType);
 			}
-			this.taskActive																	= thisTask;
-			this.start();						
-			this.taskActive.dateLastRun														= Global.Date.now();
 		}
+		else	// Dont know how Should never happen, we are scheduling a currently active task. Just let it run
+		{
+			LogIt.error("Circuit_Abstract", "taskActivate", "WOULD HAVE SAID : A task is active when it shouldn't be");
+			LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
+			LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + System.identityHashCode(taskActive));
+			LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + System.identityHashCode(thisTask));
+		}
+
+//			this.taskActive																	= thisTask;
+//			this.start();						
+//			this.taskActive.dateLastRun														= Global.Date.now();
 	}	// taskActivate
 /**
  * Deactivates current task :
