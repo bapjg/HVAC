@@ -83,7 +83,8 @@ abstract class Circuit_Abstract
 		this.circuitPump.on();
 		this.state 																			= HVAC_STATES.Circuit.Optimising;
 		this.heatRequired.setZero();
-		this.taskActivate(task);
+// Noneed to call taskActivate as we get here through SingleCircuit measured by not taskActive
+		//		this.taskActivate(task);
 	}
 	//
 	//===========================================================================================================================================================
@@ -395,7 +396,8 @@ abstract class Circuit_Abstract
 		{
 			LogIt.display("Circuit_Abstract", "taskActivate", "Called task Scheduled");
 			this.taskActive																	= thisTask;
-			this.start();
+			if (thisTask.taskType == HVAC_TYPES.CircuitTask.Optimisation)					this.optimise();
+			else 																			this.start();
 			this.taskActive.dateLastRun														= Global.Date.now();
 		}
 		else if (this.state == HVAC_STATES.Circuit.Stopping)									// Its just been set, hasn't had time to move to optimising or Off
