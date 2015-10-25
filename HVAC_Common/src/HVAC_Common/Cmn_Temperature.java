@@ -24,7 +24,7 @@ public class Cmn_Temperature									implements					java.io.Serializable
 	{
 		return new DecimalFormat("#.#").format(milliDegrees/1000.0) + " °C";
 	}
-	public void setMilliDegrees(String decimal)
+	public void setDegrees(String decimal)
 	{
 		milliDegrees																		= (int) (Float.parseFloat(decimal)	* 1000F);
 	}

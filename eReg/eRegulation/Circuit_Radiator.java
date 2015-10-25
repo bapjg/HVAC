@@ -47,7 +47,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 	{
 		super.start();
 		Integer 									temp									= temperatureGradient.getTempToTarget();
-		this.heatRequired.set(temp - 7500, temp + 7500);
+		this.heatRequired.set(temp + 7500);
 	}
 	//
 	//===========================================================================================================================================================

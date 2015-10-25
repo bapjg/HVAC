@@ -76,6 +76,10 @@ public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
+// Example of how to introduce a new field in the serialised object
+//		if (Global.eRegConfiguration.boiler.tempCondensationAvoidance == null)
+//			Global.eRegConfiguration.boiler.tempCondensationAvoidance = new Cmn_Temperature(55000);
+		
 		thermoName					.setValue(Global.eRegConfiguration.boiler.thermometer);
 		tempNeverExceed				.setValue(Global.eRegConfiguration.boiler.tempNeverExceed.displayInteger());
 		tempOverShoot				.setValue(Global.eRegConfiguration.boiler.tempOverShoot.displayInteger());

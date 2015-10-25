@@ -190,8 +190,5 @@ public class Activity_Main 										extends 					Activity
 			Ctrl_Weather.Data									resultWeather				= (Ctrl_Weather.Data) result;
 			Global.weatherForecast				 											= (Ctrl_WeatherData) resultWeather.weatherData;
 		}
-		else
-		{
-		}
 	}
 }
