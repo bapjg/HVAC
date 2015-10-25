@@ -71,7 +71,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 	public void start()
 	{
 		super.start();
-		this.heatRequired.set(55000, 80000);
+		this.heatRequired.set();
 	}
 /**
  * Shuts down the circuit :
@@ -171,7 +171,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			break;
 		case Starting:
 			if (Global.isSummer())					suspend();
-			this.heatRequired.set(55000, 80000);		// Avoid condensation
+			this.heatRequired.set();				// Avoid condensation
 
 			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 			{
