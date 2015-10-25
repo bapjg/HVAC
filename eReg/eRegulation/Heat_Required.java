@@ -30,4 +30,8 @@ public class Heat_Required
 		this.tempMaximum 																	= 100000;	// Boiler will determine max temp
 		this.tempMinimum 																	= 0;
 	}
+	public Boolean isZero()
+	{
+		return (this.tempMaximum == 0); 
+	}
 }

@@ -192,7 +192,7 @@ public class Control
 					globalHeatRequired.tempMaximum											= circuit.heatRequired.tempMaximum;
 				}
 			}
-			Global.boiler.requestHeat(globalHeatRequired);
+			if (! globalHeatRequired.isZero())			Global.boiler.requestHeat(globalHeatRequired);
 		}
 		
 		//

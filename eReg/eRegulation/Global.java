@@ -125,14 +125,14 @@ public class Global
 		}
 
 		//==================================================================================================
-		// New code
+		// New code for JSON Configuration
 		//
 		// HTTP_Send	(new Ctrl_Json().new Request(Ctrl_Json.TYPE_Calendar));				// Fire these async actions as soon as possible
 		// HTTP_Request	<Ctrl_Configuration.Request>			httpRequest					= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
 
 		int x = 1;
 		int y = 2;
-		if (x == 1)
+		if (x == y)
 		{
 
 		Ctrl_Json.Request messageSendTest = new Ctrl_Json().new Request(Ctrl_Json.TYPE_Configuration);
