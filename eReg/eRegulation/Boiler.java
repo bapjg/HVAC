@@ -38,8 +38,8 @@ public class Boiler
 	public Boiler(Ctrl_Configuration.Data.Boiler boilerparams)
 	{
 // Example of new field added until the Android has set/initialised it
-		if (boilerparams.tempCondensationAvoidance == null)	this.tempCondensationAvoidance	= 55000;
-		else this.tempCondensationAvoidance													= boilerparams.tempCondensationAvoidance.milliDegrees;
+//		if (boilerparams.tempCondensationAvoidance == null)	this.tempCondensationAvoidance	= 55000;
+//		else this.tempCondensationAvoidance													= boilerparams.tempCondensationAvoidance.milliDegrees;
 		
 		this.thermoBoiler 																	= Global.thermometers.fetchThermometer(boilerparams.thermometer);
 		this.burner																			= Global.burner;
