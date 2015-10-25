@@ -16,8 +16,9 @@ import android.widget.Button;
 @SuppressLint("ValidFragment")
 public class Menu_7_Reset 										extends 					Menu_0_Fragment
 {
-	Element_MenuButton											buttonResetConfig;
-	Element_MenuButton											buttonResetCalendars;
+	Element_MenuButton											buttonReset;
+	Element_MenuButton											buttonStop;
+	
 
 	public Menu_7_Reset()
 	{
@@ -27,16 +28,16 @@ public class Menu_7_Reset 										extends 					Menu_0_Fragment
     {
     	super.onCreateView(inflater, container, savedInstanceState);
     	
-    	buttonResetConfig																	= new Element_MenuButton("Hot Water");
-    	buttonResetCalendars																= new Element_MenuButton("Radiator");
+    	buttonReset																			= new Element_MenuButton("Reset");
+       	buttonStop																			= new Element_MenuButton("Stop");
 
-    	menuInsertPoint			.addView(buttonResetConfig);
-    	menuInsertPoint			.addView(buttonResetCalendars);
+    	menuInsertPoint			.addView(buttonReset);
+    	menuInsertPoint			.addView(buttonStop);
     	
-    	buttonResetConfig		.setListener((Menu_0_Fragment) this);
-    	buttonResetCalendars	.setListener((Menu_0_Fragment) this);
+    	buttonReset				.setListener((Menu_0_Fragment) this);
+    	buttonStop				.setListener((Menu_0_Fragment) this);
     	
-    	onElementClick(buttonResetConfig);
+    	onElementClick(buttonStop);
 
     	return menuView;
     }	
@@ -47,8 +48,8 @@ public class Menu_7_Reset 										extends 					Menu_0_Fragment
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;
    	
-    	if      (clickedView == buttonResetConfig)				panelFragment 				= new Panel_6_Actions_Relays();
-    	else if (clickedView == buttonResetCalendars) 			panelFragment 				= new Panel_6_Actions_Test_Mail();
+    	if 		(clickedView == buttonReset)					panelFragment 				= new Panel_7_Reset();
+    	else if (clickedView == buttonStop)						panelFragment 				= new Panel_7_Reset_Stop();
 
     	if 		(panelFragment != null)
     	{

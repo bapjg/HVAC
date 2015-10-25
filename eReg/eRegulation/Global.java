@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.*;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +23,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 import HVAC_Common.*;
+import HVAC_Common.Ctrl_Json.Request;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Global 
@@ -107,7 +109,6 @@ public class Global
 		Global.awayList	 																	= new ArrayList<Calendars.Away>(); 
 		Global.temperatureMaxTodayPredicted													= null;
 
-
 		display.clear();
 		display.blinkOff();
 		display.writeAtPosition(0, 0, "Initialising");
@@ -123,6 +124,36 @@ public class Global
 			return;
 		}
 
+		//==================================================================================================
+		// New code
+		//
+		// HTTP_Send	(new Ctrl_Json().new Request(Ctrl_Json.TYPE_Calendar));				// Fire these async actions as soon as possible
+		// HTTP_Request	<Ctrl_Configuration.Request>			httpRequest					= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
+
+		int x = 1;
+		int y = 2;
+		if (x == 1)
+		{
+
+		Ctrl_Json.Request messageSendTest = new Ctrl_Json().new Request(Ctrl_Json.TYPE_Configuration);
+		HTTP_Request	<Ctrl_Json.Request>			httpRequestTest					= new HTTP_Request <Ctrl_Json.Request> ("Management");
+		Ctrl__Abstract 											messageReceiveTest 				= httpRequestTest.sendData(messageSendTest);
+		
+		if (messageReceiveTest instanceof Ctrl_Json.Data)
+		{
+			String													JsonString				= ((Ctrl_Json.Data) messageReceiveTest).json;
+			Ctrl_Configuration.Data		data													= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
+		}
+		
+		
+		
+		}
+		
+		//
+		//
+		//==================================================================================================
+		
+		
 		HTTP_Request	<Ctrl_Configuration.Request>			httpRequest					= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
 		
 		Ctrl_Configuration.Request	 							messageSend 				= new Ctrl_Configuration().new Request();
@@ -161,7 +192,7 @@ public class Global
 				if (file.exists())
 				{
 					Long timeFile															= file.lastModified();
-					Ctrl_Configuration.Data thisData										= (Ctrl_Configuration.Data) messageReceive;
+					Ctrl_Configuration.Data 					thisData					 = (Ctrl_Configuration.Data) messageReceive;
 					Long timeData															= thisData.dateTime;
 					
 					if (timeData > timeFile)

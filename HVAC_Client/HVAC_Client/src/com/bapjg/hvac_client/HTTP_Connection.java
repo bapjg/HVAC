@@ -42,7 +42,7 @@ public class HTTP_Connection
 			serverConnection.setConnectTimeout(10000);
 			serverConnection.setReadTimeout(10000);
 			serverConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
-			Log.v("App", "Ariori Ok");
+			Log.v("App", "Apriori Ok");
 			return true;
 		}
 		catch(Exception e1)

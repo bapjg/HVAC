@@ -18,7 +18,7 @@ public class Menu_6_Actions 									extends 					Menu_0_Fragment
 {
 	Element_MenuButton											buttonRelays;
 	Element_MenuButton											buttonTestMail;
-	Element_MenuButton											buttonStop;
+	Element_MenuButton											buttonMixer;
 
 	public Menu_6_Actions()
 	{
@@ -30,15 +30,15 @@ public class Menu_6_Actions 									extends 					Menu_0_Fragment
 		
 		buttonRelays																		= new Element_MenuButton("Relays");
 		buttonTestMail																		= new Element_MenuButton("Test Mail");
-		buttonStop																			= new Element_MenuButton("Stop");
+		buttonMixer																			= new Element_MenuButton("Mixer");
 
     	menuInsertPoint			.addView(buttonRelays);
     	menuInsertPoint			.addView(buttonTestMail);
-    	menuInsertPoint			.addView(buttonStop);
+    	menuInsertPoint			.addView(buttonMixer);
     	
     	buttonRelays			.setListener((Menu_0_Fragment) this);
     	buttonTestMail			.setListener((Menu_0_Fragment) this);
-    	buttonStop				.setListener((Menu_0_Fragment) this);
+    	buttonMixer				.setListener((Menu_0_Fragment) this);
     	
     	onElementClick(buttonRelays);
 
@@ -51,9 +51,9 @@ public class Menu_6_Actions 									extends 					Menu_0_Fragment
     	FragmentTransaction										fTransaction				= getFragmentManager().beginTransaction();
     	Fragment 												panelFragment				= null;
    	
-    	if      (clickedView == buttonRelays)				panelFragment 					= new Panel_6_Actions_Relays();
+    	if      (clickedView == buttonRelays)					panelFragment 				= new Panel_6_Actions_Relays();
     	else if (clickedView == buttonTestMail) 				panelFragment 				= new Panel_6_Actions_Test_Mail();
-     	else if (clickedView == buttonStop)					panelFragment 					= new Panel_6_Actions_Stop();
+     	else if (clickedView == buttonMixer)					panelFragment 				= new Panel_6_Actions_Test_Mail(); // Panel_6_Actions_Mixer
 
     	if 		(panelFragment != null)
     	{

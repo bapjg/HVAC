@@ -24,13 +24,13 @@ import android.widget.Toast;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
-public class Panel_6_Actions_Stop 								extends 					Panel_0_Fragment  
+public class Panel_7_Reset_Stop 								extends 					Panel_0_Fragment  
 {
 	private	Element_Button										buttonStop;
 	private	Element_Button										buttonRestart;
 	private	Element_Button										buttonReboot;
 
-	public Panel_6_Actions_Stop()
+	public Panel_7_Reset_Stop()
 	{
 		super("Centered");
 /*
