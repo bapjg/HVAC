@@ -389,10 +389,11 @@ abstract class Circuit_Abstract
  */	
 	public void taskActivate(CircuitTask 							thisTask)
 	{
-		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay);
+		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + " " + thisTask.taskType.toString());
 
 		if (this.taskActive == null)														// Normal operation
 		{
+			LogIt.display("Circuit_Abstract", "taskActivate", "Called task Scheduled");
 			this.taskActive																	= thisTask;
 			this.start();
 			this.taskActive.dateLastRun														= Global.Date.now();
@@ -407,6 +408,7 @@ abstract class Circuit_Abstract
 			if (taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
 			{
 				// This can happen. Just switch it in
+				LogIt.display("Circuit_Abstract", "taskActivate", "Called task Swapped in as optimisation in progress");
 				this.taskActive																	= thisTask;
 				this.start();
 				this.taskActive.dateLastRun														= Global.Date.now();
