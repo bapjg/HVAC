@@ -71,7 +71,8 @@ public class Thread_Mixer implements Runnable
 			case Resuming :
 			case Idle:
 			case Optimising :
-				if (circuit.state == HVAC_STATES.Circuit.RampingUp)
+				if (	(circuit.state == HVAC_STATES.Circuit.RampingUp)
+				|| 		(circuit.state == HVAC_STATES.Circuit.Optimising)	)
 				{
 					targetTemp																= 41000;						// Trip avoidance kicks in at 450
 				}
