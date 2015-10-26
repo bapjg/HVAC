@@ -157,7 +157,7 @@ public class Boiler
 		catch (Thermometer_ReadException exTR)
 		{
 			burner.powerOff();
-			Global.eMailMessage("Boiler/sequencer", "Thermometer_ReadException on Read Boiler Thermometer");
+			Global.eMailMessage("Boiler/sequencer", "Thermometer_ReadException on Read Boiler Thermometer " + exTR.thermoName + " at " + exTR.thermoAddress);
 			state																			 = HVAC_STATES.Boiler.Error;
 			return;
 		}

@@ -172,7 +172,7 @@ public class Thermometer
 			{
 				if (probeOk)									LogIt.display("Probe", "read", "Thermometer read Error on " + this.name + "-" + this.address + " message was : " + err.getMessage());
 				probeOk																		= false;
-				throw new Thermometer_ReadException(this.name);
+				throw new Thermometer_ReadException(this.name, this.address);
 			}		
 		}
     }

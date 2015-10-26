@@ -3,8 +3,13 @@ package eRegulation;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Thermometer_ReadException							extends						Exception
 {
-	Thermometer_ReadException(String thermometerName)
+	String thermoName;
+	String thermoAddress;
+	
+	Thermometer_ReadException(String thermometerName, String thermometerAddress)
 	{
 		super(thermometerName);
+		this.thermoName = thermometerName;
+		this.thermoAddress = thermometerAddress;
 	}
 }
