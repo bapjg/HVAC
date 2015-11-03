@@ -55,9 +55,9 @@ public class Boiler
 	}
 	public void requestHeat(Heat_Required eR)
 	{
-		if (eR.isZero())										return;
 		tempMax 																			= eR.tempMaximum;
 		tempMin 																			= eR.tempMinimum;
+		if (eR.isZero())										return;
 		if (tempMax > tempNeverExceed - tempOvershoot)			tempMax 					= tempNeverExceed - tempOvershoot;
 		if (tempMin < tempCondensationAvoidance)				tempMin 					= tempCondensationAvoidance;
 		if (thermoBoiler.reading > tempMin)						return;						// No need to heat
