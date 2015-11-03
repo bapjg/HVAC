@@ -199,6 +199,7 @@ public class Thread_BackgroundTasks implements Runnable
 				// and all this depends on summer/winter/in between
 				if (Global.circuitHotWater.canOptimise())
 				{
+					LogIt.debug("Thread_Backgroud/Optimisation Starting optimisation for Hot_Water");
 					Global.circuitHotWater.startOptimisation();
 				}
 				else if (Global.circuitGradient.canOptimise())
@@ -209,6 +210,7 @@ public class Thread_BackgroundTasks implements Runnable
 				else if (Global.circuitFloor.canOptimise())
 				{
 					// Are there any circuit that we were optimising and are left on
+					LogIt.debug("Thread_Backgroud/Optimisation Starting optimisation for Floor");
 					Global.circuitFloor.startOptimisation();
 				}
 			}
