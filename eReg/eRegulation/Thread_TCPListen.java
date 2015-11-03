@@ -146,7 +146,9 @@ public class Thread_TCPListen 			implements Runnable
 		
 		Circuit_Abstract 		circuit						= Global.circuits.fetchCircuit(circuitName);
 		
-		message_return.circuitName								= circuitName;
+		if (circuit == null)	LogIt.debug("Thread_TCP/process_Ctrl_Immediate_Request : circuitName '" + message_in.circuitName + "' not found");
+		
+		message_return.circuitName							= circuitName;
 
 		Long 					now							= Global.Time.now();
 		Long					midnight					= 24L * 60 * 60 * 1000;
@@ -196,7 +198,7 @@ public class Thread_TCPListen 			implements Runnable
 			message_return.tempObjective					= new Cmn_Temperature(circuit.taskActive.tempObjective);
 			message_return.stopOnObjective					= circuit.taskActive.stopOnObjective;
 		}
-         return message_return;
+		return message_return;
 	}
 	private Ctrl__Abstract				process_Ctrl_Immediate_Execute			(Ctrl_Immediate.Execute message_in)		// Process an immediate action to start
 	{
