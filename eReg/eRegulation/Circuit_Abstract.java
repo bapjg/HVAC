@@ -201,7 +201,7 @@ abstract class Circuit_Abstract
  */	
 	public void optimise()						
 	{						
-		LogIt.debug(this.name + "Optimising called");
+		LogIt.debug(this.name + " Optimising called");
 		LogIt.action(this.name, "Optimising called");
 		this.heatRequired.setZero();
 		this.circuitPump.on();																// This checks to see if on to avoid uneccessary relay activity	
@@ -274,6 +274,7 @@ abstract class Circuit_Abstract
 			&&		(this.state != HVAC_STATES.Circuit.Optimising	)   )
 			{
 				// Time is up for this task and it hasn't yet been asked to stop
+				LogIt.debug("Circuit_Abstract/taskScheduler : Deactivating task " + this.name + " : TimeUp");
 				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
 				// TODO Let it move to optimising or Off
 				return;
@@ -282,6 +283,7 @@ abstract class Circuit_Abstract
 			if (	(taskActive.stopOnObjective								)
 			&&		(this.circuitThermo.reading > taskActive.tempObjective  )	)
 			{
+				LogIt.debug("Circuit_Abstract/taskScheduler : Deactivating task " + this.name + " : StopOnObjective");
 				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
 				// TODO Let it move to optimising or Off
 				return;
@@ -458,12 +460,12 @@ abstract class Circuit_Abstract
 		for (i = 1; i < stackTraceElements.length - 1; i++)
 		{
 			StackTraceElement 									stackTraceElement			= stackTraceElements[i];
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "index		: " + i);
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "ClassName 	: " + stackTraceElement.getClassName());
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "MethodName	: " + stackTraceElement.getMethodName());
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "FileName 	: " + stackTraceElement.getFileName());
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "Line number 	: " + stackTraceElement.getLineNumber());
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "----------------------------------------------");
+			String 												message;
+			message												= stackTraceElement.getClassName() + "/" + stackTraceElement.getMethodName();
+			message												+= ", " + stackTraceElement.getFileName();
+			message												+= ":"  + stackTraceElement.getLineNumber();
+			
+			LogIt.display("Circuit_Abstract", "taskDeactivate", "index		: " + i + " : " + message);
 		}
 		// taskActive is not set to null so that Circuit_Mixer & Thread_Mixer keeps a handle onto the task
 		// It will be set to null by the sequencer once it has really stopped
