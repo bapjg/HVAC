@@ -133,7 +133,9 @@ public class Boiler
 			switch (state)
 			{
 			case Error:	// do nothing Dont close other relays because we must evacuate the heat
+				break;
 			case Off:	// do nothing Dont close relays as optimisation may be in progress
+				if (! heatRequired.isZero()) 					state						= HVAC_STATES.Boiler.PowerUp;
 				break;
 			case On_Heating:
 				if (Global.thermoBoiler.reading > this.heatRequired.tempMaximum)
