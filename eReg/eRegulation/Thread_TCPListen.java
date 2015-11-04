@@ -66,16 +66,16 @@ public class Thread_TCPListen 			implements Runnable
 			    		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)	message_out	= process_Ctrl_Fuel_Consumption_Update	((Ctrl_Fuel_Consumption.Update) message_in);
 			        } 
 			        
-			        ObjectOutputStream 		output							= null;
+			        ObjectOutputStream 							output						= null;
 					
-					output 													= new ObjectOutputStream(UI_Socket.getOutputStream());
+					output 																	= new ObjectOutputStream(UI_Socket.getOutputStream());
 					output.writeObject(message_out);
 			        output.flush();
 			        output.close();
 			        
 			        if (Global.stopNow)
 			        {
-			        	Global.waitSeconds(2);								// If Ctrl_Actions_Stop received, allow Ack to go
+			        	Global.waitSeconds(2);												// If Ctrl_Actions_Stop received, allow Ack to go
 			        }
 				}
 		        catch (ClassNotFoundException eCNF)
@@ -119,42 +119,42 @@ public class Thread_TCPListen 			implements Runnable
 	
 	private Ctrl_Temperatures.Data		process_Ctrl_Temperatures_Request		(Ctrl_Temperatures.Request message_in)
 	{
-        Ctrl_Temperatures.Data message_return				= new Ctrl_Temperatures().new Data();
-        message_return.dateTime 							= System.currentTimeMillis();
+        Ctrl_Temperatures.Data message_return												= new Ctrl_Temperatures().new Data();
+        message_return.dateTime 															= System.currentTimeMillis();
 
-        message_return.tempBoiler	 						= Global.thermoBoiler.reading;
-        message_return.tempBoilerIn	 						= Global.thermoBoilerIn.reading;
-        message_return.tempBoilerOut	 					= Global.thermoBoilerOut.reading;
+        message_return.tempBoiler	 														= Global.thermoBoiler.reading;
+        message_return.tempBoilerIn	 														= Global.thermoBoilerIn.reading;
+        message_return.tempBoilerOut	 													= Global.thermoBoilerOut.reading;
 		
-        message_return.tempFloorIn	 						= Global.thermoFloorIn.reading;
-        message_return.tempFloorOut	 						= Global.thermoFloorOut.reading;
+        message_return.tempFloorIn	 														= Global.thermoFloorIn.reading;
+        message_return.tempFloorOut	 														= Global.thermoFloorOut.reading;
 		
-        message_return.tempRadiatorIn	 					= Global.thermoRadiatorIn.reading;
-        message_return.tempRadiatorOut	 					= Global.thermoRadiatorOut.reading;
+        message_return.tempRadiatorIn	 													= Global.thermoRadiatorIn.reading;
+        message_return.tempRadiatorOut	 													= Global.thermoRadiatorOut.reading;
 
-        message_return.tempHotWater	 						= Global.thermoHotWater.reading;
-        message_return.tempOutside	 						= Global.thermoOutside.reading;
-        message_return.tempLivingRoom	 					= Global.thermoLivingRoom.reading;
+        message_return.tempHotWater	 														= Global.thermoHotWater.reading;
+        message_return.tempOutside	 														= Global.thermoOutside.reading;
+        message_return.tempLivingRoom	 													= Global.thermoLivingRoom.reading;
         
         return message_return;
 	}
 	private	Ctrl_Immediate.Data			process_Ctrl_Immediate_Request			(Ctrl_Immediate.Request message_in)
 	{
-		Ctrl_Immediate.Data 	message_return				= new Ctrl_Immediate().new Data();
+		Ctrl_Immediate.Data 									message_return				= new Ctrl_Immediate().new Data();
 		
-		String 					circuitName					= message_in.circuitName;
+		String 													circuitName					= message_in.circuitName;
 		
-		Circuit_Abstract 		circuit						= Global.circuits.fetchCircuit(circuitName);
+		Circuit_Abstract 										circuit						= Global.circuits.fetchCircuit(circuitName);
 		
 		if (circuit == null)	LogIt.debug("Thread_TCP/process_Ctrl_Immediate_Request : circuitName '" + message_in.circuitName + "' not found");
 		
-		message_return.circuitName							= circuitName;
+		message_return.circuitName															= circuitName;
 
-		Long 					now							= Global.Time.now();
-		Long					midnight					= 24L * 60 * 60 * 1000;
-		Long					nextStart					= midnight;
-		Integer					tempObjective				= 0;
-		CircuitTask				selectedTask				= null;
+		Long 													now							= Global.Time.now();
+		Long													midnight					= 24L * 60 * 60 * 1000;
+		Long													nextStart					= midnight;
+		Integer													tempObjective				= 0;
+		CircuitTask												selectedTask				= null;
 
 		if (circuit.taskActive == null)
 		{
@@ -165,48 +165,48 @@ public class Thread_TCPListen 			implements Runnable
 				&&     	(aTask.timeStart > now )
 				&&     	(aTask.timeStart < nextStart ))
 				{
-					nextStart								= aTask.timeStart;
-					selectedTask							= aTask;
+					nextStart																= aTask.timeStart;
+					selectedTask															= aTask;
 				}
 			}
 			
             if (nextStart < midnight)	// Task currently inactive but planned
             {
-            	message_return.executionActive				= false;
-            	message_return.executionPlanned				= true;
-            	message_return.timeStart	 				= nextStart;
-            	message_return.timeEnd		 				= selectedTask.timeEnd;
-            	message_return.tempObjective 				= new Cmn_Temperature(selectedTask.tempObjective);
-            	message_return.stopOnObjective				= selectedTask.stopOnObjective;
+            	message_return.executionActive												= false;
+            	message_return.executionPlanned												= true;
+            	message_return.timeStart	 												= nextStart;
+            	message_return.timeEnd		 												= selectedTask.timeEnd;
+            	message_return.tempObjective 												= new Cmn_Temperature(selectedTask.tempObjective);
+            	message_return.stopOnObjective												= selectedTask.stopOnObjective;
             }
             else						// Task currently inactive and not even planned
             {
-            	message_return.executionActive				= false;
-            	message_return.executionPlanned				= false;
-            	message_return.timeStart					= 0L;
-            	message_return.timeEnd						= 0L;
-            	message_return.tempObjective				= new Cmn_Temperature(0);
-            	message_return.stopOnObjective				= false;
+            	message_return.executionActive												= false;
+            	message_return.executionPlanned												= false;
+            	message_return.timeStart													= 0L;
+            	message_return.timeEnd														= 0L;
+            	message_return.tempObjective												= new Cmn_Temperature(0);
+            	message_return.stopOnObjective												= false;
             }
 		}
 		else		// Task currently active
 		{
-			message_return.executionActive					= true;
-			message_return.executionPlanned					= false;
-			message_return.timeStart						= circuit.taskActive.timeStart;
-			message_return.timeEnd							= circuit.taskActive.timeEnd;
-			message_return.tempObjective					= new Cmn_Temperature(circuit.taskActive.tempObjective);
-			message_return.stopOnObjective					= circuit.taskActive.stopOnObjective;
+			message_return.executionActive													= true;
+			message_return.executionPlanned													= false;
+			message_return.timeStart														= circuit.taskActive.timeStart;
+			message_return.timeEnd															= circuit.taskActive.timeEnd;
+			message_return.tempObjective													= new Cmn_Temperature(circuit.taskActive.tempObjective);
+			message_return.stopOnObjective													= circuit.taskActive.stopOnObjective;
 		}
 		return message_return;
 	}
 	private Ctrl__Abstract				process_Ctrl_Immediate_Execute			(Ctrl_Immediate.Execute message_in)		// Process an immediate action to start
 	{
-		Long	now											= Global.Time.now();
+		Long													now							= Global.Time.now();
 		
-		String 					circuitName					= message_in.circuitName;
-		Circuit_Abstract 		circuit						= Global.circuits.fetchCircuit(circuitName);
-		Ctrl__Abstract 			message_return				= new Ctrl__Abstract().new Ack();;
+		String 													circuitName					= message_in.circuitName;
+		Circuit_Abstract 										circuit						= Global.circuits.fetchCircuit(circuitName);
+		Ctrl__Abstract 											message_return				= new Ctrl__Abstract().new Ack();;
 		
 		if (message_in.action == Ctrl_Immediate.ACTION_Start)
 		{
@@ -218,7 +218,7 @@ public class Thread_TCPListen 			implements Runnable
 																	now + 30 * 60 * 1000, 					// TimeEnd
 																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
 																	true,									// StopOnObjective
-																	"1, 2, 3, 4, 5, 6, 7",					// Days
+																	"12345,67",								// Days
 																	HVAC_TYPES.CircuitTask.Immediate);
 			}
 			else
@@ -227,7 +227,7 @@ public class Thread_TCPListen 			implements Runnable
 																	message_in.timeEnd.milliSeconds, 		// TimeEnd
 																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
 																	false,									// StopOnObjective
-																	"1, 2, 3, 4, 5, 6, 7",					// Days
+																	"12345,67",								// Days
 																	HVAC_TYPES.CircuitTask.Immediate);
 			}
 			circuit.start();
@@ -240,7 +240,6 @@ public class Thread_TCPListen 			implements Runnable
 		{
 			message_return									= new Ctrl__Abstract().new Nack();
 		}
-		
 		return message_return;
 	}
   	private Ctrl_Configuration.Data 	process_Ctrl_Configuration_Request		()
