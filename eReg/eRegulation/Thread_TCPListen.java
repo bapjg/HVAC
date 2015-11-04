@@ -230,14 +230,15 @@ public class Thread_TCPListen 			implements Runnable
 				
 				
 				
-				circuit.taskActive							= new CircuitTask(	now, 						// Time Start
-																	now + 30 * 60 * 1000, 					// TimeEnd
-																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
-																	true,									// StopOnObjective
-																	"12345,67",								// Days
-																	HVAC_TYPES.CircuitTask.Immediate);
+//				circuit.taskActive							= new CircuitTask(	now, 						// Time Start
+//																	now + 30 * 60 * 1000, 					// TimeEnd
+//																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
+//																	true,									// StopOnObjective
+//																	"12345,67",								// Days
+//																	HVAC_TYPES.CircuitTask.Immediate);
 				
-				circuit.taskActive = ct;
+//				circuit.taskActive = ct;
+				circuit.taskActivate(ct);
 			}
 			else
 			{
