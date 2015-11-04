@@ -214,6 +214,22 @@ public class Thread_TCPListen 			implements Runnable
 			
 			if (circuit.name.equalsIgnoreCase("Hot_Water"))
 			{
+				CircuitTask ct							= new CircuitTask(	now, 						// Time Start
+						now + 30 * 60 * 1000, 					// TimeEnd
+						message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
+						true,									// StopOnObjective
+						"12345,67",								// Days
+						HVAC_TYPES.CircuitTask.Immediate);
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				circuit.taskActive							= new CircuitTask(	now, 						// Time Start
 																	now + 30 * 60 * 1000, 					// TimeEnd
 																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
