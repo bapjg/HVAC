@@ -16,6 +16,7 @@ public class HVAC_STATES
 		On_Cooling,
 		On_CoolingAfterOverheat,
 		PowerUp,
+		PowerDown,
 		Error
 	}
 /**

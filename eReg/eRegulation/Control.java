@@ -108,37 +108,6 @@ public class Control
 		//
 		//============================================================
 
-
-		//============================================================
-		//
-		// Initialise Global (This ought to be in constructor) xxxx
-		//
-		
-//		Global.thermoBoiler 																= Global.thermometers.fetchThermometer("Boiler");
-//		Global.thermoBoilerOld																= Global.thermometers.fetchThermometer("Boiler_Old");
-//		Global.thermoBoilerOut																= Global.thermometers.fetchThermometer("Boiler_Out");
-//		Global.thermoBoilerIn																= Global.thermometers.fetchThermometer("Boiler_In");
-//												
-//		Global.thermoFloorOut																= Global.thermometers.fetchThermometer("Floor_Out");
-//		Global.thermoFloorIn																= Global.thermometers.fetchThermometer("Floor_In");
-//												
-//		Global.thermoRadiatorOut															= Global.thermometers.fetchThermometer("Radiator_Out");
-//		Global.thermoRadiatorIn																= Global.thermometers.fetchThermometer("Radiator_In");
-//												
-//		Global.thermoOutside																= Global.thermometers.fetchThermometer("Outside");
-//		Global.thermoLivingRoom																= Global.thermometers.fetchThermometer("Living_Room");
-//		Global.thermoHotWater																= Global.thermometers.fetchThermometer("Hot_Water");
-//
-//		Global.burnerPower	 																= Global.relays.fetchRelay("Burner");
-//											
-//		Global.circuitFloor																	= (Circuit_Mixer) 		Global.circuits.fetchCircuit("Floor");
-//		Global.circuitGradient																= (Circuit_Radiator) 	Global.circuits.fetchCircuit("Radiator");
-//		Global.circuitHotWater																= (Circuit_HotWater) 	Global.circuits.fetchCircuit("Hot_Water");
-
-		//
-		//============================================================
-		
-		
 		//============================================================
 		//
 		// Start threads 
@@ -173,9 +142,8 @@ public class Control
 		while (!Global.stopNow)
 		{
 			Global.waitSeconds(5);
-		
-			Global.boiler.sequencer();
-			
+
+			// Sequence each circuit and get the heat requirements
 			globalHeatRequired.setZero();
 
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
@@ -192,7 +160,11 @@ public class Control
 					globalHeatRequired.tempMaximum											= circuit.heatRequired.tempMaximum;
 				}
 			}
-			if (! globalHeatRequired.isZero())			Global.boiler.requestHeat(globalHeatRequired);
+//			if (! globalHeatRequired.isZero())			Global.boiler.requestHeat(globalHeatRequired);
+			
+			// Give heatRequirements to boiler and then run the sequencer
+			Global.boiler.heatRequired														= globalHeatRequired;
+			Global.boiler.sequencer();
 		}
 		
 		//

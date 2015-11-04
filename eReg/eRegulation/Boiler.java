@@ -26,9 +26,10 @@ public class Boiler
 	public Thermometers 										thermometers;
 	public Thermometer 											thermoBoiler;
 	public Burner												burner;
-	
-	public Integer	   											tempMax;
-	public Integer	   											tempMin;
+
+	public Heat_Required										heatRequired;
+//	public Integer	   											tempMax;
+//	public Integer	   											tempMin;
 	public Integer												tempNeverExceed				= 95000;
 	public Integer												tempOvershoot				= 18000;
 	public Integer												tempCondensationAvoidance	= 55000;
@@ -46,28 +47,29 @@ public class Boiler
 //		
 		this.thermoBoiler 																	= Global.thermometers.fetchThermometer(boilerparams.thermometer);
 		this.burner																			= Global.burner;
-		this.tempMax 																		= -1;
-		this.tempMin 																		= -1;
+//		this.tempMax 																		= -1;
+//		this.tempMin 																		= -1;
 		this.tempNeverExceed																= boilerparams.tempNeverExceed.milliDegrees;
 		this.tempOvershoot																	= boilerparams.tempOverShoot.milliDegrees;
 		this.tempCondensationAvoidance														= boilerparams.tempCondensationAvoidance.milliDegrees;
 		state																				= HVAC_STATES.Boiler.Off;
 	}
-	public void requestHeat(Heat_Required eR)
-	{
-		tempMax 																			= eR.tempMaximum;
-		tempMin 																			= eR.tempMinimum;
-		if (eR.isZero())										return;
-		if (tempMax > tempNeverExceed - tempOvershoot)			tempMax 					= tempNeverExceed - tempOvershoot;
-		if (tempMin < tempCondensationAvoidance)				tempMin 					= tempCondensationAvoidance;
-		if (thermoBoiler.reading > tempMin)						return;						// No need to heat
-		if (state == HVAC_STATES.Boiler.Off)					state						= HVAC_STATES.Boiler.PowerUp;
-	}
+//	public void requestHeat(Heat_Required eR)
+//	{
+//		tempMax 																			= eR.tempMaximum;
+//		tempMin 																			= eR.tempMinimum;
+//		if (eR.isZero())										return;
+//		if (tempMax > tempNeverExceed - tempOvershoot)			tempMax 					= tempNeverExceed - tempOvershoot;
+//		if (tempMin < tempCondensationAvoidance)				tempMin 					= tempCondensationAvoidance;
+//		if (thermoBoiler.reading > tempMin)						return;						// No need to heat
+//		if (state == HVAC_STATES.Boiler.Off)					state						= HVAC_STATES.Boiler.PowerUp;
+//	}
 	public void requestIdle()
 	{
 		burner.powerOff();
-		tempMax 																			= -1000;
-		tempMin 																			= -1000;
+		this.heatRequired.setZero();
+//		tempMax 																			= -1000;
+//		tempMin 																			= -1000;
 		state 																				= HVAC_STATES.Boiler.Off;
 	}
 	public Boolean checkOverHeat()
@@ -86,6 +88,28 @@ public class Boiler
 	}
 	public void sequencer()
 	{
+		// New Code
+		if (	(this.heatRequired.isZero()) 
+		&& 		(this.state != HVAC_STATES.Boiler.Off)
+		&&		(this.state != HVAC_STATES.Boiler.Error)		)							// No heat required and Off
+		{
+			this.state 																		= HVAC_STATES.Boiler.PowerDown;
+		}
+		else
+		{
+			if (this.heatRequired.tempMaximum > tempNeverExceed - tempOvershoot)
+			{
+				this.heatRequired.tempMaximum 												= tempNeverExceed - tempOvershoot;
+			}
+			if (this.heatRequired.tempMinimum < tempCondensationAvoidance)
+			{
+				this.heatRequired.tempMinimum 												= tempCondensationAvoidance;
+			}
+		}
+//		if (thermoBoiler.reading > tempMin)						return;						// No need to heat
+//		if (state == HVAC_STATES.Boiler.Off)					state						= HVAC_STATES.Boiler.PowerUp;
+
+		// Continue as before
 		try
 		{
 			Integer												tempNow						= Global.thermoBoiler.readUnCached();
@@ -98,32 +122,24 @@ public class Boiler
 					LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + " , state set to STATE_OnCoolingAfterOverheat", false);
 					state																	= HVAC_STATES.Boiler.On_CoolingAfterOverheat;
 				}
-				return;
 			}
 			if (burner.burnerFault())	//This reads GPIO
 			{
 				state																		= HVAC_STATES.Boiler.Error;
 				burner.powerOff();
 				LogIt.error("Boiler", "sequencer", "burner has tripped");
-				return;
 			}
 
 			switch (state)
 			{
-			case Error:
-				// do nothing
-				// Dont close other relays because we must evacuate the heat
-				break;
-			case Off:
-				// do nothing
-				// Should we not close down all relays
+			case Error:	// do nothing Dont close other relays because we must evacuate the heat
+			case Off:	// do nothing Dont close relays as optimisation may be in progress
 				break;
 			case On_Heating:
-				if (Global.thermoBoiler.reading > tempMax)
+				if (Global.thermoBoiler.reading > this.heatRequired.tempMaximum)
 				{
 					burner.powerOff();
 					state																	= HVAC_STATES.Boiler.On_Cooling;
-					return;
 				}
 				break;
 			case On_CoolingAfterOverheat:
@@ -131,24 +147,26 @@ public class Boiler
 				{
 					LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling", false);
 					state																	= HVAC_STATES.Boiler.On_Cooling; 		//Normal operating temp has returned
-					return;
 				}
 				break;
 			case On_Cooling:
-				if (Global.thermoBoiler.reading < tempMin)
+				if (	(Global.thermoBoiler.reading < this.heatRequired.tempMinimum) 
+				&& 		(! this.heatRequired.isZero())								)
 				{
 					burner.powerOn();
 					state 																	= HVAC_STATES.Boiler.On_Heating;
-					return;
 				}
 				break;
 			case PowerUp:
-				if (Global.thermoBoiler.reading < tempMax)
+				if (Global.thermoBoiler.reading < this.heatRequired.tempMaximum)
 				{
 					burner.powerOn();
 					state 																	= HVAC_STATES.Boiler.On_Heating;
-					return;
 				}
+				break;
+			case PowerDown:
+				burner.powerOff();
+				state 																		= HVAC_STATES.Boiler.Off;
 				break;
 			default:
 				LogIt.error("Boiler", "sequencer", "unknown state detected : " + state);	
@@ -159,20 +177,17 @@ public class Boiler
 			burner.powerOff();
 			Global.eMailMessage("Boiler/sequencer", "Thermometer_ReadException on Read Boiler Thermometer " + exTR.thermoName + " at " + exTR.thermoAddress);
 			state																			 = HVAC_STATES.Boiler.Error;
-			return;
 		}
 		catch (Thermometer_SpreadException exTS)
 		{
 			Global.eMailMessage("Boiler/sequencer", "Thermometer_SpreadException on Read Boiler Thermometer");
 			// Just carry on to see if it gets worse
-			return;
 		}
 		catch (Exception ex)
 		{
 			burner.powerOff();
 			Global.eMailMessage("Boiler/sequencer", "An Error on Read Boiler Thermometer");
 			state																			 = HVAC_STATES.Boiler.Error;
-			return;
 		}
 	}
 }
