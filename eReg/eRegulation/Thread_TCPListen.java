@@ -236,6 +236,8 @@ public class Thread_TCPListen 			implements Runnable
 																	true,									// StopOnObjective
 																	"12345,67",								// Days
 																	HVAC_TYPES.CircuitTask.Immediate);
+				
+				circuit.taskActive = ct;
 			}
 			else
 			{
