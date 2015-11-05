@@ -398,13 +398,28 @@ abstract class Circuit_Abstract
 	{
 		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + " " + thisTask.taskType.toString());
 
+		// Test to see if :
+		// - activeTask is null (just swap in)
+		// - activeTask if NOT null, and circuit is stopping
+		// - a newTask is moving in replacing an unfinished activeTask
+		// - try to schedule a task which is already active (shouldn't happen)
 		if (this.taskActive == null)														// Normal operation
 		{
-			LogIt.display("Circuit_Abstract", "taskActivate", "Called task Scheduled for " + this.name);
+			LogIt.display("Circuit_Abstract", "taskActivate", "Called task Scheduled for " + this.name + ", type " + thisTask.taskType);
 			this.taskActive																	= thisTask;
-			if (thisTask.taskType == HVAC_TYPES.CircuitTask.Optimisation)					this.optimise();
-			else 																			this.start();
 			this.taskActive.dateLastRun														= Global.Date.now();
+			
+			switch (thisTask.taskType)
+			{
+			case Optimisation :
+				this.optimise();
+				break;
+			case Immediate :
+			case AntiFreeze :
+			case Calendar :
+				this.start();
+				break;
+			}
 		}
 		else if (this.state == HVAC_STATES.Circuit.Stopping)									// Its just been set, hasn't had time to move to optimising or Off
 		{
@@ -412,6 +427,22 @@ abstract class Circuit_Abstract
 		}
 		else if (taskActive != thisTask)														// Could arise (???) during rampUp
 		{
+			LogIt.display("Circuit_Abstract", "taskActivate", "Called task Scheduled for currently active task " + this.name + ", type " + thisTask.taskType);
+//			this.taskActive																	= thisTask;
+//			this.taskActive.dateLastRun														= Global.Date.now();
+//			
+//			switch (taskActive.taskType)
+//			{
+//			case Optimisation :
+//				this.optimise();
+//				break;
+//			case Immediate :
+//			case AntiFreeze :
+//			case Calendar :
+//				this.start();
+//				break;
+//			}
+
 			if (taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
 			{
 				// This can happen. Just switch it in
@@ -441,10 +472,6 @@ abstract class Circuit_Abstract
 			LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + System.identityHashCode(taskActive));
 			LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + System.identityHashCode(thisTask));
 		}
-
-//			this.taskActive																	= thisTask;
-//			this.start();						
-//			this.taskActive.dateLastRun														= Global.Date.now();
 	}	// taskActivate
 /**
  * Deactivates current task :
