@@ -69,7 +69,7 @@ abstract class Circuit_Abstract
  */
 	public void startOptimisation()
 	{
-		LogIt.action(this.name, "----------------------------------startOptimisation called");
+		LogIt.debug("Circuit_Abstract/startOptimisation : ----------------------------------startOptimisation called " + this.name);
 		Long											now									= Global.Time.now();
 		Integer											targetTemperature					= this.circuitThermo.reading  + 2000;				// Go for 2 degrees above current temperature
 		CircuitTask										task								= new CircuitTask(	
@@ -77,14 +77,10 @@ abstract class Circuit_Abstract
 																												now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
 																												targetTemperature,					// TempObjective in millidesrees
 																												false,								// StopOnObjective
-																												"1234567",							// Days
+																												"12345, 67",						// Days
 																												HVAC_TYPES.CircuitTask.Optimisation
-				);
-		this.circuitPump.on();
-		this.state 																			= HVAC_STATES.Circuit.Optimising;
-		this.heatRequired.setZero();
-// Noneed to call taskActivate as we get here through SingleCircuit measured by not taskActive
-		//		this.taskActivate(task);
+																											 );
+		this.taskActivate(task);
 	}
 	//
 	//===========================================================================================================================================================
@@ -201,7 +197,6 @@ abstract class Circuit_Abstract
  */	
 	public void optimise()						
 	{						
-		// TODO This is NOT called for Thread_Background optimisation
 		if (this.taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
 		{
 			LogIt.debug(this.name + " Optimising called by Thread_Background");
@@ -405,7 +400,7 @@ abstract class Circuit_Abstract
 
 		if (this.taskActive == null)														// Normal operation
 		{
-			LogIt.display("Circuit_Abstract", "taskActivate", "Called task Scheduled");
+			LogIt.display("Circuit_Abstract", "taskActivate", "Called task Scheduled for " + this.name);
 			this.taskActive																	= thisTask;
 			if (thisTask.taskType == HVAC_TYPES.CircuitTask.Optimisation)					this.optimise();
 			else 																			this.start();
@@ -414,7 +409,6 @@ abstract class Circuit_Abstract
 		else if (this.state == HVAC_STATES.Circuit.Stopping)									// Its just been set, hasn't had time to move to optimising or Off
 		{
 			LogIt.debug("taskActive is stopping          = " + taskActive.days + " +++ " + taskActive.taskType.toString());
-			return;
 		}
 		else if (taskActive != thisTask)														// Could arise (???) during rampUp
 		{
