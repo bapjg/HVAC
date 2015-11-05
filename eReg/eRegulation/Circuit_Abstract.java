@@ -201,8 +201,16 @@ abstract class Circuit_Abstract
  */	
 	public void optimise()						
 	{						
-		LogIt.debug(this.name + " Optimising called");
-		LogIt.action(this.name, "Optimising called");
+		if (this.taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
+		{
+			LogIt.debug(this.name + " Optimising called by Thread_Background");
+			LogIt.action(this.name, "Optimising called by Thread_Background");
+		}
+		else
+		{
+			LogIt.debug(this.name + " Optimising called inline");
+			LogIt.action(this.name, "Optimising called inline");
+		}
 		this.heatRequired.setZero();
 		this.circuitPump.on();																// This checks to see if on to avoid uneccessary relay activity	
 		state 																				= HVAC_STATES.Circuit.Optimising;
