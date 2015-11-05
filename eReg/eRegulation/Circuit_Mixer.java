@@ -55,11 +55,11 @@ public class Circuit_Mixer extends Circuit_Abstract
  * State set to Start_Requested
  * heatRequired set to zero valued object
  */
-	@Override
-	public void startOptimisation()
-	{
-		super.startOptimisation();
-	}
+//	@Override
+//	public void startOptimisation()
+//	{
+//		super.startOptimisation();
+//	}
 	//
 	//===========================================================================================================================================================
 

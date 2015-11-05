@@ -32,10 +32,10 @@ public class Circuit_HotWater extends Circuit_Abstract
  * State set to Start_Requested
  * heatRequired set to zero valued object
  */
-	public void startOptimisation()
-	{
-		super.startOptimisation();
-	}
+//	public void startOptimisation()
+//	{
+//		super.startOptimisation();
+//	}
 	//
 	//===========================================================================================================================================================
 

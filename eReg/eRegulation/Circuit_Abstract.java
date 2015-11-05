@@ -67,21 +67,21 @@ abstract class Circuit_Abstract
  * CircuitPump = ON
  * heatRequired = ZERO
  */
-	public void startOptimisation()
-	{
-		LogIt.debug("Circuit_Abstract/startOptimisation : ----------------------------------startOptimisation called " + this.name);
-		Long											now									= Global.Time.now();
-		Integer											targetTemperature					= this.circuitThermo.reading  + 2000;				// Go for 2 degrees above current temperature
-		CircuitTask										task								= new CircuitTask(	
-																												now, 								// Time Start
-																												now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
-																												targetTemperature,					// TempObjective in millidesrees
-																												false,								// StopOnObjective
-																												"12345, 67",						// Days
-																												HVAC_TYPES.CircuitTask.Optimisation
-																											 );
-		this.taskActivate(task);
-	}
+//	public void startOptimisation()
+//	{
+//		LogIt.debug("Circuit_Abstract/startOptimisation : ----------------------------------startOptimisation called " + this.name);
+//		Long											now									= Global.Time.now();
+//		Integer											targetTemperature					= this.circuitThermo.reading  + 2000;				// Go for 2 degrees above current temperature
+//		CircuitTask										task								= new CircuitTask(	
+//																												now, 								// Time Start
+//																												now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
+//																												targetTemperature,					// TempObjective in millidesrees
+//																												false,								// StopOnObjective
+//																												"12345, 67",						// Days
+//																												HVAC_TYPES.CircuitTask.Optimisation
+//																											 );
+//		this.taskActivate(task);
+//	}
 	//
 	//===========================================================================================================================================================
 
@@ -421,56 +421,58 @@ abstract class Circuit_Abstract
 				break;
 			}
 		}
-		else if (this.state == HVAC_STATES.Circuit.Stopping)									// Its just been set, hasn't had time to move to optimising or Off
+//		else if (this.state == HVAC_STATES.Circuit.Stopping)								// Its just been set, hasn't had time to move to optimising or Off
+//		{
+//			LogIt.debug("taskActive is stopping          = " + taskActive.days + " +++ " + taskActive.taskType.toString());
+//		}
+		else if (this.taskActive == thisTask)												// Should not normally occur
 		{
-			LogIt.debug("taskActive is stopping          = " + taskActive.days + " +++ " + taskActive.taskType.toString());
+			LogIt.display("Circuit_Abstract", "taskActivate", "The scheduled task is already active " + this.name + ", type " + thisTask.taskType);
+			LogIt.display("Circuit_Abstract", "taskActivate", "taskActive    = " + System.identityHashCode(taskActive));
+			LogIt.display("Circuit_Abstract", "taskActivate", "candidateTask = " + System.identityHashCode(thisTask));
 		}
-		else if (taskActive != thisTask)														// Could arise (???) during rampUp
+		else
 		{
-			LogIt.display("Circuit_Abstract", "taskActivate", "Called task Scheduled for currently active task " + this.name + ", type " + thisTask.taskType);
-//			this.taskActive																	= thisTask;
-//			this.taskActive.dateLastRun														= Global.Date.now();
-//			
-//			switch (taskActive.taskType)
-//			{
-//			case Optimisation :
-//				this.optimise();
-//				break;
-//			case Immediate :
-//			case AntiFreeze :
-//			case Calendar :
-//				this.start();
-//				break;
-//			}
+			LogIt.display("Circuit_Abstract", "taskActivate", "The scheduled task is replacing a task " + this.name);
+			LogIt.display("Circuit_Abstract", "taskActivate", "Replaced task    " + this.taskActive.taskType + ", days " + this.taskActive.days + ", time " + this.taskActive.timeStartDisplay + " - " + this.taskActive.timeEndDisplay);
+			LogIt.display("Circuit_Abstract", "taskActivate", "Replacement task " +        thisTask.taskType + ", days " +        thisTask.days + ", time " +        thisTask.timeStartDisplay + " - " +        thisTask.timeEndDisplay);
 
-			if (taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
+			this.taskActive																	= thisTask;
+			this.taskActive.dateLastRun														= Global.Date.now();
+			
+			switch (taskActive.taskType)
 			{
-				// This can happen. Just switch it in
-				LogIt.display("Circuit_Abstract", "taskActivate", "Called task Swapped in as optimisation in progress");
-				this.taskActive																	= thisTask;
+			case Optimisation :
+				this.optimise();
+				break;
+			case Immediate :
+			case AntiFreeze :
+			case Calendar :
 				this.start();
-				this.taskActive.dateLastRun														= Global.Date.now();
+				break;
 			}
-			else if (thisTask.taskType == HVAC_TYPES.CircuitTask.Optimisation)
-			{
-				// taskActive is not Optimisation but thisTask is. taskActive is more important
-				LogIt.display("Circuit_Abstract", "taskActivate", "Called task ignored as it is for optimisation while currentTask is doing real work");
-			}
-			else
-			{
-				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
-				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is occupied... Replaced");
-				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
-				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + taskActive.days + " +++ " + taskActive.taskType);
-				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + thisTask.days + " +++ " + thisTask.taskType);
-			}
-		}
-		else	// Dont know how Should never happen, we are scheduling a currently active task. Just let it run
-		{
-			LogIt.error("Circuit_Abstract", "taskActivate", "WOULD HAVE SAID : A task is active when it shouldn't be");
-			LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
-			LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + System.identityHashCode(taskActive));
-			LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + System.identityHashCode(thisTask));
+
+//			if (taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
+//			{
+//				// This can happen. Just switch it in
+//				LogIt.display("Circuit_Abstract", "taskActivate", "Called task Swapped in as optimisation in progress");
+//				this.taskActive																	= thisTask;
+//				this.start();
+//				this.taskActive.dateLastRun														= Global.Date.now();
+//			}
+//			else if (thisTask.taskType == HVAC_TYPES.CircuitTask.Optimisation)
+//			{
+//				// taskActive is not Optimisation but thisTask is. taskActive is more important
+//				LogIt.display("Circuit_Abstract", "taskActivate", "Called task ignored as it is for optimisation while currentTask is doing real work");
+//			}
+//			else
+//			{
+//				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
+//				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is occupied... Replaced");
+//				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
+//				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + taskActive.days + " +++ " + taskActive.taskType);
+//				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + thisTask.days + " +++ " + thisTask.taskType);
+//			}
 		}
 	}	// taskActivate
 /**
