@@ -413,6 +413,7 @@ abstract class Circuit_Abstract
 		if (this.taskActive == null)														// Normal operation
 		{
 			LogIt.display("Circuit_Abstract", "taskActivate", "Called task Scheduled for " + this.name + ", type " + thisTask.taskType);
+			if (thisTask == null) LogIt.debug("Why is thisTask null");
 			this.taskActive																	= thisTask;
 			this.taskActive.dateLastRun														= Global.Date.now();
 			
