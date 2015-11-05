@@ -201,6 +201,7 @@ abstract class Circuit_Abstract
  */	
 	public void optimise()						
 	{						
+		// TODO This is NOT called for Thread_Background optimisation
 		if (this.taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
 		{
 			LogIt.debug(this.name + " Optimising called by Thread_Background");
