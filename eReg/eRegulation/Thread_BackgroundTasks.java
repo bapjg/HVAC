@@ -198,35 +198,35 @@ public class Thread_BackgroundTasks implements Runnable
 				// elseif boilertemp > floortemp (need to get accurate floor temp before)
 				//		do something
 				// and all this depends on summer/winter/in between
+				CircuitTask											taskOptimisation					= null;
 				if (Global.circuitHotWater.canOptimise())
 				{
 					LogIt.debug("Thread_Backgroud/Run : ----------------------------------startOptimisation called for Hot_Water");
-					CircuitTask										task								= new CircuitTask(	now, 								// Time Start
+					taskOptimisation																	= new CircuitTask(	now, 								// Time Start
 																															now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
 																															40000,								// Dont care, just get as much energy out as possible
 																															false,								// StopOnObjective
 																															"12345, 67",						// Days
 																															HVAC_TYPES.CircuitTask.Optimisation
 																														 );
-					Global.circuitHotWater.taskActivate(task);
+					Global.circuitHotWater.taskActivate(taskOptimisation);
 				}
 				else if (Global.circuitGradient.canOptimise())  // Always false
 				{
-					// Floor
-					// ensure mixer is in the correct position
+					// Nothing
 				}
 				else if (Global.circuitFloor.canOptimise())
 				{
 					// Are there any circuit that we were optimising and are left on
 					LogIt.debug("Thread_Backgroud/Run : ----------------------------------startOptimisation called Floor");
-					CircuitTask										task								= new CircuitTask(	now, 								// Time Start
+					taskOptimisation																	= new CircuitTask(	now, 								// Time Start
 																															now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
 																															25000,								// Dont care, just get as much energy out as possible
 																															false,								// StopOnObjective
 																															"12345, 67",						// Days
 																															HVAC_TYPES.CircuitTask.Optimisation
 																														 );
-					Global.circuitFloor.taskActivate(task);
+					Global.circuitFloor.taskActivate(taskOptimisation);
 				}
 			}
 			//
