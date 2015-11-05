@@ -218,7 +218,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			lastAccurateFloorInTemp														= Global.thermoFloorIn.reading;
 			if 		(! Global.circuits.isSingleActiveCircuit())		this.shutDown();
 			else if	(! this.canOptimise())   						this.shutDown();	//  Continue while boilerTemp more than 3 degrees than return temp
-			break;	// Continue as singlecircuit AND canOptimise = true
+			break;																		// Continue as singlecircuit AND canOptimise = true
 		case Stopping:
 			if 	 	(Global.circuits.isSingleActiveCircuit())		this.optimise();							//  Continue while boilerTemp more than 3 degrees than return temp
 			else 													this.shutDown();
