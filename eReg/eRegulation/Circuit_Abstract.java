@@ -98,6 +98,7 @@ abstract class Circuit_Abstract
 	public  void start()
 	{
 		LogIt.action(this.name, "Start called");
+		LogIt.debug("Start called" + this.name);
 		state																				= HVAC_STATES.Circuit.Starting;
 	}
 /**
@@ -114,6 +115,7 @@ abstract class Circuit_Abstract
 		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
 		// Depending on the situation, the circuit will either optimise or stopdown completely
 		LogIt.action(this.name, "Stop called");
+		LogIt.debug("Stop called" + this.name);
 		this.heatRequired.setZero();
 		state 																				= HVAC_STATES.Circuit.Stopping;
 	}
@@ -126,6 +128,7 @@ abstract class Circuit_Abstract
 	public void nowRunning()
 	{
 		LogIt.action(this.name, "NowRunning called");
+		LogIt.debug("NowRunning called" + this.name);
 		state 																				= HVAC_STATES.Circuit.Running;
 	}
 /**
@@ -137,6 +140,7 @@ abstract class Circuit_Abstract
 	public void idle()
 	{
 		LogIt.action(this.name, "Idle called");
+		LogIt.debug("Idle called" + this.name);
 		this.heatRequired.setZero();
 		state 																				= HVAC_STATES.Circuit.Idle;
 	}
@@ -150,6 +154,7 @@ abstract class Circuit_Abstract
 	public void shutDown()
 	{
 		LogIt.action(this.name, "Closing down completely");
+		LogIt.debug("Closing down completely" + this.name);
 		circuitPump.off();
 		this.heatRequired.setZero();
 		state 																				= HVAC_STATES.Circuit.Off;
@@ -174,6 +179,7 @@ abstract class Circuit_Abstract
 	public void suspend()
 	{
 		LogIt.action(this.name, "Suspend called");
+		LogIt.debug("Suspend called" + this.name);
 		this.heatRequired.setZero();
 		this.circuitPump.off();
 		state 																				= HVAC_STATES.Circuit.Suspended;
@@ -187,6 +193,7 @@ abstract class Circuit_Abstract
 	public void resume()						
 	{						
 		LogIt.action(this.name, "Resume called");						
+		LogIt.debug("Resume called" + this.name);
 		state 																				= HVAC_STATES.Circuit.Resuming;
 	}
 /**

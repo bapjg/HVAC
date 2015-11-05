@@ -174,8 +174,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 			//		No					No			*													suspend()
 			
 			if 		(! Global.circuits.isSingleActiveCircuit())								super.shutDown();
-			else if	(Global.thermoBoiler.reading < Global.thermoHotWater.reading + 3000)   						
-																							super.shutDown();//  Continue while boilerTemp more than 3 degrees than return temp
+			else if	(Global.thermoBoiler.reading < Global.thermoHotWater.reading + 3000)	super.shutDown();//  Continue while boilerTemp more than 3 degrees than return temp
 			break;
 		case Suspended:																		// In this state the circuitPump has been switched off If 5 degrees less than objective
 			if (Global.thermoBoiler.reading < this.taskActive.tempObjective - 5000) 		resume();	
