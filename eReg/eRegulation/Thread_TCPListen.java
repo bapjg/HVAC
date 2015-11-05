@@ -211,45 +211,28 @@ public class Thread_TCPListen 			implements Runnable
 		if (message_in.action == Ctrl_Immediate.ACTION_Start)
 		{
 			// This seems to ignore start/end times in message
+			CircuitTask 										circuitTask					= null;
 			
 			if (circuit.name.equalsIgnoreCase("Hot_Water"))
 			{
-				CircuitTask ct							= new CircuitTask(	now, 						// Time Start
-						now + 30 * 60 * 1000, 					// TimeEnd
-						message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
-						true,									// StopOnObjective
-						"12345,67",								// Days
-						HVAC_TYPES.CircuitTask.Immediate);
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-//				circuit.taskActive							= new CircuitTask(	now, 						// Time Start
-//																	now + 30 * 60 * 1000, 					// TimeEnd
-//																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
-//																	true,									// StopOnObjective
-//																	"12345,67",								// Days
-//																	HVAC_TYPES.CircuitTask.Immediate);
-				
-//				circuit.taskActive = ct;
-				circuit.taskActivate(ct);
+				circuitTask									= new CircuitTask(	now, 						// Time Start
+																	now + 30 * 60 * 1000, 					// TimeEnd
+																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
+																	true,									// StopOnObjective
+																	"12345,67",								// Days
+																	HVAC_TYPES.CircuitTask.Immediate);
+
 			}
 			else
 			{
-				circuit.taskActive							= new CircuitTask(	now, 						// Time Start
+				circuitTask									= new CircuitTask(	now, 						// Time Start
 																	message_in.timeEnd.milliSeconds, 		// TimeEnd
 																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
 																	false,									// StopOnObjective
 																	"12345,67",								// Days
 																	HVAC_TYPES.CircuitTask.Immediate);
 			}
-			circuit.start();
+			circuit.taskActivate(circuitTask);
 		}
 		else if (message_in.action == message_in.ACTION_Stop)
 		{
