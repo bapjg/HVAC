@@ -60,28 +60,6 @@ abstract class Circuit_Abstract
 	// Performance methods
 	//
 	public Long getRampUpTime(Integer tempObjective) 				{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
-/**
- * Starts the circuit in optimisation mode:
- * Supplied circuitTask becomes taskActive
- * State = Optimising
- * CircuitPump = ON
- * heatRequired = ZERO
- */
-//	public void startOptimisation()
-//	{
-//		LogIt.debug("Circuit_Abstract/startOptimisation : ----------------------------------startOptimisation called " + this.name);
-//		Long											now									= Global.Time.now();
-//		Integer											targetTemperature					= this.circuitThermo.reading  + 2000;				// Go for 2 degrees above current temperature
-//		CircuitTask										task								= new CircuitTask(	
-//																												now, 								// Time Start
-//																												now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
-//																												targetTemperature,					// TempObjective in millidesrees
-//																												false,								// StopOnObjective
-//																												"12345, 67",						// Days
-//																												HVAC_TYPES.CircuitTask.Optimisation
-//																											 );
-//		this.taskActivate(task);
-//	}
 	//
 	//===========================================================================================================================================================
 

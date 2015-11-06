@@ -98,6 +98,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 	@Override
 	public void optimise()
 	{
+		// TODO : Kludge
+		this.state	= HVAC_STATES.Circuit.Optimising; // Must be done here as mixer positionning takes time, and scheduler will set taskActive to null
 		this.mixer.positionPercentage(0.20F);
 		super.optimise();
 	}
