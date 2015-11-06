@@ -47,6 +47,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 	}
 	public Boolean canOptimise()
 	{
+		Integer lastAccurate = lastAccurateFloorInTemp + 3000;
+		LogIt.debug("Floor/canOptimise thermoBoiler : " + Global.thermoBoiler.reading + ", lastAccurate + 3000 : " + lastAccurate.toString());
 		return (Global.thermoBoiler.reading > lastAccurateFloorInTemp + 3000);
 	}	
 /**
