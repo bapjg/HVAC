@@ -59,11 +59,18 @@ public class Thread_Mixer implements Runnable
 			switch(circuit.state)
 			{
 			case Stopping :					// Note Circuit.Sequencer goes to optimising if any heat left in the system
+				Global.waitSeconds(10);
+				break;
 			case Off :
+				mixer.positionZero();
+				Global.waitSeconds(10);
+				break;
 			case Starting :
+				mixer.positionPercentage(0.20F);
+				Global.waitSeconds(10);
+				break;
 			case Suspended :				// Floor pump is off
-				if (circuit.state == HVAC_STATES.Circuit.Suspended) 	mixer.positionZero();		// Mixer wont move if already at zero
-				if (circuit.state == HVAC_STATES.Circuit.Starting) 		mixer.positionPercentage(0.20F);		// Mixer wont move if already at zero
+				mixer.positionZero();
 				Global.waitSeconds(10);
 				break;
 			case RampingUp :

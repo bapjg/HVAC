@@ -86,7 +86,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 	@Override
 	public void shutDown()
 	{
-		this.mixer.positionZero();
+//		this.mixer.positionZero();
 		super.shutDown();
 	}
 /**
