@@ -121,7 +121,6 @@ public class Thread_BackgroundTasks implements Runnable
 																												now + 30 * 60 * 1000, 					// TimeEnd
 																												10000,									// TempObjective in millidesrees (10]C)
 																												true,									// StopOnObjective
-																												"1234567",								// Days
 																												HVAC_TYPES.CircuitTask.AntiFreeze);
 				circuit.taskActivate(taskAntiFreeze);
 			}
@@ -134,7 +133,6 @@ public class Thread_BackgroundTasks implements Runnable
 																												now + 30 * 60 * 1000, 					// 30 mins
 																												30000,									// TempObjective in millidegrees 30°C
 																												false,									// StopOnObjective
-																												"1234567",								// Days
 																												HVAC_TYPES.CircuitTask.AntiFreeze);
 				circuit.taskActivate(taskAntiFreeze);
 			}
@@ -147,7 +145,6 @@ public class Thread_BackgroundTasks implements Runnable
 																												now + 30 * 60 * 1000, 					// 30 mins
 																												10000,									// TempObjective in millidegrees 10°C
 																												false,									// StopOnObjective
-																												"1234567",								// Days
 																												HVAC_TYPES.CircuitTask.AntiFreeze);
 				circuit.taskActivate(taskAntiFreeze);
 			}
@@ -159,7 +156,6 @@ public class Thread_BackgroundTasks implements Runnable
 																												now + 30 * 60 * 1000, 					// 30 mins
 																												30000,									// TempObjective in millidegrees 30°C
 																												false,									// StopOnObjective
-																												"1234567",								// Days
 																												HVAC_TYPES.CircuitTask.AntiFreeze);
 				circuit.taskActivate(taskAntiFreeze);
 			}
@@ -206,7 +202,6 @@ public class Thread_BackgroundTasks implements Runnable
 																															now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
 																															40000,								// Dont care, just get as much energy out as possible
 																															false,								// StopOnObjective
-																															"12345, 67",						// Days
 																															HVAC_TYPES.CircuitTask.Optimisation
 																														 );
 					Global.circuitHotWater.taskActivate(taskOptimisation);
@@ -223,7 +218,6 @@ public class Thread_BackgroundTasks implements Runnable
 																															now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
 																															25000,								// Dont care, just get as much energy out as possible
 																															false,								// StopOnObjective
-																															"12345, 67",						// Days
 																															HVAC_TYPES.CircuitTask.Optimisation
 																														 );
 					Global.circuitFloor.taskActivate(taskOptimisation);

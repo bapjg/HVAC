@@ -360,10 +360,6 @@ public class Global
 		}
 		return false;
     }
-//	public static Long now()
-//	{
-//		return Calendar.getInstance().getTimeInMillis();
-// 	}
 	public static void burnerPanic(String reason)
 	{
 		// Need to determine what to bo in burner Panic situations
@@ -497,7 +493,7 @@ public class Global
    //
    public static class Time
    {
-		public static Long 			now()													// Returns time part in milliseconds
+		public static Long 			now()													// Returns time part in milliseconds since last midnight
 		{
 			//==============================================================
 			// Returns the number of milliseconds since last midnight

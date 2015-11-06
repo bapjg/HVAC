@@ -39,17 +39,16 @@ public class CircuitTask
 			Long 												timeEnd,  
 			Integer												tempObjective, 
 			Boolean												stopOnObjective,
-			String												days,
 			HVAC_TYPES.CircuitTask								taskType
 		)
 	{
 		this.timeStart																		= timeStart;
-		this.timeStartDisplay																= new SimpleDateFormat("HH:mm").format(timeStart);
+		this.timeStartDisplay																= Global.Time.display(timeStart);
 		this.timeEnd																		= timeEnd;
-		this.timeEndDisplay																	= new SimpleDateFormat("HH:mm").format(timeEnd);
+		this.timeEndDisplay																	= Global.Time.display(timeEnd);
 		this.tempObjective																	= tempObjective;
 		this.stopOnObjective																= stopOnObjective;
-		this.days																			= days;
+		this.days																			= "12345, 67";
 		this.dateLastRun																	= 0L;
 		this.taskType																		= taskType;
 	}

@@ -219,7 +219,6 @@ public class Thread_TCPListen 			implements Runnable
 																	now + 30 * 60 * 1000, 					// TimeEnd
 																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
 																	true,									// StopOnObjective
-																	"12345,67",								// Days
 																	HVAC_TYPES.CircuitTask.Immediate);
 
 			}
@@ -229,7 +228,6 @@ public class Thread_TCPListen 			implements Runnable
 																	message_in.timeEnd.milliSeconds, 		// TimeEnd
 																	message_in.tempObjective.milliDegrees,	// TempObjective in millidesrees
 																	false,									// StopOnObjective
-																	"12345,67",								// Days
 																	HVAC_TYPES.CircuitTask.Immediate);
 			}
 			circuit.taskActivate(circuitTask);
