@@ -38,22 +38,10 @@ public class Mixer
 										
 	public Relay												mixerUp;
 	public Relay												mixerDown;
+	public Long													timeToStop;
 	
-// Is this required
-//	public STATES.Mixer											state						= STATES.Mixer.Off;
-	
-//	public static final int							MIXER_STATE_Off 						= 0;
-//	public static final int							MIXER_STATE_Normal_Operating			= 1;
-//	public static final int							MIXER_STATE_Moving_Up					= 2;
-//	public static final int							MIXER_STATE_Moving_Down					= 3;
-//	public static final int							MIXER_STATE_Moving_Waint				= 4;
-//	public static final int							MIXER_STATE_Moving_OverTemp_Recovery	= 5;
-//	public static final int							MIXER_STATE_Moving_Idle					= 6;
-
-	public Long										timeToStop;
-	
-	public float									lastBoilerDTdt							= 0;
-	public HVAC_STATES.BoilerTemperatureVariation		boilerTemperatureVariation				= HVAC_STATES.BoilerTemperatureVariation.NormalOperating;
+	public float												lastBoilerDTdt				= 0;
+	public HVAC_STATES.BoilerTemperatureVariation				boilerTemperatureVariation	= HVAC_STATES.BoilerTemperatureVariation.NormalOperating;
 
  	public Mixer(Ctrl_Configuration.Mixer			paramMixer)
     {
@@ -346,7 +334,7 @@ public class Mixer
 	}
 	public void positionPercentage(float percentage)
 	{
-		if (positionTracked == null)														positionZero();
+		positionZero();
 		allOff();
 		positionTracked																		= positionAbsolute((int) (swingTime.floatValue() * percentage)).positionTracked;
 	}
