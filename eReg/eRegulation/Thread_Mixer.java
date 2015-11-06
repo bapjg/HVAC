@@ -126,6 +126,7 @@ public class Thread_Mixer implements Runnable
 					}
 					catch (Exception ex)					// Panic : a read error has occured on thermometer
 					{
+						LogIt.debug("Thread_Mixer/Run Exception on thermoFloorOut");
 						circuit.shutDown();
 						circuit.state														= HVAC_STATES.Circuit.Error;
 						circuit.mixer.positionZero();

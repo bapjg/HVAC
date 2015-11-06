@@ -346,7 +346,7 @@ public class Mixer
 	}
 	public void positionPercentage(float percentage)
 	{
-		positionZero();
+		if (positionTracked == null)														positionZero();
 		allOff();
 		positionTracked																		= positionAbsolute((int) (swingTime.floatValue() * percentage)).positionTracked;
 	}
@@ -371,10 +371,6 @@ public class Mixer
 	}
 	public MixerMove_Report positionAbsolute(Integer position)
 	{
-//		Long 													positionDiff;
-//		Integer													timeToWait;
-//		Long													timeStart;
-//		Long													timeEnd;
 		if (position > positionTracked)
 		{
 			// Must move up
