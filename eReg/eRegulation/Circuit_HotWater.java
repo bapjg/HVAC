@@ -174,7 +174,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 //			}
 			break;
 		case Stopping:
-			if 	 	(Global.circuits.isSingleActiveCircuit())								this.optimise();							//  Continue while boilerTemp more than 3 degrees than return temp
+			if 	 	(Global.circuits.isSingleActiveCircuit())								this.initiateOptimisation();							//  Continue while boilerTemp more than 3 degrees than return temp
 			else 																			this.initiateShutDown();
 			break;
 		case BeginningOptimisation :

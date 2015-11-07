@@ -69,12 +69,12 @@ public class Circuit_Mixer extends Circuit_Abstract
 	//
 	// Activity/State Change methods
 	//
-	@Override
-	public void initiateStart()
-	{
-		super.initiateStart();
-		this.heatRequired.setMax();
-	}
+//	@Override
+//	public void initiateStart()
+//	{
+//		super.initiateStart();
+//		this.heatRequired.setMax();
+//	}
 /**
  * Shuts down the circuit :
  * State = Off.
@@ -83,12 +83,12 @@ public class Circuit_Mixer extends Circuit_Abstract
  * task will be deactivated by scheduler.
  * Floor specific : positionMixer = ZERO
 */
-	@Override
-	public void initiateShutDown()
-	{
-//		this.mixer.positionZero();
-		super.initiateShutDown();
-	}
+//	@Override
+//	public void initiateShutDown()
+//	{
+////		this.mixer.positionZero();
+//		super.initiateShutDown();
+//	}
 /**
  * Optimises the circuit :
  * State = Optimising.
@@ -97,14 +97,14 @@ public class Circuit_Mixer extends Circuit_Abstract
  * circuitPump = ON.
  * Floor specific : positionMixer = 20%
  */	
-	@Override
-	public void optimise()
-	{
-		// TODO : Kludge
-		this.state	= HVAC_STATES.Circuit.Optimising; // Must be done here as mixer positionning takes time, and scheduler will set taskActive to null
-		this.mixer.positionPercentage(0.20F);
-		super.optimise();
-	}
+//	@Override
+//	public void optimise()
+//	{
+//		// TODO : Kludge
+//		this.state	= HVAC_STATES.Circuit.Optimising; // Must be done here as mixer positionning takes time, and scheduler will set taskActive to null
+//		this.mixer.positionPercentage(0.20F);
+//		super.optimise();
+//	}
 	//
 	//===========================================================================================================================================================
 
@@ -231,6 +231,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			state 																			= HVAC_STATES.Circuit.Off;	
 			break;
 		case Suspended:
+			this.heatRequired.setZero();
 			// Used if outSide temp > Summer temp
 		case Resuming:
 			LogIt.error("Circuit_" + this.name, "sequencer", "state error detected : " + state.toString());

@@ -114,17 +114,17 @@ abstract class Circuit_Abstract
 * heatRequired.max/min = ZERO.
 * NB : State Stopping can lean on to Optimising. To end the task with certainty, use shutDown
 */	
-	public void stop()
-	{
-		// Called on one of the following conditions
-		//   1. Time is up : 					Detected/Called by Circuit_Abstract.scheduleTask
-		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
-		// Depending on the situation, the circuit will either optimise or stopdown completely
-		LogIt.action(this.name, "Stop called");
-		LogIt.debug("Stop called" + this.name);
-		this.heatRequired.setZero();
-		state 																				= HVAC_STATES.Circuit.Stopping;
-	}
+//	public void stop()
+//	{
+//		// Called on one of the following conditions
+//		//   1. Time is up : 					Detected/Called by Circuit_Abstract.scheduleTask
+//		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
+//		// Depending on the situation, the circuit will either optimise or stopdown completely
+//		LogIt.action(this.name, "Stop called");
+//		LogIt.debug("Stop called" + this.name);
+//		this.heatRequired.setZero();
+//		state 																				= HVAC_STATES.Circuit.Stopping;
+//	}
 /**
  * Sets the circuit to normal operating :
  * State set to Running.
@@ -143,24 +143,24 @@ abstract class Circuit_Abstract
  * circuitPump = UNCHANGED.
  * heatRequired.max/min = 0.
  */	
-	public void idle()
-	{
-		LogIt.action(this.name, "Idle called");
-		LogIt.debug("Idle called" + this.name);
-		this.heatRequired.setZero();
-		state 																				= HVAC_STATES.Circuit.Idle;
-	}
+//	public void idle()
+//	{
+//		LogIt.action(this.name, "Idle called");
+//		LogIt.debug("Idle called" + this.name);
+//		this.heatRequired.setZero();
+//		state 																				= HVAC_STATES.Circuit.Idle;
+//	}
 /**
  * Not implemented
  */
-	public void interupt()
-	{
+//	public void interupt()
+//	{
 //		LogIt.action(this.name, "closing down");
 //		this.state																			= CIRCUIT_STATE_Off;
 //		this.heatRequired																	= null;
 //		this.taskActive.state																= this.taskActive.TASK_STATE_Completed; // What happens if the task has been switched to a new one
 //		this.taskActive																		= null;
-	}
+//	}
 /**
  * Suspends the circuit :
  * State = Suspended.
@@ -193,8 +193,8 @@ abstract class Circuit_Abstract
  * circuitPump = ON.
  * heatRequired.max/min = ZERO.
  */	
-	public void optimise()						
-	{						
+//	public void optimise()						
+//	{						
 //		if (this.taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
 //		{
 //			LogIt.debug(this.name + " Optimising called by Thread_Background");
@@ -208,8 +208,8 @@ abstract class Circuit_Abstract
 //		this.heatRequired.setZero();
 //		this.circuitPump.on();																// This checks to see if on to avoid uneccessary relay activity	
 //		state 																				= HVAC_STATES.Circuit.Optimising;
-		state 																				= HVAC_STATES.Circuit.BeginningOptimisation;
-	}
+//		state 																				= HVAC_STATES.Circuit.BeginningOptimisation;
+//	}
 	//
 	//===========================================================================================================================================================
 
@@ -412,7 +412,7 @@ abstract class Circuit_Abstract
 			switch (thisTask.taskType)
 			{
 			case Optimisation :
-				this.optimise();
+				this.initiateOptimisation();
 				break;
 			case Immediate :
 			case AntiFreeze :
@@ -443,7 +443,7 @@ abstract class Circuit_Abstract
 			switch (taskActive.taskType)
 			{
 			case Optimisation :
-				this.optimise();
+				this.initiateOptimisation();
 				break;
 			case Immediate :
 			case AntiFreeze :
@@ -501,7 +501,7 @@ abstract class Circuit_Abstract
 		}
 		// taskActive is not set to null so that Circuit_Mixer & Thread_Mixer keeps a handle onto the task
 		// It will be set to null by the sequencer once it has really stopped
-		this.stop();
+		this.initiateOptimisation();
 		LogIt.display("Circuit_Abstract", "taskDeactivate", "==============================================================");
 	}	// taskDeactivate
 	//

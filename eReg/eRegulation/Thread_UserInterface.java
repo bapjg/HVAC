@@ -69,7 +69,7 @@ public class Thread_UserInterface implements Runnable
 				}
 				else
 				{
-					Global.circuitHotWater.stop();
+					Global.circuitHotWater.initiateOptimisation();
 				}
             }
             if (buttons.button2)
