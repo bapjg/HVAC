@@ -43,9 +43,9 @@ public class Circuit_Radiator extends Circuit_Abstract
 	// Activity/State Change methods
 	//
 	@Override 
-	public void start()
+	public void initiateStart()
 	{
-		super.start();
+		super.initiateStart();
 		Integer 									temp									= temperatureGradient.getTempToTarget();
 		this.heatRequired.set(temp - 7500, temp + 7500);
 	}
@@ -74,9 +74,9 @@ public class Circuit_Radiator extends Circuit_Abstract
 		//
 		// Check for security / errors
 		//
-		if 	(Global.thermoBoiler.reading 		== null) 
+		if 	(Global.thermoBoiler.reading == null) 
 		{
-			super.shutDown();																		// This bypasses stopRequested
+			super.initiateShutDown();																		// This bypasses stopRequested
 			state 																			= HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_Radiator/sequencer", "A Thermometer cannont be read");
 		}
@@ -118,12 +118,17 @@ public class Circuit_Radiator extends Circuit_Abstract
 			//Nothing to do
 			break;
 		case Starting:
-			if (Global.thermoBoiler.reading > Global.thermoHotWater.reading) 				// We can start pumping heat (was : > this.heatRequired.tempMinimum)
+			this.heatRequired.tempMinimum													= temp - 7500;
+			this.heatRequired.tempMaximum													= temp + 7500;
+			circuitPump.on();
+			state 																			= HVAC_STATES.Circuit.RampingUp;
+			break;
+		case RampingUp:
+			if (Global.thermoBoiler.reading > 0) 											// We could have a temperature condition here
 			{
 				LogIt.action("PumpRadiator", "On");
 				circuitPump.on();
-				super.nowRunning();
-//				state 																		= HVAC_STATES.Circuit.Running;
+				state 																		= HVAC_STATES.Circuit.Running;
 			}
 			break;
 		case Running:
@@ -131,17 +136,20 @@ public class Circuit_Radiator extends Circuit_Abstract
 			this.heatRequired.tempMaximum													= temp + 7500;
 			break;
 		case Stopping:
-			if 	 	(Global.circuits.isSingleActiveCircuit())								this.optimise();							//  Continue while boilerTemp more than 3 degrees than return temp
-			else 																			this.shutDown();
+			if 	 	(Global.circuits.isSingleActiveCircuit())								this.initiateOptimisation();							//  Continue while boilerTemp more than 3 degrees than return temp
+			else 																			this.initiateShutDown();
+			break;
+		case BeginningOptimisation :
+			this.heatRequired.setZero();
+			state 																			= HVAC_STATES.Circuit.Optimising;
 			break;
 		case Optimising:
-			if 		(! Global.circuits.isSingleActiveCircuit())								super.shutDown();
-			else if	(Global.thermoBoiler.reading < temp - 7500	)   						super.shutDown();//  Continue while boilerTemp more than 3 degrees than return temp
+			if 		(! Global.circuits.isSingleActiveCircuit())								super.initiateShutDown();
+			else if	(Global.thermoBoiler.reading < temp - 7500	)   						super.initiateShutDown();//  Continue while boilerTemp more than 3 degrees than return temp
 			break;	// Continue as singleCircuit and some heat left in system
-		case Resuming:
-		case RampingUp:
-		case Idle:
 		case Suspended:
+		case Resuming:
+		case Idle:
 		case Error:
 		default:
 			LogIt.error("Circuit_" + this.name, "sequencer", "state error detected : " + state.toString());

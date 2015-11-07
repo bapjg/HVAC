@@ -70,9 +70,9 @@ public class Circuit_Mixer extends Circuit_Abstract
 	// Activity/State Change methods
 	//
 	@Override
-	public void start()
+	public void initiateStart()
 	{
-		super.start();
+		super.initiateStart();
 		this.heatRequired.setMax();
 	}
 /**
@@ -84,10 +84,10 @@ public class Circuit_Mixer extends Circuit_Abstract
  * Floor specific : positionMixer = ZERO
 */
 	@Override
-	public void shutDown()
+	public void initiateShutDown()
 	{
 //		this.mixer.positionZero();
-		super.shutDown();
+		super.initiateShutDown();
 	}
 /**
  * Optimises the circuit :
@@ -133,7 +133,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		if (	(Global.thermoBoiler.reading 		== null) 
 		||		(Global.thermoLivingRoom.reading 	== null)	)
 		{
-			this.shutDown();											// This bypasses stopRequested
+			this.initiateShutDown();											// This bypasses stopRequested
 			state 																			= HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_Mixer/sequencer", "A Thermometer cannont be read");
 		}
@@ -174,25 +174,30 @@ public class Circuit_Mixer extends Circuit_Abstract
 			//Nothing to do
 			break;
 		case Starting:
-			if (Global.isSummer())					suspend();
-			this.heatRequired.setMax();				// Avoid condensation
-
-			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
+			if (Global.isSummer())			
 			{
-				circuitPump.on();														// CircuitPump must be on in order to obtain correct temperature readings
-				idle();
+				state 																		= HVAC_STATES.Circuit.Suspended;
 			}
-			if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
+			else
 			{
-				circuitPump.on();														// Switch on circuit pump now
-				state 																	= HVAC_STATES.Circuit.RampingUp;
+				this.heatRequired.setMax();				// Avoid condensation
+				circuitPump.on();															// CircuitPump must be on in order to obtain correct temperature readings
+	
+				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
+				{
+					state 																	= HVAC_STATES.Circuit.Idle;
+				}
+				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
+				{
+					state 																	= HVAC_STATES.Circuit.RampingUp;
+				}
 			}
 			break;
 		case RampingUp:
-			lastAccurateFloorInTemp														= Global.thermoFloorIn.reading;
-			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective - 1000)	// Otherwise Stay in rampUp mode
+			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
+			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective - 1000)		// Otherwise Stay in rampUp mode
 			{
-				nowRunning();
+				state 																		= HVAC_STATES.Circuit.Running;
 			}
 			break;
 		case Running:
@@ -201,33 +206,42 @@ public class Circuit_Mixer extends Circuit_Abstract
 //			suspend();
 //			break;
 //		}
-			lastAccurateFloorInTemp														= Global.thermoFloorIn.reading;
+			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
 			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
-			{
-				idle();			// This keeps the floor pump going
+			{																				// This keeps the floor pump going
+				state 																		= HVAC_STATES.Circuit.Idle;
 			}
 			break;
-		case Idle:
-			lastAccurateFloorInTemp														= Global.thermoFloorIn.reading;
-			if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective) // OR Floor return temp too cold
-			{
-				resume();			// This keeps the floor pump going
-			}
+		case Stopping:
+			if 	 	(Global.circuits.isSingleActiveCircuit())		this.initiateOptimisation();							//  Continue while boilerTemp more than 3 degrees than return temp
+			else 													this.initiateShutDown();
 			break;
-		case Resuming:
-			lastAccurateFloorInTemp														= Global.thermoFloorIn.reading;
-			start();
+		case BeginningOptimisation :
+			this.heatRequired.setZero();
+			state 																			= HVAC_STATES.Circuit.Optimising;
 			break;
 		case Optimising:
-			lastAccurateFloorInTemp														= Global.thermoFloorIn.reading;
-			if 		(! Global.circuits.isSingleActiveCircuit())		this.shutDown();
-			else if	(! this.canOptimise())   						this.shutDown();	//  Continue while boilerTemp more than 3 degrees than return temp
+			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
+			if 		(! Global.circuits.isSingleActiveCircuit())		this.initiateShutDown();
+			else if	(! this.canOptimise())   						this.initiateShutDown();	//  Continue while boilerTemp more than 3 degrees than return temp
 			break;																		// Continue as singlecircuit AND canOptimise = true
-		case Stopping:
-			if 	 	(Global.circuits.isSingleActiveCircuit())		this.optimise();							//  Continue while boilerTemp more than 3 degrees than return temp
-			else 													this.shutDown();
+		case ShuttingDown:
+			circuitPump.off();
+			this.heatRequired.setZero();
+			state 																			= HVAC_STATES.Circuit.Off;	
 			break;
 		case Suspended:
+			// Used if outSide temp > Summer temp
+		case Resuming:
+			LogIt.error("Circuit_" + this.name, "sequencer", "state error detected : " + state.toString());
+			break;
+		case Idle:
+			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
+			if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective) // OR Floor return temp too cold
+			{
+				state 																		= HVAC_STATES.Circuit.Starting;	
+			}
+			break;
 		case Error:
 		default:
 			LogIt.error("Circuit_" + this.name, "sequencer", "state error detected : " + state.toString());

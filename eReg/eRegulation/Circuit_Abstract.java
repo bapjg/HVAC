@@ -73,19 +73,47 @@ abstract class Circuit_Abstract
  * circuitPump = UNCHANGED
  * heatRequired.max/min = UNCHANGED, The Starting State should/will set it
  */	
-	public  void start()
+	public  void initiateStart()
 	{
 		LogIt.action(this.name, "Start called");
 		LogIt.debug("Start called" + this.name);
 		state																				= HVAC_STATES.Circuit.Starting;
 	}
 /**
- * Initiates stopping of the circuit :
- * State = Stopping.
- * circuitPump = UNCHANGED.
+ * Shuts down the circuit :
+ * State = Off.
+ * circuitPump = OFF.
  * heatRequired.max/min = ZERO.
- * NB : State Stopping can lean on to Optimising. To end the task with certainty, use shutDown
- */	
+ * task will be deactivated by scheduler.
+ */
+	public void initiateOptimisation()
+	{
+		state 																				= HVAC_STATES.Circuit.BeginningOptimisation;
+	}
+ 
+/**
+* Shuts down the circuit :
+* State = Off.
+* circuitPump = OFF.
+* heatRequired.max/min = ZERO.
+* task will be deactivated by scheduler.
+*/
+	public void initiateShutDown()
+	{
+		state 																				= HVAC_STATES.Circuit.ShuttingDown;
+//			LogIt.action(this.name, "Closing down completely");
+//			LogIt.debug("Closing down completely" + this.name);
+//			circuitPump.off();
+//			this.heatRequired.setZero();
+//			state 																			= HVAC_STATES.Circuit.Off;
+	}
+/**
+* Initiates stopping of the circuit :
+* State = Stopping.
+* circuitPump = UNCHANGED.
+* heatRequired.max/min = ZERO.
+* NB : State Stopping can lean on to Optimising. To end the task with certainty, use shutDown
+*/	
 	public void stop()
 	{
 		// Called on one of the following conditions
@@ -103,12 +131,12 @@ abstract class Circuit_Abstract
  * circuitPump = UNCHANGED.
  * heatRequired.max/min = UNCHANGED, The Running State should/will set it.
  */	
-	public void nowRunning()
-	{
-		LogIt.action(this.name, "NowRunning called");
-		LogIt.debug("NowRunning called" + this.name);
-		state 																				= HVAC_STATES.Circuit.Running;
-	}
+//	public void nowRunning()
+//	{
+//		LogIt.action(this.name, "NowRunning called");
+//		LogIt.debug("NowRunning called" + this.name);
+//		state 																				= HVAC_STATES.Circuit.Running;
+//	}
 /**
  * Idles the circuit :
  * State = Idle.
@@ -121,21 +149,6 @@ abstract class Circuit_Abstract
 		LogIt.debug("Idle called" + this.name);
 		this.heatRequired.setZero();
 		state 																				= HVAC_STATES.Circuit.Idle;
-	}
-/**
- * Shuts down the circuit :
- * State = Off.
- * circuitPump = OFF.
- * heatRequired.max/min = ZERO.
- * task will be deactivated by scheduler.
- */
-	public void shutDown()
-	{
-		LogIt.action(this.name, "Closing down completely");
-		LogIt.debug("Closing down completely" + this.name);
-		circuitPump.off();
-		this.heatRequired.setZero();
-		state 																				= HVAC_STATES.Circuit.Off;
 	}
 /**
  * Not implemented
@@ -154,26 +167,26 @@ abstract class Circuit_Abstract
  * circuitPump = OFF.
  * heatRequired.max/min = ZERO.
  */	
-	public void suspend()
-	{
-		LogIt.action(this.name, "Suspend called");
-		LogIt.debug("Suspend called" + this.name);
-		this.heatRequired.setZero();
-		this.circuitPump.off();
-		state 																				= HVAC_STATES.Circuit.Suspended;
-	}						
+//	public void suspend()
+//	{
+//		LogIt.action(this.name, "Suspend called");
+//		LogIt.debug("Suspend called" + this.name);
+//		this.heatRequired.setZero();
+//		this.circuitPump.off();
+//		state 																				= HVAC_STATES.Circuit.Suspended;
+//	}						
 /**
  * Resumes the circuit :
  * State = Resuming.
  * circuitPump = UNCHANGED.
  * heatRequired.max/min = UNCHANGED, The Resuming State should/will set it.
  */	
-	public void resume()						
-	{						
-		LogIt.action(this.name, "Resume called");						
-		LogIt.debug("Resume called" + this.name);
-		state 																				= HVAC_STATES.Circuit.Resuming;
-	}
+//	public void resume()						
+//	{						
+//		LogIt.action(this.name, "Resume called");						
+//		LogIt.debug("Resume called" + this.name);
+//		state 																				= HVAC_STATES.Circuit.Resuming;
+//	}
 /**
  * Optimises the circuit :
  * State = Optimising.
@@ -182,19 +195,20 @@ abstract class Circuit_Abstract
  */	
 	public void optimise()						
 	{						
-		if (this.taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
-		{
-			LogIt.debug(this.name + " Optimising called by Thread_Background");
-			LogIt.action(this.name, "Optimising called by Thread_Background");
-		}
-		else
-		{
-			LogIt.debug(this.name + " Optimising called inline");
-			LogIt.action(this.name, "Optimising called inline");
-		}
-		this.heatRequired.setZero();
-		this.circuitPump.on();																// This checks to see if on to avoid uneccessary relay activity	
-		state 																				= HVAC_STATES.Circuit.Optimising;
+//		if (this.taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
+//		{
+//			LogIt.debug(this.name + " Optimising called by Thread_Background");
+//			LogIt.action(this.name, "Optimising called by Thread_Background");
+//		}
+//		else
+//		{
+//			LogIt.debug(this.name + " Optimising called inline");
+//			LogIt.action(this.name, "Optimising called inline");
+//		}
+//		this.heatRequired.setZero();
+//		this.circuitPump.on();																// This checks to see if on to avoid uneccessary relay activity	
+//		state 																				= HVAC_STATES.Circuit.Optimising;
+		state 																				= HVAC_STATES.Circuit.BeginningOptimisation;
 	}
 	//
 	//===========================================================================================================================================================
@@ -253,7 +267,7 @@ abstract class Circuit_Abstract
 			// Avoid midnight perturbations
 			if (Global.Time.now() > Global.Time.parseTime("23:58"))
 			{
-				if (this.state == HVAC_STATES.Circuit.Optimising)					this.shutDown();
+				if (this.state == HVAC_STATES.Circuit.Optimising)					this.initiateShutDown();
 				else 																taskDeactivate(taskActive);
 				return; 															// Go no further
 			}
@@ -403,7 +417,7 @@ abstract class Circuit_Abstract
 			case Immediate :
 			case AntiFreeze :
 			case Calendar :
-				this.start();
+				this.initiateStart();
 				break;
 			}
 		}
@@ -434,7 +448,7 @@ abstract class Circuit_Abstract
 			case Immediate :
 			case AntiFreeze :
 			case Calendar :
-				this.start();
+				this.initiateStart();
 				break;
 			}
 

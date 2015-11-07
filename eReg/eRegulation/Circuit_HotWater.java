@@ -72,7 +72,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 		if (	(Global.thermoBoiler.reading 	== null) 
 		||		(Global.thermoHotWater.reading 	== null)	)
 		{
-			super.shutDown();											// This bypasses stopRequested
+			super.initiateShutDown();											// This bypasses stopRequested
 			state 																			= HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_HotWater/sequencer", "A Thermometer cannont be read");
 		}
@@ -121,10 +121,13 @@ public class Circuit_HotWater extends Circuit_Abstract
 			break;
 		case Starting:
 			this.heatRequired.set(this.taskActive.tempObjective + 10000, this.tempMax);
+			state 																			= HVAC_STATES.Circuit.RampingUp;
+			break;
+		case RampingUp:
 			if 		(Global.thermoBoiler.reading 	> Global.thermoHotWater.reading)
 			{
 				circuitPump.on();
-				super.nowRunning();
+				state 																		= HVAC_STATES.Circuit.Running;
 			}
 			break;
 		case Running:
@@ -141,13 +144,19 @@ public class Circuit_HotWater extends Circuit_Abstract
 			{
 				if (Global.circuits.isSingleActiveCircuit())								// Use optimisation
 				{
-					if 		(deltaHotWater  < 0           )			super.optimise();				// Over target
-					else if (deltaRatio 	> deltaMinimum)			super.optimise();				// Enough energy left
+					if (	(deltaHotWater  < 0           )				// Over target
+					||		(deltaRatio 	> deltaMinimum)	)
+					{
+						state																= HVAC_STATES.Circuit.Optimising;			
+					}
 					// Otherwise									keep running
 				}
 				else																		// No optimisation ass multiple circuits
 				{
-					if 		(deltaHotWater < 0)						super.stop();
+					if 		(deltaHotWater < 0)
+					{
+						state																= HVAC_STATES.Circuit.ShuttingDown;			
+					}
 				}
 			}
 //			else	// Task must continue until time up
@@ -164,7 +173,14 @@ public class Circuit_HotWater extends Circuit_Abstract
 //				}
 //			}
 			break;
-			
+		case Stopping:
+			if 	 	(Global.circuits.isSingleActiveCircuit())								this.optimise();							//  Continue while boilerTemp more than 3 degrees than return temp
+			else 																			this.initiateShutDown();
+			break;
+		case BeginningOptimisation :
+			this.heatRequired.setZero();
+			state 																			= HVAC_STATES.Circuit.Optimising;
+			break;
 		case Optimising:
 			
 			//	singleCircuit		stopOnObjective			deltaRatio > deltaMinimum		deltaHotWater < 0 (ie over temp)
@@ -173,20 +189,24 @@ public class Circuit_HotWater extends Circuit_Abstract
 			//		No					Yes																stop()
 			//		No					No			*													suspend()
 			
-			if 		(! Global.circuits.isSingleActiveCircuit())								super.shutDown();
-			else if	(Global.thermoBoiler.reading < Global.thermoHotWater.reading + 3000)	super.shutDown();//  Continue while boilerTemp more than 3 degrees than return temp
+			if 		(! Global.circuits.isSingleActiveCircuit())								super.initiateShutDown();
+			else if	(Global.thermoBoiler.reading < Global.thermoHotWater.reading + 3000)	super.initiateShutDown();//  Continue while boilerTemp more than 3 degrees than return temp
+			break;
+		case ShuttingDown:
+			circuitPump.off();
+			this.heatRequired.setZero();
+			state 																			= HVAC_STATES.Circuit.Off;	
 			break;
 		case Suspended:																		// In this state the circuitPump has been switched off If 5 degrees less than objective
-			if (Global.thermoBoiler.reading < this.taskActive.tempObjective - 5000) 		resume();	
+			this.heatRequired.setZero();
+			if (Global.thermoBoiler.reading < this.taskActive.tempObjective - 5000)
+			{
+				state 																		= HVAC_STATES.Circuit.Resuming;	
+			}
 			break;
 		case Resuming:																		// Setting state to starting will setup heat required etc, and turn on pump at the right time.
-			this.start();
+			state 																			= HVAC_STATES.Circuit.Starting;	
 			break;
-		case Stopping:
-			if 	 	(Global.circuits.isSingleActiveCircuit())								this.optimise();							//  Continue while boilerTemp more than 3 degrees than return temp
-			else 																			this.shutDown();
-			break;
-		case RampingUp:			// Only applies to floor
 		case Idle:			// We only idle circuits when temp reached and keep pump on. Not applicable to HW
 		case Error:
 		default:

@@ -25,7 +25,7 @@ public class Mixer
 
 	public Integer 												tempMax 					= 48000;	
 	public Integer 												tempDontMove				= 20;
-	public Integer 												positionTracked				= 0;			//This is the position expressed in milliseconds swinging from cold towards hot
+	public Integer 												positionTracked				= null;			//This is the position expressed in milliseconds swinging from cold towards hot
 	public Integer												swingTimeRequired			= 0;
 	public Integer												safeSingleCircuitPosition	= 23 * 1000;	// Was 26 * 1000
 	public Integer												safeDoubleCircuitPosition	= 40 * 1000;	
@@ -91,7 +91,7 @@ public class Mixer
 		// Simply measure the difference between wanted temperature and mixerOut
 		// Multiply by a coefficient (250ms/decimal degree to start with) and see how it goes
 		//
-
+		if (positionTracked == null)				return;			// Mixer has not yet been positionned
 		try
 		{
 			allOff();
@@ -334,28 +334,24 @@ public class Mixer
 	}
 	public void positionPercentage(float percentage)
 	{
-		positionZero();
+		if (positionTracked == null)				positionZero();
 		allOff();
 		positionTracked																		= positionAbsolute((int) (swingTime.floatValue() * percentage)).positionTracked;
 	}
 	public void positionFull()
 	{
+		allOff();
+		mixerUp.on();
 		if ((positionTracked != null) && (positionTracked != swingTime))
 		{
-			allOff();
-			mixerUp.on();
 			Global.waitMilliSeconds(swingTime - positionTracked + 2000);		// Add 2 extra seconds to be certain
-			mixerUp.off();
-			positionTracked																	= swingTime;
 		}
 		else
 		{
-			allOff();
-			mixerUp.on();
 			Global.waitMilliSeconds(swingTime + 2000);
-			mixerUp.off();
-			positionTracked																	= 0;
 		}
+		mixerUp.off();
+		positionTracked																		= swingTime;
 	}
 	public MixerMove_Report positionAbsolute(Integer position)
 	{
