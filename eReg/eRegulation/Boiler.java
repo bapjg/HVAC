@@ -68,8 +68,6 @@ public class Boiler
 	{
 		burner.powerOff();
 		this.heatRequired.setZero();
-//		tempMax 																			= -1000;
-//		tempMin 																			= -1000;
 		state 																				= HVAC_STATES.Boiler.Off;
 	}
 	public Boolean checkOverHeat()

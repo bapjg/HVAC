@@ -140,6 +140,7 @@ public class Control
 		//
 		
 		Heat_Required 											globalHeatRequired			= new Heat_Required();
+		Global.boiler.heatRequired															= globalHeatRequired;	// Avoid null pointer if stopNow actionned immediately
 		
 		while (!Global.stopNow)
 		{
@@ -170,7 +171,7 @@ public class Control
 		}
 		
 		//
-		// End of Main Code
+		// End of Main Code : while (!Global.stopNow)
 		//
 		//=============================================================
 
