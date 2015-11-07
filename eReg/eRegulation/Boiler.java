@@ -42,28 +42,13 @@ public class Boiler
 // Remember to restart TomCat with new version of software
 // Android sends/receives data in JSON format, but eReg only gets it in Fava Object Format
 
-//		if (boilerparams.tempCondensationAvoidance == null)	this.tempCondensationAvoidance	= 55000;
-//		else this.tempCondensationAvoidance													= boilerparams.tempCondensationAvoidance.milliDegrees;
-//		
 		this.thermoBoiler 																	= Global.thermometers.fetchThermometer(boilerparams.thermometer);
 		this.burner																			= Global.burner;
-//		this.tempMax 																		= -1;
-//		this.tempMin 																		= -1;
 		this.tempNeverExceed																= boilerparams.tempNeverExceed.milliDegrees;
 		this.tempOvershoot																	= boilerparams.tempOverShoot.milliDegrees;
 		this.tempCondensationAvoidance														= boilerparams.tempCondensationAvoidance.milliDegrees;
 		state																				= HVAC_STATES.Boiler.Off;
 	}
-//	public void requestHeat(Heat_Required eR)
-//	{
-//		tempMax 																			= eR.tempMaximum;
-//		tempMin 																			= eR.tempMinimum;
-//		if (eR.isZero())										return;
-//		if (tempMax > tempNeverExceed - tempOvershoot)			tempMax 					= tempNeverExceed - tempOvershoot;
-//		if (tempMin < tempCondensationAvoidance)				tempMin 					= tempCondensationAvoidance;
-//		if (thermoBoiler.reading > tempMin)						return;						// No need to heat
-//		if (state == HVAC_STATES.Boiler.Off)					state						= HVAC_STATES.Boiler.PowerUp;
-//	}
 	public void requestIdle()
 	{
 		burner.powerOff();
@@ -86,7 +71,6 @@ public class Boiler
 	}
 	public void sequencer()
 	{
-		// New Code
 		if (	(this.heatRequired.isZero()) 
 		&& 		(this.state != HVAC_STATES.Boiler.Off)
 		&&		(this.state != HVAC_STATES.Boiler.Error)		)							// No heat required and Off
@@ -95,19 +79,18 @@ public class Boiler
 		}
 		else
 		{
-			if (this.heatRequired.tempMaximum > tempNeverExceed - tempOvershoot)
-			{
-				this.heatRequired.tempMaximum 												= tempNeverExceed - tempOvershoot;
-			}
-			if (this.heatRequired.tempMinimum < tempCondensationAvoidance)
-			{
-				this.heatRequired.tempMinimum 												= tempCondensationAvoidance;
-			}
+			this.heatRequired.tempMaximum	= (this.heatRequired.tempMaximum > tempNeverExceed - tempOvershoot) ? tempNeverExceed - tempOvershoot 	: this.heatRequired.tempMaximum;
+			this.heatRequired.tempMinimum	= (this.heatRequired.tempMinimum < tempCondensationAvoidance) 		? tempCondensationAvoidance 		: this.heatRequired.tempMinimum;
+			
+//			if (this.heatRequired.tempMaximum > tempNeverExceed - tempOvershoot)
+//			{
+//				this.heatRequired.tempMaximum 												= tempNeverExceed - tempOvershoot;
+//			}
+//			if (this.heatRequired.tempMinimum < tempCondensationAvoidance)
+//			{
+//				this.heatRequired.tempMinimum 												= tempCondensationAvoidance;
+//			}
 		}
-//		if (thermoBoiler.reading > tempMin)						return;						// No need to heat
-//		if (state == HVAC_STATES.Boiler.Off)					state						= HVAC_STATES.Boiler.PowerUp;
-
-		// Continue as before
 		try
 		{
 			Integer												tempNow						= Global.thermoBoiler.readUnCached();
