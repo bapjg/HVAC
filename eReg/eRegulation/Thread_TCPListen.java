@@ -234,7 +234,7 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		else if (message_in.action == message_in.ACTION_Stop)
 		{
-			circuit.initiateOptimisation();
+			circuit.requestOptimisation();
 		}
 		else
 		{
@@ -423,7 +423,7 @@ public class Thread_TCPListen 			implements Runnable
 					task									= null;
 				}
 				circuit.circuitTaskList						= null;
-				circuit.initiateShutDown();
+				circuit.requestShutDown();
 			}
 			// Now wait for each circuit to stop
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)

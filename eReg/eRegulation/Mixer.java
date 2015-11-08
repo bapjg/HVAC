@@ -340,18 +340,26 @@ public class Mixer
 	}
 	public void positionFull()
 	{
-		allOff();
-		mixerUp.on();
-		if ((positionTracked != null) && (positionTracked != swingTime))
+		if (positionTracked == null)
 		{
-			Global.waitMilliSeconds(swingTime - positionTracked + 2000);		// Add 2 extra seconds to be certain
-		}
-		else
-		{
+			allOff();
+			mixerUp.on();
 			Global.waitMilliSeconds(swingTime + 2000);
+			mixerUp.off();
+			positionTracked																	= swingTime;
 		}
-		mixerUp.off();
-		positionTracked																		= swingTime;
+		else if (positionTracked < swingTime)
+		{
+			allOff();
+			mixerUp.on();
+			Global.waitMilliSeconds(positionTracked + 2000);					// Add 2 extra seconds to be certain
+			mixerUp.off();
+			positionTracked																	= swingTime;
+		}
+		else if (positionTracked == swingTime)
+		{
+			// Do nothing
+		}
 	}
 	public MixerMove_Report positionAbsolute(Integer position)
 	{

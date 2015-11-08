@@ -28,27 +28,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 	{
 		return false;
 	}
-/**
- * Does nothing... Cannot be optimised
- */
-//	public void startOptimisation()
-//	{
-//		return;
-//	}
-	//
-	//===========================================================================================================================================================
-
-	//===========================================================================================================================================================
-	//
-	// Activity/State Change methods
-	//
-//	@Override 
-//	public void initiateStart()
-//	{
-//		super.initiateStart();
-//		Integer 									temp									= temperatureGradient.getTempToTarget();
-//		this.heatRequired.set(temp - 7500, temp + 7500);
-//	}
+	// end of Performance methods
 	//
 	//===========================================================================================================================================================
 
@@ -64,7 +44,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 		// Check for work
 		//
 		
-		if (taskActive == null)									return;			//Nothing to do	
+//		if (taskActive == null)									return;			//Nothing to do	
 		
 		// end of Check for work
 		//
@@ -76,7 +56,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 		//
 		if 	(Global.thermoBoiler.reading == null) 
 		{
-			super.initiateShutDown();																		// This bypasses stopRequested
+			super.requestShutDown();																		// This bypasses stopRequested
 			state 																			= HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_Radiator/sequencer", "A Thermometer cannont be read");
 		}
@@ -110,21 +90,21 @@ public class Circuit_Radiator extends Circuit_Abstract
 		//
 		// Do normal activity
 		//
-		Integer 											temp						= temperatureGradient.getTempToTarget();	// Outside temp may change
+		Integer 											temp							= temperatureGradient.getTempToTarget();	// Outside temp may change
 
 		switch (state)
 		{
 		case Off:
 			//Nothing to do
 			break;
-		case Starting:
+		case StartRequested:
 			this.heatRequired.tempMinimum													= temp - 7500;
 			this.heatRequired.tempMaximum													= temp + 7500;
 			circuitPump.on();
 			state 																			= HVAC_STATES.Circuit.RampingUp;
 			break;
 		case RampingUp:
-			if (Global.thermoBoiler.reading > 0) 											// We could have a temperature condition here
+			if (Global.thermoBoiler.reading > temp - 7500) 											// We could have a temperature condition here
 			{
 				LogIt.action("PumpRadiator", "On");
 				circuitPump.on();
@@ -135,18 +115,24 @@ public class Circuit_Radiator extends Circuit_Abstract
 			this.heatRequired.tempMinimum													= temp - 7500;
 			this.heatRequired.tempMaximum													= temp + 7500;
 			break;
-		case Stopping:
-			if 	 	(Global.circuits.isSingleActiveCircuit())								this.initiateOptimisation();							//  Continue while boilerTemp more than 3 degrees than return temp
-			else 																			this.initiateShutDown();
+		case StopRequested:
+			if 	 	(Global.circuits.isSingleActiveCircuit())								this.requestOptimisation();							//  Continue while boilerTemp more than 3 degrees than return temp
+			else 																			this.requestShutDown();
 			break;
-		case BeginningOptimisation :
+		case OptimisationRequested :
 			this.heatRequired.setZero();
 			state 																			= HVAC_STATES.Circuit.Optimising;
 			break;
 		case Optimising:
-			if 		(! Global.circuits.isSingleActiveCircuit())								super.initiateShutDown();
-			else if	(Global.thermoBoiler.reading < temp - 7500	)   						super.initiateShutDown();//  Continue while boilerTemp more than 3 degrees than return temp
+			if 		(! Global.circuits.isSingleActiveCircuit())								super.requestShutDown();
+			else if	(Global.thermoBoiler.reading < temp - 7500	)   						super.requestShutDown();//  Continue while boilerTemp more than 3 degrees than return temp
 			break;	// Continue as singleCircuit and some heat left in system
+		case ShutDownRequested:
+			circuitPump.off();
+			this.heatRequired.setZero();
+			state 																			= HVAC_STATES.Circuit.Off;	
+			this.taskActive																	= null;
+			break;
 		case Suspended:
 		case Resuming:
 		case Idle:

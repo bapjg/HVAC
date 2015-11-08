@@ -59,7 +59,8 @@ abstract class Circuit_Abstract
 	//
 	// Performance methods
 	//
-	public Long getRampUpTime(Integer tempObjective) 				{  /* OverRidden in Circuit_XXX classes */	return 0L; 	}
+	public abstract Long getRampUpTime(Integer tempObjective);
+	public abstract Boolean canOptimise();
 	//
 	//===========================================================================================================================================================
 
@@ -70,146 +71,43 @@ abstract class Circuit_Abstract
 /**
  * Starts the circuit :
  * State = Starting
- * circuitPump = UNCHANGED
- * heatRequired.max/min = UNCHANGED, The Starting State should/will set it
  */	
-	public  void initiateStart()
+	public  void requestStart()
 	{
 		LogIt.action(this.name, "Start called");
 		LogIt.debug("Start called" + this.name);
-		state																				= HVAC_STATES.Circuit.Starting;
+		state																				= HVAC_STATES.Circuit.StartRequested;
 	}
 /**
- * Shuts down the circuit :
- * State = Off.
- * circuitPump = OFF.
- * heatRequired.max/min = ZERO.
- * task will be deactivated by scheduler.
+ * Optimises the circuit :
+ * State = OptimisationRequested.
  */
-	public void initiateOptimisation()
+	public void requestOptimisation()
 	{
-		state 																				= HVAC_STATES.Circuit.BeginningOptimisation;
+		state 																				= HVAC_STATES.Circuit.OptimisationRequested;
+	}
+/**
+ * Stops the circuit :
+ * State = StopRequested.
+ */
+	public void requestStop()
+	{
+		state 																				= HVAC_STATES.Circuit.StopRequested;
 	}
  
 /**
 * Shuts down the circuit :
-* State = Off.
-* circuitPump = OFF.
-* heatRequired.max/min = ZERO.
-* task will be deactivated by scheduler.
+* State = ShutDownRequested.
 */
-	public void initiateShutDown()
+	public void requestShutDown()
 	{
-		state 																				= HVAC_STATES.Circuit.ShuttingDown;
+		state 																				= HVAC_STATES.Circuit.ShutDownRequested;
 //			LogIt.action(this.name, "Closing down completely");
 //			LogIt.debug("Closing down completely" + this.name);
 //			circuitPump.off();
 //			this.heatRequired.setZero();
 //			state 																			= HVAC_STATES.Circuit.Off;
 	}
-/**
-* Initiates stopping of the circuit :
-* State = Stopping.
-* circuitPump = UNCHANGED.
-* heatRequired.max/min = ZERO.
-* NB : State Stopping can lean on to Optimising. To end the task with certainty, use shutDown
-*/	
-//	public void stop()
-//	{
-//		// Called on one of the following conditions
-//		//   1. Time is up : 					Detected/Called by Circuit_Abstract.scheduleTask
-//		//   2. Temperature objective reached : Detected/Called by Circuit_XXX.sequencer (thermometer surveillance)
-//		// Depending on the situation, the circuit will either optimise or stopdown completely
-//		LogIt.action(this.name, "Stop called");
-//		LogIt.debug("Stop called" + this.name);
-//		this.heatRequired.setZero();
-//		state 																				= HVAC_STATES.Circuit.Stopping;
-//	}
-/**
- * Sets the circuit to normal operating :
- * State set to Running.
- * circuitPump = UNCHANGED.
- * heatRequired.max/min = UNCHANGED, The Running State should/will set it.
- */	
-//	public void nowRunning()
-//	{
-//		LogIt.action(this.name, "NowRunning called");
-//		LogIt.debug("NowRunning called" + this.name);
-//		state 																				= HVAC_STATES.Circuit.Running;
-//	}
-/**
- * Idles the circuit :
- * State = Idle.
- * circuitPump = UNCHANGED.
- * heatRequired.max/min = 0.
- */	
-//	public void idle()
-//	{
-//		LogIt.action(this.name, "Idle called");
-//		LogIt.debug("Idle called" + this.name);
-//		this.heatRequired.setZero();
-//		state 																				= HVAC_STATES.Circuit.Idle;
-//	}
-/**
- * Not implemented
- */
-//	public void interupt()
-//	{
-//		LogIt.action(this.name, "closing down");
-//		this.state																			= CIRCUIT_STATE_Off;
-//		this.heatRequired																	= null;
-//		this.taskActive.state																= this.taskActive.TASK_STATE_Completed; // What happens if the task has been switched to a new one
-//		this.taskActive																		= null;
-//	}
-/**
- * Suspends the circuit :
- * State = Suspended.
- * circuitPump = OFF.
- * heatRequired.max/min = ZERO.
- */	
-//	public void suspend()
-//	{
-//		LogIt.action(this.name, "Suspend called");
-//		LogIt.debug("Suspend called" + this.name);
-//		this.heatRequired.setZero();
-//		this.circuitPump.off();
-//		state 																				= HVAC_STATES.Circuit.Suspended;
-//	}						
-/**
- * Resumes the circuit :
- * State = Resuming.
- * circuitPump = UNCHANGED.
- * heatRequired.max/min = UNCHANGED, The Resuming State should/will set it.
- */	
-//	public void resume()						
-//	{						
-//		LogIt.action(this.name, "Resume called");						
-//		LogIt.debug("Resume called" + this.name);
-//		state 																				= HVAC_STATES.Circuit.Resuming;
-//	}
-/**
- * Optimises the circuit :
- * State = Optimising.
- * circuitPump = ON.
- * heatRequired.max/min = ZERO.
- */	
-//	public void optimise()						
-//	{						
-//		if (this.taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
-//		{
-//			LogIt.debug(this.name + " Optimising called by Thread_Background");
-//			LogIt.action(this.name, "Optimising called by Thread_Background");
-//		}
-//		else
-//		{
-//			LogIt.debug(this.name + " Optimising called inline");
-//			LogIt.action(this.name, "Optimising called inline");
-//		}
-//		this.heatRequired.setZero();
-//		this.circuitPump.on();																// This checks to see if on to avoid uneccessary relay activity	
-//		state 																				= HVAC_STATES.Circuit.Optimising;
-//		state 																				= HVAC_STATES.Circuit.BeginningOptimisation;
-//	}
 	//
 	//===========================================================================================================================================================
 
@@ -218,7 +116,6 @@ abstract class Circuit_Abstract
 	// Sequencer
 	//
 	public abstract void sequencer();
-	public abstract Boolean canOptimise();
 	//
 	//===========================================================================================================================================================
 
@@ -267,13 +164,13 @@ abstract class Circuit_Abstract
 			// Avoid midnight perturbations
 			if (Global.Time.now() > Global.Time.parseTime("23:58"))
 			{
-				if (this.state == HVAC_STATES.Circuit.Optimising)					this.initiateShutDown();
+				if (this.state == HVAC_STATES.Circuit.Optimising)					this.requestShutDown();
 				else 																taskDeactivate(taskActive);
 				return; 															// Go no further
 			}
 			// Carry on with the real work
 			if (	(now > taskActive.timeEnd						) 							// taskActive : Time up
-			&&		(this.state != HVAC_STATES.Circuit.Stopping		)   
+			&&		(this.state != HVAC_STATES.Circuit.StopRequested		)   
 			&&		(this.state != HVAC_STATES.Circuit.Optimising	)   )
 			{
 				// Time is up for this task and it hasn't yet been asked to stop
@@ -395,37 +292,15 @@ abstract class Circuit_Abstract
  */	
 	public void taskActivate(CircuitTask 							thisTask)
 	{
-		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activated " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + " " + thisTask.taskType.toString());
+		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activat requested " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + " " + thisTask.taskType.toString());
 
 		// Test to see if :
 		// - activeTask is null (just swap in)
 		// - activeTask if NOT null, and circuit is stopping
 		// - a newTask is moving in replacing an unfinished activeTask
 		// - try to schedule a task which is already active (shouldn't happen)
-		if (this.taskActive == null)														// Normal operation
-		{
-			LogIt.display("Circuit_Abstract", "taskActivate", "Called task Scheduled for " + this.name + ", type " + thisTask.taskType);
-			if (thisTask == null) LogIt.debug("Why is thisTask null");
-			this.taskActive																	= thisTask;
-			this.taskActive.dateLastRun														= Global.Date.now();
-			
-			switch (thisTask.taskType)
-			{
-			case Optimisation :
-				this.initiateOptimisation();
-				break;
-			case Immediate :
-			case AntiFreeze :
-			case Calendar :
-				this.initiateStart();
-				break;
-			}
-		}
-//		else if (this.state == HVAC_STATES.Circuit.Stopping)								// Its just been set, hasn't had time to move to optimising or Off
-//		{
-//			LogIt.debug("taskActive is stopping          = " + taskActive.days + " +++ " + taskActive.taskType.toString());
-//		}
-		else if (this.taskActive == thisTask)												// Should not normally occur
+
+		if (this.taskActive == thisTask)												// Should not normally occur
 		{
 			LogIt.display("Circuit_Abstract", "taskActivate", "The scheduled task is already active " + this.name + ", type " + thisTask.taskType);
 			LogIt.display("Circuit_Abstract", "taskActivate", "taskActive    = " + System.identityHashCode(taskActive));
@@ -433,46 +308,30 @@ abstract class Circuit_Abstract
 		}
 		else
 		{
-			LogIt.display("Circuit_Abstract", "taskActivate", "The scheduled task is replacing a task " + this.name);
-			LogIt.display("Circuit_Abstract", "taskActivate", "Replaced task    " + this.taskActive.taskType + ", days " + this.taskActive.days + ", time " + this.taskActive.timeStartDisplay + " - " + this.taskActive.timeEndDisplay);
-			LogIt.display("Circuit_Abstract", "taskActivate", "Replacement task " +        thisTask.taskType + ", days " +        thisTask.days + ", time " +        thisTask.timeStartDisplay + " - " +        thisTask.timeEndDisplay);
+			if (this.taskActive == null)														// Normal operation
+			{
+				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task inserted normally " + this.name + ", type " + thisTask.taskType);
+			}
+			else
+			{
+				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task replacing a task " + this.name + ", details follow :");
+				LogIt.display("Circuit_Abstract", "taskActivate", "Replaced Task  " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + " " + thisTask.taskType.toString());
+			}
 
 			this.taskActive																	= thisTask;
 			this.taskActive.dateLastRun														= Global.Date.now();
-			
-			switch (taskActive.taskType)
+		
+			switch (thisTask.taskType)
 			{
 			case Optimisation :
-				this.initiateOptimisation();
+				this.requestOptimisation();
 				break;
 			case Immediate :
 			case AntiFreeze :
 			case Calendar :
-				this.initiateStart();
+				this.requestStart();
 				break;
 			}
-
-//			if (taskActive.taskType == HVAC_TYPES.CircuitTask.Optimisation)
-//			{
-//				// This can happen. Just switch it in
-//				LogIt.display("Circuit_Abstract", "taskActivate", "Called task Swapped in as optimisation in progress");
-//				this.taskActive																	= thisTask;
-//				this.start();
-//				this.taskActive.dateLastRun														= Global.Date.now();
-//			}
-//			else if (thisTask.taskType == HVAC_TYPES.CircuitTask.Optimisation)
-//			{
-//				// taskActive is not Optimisation but thisTask is. taskActive is more important
-//				LogIt.display("Circuit_Abstract", "taskActivate", "Called task ignored as it is for optimisation while currentTask is doing real work");
-//			}
-//			else
-//			{
-//				LogIt.error("Circuit_Abstract", "taskActivate", "A task is active when it shouldn't be");
-//				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is occupied... Replaced");
-//				LogIt.info("Circuit_Abstract", "taskActivate", "Task to activate is already active");
-//				LogIt.display("Circuit_Abstract", "taskActivate", "taskActive          = " + taskActive.days + " +++ " + taskActive.taskType);
-//				LogIt.display("Circuit_Abstract", "taskActivate", "thisTask(candidate) = " + thisTask.days + " +++ " + thisTask.taskType);
-//			}
 		}
 	}	// taskActivate
 /**
@@ -482,10 +341,6 @@ abstract class Circuit_Abstract
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
 		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay);
-		if (thisTask != this.taskActive)
-		{
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "something has gone wrong, deActivated Task isn't the running task");
-		}
 		this.taskActive.dateLastRun															= Global.Date.now();
 		StackTraceElement[] 									stackTraceElements 			= Thread.currentThread().getStackTrace();
 		int i;
@@ -501,7 +356,7 @@ abstract class Circuit_Abstract
 		}
 		// taskActive is not set to null so that Circuit_Mixer & Thread_Mixer keeps a handle onto the task
 		// It will be set to null by the sequencer once it has really stopped
-		this.initiateOptimisation();
+		this.requestOptimisation();
 		LogIt.display("Circuit_Abstract", "taskDeactivate", "==============================================================");
 	}	// taskDeactivate
 	//

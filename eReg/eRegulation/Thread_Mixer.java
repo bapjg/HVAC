@@ -45,7 +45,7 @@ public class Thread_Mixer implements Runnable
 			||		(Global.thermoLivingRoom.reading 	== null)	)
 			{
 				Global.eMailMessage("Thread_Mixer/run", "Unable to read a Thermometer");
-				circuit.initiateShutDown();
+				circuit.requestShutDown();
 			}
 			
 			// Note that Mixer calls go to sleep when positionning the mixer.
@@ -82,7 +82,7 @@ public class Thread_Mixer implements Runnable
 				if (mixer.positionTracked != null)											mixer.positionZero();
 				Global.waitSeconds(10);
 				break;
-			case Starting :
+			case StartRequested :
 				mixer.positionPercentage(0.20F);
 				Global.waitSeconds(10);
 				break;
@@ -96,17 +96,17 @@ public class Thread_Mixer implements Runnable
 				targetFloorIn														= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
 				controlMixer(targetTemp);
 				break;
-			case Stopping :					// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
+			case StopRequested :					// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
 				Global.waitSeconds(10);
 				break;
-			case BeginningOptimisation :
+			case OptimisationRequested :
 				mixer.positionPercentage(0.2F);										// Can take upto 90 seconds
 				Global.waitSeconds(10);
 				break;
 			case Optimising :
 				controlMixer(41000);
 				break;
-			case ShuttingDown :					// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
+			case ShutDownRequested :					// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
 				mixer.positionZero();
 				Global.waitSeconds(10);
 				break;
@@ -167,7 +167,7 @@ public class Thread_Mixer implements Runnable
 			catch (Exception ex)					// Panic : a read error has occured on thermometer
 			{
 				LogIt.debug("Thread_Mixer/Run Exception on thermoFloorOut");
-				circuit.initiateShutDown();
+				circuit.requestShutDown();
 				circuit.mixer.positionZero();
 				return;
 			}

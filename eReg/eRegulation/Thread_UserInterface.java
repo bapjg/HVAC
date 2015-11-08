@@ -65,11 +65,11 @@ public class Thread_UserInterface implements Runnable
 																							userControl.line1Value * 1000,		// TempObjective in millidesrees
 																							true,								// StopOnObjective
 																							HVAC_TYPES.CircuitTask.Immediate);
-					Global.circuitHotWater.initiateStart();
+					Global.circuitHotWater.requestStart();
 				}
 				else
 				{
-					Global.circuitHotWater.initiateOptimisation();
+					Global.circuitHotWater.requestOptimisation();
 				}
             }
             if (buttons.button2)

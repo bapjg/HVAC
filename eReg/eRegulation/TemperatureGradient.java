@@ -18,33 +18,33 @@ public class TemperatureGradient
 	
 	public TemperatureGradient(Ctrl_Configuration.TempGradient 		paramGradient)
 	{
-		this.outsideLow					= paramGradient.outsideLow.milliDegrees;
-		this.tempLow					= paramGradient.tempLow.milliDegrees;
-		this.outsideHigh				= paramGradient.outsideHigh.milliDegrees;
-		this.tempHigh					= paramGradient.tempHigh.milliDegrees;
+		this.outsideLow																		= paramGradient.outsideLow.milliDegrees;
+		this.tempLow																		= paramGradient.tempLow.milliDegrees;
+		this.outsideHigh																	= paramGradient.outsideHigh.milliDegrees;
+		this.tempHigh																		= paramGradient.tempHigh.milliDegrees;
 		
-		Float gradient					= (this.tempHigh.floatValue() - this.tempLow.floatValue()) / (this.outsideHigh.floatValue() - this.outsideLow.floatValue());
+		Float 													gradient					= (this.tempHigh.floatValue() - this.tempLow.floatValue()) / (this.outsideHigh.floatValue() - this.outsideLow.floatValue());
 		
-		this.a							= gradient;
+		this.a																				= gradient;
 		
 		// as y = gradient.x + b
 		//    b = y - grandient.x
 		
-		Float intercept					= this.tempHigh.floatValue() - this.outsideHigh.floatValue() * gradient;			
+		Float intercept																		= this.tempHigh.floatValue() - this.outsideHigh.floatValue() * gradient;			
 
-		this.b							= intercept;
+		this.b																				= intercept;
 	}
 	
 	
 	public Integer getTempToTarget()
 	{
-		Integer outsideTemp				= Global.thermoOutside.reading;
+		Integer outsideTemp																	= Global.thermoOutside.reading;
 		if (outsideTemp == null)
 		{
 			Global.eMailMessage("Thermometer/Read", "Unable to read Thermometer  " + Global.thermoOutside.name);
 			return 0;
 		}
-		Float	tempToTarget			= this.a * (float) outsideTemp + this.b;
+		Float													tempToTarget				= this.a * (float) outsideTemp + this.b;
 
 		return (Integer) Math.round(tempToTarget);
 	}

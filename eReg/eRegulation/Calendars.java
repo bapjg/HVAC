@@ -10,8 +10,8 @@ import java.io.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Calendars
 {
-	private Circuit_Abstract	circuit;
-	public  Ctrl_Calendars.Data	calendars;
+	private Circuit_Abstract									circuit;
+	public  Ctrl_Calendars.Data									calendars;
 	
 	public Calendars() throws IOException
     {
@@ -149,6 +149,7 @@ public class Calendars
 				circuit.addCircuitTask(paramCalendar);
 				LogIt.info("Calendar Entry", circuit.name, "Time start/end " + paramCalendar.timeStart.displayShort() + "/" + paramCalendar.timeEnd.displayShort() + " Days " + paramCalendar.days);
 			}
+			LogIt.info("Calendar Entry", circuit.name, "---------------------------------------------------------");
 		}
 		//		get away calendar
 		for (Ctrl_Calendars.Away 							paramAway 			: calendarData.awayList)

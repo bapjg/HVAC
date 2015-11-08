@@ -51,60 +51,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 		LogIt.debug("Floor/canOptimise thermoBoiler : " + Global.thermoBoiler.reading + ", lastAccurate + 3000 : " + lastAccurate.toString());
 		return (Global.thermoBoiler.reading > lastAccurateFloorInTemp + 3000);
 	}	
-/**
- * Starts the circuit in optimisation mode:
- * Supplied circuitTask becomes taskActive
- * State set to Start_Requested
- * heatRequired set to zero valued object
- */
-//	@Override
-//	public void startOptimisation()
-//	{
-//		super.startOptimisation();
-//	}
-	//
-	//===========================================================================================================================================================
-
-	//===========================================================================================================================================================
-	//
-	// Activity/State Change methods
-	//
-//	@Override
-//	public void initiateStart()
-//	{
-//		super.initiateStart();
-//		this.heatRequired.setMax();
-//	}
-/**
- * Shuts down the circuit :
- * State = Off.
- * circuitPump = OFF.
- * heatRequired.max/min = ZERO.
- * task will be deactivated by scheduler.
- * Floor specific : positionMixer = ZERO
-*/
-//	@Override
-//	public void initiateShutDown()
-//	{
-////		this.mixer.positionZero();
-//		super.initiateShutDown();
-//	}
-/**
- * Optimises the circuit :
- * State = Optimising.
- * circuitPump = UNCHANGED.
- * heatRequired.max/min = ZERO.
- * circuitPump = ON.
- * Floor specific : positionMixer = 20%
- */	
-//	@Override
-//	public void optimise()
-//	{
-//		// TODO : Kludge
-//		this.state	= HVAC_STATES.Circuit.Optimising; // Must be done here as mixer positionning takes time, and scheduler will set taskActive to null
-//		this.mixer.positionPercentage(0.20F);
-//		super.optimise();
-//	}
 	//
 	//===========================================================================================================================================================
 
@@ -120,7 +66,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		// Check for work
 		//
 		
-		if (taskActive == null)									return;			//Nothing to do	
+//		if (taskActive == null)									return;			//Nothing to do	
 		
 		// end of Check for work
 		//
@@ -133,7 +79,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		if (	(Global.thermoBoiler.reading 		== null) 
 		||		(Global.thermoLivingRoom.reading 	== null)	)
 		{
-			this.initiateShutDown();											// This bypasses stopRequested
+			this.requestShutDown();											// This bypasses stopRequested
 			state 																			= HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_Mixer/sequencer", "A Thermometer cannont be read");
 		}
@@ -173,7 +119,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		case Off:
 			//Nothing to do
 			break;
-		case Starting:
+		case StartRequested:
 			if (Global.isSummer())			
 			{
 				state 																		= HVAC_STATES.Circuit.Suspended;
@@ -212,23 +158,24 @@ public class Circuit_Mixer extends Circuit_Abstract
 				state 																		= HVAC_STATES.Circuit.Idle;
 			}
 			break;
-		case Stopping:
-			if 	 	(Global.circuits.isSingleActiveCircuit())		this.initiateOptimisation();							//  Continue while boilerTemp more than 3 degrees than return temp
-			else 													this.initiateShutDown();
+		case StopRequested:
+			if 	 	(Global.circuits.isSingleActiveCircuit())		this.requestOptimisation();							//  Continue while boilerTemp more than 3 degrees than return temp
+			else 													this.requestShutDown();
 			break;
-		case BeginningOptimisation :
+		case OptimisationRequested :
 			this.heatRequired.setZero();
 			state 																			= HVAC_STATES.Circuit.Optimising;
 			break;
 		case Optimising:
 			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
-			if 		(! Global.circuits.isSingleActiveCircuit())		this.initiateShutDown();
-			else if	(! this.canOptimise())   						this.initiateShutDown();	//  Continue while boilerTemp more than 3 degrees than return temp
+			if 		(! Global.circuits.isSingleActiveCircuit())		this.requestShutDown();
+			else if	(! this.canOptimise())   						this.requestShutDown();	//  Continue while boilerTemp more than 3 degrees than return temp
 			break;																		// Continue as singlecircuit AND canOptimise = true
-		case ShuttingDown:
+		case ShutDownRequested:
 			circuitPump.off();
 			this.heatRequired.setZero();
-			state 																			= HVAC_STATES.Circuit.Off;	
+			state 																			= HVAC_STATES.Circuit.Off;
+			this.taskActive																	= null;
 			break;
 		case Suspended:
 			this.heatRequired.setZero();
@@ -240,7 +187,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
 			if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective) // OR Floor return temp too cold
 			{
-				state 																		= HVAC_STATES.Circuit.Starting;	
+				state 																		= HVAC_STATES.Circuit.StartRequested;	
 			}
 			break;
 		case Error:

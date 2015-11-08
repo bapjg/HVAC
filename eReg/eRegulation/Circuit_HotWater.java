@@ -22,20 +22,11 @@ public class Circuit_HotWater extends Circuit_Abstract
 		Long 													rampUpMilliSeconds			= 15 * 60 * 1000L;		// 15 mins
 		return rampUpMilliSeconds;
 	}
+	@Override
 	public Boolean canOptimise()
 	{
 		return (Global.thermoBoiler.reading > this.circuitThermo.reading + 3000);
 	}	
-/**
- * Starts the circuit in optimisation mode:
- * Supplied circuitTask becomes taskActive
- * State set to Start_Requested
- * heatRequired set to zero valued object
- */
-//	public void startOptimisation()
-//	{
-//		super.startOptimisation();
-//	}
 	//
 	//===========================================================================================================================================================
 
@@ -59,7 +50,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 		// Check for work
 		//
 		
-		if (taskActive == null)									return;			//Nothing to do		
+//		if (taskActive == null)									return;			//Nothing to do		
 		
 		// end of Check for work
 		//
@@ -72,7 +63,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 		if (	(Global.thermoBoiler.reading 	== null) 
 		||		(Global.thermoHotWater.reading 	== null)	)
 		{
-			super.initiateShutDown();											// This bypasses stopRequested
+			super.requestShutDown();											// This bypasses stopRequested
 			state 																			= HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_HotWater/sequencer", "A Thermometer cannont be read");
 		}
@@ -119,7 +110,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 		case Off:
 			//Nothing to do
 			break;
-		case Starting:
+		case StartRequested:
 			this.heatRequired.set(this.taskActive.tempObjective + 10000, this.tempMax);
 			state 																			= HVAC_STATES.Circuit.RampingUp;
 			break;
@@ -155,7 +146,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				{
 					if 		(deltaHotWater < 0)
 					{
-						state																= HVAC_STATES.Circuit.ShuttingDown;			
+						state																= HVAC_STATES.Circuit.ShutDownRequested;			
 					}
 				}
 			}
@@ -173,11 +164,11 @@ public class Circuit_HotWater extends Circuit_Abstract
 //				}
 //			}
 			break;
-		case Stopping:
-			if 	 	(Global.circuits.isSingleActiveCircuit())								this.initiateOptimisation();							//  Continue while boilerTemp more than 3 degrees than return temp
-			else 																			this.initiateShutDown();
+		case StopRequested:
+			if 	 	(Global.circuits.isSingleActiveCircuit())								this.requestOptimisation();							//  Continue while boilerTemp more than 3 degrees than return temp
+			else 																			this.requestShutDown();
 			break;
-		case BeginningOptimisation :
+		case OptimisationRequested :
 			this.heatRequired.setZero();
 			state 																			= HVAC_STATES.Circuit.Optimising;
 			break;
@@ -189,13 +180,14 @@ public class Circuit_HotWater extends Circuit_Abstract
 			//		No					Yes																stop()
 			//		No					No			*													suspend()
 			
-			if 		(! Global.circuits.isSingleActiveCircuit())								super.initiateShutDown();
-			else if	(Global.thermoBoiler.reading < Global.thermoHotWater.reading + 3000)	super.initiateShutDown();//  Continue while boilerTemp more than 3 degrees than return temp
+			if 		(! Global.circuits.isSingleActiveCircuit())								super.requestShutDown();
+			else if	(Global.thermoBoiler.reading < Global.thermoHotWater.reading + 3000)	super.requestShutDown();//  Continue while boilerTemp more than 3 degrees than return temp
 			break;
-		case ShuttingDown:
+		case ShutDownRequested:
 			circuitPump.off();
 			this.heatRequired.setZero();
 			state 																			= HVAC_STATES.Circuit.Off;	
+			this.taskActive																	= null;
 			break;
 		case Suspended:																		// In this state the circuitPump has been switched off If 5 degrees less than objective
 			this.heatRequired.setZero();
@@ -205,7 +197,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 			}
 			break;
 		case Resuming:																		// Setting state to starting will setup heat required etc, and turn on pump at the right time.
-			state 																			= HVAC_STATES.Circuit.Starting;	
+			state 																			= HVAC_STATES.Circuit.StartRequested;	
 			break;
 		case Idle:			// We only idle circuits when temp reached and keep pump on. Not applicable to HW
 		case Error:
