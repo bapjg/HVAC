@@ -94,6 +94,9 @@ public class Circuit_HotWater extends Circuit_Abstract
 
 		// DeltaHotWater > 0 means not yet at target
 		// DeltaBoiler   > 0 means Boiler is over targetTemp
+		// Calculations wont work with no active task
+		
+		if (this.state == HVAC_STATES.Circuit.Off)	return;
 		Integer										deltaBoiler								= Global.thermoBoiler.reading - this.taskActive.tempObjective;
 		Integer										deltaHotWater							= this.taskActive.tempObjective - Global.thermoHotWater.reading;	// -ve if overTempTarget
 		Float										deltaRatio								= deltaBoiler.floatValue() / deltaHotWater.floatValue();

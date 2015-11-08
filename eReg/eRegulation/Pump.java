@@ -9,7 +9,7 @@ public class Pump
 	public Relay												relay;
 	public Long													dateTimeLastOperated;
 	
-	public Pump(Ctrl_Configuration.Data.Pump 						paramPump)
+	public Pump(Ctrl_Configuration.Data.Pump 					paramPump)
 	{
 		this.name 		    																= paramPump.name;
 		this.relay																			= Global.relays.fetchRelay(paramPump.relay);
