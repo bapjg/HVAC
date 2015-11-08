@@ -36,7 +36,7 @@ public class HVAC_STATES
 		StopRequested,			// External via requestStop			 	// Decides whether to optimise or shut down
 		OptimisationRequested,	// External via requestOptimisation 	// 
 		Optimising,				// Internal 						 	// Unclear : is this an inTask initiative or a Background task initiative
-		ShutDownRequested,		// Internal via requestShutDown     	// Switches off the circuitPump and calls shutDown (sets heatRequired to null; and sets state to Off)
+		ShutDownRequested,		// External via requestShutDown     	// Switches off the circuitPump and calls shutDown (sets heatRequired to null; and sets state to Off)
 
 		Suspended,				// Internal 						 	// Hot_Water : if not stop on objective, suspends all activity but surveys hwTemp
 		 															 	// resume is called to set the state to Resuming

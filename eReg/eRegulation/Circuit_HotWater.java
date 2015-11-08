@@ -32,14 +32,6 @@ public class Circuit_HotWater extends Circuit_Abstract
 
 	//===========================================================================================================================================================
 	//
-	// Activity/State Change methods
-	//
-
-	//
-	//===========================================================================================================================================================
-
-	//===========================================================================================================================================================
-	//
 	// Sequencer
 	//
 	@Override
@@ -75,19 +67,21 @@ public class Circuit_HotWater extends Circuit_Abstract
 		//
 		// List of possible states
 		//
-		//		Off,				// Inactive circuit. taskActive should be null
-		//		Starting,			// Setup up heatRequired and sets state to AwaitingHeat		
-		//		Resuming,			// Hot_Water : hwTemp is below minimum, so reactivates heatRequired
-		//		RampingUp,			// Floor : FloorOut is at max temp to shorten rampUp Time. When close to target normal tempControl used.
-		//		Running,			// Kepps on running until some sort of event occurs
-		//		Optimising,			// Unclear : is this an inTask initiative or a Background task initiative
-		//		Stopping,			// Switches off the circuitPump and calls shutDown (sets heatRequired to null; and sets state to Off)
+		//		Off,					// Internal                          	// Inactive circuit. taskActive should be null
+		//		StartRequested,			// External via requestStart        	// Setup up heatRequired and sets state to AwaitingHeat		
+		//		RampingUp,				// Internal                          	// Floor : FloorOut is at max temp to shorten rampUp Time. When close to target normal tempControl used.
+		//		Running,				// Internal                          	// Keeps on running until some sort of event occurs
+		//		StopRequested,			// External via requestStop			 	// Decides whether to optimise or shut down
+		//		OptimisationRequested,	// External via requestOptimisation 	// 
+		//		Optimising,				// Internal 						 	// Unclear : is this an inTask initiative or a Background task initiative
+		//		ShutDownRequested,		// Internal via requestShutDown     	// Switches off the circuitPump and calls shutDown (sets heatRequired to null; and sets state to Off)
 		//
-		//		Idle,				// State for pump on but no heatRequired. Used for for floor circuit inlineOptimise
-		//		Suspended,			// Hot_Water : if not stop on objective, suspends all activity but surveys hwTemp
-		//							// resume is called to set the state to Resuming
+		//		Suspended,				// Internal 						 	// Hot_Water : if not stop on objective, suspends all activity but surveys hwTemp
+		//		 															 	// resume is called to set the state to Resuming
+		//		Resuming,				// Internal 						 	// Hot_Water : hwTemp is below minimum, so reactivates heatRequired
+		//		Idle,					// Internal 						 	// State for pump on but no heatRequired. Used for for floor circuit inlineOptimise
 		//
-		//		Error				// Some sort of error has occured		
+		//		Error					// Internal    						 	// Some sort of error has occured
 		//
 		// end of State List
 		//
@@ -138,7 +132,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 					if (	(deltaHotWater  < 0           )				// Over target
 					||		(deltaRatio 	> deltaMinimum)	)
 					{
-						state																= HVAC_STATES.Circuit.Optimising;			
+						this.requestOptimisation();			
 					}
 					// Otherwise									keep running
 				}
@@ -146,7 +140,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 				{
 					if 		(deltaHotWater < 0)
 					{
-						state																= HVAC_STATES.Circuit.ShutDownRequested;			
+						this.requestShutDown();			
 					}
 				}
 			}
@@ -197,7 +191,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 			}
 			break;
 		case Resuming:																		// Setting state to starting will setup heat required etc, and turn on pump at the right time.
-			state 																			= HVAC_STATES.Circuit.StartRequested;	
+			this.requestStart();	
 			break;
 		case Idle:			// We only idle circuits when temp reached and keep pump on. Not applicable to HW
 		case Error:

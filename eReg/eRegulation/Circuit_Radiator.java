@@ -56,7 +56,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 		//
 		if 	(Global.thermoBoiler.reading == null) 
 		{
-			super.requestShutDown();																		// This bypasses stopRequested
+			super.requestShutDown();														// This bypasses stopRequested
 			state 																			= HVAC_STATES.Circuit.Error;
 			Global.eMailMessage("Circuit_Radiator/sequencer", "A Thermometer cannont be read");
 		}
@@ -68,19 +68,21 @@ public class Circuit_Radiator extends Circuit_Abstract
 		//
 		// List of possible states
 		//
-		//		Off,				// Inactive circuit. taskActive should be null
-		//		Starting,			// Setup up heatRequired and sets state to AwaitingHeat		
-		//		Resuming,			// Hot_Water : hwTemp is below minimum, so reactivates heatRequired
-		//		RampingUp,			// Floor : FloorOut is at max temp to shorten rampUp Time. When close to target normal tempControl used.
-		//		Running,			// Kepps on running until some sort of event occurs
-		//		Optimising,			// Unclear : is this an inTask initiative or a Background task initiative
-		//		Stopping,			// Switches off the circuitPump and calls shutDown (sets heatRequired to null; and sets state to Off)
+		//		Off,					// Internal                          	// Inactive circuit. taskActive should be null
+		//		StartRequested,			// External via requestStart        	// Setup up heatRequired and sets state to AwaitingHeat		
+		//		RampingUp,				// Internal                          	// Floor : FloorOut is at max temp to shorten rampUp Time. When close to target normal tempControl used.
+		//		Running,				// Internal                          	// Keeps on running until some sort of event occurs
+		//		StopRequested,			// External via requestStop			 	// Decides whether to optimise or shut down
+		//		OptimisationRequested,	// External via requestOptimisation 	// 
+		//		Optimising,				// Internal 						 	// Unclear : is this an inTask initiative or a Background task initiative
+		//		ShutDownRequested,		// Internal via requestShutDown     	// Switches off the circuitPump and calls shutDown (sets heatRequired to null; and sets state to Off)
 		//
-		//		Idle,				// State for pump on but no heatRequired. Used for for floor circuit inlineOptimise
-		//		Suspended,			// Hot_Water : if not stop on objective, suspends all activity but surveys hwTemp
-		//							// resume is called to set the state to Resuming
+		//		Suspended,				// Internal 						 	// Hot_Water : if not stop on objective, suspends all activity but surveys hwTemp
+		//		 															 	// resume is called to set the state to Resuming
+		//		Resuming,				// Internal 						 	// Hot_Water : hwTemp is below minimum, so reactivates heatRequired
+		//		Idle,					// Internal 						 	// State for pump on but no heatRequired. Used for for floor circuit inlineOptimise
 		//
-		//		Error				// Some sort of error has occured		
+		//		Error					// Internal    						 	// Some sort of error has occured
 		//
 		// end of State List
 		//

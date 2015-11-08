@@ -72,7 +72,7 @@ abstract class Circuit_Abstract
  * Starts the circuit :
  * State = Starting
  */	
-	public  void requestStart()
+	public void requestStart()
 	{
 		LogIt.action(this.name, "Start called");
 		LogIt.debug("Start called" + this.name);
