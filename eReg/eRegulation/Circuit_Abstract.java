@@ -164,14 +164,16 @@ abstract class Circuit_Abstract
 			// Avoid midnight perturbations
 			if (Global.Time.now() > Global.Time.parseTime("23:58"))
 			{
-				if (this.state == HVAC_STATES.Circuit.Optimising)					this.requestShutDown();
-				else 																taskDeactivate(taskActive);
+				this.requestShutDown();
 				return; 															// Go no further
 			}
-			// Carry on with the real work
-			if (	(now > taskActive.timeEnd						) 							// taskActive : Time up
-			&&		(this.state != HVAC_STATES.Circuit.StopRequested		)   
-			&&		(this.state != HVAC_STATES.Circuit.Optimising	)   )
+			// Deschedule timeup
+			if (	(now > taskActive.timeEnd								) 							// taskActive : Time up
+			&&		(this.state != HVAC_STATES.Circuit.StopRequested		)   	// Only called for states start, rampup, running, suspended, resuming, idle
+			&&		(this.state != HVAC_STATES.Circuit.OptimisationRequested)   
+			&&		(this.state != HVAC_STATES.Circuit.ShutDownRequested	)   
+			&&		(this.state != HVAC_STATES.Circuit.Off					)   
+			&&		(this.state != HVAC_STATES.Circuit.Optimising			)   )
 			{
 				// Time is up for this task and it hasn't yet been asked to stop
 				LogIt.debug("Circuit_Abstract/taskScheduler : Deactivating task " + this.name + " : TimeUp");
@@ -179,16 +181,16 @@ abstract class Circuit_Abstract
 				// TODO Let it move to optimising or Off
 				return;
 			}
-			
-			if (	(taskActive.stopOnObjective								)
-			&&		(this.circuitThermo.reading > taskActive.tempObjective  )	)
-			{
-				LogIt.debug("Circuit_Abstract/taskScheduler : Deactivating task " + this.name + " : StopOnObjective");
-				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
-				// TODO Let it move to optimising or Off
-				return;
-			}
-		}
+			// Stop On objective is handled with the sequencer
+//			if (	(taskActive.stopOnObjective								)
+//			&&		(this.circuitThermo.reading > taskActive.tempObjective  )	)
+//			{
+//				LogIt.debug("Circuit_Abstract/taskScheduler : Deactivating task " + this.name + " : StopOnObjective");
+//				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
+//				// TODO Let it move to optimising or Off
+//				return;
+//			}
+		}	// if deactivate called, return in order for the sequencer to have time to handle before recheduling next task
 
 		// Go through all task entries for this circuit
 		for (CircuitTask circuitTask : circuitTaskList) 													// Go through all tasks
@@ -356,7 +358,7 @@ abstract class Circuit_Abstract
 		}
 		// taskActive is not set to null so that Circuit_Mixer & Thread_Mixer keeps a handle onto the task
 		// It will be set to null by the sequencer once it has really stopped
-		this.requestOptimisation();
+		this.requestStop();
 		LogIt.display("Circuit_Abstract", "taskDeactivate", "==============================================================");
 	}	// taskDeactivate
 	//
