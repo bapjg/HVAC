@@ -166,6 +166,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			break;
 		case OptimisationRequested :
 			this.heatRequired.setZero();
+			this.circuitPump.on();
 			state 																			= HVAC_STATES.Circuit.Optimising;
 			break;
 		case Optimising:

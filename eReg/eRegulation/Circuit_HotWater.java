@@ -167,6 +167,7 @@ public class Circuit_HotWater extends Circuit_Abstract
 			break;
 		case OptimisationRequested :
 			this.heatRequired.setZero();
+			this.circuitPump.on();
 			state 																			= HVAC_STATES.Circuit.Optimising;
 			break;
 		case Optimising:
