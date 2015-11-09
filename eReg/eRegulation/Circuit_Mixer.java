@@ -167,8 +167,13 @@ public class Circuit_Mixer extends Circuit_Abstract
 		case OptimisationRequested :
 			this.heatRequired.setZero();
 			this.circuitPump.on();
-			state 																			= HVAC_STATES.Circuit.Optimising;
+			state 																			= HVAC_STATES.Circuit.AwaitingMixer;
 			break;
+		case AwaitingMixer :
+			break;																			// Just wait for Thread_Mixer to do its work
+		case MixerReady :
+			state 																			= HVAC_STATES.Circuit.Optimising;
+			break;																			// Just wait for Thread_Mixer to do its work
 		case Optimising:
 			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
 			if 		(! Global.circuits.isSingleActiveCircuit())		this.requestShutDown();

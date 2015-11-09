@@ -35,6 +35,8 @@ public class HVAC_STATES
 		Running,				// Internal                          	// Keeps on running until some sort of event occurs
 		StopRequested,			// External via requestStop			 	// Decides whether to optimise or shut down
 		OptimisationRequested,	// External via requestOptimisation 	// 
+		AwaitingMixer,			// 	Special Case  						// 
+		MixerReady,				// 	Special Case  						// 
 		Optimising,				// Internal 						 	// Unclear : is this an inTask initiative or a Background task initiative
 		ShutDownRequested,		// External via requestShutDown     	// Switches off the circuitPump and calls shutDown (sets heatRequired to null; and sets state to Off)
 

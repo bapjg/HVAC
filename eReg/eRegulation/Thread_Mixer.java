@@ -100,7 +100,9 @@ public class Thread_Mixer implements Runnable
 				Global.waitSeconds(10);
 				break;
 			case OptimisationRequested :
+			case AwaitingMixer :
 				mixer.positionPercentage(0.2F);										// Can take upto 90 seconds
+				circuit.state														= HVAC_STATES.Circuit.MixerReady;
 				Global.waitSeconds(10);
 				break;
 			case Optimising :
