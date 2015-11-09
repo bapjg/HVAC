@@ -146,7 +146,7 @@ public class Thread_TCPListen 			implements Runnable
 		
 		Circuit_Abstract 										circuit						= Global.circuits.fetchCircuit(circuitName);
 		
-		if (circuit == null)	LogIt.debug("Thread_TCP/process_Ctrl_Immediate_Request : circuitName '" + message_in.circuitName + "' not found");
+		if (circuit == null)	LogIt.display("Thread_TCP", "process_Ctrl_Immediate_Request", "circuitName '" + message_in.circuitName + "' not found");
 		
 		message_return.circuitName															= circuitName;
 

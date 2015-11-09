@@ -169,7 +169,7 @@ public class Thread_Mixer implements Runnable
 			}
 			catch (Exception ex)					// Panic : a read error has occured on thermometer
 			{
-				LogIt.debug("Thread_Mixer/Run Exception on thermoFloorOut");
+				LogIt.display("Thread_Mixer","Run", "Exception on thermoFloorOut");
 				circuit.requestShutDown();
 				circuit.mixer.positionZero();
 				return;

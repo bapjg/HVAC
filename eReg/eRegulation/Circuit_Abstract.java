@@ -75,7 +75,7 @@ abstract class Circuit_Abstract
 	public void requestStart()
 	{
 		LogIt.action(this.name, "Start called");
-		LogIt.debug("Start called" + this.name);
+		LogIt.display("Circuit_Abstract", "requestStart", "Start called" + this.name);
 		state																				= HVAC_STATES.Circuit.StartRequested;
 	}
 /**
@@ -176,21 +176,11 @@ abstract class Circuit_Abstract
 			&&		(this.state != HVAC_STATES.Circuit.Optimising			)   )
 			{
 				// Time is up for this task and it hasn't yet been asked to stop
-				LogIt.debug("Circuit_Abstract/taskScheduler : Deactivating task " + this.name + " : TimeUp");
+				LogIt.debug("Abstract/taskScheduler/Line 179 deActivating task with state " + this.state.toString());
 				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
-				// TODO Let it move to optimising or Off
 				return;
-			}
-			// Stop On objective is handled with the sequencer
-//			if (	(taskActive.stopOnObjective								)
-//			&&		(this.circuitThermo.reading > taskActive.tempObjective  )	)
-//			{
-//				LogIt.debug("Circuit_Abstract/taskScheduler : Deactivating task " + this.name + " : StopOnObjective");
-//				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
-//				// TODO Let it move to optimising or Off
-//				return;
-//			}
-		}	// if deactivate called, return in order for the sequencer to have time to handle before recheduling next task
+			}	// if deactivate called, return in order for the sequencer to have time to handle before recheduling next task
+		}	
 
 		// Go through all task entries for this circuit
 		for (CircuitTask circuitTask : circuitTaskList) 													// Go through all tasks
@@ -304,9 +294,9 @@ abstract class Circuit_Abstract
 
 		if (this.taskActive == thisTask)												// Should not normally occur
 		{
-			LogIt.display("Circuit_Abstract", "taskActivate", "The scheduled task is already active " + this.name + ", type " + thisTask.taskType);
-			LogIt.display("Circuit_Abstract", "taskActivate", "taskActive    = " + System.identityHashCode(taskActive));
-			LogIt.display("Circuit_Abstract", "taskActivate", "candidateTask = " + System.identityHashCode(thisTask));
+			LogIt.display("Circuit_Abstract", "taskActivate", "The scheduled task is already active");
+			LogIt.debug("Circuit_Abstract/taskActivate taskActive    = " + System.identityHashCode(taskActive));
+			LogIt.debug("Circuit_Abstract/taskActivate candidateTask = " + System.identityHashCode(thisTask));
 		}
 		else
 		{
@@ -344,22 +334,9 @@ abstract class Circuit_Abstract
 	{
 		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay);
 		this.taskActive.dateLastRun															= Global.Date.now();
-		StackTraceElement[] 									stackTraceElements 			= Thread.currentThread().getStackTrace();
-		int i;
-		for (i = 1; i < stackTraceElements.length - 1; i++)
-		{
-			StackTraceElement 									stackTraceElement			= stackTraceElements[i];
-			String 												message;
-			message												= stackTraceElement.getClassName() + "/" + stackTraceElement.getMethodName();
-			message												+= ", " + stackTraceElement.getFileName();
-			message												+= ":"  + stackTraceElement.getLineNumber();
-			
-			LogIt.display("Circuit_Abstract", "taskDeactivate", "index		: " + i + " : " + message);
-		}
 		// taskActive is not set to null so that Circuit_Mixer & Thread_Mixer keeps a handle onto the task
 		// It will be set to null by the sequencer once it has really stopped
 		this.requestStop();
-		LogIt.display("Circuit_Abstract", "taskDeactivate", "==============================================================");
 	}	// taskDeactivate
 	//
 	//===========================================================================================================================================================

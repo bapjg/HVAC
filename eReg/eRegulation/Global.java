@@ -458,7 +458,7 @@ public class Global
 			now.set(Calendar.MINUTE, 0);
 			now.set(Calendar.SECOND, 0);
 			now.set(Calendar.MILLISECOND, 0);
-			Long todayMidnight																	= now.getTimeInMillis();
+			Long 													todayMidnight			= now.getTimeInMillis();
 			
 			return todayMidnight;
 		}
@@ -475,7 +475,7 @@ public class Global
 			Integer 												day 					= calendar.get(Calendar.DAY_OF_WEEK);  	// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
 		
 			day																				= day + extraDays;						// Sunday = 1, Monday = 2, Tues = 3 ... Sat = 7
-			day--;																														// Sunday = 0, Monday = 1, Tues = 2 ... Sat = 6
+			day--;																													// Sunday = 0, Monday = 1, Tues = 2 ... Sat = 6
 			day																				= day % 7;								// Modulo to take extra days into account
 			if (day == 0)
 			{
