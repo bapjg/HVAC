@@ -9,7 +9,7 @@ public class Thread_Mixer implements Runnable
 	public Mixer				mixer;
 	public Circuit_Mixer		circuit;
 	
-	public Thread_Mixer(Circuit_Mixer 						circuit)
+	public Thread_Mixer(Circuit_Mixer 							circuit)
 	{
 		this.circuit 																		= circuit; 				// circuit for which this thread operates
 		this.mixer 																			= circuit.mixer;		// mixer on this circuit to be controlled
@@ -79,7 +79,8 @@ public class Thread_Mixer implements Runnable
 			switch(circuit.state)
 			{
 			case Off :								// if positionTracked is null, Thread_Mixer will set it to zero
-				if (mixer.positionTracked != null)											mixer.positionZero();
+//				if (mixer.positionTracked != null)											mixer.positionZero();
+				mixer.positionZero();															// positionZero() checks for null value														
 				Global.waitSeconds(10);
 				break;
 			case StartRequested :
@@ -90,10 +91,10 @@ public class Thread_Mixer implements Runnable
 				controlMixer(41000);
 				break;
 			case Running :
-				insideTempSpan														= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
-				totalTempSpan														= insideTempSpan.floatValue()/0.55F;
-				targetTemp															= Global.thermoOutside.reading + totalTempSpan.intValue();
-				targetFloorIn														= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
+				insideTempSpan																	= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
+				totalTempSpan																	= insideTempSpan.floatValue()/0.55F;
+				targetTemp																		= Global.thermoOutside.reading + totalTempSpan.intValue();
+				targetFloorIn																	= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
 				controlMixer(targetTemp);
 				break;
 			case StopRequested :					// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
@@ -101,8 +102,8 @@ public class Thread_Mixer implements Runnable
 				break;
 			case OptimisationRequested :
 			case AwaitingMixer :
-				mixer.positionPercentage(0.2F);										// Can take upto 90 seconds
-				circuit.state														= HVAC_STATES.Circuit.MixerReady;
+				mixer.positionPercentage(0.2F);													// Can take upto 90 seconds
+				circuit.state																	= HVAC_STATES.Circuit.MixerReady;
 				Global.waitSeconds(10);
 				break;
 			case Optimising :
