@@ -31,8 +31,8 @@ public class LogIt
 	{
 		try
 		{
-	        FileWriter fw = new FileWriter("/mnt/DZ/HVAC_FogFile.txt",true); //the true will append the new data
-	        fw.write(message + "\n");//appends the string to the file
+	        FileWriter 											fw 							= new FileWriter("/mnt/DZ/HVAC_LogFile.txt",true); //the true will append the new data
+	        fw.write(message + "\n\r");//appends the string to the file
 	        fw.flush();
 	        fw.close();
 		}
