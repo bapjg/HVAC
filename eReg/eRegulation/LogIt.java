@@ -21,7 +21,8 @@ import HVAC_Common.*;
 public class LogIt
 {
 	public static Boolean 										logDisplay 					= true;
-	public static Boolean 										logFile 					= true;
+	public static Boolean 										useLogFile 					= true;
+	private static final String									spaces						= "                                             ";
 	
 	public LogIt()
 	{
@@ -38,9 +39,14 @@ public class LogIt
 		}
 		catch (Exception ex) {}
 	}
-	public static void debug(String message)
+	public static void toScreen(String message)
 	{
 		System.out.println(dateTimeStamp() + " LogIt.debug " + message);
+	}
+	public static void debug(String message)
+	{
+		if (true)												toScreen	(dateTimeStamp() + " LogIt.debug " + message);
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " LogIt.debug " + message);
 	}
 	public static void  logMessage(String messageType, String className, String methodName, String message)
 	{
@@ -65,54 +71,46 @@ public class LogIt
 		{
 			// System.out.println(dateTimeStamp() + " Logit.logMessage" + messageType + "  is : Nack");
 		}
-
 		Global.httpSemaphore.semaphoreUnLock();			
 	}
 	
 	public static void  display(String className, String methodName, String message)
 	{
-		String 													classMethod					= (className + "/" + methodName + "                                             ").substring(0,30);
+		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
 		System.out.println(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
+		if (useLogFile)											toLogFile(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
 	}
 	public static void  info(String className, String methodName, String message)
 	{
 		logMessage("Info", className, methodName, message);
+		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
 
-		if (logDisplay)
-		{
-			String 												classMethod					= (className + "/" + methodName + "                                             ").substring(0,30);
-			System.out.println(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
-		}
+		if (logDisplay)											toScreen	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 	}
 	public static void  info(String className, String methodName, String message, Boolean display)
 	{
 		logMessage("Info", className, methodName, message);
+		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
 
-		if (display)
-		{
-			String 												classMethod					= (className + "/" + methodName + "                                             ").substring(0,30);
-			System.out.println(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
-		}
+		if (display)											toScreen	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 	}
 	public static void  error(String className, String methodName, String message)
 	{
 		logMessage("Error", className, methodName, message);
+		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
 
-		if (logDisplay)
-		{
-			String 												classMethod					= (className + "/" + methodName + "                                             ").substring(0,30);
-			System.out.println(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
-		}
+		if (logDisplay)											toScreen	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 	}
 	public static void  error(String className, String methodName, String message, Boolean display)
 	{
 		logMessage("Error", className, methodName, message);
+		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
 
-		if (display)
-		{
-			String 												classMethod					= (className + "/" + methodName + "                                             ").substring(0,30);
-			System.out.println(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
-		}
+		if (display)											toScreen	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 	}
 	public static void pidData	(Rpt_PID.Update	messageSend)
 	{
