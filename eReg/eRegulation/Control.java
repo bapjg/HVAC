@@ -88,8 +88,6 @@ public class Control
 		Global 													global 						= new Global();
 		Global.stopNow																		= false;
 		LogIt.info("Control", "main", "Starting/BootSequence");
-		LogIt.toLogFile("Control"+ "main"+ "Starting/BootSequence 1");
-		LogIt.toLogFile("Control"+ "main"+ "Starting/BootSequence 2");
 		//
 		//============================================================
 
