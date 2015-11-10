@@ -1,5 +1,7 @@
 package eRegulation;
 
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
@@ -11,16 +13,30 @@ import java.text.*;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
 
+import com.google.gson.Gson;
+
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class LogIt
 {
 	public static Boolean 										logDisplay 					= true;
+	public static Boolean 										logFile 					= true;
 	
 	public LogIt()
 	{
 		logDisplay																			= true;
+	}
+	public static void toLogFile(String message)
+	{
+		try
+		{
+	        FileWriter fw = new FileWriter("//NAS/DropZone/HVAC_FogFile.txt",true); //the true will append the new data
+	        fw.write(message + "\n");//appends the string to the file
+	        fw.flush();
+	        fw.close();
+		}
+		catch (Exception ex) {}
 	}
 	public static void debug(String message)
 	{

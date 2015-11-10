@@ -197,7 +197,6 @@ public class Thread_BackgroundTasks implements Runnable
 				CircuitTask											taskOptimisation					= null;
 				if (Global.circuitHotWater.canOptimise())
 				{
-					LogIt.display("Thread_Backgroud","Run", "calling startOptimisation for Hot_Water");
 					taskOptimisation																	= new CircuitTask(	now, 								// Time Start
 																															now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
 																															40000,								// Dont care, just get as much energy out as possible
@@ -213,7 +212,6 @@ public class Thread_BackgroundTasks implements Runnable
 				else if (Global.circuitFloor.canOptimise())
 				{
 					// Are there any circuit that we were optimising and are left on
-					LogIt.display("Thread_Backgroud","Run", "calling startOptimisation for Floor");
 					taskOptimisation																	= new CircuitTask(	now, 								// Time Start
 																															now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
 																															25000,								// Dont care, just get as much energy out as possible
