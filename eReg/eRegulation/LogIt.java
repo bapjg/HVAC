@@ -36,11 +36,7 @@ public class LogIt
 	        fw.flush();
 	        fw.close();
 		}
-		catch (Exception ex) 
-		{ 
-			int x = 1;
-			int y = 2;
-			}
+		catch (Exception ex) {}
 	}
 	public static void debug(String message)
 	{
