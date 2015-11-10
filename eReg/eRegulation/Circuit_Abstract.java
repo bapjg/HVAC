@@ -75,7 +75,7 @@ abstract class Circuit_Abstract
 	public void requestStart()
 	{
 		LogIt.action(this.name, "Start called");
-		LogIt.display("Circuit_Abstract", "requestStart", "Start called" + this.name);
+		LogIt.display("Circuit_Abstract", "requestStart", "Start called " + this.name);
 		state																				= HVAC_STATES.Circuit.StartRequested;
 	}
 /**
@@ -170,7 +170,7 @@ abstract class Circuit_Abstract
 			// Deschedule timeup
 			if (	(now > taskActive.timeEnd								) 							// taskActive : Time up
 			&&		(this.state != HVAC_STATES.Circuit.StopRequested		)   	// Only called for states start, rampup, running, suspended, resuming, idle
-			&&		(this.state != HVAC_STATES.Circuit.OptimisationRequested)   
+			&&		(this.state != HVAC_STATES.Circuit.OptimisationRequested)   	// AwaitingMixer, MixerReady
 			&&		(this.state != HVAC_STATES.Circuit.ShutDownRequested	)   
 			&&		(this.state != HVAC_STATES.Circuit.Off					)   
 			&&		(this.state != HVAC_STATES.Circuit.Optimising			)   )
@@ -284,7 +284,7 @@ abstract class Circuit_Abstract
  */	
 	public void taskActivate(CircuitTask 							thisTask)
 	{
-		LogIt.display("Circuit_Abstract", "taskActivate", this.name + " Task activat requested " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + " " + thisTask.taskType.toString());
+		LogIt.display("Circuit_Abstract", "taskActivate", "Task activate requested " + this.name + " : "+ thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + " " + thisTask.taskType.toString());
 
 		// Test to see if :
 		// - activeTask is null (just swap in)
