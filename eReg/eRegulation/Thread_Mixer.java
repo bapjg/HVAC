@@ -17,7 +17,7 @@ public class Thread_Mixer implements Runnable
 	public void run()
 	{
 		LogIt.info("Thread_Mixer_" + circuit.name, "Run", "Starting", true);		
-		Global.waitSeconds(3);																// Wait 3s before switching on the mixer, in case a pump has been turned on
+		Global.waitSeconds(1);																// Wait 1s before switching on the mixer, in case a pump has been turned on/off
 		mixer.positionZero();
 		LogIt.mixerData(Global.DateTime.now(), 0, 0L, 0);									// If timeEnd = 0, then the second part is not inserted into DataBase
 		
@@ -79,7 +79,6 @@ public class Thread_Mixer implements Runnable
 			switch(circuit.state)
 			{
 			case Off :								// if positionTracked is null, Thread_Mixer will set it to zero
-//				if (mixer.positionTracked != null)											mixer.positionZero();
 				mixer.positionZero();															// positionZero() checks for null value														
 				Global.waitSeconds(10);
 				break;
@@ -105,6 +104,9 @@ public class Thread_Mixer implements Runnable
 				mixer.positionPercentage(0.2F);													// Can take upto 90 seconds
 				circuit.state																	= HVAC_STATES.Circuit.MixerReady;
 				Global.waitSeconds(10);
+				break;
+			case MixerReady :
+				Global.waitSeconds(10);															// Circuit_Mixer hasn't done its job yet
 				break;
 			case Optimising :
 				controlMixer(41000);
