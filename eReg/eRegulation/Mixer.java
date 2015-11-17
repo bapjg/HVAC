@@ -373,7 +373,7 @@ public class Mixer
 		{
 			// Must move down
 			Integer 											swingTime					= positionTracked - position;
-			return 	mixerMoveUp(swingTime);
+			return 	mixerMoveDown(swingTime);
 		}
 	}
 	public void allOff()

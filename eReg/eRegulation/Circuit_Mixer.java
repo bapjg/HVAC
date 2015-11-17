@@ -156,6 +156,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 			{																				// This keeps the floor pump going
 				state 																		= HVAC_STATES.Circuit.Idle;
+				state 																		= HVAC_STATES.Circuit.Idle;
 			}
 			break;
 		case StopRequested:
