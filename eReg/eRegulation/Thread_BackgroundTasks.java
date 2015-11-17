@@ -195,7 +195,7 @@ public class Thread_BackgroundTasks implements Runnable
 				//		do something
 				// and all this depends on summer/winter/in between
 				CircuitTask											taskOptimisation					= null;
-				if (Global.circuitHotWater.canOptimise())
+				if ((Global.circuitHotWater.name == "UYTUYTU") && (Global.circuitHotWater.canOptimise()))
 				{
 					taskOptimisation																	= new CircuitTask(	now, 								// Time Start
 																															now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
