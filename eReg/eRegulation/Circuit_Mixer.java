@@ -6,7 +6,7 @@ import HVAC_Common.Ctrl_Configuration;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Circuit_Mixer extends Circuit_Abstract
 {
-	private Integer												lastAccurateFloorInTemp		= 25000;
+	private Integer												lastAccurateFloorInTemp		= 21000;
 	
 	public Circuit_Mixer(Ctrl_Configuration.Circuit paramCircuit)
 	{

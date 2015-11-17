@@ -246,14 +246,14 @@
   </class>  
   <association id="28">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="29" name="circuitThermo">        
+      <attribute id="29" name="circuitPump">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="30" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="31">    
@@ -269,36 +269,36 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="34">    
-    <bendpoint x="3170" y="523"/>    
-    <bendpoint x="3170" y="968"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="35" name="pumpFloor">        
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="35" name="circuitTaskList">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="36" minimum="0" maximum="1">        
+      <multiplicity id="36" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="37">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="38" name="relay">        
+    <bendpoint x="4935" y="523"/>    
+    <bendpoint x="4935" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="38" name="circuitHotWater">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="39" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="40">    
-    <bendpoint x="5525" y="523"/>    
-    <bendpoint x="5525" y="968"/>    
+    <bendpoint x="5651" y="523"/>    
+    <bendpoint x="5651" y="968"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="41" name="thermoOutside">        
+      <attribute id="41" name="thermoLivingRoom">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="42" minimum="0" maximum="1">        
@@ -309,335 +309,336 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="43">    
-    <bendpoint x="4635" y="523"/>    
-    <bendpoint x="4435" y="968"/>    
+    <bendpoint x="2486" y="523"/>    
+    <bendpoint x="2486" y="968"/>    
+    <bendpoint x="2486" y="1539"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="44" name="pumpWater">        
+      <attribute id="44" name="burnerPower">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="45" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="46">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="47" name="tasksBackGround">        
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="47" name="burner">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="48" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="49">    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="50" name="circuit">        
+    <bendpoint x="5021" y="1539"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="50" name="burnerPower">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="51" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="52">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="53" name="boilerTemperatureVariation">        
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="53" name="taskActive">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="54" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="55">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <association id="56">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="57" name="mixer">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="58" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="59">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="60" name="circuitTaskList">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="61" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
     <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="62">    
-    <bendpoint x="5567" y="523"/>    
-    <bendpoint x="5567" y="968"/>    
+  <association id="55">    
+    <bendpoint x="5546" y="523"/>    
+    <bendpoint x="5546" y="968"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="63" name="thermoBoilerOld">        
+      <attribute id="56" name="thermoBoilerIn">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="64" minimum="0" maximum="1">        
+      <multiplicity id="57" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="65">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="1"/>  
-  </nesting>  
-  <association id="66">    
-    <bendpoint x="3191" y="523"/>    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="67" name="circuit">        
+  <association id="58">    
+    <bendpoint x="5567" y="523"/>    
+    <bendpoint x="5567" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="59" name="thermoBoilerOld">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="68" minimum="0" maximum="1">        
+      <multiplicity id="60" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <bendpoint x="5199" y="523"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="62" name="burner">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="63" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <bendpoint x="5588" y="523"/>    
+    <bendpoint x="5588" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="65" name="thermoHotWater">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="66" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <bendpoint x="3191" y="523"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="68" name="circuit">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="69" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="69">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="19"/>  
-  </nesting>  
   <association id="70">    
-    <bendpoint x="5588" y="523"/>    
-    <bendpoint x="5588" y="968"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="71" name="thermoHotWater">        
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="71" name="boilerTemperatureVariation">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="72" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
+    <end type="TARGET" refId="24" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="73">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="14"/>  
-  </nesting>  
-  <association id="74">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="75" name="circuitList">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="76" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="77">    
-    <bendpoint x="5630" y="523"/>    
-    <bendpoint x="5630" y="968"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="78" name="thermoRadiatorOut">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="79" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="80">    
-    <bendpoint x="5693" y="523"/>    
-    <bendpoint x="5693" y="968"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="81" name="thermoBoiler">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="82" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="83">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="84" name="circuits">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="85" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="86">    
-    <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="87" name="thermometers">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="88" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="89">    
-    <bendpoint x="4935" y="523"/>    
-    <bendpoint x="4935" y="968"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="90" name="circuitHotWater">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="91" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="92">    
+  <association id="73">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="93" name="mixerUp">        
+      <attribute id="74" name="mixerDown">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="94" minimum="0" maximum="1">        
+      <multiplicity id="75" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="95">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="96" name="circuitPump">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="97" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="98">    
-    <bendpoint x="5021" y="1539"/>    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="99" name="burnerPower">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="100" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="101">    
-    <bendpoint x="4614" y="523"/>    
-    <bendpoint x="4414" y="968"/>    
+  <association id="76">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="102" name="pumpRadiator">        
+      <attribute id="77" name="boiler">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="103" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="104">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="105" name="boiler">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="106" minimum="0" maximum="1">        
+      <multiplicity id="78" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="21" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="107">    
-    <bendpoint x="2486" y="523"/>    
-    <bendpoint x="2486" y="968"/>    
-    <bendpoint x="2486" y="1539"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="108" name="burnerPower">        
+  <association id="79">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="80" name="heatRequired">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="109" minimum="0" maximum="1">        
+      <multiplicity id="81" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="27" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="110">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="111" name="temperatureGradient">        
+  <generalization id="82">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <nesting id="83">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="19"/>  
+  </nesting>  
+  <association id="84">    
+    <bendpoint x="4635" y="523"/>    
+    <bendpoint x="4435" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="85" name="pumpWater">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="112" minimum="0" maximum="1">        
+      <multiplicity id="86" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="87">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="88" name="mixer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="89" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="90">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="91" name="temperatureGradient">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="92" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="113">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="114" name="taskActive">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="115" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="116">    
-    <bendpoint x="4914" y="523"/>    
-    <bendpoint x="4914" y="968"/>    
+  <association id="93">    
+    <bendpoint x="5714" y="523"/>    
+    <bendpoint x="5714" y="968"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="117" name="circuitGradient">        
+      <attribute id="94" name="thermoRadiatorIn">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="118" minimum="0" maximum="1">        
+      <multiplicity id="95" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
+    <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="119">    
+  <generalization id="96">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="97">    
     <bendpoint x="5609" y="523"/>    
     <bendpoint x="5609" y="968"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="120" name="thermoBoilerOut">        
+      <attribute id="98" name="thermoBoilerOut">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="99" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="101" name="circuitThermo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="102" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="104" name="mixer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="105" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="107" name="tasksBackGround">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="108" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <bendpoint x="5693" y="523"/>    
+    <bendpoint x="5693" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="110" name="thermoBoiler">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="111" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <bendpoint x="5672" y="523"/>    
+    <bendpoint x="5672" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="113" name="thermoFloorIn">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="114" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="116" name="thermometerList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="117" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="118">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="119">    
+    <bendpoint x="5525" y="523"/>    
+    <bendpoint x="5525" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="120" name="thermoOutside">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="121" minimum="0" maximum="1">        
@@ -647,75 +648,73 @@
     <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="122">    
-    <bendpoint x="5651" y="523"/>    
-    <bendpoint x="5651" y="968"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="123" name="thermoLivingRoom">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="124" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="125">    
+  <nesting id="122">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="24"/>  
+  </nesting>  
+  <association id="123">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="126" name="mixerDown">        
+      <attribute id="124" name="mixerUp">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="127" minimum="0" maximum="1">        
+      <multiplicity id="125" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="128">    
-    <bendpoint x="5714" y="523"/>    
-    <bendpoint x="5714" y="968"/>    
+  <association id="126">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="129" name="thermoRadiatorIn">        
+      <attribute id="127" name="circuits">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="130" minimum="0" maximum="1">        
+      <multiplicity id="128" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="129">    
+    <bendpoint x="4614" y="523"/>    
+    <bendpoint x="4414" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="130" name="pumpRadiator">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="131" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="132">    
+    <bendpoint x="5220" y="968"/>    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="133" name="thermoBoiler">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="134" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="131">    
-    <bendpoint x="5199" y="523"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="132" name="burner">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="133" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="134">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
   <association id="135">    
-    <bendpoint x="5546" y="523"/>    
-    <bendpoint x="5546" y="968"/>    
+    <bendpoint x="4914" y="523"/>    
+    <bendpoint x="4914" y="968"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="136" name="thermoBoilerIn">        
+      <attribute id="136" name="circuitGradient">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="137" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
+    <end type="TARGET" refId="17" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="138">    
@@ -733,49 +732,54 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="141">    
-    <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="142" name="burner">        
+    <bendpoint x="3170" y="523"/>    
+    <bendpoint x="3170" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="142" name="pumpFloor">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="143" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="144">    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="145" name="mixer">        
+    <bendpoint x="5504" y="523"/>    
+    <bendpoint x="5504" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="145" name="thermoFloorOut">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="146" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
+    <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="147">    
-    <bendpoint x="5672" y="523"/>    
-    <bendpoint x="5672" y="968"/>    
+    <bendpoint x="5483" y="523"/>    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="148" name="thermoFloorIn">        
+      <attribute id="148" name="thermometers">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="149" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="150">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="151" name="thermometerList">        
+    <bendpoint x="5630" y="523"/>    
+    <bendpoint x="5630" y="968"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="151" name="thermoRadiatorOut">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="152" minimum="0" maximum="2147483647">        
+      <multiplicity id="152" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
@@ -786,64 +790,60 @@
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="5"/>  
   </nesting>  
-  <generalization id="154">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <association id="155">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="156" name="heatRequired">        
+  <association id="154">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="155" name="circuitList">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="157" minimum="0" maximum="1">        
+      <multiplicity id="156" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <nesting id="157">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="1"/>  
+  </nesting>  
   <nesting id="158">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="24"/>  
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="14"/>  
   </nesting>  
   <association id="159">    
-    <bendpoint x="5220" y="968"/>    
     <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="160" name="thermoBoiler">        
+      <attribute id="160" name="thermometers">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="161" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="162">    
-    <bendpoint x="5483" y="523"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="163" name="thermometers">        
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="163" name="circuit">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="164" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="165">    
-    <bendpoint x="5504" y="523"/>    
-    <bendpoint x="5504" y="968"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="166" name="thermoFloorOut">        
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="166" name="relay">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="167" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 

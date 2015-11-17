@@ -77,7 +77,7 @@ public class Mixer
 		}
 //		this.state set to Off in Thread_Mixer initialisation																			= STATES.Mixer.Off;
 	}
-	public void sequencer(Integer targetTemp)
+	public void positionAtTemperatureAndWait(Integer targetTemp)
 	{
 		// Keep it simple :
 		//

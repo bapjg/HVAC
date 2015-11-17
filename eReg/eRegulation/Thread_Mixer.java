@@ -87,14 +87,14 @@ public class Thread_Mixer implements Runnable
 				Global.waitSeconds(10);
 				break;
 			case RampingUp :
-				controlMixer(41000);
+				controlMixerAndWait(41000);
 				break;
 			case Running :
 				insideTempSpan																	= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
 				totalTempSpan																	= insideTempSpan.floatValue()/0.55F;
 				targetTemp																		= Global.thermoOutside.reading + totalTempSpan.intValue();
 				targetFloorIn																	= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
-				controlMixer(targetTemp);
+				controlMixerAndWait(targetTemp);
 				break;
 			case StopRequested :					// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
 				Global.waitSeconds(10);
@@ -113,7 +113,7 @@ public class Thread_Mixer implements Runnable
 				Global.waitSeconds(10);															// Circuit_Mixer hasn't done its job yet
 				break;
 			case Optimising :
-				controlMixer(41000);
+				controlMixerAndWait(41000);
 				break;
 			case ShutDownRequested :					// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
 				mixer.positionZero();
@@ -141,13 +141,13 @@ public class Thread_Mixer implements Runnable
 		circuit.circuitPump.off();
 		LogIt.info("Thread_Mixer", "Run", "Stopping", true);	
 	}
-	public void controlMixer(Integer targetTemp)
+	public void controlMixerAndWait(Integer targetTemp)
 	{
 		//=====================================================================
 		//
-		// mixer.sequencer call
+		// position mixer for the arget Temperature
 		//
-		this.mixer.sequencer(targetTemp);											// Get the mixer moving, then survey the results	
+		this.mixer.positionAtTemperatureAndWait(targetTemp);											// Get the mixer moving, then survey the results	
 		//
 		//=====================================================================
 
