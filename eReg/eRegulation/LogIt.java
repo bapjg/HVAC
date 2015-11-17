@@ -39,9 +39,9 @@ public class LogIt
 		}
 		catch (Exception ex) {}
 	}
-	public static void toScreen(String message)
+	public static void toScreen(String message)	// Assumes that message is already formatted
 	{
-		System.out.println(dateTimeStamp() + " LogIt.debug " + message);
+		System.out.println(message);
 	}
 	public static void debug(String message)
 	{
@@ -78,7 +78,8 @@ public class LogIt
 	{
 		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
 		System.out.println(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
-		if (useLogFile)											toLogFile(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
+		if (true)												toScreen	(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
 	}
 	public static void  info(String className, String methodName, String message)
 	{
