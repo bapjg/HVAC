@@ -93,6 +93,7 @@ abstract class Circuit_Abstract
 	public void requestStop()
 	{
 		state 																				= HVAC_STATES.Circuit.StopRequested;
+		state 																				= HVAC_STATES.Circuit.StopRequested;
 	}
  
 /**
