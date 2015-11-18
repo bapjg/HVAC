@@ -77,7 +77,6 @@ public class LogIt
 	public static void  display(String className, String methodName, String message)
 	{
 		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
-		System.out.println(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
 		if (true)												toScreen	(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
 		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
 	}
@@ -85,7 +84,6 @@ public class LogIt
 	{
 		logMessage("Info", className, methodName, message);
 		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
-
 		if (logDisplay)											toScreen	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 	}
@@ -93,7 +91,6 @@ public class LogIt
 	{
 		logMessage("Info", className, methodName, message);
 		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
-
 		if (display)											toScreen	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
 	}
@@ -101,7 +98,6 @@ public class LogIt
 	{
 		logMessage("Error", className, methodName, message);
 		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
-
 		if (logDisplay)											toScreen	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 	}
@@ -109,7 +105,6 @@ public class LogIt
 	{
 		logMessage("Error", className, methodName, message);
 		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
-
 		if (display)											toScreen	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
 	}
