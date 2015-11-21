@@ -361,20 +361,11 @@ public class Mixer
 			// Do nothing
 		}
 	}
-	public MixerMove_Report positionAbsolute(Integer position)
+	public MixerMove_Report positionAbsolute(Integer targetPosition)
 	{
-		if (position > positionTracked)
-		{
-			// Must move up
-			Integer 											swingTime					= position - positionTracked;
-			return 	mixerMoveUp(swingTime);
-		}
-		else
-		{
-			// Must move down
-			Integer 											swingTime					= positionTracked - position;
-			return 	mixerMoveDown(swingTime);
-		}
+		Integer 												swingTimeToTarget			= targetPosition - positionTracked;				
+		if (swingTimeToTarget > 0)								return 	mixerMoveUp(swingTimeToTarget);
+		else 													return 	mixerMoveDown(-swingTimeToTarget);
 	}
 	public void allOff()
 	{
