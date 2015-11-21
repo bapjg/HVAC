@@ -102,6 +102,7 @@ public class Circuit_Radiator extends Circuit_Abstract
 		case StartRequested:
 			this.heatRequired.tempMinimum													= temp - 7500;
 			this.heatRequired.tempMaximum													= temp + 7500;
+			LogIt.display("Circuit_Radiator", "sequencer", "StartRequested, temp = " + temp.toString());
 			circuitPump.on();
 			state 																			= HVAC_STATES.Circuit.RampingUp;
 			break;
