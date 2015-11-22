@@ -332,7 +332,7 @@ abstract class Circuit_Abstract
  */	
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
-		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay);
+		LogIt.display("Circuit_Abstract", "taskDeactivate", this.name + " Task Deactivated called " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay);
 		this.taskActive.dateLastRun															= Global.Date.now();
 		// taskActive is not set to null so that Circuit_Mixer & Thread_Mixer keeps a handle onto the task
 		// It will be set to null by the sequencer once it has really stopped

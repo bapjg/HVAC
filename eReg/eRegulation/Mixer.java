@@ -366,12 +366,9 @@ public class Mixer
 	}
 	public MixerMove_Report positionAbsolute(Integer targetPosition)
 	{
-		LogIt.display("Mixer", "positionAbsolute", "targetPosition : " + targetPosition.toString());
 		Integer 												swingTimeToTarget			= targetPosition - positionTracked;				
-		if (swingTimeToTarget > 0)
-			return 	mixerMoveUp(swingTimeToTarget);
-		else 
-			return 	mixerMoveDown(swingTimeToTarget);			// pass -ve number
+		if (swingTimeToTarget > 0)								return 	mixerMoveUp(swingTimeToTarget);
+		else 													return 	mixerMoveDown(swingTimeToTarget);
 	}
 	public void allOff()
 	{
@@ -386,7 +383,7 @@ public class Mixer
 		Long													positionChange				= 0L;
 		MixerMove_Report										report						= new MixerMove_Report();
 		
-		if (Math.abs(swingTimeRequired) < this.swingTimeMinimum)
+		if (Math.abs(swingTimeRequired) < this.swingTimeMinimum)							// Dont do anything, just return a zero mvt report
 		{
 			report.timeStart																= Global.DateTime.now();
 			report.timeEnd																	= Global.DateTime.now();
@@ -413,7 +410,7 @@ public class Mixer
 		Long													positionChange				= 0L;
 		MixerMove_Report										report						= new MixerMove_Report();
 		
-		if (Math.abs(swingTimeRequired) < this.swingTimeMinimum)
+		if (Math.abs(swingTimeRequired) < this.swingTimeMinimum)							// Dont do anything, just return a zero mvt report
 		{
 			report.timeStart																= Global.DateTime.now();
 			report.timeEnd																	= Global.DateTime.now();

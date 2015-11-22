@@ -97,8 +97,8 @@ public class Thread_Mixer implements Runnable
 			case StopRequested :								// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
 				break;							// TODO Is there a bug here
 			case OptimisationRequested :
-				mixer.positionPercentage(0.2F);													// Can take upto 90 seconds
-				circuit.state																	= HVAC_STATES.Circuit.MixerReady;
+//				mixer.positionPercentage(0.2F);													// Can take upto 90 seconds
+//				circuit.state																	= HVAC_STATES.Circuit.MixerReady;
 				break;
 			case AwaitingMixer :
 				mixer.positionPercentage(0.2F);													// Can take upto 90 seconds, but can also take 0 seconds
@@ -139,9 +139,9 @@ public class Thread_Mixer implements Runnable
 			case StartRequested :
 			case StopRequested :								
 			case OptimisationRequested :
-			case AwaitingMixer :
-			case MixerReady :
+			case Optimising :									// No mixer movement so wait 10 secs
 			case ShutDownRequested :							
+			case MixerReady :									// We have just waited to move mixer to 0.2F, wait no longer
 			case Off :
 			case Suspended :									
 			case Resuming :
@@ -150,9 +150,9 @@ public class Thread_Mixer implements Runnable
 				break;
 
 			
+			case AwaitingMixer :								// in this state, cycle immediately to get state = MixerReady
 			case RampingUp :									// MixerControl Called with implicit wait
-			case Optimising :
-			case Running :
+			case Running :										// ------------- " ditto " --------------
 				break;											
 			}
 		}		// End while
