@@ -139,6 +139,10 @@ public class Circuit_Radiator extends Circuit_Abstract
 			break;
 		case Suspended:
 		case Resuming:
+		case IdleRequested:										// Not used in this circuit
+			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested from state : " + state.toString());
+			state 																			= HVAC_STATES.Circuit.Idle;	
+			break;
 		case Idle:
 		case Error:
 		default:

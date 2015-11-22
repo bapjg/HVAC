@@ -197,6 +197,11 @@ public class Circuit_HotWater extends Circuit_Abstract
 		case Resuming:																		// Setting state to starting will setup heat required etc, and turn on pump at the right time.
 			this.requestStart();	
 			break;
+		case IdleRequested:										// Not used in this circuit
+			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested from state : " + state.toString());
+			LogIt.error  ("Circuit_" + this.name, "sequencer", "idle requested THIS IS AN ERROR");
+			state 																			= HVAC_STATES.Circuit.Idle;	
+			break;
 		case Idle:			// We only idle circuits when temp reached and keep pump on. Not applicable to HW
 		case Error:
 		default:

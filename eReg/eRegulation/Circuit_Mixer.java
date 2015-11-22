@@ -132,7 +132,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 				{
 					this.heatRequired.setZero();
-					state 																	= HVAC_STATES.Circuit.Idle;
+					state 																	= HVAC_STATES.Circuit.IdleRequested;
 				}
 				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
 				{
@@ -154,9 +154,9 @@ public class Circuit_Mixer extends Circuit_Abstract
 //			break;
 //		}
 			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
-			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
-			{																				// This keeps the floor pump going
-				state 																		= HVAC_STATES.Circuit.Idle;
+			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)			// This keeps the floor pump going
+			{																				
+				state 																		= HVAC_STATES.Circuit.IdleRequested;
 			}
 			break;
 		case StopRequested:
@@ -189,6 +189,12 @@ public class Circuit_Mixer extends Circuit_Abstract
 			// Used if outSide temp > Summer temp
 		case Resuming:
 			LogIt.error("Circuit_" + this.name, "sequencer", "state error detected : " + state.toString());
+			break;
+		case IdleRequested:
+			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested from state : " + state.toString());
+			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
+			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with Objective  at : " + this.taskActive.tempObjective.toString());
+			state 																			= HVAC_STATES.Circuit.Idle;	
 			break;
 		case Idle:
 			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;

@@ -130,6 +130,9 @@ public class Thread_Mixer implements Runnable
 //				targetFloorIn														= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
 //				controlMixer(targetTemp);
 				break;
+			case IdleRequested:									// Idle means pump is on, with room over temperature (fire in Chimeny)
+				// This is a transient state, so do nothing until State = Idle
+				break;
 			case Idle:											// Idle means pump is on, with room over temperature (fire in Chimeny)
 				if (Global.circuits.isSingleActiveCircuit()) 	mixer.positionPercentage(0.2F);		// Get any residual heat into the room
 				else 											mixer.positionZero();
