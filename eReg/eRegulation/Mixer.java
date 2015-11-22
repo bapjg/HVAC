@@ -368,7 +368,7 @@ public class Mixer
 		if (swingTimeToTarget > 0)
 			return 	mixerMoveUp(swingTimeToTarget);
 		else 
-			return 	mixerMoveDown(-swingTimeToTarget);
+			return 	mixerMoveDown(swingTimeToTarget);			// pass -ve number
 	}
 	public void allOff()
 	{

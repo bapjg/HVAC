@@ -312,7 +312,7 @@ public class Global
 		Boolean interrupted 																= false;
 		try
         {
-            Thread.sleep(milliSeconds);
+            Thread.sleep(Math.abs(milliSeconds));
         }
         catch (InterruptedException e)
         {
@@ -325,7 +325,7 @@ public class Global
 		Boolean interrupted 																= false;
 		try
         {
-            Thread.sleep(milliSeconds);
+            Thread.sleep(Math.abs(milliSeconds));
         }
         catch (InterruptedException e)
         {
