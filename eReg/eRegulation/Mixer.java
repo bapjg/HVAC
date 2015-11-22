@@ -363,9 +363,12 @@ public class Mixer
 	}
 	public MixerMove_Report positionAbsolute(Integer targetPosition)
 	{
+		LogIt.display("Mixer", "positionAbsolute", "targetPosition : " + targetPosition.toString());
 		Integer 												swingTimeToTarget			= targetPosition - positionTracked;				
-		if (swingTimeToTarget > 0)								return 	mixerMoveUp(swingTimeToTarget);
-		else 													return 	mixerMoveDown(-swingTimeToTarget);
+		if (swingTimeToTarget > 0)
+			return 	mixerMoveUp(swingTimeToTarget);
+		else 
+			return 	mixerMoveDown(-swingTimeToTarget);
 	}
 	public void allOff()
 	{
