@@ -80,11 +80,9 @@ public class Thread_Mixer implements Runnable
 			{
 			case Off :											// if positionTracked is null, Thread_Mixer will set it to zero
 				mixer.positionZero();															// positionZero() checks for null value														
-				Global.waitSeconds(10);
 				break;
 			case StartRequested :
-				mixer.positionPercentage(0.20F);
-				Global.waitSeconds(10);
+				mixer.positionPercentage(0.20F);				// TODO Is there a bug here
 				break;
 			case RampingUp :
 				controlMixerAndWait(41000);
@@ -97,31 +95,25 @@ public class Thread_Mixer implements Runnable
 				controlMixerAndWait(targetTemp);
 				break;
 			case StopRequested :								// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
-				Global.waitSeconds(10);
-				break;
+				break;							// TODO Is there a bug here
 			case OptimisationRequested :
 				mixer.positionPercentage(0.2F);													// Can take upto 90 seconds
 				circuit.state																	= HVAC_STATES.Circuit.MixerReady;
-				Global.waitSeconds(10);
 				break;
 			case AwaitingMixer :
-				mixer.positionPercentage(0.2F);													// Can take upto 90 seconds
+				mixer.positionPercentage(0.2F);													// Can take upto 90 seconds, but can also take 0 seconds
 				circuit.state																	= HVAC_STATES.Circuit.MixerReady;
-				Global.waitSeconds(10);
 				break;
 			case MixerReady :
-				Global.waitSeconds(10);															// Circuit_Mixer hasn't done its job yet
 				break;
 			case Optimising :
 				controlMixerAndWait(41000);
 				break;
 			case ShutDownRequested :							// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
-				mixer.positionZero();
-				Global.waitSeconds(10);
+				mixer.positionZero();				// TODO Is there a bug here
 				break;
 			case Suspended :									// Floor pump is off / NOT A NORMAL situation (except perhaps in summer
 //				mixer.positionZero();
-//				Global.waitSeconds(10);
 				break;
 			case Resuming :
 //				insideTempSpan														= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
@@ -139,6 +131,29 @@ public class Thread_Mixer implements Runnable
 				break;																
 			case Error :
 				break;
+			}
+			switch(circuit.state)
+			{
+			case IdleRequested:									// Explicit wait required
+			case Idle:											
+			case StartRequested :
+			case StopRequested :								
+			case OptimisationRequested :
+			case AwaitingMixer :
+			case MixerReady :
+			case ShutDownRequested :							
+			case Off :
+			case Suspended :									
+			case Resuming :
+			case Error :
+				Global.waitSeconds(10);
+				break;
+
+			
+			case RampingUp :									// MixerControl Called with implicit wait
+			case Optimising :
+			case Running :
+				break;											
 			}
 		}		// End while
 		circuit.circuitPump.off();

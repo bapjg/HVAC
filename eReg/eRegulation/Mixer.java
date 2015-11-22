@@ -22,6 +22,7 @@ public class Mixer
 	public Integer 												timeDelay 					= 30;
 	public Integer 												timeProjection				= 30;
 	public Integer 												marginProjection			= 2;
+	public Integer												swingTimeMinimum			= 500;
 
 	public Integer 												tempMax 					= 48000;	
 	public Integer 												tempDontMove				= 20;
@@ -75,6 +76,8 @@ public class Mixer
 		{
 			System.out.println("Mixer.Contructor : Unknown mixer relay");
 		}
+		this.swingTimeMinimum																= 500;
+
 //		this.state set to Off in Thread_Mixer initialisation																			= STATES.Mixer.Off;
 	}
 	public void positionAtTemperatureAndWait(Integer targetTemp)
