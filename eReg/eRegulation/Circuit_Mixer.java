@@ -131,6 +131,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 	
 				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
 				{
+					this.heatRequired.setZero();
 					state 																	= HVAC_STATES.Circuit.Idle;
 				}
 				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)

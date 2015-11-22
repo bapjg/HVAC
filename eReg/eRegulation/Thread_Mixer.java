@@ -73,12 +73,12 @@ public class Thread_Mixer implements Runnable
 			//     |                   |
 			//-----v------Outside------v--
 			
-			Integer									insideTempSpan;
-			Float									totalTempSpan;
+			Integer												insideTempSpan;
+			Float												totalTempSpan;
 
 			switch(circuit.state)
 			{
-			case Off :								// if positionTracked is null, Thread_Mixer will set it to zero
+			case Off :											// if positionTracked is null, Thread_Mixer will set it to zero
 				mixer.positionZero();															// positionZero() checks for null value														
 				Global.waitSeconds(10);
 				break;
@@ -96,7 +96,7 @@ public class Thread_Mixer implements Runnable
 				targetFloorIn																	= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
 				controlMixerAndWait(targetTemp);
 				break;
-			case StopRequested :					// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
+			case StopRequested :								// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
 				Global.waitSeconds(10);
 				break;
 			case OptimisationRequested :
@@ -115,11 +115,11 @@ public class Thread_Mixer implements Runnable
 			case Optimising :
 				controlMixerAndWait(41000);
 				break;
-			case ShutDownRequested :					// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
+			case ShutDownRequested :							// Note Circuit.Sequencer goes to optimising if any heat left in the system, or shuts down
 				mixer.positionZero();
 				Global.waitSeconds(10);
 				break;
-			case Suspended :				// Floor pump is off / NOT A NORMAL situation (except perhaps in summer
+			case Suspended :									// Floor pump is off / NOT A NORMAL situation (except perhaps in summer
 //				mixer.positionZero();
 //				Global.waitSeconds(10);
 				break;
@@ -130,10 +130,10 @@ public class Thread_Mixer implements Runnable
 //				targetFloorIn														= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
 //				controlMixer(targetTemp);
 				break;
-			case Idle:
-				if (Global.circuits.isSingleActiveCircuit()) 	mixer.positionPercentage(0.2F);		// Idle means pump is on, with room over temperature (fire in Chimeny)
+			case Idle:											// Idle means pump is on, with room over temperature (fire in Chimeny)
+				if (Global.circuits.isSingleActiveCircuit()) 	mixer.positionPercentage(0.2F);		// Get any residual heat into the room
 				else 											mixer.positionZero();
-				break;																// Get the heat into the room
+				break;																
 			case Error :
 				break;
 			}
