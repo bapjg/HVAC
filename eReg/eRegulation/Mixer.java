@@ -177,7 +177,7 @@ public class Mixer
 				}
 			}
 		
-			if (Math.abs(swingTimeRequired) > 500)											// Less than half a second
+			if (Math.abs(swingTimeRequired) > swingTimeMinimum)											// Less than half a second
 			{
 				Integer 										positionProjected			= positionTracked + swingTimeRequired;
 				Rpt_PID.Update									messageBefore				= (new Rpt_PID()).new Update();
@@ -386,6 +386,14 @@ public class Mixer
 		Long													positionChange				= 0L;
 		MixerMove_Report										report						= new MixerMove_Report();
 		
+		if (Math.abs(swingTimeRequired) < this.swingTimeMinimum)
+		{
+			report.timeStart																= Global.DateTime.now();
+			report.timeEnd																	= Global.DateTime.now();
+			report.swingTimePerformed														= 0;
+			report.positionTracked															= positionTracked;
+			return report;
+		}
 		mixerUp.on();
 		report.timeStart																	= Global.DateTime.now();
 		Global.waitMilliSeconds(swingTimeRequired);
@@ -405,6 +413,14 @@ public class Mixer
 		Long													positionChange				= 0L;
 		MixerMove_Report										report						= new MixerMove_Report();
 		
+		if (Math.abs(swingTimeRequired) < this.swingTimeMinimum)
+		{
+			report.timeStart																= Global.DateTime.now();
+			report.timeEnd																	= Global.DateTime.now();
+			report.swingTimePerformed														= 0;
+			report.positionTracked															= positionTracked;
+			return report;
+		}
 		mixerDown.on();
 		report.timeStart																	= Global.DateTime.now();
 		Global.waitMilliSeconds(-swingTimeRequired);									
