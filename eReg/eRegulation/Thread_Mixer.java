@@ -124,6 +124,12 @@ public class Thread_Mixer implements Runnable
 				break;
 			case IdleRequested:									// Idle means pump is on, with room over temperature (fire in Chimeny)
 				// This is a transient state, so do nothing until State = Idle
+				insideTempSpan																	= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
+				totalTempSpan																	= insideTempSpan.floatValue()/0.55F;
+				targetTemp																		= Global.thermoOutside.reading + totalTempSpan.intValue();
+				targetFloorIn																	= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
+				LogIt.display("Circuit_Floor", "sequencer", "IdleRequested, targetTemp would have been : " + targetTemp.toString() + ",floorReturn is at : " + Global.thermoFloorOut.reading);
+//				controlMixerAndWait(targetTemp);	// TODO ajust
 				break;
 			case Idle:											// Idle means pump is on, with room over temperature (fire in Chimeny)
 				if (Global.circuits.isSingleActiveCircuit()) 	mixer.positionPercentage(0.2F);		// Get any residual heat into the room

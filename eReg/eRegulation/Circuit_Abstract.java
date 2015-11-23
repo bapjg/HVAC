@@ -176,7 +176,7 @@ abstract class Circuit_Abstract
 			&&		(this.state != HVAC_STATES.Circuit.Optimising			)   )
 			{
 				// Time is up for this task and it hasn't yet been asked to stop
-				LogIt.debug("Abstract/taskScheduler/Line 179 deActivating task with state " + this.state.toString());
+				LogIt.display("Circuit_Abstract", "taskScheduler/Line179", "deActivating task " + this.name + "with state " + this.state.toString());
 				taskDeactivate(taskActive);		// Sets state to Stopping (which can go to Optimising) and end up Off
 				return;
 			}	// if deactivate called, return in order for the sequencer to have time to handle before recheduling next task
