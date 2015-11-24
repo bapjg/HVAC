@@ -116,10 +116,10 @@ public class Thread_Mixer implements Runnable
 //				mixer.positionZero();
 				break;
 			case Resuming :
-//				insideTempSpan														= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
-//				totalTempSpan														= insideTempSpan.floatValue()/0.55F;
-//				targetTemp															= Global.thermoOutside.reading + totalTempSpan.intValue();
-//				targetFloorIn														= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
+//				insideTempSpan																	= this.circuit.taskActive.tempObjective - Global.thermoOutside.reading;
+//				totalTempSpan																	= insideTempSpan.floatValue()/0.55F;
+//				targetTemp																		= Global.thermoOutside.reading + totalTempSpan.intValue();
+//				targetFloorIn																	= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
 //				controlMixer(targetTemp);
 				break;
 			case IdleRequested:									// Idle means pump is on, with room over temperature (fire in Chimeny)
@@ -128,12 +128,14 @@ public class Thread_Mixer implements Runnable
 				totalTempSpan																	= insideTempSpan.floatValue()/0.55F;
 				targetTemp																		= Global.thermoOutside.reading + totalTempSpan.intValue();
 				targetFloorIn																	= Global.thermoOutside.reading + ((int) (totalTempSpan * 0.17F));
-				LogIt.display("Circuit_Floor", "sequencer", "IdleRequested, targetTemp would have been : " + targetTemp.toString() + ",floorReturn is at : " + Global.thermoFloorOut.reading);
+				LogIt.display("Circuit_Floor", "sequencer", "IdleRequested, targetTemp would have been : " + targetTemp.toString() + ",floorReturn is at : " + Global.thermoFloorIn.reading);
+				LogIt.display("Circuit_Floor", "sequencer", "IdleRequested, will set target (Floor Out) to : " + ((Integer) this.circuit.taskActive.tempObjective + 2000));
 //				controlMixerAndWait(targetTemp);	// TODO ajust
 				break;
 			case Idle:											// Idle means pump is on, with room over temperature (fire in Chimeny)
-				if (Global.circuits.isSingleActiveCircuit()) 	mixer.positionPercentage(0.2F);		// Get any residual heat into the room
-				else 											mixer.positionZero();
+//				if (Global.circuits.isSingleActiveCircuit()) 	mixer.positionPercentage(0.2F);		// Get any residual heat into the room
+//				else 											mixer.positionZero();
+				controlMixerAndWait(this.circuit.taskActive.tempObjective + 2000);				// Just keep some warth in floor
 				break;																
 			case Error :
 				break;
