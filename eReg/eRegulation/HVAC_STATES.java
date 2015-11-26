@@ -36,6 +36,7 @@ public class HVAC_STATES
 		StopRequested,			// External via requestStop			 	// Decides whether to optimise or shut down
 		OptimisationRequested,	// External via requestOptimisation 	// 
 		AwaitingMixer,			// 	Special Case  						// 
+		MixerInitialising,		// 	Special Case  						// Period where Thread_Mixer starts and positions mixer to zero
 		MixerReady,				// 	Special Case  						// 
 		Optimising,				// Internal 						 	// Unclear : is this an inTask initiative or a Background task initiative
 		ShutDownRequested,		// External via requestShutDown     	// Switches off the circuitPump and calls shutDown (sets heatRequired to null; and sets state to Off)

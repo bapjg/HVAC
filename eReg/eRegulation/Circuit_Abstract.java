@@ -172,8 +172,9 @@ abstract class Circuit_Abstract
 			&&		(this.state != HVAC_STATES.Circuit.StopRequested		)   	// Only called for states start, rampup, running, suspended, resuming, idle
 			&&		(this.state != HVAC_STATES.Circuit.OptimisationRequested)   	// AwaitingMixer, MixerReady
 			&&		(this.state != HVAC_STATES.Circuit.ShutDownRequested	)   
-			&&		(this.state != HVAC_STATES.Circuit.AwaitingMixer		)   	// Do not perturb mixer initialisation which takes a long time.
+			&&		(this.state != HVAC_STATES.Circuit.AwaitingMixer		)   	// Do not perturb mixer OptimisationInitialisation which takes a long time.
 			&&		(this.state != HVAC_STATES.Circuit.MixerReady			)   	//     This is part of OptimisationRequested sequence
+			&&		(this.state != HVAC_STATES.Circuit.MixerInitialising	)   	// Do not perturb mixer initialisation
 			&&		(this.state != HVAC_STATES.Circuit.Off					)   
 			&&		(this.state != HVAC_STATES.Circuit.Optimising			)   )
 			{
@@ -274,7 +275,13 @@ abstract class Circuit_Abstract
 						 * 
 						 */
 //						System.out.println("Activating task " + this.name);
-						taskActivate(taskFound);
+						if (			(this.state != HVAC_STATES.Circuit.AwaitingMixer		)   	// Do not perturb mixer OptimisationInitialisation which takes a long time.
+								&&		(this.state != HVAC_STATES.Circuit.MixerReady			)   	//     This is part of OptimisationRequested sequence
+								&&		(this.state != HVAC_STATES.Circuit.MixerInitialising	)   	// Do not perturb mixer initialisation
+						   )
+						{
+							taskActivate(taskFound);
+						}
 					}
 				}
 			}
