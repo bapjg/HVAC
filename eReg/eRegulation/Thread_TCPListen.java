@@ -156,7 +156,7 @@ public class Thread_TCPListen 			implements Runnable
 		Integer													tempObjective				= 0;
 		CircuitTask												selectedTask				= null;
 
-		if (circuit.taskActive == null)
+		if ((circuit.taskActive == null) || (circuit.state == HVAC_STATES.Circuit.Optimising))
 		{
 			for (CircuitTask aTask : circuit.circuitTaskList)			// Check to ensure there are no active tasks
 			{
