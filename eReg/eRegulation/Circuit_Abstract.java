@@ -172,6 +172,8 @@ abstract class Circuit_Abstract
 			&&		(this.state != HVAC_STATES.Circuit.StopRequested		)   	// Only called for states start, rampup, running, suspended, resuming, idle
 			&&		(this.state != HVAC_STATES.Circuit.OptimisationRequested)   	// AwaitingMixer, MixerReady
 			&&		(this.state != HVAC_STATES.Circuit.ShutDownRequested	)   
+			&&		(this.state != HVAC_STATES.Circuit.AwaitingMixer		)   	// Do not perturb mixer initialisation which takes a long time.
+			&&		(this.state != HVAC_STATES.Circuit.MixerReady			)   	//     This is part of OptimisationRequested sequence
 			&&		(this.state != HVAC_STATES.Circuit.Off					)   
 			&&		(this.state != HVAC_STATES.Circuit.Optimising			)   )
 			{
