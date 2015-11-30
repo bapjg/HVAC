@@ -21,6 +21,7 @@ public class Burner
 	public 	GPIO												monitorFuelFlow;
 	public	Long												lastSwitchedOn				= 0L;
 	public	Long												lastSwitchedOff				= 0L;
+	private Boolean												isOn 						= false;
 	
 	public Burner(Ctrl_Configuration.Data.Burner burnerparams)
 	{
@@ -33,8 +34,14 @@ public class Burner
 	
 	public void powerOn()
 	{
+		if (isOn)
+		{
+			LogIt.error("Burner", "powerOn", "Burner has been powered on when already on");
+			Global.eMailMessage("Burner fault", "Burner has been powered on when already on");
+		}
 		LogIt.action("Burner", "On");
 		burnerPower.on();
+		isOn																				= true;
 		lastSwitchedOn																		= Global.DateTime.now();
 		
 		// After power on, ventilation clears fuel out of combustion chamber for 10 seconds
@@ -66,8 +73,14 @@ public class Burner
 	}
 	public void powerOff()
 	{
+		if (! isOn)
+		{
+			LogIt.error("Burner", "powerOff", "Burner has been powered down when already off");
+			Global.eMailMessage("Burner fault", "Burner has been powered down when already off");
+		}
 		LogIt.action("Burner", "powerOff");
 		burnerPower.off();
+		isOn																				= false;
 		lastSwitchedOff																		= Global.DateTime.now();
 
 		Integer i;
@@ -96,7 +109,6 @@ public class Burner
 			Global.eMailMessage("Burner fault", "Burner/sequencer : 'checkFault()' has detected a problem");
 			powerOff();
 		}
-
 		// TODO Must also check max temp;
 	}
 	public Boolean isFuelFlowing()

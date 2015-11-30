@@ -119,7 +119,7 @@ public class FuelFlow
 		}
 		else
 		{
-			LogIt.error("FuelFlow", "switchedOn", "timeLastLast is alreay set when it shouldn't be (powerOn)");
+			LogIt.error("FuelFlow", "switchedOn", "timeLast is alreay set when it shouldn't be (powerOn)");
 		}
 	}
 	public void switchedOff()

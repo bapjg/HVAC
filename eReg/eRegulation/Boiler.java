@@ -81,15 +81,6 @@ public class Boiler
 		{
 			this.heatRequired.tempMaximum	= (this.heatRequired.tempMaximum > tempNeverExceed - tempOvershoot) ? tempNeverExceed - tempOvershoot 	: this.heatRequired.tempMaximum;
 			this.heatRequired.tempMinimum	= (this.heatRequired.tempMinimum < tempCondensationAvoidance) 		? tempCondensationAvoidance 		: this.heatRequired.tempMinimum;
-			
-//			if (this.heatRequired.tempMaximum > tempNeverExceed - tempOvershoot)
-//			{
-//				this.heatRequired.tempMaximum 												= tempNeverExceed - tempOvershoot;
-//			}
-//			if (this.heatRequired.tempMinimum < tempCondensationAvoidance)
-//			{
-//				this.heatRequired.tempMinimum 												= tempCondensationAvoidance;
-//			}
 		}
 		try
 		{
