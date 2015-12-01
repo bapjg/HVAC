@@ -28,8 +28,6 @@ public class Boiler
 	public Burner												burner;
 
 	public Heat_Required										heatRequired;
-//	public Integer	   											tempMax;
-//	public Integer	   											tempMin;
 	public Integer												tempNeverExceed				= 95000;
 	public Integer												tempOvershoot				= 18000;
 	public Integer												tempCondensationAvoidance	= 55000;
