@@ -293,7 +293,7 @@ abstract class Circuit_Abstract
  */	
 	public void taskActivate(CircuitTask 							thisTask)
 	{
-		LogIt.display("Circuit_Abstract", "taskActivate", "Task activate requested " + this.name + " : "+ thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + " " + thisTask.taskType.toString() + " " + this.state.toString());
+		LogIt.display("Circuit_Abstract", "taskActivate", "Task activate requested " + this.name + " : "+ thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
 
 		// Test to see if :
 		// - activeTask is null (just swap in)

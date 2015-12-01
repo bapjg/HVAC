@@ -88,11 +88,21 @@ public class Boiler
 			
 			if (checkOverHeat())		// This is just a temperature check
 			{
-				if (state != HVAC_STATES.Boiler.On_CoolingAfterOverheat)
+				switch (state)
 				{
+				case On_CoolingAfterOverheat:
+				case On_Cooling:				// Nothing to do except wait
+					break;
+				case PowerUp:					// Normally cannot happen, as PowerUp happens only when min temperature reached
+				case Error:
+				case Off:						// Normally cannot happen
+				case On_Heating:				// Normally cannot happen, as should be switched off at lower temperature (current Temp - overShoot)
+				case PowerDown:					// Normally cannot happen, ------------------------------ditto--------------------------------------
+				default:
 					burner.powerOff();
-					LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + " , state set to STATE_OnCoolingAfterOverheat", false);
+					LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + ", state set to STATE_OnCoolingAfterOverheat, Current state : " + state, false);
 					state																	= HVAC_STATES.Boiler.On_CoolingAfterOverheat;
+					break;
 				}
 			}
 			if (burner.burnerFault())	//This reads GPIO
