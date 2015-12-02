@@ -418,6 +418,7 @@ public class Global
         catch (MessagingException mex) 
         {
             mex.printStackTrace();
+            LogIt.error("Global", "eMailMessage", mex.toString());
         }
 	}
 	public static void waitThreadTermination()
