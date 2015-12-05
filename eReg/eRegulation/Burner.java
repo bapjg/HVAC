@@ -75,8 +75,7 @@ public class Burner
 	{
 		if (! isOn)
 		{
-			LogIt.error("Burner", "powerOff", "Burner has been powered down when already off");
-			Global.eMailMessage("Burner fault", "Burner has been powered down when already off");
+			// Do nothing special, it's just the Boiler playing things safe
 		}
 		LogIt.action("Burner", "powerOff");
 		burnerPower.off();
