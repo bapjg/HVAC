@@ -53,7 +53,7 @@ public class Boiler
 		this.heatRequired.setZero();
 		state 																				= HVAC_STATES.Boiler.Off;
 	}
-	public Boolean checkOverHeat()
+	public Boolean overHeatDetected()
 	{
 		try
 		{
@@ -84,8 +84,8 @@ public class Boiler
 		{
 			Integer												tempNow						= Global.thermoBoiler.readUnCached();
 			
-			if (checkOverHeat())		// This is just a temperature check
-			{
+			if (overHeatDetected())		// This is just a temperature check. Returns true in an overheat situation
+			{							// In the event of an over heat
 				switch (state)
 				{
 				case On_CoolingAfterOverheat:
@@ -125,7 +125,7 @@ public class Boiler
 				}
 				break;
 			case On_CoolingAfterOverheat:
-				if (!checkOverHeat())
+				if (!overHeatDetected())
 				{
 					LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling", false);
 					state																	= HVAC_STATES.Boiler.On_Cooling; 		//Normal operating temp has returned

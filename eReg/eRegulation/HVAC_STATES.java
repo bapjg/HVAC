@@ -11,10 +11,10 @@ public class HVAC_STATES
 	}
 	public enum Boiler
 	{
-		Off,
-		On_Heating,
-		On_Cooling,
-		On_CoolingAfterOverheat,
+		Off,							// Boiler is not active
+		On_Heating,						// Boiler is active, Burner is currently heating
+		On_Cooling,						// Boiler is active, Burner is off
+		On_CoolingAfterOverheat,		// Boiler is active, Burner is off (after overheat)
 		PowerUp,
 		PowerDown,
 		Error
