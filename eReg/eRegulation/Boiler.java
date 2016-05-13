@@ -69,6 +69,11 @@ public class Boiler
 	}
 	public void sequencer()
 	{
+		if (this.heatRequired.tempMaximum < this.tempCondensationAvoidance)
+		{
+			this.heatRequired.setZero();
+		}
+		
 		if (	(this.heatRequired.isZero()) 
 		&& 		(this.state != HVAC_STATES.Boiler.Off)
 		&&		(this.state != HVAC_STATES.Boiler.Error)		)							// No heat required and Off
