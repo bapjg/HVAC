@@ -82,12 +82,12 @@ public class Thermometer
 		Integer 											firstReading				= -99;
 		for (Probe probe : probes)
 		{
-			if (this.name == "Boiler")
-			{
-			int x = 3;
-			}
+			Integer res = 9;
+			if (this.name == "Boiler")						res = 12;
+			else 											res = 9;
 			
-			Integer											aReading					= probe.read(resolution, unCached);
+			Integer											aReading					= probe.read(res, unCached);
+//			Integer											aReading					= probe.read(resolution, unCached);
 			if (firstReading == -99)						firstReading				= aReading;
 			if (aReading != null)
 			{

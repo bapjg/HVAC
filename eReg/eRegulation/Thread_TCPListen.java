@@ -64,6 +64,7 @@ public class Thread_TCPListen 			implements Runnable
 			    		else if (message_in instanceof Ctrl_Actions_Stop.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
 
 			    		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)	message_out	= process_Ctrl_Fuel_Consumption_Update	((Ctrl_Fuel_Consumption.Update) message_in);
+			    		else if (message_in instanceof Ctrl_Thermo_List.Request)		message_out	= process_Ctrl_Thermo_List_Request		((Ctrl_Thermo_List.Request) message_in);
 			        } 
 			        
 			        ObjectOutputStream 							output						= null;
@@ -238,7 +239,7 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		else
 		{
-			message_return									= new Ctrl__Abstract().new Nack();
+			message_return																	= new Ctrl__Abstract().new Nack();
 		}
 		return message_return;
 	}
@@ -247,17 +248,17 @@ public class Thread_TCPListen 			implements Runnable
 		// Returns the current configuration in operation
   		// It is timestamped now(). It should be timestamped with date/time recovered either from server or local file
   		
-  		Ctrl_Configuration.Data 			message_return	= new Ctrl_Configuration.Data();
+  		Ctrl_Configuration.Data 								message_return				= new Ctrl_Configuration.Data();
 		
 		// TODO
   		// This timestamp needs to be looked at in grater detail
 		
-		message_return.dateTime								= Global.DateTime.now();
+		message_return.dateTime																= Global.DateTime.now();
 		
 		for (Thermometer 			globalThermometer : Global.thermometers.thermometerList)
 		{
-			Ctrl_Configuration.Thermometer paramThermometer	= new Ctrl_Configuration().new Thermometer();
-			paramThermometer.name							= globalThermometer.name;
+			Ctrl_Configuration.Thermometer 						paramThermometer			= new Ctrl_Configuration().new Thermometer();
+			paramThermometer.name															= globalThermometer.name;
 // TODO what is this for
 //			paramThermometer.address						= globalThermometer.address;
 			message_return.thermometerList.add(paramThermometer);
@@ -265,33 +266,33 @@ public class Thread_TCPListen 			implements Runnable
 
 		for (Relay 					globalRelay : Global.relays.relayList)
 		{
-			Ctrl_Configuration.Relay 		paramRelay		= new Ctrl_Configuration().new Relay();
-			paramRelay.name									= globalRelay.name;
-			paramRelay.relayBank							= globalRelay.relayBank;
-			paramRelay.relayNumber							= globalRelay.relayNumber;
+			Ctrl_Configuration.Relay 							paramRelay					= new Ctrl_Configuration().new Relay();
+			paramRelay.name																	= globalRelay.name;
+			paramRelay.relayBank															= globalRelay.relayBank;
+			paramRelay.relayNumber															= globalRelay.relayNumber;
 			message_return.relayList.add(paramRelay);
 		}
 		
 		for (Pump 					globalPump : Global.pumps.pumpList)
 		{
-			Ctrl_Configuration.Pump 		paramPump		= new Ctrl_Configuration().new Pump();
-			paramPump.name									= globalPump.name;
-			paramPump.relay									= globalPump.relay.name;
+			Ctrl_Configuration.Pump 							paramPump					= new Ctrl_Configuration().new Pump();
+			paramPump.name																	= globalPump.name;
+			paramPump.relay																	= globalPump.relay.name;
 			message_return.pumpList.add(paramPump);
 		}
 
 		for (Circuit_Abstract 		globalCircuit : Global.circuits.circuitList)
 		{
-			Ctrl_Configuration.Circuit		paramCircuit	= new Ctrl_Configuration().new Circuit();
-			paramCircuit.name								= globalCircuit.name;
-			paramCircuit.pump								= globalCircuit.circuitPump.name;
-			paramCircuit.thermometer						= globalCircuit.circuitThermo.name;
-			paramCircuit.type								= globalCircuit.circuitType;
+			Ctrl_Configuration.Circuit							paramCircuit				= new Ctrl_Configuration().new Circuit();
+			paramCircuit.name																= globalCircuit.name;
+			paramCircuit.pump																= globalCircuit.circuitPump.name;
+			paramCircuit.thermometer														= globalCircuit.circuitThermo.name;
+			paramCircuit.type																= globalCircuit.circuitType;
 			message_return.circuitList.add(paramCircuit);
 		}
-		message_return.burner.relay							= Global.burnerPower.name;
-		message_return.boiler.tempNeverExceed				= new Cmn_Temperature(Global.boiler.tempNeverExceed);
-		message_return.boiler.tempOverShoot					= new Cmn_Temperature(Global.boiler.tempOvershoot);
+		message_return.burner.relay															= Global.burnerPower.name;
+		message_return.boiler.tempNeverExceed												= new Cmn_Temperature(Global.boiler.tempNeverExceed);
+		message_return.boiler.tempOverShoot													= new Cmn_Temperature(Global.boiler.tempOvershoot);
 		
 		
 		return message_return;
@@ -306,12 +307,12 @@ public class Thread_TCPListen 			implements Runnable
 		// Returns the current configuration in operation
   		// It is timestamped now(). It should be timestamped with date/time recovered either from server or local file
   		
-		Ctrl_Weather.Data 						message_return					= new Ctrl_Weather().new Data();			
+		Ctrl_Weather.Data 										message_return				= new Ctrl_Weather().new Data();			
 		if (Global.weatherData == null)
 		{
 			try			// Getting new data
 			{
-				Global.weatherData												= new Ctrl_WeatherData();
+				Global.weatherData															= new Ctrl_WeatherData();
 			}
 			catch (Exception e)
 			{
@@ -320,47 +321,47 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		if (Global.weatherData == null)		// still no data
 		{
-			message_return														= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
-			message_return.weatherData											= null;
+			message_return																	= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
+			message_return.weatherData														= null;
 		}
 		else
 		{
-			message_return														= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
-			message_return.weatherData											= Global.weatherData;
+			message_return																	= (Ctrl_Weather.Data) new Ctrl_Weather().new Data();
+			message_return.weatherData														= Global.weatherData;
 		}
 		return message_return;
 	}
 	private Ctrl_Actions_Relays.Data	process_Ctrl_Actions_Relays_Request		()
 	{
-		Ctrl_Actions_Relays.Data 		message_return		= new Ctrl_Actions_Relays().new Data();
-		message_return.burner 								= Global.burnerPower.isOn();
-		message_return.pumpHotWater	 						= Global.pumps.fetchPump("Pump_Water").relay.isOn();
-		message_return.pumpFloor	 						= Global.pumps.fetchPump("Pump_Floor").relay.isOn();
-		message_return.pumpRadiator	 						= Global.pumps.fetchPump("Pump_Radiator").relay.isOn();
+		Ctrl_Actions_Relays.Data 								message_return				= new Ctrl_Actions_Relays().new Data();
+		message_return.burner 																= Global.burnerPower.isOn();
+		message_return.pumpHotWater	 														= Global.pumps.fetchPump("Pump_Water").relay.isOn();
+		message_return.pumpFloor	 														= Global.pumps.fetchPump("Pump_Floor").relay.isOn();
+		message_return.pumpRadiator	 														= Global.pumps.fetchPump("Pump_Radiator").relay.isOn();
         return message_return;
 	}
 	private Ctrl_Actions_Relays.Data 	process_Ctrl_Actions_Relays_Execute		(Ctrl_Actions_Relays.Execute message_in)
 	{
 		// Action relays except for burner relay where prefer to use burner object
 		// to have fuel flow measured and fuel supply controlled
-		Relay							relay				= null;
-		Burner							burner				= null;
+		Relay													relay						= null;
+		Burner													burner						= null;
 		
 		if (message_in.relayName.equalsIgnoreCase("Burner"))
 		{
-			burner											= Global.boiler.burner;
+			burner																			= Global.boiler.burner;
 		}
 		else if (message_in.relayName.equalsIgnoreCase("HotWater"))
 		{
-			relay											= Global.pumps.fetchPump("Pump_Water").relay;
+			relay																			= Global.pumps.fetchPump("Pump_Water").relay;
 		}
 		else if (message_in.relayName.equalsIgnoreCase("Floor"))
 		{
-			relay											= Global.pumps.fetchPump("Pump_Floor").relay;
+			relay																			= Global.pumps.fetchPump("Pump_Floor").relay;
 		}
 		else if (message_in.relayName.equalsIgnoreCase("Radiator"))
 		{
-			relay											= Global.pumps.fetchPump("Pump_Radiator").relay;
+			relay																			= Global.pumps.fetchPump("Pump_Radiator").relay;
 		}
 		if (relay != null)
 		{
@@ -385,11 +386,11 @@ public class Thread_TCPListen 			implements Runnable
 			}
 		}
 		
-		Ctrl_Actions_Relays.Data message_return				= new Ctrl_Actions_Relays().new Data();
-		message_return.burner 								= Global.burnerPower.isOn();
-		message_return.pumpHotWater	 						= Global.pumps.fetchPump("Pump_Water").relay.isOn();
-		message_return.pumpFloor	 						= Global.pumps.fetchPump("Pump_Floor").relay.isOn();
-		message_return.pumpRadiator	 						= Global.pumps.fetchPump("Pump_Radiator").relay.isOn();
+		Ctrl_Actions_Relays.Data message_return												= new Ctrl_Actions_Relays().new Data();
+		message_return.burner 																= Global.burnerPower.isOn();
+		message_return.pumpHotWater	 														= Global.pumps.fetchPump("Pump_Water").relay.isOn();
+		message_return.pumpFloor	 														= Global.pumps.fetchPump("Pump_Floor").relay.isOn();
+		message_return.pumpRadiator	 														= Global.pumps.fetchPump("Pump_Radiator").relay.isOn();
 		return message_return;
 	}
 	private Ctrl_Actions_Test_Mail.Ack	process_Ctrl_Actions_Test_Mail_Execute	()
@@ -403,14 +404,14 @@ public class Thread_TCPListen 			implements Runnable
 		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reboot )
 		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Restart) )
 		{
-			Global.stopNow									= true;
-			Global.exitStatus								= message_in.actionRequest;	// 0 = stop app, 1 = restart app, 2 = reboot
+			Global.stopNow																	= true;
+			Global.exitStatus																= message_in.actionRequest;	// 0 = stop app, 1 = restart app, 2 = reboot
 			return	new Ctrl_Actions_Stop().new Ack();
 		}
 		else if (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reload_Configuration)
 		{
-			Global.stopNow									= true;
-			Global.exitStatus								= Ctrl_Actions_Stop.ACTION_Restart;	// 0 = stop app, 1 = restart app, 2 = reboot
+			Global.stopNow																	= true;
+			Global.exitStatus																= Ctrl_Actions_Stop.ACTION_Restart;	// 0 = stop app, 1 = restart app, 2 = reboot
 			return	new Ctrl_Actions_Stop().new Ack();
 		}
 		else if (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reload_Calendars)
@@ -420,9 +421,9 @@ public class Thread_TCPListen 			implements Runnable
 			{
 				for (CircuitTask task : circuit.circuitTaskList)
 				{
-					task									= null;
+					task																	= null;
 				}
-				circuit.circuitTaskList						= null;
+				circuit.circuitTaskList														= null;
 				circuit.requestShutDown();
 			}
 			// Now wait for each circuit to stop
@@ -435,11 +436,11 @@ public class Thread_TCPListen 			implements Runnable
 				}
 			}
 			// TODO : Should we not stop the Background thread
-			Global.tasksBackGround							= null;
-			Global.awayList									= null;
+			Global.tasksBackGround															= null;
+			Global.awayList																	= null;
 			try
 			{
-				Calendars		calendars 					= new Calendars();
+				Calendars										calendars 					= new Calendars();
 			}
 			catch (Exception e)
 			{
@@ -458,24 +459,30 @@ public class Thread_TCPListen 			implements Runnable
 			return	new Ctrl_Fuel_Consumption().new Nack("Fuel is currently Flowing"); 
 		}
 		
-		Long											fuelConsumed							= Global.burner.fuelflow.consumption;
+		Long													fuelConsumed				= Global.burner.fuelflow.consumption;
 		
 		try
 		{
 			LogIt.fuelData(Global.burner.fuelflow.consumption);
-			Global.burner.fuelflow.consumption				= message_in.fuelConsumed;		// Set the value (usually zero)
+			Global.burner.fuelflow.consumption												= message_in.fuelConsumed;		// Set the value (usually zero)
 			Global.burner.fuelflow.saveFuelFlow();						// Saves the current entry
 			LogIt.fuelData(Global.burner.fuelflow.consumption);
 		}
 		catch (Exception ex)
 		{
 			// Something went wrong set thing back the they were
-			Global.burner.fuelflow.consumption													= fuelConsumed;
+			Global.burner.fuelflow.consumption												= fuelConsumed;
 			LogIt.fuelData(Global.burner.fuelflow.consumption);
 			Global.burner.fuelflow.saveFuelFlow();						// Saves the current entry
 			return	new Ctrl_Fuel_Consumption().new Nack("A file or network error ocurred, command cancelled"); 
 		}
 		return	new Ctrl_Fuel_Consumption().new Ack();		// All Ok so Ack
+	}
+	private Ctrl_Thermo_List.Data	process_Ctrl_Thermo_List_Request		(Ctrl_Thermo_List.Request message_in)
+	{
+		Ctrl_Thermo_List.Data 									message_return				= new Ctrl_Thermo_List().new Data();			
+		
+		return	new Ctrl_Thermo_List().new Data();		// All Ok so Ack
 	}
 }
  
