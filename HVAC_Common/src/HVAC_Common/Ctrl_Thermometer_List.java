@@ -11,6 +11,7 @@ public class Ctrl_Thermometer_List 							extends 					Ctrl__Abstract
 	{
 		private static final long 						serialVersionUID 			= 1L;
 		public String[]									thermoAddress;
+		public Integer xx;
 	}
 	public class Request 								extends 					Ctrl_Thermometer_List
 	{
