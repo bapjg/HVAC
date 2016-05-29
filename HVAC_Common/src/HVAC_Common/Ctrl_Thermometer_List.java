@@ -1,22 +1,22 @@
 package HVAC_Common;
 
-public class Ctrl_Thermo_List 							extends 					Ctrl__Abstract
+public class Ctrl_Thermometer_List 							extends 					Ctrl__Abstract
 {
 	private static final long 							serialVersionUID 			= 1L;
 	
-	public Ctrl_Thermo_List()
+	public Ctrl_Thermometer_List()
 	{
 	}
-	public class Data 									extends 					Ctrl_Thermo_List
+	public class Data 									extends 					Ctrl_Thermometer_List
 	{
 		private static final long 						serialVersionUID 			= 1L;
 		public String[]									thermoAddress;
 	}
-	public class Request 								extends 					Ctrl_Thermo_List
+	public class Request 								extends 					Ctrl_Thermometer_List
 	{
 		private static final long 						serialVersionUID 			= 1L;
 	}
-	public class Nack 									extends 					Ctrl_Thermo_List
+	public class Nack 									extends 					Ctrl_Thermometer_List
 	{
 		private static final long 						serialVersionUID 			= 1L;
 		public String									errorMessage;

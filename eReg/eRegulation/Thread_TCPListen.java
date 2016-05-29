@@ -64,7 +64,7 @@ public class Thread_TCPListen 			implements Runnable
 			    		else if (message_in instanceof Ctrl_Actions_Stop.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
 
 			    		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)	message_out	= process_Ctrl_Fuel_Consumption_Update	((Ctrl_Fuel_Consumption.Update) message_in);
-			    		else if (message_in instanceof Ctrl_Thermo_List.Request)		message_out	= process_Ctrl_Thermo_List_Request		((Ctrl_Thermo_List.Request) message_in);
+			    		else if (message_in instanceof Ctrl_Thermometer_List.Request)		message_out	= process_Ctrl_Thermo_List_Request		((Ctrl_Thermometer_List.Request) message_in);
 			        } 
 			        
 			        ObjectOutputStream 							output						= null;
@@ -478,11 +478,11 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		return	new Ctrl_Fuel_Consumption().new Ack();		// All Ok so Ack
 	}
-	private Ctrl_Thermo_List.Data	process_Ctrl_Thermo_List_Request		(Ctrl_Thermo_List.Request message_in)
+	private Ctrl_Thermometer_List.Data	process_Ctrl_Thermo_List_Request		(Ctrl_Thermometer_List.Request message_in)
 	{
-		Ctrl_Thermo_List.Data 									message_return				= new Ctrl_Thermo_List().new Data();			
+		Ctrl_Thermometer_List.Data 									message_return				= new Ctrl_Thermometer_List().new Data();			
 		
-		return	new Ctrl_Thermo_List().new Data();		// All Ok so Ack
+		return	new Ctrl_Thermometer_List().new Data();		// All Ok so Ack
 	}
 }
  
