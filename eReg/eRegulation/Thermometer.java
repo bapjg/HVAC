@@ -83,7 +83,7 @@ public class Thermometer
 		for (Probe probe : probes)
 		{
 			Integer res = 9;
-			if (this.name == "Boiler")						res = 12;
+			if (this.name.equalsIgnoreCase("Boiler"))		res = 12;
 			else 											res = 9;
 			
 			Integer											aReading					= probe.read(res, unCached);
