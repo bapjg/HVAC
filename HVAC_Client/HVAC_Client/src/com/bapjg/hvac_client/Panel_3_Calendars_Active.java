@@ -119,7 +119,6 @@ public class Panel_3_Calendars_Active 							extends 					Panel_0_Fragment
 	   		tasksActive.radiator															= ! tasksActive.radiator;								
       		activeRadiator.setChecked(tasksActive.radiator);
 	   	}
- 
 	}
     public void onDialogReturn()
     {
