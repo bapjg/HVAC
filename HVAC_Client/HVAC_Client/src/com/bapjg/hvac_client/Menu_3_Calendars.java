@@ -28,6 +28,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	Element_MenuButton											buttonVocabulary;
 	Element_MenuButton											buttonAwayList;
 	Element_MenuButton											buttonBackgroudTasks;
+	Element_MenuButton											buttonActive;
 	
 	
 	public Menu_3_Calendars()
@@ -44,6 +45,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
     	buttonVocabulary																	= new Element_MenuButton("Vocabulary");
     	buttonAwayList																		= new Element_MenuButton("Away List");
     	buttonBackgroudTasks																= new Element_MenuButton("Backgroud Tasks");
+    	buttonActive																		= new Element_MenuButton("Active");
 
     	menuInsertPoint.addView(buttonHotWater);
     	menuInsertPoint.addView(buttonRadiator);
@@ -51,6 +53,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
     	menuInsertPoint.addView(buttonVocabulary);
     	menuInsertPoint.addView(buttonAwayList);
     	menuInsertPoint.addView(buttonBackgroudTasks);
+    	menuInsertPoint.addView(buttonActive);
     	
     	buttonHotWater			.setListener(this);
     	buttonRadiator			.setListener(this);
@@ -58,6 +61,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
     	buttonVocabulary		.setListener(this);
     	buttonAwayList			.setListener(this);
     	buttonBackgroudTasks	.setListener(this);
+    	buttonActive			.setListener(this);
 
     	onElementClick(buttonHotWater);
     	
@@ -77,6 +81,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
     	else if (clickedView == buttonFloor)					panelFragment 				= new Panel_3_Calendars_Circuits("Floor");
     	else if (clickedView == buttonAwayList)					panelFragment 				= new Panel_3_Calendars_Away();
     	else if (clickedView == buttonBackgroudTasks)			panelFragment 				= new Panel_3_Calendars_Background_Tasks();
+    	else if (clickedView == buttonActive)					panelFragment 				= new Panel_3_Calendars_Active();
 
     	if (panelFragment != null)
     	{
