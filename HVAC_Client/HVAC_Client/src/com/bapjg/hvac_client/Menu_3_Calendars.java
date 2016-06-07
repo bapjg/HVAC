@@ -104,7 +104,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	{
 		if (Global.eRegCalendars != null)
 		{
-            Gson gson 																		= new GsonBuilder().setPrettyPrinting().create();
+            Gson 													gson 					= new GsonBuilder().setPrettyPrinting().create();
 			Ctrl_Json.Update										sendUpdate				= new Ctrl_Json().new Update();
 			sendUpdate.type																	= Ctrl_Json.TYPE_Calendar;
             sendUpdate.json 																= gson.toJson((Ctrl_Calendars.Data) Global.eRegCalendars);

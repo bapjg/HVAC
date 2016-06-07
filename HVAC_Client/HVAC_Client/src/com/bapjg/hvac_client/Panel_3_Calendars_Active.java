@@ -85,18 +85,18 @@ public class Panel_3_Calendars_Active 							extends 					Panel_0_Fragment
 		activeFloor				.setOnClickListener(this);
 		activeRadiator			.setOnClickListener(this);
 	}
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
-		super.processFinishTCP(result);
+		super.processFinishHTTP(result);
 		if (result instanceof Ctrl_Calendars.Data)
 		{
-//			Global.eRegConfiguration			 											= (Ctrl_Configuration.Data) result;
+			Global.eRegCalendars			 												= (Ctrl_Calendars.Data) result;
 			displayContents();
 	        setListens();
  		}
 		else
 		{
-			Global.toaster("P5_Cals_Away : Data NOTNOTNOT received", true);
+			Global.toaster("P5_Active : Data NOTNOTNOT received", true);
 		}
 	}
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
