@@ -53,7 +53,6 @@ public class Global
 	
 	public Global() 
 	{
-		int x = 1;
 	}
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
     public static Boolean isLocalIpAddress()					// Determines if ipAddress is 192.168.5.xxx
