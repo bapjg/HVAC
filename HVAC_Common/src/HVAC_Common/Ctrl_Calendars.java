@@ -26,7 +26,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		public ArrayList <Circuit>				circuitList 				= new ArrayList <Circuit>();
 		public ArrayList <Away>					awayList 					= new ArrayList <Away>();
 		public TasksBackGround					tasksBackGround				= new TasksBackGround();
-		public TasksActive						tasksActive					= new TasksActive();
+//		public TasksActive						tasksActive					= new TasksActive();
 		
 		public Circuit fetchCircuit(String name)
 		{
@@ -58,7 +58,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		public ArrayList <Circuit>				circuitList 				= new ArrayList <Circuit>();
 		public ArrayList <Away>					awayList 					= new ArrayList <Away>();
 		public TasksBackGround					tasksBackGround				= new TasksBackGround();
-		public TasksActive						tasksActive					= new TasksActive();
+//		public TasksActive						tasksActive					= new TasksActive();
 	}
 	public class Request						extends 					Ctrl_Calendars
 	{
@@ -89,6 +89,7 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	{
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							name;
+		public Boolean							active;
 		public ArrayList<Calendar>				calendarList 				= new ArrayList<Calendar>();
 	}
 	public class Calendar						extends 					Ctrl_Calendars
@@ -116,13 +117,13 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 		public Cmn_Temperature					winterTemp;
 		public Cmn_Temperature					sunshineInfluence;
 	}
-	public class TasksActive					extends 					Ctrl_Calendars
-	{
-		private static final long 				serialVersionUID 			= 1L;
-		public Boolean							hotWater;
-		public Boolean							floor;
-		public Boolean							radiator;
-	}
+//	public class TasksActive					extends 					Ctrl_Calendars
+//	{
+//		private static final long 				serialVersionUID 			= 1L;
+//		public Boolean							hotWater;
+//		public Boolean							floor;
+//		public Boolean							radiator;
+//	}
 
 	public void initialise()
 	{

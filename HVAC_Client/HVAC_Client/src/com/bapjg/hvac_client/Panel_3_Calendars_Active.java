@@ -32,9 +32,9 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Active 							extends 					Panel_0_Fragment 
 {
-	private Element_Switch										activeHotWater;
-	private Element_Switch										activeFloor;
-	private Element_Switch										activeRadiator;
+//	private Element_Switch										activeHotWater;
+//	private Element_Switch										activeFloor;
+//	private Element_Switch										activeRadiator;
 
 	
 	public Panel_3_Calendars_Active()
@@ -45,45 +45,65 @@ public class Panel_3_Calendars_Active 							extends 					Panel_0_Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
     	super.panelInitialise(inflater, container, savedInstanceState);
-    	displayTitles("Calendars", "Active");
 
-    	activeHotWater 																		= new Element_Switch("Hot Water");
-    	activeFloor 																		= new Element_Switch("Floor");
-    	activeRadiator 																		= new Element_Switch("Radiator");
+    	Element_ListView										listView 					= new Element_ListView("Henry");
 
-    	panelInsertPoint.addView(new Element_Heading( "Active Circuits"));
-    	panelInsertPoint.addView(activeHotWater);
-    	panelInsertPoint.addView(activeFloor);
-    	panelInsertPoint.addView(activeRadiator);
+    	panelInsertPoint.addView(listView);
+    	
+    	this.adapterView																	= (AdapterView) panelView.findViewById(R.id.listView);
 
+    	displayTitles("Calendars", "Active Circuits");
+ 
         if ((Global.eRegCalendars != null)
-        &&  (Global.eRegCalendars.tasksActive != null))
+        &&  (Global.eRegCalendars.circuitList != null))
         {
         	displayContents();
-        	setListens();
+            setListens();
         }
         else // we need to reconnect to the server
         {
-            Global.toaster("Refresh", false);
+        	Global.toaster("Please refresh", true);
         }
- 
         return panelView;
+    	
+//    	activeHotWater 																		= new Element_Switch("Hot Water");
+//    	activeFloor 																		= new Element_Switch("Floor");
+//    	activeRadiator 																		= new Element_Switch("Radiator");
+//
+//    	panelInsertPoint.addView(new Element_Heading( "Active Circuits"));
+//    	panelInsertPoint.addView(activeHotWater);
+//    	panelInsertPoint.addView(activeFloor);
+//    	panelInsertPoint.addView(activeRadiator);
+//
+//        if (Global.eRegCalendars == null)
+//        {
+//        	Global.toaster("Refresh", false);
+//        }
+//        else 
+//        {
+// 			Required when first introduced in the Json string
+//        	if  (Global.eRegCalendars.tasksActive == null)
+//        	{
+//        		Global.eRegCalendars.tasksActive											= new Ctrl_Calendars ().new TasksActive();
+//        		Global.eRegCalendars.tasksActive.hotWater									= true;
+//        		Global.eRegCalendars.tasksActive.floor										= true;
+//        		Global.eRegCalendars.tasksActive.radiator									= true;
+//        	}
+//        	displayContents();
+//        	setListens();
+ //       }
+ //       return panelView;
     }
 	public void displayContents()
 	{
-		if (getActivity() != null)			// The user has not changed the screen
-		{
-			Ctrl_Calendars.TasksActive							active						= Global.eRegCalendars.tasksActive;
-			activeHotWater			.setChecked(active.hotWater);
-			activeFloor				.setChecked(active.floor);
-			activeRadiator			.setChecked(active.radiator);
-		}
+		Panel_3_Calendars_Active_Adapter								arrayAdapter				= new Panel_3_Calendars_Active_Adapter(Global.actContext, R.id.listView, Global.eRegCalendars.circuitList);
+		((AdapterView <Panel_3_Calendars_Active_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()
 	{
-		activeHotWater			.setOnClickListener(this);
-		activeFloor				.setOnClickListener(this);
-		activeRadiator			.setOnClickListener(this);
+//		activeHotWater			.setListener(this);
+//		activeFloor				.setListener(this);
+//		activeRadiator			.setListener(this);
 	}
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
@@ -100,25 +120,25 @@ public class Panel_3_Calendars_Active 							extends 					Panel_0_Fragment
 		}
 	}
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-	public void onClick(View clickedView)
+	public void onElementClick(View clickedView)
 	{
-		Ctrl_Calendars.TasksActive								tasksActive					= Global.eRegCalendars.tasksActive;
-
-	   	if (clickedView == activeHotWater)
-	   	{
-	   		tasksActive.hotWater															= ! tasksActive.hotWater;								
-	   		activeHotWater.setChecked(tasksActive.hotWater);
-	   	}
-	   	else if (clickedView == activeFloor)
-	   	{
-	   		tasksActive.floor																= ! tasksActive.floor;								
-	   		activeFloor.setChecked(tasksActive.floor);
-	   	}
-      	else if (clickedView == activeRadiator)
-	   	{
-	   		tasksActive.radiator															= ! tasksActive.radiator;								
-      		activeRadiator.setChecked(tasksActive.radiator);
-	   	}
+////		Ctrl_Calendars.TasksActive								tasksActive					= Global.eRegCalendars.tasksActive;
+//
+//	   	if (clickedView == activeHotWater)
+//	   	{
+////	   		tasksActive.hotWater															= ! tasksActive.hotWater;								
+////	   		activeHotWater.setChecked(tasksActive.hotWater);
+//	   	}
+//	   	else if (clickedView == activeFloor)
+//	   	{
+////	   		tasksActive.floor																= ! tasksActive.floor;								
+////	   		activeFloor.setChecked(tasksActive.floor);
+//	   	}
+//      	else if (clickedView == activeRadiator)
+//	   	{
+////	   		tasksActive.radiator															= ! tasksActive.radiator;								
+////      		activeRadiator.setChecked(tasksActive.radiator);
+//	   	}
 	}
     public void onDialogReturn()
     {
