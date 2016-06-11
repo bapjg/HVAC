@@ -42,8 +42,6 @@ public class Element_ListView 									extends 					LinearLayout
 	public Element_Interface									listener;
 	public ListView												listView;
 	
-//	public Element_ListView(Context context, String labelTextLeft) 
-//	{
 	public Element_ListView(String labelTextLeft) 
 	{
 		super(Global.actContext);
