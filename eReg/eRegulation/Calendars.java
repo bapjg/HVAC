@@ -138,10 +138,12 @@ public class Calendars
 		for (Ctrl_Calendars.Circuit 						paramCircuit 		: calendarData.circuitList)
 		{
 			Circuit_Abstract								circuit				= Global.circuits.fetchCircuit(paramCircuit.name);
+
+			// TODO TODO TODO
+			if (circuit.name.equalsIgnoreCase("Hot_Water"))	circuit.active 		= true;
+			else                               				circuit.active		= false;
 			
-			LogIt.display("zzz", circuit.name, paramCircuit.active.toString());
-			
-			circuit.active 														= paramCircuit.active;
+//			circuit.active 														= paramCircuit.active;
 			
 			for (Ctrl_Calendars.Calendar 					paramCalendar 		: paramCircuit.calendarList)
 			{
