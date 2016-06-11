@@ -139,7 +139,7 @@ public class Calendars
 		{
 			Circuit_Abstract								circuit				= Global.circuits.fetchCircuit(paramCircuit.name);
 			
-			LogIt.display("zzz", circuit.name, circuit.active.toString());
+			LogIt.display("zzz", circuit.name, paramCircuit.active.toString());
 			
 			circuit.active 														= paramCircuit.active;
 			
