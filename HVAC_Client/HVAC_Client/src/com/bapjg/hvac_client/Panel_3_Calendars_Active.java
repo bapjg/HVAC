@@ -32,14 +32,9 @@ import android.widget.EditText;
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Active 							extends 					Panel_0_Fragment 
 {
-//	private Element_Switch										activeHotWater;
-//	private Element_Switch										activeFloor;
-//	private Element_Switch										activeRadiator;
-
-	
 	public Panel_3_Calendars_Active()
 	{
-		super("Standard");
+		super("None");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
@@ -47,12 +42,10 @@ public class Panel_3_Calendars_Active 							extends 					Panel_0_Fragment
     	super.panelInitialise(inflater, container, savedInstanceState);
 
     	Element_ListView										listView 					= new Element_ListView("Henry");
-
     	panelInsertPoint.addView(listView);
     	
     	this.adapterView																	= (AdapterView) panelView.findViewById(R.id.listView);
-
-    	displayTitles("Calendars", "Active Circuits");
+     	displayTitles("Calendars", "Active Circuits");
  
         if ((Global.eRegCalendars != null)
         &&  (Global.eRegCalendars.circuitList != null))
@@ -101,9 +94,21 @@ public class Panel_3_Calendars_Active 							extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
+		((AdapterView <?>) adapterView).setOnItemClickListener(this);
+	   	((ViewGroup) this.adapterView.getParent()).setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+	   	((ViewGroup) this.adapterView).setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+
 //		activeHotWater			.setListener(this);
 //		activeFloor				.setListener(this);
 //		activeRadiator			.setListener(this);
+	}
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+    	Ctrl_Calendars.Circuit									itemData					= Global.eRegCalendars.circuitList.get(position);
+    	if (itemData.active == null)							itemData.active				= true;
+    	else 													itemData.active				= ! itemData.active;
+    	displayContents();
+    	setListens();
 	}
 	public void processFinishHTTP(Ctrl__Abstract result) 
 	{  
@@ -122,6 +127,9 @@ public class Panel_3_Calendars_Active 							extends 					Panel_0_Fragment
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 	public void onElementClick(View clickedView)
 	{
+    	Ctrl_Calendars.Circuit									itemData					= Global.eRegCalendars.circuitList.get(0);
+    	itemData.active																		= ! itemData.active;
+		
 ////		Ctrl_Calendars.TasksActive								tasksActive					= Global.eRegCalendars.tasksActive;
 //
 //	   	if (clickedView == activeHotWater)

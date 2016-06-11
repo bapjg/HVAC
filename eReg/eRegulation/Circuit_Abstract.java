@@ -16,6 +16,7 @@ abstract class Circuit_Abstract
 	public String 												name;
 	public Integer 												type;
 	public Integer 												circuitType;
+	public Boolean 												active;						// Is this circuit active for calendar operations
 	public Integer 												tempMax;
 
 	public Long 												rampUpTime					= 0L;
@@ -219,7 +220,7 @@ abstract class Circuit_Abstract
 		}
 		if (Global.Time.now() > Global.Time.parseTime("23:55"))								return;			// Avoid scheduling tasks just before midnight
 		
-		if (! Global.isAway())				// We are not away so get going
+		if (! Global.isAway() && (this.active))				// We are not away and the circuit is active so get going
 		{
 			if (taskFound != null)
 			{

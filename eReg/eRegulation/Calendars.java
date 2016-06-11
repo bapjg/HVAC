@@ -138,7 +138,8 @@ public class Calendars
 		for (Ctrl_Calendars.Circuit 						paramCircuit 		: calendarData.circuitList)
 		{
 			Circuit_Abstract								circuit				= Global.circuits.fetchCircuit(paramCircuit.name);
-		
+			circuit.active 														= paramCircuit.active;
+			
 			for (Ctrl_Calendars.Calendar 					paramCalendar 		: paramCircuit.calendarList)
 			{
 				for (Ctrl_Calendars.Word 					word 				: calendarData.wordList) 
