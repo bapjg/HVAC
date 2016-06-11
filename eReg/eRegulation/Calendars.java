@@ -138,6 +138,9 @@ public class Calendars
 		for (Ctrl_Calendars.Circuit 						paramCircuit 		: calendarData.circuitList)
 		{
 			Circuit_Abstract								circuit				= Global.circuits.fetchCircuit(paramCircuit.name);
+			
+			LogIt.display("zzz", circuit.name, circuit.active.toString());
+			
 			circuit.active 														= paramCircuit.active;
 			
 			for (Ctrl_Calendars.Calendar 					paramCalendar 		: paramCircuit.calendarList)
