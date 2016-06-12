@@ -40,6 +40,9 @@ public class Monitor extends HttpServlet
         out.println("<title>Hello World!</title>");
         out.println("</head>");
         out.println("<body>");
+        out.println("<p>This uses Monitor/doGet transaction in TomCat</p>");
+        out.println("<p>If SQL Works, a 'All is Ok' should appear after Hello World</p>");
+        out.println("<p>if problem check Project/Properties/Project Facets/Compiler Version = 1.6</p>");
         
         dbOpen();
         Statement 						dbStatement = null;
@@ -48,16 +51,18 @@ public class Monitor extends HttpServlet
         try
         {
             dbStatement 							= dbConnection.createStatement();
-            String 						dbSQL 		= "SELECT * FROM Test";
+            String 						dbSQL 		= "SELECT * FROM Check_Test";
             ResultSet 					dbResult 	= dbStatement.executeQuery(dbSQL);
             dbResult.next();
-            dbField 								= dbResult.getString(2);
+            dbField 								= dbResult.getString(1);		// Only one field in database
         }
         catch(SQLException e)
         {
             e.printStackTrace();
+            dbField									= e.toString();
         }
-        out.println((new StringBuilder("<h1>Hello World : ")).append(dbField).append("!</h1>").toString());
+        out.println("<h1>Hello World</h1>");
+        out.println("<p>" + dbField + "</p>");
         out.println("</body>");
         out.println("</html>");
     }
@@ -421,11 +426,6 @@ public class Monitor extends HttpServlet
         {
             ex.printStackTrace();
         }
-//		catch (SQLException eSQL)
-//		{
-//			// TODO Auto-generated catch block
-//			eSQL.printStackTrace();
-//		}
         finally 
         {
             if (stmt != null) 
