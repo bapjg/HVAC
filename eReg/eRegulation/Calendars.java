@@ -139,9 +139,11 @@ public class Calendars
 		{
 			Circuit_Abstract								circuit				= Global.circuits.fetchCircuit(paramCircuit.name);
 
+			LogIt.info("Calendar Entry", circuit.name, "***** active ***** " + paramCircuit.active.toString() );
+
 			// TODO TODO TODO
-			if (circuit.name.equalsIgnoreCase("Hot_Water"))	circuit.active 		= true;
-			else                               				circuit.active		= false;
+//			if (circuit.name.equalsIgnoreCase("Hot_Water"))	circuit.active 		= true;
+//			else                               				circuit.active		= false;
 			
 			circuit.active 														= paramCircuit.active;
 			
