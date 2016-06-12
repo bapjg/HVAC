@@ -8,7 +8,7 @@ import HVAC_Common.Ctrl_Configuration;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Relays
 {
-	public ArrayList<Relay> relayList = new ArrayList<Relay>();
+	public ArrayList<Relay> 									relayList 					= new ArrayList<Relay>();
 	
 	public native void OffAll(int Relay_Bank);
 	public native void ScanAndSet(int Relay_Bank);

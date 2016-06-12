@@ -1,12 +1,14 @@
 package eRegulation;
  
 import java.io.EOFException;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 
 import HVAC_Common.*;
 
@@ -64,7 +66,7 @@ public class Thread_TCPListen 			implements Runnable
 			    		else if (message_in instanceof Ctrl_Actions_Stop.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
 
 			    		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)	message_out	= process_Ctrl_Fuel_Consumption_Update	((Ctrl_Fuel_Consumption.Update) message_in);
-			    		else if (message_in instanceof Ctrl_Thermometer_List.Request)		message_out	= process_Ctrl_Thermo_List_Request		((Ctrl_Thermometer_List.Request) message_in);
+			    		else if (message_in instanceof Ctrl_Thermometer_List.Request)	message_out	= process_Ctrl_Thermo_List_Request		((Ctrl_Thermometer_List.Request) message_in);
 			        } 
 			        
 			        ObjectOutputStream 							output						= null;
@@ -478,10 +480,72 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		return	new Ctrl_Fuel_Consumption().new Ack();		// All Ok so Ack
 	}
+	
+	// Get a list of all thermometers either connected or not, in config file or not
+	private class Thermo
+	{
+		public String name			= "";
+		public String address;
+		public Boolean newThermo	= false;
+		public Boolean lostThermo	= false;
+	}
 	private Ctrl_Thermometer_List.Data	process_Ctrl_Thermo_List_Request		(Ctrl_Thermometer_List.Request message_in)
 	{
 		Ctrl_Thermometer_List.Data 									message_return				= new Ctrl_Thermometer_List().new Data();			
 		
+		File 														mnt1Wire 					= new File("/mnt/1wire");
+		File[] 														mnt1WireFiles	 			= mnt1Wire.listFiles();
+		
+		
+		
+		ArrayList <Thermo> thermometers = new ArrayList <Thermo>(); 
+		
+		for (File mnt1WireFile : mnt1WireFiles)// (int i = 0; i < listOfFiles.length; i++) 
+		{
+			if ((mnt1WireFile.isDirectory()) && (mnt1WireFile.getName().startsWith("028")))
+			{
+				Thermo thermo = new Thermo();
+				thermo.address = mnt1WireFile.getName();
+				thermometers.add(thermo);
+				
+				for (Thermometer thermometer : Global.thermometers.thermometerList)
+				{
+					for (Thermometer.Probe probe : thermometer.probes)
+					{
+						if (probe.address == thermo.address)
+						{
+							thermo.name = thermometer.name;
+						}
+					}
+				}
+			}
+		}
+		for (Thermometer thermometer : Global.thermometers.thermometerList)
+		{
+			for (Thermometer.Probe probe : thermometer.probes)
+			{
+				Boolean found = false;
+				for (Thermo thermo : thermometers)
+				{
+					if (probe.address == thermo.address)
+					{
+						found = true;
+					}
+				}
+				if (! found)
+				{
+					Thermo thermo = new Thermo();
+					thermo.name = thermometer.name;
+					thermo.address = probe.address;
+					thermo.lostThermo = true;
+					thermometers.add(thermo);
+				}
+			}
+		}
+		for (Thermo thermo : thermometers)
+		{
+			if (thermo.name == "") thermo.newThermo = true;
+		}
 		return	new Ctrl_Thermometer_List().new Data();		// All Ok so Ack
 	}
 }
