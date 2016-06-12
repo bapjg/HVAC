@@ -53,9 +53,9 @@ alias tempfloor_in='echo     -ne floor_in;    sudo   cat /mnt/1wire/uncached/28.
 alias tempradiator_out='echo -ne radiator_out;sudo   cat /mnt/1wire/uncached/28.A1948E040000/temperature10;echo'
 alias tempradiator_in='echo  -ne radiator_in; sudo   cat /mnt/1wire/uncached/28.76EF8E040000/temperature10;echo'
 
-alias templivingroom1='echo  -ne living_room; sudo   cat /mnt/1wire/uncached/28.90DB8E040000/temperature10;echo'
-alias templivingroom2='echo  -ne living_room; sudo   cat /mnt/1wire/uncached/28.43FECC040000/temperature10;echo'
-alias templivingroom3='echo  -ne living_room; sudo   cat /mnt/1wire/uncached/28.C835CC040000/temperature10;echo'
+alias templivingroom1='echo  -ne living_room1;sudo   cat /mnt/1wire/uncached/28.90DB8E040000/temperature10;echo'
+alias templivingroom2='echo  -ne living_room2;sudo   cat /mnt/1wire/uncached/28.43FECC040000/temperature10;echo'
+alias templivingroom3='echo  -ne living_room3;sudo   cat /mnt/1wire/uncached/28.C835CC040000/temperature10;echo'
 
 alias tempoutside='echo      -ne outside;     sudo   cat /mnt/1wire/uncached/28.41DB8E040000/temperature10;echo'
 
