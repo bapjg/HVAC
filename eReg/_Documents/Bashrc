@@ -52,7 +52,7 @@ alias tempradiator_in='echo  -ne radiator_in; sudo   cat /mnt/1wire/uncached/28.
 alias templivingroom='echo   -ne living_room; sudo   cat /mnt/1wire/uncached/28.90DB8E040000/temperature10;echo'
 alias tempoutside='echo      -ne outside;     sudo   cat /mnt/1wire/uncached/28.41DB8E040000/temperature10;echo'
 
-alias tempall='tempboiler;tempboiler_old;temphw;tempboiler_out;tempboiler_in;tempfloor_out;tempfloor_in;tempradiator_out;tempradiator_in;templivingroom;tempoutside;'
+alias tempall='tempboiler;temphw;tempboiler_out;tempboiler_in;tempfloor_out;tempfloor_in;tempradiator_out;tempradiator_in;templivingroom;tempoutside;'
 
 alias thw='cat     /sys/bus/w1/devices/28-00000485e109/w1_slave'
 alias tboiler='cat /sys/bus/w1/devices/28-0000048f011c/w1_slave'
