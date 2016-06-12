@@ -141,11 +141,11 @@ public class Calendars
 
 
 			// TODO TODO TODO
-			if (circuit.name.equalsIgnoreCase("Hot_Water"))	circuit.active 		= true;
-			else                               				circuit.active		= false;
+//			if (circuit.name.equalsIgnoreCase("Hot_Water"))	circuit.active 		= true;
+//			else                               				circuit.active		= false;
 			
-//			LogIt.info("Calendar Entry", circuit.name, "***** active ***** " + paramCircuit.active.toString() );
-//			circuit.active 														= paramCircuit.active;
+			LogIt.info("Calendar Entry", circuit.name, "***** active ***** " + paramCircuit.active.toString() );
+			circuit.active 														= paramCircuit.active;
 			
 			for (Ctrl_Calendars.Calendar 					paramCalendar 		: paramCircuit.calendarList)
 			{
