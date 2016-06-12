@@ -28,6 +28,17 @@ public class Thermometers
 			}
 		}
 	}
+//	public Thermometer (this, string name)
+//	{
+//		for (Thermometer element : thermometerList) 
+//		{
+//			if (element.name.equalsIgnoreCase(name))
+//			{
+//					return element;
+//			}
+//		}
+//		return null;
+//	}
 	public Thermometer fetchThermometer(String name)
 	{
 		for (Thermometer element : thermometerList) 
@@ -39,25 +50,4 @@ public class Thermometers
 		}
 		return null;
 	}
-	
-	
-//	public Thermometer get(String name) 
-//	{ 
-//		for (Thermometer element : thermometerList) 
-//		{
-//			if (element.name.equalsIgnoreCase(name))
-//			{
-//					return element;
-//			}
-//		}
-//		return null;
-//	}
-//	public Thermometer set(int index, Thermometer element) 
-//	{
-//		return null;
-//	}
-//    public int size() 
-//    {
-//        return thermometerList.size();
-//    }
 }

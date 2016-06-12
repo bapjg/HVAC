@@ -77,43 +77,43 @@ public class Thermometer
      	 *  	A change of resolution (either up or down) seems to be uncached
      	 */
     	
-		Integer												readings					= 0;
-		Integer												count						= 0;
-		Integer 											firstReading				= -99;
+		Integer												readings						= 0;
+		Integer												count							= 0;
+		Integer 											firstReading					= -99;
 		for (Probe probe : probes)
 		{
-			Integer res = 9;
-			if (this.name.equalsIgnoreCase("Boiler"))		res = 12;
-			else 											res = 9;
+			Integer 										res 							= 9;
+//			if (this.name.equalsIgnoreCase("Boiler"))		res = 12;
+//			else 											res = 9;
 			
-			Integer											aReading					= probe.read(res, unCached);
-//			Integer											aReading					= probe.read(resolution, unCached);
-			if (firstReading == -99)						firstReading				= aReading;
+			Integer											aReading						= probe.read(res, unCached);
+//			Integer											aReading						= probe.read(resolution, unCached);
+			if (firstReading == -99)						firstReading					= aReading;
 			if (aReading != null)
 			{
 				if (Math.abs(aReading - firstReading) > 10000)							// difference > 2 degrees
 				{
 					Global.eMailMessage("Thermometer/Read", "Temperature difference > 2 degrees on thermometer " + this.name + aReading + ", " + firstReading);
-					this.reading														= aReading > firstReading ? aReading : firstReading; // Return higher reading
+					this.reading															= aReading > firstReading ? aReading : firstReading; // Return higher reading
 					throw new Thermometer_SpreadException(this.name);
 				}
-				readings																+= aReading;
+				readings																	+= aReading;
 				count++;
 			}
 		}
 		if (count == 0)
 		{
 			Global.eMailMessage("Thermometer/Read", "Unable to read Temperature on thermometer " + this.name);
-			this.reading																= null;
+			this.reading																	= null;
 			return null;
 		}
-		this.reading																	= readings / count;
+		this.reading																		= readings / count;
 		return this.reading;
 	}
     public String toDisplay()
     {
     	// Converts temperature in millidegrees into displayable format							// Either keep true or throw it out from display
-    	DecimalFormat 										temperatureFormat 			= new DecimalFormat("0.0");
+    	DecimalFormat 										temperatureFormat 				= new DecimalFormat("0.0");
     	if (this.reading == null)							return "-273";
     	else 												return  temperatureFormat.format((float) (this.reading)/1000F);
     }
@@ -127,16 +127,16 @@ public class Thermometer
     	
     	public Probe(Ctrl_Configuration.Thermometer 		paramThermometer)
     	{
-    		this.name																	= paramThermometer.name;
-    		this.address																= paramThermometer.address;
-    		this.probeOk																= true;
-    		String prefix																= "/mnt/1wire/";
-    		String suffix																= "/";
+    		this.name																		= paramThermometer.name;
+    		this.address																	= paramThermometer.address;
+    		this.probeOk																	= true;
+    		String prefix																	= "/mnt/1wire/";
+    		String suffix																	= "/";
 
-    		this.thermoFile_Normal														= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
-    		this.thermoFile_UnCached													= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+    		this.thermoFile_Normal															= prefix               + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
+    		this.thermoFile_UnCached														= prefix + "uncached/" + address.toUpperCase().replace(" ", "") + suffix; // remove spaces from address like '28-0000 49ec xxxx'
     	}
- 	    public Integer read(Integer resolution, Boolean unCached)						throws Thermometer_ReadException, Thermometer_SpreadException
+ 	    public Integer read(Integer resolution, Boolean unCached)							throws Thermometer_ReadException, Thermometer_SpreadException
 		{
 	     	// Returns temperature in millidegrees
 	     	/*
