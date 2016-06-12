@@ -143,7 +143,7 @@ public class Calendars
 			if (circuit.name.equalsIgnoreCase("Hot_Water"))	circuit.active 		= true;
 			else                               				circuit.active		= false;
 			
-//			circuit.active 														= paramCircuit.active;
+			circuit.active 														= paramCircuit.active;
 			
 			for (Ctrl_Calendars.Calendar 					paramCalendar 		: paramCircuit.calendarList)
 			{
