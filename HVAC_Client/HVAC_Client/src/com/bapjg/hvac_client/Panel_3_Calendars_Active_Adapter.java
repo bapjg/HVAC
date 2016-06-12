@@ -24,12 +24,9 @@ public class Panel_3_Calendars_Active_Adapter 					extends 					Panel_0_Adapter
     	Ctrl_Calendars.Circuit									listItem					= (Ctrl_Calendars.Circuit) listData.get(position);
    	
     	Element_Switch											adapterSwitch 				= new Element_Switch(listItem.name);
-    	if (listItem.active == null)							adapterSwitch.setChecked(false);
-    	else 													adapterSwitch.setChecked(listItem.active);
-    	parent.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+    	adapterSwitch.setChecked(listItem.active);
     	((ViewGroup) adapterSwitch).setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-//    	adapterSwitch.onOffSwitch.setFocusable(false);										// Otherwise it's the switch that gets the event, not the main class
-    	adapterSwitch.onOffSwitch.setFocusableInTouchMode(false);
+    	adapterSwitch.onOffSwitch.setClickable(false);
     	return adapterSwitch;    	
     }
 }
