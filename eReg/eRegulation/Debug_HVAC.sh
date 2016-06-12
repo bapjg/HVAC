@@ -11,7 +11,7 @@ git pull
 	
 /home/pi/HVAC/eReg/_Documents/update.sh
 
-# change suspend=n to =y if required
+# change suspend=n or =y if required
 
 sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" \
 -Xdebug -Xnoagent                                                       \
