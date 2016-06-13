@@ -482,13 +482,6 @@ public class Thread_TCPListen 			implements Runnable
 	}
 	
 	// Get a list of all thermometers either connected or not, in config file or not
-	private class Thermo
-	{
-		public String name			= "";
-		public String address;
-		public Boolean newThermo	= false;
-		public Boolean lostThermo	= false;
-	}
 	private Ctrl_Thermo_List.Data	process_Ctrl_Thermo_List_Request		()
 	{
 		Ctrl_Thermo_List.Data 										message_return				= new Ctrl_Thermo_List().new Data();			
@@ -497,17 +490,15 @@ public class Thread_TCPListen 			implements Runnable
 		File[] 														mnt1WireFiles	 			= mnt1Wire.listFiles();
 		
 		
-		ArrayList <Thermo> thermometers = new ArrayList <Thermo>(); 
-		
 		// Get list of probes connected to the system
 		for (File mnt1WireFile : mnt1WireFiles)// (int i = 0; i < listOfFiles.length; i++) 
 		{
 			String 													fileName 					= mnt1WireFile.getName().replace("/mnt/1wire", "");
 			if ((mnt1WireFile.isDirectory()) && (fileName.startsWith("28")))
 			{
-				Thermo thermo = new Thermo();
-				thermo.address = fileName;
-				thermometers.add(thermo);
+				Ctrl_Thermo_List.Thermo 							thermo 						= message_return.new Thermo();
+				thermo.address 																	= fileName;
+				message_return.thermos.add(thermo);
 				
 				// Now see if it is the list
 				for (Thermometer thermometer : Global.thermometers.thermometerList)
@@ -517,8 +508,9 @@ public class Thread_TCPListen 			implements Runnable
 						if (probe.address.replace(" ", "").equalsIgnoreCase(thermo.address))
 						{
 							thermo.name = thermometer.name;
-							thermo.lostThermo = false;
-							thermo.newThermo = false;						}
+							thermo.isLost = false;
+							thermo.isNew = false;	
+						}
 					}
 				}
 			}
@@ -529,7 +521,7 @@ public class Thread_TCPListen 			implements Runnable
 			for (Thermometer.Probe probe : thermometer.probes)
 			{
 				Boolean found = false;
-				for (Thermo thermo : thermometers)
+				for (Ctrl_Thermo_List.Thermo thermo : message_return.thermos)
 				{
 					if (probe.address.replace(" ", "").equalsIgnoreCase(thermo.address))
 					{
@@ -538,18 +530,18 @@ public class Thread_TCPListen 			implements Runnable
 				}
 				if (! found)				// Wasn't found so add it to the list
 				{
-					Thermo thermo = new Thermo();
-					thermo.name = thermometer.name;
-					thermo.address = probe.address;
-					thermo.lostThermo = true;
-					thermometers.add(thermo);
+					Ctrl_Thermo_List.Thermo 						thermo 						= message_return.new Thermo();
+					thermo.name 																= thermometer.name;
+					thermo.address 																= probe.address;
+					thermo.isLost 																= true;
+					message_return.thermos.add(thermo);
 				}
 			}
 		}
 		// All list members without a name are new (ie unconfigured)
-		for (Thermo thermo : thermometers)
+		for (Ctrl_Thermo_List.Thermo thermo : message_return.thermos)
 		{
-			if (thermo.name == "") 					thermo.newThermo = true;
+			if (thermo.name == "") 					thermo.isNew = true;
 		}
 		return	new Ctrl_Thermo_List().new Data();		// All Ok so Ack
 	}
