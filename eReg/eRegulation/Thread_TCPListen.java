@@ -527,6 +527,9 @@ public class Thread_TCPListen 			implements Runnable
 				Boolean found = false;
 				for (Thermo thermo : thermometers)
 				{
+					String thermoAddress = thermo.address;
+					String probeAddress = probe.address.toUpperCase().replace(" ", "");
+					
 					if (probe.address.toUpperCase().replace(" ", "") == thermo.address)
 					{
 						found = true;
