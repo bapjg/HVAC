@@ -66,7 +66,7 @@ public class Thread_TCPListen 			implements Runnable
 			    		else if (message_in instanceof Ctrl_Actions_Stop.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
 
 			    		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)	message_out	= process_Ctrl_Fuel_Consumption_Update	((Ctrl_Fuel_Consumption.Update) message_in);
-			    		else if (message_in instanceof Ctrl_Thermo_List.Request)		message_out	= process_Ctrl_Thermo_List_Request		((Ctrl_Thermo_List.Request) message_in);
+			    		else if (message_in instanceof Ctrl_Thermo_List.Request)		message_out	= process_Ctrl_Thermo_List_Request		();
 			        } 
 			        
 			        ObjectOutputStream 							output						= null;
@@ -489,9 +489,9 @@ public class Thread_TCPListen 			implements Runnable
 		public Boolean newThermo	= false;
 		public Boolean lostThermo	= false;
 	}
-	private Ctrl_Thermo_List.Data	process_Ctrl_Thermo_List_Request		(Ctrl_Thermo_List.Request message_in)
+	private Ctrl_Thermo_List.Data	process_Ctrl_Thermo_List_Request		()
 	{
-		Ctrl_Thermo_List.Data 									message_return				= new Ctrl_Thermo_List().new Data();			
+		Ctrl_Thermo_List.Data 										message_return				= new Ctrl_Thermo_List().new Data();			
 		
 		File 														mnt1Wire 					= new File("/mnt/1wire");
 		File[] 														mnt1WireFiles	 			= mnt1Wire.listFiles();
