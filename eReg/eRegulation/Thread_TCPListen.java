@@ -66,7 +66,7 @@ public class Thread_TCPListen 			implements Runnable
 			    		else if (message_in instanceof Ctrl_Actions_Stop.Execute)		message_out	= process_Ctrl_Actions_Stop_Execute		((Ctrl_Actions_Stop.Execute) message_in);
 
 			    		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)	message_out	= process_Ctrl_Fuel_Consumption_Update	((Ctrl_Fuel_Consumption.Update) message_in);
-			    		else if (message_in instanceof Ctrl_Thermo_List.Request)	message_out	= process_Ctrl_Thermo_List_Request		((Ctrl_Thermo_List.Request) message_in);
+			    		else if (message_in instanceof Ctrl_Thermo_List.Request)		message_out	= process_Ctrl_Thermo_List_Request		((Ctrl_Thermo_List.Request) message_in);
 			        } 
 			        
 			        ObjectOutputStream 							output						= null;
