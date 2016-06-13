@@ -499,6 +499,7 @@ public class Thread_TCPListen 			implements Runnable
 		
 		ArrayList <Thermo> thermometers = new ArrayList <Thermo>(); 
 		
+		// Get list of probes connected to the system
 		for (File mnt1WireFile : mnt1WireFiles)// (int i = 0; i < listOfFiles.length; i++) 
 		{
 			String 													fileName 					= mnt1WireFile.getName().replace("/mnt/1wire", "");
@@ -508,18 +509,21 @@ public class Thread_TCPListen 			implements Runnable
 				thermo.address = fileName;
 				thermometers.add(thermo);
 				
+				// Now see if it is the list
 				for (Thermometer thermometer : Global.thermometers.thermometerList)
 				{
 					for (Thermometer.Probe probe : thermometer.probes)
 					{
-						if (probe.address == thermo.address)
+						if (probe.address.replace(" ", "").equalsIgnoreCase(thermo.address))
 						{
 							thermo.name = thermometer.name;
-						}
+							thermo.lostThermo = false;
+							thermo.newThermo = false;						}
 					}
 				}
 			}
 		}
+		// For each configured probe, find it in the list of found probes. If it isn't, add it to the list
 		for (Thermometer thermometer : Global.thermometers.thermometerList)
 		{
 			for (Thermometer.Probe probe : thermometer.probes)
@@ -527,17 +531,12 @@ public class Thread_TCPListen 			implements Runnable
 				Boolean found = false;
 				for (Thermo thermo : thermometers)
 				{
-					String thermoAddress = thermo.address;
-					String probeAddress = probe.address.toUpperCase().replace(" ", "");
-					
 					if (probe.address.replace(" ", "").equalsIgnoreCase(thermo.address))
 					{
-						thermo.name = thermometer.name;
-						thermo.lostThermo = false;
-						thermo.newThermo = false;
+						found = true;
 					}
 				}
-				if (! found)
+				if (! found)				// Wasn't found so add it to the list
 				{
 					Thermo thermo = new Thermo();
 					thermo.name = thermometer.name;
@@ -547,6 +546,7 @@ public class Thread_TCPListen 			implements Runnable
 				}
 			}
 		}
+		// All list members without a name are new (ie unconfigured)
 		for (Thermo thermo : thermometers)
 		{
 			if (thermo.name == "") 					thermo.newThermo = true;
