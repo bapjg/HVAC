@@ -532,7 +532,9 @@ public class Thread_TCPListen 			implements Runnable
 					
 					if (probe.address.replace(" ", "").equalsIgnoreCase(thermo.address))
 					{
-						found = true;
+						thermo.name = thermometer.name;
+						thermo.lostThermo = false;
+						thermo.newThermo = false;
 					}
 				}
 				if (! found)
