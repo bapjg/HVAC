@@ -502,7 +502,7 @@ public class Thread_TCPListen 			implements Runnable
 		for (File mnt1WireFile : mnt1WireFiles)// (int i = 0; i < listOfFiles.length; i++) 
 		{
 			String 													fileName 					= mnt1WireFile.getName().replace("/mnt/1wire", "");
-			if ((mnt1WireFile.isDirectory()) && (fileName.startsWith("028")))
+			if ((mnt1WireFile.isDirectory()) && (fileName.startsWith("28")))
 			{
 				Thermo thermo = new Thermo();
 				thermo.address = fileName;
