@@ -30,6 +30,7 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	Element_MenuButton											buttonBurner;
 	Element_MenuButton											buttonBoiler;
 	Element_MenuButton											buttonPIDs;
+	Element_MenuButton											buttonThermoList;
 	
 	public Menu_5_Configuration()
 	{
@@ -46,6 +47,7 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
     	buttonBurner																		= new Element_MenuButton("Burner");
     	buttonBoiler																		= new Element_MenuButton("Boiler");
     	buttonPIDs																			= new Element_MenuButton("PIDs");
+    	buttonThermoList																	= new Element_MenuButton("Thermo List");
 
     	menuInsertPoint			.addView(buttonThermometers);
     	menuInsertPoint			.addView(buttonRelays);
@@ -54,6 +56,7 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
     	menuInsertPoint			.addView(buttonBurner);
     	menuInsertPoint			.addView(buttonBoiler);
     	menuInsertPoint			.addView(buttonPIDs);
+    	menuInsertPoint			.addView(buttonThermoList);
     	
     	buttonThermometers		.setListener(this);
     	buttonRelays			.setListener(this);
@@ -62,7 +65,8 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
     	buttonBurner			.setListener(this);
     	buttonBoiler			.setListener(this);
     	buttonPIDs				.setListener(this);
-
+    	buttonThermoList		.setListener(this);
+    	
     	onElementClick(buttonThermometers);
     	
     	return menuView;
@@ -81,6 +85,7 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
     	else if (clickedView == buttonBurner)					panelFragment 				= new Panel_5_Configuration_Burner();
     	else if (clickedView == buttonBoiler)					panelFragment 				= new Panel_5_Configuration_Boiler();
     	else if (clickedView == buttonPIDs)						panelFragment 				= new Panel_5_Configuration_PIDs();
+    	else if (clickedView == buttonThermoList)				panelFragment 				= new Panel_5_Configuration_Thermo_List();
 
     	if 		(panelFragment != null)
     	{
@@ -91,6 +96,7 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	public void doRefresh()
 	{
 		HTTP_Send	(new Ctrl_Json().new Request(Ctrl_Json.TYPE_Configuration));				// Fire these async actions as soon as possible
+		TCP_Send	(new Ctrl_Thermo_List().new Request());										// Fire these async actions as soon as possible
 	}
 	public void doUpdate()
 	{
@@ -153,17 +159,9 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 	public void processFinishTCP(Ctrl__Abstract messageReturn)
 	{
 		super.processFinishTCP(messageReturn);
-		if (messageReturn instanceof Ctrl_Actions_Stop.Ack)
-		{
-			Global.toaster("Controler accepted the request", false);
-		}
-		else if (messageReturn instanceof Ctrl_Actions_Stop.Nack)
-		{
-			Global.toaster("Controler refused the request", true);
-		}
-		else
-		{
-			Global.toaster("Unexpected response : " + messageReturn.getClass().toString(), false);
-		}
+		if 		(messageReturn instanceof Ctrl_Actions_Stop.Ack) 		{	Global.toaster("Controler accepted the request", false);	}
+		else if (messageReturn instanceof Ctrl_Actions_Stop.Nack)		{	Global.toaster("Controler refused the request", true);		}
+		else if (messageReturn instanceof Ctrl_Thermo_List.Data)		{	Global.toaster("GOT THERMO LIST", true);					}
+		else															{	Global.toaster("Unexpected response : " + messageReturn.getClass().toString(), false);		}
 	}
 }
