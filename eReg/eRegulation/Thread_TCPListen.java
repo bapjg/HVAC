@@ -547,7 +547,7 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		for (Thermo thermo : thermometers)
 		{
-			if (thermo.name == "") thermo.newThermo = true;
+			if (thermo.name == "") 					thermo.newThermo = true;
 		}
 		return	new Ctrl_Thermo_List().new Data();		// All Ok so Ack
 	}
