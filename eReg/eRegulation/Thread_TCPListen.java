@@ -530,7 +530,7 @@ public class Thread_TCPListen 			implements Runnable
 					String thermoAddress = thermo.address;
 					String probeAddress = probe.address.toUpperCase().replace(" ", "");
 					
-					if (probe.address.toUpperCase().replace(" ", "") == thermo.address)
+					if (probe.address.replace(" ", "").equalsIgnoreCase(thermo.address))
 					{
 						found = true;
 					}
