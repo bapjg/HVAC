@@ -512,7 +512,7 @@ public class Thread_TCPListen 			implements Runnable
 				{
 					for (Thermometer.Probe probe : thermometer.probes)
 					{
-						if (probe.address != thermo.address)
+						if (probe.address == thermo.address)
 						{
 							thermo.name = thermometer.name;
 						}
