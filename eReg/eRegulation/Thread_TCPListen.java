@@ -541,7 +541,12 @@ public class Thread_TCPListen 			implements Runnable
 		// All list members without a name are new (ie unconfigured)
 		for (Ctrl_Thermo_List.Thermo thermo : message_return.thermos)
 		{
-			if (thermo.name == "") 					thermo.isNew = true;
+			if (thermo.name == "") 									thermo.isNew 				= true;
+		}
+		for (Ctrl_Thermo_List.Thermo thermo : message_return.thermos)
+		{
+			if ((! thermo.isNew) && (! thermo.isLost))			message_return.thermos.remove(thermo);
+			if (thermo.isNew)									thermo.temperature				= Global.thermometers.readNewProbe(thermo.address);
 		}
 		return	message_return;		// All Ok so Ack
 	}

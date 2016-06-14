@@ -1,5 +1,9 @@
 package eRegulation;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import HVAC_Common.Ctrl_Configuration;
@@ -49,5 +53,28 @@ public class Thermometers
 			}
 		}
 		return null;
+	}
+	public int readNewProbe(String address)
+	{
+		try
+		{
+			String 										probeFileName				= "/mnt/1wire" + address.toUpperCase().replace(" ", "") + "/temperature9";
+			FileInputStream 							ThermoFile_InputStream 		= new FileInputStream(probeFileName);
+			DataInputStream 							ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
+			BufferedReader 								ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
+			String 										ThermoFile_InputLine 		= ThermoFile_InputBuffer.readLine();
+	
+			ThermoFile_InputBuffer.close();
+			ThermoFile_InputData.close();
+			ThermoFile_InputStream.close();
+	
+			String 										tempString	 				= ThermoFile_InputLine.replace(" ", "");
+			float 										tempFloat	 				= Float.parseFloat(tempString);
+			return	Math.round(tempFloat * 1000); // Round to milli-degree
+		}
+		catch (Exception ex)
+		{
+			return -273000;
+		}
 	}
 }

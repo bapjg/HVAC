@@ -15,6 +15,7 @@ public class Ctrl_Thermo_List 							extends 					Ctrl__Abstract
 		public String 									address						= "";
 		public Boolean									isNew						= false;
 		public Boolean 									isLost						= false;
+		public int 										temperature					= 0;
 	}
 	public class Data 									extends 					Ctrl_Thermo_List
 	{
