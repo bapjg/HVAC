@@ -24,13 +24,13 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 																implements 					Dialog_Response
 {
 	Element_MenuButton											buttonThermometers;
+	Element_MenuButton											buttonThermosLostFound;
 	Element_MenuButton											buttonRelays;
 	Element_MenuButton											buttonPumps;
 	Element_MenuButton											buttonCircuits;
 	Element_MenuButton											buttonBurner;
 	Element_MenuButton											buttonBoiler;
 	Element_MenuButton											buttonPIDs;
-	Element_MenuButton											buttonThermoList;
 	
 	public Menu_5_Configuration()
 	{
@@ -41,32 +41,33 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
     	super.onCreateView(inflater, container, savedInstanceState);
     	
     	buttonThermometers																	= new Element_MenuButton("Thermometers");
+    	buttonThermosLostFound																= new Element_MenuButton("Thermos\nLost Found");
     	buttonRelays																		= new Element_MenuButton("Relays");
     	buttonPumps																			= new Element_MenuButton("Pumps");
     	buttonCircuits																		= new Element_MenuButton("Circuits");
     	buttonBurner																		= new Element_MenuButton("Burner");
     	buttonBoiler																		= new Element_MenuButton("Boiler");
     	buttonPIDs																			= new Element_MenuButton("PIDs");
-    	buttonThermoList																	= new Element_MenuButton("Thermo List");
 
     	menuInsertPoint			.addView(buttonThermometers);
+       	menuInsertPoint			.addView(buttonThermosLostFound);
     	menuInsertPoint			.addView(buttonRelays);
     	menuInsertPoint			.addView(buttonPumps);
     	menuInsertPoint			.addView(buttonCircuits);
     	menuInsertPoint			.addView(buttonBurner);
     	menuInsertPoint			.addView(buttonBoiler);
     	menuInsertPoint			.addView(buttonPIDs);
-    	menuInsertPoint			.addView(buttonThermoList);
-    	
+     	
     	buttonThermometers		.setListener(this);
+    	buttonThermosLostFound	.setListener(this);
     	buttonRelays			.setListener(this);
     	buttonPumps				.setListener(this);
     	buttonCircuits			.setListener(this);
     	buttonBurner			.setListener(this);
     	buttonBoiler			.setListener(this);
     	buttonPIDs				.setListener(this);
-    	buttonThermoList		.setListener(this);
     	
+		TCP_Send	(new Ctrl_Thermo_List().new Request());										// Fire these async actions as soon as possible
     	onElementClick(buttonThermometers);
     	
     	return menuView;
@@ -79,13 +80,13 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
     	Fragment 												panelFragment				= null;
    	
     	if      (clickedView == buttonThermometers)				panelFragment 				= new Panel_5_Configuration_Thermometers();
+    	else if (clickedView == buttonThermosLostFound)			panelFragment 				= new Panel_5_Configuration_Thermo_List();
     	else if (clickedView == buttonRelays) 					panelFragment 				= new Panel_5_Configuration_Relays();
      	else if (clickedView == buttonPumps)					panelFragment 				= new Panel_5_Configuration_Pumps();
     	else if (clickedView == buttonCircuits)					panelFragment 				= new Panel_5_Configuration_Circuits();
     	else if (clickedView == buttonBurner)					panelFragment 				= new Panel_5_Configuration_Burner();
     	else if (clickedView == buttonBoiler)					panelFragment 				= new Panel_5_Configuration_Boiler();
     	else if (clickedView == buttonPIDs)						panelFragment 				= new Panel_5_Configuration_PIDs();
-    	else if (clickedView == buttonThermoList)				panelFragment 				= new Panel_5_Configuration_Thermo_List();
 
     	if 		(panelFragment != null)
     	{

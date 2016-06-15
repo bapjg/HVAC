@@ -52,10 +52,9 @@ public class Panel_5_Configuration_Thermo_List 				extends 					Panel_0_Fragment
 
         this.adapterView																	= (AdapterView) panelView.findViewById(R.id.listView);
 
-    	displayTitles("Configuration", "Thermometres");
+    	displayTitles("Configuration", "Thermometres Lost & Found");
     	
-        if ((Global.eRegConfiguration 					!= null)
-        &&  (Global.eRegConfiguration.thermometerList 	!= null))
+        if (Global.thermosLostFound 					!= null)
         {
         	displayContents();
             setListens();
@@ -68,8 +67,8 @@ public class Panel_5_Configuration_Thermo_List 				extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		Panel_5_Configuration_Thermometers_Adapter 					arrayAdapter				= new Panel_5_Configuration_Thermometers_Adapter(Global.actContext, R.id.listView, Global.eRegConfiguration.thermometerList);
-		((AdapterView <Panel_5_Configuration_Thermometers_Adapter>) adapterView).setAdapter(arrayAdapter);
+		Panel_5_Configuration_Thermo_List_Adapter 					arrayAdapter				= new Panel_5_Configuration_Thermo_List_Adapter(Global.actContext, R.id.listView, Global.eRegConfiguration.thermometerList);
+		((AdapterView <Panel_5_Configuration_Thermo_List_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()
 	{

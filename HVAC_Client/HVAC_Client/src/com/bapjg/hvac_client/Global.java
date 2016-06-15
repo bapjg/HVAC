@@ -48,6 +48,7 @@ public class Global
 	public static	Ctrl_Configuration.Data						eRegConfiguration;
 	public static	Ctrl_Calendars.Data							eRegCalendars;
 	public static	Ctrl_WeatherData							weatherForecast;
+	public static	Ctrl_Thermo_List.Data 						thermosLostFound;
 	
 	public static	String										deviceName;
 	
@@ -100,6 +101,7 @@ public class Global
 		else if (result instanceof Ctrl_Temperatures.Data)		message = "Ok";
 		else if (result instanceof Ctrl_Immediate.Data)			message = "Ok";
 		else if (result instanceof Ctrl_Weather.Data)			message = "Ok";
+		else if (result instanceof Ctrl_Thermo_List.Data)		message = "Ok";
 		else													message = "Bad Data";
     	
 		setStatusTCP(message);
