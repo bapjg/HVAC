@@ -9,7 +9,7 @@ public class Ctrl_Thermo_List 							extends 					Ctrl__Abstract
 	public Ctrl_Thermo_List()
 	{
 	}
-	public class Thermo
+	public class Thermo 								extends 					Ctrl_Thermo_List
 	{
 		public String 									name						= "";
 		public String 									address						= "";
