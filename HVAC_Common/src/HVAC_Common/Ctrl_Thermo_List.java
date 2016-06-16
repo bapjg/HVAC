@@ -20,7 +20,7 @@ public class Ctrl_Thermo_List 							extends 					Ctrl__Abstract
 	public class Data 									extends 					Ctrl_Thermo_List
 	{
 		private static final long 						serialVersionUID 			= 1L;
-		public ArrayList <Thermo>						thermos						= new ArrayList <Thermo> ();;
+		public ArrayList <Thermo>						thermos						= new ArrayList <Thermo> ();
 	}
 	public class Request 								extends 					Ctrl_Thermo_List
 	{
