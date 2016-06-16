@@ -38,7 +38,7 @@ public class Panel_5_Configuration_Thermo_List 				extends 					Panel_0_Fragment
 {
 	public Panel_5_Configuration_Thermo_List()
 	{
-		super("Standard");
+		super("None");
 	}
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
@@ -67,7 +67,7 @@ public class Panel_5_Configuration_Thermo_List 				extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		Panel_5_Configuration_Thermo_List_Adapter 					arrayAdapter				= new Panel_5_Configuration_Thermo_List_Adapter(Global.actContext, R.id.listView, Global.eRegConfiguration.thermometerList);
+		Panel_5_Configuration_Thermo_List_Adapter 					arrayAdapter				= new Panel_5_Configuration_Thermo_List_Adapter(Global.actContext, R.id.listView, Global.thermosLostFound.thermos);
 		((AdapterView <Panel_5_Configuration_Thermo_List_Adapter>) adapterView).setAdapter(arrayAdapter);
 	}
 	public void setListens()

@@ -162,7 +162,8 @@ public class Menu_5_Configuration 								extends 					Menu_0_Fragment
 		super.processFinishTCP(messageReturn);
 		if 		(messageReturn instanceof Ctrl_Actions_Stop.Ack) 		{	Global.toaster("Controler accepted the request", false);	}
 		else if (messageReturn instanceof Ctrl_Actions_Stop.Nack)		{	Global.toaster("Controler refused the request", true);		}
-		else if (messageReturn instanceof Ctrl_Thermo_List.Data)		{	Global.toaster("GOT THERMO LIST", true);					}
+		else if (messageReturn instanceof Ctrl_Thermo_List.Data)		{	Global.toaster("ThermoList returned", true);				}
 		else															{	Global.toaster("Unexpected response : " + messageReturn.getClass().toString(), false);		}
+		if 		(messageReturn instanceof Ctrl_Thermo_List.Data)		{	Global.thermosLostFound			= (Ctrl_Thermo_List.Data) messageReturn;					}
 	}
 }
