@@ -400,7 +400,7 @@ public class Thread_TCPListen 			implements Runnable
 		Global.eMailMessage("Test", "This is a test mail");
 		return new Ctrl_Actions_Test_Mail().new Ack();
 	}
-	private Ctrl_Actions_Stop		process_Ctrl_Actions_Stop_Execute		(Ctrl_Actions_Stop.Execute message_in)
+	private Ctrl_Actions_Stop			process_Ctrl_Actions_Stop_Execute		(Ctrl_Actions_Stop.Execute message_in)
 	{
 		if ( (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Stop   )
 		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reboot )
@@ -453,7 +453,7 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		return new Ctrl_Actions_Stop().new Nack();
     } 
-	private Ctrl_Fuel_Consumption	process_Ctrl_Fuel_Consumption_Update		(Ctrl_Fuel_Consumption.Update message_in)
+	private Ctrl_Fuel_Consumption		process_Ctrl_Fuel_Consumption_Update	(Ctrl_Fuel_Consumption.Update message_in)
 	{
 		
 		if (Global.burner.isFuelFlowing())
@@ -481,8 +481,8 @@ public class Thread_TCPListen 			implements Runnable
 		return	new Ctrl_Fuel_Consumption().new Ack();		// All Ok so Ack
 	}
 	
-	// Get a list of all thermometers either connected or not, in config file or not
-	private Ctrl_Thermo_List.Data	process_Ctrl_Thermo_List_Request		()
+
+	private Ctrl_Thermo_List.Data		process_Ctrl_Thermo_List_Request		()	// Get a list of all thermometers either connected or not, in config file or not
 	{
 		Ctrl_Thermo_List.Data 										message_return				= new Ctrl_Thermo_List().new Data();			
 		
@@ -530,10 +530,10 @@ public class Thread_TCPListen 			implements Runnable
 				}
 				if (! found)				// Wasn't found so add it to the list
 				{
-					Ctrl_Thermo_List.Thermo 						thermo 						= message_return.new Thermo();
-					thermo.name 																= thermometer.name;
-					thermo.address 																= probe.address;
-					thermo.isLost 																= true;
+					Ctrl_Thermo_List.Thermo 					thermo 						= message_return.new Thermo();
+					thermo.name 															= thermometer.name;
+					thermo.address 															= probe.address;
+					thermo.isLost 															= true;
 					message_return.thermos.add(thermo);
 				}
 			}
@@ -541,10 +541,12 @@ public class Thread_TCPListen 			implements Runnable
 		// All list members without a name are new (ie unconfigured)
 		for (Ctrl_Thermo_List.Thermo thermo : message_return.thermos)
 		{
-			if (thermo.name == "") 									thermo.isNew 				= true;
+			if (thermo.name == "") 								thermo.isNew 				= true;
 		}
-		for (Ctrl_Thermo_List.Thermo thermo : message_return.thermos)
+		int 													i;
+		for (i = message_return.thermos.size() - 1; i >= 0; i--)
 		{
+			Ctrl_Thermo_List.Thermo 							thermo 						= message_return.thermos.get(i);
 			if ((! thermo.isNew) && (! thermo.isLost))			message_return.thermos.remove(thermo);
 			if (thermo.isNew)									thermo.temperature				= Global.thermometers.readNewProbe(thermo.address);
 		}
