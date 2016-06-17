@@ -24,22 +24,24 @@ public class Panel_5_Configuration_Thermo_List_Adapter 			extends 					Panel_0_A
     	Ctrl_Thermo_List.Thermo									listItem					= (Ctrl_Thermo_List.Thermo) listData.get(position);
         
        	Element_Linear_Vertical									adapterElement 				= new Element_Linear_Vertical();
+       	Element_Heading											headingElement				= new Element_Heading(" ");
         Element_Standard										nameElement 				= new Element_Standard("Name");
     	Element_Standard										addressElement 				= new Element_Standard("Address");
-    	Element_Switch											isNewElement 				= new Element_Switch("New Thermo");
-    	Element_Switch											isLostElement 				= new Element_Switch("Lost Thermo");
     	Element_Standard										tempElement 				= new Element_Standard("Temperature");
 
+    	adapterElement.insertPoint.addView(headingElement);
     	adapterElement.insertPoint.addView(nameElement);
     	adapterElement.insertPoint.addView(addressElement);
-    	adapterElement.insertPoint.addView(isNewElement);
-    	adapterElement.insertPoint.addView(isLostElement);
     	adapterElement.insertPoint.addView(tempElement);
     	
-    	nameElement		.setValue(listItem.name);
+    	String 		headingText = "";
+    	if 			(listItem.isNew) 							headingText 				= "New Thermometer";
+    	else if 	(listItem.isLost) 							headingText 				= "Lost Thermometer";
+    	else  													headingText 				= "Error... Why are we here ?";
+    	
+    	headingElement	.setTextLeft(headingText);
+       	nameElement		.setValue(listItem.name);
     	addressElement	.setValue(listItem.address);
-    	isNewElement	.setChecked(listItem.isNew);
-    	isLostElement	.setChecked(listItem.isLost);
     	tempElement		.setValue(Global.displayTemperature	(listItem.temperature));
 
         if (Global.deviceName == "lgPhone")
