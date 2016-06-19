@@ -58,7 +58,7 @@ public class Thermometers
 	{
 		try
 		{
-			String 										probeFileName				= "/mnt/1wire" + address.toUpperCase().replace(" ", "") + "/temperature9";
+			String 										probeFileName				= "/mnt/1wire/" + address.toUpperCase().replace(" ", "") + "/temperature10";
 			FileInputStream 							ThermoFile_InputStream 		= new FileInputStream(probeFileName);
 			DataInputStream 							ThermoFile_InputData 		= new DataInputStream(ThermoFile_InputStream);
 			BufferedReader 								ThermoFile_InputBuffer 		= new BufferedReader(new InputStreamReader(ThermoFile_InputData));
