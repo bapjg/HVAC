@@ -24,7 +24,7 @@ public class Panel_5_Configuration_Thermo_List_Adapter 			extends 					Panel_0_A
     	Ctrl_Thermo_List.Thermo									listItem					= (Ctrl_Thermo_List.Thermo) listData.get(position);
         
        	Element_Linear_Vertical									adapterElement 				= new Element_Linear_Vertical();
-       	Element_Heading											headingElement				= new Element_Heading(" ");
+       	Element_Centered_x_1									headingElement				= new Element_Centered_x_1("");
         Element_Standard										nameElement 				= new Element_Standard("Name");
     	Element_Standard										addressElement 				= new Element_Standard("Address");
     	Element_Standard										tempElement 				= new Element_Standard("Temperature");
@@ -39,7 +39,7 @@ public class Panel_5_Configuration_Thermo_List_Adapter 			extends 					Panel_0_A
     	else if 	(listItem.isLost) 							headingText 				= "Lost Thermometer";
     	else  													headingText 				= "Error... Why are we here ?";
     	
-    	headingElement	.setTextLeft(headingText);
+    	headingElement	.setTextCenter(headingText);
        	nameElement		.setValue(listItem.name);
     	addressElement	.setValue(listItem.address);
     	tempElement		.setValue(Global.displayTemperature	(listItem.temperature));
