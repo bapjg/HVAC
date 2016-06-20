@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import HVAC_Common.Ctrl_Actions_Relays;
 import HVAC_Common.Ctrl_Calendars;
 import HVAC_Common.Ctrl_Configuration;
+import HVAC_Common.Ctrl_Thermo_List;
 import HVAC_Common.Ctrl__Abstract;
 import HVAC_Common.Ctrl_Calendars.Word;
 import HVAC_Common.Ctrl_Configuration.Data;
@@ -72,14 +73,15 @@ public class Panel_5_Configuration_Thermo_List 				extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-		((AdapterView <Panel_5_Configuration_Thermometers_Adapter>) adapterView).setOnItemClickListener(this);
+		((AdapterView <Panel_5_Configuration_Thermo_List_Adapter>) adapterView).setOnItemClickListener(this);
 	}    
     @Override
 	public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3)
 	{
-    	Ctrl_Configuration.Thermometer							itemData					= Global.eRegConfiguration.thermometerList.get(position);
+    	Global.toaster("ThermoClick", true);
+    	Ctrl_Thermo_List.Thermo									itemData					= Global.thermosLostFound.thermos.get(position);
 
-    	Panel_5_Configuration_Thermometers_Item					itemFragment				= new Panel_5_Configuration_Thermometers_Item(itemData);
+    	Panel_5_Configuration_Therm_List_Item					itemFragment				= new Panel_5_Configuration_Therm_List_Item(itemData);
  
     	FragmentTransaction 									fTransaction 				= getActivity().getFragmentManager().beginTransaction();
    		fTransaction.replace(R.id.panel_container, itemFragment);
