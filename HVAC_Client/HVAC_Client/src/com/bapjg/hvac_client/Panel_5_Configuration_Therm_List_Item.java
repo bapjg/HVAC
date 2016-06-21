@@ -71,11 +71,6 @@ public class Panel_5_Configuration_Therm_List_Item 				extends 					Panel_0_Frag
     }
 	public void displayContents()
 	{
-    	String 										part1								= itemData.address.substring(0, 7);
-    	String 										part2								= itemData.address.substring(7, 11);
-    	String 										part3								= itemData.address.substring(11,15);
-    	itemData.address																= part1 + " " + part2 + " " + part3;
-    	
 		thermoName						.setValue		(itemData.name);
 		address							.setValue		(itemData.address);
 //		pidName							.setValue		(itemData.pidName);

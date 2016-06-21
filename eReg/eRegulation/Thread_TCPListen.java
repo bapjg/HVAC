@@ -550,6 +550,13 @@ public class Thread_TCPListen 			implements Runnable
 			if ((! thermo.isNew) && (! thermo.isLost))			message_return.thermos.remove(thermo);
 			if (thermo.isNew)									thermo.temperature				= Global.thermometers.readNewProbe(thermo.address);
 		}
+		for (Ctrl_Thermo_List.Thermo thermo : message_return.thermos)
+		{
+	    	String 										part1								= thermo.address.substring(0, 7);
+	    	String 										part2								= thermo.address.substring(7, 11);
+	    	String 										part3								= thermo.address.substring(11,15);
+	    	thermo.address																= part1 + " " + part2 + " " + part3;
+		}
 		return	message_return;		// All Ok so Ack
 	}
 }
