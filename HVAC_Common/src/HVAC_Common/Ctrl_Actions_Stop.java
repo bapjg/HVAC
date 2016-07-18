@@ -9,6 +9,9 @@ public class Ctrl_Actions_Stop 			extends 					Ctrl__Abstract
 	public 	static final int			ACTION_Reboot				= 2;
 	public 	static final int			ACTION_Reload_Configuration	= 3;
 	public 	static final int			ACTION_Reload_Calendars		= 4;
+	public 	static final int			ACTION_ShutDown				= 5;
+	public 	static final int			ACTION_Debug_Wait			= 6;
+	public 	static final int			ACTION_Debug_NoWait			= 7;
 
 	public Ctrl_Actions_Stop()
 	{

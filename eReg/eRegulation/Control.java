@@ -177,21 +177,43 @@ public class Control
 		Global.boiler.requestIdle();
 		Global.relays.offAll();
 		Global.waitThreadTermination();							// Ensure that this is the last thread to stop
+
+//		Global.exitStatus
+//		0 : Stop goto Bash
+//		1 : Restart eRegulation
+//		2 : Reboot
+//		3 : Reload Configuration
+//		4 : Reload Calendars
+//		5 : ShutDown
+//		6 : Debug and Wait
+//		7 : Debug no wait
 		
 		switch (Global.exitStatus)
 		{
-		case Ctrl_Actions_Stop.ACTION_Stop:											// Value 0 : Stop App
+		case Ctrl_Actions_Stop.ACTION_Stop:													// Value 0 : Stop App
  			LogIt.info("Thread_Main", "main", "Stopping", true);
  			System.exit(Ctrl_Actions_Stop.ACTION_Stop);
  			break;
-		case Ctrl_Actions_Stop.ACTION_Restart:											// Value 1 : Restart App
+		case Ctrl_Actions_Stop.ACTION_Restart:												// Value 1 : Restart App
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true); 
  			System.exit(Ctrl_Actions_Stop.ACTION_Restart);
  			break;		
- 		case Ctrl_Actions_Stop.ACTION_Reboot:											// Value 2 : Reboot Pi
+ 		case Ctrl_Actions_Stop.ACTION_Reboot:												// Value 2 : Reboot Pi
 	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true); 
  			System.exit(Ctrl_Actions_Stop.ACTION_Reboot);
  			break;
- 		}
+ 		case Ctrl_Actions_Stop.ACTION_ShutDown:												// Value 5 : Reboot Pi
+	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
+ 			System.exit(Ctrl_Actions_Stop.ACTION_ShutDown);
+ 			break;
+ 		case Ctrl_Actions_Stop.ACTION_Debug_Wait:											// Value 6 : Reboot Pi
+	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug Wait", true); 
+ 			System.exit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
+ 			break;
+ 		case Ctrl_Actions_Stop.ACTION_Debug_NoWait:											// Value 7 : Reboot Pi
+	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug NoWait", true); 
+ 			System.exit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
+ 			break;
+		}
 	}
- }
+}
