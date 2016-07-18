@@ -182,8 +182,8 @@ public class Control
 //		0 : Stop goto Bash
 //		1 : Restart eRegulation
 //		2 : Reboot
-//		3 : Reload Configuration
-//		4 : Reload Calendars
+//		3 : Reload Configuration	Not Handled here
+//		4 : Reload Calendars		Not Handled here
 //		5 : ShutDown
 //		6 : Debug and Wait
 //		7 : Debug no wait
