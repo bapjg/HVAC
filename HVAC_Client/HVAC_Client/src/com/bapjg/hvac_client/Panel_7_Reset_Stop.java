@@ -29,6 +29,9 @@ public class Panel_7_Reset_Stop 								extends 					Panel_0_Fragment
 	private	Element_Button										buttonStop;
 	private	Element_Button										buttonRestart;
 	private	Element_Button										buttonReboot;
+	private	Element_Button										buttonShutDown;
+	private	Element_Button										buttonDebugWait;
+	private	Element_Button										buttonDebugNoWait;
 
 	public Panel_7_Reset_Stop()
 	{
@@ -64,10 +67,16 @@ public class Panel_7_Reset_Stop 								extends 					Panel_0_Fragment
     	buttonStop																			= new Element_Button("Stop HVAC System\n(Go to Bash)");
     	buttonRestart																		= new Element_Button("Restart HVAC Application");
     	buttonReboot																		= new Element_Button("Reboot HVAC Controler Completely");
+    	buttonShutDown																		= new Element_Button("ShutDown HVAC Controler Completely");
+    	buttonDebugWait																		= new Element_Button("Debug HVAC Controler : Wait");
+    	buttonDebugNoWait																	= new Element_Button("Debug HVAC Controler : No Wait");
     	
     	panelInsertPoint.addView(buttonStop);
     	panelInsertPoint.addView(buttonRestart);
     	panelInsertPoint.addView(buttonReboot);
+    	panelInsertPoint.addView(buttonShutDown);
+    	panelInsertPoint.addView(buttonDebugWait);
+    	panelInsertPoint.addView(buttonDebugNoWait);
     	
     	displayTitles("Actions", "Stop");
     	displayContents();
@@ -87,9 +96,12 @@ public class Panel_7_Reset_Stop 								extends 					Panel_0_Fragment
 	public void onElementClick(View clickedView)
     {
     	Ctrl_Actions_Stop.Execute 								stopMessage					= new Ctrl_Actions_Stop().new Execute();
-		if      (clickedView == buttonStop)		stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Stop;
-		else if (clickedView == buttonRestart)	stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Restart;
-		else if (clickedView == buttonReboot)	stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Reboot;
+		if      (clickedView == buttonStop)			stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Stop;
+		else if (clickedView == buttonRestart)		stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Restart;
+		else if (clickedView == buttonReboot)		stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Reboot;
+		else if (clickedView == buttonShutDown)		stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_ShutDown;
+		else if (clickedView == buttonDebugWait)	stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Debug_Wait;
+		else if (clickedView == buttonDebugNoWait)	stopMessage.actionRequest	= Ctrl_Actions_Stop.ACTION_Debug_NoWait;
     	TCP_Send(stopMessage);
     }
     @Override

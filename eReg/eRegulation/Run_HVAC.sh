@@ -19,3 +19,20 @@ done
 if [ $STATUS -eq 2 ];then
 	sudo shutdown -r now
 fi
+if [ $STATUS -eq 5 ];then
+	sudo shutdown -h now
+fi
+if [ $STATUS -eq 6 ];then
+	sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" \
+-Xdebug -Xnoagent                                                       \
+-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005           \
+-Djava.library.path=./            eRegulation.Control
+
+fi
+if [ $STATUS -eq 7 ];then
+	sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" \
+-Xdebug -Xnoagent                                                       \
+-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005           \
+-Djava.library.path=./            eRegulation.Control
+
+fi

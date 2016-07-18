@@ -402,9 +402,12 @@ public class Thread_TCPListen 			implements Runnable
 	}
 	private Ctrl_Actions_Stop			process_Ctrl_Actions_Stop_Execute		(Ctrl_Actions_Stop.Execute message_in)
 	{
-		if ( (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Stop   )
-		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reboot )
-		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Restart) )
+		if ( (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Stop   		)
+		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reboot 		)
+		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Restart		) 
+		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_ShutDown		) 
+		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Debug_Wait	) 
+		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Debug_NoWait	) )
 		{
 			Global.stopNow																	= true;
 			Global.exitStatus																= message_in.actionRequest;	// 0 = stop app, 1 = restart app, 2 = reboot
