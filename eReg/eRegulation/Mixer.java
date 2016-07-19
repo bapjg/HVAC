@@ -323,7 +323,6 @@ public class Mixer
 			{
 				Global.waitMilliSeconds(5000);
 				waitTime																	-= 5000;
-				LogIt.info("Mixer", "positionZero", waitTime.toString(), true);
 			}
 //			mixerDown.on();
 //			Global.waitMilliSeconds(swingTime + 2000);
@@ -339,7 +338,6 @@ public class Mixer
 			{
 				Global.waitMilliSeconds(5000);
 				waitTime																	-= 5000;
-				LogIt.info("Mixer", "positionZero", waitTime.toString(), true);
 			}
 //			mixerDown.on();
 //			Global.waitMilliSeconds(positionTracked + 2000);					// Add 2 extra seconds to be certain
