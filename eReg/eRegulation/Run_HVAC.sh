@@ -4,7 +4,7 @@ sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 12:04
 sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
 
 STATUS=1
-while (( STATUS != 2 && STATUS != 3));
+while (( STATUS != 2 && STATUS != 5));
 do
 	git stash save
 	git stash drop
