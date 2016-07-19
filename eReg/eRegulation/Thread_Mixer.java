@@ -191,7 +191,7 @@ public class Thread_Mixer implements Runnable
 		Integer indexProject																= timeProjectInSeconds/5;			// Used during 5sec delay loop
 		Integer indexDelay																	= timeDelayInSeconds/5;
 
-		// Idea is to upto temeProject (timeProjection) in 5s intervals.
+		// Idea is to upto timeProject (timeProjection) in 5s intervals.
 		// The first intervals upto timeDelay, no decision is made
 		// Thereafter, if projected temperature is out of bound, the loop stops and the PID reactivated for recalculation
 		for (i = 0; (i < indexProject) && (! Global.stopNow); i++)

@@ -307,6 +307,24 @@ public class Global
 	{
 		return waitMilliSeconds(seconds * 1000);
  	}
+	public static Integer waitSecondsForStopNow(Integer seconds)										// Sleeps a supplied number of seconds
+	{
+		Integer 												wait 						= seconds;
+		while (!Global.stopNow && wait > 0)
+		{
+			if (wait > 5)
+			{
+				Global.waitSeconds(5);
+				wait																		-= 5;
+			}
+			else
+			{
+				Global.waitSeconds(wait);
+				wait 																		= 0;
+			}
+		}
+		return seconds - wait;
+ 	}
 	public static Boolean waitMilliSeconds(Integer milliSeconds)							// Sleeps a supplied number of milliseconds
 	{
 		Boolean interrupted 																= false;

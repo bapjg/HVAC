@@ -317,32 +317,20 @@ public class Mixer
 		if (positionTracked == null)							// Allow to be interupted by user (reboot etc)
 		{
 			allOff();
-			Integer												waitTime					= swingTime + 2000;
+			Integer												waitTime					= (swingTime + 2000)/1000;
 			mixerDown.on();
-			while (!Global.stopNow && waitTime > 0)
-			{
-				Global.waitMilliSeconds(5000);
-				waitTime																	-= 5000;
-			}
-//			mixerDown.on();
-//			Global.waitMilliSeconds(swingTime + 2000);
+			Integer												sleptTime					= Global.waitSecondsForStopNow(waitTime);
 			mixerDown.off();
-			positionTracked																	= (waitTime < 0) ? 0 : waitTime;
+			positionTracked																	= (waitTime - sleptTime < 0) ? 0 : waitTime - sleptTime;
 		}
 		else if (positionTracked > 0)
 		{
 			allOff();
-			Integer												waitTime					= positionTracked + 2000;
+			Integer												waitTime					= (positionTracked + 2000)/1000;
 			mixerDown.on();
-			while (!Global.stopNow && waitTime > 0)
-			{
-				Global.waitMilliSeconds(5000);
-				waitTime																	-= 5000;
-			}
-//			mixerDown.on();
-//			Global.waitMilliSeconds(positionTracked + 2000);					// Add 2 extra seconds to be certain
+			Integer												sleptTime					= Global.waitSecondsForStopNow(waitTime);
 			mixerDown.off();
-			positionTracked																	= (waitTime < 0) ? 0 : waitTime;
+			positionTracked																	= (waitTime - sleptTime < 0) ? 0 : waitTime - sleptTime;
 		}
 		else if (positionTracked == 0)
 		{

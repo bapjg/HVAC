@@ -293,12 +293,7 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			// Wait 5 mins (300 seconds)
 			//
-			int 												wait								= 30;
-			while (!Global.stopNow && wait > 0)
-			{
-				wait																				-= 1;
-				Global.waitSeconds(10);
-			}
+			Global.waitSecondsForStopNow(300);
 			//
 			//=========================================================================================================================================
 		}

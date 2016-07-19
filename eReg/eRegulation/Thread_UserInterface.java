@@ -30,7 +30,7 @@ public class Thread_UserInterface implements Runnable
 		{
 			showTemperatures();
  
-			Global.waitSeconds(10);
+			Global.waitSecondsForStopNow(10);
 			
 			buttons.read();
 

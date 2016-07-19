@@ -121,13 +121,13 @@ public class Control
 			}
 		}
 		new Thread(new Thread_Thermometers(), 								"Thread_Thermometers").start();
-		Global.waitSeconds(15);														// Must wait 15 secs for all thermometers to be read and have values + allow for retries
+		Global.waitSeconds(15);												// Must wait 15 secs for all thermometers to be read and have values + allow for retries
 		Global.display.writeAtPosition(3, 18, "Ok");
 
 		new Thread(new Thread_UserInterface(), 								"Thread_UserInteface").start();
 		new Thread(new Thread_TCPListen(), 									"Thread_TCPListen").start();
 // TODO wait for Thread_Mixer to finish setting it to zero
-		Global.waitSeconds(90);														// Must wait 15 secs for all thermometers to be read and have values + allow for retries
+		Global.waitSecondsForStopNow(90);												// Must wait 15 secs for all thermometers to be read and have values + allow for retries
 		new Thread(new Thread_BackgroundTasks(), 							"Thread_BackgroundTasks").start();
 		
 		//
@@ -143,7 +143,7 @@ public class Control
 		
 		while (!Global.stopNow)
 		{
-			Global.waitSeconds(5);
+			Global.waitSecondsForStopNow(5);
 
 			// Sequence each circuit and get the heat requirements
 			globalHeatRequired.setZero();
