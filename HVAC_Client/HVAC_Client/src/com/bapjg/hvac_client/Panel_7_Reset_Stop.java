@@ -36,29 +36,6 @@ public class Panel_7_Reset_Stop 								extends 					Panel_0_Fragment
 	public Panel_7_Reset_Stop()
 	{
 		super("Centered");
-/*
- * 	TODO TODO TODO
-		<RelativeLayout
-    	android:layout_width					= "match_parent"
-   	 	android:layout_height					= "match_parent"
-    	android:layout_gravity					= "center_vertical|center_horizontal"
-    	android:background						= "@color/background"
-    	android:baselineAligned					= "false"
-    	android:orientation						= "vertical" 
-	>
-
-
-	    <Button
-	        android:id							= "@+id/buttonStop"
-	        android:layout_width				= "wrap_content"
-	        android:layout_height				= "wrap_content"
-	        android:layout_alignParentTop		= "true"
-	        android:layout_centerHorizontal		= "true"
-	        android:layout_marginTop			= "30dp"
-	        android:text						= "Stop HVAC System\n(Go to Bash)"
-	        android:textColor					= "#FFFFFF" 
-		/>
-*/
 	}
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
     {
@@ -89,9 +66,12 @@ public class Panel_7_Reset_Stop 								extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-		buttonStop		.setListener(this);
-		buttonRestart	.setListener(this);
-		buttonReboot	.setListener(this);
+		buttonStop			.setListener(this);
+		buttonRestart		.setListener(this);
+		buttonReboot		.setListener(this);
+		buttonShutDown		.setListener(this);
+		buttonDebugWait		.setListener(this);
+		buttonDebugNoWait	.setListener(this);
 	}
 	public void onElementClick(View clickedView)
     {
