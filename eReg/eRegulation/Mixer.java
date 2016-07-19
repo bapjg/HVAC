@@ -314,13 +314,20 @@ public class Mixer
 	}	// End of sequencer
 	public void positionZero()
 	{
-		if (positionTracked == null)
+		if (positionTracked == null)							// Allow to be interupted by user (reboot etc)
 		{
 			allOff();
+			int 												waitTime					= swingTime + 2000;
 			mixerDown.on();
-			Global.waitMilliSeconds(swingTime + 2000);
+			while (!Global.stopNow && waitTime > 0)
+			{
+				Global.waitMilliSeconds(5000);
+				waitTime																	-= 5000;
+			}
+//			mixerDown.on();
+//			Global.waitMilliSeconds(swingTime + 2000);
 			mixerDown.off();
-			positionTracked																	= 0;
+			positionTracked																	= (waitTime < 0) ? 0 : waitTime;
 		}
 		else if (positionTracked > 0)
 		{
