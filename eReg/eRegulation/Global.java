@@ -309,6 +309,7 @@ public class Global
  	}
 	public static Integer waitSecondsForStopNow(Integer seconds)										// Sleeps a supplied number of seconds
 	{
+		Long 													timeStart					= DateTime.now();
 		Integer 												wait 						= seconds;
 		while (!Global.stopNow && wait > 0)
 		{
@@ -323,7 +324,8 @@ public class Global
 				wait 																		= 0;
 			}
 		}
-		return seconds - wait;
+		Long 													timeEnd					= DateTime.now();
+		return (int) (timeEnd - timeStart);
  	}
 	public static Boolean waitMilliSeconds(Integer milliSeconds)							// Sleeps a supplied number of milliseconds
 	{

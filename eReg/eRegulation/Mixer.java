@@ -321,7 +321,7 @@ public class Mixer
 			mixerDown.on();
 			Integer												sleptTime					= Global.waitSecondsForStopNow(waitTime);
 			mixerDown.off();
-			positionTracked																	= (waitTime - sleptTime < 0) ? 0 : waitTime - sleptTime;
+			positionTracked																	= (swingTime - sleptTime < 0) ? 0 : swingTime - sleptTime;
 		}
 		else if (positionTracked > 0)
 		{
@@ -330,7 +330,7 @@ public class Mixer
 			mixerDown.on();
 			Integer												sleptTime					= Global.waitSecondsForStopNow(waitTime);
 			mixerDown.off();
-			positionTracked																	= (waitTime - sleptTime < 0) ? 0 : waitTime - sleptTime;
+			positionTracked																	= (positionTracked - sleptTime < 0) ? 0 : positionTracked - sleptTime;
 		}
 		else if (positionTracked == 0)
 		{
