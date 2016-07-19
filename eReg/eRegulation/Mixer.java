@@ -333,10 +333,18 @@ public class Mixer
 		else if (positionTracked > 0)
 		{
 			allOff();
+			Integer												waitTime					= positionTracked + 2000;
 			mixerDown.on();
-			Global.waitMilliSeconds(positionTracked + 2000);					// Add 2 extra seconds to be certain
+			while (!Global.stopNow && waitTime > 0)
+			{
+				Global.waitMilliSeconds(5000);
+				waitTime																	-= 5000;
+				LogIt.info("Mixer", "positionZero", waitTime.toString(), true);
+			}
+//			mixerDown.on();
+//			Global.waitMilliSeconds(positionTracked + 2000);					// Add 2 extra seconds to be certain
 			mixerDown.off();
-			positionTracked																	= 0;
+			positionTracked																	= (waitTime < 0) ? 0 : waitTime;
 		}
 		else if (positionTracked == 0)
 		{
