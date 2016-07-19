@@ -192,31 +192,31 @@ public class Control
 		{
 		case Ctrl_Actions_Stop.ACTION_Stop:													// Value 0 : Stop App
 			Global.display.clear();
-			Global.display.writeAtPosition(1, 1, "Stopping controler");
+			Global.display.writeAtPosition(0, 0, "Stopping controler");
  			LogIt.info("Thread_Main", "main", "Stopping", true);
  			System.exit(Ctrl_Actions_Stop.ACTION_Stop);
  			break;
 		case Ctrl_Actions_Stop.ACTION_Restart:												// Value 1 : Restart App
 			Global.display.clear();
-			Global.display.writeAtPosition(1, 1, "Restarting controler");
+			Global.display.writeAtPosition(0, 0, "Restarting controler");
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true); 
  			System.exit(Ctrl_Actions_Stop.ACTION_Restart);
  			break;		
  		case Ctrl_Actions_Stop.ACTION_Reboot:												// Value 2 : Reboot Pi
 			Global.display.clear();
-			Global.display.writeAtPosition(1, 1, "Rebooting controler");
+			Global.display.writeAtPosition(0, 0, "Rebooting controler");
 	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true); 
  			System.exit(Ctrl_Actions_Stop.ACTION_Reboot);
  			break;
  		case Ctrl_Actions_Stop.ACTION_ShutDown:												// Value 5 : Reboot Pi
 			Global.display.clear();
-			Global.display.writeAtPosition(1, 1, "Shutting down controler");
+			Global.display.writeAtPosition(0, 0, "Shutting down controler");
 	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
  			System.exit(Ctrl_Actions_Stop.ACTION_ShutDown);
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_Wait:											// Value 6 : Reboot Pi
 			Global.display.clear();
-			Global.display.writeAtPosition(1, 1, "Restarting controler for Debug Wait");
+			Global.display.writeAtPosition(0, 0, "Restarting controler for Debug Wait");
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug Wait", true); 
  			System.exit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
  			break;
