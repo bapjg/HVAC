@@ -222,7 +222,8 @@ public class Control
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_NoWait:											// Value 7 : Reboot Pi
 			Global.display.clear();
-			Global.display.writeAtPosition(1, 1, "Restarting controler for Debug No Wait");
+			Global.display.writeAtPosition(0, 0, "Restarting controler");
+			Global.display.writeAtPosition(1, 1, "Debug : No Wait");
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug NoWait", true); 
  			System.exit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
  			break;
