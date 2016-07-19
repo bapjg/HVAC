@@ -210,7 +210,9 @@ public class Control
  			break;
  		case Ctrl_Actions_Stop.ACTION_ShutDown:												// Value 5 : Reboot Pi
 			Global.display.clear();
-			Global.display.writeAtPosition(0, 0, "Shutting down controler");
+			Global.display.writeAtPosition(0, 0, "Shutting down");
+			Global.display.writeAtPosition(1, 2, "HVAC controler");
+			Global.display.writeAtPosition(2, 10, "completely");
 	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
  			System.exit(Ctrl_Actions_Stop.ACTION_ShutDown);
  			break;
