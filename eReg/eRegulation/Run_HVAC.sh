@@ -16,6 +16,7 @@ do
 	then
     	sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" -Djava.library.path=./            eRegulation.Control
     	STATUS=$?
+    	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:00
     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC Quit.
     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now restarting
     fi
