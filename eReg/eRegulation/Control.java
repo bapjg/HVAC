@@ -212,7 +212,7 @@ public class Control
 			Global.display.clear();
 			Global.display.writeAtPosition(0, 0, "Shutting down");
 			Global.display.writeAtPosition(1, 2, "HVAC controler");
-			Global.display.writeAtPosition(2, 10, "completely");
+			Global.display.writeAtPosition(2, 2, "completely");
 	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
  			System.exit(Ctrl_Actions_Stop.ACTION_ShutDown);
  			break;
