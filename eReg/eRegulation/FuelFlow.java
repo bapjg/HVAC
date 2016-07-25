@@ -2,6 +2,7 @@ package eRegulation;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -43,60 +44,63 @@ public class FuelFlow
 		
 		Long 													consumptionRemote			= -1L;
 		Long 													consumptionLocal			= -1L;
+		Long	 												tlmRemote					= -1L;
+		Long	 												tlmLocal					= -1L;
 		
 		if (messageReceive instanceof Ctrl_Fuel_Consumption.Data)
 		{
 			LogIt.info("Fuelflow", "constructor", "Fuel level recovered from network");
 			consumptionRemote																= ((Ctrl_Fuel_Consumption.Data) messageReceive).fuelConsumed;
+			tlmRemote																		= ((Ctrl_Fuel_Consumption.Data) messageReceive).dateTime;
 	    	timeLastStart																	= -1L;
 		}
-//		else	Changed 03/10/2015
-//		{
-			LogIt.info("Fuelflow", "constructor", "Recovering from local file");
-			try
-			{
-				InputStream  									file 						= new FileInputStream("/home/pi/HVAC_Data/FuelConsumed.txt");
-				DataInputStream									input  						= new DataInputStream (file);
-			    try
-			    {
-			    	consumptionLocal														= input.readLong();
-			    }
-			    finally
-			    {
-			    	timeLastStart															= -1L;
-			    	input.close();
-			    }
-			}  
-			catch(FileNotFoundException ex)
-			{
-				LogIt.info("Fuelflow", "constructor", "FuelConsumed.txt not found : creating it");
-	    
-				consumption																	= 0L;
-				saveFuelFlow();
-			}
-			catch(IOException ex)
-			{
-				LogIt.info("Fuelflow", "constructor", "I/O error when reading FuelConsumed.txt : " + ex);
-			}			
-//		}
-		if ((consumptionRemote == -1) && (consumptionLocal == -1))
+		LogIt.info("Fuelflow", "constructor", "Recovering from local file");
+		try
+		{
+			File  												tlmFile 					= new File("/home/pi/HVAC_Data/FuelConsumed.txt");
+			tlmLocal																		= tlmFile.lastModified();
+			InputStream  										file 						= new FileInputStream("/home/pi/HVAC_Data/FuelConsumed.txt");
+			DataInputStream										input  						= new DataInputStream (file);
+		    try
+		    {
+		    	consumptionLocal															= input.readLong();
+		    }
+		    finally
+		    {
+		    	timeLastStart																= -1L;
+		    	input.close();
+		    }
+		}  
+		catch(FileNotFoundException ex)
+		{
+			// Probably using new SDCard. Just create the file
+			LogIt.info("Fuelflow", "constructor", "FuelConsumed.txt not found : creating it");
+			consumption																		= 0L;
+			saveFuelFlow();
+		}
+		catch(IOException ex)
+		{
+			LogIt.info("Fuelflow", "constructor", "I/O error when reading FuelConsumed.txt : " + ex);
+		}			
+
+		if ((tlmRemote == -1) && (tlmLocal == -1))
 		{
 			LogIt.info("Fuelflow", "constructor", "FuelConsumed failed from Network and local copy");
 			consumption																		= 0L;
 		}
-		else if ((consumptionRemote == -1) && (consumptionLocal > -1))
+		else if ((tlmRemote == -1) && (tlmLocal > -1))
 		{
 			LogIt.info("Fuelflow", "constructor", "FuelConsumed failed from Network but available locally");
 			consumption																		= consumptionLocal;
 		}
-		else if ((consumptionRemote > -1) && (consumptionLocal == -1))
+		else if ((tlmRemote > -1) && (tlmLocal == -1))
 		{
 			LogIt.info("Fuelflow", "constructor", "FuelConsumed failed locally but available from Network");
 			consumption																		= consumptionRemote;
 		}
-		else if (consumptionRemote < consumptionLocal)
+		else if (tlmRemote < tlmLocal)
 		{
-			LogIt.info("Fuelflow", "constructor", "FuelConsumed locally is higher than from Network, using Local");
+			LogIt.info("Fuelflow", "constructor", "FuelConsumed locally is more recent than from Network, using Local");
 			consumption																		= consumptionLocal;
 		}
 		else // Network is higher or both are equal
