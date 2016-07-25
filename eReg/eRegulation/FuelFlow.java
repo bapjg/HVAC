@@ -105,7 +105,7 @@ public class FuelFlow
 		}
 		else // Network is higher or both are equal
 		{
-			LogIt.info("Fuelflow", "constructor", "FuelConsumed locally and network coherent");
+			LogIt.info("Fuelflow", "constructor", "FuelConsumed locally and network coherent (Network TLM >= Local TLM)");
 			consumption																		= consumptionRemote;
 		}
 	}
