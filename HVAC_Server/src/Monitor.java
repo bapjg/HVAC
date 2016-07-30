@@ -181,6 +181,73 @@ public class Monitor extends HttpServlet
         }
         return new Rpt_Abstract().new Ack();
     }
+    public Rpt_Abstract process3DDTemperatureAverage(Rpt_Temperatures readings)
+    {
+        dbOpen();
+        
+        try
+        {
+            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            
+            String 										sql 			= "";
+            sql															+= "SELECT    date,                              ";
+            sql															+= "          AVG(tempOutside)                   ";
+            sql															+= "FROM      temperatures                       ";
+            sql															+= "WHERE     date >= CURDATE() - INTERVAL 3     ";
+            sql															+= "AND  	  time > 08:00                       ";
+            sql															+= "AND  	  time < 20:00                       ";
+            sql															+= "GROUP BY  date                               ";
+            sql															+= "ORDER BY  date                               ";
+
+            ResultSet 									dbResultSet 	= dbStatement.executeQuery(sql);
+            dbResultSet.next();
+            Integer										dayM3			= dbResultSet.getInt("tempOutside");
+            dbResultSet.next();
+            Integer										dayM2			= dbResultSet.getInt("tempOutside");
+            dbResultSet.next();
+            Integer										dayM1			= dbResultSet.getInt("tempOutside");
+            Long										dbDateTime		= dbResultSet.getLong("dateTime");
+            Integer										dayM0Weighted	= (dayM1 * 3 + dayM2 * 2 + dayM3) / 6 ;
+            dbResultSet.close();
+            
+            // TODO PUT RESULTS
+            
+            dbResultSet.moveToInsertRow();
+            
+            dbResultSet.updateDouble	("dateTime", 				readings.dateTime);
+            dbResultSet.updateString	("date", 					dateTime2Date(readings.dateTime));
+            dbResultSet.updateString	("time", 					dateTime2Time(readings.dateTime));
+            dbResultSet.updateInt		("tempHotWater", 			readings.tempHotWater.intValue());
+            dbResultSet.updateInt		("tempBoiler", 				readings.tempBoiler.intValue());
+            dbResultSet.updateInt		("tempBoilerIn", 			readings.tempBoilerIn.intValue());
+            dbResultSet.updateInt		("tempBoilerOut", 			readings.tempBoilerOut.intValue());
+            dbResultSet.updateInt		("tempFloorOut", 			readings.tempFloorOut.intValue());
+            dbResultSet.updateInt		("tempFloorIn", 			readings.tempFloorIn.intValue());
+            dbResultSet.updateInt		("tempRadiatorOut", 		readings.tempRadiatorOut.intValue());
+            dbResultSet.updateInt		("tempRadiatorIn", 			readings.tempRadiatorIn.intValue());
+            dbResultSet.updateInt		("tempOutside", 			readings.tempOutside.intValue());
+            dbResultSet.updateInt		("tempLivingRoom", 			readings.tempLivingRoom.intValue());
+            dbResultSet.updateFloat		("pidMixerDifferential",	readings.pidMixerDifferential);
+            dbResultSet.updateFloat		("pidBoilerOutDifferential",readings.pidBoilerOutDifferential);
+            dbResultSet.updateInt		("pidMixerTarget", 			readings.pidMixerTarget);
+            dbResultSet.updateInt		("tempLivingRoomTarget", 	readings.tempLivingRoomTarget);
+            dbResultSet.insertRow();
+            
+            dbStatement.close();
+            dbConnection.close();
+        }
+        catch(SQLException eSQL)
+        {
+        	eSQL.printStackTrace();
+            return new Rpt_Abstract().new Nack();
+        }
+        catch(Exception e)
+        {
+        	e.printStackTrace();
+            return new Rpt_Abstract().new Nack();
+        }
+        return new Rpt_Abstract().new Ack();
+    }
     public Rpt_Abstract processMixerMouvement(Rpt_MixerMouvement readings)
     {
         dbOpen();

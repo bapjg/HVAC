@@ -117,7 +117,7 @@ public class Management extends HttpServlet
             ResultSet 									dbResultSet 		= dbStatement.executeQuery(sql);
             dbResultSet.next();
             String										dbData				= dbResultSet.getString("data");
-             dbStatement.close();
+            dbStatement.close();
             dbConnection.close();
             Ctrl_Json.Data								returnBufferPrep	= new Ctrl_Json().new Data();
             returnBufferPrep.type 											= msgIn.type;
