@@ -212,13 +212,14 @@ public class Thread_BackgroundTasks implements Runnable
 				else if (Global.circuitFloor.canOptimise())
 				{
 					// Are there any circuit that we were optimising and are left on
-					taskOptimisation																	= new CircuitTask(	now, 								// Time Start
-																															now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
-																															25000,								// Dont care, just get as much energy out as possible
-																															false,								// StopOnObjective
-																															HVAC_TYPES.CircuitTask.Optimisation
-																														 );
-					Global.circuitFloor.taskActivate(taskOptimisation);
+					// TODO this generates thermal pumping so dont do it anymore
+//					taskOptimisation																	= new CircuitTask(	now, 								// Time Start
+//																															now + 5L * 60L * 1000L, 			// TimeEnd in 5 mins
+//																															25000,								// Dont care, just get as much energy out as possible
+//																															false,								// StopOnObjective
+//																															HVAC_TYPES.CircuitTask.Optimisation
+//																														 );
+//					Global.circuitFloor.taskActivate(taskOptimisation);
 				}
 			}
 			//
