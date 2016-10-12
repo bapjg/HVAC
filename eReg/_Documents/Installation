@@ -28,3 +28,7 @@ Interfaces.c : scanAndSet modified to just do a return
 
 Note that Interfaces.o and libInterfaces.so was in git, so would overwrite any new compilation.
 Modified to just exit.
+
+To rebuild libInterfaces.so do : 
+	make libInterfaces.so
+This recompiles Interfaces.c and builds the libInterfaces.so file
