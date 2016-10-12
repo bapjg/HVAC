@@ -179,7 +179,7 @@ static void scanAndSet()
 	buf[1] 						= 1;							// Ident
 	spi_txrx(buf, 0x2, 0x20);
 	
-	char * found;
+	char *found;
 	found 						= strstr(buf, "spi_big");
 	if (found == NULL)
 	{
