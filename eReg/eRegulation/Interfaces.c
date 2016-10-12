@@ -210,6 +210,7 @@ printf("---------- \n");
 		}
 		// Relay has no address at all. There's no point continuing
 		// As nothing (pump/burner/valve) can be actioned
+printf("3333 \n");
 		printf("scanAndSet found no relays - will now abort \n");
 		pabort("Aborting by scanAndSet \n");
 	}
