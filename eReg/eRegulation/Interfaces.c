@@ -52,7 +52,9 @@ static int 		cls 		= 0;
 static void pabort(const char *s)
 {
 	perror(s);
-	abort();
+// TODO Check this works
+//	abort();
+	exit(0);		// Status returned is 0. Application stops and returns to bash
 }
 //----------------------------------------------------------
 

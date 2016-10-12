@@ -48,7 +48,7 @@ then
     sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
     sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
    	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
-     sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Rebooting
+    sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Rebooting
 	sudo shutdown -r now
 fi
 
