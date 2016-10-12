@@ -171,6 +171,11 @@ static void scanAndSet()
 	// Here we scan to find it and, if necessary, reset
 	// it to correct value
 	
+
+	// TODO Kludge untill this routine works properly
+	return;
+	// End Kludge
+
 	char buf[0x20];
 	int add;
 	int i;
