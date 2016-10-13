@@ -27,7 +27,7 @@
 
 static uint8_t 	spi_mode;
 static uint8_t 	bits 		= 8;
-static uint32_t speed 		= 5000;							//Was 100000. Brought down to 50 000, which no longer worked from oct 2016.
+static uint32_t speed 		= 50000;							//Was 100000. Brought down to 50 000, which no longer worked from oct 2016.
 static uint16_t delay 		= 2;
 
 static int 		spi_fd;
@@ -52,8 +52,6 @@ static int 		cls 		= 0;
 static void pabort(const char *s)
 {
 	perror(s);
-// TODO Check this works
-//	abort();
 	exit(0);		// Status returned is 0. Application stops and returns to bash
 }
 //----------------------------------------------------------
