@@ -32,3 +32,25 @@ Modified to just exit.
 To rebuild libInterfaces.so do : 
 	make libInterfaces.so
 This recompiles Interfaces.c and builds the libInterfaces.so file
+
+Recompile Interfaces.c
+======================
+
+make so							// This compiles to Interfaces.o
+								// and linkedits to libInterfaces.so
+
+
+Git
+===
+
+git pull						// Gets the current HEAD
+
+git stash save					// Deletes the latest modifications
+git stash drop					// from the repository
+
+git add .						// Adds files to the git index
+git commit -a -m "commit msg" 	// Any message will do
+git push						// pushes to the upstream
+								// prompts for user/pwd = bapjg/bapjg7478
+
+							

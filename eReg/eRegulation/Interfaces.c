@@ -173,7 +173,7 @@ static void scanAndSet()
 	
 
 	// TODO Kludge untill this routine works properly
-	return;
+	//return;
 	// End Kludge
 
 	char buf[0x20];
@@ -187,7 +187,7 @@ static void scanAndSet()
 	char *found;
 	found 						= strstr(buf, "spi_big");
 printf("1111 \n");
-printf("%s", buf );
+printout(buf);
 printf("---------- \n");
 	if (found == NULL)
 	{
@@ -200,7 +200,7 @@ printf("---------- \n");
 			buf[1] 				= 1;							// Ident
 			spi_txrx(buf, 0x2, 0x20);
 printf("2222 \n");
-printf("%s", buf );
+printout(buf);
 printf("---------- \n");
 			found = strstr(buf, "spi_big");
 			if (found != NULL)
@@ -219,6 +219,29 @@ printf("3333 \n");
 		printf("scanAndSet found no relays - will now abort \n");
 		pabort("Aborting by scanAndSet \n");
 	}
+}
+// debugging... copied from bw_tool
+void printout(char *buff)
+{
+	for (i = 0; i < 0x20; i++)
+	{
+		if (mkprintable (buf[i]) != '.') 		break;
+	}
+	if (i < 0x20)
+	{
+		for (i = 0; i < 0x20; i++)
+		{
+			if (buff[i] = 0)	break;
+			putchar (mkprintable (buf[i]));
+		}
+		printf("\n");
+	}
+}
+char mkprintable (char ch)
+{
+  if (ch < ' ') 	return '.';
+  if (ch <= '~') 	return ch;
+  return '.';
 }
 //----------------------------------------------------------
 void Relay_Open(int Relay_Bank)

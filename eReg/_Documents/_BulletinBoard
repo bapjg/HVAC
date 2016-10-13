@@ -3,8 +3,8 @@ Relays
 sbw                -w 20:1		Relay on
 sudo bw_tool -a 9c -w 20:1		Relay on
 
-Get address
-===========
+Get address for spi/Big_Relay
+=============================
 sudo bw_tool -S
 sudo bw_tool -a xx -w f0:9c		Apply address
 
