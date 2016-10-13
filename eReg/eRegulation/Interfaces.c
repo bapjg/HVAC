@@ -223,6 +223,7 @@ printf("3333 \n");
 // debugging... copied from bw_tool
 void printout(char *buff)
 {
+	int i;
 	for (i = 0; i < 0x20; i++)
 	{
 		if (mkprintable (buf[i]) != '.') 		break;
