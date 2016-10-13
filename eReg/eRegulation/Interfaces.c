@@ -221,6 +221,12 @@ printf("3333 \n");
 	}
 }
 // debugging... copied from bw_tool
+char mkprintable (char ch)
+{
+  if (ch < ' ') 	return '.';
+  if (ch <= '~') 	return ch;
+  return '.';
+}
 void printout(char *buff)
 {
 	int i;
@@ -238,12 +244,7 @@ void printout(char *buff)
 		printf("\n");
 	}
 }
-char mkprintable (char ch)
-{
-  if (ch < ' ') 	return '.';
-  if (ch <= '~') 	return ch;
-  return '.';
-}
+
 //----------------------------------------------------------
 void Relay_Open(int Relay_Bank)
 {
