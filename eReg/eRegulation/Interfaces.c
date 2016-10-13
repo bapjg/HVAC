@@ -232,14 +232,14 @@ void printout(char *buff)
 	int i;
 	for (i = 0; i < 0x20; i++)
 	{
-		if (mkprintable (buf[i]) != '.') 		break;
+		if (mkprintable (buff[i]) != '.') 		break;
 	}
 	if (i < 0x20)
 	{
 		for (i = 0; i < 0x20; i++)
 		{
 			if (buff[i] = 0)	break;
-			putchar (mkprintable (buf[i]));
+			putchar (mkprintable (buff[i]));
 		}
 		printf("\n");
 	}
