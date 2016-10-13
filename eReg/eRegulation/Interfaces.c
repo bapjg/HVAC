@@ -199,9 +199,9 @@ printf("---------- \n");
 			buf[0] 				= add | 1;						// OR 1 means return status info
 			buf[1] 				= 1;							// Ident
 			spi_txrx(buf, 0x2, 0x20);
-printf("2222 \n");
-printout(buf);
-printf("---------- \n");
+//printf("2222 \n");
+//printout(buf);
+//printf("---------- \n");
 			found = strstr(buf, "spi_big");
 			if (found != NULL)
 			{
@@ -215,7 +215,6 @@ printf("---------- \n");
 		}
 		// Relay has no address at all. There's no point continuing
 		// As nothing (pump/burner/valve) can be actioned
-printf("3333 \n");
 		printf("scanAndSet found no relays - will now abort \n");
 		pabort("Aborting by scanAndSet \n");
 	}
