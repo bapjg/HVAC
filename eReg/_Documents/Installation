@@ -49,7 +49,7 @@ git stash save					// Deletes the latest modifications
 git stash drop					// from the repository
 
 git add .						// Adds files to the git index
-git commit -a -m "commit msg" 	// Any message will do
+git commit -a -m "commit msg" 	// -m Any message will do. -a (or --all) all updated/deleted files but not new files (unless git add used).
 git push						// pushes to the upstream
 								// prompts for user/pwd = bapjg/bapjg7478
 

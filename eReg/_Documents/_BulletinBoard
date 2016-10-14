@@ -12,14 +12,32 @@ Display Hello
 =============
 sudo bw_tool -I -D /dev/i2c-1 -a 94 -t hello
 
-Git discard
-===========
-git stash save --keep-index
-git stash drop
+Recompile Interfaces.c
+======================
+
+make so							// This compiles to Interfaces.o
+								// and linkedits to libInterfaces.so
+
+Git
+===
+
+git pull						// Gets the current HEAD
+
+								// Puts working repository back to HEAD
+git stash save --keep-index		// - Current mods stashed, previous stashes kept
+git stash save					// - Current mods stashed, previous stashes deleted
+git stash drop					// Deletes stashed modifications
+
+git add .						// Adds files to the git index
+git commit -a -m "commit msg" 	// -m Any message will do. -a (or --all) all 
+								// updated/deleted files but not new files 
+								// (unless git add used).
+git push						// pushes to the upstream
 
 DropZone
 ========
-sudo mount -t cifs -o username=ADavis,password=l,domain=workgroup //AD_Office/DropZone /mnt/DZ
+sudo mount -t cifs -o username=ADavis,password=l,domain=workgroup 
+													//AD_Office/DropZone /mnt/DZ
 sudo cp (source) /mnt/DZ (destination)
 
 Aliases
@@ -28,7 +46,7 @@ alias ll		='		ls -l'
 alias down		='sudo 	shutdown -h now'
 alias reboot	='sudo 	shutdown -r now'
 alias sjava		='sudo 	java -cp .. -Djava.library.path="." '
-alias ereg		='		cd /home/pi/Eclipse/eRegulation/src/eRegulation/'
+alias ereg		='cd 	/home/pi/Eclipse/eRegulation/src/eRegulation/'
 alias sbw		='sudo 	bw_tool'
 alias sbws		='sudo 	bw_tool -S'
 alias sbwa		='sudo 	bw_tool -w f0:9c -a'
