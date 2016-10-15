@@ -35,14 +35,8 @@ public class Control
 		// For debugging on a Windows machine without the necessary hardware
 		//
 		
-		if (System.getProperty("os.name").equalsIgnoreCase("windows 7"))
-		{
-			System.out.println("libraries not loaded");
-		}
-		else
-		{
-			System.loadLibrary("Interfaces");
-		}
+		if (System.getProperty("os.name").equalsIgnoreCase("windows"))	System.out.println("libraries not loaded");
+		else															System.loadLibrary("Interfaces");
 		
 		//
 		//============================================================
@@ -52,28 +46,6 @@ public class Control
 		// Any tests can be done here
 		//
 		
-		
-//		System.out.println("Starting test");
-//		gpio.setInput();
-//		
-//		int i;
-//		Float voltage;
-//		
-//		for (i = 0; i < 21; i++)
-//		{
-//			boolean signal = gpio.isHigh();
-//			
-//			if (signal)
-//			{
-//				System.out.println("Iteration : " + i + " signal is high");
-//			}
-//			else
-//			{
-//				System.out.println("Iteration : " + i + " signal is low");
-//			}
-//
-//			Global.waitSeconds(5);
-//		}
 
 		//
 		//============================================================
@@ -91,18 +63,22 @@ public class Control
 		//
 		//============================================================
 
-		Global.relays.scanAndSet();
-		Global.waitSeconds(2);
-		Global.relays.scanAndSet();
-		Global.waitSeconds(2);
-		Global.relays.scanAndSet();
-		Global.waitSeconds(2);
-		Global.relays.scanAndSet();
-		Global.waitSeconds(2);
-		Global.relays.scanAndSet();
-if (true) return;		
-		
-		
+		//============================================================
+		//
+		// Debug Code
+		//
+//		Global.relays.scanAndSet();
+//		Global.waitSeconds(2);
+//		Global.relays.scanAndSet();
+//		Global.waitSeconds(2);
+//		Global.relays.scanAndSet();
+//		Global.waitSeconds(2);
+//		Global.relays.scanAndSet();
+//		Global.waitSeconds(2);
+//		Global.relays.scanAndSet();
+//		if (true) return;		
+		//
+		//============================================================
 		
 		//============================================================
 		//
