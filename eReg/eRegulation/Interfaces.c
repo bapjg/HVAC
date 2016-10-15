@@ -179,7 +179,7 @@ static void scanAndSet()
 	
 
 	// TODO Kludge untill this routine works properly
-	return;
+//	return;
 	// End Kludge
 
 	char buf[0x20];
@@ -195,6 +195,9 @@ static void scanAndSet()
 printf("1111 \n");
 printout(buf);
 printf("---------- \n");
+
+return;
+
 	if (found == NULL)
 	{
 		// The Relay board has lost its address

@@ -91,6 +91,18 @@ public class Control
 		//
 		//============================================================
 
+		Global.relays.scanAndSet();
+		Global.waitSeconds(2);
+		Global.relays.scanAndSet();
+		Global.waitSeconds(2);
+		Global.relays.scanAndSet();
+		Global.waitSeconds(2);
+		Global.relays.scanAndSet();
+		Global.waitSeconds(2);
+		Global.relays.scanAndSet();
+if (true) return;		
+		
+		
 		
 		//============================================================
 		//
