@@ -195,8 +195,7 @@ static void scanAndSet()
 printf("1111 \n");
 printout(buf);
 printf("---------- \n");
-
-return;
+//return;
 
 	if (found == NULL)
 	{
