@@ -40,7 +40,7 @@ help:
 	echo jni.......... interface code in Java only
 	echo complete..... everything
 	
-scan:
+scan:				# lower case so that file never exists
 	rm -f *.o
 	rm -f Scan
 
