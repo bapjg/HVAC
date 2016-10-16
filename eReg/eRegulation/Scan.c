@@ -11,7 +11,7 @@
 #include <linux/spi/spidev.h>
 #include <linux/i2c-dev.h>
 
-extern static void scanAndSet(void);
+extern void scanAndSet(void);
 
 
 main()
