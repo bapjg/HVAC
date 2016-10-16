@@ -41,7 +41,6 @@ help:
 	echo complete..... everything
 	
 Scan:
-	rm -f ScanInterfaces.so
 	rm -f *.o
 	rm -f Scan
 

@@ -30,18 +30,20 @@ static uint8_t 	bits 		= 8;
 static uint32_t speed 		= 50000;							//Was 100000. Brought down to 50 000, which no longer worked from oct 2016.
 static uint16_t delay 		= 2;
 
-static int 		spi_fd;
 static int 		i2c_fd;
-static int 		i2c_port	= 0x94;								//Production
+static int 		i2c_port	= 0x94;
+static char 	*i2c_device = " ";
 
-static char 	*device 	= " ";
-static int 		addr 		= 0x9C;
+static int 		spi_fd;
+static int 		spi_port 	= 0x9C;
+static char 	*spi_device = " ";
 
-static int 		readmode 	= 0;
 
-static int 		reg 		= -1;
-static int 		val 		= -1;
-static int 		cls 		= 0;
+static int 		readmode 	= 0;			// NOT USED
+
+static int 		reg 		= -1;			// NOT USED
+static int 		val 		= -1;			// NOT USED
+static int 		cls 		= 0;			// NOT USED
 
 //================================================================
 //
@@ -72,7 +74,7 @@ static void spi_open()
 
 	int ret;
 
-	spi_fd 					= open(device, O_RDWR);
+	spi_fd 					= open(spi_device, O_RDWR);
 	if (spi_fd < 0)			 pabort("can't open device \n");
 
 //	ret 					= ioctl(spi_fd, SPI_IOC_WR_MODE, &spi_mode);
@@ -93,11 +95,11 @@ static void spi_open()
 //	ret 					= ioctl(spi_fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
 //	if (ret == -1)			pabort("can't get max speed hz \n");
 
-	if (ioctl(spi_fd, SPI_IOC_WR_MODE, &spi_mode) 		== -1)		pabort("can't set spi mode \n");
-	if (ioctl(spi_fd, SPI_IOC_RD_MODE, &bits) 			== -1)		pabort("can't set bits per word \n");
-	if (ioctl(spi_fd, SPI_IOC_RD_BITS_PER_WORD, &bits) 	== -1)		pabort("can't get bits per word \n");
-	if (ioctl(spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed) 	== -1)		pabort("can't set max speed hz \n");
-	if (ioctl(spi_fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed) 	== -1)		pabort("can't get max speed hz \n");
+	if (	ioctl(spi_fd, SPI_IOC_WR_MODE, &spi_mode) 		== -1)		pabort("can't set spi mode \n");
+	if (	ioctl(spi_fd, SPI_IOC_RD_MODE, &bits) 			== -1)		pabort("can't set bits per word \n");
+	if (	ioctl(spi_fd, SPI_IOC_RD_BITS_PER_WORD, &bits) 	== -1)		pabort("can't get bits per word \n");
+	if (	ioctl(spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed) 	== -1)		pabort("can't set max speed hz \n");
+	if (	ioctl(spi_fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed) 	== -1)		pabort("can't get max speed hz \n");
 }
 static void spi_txrx(char *buf, int tlen, int rlen)
 {
@@ -150,7 +152,7 @@ static int get_reg_value8(int reg)
 
 	char buf[5]; 
 
-	buf[0] = addr | 1;
+	buf[0] = spi_port | 1;
 	buf[1] = reg;
 	spi_txrx(buf, 2, 1);
 
@@ -163,7 +165,7 @@ static int get_reg_value16(int reg)
 
 	char buf[5];
 
-	buf[0] 						= addr | 1;
+	buf[0] 						= spi_port | 1;
 	buf[1] 						= reg;
 	spi_txrx(buf, 2, 2);
 
@@ -171,7 +173,7 @@ static int get_reg_value16(int reg)
 }
 static void scanAndSet()
 {
-	// Procedure used to find Relay bank address
+	// Procedure used to find Relay bank ess
 	// When switching off a relay, the circuit can
 	// loose its address
 	// Here we scan to find it and, if necessary, reset
@@ -186,7 +188,7 @@ static void scanAndSet()
 	int add;
 	int i;
 	
-	buf[0] 						= addr | 1;
+	buf[0] 						= spi_port | 1;
 	buf[1] 						= 1;							// Ident
 	spi_txrx(buf, 0x2, 0x20);
 	
@@ -202,9 +204,9 @@ printf("---------- \n");
 		// The Relay board has lost its address
 		// Scan all addresses to find where it is
 
-		for(add = 0; add < 255; add += 2)						// Loop through addresses
+		for(port = 0; port < 255; port += 2)					// Loop through addresses
 		{
-			buf[0] 				= add | 1;						// OR 1 means return status info
+			buf[0] 				= port | 1;						// OR 1 means return status info
 			buf[1] 				= 1;							// Ident
 			spi_txrx(buf, 0x2, 0x20);
 //printf("2222 \n");
@@ -214,9 +216,9 @@ printf("---------- \n");
 			if (found != NULL)
 			{
 				// We now have to set the address
-				buf[0] 			= add;							// No Or means do action
+				buf[0] 			= port;							// Use the found port
 				buf[1] 			= 0xf0;							// Set address
-				buf[2] 			= addr;
+				buf[2] 			= spi_port;
 				spi_txrx(buf, 3, 0);
 				return;
 			}
@@ -260,13 +262,13 @@ void Relay_Open(int Relay_Bank)
 
 	if (Relay_Bank == 0)
 	{
-		device 	 			= "/dev/spidev0.0";
-		addr				= 0x9C;
+		spi_device 	 		= "/dev/spidev0.0";
+		spi_port			= 0x9C;
 	}
 	else
 	{
-		device   			= "/dev/spidev0.1";
-		addr	 			= 0xFE;
+		spi_device   		= "/dev/spidev0.1";
+		spi_port	 		= 0xFE;
 	}
 
 	spi_open();
@@ -279,7 +281,7 @@ void Relay_On(int Relay_Bank, int Relay_Number)
 	char buf[5]; 
 	Relay_Open(Relay_Bank);
 	
-	buf[0] 					= addr;
+	buf[0] 					= spi_port;
 	buf[1] 					= 0x20 + Relay_Number;
 	buf[2] 					= 1;
 	spi_txrx(buf, 3, 0);
@@ -295,7 +297,7 @@ void Relay_Off(int Relay_Bank, int Relay_Number)
 
 	Relay_Open(Relay_Bank);
 	
-	buf[0] 					= addr;
+	buf[0] 					= spi_port;
 	buf[1] 					= 0x20 + Relay_Number;
 	buf[2] 					= 0;
 	spi_txrx(buf, 3, 0);
@@ -311,7 +313,7 @@ int Is_On(int Relay_Bank, int Relay_Number)
 	char buf[5];
 	Relay_Open(Relay_Bank);
 
-	buf[0] 					= addr | 1;
+	buf[0] 					= spi_port | 1;
 	buf[1] 					= 0x20 + Relay_Number;
 	buf[2] 					= 0;
 	spi_txrx(buf, 2, 1);
@@ -326,7 +328,7 @@ void Relays_OffAll(int Relay_Bank)
 	char buf[5];
 	Relay_Open(Relay_Bank);
 
-	buf[0] 					= addr;
+	buf[0] 					= spi_port;
 	buf[1] 					= 0x10;
 	buf[2] 					= 0;
 	spi_txrx(buf, 3, 0);
@@ -378,51 +380,15 @@ void print_from_whom(int caller)
 {
 	switch (caller)
 	{
-		case 1:
-		{
-			printf("From ButtonsRead \n");
-			break;
-		}
-		case 2:
-		{
-			printf("From ADC_Initialise \n");
-			break;
-		}
-		case 3:
-		{
-			printf("From ADC_Read \n");
-			break;
-		}
-		case 4:
-		{
-			printf("From ADC_ReadAverage \n");
-			break;
-		}
-		case 5:
-		{
-			printf("From LCD_Clear \n");
-			break;
-		}
-		case 6:
-		{
-			printf("From LCD_Write \n");
-			break;
-		}
-		case 7:
-		{
-			printf("From LCD_Position \n");
-			break;
-		}
-		case 8:
-		{
-			printf("From LCD_BlickOn \n");
-			break;
-		}
-		case 9:
-		{
-			printf("From LCD_BlickOff \n");
-			break;
-		}
+		case 1:		{	printf("From ButtonsRead \n");			break;		}
+		case 2:		{	printf("From ADC_Initialise \n");		break;		}
+		case 3:		{	printf("From ADC_Read \n");				break;		}
+		case 4:		{	printf("From ADC_ReadAverage \n");		break;		}
+		case 5:		{	printf("From LCD_Clear \n");			break;		}
+		case 6:		{	printf("From LCD_Write \n");			break;		}
+		case 7:		{	printf("From LCD_Position \n");			break;		}
+		case 8:		{	printf("From LCD_BlickOn \n");			break;		}
+		case 9:		{	printf("From LCD_BlickOff \n");			break;		}
 	}
 }
 //----------------------------------------------------------//----------------------------------------------------------
@@ -474,9 +440,9 @@ static void i2c_txrx(char *buf, int tlen, int rlen, int caller)
 //----------------------------------------------------------
 void UI_Open(int caller)
 {
-	char *device 		= "/dev/i2c-1";
+	char *i2c_device 	= "/dev/i2c-1";
 	i2c_adr				= -1;
-	i2c_fd			 	= open(device, O_RDWR);
+	i2c_fd			 	= open(i2c_device, O_RDWR);
 
 	if (i2c_fd < 0)
 	{
