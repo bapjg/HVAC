@@ -40,7 +40,7 @@ help:
 	echo jni.......... interface code in Java only
 	echo complete..... everything
 	
-Scan:
+scan:
 	rm -f *.o
 	rm -f Scan
 
