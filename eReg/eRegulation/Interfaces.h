@@ -1,0 +1,1 @@
+extern void scanAndSet(void);
