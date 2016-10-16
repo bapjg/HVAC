@@ -28,12 +28,7 @@
 
 
 extern  void debug(void);
-static  void scanAndSet(void);
 
-void debug()
-{
-	scanAndSet();
-}
 
 
 static uint8_t 	spi_mode;
@@ -643,4 +638,9 @@ JNIEXPORT void JNICALL Java_eRegulation_LCD_BlinkOff(JNIEnv *env, jobject obj)
 //
 //================================================================
 
+
+void debug()
+{
+	scanAndSet();
+}
 
