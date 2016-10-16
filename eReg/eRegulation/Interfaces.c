@@ -27,7 +27,7 @@
 
 
 
-extern static void scanAndSet(void);
+//extern static void scanAndSet(void);
 
 
 
