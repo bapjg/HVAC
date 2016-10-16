@@ -193,7 +193,7 @@ static void scanAndSet()
 	
 
 	// TODO Kludge untill this routine works properly
-//	return;
+	return;
 	// End Kludge
 
 	char buf[0x20];
