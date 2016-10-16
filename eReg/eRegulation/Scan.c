@@ -13,13 +13,10 @@
 
 extern void scanAndSet(void);
 
-//----------------------------------------------------------
-//
+
 static void main()
 {
 	printf("Scan.main \n");
 	scanAndSet();
 	printf("Done \n");
 }
-//
-//----------------------------------------------------------
