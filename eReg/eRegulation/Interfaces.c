@@ -25,6 +25,12 @@
 
 #define ARRAY_SIZE(a)(sizeof(a) / sizeof((a)[0]))
 
+
+
+extern void scanAndSet(void);
+
+
+
 static uint8_t 	spi_mode;
 static uint8_t 	bits 		= 8;
 static uint32_t speed 		= 50000;							//Was 100000. Brought down to 50 000, which no longer worked from oct 2016.
