@@ -17,6 +17,6 @@ extern void scanAndSet(void);
 static void main()
 {
 	printf("Scan.main \n");
-	scanAndSet();
+//	scanAndSet();
 	printf("Done \n");
 }
