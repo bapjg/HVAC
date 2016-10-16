@@ -28,6 +28,7 @@
 
 
 extern  void debug(void);
+static  void scanAndSet(void);
 
 void debug()
 {
