@@ -19,5 +19,5 @@ main()
 	printf("Scan.main \n");
 //	scanAndSet();
 	printf("Done \n");
-	exit(0)
+	exit(0);
 }
