@@ -11,13 +11,13 @@
 #include <linux/spi/spidev.h>
 #include <linux/i2c-dev.h>
 
-extern void scanAndSet(void);
+extern void debug(void);
 
 
 main()
 {
 	printf("Scan.main \n");
-	scanAndSet();
+	debug();
 	printf("Done \n");
 	exit(0);
 }

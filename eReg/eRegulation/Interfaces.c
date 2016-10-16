@@ -27,8 +27,12 @@
 
 
 
-//extern static void scanAndSet(void);
+extern  void debug(void);
 
+void debug()
+{
+
+}
 
 
 static uint8_t 	spi_mode;
