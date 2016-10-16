@@ -32,6 +32,7 @@ static void scanAndSet(void);
 
 void debug()
 {
+	Relay_Open(0);
 	scanAndSet();
 }
 
