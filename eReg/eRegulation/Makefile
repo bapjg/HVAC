@@ -57,4 +57,5 @@ scan:				# lower case so that file never exists
 	
 	echo ====================
 	sudo ./Scan
+	echo ====================
 	
