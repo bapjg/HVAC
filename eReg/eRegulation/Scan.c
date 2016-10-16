@@ -18,6 +18,6 @@ main()
 {
 	printf("Scan.main \n");
 	debug();
-	printf("Done \n");
+	printf("Done Scan.main\n");
 	exit(0);
 }

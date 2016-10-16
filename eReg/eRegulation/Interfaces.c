@@ -31,7 +31,7 @@ extern  void debug(void);
 
 void debug()
 {
-
+	scanAndSet();
 }
 
 
