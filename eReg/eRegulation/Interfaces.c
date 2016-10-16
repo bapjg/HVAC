@@ -29,6 +29,10 @@
 
 extern  void debug(void);
 
+void debug()
+{
+	scanAndSet();
+}
 
 
 static uint8_t 	spi_mode;
@@ -187,7 +191,7 @@ static void scanAndSet()
 	
 
 	// TODO Kludge untill this routine works properly
-	return;
+//	return;
 	// End Kludge
 
 	char buf[0x20];
@@ -639,8 +643,4 @@ JNIEXPORT void JNICALL Java_eRegulation_LCD_BlinkOff(JNIEnv *env, jobject obj)
 //================================================================
 
 
-void debug()
-{
-	scanAndSet();
-}
 
