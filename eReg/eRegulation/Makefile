@@ -56,5 +56,5 @@ scan:				# lower case so that file never exists
 	gcc     -o Scan   Scan.o Interfaces.o
 	
 	echo ====================
-	./Scan
+	sudo ./Scan
 	
