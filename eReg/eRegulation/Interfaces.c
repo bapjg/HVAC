@@ -185,7 +185,7 @@ static void scanAndSet()
 	// End Kludge
 
 	char buf[0x20];
-	int add;
+	int port;
 	int i;
 	
 	buf[0] 						= spi_port | 1;
