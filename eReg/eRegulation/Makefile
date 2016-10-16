@@ -41,11 +41,18 @@ help:
 	echo complete..... everything
 	
 Scan:
-	rm -f *.so
-	rm -f *.o
-	gcc -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o Interfaces.o
-	gcc -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Scan.c       -o Scan.o
-	gcc  -o Scan Scan.o Interfaces.o
+	git stash save
+	git stash drop
+	git pull
+	
+	rm -f ScanInterfaces.so
+	rm -f ScanInterfaces.o
+	rm -f Scan
+
+	gcc -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o ScanInterfaces.o
+	gcc -shared -o libInterfaces.so ScanInterfaces.o
+
+	gcc  -o Scan Scan.c -ScanInterfaces
 	
 	./Scan
 	
