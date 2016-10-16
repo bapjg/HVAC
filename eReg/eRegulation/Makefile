@@ -48,9 +48,15 @@ Scan:
 	git stash drop
 	git pull
 
+	echo Compiling Interfaces
+	echo ====================
 	gcc -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o Interfaces.o
-
+	
+	echo Compiling Scan
+	echo ====================
 	gcc  -o Scan Scan.c Interfaces.o
 	
+	echo Running Scan
+	echo ====================
 	./Scan
 	
