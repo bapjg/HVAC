@@ -12,7 +12,7 @@
 #include <linux/i2c-dev.h>
 
 extern void scanAndSet(void);
-eert;
+
 //----------------------------------------------------------
 //
 static void main()
