@@ -52,7 +52,8 @@ Scan:
 	gcc -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o Interfaces.o
 	
 	echo ====================
-	gcc  -o Scan Scan.c Interfaces.o
+	gcc  -c -o Scan.o Scan.c
+	gcc     -o Scan   Scan.o Interfaces.o
 	
 	echo ====================
 	./Scan
