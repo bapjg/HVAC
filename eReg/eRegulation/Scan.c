@@ -10,7 +10,7 @@
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
 #include <linux/i2c-dev.h>
-#include <./Interfaces.h>
+#include "./Interfaces.h"
 
 //----------------------------------------------------------
 //
