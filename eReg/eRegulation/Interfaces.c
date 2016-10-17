@@ -53,9 +53,9 @@ static char 	*spi_device = " ";
 
 static int 		readmode 	= 0;			// NOT USED
 
-static int 		reg 		= -1;			// NOT USED
-static int 		val 		= -1;			// NOT USED
-static int 		cls 		= 0;			// NOT USED
+//static int 		reg 		= -1;			// NOT USED
+//static int 		val 		= -1;			// NOT USED
+//static int 		cls 		= 0;			// NOT USED
 
 //================================================================
 //
