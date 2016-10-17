@@ -26,10 +26,12 @@
 #define ARRAY_SIZE(a)(sizeof(a) / sizeof((a)[0]))
 
 
-
+// Define external for debugging by Scan.c
 extern  void debug(void);
+// Avoid C compiler issuing warnings
 static void scanAndSet(void);
 static void Relay_Open(int Relay_Bank);
+static void printout(char *buff);
 
 void debug()
 {
