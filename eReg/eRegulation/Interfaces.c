@@ -158,31 +158,31 @@ static void spi_txrx(char *buf, int tlen, int rlen)
 	}
 }
 //----------------------------------------------------------
-static int get_reg_value8(int reg)
-{
-	// Routine from BW_Tools, not used
-
-	char buf[5]; 
-
-	buf[0] = spi_port | 1;
-	buf[1] = reg;
-	spi_txrx(buf, 2, 1);
-
-	return buf[2];
-}
+//static int get_reg_value8(int reg)
+//{
+//	// Routine from BW_Tools, not used
+//
+//	char buf[5];
+//
+//	buf[0] = spi_port | 1;
+//	buf[1] = reg;
+//	spi_txrx(buf, 2, 1);
+//
+//	return buf[2];
+//}
 //----------------------------------------------------------
-static int get_reg_value16(int reg)
-{
-	// Routine from BW_Tools, not used
-
-	char buf[5];
-
-	buf[0] 						= spi_port | 1;
-	buf[1] 						= reg;
-	spi_txrx(buf, 2, 2);
-
-	return buf[2] | (buf[3] << 8);
-}
+//static int get_reg_value16(int reg)
+//{
+//	// Routine from BW_Tools, not used
+//
+//	char buf[5];
+//
+//	buf[0] 						= spi_port | 1;
+//	buf[1] 						= reg;
+//	spi_txrx(buf, 2, 2);
+//
+//	return buf[2] | (buf[3] << 8);
+//}
 static void scanAndSet()
 {
 	// Procedure used to find Relay bank ess
