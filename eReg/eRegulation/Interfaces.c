@@ -26,18 +26,34 @@
 #define ARRAY_SIZE(a)(sizeof(a) / sizeof((a)[0]))
 
 
-// Define external for debugging by Scan.c
+//================================================================
+//
+//  Define external for debugging by Scan.c
+//
 extern  void debug(void);
-// Avoid C compiler issuing warnings
+//
+//================================================================
+
+//================================================================
+//
+//  Avoid C compiler issuing warnings
+//
 static void scanAndSet(void);
 static void Relay_Open(int Relay_Bank);
-static void printout(char *buff);
+//
+//================================================================
 
+//================================================================
+//
+//  Debug here from Scan.c
+//
 void debug()
 {
 	Relay_Open(0);
 	scanAndSet();
 }
+//
+//================================================================
 
 
 static uint8_t 	spi_mode;
@@ -54,12 +70,6 @@ static int 		spi_port 	= 0x9C;
 static char 	*spi_device = " ";
 
 
-//static int 		readmode 	= 0;			// NOT USED
-
-//static int 		reg 		= -1;			// NOT USED
-//static int 		val 		= -1;			// NOT USED
-//static int 		cls 		= 0;			// NOT USED
-
 //================================================================
 //
 // General subroutines & functions
@@ -70,6 +80,31 @@ static void pabort(const char *s)
 {
 	perror(s);
 	exit(0);		// Status returned is 0. Application stops and returns to bash
+}
+//----------------------------------------------------------
+char mkprintable (char ch)			// for debugging... copied from bw_tool
+{
+  if (ch < ' ') 	return '.';
+  if (ch <= '~') 	return ch;
+  return '.';
+}
+//----------------------------------------------------------
+void printout(char *buff)			// for debugging... copied from bw_tool
+{
+	int i;
+	for (i = 0; i < 0x20; i++)
+	{
+		if (mkprintable (buff[i]) != '.') 		break;
+	}
+	if (i < 0x20)
+	{
+		for (i = 0; i < 0x20; i++)
+		{
+			if (buff[i] == 0)	break;
+			putchar (mkprintable (buff[i]));
+		}
+		printf("\n");
+	}
 }
 //----------------------------------------------------------
 
@@ -241,30 +276,6 @@ printf("---------- \n");
 		// As nothing (pump/burner/valve) can be actioned
 		printf("scanAndSet found no relays - will now abort \n");
 		pabort("Aborting by scanAndSet \n");
-	}
-}
-// debugging... copied from bw_tool
-char mkprintable (char ch)
-{
-  if (ch < ' ') 	return '.';
-  if (ch <= '~') 	return ch;
-  return '.';
-}
-void printout(char *buff)
-{
-	int i;
-	for (i = 0; i < 0x20; i++)
-	{
-		if (mkprintable (buff[i]) != '.') 		break;
-	}
-	if (i < 0x20)
-	{
-		for (i = 0; i < 0x20; i++)
-		{
-			if (buff[i] == 0)	break;
-			putchar (mkprintable (buff[i]));
-		}
-		printf("\n");
 	}
 }
 
