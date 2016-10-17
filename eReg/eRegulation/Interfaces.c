@@ -29,6 +29,7 @@
 
 extern  void debug(void);
 static void scanAndSet(void);
+static void Relay_Open(int Relay_Bank);
 
 void debug()
 {
