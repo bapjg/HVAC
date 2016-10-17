@@ -231,7 +231,7 @@ static void scanAndSet()
 	
 
 	// TODO Kludge untill this routine works properly
-//	return;
+	//	return;
 	// End Kludge
 
 	char buf[0x20];
@@ -243,10 +243,6 @@ static void scanAndSet()
 	
 	char *found;
 	found 						= strstr(buf, "spi_big");
-printf("1111 \n");
-printout(buf);
-printf("---------- \n");
-//return;
 
 	if (found == NULL)
 	{
@@ -258,9 +254,7 @@ printf("---------- \n");
 			buf[0] 				= port | 1;						// OR 1 means return status info
 			buf[1] 				= 1;							// Ident
 			spi_txrx(buf, 0x2, 0x20);
-//printf("2222 \n");
-//printout(buf);
-//printf("---------- \n");
+
 			found = strstr(buf, "spi_big");
 			if (found != NULL)
 			{
