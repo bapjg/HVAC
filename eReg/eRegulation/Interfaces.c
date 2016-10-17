@@ -261,7 +261,7 @@ void printout(char *buff)
 	{
 		for (i = 0; i < 0x20; i++)
 		{
-			if (buff[i] = 0)	break;
+			if (buff[i] == 0)	break;
 			putchar (mkprintable (buff[i]));
 		}
 		printf("\n");
