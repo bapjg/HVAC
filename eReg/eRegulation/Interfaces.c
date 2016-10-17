@@ -269,7 +269,7 @@ void printout(char *buff)
 void Relay_Open(int Relay_Bank)
 {
 	// Routine to open relay bank (channel 0 or 1)
-	int ret;
+//	int ret;
 
 	if (Relay_Bank == 0)
 	{
