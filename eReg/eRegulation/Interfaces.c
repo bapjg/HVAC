@@ -451,7 +451,8 @@ static void i2c_txrx(char *buf, int tlen, int rlen, int caller)
 //----------------------------------------------------------
 void UI_Open(int caller)
 {
-	char *i2c_device 	= "/dev/i2c-1";
+//	char *i2c_device 	= "/dev/i2c-1";
+	*i2c_device 		= "/dev/i2c-1";
 	i2c_adr				= -1;
 	i2c_fd			 	= open(i2c_device, O_RDWR);
 
