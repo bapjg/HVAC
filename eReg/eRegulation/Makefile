@@ -10,29 +10,29 @@ PROJECT = /home/pi/HVAC/eReg/eRegulation
 	javac      -classpath ..	$*.java
 
 
-jni:
-	make Relay.h
-	make Relays.h
-	make ADC.h
-	make LCD.h
-	make Buttons.h
+#jni:						# header files are already present in git.
+#	make Relay.h
+#	make Relays.h
+#	make ADC.h
+#	make LCD.h
+#	make Buttons.h
 
-so:
+so:							# This is still relevant as may need to rebuild Interfaces.so file
 	rm -f *.so
 	rm -f *.o
-	gcc -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o Interfaces.o
-	gcc -shared -o libInterfaces.so Interfaces.o
+	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o Interfaces.o
+	gcc -Wall -O2 -shared -o libInterfaces.so Interfaces.o
 
-complete:
-	rm -f *.so
-	rm -f *.o
-	rm -f *.class
-	rm -f *.h
-	make
+#complete:					# class files are now made on PC as Pi is too slow
+#	rm -f *.so
+#	rm -f *.o
+#	rm -f *.class
+#	rm -f *.h
+#	make
 
-ex:
-	git pull
-	sudo java -cp "../:../../HVAC_Messages/bin/:javax.mail.jar" -Djava.library.path=./            eRegulation.Control
+#ex:						# to execute use go (alias) or Run_HVAC.sh or Debug_HVAC.sh
+#	git pull
+#	sudo java -cp "../:../../HVAC_Messages/bin/:javax.mail.jar" -Djava.library.path=./            eRegulation.Control
 
 help:
 	echo ex........... just execute as copiled in IDE
@@ -40,7 +40,7 @@ help:
 	echo jni.......... interface code in Java only
 	echo complete..... everything
 	
-scan:				# lower case so that file never exists
+scan:				# lower case so that file never exists and make says nothing to update. This is for debugging Interface.c purposes
 	rm -f *.o
 	rm -f Scan
 
@@ -48,14 +48,10 @@ scan:				# lower case so that file never exists
 	git stash drop
 	git pull
 
-	echo ====================
 	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o Interfaces.o
 	
-	echo ====================
-	gcc  -Wall -O2 -c -o Scan.o Scan.c
-	gcc               -o Scan   Scan.o Interfaces.o
+	gcc -Wall -O2 -c -o Scan.o Scan.c
+	gcc              -o Scan   Scan.o Interfaces.o
 	
-	echo ====================
 	sudo ./Scan
-	echo ====================
 	
