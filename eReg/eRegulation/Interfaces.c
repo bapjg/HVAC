@@ -51,7 +51,7 @@ static int 		spi_port 	= 0x9C;
 static char 	*spi_device = " ";
 
 
-static int 		readmode 	= 0;			// NOT USED
+//static int 		readmode 	= 0;			// NOT USED
 
 //static int 		reg 		= -1;			// NOT USED
 //static int 		val 		= -1;			// NOT USED
@@ -84,7 +84,7 @@ static void spi_open()
 	// Opens SPI interface with variables held in static
 	// If problem : aborts
 
-	int ret;
+//	int ret;
 
 	spi_fd 					= open(spi_device, O_RDWR);
 	if (spi_fd < 0)			 pabort("can't open device \n");
