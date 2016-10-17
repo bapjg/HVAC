@@ -447,7 +447,6 @@ static void i2c_txrx(char *buf, int tlen, int rlen, int caller)
 	{
 		resultCode = read(i2c_fd, buf+tlen, rlen);
 
-//		if (read(i2c_fd, buf+tlen, rlen) != rlen)
 		if (resultCode != rlen)
 		{
 			printf("read failed rc = %d \n", resultCode);
@@ -565,7 +564,7 @@ void LCD_Position(int line, int col)
 {
 	//   Position is coded as
 	//	 Top		3 bits : Line
-	//	 Bottom     8 bits : Column
+	//	 Bottom     5 bits : Column
 	
 	UI_Open(7);
 
@@ -580,15 +579,11 @@ void LCD_Position(int line, int col)
 //----------------------------------------------------------
 void LCD_BlinkOn()
 {
-	//   Position is coded as
-	//	 Top		3 bits : Line
-	//	 Bottom     8 bits : Column
-
 	UI_Open(8);
 
 	char buf[5];
 	buf[0] 				= i2c_port;								// Address of LCD
-	buf[1] 				= 0x01;									// Command Position Cursor
+	buf[1] 				= 0x01;									// Command ???
 	buf[2] 				= 0x0d;									// Data : Blick On
 
 	i2c_txrx(buf, 3, 0, 7);
@@ -597,15 +592,11 @@ void LCD_BlinkOn()
 //----------------------------------------------------------
 void LCD_BlinkOff()
 {
-	//   Position is coded as
-	//	 Top		3 bits : Line
-	//	 Bottom     8 bits : Column
-
 	UI_Open(9);
 
 	char buf[5];
 	buf[0] 				= i2c_port;								// Address of LCD
-	buf[1] 				= 0x01;									// Command Position Cursor
+	buf[1] 				= 0x01;									// Command ???
 	buf[2] 				= 0x0c;									// Data : Blick Off
 
 	i2c_txrx(buf, 3, 0, 7);
