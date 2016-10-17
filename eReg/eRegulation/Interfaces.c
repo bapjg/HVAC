@@ -198,7 +198,6 @@ static void scanAndSet()
 
 	char buf[0x20];
 	int port;
-	int i;
 	
 	buf[0] 						= spi_port | 1;
 	buf[1] 						= 1;							// Ident
