@@ -474,7 +474,7 @@ int Buttons_Read()
 	return buf[2];
 }
 //----------------------------------------------------------
-int ADC_Initialise(int Channels, int Samples, int Bits_To_Shift)
+void ADC_Initialise(int Channels, int Samples, int Bits_To_Shift)
 {
 	UI_Open(2);
 	
