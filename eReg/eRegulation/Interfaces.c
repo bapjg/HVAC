@@ -536,7 +536,6 @@ int ADC_ReadAverage()
 //----------------------------------------------------------
 void LCD_Clear()
 {
-	printf("1");
 	UI_Open(5);
 
 	char buf[5];
