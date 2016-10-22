@@ -17,7 +17,7 @@ extern void debug(void);
 main()
 {
 	printf("Scan.main \n");
-	printf("Scan.main again \n");		// Make a change
+//	printf("Scan.main again \n");		// Removed Make a change
 	debug();
 	printf("Done Scan.main\n");
 	exit(0);
