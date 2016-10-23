@@ -9,7 +9,7 @@ STATUS=1
 
 echo "2" $STATUS
 
-while (( STATUS != 0 && STATUS != 2 && STATUS != 5));
+while (( STATUS == 1 || STATUS == 6 || STATUS == 7));
 do
 	git stash save
 	git stash drop
@@ -75,5 +75,8 @@ then
    	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
 	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
    	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Going to Bash
+	echo Going to bash
+else
+	echo "Status is " $STATUS
 	echo Going to bash
 fi
