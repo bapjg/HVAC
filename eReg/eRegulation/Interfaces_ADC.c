@@ -18,6 +18,7 @@
 #include "Relay.h"
 #include "Relays.h"
 #include "LCD.h"
+#include "ADC.h"
 #include "Buttons.h"
 //
 //================================================================
@@ -466,57 +467,57 @@ int Buttons_Read()
 	return buf[2];
 }
 //----------------------------------------------------------
-//void ADC_Initialise(int Channels, int Samples, int Bits_To_Shift)
-//{
-//	UI_Open(2);
-//
-//	char buf[5];
-//	buf[0] 				= i2c_port;								// Address of UI Board + 0 for Write
-//	buf[1] 				= 0x80;									// Command : Set Number of channels to monitor
-//	buf[2] 				= Channels;								// Any data(required for command to take effect
-//	i2c_txrx(buf, 3, 0, 2);
-//
-//	buf[0] 				= i2c_port;								// Address of UI Board + 0 for Write
-//	buf[1] 				= 0x81;									// Command : Set Sample size(2 bytes)
-//	buf[2] 				= Samples;								// Number of samples over 2 bytes
-//	buf[3] 				= Samples >> 8;							// so do some bit shifting
-//	i2c_txrx(buf, 4, 0, 2);
-//
-//	buf[0] 				= i2c_port;								// Address of UI Board + 0 for Write
-//	buf[1] 				= 0x82;									// Command : Set Number of bit to shift when polling for result
-//	buf[2] 				= Bits_To_Shift;						// Number of bits to shift
-//	i2c_txrx(buf, 3, 0, 2);
-//
-//	close(i2c_fd);
-//}
+void ADC_Initialise(int Channels, int Samples, int Bits_To_Shift)
+{
+	UI_Open(2);
+	
+	char buf[5];
+	buf[0] 				= i2c_port;								// Address of UI Board + 0 for Write
+	buf[1] 				= 0x80;									// Command : Set Number of channels to monitor
+	buf[2] 				= Channels;								// Any data(required for command to take effect
+	i2c_txrx(buf, 3, 0, 2);
+
+	buf[0] 				= i2c_port;								// Address of UI Board + 0 for Write
+	buf[1] 				= 0x81;									// Command : Set Sample size(2 bytes)
+	buf[2] 				= Samples;								// Number of samples over 2 bytes
+	buf[3] 				= Samples >> 8;							// so do some bit shifting
+	i2c_txrx(buf, 4, 0, 2);
+
+	buf[0] 				= i2c_port;								// Address of UI Board + 0 for Write
+	buf[1] 				= 0x82;									// Command : Set Number of bit to shift when polling for result
+	buf[2] 				= Bits_To_Shift;						// Number of bits to shift
+	i2c_txrx(buf, 3, 0, 2);
+
+	close(i2c_fd);
+}
 //----------------------------------------------------------
-//int ADC_Read()
-//{
-//	UI_Open(3);
-//
-//	char buf[5];
-//	buf[0] 				= i2c_port | 1;							// Address of UI Board + 1 for Read
-//	buf[1] 				= 0x61;									// Command Read Analog input
-//	buf[2] 				= 0x00;									// Any data(required for command to take effect
-//	i2c_txrx(buf, 2, 2, 3);
-//	close(i2c_fd);
-//
-//	return buf[2] | (buf[3] << 8); 								// Return with bytes reordered
-//}
+int ADC_Read()
+{
+	UI_Open(3);
+
+	char buf[5];
+	buf[0] 				= i2c_port | 1;							// Address of UI Board + 1 for Read
+	buf[1] 				= 0x61;									// Command Read Analog input
+	buf[2] 				= 0x00;									// Any data(required for command to take effect
+	i2c_txrx(buf, 2, 2, 3);
+	close(i2c_fd);
+
+	return buf[2] | (buf[3] << 8); 								// Return with bytes reordered
+}
 //----------------------------------------------------------
-//int ADC_ReadAverage()
-//{
-//	UI_Open(4);
-//
-//	char buf[5];
-//	buf[0] 				= i2c_port | 1;							// Address of UI Board + 1 for Read
-//	buf[1] 				= 0x69;									// Command Read bit shifted sum of Analog input
-//	buf[2] 				= 0x00;									// Any data(required for command to take effect
-//	i2c_txrx(buf, 2, 2, 4);
-//	close(i2c_fd);
-//
-//	return buf[2] | (buf[3] << 8); 								// Return with bytes reordered
-//}
+int ADC_ReadAverage()
+{
+	UI_Open(4);
+
+	char buf[5];
+	buf[0] 				= i2c_port | 1;							// Address of UI Board + 1 for Read
+	buf[1] 				= 0x69;									// Command Read bit shifted sum of Analog input
+	buf[2] 				= 0x00;									// Any data(required for command to take effect
+	i2c_txrx(buf, 2, 2, 4);
+	close(i2c_fd);
+
+	return buf[2] | (buf[3] << 8); 								// Return with bytes reordered
+}
 //----------------------------------------------------------
 void LCD_Clear()
 {
@@ -586,18 +587,18 @@ void LCD_BlinkOff()
 	i2c_txrx(buf, 3, 0, 7);
 	close(i2c_fd);
 }
-//JNIEXPORT void JNICALL Java_eRegulation_ADC_Initialise(JNIEnv *env, jobject obj, jint Channels, jint Samples, jint Bits_To_Shift)
-//{
-//	ADC_Initialise(Channels, Samples, Bits_To_Shift);
-//}
-//JNIEXPORT jint JNICALL Java_eRegulation_ADC_Read(JNIEnv *env, jobject obj)
-//{
-//	return ADC_Read();
-//}
-//JNIEXPORT jint JNICALL Java_eRegulation_ADC_ReadAverage(JNIEnv *env, jobject obj)
-//{
-//	return ADC_ReadAverage();
-//}
+JNIEXPORT void JNICALL Java_eRegulation_ADC_Initialise(JNIEnv *env, jobject obj, jint Channels, jint Samples, jint Bits_To_Shift)
+{
+	ADC_Initialise(Channels, Samples, Bits_To_Shift);
+}
+JNIEXPORT jint JNICALL Java_eRegulation_ADC_Read(JNIEnv *env, jobject obj)
+{
+	return ADC_Read();
+}
+JNIEXPORT jint JNICALL Java_eRegulation_ADC_ReadAverage(JNIEnv *env, jobject obj)
+{
+	return ADC_ReadAverage();
+}
 JNIEXPORT jint JNICALL Java_eRegulation_Buttons_Read(JNIEnv *env, jobject obj)
 {
 	return Buttons_Read();
