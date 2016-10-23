@@ -127,24 +127,6 @@ static void spi_open()
 	spi_fd 					= open(spi_device, O_RDWR);
 	if (spi_fd < 0)			 pabort("can't open device \n");
 
-//	ret 					= ioctl(spi_fd, SPI_IOC_WR_MODE, &spi_mode);
-//	if (ret == -1)			pabort("can't set spi mode \n");
-//
-//	ret 					= ioctl(spi_fd, SPI_IOC_RD_MODE, &spi_mode);
-//	if (ret == -1)			pabort("can't get spi mode \n");
-//
-//	ret 					= ioctl(spi_fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
-//	if (ret == -1)			pabort("can't set bits per word \n");
-//
-//	ret 					= ioctl(spi_fd, SPI_IOC_RD_BITS_PER_WORD, &bits);
-//	if (ret == -1)			pabort("can't get bits per word \n");
-//
-//	ret 					= ioctl(spi_fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
-//	if (ret == -1)			pabort("can't set max speed hz \n");
-//
-//	ret 					= ioctl(spi_fd, SPI_IOC_RD_MAX_SPEED_HZ, &speed);
-//	if (ret == -1)			pabort("can't get max speed hz \n");
-
 	if (	ioctl(spi_fd, SPI_IOC_WR_MODE, &spi_mode) 		== -1)		pabort("can't set spi mode \n");
 	if (	ioctl(spi_fd, SPI_IOC_RD_MODE, &bits) 			== -1)		pabort("can't set bits per word \n");
 	if (	ioctl(spi_fd, SPI_IOC_RD_BITS_PER_WORD, &bits) 	== -1)		pabort("can't get bits per word \n");
@@ -233,6 +215,8 @@ static void scanAndSet()
 	// TODO Kludge untill this routine works properly
 	//	return;
 	// End Kludge
+
+	return;
 
 	char buf[0x20];
 	int port;
