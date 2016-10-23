@@ -42,7 +42,7 @@ public class Control
 		else															System.loadLibrary("Interfaces");
 		
 		
-//	    System.setProperty("jna.library.path","/usr/lib/cgi-bin/jna");
+	    System.setProperty("jna.library.path","home/pi/HVAC/eReg/eRegulation");
 
 	    //Open I2C Bus 1 file
 		int O_RDWR = 0x00000002;
