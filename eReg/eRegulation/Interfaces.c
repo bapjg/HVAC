@@ -15,6 +15,7 @@
 //
 // JNI Includes
 //
+#include "ADC.h"
 #include "Relay.h"
 #include "Relays.h"
 #include "LCD.h"
