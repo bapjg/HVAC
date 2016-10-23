@@ -3,11 +3,7 @@ cd /home/pi/HVAC/eReg/eRegulation/
 sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 12:04
 sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
 
-echo "1" $STATUS
-
 STATUS=1
-
-echo "2" $STATUS
 
 while (( STATUS == 1 || STATUS == 6 || STATUS == 7));
 do
@@ -46,9 +42,6 @@ do
    		sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
      	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Debug/NoWait
 	fi
-	
-	echo "sssss" $STATUS
-	
 done
 
 if [ $STATUS -eq 2 ];	# Reboot
