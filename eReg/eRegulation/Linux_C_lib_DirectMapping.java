@@ -28,7 +28,7 @@ public class Linux_C_lib_DirectMapping implements com.sun.jna.Library
 
     static 
 	{
-        try 
+    	try 
 		{
             Native.register("c");
             System.out.println("registered to c library");
