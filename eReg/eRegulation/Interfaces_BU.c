@@ -61,6 +61,9 @@ static uint8_t 	bits 		= 8;
 static uint32_t speed 		= 50000;							//Was 100000. Brought down to 50 000, which no longer worked from oct 2016.
 static uint16_t delay 		= 2;
 
+static int 		i2c_fd;
+static int 		i2c_port	= 0x94;
+static char 	*i2c_device = " ";
 
 static int 		spi_fd;
 static int 		spi_port 	= 0x9C;
@@ -373,10 +376,6 @@ JNIEXPORT void JNICALL Java_eRegulation_Relays_ScanAndSet(JNIEnv *env, jobject o
 // I2C Interface : LCD & Buttons
 //
 
-static int 		i2c_fd;
-static int 		i2c_port	= 0x94;
-static char 	*i2c_device = " ";
-
 static int 		i2c_adr;
 
 //----------------------------------------------------------//----------------------------------------------------------
@@ -444,7 +443,7 @@ static void i2c_txrx(char *buf, int tlen, int rlen, int caller)
 void UI_Open(int caller)
 {
 //	char *i2c_device 	= "/dev/i2c-1";
-	*i2c_device 		= "/dev/i2c-11111";
+	*i2c_device 		= "/dev/i2c-1";
 	i2c_adr				= -1;
 	i2c_fd			 	= open(i2c_device, O_RDWR);
 

@@ -134,21 +134,17 @@ public class Global
 		int y = 2;
 		if (x == y)
 		{
-
-		Ctrl_Json.Request messageSendTest = new Ctrl_Json().new Request(Ctrl_Json.TYPE_Configuration);
-		HTTP_Request	<Ctrl_Json.Request>			httpRequestTest					= new HTTP_Request <Ctrl_Json.Request> ("Management");
-		Ctrl__Abstract 											messageReceiveTest 				= httpRequestTest.sendData(messageSendTest);
-		@SuppressWarnings("unused")
-		Ctrl_Configuration.Data		data;
-		if (messageReceiveTest instanceof Ctrl_Json.Data)
-		{
-			String													JsonString				= ((Ctrl_Json.Data) messageReceiveTest).json;
-					data													= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
-					y = 3;
-		}
-		
-		
-		
+			Ctrl_Json.Request 									messageSendTest 				= new Ctrl_Json().new Request(Ctrl_Json.TYPE_Configuration);
+			HTTP_Request	<Ctrl_Json.Request>					httpRequestTest					= new HTTP_Request <Ctrl_Json.Request> ("Management");
+			Ctrl__Abstract 										messageReceiveTest 				= httpRequestTest.sendData(messageSendTest);
+			@SuppressWarnings("unused")
+			Ctrl_Configuration.Data		data;
+			if (messageReceiveTest instanceof Ctrl_Json.Data)
+			{
+				String											JsonString						= ((Ctrl_Json.Data) messageReceiveTest).json;
+				data																			= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
+				y 																				= 3;
+			}
 		}
 		
 		//
