@@ -52,7 +52,7 @@ public class Control
 //	    if(file < 0)
 //	    {
 //	        System.out.println("Error opening file");
-//	        return;
+	        return;
 //	    }
 //	    else
 //	    {
