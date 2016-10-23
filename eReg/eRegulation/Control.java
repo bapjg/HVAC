@@ -2,6 +2,9 @@ package eRegulation;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import com.sun.jna.Library;
+import com.sun.jna.Native;
+import com.sun.jna.Platform;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -37,6 +40,22 @@ public class Control
 		
 		if (System.getProperty("os.name").equalsIgnoreCase("windows"))	System.out.println("libraries not loaded");
 		else															System.loadLibrary("Interfaces");
+		
+		
+//	    System.setProperty("jna.library.path","/usr/lib/cgi-bin/jna");
+
+	    //Open I2C Bus 1 file
+	    String fileName = "/dev/i2c-1";
+
+	    int file = libC.open(fileName, O_RDWR);
+	    if(file<0){
+	        System.out.println("Error opening file");
+	        return;
+	    }else{
+	        System.out.println("File open for reading and writing");
+	    }
+		
+		
 		
 		//
 		//============================================================
