@@ -3,9 +3,12 @@ cd /home/pi/HVAC/eReg/eRegulation/
 sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 12:04
 sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
 
-echo $STATUS
+echo "1" $STATUS
 
 STATUS=1
+
+echo "2" $STATUS
+
 while (( STATUS != 0 && STATUS != 2 && STATUS != 5));
 do
 	git stash save
