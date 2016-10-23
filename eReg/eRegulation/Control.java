@@ -45,19 +45,19 @@ public class Control
 //	    System.setProperty("jna.library.path","/home/pi/HVAC/eReg/eRegulation/");
 
 	    //Open I2C Bus 1 file
-		int O_RDWR = 0x00000002;
-	    String fileName = "/dev/i2c-1";
-	    Linux_C_lib_DirectMapping libC = new Linux_C_lib_DirectMapping();
-	    int file = libC.open(fileName, O_RDWR);
-	    if(file < 0)
-	    {
-	        System.out.println("Error opening file");
-	        return;
-	    }
-	    else
-	    {
-	        System.out.println("File open for reading and writing");
-	    }
+//		int O_RDWR = 0x00000002;
+//	    String fileName = "/dev/i2c-1";
+//	    Linux_C_lib_DirectMapping libC = new Linux_C_lib_DirectMapping();
+//	    int file = libC.open(fileName, O_RDWR);
+//	    if(file < 0)
+//	    {
+//	        System.out.println("Error opening file");
+//	        return;
+//	    }
+//	    else
+//	    {
+//	        System.out.println("File open for reading and writing");
+//	    }
 		
 		
 		
