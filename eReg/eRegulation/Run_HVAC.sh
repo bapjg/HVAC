@@ -42,6 +42,8 @@ do
    		sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
      	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Debug/NoWait
 	fi
+	
+	echo "Status is " $STATUS
 done
 
 if [ $STATUS -eq 2 ];	# Reboot
