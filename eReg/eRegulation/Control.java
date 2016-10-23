@@ -38,9 +38,9 @@ public class Control
 		// For debugging on a Windows machine without the necessary hardware
 		//
 		
-		if (System.getProperty("os.name").equalsIgnoreCase("windows"))	System.out.println("libraries not loaded");
-		else															System.loadLibrary("Interfaces");
-		
+//		if (System.getProperty("os.name").equalsIgnoreCase("windows"))	System.out.println("libraries not loaded");
+//		else															System.loadLibrary("Interfaces");
+		System.load("/home/pi/HVAC/eReg/eRegulation/libInterfaces.so");
 		
 //	    System.setProperty("jna.library.path","/home/pi/HVAC/eReg/eRegulation/");
 
