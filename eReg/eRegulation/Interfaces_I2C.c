@@ -188,7 +188,7 @@ void LCD_Clear()
 	close(i2c_fd);
 }
 //----------------------------------------------------------
-void LCD_Write(const char message[])
+void LCD_Write(char message[])
 {
 	UI_Open(6);
 
@@ -253,6 +253,7 @@ JNIEXPORT void JNICALL Java_eRegulation_LCD_BlinkOff	(JNIEnv *env, jobject obj)	
 JNIEXPORT void JNICALL Java_eRegulation_LCD_Write		(JNIEnv *env, jobject obj, jstring Message)
 {
 	char *nativestring =(*env)->GetStringUTFChars(env, Message, 0);
+	char *anotherString = nativestring;
 	LCD_Write(nativestring);
 	(*env)->ReleaseStringUTFChars(env, Message, nativestring);
 }
