@@ -15,15 +15,24 @@
 //
 // JNI Includes
 //
-#include "Relay.h"
-#include "Relays.h"
-#include "LCD.h"
-#include "ADC.h"
-#include "Buttons.h"
+
+#include <jni.h>
+
+//include "Relay.h"
+
+JNIEXPORT void 		JNICALL Java_eRegulation_Relay_On  			(JNIEnv *, jobject, jint, jint);
+JNIEXPORT void 		JNICALL Java_eRegulation_Relay_Off 			(JNIEnv *, jobject, jint, jint);
+JNIEXPORT void 		JNICALL Java_eRegulation_Relay_AllOff  		(JNIEnv *, jobject, jint);
+JNIEXPORT jboolean 	JNICALL Java_eRegulation_Relay_IsOn  		(JNIEnv *, jobject, jint, jint);
+
+//include "Relays.h"
+
+JNIEXPORT void 		JNICALL Java_eRegulation_Relays_OffAll  	(JNIEnv *, jobject, jint);
+JNIEXPORT void 		JNICALL Java_eRegulation_Relays_ScanAndSet  (JNIEnv *, jobject, jint);
 //
 //================================================================
 
-#define ARRAY_SIZE(a)(sizeof(a) / sizeof((a)[0]))
+//#define ARRAY_SIZE(a)(sizeof(a) / sizeof((a)[0]))				What is this for
 
 
 //================================================================
@@ -38,22 +47,10 @@ extern  void debug(void);
 //
 //  Avoid C compiler issuing warnings
 //
-static void scanAndSet(void);
 static void Relay_Open(int Relay_Bank);
 //
 //================================================================
 
-//================================================================
-//
-//  Debug here from Scan.c
-//
-void debug()
-{
-	Relay_Open(0);
-	scanAndSet();
-}
-//
-//================================================================
 
 
 static uint8_t 	spi_mode;
@@ -322,5 +319,16 @@ JNIEXPORT void 		JNICALL Java_eRegulation_Relays_OffAll		(JNIEnv *env, jobject o
 JNIEXPORT void 		JNICALL Java_eRegulation_Relays_ScanAndSet	(JNIEnv *env, jobject obj, jint Relay_Bank)						{	Relays_ScanAndSet(Relay_Bank);			}
 
 
+//================================================================
+//
+//  Debug here from Scan.c
+//
+void debug()
+{
+	Relay_Open(0);
+	scanAndSet();
+}
+//
+//================================================================
 
 

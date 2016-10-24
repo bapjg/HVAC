@@ -23,6 +23,12 @@ so:							# This is still relevant as may need to rebuild Interfaces.so file
 	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o Interfaces.o
 	gcc -Wall -O2 -shared -o libInterfaces.so Interfaces.o
 
+spi:						# Compiles Interfaces_spi
+	rm -f Interfaces_SPI.so
+	rm -f Interfaces_SPI.o
+	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
+	gcc -Wall -O2 -shared -o libInterfaces_SPI.so Interfaces_SPI.o
+
 #complete:					# class files are now made on PC as Pi is too slow
 #	rm -f *.so
 #	rm -f *.o
