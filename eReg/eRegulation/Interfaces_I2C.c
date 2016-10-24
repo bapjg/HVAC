@@ -31,13 +31,6 @@ JNIEXPORT jint JNICALL Java_eRegulation_Buttons_Read  	(JNIEnv *, jobject);
 
 //#define ARRAY_SIZE(a)(sizeof(a) / sizeof((a)[0])) What is this for
 
-
-
-//static uint8_t 	spi_mode;
-//static uint8_t 	bits 		= 8;
-//static uint32_t speed 		= 50000;							//Was 100000. Brought down to 50 000, which no longer worked from oct 2016.
-//static uint16_t delay 		= 2;
-
 static int 		i2c_fd;
 static int 		i2c_port	= 0x94;
 static char 	*i2c_device = " ";
@@ -153,7 +146,7 @@ static void i2c_txrx(char *buf, int tlen, int rlen, int caller)
 void UI_Open(int caller)
 {
 //	char *i2c_device 	= "/dev/i2c-1";
-	i2c_device 		= "/dev/i2c-1";
+	i2c_device 			= "/dev/i2c-1";
 	i2c_adr				= -1;
 	i2c_fd			 	= open(i2c_device, O_RDWR);
 
@@ -252,9 +245,11 @@ JNIEXPORT void JNICALL Java_eRegulation_LCD_BlinkOn		(JNIEnv *env, jobject obj)	
 JNIEXPORT void JNICALL Java_eRegulation_LCD_BlinkOff	(JNIEnv *env, jobject obj)							{	LCD_BlinkOff();				}
 JNIEXPORT void JNICALL Java_eRegulation_LCD_Write		(JNIEnv *env, jobject obj, jstring Message)
 {
-//	char *nativestring =(*env)->GetStringUTFChars(env, Message, 0);				original code
+//	Original code
+//	char *nativestring =(*env)->GetStringUTFChars(env, Message, 0);
+
+//	To avoid warning about use of a const, recast the message with (char *)
 	char *nativestring =(char *)(*env)->GetStringUTFChars(env, Message, 0);
-//	char *anotherString = nativestring;
 	LCD_Write(nativestring);
 	(*env)->ReleaseStringUTFChars(env, Message, nativestring);
 }

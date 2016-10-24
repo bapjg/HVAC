@@ -38,14 +38,19 @@ public class Control
 		// For debugging on a Windows machine without the necessary hardware
 		//
 		
-		if (System.getProperty("os.name").equalsIgnoreCase("windows"))	System.out.println("libraries not loaded");
-		else															System.loadLibrary("Interfaces_SPI");
-		
+		// Not used any more, as debugging is done directly on the Pi
+//		if (System.getProperty("os.name").equalsIgnoreCase("windows"))	System.out.println("libraries not loaded");
+//		else															System.loadLibrary("Interfaces_SPI");
+
+		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
-//		System.load("/home/pi/HVAC/eReg/eRegulation/libInterfaces.so");
+
+//		Below is a test to use JNA in stead of JNI... It didn't work, failing on the statement
+//	    	Linux_C_lib_DirectMapping libC = new Linux_C_lib_DirectMapping();
+//		the constructor loads a linux library, which fails (library not found)
+//		Experimentation abandoned
 		
 //	    System.setProperty("jna.library.path","/home/pi/HVAC/eReg/eRegulation/");
-
 	    //Open I2C Bus 1 file
 //		int O_RDWR = 0x00000002;
 //	    String fileName = "/dev/i2c-1";
