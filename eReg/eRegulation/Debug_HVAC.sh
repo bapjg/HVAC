@@ -5,11 +5,11 @@ sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
 
 STATUS=1
 
-git stash save
-git stash drop
-git pull
+#git stash save
+#git stash drop
+#git pull
 	
-/home/pi/HVAC/eReg/_Documents/update.sh
+#/home/pi/HVAC/eReg/_Documents/update.sh
 
 # change suspend=n or =y if required
 
