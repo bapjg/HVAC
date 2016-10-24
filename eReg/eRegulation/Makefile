@@ -29,6 +29,12 @@ spi:						# Compiles Interfaces_spi
 	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
 	gcc -Wall -O2 -shared -o libInterfaces_SPI.so Interfaces_SPI.o
 
+i2c:						# Compiles Interfaces_i2c
+	rm -f Interfaces_I2C.so
+	rm -f Interfaces_I2C.o
+	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces_I2C.c -o Interfaces_I2C.o
+	gcc -Wall -O2 -shared -o libInterfaces_I2C.so Interfaces_I2C.o
+
 #complete:					# class files are now made on PC as Pi is too slow
 #	rm -f *.so
 #	rm -f *.o

@@ -47,7 +47,7 @@ extern  void debug(void);
 //
 //  Avoid C compiler issuing warnings
 //
-static void Relay_Open(int Relay_Bank);
+//static void Relay_Open(int Relay_Bank);
 //
 //================================================================
 
