@@ -204,7 +204,7 @@ printout(buf);
 			buf[0] 				= port | 1;						// OR 1 means return status info
 			buf[1] 				= 1;							// Ident
 			spi_txrx(buf, 0x2, 0x20);
-printf("0x%02X : ", port);
+//printf("0x%02X : ", port);
 printout(buf);
 			found = strstr(buf, "spi_big");
 			if (found != NULL)
