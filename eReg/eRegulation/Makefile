@@ -28,6 +28,8 @@ i2c:						# Compiles Interfaces_I2C
 	gcc -Wall -O2 -shared -o libInterfaces_I2C.so Interfaces_I2C.o
 
 
+?:
+	make help
 help:
 #	echo ex........... just execute as copiled in IDE
 	echo so........... all interface code in C only
