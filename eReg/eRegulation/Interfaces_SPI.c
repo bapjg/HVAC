@@ -185,12 +185,13 @@ static void scanAndSet()
 	char buf[0x20];
 	int port;
 	
-	buf[0] 						= spi_port | 1;
+	buf[0] 						= spi_port | 1;					// spi_port = 9C = 156
 	buf[1] 						= 1;							// Ident
 	spi_txrx(buf, 0x2, 0x20);
 	
 	char *found;
 	found 						= strstr(buf, "spi_big");
+printf("0x%02X : ",spi_port);
 printout(buf);
 //	if (found == NULL)
 	if (found != NULL)
