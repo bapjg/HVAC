@@ -96,8 +96,8 @@ void printout(char *buff)			// for debugging... copied from bw_tool
 			if (buff[i] == 0)	break;
 			putchar (mkprintable (buff[i]));
 		}
-		printf("\n");
 	}
+	printf("\n");
 }
 //----------------------------------------------------------
 
