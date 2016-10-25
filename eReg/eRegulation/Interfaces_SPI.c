@@ -193,9 +193,9 @@ static void scanAndSet()
 	found 						= strstr(buf, "spi_big");
 //printf("0x%02X : ", spi_port);
 //printout(buf);
-//	if (1 == 1)
+	if (1 == 1)
 
-	if (found == NULL)
+//	if (found == NULL)
 	{
 		// The Relay board has lost its address
 		// Scan all addresses to find where it is
