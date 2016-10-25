@@ -180,7 +180,7 @@ static void scanAndSet()
 	//	return;
 	// End Kludge
 
-	return;
+//	return;
 
 	char buf[0x20];
 	int port;

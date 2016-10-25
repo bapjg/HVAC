@@ -51,20 +51,21 @@ help:
 #	make LCD.h
 #	make Buttons.h
 	
-#scan:				# lower case so that file never exists and make says nothing to update. This is for debugging Interface.c purposes
-#	rm -f *.o
-#	rm -f Scan
-#
+scan:				# lower case so that file never exists and make says nothing to update. This is for debugging Interface.c purposes
+	rm -f Scan.o
+	rm -f Interfaces_SPI.o
+	rm -f Scan
+
 #	git stash save
 #	git stash drop
-#	git pull
-#
-#	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces.c -o Interfaces.o
-#	
-#	gcc -Wall -O2 -c -o Scan.o Scan.c
-#	gcc              -o Scan   Scan.o Interfaces.o
-#	
-#	sudo ./Scan
+	git pull
+
+	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
+	
+	gcc -Wall -O2 -c -o Scan.o Scan.c
+	gcc              -o Scan   Scan.o Interfaces_SPI.o
+	
+	sudo ./Scan
 
 #complete:					# class files are now made on PC as Pi is too slow
 #	rm -f *.so
