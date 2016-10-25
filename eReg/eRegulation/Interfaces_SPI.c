@@ -217,7 +217,7 @@ printout(buf);
 				spi_txrx(buf, 3, 0);
 				return;
 			}
-			usleep(50000);										// It seems that going too fast can create bad results 50 000 microseconds
+			usleep(10000);										// It seems that going too fast can create bad results so wait 10 000 microseconds (10 ms)
 		}
 		// Relay has no address at all. There's no point continuing
 		// As nothing (pump/burner/valve) can be actioned
