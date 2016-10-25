@@ -191,7 +191,7 @@ static void scanAndSet()
 	
 	char *found;
 	found 						= strstr(buf, "spi_big");
-
+printout(buf);
 	if (found == NULL)
 	{
 		// The Relay board has lost its address
