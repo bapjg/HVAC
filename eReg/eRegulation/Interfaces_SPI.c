@@ -192,7 +192,8 @@ static void scanAndSet()
 	char *found;
 	found 						= strstr(buf, "spi_big");
 printout(buf);
-	if (found == NULL)
+//	if (found == NULL)
+	if (true)
 	{
 		// The Relay board has lost its address
 		// Scan all addresses to find where it is
@@ -202,7 +203,7 @@ printout(buf);
 			buf[0] 				= port | 1;						// OR 1 means return status info
 			buf[1] 				= 1;							// Ident
 			spi_txrx(buf, 0x2, 0x20);
-
+printout(buf);
 			found = strstr(buf, "spi_big");
 			if (found != NULL)
 			{
