@@ -217,7 +217,7 @@ printout(buf);
 				spi_txrx(buf, 3, 0);
 				return;
 			}
-			sleep(500);
+			usleep(500000);
 		}
 		// Relay has no address at all. There's no point continuing
 		// As nothing (pump/burner/valve) can be actioned
