@@ -170,17 +170,13 @@ static void spi_txrx(char *buf, int tlen, int rlen)
 static void scanAndSet()
 {
 	// Procedure used to find Relay bank ess
-	// When switching off a relay, the circuit can
-	// loose its address
-	// Here we scan to find it and, if necessary, reset
-	// it to correct value
+	// When switching off a relay, the circuit can loose its address
+	// Here we scan to find it and, if necessary, reset its port number to correct value
 	
 
 	// TODO Kludge untill this routine works properly
 	//	return;
 	// End Kludge
-
-//	return;
 
 	char buf[0x20];
 	int port;
