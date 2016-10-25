@@ -193,8 +193,9 @@ static void scanAndSet()
 	found 						= strstr(buf, "spi_big");
 //printf("0x%02X : ", spi_port);
 //printout(buf);
-//	if (found == NULL)
-	if (found != NULL)
+//	if (1 == 1)
+
+	if (found == NULL)
 	{
 		// The Relay board has lost its address
 		// Scan all addresses to find where it is
@@ -204,8 +205,8 @@ static void scanAndSet()
 			buf[0] 				= port | 1;						// OR 1 means return status info
 			buf[1] 				= 1;							// Ident
 			spi_txrx(buf, 0x2, 0x20);
-//printf("0x%02X : ", port);
-//printout(buf);
+printf("0x%02X : ", port);
+printout(buf);
 			found = strstr(buf, "spi_big");
 			if (found != NULL)
 			{
@@ -216,6 +217,7 @@ static void scanAndSet()
 				spi_txrx(buf, 3, 0);
 				return;
 			}
+			sleep(500);
 		}
 		// Relay has no address at all. There's no point continuing
 		// As nothing (pump/burner/valve) can be actioned
