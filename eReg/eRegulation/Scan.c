@@ -14,7 +14,7 @@
 extern void debug(void);
 
 
-main()
+int main()
 {
 	printf("Scan.main \n");
 	debug();
