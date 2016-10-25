@@ -31,12 +31,9 @@ i2c:						# Compiles Interfaces_I2C
 ?:
 	make help
 help:
-#!/bin/bash
 	echo so........... all interface code in C 
 	echo spi.......... SPI interface code in C only
 	echo I2C.......... I2C interface code in C only
-
-
 
 #%.h:                    		%.class
 #	javah -jni -classpath ..  -o $*.h    $(PACKAGE).$*		
