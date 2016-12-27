@@ -46,48 +46,50 @@ public class Buttons
 		
 		button5 			= false;
 		buttonOk 			= false;
-				
-		if (result1 >= 32)
-		{
-			button0 		= true;
-			buttonCancel 	= true;
-			result1 		= result1 - 32;
-		}
-		if (result1 >= 16)
-		{
-			button1 		= true;
-			result1 		= result1 - 16;
-		}
-		if (result1 >= 8)
-		{
-			button2 		= true;
-			result1 		= result1 - 8;
-		}
-		if (result1 >= 4)
-		{
-			button3 		= true;
-			buttonDown		= true;
-			result1 		= result1 - 4;
-		}
-		if (result1 >= 2)
-		{
-			button4 		= true;
-			buttonUp		= true;
-			result1 		= result1 - 2;
-		}
-		if (result1 == 1)
-		{
-			button5 		= true;
-			buttonOk		= true;
-		}
-		return result;
+
+		return 0;	// No button pressed
+
+//		if (result1 >= 32)
+//		{
+//			button0 		= true;
+//			buttonCancel 	= true;
+//			result1 		= result1 - 32;
+//		}
+//		if (result1 >= 16)
+//		{
+//			button1 		= true;
+//			result1 		= result1 - 16;
+//		}
+//		if (result1 >= 8)
+//		{
+//			button2 		= true;
+//			result1 		= result1 - 8;
+//		}
+//		if (result1 >= 4)
+//		{
+//			button3 		= true;
+//			buttonDown		= true;
+//			result1 		= result1 - 4;
+//		}
+//		if (result1 >= 2)
+//		{
+//			button4 		= true;
+//			buttonUp		= true;
+//			result1 		= result1 - 2;
+//		}
+//		if (result1 == 1)
+//		{
+//			button5 		= true;
+//			buttonOk		= true;
+//		}
+//		return result;
 	}
 	public void cancel()
 	{
-		Global.interfaceSemaphore.semaphoreLock("Buttons.cancel");
-		@SuppressWarnings("unused")
-		Integer result = Read();
-		Global.interfaceSemaphore.semaphoreUnLock();
-
+		return;
+//		Global.interfaceSemaphore.semaphoreLock("Buttons.cancel");
+//		@SuppressWarnings("unused")
+//		Integer result = Read();
+//		Global.interfaceSemaphore.semaphoreUnLock();
 	}
 }
