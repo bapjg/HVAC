@@ -28,8 +28,8 @@ public class Buttons
 	public int read()
 	{
 		Global.interfaceSemaphore.semaphoreLock("Buttons.read");
-		Integer result = Read();
-		Integer result1 = result;
+//		Integer result = Read();
+//		Integer result1 = result;
 		Global.interfaceSemaphore.semaphoreUnLock();
 		
 		button0 			= false;
