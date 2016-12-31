@@ -147,7 +147,7 @@ public class Control
 		new Thread(new Thread_UserInterface(), 								"Thread_UserInteface").start();
 		new Thread(new Thread_TCPListen(), 									"Thread_TCPListen").start();
 // TODO wait for Thread_Mixer to finish setting it to zero
-		Global.waitSecondsForStopNow(90);												// Must wait 15 secs for all thermometers to be read and have values + allow for retries
+		Global.waitSecondsForStopNow(90);									// Must wait 90 secs for all thermometers to be read and have values + allow for retries
 		new Thread(new Thread_BackgroundTasks(), 							"Thread_BackgroundTasks").start();
 		
 		//
