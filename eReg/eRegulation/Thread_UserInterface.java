@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -36,20 +37,24 @@ public class Thread_UserInterface implements Runnable
 			Global.waitSecondsForStopNow(10);
 			
 			buttons.read();
-			BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+			
 			
 			try
 			{
-				if (in.ready())
-					System.out.println("is ready");
-				else
-					System.out.println("NOT ready");
+				DataInputStream in=new DataInputStream(System.in);
+				byte b = in.readByte();
+				
+				char ch=(char)b;
+
+				System.out.println("char is " + ch);
+
 			}
 			catch (IOException e)
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 			
 
 
