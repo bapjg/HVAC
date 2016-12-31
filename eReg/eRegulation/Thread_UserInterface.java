@@ -37,23 +37,19 @@ public class Thread_UserInterface implements Runnable
 			Global.waitSecondsForStopNow(10);
 			
 			buttons.read();
-			
-			
 			try
 			{
-				DataInputStream in=new DataInputStream(System.in);
-				byte b = in.readByte();
-				
-				char ch=(char)b;
-
-				System.out.println("char is " + ch);
+				if (System.in.available() > 0) System.out.println("Waiting");
+				else System.out.println("Char is " + System.in.read());
 
 			}
-			catch (IOException e)
+			catch (IOException e1)
 			{
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
+			
+
 
 			
 
