@@ -50,6 +50,7 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		public String 							name;
 		public Integer 							relayBank;
 		public Integer 							relayNumber;
+		public Integer 							channelGPIO					= -1;
 	}
 	public class Pump 							extends  					Ctrl_Configuration
 	{

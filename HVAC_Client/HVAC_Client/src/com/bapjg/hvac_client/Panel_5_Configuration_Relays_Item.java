@@ -29,6 +29,7 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
 	private Element_Standard									relayName;
 	private Element_Standard									relayBank;
 	private Element_Standard									relayNumber;
+	private Element_Standard									relayChannelGPIO;
 
 	private View												buttonOk;
 	private View												buttonDelete;
@@ -47,11 +48,13 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
     	relayName																			= new Element_Standard("Relay Name");
     	relayBank																			= new Element_Standard("Bank number");
     	relayNumber																			= new Element_Standard("Address");
+    	relayChannelGPIO																	= new Element_Standard("Channel GPIO");
     	
     	panelInsertPoint.addView(headingGeneral);
     	panelInsertPoint.addView(relayName);
     	panelInsertPoint.addView(relayBank);
     	panelInsertPoint.addView(relayNumber);
+    	panelInsertPoint.addView(relayChannelGPIO);
         
     	displayTitles("Configuration", "Relay");      
         
@@ -72,6 +75,7 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
 		relayName							.setValue	(itemData.name);
 		relayBank							.setValue	(itemData.relayBank);
 		relayNumber							.setValue	(itemData.relayNumber);
+		relayChannelGPIO					.setValue	(itemData.channelGPIO);
    	}
 	public void setListens()
 	{
@@ -80,6 +84,7 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
     		relayName						.setListener(this);
 			relayBank						.setListener(this);
 			relayNumber						.setListener(this);
+			relayChannelGPIO				.setListener(this);
     	}
 	}
     @Override
@@ -104,8 +109,11 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
      		dialogInteger 																	= new Dialog_Integer(itemData.relayNumber, itemData, 0, 8, "Enter Relay Number", this);
      		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
     	}
-    	
-    	
+    	else if (clickedView == relayChannelGPIO)
+    	{
+     		dialogInteger 																	= new Dialog_Integer(itemData.channelGPIO, itemData, 0, 99, "Enter GPIO Channel", this);
+     		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
+    	}
 	}
     @Override
  	public void onPanelButtonOk()

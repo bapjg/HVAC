@@ -37,17 +37,17 @@ public class Thread_UserInterface implements Runnable
 			Global.waitSecondsForStopNow(10);
 			
 			buttons.read();
-			try
-			{
-				if (System.in.available() > 0) System.out.println("Waiting");
-				else System.out.println("Char is " + System.in.read());
-
-			}
-			catch (IOException e1)
-			{
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+//			try
+//			{
+//				if (System.in.available() > 0) System.out.println("Waiting");
+//				else System.out.println("Char is " + System.in.read());
+//
+//			}
+//			catch (IOException e1)
+//			{
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
 			
 
 
