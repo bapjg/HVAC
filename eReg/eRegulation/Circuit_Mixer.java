@@ -194,8 +194,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 //			LogIt.error("Circuit_" + this.name, "sequencer", "state error detected : " + state.toString());
 			
 // Now is :			
-			this.heatRequired.setMax();
-			state 																			= HVAC_STATES.Circuit.StartRequested;
+			this.requestStart();
+			LogIt.display("Circuit_" + this.name, "sequencer", "State = Resuming, start requested");
 			break;
 		case IdleRequested:
 			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
