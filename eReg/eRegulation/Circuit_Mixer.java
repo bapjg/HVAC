@@ -188,7 +188,13 @@ public class Circuit_Mixer extends Circuit_Abstract
 			this.heatRequired.setZero();
 			// Used if outSide temp > Summer temp
 		case Resuming:
-			LogIt.error("Circuit_" + this.name, "sequencer", "state error detected : " + state.toString());
+// Corrected 31/01/2017
+			
+// Was :
+//			LogIt.error("Circuit_" + this.name, "sequencer", "state error detected : " + state.toString());
+			
+// Now is :			
+			this.heatRequired.setMax();
 			break;
 		case IdleRequested:
 			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
