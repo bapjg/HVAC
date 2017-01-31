@@ -195,6 +195,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			
 // Now is :			
 			this.heatRequired.setMax();
+			state 																			= HVAC_STATES.Circuit.StartRequested;
 			break;
 		case IdleRequested:
 			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
