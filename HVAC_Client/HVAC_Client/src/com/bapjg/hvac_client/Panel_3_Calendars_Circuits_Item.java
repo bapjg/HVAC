@@ -157,7 +157,7 @@ public class Panel_3_Calendars_Circuits_Item 				extends 					Panel_0_Fragment
     		}
      		else if (this.circuitName.equalsIgnoreCase("Hot_Water"))
     		{
-     			df 																			= new Dialog_Temperature(itemData.tempObjective, 35, 50, this);
+     			df 																			= new Dialog_Temperature(itemData.tempObjective, 35, 70, this);
     		}
      		else
      		{
