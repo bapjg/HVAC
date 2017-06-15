@@ -145,7 +145,10 @@ public class Calendars
 			{
 				for (Ctrl_Calendars.Word 					word 				: calendarData.wordList) 
 				{
-					paramCalendar.days 											= paramCalendar.days.replace(word.name, word.days);
+					if (paramCalendar.days.contentEquals(word.name))			// Take care "Sat" can be replaced by "6" before "Not Sat" processed
+					{
+						paramCalendar.days										= word.days;
+					}
 				}
 				// TODO Calendar days are not printed correctly
 				circuit.addCircuitTask(paramCalendar);
