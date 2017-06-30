@@ -170,17 +170,20 @@ public class Control
 
 			for (Circuit_Abstract circuit : Global.circuits.circuitList)
 			{
-				circuit.taskScheduler();					// In Circuit_Abstract
-				circuit.sequencer();
-				if (circuit.heatRequired.tempMinimum > globalHeatRequired.tempMinimum)
-				{
-					globalHeatRequired.tempMinimum											= circuit.heatRequired.tempMinimum;
-				}
-				
-				if (circuit.heatRequired.tempMaximum > globalHeatRequired.tempMaximum)
-				{
-					globalHeatRequired.tempMaximum											= circuit.heatRequired.tempMaximum;
-				}
+//				if (circuit.active)								// Modified 30/06/2017 as radiator/floor were running
+//				{
+					circuit.taskScheduler();					// In Circuit_Abstract
+					circuit.sequencer();
+					if (circuit.heatRequired.tempMinimum > globalHeatRequired.tempMinimum)
+					{
+						globalHeatRequired.tempMinimum										= circuit.heatRequired.tempMinimum;
+					}
+					
+					if (circuit.heatRequired.tempMaximum > globalHeatRequired.tempMaximum)
+					{
+						globalHeatRequired.tempMaximum										= circuit.heatRequired.tempMaximum;
+					}
+//				}
 			}
 //			if (! globalHeatRequired.isZero())			Global.boiler.requestHeat(globalHeatRequired);
 			
