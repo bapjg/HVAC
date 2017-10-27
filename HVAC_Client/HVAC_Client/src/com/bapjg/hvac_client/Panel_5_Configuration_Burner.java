@@ -78,15 +78,16 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
     }
 	public void displayContents()
 	{
-		Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
+		Ctrl_Configuration.Burner							burner							= Global.eRegConfiguration.burner;
 
 		relayName				.setValue(burner.relay);
-		fuelConsumption			.setValue(burner.fuelConsumption/1000/60);
+		fuelConsumption			.setValue(burner.fuelConsumption/1000/60);					// From milliseconds to minutes
 		minutesPerLitre			.setValue(burner.minutesPerLitre);
 		
 		if ((burner.minutesPerLitre != null) && (burner.minutesPerLitre != 0))
 		{
-			Long 												litresConsumed 				= burner.fuelConsumption/burner.minutesPerLitre;
+			float 											litresConsumedFloat				= burner.fuelConsumption/burner.minutesPerLitre;
+			Long 											litresConsumed 					= (long) litresConsumedFloat;
 			fuelConsumptionLitres	.setValue(litresConsumed/1000/60);
 		}
 		else
@@ -119,7 +120,8 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 		{
 			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
 
-			Dialog_Integer			 							dialog						= new Dialog_Integer(burner.minutesPerLitre, (Object) burner, 1, 20, "Minutes per Litre of fuel consummed", this);
+//			Dialog_Integer			 							dialog						= new Dialog_Integer(burner.minutesPerLitre, (Object) burner, 1, 20, "Minutes per Litre of fuel consummed", this);
+			Dialog_Float			 							dialog						= new Dialog_Float(burner.minutesPerLitre, (Object) burner, "Minutes per Litre of fuel consummed", this);
 
 			dialog.show(getFragmentManager(), "Minutes_Per_Litre");
 		}
@@ -130,6 +132,7 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 		}
 		else if (clickedView == fuelConsumptionLitres)
 		{
+			// xx
 		}
 	}
     public void onDialogReturn()

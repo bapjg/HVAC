@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Dialog_Float 									extends 					DialogFragment
+public class Dialog_Float 										extends 					DialogFragment
 {
 	private Dialog_Response										callBack;
 	private EditText	 										numberPicker;

@@ -74,7 +74,8 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		private static final long 				serialVersionUID 			= 1L;
 		public String 							relay;
 		public Long 							fuelConsumption;
-		public Integer 							minutesPerLitre;
+//		public Integer 							minutesPerLitre;
+		public Float 							minutesPerLitre;
 	}
 	public class Boiler 						extends  					Ctrl_Configuration
 	{
@@ -335,7 +336,7 @@ public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 		Burner									burner						= new Burner();
 		burner.relay														= "Burner";
 		burner.fuelConsumption												= 0L;
-		burner.minutesPerLitre												= 10;
+		burner.minutesPerLitre												= 10f;
 		confUpdate.burner													= burner;
 		
 		confUpdate.eMailList.add(new String("andre@bapjg.com"));
