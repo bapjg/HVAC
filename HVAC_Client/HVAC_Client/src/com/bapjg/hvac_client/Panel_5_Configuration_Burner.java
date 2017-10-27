@@ -132,7 +132,6 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
 		}
 		else if (clickedView == fuelConsumptionLitres)
 		{
-			// xx
 		}
 	}
     public void onDialogReturn()
