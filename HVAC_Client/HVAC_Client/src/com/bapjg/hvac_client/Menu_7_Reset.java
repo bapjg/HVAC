@@ -18,6 +18,7 @@ public class Menu_7_Reset 										extends 					Menu_0_Fragment
 {
 	Element_MenuButton											buttonReset;
 	Element_MenuButton											buttonStop;
+	Element_MenuButton											buttonResetFuel;
 	
 
 	public Menu_7_Reset()
@@ -30,12 +31,15 @@ public class Menu_7_Reset 										extends 					Menu_0_Fragment
     	
     	buttonReset																			= new Element_MenuButton("Reset");
        	buttonStop																			= new Element_MenuButton("Stop");
+    	buttonResetFuel																		= new Element_MenuButton("Reset Fuel");
 
     	menuInsertPoint			.addView(buttonReset);
     	menuInsertPoint			.addView(buttonStop);
+    	menuInsertPoint			.addView(buttonResetFuel);
     	
     	buttonReset				.setListener((Menu_0_Fragment) this);
     	buttonStop				.setListener((Menu_0_Fragment) this);
+    	buttonResetFuel			.setListener((Menu_0_Fragment) this);
     	
     	onElementClick(buttonStop);
 
@@ -50,6 +54,7 @@ public class Menu_7_Reset 										extends 					Menu_0_Fragment
    	
     	if 		(clickedView == buttonReset)					panelFragment 				= new Panel_7_Reset();
     	else if (clickedView == buttonStop)						panelFragment 				= new Panel_7_Reset_Stop();
+    	else if (clickedView == buttonResetFuel)				panelFragment 				= new Panel_7_Reset_Fuel();
 
     	if 		(panelFragment != null)
     	{
