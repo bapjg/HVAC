@@ -78,7 +78,7 @@ public class Panel_5_Configuration_Pumps_Item 					extends 					Panel_0_Fragment
 	public void onElementClick(View clickedView) 
 	{
     	Dialog_Text												dialogText;
-    	Dialog_Integer											dialogInteger;
+    	Dialog_Integer_Spinner									dialogInteger;
     	Dialog_String_List										dialogList;
     	if (clickedView == pumpName)
     	{

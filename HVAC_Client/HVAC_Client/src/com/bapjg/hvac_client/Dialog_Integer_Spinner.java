@@ -15,15 +15,13 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.*;
 import android.view.View.OnFocusChangeListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Dialog_Number_Test 									extends 					DialogFragment
+public class Dialog_Integer_Spinner 							extends 					DialogFragment
 {
 	private Dialog_Response										callBack;
 	private NumberPicker 										numberPicker;
@@ -33,15 +31,10 @@ public class Dialog_Number_Test 									extends 					DialogFragment
 	private Integer  											numberMax;
 	private String  											message;
 	
-	public Dialog_Number_Test() 
+	public Dialog_Integer_Spinner() 
     {
-		super();
-		this.number																			= 51;
-		this.numberMin																		= 31;
-		this.numberMax																		= 66;
-		this.message																		= "henry";
     }
-	public Dialog_Number_Test(Integer number, Object parent, Integer numberMin, Integer numberMax, String message, Dialog_Response callBack) 
+	public Dialog_Integer_Spinner(Integer number, Object parent, Integer numberMin, Integer numberMax, String message, Dialog_Response callBack) 
     {
 		super();
 		this.number																			= number;
@@ -67,29 +60,23 @@ public class Dialog_Number_Test 									extends 					DialogFragment
     	AlertDialog.Builder 									builder 					= new AlertDialog.Builder(getActivity());
         LayoutInflater 											inflater 					= getActivity().getLayoutInflater();
 										                                                    
-        View													dialogView					= inflater.inflate(R.layout.dialog_number_test, null);
-        
-        NumberPicker np1 = new NumberPicker(getActivity());
-        np1.setMinValue(0);
-        np1.setMaxValue(9);
-        np1.setValue(3);  
-        np1.setGravity(Gravity.CENTER_HORIZONTAL);
-        np1.setMinimumWidth(99);
-
-	    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-	    params.weight = 1.0f;
-	    params.gravity = Gravity.CENTER_HORIZONTAL;
-
-        np1.setLayoutParams(params);
-        
-        ((LinearLayout) dialogView).addView(np1);
-        
+        View													dialogView					= inflater.inflate(R.layout.dialog_integer_spinner, null);
         builder.setView(dialogView);
         builder.setTitle(message);
          
-	    EditText												tempChild					= (EditText) np1.getChildAt(0);	// Stop keyboard appearing
+		numberPicker 																		= (NumberPicker) dialogView.findViewById(R.id.value);
+	    
+	    EditText												tempChild					= (EditText) numberPicker.getChildAt(0);	// Stop keyboard appearing
 	    tempChild.setFocusable(false);
 	    tempChild.setInputType(InputType.TYPE_NULL);
+	    
+	    numberPicker.setMinValue(numberMin);
+	    numberPicker.setMaxValue(numberMax);
+	    numberPicker.setValue(number);				
+	    numberPicker.setWrapSelectorWheel(false);
+       
+        builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
 
         return builder.create();
     }

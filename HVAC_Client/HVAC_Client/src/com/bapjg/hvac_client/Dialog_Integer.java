@@ -24,35 +24,21 @@ import android.widget.TextView;
 public class Dialog_Integer 									extends 					DialogFragment
 {
 	private Dialog_Response										callBack;
-	private NumberPicker 										numberPicker;
+	private EditText	 										numberChooser;
 	private Integer												number;
+	public  Integer												newValue;
 	private Object												parent;
-	private Integer												numberMin;
-	private Integer  											numberMax;
 	private String  											message;
 	
 	public Dialog_Integer() 
     {
     }
-	public Dialog_Integer(Integer number, Object parent, Integer numberMin, Integer numberMax, String message, Dialog_Response callBack) 
+	public Dialog_Integer(Integer number, String message, Dialog_Response callBack) 
     {
 		super();
 		this.number																			= number;
-		this.parent																			= parent;
-		this.numberMin																		= numberMin;
-		this.numberMax																		= numberMax;
 		this.callBack																		= callBack;
 		this.message																		= message;
-		if (number == null    )
-		{
-			this.number																		= (numberMin + numberMax)/2;
-		}
-		else
-		{
-			if (number > numberMax)								this.numberMax 				= number;
-			if (number < numberMin)								this.numberMin 				= number;
-		}
-		
     }	
     @Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) 
@@ -64,16 +50,9 @@ public class Dialog_Integer 									extends 					DialogFragment
         builder.setView(dialogView);
         builder.setTitle(message);
          
-		numberPicker 																		= (NumberPicker) dialogView.findViewById(R.id.value);
-	    
-	    EditText												tempChild					= (EditText) numberPicker.getChildAt(0);	// Stop keyboard appearing
-	    tempChild.setFocusable(false);
-	    tempChild.setInputType(InputType.TYPE_NULL);
-	    
-	    numberPicker.setMinValue(numberMin);
-	    numberPicker.setMaxValue(numberMax);
-	    numberPicker.setValue(number);				
-	    numberPicker.setWrapSelectorWheel(false);
+		numberChooser 																		= (EditText) dialogView.findViewById(R.id.value);
+	    numberChooser.setText(number.toString());
+	    numberChooser.setSelection(number.toString().length());
        
         builder.setPositiveButton("OK",     new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonOk    (d, w);}});
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()  {@Override public void onClick(DialogInterface d, int w) {buttonCancel(d, w);}});
@@ -82,26 +61,9 @@ public class Dialog_Integer 									extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-     	Integer 												newValue	 				= numberPicker.getValue();
-     	// Identify property within parent to modify
-     	for (Field field : parent.getClass().getDeclaredFields())  
-     	{
-     		try 
-     		{
-				if (number == field.get(parent))
-				{
-					field.set(parent, newValue);
-			     	callBack.onDialogReturn();
-			    	dialog.dismiss();
-			    	return;
-				}
-			} 
-     		catch (Exception e)
-     		{
-     			// Do nothing as serialversionUID, this$ etc cause exceptions
-     		} 
-     	}
-     	Global.toaster("Object cannot be identified", false);
+    	this.newValue	 																	= Integer.parseInt(numberChooser.getText().toString());
+    	callBack.onDialogReturn();
+		dialog.dismiss();
     }
     public void buttonCancel (DialogInterface dialog, int which)
     {

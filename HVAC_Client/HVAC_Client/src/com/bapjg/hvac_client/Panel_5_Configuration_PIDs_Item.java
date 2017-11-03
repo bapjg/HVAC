@@ -85,7 +85,7 @@ public class Panel_5_Configuration_PIDs_Item 					extends 					Panel_0_Fragment
 	public void onElementClick(View clickedView) 
 	{
     	Dialog_Text												dialogText;
-    	Dialog_Integer											dialogInteger;
+    	Dialog_Integer_Spinner									dialogInteger;
     	Dialog_String_List										dialogList;
     	
     	if (clickedView == pidName)
@@ -95,12 +95,12 @@ public class Panel_5_Configuration_PIDs_Item 					extends 					Panel_0_Fragment
 		}
     	else if (clickedView == depth)
     	{
-	     	dialogInteger																= new Dialog_Integer(itemData.depth,  itemData, 1, 100, "Select PID Depth", this);
+	     	dialogInteger																= new Dialog_Integer_Spinner(itemData.depth,  itemData, 1, 100, "Select PID Depth", this);
 	     	dialogInteger.show(getFragmentManager(), "Dialog_Depth");
 		}
     	else if (clickedView == sampleIncrement)
     	{
-	     	dialogInteger																= new Dialog_Integer(itemData.sampleIncrement,  itemData, 1, 300, "Select Sample (unit = 10s)", this);
+	     	dialogInteger																= new Dialog_Integer_Spinner(itemData.sampleIncrement,  itemData, 1, 300, "Select Sample (unit = 10s)", this);
 	     	dialogInteger.show(getFragmentManager(), "Dialog_SampleIncrement");
 		}
  	}

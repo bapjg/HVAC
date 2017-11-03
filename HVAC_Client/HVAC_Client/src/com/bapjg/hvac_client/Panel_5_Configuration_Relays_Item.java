@@ -91,7 +91,7 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
 	public void onElementClick(View clickedView) 
 	{
     	Dialog_Text												dialogText;
-    	Dialog_Integer											dialogInteger;
+    	Dialog_Integer_Spinner									dialogInteger;
     	Dialog_String_List										dialogList;
 
     	if (clickedView == relayName)
@@ -101,17 +101,17 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
     	}
     	else if (clickedView == relayBank)
     	{
-     		dialogInteger 																	= new Dialog_Integer(itemData.relayBank, itemData, 0, 4, "Enter Relay Bank", this);
+     		dialogInteger 																	= new Dialog_Integer_Spinner(itemData.relayBank, itemData, 0, 4, "Enter Relay Bank", this);
      		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
     	}
     	else if (clickedView == relayNumber)
     	{
-     		dialogInteger 																	= new Dialog_Integer(itemData.relayNumber, itemData, 0, 8, "Enter Relay Number", this);
+     		dialogInteger 																	= new Dialog_Integer_Spinner(itemData.relayNumber, itemData, 0, 8, "Enter Relay Number", this);
      		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
     	}
     	else if (clickedView == relayChannelGPIO)
     	{
-     		dialogInteger 																	= new Dialog_Integer(itemData.channelGPIO, itemData, 0, 99, "Enter GPIO Channel", this);
+     		dialogInteger 																	= new Dialog_Integer_Spinner(itemData.channelGPIO, itemData, 0, 99, "Enter GPIO Channel", this);
      		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
     	}
 	}

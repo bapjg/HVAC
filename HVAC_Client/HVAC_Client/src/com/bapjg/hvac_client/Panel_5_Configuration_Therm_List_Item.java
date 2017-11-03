@@ -88,7 +88,7 @@ public class Panel_5_Configuration_Therm_List_Item 				extends 					Panel_0_Frag
 	public void onElementClick(View clickedView) 
 	{
        	Dialog_Text												dialogText;
-    	Dialog_Integer											dialogInteger;
+    	Dialog_Integer_Spinner									dialogInteger;
     	Dialog_String_List										dialogList;
      	if (clickedView == thermoName)
      	{

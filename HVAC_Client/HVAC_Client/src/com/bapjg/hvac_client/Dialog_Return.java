@@ -4,6 +4,8 @@ package com.bapjg.hvac_client;
 public class Dialog_Return
 {
 	public	Integer												valueInteger;							
-	public	Float												valueFloat;							
+	public	Float												valueFloat;
+	public	String												valueString;
+	public	Boolean												valueBool;
 }
 

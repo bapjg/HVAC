@@ -45,6 +45,7 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 	private Element_Standard									minutesPerLitreCalculated;
 	private Element_Button										buttonDeliveryReset;
 	
+	private Dialog_Integer			 							dialogLitres;
 	private Dialog_Return										dialogReturn;
 
 	public Panel_7_Reset_Fuel()
@@ -72,13 +73,6 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
         &&  	(Global.eRegConfiguration.boiler 	!= null)	)
         {
         	panelInsertPoint.addView(buttonDeliveryReset);
-        }
-    	
-    	
-
-        if (	(Global.eRegConfiguration 			!= null)
-        &&  	(Global.eRegConfiguration.boiler 	!= null)	)
-        {
         	displayContents();
             setListens();
         }
@@ -118,22 +112,17 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 		if (clickedView == buttonDeliveryReset)
 		{
 			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
-			dialogReturn																	= new Dialog_Return ();
 			
-			Long 												litresConsumedLong			= 0L;
+			Integer												litresConsumed				= 0;
 			if ((burner.minutesPerLitre != null) && (burner.minutesPerLitre != 0))
 			{
 				float 											litresConsumedFloat			= burner.fuelConsumption/burner.minutesPerLitre;
-				litresConsumedLong															= (long) litresConsumedFloat/1000/60;
-				dialogReturn.valueFloat														= (float) litresConsumedLong;
+				litresConsumed																= (int) litresConsumedFloat/1000/60;
 			}
 			
-			Dialog_Float			 							dialogLitres				= new Dialog_Float(dialogReturn.valueFloat, (Object) dialogReturn, "Litres of fuel delivered", this);
-
+			dialogLitres																	= new Dialog_Integer(litresConsumed, "Litres of fuel delivered", this);
 			dialogLitres.show(getFragmentManager(), "Litres_Delivered");
 		}
-
-		
 		
 		if (clickedView == minutesPerLitre)
 		{
@@ -165,10 +154,11 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
     	panelInsertPoint.addView	(fuelDeliveredLitres);
     	panelInsertPoint.addView	(minutesPerLitreCalculated);
 
-    	fuelDeliveredLitres			.setValue(Math.round(dialogReturn.valueFloat));
+//    	fuelDeliveredLitres			.setValue(Math.round(dialogReturn.valueFloat));
+    	fuelDeliveredLitres			.setValue(dialogLitres.newValue);
 
     	Long 						burnerMinutes											= Global.eRegConfiguration.burner.fuelConsumption/1000/60;
-    	Float 						minutesPerLitreCalculatedFloat 							= burnerMinutes/dialogReturn.valueFloat;
+    	Float 						minutesPerLitreCalculatedFloat 							= (float) burnerMinutes/dialogLitres.newValue;
     	minutesPerLitreCalculatedFloat														= Math.round(minutesPerLitreCalculatedFloat * 100f)/100f;
     	
     	minutesPerLitreCalculated	.setValue(minutesPerLitreCalculatedFloat);

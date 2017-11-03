@@ -120,7 +120,7 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 		Ctrl_Calendars.TasksBackGround							backgroundTasks				= Global.eRegCalendars.tasksBackGround;
  		Dialog_Temperature										dialogTemperature;
  		Dialog_Time												dialogTime;
- 		Dialog_Integer											dialogInteger;
+ 		Dialog_Integer_Spinner									dialogInteger;
 	   	if (clickedView == pumpCleanTime)
 	   	{
     		dialogTime 																		= new Dialog_Time(backgroundTasks.pumpCleanTime, this);
@@ -128,7 +128,7 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 	   	}
 	   	else if (clickedView == pumpCleanDuration)
 	   	{
-     		dialogInteger	 																= new Dialog_Integer(backgroundTasks.pumpCleanDurationMinutes,  (Object) backgroundTasks, 1, 10, "Select Duration (minutes)", this);
+     		dialogInteger	 																= new Dialog_Integer_Spinner(backgroundTasks.pumpCleanDurationMinutes,  (Object) backgroundTasks, 1, 10, "Select Duration (minutes)", this);
      		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
 	   	}
       	else if (clickedView == antiFreeze)

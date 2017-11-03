@@ -259,17 +259,17 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
 		}
     	else if (clickedView == swingTime)
 		{
-     		Dialog_Integer									dialogSwingTime					= new Dialog_Integer(itemData.mixer.swingTime, (Object) itemData.mixer, 10, 200, "Define Proprtional Gain",	this);
+     		Dialog_Integer_Spinner							dialogSwingTime					= new Dialog_Integer_Spinner(itemData.mixer.swingTime, (Object) itemData.mixer, 10, 200, "Define Proprtional Gain",	this);
      		dialogSwingTime.show(getFragmentManager(), "Mixer Swing Time (ms)");
 		}
     	else if (clickedView == swingProportionMin)
 		{
-    		Dialog_Integer									dialogSwingTime					= new Dialog_Integer(itemData.mixer.swingProportionMin, (Object) itemData.mixer, 0, 100, "Define Proprtional Gain",	this);
+    		Dialog_Integer_Spinner							dialogSwingTime					= new Dialog_Integer_Spinner(itemData.mixer.swingProportionMin, (Object) itemData.mixer, 0, 100, "Define Proprtional Gain",	this);
      		dialogSwingTime.show(getFragmentManager(), "Mixer Swing Time (ms)");
 		}
     	else if (clickedView == swingProportionMax)
 		{
-    		Dialog_Integer									dialogSwingTime					= new Dialog_Integer(itemData.mixer.swingProportionMax, (Object) itemData.mixer, 0, 100, "Define Proprtional Gain",	this);
+    		Dialog_Integer_Spinner							dialogSwingTime					= new Dialog_Integer_Spinner(itemData.mixer.swingProportionMax, (Object) itemData.mixer, 0, 100, "Define Proprtional Gain",	this);
      		dialogSwingTime.show(getFragmentManager(), "Mixer Swing Time (ms)");
 		}
     	else if (clickedView == relayUp)
@@ -328,17 +328,17 @@ public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragme
 		}
     	else if (clickedView == timeDelay)
 		{
-     		Dialog_Integer									dialogTimeDelay					= new Dialog_Integer(itemData.mixer.pidParams.timeDelay, (Object) itemData.mixer.pidParams, 10, 200, "Time Delay (s)",	this);
+     		Dialog_Integer_Spinner							dialogTimeDelay					= new Dialog_Integer_Spinner(itemData.mixer.pidParams.timeDelay, (Object) itemData.mixer.pidParams, 10, 200, "Time Delay (s)",	this);
      		dialogTimeDelay.show(getFragmentManager(), "timeDelay");
 		}
     	else if (clickedView == timeProjection)
 		{
-     		Dialog_Integer									dialogTimeProjection			= new Dialog_Integer(itemData.mixer.pidParams.timeProjection, (Object) itemData.mixer.pidParams, 0, 100, "Time Extrapolation (s)",	this);
+     		Dialog_Integer_Spinner							dialogTimeProjection			= new Dialog_Integer_Spinner(itemData.mixer.pidParams.timeProjection, (Object) itemData.mixer.pidParams, 0, 100, "Time Extrapolation (s)",	this);
      		dialogTimeProjection.show(getFragmentManager(), "timeProjection");
 		}
     	else if (clickedView == marginProjection)
 		{
-     		Dialog_Integer									dialogMarginProjection			= new Dialog_Integer(itemData.mixer.pidParams.marginProjection, (Object) itemData.mixer.pidParams, 0, 10, "Define Temperature Margin on Extrapolation (°C)",	this);
+     		Dialog_Integer_Spinner							dialogMarginProjection			= new Dialog_Integer_Spinner(itemData.mixer.pidParams.marginProjection, (Object) itemData.mixer.pidParams, 0, 10, "Define Temperature Margin on Extrapolation (°C)",	this);
      		dialogMarginProjection.show(getFragmentManager(), "marginProjection");
 		}
 
