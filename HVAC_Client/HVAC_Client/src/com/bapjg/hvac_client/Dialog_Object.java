@@ -1,7 +1,7 @@
 package com.bapjg.hvac_client;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class Dialog_Return
+public class Dialog_Object
 {
 	public	Integer												valueInteger;							
 	public	Float												valueFloat;

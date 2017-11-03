@@ -46,7 +46,7 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 	private Element_Button										buttonDeliveryReset;
 	
 	private Dialog_Integer			 							dialogLitres;
-	private Dialog_Return										dialogReturn;
+	private Dialog_Object										dialogObject;
 
 	public Panel_7_Reset_Fuel()
 	{
@@ -102,8 +102,6 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 	}
 	public void setListens()
 	{
-//		fuelConsumptionMinutes	.setListener(this);
-//		minutesPerLitre			.setListener(this);
 		buttonDeliveryReset		.setListener(this);
 	}
 	@Override
@@ -113,33 +111,33 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 		{
 			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
 			
-			Integer												litresConsumed				= 0;
+			dialogObject																	= new Dialog_Object();
+			dialogObject.valueInteger														= 0;
 			if ((burner.minutesPerLitre != null) && (burner.minutesPerLitre != 0))
 			{
-				float 											litresConsumedFloat			= burner.fuelConsumption/burner.minutesPerLitre;
-				litresConsumed																= (int) litresConsumedFloat/1000/60;
+				float 											litresConsumedFloat			= burner.fuelConsumption/burner.minutesPerLitre/1000/60;
+				dialogObject.valueInteger													= (int) litresConsumedFloat;
 			}
 			
-			dialogLitres																	= new Dialog_Integer(litresConsumed, "Litres of fuel delivered", this);
+			dialogLitres																	= new Dialog_Integer(dialogObject.valueInteger, dialogObject, "Litres of fuel delivered", this);
 			dialogLitres.show(getFragmentManager(), "Litres_Delivered");
 		}
-		
-		if (clickedView == minutesPerLitre)
-		{
-			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
-
-			Dialog_Float			 							dialog						= new Dialog_Float(burner.minutesPerLitre, (Object) burner, "Minutes per Litre of fuel consummed", this);
-
-			dialog.show(getFragmentManager(), "Minutes_Per_Litre");
-		}
-		else if (clickedView == fuelConsumptionMinutes)
-		{
-			Dialog_Yes_No										messageYesNo				= new Dialog_Yes_No("Reset Fuel Consumption to 0 ?", this, 99);		// Id = 99
-			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
-		}
-		else if (clickedView == fuelConsumptionLitres)
-		{
-		}
+//		else if (clickedView == minutesPerLitre)
+//		{
+//			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
+//
+//			Dialog_Float			 							dialog						= new Dialog_Float(burner.minutesPerLitre, (Object) burner, "Minutes per Litre of fuel consummed", this);
+//
+//			dialog.show(getFragmentManager(), "Minutes_Per_Litre");
+//		}
+//		else if (clickedView == fuelConsumptionMinutes)
+//		{
+//			Dialog_Yes_No										messageYesNo				= new Dialog_Yes_No("Reset Fuel Consumption to 0 ?", this, 99);		// Id = 99
+//			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
+//		}
+//		else if (clickedView == fuelConsumptionLitres)
+//		{
+//		}
 	}
     public void onDialogReturn()
     {
@@ -154,11 +152,10 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
     	panelInsertPoint.addView	(fuelDeliveredLitres);
     	panelInsertPoint.addView	(minutesPerLitreCalculated);
 
-//    	fuelDeliveredLitres			.setValue(Math.round(dialogReturn.valueFloat));
-    	fuelDeliveredLitres			.setValue(dialogLitres.newValue);
+    	fuelDeliveredLitres			.setValue(dialogObject.valueInteger);
 
     	Long 						burnerMinutes											= Global.eRegConfiguration.burner.fuelConsumption/1000/60;
-    	Float 						minutesPerLitreCalculatedFloat 							= (float) burnerMinutes/dialogLitres.newValue;
+    	Float 						minutesPerLitreCalculatedFloat 							= (float) burnerMinutes/dialogObject.valueInteger;
     	minutesPerLitreCalculatedFloat														= Math.round(minutesPerLitreCalculatedFloat * 100f)/100f;
     	
     	minutesPerLitreCalculated	.setValue(minutesPerLitreCalculatedFloat);

@@ -26,17 +26,18 @@ public class Dialog_Integer 									extends 					DialogFragment
 	private Dialog_Response										callBack;
 	private EditText	 										numberChooser;
 	private Integer												number;
-	public  Integer												newValue;
+//	public  Integer												newValue;
 	private Object												parent;
 	private String  											message;
 	
 	public Dialog_Integer() 
     {
     }
-	public Dialog_Integer(Integer number, String message, Dialog_Response callBack) 
+	public Dialog_Integer(Integer number, Object parent, String message, Dialog_Response callBack) 
     {
 		super();
 		this.number																			= number;
+		this.parent																			= parent;
 		this.callBack																		= callBack;
 		this.message																		= message;
     }	
@@ -61,9 +62,27 @@ public class Dialog_Integer 									extends 					DialogFragment
     }
     public void buttonOk (DialogInterface dialog, int which)
     {
-    	this.newValue	 																	= Integer.parseInt(numberChooser.getText().toString());
-    	callBack.onDialogReturn();
-		dialog.dismiss();
+//    	this.newValue	 																	= Integer.parseInt(numberChooser.getText().toString());
+    	Integer 												newValue	 				= Integer.parseInt(numberChooser.getText().toString());
+     	// Identify property within parent to modify
+     	for (Field field : parent.getClass().getDeclaredFields())  
+     	{
+     		try 
+     		{
+				if (number == field.get(parent))
+				{
+					field.set(parent, newValue);
+			     	callBack.onDialogReturn();
+			    	dialog.dismiss();
+			    	return;
+				}
+			} 
+     		catch (Exception e)
+     		{
+     			// Do nothing as serialversionUID, this$ etc cause exceptions
+     		} 
+     	}
+     	Global.toaster("Object cannot be identified", false);
     }
     public void buttonCancel (DialogInterface dialog, int which)
     {
