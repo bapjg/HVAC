@@ -44,6 +44,7 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 	private Element_Standard									fuelDeliveredLitres;
 	private Element_Standard									minutesPerLitreCalculated;
 	private Element_Button										buttonDeliveryReset;
+	private Element_Button										buttonConfirm;
 	
 	private Dialog_Integer			 							dialogLitres;
 	private Dialog_Object										dialogObject;
@@ -68,6 +69,7 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
     	panelInsertPoint.addView	(fuelConsumptionLitres);
 
     	buttonDeliveryReset																	= new Element_Button("Delivery Reset");
+    	buttonConfirm																		= new Element_Button("Confirm");
 
     	if (	(Global.eRegConfiguration 			!= null)
         &&  	(Global.eRegConfiguration.boiler 	!= null)	)
@@ -103,6 +105,7 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 	public void setListens()
 	{
 		buttonDeliveryReset		.setListener(this);
+		buttonConfirm			.setListener(this);
 	}
 	@Override
 	public void onElementClick(View clickedView) 
@@ -122,14 +125,15 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 			dialogLitres																	= new Dialog_Integer(dialogObject.valueInteger, dialogObject, "Litres of fuel delivered", this);
 			dialogLitres.show(getFragmentManager(), "Litres_Delivered");
 		}
-//		else if (clickedView == minutesPerLitre)
-//		{
-//			Ctrl_Configuration.Burner							burner						= Global.eRegConfiguration.burner;
-//
-//			Dialog_Float			 							dialog						= new Dialog_Float(burner.minutesPerLitre, (Object) burner, "Minutes per Litre of fuel consummed", this);
-//
-//			dialog.show(getFragmentManager(), "Minutes_Per_Litre");
-//		}
+		else if (clickedView == buttonConfirm)
+		{
+    		Global.eRegConfiguration.burner.fuelConsumption									= 0L;
+    		Ctrl_Fuel_Consumption.Update				messageSend							= new Ctrl_Fuel_Consumption().new Update();
+    		messageSend.dateTime															= Global.now();
+    		messageSend.fuelConsumed														= 0L;
+
+    		TCP_Send(messageSend);
+		}
 //		else if (clickedView == fuelConsumptionMinutes)
 //		{
 //			Dialog_Yes_No										messageYesNo				= new Dialog_Yes_No("Reset Fuel Consumption to 0 ?", this, 99);		// Id = 99
@@ -151,6 +155,7 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
     	panelInsertPoint.addView(new Element_Heading( "Reset/New Values"));
     	panelInsertPoint.addView	(fuelDeliveredLitres);
     	panelInsertPoint.addView	(minutesPerLitreCalculated);
+    	panelInsertPoint.addView	(buttonConfirm);
 
     	fuelDeliveredLitres			.setValue(dialogObject.valueInteger);
 
