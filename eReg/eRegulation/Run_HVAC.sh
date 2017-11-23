@@ -3,6 +3,17 @@ cd /home/pi/HVAC/eReg/eRegulation/
 # sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 12:04
 # sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
 
+# Status	Description
+#   0       Stop application and go to bash
+#   1       Normal Start/Restart application
+#   2       Reboot controler
+#   3       
+#   4       
+#   5       Shutdown controler
+#   6       Debug mode and    wait for debugger to connect
+#   7       Debug mode and NO wait for debugger to connect
+
+
 STATUS=1
 
 while (( STATUS == 1 || STATUS == 6 || STATUS == 7));
