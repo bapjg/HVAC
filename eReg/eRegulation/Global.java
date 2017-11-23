@@ -44,8 +44,8 @@ public class Global
 	//
 	//===================================================================
 	
-	public static 	Boolean										stopNow;
-	public static 	int											exitStatus			= 0;	// 0 = stop app, 1 = restart app, 2 = reboot
+	public static 	Boolean										stopNow						= false;
+	public static 	int											exitStatus					= 0;	// 0 = stop app, 1 = restart app, 2 = reboot
 	
 	public static	PIDs										pids;
 	public static 	Thermometers 								thermometers;

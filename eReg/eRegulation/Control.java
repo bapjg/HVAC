@@ -1,6 +1,8 @@
 package eRegulation;
 
+import java.io.Console;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
@@ -47,6 +49,32 @@ public class Control
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
 
+		
+		if (false)
+		{
+			InputStream 	console 	= System.in;
+			Console 		console2 	= System.console();
+			
+			if (console.available() > 0)
+			{
+				// Do something
+			}
+			byte [] 		b 			= new byte [] {(byte) 0};
+			int 			off 		= 0;
+			int 			len 		= 1;
+			
+			if (console.read(b, off, len) > 0)		// console returns number of bytes read
+			{
+				// Do something
+			}
+			
+			char escCode = 0x1B;
+			int row = 10; 
+			int column = 10;
+			System.out.print(String.format("%c[%d;%df",escCode,row,column));		
+			System.out.print("99999999999999999");		
+		}
+		
 //		Below is a test to use JNA in stead of JNI... It didn't work, failing on the statement
 //	    	Linux_C_lib_DirectMapping libC = new Linux_C_lib_DirectMapping();
 //		the constructor loads a linux library, which fails (library not found)
@@ -73,15 +101,6 @@ public class Control
 		//
 		//============================================================
 
-		//============================================================
-		//
-		// Any tests can be done here
-		//
-		
-
-		//
-		//============================================================
-		
 		//============================================================
 		//
 		// Initialising : Note that "Initialising" message on LCD is handled
