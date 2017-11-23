@@ -1,7 +1,7 @@
 cd /home/pi/HVAC/eReg/eRegulation/
 
-sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 12:04
-sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
+# sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 12:04
+# sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
 
 STATUS=1
 
@@ -17,59 +17,66 @@ do
 	then
     	sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" -Djava.library.path=./            eRegulation.Control
     	STATUS=$?
-    	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40			# Position Line 2 (ie 2 x 32 Hex) (0 to 3)
-    	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
-   		sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60			# Position Line 3 (ie 3 x 32 Hex) (0 to 3)
-     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now restarting
+#     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40			# Position Line 2 (ie 2 x 32 Hex) (0 to 3)
+#     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
+#  		sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60			# Position Line 3 (ie 3 x 32 Hex) (0 to 3)
+#      	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now restarting
+		echo Now restarting
     fi
     
     if [ $STATUS -eq 6 ];	# Debug Restart Wait
     then
 		sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005  -Djava.library.path=./  eRegulation.Control
     	STATUS=$?
-    	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
-    	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
-   		sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
-     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Debug/Wait
+#     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
+#     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
+#  		sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
+#      	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Debug/Wait
+		echo Now Debug/Wait
 	fi
 	
 	if [ $STATUS -eq 7 ];	# Debug Restart No Wait
 	then
 		sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005  -Djava.library.path=./  eRegulation.Control
     	STATUS=$?
-    	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
-    	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
-   		sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
-     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Debug/NoWait
+#     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
+#     	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
+#  		sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
+#      	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Debug/NoWait
+		echo Now Debug/NoWait
 	fi
 	
 	echo "Status is " $STATUS
+# ??????????????????????
 done
+# ??????????????????????
 
 if [ $STATUS -eq 2 ];	# Reboot
 then
-    sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
-    sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
-   	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
-    sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Rebooting
+#	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
+#   sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
+#  	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
+#   sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Rebooting
+	echo Now Rebooting
 	sudo shutdown -r now
 fi
 
 if [ $STATUS -eq 5 ];	# Shutdown
 then
-   	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
-  	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
-	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
-   	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Halting
+#  	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
+#  	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
+# 	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
+#  	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Now Halting
+	echo Now Halting
 	sudo shutdown -h now
 fi
 
 if [ $STATUS -eq 0 ];	# GoTo Bash
 then
-   	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
-   	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
-	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
-   	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Going to Bash
+#  	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:40
+#  	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t HVAC/eReg Quit.
+# 	sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 11:60
+#  	sudo bw_tool -I -D /dev/i2c-1 -a 94 -t Going to Bash
 	echo Going to bash
 else
 	echo "Status is " $STATUS
