@@ -4,6 +4,8 @@ import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.util.Scanner;
+
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Platform;
@@ -52,10 +54,56 @@ public class Control
 
 		if (false)
 		{
+
+			Scanner s= new Scanner(System.in);
+			char xx = s.next().charAt(0);		
+
+			
+//			
+//			public class ConsoleReadingDemo {
+//			    public static void main(String[] args) {
+//			        java.io.InputStreamReader reader = new java.io.InputStreamReader(System.in);
+//			        boolean b = false;
+//			        while(!b)
+//			        {
+//			            try 
+//			            {
+//			                int key = System.in.read();
+//			                // read a character and process it 
+//			                System.out.println("key pressed");
+//			                b = true;
+//			             } catch (java.io.IOException ioex) {
+//			                System.out.println("IO Exception");
+//			             }
+//			             // edit, lets not hog any cpu time
+//			             try {
+//			                Thread.sleep(50);
+//			                System.out.println("nop yet");
+//			             } catch (InterruptedException ex) {
+//			                // can't do much about it can we? Ignoring 
+//			                System.out.println("Interrupted Exception");
+//			             }
+//			        }
+//			    }
+//			}			
+//			
+			
+			
+			
+			
+			
+			
+			char [] a;
+		    String temp;
+		    Scanner keyboard = new Scanner(System.in);
+		    System.out.println("please give the first integer :");
+		    temp=keyboard.next();
+		    a=temp.toCharArray();
+			
 			InputStream 	console 	= System.in;
 //			Console 		console2 	= System.console();
 			
-			int x = console.available();
+			int 			x 			= console.available();
 			byte [] 		b 			= new byte [] {(byte) 0};
 			int 			off 		= 0;
 			int 			len 		= 1;
@@ -64,11 +112,11 @@ public class Control
 			{
 				// Do something
 			}
-			int y = console.available();
+			int 			y 			= console.available();
 			
-			char escCode = 0x1B;
-			int row = 10; 
-			int column = 100;
+			char 			escCode 	= 0x1B;
+			int 			row 		= 10; 
+			int 			column 		= 100;
 //			System.out.print(String.format("%c[%d;%df",escCode,row,column));		
 //			System.out.print("99999999999999999");		
 		}
