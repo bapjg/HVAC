@@ -57,7 +57,7 @@ public class Control
 			
 			if (console.available() > 0)
 			{
-				int x = 33;
+				int x = console.available();
 			}
 			byte [] 		b 			= new byte [] {(byte) 0};
 			int 			off 		= 0;
