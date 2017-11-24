@@ -18,7 +18,8 @@ import HVAC_Common.Ctrl_Configuration.Relay;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Control
 {
-    public static void main(String[] args) 						throws 						IOException, 
+   @SuppressWarnings("unused")
+   public static void main(String[] args) 						throws 						IOException, 
 																							SAXException, 
 																							ParserConfigurationException
 	{
@@ -49,8 +50,7 @@ public class Control
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
 
-		
-		if (false)
+		if (true)
 		{
 			InputStream 	console 	= System.in;
 			Console 		console2 	= System.console();

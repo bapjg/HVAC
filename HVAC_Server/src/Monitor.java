@@ -234,8 +234,17 @@ public class Monitor extends HttpServlet
         }
         return new Rpt_Abstract().new Ack();
     }
-    public Rpt_Abstract processMixerMouvement(Rpt_MixerMouvement readings)
+    @SuppressWarnings("unused")
+	public Rpt_Abstract processMixerMouvement(Rpt_MixerMouvement readings)
     {
+    	// Used to handle mixer handling statistics
+    	// No longer required
+    	// Should remove this from Client (eReg)
+    	if (true) 
+    	{
+    		return new Rpt_Abstract().new Ack();
+    	}
+
         dbOpen();
         
         try
