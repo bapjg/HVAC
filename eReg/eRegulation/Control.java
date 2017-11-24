@@ -62,8 +62,9 @@ public class Control
 
 			Reader reader = new InputStreamReader(System.in);
 			int ch = reader.read();
-			if (ch != -1) {  // check for EOF
-			    // we have a character ...
+			if (ch != -1)   // check for EOF
+			{
+			    int zz = 33;
 			}
 			
 //			1. Use InputStreamReader to read one character at a time. 
