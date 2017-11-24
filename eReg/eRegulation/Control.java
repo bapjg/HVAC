@@ -55,10 +55,7 @@ public class Control
 			InputStream 	console 	= System.in;
 //			Console 		console2 	= System.console();
 			
-			if (console.available() > 0)
-			{
-				int x = console.available();
-			}
+			int x = console.available();
 			byte [] 		b 			= new byte [] {(byte) 0};
 			int 			off 		= 0;
 			int 			len 		= 1;
