@@ -53,7 +53,7 @@ public class Control
 		if (true)
 		{
 			InputStream 	console 	= System.in;
-			Console 		console2 	= System.console();
+//			Console 		console2 	= System.console();
 			
 			if (console.available() > 0)
 			{
