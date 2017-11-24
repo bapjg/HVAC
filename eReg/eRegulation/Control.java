@@ -50,7 +50,7 @@ public class Control
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
 
-		if (true)
+		if (false)
 		{
 			InputStream 	console 	= System.in;
 //			Console 		console2 	= System.console();
@@ -64,12 +64,13 @@ public class Control
 			{
 				// Do something
 			}
+			int y = console.available();
 			
 			char escCode = 0x1B;
 			int row = 10; 
 			int column = 100;
-			System.out.print(String.format("%c[%d;%df",escCode,row,column));		
-			System.out.print("99999999999999999");		
+//			System.out.print(String.format("%c[%d;%df",escCode,row,column));		
+//			System.out.print("99999999999999999");		
 		}
 		
 //		Below is a test to use JNA in stead of JNI... It didn't work, failing on the statement
