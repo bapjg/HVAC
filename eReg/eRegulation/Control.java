@@ -3,6 +3,8 @@ package eRegulation;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
@@ -58,6 +60,38 @@ public class Control
 			Scanner s= new Scanner(System.in);
 			char xx = s.next().charAt(0);		
 
+			Reader reader = new InputStreamReader(System.in);
+			int ch = reader.read();
+			if (ch != -1) {  // check for EOF
+			    // we have a character ...
+			}
+			
+//			1. Use InputStreamReader to read one character at a time. 
+//			2. Use ready() method to determine when to read. 
+//			3. Example:
+//			InputStreamReader reader = new InputStreamReader(System.in); 
+//			 
+//			while(!exit) 
+//			{ 
+//				if ( reader.ready()) 
+//				{ 
+//					// read a character and process it 
+//				} 
+//			 
+//				// edit, lets not hog any cpu time 
+//				try 
+//				{ 
+//					Thread.sleep(50); 
+//				} 
+//				catch (InterruptedException ex) 
+//				{ 
+//					// can't do much about it can we? Ignoring  
+//				} 
+//			}
+			
+			
+			
+			
 			
 //			
 //			public class ConsoleReadingDemo {
