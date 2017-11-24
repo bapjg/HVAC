@@ -70,7 +70,7 @@ public class Control
 			
 			char escCode = 0x1B;
 			int row = 10; 
-			int column = 10;
+			int column = 100;
 			System.out.print(String.format("%c[%d;%df",escCode,row,column));		
 			System.out.print("99999999999999999");		
 		}
