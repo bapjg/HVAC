@@ -84,18 +84,18 @@ public class Control
 				Form_Actions formActions = new Form_Actions();
 				formActions.setVisible(true);
 
-				JFrame frame = new JFrame("FrameDemo");
-		        frame.setMinimumSize(new Dimension(800, 400));
-		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
-	
-		        JLabel myLabel = new JLabel("Hello World !!!", SwingConstants.CENTER);
-		        myLabel.setFont(new Font("Serif", Font.BOLD, 22));
-		        myLabel.setBackground(Color.blue);
-		        myLabel.setOpaque(true);
-		        myLabel.setPreferredSize(new Dimension(100, 80));
-	
-		        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
-		        frame.setVisible(true);
+//				JFrame frame = new JFrame("FrameDemo");
+//		        frame.setMinimumSize(new Dimension(800, 400));
+//		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
+//	
+//		        JLabel myLabel = new JLabel("Hello World !!!", SwingConstants.CENTER);
+//		        myLabel.setFont(new Font("Serif", Font.BOLD, 22));
+//		        myLabel.setBackground(Color.blue);
+//		        myLabel.setOpaque(true);
+//		        myLabel.setPreferredSize(new Dimension(100, 80));
+//	
+//		        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
+//		        frame.setVisible(true);
 			}
 			
 			
