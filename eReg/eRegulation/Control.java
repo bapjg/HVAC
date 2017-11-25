@@ -67,7 +67,7 @@ public class Control
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
 
-		if (true)
+		if (false)
 		{
 //	        JFrame frame = new JFrame("FrameDemo");
 //	        frame.setMinimumSize(new Dimension(800, 400));
@@ -82,7 +82,7 @@ public class Control
 //	        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
 
 			boolean headLess = GraphicsEnvironment.isHeadless();
-			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+//			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
 
 			
 			
