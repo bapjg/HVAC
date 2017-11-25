@@ -84,6 +84,7 @@ public class Control
 		        myLabel.setPreferredSize(new Dimension(100, 80));
 	
 		        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
+		        frame.setVisible(true);
 			}
 			
 			
