@@ -1,5 +1,11 @@
 package eRegulation;
 
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +13,10 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.text.DecimalFormat;
 import java.util.Scanner;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
@@ -54,45 +64,61 @@ public class Control
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
 
-		if (false)
+		if (true)
 		{
+	        JFrame frame = new JFrame("FrameDemo");
+	        frame.setMinimumSize(new Dimension(800, 400));
+	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
 
-			Reader reader = new InputStreamReader(System.in);
+	        JLabel myLabel = new JLabel("Hello World !!!", SwingConstants.CENTER);
+	        myLabel.setFont(new Font("Serif", Font.BOLD, 22));
+	        myLabel.setBackground(Color.blue);
+	        myLabel.setOpaque(true);
+	        myLabel.setPreferredSize(new Dimension(100, 80));
+
+	        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
 			
 			
-		    while (true)
-		    {
-			    System.out.println("ready : " + reader.ready());
-				int ch = reader.read();
-				if (ch == -1)   break;
-			    System.out.println("char : " + ch);
+			System.out.println("Reader");
+	        Reader reader = new InputStreamReader(System.in);
+			System.out.println("ready : " + reader.ready());
+			int ch = reader.read();
+			System.out.println("char : " + ch);
 		    
-		    }
+			System.out.println("InputStreamReader");
+			InputStreamReader reader2 = new InputStreamReader(System.in);
+			System.out.println("ready : " + reader2.ready());
+			int ch2 = reader.read();
+			System.out.println("char : " + ch2);
+		
+			
+			System.out.println("InputStreamReader & System.in.read() Try1");
+			InputStreamReader reader3 = new InputStreamReader(System.in);
+            int key;
+			System.out.println("ready : " + reader3.ready());
+            try 
+            {
+                key = System.in.read();
+                // read a character and process it 
+                System.out.println("key pressed");
+             } 
+            catch (java.io.IOException ioex) 
+            {
+                System.out.println("IO Exception");
+            }
 
-			
-//			1. Use InputStreamReader to read one character at a time. 
-//			2. Use ready() method to determine when to read. 
-//			3. Example:
-//			InputStreamReader reader = new InputStreamReader(System.in); 
-//			 
-//			while(!exit) 
-//			{ 
-//				if ( reader.ready()) 
-//				{ 
-//					// read a character and process it 
-//				} 
-//			 
-//				// edit, lets not hog any cpu time 
-//				try 
-//				{ 
-//					Thread.sleep(50); 
-//				} 
-//				catch (InterruptedException ex) 
-//				{ 
-//					// can't do much about it can we? Ignoring  
-//				} 
-//			}
-			
+			System.out.println("InputStreamReader & System.in.read() Try2");
+			System.out.println("ready : " + reader3.ready());
+            try 
+            {
+                key = System.in.read();
+                // read a character and process it 
+                System.out.println("key pressed");
+             } 
+            catch (java.io.IOException ioex) 
+            {
+                System.out.println("IO Exception");
+            }
 			
 			
 			
