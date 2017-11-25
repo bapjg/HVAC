@@ -82,7 +82,7 @@ public class Control
 //	        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
 
 			boolean headLess = GraphicsEnvironment.isHeadless();
-//			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
+			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
 
 			
 			
