@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
 import java.io.Console;
@@ -81,8 +82,8 @@ public class Control
 //	        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
 
 			boolean headLess = GraphicsEnvironment.isHeadless();
-//			GraphicsDevice[] gd = GraphicsEnvironment.getScreenDevices();
-//			var gd1 = GraphicsEnvironment.getScreenDevices();
+			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+
 			
 			
 			
