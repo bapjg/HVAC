@@ -6,8 +6,8 @@ PROJECT = /home/pi/HVAC/eReg/eRegulation
 so:							# This is still relevant as may need to rebuild Interfaces.so file Compiles and Links Interfaces_SPI and Interfaces_I2C
 	rm -f *.so
 	rm -f *.o
-	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
-	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces_I2C.c -o Interfaces_I2C.o
+	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
+	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include/linux -c Interfaces_I2C.c -o Interfaces_I2C.o
 	gcc -Wall -O2 -shared -o libInterfaces_SPI.so Interfaces_SPI.o
 	gcc -Wall -O2 -shared -o libInterfaces_I2C.so Interfaces_I2C.o
 
@@ -16,7 +16,7 @@ SPI:						# Compiles Interfaces_SPI
 spi:						# Compiles Interfaces_SPI
 	rm -f Interfaces_SPI.so
 	rm -f Interfaces_SPI.o
-	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
+	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
 	gcc -Wall -O2 -shared -o libInterfaces_SPI.so Interfaces_SPI.o
 
 I2C:						# Compiles Interfaces_I2C
@@ -59,7 +59,7 @@ scan:				# lower case so that file never exists and make says nothing to update.
 #	git stash drop
 	git pull
 
-	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
+	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
 	
 	gcc -Wall -O2 -c -o Scan.o Scan.c
 	gcc              -o Scan   Scan.o Interfaces_SPI.o
