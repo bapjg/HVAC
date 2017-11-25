@@ -1,5 +1,6 @@
 package eRegulation;
 
+import eReg_Forms.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -74,9 +75,15 @@ public class Control
 			{
 				GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
 		        
-				eReg_Forms.Form_LogIt formLogIt = new eReg_Forms.Form_LogIt();
+				Form_LogIt formLogIt = new Form_LogIt();
 				formLogIt.setVisible(true);
 				
+				Form_Temperatures formTemperatures = new Form_Temperatures();
+				formTemperatures.setVisible(true);
+				
+				Form_Actions formActions = new Form_Actions();
+				formActions.setVisible(true);
+
 				JFrame frame = new JFrame("FrameDemo");
 		        frame.setMinimumSize(new Dimension(800, 400));
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
