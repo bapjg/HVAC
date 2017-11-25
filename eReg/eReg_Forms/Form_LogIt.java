@@ -46,7 +46,7 @@ public class Form_LogIt extends JFrame
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(1, 5, 0, 0));
+		contentPane.setLayout(new GridLayout(0, 5, 0, 0));
 	}
 
 }
