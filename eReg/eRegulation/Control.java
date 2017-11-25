@@ -54,7 +54,7 @@ public class Control
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
 
-		if (true)
+		if (false)
 		{
 
 			Reader reader = new InputStreamReader(System.in);
