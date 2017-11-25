@@ -69,21 +69,22 @@ public class Control
 
 		if (true)
 		{
-//	        JFrame frame = new JFrame("FrameDemo");
-//	        frame.setMinimumSize(new Dimension(800, 400));
-//	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
-//
-//	        JLabel myLabel = new JLabel("Hello World !!!", SwingConstants.CENTER);
-//	        myLabel.setFont(new Font("Serif", Font.BOLD, 22));
-//	        myLabel.setBackground(Color.blue);
-//	        myLabel.setOpaque(true);
-//	        myLabel.setPreferredSize(new Dimension(100, 80));
-//
-//	        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
 
-			boolean headLess = GraphicsEnvironment.isHeadless();
-			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
-
+			if (!GraphicsEnvironment.isHeadless())
+			{
+				GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
+		        JFrame frame = new JFrame("FrameDemo");
+		        frame.setMinimumSize(new Dimension(800, 400));
+		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
+	
+		        JLabel myLabel = new JLabel("Hello World !!!", SwingConstants.CENTER);
+		        myLabel.setFont(new Font("Serif", Font.BOLD, 22));
+		        myLabel.setBackground(Color.blue);
+		        myLabel.setOpaque(true);
+		        myLabel.setPreferredSize(new Dimension(100, 80));
+	
+		        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
+			}
 			
 			
 			
