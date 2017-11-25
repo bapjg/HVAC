@@ -67,7 +67,7 @@ public class Control
 		    {
 			    System.out.println("ready : " + reader.ready());
 				int ch = reader.read();
-				if (ch != -1)   break;
+				if (ch == -1)   break;
 			    System.out.println("char : " + ch);
 		    
 		    }
