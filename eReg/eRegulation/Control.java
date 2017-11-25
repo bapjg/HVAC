@@ -97,9 +97,6 @@ public class Control
 			
 			
 			
-//			
-//			public class ConsoleReadingDemo {
-//			    public static void main(String[] args) {
 //			        java.io.InputStreamReader reader = new java.io.InputStreamReader(System.in);
 //			        boolean b = false;
 //			        while(!b)
@@ -122,33 +119,9 @@ public class Control
 //			                System.out.println("Interrupted Exception");
 //			             }
 //			        }
-//			    }
-//			}			
-//			
+		
 			
-			
-			
-			
-			
-			
-			
-			InputStream 	console 	= System.in;
-//			Console 		console2 	= System.console();
-			
-			int 			x 			= console.available();
-			byte [] 		b 			= new byte [] {(byte) 0};
-			int 			off 		= 0;
-			int 			len 		= 1;
-			
-			if (console.read(b, off, len) > 0)		// console returns number of bytes read
-			{
-				// Do something
-			}
-			int 			y 			= console.available();
-			
-			char 			escCode 	= 0x1B;
-			int 			row 		= 10; 
-			int 			column 		= 100;
+
 //			System.out.print(String.format("%c[%d;%df",escCode,row,column));		
 //			System.out.print("99999999999999999");		
 		}
