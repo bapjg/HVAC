@@ -67,7 +67,7 @@ public class Control
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
 
-		if (true)
+		if (false)
 		{
 //	        JFrame frame = new JFrame("FrameDemo");
 //	        frame.setMinimumSize(new Dimension(800, 400));
