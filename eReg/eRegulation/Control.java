@@ -57,8 +57,8 @@ public class Control
 		if (true)
 		{
 
-			Scanner s= new Scanner(System.in);
-			char xx = s.next().charAt(0);		
+//			Scanner s= new Scanner(System.in);
+//			char xx = s.next().charAt(0);		
 
 			Reader reader = new InputStreamReader(System.in);
 			int ch = reader.read();
