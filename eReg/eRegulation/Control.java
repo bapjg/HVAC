@@ -61,6 +61,9 @@ public class Control
 //			char xx = s.next().charAt(0);		
 
 			Reader reader = new InputStreamReader(System.in);
+			
+		    System.out.println("ready : " + reader.ready());
+			
 			int ch = reader.read();
 			if (ch != -1)   // check for EOF
 			{
