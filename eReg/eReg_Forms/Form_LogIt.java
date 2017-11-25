@@ -41,6 +41,7 @@ public class Form_LogIt extends JFrame
 	 */
 	public Form_LogIt()
 	{
+		setTitle("LogIt");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 487, 309);
 		contentPane = new JPanel();
