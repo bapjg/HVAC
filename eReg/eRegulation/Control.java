@@ -67,7 +67,7 @@ public class Control
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
 
-		if (false)
+		if (true)
 		{
 //	        JFrame frame = new JFrame("FrameDemo");
 //	        frame.setMinimumSize(new Dimension(800, 400));
@@ -89,13 +89,15 @@ public class Control
 			
 			System.out.println("Reader");
 	        Reader reader = new InputStreamReader(System.in);
-			System.out.println("ready : " + reader.ready());
+	        boolean ready1 = reader.ready();
+			System.out.println("ready : " + ready1);
 			int ch = reader.read();
 			System.out.println("char : " + ch);
 		    
 			System.out.println("InputStreamReader");
 			InputStreamReader reader2 = new InputStreamReader(System.in);
-			System.out.println("ready : " + reader2.ready());
+	        boolean ready2 = reader2.ready();
+			System.out.println("ready : " + ready2);
 			int ch2 = reader.read();
 			System.out.println("char : " + ch2);
 		
@@ -103,7 +105,8 @@ public class Control
 			System.out.println("InputStreamReader & System.in.read() Try1");
 			InputStreamReader reader3 = new InputStreamReader(System.in);
             int key;
-			System.out.println("ready : " + reader3.ready());
+	        boolean ready3 = reader3.ready();
+			System.out.println("ready : " + ready3);
             try 
             {
                 key = System.in.read();
