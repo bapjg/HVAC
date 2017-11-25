@@ -63,7 +63,22 @@ public class Control
 //		if (System.getProperty("os.name").equalsIgnoreCase("windows"))	System.out.println("libraries not loaded");
 //		else															System.loadLibrary("Interfaces_SPI");
 
-		if (System.getProperty("os.name").equalsIgnoreCase("windows"))	return;
+		
+		if (!GraphicsEnvironment.isHeadless())		// Tested under Windows
+		{
+			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
+	        
+			Form_Control formControl = new Form_Control();
+			formControl.setVisible(true);
+			
+		}
+		
+		
+		
+		
+		String osName = System.getProperty("os.name").toLowerCase();
+		
+		if (osName.contains("windows"))	return;
 		
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
