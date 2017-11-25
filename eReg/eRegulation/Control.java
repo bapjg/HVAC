@@ -62,17 +62,16 @@ public class Control
 
 			Reader reader = new InputStreamReader(System.in);
 			
-		    System.out.println("ready : " + reader.ready());
 			
-			int ch = reader.read();
-			if (ch != -1)   // check for EOF
-			{
-			    int xyz = ch;
-			    if (xyz == -1)
-			    {
-			    	xyz = 22;
-			    }
-			}
+		    while (true)
+		    {
+			    System.out.println("ready : " + reader.ready());
+				int ch = reader.read();
+				if (ch != -1)   break;
+			    System.out.println("char : " + ch);
+		    
+		    }
+
 			
 //			1. Use InputStreamReader to read one character at a time. 
 //			2. Use ready() method to determine when to read. 
