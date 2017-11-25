@@ -4,3 +4,5 @@
 !*.jar
 /doc
 !/eRegulation/*
+!/eReg_Forms/*
+
