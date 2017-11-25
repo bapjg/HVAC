@@ -5,12 +5,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
@@ -66,17 +68,22 @@ public class Control
 
 		if (true)
 		{
-	        JFrame frame = new JFrame("FrameDemo");
-	        frame.setMinimumSize(new Dimension(800, 400));
-	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
+//	        JFrame frame = new JFrame("FrameDemo");
+//	        frame.setMinimumSize(new Dimension(800, 400));
+//	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
+//
+//	        JLabel myLabel = new JLabel("Hello World !!!", SwingConstants.CENTER);
+//	        myLabel.setFont(new Font("Serif", Font.BOLD, 22));
+//	        myLabel.setBackground(Color.blue);
+//	        myLabel.setOpaque(true);
+//	        myLabel.setPreferredSize(new Dimension(100, 80));
+//
+//	        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
 
-	        JLabel myLabel = new JLabel("Hello World !!!", SwingConstants.CENTER);
-	        myLabel.setFont(new Font("Serif", Font.BOLD, 22));
-	        myLabel.setBackground(Color.blue);
-	        myLabel.setOpaque(true);
-	        myLabel.setPreferredSize(new Dimension(100, 80));
-
-	        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
+			boolean headLess = GraphicsEnvironment.isHeadless();
+//			GraphicsDevice[] gd = GraphicsEnvironment.getScreenDevices();
+//			var gd1 = GraphicsEnvironment.getScreenDevices();
+			
 			
 			
 			System.out.println("Reader");
