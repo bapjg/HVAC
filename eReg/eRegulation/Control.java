@@ -57,9 +57,6 @@ public class Control
 		if (true)
 		{
 
-//			Scanner s= new Scanner(System.in);
-//			char xx = s.next().charAt(0);		
-
 			Reader reader = new InputStreamReader(System.in);
 			
 			
@@ -134,12 +131,6 @@ public class Control
 			
 			
 			
-			char [] a;
-		    String temp;
-		    Scanner keyboard = new Scanner(System.in);
-		    System.out.println("please give the first integer :");
-		    temp=keyboard.next();
-		    a=temp.toCharArray();
 			
 			InputStream 	console 	= System.in;
 //			Console 		console2 	= System.console();
