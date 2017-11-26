@@ -338,6 +338,24 @@ public class Control
 //		6 : Debug and Wait
 //		7 : Debug no wait
 
+
+// Would need to run git pull first, and check finished before restarting	would need to test under debugger with "SLEEP 5".
+		// Could have problems as git pull will be overwriting .class files
+		// Doc says that should be ok (just before restating)
+		
+//		  public static void main(String[] args) {
+//			    try {
+//			      ProcessBuilder pb = new ProcessBuilder("/home/sam/myscript.sh");
+//			      Process p = pb.start();     // Start the process.
+//			      p.waitFor();                // Wait for the process to finish.
+//			      System.out.println("Script executed successfully");
+//			    } catch (Exception e) {
+//			      e.printStackTrace();
+//			      }
+//
+//			  }	
+		
+		
 		
 //		public void restartApplication()
 //		{
