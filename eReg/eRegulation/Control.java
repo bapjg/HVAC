@@ -337,6 +337,15 @@ public class Control
 //		5 : ShutDown
 //		6 : Debug and Wait
 //		7 : Debug no wait
+
+		
+//	    Runtime runtime = Runtime.getRuntime();
+//	    Process proc = runtime.exec("sudo shutdown -r now");
+//	    System.exit(0);
+		
+		
+		Runtime 												runtime 					= Runtime.getRuntime();
+		
 		
 		switch (Global.exitStatus)
 		{
@@ -353,18 +362,34 @@ public class Control
  			System.exit(Ctrl_Actions_Stop.ACTION_Restart);
  			break;		
  		case Ctrl_Actions_Stop.ACTION_Reboot:												// Value 2 : Reboot Pi
-			Global.display.clear();
-			Global.display.writeAtPosition(0, 0, "Rebooting controler");
-	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true); 
- 			System.exit(Ctrl_Actions_Stop.ACTION_Reboot);
+//			Global.display.clear();
+//			Global.display.writeAtPosition(0, 0, "Rebooting controler");
+//	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true); 
+// 			System.exit(Ctrl_Actions_Stop.ACTION_Reboot);
+ 			
+	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true);
+	 		Global.waitSeconds(5);
+ 		    Process 									procReBoot 							= runtime.exec("sudo shutdown -r now");
+ 		    System.exit(0);
+ 			
+ 			
+ 			
  			break;
  		case Ctrl_Actions_Stop.ACTION_ShutDown:												// Value 5 : Reboot Pi
-			Global.display.clear();
-			Global.display.writeAtPosition(0, 0, "Shutting down");
-			Global.display.writeAtPosition(1, 2, "HVAC controler");
-			Global.display.writeAtPosition(2, 2, "completely");
+//			Global.display.clear();
+//			Global.display.writeAtPosition(0, 0, "Shutting down");
+//			Global.display.writeAtPosition(1, 2, "HVAC controler");
+//			Global.display.writeAtPosition(2, 2, "completely");
+//	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
+// 			System.exit(Ctrl_Actions_Stop.ACTION_ShutDown);
+
 	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
- 			System.exit(Ctrl_Actions_Stop.ACTION_ShutDown);
+	 		Global.waitSeconds(5);
+ 		    Process 									procHalt 							= runtime.exec("sudo shutdown -h now");
+ 		    System.exit(0);
+ 			
+ 			
+ 			
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_Wait:											// Value 6 : Reboot Pi
 			Global.display.clear();
