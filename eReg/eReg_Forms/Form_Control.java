@@ -17,17 +17,21 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
+import javax.swing.JTable;
+import java.awt.Dimension;
 
 public class Form_Control extends JFrame
 {
 
 	private JPanel contentPane;
+	private JTable table;
 
 
 	public Form_Control()
 	{
+		setMinimumSize(new Dimension(800, 800));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 701, 484);
+		setBounds(100, 100, 136, 252);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -142,11 +146,32 @@ public class Form_Control extends JFrame
 		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		paneLogIt.setBounds(10, 164, 665, 270);
 		contentPane.add(paneLogIt);
+		
+        String[] columnHeaders = new String[] {"Date", "Time", "Type", "From", "Message"};
+             
+            //actual data for the table in a 2d array
+            Object[][] rowData = new Object[][] 
+            {
+                {"01/01/2017", "11:54:00", "Warning", "Global", "Test 1"},
+                {"01/01/2017", "11:54:00", "Warning", "Global", "Test 2"},
+                {"01/01/2017", "11:54:00", "Warning", "Global", "Test 3"},
+            };
+            //create table with data
+            table = new JTable(rowData, columnHeaders);
+            table.setVisible(true);
+
+            //add the table to the frame
+ //           getContentPane().add(new JScrollPane(table));
+            paneLogIt.add(table) ;
+            this.pack();
+            this.setVisible(true);
+		
+		
+		
 	}
 	public void forceExit(int exitStatus) 
 	{
 		Global.stopNow																	= true;
 		Global.exitStatus																= exitStatus;
 	}
-
 }

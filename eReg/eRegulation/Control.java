@@ -69,7 +69,6 @@ public class Control
 			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
 	        
 			Form_Control formControl = new Form_Control();
-			formControl.setVisible(true);
 			
 		}
 		
@@ -86,18 +85,11 @@ public class Control
 		if (false)
 		{
 
-			if (!GraphicsEnvironment.isHeadless())
+			if (! GraphicsEnvironment.isHeadless())
 			{
 				GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
 		        
-				Form_LogIt formLogIt = new Form_LogIt();
-				formLogIt.setVisible(true);
-				
-				Form_Temperatures formTemperatures = new Form_Temperatures();
-				formTemperatures.setVisible(true);
-				
-				Form_Actions formActions = new Form_Actions();
-				formActions.setVisible(true);
+
 
 //				JFrame frame = new JFrame("FrameDemo");
 //		        frame.setMinimumSize(new Dimension(800, 400));
