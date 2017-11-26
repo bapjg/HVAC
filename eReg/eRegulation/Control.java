@@ -77,7 +77,7 @@ public class Control
 		
 		String osName = System.getProperty("os.name").toLowerCase();
 		
-		if (osName.contains("windows"))	return;
+		if (osName.contains("windows"))	System.exit(Ctrl_Actions_Stop.ACTION_Stop);
 		
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");

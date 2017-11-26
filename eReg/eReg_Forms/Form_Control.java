@@ -25,12 +25,15 @@ import javax.swing.table.DefaultTableModel;
 public class Form_Control extends JFrame
 {
 
-	private JPanel contentPane;
-	private JTable tableLogIt;
+	private JPanel 										contentPane;
+	private JTable 										tableLogIt;
+	private Form_Control_LogIt_Items 					logItItems;
 
 
 	public Form_Control()
 	{
+		logItItems	 																			= new Form_Control_LogIt_Items(100);
+		
 		setMinimumSize(new Dimension(800, 800));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 136, 252);
@@ -150,18 +153,18 @@ public class Form_Control extends JFrame
 		paneLogIt.setBounds(10, 172, 764, 300);
 		contentPane.add(paneLogIt);
 
-		tableLogIt = new JTable();
+		tableLogIt 																				= new JTable();
 		paneLogIt.setViewportView(tableLogIt);
 		
-		Form_Control_LogIt_Items items = new Form_Control_LogIt_Items(100);
-		
-		for (int i = 0; i < 110; i++)
-		{
-			items.add(new Form_Control_LogIt_Item("Warning", "Global", "Test " + i));
-		}
-		Form_Control_LogIt_Item lastItem = new Form_Control_LogIt_Item("Error", "Circuit_Abstract/Constructor", "HotWater" + " invalid pump " + "3");
-		items.add(lastItem);
-		tableLogIt.setModel(items);
+//		Form_Control_LogIt_Items items = new Form_Control_LogIt_Items(100);
+//		
+//		for (int i = 0; i < 110; i++)
+//		{
+//			items.add(new Form_Control_LogIt_Item("Warning", "Global", "Test " + i));
+//		}
+//		Form_Control_LogIt_Item lastItem = new Form_Control_LogIt_Item("Error", "Circuit_Abstract/Constructor", "HotWater" + " invalid pump " + "3");
+//		items.add(lastItem);
+		tableLogIt.setModel(logItItems);
 		
 
 		tableLogIt.getColumnModel().getColumn(0).setMinWidth(130);
@@ -172,6 +175,10 @@ public class Form_Control extends JFrame
 		
         this.pack();
         this.setVisible(true);
+	}
+	public void logMessage(String dateTimeStamp, String severity, String sender, String message)
+	{
+		logItItems.add(dateTimeStamp, severity, sender, message);
 	}
 	public void forceExit(int exitStatus) 
 	{

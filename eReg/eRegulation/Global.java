@@ -6,6 +6,7 @@ import org.xml.sax.SAXException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.awt.GraphicsEnvironment;
 import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -45,7 +46,7 @@ public class Global
 	//===================================================================
 	
 	public static 	Boolean										stopNow						= false;
-	public static 	int											exitStatus					= 0;	// 0 = stop app, 1 = restart app, 2 = reboot
+	public static 	int											exitStatus					= 0;	// 0 = stop app, 1 = restart app, 2 = reboot etc
 	
 	public static	PIDs										pids;
 	public static 	Thermometers 								thermometers;
@@ -83,6 +84,7 @@ public class Global
 	public static	Boiler										boiler;
 	public static	Burner										burner;
 
+	public static	eReg_Forms.Form_Control						formControl;
 	public static 	LCD											display;	
 	public static 	Buttons										buttons;	
 
@@ -98,6 +100,7 @@ public class Global
 	
 	public Global()
 	{
+		Global.formControl 																	= (! GraphicsEnvironment.isHeadless()) ? new eReg_Forms.Form_Control() : null;
 		Global.display 																		= new LCD();
 		Global.buttons 																		= new Buttons();	
 		Global.pids																			= new PIDs();
@@ -130,6 +133,8 @@ public class Global
 		// HTTP_Send	(new Ctrl_Json().new Request(Ctrl_Json.TYPE_Calendar));				// Fire these async actions as soon as possible
 		// HTTP_Request	<Ctrl_Configuration.Request>			httpRequest					= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
 
+		// TODO Look into this
+		
 		int x = 1;
 		int y = 2;
 		if (x == y)

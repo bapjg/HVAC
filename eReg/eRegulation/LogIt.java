@@ -50,63 +50,76 @@ public class LogIt
 	}
 	public static void  logMessage(String messageType, String className, String methodName, String message)
 	{
-		if (!Global.httpSemaphore.semaphoreLock("LogIt.logMessage"))
-		{
-			System.out.println(dateTimeStamp() + " LogIt.logMessage Lock timedout, owned by " + Global.httpSemaphore.owner);
-			return;
-		}
-
-		HTTP_Request	<Rpt_Report>							httpRequest					= new HTTP_Request <Rpt_Report> ("Monitor");
+		// TODO : Remove this as no longer used/analysed
 		
-		Rpt_Report	 											messageSend 				= new Rpt_Report();
-		messageSend.dateTime 																= System.currentTimeMillis();
-		messageSend.reportType 																= messageType;
-		messageSend.className 																= className;
-		messageSend.methodName 																= methodName;
-		messageSend.reportText 																= message;
-			
-		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
-			
-		if (!(messageReceive instanceof Rpt_Abstract.Ack))
-		{
-			// System.out.println(dateTimeStamp() + " Logit.logMessage" + messageType + "  is : Nack");
-		}
-		Global.httpSemaphore.semaphoreUnLock();			
+//		if (!Global.httpSemaphore.semaphoreLock("LogIt.logMessage"))
+//		{
+//			System.out.println(dateTimeStamp() + " LogIt.logMessage Lock timedout, owned by " + Global.httpSemaphore.owner);
+//			return;
+//		}
+//
+//		HTTP_Request	<Rpt_Report>							httpRequest					= new HTTP_Request <Rpt_Report> ("Monitor");
+//		
+//		Rpt_Report	 											messageSend 				= new Rpt_Report();
+//		messageSend.dateTime 																= System.currentTimeMillis();
+//		messageSend.reportType 																= messageType;
+//		messageSend.className 																= className;
+//		messageSend.methodName 																= methodName;
+//		messageSend.reportText 																= message;
+//			
+//		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
+//			
+//		if (!(messageReceive instanceof Rpt_Abstract.Ack))
+//		{
+//			// System.out.println(dateTimeStamp() + " Logit.logMessage" + messageType + "  is : Nack");
+//		}
+//		Global.httpSemaphore.semaphoreUnLock();			
 	}
 	
 	public static void  display(String className, String methodName, String message)
 	{
-		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
-		if (true)												toScreen	(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Display: " + classMethod + " - " + message);
+		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
+		if (Global.formControl != null)							Global.formControl.logMessage(dateTimeStamp(), "Display", sender, message);
+		else													toScreen	(dateTimeStamp() + " : Display: " + sender + " - " + message);
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Display: " + sender + " - " + message);
 	}
 	public static void  info(String className, String methodName, String message)
 	{
 		logMessage("Info", className, methodName, message);
-		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
-		if (logDisplay)											toScreen	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
+		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
+		if (Global.formControl != null)							Global.formControl.logMessage(dateTimeStamp(), "Info", sender, message);
+		else													toScreen	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
 	}
 	public static void  info(String className, String methodName, String message, Boolean display)
 	{
 		logMessage("Info", className, methodName, message);
-		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
-		if (display)											toScreen	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + classMethod + " - " + message);
+		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
+		if (display)
+		{
+			if (Global.formControl != null)						Global.formControl.logMessage(dateTimeStamp(), "Info", sender, message);
+			else												toScreen	(dateTimeStamp() + " : Info  : " + sender + " - " + message);
+		}
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
 	}
 	public static void  error(String className, String methodName, String message)
 	{
 		logMessage("Error", className, methodName, message);
-		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
-		if (logDisplay)											toScreen	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
+		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
+		if (Global.formControl != null)							Global.formControl.logMessage(dateTimeStamp(), "Error", sender, message);
+		else													toScreen	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
 	}
 	public static void  error(String className, String methodName, String message, Boolean display)
 	{
 		logMessage("Error", className, methodName, message);
-		String 													classMethod					= (className + "/" + methodName + spaces).substring(0,30);
-		if (display)											toScreen	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + classMethod + " - " + message);
+		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
+		if (display)
+		{
+			if (Global.formControl != null)						Global.formControl.logMessage(dateTimeStamp(), "Error", sender, message);
+			else												toScreen	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
+		}
+		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
 	}
 	public static void pidData	(Rpt_PID.Update	messageSend)
 	{
@@ -172,28 +185,30 @@ public class LogIt
     }
 	public static void mixerData(Long dateTimeStart, Integer positionTrackedStart, Long dateTimeEnd, Integer positionTrackedEnd)
     {
-		if (!Global.httpSemaphore.semaphoreLock("LogIt.mixerData"))
-		{
-			System.out.println(dateTimeStamp() + " LogIt.mixerData Lock timedout, owned by " + Global.httpSemaphore.owner);
-			return;
-		}
-
-		HTTP_Request <Rpt_MixerMouvement>						httpRequest					= new HTTP_Request <Rpt_MixerMouvement> ("Monitor");
-				
-		Rpt_MixerMouvement 										messageSend 				= new Rpt_MixerMouvement();
-		messageSend.dateTimeStart 															= dateTimeStart;
-		messageSend.positionTrackedStart 													= positionTrackedStart;
-		messageSend.dateTimeEnd 															= dateTimeEnd;
-		messageSend.positionTrackedEnd														= positionTrackedEnd;
-				
-		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
+		// Code removed as no longer logging mexer movements
 		
-		if (!(messageReceive instanceof Rpt_Abstract.Ack))
-		{
-			// System.out.println(dateTimeStamp() + " Temp data  is : Nack");
-		}
-
-		Global.httpSemaphore.semaphoreUnLock();			
+//		if (!Global.httpSemaphore.semaphoreLock("LogIt.mixerData"))
+//		{
+//			System.out.println(dateTimeStamp() + " LogIt.mixerData Lock timedout, owned by " + Global.httpSemaphore.owner);
+//			return;
+//		}
+//
+//		HTTP_Request <Rpt_MixerMouvement>						httpRequest					= new HTTP_Request <Rpt_MixerMouvement> ("Monitor");
+//				
+//		Rpt_MixerMouvement 										messageSend 				= new Rpt_MixerMouvement();
+//		messageSend.dateTimeStart 															= dateTimeStart;
+//		messageSend.positionTrackedStart 													= positionTrackedStart;
+//		messageSend.dateTimeEnd 															= dateTimeEnd;
+//		messageSend.positionTrackedEnd														= positionTrackedEnd;
+//				
+//		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
+//		
+//		if (!(messageReceive instanceof Rpt_Abstract.Ack))
+//		{
+//			// System.out.println(dateTimeStamp() + " Temp data  is : Nack");
+//		}
+//
+//		Global.httpSemaphore.semaphoreUnLock();			
     }
 	public static void fuelData(Long fuelConsumed)
     {

@@ -25,6 +25,11 @@ public class Form_Control_LogIt_Items extends AbstractTableModel
     	}
     	logItItems.add(0, item);
     }
+    public void add(String dateTimeStamp, String severity, String sender, String message)
+    {
+    	Form_Control_LogIt_Item							item 								= new Form_Control_LogIt_Item(dateTimeStamp, severity, sender, message);
+    	add(item);
+    }
     @Override
     public int getRowCount() 
     {
