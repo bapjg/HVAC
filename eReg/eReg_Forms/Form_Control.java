@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,17 +24,23 @@ import javax.swing.JTable;
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 
+//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Form_Control extends JFrame
 {
 
 	private JPanel 										contentPane;
 	private JTable 										tableLogIt;
 	private Form_Control_LogIt_Items 					logItItems;
-
+	private JFormattedTextField 						txtDate;
+	private JFormattedTextField 						txtTime;
+	private JFormattedTextField 						txtBoiler;
+	private JFormattedTextField 						txtHotWater;
+	private JFormattedTextField 						txtFloorOut;
+	private JFormattedTextField 						txtFloorIn;
 
 	public Form_Control()
 	{
-		logItItems	 																			= new Form_Control_LogIt_Items(100);
+		logItItems	 																		= new Form_Control_LogIt_Items(100);
 		
 		setMinimumSize(new Dimension(800, 800));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -92,57 +100,60 @@ public class Form_Control extends JFrame
 		});
 		paneButtons.add(btnDebugNoWait);
 		
-		JPanel paneTemperatures = new JPanel();
+		JPanel 													paneTemperatures 			= new JPanel();
 		paneTemperatures.setBounds(292, 11, 383, 155);
 		contentPane.add(paneTemperatures);
 		paneTemperatures.setLayout(null);
 		
-		JLabel lblUpdatedOn = new JLabel("Updated on");
+		JLabel 													lblUpdatedOn 				= new JLabel("Updated on");
 		lblUpdatedOn.setBounds(10, 14, 111, 14);
 		paneTemperatures.add(lblUpdatedOn);
 		
-		JLabel lblBoiler = new JLabel("Boiler");
+		JLabel 													lblBoiler 					= new JLabel("Boiler");
 		lblBoiler.setBounds(10, 60, 111, 14);
 		paneTemperatures.add(lblBoiler);
 		
-		JLabel lblHotWater = new JLabel("Hot Water");
+		JLabel 													lblHotWater 				= new JLabel("Hot Water");
 		lblHotWater.setBounds(10, 85, 111, 14);
 		paneTemperatures.add(lblHotWater);
 		
-		JLabel lblFloorOut = new JLabel("Floor Out");
+		JLabel 													lblFloorOut 				= new JLabel("Floor Out");
 		lblFloorOut.setBounds(10, 110, 111, 14);
 		paneTemperatures.add(lblFloorOut);
 		
-		JLabel lblFloorIn = new JLabel("Floor In");
+		JLabel 													lblFloorIn 					= new JLabel("Floor In");
 		lblFloorIn.setBounds(10, 135, 111, 14);
 		paneTemperatures.add(lblFloorIn);
+
 		
-		JFormattedTextField txtDate = new JFormattedTextField();
+		
+		
+		txtDate 																			= new JFormattedTextField();
 		txtDate.setEditable(false);
 		txtDate.setBounds(131, 11, 73, 20);
 		paneTemperatures.add(txtDate);
 		
-		JFormattedTextField txtTime = new JFormattedTextField();
+		txtTime  																			= new JFormattedTextField();
 		txtTime.setEditable(false);
 		txtTime.setBounds(248, 11, 73, 20);
 		paneTemperatures.add(txtTime);
 		
-		JFormattedTextField txtBoiler = new JFormattedTextField();
+		txtBoiler  																			= new JFormattedTextField();
 		txtBoiler.setEditable(false);
 		txtBoiler.setBounds(193, 57, 73, 20);
 		paneTemperatures.add(txtBoiler);
 		
-		JFormattedTextField txtHotWater = new JFormattedTextField();
+		txtHotWater  																		= new JFormattedTextField();
 		txtHotWater.setEditable(false);
 		txtHotWater.setBounds(193, 82, 73, 20);
 		paneTemperatures.add(txtHotWater);
 		
-		JFormattedTextField txtFloorOut = new JFormattedTextField();
+		txtFloorOut  																		= new JFormattedTextField();
 		txtFloorOut.setEditable(false);
 		txtFloorOut.setBounds(193, 107, 73, 20);
 		paneTemperatures.add(txtFloorOut);
 		
-		JFormattedTextField txtFloorIn = new JFormattedTextField();
+		txtFloorIn  																		= new JFormattedTextField();
 		txtFloorIn.setEditable(false);
 		txtFloorIn.setBounds(193, 132, 73, 20);
 		paneTemperatures.add(txtFloorIn);
@@ -179,6 +190,26 @@ public class Form_Control extends JFrame
 	public void logMessage(String dateTimeStamp, String severity, String sender, String message)
 	{
 		logItItems.add(dateTimeStamp, severity, sender, message);
+	}
+	public void showTemperatures()
+	{
+		Date date                                               		= new Date();
+		SimpleDateFormat    dateFormat                          		= new SimpleDateFormat("dd.MM");
+		SimpleDateFormat    timeFormat                          		= new SimpleDateFormat("HH:mm:ss");
+		
+		Global.display.writeAtPosition(0, 0, dateFormat.format(date));
+		txtDate.setValue(dateFormat);
+		txtTime.setValue(timeFormat);
+
+		txtBoiler		.setValue(Global.thermoBoiler		.toDisplay());
+		txtHotWater		.setValue(Global.thermoHotWater		.toDisplay());
+		txtFloorOut		.setValue(Global.thermoBoilerOut	.toDisplay());
+		txtFloorIn		.setValue(Global.thermoFloorIn		.toDisplay());
+
+		// ToDo : Add other temperatures
+		
+//		Global.display.writeAtPosition(2, 5,  Global.thermoBoilerOut.toDisplay() + "  ");
+//		Global.display.writeAtPosition(3, 16, Global.thermoLivingRoom.toDisplay());
 	}
 	public void forceExit(int exitStatus) 
 	{

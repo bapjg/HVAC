@@ -115,7 +115,7 @@ public class Thermometer
     	// Converts temperature in millidegrees into displayable format							// Either keep true or throw it out from display
     	DecimalFormat 										temperatureFormat 				= new DecimalFormat("0.0");
     	if (this.reading == null)							return "-273";
-    	else 												return  temperatureFormat.format((float) (this.reading)/1000F);
+    	else 												return  temperatureFormat.format((float) (this.reading)/1000F) + "°C";
     }
     public class Probe
     {

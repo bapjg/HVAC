@@ -204,8 +204,9 @@ public class Thread_UserInterface implements Runnable
 		Integer x = 0;
 		x++;
 		
-		Date date                                               		= new Date();
-		SimpleDateFormat    dateFormat                          		= new SimpleDateFormat("dd.MM HH:mm:ss");
+		if (Global.formControl != null)										Global.formControl.showTemperatures();
+		Date date                                               			= new Date();
+		SimpleDateFormat    dateFormat                          			= new SimpleDateFormat("dd.MM HH:mm:ss");
 		
 		Global.display.writeAtPosition(0, 0, dateFormat.format(date));
 
