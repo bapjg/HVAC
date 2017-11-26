@@ -2,141 +2,151 @@ package eReg_Forms;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JSplitPane;
-import javax.swing.JToolBar;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
+
+import HVAC_Common.Ctrl_Actions_Stop;
+import eRegulation.Global;
+
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
+import javax.swing.JButton;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Form_Control extends JFrame
 {
 
-	private JPanel 												contentPane;
-//	private final JSplitPane 									splitPane 					= new JSplitPane();
-//	private JSplitPane splitPane_1;
+	private JPanel contentPane;
 
 
 	public Form_Control()
 	{
-		setTitle("HVAC eRegulation");
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 856, 545);
-
-		contentPane 																		= new JPanel();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 701, 484);
+		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setSize( new Dimension(200, 200));
-//		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
-//				FormSpecs.UNRELATED_GAP_COLSPEC,
-//				ColumnSpec.decode("588px"),},
-//			new RowSpec[] {
-//				FormSpecs.UNRELATED_GAP_ROWSPEC,
-//				RowSpec.decode("379px"),}));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		JSplitPane 												splitTopBottom				= new JSplitPane();
-		splitTopBottom.setMinimumSize(new Dimension(200, 200));
-		splitTopBottom.setSize(new Dimension(200, 200));
-		splitTopBottom.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		contentPane.add(splitTopBottom, "2, 2, fill, fill");
+		JPanel paneButtons = new JPanel();
+		paneButtons.setBounds(10, 11, 284, 155);
+		paneButtons.setLayout(null);
+		contentPane.add(paneButtons);
 		
-		JSplitPane												splitLeftRight 				= new JSplitPane();
-		splitLeftRight.setMinimumSize(new Dimension(203, 150));
-		splitLeftRight.setResizeWeight(0.5);
-		splitLeftRight.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
-		splitLeftRight.setContinuousLayout(false);
-		splitTopBottom.setTopComponent(splitLeftRight);
+		JButton btnReBoot = new JButton("ReBoot");
+		btnReBoot.setBounds(34, 21, 90, 20);
+		btnReBoot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				forceExit(Ctrl_Actions_Stop.ACTION_Reboot);
+			}
+		});
+		paneButtons.add(btnReBoot);
 		
-		JPanel 													panelLeft					= new JPanel();
-		JPanel 													panelRight					= new JPanel();
-		JPanel 													panelBottom					= new JPanel();
-		panelBottom.setMinimumSize(new Dimension(10, 100));
-		splitLeftRight.setLeftComponent(panelLeft);
-		panelLeft.setLayout(null);
+		JButton btnBash = new JButton("Bash");
+		btnBash.setBounds(34, 81, 90, 20);
+		btnBash.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				forceExit(Ctrl_Actions_Stop.ACTION_Stop);
+			}
+		});
+		paneButtons.add(btnBash);
 		
-		JButton 												btnReBoot 					= new JButton("ReBoot");
-		btnReBoot.setBounds(10, 5, 90, 20);
-		panelLeft.add(btnReBoot);
-		JButton 												btnDebugWait 				= new JButton("Debug Wait");
-		btnDebugWait.setBounds(10, 35, 90, 20);
-		panelLeft.add(btnDebugWait);
-		JButton 												btnBash 					= new JButton("Bash");
-		btnBash.setBounds(10, 65, 90, 20);
-		panelLeft.add(btnBash);
-		JButton 												btnDebugNoWait 				= new JButton("Debug No Wait");
-		btnDebugNoWait.setBounds(140, 5, 110, 20);
-		panelLeft.add(btnDebugNoWait);
-		JButton 												btnQuit 					= new JButton("Quit");
-		btnQuit.setBounds(140, 35, 110, 20);
-		panelLeft.add(btnQuit);
+		JButton btnRestart= new JButton("ReStart");
+		btnRestart.setBounds(164, 51, 110, 20);
+		btnRestart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				forceExit(Ctrl_Actions_Stop.ACTION_Restart);
+			}
+		});
+		paneButtons.add(btnRestart);
 		
-		splitLeftRight.setRightComponent(panelRight);
-		panelRight.setLayout(null);
+		JButton btnDebugWait = new JButton("Debug Wait");
+		btnDebugWait.setBounds(34, 51, 90, 20);
+		btnDebugWait.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				forceExit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
+			}
+		});
+		paneButtons.add(btnDebugWait);
 		
-		JLabel lblUpdated = new JLabel("Updated on");
-		lblUpdated.setBounds(20, 8, 56, 14);
-		panelRight.add(lblUpdated);
+		JButton btnDebugNoWait = new JButton("Debug No Wait");
+		btnDebugNoWait.setBounds(164, 21, 110, 20);
+		btnDebugNoWait.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				forceExit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
+			}
+		});
+		paneButtons.add(btnDebugNoWait);
 		
-		JFormattedTextField txtDate = new JFormattedTextField();
-		txtDate.setBounds(86, 5, 69, 20);
-		txtDate.setEditable(false);
-		panelRight.add(txtDate);
+		JPanel paneTemperatures = new JPanel();
+		paneTemperatures.setBounds(292, 11, 383, 155);
+		contentPane.add(paneTemperatures);
+		paneTemperatures.setLayout(null);
 		
-		JFormattedTextField txtTime = new JFormattedTextField();
-		txtTime.setBounds(165, 5, 80, 20);
-		txtTime.setEditable(false);
-		panelRight.add(txtTime);
+		JLabel lblUpdatedOn = new JLabel("Updated on");
+		lblUpdatedOn.setBounds(10, 14, 111, 14);
+		paneTemperatures.add(lblUpdatedOn);
 		
 		JLabel lblBoiler = new JLabel("Boiler");
-		lblBoiler.setBounds(10, 36, 111, 14);
-		panelRight.add(lblBoiler);
+		lblBoiler.setBounds(10, 60, 111, 14);
+		paneTemperatures.add(lblBoiler);
 		
 		JLabel lblHotWater = new JLabel("Hot Water");
-		lblHotWater.setBounds(10, 61, 111, 14);
-		panelRight.add(lblHotWater);
+		lblHotWater.setBounds(10, 85, 111, 14);
+		paneTemperatures.add(lblHotWater);
 		
 		JLabel lblFloorOut = new JLabel("Floor Out");
-		lblFloorOut.setBounds(10, 86, 111, 14);
-		panelRight.add(lblFloorOut);
+		lblFloorOut.setBounds(10, 110, 111, 14);
+		paneTemperatures.add(lblFloorOut);
 		
 		JLabel lblFloorIn = new JLabel("Floor In");
-		lblFloorIn.setBounds(10, 111, 111, 14);
-		panelRight.add(lblFloorIn);
+		lblFloorIn.setBounds(10, 135, 111, 14);
+		paneTemperatures.add(lblFloorIn);
+		
+		JFormattedTextField txtDate = new JFormattedTextField();
+		txtDate.setEditable(false);
+		txtDate.setBounds(131, 11, 73, 20);
+		paneTemperatures.add(txtDate);
+		
+		JFormattedTextField txtTime = new JFormattedTextField();
+		txtTime.setEditable(false);
+		txtTime.setBounds(248, 11, 73, 20);
+		paneTemperatures.add(txtTime);
 		
 		JFormattedTextField txtBoiler = new JFormattedTextField();
 		txtBoiler.setEditable(false);
-		txtBoiler.setBounds(193, 33, 73, 20);
-		panelRight.add(txtBoiler);
+		txtBoiler.setBounds(193, 57, 73, 20);
+		paneTemperatures.add(txtBoiler);
 		
 		JFormattedTextField txtHotWater = new JFormattedTextField();
 		txtHotWater.setEditable(false);
-		txtHotWater.setBounds(193, 58, 73, 20);
-		panelRight.add(txtHotWater);
+		txtHotWater.setBounds(193, 82, 73, 20);
+		paneTemperatures.add(txtHotWater);
 		
 		JFormattedTextField txtFloorOut = new JFormattedTextField();
 		txtFloorOut.setEditable(false);
-		txtFloorOut.setBounds(193, 83, 73, 20);
-		panelRight.add(txtFloorOut);
+		txtFloorOut.setBounds(193, 107, 73, 20);
+		paneTemperatures.add(txtFloorOut);
 		
 		JFormattedTextField txtFloorIn = new JFormattedTextField();
 		txtFloorIn.setEditable(false);
-		txtFloorIn.setBounds(193, 108, 73, 20);
-		panelRight.add(txtFloorIn);
-		splitTopBottom.setBottomComponent(panelBottom);
+		txtFloorIn.setBounds(193, 132, 73, 20);
+		paneTemperatures.add(txtFloorIn);
+		
+		JScrollPane paneLogIt = new JScrollPane();
+		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		paneLogIt.setBounds(10, 164, 665, 270);
+		contentPane.add(paneLogIt);
 	}
+	public void forceExit(int exitStatus) 
+	{
+		Global.stopNow																	= true;
+		Global.exitStatus																= exitStatus;
+	}
+
 }
