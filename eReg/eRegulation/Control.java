@@ -339,10 +339,46 @@ public class Control
 //		7 : Debug no wait
 
 		
-//	    Runtime runtime = Runtime.getRuntime();
-//	    Process proc = runtime.exec("sudo shutdown -r now");
-//	    System.exit(0);
-		
+//		public void restartApplication()
+//		{
+//		  final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+//		  final File currentJar = new File(MyClassInTheJar.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+//
+//		  /* is it a jar file? */
+//		  if(!currentJar.getName().endsWith(".jar"))
+//		    return;
+//
+//		  /* Build command: java -jar application.jar */
+//		  final ArrayList<String> command = new ArrayList<String>();
+//		  command.add(javaBin);
+//		  command.add("-jar");
+//		  command.add(currentJar.getPath());
+//
+//		  final ProcessBuilder builder = new ProcessBuilder(command);
+//		  builder.start();
+//		  System.exit(0);
+//		}
+
+//		import java.io.File;
+//		import java.io.IOException;
+//		import java.lang.management.ManagementFactory;
+//
+//		public class Main {
+//		    public static void main(String[] args) throws IOException, InterruptedException {
+//		        StringBuilder cmd = new StringBuilder();
+//		        cmd.append(System.getProperty("java.home") + File.separator + "bin" + File.separator + "java ");
+//		        for (String jvmArg : ManagementFactory.getRuntimeMXBean().getInputArguments()) {
+//		            cmd.append(jvmArg + " ");
+//		        }
+//		        cmd.append("-cp ").append(ManagementFactory.getRuntimeMXBean().getClassPath()).append(" ");
+//		        cmd.append(Main.class.getName()).append(" ");
+//		        for (String arg : args) {
+//		            cmd.append(arg).append(" ");
+//		        }
+//		        Runtime.getRuntime().exec(cmd.toString());
+//		        System.exit(0);
+//		    }
+//		}
 		
 		Runtime 												runtime 					= Runtime.getRuntime();
 		
