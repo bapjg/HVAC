@@ -19,12 +19,13 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.Dimension;
+import javax.swing.table.DefaultTableModel;
 
 public class Form_Control extends JFrame
 {
 
 	private JPanel contentPane;
-	private JTable table;
+	private JTable tableLogIt;
 
 
 	public Form_Control()
@@ -143,31 +144,42 @@ public class Form_Control extends JFrame
 		paneTemperatures.add(txtFloorIn);
 		
 		JScrollPane paneLogIt = new JScrollPane();
+		paneLogIt.setPreferredSize(new Dimension(10, 10));
 		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		paneLogIt.setBounds(10, 164, 665, 270);
+		paneLogIt.setBounds(10, 172, 665, 300);
 		contentPane.add(paneLogIt);
-		
-        String[] columnHeaders = new String[] {"Date", "Time", "Type", "From", "Message"};
-             
-            //actual data for the table in a 2d array
-            Object[][] rowData = new Object[][] 
-            {
-                {"01/01/2017", "11:54:00", "Warning", "Global", "Test 1"},
-                {"01/01/2017", "11:54:00", "Warning", "Global", "Test 2"},
-                {"01/01/2017", "11:54:00", "Warning", "Global", "Test 3"},
-            };
-            //create table with data
-            table = new JTable(rowData, columnHeaders);
-            table.setVisible(true);
 
-            //add the table to the frame
- //           getContentPane().add(new JScrollPane(table));
-            paneLogIt.add(table) ;
-            this.pack();
-            this.setVisible(true);
+		tableLogIt = new JTable();
+		paneLogIt.setViewportView(tableLogIt);
+		
+		Form_Control_LogIt_Items items = new Form_Control_LogIt_Items(100);
+		
+		for (int i = 0; i < 110; i++)
+		{
+			items.add(new Form_Control_LogIt_Item("Warning", "Global", "Test " + i));
+		}
+		tableLogIt.setModel(items);
 		
 		
 		
+//		tableLogIt.setModel(new DefaultTableModel(
+//				new Object[][] {
+//					{"01/01/2017 11:54:00", "Warning", "Global", "Test 1"},
+//					{"01/01/2017 11:54:00", "Warning", "Global", "Test 2"},
+//					{"01/01/2017 11:54:00", "Warning", "Global", "Test 3"},
+//				},
+//				new String[] {
+//					"Date Time", "Type", "Sevrity", "Message"
+//				}
+//			));
+		tableLogIt.getColumnModel().getColumn(0).setPreferredWidth(114);
+		tableLogIt.getColumnModel().getColumn(1).setPreferredWidth(56);
+		tableLogIt.getColumnModel().getColumn(2).setPreferredWidth(148);
+		tableLogIt.getColumnModel().getColumn(3).setPreferredWidth(299);
+		tableLogIt.setVisible(true);
+		
+        this.pack();
+        this.setVisible(true);
 	}
 	public void forceExit(int exitStatus) 
 	{
