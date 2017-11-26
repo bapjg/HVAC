@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import HVAC_Common.Ctrl_Actions_Stop;
 import eRegulation.Global;
+import eRegulation.LogIt;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -146,7 +147,7 @@ public class Form_Control extends JFrame
 		JScrollPane paneLogIt = new JScrollPane();
 		paneLogIt.setPreferredSize(new Dimension(10, 10));
 		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		paneLogIt.setBounds(10, 172, 665, 300);
+		paneLogIt.setBounds(10, 172, 764, 300);
 		contentPane.add(paneLogIt);
 
 		tableLogIt = new JTable();
@@ -158,24 +159,15 @@ public class Form_Control extends JFrame
 		{
 			items.add(new Form_Control_LogIt_Item("Warning", "Global", "Test " + i));
 		}
+		Form_Control_LogIt_Item lastItem = new Form_Control_LogIt_Item("Error", "Circuit_Abstract/Constructor", "HotWater" + " invalid pump " + "3");
+		items.add(lastItem);
 		tableLogIt.setModel(items);
 		
-		
-		
-//		tableLogIt.setModel(new DefaultTableModel(
-//				new Object[][] {
-//					{"01/01/2017 11:54:00", "Warning", "Global", "Test 1"},
-//					{"01/01/2017 11:54:00", "Warning", "Global", "Test 2"},
-//					{"01/01/2017 11:54:00", "Warning", "Global", "Test 3"},
-//				},
-//				new String[] {
-//					"Date Time", "Type", "Sevrity", "Message"
-//				}
-//			));
-		tableLogIt.getColumnModel().getColumn(0).setPreferredWidth(114);
-		tableLogIt.getColumnModel().getColumn(1).setPreferredWidth(56);
-		tableLogIt.getColumnModel().getColumn(2).setPreferredWidth(148);
-		tableLogIt.getColumnModel().getColumn(3).setPreferredWidth(299);
+
+		tableLogIt.getColumnModel().getColumn(0).setMinWidth(130);
+		tableLogIt.getColumnModel().getColumn(1).setMinWidth(70);
+		tableLogIt.getColumnModel().getColumn(2).setMinWidth(200);
+		tableLogIt.getColumnModel().getColumn(3).setMinWidth(500);
 		tableLogIt.setVisible(true);
 		
         this.pack();

@@ -21,9 +21,9 @@ public class Form_Control_LogIt_Items extends AbstractTableModel
     {
     	if (logItItems.size() >= maxSize)
     	{
-    		logItItems.remove(0);
+    		logItItems.remove(logItItems.size() - 1);
     	}
-    	logItItems.add(item);
+    	logItItems.add(0, item);
     }
     @Override
     public int getRowCount() 
