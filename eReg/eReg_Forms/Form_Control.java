@@ -193,13 +193,12 @@ public class Form_Control extends JFrame
 	}
 	public void showTemperatures()
 	{
-		Date date                                               		= new Date();
-		SimpleDateFormat    dateFormat                          		= new SimpleDateFormat("dd.MM");
-		SimpleDateFormat    timeFormat                          		= new SimpleDateFormat("HH:mm:ss");
+		Date 													date    					= new Date();
+		SimpleDateFormat    									dateFormat					= new SimpleDateFormat("dd.MM");
+		SimpleDateFormat    									timeFormat					= new SimpleDateFormat("HH:mm:ss");
 		
-		Global.display.writeAtPosition(0, 0, dateFormat.format(date));
-		txtDate.setValue(dateFormat);
-		txtTime.setValue(timeFormat);
+		txtDate			.setValue(dateFormat);
+		txtTime			.setValue(timeFormat);
 
 		txtBoiler		.setValue(Global.thermoBoiler		.toDisplay());
 		txtHotWater		.setValue(Global.thermoHotWater		.toDisplay());
