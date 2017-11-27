@@ -213,13 +213,17 @@ public class Form_Control extends JFrame
 	}
 	public void showTemperatures()
 	{
-		Date 													date    					= new Date();
+		Date 													now	    					= new Date();
 		SimpleDateFormat    									dateFormat					= new SimpleDateFormat("dd.MM");
 		SimpleDateFormat    									timeFormat					= new SimpleDateFormat("HH:mm:ss");
 		
+		String x = dateFormat.format(now);
+		String y = timeFormat.format(now);
+
 		txtDate			.setText(dateFormat					.toString());
 		txtTime			.setValue(timeFormat);
 
+		
 		txtBoiler		.setValue(Global.thermoBoiler		.toDisplay());
 		txtHotWater		.setValue(Global.thermoHotWater		.toDisplay());
 		txtFloorOut		.setValue(Global.thermoBoilerOut	.toDisplay());
