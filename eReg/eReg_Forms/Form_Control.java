@@ -188,6 +188,7 @@ public class Form_Control extends JFrame
 	public void logMessage(String dateTimeStamp, String severity, String sender, String message)
 	{
 		logItItems.add(dateTimeStamp, severity, sender, message);
+		logItItems.fireTableDataChanged();
 	}
 	public void showTemperatures()
 	{
