@@ -129,7 +129,7 @@ public class Form_Control extends JFrame
 		paneButtons.add(btnDebugNoWait);
 		
 		JPanel 													paneTemperatures 			= new JPanel();
-		paneTemperatures.setBounds(292, 11, 459, 166);
+		paneTemperatures.setBounds(304, 11, 399, 166);
 		contentPane.add(paneTemperatures);
 		paneTemperatures.setLayout(null);
 		
@@ -190,7 +190,7 @@ public class Form_Control extends JFrame
 		txtTime.setBackground(new Color(240, 240, 240));
 		txtTime.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTime.setForeground(Color.RED);
-		txtTime.setBounds(192, 11, 56, 20);
+		txtTime.setBounds(194, 11, 60, 20);
 		txtTime.setEditable(false);
 		paneTemperatures.add(txtTime);
 
@@ -258,6 +258,45 @@ public class Form_Control extends JFrame
 		int 													paneLogItY					= 212;
 		int														paneLogItHeight				= screenHeight - paneLogItY - 80; // Taskbar height is 36 pixels
 		int														paneLogItWidth				= screenWidth - 20;
+		
+		JPanel paneLights = new JPanel();
+		paneLights.setLayout(null);
+		paneLights.setBounds(713, 11, 261, 166);
+		contentPane.add(paneLights);
+		
+		JButton btnHotWater = new JButton("Hot Water");
+		btnHotWater.setBounds(10, 31, 90, 23);
+		paneLights.add(btnHotWater);
+		
+		JButton btnFloor = new JButton("Floor");
+		btnFloor.setBounds(10, 65, 90, 23);
+		paneLights.add(btnFloor);
+		
+		JButton btnRadiator = new JButton("Radiator");
+		btnRadiator.setBounds(10, 99, 90, 23);
+		paneLights.add(btnRadiator);
+		
+		JLabel lblPumps = new JLabel("Pumps");
+		lblPumps.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPumps.setBounds(28, 11, 46, 14);
+		paneLights.add(lblPumps);
+		
+		JButton btnBurner = new JButton("Burner");
+		btnBurner.setBounds(138, 31, 90, 23);
+		paneLights.add(btnBurner);
+		
+		JLabel lblOther = new JLabel("Other");
+		lblOther.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOther.setBounds(161, 11, 46, 14);
+		paneLights.add(lblOther);
+		
+		JButton btnMixerUp = new JButton("Mixer Up");
+		btnMixerUp.setBounds(138, 65, 90, 23);
+		paneLights.add(btnMixerUp);
+		
+		JButton btnMixerDown = new JButton("Mixer Down");
+		btnMixerDown.setBounds(138, 99, 90, 23);
+		paneLights.add(btnMixerDown);
 		paneLogIt.setPreferredSize(new Dimension(10, 10));
 		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		paneLogIt.setBounds(10, 212, paneLogItWidth, paneLogItHeight);
