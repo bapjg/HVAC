@@ -220,9 +220,8 @@ public class Form_Control extends JFrame
 		String x = dateFormat.format(now);
 		String y = timeFormat.format(now);
 
-		txtDate			.setText(dateFormat					.toString());
-		txtTime			.setValue(timeFormat);
-
+		txtDate			.setText(dateFormat					.format(now));
+		txtTime			.setText(timeFormat					.format(now));
 		
 		txtBoiler		.setValue(Global.thermoBoiler		.toDisplay());
 		txtHotWater		.setValue(Global.thermoHotWater		.toDisplay());
