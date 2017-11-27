@@ -257,14 +257,15 @@ public class Form_Control extends JFrame
 		JScrollPane 											paneLogIt 					= new JScrollPane();
 		int 													paneLogItY					= 212;
 		int														paneLogItHeight				= screenHeight - paneLogItY - 80; // Taskbar height is 36 pixels
+		int														paneLogItWidth				= screenWidth - 20;
 		paneLogIt.setPreferredSize(new Dimension(10, 10));
 		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		paneLogIt.setBounds(10, 212, 1910, paneLogItHeight);
+		paneLogIt.setBounds(10, 212, paneLogItWidth, paneLogItHeight);
 		contentPane.add(paneLogIt);
 
 		tableLogIt 																			= new JTable();
 		paneLogIt.setViewportView(tableLogIt);
-		tableLogIt.setBounds(0, 0, screenWidth - 10, 300);		
+//		tableLogIt.setBounds(0, 0, screenWidth - 10, 300);		
 
 		tableLogIt.setModel(logItItems);
 		
