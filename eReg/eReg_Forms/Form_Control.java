@@ -47,13 +47,17 @@ public class Form_Control extends JFrame
 	private JTextField 									txtHotWater;
 	private JTextField 									txtFloorOut;
 	private JTextField 									txtFloorIn;
+	private JTextField 									txtOutside;
+	private JTextField 									txtRadiatorOut;
+	private JTextField 									txtRadiatorIn;
+	private JTextField 									txtBoilerOut;
+	private JTextField 									txtBoilerIn;
+	private JTextField 									txtLivingRoom;
+	
+	private JButton 									btnFreezeUnfreeze;
+	
 	private int 										screenHeight;
 	private int 										screenWidth;
-	private JTextField txtOutside;
-	private JTextField txtRadiatorOut;
-	private JTextField txtRadiatorIn;
-	private JTextField txtBoilerOut;
-	private JTextField txtBoilerIn;
 
 	public Form_Control()
 	{
@@ -67,7 +71,7 @@ public class Form_Control extends JFrame
 		
 		this.setMinimumSize(new Dimension(800, 800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(100, 100, 865, 800);
+		this.setBounds(100, 100, 877, 800);
 		
 		contentPane 																		= new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -141,7 +145,7 @@ public class Form_Control extends JFrame
 		lblHotWater.setBounds(10, 58, 111, 14);
 		paneTemperatures.add(lblHotWater);
 		
-		JLabel lblOutside = new JLabel("Outside");
+		JLabel 													lblOutside 					= new JLabel("Outside");
 		lblOutside.setBounds(10, 85, 111, 14);
 		paneTemperatures.add(lblOutside);
 		
@@ -186,8 +190,6 @@ public class Form_Control extends JFrame
 		paneTemperatures.add(txtTime);
 
 		txtBoiler  																			= new JTextField();
-		txtBoiler.setFont(new Font("Tahoma", Font.BOLD, 11));
-		txtBoiler.setForeground(Color.WHITE);
 		txtBoiler.setEditable(false);
 		txtBoiler.setBounds(193, 39, 73, 20);
 		paneTemperatures.add(txtBoiler);
@@ -232,6 +234,15 @@ public class Form_Control extends JFrame
 		txtBoilerIn.setBounds(326, 147, 73, 20);
 		paneTemperatures.add(txtBoilerIn);
 		
+		JLabel 													lblLivingRoom 				= new JLabel("Living Room");
+		lblLivingRoom.setBounds(10, 165, 111, 14);
+		paneTemperatures.add(lblLivingRoom);
+		
+		txtLivingRoom 																		= new JTextField();
+		txtLivingRoom.setEditable(false);
+		txtLivingRoom.setBounds(193, 163, 73, 20);
+		paneTemperatures.add(txtLivingRoom);
+		
 		JScrollPane 											paneLogIt 					= new JScrollPane();
 		paneLogIt.setPreferredSize(new Dimension(10, 10));
 		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -243,6 +254,18 @@ public class Form_Control extends JFrame
 		tableLogIt.setBounds(0, 0, screenWidth - 10, 300);		
 
 		tableLogIt.setModel(logItItems);
+		
+		btnFreezeUnfreeze 																	= new JButton("Freeze");
+		btnFreezeUnfreeze.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				if (btnFreezeUnfreeze.getText() == "Freeze") 	btnFreezeUnfreeze.setText("Unfreeze");
+				else 											btnFreezeUnfreeze.setText("Freeze");
+			}
+		});
+		btnFreezeUnfreeze.setBounds(93, 178, 89, 23);
+		contentPane.add(btnFreezeUnfreeze);
 
 		tableLogIt.getColumnModel().getColumn(0).setMinWidth(150);
 		tableLogIt.getColumnModel().getColumn(0).setMaxWidth(150);
@@ -274,17 +297,14 @@ public class Form_Control extends JFrame
 		
 		txtBoiler		.setText(Global.thermoBoiler		.toDisplay());
 		txtHotWater		.setText(Global.thermoHotWater		.toDisplay());
+		txtOutside		.setText(Global.thermoOutside		.toDisplay());
 		txtFloorOut		.setText(Global.thermoFloorOut		.toDisplay());
 		txtFloorIn		.setText(Global.thermoFloorIn		.toDisplay());
 		txtRadiatorOut	.setText(Global.thermoRadiatorOut	.toDisplay());
 		txtRadiatorIn	.setText(Global.thermoRadiatorIn	.toDisplay());
 		txtBoilerOut	.setText(Global.thermoBoilerOut		.toDisplay());
 		txtBoilerIn		.setText(Global.thermoBoilerIn		.toDisplay());
-
-		// ToDo : Add other temperatures
-		
-//		Global.display.writeAtPosition(2, 5,  Global.thermoBoilerOut.toDisplay() + "  ");
-//		Global.display.writeAtPosition(3, 16, Global.thermoLivingRoom.toDisplay());
+		txtLivingRoom	.setText(Global.thermoLivingRoom	.toDisplay());
 	}
 	public void forceExit(int exitStatus) 
 	{
