@@ -99,7 +99,7 @@ public class Control
 		Global 													global 						= new Global();
 		Global.stopNow																		= false;
 		LogIt.info("Control", "main", "Starting/BootSequence");
-		System.exit(0);;
+
 		//
 		//============================================================
 
