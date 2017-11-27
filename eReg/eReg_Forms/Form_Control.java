@@ -49,6 +49,11 @@ public class Form_Control extends JFrame
 	private JTextField 									txtFloorIn;
 	private int 										screenHeight;
 	private int 										screenWidth;
+	private JTextField txtOutside;
+	private JTextField txtRadiatorOut;
+	private JTextField txtRadiatorIn;
+	private JTextField txtBoilerOut;
+	private JTextField txtBoilerIn;
 
 	public Form_Control()
 	{
@@ -62,9 +67,7 @@ public class Form_Control extends JFrame
 		
 		this.setMinimumSize(new Dimension(800, 800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(100, 100, 136, 252);
-		this.setVisible(true);
-		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
+		this.setBounds(100, 100, 865, 800);
 		
 		contentPane 																		= new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -122,7 +125,7 @@ public class Form_Control extends JFrame
 		paneButtons.add(btnDebugNoWait);
 		
 		JPanel 													paneTemperatures 			= new JPanel();
-		paneTemperatures.setBounds(292, 11, 383, 155);
+		paneTemperatures.setBounds(292, 11, 523, 190);
 		contentPane.add(paneTemperatures);
 		paneTemperatures.setLayout(null);
 		
@@ -131,12 +134,16 @@ public class Form_Control extends JFrame
 		paneTemperatures.add(lblUpdatedOn);
 		
 		JLabel 													lblBoiler 					= new JLabel("Boiler");
-		lblBoiler.setBounds(10, 60, 111, 14);
+		lblBoiler.setBounds(10, 42, 111, 14);
 		paneTemperatures.add(lblBoiler);
 		
 		JLabel 													lblHotWater 				= new JLabel("Hot Water");
-		lblHotWater.setBounds(10, 85, 111, 14);
+		lblHotWater.setBounds(10, 58, 111, 14);
 		paneTemperatures.add(lblHotWater);
+		
+		JLabel lblOutside = new JLabel("Outside");
+		lblOutside.setBounds(10, 85, 111, 14);
+		paneTemperatures.add(lblOutside);
 		
 		JLabel 													lblFloorOut 				= new JLabel("Floor Out");
 		lblFloorOut.setBounds(10, 110, 111, 14);
@@ -145,6 +152,22 @@ public class Form_Control extends JFrame
 		JLabel 													lblFloorIn 					= new JLabel("Floor In");
 		lblFloorIn.setBounds(10, 135, 111, 14);
 		paneTemperatures.add(lblFloorIn);
+		
+		JLabel 													lblRadiatorOut 				= new JLabel("Radiator Out");
+		lblRadiatorOut.setBounds(406, 42, 111, 14);
+		paneTemperatures.add(lblRadiatorOut);
+		
+		JLabel 													lblRadiatorIn  				= new JLabel("Radiator In");
+		lblRadiatorIn.setBounds(406, 79, 111, 14);
+		paneTemperatures.add(lblRadiatorIn);
+		
+		JLabel 													lblBoilerOut  				= new JLabel("Boiler Out");
+		lblBoilerOut.setBounds(406, 107, 111, 14);
+		paneTemperatures.add(lblBoilerOut);
+		
+		JLabel 													lblBoilerIn  				= new JLabel("Boiler In");
+		lblBoilerIn.setBounds(409, 150, 111, 14);
+		paneTemperatures.add(lblBoilerIn);
 		
 		txtDate 																			= new JTextField();
 		txtDate.setBackground(new Color(240, 240, 240));
@@ -163,14 +186,21 @@ public class Form_Control extends JFrame
 		paneTemperatures.add(txtTime);
 
 		txtBoiler  																			= new JTextField();
+		txtBoiler.setFont(new Font("Tahoma", Font.BOLD, 11));
+		txtBoiler.setForeground(Color.WHITE);
 		txtBoiler.setEditable(false);
-		txtBoiler.setBounds(193, 57, 73, 20);
+		txtBoiler.setBounds(193, 39, 73, 20);
 		paneTemperatures.add(txtBoiler);
 		
 		txtHotWater  																		= new JTextField();
 		txtHotWater.setEditable(false);
-		txtHotWater.setBounds(193, 82, 73, 20);
+		txtHotWater.setBounds(193, 55, 73, 20);
 		paneTemperatures.add(txtHotWater);
+		
+		txtOutside  				 				 				 						= new JTextField();
+		txtOutside.setEditable(false);
+		txtOutside.setBounds(193, 76, 73, 20);
+		paneTemperatures.add(txtOutside);
 		
 		txtFloorOut  																		= new JTextField();
 		txtFloorOut.setEditable(false);
@@ -182,10 +212,30 @@ public class Form_Control extends JFrame
 		txtFloorIn.setBounds(193, 132, 73, 20);
 		paneTemperatures.add(txtFloorIn);
 		
+		txtRadiatorOut  				 				 				 					= new JTextField();
+		txtRadiatorOut.setEditable(false);
+		txtRadiatorOut.setBounds(326, 39, 73, 20);
+		paneTemperatures.add(txtRadiatorOut);
+		
+		txtRadiatorIn  				 				 				 				 		= new JTextField();
+		txtRadiatorIn.setEditable(false);
+		txtRadiatorIn.setBounds(326, 79, 73, 20);
+		paneTemperatures.add(txtRadiatorIn);
+		
+		txtBoilerOut  				 				 				 				 		= new JTextField();
+		txtBoilerOut.setEditable(false);
+		txtBoilerOut.setBounds(326, 117, 73, 20);
+		paneTemperatures.add(txtBoilerOut);
+		
+		txtBoilerIn  				 				 				 				 		= new JTextField();
+		txtBoilerIn.setEditable(false);
+		txtBoilerIn.setBounds(326, 147, 73, 20);
+		paneTemperatures.add(txtBoilerIn);
+		
 		JScrollPane 											paneLogIt 					= new JScrollPane();
 		paneLogIt.setPreferredSize(new Dimension(10, 10));
 		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		paneLogIt.setBounds(10, 172, screenWidth - 10, 300);
+		paneLogIt.setBounds(10, 212, 1910, 260);
 		contentPane.add(paneLogIt);
 
 		tableLogIt 																			= new JTable();
@@ -206,6 +256,7 @@ public class Form_Control extends JFrame
 		
         this.pack();
         this.setVisible(true);
+		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
 	}
 	public void logMessage(String dateTimeStamp, String severity, String sender, String message)
 	{
@@ -218,16 +269,17 @@ public class Form_Control extends JFrame
 		SimpleDateFormat    									dateFormat					= new SimpleDateFormat("dd.MM");
 		SimpleDateFormat    									timeFormat					= new SimpleDateFormat("HH:mm:ss");
 		
-		String x = dateFormat.format(now);
-		String y = timeFormat.format(now);
-
 		txtDate			.setText(dateFormat					.format(now));
 		txtTime			.setText(timeFormat					.format(now));
 		
 		txtBoiler		.setText(Global.thermoBoiler		.toDisplay());
 		txtHotWater		.setText(Global.thermoHotWater		.toDisplay());
-		txtFloorOut		.setText(Global.thermoBoilerOut		.toDisplay());
+		txtFloorOut		.setText(Global.thermoFloorOut		.toDisplay());
 		txtFloorIn		.setText(Global.thermoFloorIn		.toDisplay());
+		txtRadiatorOut	.setText(Global.thermoRadiatorOut	.toDisplay());
+		txtRadiatorIn	.setText(Global.thermoRadiatorIn	.toDisplay());
+		txtBoilerOut	.setText(Global.thermoBoilerOut		.toDisplay());
+		txtBoilerIn		.setText(Global.thermoBoilerIn		.toDisplay());
 
 		// ToDo : Add other temperatures
 		
