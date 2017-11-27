@@ -64,152 +64,27 @@ public class Control
 //		else															System.loadLibrary("Interfaces_SPI");
 
 		
-		if (!GraphicsEnvironment.isHeadless())		
-		{
-			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
-	        
-			Form_Control formControl = new Form_Control();
-
-	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug Wait", true); 
-	 		Global.waitSeconds(5);
-	 		ProcessBuilder pb 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh");
-	 		Process 	p																	= pb.start();     // Start the process.
- 			System.exit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
-
-		}
+//		if (!GraphicsEnvironment.isHeadless())		
+//		{
+//			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
+//	        
+//			Form_Control formControl = new Form_Control();
+//		}
 		
+		String 													osName 						= System.getProperty("os.name").toLowerCase();
 		
-		
-		
-		String osName = System.getProperty("os.name").toLowerCase();
-		
-		if (osName.contains("windows"))	System.exit(Ctrl_Actions_Stop.ACTION_Stop);
+		if (osName.contains("windows"))							System.exit(Ctrl_Actions_Stop.ACTION_Stop);
 		
 		System.loadLibrary("Interfaces_SPI");
 		System.loadLibrary("Interfaces_I2C");
 
 		if (false)
 		{
-
 			if (! GraphicsEnvironment.isHeadless())
 			{
 				GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
-		        
-
-
-//				JFrame frame = new JFrame("FrameDemo");
-//		        frame.setMinimumSize(new Dimension(800, 400));
-//		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
-//	
-//		        JLabel myLabel = new JLabel("Hello World !!!", SwingConstants.CENTER);
-//		        myLabel.setFont(new Font("Serif", Font.BOLD, 22));
-//		        myLabel.setBackground(Color.blue);
-//		        myLabel.setOpaque(true);
-//		        myLabel.setPreferredSize(new Dimension(100, 80));
-//	
-//		        frame.getContentPane().add(myLabel, BorderLayout.NORTH);
-//		        frame.setVisible(true);
 			}
-			
-			
-			
-			System.out.println("Reader");
-	        Reader reader = new InputStreamReader(System.in);
-	        boolean ready1 = reader.ready();
-			System.out.println("ready : " + ready1);
-			int ch = reader.read();
-			System.out.println("char : " + ch);
-		    
-			System.out.println("InputStreamReader");
-			InputStreamReader reader2 = new InputStreamReader(System.in);
-	        boolean ready2 = reader2.ready();
-			System.out.println("ready : " + ready2);
-			int ch2 = reader.read();
-			System.out.println("char : " + ch2);
-		
-			
-			System.out.println("InputStreamReader & System.in.read() Try1");
-			InputStreamReader reader3 = new InputStreamReader(System.in);
-            int key;
-	        boolean ready3 = reader3.ready();
-			System.out.println("ready : " + ready3);
-            try 
-            {
-                key = System.in.read();
-                // read a character and process it 
-                System.out.println("key pressed");
-             } 
-            catch (java.io.IOException ioex) 
-            {
-                System.out.println("IO Exception");
-            }
-
-			System.out.println("InputStreamReader & System.in.read() Try2");
-			System.out.println("ready : " + reader3.ready());
-            try 
-            {
-                key = System.in.read();
-                // read a character and process it 
-                System.out.println("key pressed");
-             } 
-            catch (java.io.IOException ioex) 
-            {
-                System.out.println("IO Exception");
-            }
-			
-			
-			
-			
-//			        java.io.InputStreamReader reader = new java.io.InputStreamReader(System.in);
-//			        boolean b = false;
-//			        while(!b)
-//			        {
-//			            try 
-//			            {
-//			                int key = System.in.read();
-//			                // read a character and process it 
-//			                System.out.println("key pressed");
-//			                b = true;
-//			             } catch (java.io.IOException ioex) {
-//			                System.out.println("IO Exception");
-//			             }
-//			             // edit, lets not hog any cpu time
-//			             try {
-//			                Thread.sleep(50);
-//			                System.out.println("nop yet");
-//			             } catch (InterruptedException ex) {
-//			                // can't do much about it can we? Ignoring 
-//			                System.out.println("Interrupted Exception");
-//			             }
-//			        }
-		
-			
-
-//			System.out.print(String.format("%c[%d;%df",escCode,row,column));		
-//			System.out.print("99999999999999999");		
 		}
-		
-//		Below is a test to use JNA in stead of JNI... It didn't work, failing on the statement
-//	    	Linux_C_lib_DirectMapping libC = new Linux_C_lib_DirectMapping();
-//		the constructor loads a linux library, which fails (library not found)
-//		Experimentation abandoned
-		
-//	    System.setProperty("jna.library.path","/home/pi/HVAC/eReg/eRegulation/");
-	    //Open I2C Bus 1 file
-//		int O_RDWR = 0x00000002;
-//	    String fileName = "/dev/i2c-1";
-//	    Linux_C_lib_DirectMapping libC = new Linux_C_lib_DirectMapping();
-//	    int file = libC.open(fileName, O_RDWR);
-//	    if(file < 0)
-//	    {
-//	        System.out.println("Error opening file");
-//	        return;
-//	    }
-//	    else
-//	    {
-//	        System.out.println("File open for reading and writing");
-//	    }
-		
 		
 		
 		//
