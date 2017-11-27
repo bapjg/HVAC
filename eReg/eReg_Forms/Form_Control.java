@@ -167,13 +167,13 @@ public class Form_Control extends JFrame
 		tableLogIt 																			= new JTable();
 		paneLogIt.setViewportView(tableLogIt);
 		
-		for (int i = 0; i < 110; i++)
-		{
-			logItItems.add(new Form_Control_LogIt_Item("Warning", "Global", "Test " + i));
-		}
+//		for (int i = 0; i < 110; i++)
+//		{
+//			logItItems.add(new Form_Control_LogIt_Item("Warning", "Global", "Test " + i));
+//		}
 		tableLogIt.setModel(logItItems);
-		Form_Control_LogIt_Item 								lastItem 					= new Form_Control_LogIt_Item("Error", "Circuit_Abstract/Constructor", "HotWater" + " invalid pump " + "3");
-		logItItems.add(lastItem);
+//		Form_Control_LogIt_Item 								lastItem 					= new Form_Control_LogIt_Item("Error", "Circuit_Abstract/Constructor", "HotWater" + " invalid pump " + "3");
+//		logItItems.add(lastItem);
 		
 
 		tableLogIt.getColumnModel().getColumn(0).setMinWidth(130);
