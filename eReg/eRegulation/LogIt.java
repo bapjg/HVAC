@@ -98,7 +98,7 @@ public class LogIt
 		if (display)
 		{
 			if (Global.formControl != null)						Global.formControl.logMessage(dateTimeStamp(), "Info", sender, message);
-			else												toScreen	(dateTimeStamp() + " : Info  : " + sender + " - " + message);
+			else												toScreen	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
 		}
 		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
 	}
