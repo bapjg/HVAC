@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Form_Control extends JFrame
@@ -38,7 +39,6 @@ public class Form_Control extends JFrame
 	private JPanel 										contentPane;
 	private JTable 										tableLogIt;
 	private Form_Control_LogIt_Items 					logItItems;
-	private JFormattedTextField 						txtDate;
 	private JFormattedTextField 						txtTime;
 	private JFormattedTextField 						txtBoiler;
 	private JFormattedTextField 						txtHotWater;
@@ -46,6 +46,7 @@ public class Form_Control extends JFrame
 	private JFormattedTextField 						txtFloorIn;
 	private int 										screenHeight;
 	private int 										screenWidth;
+	private JTextField txtDate;
 
 	public Form_Control()
 	{
@@ -142,14 +143,12 @@ public class Form_Control extends JFrame
 		JLabel 													lblFloorIn 					= new JLabel("Floor In");
 		lblFloorIn.setBounds(10, 135, 111, 14);
 		paneTemperatures.add(lblFloorIn);
-
 		
-		
-		
-		txtDate 																			= new JFormattedTextField();
-		txtDate.setEditable(false);
-		txtDate.setBounds(131, 11, 73, 20);
+		txtDate = new JTextField();
+		txtDate.setForeground(Color.RED);
+		txtDate.setBounds(147, 11, 86, 20);
 		paneTemperatures.add(txtDate);
+		txtDate.setColumns(10);
 		
 		txtTime  																			= new JFormattedTextField();
 		txtTime.setEditable(false);
@@ -218,7 +217,7 @@ public class Form_Control extends JFrame
 		SimpleDateFormat    									dateFormat					= new SimpleDateFormat("dd.MM");
 		SimpleDateFormat    									timeFormat					= new SimpleDateFormat("HH:mm:ss");
 		
-		txtDate			.setValue(dateFormat);
+		txtDate			.setText(dateFormat					.toString());
 		txtTime			.setValue(timeFormat);
 
 		txtBoiler		.setValue(Global.thermoBoiler		.toDisplay());
