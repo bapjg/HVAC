@@ -64,12 +64,18 @@ public class Control
 //		else															System.loadLibrary("Interfaces_SPI");
 
 		
-		if (!GraphicsEnvironment.isHeadless())		// Tested under Windows
+		if (!GraphicsEnvironment.isHeadless())		
 		{
 			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
 	        
 			Form_Control formControl = new Form_Control();
-			
+
+	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug Wait", true); 
+	 		Global.waitSeconds(5);
+	 		ProcessBuilder pb 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh");
+	 		Process 	p																	= pb.start();     // Start the process.
+ 			System.exit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
+
 		}
 		
 		
@@ -399,20 +405,28 @@ public class Control
 //		}
 		
 		Runtime 												runtime 					= Runtime.getRuntime();
+ 		ProcessBuilder 											processBuilder;
+ 		Process 												process;
 		
 		
 		switch (Global.exitStatus)
 		{
 		case Ctrl_Actions_Stop.ACTION_Stop:													// Value 0 : Stop App
-			Global.display.clear();
-			Global.display.writeAtPosition(0, 0, "Stopping controler");
+//			Global.display.clear();
+//			Global.display.writeAtPosition(0, 0, "Stopping controler");
  			LogIt.info("Thread_Main", "main", "Stopping", true);
+	 		Global.waitSeconds(5);
  			System.exit(Ctrl_Actions_Stop.ACTION_Stop);
  			break;
 		case Ctrl_Actions_Stop.ACTION_Restart:												// Value 1 : Restart App
-			Global.display.clear();
-			Global.display.writeAtPosition(0, 0, "Restarting controler");
-	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true); 
+//			Global.display.clear();
+//			Global.display.writeAtPosition(0, 0, "Restarting controler");
+	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true);
+	 		Global.waitSeconds(5);
+	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Run.sh");
+	 		process 																		= processBuilder.start();     // Start the process.
+//		    process.waitFor();                // Wait for the process to finish.
+
  			System.exit(Ctrl_Actions_Stop.ACTION_Restart);
  			break;		
  		case Ctrl_Actions_Stop.ACTION_Reboot:												// Value 2 : Reboot Pi
@@ -423,7 +437,7 @@ public class Control
  			
 	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true);
 	 		Global.waitSeconds(5);
- 		    Process 									procReBoot 							= runtime.exec("sudo shutdown -r now");
+ 		    process 																		= runtime.exec("sudo shutdown -r now");
  		    System.exit(0);
  			
  			
@@ -439,23 +453,29 @@ public class Control
 
 	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
 	 		Global.waitSeconds(5);
- 		    Process 									procHalt 							= runtime.exec("sudo shutdown -h now");
+	 		process												 							= runtime.exec("sudo shutdown -h now");
  		    System.exit(0);
  			
  			
  			
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_Wait:											// Value 6 : Reboot Pi
-			Global.display.clear();
-			Global.display.writeAtPosition(0, 0, "Restarting controler for Debug Wait");
+//			Global.display.clear();
+//			Global.display.writeAtPosition(0, 0, "Restarting controler for Debug Wait");
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug Wait", true); 
+	 		Global.waitSeconds(5);
+	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh");
+	 		process 																		= processBuilder.start();     // Start the process.
  			System.exit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_NoWait:											// Value 7 : Reboot Pi
-			Global.display.clear();
-			Global.display.writeAtPosition(0, 0, "Restarting controler");
-			Global.display.writeAtPosition(1, 1, "Debug : No Wait");
+//			Global.display.clear();
+//			Global.display.writeAtPosition(0, 0, "Restarting controler");
+//			Global.display.writeAtPosition(1, 1, "Debug : No Wait");
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug NoWait", true); 
+	 		Global.waitSeconds(5);
+	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh");
+	 		process 																		= processBuilder.start();     // Start the process.
  			System.exit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
  			break;
 		}
