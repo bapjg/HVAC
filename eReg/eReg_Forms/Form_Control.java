@@ -194,9 +194,9 @@ public class Form_Control extends JFrame
 //		logItItems.add(lastItem);
 		
 
-		tableLogIt.getColumnModel().getColumn(0).setMinWidth(130);
-		tableLogIt.getColumnModel().getColumn(1).setMinWidth(70);
-		tableLogIt.getColumnModel().getColumn(2).setMinWidth(200);
+		tableLogIt.getColumnModel().getColumn(0).setMaxWidth(130);
+		tableLogIt.getColumnModel().getColumn(1).setMaxWidth(70);
+		tableLogIt.getColumnModel().getColumn(2).setMaxWidth(200);
 		tableLogIt.getColumnModel().getColumn(3).setMinWidth(500);
 		tableLogIt.setVisible(true);
 		

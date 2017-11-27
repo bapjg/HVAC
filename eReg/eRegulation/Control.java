@@ -68,10 +68,7 @@ public class Control
 
 		if (false)
 		{
-			if (! GraphicsEnvironment.isHeadless())
-			{
-				GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
-			}
+
 		}
 		
 		
