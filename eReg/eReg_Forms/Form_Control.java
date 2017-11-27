@@ -256,7 +256,7 @@ public class Form_Control extends JFrame
 		
 		JScrollPane 											paneLogIt 					= new JScrollPane();
 		int 													paneLogItY					= 212;
-		int														paneLogItHeight				= screenHeight - paneLogItY - 10;
+		int														paneLogItHeight				= screenHeight - paneLogItY - 50;
 		paneLogIt.setPreferredSize(new Dimension(10, 10));
 		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		paneLogIt.setBounds(10, 212, 1910, paneLogItHeight);
