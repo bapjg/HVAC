@@ -42,10 +42,12 @@ public class Form_Control extends JFrame
 	{
 		logItItems	 																		= new Form_Control_LogIt_Items(100);
 		
-		setMinimumSize(new Dimension(800, 800));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 136, 252);
-		contentPane = new JPanel();
+		this.setMinimumSize(new Dimension(800, 800));
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 136, 252);
+		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
+		
+		contentPane 																		= new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
