@@ -96,10 +96,10 @@ public class Control
 		// in the Global constructor when the LCD display has been created
 		//
 
-		@SuppressWarnings("unused")
 		Global 													global 						= new Global();
 		Global.stopNow																		= false;
 		LogIt.info("Control", "main", "Starting/BootSequence");
+		System.exit(0);;
 		//
 		//============================================================
 
@@ -107,16 +107,7 @@ public class Control
 		//
 		// Debug Code
 		//
-//		Global.relays.scanAndSet();
-//		Global.waitSeconds(2);
-//		Global.relays.scanAndSet();
-//		Global.waitSeconds(2);
-//		Global.relays.scanAndSet();
-//		Global.waitSeconds(2);
-//		Global.relays.scanAndSet();
-//		Global.waitSeconds(2);
-//		Global.relays.scanAndSet();
-//		if (true) return;		
+	
 		//
 		//============================================================
 		
