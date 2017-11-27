@@ -31,6 +31,8 @@ import java.util.Date;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Form_Control extends JFrame
@@ -39,14 +41,14 @@ public class Form_Control extends JFrame
 	private JPanel 										contentPane;
 	private JTable 										tableLogIt;
 	private Form_Control_LogIt_Items 					logItItems;
-	private JFormattedTextField 						txtTime;
+	private JTextField 									txtDate;
+	private JTextField 									txtTime;
 	private JFormattedTextField 						txtBoiler;
 	private JFormattedTextField 						txtHotWater;
 	private JFormattedTextField 						txtFloorOut;
 	private JFormattedTextField 						txtFloorIn;
 	private int 										screenHeight;
 	private int 										screenWidth;
-	private JTextField txtDate;
 
 	public Form_Control()
 	{
@@ -144,17 +146,23 @@ public class Form_Control extends JFrame
 		lblFloorIn.setBounds(10, 135, 111, 14);
 		paneTemperatures.add(lblFloorIn);
 		
-		txtDate = new JTextField();
+		txtDate 																			= new JTextField();
+		txtDate.setBackground(new Color(240, 240, 240));
+		txtDate.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDate.setForeground(Color.RED);
 		txtDate.setBounds(147, 11, 86, 20);
+		txtDate.setEditable(false);
 		paneTemperatures.add(txtDate);
-		txtDate.setColumns(10);
+//		txtDate.setColumns(10);
 		
-		txtTime  																			= new JFormattedTextField();
-		txtTime.setEditable(false);
+		txtTime 																			= new JTextField();
+		txtTime.setBackground(new Color(240, 240, 240));
+		txtTime.setHorizontalAlignment(SwingConstants.CENTER);
+		txtTime.setForeground(Color.RED);
 		txtTime.setBounds(248, 11, 73, 20);
+		txtTime.setEditable(false);
 		paneTemperatures.add(txtTime);
-		
+
 		txtBoiler  																			= new JFormattedTextField();
 		txtBoiler.setEditable(false);
 		txtBoiler.setBounds(193, 57, 73, 20);
