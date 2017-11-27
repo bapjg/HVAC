@@ -266,18 +266,6 @@ public class Form_Control extends JFrame
 //		});
 		btnFreezeUnfreeze.setBounds(93, 178, 89, 23);
 		contentPane.add(btnFreezeUnfreeze);
-		
-		btnFreezeUnfreeze 																	= new JButton("Freeze");
-		btnFreezeUnfreeze.addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent arg0) 
-			{
-				if (btnFreezeUnfreeze.getText() == "Freeze") 	btnFreezeUnfreeze.setText("Unfreeze");
-				else 											btnFreezeUnfreeze.setText("Freeze");
-			}
-		});
-		btnFreezeUnfreeze.setBounds(93, 178, 89, 23);
-		contentPane.add(btnFreezeUnfreeze);
 
 		tableLogIt.getColumnModel().getColumn(0).setMinWidth(150);
 		tableLogIt.getColumnModel().getColumn(0).setMaxWidth(150);
