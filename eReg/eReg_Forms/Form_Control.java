@@ -44,13 +44,16 @@ public class Form_Control extends JFrame
 	private JFormattedTextField 						txtHotWater;
 	private JFormattedTextField 						txtFloorOut;
 	private JFormattedTextField 						txtFloorIn;
+	private int 										screenHeight;
+	private int 										screenWidth;
 
 	public Form_Control()
 	{
-		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0]; // Only works if NOT headLess
-		GraphicsConfiguration gc = gd.getConfigurations()[0];
-        Rectangle bounds = gc.getBounds();
-		
+		GraphicsDevice 											gd 							= GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0]; // Only works if NOT headLess
+		GraphicsConfiguration 									gc 							= gd.getConfigurations()[0];
+        Rectangle 												bounds 						= gc.getBounds();
+        screenHeight																		= bounds.height;
+        screenWidth																			= bounds.width;
 		
 		logItItems	 																		= new Form_Control_LogIt_Items(100);
 		
@@ -173,15 +176,15 @@ public class Form_Control extends JFrame
 		txtFloorIn.setBounds(193, 132, 73, 20);
 		paneTemperatures.add(txtFloorIn);
 		
-		JScrollPane paneLogIt = new JScrollPane();
+		JScrollPane 											paneLogIt 					= new JScrollPane();
 		paneLogIt.setPreferredSize(new Dimension(10, 10));
 		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		paneLogIt.setBounds(10, 172, 764, 300);
+		paneLogIt.setBounds(10, 172, screenWidth - 10, 300);
 		contentPane.add(paneLogIt);
 
 		tableLogIt 																			= new JTable();
 		paneLogIt.setViewportView(tableLogIt);
-		
+		tableLogIt.setBounds(0, 0, screenWidth - 10, 300);		
 //		for (int i = 0; i < 110; i++)
 //		{
 //			logItItems.add(new Form_Control_LogIt_Item("Warning", "Global", "Test " + i));
