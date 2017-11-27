@@ -38,26 +38,26 @@ import javax.swing.UIManager;
 public class Form_Control extends JFrame
 {
 
-	private JPanel 										contentPane;
-	private JTable 										tableLogIt;
-	private Form_Control_LogIt_Items 					logItItems;
-	private JTextField 									txtDate;
-	private JTextField 									txtTime;
-	private JTextField 									txtBoiler;
-	private JTextField 									txtHotWater;
-	private JTextField 									txtFloorOut;
-	private JTextField 									txtFloorIn;
-	private JTextField 									txtOutside;
-	private JTextField 									txtRadiatorOut;
-	private JTextField 									txtRadiatorIn;
-	private JTextField 									txtBoilerOut;
-	private JTextField 									txtBoilerIn;
-	private JTextField 									txtLivingRoom;
+	private JPanel 												contentPane;
+	private JTable 												tableLogIt;
+	private Form_Control_LogIt_Items 							logItItems;
+	private JTextField 											txtDate;
+	private JTextField 											txtTime;
+	private JTextField 											txtBoiler;
+	private JTextField 											txtHotWater;
+	private JTextField 											txtFloorOut;
+	private JTextField 											txtFloorIn;
+	private JTextField 											txtOutside;
+	private JTextField 											txtRadiatorOut;
+	private JTextField 											txtRadiatorIn;
+	private JTextField 											txtBoilerOut;
+	private JTextField 											txtBoilerIn;
+	private JTextField 											txtLivingRoom;
 	
-	private JButton 									btnFreezeUnfreeze;
+	private JButton 											btnFreezeUnfreeze;
 	
-	private int 										screenHeight;
-	private int 										screenWidth;
+	private int 												screenHeight;
+	private int 												screenWidth;
 
 	public Form_Control()
 	{
@@ -138,41 +138,45 @@ public class Form_Control extends JFrame
 		paneTemperatures.add(lblUpdatedOn);
 		
 		JLabel 													lblBoiler 					= new JLabel("Boiler");
-		lblBoiler.setBounds(10, 56, 50, 14);
+		lblBoiler.setBounds(10, 56, 70, 14);
 		paneTemperatures.add(lblBoiler);
 		
 		JLabel 													lblHotWater 				= new JLabel("Hot Water");
-		lblHotWater.setBounds(10, 84, 50, 14);
+		lblHotWater.setBounds(10, 84, 70, 14);
 		paneTemperatures.add(lblHotWater);
 		
 		JLabel 													lblOutside 					= new JLabel("Outside");
-		lblOutside.setBounds(10, 112, 50, 14);
+		lblOutside.setBounds(10, 112, 70, 14);
 		paneTemperatures.add(lblOutside);
 		
-		JLabel 													lblFloorOut 				= new JLabel("Floor");
-		lblFloorOut.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFloorOut.setBounds(208, 112, 70, 14);
-		paneTemperatures.add(lblFloorOut);
+		JLabel 													lblLivingRoom 				= new JLabel("Living Room");
+		lblLivingRoom.setBounds(10, 140, 70, 14);
+		paneTemperatures.add(lblLivingRoom);
 		
-		JLabel 													lblRadiatorOut 				= new JLabel("Radiator");
-		lblRadiatorOut.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRadiatorOut.setBounds(208, 56, 70, 14);
-		paneTemperatures.add(lblRadiatorOut);
+		JLabel 													lblIn  						= new JLabel("In");
+		lblIn.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIn.setBounds(278, 39, 50, 14);
+		paneTemperatures.add(lblIn);
 		
-		JLabel 													lblRadiatorIn  				= new JLabel("In");
-		lblRadiatorIn.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRadiatorIn.setBounds(278, 39, 50, 14);
-		paneTemperatures.add(lblRadiatorIn);
+		JLabel 													lblOut  					= new JLabel("Out");
+		lblOut.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOut.setBounds(158, 39, 50, 14);
+		paneTemperatures.add(lblOut);
 		
-		JLabel 													lblBoilerOut  				= new JLabel("Boiler");
-		lblBoilerOut.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBoilerOut.setBounds(208, 84, 70, 14);
-		paneTemperatures.add(lblBoilerOut);
+		JLabel 													lblRadiatorInOut 			= new JLabel("Radiator");
+		lblRadiatorInOut.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRadiatorInOut.setBounds(208, 56, 70, 14);
+		paneTemperatures.add(lblRadiatorInOut);
 		
-		JLabel 													lblBoilerIn  				= new JLabel("Out");
-		lblBoilerIn.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBoilerIn.setBounds(158, 39, 50, 14);
-		paneTemperatures.add(lblBoilerIn);
+		JLabel 													lblBoilerInOut  			= new JLabel("Boiler");
+		lblBoilerInOut.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBoilerInOut.setBounds(208, 84, 70, 14);
+		paneTemperatures.add(lblBoilerInOut);
+		
+		JLabel 													lblFloorInOut 				= new JLabel("Floor");
+		lblFloorInOut.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFloorInOut.setBounds(208, 112, 70, 14);
+		paneTemperatures.add(lblFloorInOut);
 		
 		txtDate 																			= new JTextField();
 		txtDate.setBackground(new Color(240, 240, 240));
@@ -244,10 +248,6 @@ public class Form_Control extends JFrame
 		txtBoilerIn.setBounds(278, 81, 50, 20);
 		paneTemperatures.add(txtBoilerIn);
 		
-		JLabel 													lblLivingRoom 				= new JLabel("Living Room");
-		lblLivingRoom.setBounds(10, 140, 70, 14);
-		paneTemperatures.add(lblLivingRoom);
-		
 		txtLivingRoom 																		= new JTextField();
 		txtLivingRoom.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLivingRoom.setEditable(false);
@@ -255,9 +255,11 @@ public class Form_Control extends JFrame
 		paneTemperatures.add(txtLivingRoom);
 		
 		JScrollPane 											paneLogIt 					= new JScrollPane();
+		int 													paneLogItY					= 212;
+		int														paneLogItHeight				= screenHeight - paneLogItY - 10;
 		paneLogIt.setPreferredSize(new Dimension(10, 10));
 		paneLogIt.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		paneLogIt.setBounds(10, 212, 1910, 260);
+		paneLogIt.setBounds(10, 212, 1910, paneLogItHeight);
 		contentPane.add(paneLogIt);
 
 		tableLogIt 																			= new JTable();
