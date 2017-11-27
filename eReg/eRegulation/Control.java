@@ -40,7 +40,7 @@ public class Control
    public static void main(String[] args) 						throws 						IOException, 
 																							SAXException, 
 																							ParserConfigurationException
-	{
+   {
     	//============================================================
 		//
 		// Instantiate this class (required for JNI)
@@ -58,18 +58,6 @@ public class Control
 		//
 		// For debugging on a Windows machine without the necessary hardware
 		//
-		
-		// Not used any more, as debugging is done directly on the Pi
-//		if (System.getProperty("os.name").equalsIgnoreCase("windows"))	System.out.println("libraries not loaded");
-//		else															System.loadLibrary("Interfaces_SPI");
-
-		
-//		if (!GraphicsEnvironment.isHeadless())		
-//		{
-//			GraphicsDevice[] gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices(); // Only works if NOT headLess
-//	        
-//			Form_Control formControl = new Form_Control();
-//		}
 		
 		String 													osName 						= System.getProperty("os.name").toLowerCase();
 		
@@ -116,11 +104,8 @@ public class Control
 		// Read Calendar file
 		//
 		
-		Global.display.writeAtPosition(2, 0, " Calendar");
 		@SuppressWarnings("unused")
 		Calendars												calendars 					= new Calendars();
-		Global.display.writeAtPosition(2, 18, "Ok");
-
 		calendars																			= null;				// To avoid memory use in the event of a new calendar later
 		
 		//
@@ -141,11 +126,10 @@ public class Control
 		}
 		new Thread(new Thread_Thermometers(), 								"Thread_Thermometers").start();
 		Global.waitSeconds(15);												// Must wait 15 secs for all thermometers to be read and have values + allow for retries
-		Global.display.writeAtPosition(3, 18, "Ok");
 
 		new Thread(new Thread_UserInterface(), 								"Thread_UserInteface").start();
 		new Thread(new Thread_TCPListen(), 									"Thread_TCPListen").start();
-// TODO wait for Thread_Mixer to finish setting it to zero
+
 		Global.waitSecondsForStopNow(90);									// Must wait 90 secs for all thermometers to be read and have values + allow for retries
 		new Thread(new Thread_BackgroundTasks(), 							"Thread_BackgroundTasks").start();
 		

@@ -138,7 +138,7 @@ public class LogIt
 		}
 		Global.httpSemaphore.semaphoreUnLock();			
 	}
-	public static void tempData()
+	public static void temperatureData()
     {
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.tempData"))
 		{

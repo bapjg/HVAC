@@ -24,7 +24,7 @@ import javax.swing.JTable;
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Form_Control extends JFrame
 {
 
@@ -164,18 +164,16 @@ public class Form_Control extends JFrame
 		paneLogIt.setBounds(10, 172, 764, 300);
 		contentPane.add(paneLogIt);
 
-		tableLogIt 																				= new JTable();
+		tableLogIt 																			= new JTable();
 		paneLogIt.setViewportView(tableLogIt);
-		
-		Form_Control_LogIt_Items items = new Form_Control_LogIt_Items(100);
 		
 		for (int i = 0; i < 110; i++)
 		{
-			items.add(new Form_Control_LogIt_Item("Warning", "Global", "Test " + i));
+			logItItems.add(new Form_Control_LogIt_Item("Warning", "Global", "Test " + i));
 		}
-		Form_Control_LogIt_Item lastItem = new Form_Control_LogIt_Item("Error", "Circuit_Abstract/Constructor", "HotWater" + " invalid pump " + "3");
-		items.add(lastItem);
 		tableLogIt.setModel(logItItems);
+		Form_Control_LogIt_Item 								lastItem 					= new Form_Control_LogIt_Item("Error", "Circuit_Abstract/Constructor", "HotWater" + " invalid pump " + "3");
+		logItItems.add(lastItem);
 		
 
 		tableLogIt.getColumnModel().getColumn(0).setMinWidth(130);

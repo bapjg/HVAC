@@ -66,7 +66,7 @@ public class Thread_Thermometers 								implements 					Runnable
 					}
 				}
 			}
-			LogIt.tempData();
+			LogIt.temperatureData();
 			Global.waitSecondsForStopNow(10);
 		}
 		LogIt.info("Thread_Thermometers", "Run", "Stopping", true);			
