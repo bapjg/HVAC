@@ -1,7 +1,11 @@
 package eReg_Forms;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.EventQueue;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -22,6 +26,9 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.Dimension;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.table.DefaultTableModel;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
@@ -40,11 +47,17 @@ public class Form_Control extends JFrame
 
 	public Form_Control()
 	{
+		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0]; // Only works if NOT headLess
+		GraphicsConfiguration gc = gd.getConfigurations()[0];
+        Rectangle bounds = gc.getBounds();
+		
+		
 		logItItems	 																		= new Form_Control_LogIt_Items(100);
 		
 		this.setMinimumSize(new Dimension(800, 800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 136, 252);
+		this.setVisible(true);
 		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
 		
 		contentPane 																		= new JPanel();
