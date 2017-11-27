@@ -256,6 +256,18 @@ public class Form_Control extends JFrame
 		tableLogIt.setModel(logItItems);
 		
 		btnFreezeUnfreeze 																	= new JButton("Freeze");
+//		btnFreezeUnfreeze.addActionListener(new ActionListener() 
+//		{
+//			public void actionPerformed(ActionEvent arg0) 
+//			{
+//				if (btnFreezeUnfreeze.getText() == "Freeze") 	btnFreezeUnfreeze.setText("Unfreeze");
+//				else 											btnFreezeUnfreeze.setText("Freeze");
+//			}
+//		});
+		btnFreezeUnfreeze.setBounds(93, 178, 89, 23);
+		contentPane.add(btnFreezeUnfreeze);
+		
+		btnFreezeUnfreeze 																	= new JButton("Freeze");
 		btnFreezeUnfreeze.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent arg0) 
