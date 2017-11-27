@@ -43,10 +43,10 @@ public class Form_Control extends JFrame
 	private Form_Control_LogIt_Items 					logItItems;
 	private JTextField 									txtDate;
 	private JTextField 									txtTime;
-	private JFormattedTextField 						txtBoiler;
-	private JFormattedTextField 						txtHotWater;
-	private JFormattedTextField 						txtFloorOut;
-	private JFormattedTextField 						txtFloorIn;
+	private JTextField 									txtBoiler;
+	private JTextField 									txtHotWater;
+	private JTextField 									txtFloorOut;
+	private JTextField 									txtFloorIn;
 	private int 										screenHeight;
 	private int 										screenWidth;
 
@@ -153,7 +153,6 @@ public class Form_Control extends JFrame
 		txtDate.setBounds(147, 11, 86, 20);
 		txtDate.setEditable(false);
 		paneTemperatures.add(txtDate);
-//		txtDate.setColumns(10);
 		
 		txtTime 																			= new JTextField();
 		txtTime.setBackground(new Color(240, 240, 240));
@@ -163,22 +162,22 @@ public class Form_Control extends JFrame
 		txtTime.setEditable(false);
 		paneTemperatures.add(txtTime);
 
-		txtBoiler  																			= new JFormattedTextField();
+		txtBoiler  																			= new JTextField();
 		txtBoiler.setEditable(false);
 		txtBoiler.setBounds(193, 57, 73, 20);
 		paneTemperatures.add(txtBoiler);
 		
-		txtHotWater  																		= new JFormattedTextField();
+		txtHotWater  																		= new JTextField();
 		txtHotWater.setEditable(false);
 		txtHotWater.setBounds(193, 82, 73, 20);
 		paneTemperatures.add(txtHotWater);
 		
-		txtFloorOut  																		= new JFormattedTextField();
+		txtFloorOut  																		= new JTextField();
 		txtFloorOut.setEditable(false);
 		txtFloorOut.setBounds(193, 107, 73, 20);
 		paneTemperatures.add(txtFloorOut);
 		
-		txtFloorIn  																		= new JFormattedTextField();
+		txtFloorIn  																		= new JTextField();
 		txtFloorIn.setEditable(false);
 		txtFloorIn.setBounds(193, 132, 73, 20);
 		paneTemperatures.add(txtFloorIn);
@@ -192,14 +191,8 @@ public class Form_Control extends JFrame
 		tableLogIt 																			= new JTable();
 		paneLogIt.setViewportView(tableLogIt);
 		tableLogIt.setBounds(0, 0, screenWidth - 10, 300);		
-//		for (int i = 0; i < 110; i++)
-//		{
-//			logItItems.add(new Form_Control_LogIt_Item("Warning", "Global", "Test " + i));
-//		}
+
 		tableLogIt.setModel(logItItems);
-//		Form_Control_LogIt_Item 								lastItem 					= new Form_Control_LogIt_Item("Error", "Circuit_Abstract/Constructor", "HotWater" + " invalid pump " + "3");
-//		logItItems.add(lastItem);
-		
 
 		tableLogIt.getColumnModel().getColumn(0).setMinWidth(150);
 		tableLogIt.getColumnModel().getColumn(0).setMaxWidth(150);
@@ -231,10 +224,10 @@ public class Form_Control extends JFrame
 		txtDate			.setText(dateFormat					.format(now));
 		txtTime			.setText(timeFormat					.format(now));
 		
-		txtBoiler		.setValue(Global.thermoBoiler		.toDisplay());
-		txtHotWater		.setValue(Global.thermoHotWater		.toDisplay());
-		txtFloorOut		.setValue(Global.thermoBoilerOut	.toDisplay());
-		txtFloorIn		.setValue(Global.thermoFloorIn		.toDisplay());
+		txtBoiler		.setText(Global.thermoBoiler		.toDisplay());
+		txtHotWater		.setText(Global.thermoHotWater		.toDisplay());
+		txtFloorOut		.setText(Global.thermoBoilerOut		.toDisplay());
+		txtFloorIn		.setText(Global.thermoFloorIn		.toDisplay());
 
 		// ToDo : Add other temperatures
 		
