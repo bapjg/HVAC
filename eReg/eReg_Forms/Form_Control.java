@@ -69,7 +69,7 @@ public class Form_Control extends JFrame
 		
 		logItItems	 																		= new Form_Control_LogIt_Items(100);
 		
-		this.setMinimumSize(new Dimension(800, 800));
+		this.setMinimumSize(new Dimension(1000, 800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 877, 800);
 		
@@ -129,7 +129,7 @@ public class Form_Control extends JFrame
 		paneButtons.add(btnDebugNoWait);
 		
 		JPanel 													paneTemperatures 			= new JPanel();
-		paneTemperatures.setBounds(292, 11, 523, 190);
+		paneTemperatures.setBounds(292, 11, 346, 166);
 		contentPane.add(paneTemperatures);
 		paneTemperatures.setLayout(null);
 		
@@ -138,46 +138,47 @@ public class Form_Control extends JFrame
 		paneTemperatures.add(lblUpdatedOn);
 		
 		JLabel 													lblBoiler 					= new JLabel("Boiler");
-		lblBoiler.setBounds(10, 42, 111, 14);
+		lblBoiler.setBounds(10, 56, 50, 14);
 		paneTemperatures.add(lblBoiler);
 		
 		JLabel 													lblHotWater 				= new JLabel("Hot Water");
-		lblHotWater.setBounds(10, 58, 111, 14);
+		lblHotWater.setBounds(10, 84, 50, 14);
 		paneTemperatures.add(lblHotWater);
 		
 		JLabel 													lblOutside 					= new JLabel("Outside");
-		lblOutside.setBounds(10, 85, 111, 14);
+		lblOutside.setBounds(10, 112, 50, 14);
 		paneTemperatures.add(lblOutside);
 		
-		JLabel 													lblFloorOut 				= new JLabel("Floor Out");
-		lblFloorOut.setBounds(10, 110, 111, 14);
+		JLabel 													lblFloorOut 				= new JLabel("Floor");
+		lblFloorOut.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFloorOut.setBounds(208, 112, 70, 14);
 		paneTemperatures.add(lblFloorOut);
 		
-		JLabel 													lblFloorIn 					= new JLabel("Floor In");
-		lblFloorIn.setBounds(10, 135, 111, 14);
-		paneTemperatures.add(lblFloorIn);
-		
-		JLabel 													lblRadiatorOut 				= new JLabel("Radiator Out");
-		lblRadiatorOut.setBounds(406, 42, 111, 14);
+		JLabel 													lblRadiatorOut 				= new JLabel("Radiator");
+		lblRadiatorOut.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRadiatorOut.setBounds(208, 56, 70, 14);
 		paneTemperatures.add(lblRadiatorOut);
 		
-		JLabel 													lblRadiatorIn  				= new JLabel("Radiator In");
-		lblRadiatorIn.setBounds(406, 79, 111, 14);
+		JLabel 													lblRadiatorIn  				= new JLabel("In");
+		lblRadiatorIn.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRadiatorIn.setBounds(278, 39, 50, 14);
 		paneTemperatures.add(lblRadiatorIn);
 		
-		JLabel 													lblBoilerOut  				= new JLabel("Boiler Out");
-		lblBoilerOut.setBounds(406, 107, 111, 14);
+		JLabel 													lblBoilerOut  				= new JLabel("Boiler");
+		lblBoilerOut.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBoilerOut.setBounds(208, 84, 70, 14);
 		paneTemperatures.add(lblBoilerOut);
 		
-		JLabel 													lblBoilerIn  				= new JLabel("Boiler In");
-		lblBoilerIn.setBounds(409, 150, 111, 14);
+		JLabel 													lblBoilerIn  				= new JLabel("Out");
+		lblBoilerIn.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBoilerIn.setBounds(158, 39, 50, 14);
 		paneTemperatures.add(lblBoilerIn);
 		
 		txtDate 																			= new JTextField();
 		txtDate.setBackground(new Color(240, 240, 240));
 		txtDate.setHorizontalAlignment(SwingConstants.CENTER);
 		txtDate.setForeground(Color.RED);
-		txtDate.setBounds(147, 11, 86, 20);
+		txtDate.setBounds(86, 11, 50, 20);
 		txtDate.setEditable(false);
 		paneTemperatures.add(txtDate);
 		
@@ -185,62 +186,72 @@ public class Form_Control extends JFrame
 		txtTime.setBackground(new Color(240, 240, 240));
 		txtTime.setHorizontalAlignment(SwingConstants.CENTER);
 		txtTime.setForeground(Color.RED);
-		txtTime.setBounds(248, 11, 73, 20);
+		txtTime.setBounds(146, 11, 56, 20);
 		txtTime.setEditable(false);
 		paneTemperatures.add(txtTime);
 
 		txtBoiler  																			= new JTextField();
+		txtBoiler.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBoiler.setEditable(false);
-		txtBoiler.setBounds(193, 39, 73, 20);
+		txtBoiler.setBounds(86, 53, 50, 20);
 		paneTemperatures.add(txtBoiler);
 		
 		txtHotWater  																		= new JTextField();
+		txtHotWater.setHorizontalAlignment(SwingConstants.CENTER);
 		txtHotWater.setEditable(false);
-		txtHotWater.setBounds(193, 55, 73, 20);
+		txtHotWater.setBounds(86, 81, 50, 20);
 		paneTemperatures.add(txtHotWater);
 		
 		txtOutside  				 				 				 						= new JTextField();
+		txtOutside.setHorizontalAlignment(SwingConstants.CENTER);
 		txtOutside.setEditable(false);
-		txtOutside.setBounds(193, 76, 73, 20);
+		txtOutside.setBounds(86, 109, 50, 20);
 		paneTemperatures.add(txtOutside);
 		
 		txtFloorOut  																		= new JTextField();
+		txtFloorOut.setHorizontalAlignment(SwingConstants.CENTER);
 		txtFloorOut.setEditable(false);
-		txtFloorOut.setBounds(193, 107, 73, 20);
+		txtFloorOut.setBounds(158, 109, 50, 20);
 		paneTemperatures.add(txtFloorOut);
 		
 		txtFloorIn  																		= new JTextField();
+		txtFloorIn.setHorizontalAlignment(SwingConstants.CENTER);
 		txtFloorIn.setEditable(false);
-		txtFloorIn.setBounds(193, 132, 73, 20);
+		txtFloorIn.setBounds(278, 109, 50, 20);
 		paneTemperatures.add(txtFloorIn);
 		
 		txtRadiatorOut  				 				 				 					= new JTextField();
+		txtRadiatorOut.setHorizontalAlignment(SwingConstants.CENTER);
 		txtRadiatorOut.setEditable(false);
-		txtRadiatorOut.setBounds(326, 39, 73, 20);
+		txtRadiatorOut.setBounds(158, 53, 50, 20);
 		paneTemperatures.add(txtRadiatorOut);
 		
 		txtRadiatorIn  				 				 				 				 		= new JTextField();
+		txtRadiatorIn.setHorizontalAlignment(SwingConstants.CENTER);
 		txtRadiatorIn.setEditable(false);
-		txtRadiatorIn.setBounds(326, 79, 73, 20);
+		txtRadiatorIn.setBounds(278, 53, 50, 20);
 		paneTemperatures.add(txtRadiatorIn);
 		
 		txtBoilerOut  				 				 				 				 		= new JTextField();
+		txtBoilerOut.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBoilerOut.setEditable(false);
-		txtBoilerOut.setBounds(326, 117, 73, 20);
+		txtBoilerOut.setBounds(158, 81, 50, 20);
 		paneTemperatures.add(txtBoilerOut);
 		
 		txtBoilerIn  				 				 				 				 		= new JTextField();
+		txtBoilerIn.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBoilerIn.setEditable(false);
-		txtBoilerIn.setBounds(326, 147, 73, 20);
+		txtBoilerIn.setBounds(278, 81, 50, 20);
 		paneTemperatures.add(txtBoilerIn);
 		
 		JLabel 													lblLivingRoom 				= new JLabel("Living Room");
-		lblLivingRoom.setBounds(10, 165, 111, 14);
+		lblLivingRoom.setBounds(10, 140, 70, 14);
 		paneTemperatures.add(lblLivingRoom);
 		
 		txtLivingRoom 																		= new JTextField();
+		txtLivingRoom.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLivingRoom.setEditable(false);
-		txtLivingRoom.setBounds(193, 163, 73, 20);
+		txtLivingRoom.setBounds(86, 137, 50, 20);
 		paneTemperatures.add(txtLivingRoom);
 		
 		JScrollPane 											paneLogIt 					= new JScrollPane();
