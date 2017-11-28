@@ -49,40 +49,40 @@ public class Pane_Lights extends JPanel
 	{
 		
 		this.setLayout(null);
-		this.setBounds(713, 11, 261, 166);
+		this.setBounds(713, 11, 291, 166);
 		
 		btnHotWater 																		= new JButton("Hot Water");
-		btnHotWater.setBounds(10, 31, 120, 23);
+		btnHotWater.setBounds(10, 31, 130, 23);
 		this.add(btnHotWater);
 		
 		btnFloor 																			= new JButton("Floor");
-		btnFloor.setBounds(10, 65, 120, 23);
+		btnFloor.setBounds(10, 65, 130, 23);
 		this.add(btnFloor);
 		
 		btnRadiator  																		= new JButton("Radiator");
-		btnRadiator.setBounds(10, 99, 120, 23);
+		btnRadiator.setBounds(10, 99, 130, 23);
 		this.add(btnRadiator);
 		
 		JLabel 													lblPumps  					= new JLabel("Pumps");
 		lblPumps.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPumps.setBounds(10, 11, 120, 14);
+		lblPumps.setBounds(10, 11, 130, 14);
 		this.add(lblPumps);
 		
 		btnBurner  																			= new JButton("Burner");
-		btnBurner.setBounds(138, 31, 120, 23);
+		btnBurner.setBounds(150, 31, 130, 23);
 		this.add(btnBurner);
 		
 		JLabel 													lblOther  					= new JLabel("Other");
 		lblOther.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOther.setBounds(138, 11, 120, 14);
+		lblOther.setBounds(150, 11, 130, 14);
 		this.add(lblOther);
 		
 		btnMixerUp  																		= new JButton("Mixer Up");
-		btnMixerUp.setBounds(138, 65, 120, 23);
+		btnMixerUp.setBounds(150, 65, 130, 23);
 		this.add(btnMixerUp);
 		
 		btnMixerDown  																		= new JButton("Mixer Down");
-		btnMixerDown.setBounds(138, 99, 120, 23);
+		btnMixerDown.setBounds(150, 99, 130, 23);
 		this.add(btnMixerDown);
 	}
 }
