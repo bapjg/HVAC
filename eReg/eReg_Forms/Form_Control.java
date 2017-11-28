@@ -84,7 +84,7 @@ public class Form_Control extends JFrame
 		contentPane.add(paneButtons);
 		
 		JButton btnReBoot = new JButton("ReBoot");
-		btnReBoot.setBounds(34, 21, 90, 20);
+		btnReBoot.setBounds(10, 22, 120, 20);
 		btnReBoot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forceExit(Ctrl_Actions_Stop.ACTION_Reboot);
@@ -93,7 +93,7 @@ public class Form_Control extends JFrame
 		paneButtons.add(btnReBoot);
 		
 		JButton btnBash = new JButton("Bash");
-		btnBash.setBounds(34, 81, 90, 20);
+		btnBash.setBounds(10, 82, 120, 20);
 		btnBash.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forceExit(Ctrl_Actions_Stop.ACTION_Stop);
@@ -102,7 +102,7 @@ public class Form_Control extends JFrame
 		paneButtons.add(btnBash);
 		
 		JButton btnRestart= new JButton("ReStart");
-		btnRestart.setBounds(164, 51, 110, 20);
+		btnRestart.setBounds(140, 52, 120, 20);
 		btnRestart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forceExit(Ctrl_Actions_Stop.ACTION_Restart);
@@ -111,7 +111,7 @@ public class Form_Control extends JFrame
 		paneButtons.add(btnRestart);
 		
 		JButton btnDebugWait = new JButton("Debug Wait");
-		btnDebugWait.setBounds(34, 51, 90, 20);
+		btnDebugWait.setBounds(10, 52, 120, 20);
 		btnDebugWait.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forceExit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
@@ -120,7 +120,7 @@ public class Form_Control extends JFrame
 		paneButtons.add(btnDebugWait);
 		
 		JButton btnDebugNoWait = new JButton("Debug No Wait");
-		btnDebugNoWait.setBounds(164, 21, 110, 20);
+		btnDebugNoWait.setBounds(140, 22, 120, 20);
 		btnDebugNoWait.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forceExit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
