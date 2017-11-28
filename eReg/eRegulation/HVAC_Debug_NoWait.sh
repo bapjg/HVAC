@@ -1,10 +1,10 @@
 cd /home/pi/HVAC/eReg/eRegulation/
 
-git stash save
-git stash drop
-git pull
+sudo git stash save
+sudo git stash drop
+sudo git pull
 
-chmod 777 *
+sudo chmod 777 *
 	
 /home/pi/HVAC/eReg/_Documents/update.sh
 
