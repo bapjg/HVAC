@@ -78,55 +78,9 @@ public class Form_Control extends JFrame
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel paneButtons = new JPanel();
-		paneButtons.setBounds(10, 11, 284, 155);
-		paneButtons.setLayout(null);
+		JPanel 													paneButtons 				= new Pane_Buttons();
 		contentPane.add(paneButtons);
-		
-		JButton btnReBoot = new JButton("ReBoot");
-		btnReBoot.setBounds(10, 22, 120, 20);
-		btnReBoot.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_Reboot);
-			}
-		});
-		paneButtons.add(btnReBoot);
-		
-		JButton btnBash = new JButton("Bash");
-		btnBash.setBounds(10, 82, 120, 20);
-		btnBash.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_Stop);
-			}
-		});
-		paneButtons.add(btnBash);
-		
-		JButton btnRestart= new JButton("ReStart");
-		btnRestart.setBounds(140, 52, 120, 20);
-		btnRestart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_Restart);
-			}
-		});
-		paneButtons.add(btnRestart);
-		
-		JButton btnDebugWait = new JButton("Debug Wait");
-		btnDebugWait.setBounds(10, 52, 120, 20);
-		btnDebugWait.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
-			}
-		});
-		paneButtons.add(btnDebugWait);
-		
-		JButton btnDebugNoWait = new JButton("Debug No Wait");
-		btnDebugNoWait.setBounds(140, 22, 120, 20);
-		btnDebugNoWait.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
-			}
-		});
-		paneButtons.add(btnDebugNoWait);
+
 		
 		JPanel 													paneTemperatures 			= new JPanel();
 		paneTemperatures.setBounds(304, 11, 399, 166);
@@ -326,10 +280,5 @@ public class Form_Control extends JFrame
 		txtBoilerOut	.setText(Global.thermoBoilerOut		.toDisplay());
 		txtBoilerIn		.setText(Global.thermoBoilerIn		.toDisplay());
 		txtLivingRoom	.setText(Global.thermoLivingRoom	.toDisplay());
-	}
-	public void forceExit(int exitStatus) 
-	{
-		Global.stopNow																	= true;
-		Global.exitStatus																= exitStatus;
 	}
 }
