@@ -14,7 +14,6 @@ alias ereg='cd /home/pi/Eclipse/eRegulation/eRegulation/'
 alias sbw='sudo bw_tool'
 alias sbws='sudo bw_tool -S'
 alias sbwaSPI='sudo bw_tool -w f0:9c -a'
-alias sbwaI2C='sudo bw_tool -I -D /dev/i2c-1 -w f0:94 -a'
 
 echo Relays are
 echo  - Burner        20
@@ -24,7 +23,7 @@ echo  - Hot Water     23
 echo  - Radiator      24
 echo  - Floor         25
 
-alias update='/home/pi/HVAC/eReg/_Documents/update.sh'
+alias update='/home/pi/HVAC/eReg/eRegulation/update.sh'
 alias test='/home/pi/HVAC/eReg/eRegulation/Test.sh'
 
 alias burneron='sudo  	bw_tool -a 9c -w 20:1'
@@ -61,19 +60,12 @@ alias tempoutside='echo      -ne outside;     sudo   cat /mnt/1wire/uncached/28.
 
 alias tempall='tempboiler;temphw;tempboiler_out;tempboiler_in;tempfloor_out;tempfloor_in;tempradiator_out;tempradiator_in;templivingroom;tempoutside;'
 
-alias thw='cat     /sys/bus/w1/devices/28-00000485e109/w1_slave'
-alias tboiler='cat /sys/bus/w1/devices/28-0000048f011c/w1_slave'
-alias tmixo='cat   /sys/bus/w1/devices/28-0000048e9244/w1_slave'
-
 alias go='           cd /home/pi/HVAC/eReg/eRegulation/;./Run_HVAC.sh'
 alias Run_HVAC='     cd /home/pi/HVAC/eReg/eRegulation/;./Run_HVAC.sh'
 alias Debug_HVAC='   cd /home/pi/HVAC/eReg/eRegulation/;./Debug_HVAC.sh'
 
-# echo ============================================
-# echo Adjusting contrast to 4 and brightness to 08
-# sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 12:04
-# sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
-# echo ============================================
+alias HVAC_Run='     cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Run.sh'
+alias HVAC_Debug'    cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Debug_Wait.sh'
 
 echo Testing mount to //NAS/DropZone at /mnt/DZ
 echo ============================================

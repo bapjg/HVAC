@@ -4,7 +4,7 @@ sudo git stash save
 sudo git stash drop
 sudo git pull
 
-sudo chmod 777 *
+# sudo chmod 777 *.sh
 	
 /home/pi/HVAC/eReg/_Documents/update.sh
 

@@ -5,5 +5,3 @@
 /doc
 !/eRegulation/*
 !/eReg_Forms/*
-!/eReg_Forms/*.class
-!/eReg_Forms/*.java

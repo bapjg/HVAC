@@ -1,7 +1,3 @@
-cd   /home/pi/HVAC/eReg/_Documents
+# Depricated
+# New version in eRegulation
 
-sudo cp -f Bashrc /home/pi/Bashrc
-
-cd   /home/pi/HVAC/eReg/eRegulation
-
-sudo cp -f HVAC_*.sh /home/pi/Desktop

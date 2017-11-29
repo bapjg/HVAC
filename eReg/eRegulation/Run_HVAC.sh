@@ -1,8 +1,5 @@
 cd /home/pi/HVAC/eReg/eRegulation/
 
-# sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 12:04
-# sudo bw_tool -I -D /dev/i2c-1 -a 94 -w 13:08
-
 # Status	Description
 #   0       Stop application and go to bash
 #   1       Normal Start/Restart application
@@ -22,7 +19,7 @@ do
 	git stash drop
 	git pull
 	
-	/home/pi/HVAC/eReg/_Documents/update.sh
+	/home/pi/HVAC/eReg/eRegulation/update.sh
 
 	if [ $STATUS -eq 1 ];	# Normal Restart application
 	then
