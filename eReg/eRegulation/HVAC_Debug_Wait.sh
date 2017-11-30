@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd /home/pi/HVAC/eReg/eRegulation/
 
 sudo git stash save
