@@ -7,9 +7,9 @@ so:							# This is still relevant as may need to rebuild Interfaces.so file Com
 	rm -f *.so
 	rm -f *.o
 	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
-	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include/linux -c Interfaces_I2C.c -o Interfaces_I2C.o
+#	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include/linux -c Interfaces_I2C.c -o Interfaces_I2C.o
 	gcc -Wall -O2 -shared -o libInterfaces_SPI.so Interfaces_SPI.o
-	gcc -Wall -O2 -shared -o libInterfaces_I2C.so Interfaces_I2C.o
+#	gcc -Wall -O2 -shared -o libInterfaces_I2C.so Interfaces_I2C.o
 
 SPI:						# Compiles Interfaces_SPI
 	make spi
@@ -19,13 +19,13 @@ spi:						# Compiles Interfaces_SPI
 	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include/linux -c Interfaces_SPI.c -o Interfaces_SPI.o
 	gcc -Wall -O2 -shared -o libInterfaces_SPI.so Interfaces_SPI.o
 
-I2C:						# Compiles Interfaces_I2C
-	make i2c
-i2c:						# Compiles Interfaces_I2C
-	rm -f Interfaces_I2C.so
-	rm -f Interfaces_I2C.o
-	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include/linux -c Interfaces_I2C.c -o Interfaces_I2C.o
-	gcc -Wall -O2 -shared -o libInterfaces_I2C.so Interfaces_I2C.o
+# I2C:						# Compiles Interfaces_I2C
+# 	make i2c
+# i2c:						# Compiles Interfaces_I2C
+#	rm -f Interfaces_I2C.so
+#	rm -f Interfaces_I2C.o
+#	gcc -Wall -O2 -I/usr/lib/jvm/java-6-openjdk-armhf/include -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include -I/usr/lib/jvm/java-6-openjdk-armhf/include/linux -I/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/include/linux -c Interfaces_I2C.c -o Interfaces_I2C.o
+#	gcc -Wall -O2 -shared -o libInterfaces_I2C.so Interfaces_I2C.o
 
 
 ?:
@@ -33,7 +33,7 @@ i2c:						# Compiles Interfaces_I2C
 help:
 	echo so........... all interface code in C 
 	echo spi.......... SPI interface code in C only
-	echo I2C.......... I2C interface code in C only
+#	echo I2C.......... I2C interface code in C only
 
 #%.h:                    		%.class
 #	javah -jni -classpath ..  -o $*.h    $(PACKAGE).$*		

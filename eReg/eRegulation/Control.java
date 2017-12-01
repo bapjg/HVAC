@@ -64,7 +64,7 @@ public class Control
 		if (osName.contains("windows"))							System.exit(Ctrl_Actions_Stop.ACTION_Stop);
 		
 		System.loadLibrary("Interfaces_SPI");
-		System.loadLibrary("Interfaces_I2C");
+//		System.loadLibrary("Interfaces_I2C");					// I2C removed (except for thermometers) as screen removed/replaced by HDMI
 
 		if (false)
 		{
@@ -113,7 +113,7 @@ public class Control
 		// Start threads (start with mixer, as it takes a long time
 		//
 		
-		Global.display.writeAtPosition(3, 0, " Thermometers");
+//		Global.display.writeAtPosition(3, 0, " Thermometers");
 		for (Circuit_Abstract circuit : Global.circuits.circuitList)
 		{
 			if (circuit.mixer != null)
@@ -124,7 +124,7 @@ public class Control
 		new Thread(new Thread_Thermometers(), 								"Thread_Thermometers").start();
 		Global.waitSeconds(15);												// Must wait 15 secs for all thermometers to be read and have values + allow for retries
 
-		new Thread(new Thread_UserInterface(), 								"Thread_UserInteface").start();
+//*		new Thread(new Thread_UserInterface(), 								"Thread_UserInteface").start();
 		new Thread(new Thread_TCPListen(), 									"Thread_TCPListen").start();
 
 		Global.waitSecondsForStopNow(90);									// Must wait 90 secs for all thermometers to be read and have values + allow for retries

@@ -85,8 +85,8 @@ public class Global
 	public static	Burner										burner;
 
 	public static	eReg_Forms.Form_Control						formControl;
-	public static 	LCD											display;	
-	public static 	Buttons										buttons;	
+//	public static 	LCD											display;	
+//	public static 	Buttons										buttons;	
 
 	public static 	ArrayList	<String>						eMails;	
 
@@ -101,8 +101,8 @@ public class Global
 	public Global()
 	{
 		Global.formControl 																	= (! GraphicsEnvironment.isHeadless()) ? new eReg_Forms.Form_Control() : null;
-		Global.display 																		= new LCD();
-		Global.buttons 																		= new Buttons();	
+//		Global.display 																		= new LCD();
+//		Global.buttons 																		= new Buttons();	
 		Global.pids																			= new PIDs();
 		Global.thermometers																	= new Thermometers();
 		Global.relays																		= new Relays();
@@ -112,10 +112,10 @@ public class Global
 		Global.awayList	 																	= new ArrayList<Calendars.Away>(); 
 		Global.temperatureMaxTodayPredicted													= null;
 
-		display.clear();
-		display.blinkOff();
-		display.writeAtPosition(0, 0, "Initialising");
-		display.writeAtPosition(1, 0, " Reading params");
+//		display.clear();
+//		display.blinkOff();
+//		display.writeAtPosition(0, 0, "Initialising");
+//		display.writeAtPosition(1, 0, " Reading params");
 		
 		//==================================================================================
 		//
@@ -300,7 +300,7 @@ public class Global
 		//
 		//============================================================
 
-		display.writeAtPosition(1, 18, "Ok");
+//		display.writeAtPosition(1, 18, "Ok");
 		// Other initialisation messages are displayed by Control.java
 	}
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------

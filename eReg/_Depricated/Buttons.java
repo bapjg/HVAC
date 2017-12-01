@@ -1,4 +1,4 @@
-package eRegulation;
+package _Depricated;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 public class Buttons
@@ -27,10 +27,10 @@ public class Buttons
 
 	public int read()
 	{
-		Global.interfaceSemaphore.semaphoreLock("Buttons.read");
+//		Global.interfaceSemaphore.semaphoreLock("Buttons.read");
 //		Integer result = Read();
 //		Integer result1 = result;
-		Global.interfaceSemaphore.semaphoreUnLock();
+//		Global.interfaceSemaphore.semaphoreUnLock();
 		
 		button0 			= false;
 		buttonCancel 		= false;
