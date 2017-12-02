@@ -1,4 +1,4 @@
-mount //NAS/DropZone /mnt/DZ -t cifs -o username=administrateur,domain=bapjg,password=llenkcarb,file_mode=0777,dir_mode=0777
+# mount //NAS/DropZone /mnt/DZ -t cifs -o username=administrateur,domain=bapjg,password=llenkcarb,file_mode=0777,dir_mode=0777
 
 PATH=$PATH:/home/pi/Macros
 alias ll='ls -l'
