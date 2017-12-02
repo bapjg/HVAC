@@ -6,10 +6,6 @@ alias down='sudo shutdown -h now;exit'
 alias reboot='sudo shutdown -r now;exit'
 alias sjava='sudo java -cp .. -Djava.library.path="." '
 
-#sudo modprobe w1-gpio
-#sudo modprobe w1-therm
-
-alias devices='cd /sys/bus/w1/devices/'
 alias ereg='cd /home/pi/Eclipse/eRegulation/eRegulation/'
 alias sbw='sudo bw_tool'
 alias sbws='sudo bw_tool -S'
@@ -61,7 +57,6 @@ alias tempoutside='echo      -ne outside;     sudo   cat /mnt/1wire/uncached/28.
 alias tempall='tempboiler;temphw;tempboiler_out;tempboiler_in;tempfloor_out;tempfloor_in;tempradiator_out;tempradiator_in;templivingroom;tempoutside;'
 
 alias go='           cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Run.sh'
-alias Debug_HVAC='   cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Debug_Wait.sh'
 
 alias HVAC_Run='     cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Run.sh'
 alias HVAC_Debug'    cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Debug_Wait.sh'
@@ -72,4 +67,4 @@ sudo cat /mnt/DZ/HVAC_TestFile
 echo ============================================
 
 cd /home/pi/HVAC/eReg/eRegulation
-chmod 777 *.sh
+
