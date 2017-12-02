@@ -83,7 +83,7 @@ public class Form_Control extends JFrame
 
 		
 		JPanel 													paneTemperatures 			= new JPanel();
-		paneTemperatures.setBounds(304, 11, 399, 166);
+		paneTemperatures.setBounds(350, 11, 400, 166);
 		contentPane.add(paneTemperatures);
 		paneTemperatures.setLayout(null);
 		
@@ -248,6 +248,7 @@ public class Form_Control extends JFrame
 		tableLogIt.setVisible(true);
 
 		Pane_Lights												paneLights 					= new Pane_Lights();
+		paneLights.setLocation(760, 11);
 		contentPane.add(paneLights);
 		
 		
