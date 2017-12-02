@@ -61,8 +61,7 @@ cd /home/pi/HVAC/eReg/eRegulation/
 alias go='           cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Run.sh'
 
 alias HVAC_Run='     cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Run.sh'
-# alias HVAC_Debug'    cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Debug_Wait.sh'
-alias HVAC_Debug'    cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Run.sh'
+alias HVAC_Debug='   cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Debug_Wait.sh'
 
 echo Testing mount to //NAS/DropZone at /mnt/DZ
 echo ============================================
