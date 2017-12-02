@@ -170,6 +170,7 @@ public class Control
 			// Give heatRequirements to boiler and then run the sequencer
 			Global.boiler.heatRequired														= globalHeatRequired;
 			Global.boiler.sequencer();
+			Global.formControl.showTemperatures();
 		}
 		
 		//
