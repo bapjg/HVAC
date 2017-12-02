@@ -233,7 +233,7 @@ public class Control
  		case Ctrl_Actions_Stop.ACTION_Debug_NoWait:											// Value 7 : Reboot Pi
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug NoWait", true); 
 	 		Global.waitSeconds(5);
-	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh");
+	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_NoWait.sh");
 	 		process 																		= processBuilder.start();     // Start the process.
  			System.exit(0);
  			break;
