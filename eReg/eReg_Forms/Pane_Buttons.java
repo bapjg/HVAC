@@ -39,11 +39,20 @@ public class Pane_Buttons extends JPanel
 {
 	public Pane_Buttons()
 	{
-		this.setBounds(10, 11, 284, 155);
+		this.setBounds(10, 11, 333, 155);
 		this.setLayout(null);
 		
-		JButton btnReBoot = new JButton("ReBoot");
-		btnReBoot.setBounds(10, 22, 120, 20);
+		JButton 												btnShutdown 				= new JButton("Shutdown eReg");
+		btnShutdown.setBounds(10, 21, 150, 20);
+		btnShutdown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				forceExit(Ctrl_Actions_Stop.ACTION_ShutDown);
+			}
+		});		
+		add(btnShutdown);
+
+		JButton 												btnReBoot 					= new JButton("ReBoot eReg");
+		btnReBoot.setBounds(170, 22, 150, 20);
 		btnReBoot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forceExit(Ctrl_Actions_Stop.ACTION_Reboot);
@@ -51,17 +60,17 @@ public class Pane_Buttons extends JPanel
 		});
 		this.add(btnReBoot);
 		
-		JButton btnBash = new JButton("Bash");
-		btnBash.setBounds(10, 82, 120, 20);
-		btnBash.addActionListener(new ActionListener() {
+		JButton  												btnStop  					= new JButton("Stop App");
+		btnStop.setBounds(10, 52, 150, 20);
+		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forceExit(Ctrl_Actions_Stop.ACTION_Stop);
 			}
 		});
-		this.add(btnBash);
+		this.add(btnStop);
 		
-		JButton btnRestart= new JButton("ReStart");
-		btnRestart.setBounds(140, 52, 120, 20);
+		JButton  												btnRestart 					= new JButton("ReStart App");
+		btnRestart.setBounds(170, 52, 150, 20);
 		btnRestart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forceExit(Ctrl_Actions_Stop.ACTION_Restart);
@@ -69,8 +78,8 @@ public class Pane_Buttons extends JPanel
 		});
 		this.add(btnRestart);
 		
-		JButton btnDebugWait = new JButton("Debug Wait");
-		btnDebugWait.setBounds(10, 52, 120, 20);
+		JButton  												btnDebugWait  					= new JButton("Debug Wait");
+		btnDebugWait.setBounds(10, 90, 150, 20);
 		btnDebugWait.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forceExit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
@@ -78,8 +87,8 @@ public class Pane_Buttons extends JPanel
 		});
 		this.add(btnDebugWait);
 		
-		JButton btnDebugNoWait = new JButton("Debug No Wait");
-		btnDebugNoWait.setBounds(140, 22, 120, 20);
+		JButton  												btnDebugNoWait  				= new JButton("Debug No Wait");
+		btnDebugNoWait.setBounds(170, 90, 150, 20);
 		btnDebugNoWait.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forceExit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
