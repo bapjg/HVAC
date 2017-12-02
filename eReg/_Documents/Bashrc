@@ -6,7 +6,7 @@ alias down='sudo shutdown -h now;exit'
 alias reboot='sudo shutdown -r now;exit'
 alias sjava='sudo java -cp .. -Djava.library.path="." '
 
-alias ereg='cd /home/pi/Eclipse/eRegulation/eRegulation/'
+alias ereg='cd /home/pi/HVAC/eRegulation/eRegulation/'
 alias sbw='sudo bw_tool'
 alias sbws='sudo bw_tool -S'
 alias sbwaSPI='sudo bw_tool -w f0:9c -a'
