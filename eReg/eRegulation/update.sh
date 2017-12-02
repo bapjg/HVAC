@@ -9,5 +9,6 @@ sudo cp -f HVAC_C*.sh /home/pi/Desktop
 sudo cp -f HVAC_R*.sh /home/pi/Desktop
 
 cd /home/pi/Desktop
-rm HVAC_Prod.sh
-rm HVAC_Reset.sh
+# remove old files if they are still there
+rm HVAC_Prod.sh  2> /dev/null
+rm HVAC_Reset.sh 2> /dev/null
