@@ -181,7 +181,8 @@ public class Global
 			}  
 			catch(IOException ex)
 			{
-				System.out.println("I/O error on open : eRegulator_Json " + ex);
+				LogIt.error("Global", "constructor", "I/O error on open : eRegulator_Json " + ex);
+//				System.out.println("I/O error on open : eRegulator_Json " + ex);
 				System.exit(Ctrl_Actions_Stop.ACTION_Stop);				// 0 = stop application
 			}	
 		}
@@ -387,7 +388,7 @@ public class Global
 		// Ensure that burnerRelay is off
 		// Evacutae heat (over temperature by any means) hot water is usefull even in summer
 		
-		System.out.println("Global/burnerPanic called : will stop all" + reason);
+		LogIt.error("Global", "burnerPanic", "will stop all" + reason);
 
 		eMailMessage("HVAC Panic", "The burner has detected a panic situation, reason : " + reason);
 		
@@ -402,13 +403,13 @@ public class Global
 		}
 		catch (InterruptedException e1)
 		{
-			System.out.println(LogIt.dateTimeStamp() + " TryLock failed");
+			LogIt.error("Global", "semaphoreLock", "TryLock failed");
 			return;
 		}
 		
 		if (!lockResult)
 		{
-			System.out.println(LogIt.dateTimeStamp() + " TryLock timed out ");
+			LogIt.error("Global", "semaphoreLock", "TryLock timed out ");
 			return;
 		}
 	}

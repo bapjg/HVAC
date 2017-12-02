@@ -12,8 +12,8 @@ public class XML
             String xml 										= "";
             String className								= getClassName(object);
 
-            System.out.println("className full " + object.getClass().toString());
-            System.out.println("className part " + className);
+           	LogIt.error("XML", "getXML", "className full " + object.getClass().toString());
+           	LogIt.error("XML", "getXML", "className part " + className);
             
             String 	header 									= "<" + getClassName(object) + " ";
             String 	footer 									= "</" + getClassName(object) + ">";
@@ -25,10 +25,10 @@ public class XML
             {
                 String fieldType = getFieldType(field);
                 
-                System.out.println("field name " + field.getName());
-                System.out.println("field type full " + field.getType().toString());
-                System.out.println("field type part " + fieldType);
-                    
+               	LogIt.error("XML", "getXML", "field name " + field.getName());
+               	LogIt.error("XML", "getXML", "field type full " + field.getType().toString());
+               	LogIt.error("XML", "getXML", "field type part " + fieldType);
+                   
                 if 
                 (	(fieldType.endsWith("String")	)
                 ||  (fieldType.endsWith("Integer")	)    
@@ -74,8 +74,8 @@ public class XML
                 {
                     String fieldType = getFieldType(field);
                     
-                    System.out.println("field name " + field.getName());
-                    System.out.println("field type " + fieldType);
+                   	LogIt.error("XML", "getXML", "field name " + field.getName());
+                   	LogIt.error("XML", "getXML", "field type full " + fieldType);
                     
                     if 
                     (	(fieldType.endsWith("String")	)
@@ -89,7 +89,8 @@ public class XML
                     }
                     if  (fieldType.endsWith("Class"))		// or SubClass
                     {
-                    	System.out.println("CLASS DETECTED");
+                       	LogIt.error("XML", "getXML", "CLASS DETECTED");
+//                    	System.out.println("CLASS DETECTED");
                     }
                     else if (fieldType.endsWith("ArrayList"))
                     {

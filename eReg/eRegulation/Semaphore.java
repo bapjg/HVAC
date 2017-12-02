@@ -35,13 +35,13 @@ public class Semaphore
 			}
 			catch (InterruptedException e1)
 			{
-				System.out.println(Global.DateTime.now() + " Lock on semaphore " + this.name + " failed, called by " + caller);
+				LogIt.error("Semaphore", "semaphoreLock", "Lock on semaphore " + this.name + " failed, called by " + caller);
 				return false;
 			}
 			
 			if (!lockResult)
 			{
-				System.out.println(Global.DateTime.now() + " Lock on semaphore " + this.name + " timed out, called by " + caller + " owned by " + this.owner);
+				LogIt.error("Semaphore", "semaphoreLock", "Lock on semaphore " + this.name + " timed out, called by " + caller + " owned by " + this.owner);
 				return false;
 			}
 			else

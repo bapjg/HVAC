@@ -64,7 +64,8 @@ public class GPIO
         }
         catch (Exception e)
         {
-        	System.out.println("Constructor Exception : " + e);
+           	LogIt.error("GPIO", "constructor", "Constructor Exception : " + e);
+//        	System.out.println("Constructor Exception : " + e);
         }
 	}
 	public void setInput()
@@ -78,7 +79,8 @@ public class GPIO
         }
         catch (IOException e)
         {
-           	System.out.println("setInput Exception : " + e);
+           	LogIt.error("GPIO", "setInput", "setInput Exception : " + e);
+//           	System.out.println("setInput Exception : " + e);
         }
 	}
 	public void setOutput()
@@ -92,7 +94,8 @@ public class GPIO
         }
         catch (IOException e)
         {
-           	System.out.println("setOutput Exception : " + e);
+           	LogIt.error("GPIO", "setOutput", "setOutput Exception : " + e);
+//           	System.out.println("setOutput Exception : " + e);
         }
 	}
 	public void setHigh()
@@ -106,7 +109,8 @@ public class GPIO
          }
         catch (IOException e)
         {
-           	System.out.println("setHigh Exception : " + e);
+           	LogIt.error("GPIO", "setHigh", "setHigh Exception : " + e);
+//           	System.out.println("setHigh Exception : " + e);
         }
     }
 	public void setLow()
@@ -120,7 +124,8 @@ public class GPIO
          }
         catch (IOException e)
         {
-           	System.out.println("setLow Exception : " + e);
+           	LogIt.error("GPIO", "setLow", "setLow Exception : " + e);
+//           	System.out.println("setLow Exception : " + e);
         }
     }
 	public Boolean isHigh()
@@ -141,7 +146,8 @@ public class GPIO
         }
         catch (IOException e)
         {
-           	System.out.println("isHigh Exception : " + e);
+           	LogIt.error("GPIO", "isLow", "isHigh Exception : " + e);
+//           	System.out.println("isHigh Exception : " + e);
            	return false;
         }
 	}
@@ -163,14 +169,15 @@ public class GPIO
         }
         catch (IOException e)
         {
-           	System.out.println("isLow Exception : " + e);
+           	LogIt.error("GPIO", "isLow", "isLow Exception : " + e);
            	return false;
         }
 
 	}
 	public void finalize()
 	{
-       	System.out.println("Finalising");
+       	LogIt.error("GPIO", "finalize", "Finalising");
+//       	System.out.println("Finalising");
         try
         {
         	exportFile 																		= new FileWriter(prefix + "export");
@@ -185,7 +192,8 @@ public class GPIO
         }
         catch (Exception e)
         {
-        	System.out.println("finalize Exception : " + e);
+           	LogIt.error("GPIO", "finalize", "finalize Exception : " + e);
+//        	System.out.println("finalize Exception : " + e);
         }
 	}
 }

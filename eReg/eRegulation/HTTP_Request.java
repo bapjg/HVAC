@@ -25,7 +25,8 @@ public class HTTP_Request <SendType>
 		}
 		catch (MalformedURLException e)
 		{
-			e.printStackTrace();
+           	LogIt.error("HTTP_Request", "constructor", "Exception : " + e);
+//			e.printStackTrace();
 		}
 
 		try
@@ -34,6 +35,7 @@ public class HTTP_Request <SendType>
 		}
 		catch (IOException e)
 		{
+           	LogIt.error("HTTP_Request", "constructor", "Exception : " + e);
 			e.printStackTrace();
 		}
 		
