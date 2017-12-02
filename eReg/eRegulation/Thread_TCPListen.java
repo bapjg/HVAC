@@ -318,7 +318,7 @@ public class Thread_TCPListen 			implements Runnable
 			}
 			catch (Exception e)
 			{
-				System.out.println("exception in trying to get new : " + e.toString());
+				LogIt.info("Thread_TCPListen", "process_Ctrl_Weather_Request", "exception in trying to get new : " + e.toString());
 			}
 		}
 		if (Global.weatherData == null)		// still no data

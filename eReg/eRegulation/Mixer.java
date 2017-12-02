@@ -74,7 +74,7 @@ public class Mixer
 		
 		if ((this.mixerUp == null) || (this.mixerDown == null))
 		{
-			System.out.println("Mixer.Contructor : Unknown mixer relay");
+			LogIt.error("Mixer", "constructor", "Unknown mixer relay");
 		}
 		this.swingTimeMinimum																= 500;
 

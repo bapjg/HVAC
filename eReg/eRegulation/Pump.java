@@ -16,7 +16,7 @@ public class Pump
 		this.dateTimeLastOperated															= Global.DateTime.now();
 		if (this.relay == null)
 		{
-			System.out.println("Relay.Constructor Pump : " + this.name + ", invalid relayName : " + paramPump.relay);
+			LogIt.error("Pump", "constructor", this.name + ", invalid relayName : " + paramPump.relay);
 		}
 	}
 	public void on()
