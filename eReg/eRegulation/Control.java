@@ -191,139 +191,50 @@ public class Control
 //		6 : Debug and Wait
 //		7 : Debug no wait
 
-
-// Would need to run git pull first, and check finished before restarting	would need to test under debugger with "SLEEP 5".
-		// Could have problems as git pull will be overwriting .class files
-		// Doc says that should be ok (just before restating)
-		
-//		  public static void main(String[] args) {
-//			    try {
-//			      ProcessBuilder pb = new ProcessBuilder("/home/sam/myscript.sh");
-//			      Process p = pb.start();     // Start the process.
-//			      p.waitFor();                // Wait for the process to finish.
-//			      System.out.println("Script executed successfully");
-//			    } catch (Exception e) {
-//			      e.printStackTrace();
-//			      }
-//
-//			  }	
-		
-		
-		
-//		public void restartApplication()
-//		{
-//		  final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-//		  final File currentJar = new File(MyClassInTheJar.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-//
-//		  /* is it a jar file? */
-//		  if(!currentJar.getName().endsWith(".jar"))
-//		    return;
-//
-//		  /* Build command: java -jar application.jar */
-//		  final ArrayList<String> command = new ArrayList<String>();
-//		  command.add(javaBin);
-//		  command.add("-jar");
-//		  command.add(currentJar.getPath());
-//
-//		  final ProcessBuilder builder = new ProcessBuilder(command);
-//		  builder.start();
-//		  System.exit(0);
-//		}
-
-//		import java.io.File;
-//		import java.io.IOException;
-//		import java.lang.management.ManagementFactory;
-//
-//		public class Main {
-//		    public static void main(String[] args) throws IOException, InterruptedException {
-//		        StringBuilder cmd = new StringBuilder();
-//		        cmd.append(System.getProperty("java.home") + File.separator + "bin" + File.separator + "java ");
-//		        for (String jvmArg : ManagementFactory.getRuntimeMXBean().getInputArguments()) {
-//		            cmd.append(jvmArg + " ");
-//		        }
-//		        cmd.append("-cp ").append(ManagementFactory.getRuntimeMXBean().getClassPath()).append(" ");
-//		        cmd.append(Main.class.getName()).append(" ");
-//		        for (String arg : args) {
-//		            cmd.append(arg).append(" ");
-//		        }
-//		        Runtime.getRuntime().exec(cmd.toString());
-//		        System.exit(0);
-//		    }
-//		}
-		
 		Runtime 												runtime 					= Runtime.getRuntime();
  		ProcessBuilder 											processBuilder;
  		Process 												process;
 		
-		
 		switch (Global.exitStatus)
 		{
-		case Ctrl_Actions_Stop.ACTION_Stop:													// Value 0 : Stop App
-//			Global.display.clear();
-//			Global.display.writeAtPosition(0, 0, "Stopping controler");
+		case Ctrl_Actions_Stop.ACTION_Stop:													// Value 0 : Stop App and return to X11/GUI
  			LogIt.info("Thread_Main", "main", "Stopping", true);
 	 		Global.waitSeconds(5);
- 			System.exit(Ctrl_Actions_Stop.ACTION_Stop);
+ 			System.exit(0);
  			break;
 		case Ctrl_Actions_Stop.ACTION_Restart:												// Value 1 : Restart App
-//			Global.display.clear();
-//			Global.display.writeAtPosition(0, 0, "Restarting controler");
-	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true);
+	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true);	
 	 		Global.waitSeconds(5);
 	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Run.sh");
 	 		process 																		= processBuilder.start();     // Start the process.
 //		    process.waitFor();                // Wait for the process to finish.
-
- 			System.exit(Ctrl_Actions_Stop.ACTION_Restart);
+ 			System.exit(0);
  			break;		
  		case Ctrl_Actions_Stop.ACTION_Reboot:												// Value 2 : Reboot Pi
-//			Global.display.clear();
-//			Global.display.writeAtPosition(0, 0, "Rebooting controler");
-//	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true); 
-// 			System.exit(Ctrl_Actions_Stop.ACTION_Reboot);
- 			
 	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true);
 	 		Global.waitSeconds(5);
  		    process 																		= runtime.exec("sudo shutdown -r now");
  		    System.exit(0);
- 			
- 			
- 			
  			break;
  		case Ctrl_Actions_Stop.ACTION_ShutDown:												// Value 5 : Reboot Pi
-//			Global.display.clear();
-//			Global.display.writeAtPosition(0, 0, "Shutting down");
-//			Global.display.writeAtPosition(1, 2, "HVAC controler");
-//			Global.display.writeAtPosition(2, 2, "completely");
-//	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
-// 			System.exit(Ctrl_Actions_Stop.ACTION_ShutDown);
-
 	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
 	 		Global.waitSeconds(5);
 	 		process												 							= runtime.exec("sudo shutdown -h now");
  		    System.exit(0);
- 			
- 			
- 			
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_Wait:											// Value 6 : Reboot Pi
-//			Global.display.clear();
-//			Global.display.writeAtPosition(0, 0, "Restarting controler for Debug Wait");
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug Wait", true); 
 	 		Global.waitSeconds(5);
 	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh");
 	 		process 																		= processBuilder.start();     // Start the process.
- 			System.exit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
+ 			System.exit(0);
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_NoWait:											// Value 7 : Reboot Pi
-//			Global.display.clear();
-//			Global.display.writeAtPosition(0, 0, "Restarting controler");
-//			Global.display.writeAtPosition(1, 1, "Debug : No Wait");
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug NoWait", true); 
 	 		Global.waitSeconds(5);
 	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh");
 	 		process 																		= processBuilder.start();     // Start the process.
- 			System.exit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
+ 			System.exit(0);
  			break;
 		}
 	}
