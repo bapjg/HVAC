@@ -56,6 +56,8 @@ alias tempoutside='echo      -ne outside;     sudo   cat /mnt/1wire/uncached/28.
 
 alias tempall='tempboiler;temphw;tempboiler_out;tempboiler_in;tempfloor_out;tempfloor_in;tempradiator_out;tempradiator_in;templivingroom;tempoutside;'
 
+cd /home/pi/HVAC/eReg/eRegulation/
+
 alias go='           cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Run.sh'
 
 alias HVAC_Run='     cd /home/pi/HVAC/eReg/eRegulation/;./HVAC_Run.sh'
