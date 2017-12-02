@@ -47,7 +47,7 @@ public class Pane_Buttons extends JPanel
 		btnShutdown.setBounds(10, 21, 150, 20);
 		btnShutdown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_ShutDown, 2);
+				forceExit(Ctrl_Actions_Stop.ACTION_ShutDown);
 			}
 		});		
 		add(btnShutdown);
@@ -56,7 +56,7 @@ public class Pane_Buttons extends JPanel
 		btnReBoot.setBounds(170, 22, 150, 20);
 		btnReBoot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_Reboot, 2);
+				forceExit(Ctrl_Actions_Stop.ACTION_Reboot);
 			}
 		});
 		this.add(btnReBoot);
@@ -66,7 +66,7 @@ public class Pane_Buttons extends JPanel
 		btnStop.setBounds(10, 52, 150, 20);
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_Stop, 2);
+				forceExit(Ctrl_Actions_Stop.ACTION_Stop);
 			}
 		});
 		this.add(btnStop);
@@ -75,7 +75,7 @@ public class Pane_Buttons extends JPanel
 		btnRestart.setBounds(170, 52, 150, 20);
 		btnRestart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_Restart, 2);
+				forceExit(Ctrl_Actions_Stop.ACTION_Restart);
 			}
 		});
 		this.add(btnRestart);
@@ -85,7 +85,7 @@ public class Pane_Buttons extends JPanel
 		btnDebugWait.setBounds(10, 90, 150, 20);
 		btnDebugWait.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_Debug_Wait, 2);
+				forceExit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
 			}
 		});
 		this.add(btnDebugWait);
@@ -94,16 +94,16 @@ public class Pane_Buttons extends JPanel
 		btnDebugNoWait.setBounds(170, 90, 150, 20);
 		btnDebugNoWait.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				forceExit(Ctrl_Actions_Stop.ACTION_Debug_NoWait, 2);
+				forceExit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
 			}
 		});		
 		this.add(btnDebugNoWait);
 	}
-	public void forceExit(int exitStatus, int dummy) 
-	{
-		Global.stopNow																	= true;
-		Global.exitStatus																= exitStatus;
-	}
+//	public void forceExit(int exitStatus, int dummy) 
+//	{
+//		Global.stopNow																	= true;
+//		Global.exitStatus																= exitStatus;
+//	}
 	public void forceExit(int exitStatus) 
 	{
 		Global.stopNow																	= true;
