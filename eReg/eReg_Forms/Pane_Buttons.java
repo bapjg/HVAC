@@ -39,9 +39,10 @@ public class Pane_Buttons extends JPanel
 {
 	public Pane_Buttons()
 	{
-		this.setBounds(10, 11, 333, 155);
+		this.setBounds(10, 11, 330, 155);
 		this.setLayout(null);
 		
+		// bash command down/reboot
 		JButton 												btnShutdown 				= new JButton("Shutdown eReg");
 		btnShutdown.setBounds(10, 21, 150, 20);
 		btnShutdown.addActionListener(new ActionListener() {
@@ -60,6 +61,7 @@ public class Pane_Buttons extends JPanel
 		});
 		this.add(btnReBoot);
 		
+		// Stop app (and go to bash/gui) restart app
 		JButton  												btnStop  					= new JButton("Stop App");
 		btnStop.setBounds(10, 52, 150, 20);
 		btnStop.addActionListener(new ActionListener() {
@@ -78,6 +80,7 @@ public class Pane_Buttons extends JPanel
 		});
 		this.add(btnRestart);
 		
+		// Dubug alternatives
 		JButton  												btnDebugWait  					= new JButton("Debug Wait");
 		btnDebugWait.setBounds(10, 90, 150, 20);
 		btnDebugWait.addActionListener(new ActionListener() {
