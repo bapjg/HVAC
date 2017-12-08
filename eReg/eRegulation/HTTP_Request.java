@@ -89,9 +89,9 @@ public class HTTP_Request <SendType>
 	}
 	public Ctrl__Abstract sendData(Ctrl__Abstract messageSend)
 	{
-// Changed 08/12/2017 after casting error
-//		Ctrl__Abstract											messageReceive				= null;
-		Rpt_Abstract											messageReceive				= null;
+// Changed 08/12/2017 after casting error  STOPPRESS changes undone
+		Ctrl__Abstract											messageReceive				= null;
+//		Rpt_Abstract											messageReceive				= null;
 
 		try
 		{
@@ -114,6 +114,7 @@ public class HTTP_Request <SendType>
 		{
 			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
 			messageReceive 																	= (Ctrl__Abstract) response.readObject();
+//			messageReceive 																	= (Rpt_Abstract)   response.readObject();
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{
