@@ -89,7 +89,9 @@ public class HTTP_Request <SendType>
 	}
 	public Ctrl__Abstract sendData(Ctrl__Abstract messageSend)
 	{
-		Ctrl__Abstract											messageReceive				= null;
+// Changed 08/12/2017 after casting error
+//		Ctrl__Abstract											messageReceive				= null;
+		Rpt_Abstract											messageReceive				= null;
 
 		try
 		{
