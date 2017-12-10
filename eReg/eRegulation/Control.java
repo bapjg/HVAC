@@ -227,10 +227,10 @@ public class Control
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug Wait", true); 
 	 		Global.waitSeconds(5);
 	 		
-	 		Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", "/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh"});
+//	 		Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", "/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh"});
 	 		
-//	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh");
-//	 		process 																		= processBuilder.start();     // Start the process.
+	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh &");
+	 		process 																		= processBuilder.start();     // Start the process.
  			System.exit(0);
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_NoWait:											// Value 7 : Reboot Pi
