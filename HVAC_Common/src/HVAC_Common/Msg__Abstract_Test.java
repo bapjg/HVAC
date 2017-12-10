@@ -1,7 +1,7 @@
 package HVAC_Common;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
-public abstract class Msg__Abstract_Test 							implements 					java.io.Serializable
+public abstract class Msg__Abstract_Test 						implements 					java.io.Serializable
 {
 	private static final long 									serialVersionUID 			= 1L;
 
