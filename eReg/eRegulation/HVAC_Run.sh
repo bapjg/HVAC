@@ -26,7 +26,7 @@ do
 	sudo git stash drop
 	sudo git pull
 	
-	/home/pi/HVAC/eReg/_Documents/update.sh
+	/home/pi/HVAC/eReg/eRegulation/update.sh
 
 	if [ $STATUS -eq 1 ];	# Normal Restart application
 	then
