@@ -22,11 +22,11 @@ STATUS=1
 
 while (( STATUS == 1 || STATUS == 6 || STATUS == 7));
 do
-	git stash save
-	git stash drop
-	git pull
+	sudo git stash save
+	sudo git stash drop
+	sudo git pull
 	
-	sudo /home/pi/HVAC/eReg/_Documents/update.sh
+	/home/pi/HVAC/eReg/_Documents/update.sh
 
 	if [ $STATUS -eq 1 ];	# Normal Restart application
 	then
