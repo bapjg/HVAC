@@ -1,7 +1,7 @@
 cd   /home/pi/HVAC/eReg/eRegulation
 
 sudo cp -f Bashrc /home/pi/Bashrc
-sudo cp -f HVAC_A*.sh     /home/pi/Desktop
+sudo cp -f HVAC_Auto*.sh  /home/pi/Desktop
 sudo cp -f HVAC_Debug*.sh /home/pi/Desktop
 sudo cp -f HVAC_Run*.sh   /home/pi/Desktop
 
