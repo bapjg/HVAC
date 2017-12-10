@@ -80,6 +80,11 @@ public class HTTP_Request <SendType>
 		{
     		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend TimeOut on read  : " + eTimeOut);
 		}
+		catch (ClassCastException eClassCast) 
+		{
+    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend ClassCast : " + eClassCast);
+    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend ClassCast : " + eClassCast.getMessage());
+		}
 		catch (Exception eReceive) 
 		{
     		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend Other : " + eReceive);
@@ -123,6 +128,11 @@ public class HTTP_Request <SendType>
 		catch (SocketTimeoutException eTimeOut)
 		{
     		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend TimeOut on read  : " + eTimeOut);
+		}
+		catch (ClassCastException eClassCast) 
+		{
+    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend ClassCast : " + eClassCast);
+    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend ClassCast : " + eClassCast.getMessage());
 		}
 		catch (Exception eReceive) 
 		{
