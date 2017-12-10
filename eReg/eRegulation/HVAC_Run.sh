@@ -24,25 +24,25 @@ do
 
 	if [ $STATUS -eq 1 ];	# Normal Restart application
 	then
+ 		echo Now restarting
     	sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" -Djava.library.path=./            eRegulation.Control
     	NEWSTATUS=$?
-		echo Now restarting
 		sleep 5
     fi
     
     if [ $STATUS -eq 6 ];	# Debug Restart Wait
     then
+		echo Now Debug/Wait
 		sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005  -Djava.library.path=./  eRegulation.Control
     	NEWSTATUS=$?
-		echo Now Debug/Wait
 		sleep 5
 	fi
 	
 	if [ $STATUS -eq 7 ];	# Debug Restart No Wait
 	then
+		echo Now Debug/NoWait
 		sudo java -cp "../:../../HVAC_Common/bin:javax.mail.jar:gson-2.2.4.jar" -Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005  -Djava.library.path=./  eRegulation.Control
     	NEWSTATUS=$?
-		echo Now Debug/NoWait
 		sleep 5
 	fi
 	

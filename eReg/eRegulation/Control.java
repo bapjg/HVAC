@@ -199,34 +199,34 @@ public class Control
 		switch (Global.exitStatus)
 		{
 		case Ctrl_Actions_Stop.ACTION_Stop:													// Value 0 : Stop App and return to X11/GUI
- 			LogIt.info("Thread_Main", "main", "Stopping", true);
+ 			LogIt.info("Thread_Main", "main", "Stopping");
 	 		Global.waitSeconds(5);
  			System.exit(Ctrl_Actions_Stop.ACTION_Stop);
  			break;
 		case Ctrl_Actions_Stop.ACTION_Restart:												// Value 1 : Restart App
-	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true);	
+	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application");	
 	 		Global.waitSeconds(5);
  			System.exit(Ctrl_Actions_Stop.ACTION_Restart);
  			break;		
  		case Ctrl_Actions_Stop.ACTION_Reboot:												// Value 2 : Reboot Pi
-	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true);
+	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting");
 	 		Global.waitSeconds(5);
  		    Runtime.getRuntime().exec("sudo shutdown -r now");
  		    System.exit(Ctrl_Actions_Stop.ACTION_Reboot);									// Exit code irrelevant as process above does the work
  			break;
  		case Ctrl_Actions_Stop.ACTION_ShutDown:												// Value 5 : Reboot Pi
-	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
+	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down"); 
 	 		Global.waitSeconds(5);
 	 		Runtime.getRuntime().exec("sudo shutdown -h now");
  		    System.exit(Ctrl_Actions_Stop.ACTION_ShutDown);									// Exit code irrelevant as process above does the work
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_Wait:											// Value 6 : Reboot Pi
-	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug Wait", true); 
+	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug Wait"); 
 	 		Global.waitSeconds(5);
  			System.exit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_NoWait:											// Value 7 : Reboot Pi
-	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug NoWait", true); 
+	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug NoWait"); 
 	 		Global.waitSeconds(5);
  			System.exit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
  			break;
