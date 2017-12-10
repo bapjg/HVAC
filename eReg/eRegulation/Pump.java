@@ -38,6 +38,6 @@ public class Pump
 	}
 	public Boolean isOn()
 	{
-		return relay.isOn();
+		return relay.isOn;
 	}
 }
