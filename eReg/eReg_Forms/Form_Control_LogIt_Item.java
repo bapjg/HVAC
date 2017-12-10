@@ -3,6 +3,7 @@ package eReg_Forms;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Form_Control_LogIt_Item
 {
 	public String 								dateTimeStamp;

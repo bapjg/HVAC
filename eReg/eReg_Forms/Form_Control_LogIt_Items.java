@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Form_Control_LogIt_Items extends AbstractTableModel 
 {
 

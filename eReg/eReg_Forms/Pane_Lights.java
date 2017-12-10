@@ -8,6 +8,9 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
 import javax.swing.JFormattedTextField;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.Dimension;
@@ -33,6 +37,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
+import javax.swing.ImageIcon;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Pane_Lights extends JPanel
@@ -44,7 +49,9 @@ public class Pane_Lights extends JPanel
 	private JButton 											btnMixerUp;
 	private JButton 											btnMixerDown;
 
-
+    private BufferedImage 										lampOn;
+    private BufferedImage 										lampOff;
+ 
 	public Pane_Lights()
 	{
 		
@@ -53,6 +60,7 @@ public class Pane_Lights extends JPanel
 		
 		btnHotWater 																		= new JButton("Hot Water");
 		btnHotWater.setBounds(10, 31, 130, 23);
+//		btnHotWater.setIcon(new ImageIcon("D:\\HVAC_Repository\\git\\HVAC\\eReg\\eReg_Forms\\lamp_on.jpg"));
 		this.add(btnHotWater);
 		
 		btnFloor 																			= new JButton("Floor");
@@ -84,5 +92,22 @@ public class Pane_Lights extends JPanel
 		btnMixerDown  																		= new JButton("Mixer Down");
 		btnMixerDown.setBounds(150, 99, 130, 23);
 		this.add(btnMixerDown);
+		
+	    try 
+	    {                
+	          lampOn = ImageIO.read(new File("../eReg_Forms/lamp_on.jpg"));
+	          lampOff = ImageIO.read(new File("../eReg_Forms/lamp_off.jpg"));
+	    } 
+	    catch (IOException ex) 
+	    {
+	            // handle exception...
+	    }
+	}
+	@Override
+    protected void paintComponent(Graphics g) 
+	{
+        super.paintComponent(g);
+        g.drawImage(lampOn, 0, 0, this); // see javadoc for more info on the parameters            
+        g.drawImage(lampOff, 0, 0, this); // see javadoc for more info on the parameters            
 	}
 }

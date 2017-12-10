@@ -3,7 +3,7 @@ package eRegulation;
 import HVAC_Common.CIRCUIT;
 import HVAC_Common.Ctrl_Configuration;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Circuit_Mixer extends Circuit_Abstract
 {
 	private Integer												lastAccurateFloorInTemp		= 21000;

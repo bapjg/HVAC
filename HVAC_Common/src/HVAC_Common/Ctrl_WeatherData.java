@@ -25,7 +25,7 @@ import java.util.TimeZone;
 
 // http://api.openweathermap.org/data/2.5/forecast/city?q=chambery,fr&mode=xml&units=metric&type=accurate
 
-
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Ctrl_WeatherData 						extends 		DefaultHandler
 													implements 		java.io.Serializable
 {

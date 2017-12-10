@@ -12,7 +12,7 @@ import HVAC_Common.Rpt_PID.Update;
 // Hence, time required for BoilerOut (or MixerHot) to increase upto Boiler Temp
 // is much longer than with much larger valve openings
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Mixer
 {
 	public String 												name;

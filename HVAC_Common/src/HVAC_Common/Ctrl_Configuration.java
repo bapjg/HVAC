@@ -3,6 +3,7 @@ package HVAC_Common;
 import java.util.ArrayList;
 import HVAC_Common.*;
 
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 @SuppressWarnings("serial")
 public class Ctrl_Configuration 				extends 					Ctrl__Abstract
 {
