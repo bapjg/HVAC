@@ -35,7 +35,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
-public class Form_Control extends JFrame
+public class Form_Control 										extends 					JFrame
 {
 
 	private JPanel 												contentPane;
