@@ -46,6 +46,55 @@ public class HTTP_Request <SendType>
 		servletConnection.setReadTimeout(1000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 	}
+	//
+	// New version based on Msg__Abstract
+	//
+	public Msg__Abstract sendData(Msg__Abstract messageSend)
+	{
+		Msg__Abstract											messageReceive				= null;
+
+		try
+		{
+			ObjectOutputStream 									outputToServlet;
+			outputToServlet 																= new ObjectOutputStream(servletConnection.getOutputStream());
+			outputToServlet.writeObject(messageSend);
+			outputToServlet.flush();
+			outputToServlet.close();
+		}
+		catch (SocketTimeoutException eTimeOut)
+		{
+    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend TimeOut on write : " + eTimeOut);
+		}
+		catch (Exception eSend) 
+		{
+    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend : " + eSend);
+		}
+
+		try
+		{
+			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
+			messageReceive 																	= (Msg__Abstract) response.readObject();
+		}
+    	catch (ClassNotFoundException eClassNotFound) 
+    	{
+    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend ClassNotFound : " + eClassNotFound);
+		}
+		catch (SocketTimeoutException eTimeOut)
+		{
+    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend TimeOut on read  : " + eTimeOut);
+		}
+		catch (ClassCastException eClassCast) 
+		{
+    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend ClassCast : " + eClassCast);
+    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend ClassCast : " + eClassCast.getMessage());
+		}
+		catch (Exception eReceive) 
+		{
+    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend Other : " + eReceive);
+    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend Other : " + eReceive.getMessage());
+		}
+		return messageReceive;			
+	}
 	public Rpt_Abstract sendData(Rpt_Abstract messageSend)
 	{
 		Rpt_Abstract											messageReceive				= null;
