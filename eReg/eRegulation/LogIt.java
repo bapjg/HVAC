@@ -20,13 +20,13 @@ import HVAC_Common.*;
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class LogIt
 {
-	public static Boolean 										logDisplay 					= true;
-	public static Boolean 										useLogFile 					= true;
+//	public static Boolean 										logDisplay 					= true;
+//	public static Boolean 										useLogFile 					= true;
 	private static final String									spaces						= "                                             ";
 	
 	public LogIt()
 	{
-		logDisplay																			= true;
+//		logDisplay																			= true;
 	}
 	public static void toLogFile(String message)
 	{
@@ -45,8 +45,10 @@ public class LogIt
 	}
 	public static void debug(String message)
 	{
-		if (true)												toScreen	(dateTimeStamp() + " LogIt.debug " + message);
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " LogIt.debug " + message);
+//		if (true)												toScreen	(dateTimeStamp() + " LogIt.debug " + message);
+//		if (useLogFile)											toLogFile	(dateTimeStamp() + " LogIt.debug " + message);
+		toScreen	(dateTimeStamp() + " LogIt.debug " + message);
+		toLogFile	(dateTimeStamp() + " LogIt.debug " + message);
 	}
 	public static void  logMessage(String messageType, String className, String methodName, String message)
 	{
@@ -81,15 +83,14 @@ public class LogIt
 		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
 		if (Global.formControl != null)							Global.formControl.logMessage(dateTimeStamp(), "Display", sender, message);
 		else													toScreen	(dateTimeStamp() + " : Display: " + sender + " - " + message);
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Display: " + sender + " - " + message);
+		toLogFile	(dateTimeStamp() + " : Display: " + sender + " - " + message);
 	}
 	public static void  info(String className, String methodName, String message)
 	{
-		logMessage("Info", className, methodName, message);
 		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
 		if (Global.formControl != null)							Global.formControl.logMessage(dateTimeStamp(), "Info", sender, message);
 		else													toScreen	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
+		toLogFile	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
 	}
 //	public static void  info(String className, String methodName, String message, Boolean display)
 //	{
@@ -104,11 +105,11 @@ public class LogIt
 //	}
 	public static void  error(String className, String methodName, String message)
 	{
-		logMessage("Error", className, methodName, message);
+
 		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
 		if (Global.formControl != null)							Global.formControl.logMessage(dateTimeStamp(), "Error", sender, message);
 		else													toScreen	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
+		toLogFile	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
 	}
 //	public static void  error(String className, String methodName, String message, Boolean display)
 //	{

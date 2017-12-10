@@ -49,9 +49,9 @@ public class HTTP_Request <SendType>
 	//
 	// New version based on Msg__Abstract
 	//
-	public Msg__Abstract sendData(Msg__Abstract messageSend)
+	public Msg__Abstract_Test sendData(Msg__Abstract_Test messageSend)
 	{
-		Msg__Abstract											messageReceive				= null;
+		Msg__Abstract_Test											messageReceive				= null;
 
 		try
 		{
@@ -73,7 +73,7 @@ public class HTTP_Request <SendType>
 		try
 		{
 			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 																	= (Msg__Abstract) response.readObject();
+			messageReceive 																	= (Msg__Abstract_Test) response.readObject();
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{
