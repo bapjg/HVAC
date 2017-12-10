@@ -103,7 +103,7 @@ public class Boiler
 				case PowerDown:					// Normally cannot happen, ------------------------------ditto--------------------------------------
 				default:
 					burner.powerOff();
-					LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + ", state set to STATE_OnCoolingAfterOverheat, Current state : " + state, false);
+					LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + ", state set to STATE_OnCoolingAfterOverheat, Current state : " + state);
 					state																	= HVAC_STATES.Boiler.On_CoolingAfterOverheat;
 					break;
 				}
@@ -132,7 +132,7 @@ public class Boiler
 			case On_CoolingAfterOverheat:
 				if (!overHeatDetected())
 				{
-					LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling", false);
+					LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling");
 					state																	= HVAC_STATES.Boiler.On_Cooling; 		//Normal operating temp has returned
 				}
 				break;

@@ -91,17 +91,17 @@ public class LogIt
 		else													toScreen	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
 		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
 	}
-	public static void  info(String className, String methodName, String message, Boolean display)
-	{
-		logMessage("Info", className, methodName, message);
-		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
-		if (display)
-		{
-			if (Global.formControl != null)						Global.formControl.logMessage(dateTimeStamp(), "Info", sender, message);
-			else												toScreen	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
-		}
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
-	}
+//	public static void  info(String className, String methodName, String message, Boolean display)
+//	{
+//		logMessage("Info", className, methodName, message);
+//		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
+//		if (display)
+//		{
+//			if (Global.formControl != null)						Global.formControl.logMessage(dateTimeStamp(), "Info", sender, message);
+//			else												toScreen	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
+//		}
+//		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
+//	}
 	public static void  error(String className, String methodName, String message)
 	{
 		logMessage("Error", className, methodName, message);
@@ -110,17 +110,17 @@ public class LogIt
 		else													toScreen	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
 		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
 	}
-	public static void  error(String className, String methodName, String message, Boolean display)
-	{
-		logMessage("Error", className, methodName, message);
-		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
-		if (display)
-		{
-			if (Global.formControl != null)						Global.formControl.logMessage(dateTimeStamp(), "Error", sender, message);
-			else												toScreen	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
-		}
-		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
-	}
+//	public static void  error(String className, String methodName, String message, Boolean display)
+//	{
+//		logMessage("Error", className, methodName, message);
+//		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
+//		if (display)
+//		{
+//			if (Global.formControl != null)						Global.formControl.logMessage(dateTimeStamp(), "Error", sender, message);
+//			else												toScreen	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
+//		}
+//		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
+//	}
 	public static void pidData	(Rpt_PID.Update	messageSend)
 	{
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.pidData"))

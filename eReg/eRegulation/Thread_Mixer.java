@@ -15,7 +15,7 @@ public class Thread_Mixer implements Runnable
 	}
 	public void run()
 	{
-		LogIt.info("Thread_Mixer_" + circuit.name, "Run", "Starting", true);
+		LogIt.info("Thread_Mixer_" + circuit.name, "Run", "Starting");
 		circuit.state																		= HVAC_STATES.Circuit.MixerInitialising;
 		Global.waitSeconds(1);																// Wait 1s before switching on the mixer, in case a pump has been turned on/off
 		
@@ -167,7 +167,7 @@ public class Thread_Mixer implements Runnable
 			}
 		}		// End while
 		circuit.circuitPump.off();
-		LogIt.info("Thread_Mixer", "Run", "Stopping", true);	
+		LogIt.info("Thread_Mixer", "Run", "Stopping");	
 	}
 	public void controlMixerAndWait(Integer targetTemp)
 	{

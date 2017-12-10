@@ -20,7 +20,7 @@ public class Thread_TCPListen 			implements Runnable
 	
 	public void run()
     {
-		LogIt.info("Thread_TCPListen", "Run", "Starting", true);            
+		LogIt.info("Thread_TCPListen", "Run", "Starting");            
  
 		Ctrl__Abstract					message_in 							= null;
 		Ctrl__Abstract					message_out 						= null;
@@ -43,7 +43,7 @@ public class Thread_TCPListen 			implements Runnable
 
 			        if (message_in == null)
 			        {
-						LogIt.info("Thread_TCPListen", "Run", "Null received from client", true);            
+						LogIt.info("Thread_TCPListen", "Run", "Null received from client");            
 			            message_out 										= new Ctrl__Abstract().new Nack();
 			        } 
 			    	else
@@ -83,12 +83,12 @@ public class Thread_TCPListen 			implements Runnable
 				}
 		        catch (ClassNotFoundException eCNF)
 		        {
-					LogIt.info("Thread_TCPListen", "Run", "Caught CNF", true);            
+					LogIt.info("Thread_TCPListen", "Run", "Caught CNF");            
 		            // message_out 							= new Message_Abstract().new Nack();
 		        }
 				catch (EOFException eEOF)
 				{
-					LogIt.info("Thread_TCPListen", "Run", "Caught EOF", true);            
+					LogIt.info("Thread_TCPListen", "Run", "Caught EOF");            
 					// Do nothing we will loop and do another 10s wait unless stopNow activated
 				}
 				catch (SocketTimeoutException eTO)
@@ -97,11 +97,11 @@ public class Thread_TCPListen 			implements Runnable
 				}
 				catch (IOException eIO)
 				{
-					LogIt.info("Thread_TCPListen", "Run", "Caught IO " + eIO, true);            
+					LogIt.info("Thread_TCPListen", "Run", "Caught IO " + eIO);            
 				}
 				catch (Exception e)
 				{
-					LogIt.info("Thread_TCPListen", "Run", "Caught other" + e, true); 
+					LogIt.info("Thread_TCPListen", "Run", "Caught other" + e); 
 					e.printStackTrace();
 				}
 			}
@@ -117,7 +117,7 @@ public class Thread_TCPListen 			implements Runnable
 		catch (IOException e)
 		{
 		}
- 		LogIt.info("Thread_TCPListen", "Run", "Stopping", true);             
+ 		LogIt.info("Thread_TCPListen", "Run", "Stopping");             
 	}
 	
 	private Ctrl_Temperatures.Data		process_Ctrl_Temperatures_Request		(Ctrl_Temperatures.Request message_in)

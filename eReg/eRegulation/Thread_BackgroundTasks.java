@@ -62,7 +62,7 @@ public class Thread_BackgroundTasks implements Runnable
 					{
 						if (! circuit.circuitPump.isOn())			// Not really possible otherwise
 						{
-							LogIt.info("Thread_Background", "Run", "Clean pump !isOn " + circuit.circuitPump.name, true);
+							LogIt.info("Thread_Background", "Run", "Clean pump !isOn " + circuit.circuitPump.name);
 							circuit.circuitPump.relay.on();			// circuitPump.on() updates timeLastOperated, whereas circuitPump.relay.on() does not.
 							Global.waitMilliSeconds(1000);			// Avoid switch all the relays at the same time
 							mustWait 							= true;
@@ -70,13 +70,13 @@ public class Thread_BackgroundTasks implements Runnable
 					}
 					else
 					{
-						LogIt.info("Thread_Background", "Run", "Clean pump DISCARDED "	+ circuit.circuitPump.name, 			true);
+						LogIt.info("Thread_Background", "Run", "Clean pump DISCARDED "	+ circuit.circuitPump.name);
 					}
 				}
 
 				if (mustWait)		// i.e. at least one pump has been turned on
 				{
-					LogIt.info("Thread_Background", "Run", "Summer Pumps Wait time " + tasksBackGround.pumpCleanDurationSeconds, true);
+					LogIt.info("Thread_Background", "Run", "Summer Pumps Wait time " + tasksBackGround.pumpCleanDurationSeconds);
 					// This is a wait which allows loop exit if stopButton pressed
 					for (i = 0; (i < tasksBackGround.pumpCleanDurationSeconds) && (!Global.stopNow); i++)			
 					{
@@ -90,7 +90,7 @@ public class Thread_BackgroundTasks implements Runnable
 						{
 							if (circuit.circuitPump.isOn())
 							{
-								LogIt.info("Thread_Background", "Run", "Clean pump off " + circuit.circuitPump.name, true);
+								LogIt.info("Thread_Background", "Run", "Clean pump off " + circuit.circuitPump.name);
 								circuit.circuitPump.off();
 								Global.waitMilliSeconds(1000);			// Avoid switching off all the relays at the same time
 							}
@@ -99,7 +99,7 @@ public class Thread_BackgroundTasks implements Runnable
 				}
 				pumpCleanDateLast															= Global.Date.now();
 				LogIt.action("Summer Pumps", "Finished");
-				LogIt.info("Thread_Background", "Run", "Clean pump finished", true);
+				LogIt.info("Thread_Background", "Run", "Clean pump finished");
 			}
 			//
 			//=========================================================================================================================================
@@ -241,7 +241,7 @@ public class Thread_BackgroundTasks implements Runnable
 				Integer 												efectiveTempCalculatedMax 	= -100;
 				Long 													efectiveTempCalculatedTime 	= -1L;
 				
-				LogIt.info("Thread_Background", "Run", "Weather : get It", true);
+				LogIt.info("Thread_Background", "Run", "Weather : get It");
 				try
 				{
 					Global.weatherData																= new Ctrl_WeatherData();
@@ -249,7 +249,7 @@ public class Thread_BackgroundTasks implements Runnable
 					if (Global.weatherData.forecasts != null)			// TODO need to check
 					{
 						Global.weatherData.dateTimeObtained											= Global.DateTime.now();
-						LogIt.info("Thread_Background", "Run", "Weather : fetched", true);
+						LogIt.info("Thread_Background", "Run", "Weather : fetched");
 				        for (Ctrl_WeatherData.Forecast forecastItem : Global.weatherData.forecasts)
 				        {
 				        	if  ((forecastItem.dateTime.from > Global.Date.now())							// timeStamp > last midnight
@@ -276,12 +276,12 @@ public class Thread_BackgroundTasks implements Runnable
 				        	Global.temperatureMaxTodayPredicted										= efectiveTempCalculatedMax;
 				        	Global.temperatureMaxTodayTime											= efectiveTempCalculatedTime;
 				        }
-						LogIt.info("Thread_Background", "Run", "Maximum temperature (corrected) today " + efectiveTempCalculatedMax + ", at " + Global.Time.display(efectiveTempCalculatedTime), true);
+						LogIt.info("Thread_Background", "Run", "Maximum temperature (corrected) today " + efectiveTempCalculatedMax + ", at " + Global.Time.display(efectiveTempCalculatedTime));
 					}
 				}
 				catch (Exception e)
 				{
-					LogIt.info("Thread_Background", "Run", "Weather : getIt returned error " + e, true);
+					LogIt.info("Thread_Background", "Run", "Weather : getIt returned error " + e);
 					Global.weatherData																= null;
 					// If there's a problem getting weatherData, leave Global.temperatureMaxTodayPredicted as it is
 					// there is high probability that today's max temp will be the same as yesterday's
@@ -298,6 +298,6 @@ public class Thread_BackgroundTasks implements Runnable
 			//
 			//=========================================================================================================================================
 		}
-		LogIt.info("Thread_Background", "Run", "Stopping", true);		
+		LogIt.info("Thread_Background", "Run", "Stopping");		
 	}
 }

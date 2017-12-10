@@ -5,7 +5,7 @@ public class Thread_Thermometers 								implements 					Runnable
 {
 	public void run()
 	{
-		LogIt.info("Thread_Thermometers", "Run", "Starting", true);		
+		LogIt.info("Thread_Thermometers", "Run", "Starting");		
 		
 // Must be an uncached read to set resolution
 // Same resolution will be used below
@@ -69,6 +69,6 @@ public class Thread_Thermometers 								implements 					Runnable
 			LogIt.temperatureData();
 			Global.waitSecondsForStopNow(10);
 		}
-		LogIt.info("Thread_Thermometers", "Run", "Stopping", true);			
+		LogIt.info("Thread_Thermometers", "Run", "Stopping");			
 	}
 }
