@@ -201,44 +201,40 @@ public class Control
 		case Ctrl_Actions_Stop.ACTION_Stop:													// Value 0 : Stop App and return to X11/GUI
  			LogIt.info("Thread_Main", "main", "Stopping", true);
 	 		Global.waitSeconds(5);
- 			System.exit(0);
+ 			System.exit(Ctrl_Actions_Stop.ACTION_Stop);
  			break;
 		case Ctrl_Actions_Stop.ACTION_Restart:												// Value 1 : Restart App
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application", true);	
 	 		Global.waitSeconds(5);
-	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Run.sh");
-	 		process 																		= processBuilder.start();     // Start the process.
-//		    process.waitFor();                // Wait for the process to finish.
- 			System.exit(0);
+//	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Run.sh");
+//	 		process 																		= processBuilder.start();     // Start the process.
+ 			System.exit(Ctrl_Actions_Stop.ACTION_Restart);
  			break;		
  		case Ctrl_Actions_Stop.ACTION_Reboot:												// Value 2 : Reboot Pi
 	 		LogIt.info("Thread_Main", "main", "Stopping and rebooting", true);
 	 		Global.waitSeconds(5);
  		    process 																		= runtime.exec("sudo shutdown -r now");
- 		    System.exit(0);
+ 		    System.exit(Ctrl_Actions_Stop.ACTION_Reboot);									// Exit code irrelevant as process above does the work
  			break;
  		case Ctrl_Actions_Stop.ACTION_ShutDown:												// Value 5 : Reboot Pi
 	 		LogIt.info("Thread_Main", "main", "Stopping and shutting down", true); 
 	 		Global.waitSeconds(5);
 	 		process												 							= runtime.exec("sudo shutdown -h now");
- 		    System.exit(0);
+ 		    System.exit(Ctrl_Actions_Stop.ACTION_ShutDown);									// Exit code irrelevant as process above does the work
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_Wait:											// Value 6 : Reboot Pi
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug Wait", true); 
 	 		Global.waitSeconds(5);
-	 		
-//	 		Runtime.getRuntime().exec(new String[]{"/bin/sh", "-c", "/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh"});
-	 		
-	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh &");
-	 		process 																		= processBuilder.start();     // Start the process.
- 			System.exit(0);
+//	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_Wait.sh &");
+//	 		process 																		= processBuilder.start();     // Start the process.
+ 			System.exit(Ctrl_Actions_Stop.ACTION_Debug_Wait);
  			break;
  		case Ctrl_Actions_Stop.ACTION_Debug_NoWait:											// Value 7 : Reboot Pi
 	 		LogIt.info("Thread_Main", "main", "Stopping and restarting application with Debug NoWait", true); 
 	 		Global.waitSeconds(5);
-	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_NoWait.sh");
-	 		process 																		= processBuilder.start();     // Start the process.
- 			System.exit(0);
+//	 		processBuilder 																	= new ProcessBuilder("/home/pi/HVAC/eReg/eRegulation/HVAC_Debug_NoWait.sh");
+//	 		process 																		= processBuilder.start();     // Start the process.
+ 			System.exit(Ctrl_Actions_Stop.ACTION_Debug_NoWait);
  			break;
 		}
 	}
