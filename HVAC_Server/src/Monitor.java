@@ -17,6 +17,7 @@ import HVAC_Common.Rpt_PID;
 import HVAC_Common.Rpt_Report;
 import HVAC_Common.Rpt_Temperatures;
 
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Monitor extends HttpServlet
 {
 
@@ -28,12 +29,12 @@ public class Monitor extends HttpServlet
     public Monitor()
     {
         super();
-    	dbName 										= "jdbc:mysql://localhost/hvac_database";
+    	dbName 																				= "jdbc:mysql://localhost/hvac_database";
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         response.setContentType("text/html");
-        PrintWriter 					out 		= response.getWriter();
+        PrintWriter 											out 						= response.getWriter();
         
         out.println("<html>");
         out.println("<head>");
@@ -45,21 +46,21 @@ public class Monitor extends HttpServlet
         out.println("<p>if problem check Project/Properties/Project Facets/Compiler Version = 1.6</p>");
         
         dbOpen();
-        Statement 						dbStatement = null;
+        Statement 												dbStatement 				= null;
         String dbField = "Z";
         
         try
         {
-            dbStatement 							= dbConnection.createStatement();
-            String 						dbSQL 		= "SELECT * FROM Check_Test";
-            ResultSet 					dbResult 	= dbStatement.executeQuery(dbSQL);
-            dbResult.next();
-            dbField 								= dbResult.getString(1);		// Only one field in database
+            dbStatement 																	= dbConnection.createStatement();
+            String 												dbSQL 						= "SELECT * FROM Check_Test";
+            ResultSet 											dbResult 					= dbStatement.executeQuery(dbSQL);
+            dbResult.next();										
+            dbField 																		= dbResult.getString(1);		// Only one field in database
         }
         catch(SQLException e)
         {
             e.printStackTrace();
-            dbField									= e.toString();
+            dbField																			= e.toString();
         }
         out.println("<h1>Hello World</h1>");
         out.println("<p>" + dbField + "</p>");
@@ -68,72 +69,72 @@ public class Monitor extends HttpServlet
     }
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        Object 							message_in 	= null;
-        Rpt_Abstract 				message_out = null;
+        Object 													message_in 					= null;
+        Rpt_Abstract 											message_out 				= null;
         
         try
         {
-            ObjectInputStream 			input 		= new ObjectInputStream(request.getInputStream());
-            message_in 								= input.readObject();
+            ObjectInputStream 									input 						= new ObjectInputStream(request.getInputStream());
+            message_in 																		= input.readObject();
         }
         catch (ClassNotFoundException eCNF)
         {
         	System.out.println("Monitor : Caught CNF");
         	eCNF.printStackTrace();
-            message_out 							= new Rpt_Abstract().new Nack();
+            message_out 																	= new Rpt_Abstract().new Nack();
         }
         catch (IOException eIO)
         {
         	System.out.println("Monitor : Caught IO");
         	System.out.println("An IO Exception occured : " + eIO);
-        	message_out 							= new Rpt_Abstract().new Nack();
+        	message_out 																	= new Rpt_Abstract().new Nack();
         }
         catch (Exception e)
         {
         	System.out.println("Monitor : Caught another exception");
         	System.out.println("An Exception occured : " + e);
-        	message_out 							= new Rpt_Abstract().new Nack();
+        	message_out 																	= new Rpt_Abstract().new Nack();
         }
 
     	if (message_in == null)
         {
             System.out.println("Monitor : Null received from client");
-            message_out 							= new Rpt_Abstract().new Nack();
+            message_out 																	= new Rpt_Abstract().new Nack();
         } 
     	else if (message_in instanceof Rpt_Temperatures)
         {
-    		Rpt_Temperatures 		readings 		= (Rpt_Temperatures) message_in;
-            message_out								= processTemperatures(readings);
+    		Rpt_Temperatures 									readings 					= (Rpt_Temperatures) message_in;
+            message_out																		= processTemperatures(readings);
         } 
 		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)
         {
-            Ctrl_Fuel_Consumption.Update			readings 	= (Ctrl_Fuel_Consumption.Update) message_in;
-            message_out								= processFuel(readings);
+            Ctrl_Fuel_Consumption.Update						readings 					= (Ctrl_Fuel_Consumption.Update) message_in;
+            message_out																		= processFuel(readings);
         } 
 		else if (message_in instanceof Rpt_Report)
         {
-            Rpt_Report 				readings 		= (Rpt_Report) message_in;
-            message_out								= processReport(readings);
+            Rpt_Report 											readings 					= (Rpt_Report) message_in;
+            message_out																		= processReport(readings);
         } 
 		else if (message_in instanceof Rpt_Action)
         {
-            Rpt_Action 				readings 		= (Rpt_Action) message_in;
-            message_out								= processAction(readings);
-        } 
-		else if (message_in instanceof Rpt_PID.Update)
-        {
-            Rpt_PID.Update			readings 		= (Rpt_PID.Update) message_in;
-            message_out								= processPID(readings);
-        } 
-		else if (message_in instanceof Rpt_MixerMouvement)
-        {
-			Rpt_MixerMouvement 		readings 		= (Rpt_MixerMouvement) message_in;
-            message_out								= processMixerMouvement(readings);
+            Rpt_Action 											readings 					= (Rpt_Action) message_in;
+            message_out																		= processAction(readings);
+        } 			
+		else if (message_in instanceof Rpt_PID.Update)			
+        {			
+            Rpt_PID.Update										readings 					= (Rpt_PID.Update) message_in;
+            message_out																		= processPID(readings);
+        } 			
+		else if (message_in instanceof Rpt_MixerMouvement)			
+        {			
+			Rpt_MixerMouvement 									readings 					= (Rpt_MixerMouvement) message_in;
+            message_out																		= processMixerMouvement(readings);
          } 
 		else
         {
             System.out.println("Monitor : Unsupported message class received from client");
-            message_out 							= new Rpt_Abstract().new Nack();
+            message_out 																	= new Rpt_Abstract().new Nack();
         }
         reply(response, message_out);
     }
@@ -143,8 +144,8 @@ public class Monitor extends HttpServlet
         
         try
         {
-            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
+            dbStatement 																	= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 											dbResultSet 				= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateDouble	("dateTime", 				readings.dateTime);
@@ -190,30 +191,30 @@ public class Monitor extends HttpServlet
         
         try
         {
-            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            dbStatement 																	= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             
-            String 										sql 			= "";
-            sql															+= "SELECT    date,                              ";
-            sql															+= "          AVG(tempOutside)                   ";
-            sql															+= "FROM      temperatures                       ";
-            sql															+= "WHERE     date >= SUBDATE(CURDATE(), 3)      ";
-            sql															+= "AND  	  time > 08:00                       ";
-            sql															+= "AND  	  time < 20:00                       ";
-            sql															+= "GROUP BY  date                               ";
+            String 												sql 						= "";
+            sql																				+= "SELECT    date,                              ";
+            sql																				+= "          AVG(tempOutside)                   ";
+            sql																				+= "FROM      temperatures                       ";
+            sql																				+= "WHERE     date >= SUBDATE(CURDATE(), 3)      ";
+            sql																				+= "AND  	  time > 08:00                       ";
+            sql																				+= "AND  	  time < 20:00                       ";
+            sql																				+= "GROUP BY  date                               ";
 
-            ResultSet 									dbResultSet 	= dbStatement.executeQuery(sql);
-            while (dbResultSet.next())
-            {
-            	String 									day				= dbResultSet.getString("date");
-            }
-            dbResultSet.next();
-            Integer										dayM3			= dbResultSet.getInt("tempOutside");
-            dbResultSet.next();
-            Integer										dayM2			= dbResultSet.getInt("tempOutside");
-            dbResultSet.next();
-            Integer										dayM1			= dbResultSet.getInt("tempOutside");
-            Long										dbDateTime		= dbResultSet.getLong("dateTime");
-            Integer										dayM0Weighted	= (dayM1 * 3 + dayM2 * 2 + dayM3) / 6 ;
+            ResultSet 											dbResultSet 				= dbStatement.executeQuery(sql);
+            while (dbResultSet.next())			
+            {			
+            	String 											day							= dbResultSet.getString("date");
+            }					
+            dbResultSet.next();					
+            Integer												dayM3						= dbResultSet.getInt("tempOutside");
+            dbResultSet.next();					
+            Integer												dayM2						= dbResultSet.getInt("tempOutside");
+            dbResultSet.next();					
+            Integer												dayM1						= dbResultSet.getInt("tempOutside");
+            Long												dbDateTime					= dbResultSet.getLong("dateTime");
+            Integer												dayM0Weighted				= (dayM1 * 3 + dayM2 * 2 + dayM3) / 6 ;
             dbResultSet.close();
             
             // TODO PUT RESULTS
@@ -249,8 +250,8 @@ public class Monitor extends HttpServlet
         
         try
         {
-            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
+            dbStatement 																	= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 											dbResultSet 				= dbStatement.executeQuery("SELECT * FROM temperatures LIMIT 1");
             
             if (readings.dateTimeStart > 0)
             {
@@ -285,8 +286,8 @@ public class Monitor extends HttpServlet
         
         try
         {
-            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM mixer LIMIT 1");
+            dbStatement 																	= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 											dbResultSet 				= dbStatement.executeQuery("SELECT * FROM mixer LIMIT 1");
             
             if (readings.dateTimeStart > 0)
             {
@@ -329,14 +330,16 @@ public class Monitor extends HttpServlet
         }
         return new Rpt_Abstract().new Ack();
     }
+    @SuppressWarnings("all")
     public Rpt_Abstract processPID(Rpt_PID.Update readings)
     {
+    	if (true) return new Rpt_Abstract().new Ack();
         dbOpen();
 
         try
         {
-        	dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM pid LIMIT 1");
+        	dbStatement 																	= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 											dbResultSet 				= dbStatement.executeQuery("SELECT * FROM pid LIMIT 1");
             dbResultSet.moveToInsertRow();
 
             dbResultSet.updateDouble	("dateTime", 			readings.dateTime);
@@ -377,14 +380,15 @@ public class Monitor extends HttpServlet
         }
         return new Rpt_Abstract().new Ack();
     }
+//    public Rpt_Abstract processFuel(Ctrl_Fuel_Consumption.Update readings)
     public Rpt_Abstract processFuel(Ctrl_Fuel_Consumption.Update readings)
     {
         dbOpen();
 
         try
         {
-            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 				dbResultSet 	= dbStatement.executeQuery("SELECT * FROM fuel LIMIT 1");
+            dbStatement 																	= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 											dbResultSet 				= dbStatement.executeQuery("SELECT * FROM fuel LIMIT 1");
             dbResultSet.moveToInsertRow();
 
             dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
@@ -406,12 +410,12 @@ public class Monitor extends HttpServlet
     public Rpt_Abstract processReport(Rpt_Report readings)
     {
         dbOpen();
-        Boolean 				returnAck 			= false;
+        Boolean 												returnAck 					= false;
         
         try
         {
-            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM reports LIMIT 1");
+            dbStatement 																	= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 											dbResultSet 				= dbStatement.executeQuery("SELECT * FROM reports LIMIT 1");
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
@@ -422,7 +426,7 @@ public class Monitor extends HttpServlet
             dbResultSet.updateString	("methodName",		 readings.methodName);
             dbResultSet.updateString	("reportText", 		readings.reportText);
             dbResultSet.insertRow();
-            returnAck 								= true;
+            returnAck 																		= true;
             
             dbStatement.close();
             dbConnection.close();
@@ -440,8 +444,8 @@ public class Monitor extends HttpServlet
 
         try
         {
-            dbStatement 							= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            ResultSet 			dbResultSet 		= dbStatement.executeQuery("SELECT * FROM actions LIMIT 1");
+            dbStatement 																	= dbConnection.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet 											dbResultSet 				= dbStatement.executeQuery("SELECT * FROM actions LIMIT 1");
             dbResultSet.moveToInsertRow();
             
             dbResultSet.updateDouble	("dateTime", 		readings.dateTime);
@@ -463,12 +467,12 @@ public class Monitor extends HttpServlet
     }
     public void init() throws ServletException
     {
-        Connection 						conn 		= null;
-        Statement 						stmt 		= null;
-        try
-        {
-            InitialContext 				ctx 		= new InitialContext();
-            dbPool 									= (DataSource) ctx.lookup("java:comp/env/jdbc/hvac");
+        Connection 												conn 						= null;
+        Statement 												stmt 						= null;
+        try										
+        {										
+            InitialContext 										ctx 						= new InitialContext();
+            dbPool 																			= (DataSource) ctx.lookup("java:comp/env/jdbc/hvac");
             if(dbPool == null)
 			{
                 throw new ServletException("Unknown DataSource 'jdbc/hvac'");
@@ -519,8 +523,8 @@ public class Monitor extends HttpServlet
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            dbName 									= "jdbc:mysql://localhost/hvac_database";
-            dbConnection 							= DriverManager.getConnection(dbName, "root", "llenkcarb");
+            dbName 																			= "jdbc:mysql://localhost/hvac_database";
+            dbConnection 																	= DriverManager.getConnection(dbName, "root", "llenkcarb");
         }
         catch(ClassNotFoundException e)
         {
@@ -535,43 +539,43 @@ public class Monitor extends HttpServlet
     {
         response.reset();
         response.setHeader("Content-Type", "application/x-java-serialized-object");
-        ObjectOutputStream 		output				= null;;
+        ObjectOutputStream 										output						= null;;
 		
-		output 										= new ObjectOutputStream(response.getOutputStream());
+		output 																				= new ObjectOutputStream(response.getOutputStream());
 		output.writeObject(message_out);
         output.flush();
         output.close();
     }
     public String dateTime2String(Long dateTime)
     {
-    	String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
+    	String													dateTimeString				= "";
+										
+        SimpleDateFormat 										sdf 						= new SimpleDateFormat("yyyy_MM_dd HH:mm:ss.SSS");
+        GregorianCalendar 										calendar 					= new GregorianCalendar();
         calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime);
+        dateTimeString																		= sdf.format(dateTime);
     	
     	return dateTimeString;
     }
     public String dateTime2Date(Long dateTime)
     {
-    	String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("yyyy_MM_dd");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
+    	String													dateTimeString				= "";
+										
+        SimpleDateFormat 										sdf 						= new SimpleDateFormat("yyyy_MM_dd");
+        GregorianCalendar 										calendar 					= new GregorianCalendar();
         calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime);
+        dateTimeString																		= sdf.format(dateTime);
     	
     	return dateTimeString;
     }
     public String dateTime2Time(Long dateTime)
     {
-    	String					dateTimeString		= "";
- 
-        SimpleDateFormat 		sdf 				= new SimpleDateFormat("HH:mm:ss.SSS");
-        GregorianCalendar 		calendar 			= new GregorianCalendar();
+    	String													dateTimeString				= "";
+										
+        SimpleDateFormat 										sdf 						= new SimpleDateFormat("HH:mm:ss.SSS");
+        GregorianCalendar 										calendar 					= new GregorianCalendar();
         calendar.setTimeInMillis(dateTime);
-        dateTimeString								= sdf.format(dateTime);
+        dateTimeString																		= sdf.format(dateTime);
     	
     	return dateTimeString;
     }
