@@ -14,6 +14,12 @@ public class Relay
 	public String 												friendlyName;
 	public int 													relayBank;
 	public int 													relayNumber;
+	
+	// GPIO
+	public Integer												gpioChannel;
+	public GPIO													gpio;
+	// GPIO END
+	
 	public Boolean												isOn;
 	
 	public Relay(Ctrl_Configuration.Relay 				relayParam)
@@ -24,11 +30,20 @@ public class Relay
 		this.friendlyName   																= "";
 		this.relayNumber																	= relayParam.relayNumber;
 		this.isOn																			= false;
+		this.gpioChannel																	= relayParam.gpioChannel;
+		
+		if (this.gpioChannel == null)							return;
+		if (this.gpioChannel == 0)								return;
+		
+		this.gpio																			= new GPIO(gpioChannel);
+		this.gpio.setLow();
 	}
 	public void on()
 	{
 		Global.interfaceSemaphore.semaphoreLock("Relay.on");
-		On(relayBank, relayNumber);
+		
+		if (gpio == null)										On(relayBank, relayNumber);
+		else													gpio.setHigh();
 		isOn																				= true;
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}
@@ -36,7 +51,8 @@ public class Relay
 	{
 		// Call takes approx 12 ms (100 call to off = 1225ms)
 		Global.interfaceSemaphore.semaphoreLock("Relay.off");
-		Off(relayBank, relayNumber);
+		if (gpio == null)										Off(relayBank, relayNumber);
+		else													gpio.setLow();
 		isOn																				= false;
 		Global.interfaceSemaphore.semaphoreUnLock();
 	}

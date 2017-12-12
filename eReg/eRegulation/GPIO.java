@@ -23,7 +23,7 @@ import java.io.File;
 //
 //  Example
 //  =======
-//  To use gpio in 4
+//  To use gpio pin 4
 //  write "4" 	to  file "/sys/class/gpio/"
 //  write "in" 	to 	file "/sys/class/gpio/gpio4/direction"		for reading, or
 //  write "out" to 	file "/sys/class/gpio/gpio4/direction"		for writing
@@ -36,7 +36,7 @@ import java.io.File;
 public class GPIO
 {
 	String 														pin;
-	String														pinDirectory;
+	String														pinDirectoryName;
 	static final String 										prefix 						= "/sys/class/gpio/";
 	FileWriter 													exportFile;
 	FileWriter 													unexportFile;
@@ -44,13 +44,13 @@ public class GPIO
 	public GPIO(Integer pin)
 	{
 		this.pin																			= pin.toString();
-		this.pinDirectory																	= prefix + "gpio" + this.pin;
+		this.pinDirectoryName																= prefix + "gpio" + this.pin;			// i.e. "/sys/class/gpio/gpio4"
         try											
         {											
         	exportFile 																		= new FileWriter(prefix + "export");	// to activate GPIO pin
         	unexportFile 																	= new FileWriter(prefix + "unexport");	// to deactivate GPIO pin
-            File gpioPinDirectory 															= new File(pinDirectory);				// if it exists, it is a directory
-            if (gpioPinDirectory.exists()) 
+            File 												pinDirectory 				= new File(pinDirectoryName);				// if it exists, it is a directory
+            if (pinDirectory.exists()) 
             {
                 unexportFile.write(this.pin);
                 unexportFile.flush();
@@ -65,14 +65,13 @@ public class GPIO
         catch (Exception e)
         {
            	LogIt.error("GPIO", "constructor", "Constructor Exception : " + e);
-//        	System.out.println("Constructor Exception : " + e);
         }
 	}
 	public void setInput()
 	{
         try
         {
-        	FileWriter 											directionFile 				= new FileWriter(pinDirectory + "/direction");
+        	FileWriter 											directionFile 				= new FileWriter(pinDirectoryName + "/direction");
         	directionFile.write("in");
         	directionFile.flush();
         	directionFile.close();
@@ -80,14 +79,13 @@ public class GPIO
         catch (IOException e)
         {
            	LogIt.error("GPIO", "setInput", "setInput Exception : " + e);
-//           	System.out.println("setInput Exception : " + e);
         }
 	}
 	public void setOutput()
 	{
         try
         {
-        	FileWriter 											directionFile 				= new FileWriter(pinDirectory + "/direction");
+        	FileWriter 											directionFile 				= new FileWriter(pinDirectoryName + "/direction");
         	directionFile.write("out");
         	directionFile.flush();
         	directionFile.close();
@@ -95,7 +93,6 @@ public class GPIO
         catch (IOException e)
         {
            	LogIt.error("GPIO", "setOutput", "setOutput Exception : " + e);
-//           	System.out.println("setOutput Exception : " + e);
         }
 	}
 	public void setHigh()
@@ -103,14 +100,13 @@ public class GPIO
 		setOutput();
 		try
         {
-            BufferedWriter 										valueFile 					= new BufferedWriter(new FileWriter(pinDirectory + "/value"));
+            BufferedWriter 										valueFile 					= new BufferedWriter(new FileWriter(pinDirectoryName + "/value"));
             valueFile.write("1");
             valueFile.close();
          }
         catch (IOException e)
         {
            	LogIt.error("GPIO", "setHigh", "setHigh Exception : " + e);
-//           	System.out.println("setHigh Exception : " + e);
         }
     }
 	public void setLow()
@@ -118,36 +114,28 @@ public class GPIO
 		setOutput();
 		try
         {
-            BufferedWriter 										valueFile 					= new BufferedWriter(new FileWriter(pinDirectory + "/value"));
+            BufferedWriter 										valueFile 					= new BufferedWriter(new FileWriter(pinDirectoryName + "/value"));
             valueFile.write("0");
             valueFile.close();
          }
         catch (IOException e)
         {
            	LogIt.error("GPIO", "setLow", "setLow Exception : " + e);
-//           	System.out.println("setLow Exception : " + e);
         }
     }
 	public Boolean isHigh()
 	{
 		try
         {
-            BufferedReader  									valueFile 					= new BufferedReader(new FileReader(pinDirectory + "/value"));
+            BufferedReader  									valueFile 					= new BufferedReader(new FileReader(pinDirectoryName + "/value"));
             String												valueReturned				= valueFile.readLine();
             valueFile.close();
-            if (valueReturned.equals("1"))
-            {
-            	return true;
-            }
-            else
-            {
-            	return false;
-            }
+            if (valueReturned.equals("1"))             			return true;
+            else            									return false;
         }
         catch (IOException e)
         {
            	LogIt.error("GPIO", "isLow", "isHigh Exception : " + e);
-//           	System.out.println("isHigh Exception : " + e);
            	return false;
         }
 	}
@@ -155,17 +143,11 @@ public class GPIO
 	{
 		try
         {
-            BufferedReader  									valueFile 					= new BufferedReader(new FileReader(pinDirectory+ "/value"));
+            BufferedReader  									valueFile 					= new BufferedReader(new FileReader(pinDirectoryName+ "/value"));
             String												valueReturned				= valueFile.readLine();
             valueFile.close();
-            if (valueReturned.equals("1"))
-            {
-            	return false;
-            }
-            else
-            {
-            	return true;
-            }
+            if (valueReturned.equals("1"))             			return false;
+            else            									return true;
         }
         catch (IOException e)
         {
@@ -177,12 +159,11 @@ public class GPIO
 	public void finalize()
 	{
        	LogIt.error("GPIO", "finalize", "Finalising");
-//       	System.out.println("Finalising");
         try
         {
         	exportFile 																		= new FileWriter(prefix + "export");
         	unexportFile 																	= new FileWriter(prefix + "unexport");
-            File gpioPinDirectory 															= new File(pinDirectory);				// if it exists, it is a directory
+            File gpioPinDirectory 															= new File(pinDirectoryName);				// if it exists, it is a directory
             if (gpioPinDirectory.exists()) 
             {
                 unexportFile.write(this.pin);
@@ -193,7 +174,6 @@ public class GPIO
         catch (Exception e)
         {
            	LogIt.error("GPIO", "finalize", "finalize Exception : " + e);
-//        	System.out.println("finalize Exception : " + e);
         }
 	}
 }

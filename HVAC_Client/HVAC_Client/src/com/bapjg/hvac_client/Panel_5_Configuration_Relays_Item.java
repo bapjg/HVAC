@@ -75,7 +75,7 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
 		relayName							.setValue	(itemData.name);
 		relayBank							.setValue	(itemData.relayBank);
 		relayNumber							.setValue	(itemData.relayNumber);
-		relayChannelGPIO					.setValue	(itemData.channelGPIO);
+		relayChannelGPIO					.setValue	(itemData.gpioChannel);
    	}
 	public void setListens()
 	{
@@ -111,7 +111,7 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
     	}
     	else if (clickedView == relayChannelGPIO)
     	{
-     		dialogInteger 																	= new Dialog_Integer_Spinner(itemData.channelGPIO, itemData, 0, 99, "Enter GPIO Channel", this);
+     		dialogInteger 																	= new Dialog_Integer_Spinner(itemData.gpioChannel, itemData, 0, 99, "Enter GPIO Channel", this);
      		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
     	}
 	}
