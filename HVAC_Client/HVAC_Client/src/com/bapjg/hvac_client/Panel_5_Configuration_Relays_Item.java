@@ -111,7 +111,8 @@ public class Panel_5_Configuration_Relays_Item 					extends 					Panel_0_Fragmen
     	}
     	else if (clickedView == relayChannelGPIO)
     	{
-     		dialogInteger 																	= new Dialog_Integer_Spinner(itemData.gpioChannel, itemData, 0, 99, "Enter GPIO Channel", this);
+     		if (itemData.gpioChannel == null)					itemData.gpioChannel		= 0;
+    		dialogInteger 																	= new Dialog_Integer_Spinner(itemData.gpioChannel, itemData, 0, 99, "Enter GPIO Channel", this);
      		dialogInteger.show(getFragmentManager(), "Dialog_Integer");
     	}
 	}

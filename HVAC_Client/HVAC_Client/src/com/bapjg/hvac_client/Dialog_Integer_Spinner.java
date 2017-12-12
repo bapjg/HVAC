@@ -43,7 +43,7 @@ public class Dialog_Integer_Spinner 							extends 					DialogFragment
 		this.numberMax																		= numberMax;
 		this.callBack																		= callBack;
 		this.message																		= message;
-		if (number == null    )
+		if (number == null)
 		{
 			this.number																		= (numberMin + numberMax)/2;
 		}
