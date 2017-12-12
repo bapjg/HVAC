@@ -172,7 +172,6 @@ public class GPIO
            	LogIt.error("GPIO", "isLow", "isLow Exception : " + e);
            	return false;
         }
-
 	}
 	public void finalize()
 	{
