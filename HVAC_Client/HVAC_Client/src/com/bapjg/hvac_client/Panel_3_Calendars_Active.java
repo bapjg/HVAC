@@ -75,7 +75,7 @@ public class Panel_3_Calendars_Active 							extends 					Panel_0_Fragment
     	displayContents();
     	setListens();
 	}
-	public void processFinishHTTP(Ctrl__Abstract result) 
+	public void processFinishHTTP(Msg__Abstract result) 
 	{  
 		super.processFinishHTTP(result);
 		if (result instanceof Ctrl_Calendars.Data)

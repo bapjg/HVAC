@@ -2,14 +2,14 @@ package com.bapjg.hvac_client;
 
 import java.util.ArrayList;
 
-import HVAC_Common.Ctrl_Actions_Relays;
-import HVAC_Common.Ctrl_Calendars;
-import HVAC_Common.Ctrl_Configuration;
-import HVAC_Common.Ctrl_Thermo_List;
-import HVAC_Common.Ctrl__Abstract;
-import HVAC_Common.Ctrl_Calendars.Word;
-import HVAC_Common.Ctrl_Configuration.Data;
-import HVAC_Common.Ctrl_Configuration.Request;
+//import HVAC_Common.Ctrl_Actions_Relays;
+//import HVAC_Common.Ctrl_Calendars;
+//import HVAC_Common.Ctrl_Configuration;
+//import HVAC_Common.Ctrl_Thermo_List;
+//import HVAC_Common.Ctrl__Abstract;
+//import HVAC_Common.Ctrl_Calendars.Word;
+//import HVAC_Common.Ctrl_Configuration.Data;
+//import HVAC_Common.Ctrl_Configuration.Request;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -32,6 +32,8 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.EditText;
+
+import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")

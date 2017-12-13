@@ -151,7 +151,7 @@ public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment
     	}
     	displayContents();
     }
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		super.processFinishTCP(result);
 		

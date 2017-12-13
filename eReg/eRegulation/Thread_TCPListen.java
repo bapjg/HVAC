@@ -22,8 +22,8 @@ public class Thread_TCPListen 			implements Runnable
     {
 		LogIt.info("Thread_TCPListen", "Run", "Starting");            
  
-		Ctrl__Abstract					message_in 							= null;
-		Ctrl__Abstract					message_out 						= null;
+		Msg__Abstract					message_in 							= null;
+		Msg__Abstract					message_out 						= null;
 
 		try
 		{
@@ -39,12 +39,12 @@ public class Thread_TCPListen 			implements Runnable
 			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
 			        // This previous line results in an EOFException
 			        
-			        message_in 												= (Ctrl__Abstract) input.readObject();
+			        message_in 												= (Msg__Abstract) input.readObject();
 
 			        if (message_in == null)
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "Null received from client");            
-			            message_out 										= new Ctrl__Abstract().new Nack();
+			            message_out 										= new Msg__Abstract().new Nack();
 			        } 
 			    	else
 			    	{
@@ -203,13 +203,13 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		return message_return;
 	}
-	private Ctrl__Abstract				process_Ctrl_Immediate_Execute			(Ctrl_Immediate.Execute message_in)		// Process an immediate action to start
+	private Msg__Abstract				process_Ctrl_Immediate_Execute			(Ctrl_Immediate.Execute message_in)		// Process an immediate action to start
 	{
 		Long													now							= Global.Time.now();
 		
 		String 													circuitName					= message_in.circuitName;
 		Circuit_Abstract 										circuit						= Global.circuits.fetchCircuit(circuitName);
-		Ctrl__Abstract 											message_return				= new Ctrl__Abstract().new Ack();;
+		Msg__Abstract 											message_return				= new Msg__Abstract().new Ack();;
 		
 		if (message_in.action == Ctrl_Immediate.ACTION_Start)
 		{
@@ -241,7 +241,7 @@ public class Thread_TCPListen 			implements Runnable
 		}
 		else
 		{
-			message_return																	= new Ctrl__Abstract().new Nack();
+			message_return																	= new Msg__Abstract().new Nack();
 		}
 		return message_return;
 	}
@@ -389,7 +389,7 @@ public class Thread_TCPListen 			implements Runnable
 		Global.eMailMessage("Test", "This is a test mail");
 		return new Ctrl_Actions_Test_Mail().new Ack();
 	}
-	private Ctrl_Actions_Stop			process_Ctrl_Actions_Stop_Execute		(Ctrl_Actions_Stop.Execute message_in)
+	private Msg__Abstract			process_Ctrl_Actions_Stop_Execute		(Ctrl_Actions_Stop.Execute message_in)
 	{
 		if ( (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Stop   		)
 		||	 (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reboot 		)
@@ -400,13 +400,13 @@ public class Thread_TCPListen 			implements Runnable
 		{
 			Global.stopNow																	= true;
 			Global.exitStatus																= message_in.actionRequest;	// 0 = stop app, 1 = restart app, 2 = reboot
-			return	new Ctrl_Actions_Stop().new Ack();
+			return	new Msg__Abstract().new Ack();
 		}
 		else if (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reload_Configuration)
 		{
 			Global.stopNow																	= true;
 			Global.exitStatus																= Ctrl_Actions_Stop.ACTION_Restart;	// 0 = stop app, 1 = restart app, 2 = reboot
-			return	new Ctrl_Actions_Stop().new Ack();
+			return	new Msg__Abstract().new Ack();
 		}
 		else if (message_in.actionRequest == Ctrl_Actions_Stop.ACTION_Reload_Calendars)
 		{
@@ -441,16 +441,16 @@ public class Thread_TCPListen 			implements Runnable
 				LogIt.display("TCP_Listener", "process_Ctrl_Actions_Stop_Execute", "Couldn't reload calendars " + e);
 			}
 			// TODO : Should we not restart the Background thread
-			return	new Ctrl_Actions_Stop().new Ack();
+			return	new Msg__Abstract().new Ack();
 		}
-		return new Ctrl_Actions_Stop().new Nack();
+		return new Msg__Abstract().new Nack();
     } 
-	private Ctrl_Fuel_Consumption		process_Ctrl_Fuel_Consumption_Update	(Ctrl_Fuel_Consumption.Update message_in)
+	private Msg__Abstract		process_Ctrl_Fuel_Consumption_Update	(Ctrl_Fuel_Consumption.Update message_in)
 	{
 		
 		if (Global.burner.isFuelFlowing())
 		{
-			return	new Ctrl_Fuel_Consumption().new Nack("Fuel is currently Flowing"); 
+			return	new Msg__Abstract().new Nack("Fuel is currently Flowing"); 
 		}
 		
 		Long													fuelConsumed				= Global.burner.fuelflow.consumption;

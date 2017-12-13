@@ -100,7 +100,7 @@ public class Panel_3_Calendars_Background_Tasks 				extends 					Panel_0_Fragmen
 		winterTemp				.setOnClickListener(this);
 		sunshineInfluence		.setOnClickListener(this);
 	}
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Calendars.Data)

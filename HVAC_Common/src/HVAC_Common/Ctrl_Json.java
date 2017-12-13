@@ -12,39 +12,40 @@ import HVAC_Common.Ctrl_Configuration.Thermometer;
 import HVAC_Common.Ctrl_Configuration.Update;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
-public class Ctrl_Json 					extends 					Ctrl__Abstract 
+//public class Ctrl_Json 					extends 					Ctrl__Abstract 
+public class Ctrl_Json 											extends 					Msg__Abstract 
 {
 	public Long dateTime;
-	private static final long 					serialVersionUID 			= 1L;
-	public static final int 					TYPE_Calendar 				= 1;
-	public static final int 					TYPE_Configuration			= 2;
-	public  int									type;
-	public  String								json;
+	private static final long 									serialVersionUID 			= 1L;
+	public static final int 									TYPE_Calendar 				= 1;
+	public static final int 									TYPE_Configuration			= 2;
+	public  int													type;
+	public  String												json;
 	
 	public Ctrl_Json()
 	{
 	}
 	public Ctrl_Json(int type)
 	{
-		this.type															= type;
+		this.type																			= type;
 	}
-	public class Data							extends 					Ctrl_Json
+	public class Data											extends 					Ctrl_Json
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 								serialVersionUID 			= 1L;
 	}
-	public class Update							extends 					Ctrl_Json
+	public class Update											extends 					Ctrl_Json
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 								serialVersionUID 			= 1L;
 	}
-	public class Request						extends 					Ctrl_Json
+	public class Request										extends 					Ctrl_Json
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 								serialVersionUID 			= 1L;
 		public Request()
 		{
 		}
 		public Request(int type)
 		{
-			this.type														= type;
+			this.type																		= type;
 		}
 	}
 }

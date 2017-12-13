@@ -114,14 +114,14 @@ public class Panel_0_Fragment 									extends 					Fragment
 	}
 	public void displayContents() 											{}
 	public void setListens()												{}
-	public void HTTP_Send(Ctrl__Abstract message)
+	public void HTTP_Send(Msg__Abstract message)
 	{
 		Global.setStatusHTTP("Waiting");
 		HTTP_Task												task						= new HTTP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);		
 	}		
-	public void TCP_Send(Ctrl__Abstract message)		
+	public void TCP_Send(Msg__Abstract message)		
 	{		
 		Global.setStatusTCP("Waiting");
 		TCP_Task												task						= new TCP_Task();
@@ -152,12 +152,12 @@ public class Panel_0_Fragment 									extends 					Fragment
 	@Override	public void onDialogReturn 				()															{}
 	@Override	public void onDialogReturnWithId		(int id)													{}
 	@Override	public void onElementClick				(View view)													{}
-	public void processFinishHTTP(Ctrl__Abstract result) 										
+	public void processFinishHTTP(Msg__Abstract result) 										
 	{
 		Global.setAddressSpace();
 		Global.setStatusHTTP(result);
 	}
-	public void processFinishTCP(Ctrl__Abstract result) 										
+	public void processFinishTCP(Msg__Abstract result) 										
 	{
 		Global.setAddressSpace();
 		Global.setStatusTCP(result);

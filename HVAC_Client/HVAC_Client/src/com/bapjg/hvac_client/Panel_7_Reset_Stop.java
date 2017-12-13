@@ -85,7 +85,7 @@ public class Panel_7_Reset_Stop 								extends 					Panel_0_Fragment
     	TCP_Send(stopMessage);
     }
     @Override
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Actions_Stop.Ack)			Global.toaster("Stop Request accepted", true);

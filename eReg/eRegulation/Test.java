@@ -12,8 +12,7 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import HVAC_Common.Ctrl_Configuration;
-import HVAC_Common.Ctrl__Abstract;
+import HVAC_Common.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

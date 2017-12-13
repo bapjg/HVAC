@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import HVAC_Common.*;
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class HTTP_Task 											extends 					AsyncTask <Ctrl__Abstract, Void, Ctrl__Abstract>
+public class HTTP_Task 											extends 					AsyncTask <Msg__Abstract, Void, Msg__Abstract>
 {
 	public HTTP_Response										callBack;
 	public HTTP_Connection										serverConnection;
@@ -18,13 +18,13 @@ public class HTTP_Task 											extends 					AsyncTask <Ctrl__Abstract, Void, 
 		this.callBack																		= null;
 	}
 	@Override
-	protected Ctrl__Abstract doInBackground(Ctrl__Abstract... messageOut) 
+	protected Msg__Abstract doInBackground(Msg__Abstract... messageOut) 
 	{
 		return serverConnection.serverTransaction(messageOut[0]);
 	}	
 	protected void onProgressUpdate(Void... progress)  { }
 	@Override
-    protected void onPostExecute(Ctrl__Abstract messageReturn) 
+    protected void onPostExecute(Msg__Abstract messageReturn) 
 	{             
 		callBack.processFinishHTTP(messageReturn);
     }

@@ -178,7 +178,7 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
     	}
     	displayContents();
     }
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		super.processFinishTCP(result);
 		

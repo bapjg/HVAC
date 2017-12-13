@@ -38,7 +38,7 @@ public class FuelFlow
 
 		HTTP_Request											httpRequest					= new HTTP_Request <Ctrl_Fuel_Consumption.Request> ("Management");
 		Ctrl_Fuel_Consumption.Request	 						messageSend 				= (new Ctrl_Fuel_Consumption()).new Request();
-		Ctrl__Abstract 											messageReceive	 			= httpRequest.sendData(messageSend);
+		Msg__Abstract 											messageReceive	 			= httpRequest.sendData(messageSend);
 			
 		Global.httpSemaphore.semaphoreUnLock();			
 		

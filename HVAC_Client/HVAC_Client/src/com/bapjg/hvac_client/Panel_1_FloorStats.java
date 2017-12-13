@@ -70,7 +70,7 @@ public class Panel_1_FloorStats 								extends 					Panel_0_Fragment
            	
         return panelView;
     }
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{             
 		super.processFinishTCP(result);
 		if 	(result instanceof Ctrl_Temperatures.Data)

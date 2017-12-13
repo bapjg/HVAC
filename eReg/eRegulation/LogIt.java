@@ -131,9 +131,9 @@ public class LogIt
 		}
 	
 		HTTP_Request 											httpRequest					= new HTTP_Request <Rpt_PID.Update> ("Monitor");
-		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
+		Msg__Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 		
-		if (!(messageReceive instanceof Rpt_Abstract.Ack))
+		if (!(messageReceive instanceof Msg__Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " pid data  is : Nack");
 		}
@@ -175,9 +175,9 @@ public class LogIt
 		messageSend.pidMixerDifferential													= Global.thermoFloorOut.pidControler.dTdt();
 		messageSend.pidBoilerOutDifferential												= Global.thermoBoilerOut.pidControler.dTdt();
 		
-		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
+		Msg__Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Rpt_Abstract.Ack))
+		if (!(messageReceive instanceof Msg__Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " Temp data  is : Nack");
 		}
@@ -225,9 +225,9 @@ public class LogIt
 		messageSend.dateTime 																= Global.DateTime.now();
 		messageSend.fuelConsumed 															= fuelConsumed;
 			
-		Ctrl__Abstract 											messageReceive	 			= httpRequest.sendData(messageSend);
+		Msg__Abstract 											messageReceive	 			= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Ctrl__Abstract.Ack))
+		if (!(messageReceive instanceof Msg__Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " Fuel data  is : Nack");
 		}
@@ -249,9 +249,9 @@ public class LogIt
 		messageSend.device 																	= device;
 		messageSend.action 																	= action;
 			
-		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
+		Msg__Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 			
-		if (!(messageReceive instanceof Rpt_Abstract.Ack))
+		if (!(messageReceive instanceof Msg__Abstract.Ack))
 		{
 			// System.out.println(dateTimeStamp() + " Action data  is : Nack");
 		}

@@ -2,7 +2,8 @@ package HVAC_Common;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 @SuppressWarnings("serial")
-public class Rpt_Temperatures extends Rpt_Abstract
+//public class Rpt_Temperatures extends Rpt_Abstract
+public class Rpt_Temperatures 									extends 					Msg__Abstract
 {
 	private static final long 		serialVersionUID 			= 1L;
 	public Long						dateTime;

@@ -51,7 +51,7 @@ public class HTTP_Connection
 			return false;
 		}
 	}
-	public Ctrl__Abstract 										serverTransaction(Ctrl__Abstract messageSend)
+	public Msg__Abstract 										serverTransaction(Msg__Abstract messageSend)
 	{
 		if (connect())
 		{
@@ -63,17 +63,17 @@ public class HTTP_Connection
 				serverSend.flush();
 				serverSend.close();
 				ObjectInputStream 								serverReceive				= new ObjectInputStream(serverConnection.getInputStream());
-				Ctrl__Abstract									returnMessage  				= (Ctrl__Abstract) serverReceive.readObject();
+				Msg__Abstract									returnMessage  				= (Msg__Abstract) serverReceive.readObject();
 				serverReceive.close();
 				return returnMessage;
 			}
 			catch (SocketTimeoutException eTimeOut)			
-			{	return 						new Ctrl__Abstract().new TimeOut();			}
+			{	return 						new Msg__Abstract().new TimeOut();			}
 			catch (ConnectException eSE)
-			{	return 						new Ctrl__Abstract().new NoConnection();			}
+			{	return 						new Msg__Abstract().new NoConnection();			}
 			catch (Exception e)								
-			{	return 						new Ctrl__Abstract().new NoData();			}
+			{	return 						new Msg__Abstract().new NoData();			}
 		}
-		else												{ 	return 						new Ctrl__Abstract().new NoConnection();	}
+		else												{ 	return 						new Msg__Abstract().new NoConnection();	}
 	}
 }

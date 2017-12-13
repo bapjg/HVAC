@@ -77,7 +77,7 @@ public class Menu_4_Weather 									extends 					Menu_0_Fragment
         TCP_Send	(new Ctrl_Weather().new Request());
 	}
 	@Override
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Weather.Data)

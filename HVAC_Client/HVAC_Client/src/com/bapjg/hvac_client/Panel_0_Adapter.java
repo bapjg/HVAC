@@ -29,9 +29,9 @@ public class Panel_0_Adapter 									extends 					ArrayAdapter
     {
         return listData.size();
     }
-    public Ctrl__Abstract getItem(int position) 
+    public Msg__Abstract getItem(int position) 
     {
-        return (Ctrl__Abstract) listData.get(position);
+        return (Msg__Abstract) listData.get(position);
     }
     public long getItemId(int position) 
     {

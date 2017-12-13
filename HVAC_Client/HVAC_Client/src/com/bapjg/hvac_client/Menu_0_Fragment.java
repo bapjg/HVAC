@@ -8,7 +8,7 @@ import HVAC_Common.Ctrl_Configuration;
 import HVAC_Common.Ctrl_Temperatures;
 import HVAC_Common.Ctrl_Weather;
 import HVAC_Common.Ctrl_WeatherData;
-import HVAC_Common.Ctrl__Abstract;
+import HVAC_Common.Msg__Abstract;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
@@ -114,26 +114,26 @@ public class Menu_0_Fragment 									extends 					Fragment
 			}
 		}
 	}
-	public void HTTP_Send(Ctrl__Abstract message)
+	public void HTTP_Send(Msg__Abstract message)
 	{
 		Global.setStatusHTTP("Waiting");
 		HTTP_Task												task						= new HTTP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);		
 	}		
-	public void TCP_Send(Ctrl__Abstract message)		
+	public void TCP_Send(Msg__Abstract message)		
 	{		
 		Global.setStatusTCP("Waiting");
 		TCP_Task												task						= new TCP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);									// processFinishHTTP is in the instaciated class
 	}
-	public void processFinishHTTP(Ctrl__Abstract result) 
+	public void processFinishHTTP(Msg__Abstract result) 
 	{  
 		Global.setAddressSpace();
 		Global.setStatusHTTP(result);
 	}
-	public void processFinishTCP(Ctrl__Abstract result) 						// Overridden in subclass
+	public void processFinishTCP(Msg__Abstract result) 						// Overridden in subclass
 	{  
 		Global.setAddressSpace();
 		Global.setStatusTCP(result);

@@ -64,7 +64,7 @@ public class Panel_7_Reset 										extends 					Panel_0_Fragment
     	TCP_Send(resetMessage);
     }
     @Override
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{  // Should be Http message
 		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Actions_Stop.Ack)			Global.toaster("Reset Request accepted", true);

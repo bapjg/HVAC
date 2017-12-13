@@ -1,10 +1,10 @@
 package eRegulation;
 
 import HVAC_Common.*;
-import HVAC_Common.Ctrl__Abstract.Ack;
+//import HVAC_Common.Ctrl__Abstract.Ack;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
-public class Thread_BackgroundTasks implements Runnable
+public class Thread_BackgroundTasks 							implements 					Runnable
 {
 //	public enum SUMMER_PUMPS
 //	{
@@ -52,11 +52,11 @@ public class Thread_BackgroundTasks implements Runnable
 			{
 				LogIt.action("Summer Pumps", "Action being considered");
 				
-				Boolean mustWait = false;
+				Boolean 										mustWait 					= false;
 				
 				for (Circuit_Abstract circuit 					: Global.circuits.circuitList)
 				{
-					Pump		thisPump						= circuit.circuitPump;
+					Pump										thisPump					= circuit.circuitPump;
 					
 					if (thisPump.dateTimeLastOperated < (Global.DateTime.now() - 23 * 3600 * 1000L) )									// Last pump use was earlier than 11 hours ago
 					{
@@ -65,7 +65,7 @@ public class Thread_BackgroundTasks implements Runnable
 							LogIt.info("Thread_Background", "Run", "Clean pump !isOn " + circuit.circuitPump.name);
 							circuit.circuitPump.relay.on();			// circuitPump.on() updates timeLastOperated, whereas circuitPump.relay.on() does not.
 							Global.waitMilliSeconds(1000);			// Avoid switch all the relays at the same time
-							mustWait 							= true;
+							mustWait 														= true;
 						}
 					}
 					else

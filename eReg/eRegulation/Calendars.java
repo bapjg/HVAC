@@ -28,7 +28,7 @@ public class Calendars
 		HTTP_Request	<Ctrl_Calendars.Request>			httpRequest			= new HTTP_Request <Ctrl_Calendars.Request> ("Management");
 		
 		Ctrl_Calendars.Request	 							messageSend 		= new Ctrl_Calendars().new Request();
-		Ctrl__Abstract 										messageReceive 		= httpRequest.sendData(messageSend);
+		Msg__Abstract 										messageReceive 		= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Ctrl_Calendars.Data))
 		{
@@ -45,7 +45,7 @@ public class Calendars
 			    String 										dataIn 				= new String(data);
 				
 			    Ctrl_Calendars.Data							dataInJson 			= new Gson().fromJson(dataIn, Ctrl_Calendars.Data.class);
-				messageReceive													= (Ctrl__Abstract) dataInJson;
+				messageReceive													= (Msg__Abstract) dataInJson;
 			}  
 			catch(IOException ex)
 			{

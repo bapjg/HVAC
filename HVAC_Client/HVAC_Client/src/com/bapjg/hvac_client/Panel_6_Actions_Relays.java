@@ -88,7 +88,7 @@ public class Panel_6_Actions_Relays 							extends 					Panel_0_Fragment
 
 		TCP_Send(messageSend);
     }
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		super.processFinishTCP(result);
 		

@@ -51,11 +51,11 @@ public class Z_Initialise_Configuration
 		// Setup URL & Connection to server
 		//
 		
-		URL										serverURL;
-		URLConnection							servletConnection;
+		URL														serverURL;
+		URLConnection											servletConnection;
 
-		serverURL													= null;
-		servletConnection											= null;
+		serverURL																			= null;
+		servletConnection																	= null;
 		
 		try
 		{
@@ -68,7 +68,7 @@ public class Z_Initialise_Configuration
 
 		try
 		{
-			servletConnection 										= serverURL.openConnection();
+			servletConnection 																= serverURL.openConnection();
 		}
 		catch (IOException e)
 		{
@@ -81,9 +81,9 @@ public class Z_Initialise_Configuration
 		servletConnection.setReadTimeout(1000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 
-		messageSend.dateTime 										= System.currentTimeMillis();
+		messageSend.dateTime 																= System.currentTimeMillis();
 			
-		Ctrl__Abstract							messageReceive		= null;
+		Msg__Abstract											messageReceive				= null;
 
 		//
 		//================================================================================================================================
@@ -95,8 +95,8 @@ public class Z_Initialise_Configuration
 
 		try
 		{
-			ObjectOutputStream 			outputToServlet;
-			outputToServlet 										= new ObjectOutputStream(servletConnection.getOutputStream());
+			ObjectOutputStream 									outputToServlet;
+			outputToServlet 																= new ObjectOutputStream(servletConnection.getOutputStream());
 			outputToServlet.writeObject(messageSend);
 			outputToServlet.flush();
 			outputToServlet.close();
@@ -120,8 +120,8 @@ public class Z_Initialise_Configuration
 
 		try
 		{
-			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 									= (Ctrl__Abstract) response.readObject();
+			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
+			messageReceive 																	= (Msg__Abstract) response.readObject();
 		}
     	catch (Exception e) 
     	{
@@ -136,13 +136,13 @@ public class Z_Initialise_Configuration
 		// Send second message to Server to receive what was just sent
 		//
 
-		Ctrl_Configuration.Request 			messageSend2			= new Ctrl_Configuration().new Request();
+		Ctrl_Configuration.Request 								messageSend2				= new Ctrl_Configuration().new Request();
 			
-		messageReceive												= null;
+		messageReceive																		= null;
 
 		try
 		{
-			servletConnection 										= serverURL.openConnection();
+			servletConnection 																= serverURL.openConnection();
 		}
 		catch (IOException e)
 		{
@@ -157,8 +157,7 @@ public class Z_Initialise_Configuration
 
 		try
 		{
-			ObjectOutputStream 			outputToServlet;
-			outputToServlet 										= new ObjectOutputStream(servletConnection.getOutputStream());
+			ObjectOutputStream 								outputToServlet					= new ObjectOutputStream(servletConnection.getOutputStream());
 			outputToServlet.writeObject(messageSend2);
 			outputToServlet.flush();
 			outputToServlet.close();
@@ -182,8 +181,8 @@ public class Z_Initialise_Configuration
 
 		try
 		{
-			ObjectInputStream 		response 				= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 									= (Ctrl__Abstract) response.readObject();
+			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
+			messageReceive 																	= (Msg__Abstract) response.readObject();
 		}
     	catch (Exception e) 
     	{

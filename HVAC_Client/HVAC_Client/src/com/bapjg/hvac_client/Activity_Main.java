@@ -127,21 +127,21 @@ public class Activity_Main 										extends 					Activity
 		return false;
 	}
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-	public void TCP_Send(Ctrl__Abstract message)		
+	public void TCP_Send(Msg__Abstract message)		
 	{		
 		Global.setStatusTCP("Waiting");
 		TCP_Task												task						= new TCP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);
 	}
-	public void HTTP_Send(Ctrl__Abstract message)
+	public void HTTP_Send(Msg__Abstract message)
 	{
 		Global.setStatusHTTP("Waiting");
 		HTTP_Task												task						= new HTTP_Task();
 	   	task.callBack																		= this;					// processFinish
 	   	task.execute(message);		
 	}		
-	public void processFinishHTTP(Ctrl__Abstract result) 
+	public void processFinishHTTP(Msg__Abstract result) 
 	{  
 		Global.setAddressSpace();
 		Global.setStatusHTTP(result);
@@ -180,7 +180,7 @@ public class Activity_Main 										extends 					Activity
 			}
 		}
 	}
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		Global.setAddressSpace();
 		Global.setStatusTCP(result);

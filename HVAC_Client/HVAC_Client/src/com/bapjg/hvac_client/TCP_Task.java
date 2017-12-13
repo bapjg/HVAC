@@ -7,7 +7,7 @@ import android.widget.Toast;
 import HVAC_Common.*;
 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class TCP_Task 											extends 					AsyncTask <Ctrl__Abstract, Void, Ctrl__Abstract>
+public class TCP_Task 											extends 					AsyncTask <Msg__Abstract, Void, Msg__Abstract>
 {
 	public TCP_Response											callBack;
 	public TCP_Connection										piConnection;
@@ -18,13 +18,13 @@ public class TCP_Task 											extends 					AsyncTask <Ctrl__Abstract, Void, C
 		this.callBack																		= null;
 	}
 	@Override
-	protected Ctrl__Abstract doInBackground(Ctrl__Abstract... messageOut) 
+	protected Msg__Abstract doInBackground(Msg__Abstract... messageOut) 
 	{
 		return piConnection.piTransaction(messageOut[0]);
 	}	
 	protected void onProgressUpdate(Void... progress)  { }
 	@Override
-    protected void onPostExecute(Ctrl__Abstract messageReturn) 
+    protected void onPostExecute(Msg__Abstract messageReturn) 
 	{             
 		callBack.processFinishTCP(messageReturn);
 		piConnection.disconnect();

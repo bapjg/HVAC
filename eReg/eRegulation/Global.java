@@ -141,7 +141,7 @@ public class Global
 		{
 			Ctrl_Json.Request 									messageSendTest 				= new Ctrl_Json().new Request(Ctrl_Json.TYPE_Configuration);
 			HTTP_Request	<Ctrl_Json.Request>					httpRequestTest					= new HTTP_Request <Ctrl_Json.Request> ("Management");
-			Ctrl__Abstract 										messageReceiveTest 				= httpRequestTest.sendData(messageSendTest);
+			Msg__Abstract 										messageReceiveTest 				= httpRequestTest.sendData(messageSendTest);
 			@SuppressWarnings("unused")
 			Ctrl_Configuration.Data		data;
 			if (messageReceiveTest instanceof Ctrl_Json.Data)
@@ -160,7 +160,7 @@ public class Global
 		HTTP_Request	<Ctrl_Configuration.Request>			httpRequest					= new HTTP_Request <Ctrl_Configuration.Request> ("Management");
 		
 		Ctrl_Configuration.Request	 							messageSend 				= new Ctrl_Configuration().new Request();
-		Ctrl__Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
+		Msg__Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
 			
 		if (!(messageReceive instanceof Ctrl_Configuration.Data))
 		{
@@ -177,7 +177,7 @@ public class Global
 			    String 											dataIn 						= new String(data);
 				
 			    Ctrl_Configuration.Data							dataInJson 					= new Gson().fromJson(dataIn, Ctrl_Configuration.Data.class);
-				messageReceive																= (Ctrl__Abstract) dataInJson;
+				messageReceive																= (Msg__Abstract) dataInJson;
 			}  
 			catch(IOException ex)
 			{

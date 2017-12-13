@@ -125,7 +125,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 	    	TCP_Send	(stopMessage);
 		}
 	}
-	public void processFinishHTTP(Ctrl__Abstract messageReturned)
+	public void processFinishHTTP(Msg__Abstract messageReturned)
 	{
 		super.processFinishHTTP(messageReturned);
 		
@@ -136,7 +136,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 			Global.toaster("Configuration data received", false);
 			clickActiveButton();
 		}
-		else if (messageReturned instanceof Ctrl__Abstract.Ack)
+		else if (messageReturned instanceof Msg__Abstract.Ack)
 		{
 			Global.toaster("Server updated", false);
 			Dialog_Yes_No											messageYesNo			= new Dialog_Yes_No("Update controller with new calendar now ?", this, 1);	// id = 1
@@ -147,7 +147,7 @@ public class Menu_3_Calendars 									extends 					Menu_0_Fragment
 			Global.toaster("Unexpected response : " + messageReturned.getClass().toString(), false);
 		}
 	}
-	public void processFinishTCP(Ctrl__Abstract messageReturn)
+	public void processFinishTCP(Msg__Abstract messageReturn)
 	{
 		super.processFinishTCP(messageReturn);
 		

@@ -76,7 +76,7 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 
         return panelView;
     }
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		super.processFinishTCP(result);
 		if 		(result instanceof Ctrl_Immediate.Data)
@@ -136,9 +136,9 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 			displayContents();
 			setListens();
 		}
-		else if (result instanceof Ctrl_Immediate.Ack)						Global.toast("Command accepted", false);
-		else if (result instanceof Ctrl__Abstract.Ack)						Global.toast("Command accepted", false);
-		else if (result instanceof Ctrl_Temperatures.NoConnection)			Global.toast("No Connection established yet", false);
+//		else if (result instanceof Ctrl_Immediate.Ack)						Global.toast("Command accepted", false);
+		else if (result instanceof Msg__Abstract.Ack)						Global.toast("Command accepted", false);
+		else if (result instanceof Msg__Abstract.NoConnection)				Global.toast("No Connection established yet", false);
 		else																Global.toast("A Nack has been returned", false);
 	}
 	public void displayContents()

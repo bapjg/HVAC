@@ -12,26 +12,27 @@ import HVAC_Common.Ctrl_Configuration.Thermometer;
 import HVAC_Common.Ctrl_Configuration.Update;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
-public class Ctrl_Calendars 					extends 					Ctrl__Abstract 
+//public class Ctrl_Calendars 									extends 					Ctrl__Abstract 
+public class Ctrl_Calendars 									extends 					Msg__Abstract 
 {
 	public Long dateTime;
-	private static final long 					serialVersionUID 			= 1L;
+	private static final long 									serialVersionUID 			= 1L;
 	
 	public Ctrl_Calendars()
 	{
 	}
-	public class Data							extends 					Ctrl_Calendars
+	public class Data											extends 					Ctrl_Calendars
 	{
-		private static final long 				serialVersionUID 			= 1L;
-		public ArrayList <Word>					wordList 					= new ArrayList <Word>();
-		public ArrayList <Circuit>				circuitList 				= new ArrayList <Circuit>();
-		public ArrayList <Away>					awayList 					= new ArrayList <Away>();
-		public TasksBackGround					tasksBackGround				= new TasksBackGround();
-//		public TasksActive						tasksActive					= new TasksActive();
+		private static final long 								serialVersionUID 			= 1L;
+		public ArrayList <Word>									wordList 					= new ArrayList <Word>();
+		public ArrayList <Circuit>								circuitList 				= new ArrayList <Circuit>();
+		public ArrayList <Away>									awayList 					= new ArrayList <Away>();
+		public TasksBackGround									tasksBackGround				= new TasksBackGround();
+//		public TasksActive										tasksActive					= new TasksActive();
 		
 		public Circuit fetchCircuit(String name)
 		{
-	        for (Circuit 						circuit 					: circuitList)
+	        for (Circuit 										circuit 					: circuitList)
 	        {
 	        	if (circuit.name.equalsIgnoreCase(name))
 	        	{
@@ -52,32 +53,32 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 	        return null;
 		}
 	}
-	public class Update							extends 					Ctrl_Calendars
+	public class Update											extends 					Ctrl_Calendars
 	{
-		private static final long 				serialVersionUID 			= 1L;
-		public ArrayList <Word>					wordList 					= new ArrayList <Word>();
-		public ArrayList <Circuit>				circuitList 				= new ArrayList <Circuit>();
-		public ArrayList <Away>					awayList 					= new ArrayList <Away>();
-		public TasksBackGround					tasksBackGround				= new TasksBackGround();
-//		public TasksActive						tasksActive					= new TasksActive();
+		private static final long 								serialVersionUID 			= 1L;
+		public ArrayList <Word>									wordList 					= new ArrayList <Word>();
+		public ArrayList <Circuit>								circuitList 				= new ArrayList <Circuit>();
+		public ArrayList <Away>									awayList 					= new ArrayList <Away>();
+		public TasksBackGround									tasksBackGround				= new TasksBackGround();
+//		public TasksActive										tasksActive					= new TasksActive();
 	}
-	public class Request						extends 					Ctrl_Calendars
+	public class Request										extends 					Ctrl_Calendars
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 								serialVersionUID 			= 1L;
 	}
-	public class Word							extends 					Ctrl_Calendars
-												implements					Cloneable
+	public class Word											extends 					Ctrl_Calendars
+																implements					Cloneable
 	{
-		private static final long 				serialVersionUID 			= 1L;
-		public String 							name;
-		public String							days;
+		private static final long 								serialVersionUID 			= 1L;
+		public String 											name;
+		public String											days;
 		
 		public Object clone() 
 		{
-			Object cloneObject 												= null;
+			Object cloneObject 																= null;
 			try 
 			{
-				cloneObject 												= super.clone();
+				cloneObject 																= super.clone();
 			} 
 			catch(CloneNotSupportedException cnse) 
 			{
@@ -86,21 +87,21 @@ public class Ctrl_Calendars 					extends 					Ctrl__Abstract
 			return cloneObject;
 		}
 	}
-	public class Circuit						extends 					Ctrl_Calendars
+	public class Circuit										extends 					Ctrl_Calendars
 	{
-		private static final long 				serialVersionUID 			= 1L;
-		public String 							name;
-		public Boolean							active;
-		public ArrayList<Calendar>				calendarList 				= new ArrayList<Calendar>();
+		private static final long 								serialVersionUID 			= 1L;
+		public String 											name;
+		public Boolean											active;
+		public ArrayList<Calendar>								calendarList 				= new ArrayList<Calendar>();
 	}
-	public class Calendar						extends 					Ctrl_Calendars
+	public class Calendar										extends 					Ctrl_Calendars
 	{
-		private static final long 				serialVersionUID 			= 1L;
-		public String							days;
-		public Cmn_Time							timeStart;
-		public Cmn_Time							timeEnd;
-		public Cmn_Temperature					tempObjective;
-		public Boolean							stopOnObjective;
+		private static final long 								serialVersionUID 			= 1L;
+		public String											days;
+		public Cmn_Time											timeStart;
+		public Cmn_Time											timeEnd;
+		public Cmn_Temperature									tempObjective;
+		public Boolean											stopOnObjective;
 	}
 	public class Away							extends 					Ctrl_Calendars
 	{

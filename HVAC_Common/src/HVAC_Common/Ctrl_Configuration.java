@@ -5,22 +5,23 @@ import HVAC_Common.*;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 @SuppressWarnings("serial")
-public class Ctrl_Configuration 				extends 					Ctrl__Abstract
+//public class Ctrl_Configuration 								extends 					Ctrl__Abstract
+public class Ctrl_Configuration 								extends 					Msg__Abstract
 {
-	private static final long 					serialVersionUID 			= 1L;
-	public final transient Integer				CIRCUIT_TYPE_HotWater		= 0;
-	public final transient Integer				CIRCUIT_TYPE_Gradient		= 1;
-	public final transient Integer				CIRCUIT_TYPE_Mixer			= 2;
+	private static final long 									serialVersionUID 			= 1L;
+	public final transient Integer								CIRCUIT_TYPE_HotWater		= 0;
+	public final transient Integer								CIRCUIT_TYPE_Gradient		= 1;
+	public final transient Integer								CIRCUIT_TYPE_Mixer			= 2;
 	
-	public Long									dateTime;
+	public Long													dateTime;
 
 	public Ctrl_Configuration()
 	{
 	}
 	
-	public class Request 						extends 					Ctrl_Configuration
+	public class Request 										extends 					Ctrl_Configuration
 	{
-		private static final long 				serialVersionUID 			= 1L;
+		private static final long 								serialVersionUID 			= 1L;
 	}
 	public static class Data					extends 					Ctrl_Configuration
 	{

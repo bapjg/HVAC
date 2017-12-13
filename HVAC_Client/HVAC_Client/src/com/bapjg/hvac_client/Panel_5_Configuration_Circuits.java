@@ -84,7 +84,7 @@ public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
 	}
-    public void processFinishHTTP(Ctrl__Abstract result) 
+    public void processFinishHTTP(Msg__Abstract result) 
 	{  
 		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Configuration.Data)

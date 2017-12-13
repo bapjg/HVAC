@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 import javax.sql.DataSource;
 
 import HVAC_Common.Ctrl_Fuel_Consumption;
-import HVAC_Common.Rpt_Abstract;
+import HVAC_Common.Msg__Abstract;
 import HVAC_Common.Rpt_Action;
 import HVAC_Common.Rpt_MixerMouvement;
 import HVAC_Common.Rpt_PID;
@@ -70,7 +70,7 @@ public class Monitor extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         Object 													message_in 					= null;
-        Rpt_Abstract 											message_out 				= null;
+        Msg__Abstract 											message_out 				= null;
         
         try
         {
@@ -81,25 +81,25 @@ public class Monitor extends HttpServlet
         {
         	System.out.println("Monitor : Caught CNF");
         	eCNF.printStackTrace();
-            message_out 																	= new Rpt_Abstract().new Nack();
+            message_out 																	= new Msg__Abstract().new Nack();
         }
         catch (IOException eIO)
         {
         	System.out.println("Monitor : Caught IO");
         	System.out.println("An IO Exception occured : " + eIO);
-        	message_out 																	= new Rpt_Abstract().new Nack();
+        	message_out 																	= new Msg__Abstract().new Nack();
         }
         catch (Exception e)
         {
         	System.out.println("Monitor : Caught another exception");
         	System.out.println("An Exception occured : " + e);
-        	message_out 																	= new Rpt_Abstract().new Nack();
+        	message_out 																	= new Msg__Abstract().new Nack();
         }
 
     	if (message_in == null)
         {
             System.out.println("Monitor : Null received from client");
-            message_out 																	= new Rpt_Abstract().new Nack();
+            message_out 																	= new Msg__Abstract().new Nack();
         } 
     	else if (message_in instanceof Rpt_Temperatures)
         {
@@ -134,11 +134,11 @@ public class Monitor extends HttpServlet
 		else
         {
             System.out.println("Monitor : Unsupported message class received from client");
-            message_out 																	= new Rpt_Abstract().new Nack();
+            message_out 																	= new Msg__Abstract().new Nack();
         }
         reply(response, message_out);
     }
-    public Rpt_Abstract processTemperatures(Rpt_Temperatures readings)
+    public Msg__Abstract processTemperatures(Rpt_Temperatures readings)
     {
         dbOpen();
         
@@ -173,16 +173,16 @@ public class Monitor extends HttpServlet
         catch(SQLException eSQL)
         {
         	eSQL.printStackTrace();
-            return new Rpt_Abstract().new Nack();
+            return new Msg__Abstract().new Nack();
         }
         catch(Exception e)
         {
         	e.printStackTrace();
-            return new Rpt_Abstract().new Nack();
+            return new Msg__Abstract().new Nack();
         }
-        return new Rpt_Abstract().new Ack();
+        return new Msg__Abstract().new Ack();
     }
-    public Rpt_Abstract processTempOutside3DDD(Rpt_Temperatures readings)
+    public Msg__Abstract processTempOutside3DDD(Rpt_Temperatures readings)
     {
         // Return tempOutSide 3Day Diurnal Distribution
     	// For each day average between 8am and 8pm
@@ -226,24 +226,24 @@ public class Monitor extends HttpServlet
         catch(SQLException eSQL)
         {
         	eSQL.printStackTrace();
-            return new Rpt_Abstract().new Nack();
+            return new Msg__Abstract().new Nack();
         }
         catch(Exception e)
         {
         	e.printStackTrace();
-            return new Rpt_Abstract().new Nack();
+            return new Msg__Abstract().new Nack();
         }
-        return new Rpt_Abstract().new Ack();
+        return new Msg__Abstract().new Ack();
     }
     @SuppressWarnings("unused")
-	public Rpt_Abstract processMixerMouvement(Rpt_MixerMouvement readings)
+	public Msg__Abstract processMixerMouvement(Rpt_MixerMouvement readings)
     {
     	// Used to handle mixer handling statistics
     	// No longer required
     	// Should remove this from Client (eReg)
     	if (true) 
     	{
-    		return new Rpt_Abstract().new Ack();
+    		return new Msg__Abstract().new Ack();
     	}
 
         dbOpen();
@@ -281,7 +281,7 @@ public class Monitor extends HttpServlet
         catch(SQLException eSQL)
         {
         	eSQL.printStackTrace();
-            return new Rpt_Abstract().new Nack();
+            return new Msg__Abstract().new Nack();
         }
         
         try
@@ -326,14 +326,14 @@ public class Monitor extends HttpServlet
         catch(SQLException eSQL)
         {
         	eSQL.printStackTrace();
-            return new Rpt_Abstract().new Nack();
+            return new Msg__Abstract().new Nack();
         }
-        return new Rpt_Abstract().new Ack();
+        return new Msg__Abstract().new Ack();
     }
     @SuppressWarnings("all")
-    public Rpt_Abstract processPID(Rpt_PID.Update readings)
+    public Msg__Abstract processPID(Rpt_PID.Update readings)
     {
-    	if (true) return new Rpt_Abstract().new Ack();
+    	if (true) return new Msg__Abstract().new Ack();
         dbOpen();
 
         try
@@ -376,12 +376,12 @@ public class Monitor extends HttpServlet
         catch(SQLException e)
         {
             e.printStackTrace();
-            return new Rpt_Abstract().new Nack();
+            return new Msg__Abstract().new Nack();
         }
-        return new Rpt_Abstract().new Ack();
+        return new Msg__Abstract().new Ack();
     }
 //    public Rpt_Abstract processFuel(Ctrl_Fuel_Consumption.Update readings)
-    public Rpt_Abstract processFuel(Ctrl_Fuel_Consumption.Update readings)
+    public Msg__Abstract processFuel(Ctrl_Fuel_Consumption.Update readings)
     {
         dbOpen();
 
@@ -403,11 +403,11 @@ public class Monitor extends HttpServlet
         catch(SQLException e)
         {
             e.printStackTrace();
-            return new Rpt_Abstract().new Nack();
+            return new Msg__Abstract().new Nack();
         }
-        return new Rpt_Abstract().new Ack();
+        return new Msg__Abstract().new Ack();
     }
-    public Rpt_Abstract processReport(Rpt_Report readings)
+    public Msg__Abstract processReport(Rpt_Report readings)
     {
         dbOpen();
         Boolean 												returnAck 					= false;
@@ -434,11 +434,11 @@ public class Monitor extends HttpServlet
         catch(SQLException e)
         {
             e.printStackTrace();
-            return new Rpt_Abstract().new Nack();
+            return new Msg__Abstract().new Nack();
         }
-        return new Rpt_Abstract().new Ack();
+        return new Msg__Abstract().new Ack();
     }
-    public Rpt_Abstract processAction(Rpt_Action readings)
+    public Msg__Abstract processAction(Rpt_Action readings)
     {
     	dbOpen();
 
@@ -461,9 +461,9 @@ public class Monitor extends HttpServlet
         catch(SQLException e)
         {
             e.printStackTrace();
-            return new Rpt_Abstract().new Nack();
+            return new Msg__Abstract().new Nack();
         }
-        return new Rpt_Abstract().new Ack();
+        return new Msg__Abstract().new Ack();
     }
     public void init() throws ServletException
     {
@@ -535,7 +535,7 @@ public class Monitor extends HttpServlet
             e.printStackTrace();
         }
     }
-    public void reply(HttpServletResponse response, Rpt_Abstract message_out) throws IOException 
+    public void reply(HttpServletResponse response, Msg__Abstract message_out) throws IOException 
     {
         response.reset();
         response.setHeader("Content-Type", "application/x-java-serialized-object");

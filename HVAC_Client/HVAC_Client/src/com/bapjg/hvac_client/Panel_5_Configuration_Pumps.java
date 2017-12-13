@@ -93,7 +93,7 @@ public class Panel_5_Configuration_Pumps 						extends 					Panel_0_Fragment
    		fTransaction.addToBackStack(null);
    		fTransaction.commit();
    	}
-	public void processFinishTCP(Ctrl__Abstract result) 
+	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		if (result instanceof Ctrl_Configuration.Data)
 		{

@@ -54,7 +54,7 @@ public class Management extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         Object 													message_in 					= null;
-        Ctrl__Abstract	 										message_out 				= null;
+        Msg__Abstract	 										message_out 				= null;
         
         try
         {
@@ -64,17 +64,17 @@ public class Management extends HttpServlet
         catch (ClassNotFoundException eCNF)
         {
             eCNF.printStackTrace();
-            message_out 																	= (new Ctrl__Abstract()).new Nack();
+            message_out 																	= (new Msg__Abstract()).new Nack();
         }
         catch (IOException eIO)
         {
             System.out.println(dateTime2Time(now()) + "Management : An IO Exception occured : " + eIO);
-            message_out 																	= (new Ctrl__Abstract()).new Nack();
+            message_out 																	= (new Msg__Abstract()).new Nack();
         }
         catch (Exception e)
         {
             System.out.println(dateTime2Time(now()) + "Management : An Exception occurred : " + e);
-            message_out 																	= (new Ctrl__Abstract()).new Nack();
+            message_out 																	= (new Msg__Abstract()).new Nack();
         }
         
         if (message_in != null)
@@ -83,7 +83,7 @@ public class Management extends HttpServlet
         } 
 
         
-        if      (message_in == null)         								message_out 	= (new Ctrl__Abstract()).new Nack();
+        if      (message_in == null)         								message_out 	= (new Msg__Abstract()).new Nack();
         else if (message_in instanceof Ctrl_Json.Request)					message_out 	= processJson_Request	(message_in);	// For Android
 		else if (message_in instanceof Ctrl_Json.Update)					message_out 	= processJson_Update	(message_in);	// For Android
 		else if (message_in instanceof Ctrl_Configuration.Request)			message_out 	= processConfiguration_Request();		// For eReg
@@ -92,15 +92,15 @@ public class Management extends HttpServlet
  		else
         {
             System.out.println(dateTime2Time(now()) + "Management : Unsupported message class received from client");
-            message_out 													= (new Ctrl__Abstract()).new Nack();;
+            message_out 													= (new Msg__Abstract()).new Nack();;
         }
        	reply(response, message_out);
     }
-	private Ctrl__Abstract						processJson_Request(Object   message_in)
+	private Msg__Abstract						processJson_Request(Object   message_in)
     {
 		Ctrl_Json.Request										msgIn						= (Ctrl_Json.Request) message_in;
         dbOpen();			
-        Ctrl__Abstract											returnBuffer 				= new Ctrl__Abstract().new Nack();
+        Msg__Abstract											returnBuffer 				= new Msg__Abstract().new Nack();
         String													sql;		
 		Ctrl_Json												msgInn						= (Ctrl_Json) message_in;
         
@@ -120,7 +120,7 @@ public class Management extends HttpServlet
             returnBufferPrep.type 															= msgIn.type;
             returnBufferPrep.json 															= dbData;
 
-     		returnBuffer																	= (Ctrl__Abstract) returnBufferPrep;
+     		returnBuffer																	= (Msg__Abstract) returnBufferPrep;
         }
         catch(SQLException e)
         {
@@ -128,17 +128,17 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    private Ctrl__Abstract						processJson_Update(Object   message_in)
+    private Msg__Abstract						processJson_Update(Object   message_in)
     {
     	Ctrl_Json.Update										msgIn						= (Ctrl_Json.Update) message_in;
     	dbOpen();				
 						
-        Ctrl__Abstract 											returnBuffer				= new Ctrl__Abstract().new Ack();
+    	Msg__Abstract 											returnBuffer				= new Msg__Abstract().new Ack();
         String													sql;
         
         if      (msgIn.type == Ctrl_Json.TYPE_Calendar)			sql			= "SELECT dateTime, Date, Time, Calendars     as Data FROM Calendars     ORDER BY dateTime DESC LIMIT 1";
         else if (msgIn.type == Ctrl_Json.TYPE_Configuration)	sql			= "SELECT dateTime, Date, Time, Configuration as Data FROM Configuration ORDER BY dateTime DESC LIMIT 1";
-        else													return		new Ctrl__Abstract().new Nack();
+        else													return		new Msg__Abstract().new Nack();
 
         try
         {
@@ -160,15 +160,15 @@ public class Management extends HttpServlet
         catch(Exception e)
         {
         	e.printStackTrace();
-            returnBuffer																	= new Ctrl__Abstract().new Nack();
+            returnBuffer																	= new Msg__Abstract().new Nack();
         }
         return returnBuffer;
     }
-    private Ctrl__Abstract 						processCalendars_Request()		// eReg still uses this interface
+    private Msg__Abstract 						processCalendars_Request()		// eReg still uses this interface
     {
         dbOpen();
         
-        Ctrl__Abstract											returnBuffer 				= new Ctrl__Abstract().new Nack();
+        Msg__Abstract											returnBuffer 				= new Msg__Abstract().new Nack();
 				
         try				
         {				
@@ -184,7 +184,7 @@ public class Management extends HttpServlet
  
             Ctrl_Calendars.Data									returnBufferPrep			= new Gson().fromJson(dbJsonString, Ctrl_Calendars.Data.class);
     		returnBufferPrep.dateTime														= dbDateTime;											// Add time stamp to mesage
-     		returnBuffer																	= (Ctrl__Abstract) returnBufferPrep;
+     		returnBuffer																	= (Msg__Abstract) returnBufferPrep;
         }
         catch(SQLException e)
         {
@@ -192,11 +192,11 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    private Ctrl__Abstract		 				processConfiguration_Request()		// eReg still uses this interface
+    private Msg__Abstract		 				processConfiguration_Request()		// eReg still uses this interface
     {
         dbOpen();
         
-        Ctrl__Abstract 											returnBuffer				= new Ctrl__Abstract().new Nack();
+        Msg__Abstract 											returnBuffer				= new Msg__Abstract().new Nack();
 				
         try				
         {				
@@ -228,11 +228,11 @@ public class Management extends HttpServlet
         }
         return returnBuffer;
     }
-    private Ctrl__Abstract 						processFuelConsumption_Request()
+    private Msg__Abstract 						processFuelConsumption_Request()
     {
         dbOpen();
         
-        Ctrl__Abstract											returnBuffer 				= new Ctrl__Abstract().new Nack();
+        Msg__Abstract											returnBuffer 				= new Msg__Abstract().new Nack();
 				
         try				
         {				
@@ -247,7 +247,7 @@ public class Management extends HttpServlet
     		dbData.fuelConsumed																= dbFuelConsumed;
     		dbData.dateTime																	= dbDateTime;
 
-    		returnBuffer																	= (Ctrl__Abstract) dbData;
+    		returnBuffer																	= (Msg__Abstract) dbData;
     		
     		dbStatement.close();
             dbConnection.close();
@@ -275,7 +275,7 @@ public class Management extends HttpServlet
             e.printStackTrace();
         }
     }
-    private void reply(HttpServletResponse response, Ctrl__Abstract message_out) throws IOException 
+    private void reply(HttpServletResponse response, Msg__Abstract message_out) throws IOException 
     {
         System.out.println(dateTime2Time(now()) + " ----Class replied " + message_out.getClass().toString());
         response.reset();

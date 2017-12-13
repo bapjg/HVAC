@@ -87,17 +87,17 @@ public class Global
     {
     	((TextView) activity.findViewById(R.id.connection_tcp)).setText(message);
     }
-    public static void setStatusTCP(Ctrl__Abstract result)
+    public static void setStatusTCP(Msg__Abstract result)
     {
 		String message;
-		if 		(result instanceof Ctrl__Abstract.Ack)			message = "Ok";
-		else if (result instanceof Ctrl__Abstract.Nack)			message = "Nack";
-		else if (result instanceof Ctrl__Abstract.NoConnection)	message = "No Connection";
-		else if (result instanceof Ctrl__Abstract.TimeOut)		message = "Time Out";
-		else if (result instanceof Ctrl__Abstract.NoData)		message = "No Data";
+		if 		(result instanceof Msg__Abstract.Ack)			message = "Ok";
+		else if (result instanceof Msg__Abstract.Nack)			message = "Nack";
+		else if (result instanceof Msg__Abstract.NoConnection)	message = "No Connection";
+		else if (result instanceof Msg__Abstract.TimeOut)		message = "Time Out";
+		else if (result instanceof Msg__Abstract.NoData)		message = "No Data";
 		else if (result instanceof Ctrl_Actions_Relays.Data)	message = "Ok";
-		else if (result instanceof Ctrl_Actions_Test_Mail.Ack)	message = "Ok";
-		else if (result instanceof Ctrl_Actions_Stop.Ack)		message = "Ok";
+//		else if (result instanceof Ctrl_Actions_Test_Mail.Ack)	message = "Ok";
+//		else if (result instanceof Ctrl_Actions_Stop.Ack)		message = "Ok";
 		else if (result instanceof Ctrl_Temperatures.Data)		message = "Ok";
 		else if (result instanceof Ctrl_Immediate.Data)			message = "Ok";
 		else if (result instanceof Ctrl_Weather.Data)			message = "Ok";
@@ -110,17 +110,17 @@ public class Global
     {
 		((TextView) activity.findViewById(R.id.connection_http)).setText(message);
     }
-    public static void setStatusHTTP(Ctrl__Abstract result)
+    public static void setStatusHTTP(Msg__Abstract result)
     {
 		String message;
 		if 		(result instanceof Ctrl_Calendars.Data)			message = "Ok";
 		else if (result instanceof Ctrl_Configuration.Data)		message = "Ok";
 		else if (result instanceof Ctrl_Fuel_Consumption.Data)	message = "Ok";
-		else if (result instanceof Ctrl__Abstract.Ack)			message = "Ok";
-		else if (result instanceof Ctrl__Abstract.Nack)			message = "Nack";
-		else if (result instanceof Ctrl__Abstract.NoConnection)	message = "No Connection";
-		else if (result instanceof Ctrl__Abstract.TimeOut)		message = "Time Out";
-		else if (result instanceof Ctrl__Abstract.NoData)		message = "No Data";
+		else if (result instanceof Msg__Abstract.Ack)			message = "Ok";
+		else if (result instanceof Msg__Abstract.Nack)			message = "Nack";
+		else if (result instanceof Msg__Abstract.NoConnection)	message = "No Connection";
+		else if (result instanceof Msg__Abstract.TimeOut)		message = "Time Out";
+		else if (result instanceof Msg__Abstract.NoData)		message = "No Data";
 		else if (result instanceof Ctrl_Json.Data)				message = "Ok";
 		else													message = "Bad Data";
 

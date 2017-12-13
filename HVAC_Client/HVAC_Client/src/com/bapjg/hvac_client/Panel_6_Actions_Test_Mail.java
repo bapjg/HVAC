@@ -59,7 +59,7 @@ public class Panel_6_Actions_Test_Mail 							extends 					Panel_0_Fragment
     		TCP_Send(new Ctrl_Actions_Test_Mail().new Execute());
     	}
     }
- 	public void processFinishTCP(Ctrl__Abstract result) 
+ 	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		super.processFinishTCP(result);
 		if (result instanceof Ctrl_Actions_Test_Mail.Ack)		Global.toaster("eMail sent", true);

@@ -54,7 +54,7 @@ public class TCP_Connection
 		try { piInputStream.close(); 	}				catch(Exception e) {}
 		try { piSocket.close(); 		}				catch(Exception e) {}
 	}
-	public Ctrl__Abstract piTransaction(Ctrl__Abstract messageSend)
+	public Msg__Abstract piTransaction(Msg__Abstract messageSend)
 	{
 		if(connect())
 		{
@@ -66,11 +66,11 @@ public class TCP_Connection
 				
 				piInputStream																= new ObjectInputStream(piSocket.getInputStream());
 				
-				return (Ctrl__Abstract) piInputStream.readObject();
+				return (Msg__Abstract) piInputStream.readObject();
 			}
-			catch (SocketTimeoutException eTimeOut)		{	return new Ctrl__Abstract().new TimeOut();		}
-			catch (Exception e)							{	return new Ctrl__Abstract().new NoData();			}
+			catch (SocketTimeoutException eTimeOut)		{	return new Msg__Abstract().new TimeOut();		}
+			catch (Exception e)							{	return new Msg__Abstract().new NoData();			}
 		}
-		else											{	return new Ctrl__Abstract().new NoConnection();	}
+		else											{	return new Msg__Abstract().new NoConnection();	}
 	}
 }

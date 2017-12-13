@@ -1,7 +1,7 @@
 package HVAC_Common;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
-public class Msg_Fuel_Consumption_Test 							extends 					Msg__Abstract_Test
+public class Msg_Fuel_Consumption_Test 							extends 					Msg__Abstract
 {
 	private static final long 									serialVersionUID 			= 1L;
 

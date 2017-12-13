@@ -49,9 +49,9 @@ public class HTTP_Request <SendType>
 	//
 	// New version based on Msg__Abstract
 	//
-	public Msg__Abstract_Test sendData(Msg__Abstract_Test messageSend)
+	public Msg__Abstract sendData(Msg__Abstract messageSend)
 	{
-		Msg__Abstract_Test											messageReceive				= null;
+		Msg__Abstract											messageReceive				= null;
 
 		try
 		{
@@ -73,7 +73,7 @@ public class HTTP_Request <SendType>
 		try
 		{
 			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 																	= (Msg__Abstract_Test) response.readObject();
+			messageReceive 																	= (Msg__Abstract) response.readObject();
 		}
     	catch (ClassNotFoundException eClassNotFound) 
     	{
@@ -95,99 +95,99 @@ public class HTTP_Request <SendType>
 		}
 		return messageReceive;			
 	}
-	public Rpt_Abstract sendData(Rpt_Abstract messageSend)
-	{
-		Rpt_Abstract											messageReceive				= null;
-
-		try
-		{
-			ObjectOutputStream 									outputToServlet;
-			outputToServlet 																= new ObjectOutputStream(servletConnection.getOutputStream());
-			outputToServlet.writeObject(messageSend);
-			outputToServlet.flush();
-			outputToServlet.close();
-		}
-		catch (SocketTimeoutException eTimeOut)
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend TimeOut on write : " + eTimeOut);
-		}
-		catch (Exception eSend) 
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend : " + eSend);
-		}
-
-		try
-		{
-			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 																	= (Rpt_Abstract) response.readObject();
-		}
-    	catch (ClassNotFoundException eClassNotFound) 
-    	{
-    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend ClassNotFound : " + eClassNotFound);
-		}
-		catch (SocketTimeoutException eTimeOut)
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend TimeOut on read  : " + eTimeOut);
-		}
-		catch (ClassCastException eClassCast) 
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend ClassCast : " + eClassCast);
-    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend ClassCast : " + eClassCast.getMessage());
-		}
-		catch (Exception eReceive) 
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend Other : " + eReceive);
-    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend Other : " + eReceive.getMessage());
-		}
-		return messageReceive;			
-	}
-	public Ctrl__Abstract sendData(Ctrl__Abstract messageSend)
-	{
-// Changed 08/12/2017 after casting error  STOPPRESS changes undone
-		Ctrl__Abstract											messageReceive				= null;
-//		Rpt_Abstract											messageReceive				= null;
-
-		try
-		{
-			ObjectOutputStream 									outputToServlet;
-			outputToServlet 																= new ObjectOutputStream(servletConnection.getOutputStream());
-			outputToServlet.writeObject(messageSend);
-			outputToServlet.flush();
-			outputToServlet.close();
-		}
-		catch (SocketTimeoutException eTimeOut)
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend TimeOut on write : " + eTimeOut);
-		}
-		catch (Exception eSend) 
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend : " + eSend);
-		}
-
-		try
-		{
-			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
-			messageReceive 																	= (Ctrl__Abstract) response.readObject();
-//			messageReceive 																	= (Rpt_Abstract)   response.readObject();
-		}
-    	catch (ClassNotFoundException eClassNotFound) 
-    	{
-    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend ClassNotFound : " + eClassNotFound);
-		}
-		catch (SocketTimeoutException eTimeOut)
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend TimeOut on read  : " + eTimeOut);
-		}
-		catch (ClassCastException eClassCast) 
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend ClassCast : " + eClassCast);
-    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend ClassCast : " + eClassCast.getMessage());
-		}
-		catch (Exception eReceive) 
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend Other : " + eReceive);
-    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend Other : " + eReceive.getMessage());
-		}
-		return messageReceive;			
-	}
+//	public Msg__Abstract sendData(Msg__Abstract messageSend)
+//	{
+//		Msg__Abstract											messageReceive				= null;
+//
+//		try
+//		{
+//			ObjectOutputStream 									outputToServlet;
+//			outputToServlet 																= new ObjectOutputStream(servletConnection.getOutputStream());
+//			outputToServlet.writeObject(messageSend);
+//			outputToServlet.flush();
+//			outputToServlet.close();
+//		}
+//		catch (SocketTimeoutException eTimeOut)
+//		{
+//    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend TimeOut on write : " + eTimeOut);
+//		}
+//		catch (Exception eSend) 
+//		{
+//    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend : " + eSend);
+//		}
+//
+//		try
+//		{
+//			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
+//			messageReceive 																	= (Msg__Abstract) response.readObject();
+//		}
+//    	catch (ClassNotFoundException eClassNotFound) 
+//    	{
+//    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend ClassNotFound : " + eClassNotFound);
+//		}
+//		catch (SocketTimeoutException eTimeOut)
+//		{
+//    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend TimeOut on read  : " + eTimeOut);
+//		}
+//		catch (ClassCastException eClassCast) 
+//		{
+//    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend ClassCast : " + eClassCast);
+//    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend ClassCast : " + eClassCast.getMessage());
+//		}
+//		catch (Exception eReceive) 
+//		{
+//    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend Other : " + eReceive);
+//    		LogIt.info("HTTP_Request", "sendData", "Rpt_Abstract messageSend Other : " + eReceive.getMessage());
+//		}
+//		return messageReceive;			
+//	}
+//	public Msg__Abstract sendData(Msg__Abstract messageSend)
+//	{
+//// Changed 08/12/2017 after casting error  STOPPRESS changes undone
+//		Msg__Abstract											messageReceive				= null;
+////		Rpt_Abstract											messageReceive				= null;
+//
+//		try
+//		{
+//			ObjectOutputStream 									outputToServlet;
+//			outputToServlet 																= new ObjectOutputStream(servletConnection.getOutputStream());
+//			outputToServlet.writeObject(messageSend);
+//			outputToServlet.flush();
+//			outputToServlet.close();
+//		}
+//		catch (SocketTimeoutException eTimeOut)
+//		{
+//    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend TimeOut on write : " + eTimeOut);
+//		}
+//		catch (Exception eSend) 
+//		{
+//    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend : " + eSend);
+//		}
+//
+//		try
+//		{
+//			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
+//			messageReceive 																	= (Msg__Abstract) response.readObject();
+////			messageReceive 																	= (Rpt_Abstract)   response.readObject();
+//		}
+//    	catch (ClassNotFoundException eClassNotFound) 
+//    	{
+//    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend ClassNotFound : " + eClassNotFound);
+//		}
+//		catch (SocketTimeoutException eTimeOut)
+//		{
+//    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend TimeOut on read  : " + eTimeOut);
+//		}
+//		catch (ClassCastException eClassCast) 
+//		{
+//    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend ClassCast : " + eClassCast);
+//    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend ClassCast : " + eClassCast.getMessage());
+//		}
+//		catch (Exception eReceive) 
+//		{
+//    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend Other : " + eReceive);
+//    		LogIt.info("HTTP_Request", "sendData", "Ctrl__Abstract messageSend Other : " + eReceive.getMessage());
+//		}
+//		return messageReceive;			
+//	}
 }
