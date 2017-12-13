@@ -135,14 +135,17 @@ public class Ctrl_WeatherData 									extends 					DefaultHandler
 			{
 				this.dateTimeObtained														= null;
 				this.forecasts																= null;
-				return;																		// Will try again in 5 mins (loop timer)
+				Exception 										exception 					= new Exception("Response Code <> 200. Try again in 5 mins");
+				throw exception;
+//				return;																			// Will try again in 5 mins (loop timer)
 			}		
 		}
 		catch (SocketTimeoutException eTO) 		
 		{		
 			this.dateTimeObtained															= null;
 			this.forecasts																	= null;
-			return;																			// Will try again in 5 mins (loop timer)
+			throw eTO;
+//			return;																			// Will try again in 5 mins (loop timer)
 		}		
 		catch (Exception e) 																//	This can happen for a variety of reasons, just try again in 5 mins
 		{
