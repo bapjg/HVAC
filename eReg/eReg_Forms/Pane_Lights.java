@@ -38,6 +38,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.ImageIcon;
+import javax.swing.JTextPane;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Pane_Lights extends JPanel
@@ -49,14 +50,20 @@ public class Pane_Lights extends JPanel
 	private JButton 											btnMixerUp;
 	private JButton 											btnMixerDown;
 
-    private BufferedImage 										lampOn;
-    private BufferedImage 										lampOff;
+    private ImageIcon 											lampOn;
+    private ImageIcon 											lampOff;
+    
+    private JLabel												lblHotWater;
+	private JLabel 												lblFloor;
  
 	public Pane_Lights()
 	{
-		
 		this.setLayout(null);
-		this.setBounds(713, 11, 291, 166);
+		this.setBounds(713, 11, 291, 174);
+
+		lampOn																				= new ImageIcon(Pane_Lights.class.getResource("/eReg_Forms/lamp_on.jpg"));		
+		lampOff																				= new ImageIcon(Pane_Lights.class.getResource("/eReg_Forms/lamp_off.jpg"));		
+		
 		
 		btnHotWater 																		= new JButton("Hot Water");
 		btnHotWater.setBounds(10, 31, 130, 23);
@@ -93,21 +100,22 @@ public class Pane_Lights extends JPanel
 		btnMixerDown.setBounds(150, 99, 130, 23);
 		this.add(btnMixerDown);
 		
-	    try 
-	    {                
-	          lampOn = ImageIO.read(new File("../eReg_Forms/lamp_on.jpg"));
-	          lampOff = ImageIO.read(new File("../eReg_Forms/lamp_off.jpg"));
-	    } 
-	    catch (IOException ex) 
-	    {
-	            // handle exception...
-	    }
+		lblHotWater 																		= new JLabel("Hot Water");
+		lblHotWater.setIcon(lampOn);
+		lblHotWater.setBounds(41, 133, 35, 35);
+		add(lblHotWater);
+
+		lblFloor 																			= new JLabel("Floor");
+		lblFloor.setIcon(lampOff);
+		lblFloor.setBounds(96, 133, 35, 35);
+		add(lblFloor);
+		
 	}
-	@Override
-    protected void paintComponent(Graphics g) 
-	{
-        super.paintComponent(g);
-        g.drawImage(lampOn, 0, 0, this); // see javadoc for more info on the parameters            
-        g.drawImage(lampOff, 0, 0, this); // see javadoc for more info on the parameters            
-	}
+//	@Override
+//    protected void paintComponent(Graphics g) 
+//	{
+//        super.paintComponent(g);
+//        g.drawImage(lampOn, 0, 0, this); // see javadoc for more info on the parameters            
+//        g.drawImage(lampOff, 0, 0, this); // see javadoc for more info on the parameters            
+//	}
 }
