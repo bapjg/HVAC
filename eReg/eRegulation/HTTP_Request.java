@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.*;
 import HVAC_Common.*;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
@@ -61,38 +62,21 @@ public class HTTP_Request <SendType>
 			outputToServlet.flush();
 			outputToServlet.close();
 		}
-		catch (SocketTimeoutException eTimeOut)
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend TimeOut on write : " + eTimeOut);
-		}
-		catch (Exception eSend) 
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend : " + eSend);
-		}
+		catch (SocketTimeoutException eTimeOut)			{	LogIt.info("HTTP_Request", "sendData", "writeObject/TimeOut : " 			+ eTimeOut);		}
+		catch (ConnectException eConnect) 				{   LogIt.info("HTTP_Request", "sendData", "writeObject/Connect Exception : " 	+ eConnect);		}
+		catch (Exception eSend) 						{   LogIt.info("HTTP_Request", "sendData", "writeObject/Exception : " 			+ eSend);			}
 
 		try
 		{
 			ObjectInputStream 									response 					= new ObjectInputStream(servletConnection.getInputStream());
 			messageReceive 																	= (Msg__Abstract) response.readObject();
 		}
-    	catch (ClassNotFoundException eClassNotFound) 
-    	{
-    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend ClassNotFound : " + eClassNotFound);
-		}
-		catch (SocketTimeoutException eTimeOut)
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend TimeOut on read  : " + eTimeOut);
-		}
-		catch (ClassCastException eClassCast) 
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend ClassCast : " + eClassCast);
-    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend ClassCast : " + eClassCast.getMessage());
-		}
-		catch (Exception eReceive) 
-		{
-    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend Other : " + eReceive);
-    		LogIt.info("HTTP_Request", "sendData", "Msg__Abstract messageSend Other : " + eReceive.getMessage());
-		}
+    	catch (ClassNotFoundException eClassNotFound)	{	LogIt.info("HTTP_Request", "sendData", "readObject/ClassNotFound : " 		+ eClassNotFound);	}
+		catch (SocketTimeoutException eTimeOut)			{	LogIt.info("HTTP_Request", "sendData", "readObject/TimeOut  : " 			+ eTimeOut);		}
+		catch (ConnectException eConnect) 				{	LogIt.info("HTTP_Request", "sendData", "writeObject/Connect Exception : " 	+ eConnect);		}
+		catch (ClassCastException eClassCast) 			{	LogIt.info("HTTP_Request", "sendData", "readObject/ClassCast : " 			+ eClassCast);		}
+		catch (Exception eReceive) 						{	LogIt.info("HTTP_Request", "sendData", "readObject/Exception : " 			+ eReceive);		}
+		
 		return messageReceive;			
 	}
 //	public Msg__Abstract sendData(Msg__Abstract messageSend)
