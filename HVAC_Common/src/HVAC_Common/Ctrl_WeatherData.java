@@ -14,9 +14,10 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.SocketTimeoutException;
-import java.net.URL;
+import java.net.*;
+//import java.net.HttpURLConnection;
+//import java.net.SocketTimeoutException;
+//import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -104,7 +105,7 @@ public class Ctrl_WeatherData 									extends 					DefaultHandler
 		public Long 											sunRise;		//Tag sun/rise
 		public Long 											sunSet;			//Tag sun/set
 	}
-	public Ctrl_WeatherData() throws IOException, SAXException, ParserConfigurationException
+	public Ctrl_WeatherData() throws Exception, IOException, SAXException, ParserConfigurationException
 	{
 
 		StringBuffer 											response_msg 				= new StringBuffer();
@@ -136,7 +137,7 @@ public class Ctrl_WeatherData 									extends 					DefaultHandler
 				this.forecasts																= null;
 				return;																		// Will try again in 5 mins (loop timer)
 			}		
-		} 		
+		}
 		catch (SocketTimeoutException eTO) 		
 		{		
 			this.dateTimeObtained															= null;
@@ -147,7 +148,8 @@ public class Ctrl_WeatherData 									extends 					DefaultHandler
 		{
 			this.dateTimeObtained															= null;
 			this.forecasts																	= null;
-			return;																			// Will try again in 5 mins (loop timer)
+			throw e;
+//			return;																			// Will try again in 5 mins (loop timer)
 		}
 		//
 		//=====================================================================

@@ -41,20 +41,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextPane;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
-public class Pane_Lights extends JPanel
+public class Pane_Lights 										extends 					JPanel
 {
-	private JButton 											btnHotWater;
-	private JButton 											btnFloor;
-	private JButton 											btnRadiator;
-	private JButton 											btnBurner;
-	private JButton 											btnMixerUp;
-	private JButton 											btnMixerDown;
+	private JLabel 												lblHotWater;
+	private JLabel 												lblFloor;
+	private JLabel 												lblRadiator;
+	private JLabel 												lblBurner;
+	private JLabel 												lblMixerUp;
+	private JLabel 												lblMixerDown;
 
     private ImageIcon 											lampOn;
     private ImageIcon 											lampOff;
     
-    private JLabel												lblHotWater;
-	private JLabel 												lblFloor;
+    private JLabel												lampHotWater;
+	private JLabel 												lampFloor;
  
 	public Pane_Lights()
 	{
@@ -65,50 +65,49 @@ public class Pane_Lights extends JPanel
 		lampOff																				= new ImageIcon(Pane_Lights.class.getResource("/eReg_Forms/lamp_off.jpg"));		
 		
 		
-		btnHotWater 																		= new JButton("Hot Water");
-		btnHotWater.setBounds(10, 31, 130, 23);
-//		btnHotWater.setIcon(new ImageIcon("D:\\HVAC_Repository\\git\\HVAC\\eReg\\eReg_Forms\\lamp_on.jpg"));
-		this.add(btnHotWater);
+		lblHotWater 																		= new JLabel("Hot Water");
+		lblHotWater.setBounds(10, 31, 65, 23);
+		this.add(lblHotWater);
 		
-		btnFloor 																			= new JButton("Floor");
-		btnFloor.setBounds(10, 65, 130, 23);
-		this.add(btnFloor);
+		lblFloor 																			= new JLabel("Floor");
+		lblFloor.setBounds(10, 65, 65, 23);
+		this.add(lblFloor);
 		
-		btnRadiator  																		= new JButton("Radiator");
-		btnRadiator.setBounds(10, 99, 130, 23);
-		this.add(btnRadiator);
+		lblRadiator  																		= new JLabel("Radiator");
+		lblRadiator.setBounds(10, 99, 65, 23);
+		this.add(lblRadiator);
 		
 		JLabel 													lblPumps  					= new JLabel("Pumps");
 		lblPumps.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPumps.setBounds(10, 11, 130, 14);
 		this.add(lblPumps);
 		
-		btnBurner  																			= new JButton("Burner");
-		btnBurner.setBounds(150, 31, 130, 23);
-		this.add(btnBurner);
+		lblBurner  																			= new JLabel("Burner");
+		lblBurner.setBounds(150, 31, 65, 23);
+		this.add(lblBurner);
 		
 		JLabel 													lblOther  					= new JLabel("Other");
 		lblOther.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOther.setBounds(150, 11, 130, 14);
+		lblOther.setBounds(150, 11, 65, 14);
 		this.add(lblOther);
 		
-		btnMixerUp  																		= new JButton("Mixer Up");
-		btnMixerUp.setBounds(150, 65, 130, 23);
-		this.add(btnMixerUp);
+		lblMixerUp  																		= new JLabel("Mixer Up");
+		lblMixerUp.setBounds(150, 65, 65, 23);
+		this.add(lblMixerUp);
 		
-		btnMixerDown  																		= new JButton("Mixer Down");
-		btnMixerDown.setBounds(150, 99, 130, 23);
-		this.add(btnMixerDown);
+		lblMixerDown  																		= new JLabel("Mixer Down");
+		lblMixerDown.setBounds(150, 99, 65, 23);
+		this.add(lblMixerDown);
 		
-		lblHotWater 																		= new JLabel("Hot Water");
-		lblHotWater.setIcon(lampOn);
-		lblHotWater.setBounds(41, 133, 35, 35);
-		add(lblHotWater);
+		lampHotWater 																		= new JLabel("Hot Water");
+		lampHotWater.setIcon(lampOn);
+		lampHotWater.setBounds(41, 133, 35, 35);
+		add(lampHotWater);
 
-		lblFloor 																			= new JLabel("Floor");
-		lblFloor.setIcon(lampOff);
-		lblFloor.setBounds(96, 133, 35, 35);
-		add(lblFloor);
+		lampFloor 																			= new JLabel("Floor");
+		lampFloor.setIcon(lampOff);
+		lampFloor.setBounds(96, 133, 35, 35);
+		add(lampFloor);
 		
 	}
 //	@Override
