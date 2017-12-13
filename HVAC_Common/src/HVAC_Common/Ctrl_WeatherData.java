@@ -135,7 +135,7 @@ public class Ctrl_WeatherData 									extends 					DefaultHandler
 			{
 				this.dateTimeObtained														= null;
 				this.forecasts																= null;
-				Exception 										exception 					= new Exception("Response Code <> 200. Try again in 5 mins");
+				Exception 										exception 					= new Exception("Response Code <> 200 (" + responseCode + "). Try again in 5 mins");
 				throw exception;
 //				return;																			// Will try again in 5 mins (loop timer)
 			}		
