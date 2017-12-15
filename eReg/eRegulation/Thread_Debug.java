@@ -28,6 +28,8 @@ public class Thread_Debug 										implements 					Runnable
 			Thermometers										thermos						= Global.thermometers;
 			Relays												relays						= Global.relays;
 			Circuits 											circuits					= Global.circuits;
+			Boiler 												boiler 						= Global.boiler;
+			Burner												bruner						= Global.burner;
 		}
 		catch (Exception ex)
 		{
@@ -35,8 +37,6 @@ public class Thread_Debug 										implements 					Runnable
 		}
 		while (!Global.stopNow)
 		{
-			Boiler 												boiler 						= Global.boiler;
-			
 			
 			
 			
