@@ -24,7 +24,6 @@ public class Thread_Debug 										implements 					Runnable
 
 		try
 		{
-			Global 												global 						= new Global();
 			Thermometers										thermos						= Global.thermometers;
 			Relays												relays						= Global.relays;
 			Circuits 											circuits					= Global.circuits;

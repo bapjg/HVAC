@@ -41,6 +41,7 @@ abstract class Circuit_Abstract
 		this.name																			= paramCircuit.name;
 		this.type																			= paramCircuit.type;
 		this.circuitType																	= paramCircuit.type;
+		this.active																			= false;			// Avoid null pointer exception. Calendar will set it to correct value
 		this.tempMax																		= paramCircuit.tempMax;
 		this.circuitPump																	= Global.pumps.fetchPump(paramCircuit.pump);
 		this.circuitThermo																	= Global.thermometers.fetchThermometer(paramCircuit.thermometer);
