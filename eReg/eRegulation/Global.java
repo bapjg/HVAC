@@ -449,17 +449,26 @@ public class Global
 		{
 			Set <Thread> 										threadSet 					= Thread.getAllStackTraces().keySet();
 			
-			Iterator<Thread> i = threadSet.iterator();
-			while(i.hasNext()) 
+			for (Thread thd : threadSet) 
 			{
-				Thread j 																	= i.next();
-				String threadName 															= j.getName();
-				if (threadName.substring(0,7).equals("Thread_"))
+				if (thd.getName().substring(0,7).equals("Thread_"))
 				{
 						Global.waitSeconds(1);
 						break;
 				}
 			}
+			
+//			Iterator <Thread> 									i 							= threadSet.iterator();
+//			while(i.hasNext()) 
+//			{
+//				Thread 											j 							= i.next();
+//				
+//				if (j.getName().substring(0,7).equals("Thread_"))
+//				{
+//						Global.waitSeconds(1);
+//						break;
+//				}
+//			}
 			threadsAlive																	= false;
 		}
 		
