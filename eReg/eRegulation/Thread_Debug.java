@@ -50,7 +50,7 @@ public class Thread_Debug 										implements 					Runnable
 				
 				for (Thread thd : threadSet) 
 				{
-					if (thd.getName().substring(0,7).equals("Thread_Main"))    	threadMainFound =  true;
+					if (thd.getName().contains("_Main"))    	threadMainFound =  true;
 				}
 
 //				
