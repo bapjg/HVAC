@@ -4,10 +4,12 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.util.*;
 import java.text.*;
 import java.io.*;
@@ -26,13 +28,30 @@ public class LogIt
 	
 	public LogIt()
 	{
-//		logDisplay																			= true;
 	}
 	public static void toLogFile(String message)
 	{
+        InetAddress 											address;
+        boolean 												reachable					= false;
 		try
 		{
-	        FileWriter 											fw 							= new FileWriter("/mnt/DZ/HVAC_LogFile.txt",true); //the true will append the new data
+			address 											= InetAddress.getByName("192.168.5.10");
+	        reachable 											= address.isReachable(10000);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return;
+		}
+
+		if (! reachable)
+		{
+			if (Global.formControl != null)							Global.formControl.logMessage(dateTimeStamp(), "Error", "LogIt/toLogFile", "Server not reachable, look at stack trace");
+			return;
+		}
+        try
+		{
+	        FileWriter 											fw 							= new FileWriter("/mnt/DZ/HVAC_LogFile.txt", true); //the true will append the new data
 	        fw.write(message + "\r\n");//appends the string to the file
 	        fw.flush();
 	        fw.close();
@@ -45,37 +64,11 @@ public class LogIt
 	}
 	public static void debug(String message)
 	{
-//		if (true)												toScreen	(dateTimeStamp() + " LogIt.debug " + message);
-//		if (useLogFile)											toLogFile	(dateTimeStamp() + " LogIt.debug " + message);
 		toScreen	(dateTimeStamp() + " LogIt.debug " + message);
 		toLogFile	(dateTimeStamp() + " LogIt.debug " + message);
 	}
 	public static void  logMessage(String messageType, String className, String methodName, String message)
 	{
-		// TODO : Remove this as no longer used/analysed
-		
-//		if (!Global.httpSemaphore.semaphoreLock("LogIt.logMessage"))
-//		{
-//			System.out.println(dateTimeStamp() + " LogIt.logMessage Lock timedout, owned by " + Global.httpSemaphore.owner);
-//			return;
-//		}
-//
-//		HTTP_Request	<Rpt_Report>							httpRequest					= new HTTP_Request <Rpt_Report> ("Monitor");
-//		
-//		Rpt_Report	 											messageSend 				= new Rpt_Report();
-//		messageSend.dateTime 																= System.currentTimeMillis();
-//		messageSend.reportType 																= messageType;
-//		messageSend.className 																= className;
-//		messageSend.methodName 																= methodName;
-//		messageSend.reportText 																= message;
-//			
-//		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
-//			
-//		if (!(messageReceive instanceof Rpt_Abstract.Ack))
-//		{
-//			// System.out.println(dateTimeStamp() + " Logit.logMessage" + messageType + "  is : Nack");
-//		}
-//		Global.httpSemaphore.semaphoreUnLock();			
 	}
 	
 	public static void  display(String className, String methodName, String message)
@@ -92,17 +85,6 @@ public class LogIt
 		else													toScreen	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
 		toLogFile	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
 	}
-//	public static void  info(String className, String methodName, String message, Boolean display)
-//	{
-//		logMessage("Info", className, methodName, message);
-//		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
-//		if (display)
-//		{
-//			if (Global.formControl != null)						Global.formControl.logMessage(dateTimeStamp(), "Info", sender, message);
-//			else												toScreen	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
-//		}
-//		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Info   : " + sender + " - " + message);
-//	}
 	public static void  error(String className, String methodName, String message)
 	{
 
@@ -111,17 +93,6 @@ public class LogIt
 		else													toScreen	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
 		toLogFile	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
 	}
-//	public static void  error(String className, String methodName, String message, Boolean display)
-//	{
-//		logMessage("Error", className, methodName, message);
-//		String 													sender						= (className + "/" + methodName + spaces).substring(0,30);
-//		if (display)
-//		{
-//			if (Global.formControl != null)						Global.formControl.logMessage(dateTimeStamp(), "Error", sender, message);
-//			else												toScreen	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
-//		}
-//		if (useLogFile)											toLogFile	(dateTimeStamp() + " : Error  : " + sender + " - " + message);
-//	}
 	public static void pidData	(Rpt_PID.Update	messageSend)
 	{
 		if (!Global.httpSemaphore.semaphoreLock("LogIt.pidData"))
@@ -186,30 +157,6 @@ public class LogIt
     }
 	public static void mixerData(Long dateTimeStart, Integer positionTrackedStart, Long dateTimeEnd, Integer positionTrackedEnd)
     {
-		// Code removed as no longer logging mexer movements
-		
-//		if (!Global.httpSemaphore.semaphoreLock("LogIt.mixerData"))
-//		{
-//			System.out.println(dateTimeStamp() + " LogIt.mixerData Lock timedout, owned by " + Global.httpSemaphore.owner);
-//			return;
-//		}
-//
-//		HTTP_Request <Rpt_MixerMouvement>						httpRequest					= new HTTP_Request <Rpt_MixerMouvement> ("Monitor");
-//				
-//		Rpt_MixerMouvement 										messageSend 				= new Rpt_MixerMouvement();
-//		messageSend.dateTimeStart 															= dateTimeStart;
-//		messageSend.positionTrackedStart 													= positionTrackedStart;
-//		messageSend.dateTimeEnd 															= dateTimeEnd;
-//		messageSend.positionTrackedEnd														= positionTrackedEnd;
-//				
-//		Rpt_Abstract 											messageReceive 				= httpRequest.sendData(messageSend);
-//		
-//		if (!(messageReceive instanceof Rpt_Abstract.Ack))
-//		{
-//			// System.out.println(dateTimeStamp() + " Temp data  is : Nack");
-//		}
-//
-//		Global.httpSemaphore.semaphoreUnLock();			
     }
 	public static void fuelData(Long fuelConsumed)
     {
