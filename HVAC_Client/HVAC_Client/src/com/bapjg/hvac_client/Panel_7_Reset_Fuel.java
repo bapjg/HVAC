@@ -33,6 +33,19 @@ import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Actions_Relays.Execute;
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+// A change of minutesPerLitre updates Global.eRegConfiguration.burner.minutesPerLitre
+// This change must be sent to HVAC_Server to update the Ereg Configuration
+//
+// Ctrl_Fuel_Consumption_Update sends a TCP message to eReg to set fuelConsumption to zero
+//
+// NB : A ReBoot is NOT required as :
+//   - burner.minutesPerLitre is NOT used by eReg
+//   - a new (updated) config file will eventually be sent to eReg on next calendar update (or any later reboot)
+//   - burner.minutesPerLitre is only used by HVAC_Client to calculate fuel used (in litres) when placing an order to refill fuel tank
+//   - HVAC_Client gets updated Config data dynamically whenever needed
+//
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment 
