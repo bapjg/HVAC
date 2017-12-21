@@ -66,7 +66,7 @@ public class Menu_0_Fragment 									extends 					Fragment
 				buttonRefresh 																= new Element_MenuButton("Refresh");
 				refreshInsertPoint.addView(buttonRefresh);
 			}
-			if (hasButtonUpdate)								buttonUpdate 				= new Element_MenuButton("Update");
+			if (hasButtonUpdate)	// This is erroneous, as repeated below								buttonUpdate 				= new Element_MenuButton("Update");
 			{
 				buttonUpdate 																= new Element_MenuButton("Update");
 				refreshInsertPoint.addView(buttonUpdate);

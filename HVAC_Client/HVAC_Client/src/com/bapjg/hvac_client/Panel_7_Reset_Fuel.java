@@ -13,6 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
@@ -32,6 +35,8 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Actions_Relays.Execute;
+import HVAC_Common.Ctrl_Fuel_Consumption.Request;
+import HVAC_Common.Ctrl_Fuel_Consumption.Update;
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------
 //
@@ -46,6 +51,13 @@ import HVAC_Common.Ctrl_Actions_Relays.Execute;
 //   - burner.minutesPerLitre is only used by HVAC_Client to calculate fuel used (in litres) when placing an order to refill fuel tank
 //   - HVAC_Client gets updated Config data dynamically whenever needed
 //
+// The TCP send does :
+//   - Sets the value of fuelConsumed = 0
+//   - Writes out the value to disk
+//   - Writes out the value to server (via HTTP_Send)
+// A Nack can be returned if
+//   - Fuel is flowing
+//   - Something goes wrong saving the fuelConumed data (eith disk or server)
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment 
@@ -140,12 +152,21 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 		}
 		else if (clickedView == buttonConfirm)
 		{
-    		Global.eRegConfiguration.burner.fuelConsumption									= 0L;
-    		Ctrl_Fuel_Consumption.Update				messageSend							= new Ctrl_Fuel_Consumption().new Update();
-    		messageSend.dateTime															= Global.now();
-    		messageSend.fuelConsumed														= 0L;
-
-    		TCP_Send(messageSend);
+			Dialog_Yes_No										messageYesNo				= new Dialog_Yes_No("Reset Fuel Consumption to 0 ?", this, 1);		// Id = 1
+			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
+    		
+			
+			
+			
+			
+			
+			
+//			Global.eRegConfiguration.burner.fuelConsumption									= 0L;
+//    		Ctrl_Fuel_Consumption.Update				messageSend							= new Ctrl_Fuel_Consumption().new Update();
+//    		messageSend.dateTime															= Global.now();
+//    		messageSend.fuelConsumed														= 0L;
+//
+//    		TCP_Send(messageSend);
 		}
 //		else if (clickedView == fuelConsumptionMinutes)
 //		{
@@ -180,6 +201,22 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
     }
     public void onDialogReturnWithId(int id)
     {
+    	if (id == 1)		// ButtonConfirm : Do http_send to update config with new minsPerLitre in configuration
+    	{
+    		if (Global.eRegConfiguration != null)
+    		{
+                Gson gson 																		= new GsonBuilder().setPrettyPrinting().create();
+    			Ctrl_Json.Update										sendUpdate				= new Ctrl_Json().new Update();
+    			sendUpdate.type																	= Ctrl_Json.TYPE_Configuration;
+                sendUpdate.json 																= gson.toJson((Ctrl_Configuration.Data) Global.eRegConfiguration);
+
+    			HTTP_Send	(sendUpdate);
+    		}
+    		else
+    		{
+    			Global.toaster("No data to send, do a Refresh", false);
+    		}
+    	}
     	if (id == 99)
     	{
     		Global.eRegConfiguration.burner.fuelConsumption									= 0L;
@@ -191,6 +228,48 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
     	}
     	displayContents();
     }
+	public void processFinishHTTP(Msg__Abstract messageReturned)
+	{
+		super.processFinishHTTP(messageReturned);
+		if (messageReturned instanceof Ctrl_Json.Data)
+		{
+			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
+			Global.eRegConfiguration														= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
+			
+			HTTP_Send(new Ctrl_Fuel_Consumption().new Request());
+		}
+		else if (messageReturned instanceof Ctrl_Fuel_Consumption.Data)
+		{
+			// TODO DO WE NEED TO DO ALL THIS
+			
+			Ctrl_Fuel_Consumption.Data								fuel					= ((Ctrl_Fuel_Consumption.Data) messageReturned);
+			Global.eRegConfiguration.burner.fuelConsumption									= fuel.fuelConsumed;
+			Global.toaster("Configuration & Fuel data received", false);
+//			clickActiveButton(); // What is this
+			
+    		// Now Do TCP Part
+			
+			Global.eRegConfiguration.burner.fuelConsumption									= 0L;
+    		Ctrl_Fuel_Consumption.Update				messageSend							= new Ctrl_Fuel_Consumption().new Update();
+    		messageSend.dateTime															= Global.now();
+    		messageSend.fuelConsumed														= 0L;
+
+    		TCP_Send(messageSend);
+			
+			// Should this not be below in Ack Section
+			
+		}
+		else if (messageReturned instanceof Msg__Abstract.Ack)
+		{
+			Global.toaster("Server updated", false);
+			Dialog_Yes_No											messageYesNo			= new Dialog_Yes_No("Update controller with new configuration now ?", this, 1);	// id = 1
+			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
+		}
+		else 
+		{
+			Global.toaster("Unexpected response : " + messageReturned.getClass().toString(), false);
+		}
+	}
 	public void processFinishTCP(Msg__Abstract result) 
 	{  
 		super.processFinishTCP(result);
@@ -209,5 +288,27 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 			Global.toaster("Unexpected response", true);
 		}
 	}
+	public void doUpdate()
+	{
+		Dialog_Yes_No												messageYesNo			= new Dialog_Yes_No("Are you certain ?", this);
+		messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
+	}
+	// OLD STUFF FROM Menu_Frag_Config
+//	public void doUpdate2()
+//	{
+//		if (Global.eRegConfiguration != null)
+//		{
+//            Gson gson 																		= new GsonBuilder().setPrettyPrinting().create();
+//			Ctrl_Json.Update										sendUpdate				= new Ctrl_Json().new Update();
+//			sendUpdate.type																	= Ctrl_Json.TYPE_Configuration;
+//            sendUpdate.json 																= gson.toJson((Ctrl_Configuration.Data) Global.eRegConfiguration);
+//
+//			HTTP_Send	(sendUpdate);
+//		}
+//		else
+//		{
+//			Global.toaster("No data to send, do a Refresh", false);
+//		}
+//	}
 }
 

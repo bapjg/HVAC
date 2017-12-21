@@ -447,7 +447,6 @@ public class Thread_TCPListen 			implements Runnable
     } 
 	private Msg__Abstract		process_Ctrl_Fuel_Consumption_Update	(Ctrl_Fuel_Consumption.Update message_in)
 	{
-		
 		if (Global.burner.isFuelFlowing())
 		{
 			return	new Msg__Abstract().new Nack("Fuel is currently Flowing"); 
@@ -459,12 +458,12 @@ public class Thread_TCPListen 			implements Runnable
 		{
 			LogIt.fuelData(Global.burner.fuelflow.consumption);
 			Global.burner.fuelflow.consumption												= message_in.fuelConsumed;		// Set the value (usually zero)
-			Global.burner.fuelflow.saveFuelFlow();						// Saves the current entry
-			LogIt.fuelData(Global.burner.fuelflow.consumption);
+			Global.burner.fuelflow.saveFuelFlow();						// Saves the current value to disk
+			LogIt.fuelData(Global.burner.fuelflow.consumption);			// Saves the current value to server
 		}
 		catch (Exception ex)
 		{
-			// Something went wrong set thing back the they were
+			// Something went wrong set thing back the way they were
 			Global.burner.fuelflow.consumption												= fuelConsumed;
 			LogIt.fuelData(Global.burner.fuelflow.consumption);
 			Global.burner.fuelflow.saveFuelFlow();						// Saves the current entry

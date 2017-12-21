@@ -25,7 +25,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		Integer													tempNow						= Global.thermoLivingRoom.reading;
 		if (tempNow != null)
 		{
-			Integer													tempDifference			= tempObjective - tempNow;
+			Integer												tempDifference				= tempObjective - tempNow;
 	
 			// Work on basis of 		:	6               hours   per degree
 			// or						:   6 x 60 x 60     seconds per degree
@@ -34,7 +34,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			
 			if (tempDifference > 0)
 			{
-				Long												rampUpMilliSeconds		= 6L * 3600 * tempDifference;		// 6 hours per degree
+				Long											rampUpMilliSeconds			= 6L * 3600 * tempDifference;		// 6 hours per degree
 				return rampUpMilliSeconds;
 			}
 			return 0L;
@@ -126,7 +126,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 			}
 			else
 			{
-				this.heatRequired.setMax();				// Avoid condensation
 				circuitPump.on();															// CircuitPump must be on in order to obtain correct temperature readings
 	
 				if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective)
@@ -134,15 +133,24 @@ public class Circuit_Mixer extends Circuit_Abstract
 					this.heatRequired.setZero();
 					state 																	= HVAC_STATES.Circuit.IdleRequested;
 				}
-				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
+				else
 				{
+					this.heatRequired.setMax();
 					state 																	= HVAC_STATES.Circuit.RampingUp;
 				}
+// Changed 21/12/2017. I think the idea behind the code is that its no use doing anything until thermoBoiler > heatRequired.tempMinimum
+// As the circuit pump is on anyway, it makes no difference
+// Hence the code above
+				
+//				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
+//				{
+//					state 																	= HVAC_STATES.Circuit.RampingUp;
+//				}
 			}
 			break;
 		case RampingUp:
 			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
-			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective - 500)		// Otherwise Stay in rampUp mode
+			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective - 500)		// Otherwise Stay in rampUp mode until over target - 0.5 °C
 			{
 				state 																		= HVAC_STATES.Circuit.Running;
 			}
