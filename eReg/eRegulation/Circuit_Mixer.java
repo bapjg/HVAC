@@ -142,7 +142,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			break;
 		case RampingUp:
 			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
-			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective - 1000)		// Otherwise Stay in rampUp mode
+			if (Global.thermoLivingRoom.reading > this.taskActive.tempObjective - 500)		// Otherwise Stay in rampUp mode
 			{
 				state 																		= HVAC_STATES.Circuit.Running;
 			}
@@ -195,11 +195,14 @@ public class Circuit_Mixer extends Circuit_Abstract
 			
 // Now is :			
 			this.requestStart();
-			LogIt.display("Circuit_" + this.name, "sequencer", "State = Resuming, start requested");
+			LogIt.info("Circuit_Mier", "sequencer", "State = Resuming, start requested");
+//			LogIt.display("Circuit_" + this.name, "sequencer", "State = Resuming, start requested");
 			break;
 		case IdleRequested:
-			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
-			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with Objective  at : " + this.taskActive.tempObjective.toString());
+			LogIt.info("Circuit_Mier", "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
+			LogIt.info("Circuit_Mier", "sequencer", "idle requested with Objective  at : " + this.taskActive.tempObjective.toString());
+//			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
+//			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with Objective  at : " + this.taskActive.tempObjective.toString());
 			state 																			= HVAC_STATES.Circuit.Idle;	
 			break;
 		case Idle:
@@ -211,7 +214,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			break;
 		case Error:
 		default:
-			LogIt.error("Circuit_" + this.name, "sequencer", "state error detected : " + state.toString());
+			LogIt.error("Circuit_Mixer", "sequencer", "state error detected : " + state.toString());
 			break;
 		}
 		// end of Normal Activity
