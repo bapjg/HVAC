@@ -233,6 +233,7 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
     			Global.toaster("No data to send, do a Refresh", false);
     		}
     	}
+    	int x = 99;
 //    	if (id == 99)
 //    	{
 //    		Global.eRegConfiguration.burner.fuelConsumption									= 0L;
