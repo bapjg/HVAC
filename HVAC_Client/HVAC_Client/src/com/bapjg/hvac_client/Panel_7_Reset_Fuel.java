@@ -58,6 +58,17 @@ import HVAC_Common.Ctrl_Fuel_Consumption.Update;
 // A Nack can be returned if
 //   - Fuel is flowing
 //   - Something goes wrong saving the fuelConumed data (eith disk or server)
+//
+// Normal stepping
+//   - onElementClick (buttonConfirm)
+//   	. DialogYesNo (id = 1)
+//	 - DialogReturnWithId
+//   	. HTTP_Send (minutesPerLitre recalculated)
+//	 - HTTP_Return
+//		. TCP_Send (fuelConsumed = 0)
+//	 - TCP_Return
+//   	. Toaster Ok or NotOk
+// 
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment 
@@ -179,7 +190,9 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 	}
     public void onDialogReturn()
     {
-//    	this.container.removeView(buttonDeliveryReset);
+		// Return from
+    	// dialogLitres.show(getFragmentManager(), "Litres_Delivered");
+
     	
     	buttonDeliveryReset.setVisibility(TRIM_MEMORY_UI_HIDDEN);
  
@@ -201,6 +214,9 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
     }
     public void onDialogReturnWithId(int id)
     {
+		// Return from buttonConfirm
+		// Dialog_Yes_No										messageYesNo				= new Dialog_Yes_No("Reset Fuel Consumption to 0 ?", this, 1);		// Id = 1
+
     	if (id == 1)		// ButtonConfirm : Do http_send to update config with new minsPerLitre in configuration
     	{
     		if (Global.eRegConfiguration != null)
@@ -284,6 +300,7 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 		{		
 			Global.toaster("Update successful", true);
 	    	buttonConfirm.setVisibility(TRIM_MEMORY_UI_HIDDEN);
+	       	displayContents();
 		}
 		else if (result instanceof Ctrl_Fuel_Consumption.Nack)		
 		{		
