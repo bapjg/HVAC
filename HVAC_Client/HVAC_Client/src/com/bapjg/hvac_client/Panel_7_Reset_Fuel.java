@@ -217,53 +217,59 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
     			Global.toaster("No data to send, do a Refresh", false);
     		}
     	}
-    	if (id == 99)
-    	{
-    		Global.eRegConfiguration.burner.fuelConsumption									= 0L;
-    		Ctrl_Fuel_Consumption.Update				messageSend							= new Ctrl_Fuel_Consumption().new Update();
-    		messageSend.dateTime															= Global.now();
-    		messageSend.fuelConsumed														= 0L;
-
-    		TCP_Send(messageSend);
-    	}
+//    	if (id == 99)
+//    	{
+//    		Global.eRegConfiguration.burner.fuelConsumption									= 0L;
+//    		Ctrl_Fuel_Consumption.Update				messageSend							= new Ctrl_Fuel_Consumption().new Update();
+//    		messageSend.dateTime															= Global.now();
+//    		messageSend.fuelConsumed														= 0L;
+//
+//    		TCP_Send(messageSend);
+//    	}
     	displayContents();
     }
 	public void processFinishHTTP(Msg__Abstract messageReturned)
 	{
 		super.processFinishHTTP(messageReturned);
-		if (messageReturned instanceof Ctrl_Json.Data)
+//		if (messageReturned instanceof Ctrl_Json.Data)
+//		{
+//			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
+//			Global.eRegConfiguration														= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
+//			
+//			HTTP_Send(new Ctrl_Fuel_Consumption().new Request());
+//		}
+//		else if (messageReturned instanceof Ctrl_Fuel_Consumption.Data)
+//		{
+//			// TODO DO WE NEED TO DO ALL THIS
+//			
+//			Ctrl_Fuel_Consumption.Data								fuel					= ((Ctrl_Fuel_Consumption.Data) messageReturned);
+//			Global.eRegConfiguration.burner.fuelConsumption									= fuel.fuelConsumed;
+//			Global.toaster("Configuration & Fuel data received", false);
+////			clickActiveButton(); // What is this
+//			
+//    		// Now Do TCP Part
+//			
+//			Global.eRegConfiguration.burner.fuelConsumption									= 0L;
+//    		Ctrl_Fuel_Consumption.Update				messageSend							= new Ctrl_Fuel_Consumption().new Update();
+//    		messageSend.dateTime															= Global.now();
+//    		messageSend.fuelConsumed														= 0L;
+//
+//    		TCP_Send(messageSend);
+//			
+//			// Should this not be below in Ack Section
+//			
+//		}
+//		else if (messageReturned instanceof Msg__Abstract.Ack)
+		if (messageReturned instanceof Msg__Abstract.Ack)
 		{
-			String													JsonString				= ((Ctrl_Json.Data) messageReturned).json;
-			Global.eRegConfiguration														= new Gson().fromJson(JsonString, Ctrl_Configuration.Data.class);
-			
-			HTTP_Send(new Ctrl_Fuel_Consumption().new Request());
-		}
-		else if (messageReturned instanceof Ctrl_Fuel_Consumption.Data)
-		{
-			// TODO DO WE NEED TO DO ALL THIS
-			
-			Ctrl_Fuel_Consumption.Data								fuel					= ((Ctrl_Fuel_Consumption.Data) messageReturned);
-			Global.eRegConfiguration.burner.fuelConsumption									= fuel.fuelConsumed;
-			Global.toaster("Configuration & Fuel data received", false);
-//			clickActiveButton(); // What is this
-			
-    		// Now Do TCP Part
-			
+			Global.toaster("Server updated", false);
 			Global.eRegConfiguration.burner.fuelConsumption									= 0L;
     		Ctrl_Fuel_Consumption.Update				messageSend							= new Ctrl_Fuel_Consumption().new Update();
     		messageSend.dateTime															= Global.now();
     		messageSend.fuelConsumed														= 0L;
 
     		TCP_Send(messageSend);
-			
-			// Should this not be below in Ack Section
-			
-		}
-		else if (messageReturned instanceof Msg__Abstract.Ack)
-		{
-			Global.toaster("Server updated", false);
-			Dialog_Yes_No											messageYesNo			= new Dialog_Yes_No("Update controller with new configuration now ?", this, 1);	// id = 1
-			messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
+			Global.toaster("eReg Controller sending update", false);
 		}
 		else 
 		{
@@ -277,6 +283,7 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 		if (result instanceof Ctrl_Fuel_Consumption.Ack)		
 		{		
 			Global.toaster("Update successful", true);
+	    	buttonConfirm.setVisibility(TRIM_MEMORY_UI_HIDDEN);
 		}
 		else if (result instanceof Ctrl_Fuel_Consumption.Nack)		
 		{		
@@ -288,27 +295,10 @@ public class Panel_7_Reset_Fuel 								extends 					Panel_0_Fragment
 			Global.toaster("Unexpected response", true);
 		}
 	}
-	public void doUpdate()
-	{
-		Dialog_Yes_No												messageYesNo			= new Dialog_Yes_No("Are you certain ?", this);
-		messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
-	}
-	// OLD STUFF FROM Menu_Frag_Config
-//	public void doUpdate2()
+//	public void doUpdate()
 //	{
-//		if (Global.eRegConfiguration != null)
-//		{
-//            Gson gson 																		= new GsonBuilder().setPrettyPrinting().create();
-//			Ctrl_Json.Update										sendUpdate				= new Ctrl_Json().new Update();
-//			sendUpdate.type																	= Ctrl_Json.TYPE_Configuration;
-//            sendUpdate.json 																= gson.toJson((Ctrl_Configuration.Data) Global.eRegConfiguration);
-//
-//			HTTP_Send	(sendUpdate);
-//		}
-//		else
-//		{
-//			Global.toaster("No data to send, do a Refresh", false);
-//		}
+//		Dialog_Yes_No												messageYesNo			= new Dialog_Yes_No("Are you certain ?", this);
+//		messageYesNo.show(getFragmentManager(), "Dialog_Yes_No");
 //	}
 }
 
