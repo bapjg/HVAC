@@ -35,18 +35,18 @@ public class LogIt
         boolean 												reachable					= false;
 		try
 		{
-			address 											= InetAddress.getByName("192.168.5.10");
-	        reachable 											= address.isReachable(10000);
+			address 																		= InetAddress.getByName("192.168.5.10");
+	        reachable 																		= address.isReachable(10000);
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
-			return;
+//			e.printStackTrace();
+			reachable																		= false;
 		}
 
 		if (! reachable)
 		{
-			if (Global.formControl != null)							Global.formControl.logMessage(dateTimeStamp(), "Error", "LogIt/toLogFile", "Server not reachable, look at stack trace");
+			if (Global.formControl != null)						Global.formControl.logMessage(dateTimeStamp(), "Error", "LogIt/toLogFile", "Server not reachable");
 			return;
 		}
         try
