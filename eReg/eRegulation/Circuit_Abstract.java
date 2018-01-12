@@ -170,7 +170,7 @@ abstract class Circuit_Abstract
 				return; 															// Go no further
 			}
 			// Deschedule timeup
-			if (	(now > taskActive.timeEnd								) 							// taskActive : Time up
+			if (	(now > taskActive.timeEnd								) 		// taskActive : Time up
 			&&		(this.state != HVAC_STATES.Circuit.StopRequested		)   	// Only called for states start, rampup, running, suspended, resuming, idle
 			&&		(this.state != HVAC_STATES.Circuit.OptimisationRequested)   	// AwaitingMixer, MixerReady
 			&&		(this.state != HVAC_STATES.Circuit.ShutDownRequested	)   
@@ -346,9 +346,8 @@ abstract class Circuit_Abstract
  */	
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
-//		LogIt.display("Circuit_Abstract", "taskDeactivate",  thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay);
-		LogIt.display("Circuit_Abstract", "taskDeactivate", "Task Deactivated called 1 " + this.name + " : " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + ", Temp Objective : " + thisTask.tempObjective.toString());
-		LogIt.display("Circuit_Abstract", "taskDeactivate", "Task Deactivated called 2 " + this.name + " : " + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
+		LogIt.display("Circuit_Abstract", "taskDeactivate", "Task Deactivated called " + this.name + " : " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + ", Temp Objective : " + thisTask.tempObjective.toString() + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
+//		LogIt.display("Circuit_Abstract", "taskDeactivate", "Task Deactivated called 2 " + this.name + " : " + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
 		this.taskActive.dateLastRun															= Global.Date.now();
 		// taskActive is not set to null so that Circuit_Mixer & Thread_Mixer keeps a handle onto the task
 		// It will be set to null by the sequencer once it has really stopped

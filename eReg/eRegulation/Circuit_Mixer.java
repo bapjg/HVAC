@@ -156,7 +156,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			}
 			break;
 		case Running:
-			//TODO if(temp > summerTemp)
+//TODO if(temp > summerTemp)
 //		{
 //			suspend();
 //			break;
@@ -203,14 +203,11 @@ public class Circuit_Mixer extends Circuit_Abstract
 			
 // Now is :			
 			this.requestStart();
-			LogIt.info("Circuit_Mier", "sequencer", "State = Resuming, start requested");
-//			LogIt.display("Circuit_" + this.name, "sequencer", "State = Resuming, start requested");
+			LogIt.info("Circuit_Mixer", "sequencer", "State = Resuming, start requested");
 			break;
 		case IdleRequested:
-			LogIt.info("Circuit_Mier", "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
-			LogIt.info("Circuit_Mier", "sequencer", "idle requested with Objective  at : " + this.taskActive.tempObjective.toString());
-//			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
-//			LogIt.display("Circuit_" + this.name, "sequencer", "idle requested with Objective  at : " + this.taskActive.tempObjective.toString());
+			LogIt.info("Circuit_Mixer", "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
+			LogIt.info("Circuit_Mixer", "sequencer", "idle requested with Objective  at : " + this.taskActive.tempObjective.toString());
 			state 																			= HVAC_STATES.Circuit.Idle;	
 			break;
 		case Idle:
@@ -219,6 +216,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 			{
 				state 																		= HVAC_STATES.Circuit.StartRequested;	
 			}
+			// else should we not set heatRequired to zero
 			break;
 		case Error:
 		default:
