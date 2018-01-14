@@ -43,12 +43,12 @@ public class HTTP_Request <SendType>
 		
 		servletConnection.setDoOutput(true);
 		servletConnection.setUseCaches(false);
-		servletConnection.setConnectTimeout(1000);
-		servletConnection.setReadTimeout(1000);
+		servletConnection.setConnectTimeout(2000);			// Changed from 1 sec to 2 secs 14/01/2018
+		servletConnection.setReadTimeout(2000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 	}
 	//
-	// New version based on Msg__Abstract
+	// New version based on Msg__Abstract (old version at end of this file (commented out)
 	//
 	public Msg__Abstract sendData(Msg__Abstract messageSend)
 	{
