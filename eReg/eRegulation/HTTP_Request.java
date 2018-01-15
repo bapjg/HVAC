@@ -18,8 +18,8 @@ public class HTTP_Request <SendType>
 	
 	public HTTP_Request(String servlet)
 	{
-		serverURL							= null;
-		servletConnection					= null;
+		serverURL																			= null;
+		servletConnection																	= null;
 		
 		try
 		{
@@ -27,8 +27,7 @@ public class HTTP_Request <SendType>
 		}
 		catch (MalformedURLException e)
 		{
-           	LogIt.error("HTTP_Request", "constructor", "Exception : " + e);
-//			e.printStackTrace();
+           	LogIt.error("HTTP_Request", "constructor", "Exception (new URL) : " + e);
 		}
 
 		try
@@ -37,8 +36,7 @@ public class HTTP_Request <SendType>
 		}
 		catch (IOException e)
 		{
-           	LogIt.error("HTTP_Request", "constructor", "Exception : " + e);
-			e.printStackTrace();
+           	LogIt.error("HTTP_Request", "constructor", "Exception (openConnection) : " + e);
 		}
 		
 		servletConnection.setDoOutput(true);
@@ -62,9 +60,9 @@ public class HTTP_Request <SendType>
 			outputToServlet.flush();
 			outputToServlet.close();
 		}
-		catch (SocketTimeoutException eTimeOut)			{	LogIt.info("HTTP_Request", "sendData", "writeObject/TimeOut : " 			+ eTimeOut);		}
-		catch (ConnectException eConnect) 				{   LogIt.info("HTTP_Request", "sendData", "writeObject/Connect Exception : " 	+ eConnect);		}
-		catch (Exception eSend) 						{   LogIt.info("HTTP_Request", "sendData", "writeObject/Exception : " 			+ eSend);			}
+		catch (SocketTimeoutException eTimeOut)			{	LogIt.info("HTTP_Request", "sendData", "writeObject/TimeOut : " 			+ eTimeOut		);	}
+		catch (ConnectException eConnect) 				{   LogIt.info("HTTP_Request", "sendData", "writeObject/Connect Exception : " 	+ eConnect		);	}
+		catch (Exception eSend) 						{   LogIt.info("HTTP_Request", "sendData", "writeObject/Exception : " 			+ eSend			);	}
 
 		try
 		{
@@ -72,10 +70,10 @@ public class HTTP_Request <SendType>
 			messageReceive 																	= (Msg__Abstract) response.readObject();
 		}
     	catch (ClassNotFoundException eClassNotFound)	{	LogIt.info("HTTP_Request", "sendData", "readObject/ClassNotFound : " 		+ eClassNotFound);	}
-		catch (SocketTimeoutException eTimeOut)			{	LogIt.info("HTTP_Request", "sendData", "readObject/TimeOut  : " 			+ eTimeOut);		}
-		catch (ConnectException eConnect) 				{	LogIt.info("HTTP_Request", "sendData", "writeObject/Connect Exception : " 	+ eConnect);		}
-		catch (ClassCastException eClassCast) 			{	LogIt.info("HTTP_Request", "sendData", "readObject/ClassCast : " 			+ eClassCast);		}
-		catch (Exception eReceive) 						{	LogIt.info("HTTP_Request", "sendData", "readObject/Exception : " 			+ eReceive);		}
+		catch (SocketTimeoutException eTimeOut)			{	LogIt.info("HTTP_Request", "sendData", "readObject/TimeOut  : " 			+ eTimeOut		);	}
+		catch (ConnectException eConnect) 				{	LogIt.info("HTTP_Request", "sendData", "writeObject/Connect Exception : " 	+ eConnect		);	}
+		catch (ClassCastException eClassCast) 			{	LogIt.info("HTTP_Request", "sendData", "readObject/ClassCast : " 			+ eClassCast	);	}
+		catch (Exception eReceive) 						{	LogIt.info("HTTP_Request", "sendData", "readObject/Exception : " 			+ eReceive		);	}
 		
 		return messageReceive;			
 	}
