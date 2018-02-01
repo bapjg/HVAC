@@ -206,8 +206,8 @@ public class Circuit_Mixer extends Circuit_Abstract
 			LogIt.info("Circuit_Mixer", "sequencer", "State = Resuming, start requested");
 			break;
 		case IdleRequested:
-			LogIt.info("Circuit_Mixer", "sequencer", "idle requested with LivingRomm at : " + Global.thermoLivingRoom.reading.toString());
-			LogIt.info("Circuit_Mixer", "sequencer", "idle requested with Objective  at : " + this.taskActive.tempObjective.toString());
+//			LogIt.info("Circuit_Mixer", "sequencer", "Idle requested with LivingRoom at : " + Global.thermoLivingRoom.reading.toString() + "Objective  at " + this.taskActive.tempObjective.toString());
+			LogIt.info("Circuit_Mixer", "sequencer", "Idle requested with LivingRoom at : " + Global.thermoLivingRoom.toDisplay() + "Objective  at " + this.taskActive.tempObjective.toString());
 			state 																			= HVAC_STATES.Circuit.Idle;	
 			break;
 		case Idle:

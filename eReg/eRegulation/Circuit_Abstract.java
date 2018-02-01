@@ -295,8 +295,8 @@ abstract class Circuit_Abstract
  */	
 	public void taskActivate(CircuitTask 							thisTask)
 	{
-		LogIt.display("Circuit_Abstract", "taskActivate", "Task activate requested 1 " + this.name + " : " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + ", Temp Objective : " + thisTask.tempObjective.toString());
-		LogIt.display("Circuit_Abstract", "taskActivate", "Task activate requested 2 " + this.name + " : " + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
+		LogIt.display("Circuit_Abstract", "taskActivate", "Task activate requested " + this.name + " : " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + ", Temp Objective : " + thisTask.tempObjective.toString() + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
+//		LogIt.display("Circuit_Abstract", "taskActivate", "Task activate requested 2 " + this.name + " : " + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
 
 		// Test to see if :
 		// - activeTask is null (just swap in)
@@ -312,16 +312,13 @@ abstract class Circuit_Abstract
 		{
 			if (this.taskActive == null)														// Normal operation
 			{
-//				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task inserted normally " + this.name + ", type " + thisTask.taskType);
-				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task inserted normally 1 " + this.name + " : " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + ", Temp Objective : " + thisTask.tempObjective.toString());
-				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task inserted normally 2 " + this.name + " : " + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
+				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task inserted normally " + this.name + " : " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + ", Temp Objective : " + thisTask.tempObjective.toString() + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
+//				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task inserted normally 2 " + this.name + " : " + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
 			}
 			else
 			{
-//				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task replacing a task " + this.name + ", details follow :");
-//				LogIt.display("Circuit_Abstract", "taskActivate", "Replaced Task  " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + " " + thisTask.taskType.toString());
-				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task replacing a task 1 " + this.name + " : " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + ", Temp Objective : " + thisTask.tempObjective.toString());
-				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task replacing a task 2 " + this.name + " : " + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
+				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task replacing a task " + this.name + " : " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + ", Temp Objective : " + thisTask.tempObjective.toString() + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
+//				LogIt.display("Circuit_Abstract", "taskActivate", "Activated task replacing a task 2 " + this.name + " : " + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
 			}
 
 			this.taskActive																	= thisTask;
@@ -347,7 +344,6 @@ abstract class Circuit_Abstract
 	public void taskDeactivate(CircuitTask thisTask)			// After deactivation, all tasks should be inactive
 	{
 		LogIt.display("Circuit_Abstract", "taskDeactivate", "Task Deactivated called " + this.name + " : " + thisTask.days + " " + thisTask.timeStartDisplay + " - " + thisTask.timeEndDisplay + ", Temp Objective : " + thisTask.tempObjective.toString() + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
-//		LogIt.display("Circuit_Abstract", "taskDeactivate", "Task Deactivated called 2 " + this.name + " : " + ", Task Type : " + thisTask.taskType.toString() + ", Circuit State : " + this.state.toString());
 		this.taskActive.dateLastRun															= Global.Date.now();
 		// taskActive is not set to null so that Circuit_Mixer & Thread_Mixer keeps a handle onto the task
 		// It will be set to null by the sequencer once it has really stopped
