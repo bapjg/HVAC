@@ -6,7 +6,24 @@ sudo bw_tool -a 9c -w 20:1		Relay on
 Get address for spi/Big_Relay
 =============================
 sudo bw_tool -S
-sudo bw_tool -a xx -w f0:9c		Apply address
+
+Set address for spi/Big_Relay	In the event of lost address
+=============================
+sbws
+		equivalent to 			: sudo bw_tool -S
+		returns					: b4: spi_bigrelay 1.0
+		the (lost) address is 	: B4
+
+then set the correct address (9C) instead of B4
+
+sbwaSPI B4
+		equivalent to 			: sudo bw_tool -a B4 -w f0:9c
+		or by hand 				: sudo bw_tool -a xx -w f0:9c		replacing xx with address returned by sbws
+
+then check
+
+sbws
+		should return 			: 9c: spi_bigrelay 1.0
 
 Display Hello
 =============
