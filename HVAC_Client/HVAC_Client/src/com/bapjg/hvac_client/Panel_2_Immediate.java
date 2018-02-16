@@ -204,9 +204,9 @@ public class Panel_2_Immediate 									extends 					Panel_0_Fragment
 	{
 
 		// New code
-    	if (clickedView == targetTemp)
+    	if (clickedView == targetTemp)							// Max temp increased to 65° 16/02/2018
     	{
-    		Dialog_Temperature 									df 							= new Dialog_Temperature(messageExecute.tempObjective, 25, 45, this);
+    		Dialog_Temperature 									df 							= new Dialog_Temperature(messageExecute.tempObjective, 25, 65, this);
     		df.show(getFragmentManager(), "Dialog_Temperature");
     	}
     	else if (clickedView == timeEnd)
