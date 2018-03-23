@@ -417,7 +417,7 @@ public class Global
 		Properties 												props 						= new Properties();
 		props.setProperty("mail.user", 			"administrateur");
     	props.setProperty("mail.password", 		"llenkcarb");
-    	props.setProperty("mail.smtp.host", 	"192.168.5.10");
+    	props.setProperty("mail.smtp.host", 	"192.168.5.15");							// Email SMTP Address
 
         Session 												session 					= Session.getDefaultInstance(props);
 
