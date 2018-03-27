@@ -33,7 +33,9 @@ public class Monitor extends HttpServlet
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        response.setContentType("text/html");
+    	// Accessed via http://192.168.5.10:8888/hvac/Monitor
+    	
+    	response.setContentType("text/html");
         PrintWriter 											out 						= response.getWriter();
         
         out.println("<html>");
