@@ -79,24 +79,9 @@ public class Monitor extends HttpServlet
             ObjectInputStream 									input 						= new ObjectInputStream(request.getInputStream());
             message_in 																		= input.readObject();
         }
-        catch (ClassNotFoundException eCNF)
-        {
-        	System.out.println("Monitor : Caught CNF");
-        	eCNF.printStackTrace();
-            message_out 																	= new Msg__Abstract().new Nack();
-        }
-        catch (IOException eIO)
-        {
-        	System.out.println("Monitor : Caught IO");
-        	System.out.println("An IO Exception occured : " + eIO);
-        	message_out 																	= new Msg__Abstract().new Nack();
-        }
-        catch (Exception e)
-        {
-        	System.out.println("Monitor : Caught another exception");
-        	System.out.println("An Exception occured : " + e);
-        	message_out 																	= new Msg__Abstract().new Nack();
-        }
+        catch (ClassNotFoundException eCNF) { System.out.println("Monitor : Caught CNF");        		eCNF.printStackTrace();            						message_out = new Msg__Abstract().new Nack(); }
+        catch (IOException eIO)        		{ System.out.println("Monitor : Caught IO");        		System.out.println("An IO Exception occured : " + eIO); message_out = new Msg__Abstract().new Nack(); }
+        catch (Exception e)        			{ System.out.println("Monitor : Caught another exception"); System.out.println("An Exception occured : " + e);      message_out = new Msg__Abstract().new Nack(); }
 
     	if 		(message_in == null)        						{ System.out.println("Monitor : Null received from client");	message_out	= new Msg__Abstract().new Nack();       				} 
     	else if (message_in instanceof Rpt_Temperatures)    		{ Rpt_Temperatures             readings = (Rpt_Temperatures)             message_in; message_out = processTemperatures  (readings); } 
