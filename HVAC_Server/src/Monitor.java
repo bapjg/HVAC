@@ -53,7 +53,7 @@ public class Monitor extends HttpServlet
         
         try
         {
-            dbStatement 																	= dbConnection.createStatement();
+        	dbStatement 																	= dbConnection.createStatement();
             String 												dbSQL 						= "SELECT * FROM Check_Test";
             ResultSet 											dbResult 					= dbStatement.executeQuery(dbSQL);
             dbResult.next();										

@@ -262,7 +262,7 @@ public class Management extends HttpServlet
     {
         try
         {
-            Class.forName("com.mysql.jdbc.Driver");
+        	Class.forName("com.mysql.jdbc.Driver");
             dbName 																			= "jdbc:mysql://localhost/hvac_database";
             dbConnection 																	= DriverManager.getConnection(dbName, "root", "llenkcarb");
         }

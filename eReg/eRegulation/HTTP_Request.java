@@ -23,7 +23,7 @@ public class HTTP_Request <SendType>
 		
 		try
 		{
-			serverURL 																		= new URL("http://192.168.5.99:8888/hvac/" + servlet);
+			serverURL 																		= new URL("http://192.168.5.10:8888/hvac/" + servlet);
 //			serverURL 																		= new URL("http://HVAC_Server.bapjg.local:8888/hvac/" + servlet);
 		}
 		catch (MalformedURLException e)

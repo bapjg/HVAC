@@ -26,5 +26,6 @@ echo Pushing HVAC_Common Classes to TomCat
 echo Finished
 =============
 
+    CD             D:\HVAC_Repository\git\HVAC\eReg\_Documents
     Pause
 
