@@ -98,46 +98,14 @@ public class Monitor extends HttpServlet
         	message_out 																	= new Msg__Abstract().new Nack();
         }
 
-    	if (message_in == null)
-        {
-            System.out.println("Monitor : Null received from client");
-            message_out 																	= new Msg__Abstract().new Nack();
-        } 
-    	else if (message_in instanceof Rpt_Temperatures)
-        {
-    		Rpt_Temperatures 									readings 					= (Rpt_Temperatures) message_in;
-            message_out																		= processTemperatures(readings);
-        } 
-		else if (message_in instanceof Ctrl_Fuel_Consumption.Update)
-        {
-            Ctrl_Fuel_Consumption.Update						readings 					= (Ctrl_Fuel_Consumption.Update) message_in;
-            message_out																		= processFuel(readings);
-        } 
-		else if (message_in instanceof Rpt_Report)
-        {
-            Rpt_Report 											readings 					= (Rpt_Report) message_in;
-            message_out																		= processReport(readings);
-        } 
-		else if (message_in instanceof Rpt_Action)
-        {
-            Rpt_Action 											readings 					= (Rpt_Action) message_in;
-            message_out																		= processAction(readings);
-        } 			
-		else if (message_in instanceof Rpt_PID.Update)			
-        {			
-            Rpt_PID.Update										readings 					= (Rpt_PID.Update) message_in;
-            message_out																		= processPID(readings);
-        } 			
-		else if (message_in instanceof Rpt_MixerMouvement)			
-        {			
-			Rpt_MixerMouvement 									readings 					= (Rpt_MixerMouvement) message_in;
-            message_out																		= processMixerMouvement(readings);
-         } 
-		else
-        {
-            System.out.println("Monitor : Unsupported message class received from client");
-            message_out 																	= new Msg__Abstract().new Nack();
-        }
+    	if 		(message_in == null)        						{ System.out.println("Monitor : Null received from client");	message_out	= new Msg__Abstract().new Nack();       				} 
+    	else if (message_in instanceof Rpt_Temperatures)    		{ Rpt_Temperatures             readings = (Rpt_Temperatures)             message_in; message_out = processTemperatures  (readings); } 
+		else if (message_in instanceof Ctrl_Fuel_Consumption.Update){ Ctrl_Fuel_Consumption.Update readings = (Ctrl_Fuel_Consumption.Update) message_in; message_out = processFuel          (readings); } 
+		else if (message_in instanceof Rpt_Report)        			{ Rpt_Report                   readings = (Rpt_Report)                   message_in; message_out = processReport        (readings); } 
+		else if (message_in instanceof Rpt_Action)        			{ Rpt_Action                   readings = (Rpt_Action)                   message_in; message_out = processAction        (readings); } 			
+		else if (message_in instanceof Rpt_PID.Update)        		{ Rpt_PID.Update		       readings = (Rpt_PID.Update)               message_in; message_out = processPID           (readings); } 			
+		else if (message_in instanceof Rpt_MixerMouvement)	        { Rpt_MixerMouvement 	       readings = (Rpt_MixerMouvement)           message_in; message_out = processMixerMouvement(readings); } 
+		else        												{ System.out.println("Monitor : Unsupported message class received from client");    message_out = new Msg__Abstract().new Nack();  }
         reply(response, message_out);
     }
     public Msg__Abstract processTemperatures(Rpt_Temperatures readings)
