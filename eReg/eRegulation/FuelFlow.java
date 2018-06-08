@@ -100,8 +100,9 @@ public class FuelFlow
 		}
 		else if (tlmRemote < tlmLocal)
 		{
-			LogIt.info("Fuelflow", "constructor", "FuelConsumed locally is more recent than from Network, using Local");
+			LogIt.info("Fuelflow", "constructor", "FuelConsumed locally is more recent than from Network, using Local and updating remote");
 			consumption																		= consumptionLocal;
+			LogIt.fuelData(consumption);
 		}
 		else // Network is higher or both are equal
 		{
