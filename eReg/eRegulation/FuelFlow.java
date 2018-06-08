@@ -113,7 +113,7 @@ public class FuelFlow
 	public void switchedOn()
 	{
 		// We basically need to detected state changes
-		// if     fuelFlowing & timeLastStart  = -1 means that we have just powered On
+		// if     fuelFlowing  & timeLastStart = -1 means that we have just powered On
 		// if Not(fuelFlowing) & timeLastStart > -1 means that we have just powered Off
 		
 		// TODO We also need a conversion milliseconds of FuelFlow to litres of fuel

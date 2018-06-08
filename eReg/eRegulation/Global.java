@@ -101,8 +101,6 @@ public class Global
 	public Global()
 	{
 		Global.formControl 																	= (! GraphicsEnvironment.isHeadless()) ? new eReg_Forms.Form_Control() : null;
-//		Global.display 																		= new LCD();
-//		Global.buttons 																		= new Buttons();	
 		Global.pids																			= new PIDs();
 		Global.thermometers																	= new Thermometers();
 		Global.relays																		= new Relays();
@@ -112,11 +110,6 @@ public class Global
 		Global.awayList	 																	= new ArrayList<Calendars.Away>(); 
 		Global.temperatureMaxTodayPredicted													= null;
 
-//		display.clear();
-//		display.blinkOff();
-//		display.writeAtPosition(0, 0, "Initialising");
-//		display.writeAtPosition(1, 0, " Reading params");
-		
 		//==================================================================================
 		//
 		// Get message from server

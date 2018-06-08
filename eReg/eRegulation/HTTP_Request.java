@@ -23,8 +23,8 @@ public class HTTP_Request <SendType>
 		
 		try
 		{
-			serverURL 																		= new URL("http://192.168.5.10:8888/hvac/" + servlet);
-//			serverURL 																		= new URL("http://HVAC_Server.bapjg.local:8888/hvac/" + servlet);
+//			serverURL 																		= new URL("http://192.168.5.10:8888/hvac/" + servlet);
+			serverURL 																		= new URL("http://HVAC_Server.bapjg.local:8888/hvac/" + servlet);
 		}
 		catch (MalformedURLException e)
 		{
@@ -33,7 +33,7 @@ public class HTTP_Request <SendType>
 
 		try
 		{
-			servletConnection = serverURL.openConnection();
+			servletConnection 																= serverURL.openConnection();
 		}
 		catch (IOException e)
 		{
@@ -46,9 +46,6 @@ public class HTTP_Request <SendType>
 		servletConnection.setReadTimeout(2000);
 		servletConnection.setRequestProperty("Content-Type", "application/x-java-serialized-object");
 	}
-	//
-	// New version based on Msg__Abstract (old version at end of this file (commented out)
-	//
 	public Msg__Abstract sendData(Msg__Abstract messageSend)
 	{
 		Msg__Abstract											messageReceive				= null;
