@@ -1,6 +1,5 @@
-
 /Interfaces_I2C.o
 /Interfaces_SPI.o
 /libInterfaces_I2C.so
 /libInterfaces_SPI.so
-
+/Thread_Debug.class

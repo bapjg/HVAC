@@ -69,7 +69,7 @@ public class Form_Control 										extends 					JFrame
 		
 		logItItems	 																		= new Form_Control_LogIt_Items(100);
 		
-		this.setMinimumSize(new Dimension(1000, 800));
+		this.setMinimumSize(new Dimension(1500, 800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 877, 800);
 		
@@ -83,7 +83,7 @@ public class Form_Control 										extends 					JFrame
 
 		
 		JPanel 													paneTemperatures 			= new JPanel();
-		paneTemperatures.setBounds(350, 11, 400, 166);
+		paneTemperatures.setBounds(360, 11, 500, 166);
 		contentPane.add(paneTemperatures);
 		paneTemperatures.setLayout(null);
 		
@@ -248,7 +248,7 @@ public class Form_Control 										extends 					JFrame
 		tableLogIt.setVisible(true);
 
 		Pane_Lights												paneLights 					= new Pane_Lights();
-		paneLights.setLocation(760, 11);
+		paneLights.setLocation(880, 11);
 		contentPane.add(paneLights);
 		
 		
