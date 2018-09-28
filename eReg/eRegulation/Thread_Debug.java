@@ -17,9 +17,6 @@ import HVAC_Common.*;
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Thread_Debug 										implements 					Runnable
 {
-
-	
-
 	public void run()
     {
 		LogIt.info("Thread_Debug", "Run", "Starting");            
@@ -42,7 +39,6 @@ public class Thread_Debug 										implements 					Runnable
 		while (!Global.stopNow)
 		{
 			Set <Thread> 										threadSet 					= Thread.getAllStackTraces().keySet();
-//			Thread[] 											threadArray 				= threadSet.toArray(new Thread[threadSet.size()]);
 			
 			if (threadMainFound)
 			{
@@ -50,29 +46,15 @@ public class Thread_Debug 										implements 					Runnable
 				
 				for (Thread thd : threadSet) 
 				{
-					if (thd.getName().contains("_Main"))    	threadMainFound =  true;
+					if (thd.getName().contains("_Main"))    	threadMainFound 			=  true;
 				}
-
-//				
-//				
-//				
-//				
-//				for (int i = 0; i < threadArray.length; i++) 
-//			    {
-//			        if (threadArray[i].getName().equals("Thread_Main"))    	threadMainFound =  true;
-//			    }
-				
 				
 			    if (! threadMainFound)							LogIt.error("Thread_Debug", "run", "Thread_Main missing");
 			}
-			
-			
-			
 			
 			Global.waitSecondsForStopNow(10);
 		}
  		LogIt.info("Thread_Debug", "Run", "Stopping");             
 	}
-	
 }
  
