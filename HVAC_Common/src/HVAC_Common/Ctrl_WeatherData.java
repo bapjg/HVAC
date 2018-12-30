@@ -118,6 +118,10 @@ public class Ctrl_WeatherData 									extends 					DefaultHandler
 		
 		try 
 		{
+			// Another weather site (not used in this implementation)
+			// https://www.wunderground.com/weather/api
+			// password (????) : bb358af85e0cc8e0
+			
 			URL 												serverURL 					= new URL("http://api.openweathermap.org/data/2.5/forecast?q=chambéry,fr&mode=xml&units=metric&type=accurate&appid=41515f9a266234d303e26f056173c60b");
 			HttpURLConnection  									serverConnection 			= (HttpURLConnection) serverURL.openConnection();
 			serverConnection.setRequestMethod("GET");

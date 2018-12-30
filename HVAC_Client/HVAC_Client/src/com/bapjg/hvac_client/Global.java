@@ -76,7 +76,7 @@ public class Global
 			    }
 			}
 		}
-		catch(Exception e1)		{}
+		catch (Exception e1)		{}
     	return false;
     }
     public static void setAddressSpace()
