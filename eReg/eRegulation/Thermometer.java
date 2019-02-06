@@ -80,7 +80,6 @@ public class Thermometer
     	
     	if (this.name.equalsIgnoreCase("outside"))											// kludge
     	{
-			LogIt.display("Probe", "read on outside", "Thermometer forced at zero " + this.name );
     		this.reading																	= 0;	// zero millidegrees
     		return this.reading;
     	}
