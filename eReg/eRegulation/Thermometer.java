@@ -77,6 +77,15 @@ public class Thermometer
      	 *  	A change of resolution (either up or down) seems to be uncached
      	 */
     	
+    	
+    	if (this.name.toLowerCase() == "outside")											// kludge
+    	{
+			Global.eMailMessage("Thermometer/Read", "outside found " + this.name);
+    		this.reading																	= 0;	// zero millidegrees
+    		return this.reading;
+    	}
+    	
+    	
 		Integer												readings						= 0;
 		Integer												count							= 0;
 		Integer 											firstReading					= -99;
