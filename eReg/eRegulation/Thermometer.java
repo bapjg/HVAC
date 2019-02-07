@@ -78,11 +78,11 @@ public class Thermometer
      	 */
     	
     	
-//    	if (this.name.equalsIgnoreCase("outside"))											// kludge
-//    	{
-//    		this.reading																	= 0;	// zero millidegrees
-//    		return this.reading;
-//    	}
+    	if (this.name.equalsIgnoreCase("outside"))											// kludge
+    	{
+    		this.reading																	= 0;	// zero millidegrees
+    		return this.reading;
+    	}
     	
     	
 		Integer												readings						= 0;
