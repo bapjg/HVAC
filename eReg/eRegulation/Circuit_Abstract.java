@@ -200,8 +200,10 @@ abstract class Circuit_Abstract
 				// - It can be yet to run
 				// Find the latest task elligible to run
 				
+				String x = this.name;
+				
 				if (		(  circuitTask.timeStart - this.getRampUpTime(circuitTask.tempObjective) > now	)						// This task has yet to be performed (timeStart future
-				&& 			(  circuitTask.timeEnd > now													)  		)				// Or time End future
+				&& 			(  circuitTask.timeEnd > now													)  		)				// and time End still in future
 				{
 					// This task has yet to run : both start and end are in the future
 					// Nothing todo
