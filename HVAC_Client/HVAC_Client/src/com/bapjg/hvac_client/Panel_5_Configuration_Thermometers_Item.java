@@ -139,7 +139,9 @@ public class Panel_5_Configuration_Thermometers_Item 			extends 					Panel_0_Fra
     	address																				= address.toUpperCase();
     	address																				= address.replaceAll(" ", "");
     	// result will be in format "28.XXXXXXXXXXXX"
-    	address																				= address.substring(0, 6) + " " + address.substring(7, 10) + " " + address.substring(11, 14);
+    	// note String.substring(start, end) syntax is start = 1st character (inclusive), end = last character (exclusive)
+    	
+    	address																				= address.substring(0, 7) + " " + address.substring(7, 11) + " " + address.substring(11);
     	itemData.address 																	= address;
     	// result will now be in format "28.XXXX XXXX XXXX"
    	
