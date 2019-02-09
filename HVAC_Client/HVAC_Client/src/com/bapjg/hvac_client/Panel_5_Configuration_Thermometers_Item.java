@@ -141,7 +141,8 @@ public class Panel_5_Configuration_Thermometers_Item 			extends 					Panel_0_Fra
     	// result will be in format "28.XXXXXXXXXXXX"
     	address																				= address.substring(0, 6) + " " + address.substring(7, 10) + " " + address.substring(11, 14);
     	itemData.address 																	= address;
-    	
+    	// result will now be in format "28.XXXX XXXX XXXX"
+   	
     	displayContents();
     }
 }

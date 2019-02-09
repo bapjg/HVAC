@@ -35,8 +35,6 @@ alias radiatoroff='sudo bw_tool -a 9c -w 24:0'
 alias flooron='sudo   	bw_tool -a 9c -w 25:1'
 alias flooroff='sudo  	bw_tool -a 9c -w 25:0'
 
-alias tempboiler='tempboiler1;tempboiler2'
-alias templivingroom='templivingroom1;templivingroom2;templivingroom3'
 
 alias tempboiler1='echo      -ne boiler1\ ;     sudo   cat /mnt/1wire/uncached/28.72D185040000/temperature10;echo'
 alias tempboiler2='echo   	 -ne boiler2\ ;     sudo   cat /mnt/1wire/uncached/28.01E0CC040000/temperature10;echo'
@@ -54,8 +52,9 @@ alias templivingroom2='echo  -ne living_room2\ ;sudo   cat /mnt/1wire/uncached/2
 alias templivingroom3='echo  -ne living_room3\ ;sudo   cat /mnt/1wire/uncached/28.C835CC040000/temperature10;echo'
 
 alias tempoutside='echo      -ne outside\ ;     sudo   cat /mnt/1wire/uncached/28.FFF19D711503/temperature10;echo'
-alias tempoutside='echo      -ne outside\ ;     sudo   cat /mnt/1wire/uncached/28.41DB8E040000/temperature10;echo'
 
+alias tempboiler='tempboiler1;tempboiler2'
+alias templivingroom='templivingroom1;templivingroom2;templivingroom3'
 alias tempall='tempboiler;temphw;tempboiler_out;tempboiler_in;tempfloor_out;tempfloor_in;tempradiator_out;tempradiator_in;templivingroom;tempoutside;'
 
 cd /home/pi/HVAC/eReg/eRegulation/
