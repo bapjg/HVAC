@@ -54,6 +54,7 @@ alias templivingroom2='echo  -ne living_room2\ ;sudo   cat /mnt/1wire/uncached/2
 alias templivingroom3='echo  -ne living_room3\ ;sudo   cat /mnt/1wire/uncached/28.C835CC040000/temperature10;echo'
 
 alias tempoutside='echo      -ne outside\ ;     sudo   cat /mnt/1wire/uncached/28.FFF19D711503/temperature10;echo'
+alias tempoutside='echo      -ne outside\ ;     sudo   cat /mnt/1wire/uncached/28.41DB8E040000/temperature10;echo'
 
 alias tempall='tempboiler;temphw;tempboiler_out;tempboiler_in;tempfloor_out;tempfloor_in;tempradiator_out;tempradiator_in;templivingroom;tempoutside;'
 
