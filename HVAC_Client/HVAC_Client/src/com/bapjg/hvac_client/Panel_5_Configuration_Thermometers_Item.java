@@ -132,6 +132,16 @@ public class Panel_5_Configuration_Thermometers_Item 			extends 					Panel_0_Fra
     @Override
     public void onDialogReturn()
     {
+    	// itemData.address may have been changed... set to upper case, and insert spaces if need be
+    	
+    	String 													address						= itemData.address;
+    	
+    	address																				= address.toUpperCase();
+    	address																				= address.replaceAll(" ", "");
+    	// result will be in format "28.XXXXXXXXXXXX"
+    	address																				= address.substring(0, 6) + " " + address.substring(7, 10) + " " + address.substring(11, 14);
+    	itemData.address 																	= address;
+    	
     	displayContents();
     }
 }
