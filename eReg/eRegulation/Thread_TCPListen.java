@@ -91,10 +91,18 @@ public class Thread_TCPListen 			implements Runnable
 					LogIt.info("Thread_TCPListen", "Run", "Caught EOF");            
 					// Do nothing we will loop and do another 10s wait unless stopNow activated
 				}
+				catch (java.io.StreamCorruptedException eSCE)
+				{
+					// Do nothing as this is a hack attempt
+				}
 				catch (SocketTimeoutException eTO)
 				{
 					// Do nothing we will loop and do another 10s wait unless stopNow activated
 				}
+//				catch (java.net.SocketException eSO)		// Added 07/04/2019 log shows "connection reset" in text
+//				{
+//					// Do nothing we will loop and do another 10s wait unless stopNow activated
+//				}
 				catch (IOException eIO)
 				{
 					LogIt.info("Thread_TCPListen", "Run", "Caught IO " + eIO);            

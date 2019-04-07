@@ -1,11 +1,13 @@
 package com.bapjg.hvac_client;
 
+import java.lang.Runnable;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.MeasureSpec;
@@ -69,6 +71,23 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
        	panelInsertPoint.addView(tempRadiatorIn);
        	panelInsertPoint.addView(new Element_Filler());
        	panelInsertPoint.addView(tempBoilerIn);
+       	
+       	Handler handler = new Handler();
+       	Runnable runnable = new Runnable()
+       	{
+       		public void run()
+       		{
+//       		   	super.TCP_Send(new Ctrl_Temperatures().new Request());
+//       		   	handler.postDelayed(this, delay);
+       		}
+       	};
+       	
+     // Start
+//       	handler.post(runnable);
+
+
+       	// Stop
+//       	handler.removeCallbacks(runnable);       	
           	
         return panelView;
     }
@@ -107,5 +126,10 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	public void setListens()
 	{
 	}
+//	https://stackoverflow.com/questions/22098121/timertask-fragment-error-in-android
+//	private Runnable updateTemperatures = new Runnable()
+//	{
+//    	super.TCP_Send(new Ctrl_Temperatures().new Request());
+//	}
 }
 
