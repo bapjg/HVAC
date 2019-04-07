@@ -130,6 +130,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
 	public void setListens()
 	{
 	}
+	
 //	https://stackoverflow.com/questions/22098121/timertask-fragment-error-in-android
 //	private Runnable updateTemperatures = new Runnable()
 //	{
