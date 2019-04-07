@@ -77,7 +77,7 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
        	{
        		public void run()
        		{
-//       		   	super.TCP_Send(new Ctrl_Temperatures().new Request());
+       		   	sendTCP();
 //       		   	handler.postDelayed(this, delay);
        		}
        	};
@@ -91,6 +91,10 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
           	
         return panelView;
     }
+	public void sendTCP()
+	{
+    	super.TCP_Send(new Ctrl_Temperatures().new Request());
+	}
 	public void processFinishTCP(Msg__Abstract result) 
 	{             
 		super.processFinishTCP(result);
