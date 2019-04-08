@@ -23,7 +23,8 @@ import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
 //--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
-public class _Dialog_Number_Test_THROW_AWAY 									extends 					DialogFragment
+// Was public class _THROW_AWAY extends 	DialogFragment
+public class _THROW_AWAY 									extends 					DialogFragment
 {
 	private Dialog_Response										callBack;
 	private NumberPicker 										numberPicker;
@@ -33,7 +34,7 @@ public class _Dialog_Number_Test_THROW_AWAY 									extends 					DialogFragment
 	private Integer  											numberMax;
 	private String  											message;
 	
-	public _Dialog_Number_Test_THROW_AWAY() 
+	public _THROW_AWAY() 
     {
 		super();
 		this.number																			= 51;
@@ -41,7 +42,7 @@ public class _Dialog_Number_Test_THROW_AWAY 									extends 					DialogFragment
 		this.numberMax																		= 66;
 		this.message																		= "henry";
     }
-	public _Dialog_Number_Test_THROW_AWAY(Integer number, Object parent, Integer numberMin, Integer numberMax, String message, Dialog_Response callBack) 
+	public _THROW_AWAY(Integer number, Object parent, Integer numberMin, Integer numberMax, String message, Dialog_Response callBack) 
     {
 		super();
 		this.number																			= number;
