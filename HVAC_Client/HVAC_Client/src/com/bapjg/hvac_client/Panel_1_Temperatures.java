@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import HVAC_Common.*;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//--------------------------------------------------------------65--------------------------93-------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_1_Temperatures 								extends 					Panel_0_Fragment 
 {		
@@ -71,6 +71,10 @@ public class Panel_1_Temperatures 								extends 					Panel_0_Fragment
        	panelInsertPoint.addView(tempRadiatorIn);
        	panelInsertPoint.addView(new Element_Filler());
        	panelInsertPoint.addView(tempBoilerIn);
+       	
+       	Timer													timer						= new Timer(true);
+       	Timer_Task												timerTask					= new Timer_Task(this);
+       	timer.scheduleAtFixedRate(timerTask, /* first run */ 10 * 1000, /* subsequent runs */ 10 * 1000);
        	
        	Handler handler = new Handler();
        	Runnable runnable = new Runnable()
