@@ -3,12 +3,12 @@ package eRegulation;
 import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.util.ArrayList;
+import java.io.*;
+import java.net.*;
+//import java.net.ServerSocket;
+//import java.net.Socket;
+//import java.net.SocketTimeoutException;
+//import java.util.ArrayList;
 
 import HVAC_Common.*;
 
@@ -81,37 +81,13 @@ public class Thread_TCPListen 			implements Runnable
 			        	Global.waitSeconds(2);												// If Ctrl_Actions_Stop received, allow Ack to go
 			        }
 				}
-		        catch (ClassNotFoundException eCNF)
-		        {
-					LogIt.info("Thread_TCPListen", "Run", "Caught CNF");            
-		            // message_out 							= new Message_Abstract().new Nack();
-		        }
-				catch (EOFException eEOF)
-				{
-					LogIt.info("Thread_TCPListen", "Run", "Caught EOF");            
-					// Do nothing we will loop and do another 10s wait unless stopNow activated
-				}
-				catch (java.io.StreamCorruptedException eSCE)
-				{
-					// Do nothing as this is a hack attempt
-				}
-				catch (SocketTimeoutException eTO)
-				{
-					// Do nothing we will loop and do another 10s wait unless stopNow activated
-				}
-//				catch (java.net.SocketException eSO)		// Added 07/04/2019 log shows "connection reset" in text
-//				{
-//					// Do nothing we will loop and do another 10s wait unless stopNow activated
-//				}
-				catch (IOException eIO)
-				{
-					LogIt.info("Thread_TCPListen", "Run", "Caught IO " + eIO);            
-				}
-				catch (Exception e)
-				{
-					LogIt.info("Thread_TCPListen", "Run", "Caught other" + e); 
-					e.printStackTrace();
-				}
+		        catch (ClassNotFoundException eCNF)		{	LogIt.info("Thread_TCPListen", "Run", "Caught CNF");          					}
+				catch (EOFException eEOF)				{	LogIt.info("Thread_TCPListen", "Run", "Caught EOF");       						}
+				catch (StreamCorruptedException eSCE)	{	/* Do nothing as this is a hack attempt										*/	}
+				catch (SocketTimeoutException eTO)		{	/* Do nothing we will loop and do another 10s wait unless stopNow activated	*/	}
+				catch (SocketException eSO)				{	/* Probably a hack attempt log shows "connection reset" or "Broken pipe" 	*/	}
+				catch (IOException eIO)					{	LogIt.info("Thread_TCPListen", "Run", "Caught IO " + eIO);   					}
+				catch (Exception e)						{	LogIt.info("Thread_TCPListen", "Run", "Caught other" + e); 						}
 			}
 		}
 		catch (IOException e)
