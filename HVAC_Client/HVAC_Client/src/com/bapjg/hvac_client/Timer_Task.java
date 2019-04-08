@@ -25,6 +25,7 @@ public class Timer_Task 										extends						TimerTask
 		TCP_Task												task						= new TCP_Task();
 	   	task.callBack																		= callBack;					// processFinish
 	   	task.execute(new Ctrl_Temperatures().new Request());
+//	   	Global.toaster("45", true); // Comment/Uncomment to force recompilation
 	}
 }
 
