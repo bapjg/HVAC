@@ -24,7 +24,6 @@ import HVAC_Common.*;
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Management extends HttpServlet
 {
-
     public 		Connection 			dbConnection;
     public 		Statement 			dbStatement;
     public 		String 				dbName;

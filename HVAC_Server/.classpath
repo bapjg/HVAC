@@ -11,5 +11,8 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/HVAC_Common"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/gson-2.2.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/bootstrap.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/tomcat-juli.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
