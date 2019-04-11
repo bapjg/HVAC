@@ -20,7 +20,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Circuits_Item 				extends 					Panel_0_Fragment
 {		

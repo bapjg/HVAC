@@ -9,7 +9,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import HVAC_Common.*;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Element_Switch 									extends 					LinearLayout
 																implements 					Switch.OnClickListener 
 {
@@ -18,8 +18,6 @@ public class Element_Switch 									extends 					LinearLayout
 	public Switch		 										onOffSwitch;
 	public Element_Interface									listener;
 	
-//	public Element_Switch(Context context, String labelTextLeft) 
-//	{
 	public Element_Switch(String labelTextLeft) 
 	{
 		super(Global.actContext);

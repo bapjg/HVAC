@@ -30,7 +30,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 @SuppressLint("ValidFragment")
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Panel_5_Configuration_Circuits 					extends 					Panel_0_Fragment
 																implements					AdapterView.OnItemClickListener	
 {

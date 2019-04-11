@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Panel_5_Configuration_Circuits_Item 				extends 					Panel_0_Fragment
 {		
 	private Ctrl_Configuration.Circuit	 						itemData;

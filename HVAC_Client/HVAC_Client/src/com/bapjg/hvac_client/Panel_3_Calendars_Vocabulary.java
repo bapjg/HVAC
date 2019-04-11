@@ -17,7 +17,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_3_Calendars_Vocabulary 						extends 					Panel_0_Fragment
 {		

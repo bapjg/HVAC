@@ -11,7 +11,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import HVAC_Common.*;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Element_CheckBox 									extends 					LinearLayout
 																implements					View.OnClickListener
 {
@@ -20,8 +20,7 @@ public class Element_CheckBox 									extends 					LinearLayout
 	public TextView 											textLeft;
 	public Element_Interface									listener;
 	
-//	public Element_CheckBox(Context context, String labelTextLeft) 
-//	{
+
 	public Element_CheckBox(String labelTextLeft) 
 	{
 		super(Global.actContext);

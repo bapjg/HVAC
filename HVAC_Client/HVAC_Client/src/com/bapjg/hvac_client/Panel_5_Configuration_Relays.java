@@ -28,7 +28,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.EditText;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_5_Configuration_Relays 						extends 					Panel_0_Fragment 
 {

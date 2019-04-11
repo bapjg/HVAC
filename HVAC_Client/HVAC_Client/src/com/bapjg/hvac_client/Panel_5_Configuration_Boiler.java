@@ -30,7 +30,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_5_Configuration_Boiler 						extends 					Panel_0_Fragment
 {		

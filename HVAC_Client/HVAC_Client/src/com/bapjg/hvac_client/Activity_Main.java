@@ -26,6 +26,7 @@ public class Activity_Main 										extends 					Activity
 {
 	public static	Global										global;
 
+//	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{

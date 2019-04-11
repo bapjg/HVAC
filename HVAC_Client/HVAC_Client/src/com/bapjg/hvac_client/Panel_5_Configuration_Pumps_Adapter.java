@@ -10,7 +10,7 @@ import android.view.*;
 import android.widget.*;
 import HVAC_Common.*;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Panel_5_Configuration_Pumps_Adapter 				extends 					Panel_0_Adapter
 {
     public Panel_5_Configuration_Pumps_Adapter(Context context, int resource, ArrayList listData) 

@@ -20,7 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 
 public class Panel_3_Calendars_Away_Item 						extends 					Panel_0_Fragment
 																implements					Dialog_Response

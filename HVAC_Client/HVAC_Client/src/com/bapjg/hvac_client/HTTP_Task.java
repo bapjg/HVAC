@@ -6,7 +6,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import HVAC_Common.*;
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class HTTP_Task 											extends 					AsyncTask <Msg__Abstract, Void, Msg__Abstract>
 {
 	public HTTP_Response										callBack;

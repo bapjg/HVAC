@@ -33,7 +33,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Actions_Relays.Execute;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 @SuppressLint("ValidFragment")
 public class Panel_5_Configuration_Burner 						extends 					Panel_0_Fragment 
 {		

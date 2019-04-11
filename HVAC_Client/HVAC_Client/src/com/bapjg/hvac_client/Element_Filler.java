@@ -31,7 +31,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import HVAC_Common.*;
 import HVAC_Common.Ctrl_Temperatures.Request;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Element_Filler 									extends 					LinearLayout
 {
 	public LayoutInflater 										inflater;

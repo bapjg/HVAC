@@ -11,7 +11,7 @@ import android.graphics.Typeface;
 import android.view.*;
 import android.widget.*;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Panel_3_Calendars_Away_Adapter 					extends 					Panel_0_Adapter
 {
     public Panel_3_Calendars_Away_Adapter(Context context, int resource, ArrayList listData) 

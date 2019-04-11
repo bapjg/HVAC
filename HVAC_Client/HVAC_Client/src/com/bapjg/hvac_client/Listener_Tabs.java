@@ -9,7 +9,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.view.Menu;
 
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Listener_Tabs 										implements 					ActionBar.TabListener
 {
 	public Fragment 											menu;

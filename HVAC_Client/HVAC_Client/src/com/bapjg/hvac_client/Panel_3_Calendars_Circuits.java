@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 @SuppressLint("ValidFragment")
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Panel_3_Calendars_Circuits 						extends 					Panel_0_Fragment
 																implements					AdapterView.OnItemClickListener	
 {

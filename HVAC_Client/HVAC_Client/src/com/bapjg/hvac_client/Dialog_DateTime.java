@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 @SuppressLint("ValidFragment")
-//--------------------------------------------------------------|---------------------------|--------------------------------------------------------------------
+//------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
 public class Dialog_DateTime 									extends 					DialogFragment 
 																implements 					View.OnClickListener 
 {
