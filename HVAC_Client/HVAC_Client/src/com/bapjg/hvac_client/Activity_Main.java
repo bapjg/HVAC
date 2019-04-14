@@ -47,7 +47,8 @@ public class Activity_Main 										extends 					Activity
 		float 													heightDp 					= heightPixels / scaleFactor;
 		float 													smallestWidth 				= Math.min(widthDp, heightDp);
 		
-		if 		(smallestWidth > 750)							Global.deviceName			= "tablette";
+		if (smallestWidth == 360) 								Global.deviceName 			= "Huawei";
+		else if (smallestWidth > 750) 							Global.deviceName 			= "tablette";
 		else if (smallestWidth > 430)							Global.deviceName			= "iJoy";
 		else													Global.deviceName			= "lgPhone";
 		

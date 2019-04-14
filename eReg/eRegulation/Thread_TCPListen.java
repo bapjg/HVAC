@@ -13,38 +13,37 @@ import java.net.*;
 import HVAC_Common.*;
 
 //------------------------------------------------------------65|-------------------------93|--------------------------------------------------------------------
-public class Thread_TCPListen 			implements Runnable
+public class Thread_TCPListen 									implements 					Runnable
 {
-	ServerSocket						UI_Server;
-	Socket								UI_Socket;
+	ServerSocket												UI_Server;
+	Socket														UI_Socket;
 	
 	public void run()
     {
 		LogIt.info("Thread_TCPListen", "Run", "Starting");            
  
-		Msg__Abstract					message_in 							= null;
-		Msg__Abstract					message_out 						= null;
-
+		Msg__Abstract											message_in 					= null;
+		Msg__Abstract											message_out 				= null;
 		try
 		{
-			UI_Server														= new ServerSocket(8889);
+			UI_Server																		= new ServerSocket(8889);
 			UI_Server.setSoTimeout(10 * 1000);
 		
 			while (!Global.stopNow)
 			{
 				try
 				{
-					UI_Socket												= UI_Server.accept();
+					UI_Socket																= UI_Server.accept();
 					
-			        ObjectInputStream 	input 								= new ObjectInputStream(UI_Socket.getInputStream());
+			        ObjectInputStream 	input 												= new ObjectInputStream(UI_Socket.getInputStream());
 			        // This previous line results in an EOFException
 			        
-			        message_in 												= (Msg__Abstract) input.readObject();
+			        message_in 																= (Msg__Abstract) input.readObject();
 
 			        if (message_in == null)
 			        {
 						LogIt.info("Thread_TCPListen", "Run", "Null received from client");            
-			            message_out 										= new Msg__Abstract().new Nack();
+			            message_out 														= new Msg__Abstract().new Nack();
 			        } 
 			    	else
 			    	{
