@@ -98,8 +98,9 @@ public class Boiler
 				case Error:						break;
 				case Off:						break;	// Normally cannot happen
 				case PowerDown:					break;	// Normally cannot happen, ------------------------------ditto--------------------------------------
-				case PowerUp:					// DONT BREAK	// Normally cannot happen, as PowerUp happens only when min temperature reached
-				case On_Heating:				// DONT BREAK	// Normally cannot happen, as should be switched off at lower temperature (current Temp - overShoot)
+				// 28/04/2019 : Order changed so that only PowerUp and On_Heating generate message below
+				case PowerUp:					// DONT BREAK	// Normally cannot    happen, as PowerUp happens only when min temperature reached
+				case On_Heating:				// DONT BREAK	// Normally shouldn't happen, as should be switched off at lower temperature (current Temp - overShoot)
 				default:
 					burner.powerOff();
 					LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + ", state set to STATE_OnCoolingAfterOverheat, Current state : " + state);
