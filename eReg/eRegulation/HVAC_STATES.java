@@ -16,7 +16,7 @@ public class HVAC_STATES
 		On_Cooling,						// Boiler is active, Burner is off
 		On_CoolingAfterOverheat,		// Boiler is active, Burner is off (after overheat)
 		PowerUp,
-		PowerDown,
+		PowerDown,						
 		Error
 	}
 /**

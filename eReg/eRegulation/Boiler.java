@@ -47,7 +47,7 @@ public class Boiler
 		this.tempCondensationAvoidance														= boilerparams.tempCondensationAvoidance.milliDegrees;
 		state																				= HVAC_STATES.Boiler.Off;
 	}
-	public void requestIdle()
+	public void requestIdle()		// Called by Control prior to closing down the system
 	{
 		burner.powerOff();
 		this.heatRequired.setZero();
@@ -93,14 +93,13 @@ public class Boiler
 			{							// In the event of an over heat
 				switch (state)
 				{
-				case On_CoolingAfterOverheat:
-				case On_Cooling:				// Nothing to do except wait
-					break;
-				case PowerUp:					// Normally cannot happen, as PowerUp happens only when min temperature reached
-				case Error:
-				case Off:						// Normally cannot happen
-				case On_Heating:				// Normally cannot happen, as should be switched off at lower temperature (current Temp - overShoot)
-				case PowerDown:					// Normally cannot happen, ------------------------------ditto--------------------------------------
+				case On_CoolingAfterOverheat:	break;
+				case On_Cooling:				break;	// Nothing to do except wait
+				case Error:						break;
+				case Off:						break;	// Normally cannot happen
+				case PowerDown:					break;	// Normally cannot happen, ------------------------------ditto--------------------------------------
+				case PowerUp:					// DONT BREAK	// Normally cannot happen, as PowerUp happens only when min temperature reached
+				case On_Heating:				// DONT BREAK	// Normally cannot happen, as should be switched off at lower temperature (current Temp - overShoot)
 				default:
 					burner.powerOff();
 					LogIt.error("Boiler", "sequencer", "boiler overheat at : " + Global.thermoBoiler.reading + ", state set to STATE_OnCoolingAfterOverheat, Current state : " + state);
@@ -130,7 +129,7 @@ public class Boiler
 				}
 				break;
 			case On_CoolingAfterOverheat:
-				if (!overHeatDetected())
+				if (! overHeatDetected())
 				{
 					LogIt.error("Boiler", "sequencer", "boiler overheat, normal operating temperature : " + Global.thermoBoiler.reading + " , state set to STATE_OnCooling");
 					state																	= HVAC_STATES.Boiler.On_Cooling; 		//Normal operating temp has returned
