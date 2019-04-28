@@ -138,14 +138,6 @@ public class Circuit_Mixer extends Circuit_Abstract
 					this.heatRequired.setMax();
 					state 																	= HVAC_STATES.Circuit.RampingUp;
 				}
-// Changed 21/12/2017. I think the idea behind the code is that its no use doing anything until thermoBoiler > heatRequired.tempMinimum
-// As the circuit pump is on anyway, it makes no difference
-// Hence the code above
-				
-//				if (Global.thermoBoiler.reading > this.heatRequired.tempMinimum)
-//				{
-//					state 																	= HVAC_STATES.Circuit.RampingUp;
-//				}
 			}
 			break;
 		case RampingUp:
@@ -206,14 +198,15 @@ public class Circuit_Mixer extends Circuit_Abstract
 			LogIt.info("Circuit_Mixer", "sequencer", "State = Resuming, start requested");
 			break;
 		case IdleRequested:
-//			LogIt.info("Circuit_Mixer", "sequencer", "Idle requested with LivingRoom at : " + Global.thermoLivingRoom.reading.toString() + "Objective  at " + this.taskActive.tempObjective.toString());
-			LogIt.info("Circuit_Mixer", "sequencer", "Idle requested with LivingRoom at : " + Global.thermoLivingRoom.toDisplay() + "Objective  at " + this.taskActive.tempObjective.toString());
+			LogIt.info("Circuit_Mixer", "sequencer", "Idle requested with LivingRoom at : " + Global.thermoLivingRoom.toDisplay() + " Objective  at " + this.taskActive.tempObjective.toString());
+			this.heatRequired.setZero();
 			state 																			= HVAC_STATES.Circuit.Idle;	
 			break;
 		case Idle:
 			lastAccurateFloorInTemp															= Global.thermoFloorIn.reading;
 			if (Global.thermoLivingRoom.reading < this.taskActive.tempObjective) // OR Floor return temp too cold
 			{
+				LogIt.info("Circuit_Mixer", "sequencer", "Leaving Idle with LivingRoom at : " + Global.thermoLivingRoom.toDisplay() + " Objective  at " + this.taskActive.tempObjective.toString());
 				state 																		= HVAC_STATES.Circuit.StartRequested;	
 			}
 			// else should we not set heatRequired to zero
