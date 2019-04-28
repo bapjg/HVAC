@@ -101,6 +101,7 @@ public class Circuit_Mixer extends Circuit_Abstract
 		//		Suspended,				// Internal 						 	// Hot_Water : if not stop on objective, suspends all activity but surveys hwTemp
 		//		 															 	// resume is called to set the state to Resuming
 		//		Resuming,				// Internal 						 	// Hot_Water : hwTemp is below minimum, so reactivates heatRequired
+		//		IdleRequested,			// Internal 						 	// see below
 		//		Idle,					// Internal 						 	// State for pump on but no heatRequired. Used for for floor circuit inlineOptimise
 		//
 		//		Error					// Internal    						 	// Some sort of error has occured
